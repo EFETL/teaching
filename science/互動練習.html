@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一自然先修 ── 互動練習</title>
+<style>
+  :root {
+    --primary: #2c5f8a;
+    --accent: #e6a800;
+    --correct: #2e7d32;
+    --wrong: #c0392b;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    font-size: 22px;
+    line-height: 1.8;
+    background: var(--bg);
+    color: #222;
+    min-height: 100vh;
+  }
+
+  /* ── 頂部導覽 ── */
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 16px 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  }
+  header h1 { font-size: 26px; margin-bottom: 12px; }
+  .tab-bar {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #222;
+    font-weight: bold;
+  }
+
+  /* ── 主要內容 ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  .unit-panel { display: none; }
+  .unit-panel.active { display: block; }
+
+  .unit-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 6px solid var(--primary);
+    padding-left: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ── 重點卡片 ── */
+  .concept-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--primary);
+  }
+  .concept-card h3 {
+    font-size: 22px;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .concept-card h3::before {
+    content: "★";
+    color: var(--accent);
+  }
+  .concept-card ul, .concept-card ol {
+    padding-left: 24px;
+  }
+  .concept-card li { margin: 6px 0; }
+  .highlight {
+    background: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #7a4f00;
+  }
+  .formula-box {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: #1b5e20;
+    margin: 14px 0;
+  }
+
+  /* ── 問答區 ── */
+  .quiz-section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .quiz-section-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #a07000;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+
+  /* 選擇題 */
+  .question {
+    margin-bottom: 28px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .question.correct { border-left-color: var(--correct); background: #f1fff3; }
+  .question.wrong   { border-left-color: var(--wrong);   background: #fff1f0; }
+  .q-text { font-size: 22px; margin-bottom: 14px; font-weight: 500; }
+  .q-num  { color: var(--primary); font-weight: bold; margin-right: 6px; }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    font-size: 21px;
+    text-align: left;
+    transition: all 0.2s;
+    line-height: 1.6;
+  }
+  .option-btn:hover { border-color: var(--primary); background: #eef4ff; }
+  .option-btn.selected { border-color: var(--primary); background: #dbeafe; }
+  .option-btn.correct-ans {
+    border-color: var(--correct);
+    background: #e8f5e9;
+    color: #1b5e20;
+  }
+  .option-btn.wrong-ans {
+    border-color: var(--wrong);
+    background: #ffebee;
+    color: #7f0000;
+    text-decoration: line-through;
+  }
+  .option-label {
+    font-weight: bold;
+    background: var(--primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .option-btn.correct-ans .option-label { background: var(--correct); }
+  .option-btn.wrong-ans   .option-label { background: var(--wrong); }
+
+  /* 解析 */
+  .explanation {
+    display: none;
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: #fffbe6;
+    border-radius: 8px;
+    border: 1.5px solid var(--accent);
+    font-size: 20px;
+    color: #5a3e00;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--correct); }
+  .explanation .wrong-note { color: var(--wrong); }
+
+  /* 填空題 */
+  .fill-question {
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+  .fill-question .q-text { margin-bottom: 10px; }
+  .fill-input {
+    font-size: 22px;
+    border: 2px solid #aaa;
+    border-radius: 6px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 6px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .fill-input:focus { border-color: var(--primary); }
+  .fill-input.correct-fill { border-color: var(--correct); background: #e8f5e9; }
+  .fill-input.wrong-fill   { border-color: var(--wrong);   background: #ffebee; }
+  .fill-result { display: none; font-size: 20px; margin-top: 6px; }
+  .fill-result.show { display: block; }
+  .fill-result.ok  { color: var(--correct); }
+  .fill-result.bad { color: var(--wrong); }
+
+  /* ── 按鈕 ── */
+  .check-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 36px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .check-btn:hover    { background: #1a3f60; transform: translateY(-1px); }
+  .check-btn:active   { transform: translateY(0); }
+  .check-btn:disabled { background: #aaa; cursor: default; }
+
+  .score-bar {
+    display: none;
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .score-bar.show { display: block; }
+  .score-bar.great  { background: #e8f5e9; color: #2e7d32; border: 2px solid #4caf50; }
+  .score-bar.ok     { background: #fffde7; color: #f57f17; border: 2px solid #fbc02d; }
+  .score-bar.retry  { background: #ffebee; color: #c62828; border: 2px solid #ef5350; }
+
+  .reset-btn {
+    display: none;
+    margin: 14px auto 0;
+    padding: 10px 30px;
+    background: #eee;
+    border: 2px solid #aaa;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .reset-btn.show { display: block; }
+
+  /* 序列展示（細胞→個體） */
+  .sequence {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    justify-content: center;
+  }
+  .seq-item {
+    background: var(--primary);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    text-align: center;
+  }
+  .seq-item:hover { background: var(--accent); color: #222; transform: scale(1.05); }
+  .seq-arrow {
+    font-size: 28px;
+    color: var(--primary);
+    padding: 0 6px;
+    font-weight: bold;
+  }
+  .seq-popup {
+    background: #1b5e20;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 19px;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+  }
+  .seq-popup.show { display: block; }
+
+  /* 進度條 */
+  .progress-wrap { height: 8px; background: #ddd; border-radius: 4px; margin: 6px 0 18px; }
+  .progress-bar  { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.4s; }
+
+  /* 比較表格 */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 21px; margin: 14px 0; }
+  .compare-table th { background: var(--primary); color: white; padding: 10px; text-align: center; }
+  .compare-table td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+  .compare-table tr:nth-child(even) td { background: #f4f8ff; }
+
+  /* 動畫 */
+  @keyframes pop-in {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+  .pop-in { animation: pop-in 0.3s ease; }
+
+  /* 深色模式不支援時的備援 */
+  @media (prefers-color-scheme: dark) {
+    body { background: #1a1a2e; color: #e0e0e0; }
+    .concept-card, .quiz-section, .question, .fill-question { background: #25253d; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔬 國一自然先修 ── 互動練習</h1>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchUnit(0)">單元1 科學方法</button>
+    <button class="tab-btn" onclick="switchUnit(1)">單元2 實驗室</button>
+    <button class="tab-btn" onclick="switchUnit(2)">單元3 細胞</button>
+    <button class="tab-btn" onclick="switchUnit(3)">單元4 顯微鏡</button>
+    <button class="tab-btn" onclick="switchUnit(4)">單元5 從細胞到個體</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════ 單元 1 ══════════ -->
+<div class="unit-panel active" id="panel-0">
+  <div class="unit-title">單元 1 ─ 科學方法</div>
+
+  <div class="concept-card">
+    <h3>核心概念：科學方法六步驟</h3>
+    <ol>
+      <li><span class="highlight">觀察</span> → 發現自然現象</li>
+      <li><span class="highlight">定義問題</span> → 把現象化為問題</li>
+      <li><span class="highlight">提出假設</span> → 提出可驗證的暫時答案</li>
+      <li><span class="highlight">蒐集資料</span> → 查閱文獻、進行初步調查</li>
+      <li><span class="highlight">實驗驗證</span> → 設計受控實驗</li>
+      <li><span class="highlight">歸納結論</span> → 分析數據，得出結論</li>
+    </ol>
+  </div>
+
+  <div class="concept-card">
+    <h3>控制變因法</h3>
+    <ul>
+      <li><b>操縱變因</b>：刻意<span class="highlight">改變</span>的那一個因素（只能有1個）</li>
+      <li><b>控制變因</b>：維持<span class="highlight">不變</span>的所有其他因素</li>
+      <li><b>應變變因</b>：因操縱而產生的<span class="highlight">結果（變化）</span></li>
+    </ul>
+  </div>
+
+  <div class="quiz-section" id="q1">
+    <div class="quiz-section-title">📝 選擇題練習</div>
+    <div class="progress-wrap"><div class="progress-bar" id="prog1" style="width:0%"></div></div>
+
+    <div class="question" id="q1-1">
+      <div class="q-text"><span class="q-num">1.</span>科學方法中，「提出假設」之後，下一步應該是？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q1-1','A')"><span class="option-label">A</span>歸納結論</button>
+        <button class="option-btn" onclick="choose(this,'q1-1','B')"><span class="option-label">B</span>蒐集資料</button>
+        <button class="option-btn" onclick="choose(this,'q1-1','C')"><span class="option-label">C</span>觀察</button>
+        <button class="option-btn" onclick="choose(this,'q1-1','D')"><span class="option-label">D</span>定義問題</button>
+      </div>
+      <div class="explanation" id="exp-q1-1">
+        <strong>✔ 正確答案：B 蒐集資料</strong><br>
+        科學方法順序：觀察→定義問題→提出假設→<b>蒐集資料</b>→實驗驗證→歸納結論。<br>
+        <span class="wrong-note">▶ A 歸納結論是最後一步；C 觀察是第一步；D 定義問題在假設之前。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q1-2">
+      <div class="q-text"><span class="q-num">2.</span>小明測試「不同施肥量對植物高度的影響」，以下何者是「操縱變因」？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q1-2','A')"><span class="option-label">A</span>澆水量</button>
+        <button class="option-btn" onclick="choose(this,'q1-2','B')"><span class="option-label">B</span>植物品種</button>
+        <button class="option-btn" onclick="choose(this,'q1-2','C')"><span class="option-label">C</span>施肥量</button>
+        <button class="option-btn" onclick="choose(this,'q1-2','D')"><span class="option-label">D</span>植物高度</button>
+      </div>
+      <div class="explanation" id="exp-q1-2">
+        <strong>✔ 正確答案：C 施肥量</strong><br>
+        操縱變因是實驗中<b>刻意改變</b>的那一個因素。<br>
+        <span class="wrong-note">▶ A、B 是控制變因（保持不變）；D 植物高度是應變變因（測量結果）。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q1-3">
+      <div class="q-text"><span class="q-num">3.</span>下列哪一個說法正確？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q1-3','A')"><span class="option-label">A</span>一個實驗可以有多個操縱變因</button>
+        <button class="option-btn" onclick="choose(this,'q1-3','B')"><span class="option-label">B</span>應變變因是人為設定要改變的因素</button>
+        <button class="option-btn" onclick="choose(this,'q1-3','C')"><span class="option-label">C</span>對照組存在的目的是做為比較的基準</button>
+        <button class="option-btn" onclick="choose(this,'q1-3','D')"><span class="option-label">D</span>假設一定要和結論完全相同</button>
+      </div>
+      <div class="explanation" id="exp-q1-3">
+        <strong>✔ 正確答案：C</strong><br>
+        對照組沒有施加操縱變因，是做為「比較標準」，確保差異由操縱變因造成。<br>
+        <span class="wrong-note">▶ A 錯：操縱變因只能有1個。▶ B 錯：應變變因是自然產生的結果，不是人為設定。▶ D 錯：假設是預測，不一定等於結論。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q1-4">
+      <div class="q-text"><span class="q-num">4.</span>下列哪個步驟屬於科學方法中「觀察」的最佳例子？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q1-4','A')"><span class="option-label">A</span>小玲看到樹葉在秋天變黃</button>
+        <button class="option-btn" onclick="choose(this,'q1-4','B')"><span class="option-label">B</span>小玲推測葉子因為天氣變冷而變黃</button>
+        <button class="option-btn" onclick="choose(this,'q1-4','C')"><span class="option-label">C</span>小玲設計改變溫度的實驗</button>
+        <button class="option-btn" onclick="choose(this,'q1-4','D')"><span class="option-label">D</span>小玲記錄溫度對葉色的影響並下結論</button>
+      </div>
+      <div class="explanation" id="exp-q1-4">
+        <strong>✔ 正確答案：A</strong><br>
+        觀察是最初步的感知，用感官發現自然現象。<br>
+        <span class="wrong-note">▶ B 是「提出假設」；C 是「實驗驗證」；D 是「歸納結論」。</span>
+      </div>
+    </div>
+
+    <button class="check-btn" id="checkBtn1" onclick="checkAll(1)">查看結果與解析</button>
+    <div class="score-bar" id="score1"></div>
+    <button class="reset-btn" id="resetBtn1" onclick="resetQuiz(1)">🔄 重新作答</button>
+  </div>
+</div>
+
+<!-- ══════════ 單元 2 ══════════ -->
+<div class="unit-panel" id="panel-1">
+  <div class="unit-title">單元 2 ─ 進入實驗室</div>
+
+  <div class="concept-card">
+    <h3>安全守則重點</h3>
+    <ul>
+      <li>進實驗室需穿<span class="highlight">實驗衣</span>，長髮需綁起</li>
+      <li>不可在實驗室<span class="highlight">飲食</span></li>
+      <li>酒精燈用<span class="highlight">燈蓋</span>滅火（不可用嘴吹）</li>
+      <li>聞藥品時用<span class="highlight">手扇動</span>（不可直接湊近）</li>
+      <li>廢液倒入<span class="highlight">廢液桶</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-card">
+    <h3>酒精燈使用口訣</h3>
+    <ol>
+      <li>檢查酒精量（<span class="highlight">1/4 ~ 2/3</span>）</li>
+      <li>火柴由側面點火</li>
+      <li>燈蓋滅火</li>
+      <li>等一等，再蓋一次（防復燃）</li>
+    </ol>
+  </div>
+
+  <div class="quiz-section" id="q2">
+    <div class="quiz-section-title">📝 選擇題練習</div>
+    <div class="progress-wrap"><div class="progress-bar" id="prog2" style="width:0%"></div></div>
+
+    <div class="question" id="q2-1">
+      <div class="q-text"><span class="q-num">1.</span>酒精燈用完後，正確的滅火方式是？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q2-1','A')"><span class="option-label">A</span>用嘴吹熄</button>
+        <button class="option-btn" onclick="choose(this,'q2-1','B')"><span class="option-label">B</span>用燈蓋蓋住後等片刻，再蓋一次</button>
+        <button class="option-btn" onclick="choose(this,'q2-1','C')"><span class="option-label">C</span>直接用水澆</button>
+        <button class="option-btn" onclick="choose(this,'q2-1','D')"><span class="option-label">D</span>放著讓它自然熄滅</button>
+      </div>
+      <div class="explanation" id="exp-q2-1">
+        <strong>✔ 正確答案：B</strong><br>
+        用燈蓋蓋住隔絕空氣，等片刻後再蓋一次是為了防止酒精蒸氣復燃。<br>
+        <span class="wrong-note">▶ A 危險：吹氣可使酒精噴散引發火災。▶ C 危險：灑水可能讓酒精到處飛濺。▶ D 浪費酒精且危險。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q2-2">
+      <div class="q-text"><span class="q-num">2.</span>量取液體體積時，應使用哪種器材？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q2-2','A')"><span class="option-label">A</span>燒杯</button>
+        <button class="option-btn" onclick="choose(this,'q2-2','B')"><span class="option-label">B</span>試管</button>
+        <button class="option-btn" onclick="choose(this,'q2-2','C')"><span class="option-label">C</span>量筒</button>
+        <button class="option-btn" onclick="choose(this,'q2-2','D')"><span class="option-label">D</span>蒸發皿</button>
+      </div>
+      <div class="explanation" id="exp-q2-2">
+        <strong>✔ 正確答案：C 量筒</strong><br>
+        量筒有刻度，是精確量取液體體積的器材。讀數時，視線要與液面凹面最低點齊平。<br>
+        <span class="wrong-note">▶ A 燒杯刻度不精確，只能估量。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q2-3">
+      <div class="q-text"><span class="q-num">3.</span>試管加熱時，管口應朝向哪個方向？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q2-3','A')"><span class="option-label">A</span>朝向實驗者本人</button>
+        <button class="option-btn" onclick="choose(this,'q2-3','B')"><span class="option-label">B</span>朝向旁邊的同學</button>
+        <button class="option-btn" onclick="choose(this,'q2-3','C')"><span class="option-label">C</span>無人處（空曠方向）</button>
+        <button class="option-btn" onclick="choose(this,'q2-3','D')"><span class="option-label">D</span>朝上，垂直加熱</button>
+      </div>
+      <div class="explanation" id="exp-q2-3">
+        <strong>✔ 正確答案：C</strong><br>
+        試管加熱時內部液體可能突然噴出，管口應朝向無人處，避免燙傷他人。<br>
+        <span class="wrong-note">▶ A、B 都很危險。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q2-4">
+      <div class="q-text"><span class="q-num">4.</span>以下哪種行為是進入實驗室的正確行為？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q2-4','A')"><span class="option-label">A</span>把實驗的水喝一口試試看味道</button>
+        <button class="option-btn" onclick="choose(this,'q2-4','B')"><span class="option-label">B</span>把廢液直接倒入水槽</button>
+        <button class="option-btn" onclick="choose(this,'q2-4','C')"><span class="option-label">C</span>長髮束起，穿上實驗衣</button>
+        <button class="option-btn" onclick="choose(this,'q2-4','D')"><span class="option-label">D</span>把鼻子湊近藥品瓶口聞氣味</button>
+      </div>
+      <div class="explanation" id="exp-q2-4">
+        <strong>✔ 正確答案：C</strong><br>
+        長髮束起是防止頭髮靠近火源。穿實驗衣保護皮膚。<br>
+        <span class="wrong-note">▶ A、B、D 都是危險行為。聞氣味應用手扇動，不可直接湊近。</span>
+      </div>
+    </div>
+
+    <button class="check-btn" id="checkBtn2" onclick="checkAll(2)">查看結果與解析</button>
+    <div class="score-bar" id="score2"></div>
+    <button class="reset-btn" id="resetBtn2" onclick="resetQuiz(2)">🔄 重新作答</button>
+  </div>
+</div>
+
+<!-- ══════════ 單元 3 ══════════ -->
+<div class="unit-panel" id="panel-2">
+  <div class="unit-title">單元 3 ─ 細胞</div>
+
+  <div class="concept-card">
+    <h3>細胞的發現</h3>
+    <ul>
+      <li>西元 <span class="highlight">1665</span> 年，英國科學家 <span class="highlight">羅伯特·虎克</span></li>
+      <li>觀察<span class="highlight">軟木塞切片</span>，命名為 cell（細胞）</li>
+    </ul>
+  </div>
+
+  <div class="concept-card">
+    <h3>植物 vs 動物細胞比較</h3>
+    <table class="compare-table">
+      <tr>
+        <th>構造</th>
+        <th>功能</th>
+        <th>植物</th>
+        <th>動物</th>
+      </tr>
+      <tr><td>細胞膜</td><td>控制物質進出</td><td>✓</td><td>✓</td></tr>
+      <tr><td>細胞質</td><td>進行代謝的場所</td><td>✓</td><td>✓</td></tr>
+      <tr><td>細胞核</td><td>控制生命活動，含遺傳物質</td><td>✓</td><td>✓</td></tr>
+      <tr><td style="color:#cc0000;font-weight:bold;">細胞壁</td><td>支撐保護</td><td style="color:#2e7d32;font-weight:bold;">✓</td><td style="color:#cc0000;">✗</td></tr>
+      <tr><td style="color:#cc0000;font-weight:bold;">葉綠體</td><td>進行光合作用</td><td style="color:#2e7d32;font-weight:bold;">✓</td><td style="color:#cc0000;">✗</td></tr>
+      <tr><td>液胞</td><td>儲存水分與廢物</td><td>✓ 大</td><td>✓ 小</td></tr>
+    </table>
+    <p style="font-size:19px; color:#cc0000; margin-top:8px;">★ 紅色構造為植物細胞特有，動物細胞沒有！</p>
+  </div>
+
+  <div class="quiz-section" id="q3">
+    <div class="quiz-section-title">📝 選擇題練習</div>
+    <div class="progress-wrap"><div class="progress-bar" id="prog3" style="width:0%"></div></div>
+
+    <div class="question" id="q3-1">
+      <div class="q-text"><span class="q-num">1.</span>細胞一詞最早由哪位科學家提出？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q3-1','A')"><span class="option-label">A</span>達爾文（Darwin）</button>
+        <button class="option-btn" onclick="choose(this,'q3-1','B')"><span class="option-label">B</span>虎克（Hooke）</button>
+        <button class="option-btn" onclick="choose(this,'q3-1','C')"><span class="option-label">C</span>巴斯德（Pasteur）</button>
+        <button class="option-btn" onclick="choose(this,'q3-1','D')"><span class="option-label">D</span>孟德爾（Mendel）</button>
+      </div>
+      <div class="explanation" id="exp-q3-1">
+        <strong>✔ 正確答案：B 虎克（Robert Hooke）</strong><br>
+        1665年虎克用顯微鏡觀察軟木塞，命名其為 cell（細胞）。<br>
+        <span class="wrong-note">▶ 達爾文：演化論；巴斯德：微生物學；孟德爾：遺傳學。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q3-2">
+      <div class="q-text"><span class="q-num">2.</span>植物細胞有，但動物細胞沒有的構造是？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q3-2','A')"><span class="option-label">A</span>細胞膜</button>
+        <button class="option-btn" onclick="choose(this,'q3-2','B')"><span class="option-label">B</span>細胞核</button>
+        <button class="option-btn" onclick="choose(this,'q3-2','C')"><span class="option-label">C</span>葉綠體</button>
+        <button class="option-btn" onclick="choose(this,'q3-2','D')"><span class="option-label">D</span>細胞質</button>
+      </div>
+      <div class="explanation" id="exp-q3-2">
+        <strong>✔ 正確答案：C 葉綠體</strong><br>
+        葉綠體是植物細胞特有的（含葉綠素的細胞），動物細胞沒有。<br>
+        <span class="wrong-note">▶ 細胞膜、細胞核、細胞質：動植物細胞都有。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q3-3">
+      <div class="q-text"><span class="q-num">3.</span>哪個細胞構造具有控制物質進出細胞的功能？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q3-3','A')"><span class="option-label">A</span>細胞壁</button>
+        <button class="option-btn" onclick="choose(this,'q3-3','B')"><span class="option-label">B</span>細胞核</button>
+        <button class="option-btn" onclick="choose(this,'q3-3','C')"><span class="option-label">C</span>液胞</button>
+        <button class="option-btn" onclick="choose(this,'q3-3','D')"><span class="option-label">D</span>細胞膜</button>
+      </div>
+      <div class="explanation" id="exp-q3-3">
+        <strong>✔ 正確答案：D 細胞膜</strong><br>
+        細胞膜是「選擇性滲透膜」，控制哪些物質可以進出細胞。<br>
+        <span class="wrong-note">▶ 細胞壁：支撐保護；細胞核：控制生命活動（含遺傳物質）；液胞：儲存功能。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q3-4">
+      <div class="q-text"><span class="q-num">4.</span>細胞學說中，哪一點是正確的？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q3-4','A')"><span class="option-label">A</span>只有動物由細胞組成</button>
+        <button class="option-btn" onclick="choose(this,'q3-4','B')"><span class="option-label">B</span>新細胞可從無生命物質自然產生</button>
+        <button class="option-btn" onclick="choose(this,'q3-4','C')"><span class="option-label">C</span>細胞是生物體構造與功能的基本單位</button>
+        <button class="option-btn" onclick="choose(this,'q3-4','D')"><span class="option-label">D</span>病毒也是由細胞組成</button>
+      </div>
+      <div class="explanation" id="exp-q3-4">
+        <strong>✔ 正確答案：C</strong><br>
+        細胞學說三大要點：①所有生物由細胞組成；②細胞是構造與功能的基本單位；③新細胞由既有細胞分裂而來。<br>
+        <span class="wrong-note">▶ A 錯：動植物都由細胞組成。▶ B 錯：新細胞來自舊細胞分裂。▶ D 錯：病毒沒有細胞結構。</span>
+      </div>
+    </div>
+
+    <button class="check-btn" id="checkBtn3" onclick="checkAll(3)">查看結果與解析</button>
+    <div class="score-bar" id="score3"></div>
+    <button class="reset-btn" id="resetBtn3" onclick="resetQuiz(3)">🔄 重新作答</button>
+  </div>
+</div>
+
+<!-- ══════════ 單元 4 ══════════ -->
+<div class="unit-panel" id="panel-3">
+  <div class="unit-title">單元 4 ─ 顯微鏡的介紹</div>
+
+  <div class="concept-card">
+    <h3>放大倍率公式</h3>
+    <div class="formula-box">總放大倍率 ＝ 目鏡倍率 × 物鏡倍率</div>
+    <p>例：目鏡 10×，物鏡 40× → 10 × 40 ＝ <span class="highlight">400 倍</span></p>
+  </div>
+
+  <div class="concept-card">
+    <h3>複式顯微鏡 vs 解剖顯微鏡</h3>
+    <table class="compare-table">
+      <tr><th>項目</th><th>複式顯微鏡</th><th>解剖顯微鏡</th></tr>
+      <tr><td>倍率</td><td>高（可達400倍以上）</td><td>低（10~40倍）</td></tr>
+      <tr><td>標本</td><td>需製成薄玻片</td><td>可直接觀察立體物</td></tr>
+      <tr><td>光源</td><td>由下往上透射</td><td>由上往下照射</td></tr>
+    </table>
+  </div>
+
+  <div class="concept-card">
+    <h3>操作重點</h3>
+    <ul>
+      <li>搬運：一手握<span class="highlight">鏡臂</span>，一手托<span class="highlight">鏡座</span></li>
+      <li>先用<span class="highlight">低倍</span>鏡對焦，再換高倍</li>
+      <li>高倍鏡：視野變<span class="highlight">暗</span>，視野範圍變<span class="highlight">小</span></li>
+      <li>影像偏哪邊 → 玻片往<span class="highlight">同方向</span>移動</li>
+    </ul>
+  </div>
+
+  <!-- 互動計算機 -->
+  <div class="quiz-section">
+    <div class="quiz-section-title">🔢 放大倍率計算器</div>
+    <p style="margin-bottom:12px;">選擇目鏡和物鏡倍率，計算總放大倍率：</p>
+    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center; margin-bottom:16px;">
+      <label style="font-size:21px;">目鏡：
+        <select id="eyepieceSelect" onchange="calcMag()" style="font-size:21px; padding:6px 10px; border-radius:6px; border:2px solid #aaa;">
+          <option value="5">5×</option>
+          <option value="10" selected>10×</option>
+          <option value="15">15×</option>
+          <option value="20">20×</option>
+        </select>
+      </label>
+      <label style="font-size:21px;">物鏡：
+        <select id="objectiveSelect" onchange="calcMag()" style="font-size:21px; padding:6px 10px; border-radius:6px; border:2px solid #aaa;">
+          <option value="4">4×</option>
+          <option value="10" selected>10×</option>
+          <option value="40">40×</option>
+          <option value="100">100×</option>
+        </select>
+      </label>
+    </div>
+    <div id="magResult" style="font-size:26px; font-weight:bold; color:var(--primary); background:#e8f0fb; border-radius:8px; padding:14px 20px; text-align:center;">
+      10 × 10 ＝ <span style="color:#cc0000;">100 倍</span>
+    </div>
+  </div>
+
+  <div class="quiz-section" id="q4">
+    <div class="quiz-section-title">📝 選擇題練習</div>
+    <div class="progress-wrap"><div class="progress-bar" id="prog4" style="width:0%"></div></div>
+
+    <div class="question" id="q4-1">
+      <div class="q-text"><span class="q-num">1.</span>目鏡 10×，物鏡 40×，總放大倍率為多少？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q4-1','A')"><span class="option-label">A</span>50 倍</button>
+        <button class="option-btn" onclick="choose(this,'q4-1','B')"><span class="option-label">B</span>400 倍</button>
+        <button class="option-btn" onclick="choose(this,'q4-1','C')"><span class="option-label">C</span>4 倍</button>
+        <button class="option-btn" onclick="choose(this,'q4-1','D')"><span class="option-label">D</span>40 倍</button>
+      </div>
+      <div class="explanation" id="exp-q4-1">
+        <strong>✔ 正確答案：B 400 倍</strong><br>
+        總倍率 ＝ 目鏡 × 物鏡 ＝ 10 × 40 ＝ <b>400 倍</b><br>
+        <span class="wrong-note">▶ A 是相加（錯誤）；C 是相除（錯誤）；D 只取物鏡（錯誤）。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q4-2">
+      <div class="q-text"><span class="q-num">2.</span>使用複式顯微鏡觀察時，若影像出現在視野右下方，應將玻片移向哪個方向？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q4-2','A')"><span class="option-label">A</span>左上方</button>
+        <button class="option-btn" onclick="choose(this,'q4-2','B')"><span class="option-label">B</span>右上方</button>
+        <button class="option-btn" onclick="choose(this,'q4-2','C')"><span class="option-label">C</span>左下方</button>
+        <button class="option-btn" onclick="choose(this,'q4-2','D')"><span class="option-label">D</span>右下方</button>
+      </div>
+      <div class="explanation" id="exp-q4-2">
+        <strong>✔ 正確答案：D 右下方</strong><br>
+        顯微鏡下的影像移動方向與玻片移動方向「相同」。影像在右下方，玻片也往右下移，讓目標移到視野中央。<br>
+        <span class="wrong-note">▶ 注意：不是「相反」方向！</span>
+      </div>
+    </div>
+
+    <div class="question" id="q4-3">
+      <div class="q-text"><span class="q-num">3.</span>使用顯微鏡時，換成高倍物鏡後，視野會有什麼變化？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q4-3','A')"><span class="option-label">A</span>視野變亮、範圍變大</button>
+        <button class="option-btn" onclick="choose(this,'q4-3','B')"><span class="option-label">B</span>視野變暗、範圍變小</button>
+        <button class="option-btn" onclick="choose(this,'q4-3','C')"><span class="option-label">C</span>視野變亮、範圍變小</button>
+        <button class="option-btn" onclick="choose(this,'q4-3','D')"><span class="option-label">D</span>視野沒有改變</button>
+      </div>
+      <div class="explanation" id="exp-q4-3">
+        <strong>✔ 正確答案：B</strong><br>
+        高倍鏡放大倍率高，進入的光線少，所以<b>視野變暗</b>；且觀察範圍縮小，所以<b>視野範圍變小</b>。<br>
+        此時需調整光圈或換凹面反光鏡，使視野變亮。
+      </div>
+    </div>
+
+    <div class="question" id="q4-4">
+      <div class="q-text"><span class="q-num">4.</span>解剖顯微鏡最大的優點是？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q4-4','A')"><span class="option-label">A</span>放大倍率比複式顯微鏡高</button>
+        <button class="option-btn" onclick="choose(this,'q4-4','B')"><span class="option-label">B</span>可直接觀察立體的完整標本</button>
+        <button class="option-btn" onclick="choose(this,'q4-4','C')"><span class="option-label">C</span>可以觀察細菌等極微小生物</button>
+        <button class="option-btn" onclick="choose(this,'q4-4','D')"><span class="option-label">D</span>不需要光源</button>
+      </div>
+      <div class="explanation" id="exp-q4-4">
+        <strong>✔ 正確答案：B</strong><br>
+        解剖顯微鏡可直接觀察昆蟲、花朵等立體標本，不需製成薄切片。<br>
+        <span class="wrong-note">▶ A 錯：解剖顯微鏡倍率低（10~40×）。▶ C 錯：觀察細菌需高倍複式顯微鏡。▶ D 錯：需光源，只是從上方照射。</span>
+      </div>
+    </div>
+
+    <button class="check-btn" id="checkBtn4" onclick="checkAll(4)">查看結果與解析</button>
+    <div class="score-bar" id="score4"></div>
+    <button class="reset-btn" id="resetBtn4" onclick="resetQuiz(4)">🔄 重新作答</button>
+  </div>
+</div>
+
+<!-- ══════════ 單元 5 ══════════ -->
+<div class="unit-panel" id="panel-4">
+  <div class="unit-title">單元 5 ─ 從細胞到個體</div>
+
+  <div class="concept-card">
+    <h3>生物的組成層次（點擊各層次了解更多）</h3>
+    <div class="sequence">
+      <div class="seq-item" onclick="showSeq(0)">細胞</div>
+      <div class="seq-arrow">→</div>
+      <div class="seq-item" onclick="showSeq(1)">組織</div>
+      <div class="seq-arrow">→</div>
+      <div class="seq-item" onclick="showSeq(2)">器官</div>
+      <div class="seq-arrow">→</div>
+      <div class="seq-item" onclick="showSeq(3)">系統</div>
+      <div class="seq-arrow">→</div>
+      <div class="seq-item" onclick="showSeq(4)">個體</div>
+    </div>
+    <div class="seq-popup" id="seqPop"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>動物 vs 植物 組成層次差異</h3>
+    <table class="compare-table">
+      <tr><th>層次</th><th>動物</th><th>植物</th></tr>
+      <tr><td>細胞</td><td>✓ 神經細胞、肌肉細胞</td><td>✓ 葉肉細胞、根毛細胞</td></tr>
+      <tr><td>組織</td><td>✓ 神經組織、肌肉組織</td><td>✓ 表皮組織、輸導組織</td></tr>
+      <tr><td>器官</td><td>✓ 心臟、肺臟、胃</td><td>✓ 根、莖、葉、花</td></tr>
+      <tr><td style="font-weight:bold; color:#cc0000;">系統</td><td style="color:#2e7d32; font-weight:bold;">✓ 循環系統、消化系統</td><td style="color:#cc0000; font-weight:bold;">✗ 植物沒有！</td></tr>
+      <tr><td>個體</td><td>✓ 一個人、一隻貓</td><td>✓ 一棵樹、一朵花</td></tr>
+    </table>
+    <p style="font-size:19px; color:#cc0000; margin-top:8px;">★ 植物沒有「系統」層次，是最重要的考試重點！</p>
+  </div>
+
+  <div class="quiz-section" id="q5">
+    <div class="quiz-section-title">📝 選擇題練習</div>
+    <div class="progress-wrap"><div class="progress-bar" id="prog5" style="width:0%"></div></div>
+
+    <div class="question" id="q5-1">
+      <div class="q-text"><span class="q-num">1.</span>下列生物組成層次，由小到大排列正確的是？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q5-1','A')"><span class="option-label">A</span>細胞 → 器官 → 組織 → 系統 → 個體</button>
+        <button class="option-btn" onclick="choose(this,'q5-1','B')"><span class="option-label">B</span>細胞 → 組織 → 器官 → 系統 → 個體</button>
+        <button class="option-btn" onclick="choose(this,'q5-1','C')"><span class="option-label">C</span>組織 → 細胞 → 器官 → 個體 → 系統</button>
+        <button class="option-btn" onclick="choose(this,'q5-1','D')"><span class="option-label">D</span>細胞 → 組織 → 系統 → 器官 → 個體</button>
+      </div>
+      <div class="explanation" id="exp-q5-1">
+        <strong>✔ 正確答案：B</strong><br>
+        正確順序：<b>細胞 → 組織 → 器官 → 系統 → 個體</b>（由小到大）
+      </div>
+    </div>
+
+    <div class="question" id="q5-2">
+      <div class="q-text"><span class="q-num">2.</span>植物的組成層次中缺少哪個層次？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q5-2','A')"><span class="option-label">A</span>細胞</button>
+        <button class="option-btn" onclick="choose(this,'q5-2','B')"><span class="option-label">B</span>組織</button>
+        <button class="option-btn" onclick="choose(this,'q5-2','C')"><span class="option-label">C</span>系統</button>
+        <button class="option-btn" onclick="choose(this,'q5-2','D')"><span class="option-label">D</span>器官</button>
+      </div>
+      <div class="explanation" id="exp-q5-2">
+        <strong>✔ 正確答案：C 系統</strong><br>
+        植物的組成層次：細胞→組織→器官→個體（共4層），<b>沒有系統</b>這個層次。
+      </div>
+    </div>
+
+    <div class="question" id="q5-3">
+      <div class="q-text"><span class="q-num">3.</span>「心臟」是生物組成層次中的哪一層？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q5-3','A')"><span class="option-label">A</span>細胞</button>
+        <button class="option-btn" onclick="choose(this,'q5-3','B')"><span class="option-label">B</span>組織</button>
+        <button class="option-btn" onclick="choose(this,'q5-3','C')"><span class="option-label">C</span>器官</button>
+        <button class="option-btn" onclick="choose(this,'q5-3','D')"><span class="option-label">D</span>系統</button>
+      </div>
+      <div class="explanation" id="exp-q5-3">
+        <strong>✔ 正確答案：C 器官</strong><br>
+        心臟由多種組織（肌肉組織、神經組織、結締組織等）組成，是器官層次。<br>
+        心臟是「循環系統」的一部分（系統層次）。
+      </div>
+    </div>
+
+    <div class="question" id="q5-4">
+      <div class="q-text"><span class="q-num">4.</span>下列何者是「組織」層次的正確例子？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q5-4','A')"><span class="option-label">A</span>一隻狗</button>
+        <button class="option-btn" onclick="choose(this,'q5-4','B')"><span class="option-label">B</span>消化系統</button>
+        <button class="option-btn" onclick="choose(this,'q5-4','C')"><span class="option-label">C</span>肌肉組織</button>
+        <button class="option-btn" onclick="choose(this,'q5-4','D')"><span class="option-label">D</span>胃</button>
+      </div>
+      <div class="explanation" id="exp-q5-4">
+        <strong>✔ 正確答案：C 肌肉組織</strong><br>
+        肌肉組織由形態與功能相同的肌肉細胞集合而成，是組織層次。<br>
+        <span class="wrong-note">▶ A 一隻狗：個體；B 消化系統：系統；D 胃：器官。</span>
+      </div>
+    </div>
+
+    <div class="question" id="q5-5">
+      <div class="q-text"><span class="q-num">5.</span>以下哪一個多細胞生物的組成層次，由大到小排列正確？</div>
+      <div class="options">
+        <button class="option-btn" onclick="choose(this,'q5-5','A')"><span class="option-label">A</span>個體 → 系統 → 器官 → 組織 → 細胞</button>
+        <button class="option-btn" onclick="choose(this,'q5-5','B')"><span class="option-label">B</span>個體 → 器官 → 系統 → 組織 → 細胞</button>
+        <button class="option-btn" onclick="choose(this,'q5-5','C')"><span class="option-label">C</span>個體 → 系統 → 組織 → 器官 → 細胞</button>
+        <button class="option-btn" onclick="choose(this,'q5-5','D')"><span class="option-label">D</span>系統 → 個體 → 器官 → 組織 → 細胞</button>
+      </div>
+      <div class="explanation" id="exp-q5-5">
+        <strong>✔ 正確答案：A</strong><br>
+        由大到小：個體 → 系統 → 器官 → 組織 → 細胞<br>
+        （這是由小到大「細胞→組織→器官→系統→個體」的反轉）
+      </div>
+    </div>
+
+    <button class="check-btn" id="checkBtn5" onclick="checkAll(5)">查看結果與解析</button>
+    <div class="score-bar" id="score5"></div>
+    <button class="reset-btn" id="resetBtn5" onclick="resetQuiz(5)">🔄 重新作答</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+// 正確答案索引
+const answers = {
+  'q1-1': 'B', 'q1-2': 'C', 'q1-3': 'C', 'q1-4': 'A',
+  'q2-1': 'B', 'q2-2': 'C', 'q2-3': 'C', 'q2-4': 'C',
+  'q3-1': 'B', 'q3-2': 'C', 'q3-3': 'D', 'q3-4': 'C',
+  'q4-1': 'B', 'q4-2': 'D', 'q4-3': 'B', 'q4-4': 'B',
+  'q5-1': 'B', 'q5-2': 'C', 'q5-3': 'C', 'q5-4': 'C', 'q5-5': 'A'
+};
+
+// 每題已選答案
+const selected = {};
+// 已交卷的單元
+const submitted = {};
+
+// 每個單元有幾題
+const qCount = { 1:4, 2:4, 3:4, 4:4, 5:5 };
+
+function choose(btn, qid, choice) {
+  if (submitted[qid.replace(/-\d$/,'').replace('q','').split('-')[0]]) return;
+  const unit = qid.split('-')[0]; // e.g. 'q1'
+  const unitNum = unit.replace('q','');
+  if (submitted[unitNum]) return;
+
+  // 清除同題其他選項
+  const options = btn.closest('.options').querySelectorAll('.option-btn');
+  options.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selected[qid] = choice;
+
+  // 更新進度條
+  const unit2 = parseInt(unitNum);
+  const done = Object.keys(selected).filter(k => k.startsWith('q'+unit2+'-')).length;
+  const pct = Math.round(done / qCount[unit2] * 100);
+  document.getElementById('prog'+unit2).style.width = pct + '%';
+}
+
+function checkAll(unitNum) {
+  if (submitted[unitNum]) return;
+  submitted[unitNum] = true;
+
+  const prefix = 'q' + unitNum + '-';
+  const keys = Object.keys(answers).filter(k => k.startsWith(prefix));
+  let correct = 0;
+
+  keys.forEach(qid => {
+    const qEl = document.getElementById(qid);
+    const userAns = selected[qid];
+    const rightAns = answers[qid];
+    const expEl = document.getElementById('exp-' + qid);
+
+    // 找到按鈕
+    const btns = qEl.querySelectorAll('.option-btn');
+    const labels = ['A','B','C','D'];
+    btns.forEach((b, i) => {
+      const optLabel = labels[i];
+      b.style.pointerEvents = 'none';
+      if (optLabel === rightAns) {
+        b.classList.add('correct-ans');
+        b.querySelector('.option-label').textContent = '✔';
+      } else if (optLabel === userAns && userAns !== rightAns) {
+        b.classList.add('wrong-ans');
+        b.querySelector('.option-label').textContent = '✘';
+      }
+    });
+
+    if (userAns === rightAns) {
+      correct++;
+      qEl.classList.add('correct');
+    } else {
+      qEl.classList.add('wrong');
+    }
+
+    if (expEl) expEl.classList.add('show');
+  });
+
+  // 更新進度條 100%
+  document.getElementById('prog'+unitNum).style.width = '100%';
+
+  // 顯示分數
+  const total = keys.length;
+  const scoreEl = document.getElementById('score'+unitNum);
+  const pct = Math.round(correct/total*100);
+  scoreEl.textContent = `答對 ${correct} / ${total} 題 (${pct}%)`;
+  scoreEl.classList.add('show');
+  if (pct >= 80) scoreEl.classList.add('great');
+  else if (pct >= 60) scoreEl.classList.add('ok');
+  else scoreEl.classList.add('retry');
+
+  document.getElementById('checkBtn'+unitNum).disabled = true;
+  document.getElementById('resetBtn'+unitNum).classList.add('show');
+}
+
+function resetQuiz(unitNum) {
+  submitted[unitNum] = false;
+  const prefix = 'q' + unitNum + '-';
+  Object.keys(selected).filter(k => k.startsWith(prefix)).forEach(k => delete selected[k]);
+
+  const keys = Object.keys(answers).filter(k => k.startsWith(prefix));
+  keys.forEach(qid => {
+    const qEl = document.getElementById(qid);
+    qEl.classList.remove('correct','wrong');
+    const btns = qEl.querySelectorAll('.option-btn');
+    const labels = ['A','B','C','D'];
+    btns.forEach((b, i) => {
+      b.classList.remove('selected','correct-ans','wrong-ans');
+      b.style.pointerEvents = '';
+      b.querySelector('.option-label').textContent = labels[i];
+    });
+    const expEl = document.getElementById('exp-' + qid);
+    if (expEl) expEl.classList.remove('show');
+  });
+
+  document.getElementById('prog'+unitNum).style.width = '0%';
+  const scoreEl = document.getElementById('score'+unitNum);
+  scoreEl.className = 'score-bar';
+  scoreEl.textContent = '';
+  document.getElementById('checkBtn'+unitNum).disabled = false;
+  document.getElementById('resetBtn'+unitNum).classList.remove('show');
+}
+
+// 切換單元
+function switchUnit(idx) {
+  document.querySelectorAll('.unit-panel').forEach((p,i) => {
+    p.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 序列說明
+const seqData = [
+  { name:'細胞', text:'最基本的生命單位。例：神經細胞、肌肉細胞、葉肉細胞。' },
+  { name:'組織', text:'形態與功能相同的細胞集合。例：肌肉組織、神經組織、表皮組織。' },
+  { name:'器官', text:'不同組織共同組成，有特定功能。例：心臟、肺臟、胃、葉、根。' },
+  { name:'系統', text:'多個器官共同執行某種生理功能。例：循環系統、消化系統。⚠ 植物沒有！' },
+  { name:'個體', text:'由所有構造組成的完整生物體。例：一個人、一隻貓、一棵樹。' },
+];
+function showSeq(idx) {
+  const pop = document.getElementById('seqPop');
+  pop.textContent = '【' + seqData[idx].name + '】' + seqData[idx].text;
+  pop.classList.add('show', 'pop-in');
+  setTimeout(() => pop.classList.remove('pop-in'), 300);
+}
+
+// 倍率計算機
+function calcMag() {
+  const eye = parseInt(document.getElementById('eyepieceSelect').value);
+  const obj = parseInt(document.getElementById('objectiveSelect').value);
+  const total = eye * obj;
+  document.getElementById('magResult').innerHTML =
+    eye + ' × ' + obj + ' ＝ <span style="color:#cc0000;">' + total + ' 倍</span>';
+}
+</script>
+
+</body>
+</html>

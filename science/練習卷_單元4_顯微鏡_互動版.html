@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一自然先修 ── 單元4 顯微鏡（練習卷‧互動版）</title>
+<style>
+  :root { --main:#2c5f8a; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f4f7fb; max-width:820px; margin:0 auto; padding:18px 16px 60px; }
+  .cover-title { font-size:22px; font-weight:bold; text-align:center; color:var(--main); background:#eef4fb; border:2.5px solid var(--main); border-radius:10px; padding:12px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(244,247,251,.96); border-bottom:1.5px solid #cdd7e3; padding:10px; margin-bottom:16px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 16px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:14px 16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:10px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d4d9e0; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; transition:all .12s; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#eef4fb; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+  <div class="cover-title">國一自然先修 ── 單元4 顯微鏡（練習卷‧互動版）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">1.</span>複式顯微鏡上，供眼睛直接觀察的構造是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 物鏡</button>
+      <button class="opt" data-opt="B">(B) 目鏡</button>
+      <button class="opt" data-opt="C">(C) 反光鏡</button>
+      <button class="opt" data-opt="D">(D) 載物台</button>
+    </div>
+    <div class="explain">目鏡位於鏡筒上端，供眼睛靠近觀察。物鏡(A)靠近標本負責放大；反光鏡(C)反射光線；載物台(D)放玻片，皆非眼睛觀看處。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">2.</span>使用目鏡10×、物鏡40×觀察標本時，總放大倍率為多少？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 50倍</button>
+      <button class="opt" data-opt="B">(B) 4倍</button>
+      <button class="opt" data-opt="C">(C) 400倍</button>
+      <button class="opt" data-opt="D">(D) 40倍</button>
+    </div>
+    <div class="explain">總放大倍率＝目鏡×物鏡＝10×40＝400倍。(D)40倍只算物鏡、(A)50倍是相加(10+40)、(B)4倍是相除，皆為常見錯誤。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">3.</span>下列哪一個構造的功能是「放置玻片標本的平台」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 載物台</button>
+      <button class="opt" data-opt="B">(B) 鏡筒</button>
+      <button class="opt" data-opt="C">(C) 旋轉盤</button>
+      <button class="opt" data-opt="D">(D) 鏡臂</button>
+    </div>
+    <div class="explain">載物台是放置玻片標本的平台。鏡筒(B)連接目鏡與物鏡；旋轉盤(C)換物鏡；鏡臂(D)是搬運握持的支撐結構。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">4.</span>複式顯微鏡所成的影像，與實際標本相比是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 正立放大像</button>
+      <button class="opt" data-opt="B">(B) 正立縮小像</button>
+      <button class="opt" data-opt="C">(C) 倒立放大像</button>
+      <button class="opt" data-opt="D">(D) 倒立縮小像</button>
+    </div>
+    <div class="explain">複式顯微鏡成倒立放大像（上下顛倒、左右相反），故選C。它是放大而非縮小，也不是正立像。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">5.</span>用目鏡15×、物鏡10×觀察時，總放大倍率是多少？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 150倍</button>
+      <button class="opt" data-opt="B">(B) 25倍</button>
+      <button class="opt" data-opt="C">(C) 15倍</button>
+      <button class="opt" data-opt="D">(D) 1.5倍</button>
+    </div>
+    <div class="explain">15×10＝150倍。(B)25倍是相加(15+10)、(C)15倍只取目鏡、(D)1.5倍是相除，皆為常見計算錯誤。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">6.</span>下列哪一個構造可以一次裝上多個物鏡，並用來更換不同倍率的物鏡？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 壓片夾</button>
+      <button class="opt" data-opt="B">(B) 旋轉盤</button>
+      <button class="opt" data-opt="C">(C) 細調節輪</button>
+      <button class="opt" data-opt="D">(D) 光圈</button>
+    </div>
+    <div class="explain">旋轉盤（物鏡轉盤）裝有多個物鏡，旋轉即可更換倍率。壓片夾(A)固定玻片；細調節輪(C)微調焦距；光圈(D)調光量。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">7.</span>觀察時若發現視野中的影像偏向左下方，想把它移到視野中央，玻片應往哪個方向移動？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 右上方</button>
+      <button class="opt" data-opt="B">(B) 左上方</button>
+      <button class="opt" data-opt="C">(C) 右下方</button>
+      <button class="opt" data-opt="D">(D) 左下方</button>
+    </div>
+    <div class="explain">因影像倒立，玻片移動方向與所見影像移動方向相同。影像在左下，玻片就往左下方移，影像才會移向中央。(A)右上方為相反方向的常見誤答。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">8.</span>剛開始觀察標本時，應先選用下列哪一個物鏡？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 最高倍的物鏡</button>
+      <button class="opt" data-opt="B">(B) 任意一個皆可</button>
+      <button class="opt" data-opt="C">(C) 中間倍率的物鏡</button>
+      <button class="opt" data-opt="D">(D) 最低倍的物鏡</button>
+    </div>
+    <div class="explain">觀察應先用最低倍物鏡，視野較大較容易找到標本，再換高倍鏡。先用高倍鏡(A)不易對焦且範圍太小。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">9.</span>從低倍鏡換成高倍鏡後，視野（觀察範圍）會有什麼變化？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 變小</button>
+      <button class="opt" data-opt="B">(B) 變大</button>
+      <button class="opt" data-opt="C">(C) 不變</button>
+      <button class="opt" data-opt="D">(D) 先變大再變小</button>
+    </div>
+    <div class="explain">換高倍鏡後物體放大，但觀察範圍（視野）變小、視野也變暗。故選變小，而非變大(B)或不變(C)。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">10.</span>關於粗調節輪與細調節輪，下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 粗調節輪用來微調使影像更清晰</button>
+      <button class="opt" data-opt="B">(B) 細調節輪在低倍鏡時做大幅調整</button>
+      <button class="opt" data-opt="C">(C) 粗調節輪可大幅、快速調整焦距</button>
+      <button class="opt" data-opt="D">(D) 兩者功能完全相同</button>
+    </div>
+    <div class="explain">粗調節輪在低倍時可大幅、快速調整焦距；細調節輪做微調使影像更清晰（高倍鏡用）。(A)(B)把兩者功能對調，(D)錯誤。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">11.</span>使用目鏡5×、物鏡40×觀察時，總放大倍率為多少？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 45倍</button>
+      <button class="opt" data-opt="B">(B) 8倍</button>
+      <button class="opt" data-opt="C">(C) 200倍</button>
+      <button class="opt" data-opt="D">(D) 20倍</button>
+    </div>
+    <div class="explain">5×40＝200倍。(A)45倍是相加、(B)8倍是相除、(D)20倍是誤算，皆錯。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">12.</span>當光線較弱或使用高倍鏡時，為了使視野變亮，反光鏡應使用哪一面？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 平面鏡</button>
+      <button class="opt" data-opt="B">(B) 毛玻璃面</button>
+      <button class="opt" data-opt="C">(C) 凸面鏡</button>
+      <button class="opt" data-opt="D">(D) 凹面鏡</button>
+    </div>
+    <div class="explain">凹面鏡能匯聚光線，光弱或高倍時用凹面鏡可使視野變亮。平面鏡(A)只能反射不匯聚，光線不足。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">13.</span>搬運顯微鏡時，正確的握持方式是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 一手握鏡臂，一手托鏡座</button>
+      <button class="opt" data-opt="B">(B) 雙手抓住載物台</button>
+      <button class="opt" data-opt="C">(C) 單手抓住鏡筒提起</button>
+      <button class="opt" data-opt="D">(D) 抓住目鏡與物鏡</button>
+    </div>
+    <div class="explain">搬運時應一手握鏡臂、一手托鏡座，平穩且不傷及鏡頭。抓載物台(B)、提鏡筒(C)、抓目鏡物鏡(D)都可能使構造鬆脫或損壞。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">14.</span>下列何者是複式顯微鏡與解剖顯微鏡在放大倍率上的正確比較？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 解剖顯微鏡倍率較高</button>
+      <button class="opt" data-opt="B">(B) 兩者倍率相同</button>
+      <button class="opt" data-opt="C">(C) 複式顯微鏡倍率較高</button>
+      <button class="opt" data-opt="D">(D) 兩者皆只有1倍</button>
+    </div>
+    <div class="explain">複式顯微鏡倍率高（數十至數百倍以上），解剖顯微鏡倍率低（約10～40倍）。故(A)(B)(D)皆錯。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">15.</span>用複式顯微鏡觀察的標本，通常必須具備下列哪一項條件？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 必須是立體且完整的物體</button>
+      <button class="opt" data-opt="B">(B) 必須製成可透光的薄玻片</button>
+      <button class="opt" data-opt="C">(C) 必須是會發光的物體</button>
+      <button class="opt" data-opt="D">(D) 必須是金屬材質</button>
+    </div>
+    <div class="explain">複式顯微鏡的光由下往上穿透標本，故標本須製成可透光的薄玻片。立體完整物體(A)是解剖顯微鏡的對象。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">16.</span>下列何者最適合用「解剖顯微鏡」直接觀察？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 人體口腔上皮細胞</button>
+      <button class="opt" data-opt="B">(B) 水中的細菌</button>
+      <button class="opt" data-opt="C">(C) 血液中的紅血球</button>
+      <button class="opt" data-opt="D">(D) 完整的小昆蟲或花朵</button>
+    </div>
+    <div class="explain">解剖顯微鏡倍率低、可直接觀察立體完整標本，適合昆蟲、花朵等。細胞、細菌、紅血球(A)(B)(C)微小且需透光，要用複式顯微鏡。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">17.</span>在從目鏡觀察、轉動粗調節輪尋找影像時，下列做法何者正確，以避免物鏡撞壞玻片？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 邊看目鏡邊讓鏡筒（物鏡）持續下降</button>
+      <button class="opt" data-opt="B">(B) 邊看目鏡邊讓鏡筒（物鏡）緩緩上升</button>
+      <button class="opt" data-opt="C">(C) 快速來回大幅轉動調節輪</button>
+      <button class="opt" data-opt="D">(D) 直接用力按壓玻片</button>
+    </div>
+    <div class="explain">先從側面把鏡筒降到接近標本，再從目鏡看時應緩緩讓鏡筒上升找影像，才不會撞壞玻片。邊看邊下降(A)易壓碎玻片。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">18.</span>使用目鏡10×、物鏡100×（油鏡）觀察時，總放大倍率為多少？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 110倍</button>
+      <button class="opt" data-opt="B">(B) 1000倍</button>
+      <button class="opt" data-opt="C">(C) 100倍</button>
+      <button class="opt" data-opt="D">(D) 10倍</button>
+    </div>
+    <div class="explain">10×100＝1000倍。(A)110倍是相加、(C)100倍只取物鏡、(D)10倍只取目鏡，皆為常見錯誤。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">19.</span>複式顯微鏡觀察標本時，光線的照明方向是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 由標本下方往上穿透標本</button>
+      <button class="opt" data-opt="B">(B) 由標本上方往下照射</button>
+      <button class="opt" data-opt="C">(C) 由標本側面水平照射</button>
+      <button class="opt" data-opt="D">(D) 不需要任何光線</button>
+    </div>
+    <div class="explain">複式顯微鏡的光由標本下方往上穿透標本進入物鏡。由上方照射(B)是解剖顯微鏡的方式。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">20.</span>下列關於用顯微鏡固定玻片的構造，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 用反光鏡固定玻片</button>
+      <button class="opt" data-opt="B">(B) 用旋轉盤固定玻片</button>
+      <button class="opt" data-opt="C">(C) 用目鏡固定玻片</button>
+      <button class="opt" data-opt="D">(D) 用壓片夾固定玻片</button>
+    </div>
+    <div class="explain">壓片夾位於載物台上，用來固定玻片避免滑動。反光鏡(A)反射光、目鏡(C)供觀察、旋轉盤(B)換物鏡，皆非固定玻片之用。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
+  });
+  function showDone(){ const msg=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); msg.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; msg.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; msg.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; msg.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const m=b.querySelector('.mark'); if(m) m.remove(); }); }); }
+</script>
+</body>
+</html>

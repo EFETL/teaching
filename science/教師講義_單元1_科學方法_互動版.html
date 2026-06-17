@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教師講義（互動版）── 單元1 科學方法</title>
+<style>
+  :root { --main:#2c5f8a; --ans:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+    font-size:21px; line-height:1.9; color:#1a1a1a; background:#f4f7fb;
+    max-width:900px; margin:0 auto; padding:24px 20px 80px;
+  }
+  h1 {
+    font-size:28px; text-align:center; color:var(--main);
+    background:#e8f0fb; border:3px solid var(--main); border-radius:10px;
+    padding:14px; margin-bottom:10px;
+  }
+  .hint {
+    text-align:center; font-size:20px; color:#555; margin-bottom:18px;
+  }
+  /* 控制列 */
+  .toolbar {
+    position:sticky; top:0; z-index:50;
+    display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+    background:rgba(244,247,251,0.96); padding:12px 0; margin-bottom:18px;
+    border-bottom:1.5px solid #cdd7e3;
+  }
+  .toolbar button {
+    font-size:20px; padding:8px 20px; border-radius:24px; cursor:pointer;
+    border:2px solid var(--main); background:white; color:var(--main);
+    transition:all .15s;
+  }
+  .toolbar button:hover { background:var(--main); color:white; }
+  .toolbar .primary { background:var(--main); color:white; }
+  .toolbar .primary:hover { background:#1a3f60; }
+
+  .unit-tag {
+    display:inline-block; background:var(--main); color:white;
+    font-size:20px; padding:4px 16px; border-radius:5px; margin-bottom:6px;
+  }
+  .section-title {
+    font-size:23px; font-weight:bold; color:var(--main);
+    border-left:6px solid var(--main); padding-left:12px;
+    margin:26px 0 12px;
+  }
+  .card {
+    background:white; border-radius:10px; padding:18px 22px;
+    margin-bottom:16px; box-shadow:0 1px 5px rgba(0,0,0,.07);
+  }
+  .point { margin:6px 0 4px; }
+  .ptext { font-size:21px; }
+
+  /* 空格 */
+  .blank {
+    display:inline-block; min-width:70px; text-align:center;
+    border:2px dashed var(--main); border-radius:6px;
+    padding:1px 10px; margin:0 3px; cursor:pointer;
+    color:var(--main); background:#eef4fb; font-weight:bold;
+    user-select:none; transition:all .15s;
+  }
+  .blank::before { content:"？"; }
+  .blank:hover { background:#dbe9f8; }
+  .blank.on {
+    border:2px solid var(--ans); background:#fdecea;
+    color:var(--ans); cursor:default;
+  }
+  .blank.on::before { content:""; }
+  .blank.wide { min-width:120px; }
+  .blank.xwide { min-width:200px; }
+
+  /* 解析 */
+  .explain {
+    display:none; margin:8px 0 2px; padding:10px 14px;
+    background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0;
+    font-size:20px; color:#5a3e00;
+  }
+  .explain.show { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+
+  /* 步驟 */
+  .steps { list-style:none; padding:0; }
+  .steps li { display:flex; gap:10px; align-items:flex-start; margin:8px 0; font-size:21px; }
+  .stepnum {
+    background:var(--main); color:white; border-radius:50%;
+    width:30px; height:30px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:18px;
+  }
+  /* 表格 */
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:20px; }
+  th { background:var(--main); color:white; padding:9px; text-align:center; }
+  td { border:1px solid #b9c8d8; padding:9px; text-align:center; }
+  tr:nth-child(even) td { background:#f4f8ff; }
+
+  .mistake {
+    background:#eaf7ee; border:1.5px solid #4caf50; border-radius:8px;
+    padding:12px 16px; margin-top:10px; font-size:20px; color:#1b5e20;
+  }
+  .mistake::before { content:"🔍 常見錯誤提醒："; font-weight:bold; }
+
+  .flow { font-weight:bold; color:var(--main); }
+</style>
+</head>
+<body>
+
+<h1>教師講義（互動版）<br>單元1 ── 科學方法</h1>
+<div class="hint">👆 點一下每個 <span style="color:var(--main); font-weight:bold;">？空格</span>，會顯示答案並展開解析。適合上課時逐步揭曉。</div>
+
+<div class="toolbar">
+  <button class="primary" onclick="revealAll()">顯示全部答案＋解析</button>
+  <button onclick="hideAll()">全部隱藏（重來）</button>
+  <button onclick="toggleExp()">只切換解析顯示</button>
+</div>
+
+<div class="unit-tag">單元 1　科學方法</div>
+
+<!-- 一、科學的精神 -->
+<div class="section-title">一、科學的精神</div>
+<div class="card">
+  <div class="point">
+    <div class="ptext">科學是藉由
+      <span class="blank" data-ans="觀察"></span>、
+      <span class="blank" data-ans="實驗"></span> 與
+      <span class="blank wide" data-ans="推理歸納"></span>
+      等過程，來認識自然現象並解決問題的方法。</div>
+    <div class="explain">科學重視親自「觀察」與「實驗」，再用邏輯「推理歸納」出結論；強調客觀、求真、可重複驗證。</div>
+  </div>
+</div>
+
+<!-- 二、科學方法步驟 -->
+<div class="section-title">二、科學方法的步驟</div>
+<div class="card">
+  <ul class="steps">
+    <li><span class="stepnum">1</span><div><b>觀察</b>：對周遭事物細心留意，發現問題。</div></li>
+    <li><span class="stepnum">2</span><div><b>定義問題</b>：把觀察到的現象化成明確的問題。</div></li>
+    <li><span class="stepnum">3</span>
+      <div class="point" style="flex:1;">
+        <div class="ptext"><b>提出假設</b>：根據已知知識，對問題提出
+          <span class="blank xwide" data-ans="可驗證的暫時性"></span> 的答案。</div>
+        <div class="explain">「假設」是暫時性、而且「可以用實驗檢驗」的答案，不是最終結論，也不是隨意猜測。</div>
+      </div></li>
+    <li><span class="stepnum">4</span><div><b>蒐集資料</b>：查閱文獻或做初步調查來蒐集數據。</div></li>
+    <li><span class="stepnum">5</span>
+      <div class="point" style="flex:1;">
+        <div class="ptext"><b>實驗驗證</b>：設計
+          <span class="blank wide" data-ans="受控實驗"></span> 來驗證假設是否正確。</div>
+        <div class="explain">用「控制變因法」設計實驗（一次只改變一個因素），才能公平檢驗假設。</div>
+      </div></li>
+    <li><span class="stepnum">6</span><div><b>歸納結論</b>：分析數據，得出結論，並與假設對照。</div></li>
+  </ul>
+</div>
+
+<!-- 三、控制變因法 -->
+<div class="section-title">三、控制變因法（三種變因）</div>
+<div class="card">
+  <div class="point">
+    <div class="ptext"><b>操縱變因</b>：實驗中刻意
+      <span class="blank" data-ans="改變"></span> 的因素（只能有 <b>1</b> 個）。</div>
+    <div class="explain">操縱變因是研究者「主動改變」的因素，一次只能有一個，否則無法判斷是哪個因素造成結果。</div>
+  </div>
+  <div class="point">
+    <div class="ptext"><b>控制變因</b>：實驗中保持
+      <span class="blank wide" data-ans="相同（不變）"></span> 的其他所有因素。</div>
+    <div class="explain">除了操縱變因以外、所有可能影響結果的因素都要維持相同，這樣比較才公平。</div>
+  </div>
+  <div class="point">
+    <div class="ptext"><b>應變變因</b>：因操縱變因改變而產生
+      <span class="blank" data-ans="變化"></span> 的結果（也就是我們所測量的項目）。</div>
+    <div class="explain">應變變因是「測量到的結果」（例如株高），不是測量的工具（例如尺）。</div>
+  </div>
+</div>
+
+<!-- 四、實驗範例 -->
+<div class="section-title">四、實驗範例：肥料對植物生長的影響</div>
+<div class="card">
+  <div class="point">
+    <table>
+      <tr><th>組別</th><th>肥料<br>(操縱變因)</th><th>水量<br>(控制變因)</th><th>日照<br>(控制變因)</th><th>株高<br>(應變變因)</th></tr>
+      <tr><td>實驗組</td><td>有施肥</td>
+        <td><span class="blank" data-ans="相同"></span></td>
+        <td><span class="blank" data-ans="相同"></span></td>
+        <td>記錄</td></tr>
+      <tr><td>對照組</td><td>不施肥</td>
+        <td><span class="blank" data-ans="相同"></span></td>
+        <td><span class="blank" data-ans="相同"></span></td>
+        <td>記錄</td></tr>
+    </table>
+    <div class="explain">除了「肥料」（操縱變因）不同之外，水量、日照等其餘條件都要維持「相同」，這就是設置對照組的意義──讓差異只可能來自肥料。</div>
+  </div>
+</div>
+
+<!-- 五、課後練習解答 -->
+<div class="section-title">五、課後練習解答</div>
+<div class="card">
+  <div class="point">
+    <div class="ptext"><b>1.</b> 科學方法的正確順序為：<br>
+      <span class="blank xwide" data-ans="觀察 → 定義問題 → 提出假設 → 蒐集資料 → 實驗驗證 → 歸納結論"></span></div>
+    <div class="explain">最容易錯的是順序：「定義問題」要在「提出假設」之前。</div>
+  </div>
+  <div class="point">
+    <div class="ptext"><b>2.</b> 操縱變因最多只能有
+      <span class="blank" data-ans="1"></span> 個，目的是確保實驗結果的
+      <span class="blank wide" data-ans="可靠性（公正性）"></span>。</div>
+    <div class="explain">一次只改變一個變因，才能確定差異是由「該因素」造成，結果才可靠、公正。</div>
+  </div>
+  <div class="point">
+    <div class="ptext"><b>3.</b> 研究「光照時間是否影響植物開花」：<br>
+      ① 操縱變因：<span class="blank wide" data-ans="光照時間（長短）"></span><br>
+      ② 應變變因：<span class="blank wide" data-ans="是否開花（或開花時間）"></span><br>
+      ③ 控制變因（任兩個）：<span class="blank xwide" data-ans="澆水量、溫度、土壤種類、植株品種…"></span></div>
+    <div class="explain">口訣：操縱＝「我改變的」、應變＝「我測量的結果」、控制＝「維持不變的其他條件」。</div>
+  </div>
+  <div class="mistake">學生常把「應變變因」誤寫成測量工具（如「尺」），要引導他們回答「測量到的結果」（如「株高」）。</div>
+</div>
+
+<script>
+  function reveal(el){
+    if(el.classList.contains('on')) return;
+    el.classList.add('on');
+    el.textContent = el.dataset.ans;
+    const p = el.closest('.point');
+    if(p){ const e = p.querySelector('.explain'); if(e) e.classList.add('show'); }
+  }
+  // 綁定每個空格
+  document.querySelectorAll('.blank').forEach(b => b.addEventListener('click', () => reveal(b)));
+
+  function revealAll(){
+    document.querySelectorAll('.blank').forEach(reveal);
+  }
+  function hideAll(){
+    document.querySelectorAll('.blank').forEach(b => {
+      b.classList.remove('on');
+      b.textContent = '';
+    });
+    document.querySelectorAll('.explain').forEach(e => e.classList.remove('show'));
+  }
+  let expOn = false;
+  function toggleExp(){
+    expOn = !expOn;
+    document.querySelectorAll('.explain').forEach(e => e.classList.toggle('show', expOn));
+  }
+</script>
+
+</body>
+</html>

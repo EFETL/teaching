@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教師講義（互動版）── 單元3 細胞</title>
+<style>
+  :root { --main:#2c5f8a; --ans:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:21px; line-height:1.9; color:#1a1a1a; background:#f4f7fb; max-width:900px; margin:0 auto; padding:24px 20px 80px; }
+  h1 { font-size:28px; text-align:center; color:var(--main); background:#e8f0fb; border:3px solid var(--main); border-radius:10px; padding:14px; margin-bottom:10px; }
+  .hint { text-align:center; font-size:20px; color:#555; margin-bottom:18px; }
+  .toolbar { position:sticky; top:0; z-index:50; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; background:rgba(244,247,251,0.96); padding:12px 0; margin-bottom:18px; border-bottom:1.5px solid #cdd7e3; }
+  .toolbar button { font-size:20px; padding:8px 20px; border-radius:24px; cursor:pointer; border:2px solid var(--main); background:white; color:var(--main); transition:all .15s; }
+  .toolbar button:hover { background:var(--main); color:white; }
+  .toolbar .primary { background:var(--main); color:white; }
+  .toolbar .primary:hover { background:#1a3f60; }
+  .unit-tag { display:inline-block; background:var(--main); color:white; font-size:20px; padding:4px 16px; border-radius:5px; margin-bottom:6px; }
+  .section-title { font-size:23px; font-weight:bold; color:var(--main); border-left:6px solid var(--main); padding-left:12px; margin:26px 0 12px; }
+  .card { background:white; border-radius:10px; padding:18px 22px; margin-bottom:16px; box-shadow:0 1px 5px rgba(0,0,0,.07); }
+  .point { margin:6px 0 4px; }
+  .ptext { font-size:21px; }
+  .blank { display:inline-block; min-width:70px; text-align:center; border:2px dashed var(--main); border-radius:6px; padding:1px 10px; margin:0 3px; cursor:pointer; color:var(--main); background:#eef4fb; font-weight:bold; user-select:none; transition:all .15s; }
+  .blank::before { content:"？"; }
+  .blank:hover { background:#dbe9f8; }
+  .blank.on { border:2px solid var(--ans); background:#fdecea; color:var(--ans); cursor:default; }
+  .blank.on::before { content:""; }
+  .blank.wide { min-width:120px; }
+  .blank.xwide { min-width:200px; }
+  .explain { display:none; margin:8px 0 2px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:20px; color:#5a3e00; }
+  .explain.show { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+  .steps { list-style:none; padding:0; }
+  .steps li { display:flex; gap:10px; align-items:flex-start; margin:8px 0; font-size:21px; }
+  .stepnum { background:var(--main); color:white; border-radius:50%; width:30px; height:30px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:18px; }
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:20px; }
+  th { background:var(--main); color:white; padding:9px; text-align:center; }
+  td { border:1px solid #b9c8d8; padding:9px; text-align:center; }
+  tr:nth-child(even) td { background:#f4f8ff; }
+  .mistake { background:#eaf7ee; border:1.5px solid #4caf50; border-radius:8px; padding:12px 16px; margin-top:10px; font-size:20px; color:#1b5e20; }
+  .mistake::before { content:"🔍 常見錯誤提醒："; font-weight:bold; }
+  .flow { font-weight:bold; color:var(--main); }
+</style>
+</head>
+<body>
+<h1>教師講義（互動版）<br>單元3 ── 細胞</h1>
+<div class="hint">👆 點一下每個 <span style="color:var(--main); font-weight:bold;">？空格</span>，會顯示答案並展開解析。適合上課時逐步揭曉。</div>
+<div class="toolbar">
+  <button class="primary" onclick="revealAll()">顯示全部答案＋解析</button>
+  <button onclick="hideAll()">全部隱藏（重來）</button>
+  <button onclick="toggleExp()">只切換解析顯示</button>
+</div>
+<div class="unit-tag">單元 3　細胞</div>
+
+<div class="section-title">一、細胞的發現</div>
+<div class="card">
+  <div class="point">
+    <div class="ptext">西元 <span class="blank" data-ans="1665"></span> 年，英國科學家 <span class="blank xwide" data-ans="羅伯特·虎克（Robert Hooke）"></span> 觀察軟木塞切片，將看到的小格子命名為 <span class="blank wide" data-ans="細胞（cell）"></span>。</div>
+    <div class="explain">他看到的其實是死細胞留下的「空細胞壁」，不是活細胞。</div>
+  </div>
+</div>
+
+<div class="section-title">二、細胞學說（三要點）</div>
+<div class="card">
+  <div class="point">
+    <div class="ptext">1. 細胞是生物體 <span class="blank wide" data-ans="構造與功能"></span> 的基本單位。</div>
+    <div class="ptext">2. 所有生物都由 <span class="blank" data-ans="細胞"></span> 組成。</div>
+    <div class="ptext">3. 新細胞由 <span class="blank wide" data-ans="既有（舊）細胞"></span> 分裂而來。</div>
+    <div class="explain">細胞學說說明細胞是生命的基本單位，且細胞只能來自既有細胞。</div>
+  </div>
+</div>
+
+<div class="section-title">三、細胞的基本構造</div>
+<div class="card">
+  <div class="point">
+    <table>
+      <tr><th>構造</th><th>功能</th><th>植物細胞</th><th>動物細胞</th></tr>
+      <tr><td>細胞膜</td><td>控制 <span class="blank wide" data-ans="物質進出"></span></td><td>✓</td><td>✓</td></tr>
+      <tr><td>細胞質</td><td>進行各種 <span class="blank wide" data-ans="生命活動（代謝）"></span> 的場所</td><td>✓</td><td>✓</td></tr>
+      <tr><td>細胞核</td><td>控制生命活動，含 <span class="blank wide" data-ans="遺傳物質（DNA）"></span></td><td>✓</td><td>✓</td></tr>
+      <tr><td>細胞壁</td><td><span class="blank wide" data-ans="支撐並保護細胞"></span></td><td>✓</td><td>✗</td></tr>
+      <tr><td>葉綠體</td><td>進行 <span class="blank" data-ans="光合作用"></span></td><td>✓</td><td>✗</td></tr>
+      <tr><td>液胞</td><td>儲存 <span class="blank wide" data-ans="水分、養分與廢物"></span></td><td>✓(大)</td><td>✓(小或無)</td></tr>
+    </table>
+    <div class="explain">植物細胞「特有」的是細胞壁與葉綠體；細胞膜、細胞質、細胞核是動植物共有。</div>
+  </div>
+  <div class="mistake">並非所有植物細胞都有葉綠體，例如根部細胞通常沒有葉綠體，只有含葉綠素的部位才有。</div>
+</div>
+
+<script>
+  function reveal(el){ if(el.classList.contains('on')) return; el.classList.add('on'); el.textContent=el.dataset.ans; const p=el.closest('.point'); if(p){ const e=p.querySelector('.explain'); if(e) e.classList.add('show'); } }
+  document.querySelectorAll('.blank').forEach(b => b.addEventListener('click', () => reveal(b)));
+  function revealAll(){ document.querySelectorAll('.blank').forEach(reveal); }
+  function hideAll(){ document.querySelectorAll('.blank').forEach(b => { b.classList.remove('on'); b.textContent=''; }); document.querySelectorAll('.explain').forEach(e => e.classList.remove('show')); }
+  let expOn=false;
+  function toggleExp(){ expOn=!expOn; document.querySelectorAll('.explain').forEach(e => e.classList.toggle('show', expOn)); }
+</script>
+</body>
+</html>

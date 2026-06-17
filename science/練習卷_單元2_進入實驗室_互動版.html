@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一自然先修 ── 單元2 進入實驗室（練習卷‧互動版）</title>
+<style>
+  :root { --main:#2c5f8a; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f4f7fb; max-width:820px; margin:0 auto; padding:18px 16px 60px; }
+  .cover-title { font-size:22px; font-weight:bold; text-align:center; color:var(--main); background:#eef4fb; border:2.5px solid var(--main); border-radius:10px; padding:12px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(244,247,251,.96); border-bottom:1.5px solid #cdd7e3; padding:10px; margin-bottom:16px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 16px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:14px 16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:10px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d4d9e0; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; transition:all .12s; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#eef4fb; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+  <div class="cover-title">國一自然先修 ── 單元2 進入實驗室（練習卷‧互動版）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">1.</span>下列哪一項是進入實驗室做實驗時，正確的安全行為？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 穿上實驗衣並把長髮綁起來</button>
+      <button class="opt" data-opt="B">(B) 口渴時喝瓶裝水補充水分</button>
+      <button class="opt" data-opt="C">(C) 和同學在走道上追逐玩耍</button>
+      <button class="opt" data-opt="D">(D) 好奇時自行混合兩種藥品試試看</button>
+    </div>
+    <div class="explain">進實驗室要穿實驗衣、長髮綁起以策安全。(B)實驗室內不可飲食、(C)不可嬉戲奔跑、(D)不可擅自混合藥品，都是危險行為。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">2.</span>做實驗時若想知道某瓶藥品的氣味，正確的做法是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 直接把鼻子湊近瓶口用力吸氣</button>
+      <button class="opt" data-opt="B">(B) 用嘴巴含一點點嚐看看</button>
+      <button class="opt" data-opt="C">(C) 用手在瓶口上方搧動氣體至鼻前輕聞</button>
+      <button class="opt" data-opt="D">(D) 把瓶子靠近耳朵聽聲音</button>
+    </div>
+    <div class="explain">聞氣味要用手在瓶口上方搧動氣體至鼻前輕聞。(A)直接湊近瓶口可能吸入過量有害氣體；(B)藥品絕不可入口。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">3.</span>實驗結束後產生的廢液，應該如何處理？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 直接倒入水槽沖掉</button>
+      <button class="opt" data-opt="B">(B) 倒在地上讓它自然蒸發</button>
+      <button class="opt" data-opt="C">(C) 裝進寶特瓶帶回家</button>
+      <button class="opt" data-opt="D">(D) 倒入指定的廢液桶</button>
+    </div>
+    <div class="explain">廢液要倒入指定廢液桶。(A)倒入水槽會污染環境也可能造成危險；(C)更不可帶回家。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">4.</span>下列哪一種器材主要用來「精確量取液體的體積」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 燒杯</button>
+      <button class="opt" data-opt="B">(B) 量筒</button>
+      <button class="opt" data-opt="C">(C) 試管</button>
+      <button class="opt" data-opt="D">(D) 蒸發皿</button>
+    </div>
+    <div class="explain">量筒專門用來精確量取液體體積。(A)燒杯刻度不精確；(C)試管多用於盛裝少量液體。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">5.</span>使用量筒讀取水的體積時，水面會呈現凹液面，正確的讀數位置是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 凹液面的最低點</button>
+      <button class="opt" data-opt="B">(B) 凹液面的最高點</button>
+      <button class="opt" data-opt="C">(C) 量筒杯壁上水的痕跡</button>
+      <button class="opt" data-opt="D">(D) 量筒的最上緣</button>
+    </div>
+    <div class="explain">水在量筒中呈凹液面，要讀「凹液面最低點」，且視線需與液面平視。(B)讀最高點會不準確。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">6.</span>小明用量筒量水時，視線由上往下「俯視」液面讀數，他讀到的數值會？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 比實際值偏大</button>
+      <button class="opt" data-opt="B">(B) 比實際值偏小</button>
+      <button class="opt" data-opt="C">(C) 恰好等於實際值</button>
+      <button class="opt" data-opt="D">(D) 無法讀出任何數值</button>
+    </div>
+    <div class="explain">俯視（由上往下看）會把刻度讀到偏大值；仰視則會偏小。只有平視才會讀到正確值。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">7.</span>加熱時用來「支撐加熱容器」的器材是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 坩堝鉗</button>
+      <button class="opt" data-opt="B">(B) 三角架</button>
+      <button class="opt" data-opt="C">(C) 滴管</button>
+      <button class="opt" data-opt="D">(D) 玻璃攪拌棒</button>
+    </div>
+    <div class="explain">三角架用來支撐加熱容器。(A)坩堝鉗用來夾取高溫器具，並非支撐。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">8.</span>加熱時將石棉網墊在容器下方，最主要的目的是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 讓容器加熱得更快</button>
+      <button class="opt" data-opt="B">(B) 讓火焰顏色變漂亮</button>
+      <button class="opt" data-opt="C">(C) 使容器受熱均勻、避免局部過熱</button>
+      <button class="opt" data-opt="D">(D) 節省酒精的用量</button>
+    </div>
+    <div class="explain">石棉網能使容器受熱均勻、隔熱緩衝，避免局部過熱而破裂。(A)它不會讓加熱變快。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">9.</span>要夾取正在加熱、溫度很高的器具，應使用下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 蓋玻片</button>
+      <button class="opt" data-opt="B">(B) 滴管</button>
+      <button class="opt" data-opt="C">(C) 玻璃攪拌棒</button>
+      <button class="opt" data-opt="D">(D) 坩堝鉗</button>
+    </div>
+    <div class="explain">坩堝鉗專門用來夾取加熱中的高溫器具。其他器材都不適合夾高溫物品。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">10.</span>關於酒精燈內酒精的量，下列何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 加滿到瓶口最安全</button>
+      <button class="opt" data-opt="B">(B) 保持在容量的 1/4～2/3 之間</button>
+      <button class="opt" data-opt="C">(C) 只要有一點點就好，越少越好</button>
+      <button class="opt" data-opt="D">(D) 酒精的量多少完全沒有關係</button>
+    </div>
+    <div class="explain">酒精量應保持在容量的 1/4～2/3。(A)加太滿易溢出引火；(C)太少燈芯易燒乾損壞。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">11.</span>要熄滅酒精燈的火焰時，正確的方法是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 用嘴巴對著火焰吹熄</button>
+      <button class="opt" data-opt="B">(B) 用手搧風讓它熄滅</button>
+      <button class="opt" data-opt="C">(C) 用燈蓋蓋住火焰使其熄滅</button>
+      <button class="opt" data-opt="D">(D) 倒一點水把火澆熄</button>
+    </div>
+    <div class="explain">用燈蓋蓋住火焰滅火。(A)用嘴吹可能把火吹進燈內引發危險，絕對禁止；(D)用水也不正確。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">12.</span>下列點燃酒精燈的做法，何者是錯誤而且危險的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 用火柴從燈芯側面點燃</button>
+      <button class="opt" data-opt="B">(B) 點燃後把火柴棒放到指定處</button>
+      <button class="opt" data-opt="C">(C) 點燃前先檢查酒精量是否足夠</button>
+      <button class="opt" data-opt="D">(D) 拿一個已點燃的酒精燈去點另一個酒精燈</button>
+    </div>
+    <div class="explain">用點燃的酒精燈去點另一個，容易打翻而引火，非常危險。正確應用火柴從側面點燃。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">13.</span>用試管加熱液體時，管口應該朝向？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 對著自己的臉</button>
+      <button class="opt" data-opt="B">(B) 對著旁邊的同學</button>
+      <button class="opt" data-opt="C">(C) 沒有人的方向</button>
+      <button class="opt" data-opt="D">(D) 正上方天花板</button>
+    </div>
+    <div class="explain">試管加熱時管口要朝向沒有人的方向，以免噴濺傷人。(A)(B)都可能傷到人。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">14.</span>用試管加熱液體時，試管內的液體量最多不要超過試管的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 1/3</button>
+      <button class="opt" data-opt="B">(B) 1/2</button>
+      <button class="opt" data-opt="C">(C) 2/3</button>
+      <button class="opt" data-opt="D">(D) 幾乎裝滿</button>
+    </div>
+    <div class="explain">加熱時液體量不超過試管的 1/3，以免沸騰噴出。裝太多很危險。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">15.</span>下列哪一種器材可以盛裝少量液體，而且能直接拿來加熱？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 量筒</button>
+      <button class="opt" data-opt="B">(B) 試管</button>
+      <button class="opt" data-opt="C">(C) 滴管</button>
+      <button class="opt" data-opt="D">(D) 載玻片</button>
+    </div>
+    <div class="explain">試管可盛裝少量液體且能直接加熱。(A)量筒不可加熱；(D)載玻片用於顯微觀察。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">16.</span>做實驗時不小心打破玻璃器材，正確的處理方式是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 立刻用手把碎片撿起來丟掉</button>
+      <button class="opt" data-opt="B">(B) 假裝沒看到繼續做實驗</button>
+      <button class="opt" data-opt="C">(C) 把碎片掃進旁邊水槽沖掉</button>
+      <button class="opt" data-opt="D">(D) 立刻告知老師，依老師指示處理</button>
+    </div>
+    <div class="explain">玻璃破裂應立刻告知老師、依指示處理。(A)用手撿易割傷；(C)碎片不可丟入水槽。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">17.</span>若藥品不慎濺到皮膚上，第一時間應該怎麼做？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 立刻用大量清水沖洗，並告知老師</button>
+      <button class="opt" data-opt="B">(B) 用衛生紙擦一擦就好</button>
+      <button class="opt" data-opt="C">(C) 馬上塗上另一種藥品中和</button>
+      <button class="opt" data-opt="D">(D) 等下課再去洗手間清洗</button>
+    </div>
+    <div class="explain">藥品濺到皮膚要立刻用大量清水沖洗並告知老師。(C)自行加別的藥品中和反而更危險。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">18.</span>下列關於「燒杯」的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 可用來精確量取液體體積，刻度非常準確</button>
+      <button class="opt" data-opt="B">(B) 可盛裝或加熱較大量液體，但刻度不夠精確</button>
+      <button class="opt" data-opt="C">(C) 只能裝液體，絕對不可以加熱</button>
+      <button class="opt" data-opt="D">(D) 專門用來夾取高溫器具</button>
+    </div>
+    <div class="explain">燒杯可盛裝或加熱較大量液體，但刻度不精確。(A)精確量體積要用量筒；(C)燒杯可加熱。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">19.</span>剛用燈蓋蓋熄酒精燈後，建議「稍待片刻再蓋一次」，這樣做的主要原因是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 讓燈蓋比較好拿</button>
+      <button class="opt" data-opt="B">(B) 可以加快酒精蒸發</button>
+      <button class="opt" data-opt="C">(C) 讓酒精燈看起來比較整齊</button>
+      <button class="opt" data-opt="D">(D) 避免殘餘熱氣使火焰復燃</button>
+    </div>
+    <div class="explain">滅火後稍待再蓋一次，是為了避免殘餘熱氣使火焰復燃，確保完全熄滅。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">20.</span>用試管加熱液體時，下列哪一個動作順序最正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 固定加熱一個位置，直到沸騰</button>
+      <button class="opt" data-opt="B">(B) 只加熱試管口的位置</button>
+      <button class="opt" data-opt="C">(C) 先來回均勻加熱，再集中加熱液體部位</button>
+      <button class="opt" data-opt="D">(D) 用手直接握住試管加熱</button>
+    </div>
+    <div class="explain">試管加熱要先來回均勻加熱，再集中加熱液體部位，避免受熱不均使試管破裂。(D)絕不可用手直接握。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
+  });
+  function showDone(){ const msg=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); msg.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; msg.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; msg.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; msg.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const m=b.querySelector('.mark'); if(m) m.remove(); }); }); }
+</script>
+</body>
+</html>

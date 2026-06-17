@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一自然先修 ── 單元5 從細胞到個體（作業卷‧互動版）</title>
+<style>
+  :root { --main:#7b2d00; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f4f7fb; max-width:820px; margin:0 auto; padding:18px 16px 60px; }
+  .cover-title { font-size:22px; font-weight:bold; text-align:center; color:var(--main); background:#eef4fb; border:2.5px solid var(--main); border-radius:10px; padding:12px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(244,247,251,.96); border-bottom:1.5px solid #cdd7e3; padding:10px; margin-bottom:16px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 16px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:14px 16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:10px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d4d9e0; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; transition:all .12s; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#eef4fb; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+  <div class="cover-title">國一自然先修 ── 單元5 從細胞到個體（作業卷‧互動版）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">1.</span>下列何者「不是」生物的組成層次之一？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞</button>
+      <button class="opt" data-opt="B">(B) 分子</button>
+      <button class="opt" data-opt="C">(C) 器官</button>
+      <button class="opt" data-opt="D">(D) 系統</button>
+    </div>
+    <div class="explain">生物的組成層次為細胞、組織、器官、系統、個體。「分子」不是本單元的生物組成層次，故選B。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">2.</span>植物的組成層次由小到大，下列何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞→組織→系統→個體</button>
+      <button class="opt" data-opt="B">(B) 細胞→器官→組織→個體</button>
+      <button class="opt" data-opt="C">(C) 細胞→組織→器官→個體</button>
+      <button class="opt" data-opt="D">(D) 組織→細胞→器官→個體</button>
+    </div>
+    <div class="explain">植物為細胞→組織→器官→個體（沒有系統）。(A)多了系統、(B)器官組織順序顛倒，皆錯誤。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">3.</span>下列何者「只有動物有，植物沒有」的組成層次？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞</button>
+      <button class="opt" data-opt="B">(B) 組織</button>
+      <button class="opt" data-opt="C">(C) 器官</button>
+      <button class="opt" data-opt="D">(D) 系統</button>
+    </div>
+    <div class="explain">系統（由多個器官合作）只有動物才有，植物沒有系統層次。細胞、組織、器官則動植物都有。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">4.</span>「胃」是由肌肉組織、上皮組織等共同組成，能消化食物。胃屬於哪一個層次？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 組織</button>
+      <button class="opt" data-opt="B">(B) 器官</button>
+      <button class="opt" data-opt="C">(C) 系統</button>
+      <button class="opt" data-opt="D">(D) 細胞</button>
+    </div>
+    <div class="explain">胃由不同組織共同組成、執行消化功能，屬於「器官」。系統(C)是多個器官合作，層次更高，為誘答。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">5.</span>關於「系統」的敘述，下列何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 由相同細胞集合而成</button>
+      <button class="opt" data-opt="B">(B) 植物也有完整的系統層次</button>
+      <button class="opt" data-opt="C">(C) 由多個器官共同合作，完成某種生理功能</button>
+      <button class="opt" data-opt="D">(D) 就是一個單獨的細胞</button>
+    </div>
+    <div class="explain">系統是由多個器官共同合作完成某種生理功能。(B)植物沒有系統層次、(A)是組織的特徵，皆錯誤。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">6.</span>下列哪一組全部都屬於「動物的系統」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 呼吸系統、神經系統</button>
+      <button class="opt" data-opt="B">(B) 心臟、肺臟</button>
+      <button class="opt" data-opt="C">(C) 根、莖、葉</button>
+      <button class="opt" data-opt="D">(D) 上皮組織、肌肉組織</button>
+    </div>
+    <div class="explain">呼吸系統、神經系統都是動物的系統。(B)是器官、(C)是植物器官、(D)是組織，層次不符。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">7.</span>下列哪一種組織負責「連接、支撐、保護與填充」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 上皮組織</button>
+      <button class="opt" data-opt="B">(B) 神經組織</button>
+      <button class="opt" data-opt="C">(C) 結締組織</button>
+      <button class="opt" data-opt="D">(D) 肌肉組織</button>
+    </div>
+    <div class="explain">結締組織負責連接、支撐、保護與填充（如血液、骨骼、脂肪）。上皮組織(A)是覆蓋保護，功能不同。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">8.</span>心肌、骨骼肌、平滑肌都屬於下列哪一種組織？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 上皮組織</button>
+      <button class="opt" data-opt="B">(B) 結締組織</button>
+      <button class="opt" data-opt="C">(C) 神經組織</button>
+      <button class="opt" data-opt="D">(D) 肌肉組織</button>
+    </div>
+    <div class="explain">心肌、骨骼肌、平滑肌都是肌肉組織，能收縮產生運動。其餘組織不具收縮功能。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">9.</span>下列關於「細胞分化」的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 使細胞數量變多但功能都一樣</button>
+      <button class="opt" data-opt="B">(B) 細胞特化成不同形態與功能的過程</button>
+      <button class="opt" data-opt="C">(C) 只發生在植物，動物沒有</button>
+      <button class="opt" data-opt="D">(D) 會讓細胞合併成一個大細胞</button>
+    </div>
+    <div class="explain">細胞分化是細胞特化成不同形態與功能的過程。(A)描述的是分裂（數量變多）、(C)動植物都有分化，皆錯。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">10.</span>「腎臟」在生物組成層次中屬於下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 系統</button>
+      <button class="opt" data-opt="B">(B) 組織</button>
+      <button class="opt" data-opt="C">(C) 器官</button>
+      <button class="opt" data-opt="D">(D) 細胞</button>
+    </div>
+    <div class="explain">腎臟由不同組織組成、執行特定功能，屬於器官。系統(A)是多個器官合作，層次更高，為誘答。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">11.</span>下列何者是「組織」層次的例子？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 一顆心臟</button>
+      <button class="opt" data-opt="B">(B) 一棵完整的樹</button>
+      <button class="opt" data-opt="C">(C) 整個消化系統</button>
+      <button class="opt" data-opt="D">(D) 一段神經組織</button>
+    </div>
+    <div class="explain">一段神經組織屬於「組織」層次。心臟(A)是器官、消化系統(C)是系統、整棵樹(B)是個體，層次都不同。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">12.</span>動物比植物多了哪一個組成層次？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞</button>
+      <button class="opt" data-opt="B">(B) 組織</button>
+      <button class="opt" data-opt="C">(C) 器官</button>
+      <button class="opt" data-opt="D">(D) 系統</button>
+    </div>
+    <div class="explain">動物有5個層次、植物有4個，動物比植物多了「系統」這個層次。這是動植物層次最重要的差異。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">13.</span>下列何者「最小」（範圍最小）？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 一個神經細胞</button>
+      <button class="opt" data-opt="B">(B) 一段神經組織</button>
+      <button class="opt" data-opt="C">(C) 整個腦</button>
+      <button class="opt" data-opt="D">(D) 整個神經系統</button>
+    </div>
+    <div class="explain">一個神經細胞是最小的層次。組織、腦（器官）、神經系統範圍依序更大，故最小為細胞。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">14.</span>下列關於上皮組織的例子，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 血液</button>
+      <button class="opt" data-opt="B">(B) 骨骼</button>
+      <button class="opt" data-opt="C">(C) 皮膚表皮</button>
+      <button class="opt" data-opt="D">(D) 骨骼肌</button>
+    </div>
+    <div class="explain">皮膚表皮是上皮組織。血液、骨骼(A)(B)是結締組織、骨骼肌(D)是肌肉組織，皆非上皮組織。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">15.</span>下列關於動物與植物層次數目的比較，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 動物5個層次，植物4個層次</button>
+      <button class="opt" data-opt="B">(B) 動物4個層次，植物5個層次</button>
+      <button class="opt" data-opt="C">(C) 兩者都是5個層次</button>
+      <button class="opt" data-opt="D">(D) 兩者都是3個層次</button>
+    </div>
+    <div class="explain">動物有細胞、組織、器官、系統、個體共5層；植物少了系統只有4層。故選A。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">16.</span>「神經系統」是由腦、脊髓、神經等器官合作完成。下列何者與它「同屬系統層次」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 骨骼系統</button>
+      <button class="opt" data-opt="B">(B) 心臟</button>
+      <button class="opt" data-opt="C">(C) 上皮組織</button>
+      <button class="opt" data-opt="D">(D) 根</button>
+    </div>
+    <div class="explain">骨骼系統與神經系統同屬「系統」層次。心臟(B)是器官、上皮組織(C)是組織、根(D)是植物器官，層次不符。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">17.</span>下列關於「花、果實、種子」的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 它們都是動物的器官</button>
+      <button class="opt" data-opt="B">(B) 它們都是植物的器官</button>
+      <button class="opt" data-opt="C">(C) 它們都是動物的系統</button>
+      <button class="opt" data-opt="D">(D) 它們都只是單一細胞</button>
+    </div>
+    <div class="explain">花、果實、種子都是植物的器官。植物沒有系統層次，由器官直接組成個體，故B正確。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">18.</span>植物的「分生組織」主要負責下列何種功能？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 分裂使植物生長</button>
+      <button class="opt" data-opt="B">(B) 運輸水分養分</button>
+      <button class="opt" data-opt="C">(C) 收縮產生運動</button>
+      <button class="opt" data-opt="D">(D) 傳遞訊息</button>
+    </div>
+    <div class="explain">分生組織能分裂使植物生長。運輸(B)是輸導組織的功能，(C)(D)為動物組織功能，皆為誘答。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">19.</span>將下列構造由大到小排列：①細胞 ②系統 ③個體 ④器官 ⑤組織（動物），何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) ③②④⑤①</button>
+      <button class="opt" data-opt="B">(B) ①⑤④②③</button>
+      <button class="opt" data-opt="C">(C) ③④②⑤①</button>
+      <button class="opt" data-opt="D">(D) ②③④⑤①</button>
+    </div>
+    <div class="explain">由大到小為個體③→系統②→器官④→組織⑤→細胞①，即③②④⑤①。其餘排列順序錯誤。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">20.</span>下列關於「組織」與「器官」差異的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 組織由不同組織組成，器官由相同細胞組成</button>
+      <button class="opt" data-opt="B">(B) 組織由相同細胞組成，器官由不同組織組成</button>
+      <button class="opt" data-opt="C">(C) 兩者完全相同</button>
+      <button class="opt" data-opt="D">(D) 器官比組織小</button>
+    </div>
+    <div class="explain">組織由形態功能相同的細胞組成；器官由不同種類的組織組成。(A)敘述顛倒、(D)器官其實比組織大，皆錯。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
+  });
+  function showDone(){ const msg=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); msg.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; msg.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; msg.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; msg.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const m=b.querySelector('.mark'); if(m) m.remove(); }); }); }
+</script>
+</body>
+</html>

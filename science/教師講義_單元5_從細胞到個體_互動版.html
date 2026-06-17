@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教師講義（互動版）── 單元5 從細胞到個體</title>
+<style>
+  :root { --main:#2c5f8a; --ans:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:21px; line-height:1.9; color:#1a1a1a; background:#f4f7fb; max-width:900px; margin:0 auto; padding:24px 20px 80px; }
+  h1 { font-size:28px; text-align:center; color:var(--main); background:#e8f0fb; border:3px solid var(--main); border-radius:10px; padding:14px; margin-bottom:10px; }
+  .hint { text-align:center; font-size:20px; color:#555; margin-bottom:18px; }
+  .toolbar { position:sticky; top:0; z-index:50; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; background:rgba(244,247,251,0.96); padding:12px 0; margin-bottom:18px; border-bottom:1.5px solid #cdd7e3; }
+  .toolbar button { font-size:20px; padding:8px 20px; border-radius:24px; cursor:pointer; border:2px solid var(--main); background:white; color:var(--main); transition:all .15s; }
+  .toolbar button:hover { background:var(--main); color:white; }
+  .toolbar .primary { background:var(--main); color:white; }
+  .toolbar .primary:hover { background:#1a3f60; }
+  .unit-tag { display:inline-block; background:var(--main); color:white; font-size:20px; padding:4px 16px; border-radius:5px; margin-bottom:6px; }
+  .section-title { font-size:23px; font-weight:bold; color:var(--main); border-left:6px solid var(--main); padding-left:12px; margin:26px 0 12px; }
+  .card { background:white; border-radius:10px; padding:18px 22px; margin-bottom:16px; box-shadow:0 1px 5px rgba(0,0,0,.07); }
+  .point { margin:6px 0 4px; }
+  .ptext { font-size:21px; }
+  .blank { display:inline-block; min-width:70px; text-align:center; border:2px dashed var(--main); border-radius:6px; padding:1px 10px; margin:0 3px; cursor:pointer; color:var(--main); background:#eef4fb; font-weight:bold; user-select:none; transition:all .15s; }
+  .blank::before { content:"？"; }
+  .blank:hover { background:#dbe9f8; }
+  .blank.on { border:2px solid var(--ans); background:#fdecea; color:var(--ans); cursor:default; }
+  .blank.on::before { content:""; }
+  .blank.wide { min-width:120px; }
+  .blank.xwide { min-width:200px; }
+  .explain { display:none; margin:8px 0 2px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:20px; color:#5a3e00; }
+  .explain.show { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+  .steps { list-style:none; padding:0; }
+  .steps li { display:flex; gap:10px; align-items:flex-start; margin:8px 0; font-size:21px; }
+  .stepnum { background:var(--main); color:white; border-radius:50%; width:30px; height:30px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:18px; }
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:20px; }
+  th { background:var(--main); color:white; padding:9px; text-align:center; }
+  td { border:1px solid #b9c8d8; padding:9px; text-align:center; }
+  tr:nth-child(even) td { background:#f4f8ff; }
+  .mistake { background:#eaf7ee; border:1.5px solid #4caf50; border-radius:8px; padding:12px 16px; margin-top:10px; font-size:20px; color:#1b5e20; }
+  .mistake::before { content:"🔍 常見錯誤提醒："; font-weight:bold; }
+  .flow { font-weight:bold; color:var(--main); }
+</style>
+</head>
+<body>
+<h1>教師講義（互動版）<br>單元5 ── 從細胞到個體</h1>
+<div class="hint">👆 點一下每個 <span style="color:var(--main); font-weight:bold;">？空格</span>，會顯示答案並展開解析。適合上課時逐步揭曉。</div>
+<div class="toolbar">
+  <button class="primary" onclick="revealAll()">顯示全部答案＋解析</button>
+  <button onclick="hideAll()">全部隱藏（重來）</button>
+  <button onclick="toggleExp()">只切換解析顯示</button>
+</div>
+<div class="unit-tag">單元 5　從細胞到個體</div>
+
+<div class="section-title">一、生物的組成層次</div>
+<div class="card">
+  <div class="point">
+    <div class="ptext">由小到大的順序：<span class="blank" data-ans="細胞"></span> → <span class="blank" data-ans="組織"></span> → <span class="blank" data-ans="器官"></span> → <span class="blank" data-ans="系統"></span> → <span class="blank" data-ans="個體"></span>。</div>
+    <div class="explain">這是多細胞「動物」的完整五個層次。記憶口訣：細胞最小，個體最大，中間依序是組織、器官、系統。</div>
+  </div>
+</div>
+
+<div class="section-title">二、各層次的定義</div>
+<div class="card">
+  <div class="point">
+    <table>
+      <tr><th>層次</th><th>說明</th><th>動物例子</th><th>植物例子</th></tr>
+      <tr>
+        <td>細胞</td>
+        <td>生物體最 <span class="blank" data-ans="基本"></span> 的單位</td>
+        <td>肌肉細胞、神經細胞</td>
+        <td>葉肉細胞、根毛細胞</td>
+      </tr>
+      <tr>
+        <td>組織</td>
+        <td>許多形態與功能 <span class="blank" data-ans="相同"></span> 的細胞集合</td>
+        <td>肌肉組織、神經組織</td>
+        <td>表皮組織、輸導組織</td>
+      </tr>
+      <tr>
+        <td>器官</td>
+        <td>由不同 <span class="blank" data-ans="組織"></span> 共同組成</td>
+        <td>心臟、肺臟、胃</td>
+        <td>根、莖、葉、花</td>
+      </tr>
+      <tr>
+        <td>系統</td>
+        <td>多個器官共同執行 <span class="blank wide" data-ans="某種生理功能"></span></td>
+        <td>循環系統、消化系統</td>
+        <td>（無）</td>
+      </tr>
+      <tr>
+        <td>個體</td>
+        <td>由各部分組成的完整 <span class="blank wide" data-ans="生物體"></span></td>
+        <td>一個人</td>
+        <td>一棵樹</td>
+      </tr>
+    </table>
+    <div class="explain">組織強調「功能相同的細胞」集合；器官由「多種組織」共同組成；系統由「多個器官」合作完成一項生理功能。層層往上，分工愈來愈複雜。</div>
+  </div>
+</div>
+
+<div class="section-title">三、動物與植物層次的差異</div>
+<div class="card">
+  <div class="point">
+    <div class="ptext">動物：細胞 → 組織 → 器官 → 系統 → 個體，共 <span class="blank" data-ans="5"></span> 層。</div>
+    <div class="explain">動物有完整的五個層次，「系統」是動物特有的層次。</div>
+  </div>
+  <div class="point">
+    <div class="ptext">植物：細胞 → 組織 → 器官 → 個體，共 <span class="blank" data-ans="4"></span> 層，沒有 <span class="blank" data-ans="系統"></span> 這個層次。</div>
+    <div class="explain">植物沒有「系統」層次，是本單元最重要、最常考的重點。植物從「器官」直接組成「個體」。</div>
+  </div>
+</div>
+
+<div class="section-title">四、動物的四大組織</div>
+<div class="card">
+  <div class="point">
+    <table>
+      <tr><th>組織</th><th>功能</th><th>舉例</th></tr>
+      <tr>
+        <td>上皮組織</td>
+        <td><span class="blank wide" data-ans="覆蓋與保護"></span> 身體表面及器官內壁</td>
+        <td>皮膚表皮、腸道內壁</td>
+      </tr>
+      <tr>
+        <td>結締組織</td>
+        <td><span class="blank wide" data-ans="連接、支撐與填充"></span></td>
+        <td>血液、骨骼、脂肪</td>
+      </tr>
+      <tr>
+        <td>肌肉組織</td>
+        <td>產生 <span class="blank wide" data-ans="運動（收縮）"></span></td>
+        <td>心肌、骨骼肌</td>
+      </tr>
+      <tr>
+        <td>神經組織</td>
+        <td>接收與傳遞 <span class="blank wide" data-ans="訊息（神經衝動）"></span></td>
+        <td>腦、脊髓、神經</td>
+      </tr>
+    </table>
+    <div class="explain">四大組織各司其職，常以「血液屬於結締組織」當考點，容易被誤認為其他組織，要特別記清楚。</div>
+  </div>
+  <div class="mistake">學生常誤以為植物有「系統」（例如把輸導組織說成輸導系統）；植物只到「器官」層次，沒有系統。</div>
+</div>
+
+<script>
+  function reveal(el){ if(el.classList.contains('on')) return; el.classList.add('on'); el.textContent=el.dataset.ans; const p=el.closest('.point'); if(p){ const e=p.querySelector('.explain'); if(e) e.classList.add('show'); } }
+  document.querySelectorAll('.blank').forEach(b => b.addEventListener('click', () => reveal(b)));
+  function revealAll(){ document.querySelectorAll('.blank').forEach(reveal); }
+  function hideAll(){ document.querySelectorAll('.blank').forEach(b => { b.classList.remove('on'); b.textContent=''; }); document.querySelectorAll('.explain').forEach(e => e.classList.remove('show')); }
+  let expOn=false;
+  function toggleExp(){ expOn=!expOn; document.querySelectorAll('.explain').forEach(e => e.classList.toggle('show', expOn)); }
+</script>
+</body>
+</html>

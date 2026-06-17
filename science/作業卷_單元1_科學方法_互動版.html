@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一自然先修 ── 單元1 科學方法（作業卷‧互動版）</title>
+<style>
+  :root { --main:#7b2d00; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f4f7fb; max-width:820px; margin:0 auto; padding:18px 16px 60px; }
+  .cover-title { font-size:22px; font-weight:bold; text-align:center; color:var(--main); background:#eef4fb; border:2.5px solid var(--main); border-radius:10px; padding:12px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(244,247,251,.96); border-bottom:1.5px solid #cdd7e3; padding:10px; margin-bottom:16px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 16px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:14px 16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:10px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d4d9e0; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; transition:all .12s; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#eef4fb; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+  <div class="cover-title">國一自然先修 ── 單元1 科學方法（作業卷‧互動版）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">1.</span>科學方法的第一個步驟是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 提出假設</button>
+      <button class="opt" data-opt="B">(B) 歸納結論</button>
+      <button class="opt" data-opt="C">(C) 實驗驗證</button>
+      <button class="opt" data-opt="D">(D) 觀察</button>
+    </div>
+    <div class="explain">科學方法一律從「觀察」開始，先注意到周遭現象，才會進一步定義問題、提出假設。提出假設(A)、實驗驗證(C)、歸納結論(B)都在觀察之後。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">2.</span>在「提出假設」之後、「歸納結論」之前，科學方法還要經過哪一個步驟來檢驗假設？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 觀察</button>
+      <button class="opt" data-opt="B">(B) 定義問題</button>
+      <button class="opt" data-opt="C">(C) 實驗驗證</button>
+      <button class="opt" data-opt="D">(D) 下定義</button>
+    </div>
+    <div class="explain">六步驟順序中，提出假設之後是蒐集資料與「實驗驗證」，最後才歸納結論。觀察、定義問題都在提出假設之前，故選(C)。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">3.</span>下列關於「假設」的敘述，何者錯誤？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 假設是暫時性的答案</button>
+      <button class="opt" data-opt="B">(B) 假設要能用實驗來驗證</button>
+      <button class="opt" data-opt="C">(C) 假設應根據觀察提出</button>
+      <button class="opt" data-opt="D">(D) 假設就是實驗最後得到的結論</button>
+    </div>
+    <div class="explain">假設是「暫時性、可驗證、依觀察提出」的答案，(A)(B)(C)都正確。(D)把假設說成最後的結論是錯的——假設要經實驗驗證後才可能成為結論。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">4.</span>實驗中「刻意改變、而且一次只能改變一個」的因素，稱為什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 控制變因</button>
+      <button class="opt" data-opt="B">(B) 應變變因</button>
+      <button class="opt" data-opt="C">(C) 操縱變因</button>
+      <button class="opt" data-opt="D">(D) 對照變因</button>
+    </div>
+    <div class="explain">刻意改變、一次只改一個的因素是「操縱變因」。控制變因是保持不變的、應變變因是測量的結果，沒有「對照變因」這個正式名稱。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">5.</span>實驗中為了公平比較而「保持不變」的其他因素，稱為什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 控制變因</button>
+      <button class="opt" data-opt="B">(B) 操縱變因</button>
+      <button class="opt" data-opt="C">(C) 應變變因</button>
+      <button class="opt" data-opt="D">(D) 結果變因</button>
+    </div>
+    <div class="explain">為了公平比較而「保持不變」的其他因素稱為控制變因。操縱變因是刻意改變的、應變變因是測量結果，故選(A)。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">6.</span>阿宏研究「水量多寡是否影響金魚游動的活躍度」，他在不同水量的魚缸中觀察金魚。請問此實驗的應變變因是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 魚缸裡的水量</button>
+      <button class="opt" data-opt="B">(B) 金魚游動的活躍程度</button>
+      <button class="opt" data-opt="C">(C) 魚缸的大小</button>
+      <button class="opt" data-opt="D">(D) 金魚的品種</button>
+    </div>
+    <div class="explain">應變變因是「測量的結果」。本實驗要看金魚的活躍度，所以金魚游動的活躍程度是應變變因。水量是操縱變因，魚缸大小、品種應保持相同。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">7.</span>小婷想知道「種子要不要陽光才能發芽」，她把同樣的種子分成兩盤，一盤放在陽光下、一盤放在黑暗的櫃子裡，其他條件相同。這個實驗的操縱變因是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 有沒有陽光</button>
+      <button class="opt" data-opt="B">(B) 種子的種類</button>
+      <button class="opt" data-opt="C">(C) 盤子的大小</button>
+      <button class="opt" data-opt="D">(D) 種子發芽的數量</button>
+    </div>
+    <div class="explain">研究主題是「要不要陽光」，所以刻意改變的「有沒有陽光」是操縱變因。種子種類、盤子大小應相同（控制變因），發芽數量是結果（應變變因）。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">8.</span>承上題，小婷實驗中「放在黑暗櫃子裡」與「放在陽光下」相比，下列哪一盤比較適合作為對照組？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 放在陽光下（自然正常條件）的那一盤</button>
+      <button class="opt" data-opt="B">(B) 兩盤都不算對照組</button>
+      <button class="opt" data-opt="C">(C) 必須再做第三盤才有對照組</button>
+      <button class="opt" data-opt="D">(D) 放在冰箱裡的那一盤</button>
+    </div>
+    <div class="explain">對照組是「維持自然正常條件」的那一組。種子本來就需要正常環境，放在陽光下是常態條件，可作比較基準；放冰箱(D)又多改了溫度，不適合。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">9.</span>下列哪一個研究問題「可以」用控制變因實驗來驗證？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 哪一首歌最好聽</button>
+      <button class="opt" data-opt="B">(B) 哪一種顏色最漂亮</button>
+      <button class="opt" data-opt="C">(C) 施肥量是否影響小白菜的生長高度</button>
+      <button class="opt" data-opt="D">(D) 哪一種冰淇淋口味最受歡迎</button>
+    </div>
+    <div class="explain">科學實驗要研究「可測量、可驗證」的問題。施肥量與生長高度都能量化、能控制變因驗證。(A)(B)(D)都是主觀喜好，無法用實驗客觀判定。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">10.</span>科學家在做實驗前，會把「假設」設計成可以被檢驗的形式，主要是為了下列哪一個目的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 讓假設聽起來比較厲害</button>
+      <button class="opt" data-opt="B">(B) 讓實驗永遠不會失敗</button>
+      <button class="opt" data-opt="C">(C) 避免別人看懂他的研究</button>
+      <button class="opt" data-opt="D">(D) 方便用實驗來判斷假設是否成立</button>
+    </div>
+    <div class="explain">假設要設計成「可被檢驗」的形式，才能用實驗判斷它到底成不成立，這正是實驗驗證的基礎。(A)(B)(C)都不是科學上的目的。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">11.</span>大雄做「溫度對麵包發霉速度的影響」實驗，他把麵包放在 10°C、20°C、30°C 三種溫度下，但其中一塊用白吐司、一塊用全麥、一塊用麵包邊。這樣的設計有什麼問題？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 溫度設定太接近</button>
+      <button class="opt" data-opt="B">(B) 同時改變了溫度與麵包種類，無法判斷是哪個造成差異</button>
+      <button class="opt" data-opt="C">(C) 沒有測量麵包重量</button>
+      <button class="opt" data-opt="D">(D) 應該放四種溫度才對</button>
+    </div>
+    <div class="explain">想研究溫度的影響，卻同時換了麵包種類，等於一次改變兩個變因，無法分辨發霉差異是溫度還是麵包種類造成，違反控制變因原則。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">12.</span>承上題，要讓這個「溫度對發霉的影響」實驗正確，大雄應該怎麼做？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 三塊麵包用同一種、只改變溫度</button>
+      <button class="opt" data-opt="B">(B) 三塊麵包用不同種、溫度也不同</button>
+      <button class="opt" data-opt="C">(C) 每塊麵包都放不同的房間</button>
+      <button class="opt" data-opt="D">(D) 把麵包都放進冰箱就好</button>
+    </div>
+    <div class="explain">要正確研究溫度的影響，必須讓三塊麵包是「同一種」（控制變因相同），只改變溫度這一個操縱變因，才能確定發霉差異來自溫度。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">13.</span>某同學記錄實驗數據時，發現有一筆數字跟他的假設不合，他最應該怎麼做？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 把不合的數字偷偷改掉</button>
+      <button class="opt" data-opt="B">(B) 誠實記錄真實數據，再思考原因</button>
+      <button class="opt" data-opt="C">(C) 把那筆數據直接刪掉不管</button>
+      <button class="opt" data-opt="D">(D) 假裝沒看到繼續做</button>
+    </div>
+    <div class="explain">科學態度要求誠實記錄真實數據。即使數據與假設不合，也應如實記錄並思考原因，這往往是新發現的開始。(A)(C)(D)都是竄改或忽略數據，不誠實。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">14.</span>下列哪一項最能代表「客觀」的科學態度？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 依照實際觀測到的事實做判斷，不憑個人喜好</button>
+      <button class="opt" data-opt="B">(B) 只記錄對自己有利的結果</button>
+      <button class="opt" data-opt="C">(C) 結果跟期待不同就不寫下來</button>
+      <button class="opt" data-opt="D">(D) 相信感覺勝過相信數據</button>
+    </div>
+    <div class="explain">客觀就是依照實際觀測到的事實做判斷，不受個人喜好左右。(B)(C)只挑對自己有利的、(D)憑感覺，都是主觀而非客觀。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">15.</span>小芸研究「每天澆水次數是否影響盆栽開花數量」。她設計每天澆 1 次、2 次、3 次三組，土壤、日照都相同。這個實驗中的「應變變因」是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 每天澆水的次數</button>
+      <button class="opt" data-opt="B">(B) 盆栽開花的數量</button>
+      <button class="opt" data-opt="C">(C) 土壤的種類</button>
+      <button class="opt" data-opt="D">(D) 每天的日照量</button>
+    </div>
+    <div class="explain">應變變因是「測量的結果」。本實驗要看開花情況，所以盆栽開花的數量是應變變因。澆水次數是操縱變因，土壤、日照是控制變因。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">16.</span>承上題，小芸實驗中「土壤、日照都相同」這些條件，屬於哪一種變因？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 操縱變因</button>
+      <button class="opt" data-opt="B">(B) 應變變因</button>
+      <button class="opt" data-opt="C">(C) 控制變因</button>
+      <button class="opt" data-opt="D">(D) 結果變因</button>
+    </div>
+    <div class="explain">為了公平比較而保持不變的土壤、日照，是控制變因。操縱變因是澆水次數，應變變因是開花數量，故選(C)。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">17.</span>科學家在研究時把觀察到的「下雨前蚯蚓會爬出地面」整理成「為什麼蚯蚓會在下雨前爬出地面？」這個明確的問句。這屬於哪一步驟？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 觀察</button>
+      <button class="opt" data-opt="B">(B) 實驗驗證</button>
+      <button class="opt" data-opt="C">(C) 歸納結論</button>
+      <button class="opt" data-opt="D">(D) 定義問題</button>
+    </div>
+    <div class="explain">把觀察到的現象整理成一個明確的問句，就是「定義問題」。它在觀察之後、提出假設之前。(A)只是看到現象，還沒整理成問題。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">18.</span>下列關於「實驗組」與「對照組」的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 對照組是接受特別處理（操縱變因）的那一組</button>
+      <button class="opt" data-opt="B">(B) 對照組是比較的基準，用來確認差異來自操縱變因</button>
+      <button class="opt" data-opt="C">(C) 實驗組與對照組可以有很多條件都不一樣</button>
+      <button class="opt" data-opt="D">(D) 對照組與實驗組沒有任何差別</button>
+    </div>
+    <div class="explain">對照組是比較的基準，用來確認實驗組的差異確實來自操縱變因。(A)說反了（接受特別處理的是實驗組）；(C)(D)也不符合對照原則。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">19.</span>一個良好的科學實驗，下列哪一項做法最恰當？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 只做一次就下結論</button>
+      <button class="opt" data-opt="B">(B) 一次同時改變很多個變因</button>
+      <button class="opt" data-opt="C">(C) 重複多次實驗，並如實記錄每次數據</button>
+      <button class="opt" data-opt="D">(D) 結果不理想就改掉數據</button>
+    </div>
+    <div class="explain">良好實驗應重複多次、如實記錄，以確保結果可重複驗證、可靠。(A)只做一次不可靠、(B)改變多變因無法判斷原因、(D)竄改數據不誠實。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">20.</span>阿傑想研究「不同光照顏色（紅光、藍光、白光）是否影響水草的生長」，其他條件都相同。下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 操縱變因是水草的生長量</button>
+      <button class="opt" data-opt="B">(B) 操縱變因是光照的顏色</button>
+      <button class="opt" data-opt="C">(C) 應變變因是光照的顏色</button>
+      <button class="opt" data-opt="D">(D) 水溫是操縱變因</button>
+    </div>
+    <div class="explain">研究主題是「光照顏色的影響」，刻意改變的光照顏色是操縱變因。水草生長量是結果（應變變因），水溫等其他條件應保持相同（控制變因），故選(B)。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
+  });
+  function showDone(){ const msg=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); msg.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; msg.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; msg.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; msg.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const m=b.querySelector('.mark'); if(m) m.remove(); }); }); }
+</script>
+</body>
+</html>

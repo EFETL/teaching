@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一自然先修 ── 單元3 細胞（練習卷‧互動版）</title>
+<style>
+  :root { --main:#2c5f8a; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f4f7fb; max-width:820px; margin:0 auto; padding:18px 16px 60px; }
+  .cover-title { font-size:22px; font-weight:bold; text-align:center; color:var(--main); background:#eef4fb; border:2.5px solid var(--main); border-radius:10px; padding:12px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(244,247,251,.96); border-bottom:1.5px solid #cdd7e3; padding:10px; margin-bottom:16px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 16px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:14px 16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:10px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d4d9e0; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; transition:all .12s; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#eef4fb; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; animation:fade .25s ease; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  @keyframes fade { from{opacity:0; transform:translateY(-4px);} to{opacity:1;} }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+  <div class="cover-title">國一自然先修 ── 單元3 細胞（練習卷‧互動版）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">1.</span>下列何者「不是」所有生物都具有的生命現象？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 會生長</button>
+      <button class="opt" data-opt="B">(B) 會生殖</button>
+      <button class="opt" data-opt="C">(C) 會行光合作用</button>
+      <button class="opt" data-opt="D">(D) 會對刺激產生反應</button>
+    </div>
+    <div class="explain">生長、生殖、感應是所有生物共同的生命現象；光合作用只有含葉綠素的生物（如植物）才會進行，動物與許多微生物不會，故非「所有」生物都有。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">2.</span>西元1665年第一個觀察到細胞並將它命名為「cell」的科學家是誰？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 羅伯特·虎克</button>
+      <button class="opt" data-opt="B">(B) 達爾文</button>
+      <button class="opt" data-opt="C">(C) 雷文霍克</button>
+      <button class="opt" data-opt="D">(D) 孟德爾</button>
+    </div>
+    <div class="explain">西元1665年英國科學家羅伯特·虎克觀察軟木塞，命名 cell。(C) 雷文霍克是後來觀察活微生物的人，並非命名者。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">3.</span>虎克當年用顯微鏡觀察的材料是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 洋蔥表皮</button>
+      <button class="opt" data-opt="B">(B) 人的口腔細胞</button>
+      <button class="opt" data-opt="C">(C) 軟木塞（栓皮）切片</button>
+      <button class="opt" data-opt="D">(D) 池塘水中的微生物</button>
+    </div>
+    <div class="explain">虎克觀察的是軟木塞（栓皮）切片。(A) 洋蔥表皮、(B) 口腔細胞、(D) 微生物都不是虎克最初觀察的材料。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">4.</span>虎克所看到的「小格子」，其實是細胞死亡後留下的哪一個構造？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞核</button>
+      <button class="opt" data-opt="B">(B) 細胞壁</button>
+      <button class="opt" data-opt="C">(C) 葉綠體</button>
+      <button class="opt" data-opt="D">(D) 液胞</button>
+    </div>
+    <div class="explain">軟木塞是死細胞，內容物已消失，只剩下空的細胞壁，所以虎克看到的小格子是細胞壁。其他構造在死細胞中已不存在。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">5.</span>下列哪一位科學家用單式顯微鏡觀察到「活的」微生物（如細菌、原生動物）？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 虎克</button>
+      <button class="opt" data-opt="B">(B) 巴斯德</button>
+      <button class="opt" data-opt="C">(C) 牛頓</button>
+      <button class="opt" data-opt="D">(D) 雷文霍克</button>
+    </div>
+    <div class="explain">雷文霍克用單式顯微鏡觀察到活的細菌、原生動物等微生物。(A) 虎克觀察的是死細胞留下的細胞壁。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">6.</span>關於「細胞學說」的內容，下列敘述何者「錯誤」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 所有生物都由細胞組成</button>
+      <button class="opt" data-opt="B">(B) 細胞是生物體構造與功能的基本單位</button>
+      <button class="opt" data-opt="C">(C) 新細胞由既有細胞分裂而來</button>
+      <button class="opt" data-opt="D">(D) 細胞可以從沒有生命的物質自然產生</button>
+    </div>
+    <div class="explain">細胞學說主張新細胞由既有細胞分裂而來，「無中生有」（自然發生）是錯誤的觀念。(A)(B)(C) 都是細胞學說的三大要點。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">7.</span>負責「控制物質進出細胞」、具有選擇性滲透功能的構造是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞膜</button>
+      <button class="opt" data-opt="B">(B) 細胞壁</button>
+      <button class="opt" data-opt="C">(C) 細胞核</button>
+      <button class="opt" data-opt="D">(D) 葉綠體</button>
+    </div>
+    <div class="explain">細胞膜具選擇性滲透，控制物質進出。(B) 細胞壁是支撐保護；(C) 細胞核是控制中樞；(D) 葉綠體行光合作用。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">8.</span>細胞中含有遺傳物質（DNA）、有「生命中樞」之稱、能控制細胞活動的構造是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞質</button>
+      <button class="opt" data-opt="B">(B) 液胞</button>
+      <button class="opt" data-opt="C">(C) 細胞核</button>
+      <button class="opt" data-opt="D">(D) 細胞膜</button>
+    </div>
+    <div class="explain">細胞核含 DNA，是生命中樞、控制細胞活動。(A) 細胞質是代謝場所；(D) 細胞膜控制物質進出，皆非含遺傳物質的中樞。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">9.</span>植物細胞中能進行光合作用、含有葉綠素的構造是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 葉綠體</button>
+      <button class="opt" data-opt="B">(B) 細胞核</button>
+      <button class="opt" data-opt="C">(C) 細胞壁</button>
+      <button class="opt" data-opt="D">(D) 細胞膜</button>
+    </div>
+    <div class="explain">葉綠體含葉綠素，進行光合作用。(C) 細胞壁只負責支撐保護，並不能行光合作用，是常見誘答。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">10.</span>植物細胞壁的主要成分是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 葉綠素</button>
+      <button class="opt" data-opt="B">(B) 纖維素</button>
+      <button class="opt" data-opt="C">(C) 水分</button>
+      <button class="opt" data-opt="D">(D) 脂肪</button>
+    </div>
+    <div class="explain">細胞壁主成分為纖維素。(A) 葉綠素是葉綠體內行光合作用的色素，並非細胞壁成分。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">11.</span>下列哪一個構造是「植物細胞有、動物細胞沒有」的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞膜</button>
+      <button class="opt" data-opt="B">(B) 細胞核</button>
+      <button class="opt" data-opt="C">(C) 細胞質</button>
+      <button class="opt" data-opt="D">(D) 細胞壁</button>
+    </div>
+    <div class="explain">細胞壁為植物特有，動物細胞沒有。(A)(B)(C) 細胞膜、細胞核、細胞質為動植物共有。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">12.</span>下列何者是動物細胞與植物細胞「都有」的構造？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 葉綠體</button>
+      <button class="opt" data-opt="B">(B) 細胞壁</button>
+      <button class="opt" data-opt="C">(C) 細胞核</button>
+      <button class="opt" data-opt="D">(D) 大液胞</button>
+    </div>
+    <div class="explain">細胞核為動植物都有。(A) 葉綠體、(B) 細胞壁、(D) 大液胞皆為植物特有，動物細胞沒有或很小。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">13.</span>小明在顯微鏡下觀察一個細胞，發現它「有細胞壁、有葉綠體、有大液胞」。這最可能是下列何種細胞？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 動物細胞</button>
+      <button class="opt" data-opt="B">(B) 植物細胞</button>
+      <button class="opt" data-opt="C">(C) 人的血球</button>
+      <button class="opt" data-opt="D">(D) 細菌以外無法判斷</button>
+    </div>
+    <div class="explain">同時具有細胞壁、葉綠體與大液胞是植物細胞的特徵。(A) 動物細胞沒有這三者；(C) 血球屬動物細胞。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">14.</span>細胞中呈膠狀、是進行各種代謝反應（生命活動）場所的構造是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 細胞核</button>
+      <button class="opt" data-opt="B">(B) 葉綠體</button>
+      <button class="opt" data-opt="C">(C) 細胞壁</button>
+      <button class="opt" data-opt="D">(D) 細胞質</button>
+    </div>
+    <div class="explain">細胞質呈膠狀，是各種代謝反應進行的場所。(A) 細胞核是控制中樞，非主要代謝反應場所。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">15.</span>植物細胞中通常較大、用來儲存水分、養分與代謝廢物的構造是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 液胞</button>
+      <button class="opt" data-opt="B">(B) 細胞核</button>
+      <button class="opt" data-opt="C">(C) 細胞膜</button>
+      <button class="opt" data-opt="D">(D) 葉綠體</button>
+    </div>
+    <div class="explain">液胞儲存水分、養分與代謝廢物，植物細胞的液胞大且通常一個。(D) 葉綠體是行光合作用，功能不同。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">16.</span>下列關於「細胞是基本單位」的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 只有動物由細胞組成，植物不是</button>
+      <button class="opt" data-opt="B">(B) 細胞是組成生物體構造與功能的基本單位</button>
+      <button class="opt" data-opt="C">(C) 生物體最小的單位是器官</button>
+      <button class="opt" data-opt="D">(D) 細胞無法獨立進行生命活動</button>
+    </div>
+    <div class="explain">細胞是組成生物體構造與功能的基本單位。(A) 動植物都由細胞組成；(C) 最小單位是細胞而非器官；(D) 細胞能進行生命活動。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">17.</span>下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 所有植物細胞都含有葉綠體</button>
+      <button class="opt" data-opt="B">(B) 植物的根部細胞通常不含葉綠體</button>
+      <button class="opt" data-opt="C">(C) 動物細胞也有細胞壁</button>
+      <button class="opt" data-opt="D">(D) 葉綠體能控制細胞活動</button>
+    </div>
+    <div class="explain">並非所有植物細胞都有葉綠體，如根部細胞通常不含葉綠體。(A) 錯在「所有」；(C) 動物無細胞壁；(D) 控制細胞活動的是細胞核。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">18.</span>細胞要維持生命，需要不斷進行物質的分解與合成以獲得能量，這個過程稱為？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 生殖</button>
+      <button class="opt" data-opt="B">(B) 感應</button>
+      <button class="opt" data-opt="C">(C) 新陳代謝</button>
+      <button class="opt" data-opt="D">(D) 遺傳</button>
+    </div>
+    <div class="explain">物質的分解與合成以獲得能量稱為新陳代謝。(A) 生殖、(B) 感應、(D) 遺傳皆為其他生命現象。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">19.</span>含羞草受到碰觸後葉片會合起來，這屬於哪一種生命現象？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 感應（對刺激反應）</button>
+      <button class="opt" data-opt="B">(B) 生長</button>
+      <button class="opt" data-opt="C">(C) 生殖</button>
+      <button class="opt" data-opt="D">(D) 新陳代謝</button>
+    </div>
+    <div class="explain">含羞草對碰觸刺激產生反應，屬於感應。(B) 生長是體積變大；(C) 生殖是產生新個體；(D) 新陳代謝是能量物質轉換。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">20.</span>下列關於動物細胞與植物細胞液胞的比較，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 動物細胞的液胞大且通常只有一個</button>
+      <button class="opt" data-opt="B">(B) 植物細胞的液胞大且通常一個</button>
+      <button class="opt" data-opt="C">(C) 只有動物細胞才有液胞</button>
+      <button class="opt" data-opt="D">(D) 液胞的功能是進行光合作用</button>
+    </div>
+    <div class="explain">植物細胞液胞大且通常一個；動物細胞液胞小或無。(A) 大液胞是植物的特徵非動物；(C) 動物也可能有小液胞；(D) 光合作用是葉綠體的功能。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
+  });
+  function showDone(){ const msg=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); msg.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; msg.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; msg.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; msg.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const m=b.querySelector('.mark'); if(m) m.remove(); }); }); }
+</script>
+</body>
+</html>
