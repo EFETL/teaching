@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>歷史　單元9　漢人文化的移植　教師講義</title>
+<style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#e67e22;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
+header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
+header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
+header p{font-size:17px;opacity:.95;}
+.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
+.back:hover{background:#eef6ff;}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
+button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
+button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
+button.reveal{background:var(--accent);color:#3a2c00;}
+button.hide{background:#7b8a9a;color:#fff;}
+button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
+.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
+section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
+/* 講義條目 */
+.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
+.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
+/* 填空（「？」點擊即顯示答案） */
+span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
+span.blank::before{content:"？";}
+span.blank:hover{background:#fff6d8;}
+span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
+span.blank.on::before{content:"";}
+/* 解析 */
+.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain b{color:var(--main);}
+.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
+/* 題目 */
+.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
+.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
+.q-type.mc{background:#eaf3fb;color:var(--main);}
+.q-type.fill{background:#fdf0e3;color:#b9690a;}
+.q-stem{flex:1;font-size:18px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}}
+.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
+.opt:hover{border-color:var(--main);background:#f3f8fd;}
+.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
+.opt.picked{border-color:var(--main);background:#e8f1fb;}
+.opt.correct{border-color:var(--ok);background:#e7f6ee;}
+.opt.correct .lab{color:var(--ok);}
+.opt.wrong{border-color:var(--no);background:#fceae8;}
+.opt.wrong .lab{color:var(--no);}
+.q .explain{margin-left:40px;}
+.qbtn{margin:8px 0 0 40px;}
+.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* 頁碼（列印） */
+.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
+@media print{
+  body{background:#fff;padding:0;font-size:15px;}
+  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
+  header{box-shadow:none;}
+  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  .show-ans .explain,.explain{display:block;}
+  @page{margin:16mm 14mm 18mm;}
+  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
+  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+}
+</style></head><body>
+<header><div class="unit-tag">歷史　單元 9</div>
+<h1>漢人文化的移植</h1><p>教師講義　·　全民補習班 線上教學</p>
+<a class="back" href="./">← 回歷史科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span>
+<button class="act reveal" onclick="revealAll()">顯示所有答案</button>
+<button class="act hide" onclick="hideAll()">隱藏答案</button>
+<button class="act clear" onclick="clearAll()">重置</button></div><section class="card"><div class="sec-h">重點複習</div><div class="note-pt"><span class="lead">1.</span>明代末年，鄭成功為取得「反清復明」的基地，由福建率軍渡海來臺，驅逐<span class="blank" data-ans="荷蘭人"></span>、統治臺灣，歷史上稱為鄭氏時期。<div class="explain"><b>解析：</b>鄭成功來臺的主要目的是建立「反清復明」的基地，他驅逐了原本統治臺灣的荷蘭人，開啟鄭氏時期。</div></div><div class="note-pt"><span class="lead">2.</span>鄭成功原名森，明代皇帝賜姓「朱」並改名「成功」，後人稱他「<span class="blank" data-ans="國姓爺"></span>」，後又被封為「延平郡王」。<div class="explain"><b>解析：</b>因明朝皇帝賜姓朱（國姓），後人尊稱鄭成功為「國姓爺」；他後來又被封為「延平郡王」。</div></div><div class="note-pt"><span class="lead">3.</span>鄭成功來臺不久即因病去世，建設事業改由其子<span class="blank" data-ans="鄭經"></span>繼續經營，並由陳永華輔佐，推動開墾荒地、招募漢人、發展農業等各項建設。<div class="explain"><b>解析：</b>鄭成功來臺後不久病逝，由其子鄭經接續經營臺灣，並倚重陳永華推動各項建設。</div></div><div class="note-pt"><span class="lead">4.</span>鄭氏時期在陳永華輔佐下，努力開墾荒地、大量招募漢人定居、發展農業，並傳播<span class="blank" data-ans="漢人"></span>文化與拓展海外貿易。<div class="explain"><b>解析：</b>鄭氏政權積極招募漢人來臺定居，使漢人文化大量移植到臺灣，這也是本單元主題「漢人文化的移植」的核心。</div></div></section><section class="card"><div class="sec-h">課前預覽</div><div class="note-pt"><span class="lead">1.</span>西元<span class="blank" data-ans="1662"></span>年，鄭成功建立臺灣第一個漢人政權；其後歷經鄭經、鄭克塽，至西元1683年清軍攻臺而結束鄭氏政權。<div class="explain"><b>解析：</b>鄭氏政權興衰：1662年鄭成功建立第一個漢人政權，傳鄭經、鄭克塽，1683年清軍攻臺後結束。</div></div><div class="note-pt"><span class="lead">2.</span>鄭氏政權傳承順序為鄭成功→鄭經→<span class="blank" data-ans="鄭克塽"></span>，最後於西元1683年被清軍所滅。<div class="explain"><b>解析：</b>鄭氏政權的傳承為鄭成功、鄭經、鄭克塽三代，1683年清軍攻臺，鄭克塽降清，政權結束。</div></div><div class="note-pt"><span class="lead">3.</span>鄭氏推動拓墾事業，以<span class="blank" data-ans="承天府"></span>（今臺南）為中心，大量招募漢人來臺開墾。<div class="explain"><b>解析：</b>鄭氏以承天府（今臺南）為政治與拓墾中心，開墾範圍主要侷限於臺灣南部。</div></div><div class="note-pt"><span class="lead">4.</span>鄭氏的開墾依性質分為三類：寓兵於農的<span class="blank" data-ans="軍屯"></span>、官墾與民墾。<div class="explain"><b>解析：</b>鄭氏開墾分為軍屯、官墾、民墾；其中軍屯即「寓兵於農」，戰時作戰、平時務農，以培育當地軍民的糧食。</div></div><div class="note-pt"><span class="lead">5.</span>面對清廷實施的<span class="blank" data-ans="海禁"></span>，鄭氏改以走私貿易因應，並加強與英國、日本和東南亞各國的往來。<div class="explain"><b>解析：</b>清廷實施海禁封鎖鄭氏，鄭氏便以走私貿易因應，同時拓展與英國、日本、東南亞的貿易。</div></div><div class="note-pt"><span class="lead">6.</span>鄭氏對外貿易主要輸出蔗糖、鹿皮與<span class="blank" data-ans="絲織品"></span>，輸入布匹和軍需品。<div class="explain"><b>解析：</b>鄭氏主要輸出蔗糖、鹿皮與絲織品，輸入布匹和軍需品；樟腦是清末才大量出口，並非鄭氏時期的貿易品。</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　歷史科　單元9　漢人文化的移植</footer>
+<div class="page-foot">全民補習班　teaching.efetl.com　—　歷史　單元9　漢人文化的移植　教師講義</div>
+</div><script>
+function reveal(el){
+  if(el.classList.contains('on')) return;
+  el.classList.add('on');
+  el.textContent = el.dataset.ans;
+  const c = el.closest('.note-pt, .q');
+  if(c) c.classList.add('revealed');
+}
+document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
+
+function revealAll(){
+  document.body.classList.add('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{
+    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
+  });
+  document.querySelectorAll('.q').forEach(gradeQ);
+  updateScore(true);
+}
+function hideAll(){
+  document.body.classList.remove('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
+}
+function clearAll(){
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
+  document.body.classList.remove('show-ans');
+  updateScore(false);
+}
+function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
+function pickMC(q,idx,btn){
+  const ans=+q.dataset.ans;q.dataset.picked=idx;
+  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  btn.classList.add('picked');
+  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
+    q.querySelectorAll('.opt')[ans].classList.add('correct');}
+  q.classList.add('revealed');updateScore(false);
+}
+function gradeQ(q){
+  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
+    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  }
+}
+function toggleQ(q){q.classList.toggle('revealed');}
+function updateScore(force){
+  const el=document.getElementById('score');if(!el)return;
+  const qs=document.querySelectorAll('.q');let done=0,right=0;
+  qs.forEach(q=>{
+    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
+    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+  });
+  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+}
+</script></body></html>
