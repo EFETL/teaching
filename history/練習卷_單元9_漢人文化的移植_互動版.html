@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>歷史　單元9　漢人文化的移植　練習卷</title>
+<style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#e67e22;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
+header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
+header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
+header p{font-size:17px;opacity:.95;}
+.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
+.back:hover{background:#eef6ff;}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
+button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
+button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
+button.reveal{background:var(--accent);color:#3a2c00;}
+button.hide{background:#7b8a9a;color:#fff;}
+button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
+.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
+section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
+/* 講義填空 */
+.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
+.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
+input.blank{font-family:inherit;font-size:17px;text-align:center;border:none;border-bottom:2px solid var(--accent);background:#fffdf3;min-width:84px;width:auto;padding:2px 8px;margin:0 3px;color:#1a1a1a;}
+input.blank:focus{outline:none;background:#fff6d8;}
+.ans-chip{display:none;font-size:15px;font-weight:bold;color:#fff;background:var(--ok);border-radius:6px;padding:1px 9px;margin:0 3px;}
+.show-ans .ans-chip{display:inline-block;}
+.show-ans input.blank{border-bottom-color:#cdd6df;color:#8893a0;}
+.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain b{color:var(--main);}
+.show-ans .explain,.q.revealed .explain{display:block;}
+/* 題目 */
+.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
+.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
+.q-type.mc{background:#eaf3fb;color:var(--main);}
+.q-type.fill{background:#fdf0e3;color:#b9690a;}
+.q-stem{flex:1;font-size:18px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}}
+.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
+.opt:hover{border-color:var(--main);background:#f3f8fd;}
+.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
+.opt.picked{border-color:var(--main);background:#e8f1fb;}
+.opt.correct{border-color:var(--ok);background:#e7f6ee;}
+.opt.correct .lab{color:var(--ok);}
+.opt.wrong{border-color:var(--no);background:#fceae8;}
+.opt.wrong .lab{color:var(--no);}
+.fillwrap{margin:6px 0 4px 40px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+input.finput{font-family:inherit;font-size:17px;border:2px solid #d9e2ec;border-radius:8px;padding:8px 12px;min-width:160px;}
+input.finput:focus{outline:none;border-color:var(--main);}
+input.finput.correct{border-color:var(--ok);background:#e7f6ee;}
+input.finput.wrong{border-color:var(--no);background:#fceae8;}
+button.check{font-family:inherit;font-size:16px;border:none;background:var(--main);color:#fff;border-radius:8px;padding:8px 16px;cursor:pointer;}
+.fb{font-size:16px;font-weight:bold;margin-left:6px;}
+.fb.ok{color:var(--ok);} .fb.no{color:var(--no);}
+.q .ansline{display:none;font-size:16px;margin:8px 0 0 40px;color:var(--ok);font-weight:bold;}
+.show-ans .q .ansline,.q.revealed .ansline{display:block;}
+.q .explain{margin-left:40px;}
+.qbtn{margin:8px 0 0 40px;}
+.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* 頁碼（列印） */
+.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
+@media print{
+  body{background:#fff;padding:0;font-size:15px;}
+  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
+  header{box-shadow:none;}
+  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  .show-ans .explain,.explain{display:block;}
+  @page{margin:16mm 14mm 18mm;}
+  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
+  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+}
+</style></head><body>
+<header><div class="unit-tag">歷史　單元 9</div>
+<h1>漢人文化的移植</h1><p>練習卷　·　全民補習班 線上教學</p>
+<a class="back" href="./">← 回歷史科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">練習卷　共 20 題（選擇 + 填充）</span>
+<span class="score" id="score">作答 0/20</span>
+<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
+<button class="act hide" onclick="hideAll()">隱藏答案</button>
+<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">鄭成功建立的政權，被視為臺灣歷史上的第幾個漢人政權？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>第一個</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>第二個</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>第三個</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>第四個</button></div><div class="explain"><b>解析：</b>西元1662年鄭成功建立臺灣第一個漢人政權。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">鄭氏時期建設臺灣，倚重陳永華輔佐的是哪一位統治者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>鄭成功</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>鄭經</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>鄭克塽</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>鄭芝龍</button></div><div class="explain"><b>解析：</b>鄭經經營臺灣時由陳永華輔佐，推動各項建設。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">鄭成功原本的名字是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>森</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>經</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>塽</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>芝龍</button></div><div class="explain"><b>解析：</b>鄭成功原名森，皇帝賜姓朱、改名成功。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">鄭氏政權結束的直接原因是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>荷蘭人反攻</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>清軍攻臺</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>日本入侵</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>內部饑荒</button></div><div class="explain"><b>解析：</b>西元1683年清軍攻臺，鄭氏政權結束。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一項「不是」鄭氏時期推動的主要建設？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>開墾荒地</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>招募漢人定居</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>發展農業</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>開採石油</button></div><div class="explain"><b>解析：</b>鄭氏推動開墾荒地、招募漢人、發展農業與海外貿易；開採石油並非當時的建設。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">鄭氏軍屯制度的主要目的是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>培育當地軍民的糧食</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>開採樟腦外銷</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>建造城牆</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>招募外國傭兵</button></div><div class="explain"><b>解析：</b>軍屯（寓兵於農）的目的是培育當地軍民的糧食。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者「不是」鄭氏時期主要輸出的商品？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>蔗糖</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>鹿皮</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>絲織品</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>樟腦</button></div><div class="explain"><b>解析：</b>鄭氏主要輸出蔗糖、鹿皮與絲織品；樟腦是清末才大量出口，非鄭氏時期的貿易品。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">鄭氏對外貿易時，主要輸入下列哪一類物品？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>布匹和軍需品</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>蔗糖和鹿皮</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>稻米和茶葉</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>陶瓷和書籍</button></div><div class="explain"><b>解析：</b>鄭氏輸出蔗糖、鹿皮、絲織品，輸入布匹和軍需品。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">鄭氏的開墾「官墾」是指由誰主導開墾的土地？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>軍隊</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>官府</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>一般百姓</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>外商</button></div><div class="explain"><b>解析：</b>鄭氏開墾分軍屯（軍隊）、官墾（官府）、民墾（百姓）三類。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">清廷對鄭氏採取下列哪一項政策，企圖切斷其對外貿易？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>和親</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>海禁</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>朝貢</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>冊封</button></div><div class="explain"><b>解析：</b>清廷實施海禁封鎖鄭氏，鄭氏則以走私貿易因應。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">本單元主題「漢人文化的移植」，主要與鄭氏哪一項作為關係最密切？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>開採礦產</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>大量招募漢人來臺定居</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>與荷蘭結盟</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>遷都北部</button></div><div class="explain"><b>解析：</b>鄭氏大量招募漢人來臺定居，使漢人文化移植到臺灣。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">承天府是今日臺灣的哪一個地方？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>臺北</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>臺中</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>臺南</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>高雄</button></div><div class="explain"><b>解析：</b>承天府即今日的臺南，是鄭氏拓墾中心。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">鄭成功被尊稱「國姓爺」與被封「延平郡王」，反映他與哪一個朝廷關係密切？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>明朝</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>清朝</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>荷蘭</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>日本</button></div><div class="explain"><b>解析：</b>明朝皇帝賜國姓、封延平郡王，鄭成功以反清復明為志，與明朝關係密切。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">鄭氏採用走私貿易的根本原因是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>臺灣物產不足</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>清廷實施海禁</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>荷蘭人封鎖港口</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>缺乏船隻</button></div><div class="explain"><b>解析：</b>因清廷實施海禁封鎖，鄭氏才改以走私貿易維持對外往來。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於鄭氏開墾範圍的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>遍及全臺</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>主要在臺灣南部</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>集中於臺灣北部</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>僅限於東部</button></div><div class="explain"><b>解析：</b>鄭氏的開墾主要侷限於臺灣南部。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="走私"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">鄭氏面對清廷的海禁，改以____貿易來維持對外往來。</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：走私</div><div class="explain"><b>解析：</b>清廷實施海禁，鄭氏以走私貿易因應。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="絲織品|絲綢"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">鄭氏對外貿易主要輸出蔗糖、鹿皮與____。</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：絲織品</div><div class="explain"><b>解析：</b>鄭氏主要輸出蔗糖、鹿皮與絲織品。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="糧食"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">軍屯制度的精神是「寓兵於農」，目的是培育當地軍民的____。</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：糧食</div><div class="explain"><b>解析：</b>軍屯（寓兵於農）的目的是培育當地軍民的糧食。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="鄭克塽"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">鄭氏政權最後一位統治者是____，他在1683年降清。</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：鄭克塽</div><div class="explain"><b>解析：</b>鄭氏傳承為鄭成功→鄭經→鄭克塽，1683年鄭克塽降清。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="清|清朝|清代"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">樟腦是____（朝代）末年才大量出口的商品，並非鄭氏時期的主要貿易品。</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：清</div><div class="explain"><b>解析：</b>樟腦是清末才大量出口，鄭氏時期的主要輸出品為蔗糖、鹿皮與絲織品。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　歷史科　單元9　漢人文化的移植</footer>
+<div class="page-foot">全民補習班　teaching.efetl.com　—　歷史　單元9　漢人文化的移植　練習卷</div>
+</div><script>
+function revealAll(){document.body.classList.add('show-ans');
+  document.querySelectorAll('.q').forEach(gradeQ);updateScore(true);}
+function hideAll(){document.body.classList.remove('show-ans');
+  document.querySelectorAll('.q').forEach(q=>q.classList.remove('revealed'));}
+function clearAll(){
+  document.querySelectorAll('input.blank,input.finput').forEach(i=>{i.value='';i.classList.remove('correct','wrong');});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  document.querySelectorAll('.fb').forEach(f=>f.textContent='');
+  document.querySelectorAll('.q').forEach(q=>{q.classList.remove('revealed');q.dataset.picked='';});
+  document.body.classList.remove('show-ans');updateScore(false);
+}
+function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
+function pickMC(q,idx,btn){
+  const ans=+q.dataset.ans;q.dataset.picked=idx;
+  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  btn.classList.add('picked');
+  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
+    q.querySelectorAll('.opt')[ans].classList.add('correct');}
+  q.classList.add('revealed');updateScore(false);
+}
+function checkFill(q){
+  const inp=q.querySelector('input.finput');const ans=(q.dataset.ans||'').split('|').map(norm);
+  const fb=q.querySelector('.fb');
+  if(ans.includes(norm(inp.value))){inp.classList.remove('wrong');inp.classList.add('correct');fb.textContent='✓ 答對了！';fb.className='fb ok';}
+  else{inp.classList.remove('correct');inp.classList.add('wrong');fb.textContent='✗ 再想想';fb.className='fb no';}
+  q.classList.add('revealed');updateScore(false);
+}
+function gradeQ(q){
+  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
+    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  }else{const inp=q.querySelector('input.finput');if(inp){inp.classList.add('correct');}}
+}
+function toggleQ(q){q.classList.toggle('revealed');}
+function updateScore(force){
+  const el=document.getElementById('score');if(!el)return;
+  const qs=document.querySelectorAll('.q');let done=0,right=0;
+  qs.forEach(q=>{if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
+    else{const inp=q.querySelector('input.finput');if(inp&&inp.classList.contains('correct')){done++;right++;}else if(inp&&inp.classList.contains('wrong')){done++;}}});
+  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+}
+</script></body></html>
