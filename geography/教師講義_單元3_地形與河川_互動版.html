@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>地理　單元3　地形與河川　教師講義</title>
+<style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#9b59b6;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
+header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
+header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
+header p{font-size:17px;opacity:.95;}
+.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
+.back:hover{background:#eef6ff;}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
+button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
+button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
+button.reveal{background:var(--accent);color:#3a2c00;}
+button.hide{background:#7b8a9a;color:#fff;}
+button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
+.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
+section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
+/* 講義填空 */
+.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
+.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
+input.blank{font-family:inherit;font-size:17px;text-align:center;border:none;border-bottom:2px solid var(--accent);background:#fffdf3;min-width:84px;width:auto;padding:2px 8px;margin:0 3px;color:#1a1a1a;}
+input.blank:focus{outline:none;background:#fff6d8;}
+.ans-chip{display:none;font-size:15px;font-weight:bold;color:#fff;background:var(--ok);border-radius:6px;padding:1px 9px;margin:0 3px;}
+.show-ans .ans-chip{display:inline-block;}
+.show-ans input.blank{border-bottom-color:#cdd6df;color:#8893a0;}
+.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain b{color:var(--main);}
+.show-ans .explain,.q.revealed .explain{display:block;}
+/* 題目 */
+.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
+.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
+.q-type.mc{background:#eaf3fb;color:var(--main);}
+.q-type.fill{background:#fdf0e3;color:#b9690a;}
+.q-stem{flex:1;font-size:18px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}}
+.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
+.opt:hover{border-color:var(--main);background:#f3f8fd;}
+.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
+.opt.picked{border-color:var(--main);background:#e8f1fb;}
+.opt.correct{border-color:var(--ok);background:#e7f6ee;}
+.opt.correct .lab{color:var(--ok);}
+.opt.wrong{border-color:var(--no);background:#fceae8;}
+.opt.wrong .lab{color:var(--no);}
+.fillwrap{margin:6px 0 4px 40px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+input.finput{font-family:inherit;font-size:17px;border:2px solid #d9e2ec;border-radius:8px;padding:8px 12px;min-width:160px;}
+input.finput:focus{outline:none;border-color:var(--main);}
+input.finput.correct{border-color:var(--ok);background:#e7f6ee;}
+input.finput.wrong{border-color:var(--no);background:#fceae8;}
+button.check{font-family:inherit;font-size:16px;border:none;background:var(--main);color:#fff;border-radius:8px;padding:8px 16px;cursor:pointer;}
+.fb{font-size:16px;font-weight:bold;margin-left:6px;}
+.fb.ok{color:var(--ok);} .fb.no{color:var(--no);}
+.q .ansline{display:none;font-size:16px;margin:8px 0 0 40px;color:var(--ok);font-weight:bold;}
+.show-ans .q .ansline,.q.revealed .ansline{display:block;}
+.q .explain{margin-left:40px;}
+.qbtn{margin:8px 0 0 40px;}
+.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* 頁碼（列印） */
+.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
+@media print{
+  body{background:#fff;padding:0;font-size:15px;}
+  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
+  header{box-shadow:none;}
+  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  .show-ans .explain,.explain{display:block;}
+  @page{margin:16mm 14mm 18mm;}
+  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
+  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+}
+</style></head><body>
+<header><div class="unit-tag">地理　單元 3</div>
+<h1>地形與河川</h1><p>教師講義　·　全民補習班 線上教學</p>
+<a class="back" href="./">← 回地理科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">小朋友先在空格作答；老師按右側按鈕顯示答案與解析</span>
+<button class="act reveal" onclick="document.body.classList.add('show-ans')">顯示答案與解析</button>
+<button class="act hide" onclick="document.body.classList.remove('show-ans')">隱藏答案</button>
+<button class="act clear" onclick="document.querySelectorAll('input.blank').forEach(i=>i.value='')">清除作答</button></div><section class="card"><div class="sec-h">重點複習</div><div class="note-pt"><span class="lead">1.</span>臺灣島地形高低起伏，主要分五大類：山地、丘陵、台地、<input class="blank" size="6" autocomplete="off"><span class="ans-chip">盆地</span> 與平原。<div class="explain"><b>解析：</b>臺灣五大地形為山地、丘陵、台地、盆地與平原，並無高原。</div></div><div class="note-pt"><span class="lead">2.</span>臺灣島地表形態多樣，山地南北縱貫，河川多 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">東西</span> 向，分別注入太平洋和臺灣海峽。<div class="explain"><b>解析：</b>因山脈呈南北走向，使河川多沿東西方向分流入海。</div></div><div class="note-pt"><span class="lead">3.</span>臺灣河川多具有流速急、河床坡度 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">陡</span>、長度短、流量變化大等特色。<div class="explain"><b>解析：</b>臺灣南北狹長、東西較窄，加上降雨季節分布不均，造就河川此類特色。</div></div><div class="note-pt"><span class="lead">4.</span>臺灣島南北 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">狹長</span>、東西較窄，是河川長度短的重要原因。<div class="explain"><b>解析：</b>島嶼形狀南北狹長、東西較窄，限制了河川的長度。</div></div></section><section class="card"><div class="sec-h">課前預覽</div><div class="note-pt"><span class="lead">1.</span>臺灣島位於菲律賓海板塊與 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">歐亞</span> 板塊交接處，因板塊運動擠壓而隆起。<div class="explain"><b>解析：</b>臺灣位於菲律賓海板塊與歐亞板塊交界帶，板塊擠壓使陸地隆起。</div></div><div class="note-pt"><span class="lead">2.</span>板塊推擠方向略為東西向，故山脈多呈 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">南北</span> 走向，也造成河川多東西向流。<div class="explain"><b>解析：</b>東西向的推擠力使山脈呈南北走向，連帶影響河川多為東西向。</div></div><div class="note-pt"><span class="lead">3.</span>臺灣地形分布以 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">中央</span> 山脈為主軸；西部以丘陵、台地、盆地與平原為主，東部主要為山地。<div class="explain"><b>解析：</b>中央山脈為臺灣地形主軸，東西兩側地形分布明顯不同。</div></div><div class="note-pt"><span class="lead">4.</span>盆地的地形特徵為中間低、四周較高；<input class="blank" size="6" autocomplete="off"><span class="ans-chip">台地</span> 則是海拔較低、平頂的高地。<div class="explain"><b>解析：</b>盆地中低周高；台地為海拔較低且頂部平坦的高地。</div></div><div class="note-pt"><span class="lead">5.</span>臺灣河川的特色包括長度不長、含沙量大，以及中南部河川 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">流量</span> 變化大。<div class="explain"><b>解析：</b>中南部河川因降雨集中，洪枯（流量）變化特別明顯。</div></div><div class="note-pt"><span class="lead">6.</span>因降雨季節分布不均、地形陡峻，河川短小湍急、快速入海，實際可利用的 <input class="blank" size="6" autocomplete="off"><span class="ans-chip">水資源</span> 並不豐富。<div class="explain"><b>解析：</b>河水快速入海難以蓄存，使臺灣實際可利用的水資源有限。</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　地理科　單元3　地形與河川</footer>
+<div class="page-foot">全民補習班　teaching.efetl.com　—　地理　單元3　地形與河川　教師講義</div>
+</div><script>
+function revealAll(){document.body.classList.add('show-ans');
+  document.querySelectorAll('.q').forEach(gradeQ);updateScore(true);}
+function hideAll(){document.body.classList.remove('show-ans');
+  document.querySelectorAll('.q').forEach(q=>q.classList.remove('revealed'));}
+function clearAll(){
+  document.querySelectorAll('input.blank,input.finput').forEach(i=>{i.value='';i.classList.remove('correct','wrong');});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  document.querySelectorAll('.fb').forEach(f=>f.textContent='');
+  document.querySelectorAll('.q').forEach(q=>{q.classList.remove('revealed');q.dataset.picked='';});
+  document.body.classList.remove('show-ans');updateScore(false);
+}
+function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
+function pickMC(q,idx,btn){
+  const ans=+q.dataset.ans;q.dataset.picked=idx;
+  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  btn.classList.add('picked');
+  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
+    q.querySelectorAll('.opt')[ans].classList.add('correct');}
+  q.classList.add('revealed');updateScore(false);
+}
+function checkFill(q){
+  const inp=q.querySelector('input.finput');const ans=(q.dataset.ans||'').split('|').map(norm);
+  const fb=q.querySelector('.fb');
+  if(ans.includes(norm(inp.value))){inp.classList.remove('wrong');inp.classList.add('correct');fb.textContent='✓ 答對了！';fb.className='fb ok';}
+  else{inp.classList.remove('correct');inp.classList.add('wrong');fb.textContent='✗ 再想想';fb.className='fb no';}
+  q.classList.add('revealed');updateScore(false);
+}
+function gradeQ(q){
+  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
+    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  }else{const inp=q.querySelector('input.finput');if(inp){inp.classList.add('correct');}}
+}
+function toggleQ(q){q.classList.toggle('revealed');}
+function updateScore(force){
+  const el=document.getElementById('score');if(!el)return;
+  const qs=document.querySelectorAll('.q');let done=0,right=0;
+  qs.forEach(q=>{if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
+    else{const inp=q.querySelector('input.finput');if(inp&&inp.classList.contains('correct')){done++;right++;}else if(inp&&inp.classList.contains('wrong')){done++;}}});
+  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+}
+</script></body></html>
