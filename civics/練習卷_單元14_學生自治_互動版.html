@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>公民　單元14　學生自治　練習卷</title>
+<style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
+header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
+header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
+header p{font-size:17px;opacity:.95;}
+.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
+.back:hover{background:#eef6ff;}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
+button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
+button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
+button.reveal{background:var(--accent);color:#3a2c00;}
+button.hide{background:#7b8a9a;color:#fff;}
+button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
+.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
+section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
+/* 講義填空 */
+.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
+.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
+input.blank{font-family:inherit;font-size:17px;text-align:center;border:none;border-bottom:2px solid var(--accent);background:#fffdf3;min-width:84px;width:auto;padding:2px 8px;margin:0 3px;color:#1a1a1a;}
+input.blank:focus{outline:none;background:#fff6d8;}
+.ans-chip{display:none;font-size:15px;font-weight:bold;color:#fff;background:var(--ok);border-radius:6px;padding:1px 9px;margin:0 3px;}
+.show-ans .ans-chip{display:inline-block;}
+.show-ans input.blank{border-bottom-color:#cdd6df;color:#8893a0;}
+.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain b{color:var(--main);}
+.show-ans .explain,.q.revealed .explain{display:block;}
+/* 題目 */
+.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
+.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
+.q-type.mc{background:#eaf3fb;color:var(--main);}
+.q-type.fill{background:#fdf0e3;color:#b9690a;}
+.q-stem{flex:1;font-size:18px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}}
+.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
+.opt:hover{border-color:var(--main);background:#f3f8fd;}
+.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
+.opt.picked{border-color:var(--main);background:#e8f1fb;}
+.opt.correct{border-color:var(--ok);background:#e7f6ee;}
+.opt.correct .lab{color:var(--ok);}
+.opt.wrong{border-color:var(--no);background:#fceae8;}
+.opt.wrong .lab{color:var(--no);}
+.fillwrap{margin:6px 0 4px 40px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+input.finput{font-family:inherit;font-size:17px;border:2px solid #d9e2ec;border-radius:8px;padding:8px 12px;min-width:160px;}
+input.finput:focus{outline:none;border-color:var(--main);}
+input.finput.correct{border-color:var(--ok);background:#e7f6ee;}
+input.finput.wrong{border-color:var(--no);background:#fceae8;}
+button.check{font-family:inherit;font-size:16px;border:none;background:var(--main);color:#fff;border-radius:8px;padding:8px 16px;cursor:pointer;}
+.fb{font-size:16px;font-weight:bold;margin-left:6px;}
+.fb.ok{color:var(--ok);} .fb.no{color:var(--no);}
+.q .ansline{display:none;font-size:16px;margin:8px 0 0 40px;color:var(--ok);font-weight:bold;}
+.show-ans .q .ansline,.q.revealed .ansline{display:block;}
+.q .explain{margin-left:40px;}
+.qbtn{margin:8px 0 0 40px;}
+.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* 頁碼（列印） */
+.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
+@media print{
+  body{background:#fff;padding:0;font-size:15px;}
+  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
+  header{box-shadow:none;}
+  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  .show-ans .explain,.explain{display:block;}
+  @page{margin:16mm 14mm 18mm;}
+  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
+  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+}
+</style></head><body>
+<header><div class="unit-tag">公民　單元 14</div>
+<h1>學生自治</h1><p>練習卷　·　全民補習班 線上教學</p>
+<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">練習卷　共 20 題（選擇 + 填充）</span>
+<span class="score" id="score">作答 0/20</span>
+<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
+<button class="act hide" onclick="hideAll()">隱藏答案</button>
+<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">小明被全班選為班長，這項活動屬於下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>學生自治</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>師長指派</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>家長決定</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>校務行政</button></div><div class="explain"><b>解析：</b>選出班級幹部（如班長）屬於學生自治的範圍。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者「不」屬於學生自治可決定的事項？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>班級幹部人選</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>班級公約內容</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>班級導師人選</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>班級事務分工</button></div><div class="explain"><b>解析：</b>班級導師人選不屬於學生自治；幹部人選、班級公約、事務分工則屬於學生自治。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">班會開會時，同學交頭接耳使會場秩序受到干擾，主席的處理符合下列何種程序問題？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>權宜問題</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>秩序問題</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>復議問題</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>散會問題</button></div><div class="explain"><b>解析：</b>會場秩序被干擾時，應向主席提出「秩序問題」處理。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">主席在尚未充分討論議案前就逕行表決，違反了開會程序，此時應提出什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>秩序問題</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>權宜問題</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>臨時動議</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>附議</button></div><div class="explain"><b>解析：</b>對開會程序錯誤（如未討論就表決）應提「權宜問題」。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於學生自治定義的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>由師長訂定所有規範</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>由學生訂定規範並成立自治組織</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>由家長管理公眾事務</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>由校長指定自治幹部</button></div><div class="explain"><b>解析：</b>學生自治是由學生訂定規範、成立自治組織，學習管理公眾事務。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">實施學生自治時，訂定自治法規的前一個步驟是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>推展自治活動</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>成立自治組織</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>進行表決</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>做成決議</button></div><div class="explain"><b>解析：</b>實施步驟為成立自治組織→訂定自治法規→推展自治活動，故訂定法規前要先成立組織。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一項「屬於」全校性的學生自治事務？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>決定全校學生自治會幹部</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>選出某班班長</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>安排某科任課老師</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>報名全鎮運動會</button></div><div class="explain"><b>解析：</b>全校學生自治會幹部屬於全校性事務；班長屬班級性，任課老師與全鎮運動會則不屬學生自治。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">班會中提出一項議案後，依規定需要怎樣才能進行討論？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>無須任何人同意</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>需一位以上同學附議</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>需全班一致通過</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>需老師核准</button></div><div class="explain"><b>解析：</b>提出議案後需一位以上同學附議，才會進行討論。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">「服從多數、尊重少數」屬於下列何種精神的展現？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>專制</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>民主</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>放任</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>對立</button></div><div class="explain"><b>解析：</b>服從多數、尊重少數是民主精神的展現，也是學生自治的重要原則。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於校規與班級公約的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>訂定後永遠不能修改</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>可透過民主方式修訂以符合現實需要</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>只能由學生單方面廢除</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>與學生自治完全無關</button></div><div class="explain"><b>解析：</b>校規與班級公約可透過民主方式修訂，讓它更符合現實需要。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">開會程序中「推選主席」之後，緊接著進行的步驟是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>直接表決</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>提出議案並充分討論</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>做成決議</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>宣布散會</button></div><div class="explain"><b>解析：</b>開會程序為推選主席→提出議案並充分討論→表決，故主席選出後先討論議案。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">若有甲、乙兩議案先後提出，依規定應先表決哪一個？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>後提出的乙案</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>先提出的甲案</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>由主席挑選</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>兩案合併表決</button></div><div class="explain"><b>解析：</b>依「先提案先表決」原則，應先表決先提出的甲案。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一項「不」是學生自治活動的重要參與？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>選舉班級幹部</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>服從多數、尊重少數</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>遵守班會決定</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>拒絕參與班級事務</button></div><div class="explain"><b>解析：</b>學生自治的重要參與包括選舉幹部、服從多數尊重少數、遵守班會決定並積極參與，拒絕參與則不符合。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">在學校學習民主生活，下列哪一種做法最為恰當？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>只顧自己的成績</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>遵守校規並主動參與各項活動</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>凡事都讓別人決定</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>不遵守班級公約</button></div><div class="explain"><b>解析：</b>學習民主生活應遵守校規和班級公約，並主動參與各項活動。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">表決通過後，會議應將通過的提案或動議做成什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>議案</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>決議</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>附議</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>權宜問題</button></div><div class="explain"><b>解析：</b>表決後須將通過的提案或動議做成「決議」。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="學生自治|學生自治活動"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">選出班級幹部屬於什麼活動的範圍？</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：學生自治</div><div class="explain"><b>解析：</b>選出班級幹部屬於學生自治的範圍。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="推展各項自治活動|推展自治活動|推展各項活動"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">學生自治的實施步驟為：成立自治組織→訂定自治法規→什麼？</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：推展各項自治活動</div><div class="explain"><b>解析：</b>實施步驟最後一步是推展各項自治活動。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="表決"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">開會程序中，提出議案並充分討論之後的步驟是什麼？</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：表決</div><div class="explain"><b>解析：</b>開會程序為推選主席→提出議案並充分討論→表決。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="權宜問題"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">開會時對開會程序錯誤，應向主席提出什麼問題？</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：權宜問題</div><div class="explain"><b>解析：</b>對開會程序錯誤應提「權宜問題」。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="尊重少數|尊重"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">學生自治強調少數服從多數，同時多數也要怎麼對待少數？</span></div><div class="fillwrap"><input class="finput" autocomplete="off" placeholder="在此作答"><button class="check" onclick="checkFill(this.closest('.q'))">檢查</button><span class="fb"></span></div><div class="ansline">正解：尊重少數</div><div class="explain"><b>解析：</b>學生自治強調少數服從多數、多數尊重少數的民主精神。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元14　學生自治</footer>
+<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元14　學生自治　練習卷</div>
+</div><script>
+function revealAll(){document.body.classList.add('show-ans');
+  document.querySelectorAll('.q').forEach(gradeQ);updateScore(true);}
+function hideAll(){document.body.classList.remove('show-ans');
+  document.querySelectorAll('.q').forEach(q=>q.classList.remove('revealed'));}
+function clearAll(){
+  document.querySelectorAll('input.blank,input.finput').forEach(i=>{i.value='';i.classList.remove('correct','wrong');});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  document.querySelectorAll('.fb').forEach(f=>f.textContent='');
+  document.querySelectorAll('.q').forEach(q=>{q.classList.remove('revealed');q.dataset.picked='';});
+  document.body.classList.remove('show-ans');updateScore(false);
+}
+function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
+function pickMC(q,idx,btn){
+  const ans=+q.dataset.ans;q.dataset.picked=idx;
+  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  btn.classList.add('picked');
+  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
+    q.querySelectorAll('.opt')[ans].classList.add('correct');}
+  q.classList.add('revealed');updateScore(false);
+}
+function checkFill(q){
+  const inp=q.querySelector('input.finput');const ans=(q.dataset.ans||'').split('|').map(norm);
+  const fb=q.querySelector('.fb');
+  if(ans.includes(norm(inp.value))){inp.classList.remove('wrong');inp.classList.add('correct');fb.textContent='✓ 答對了！';fb.className='fb ok';}
+  else{inp.classList.remove('correct');inp.classList.add('wrong');fb.textContent='✗ 再想想';fb.className='fb no';}
+  q.classList.add('revealed');updateScore(false);
+}
+function gradeQ(q){
+  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
+    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  }else{const inp=q.querySelector('input.finput');if(inp){inp.classList.add('correct');}}
+}
+function toggleQ(q){q.classList.toggle('revealed');}
+function updateScore(force){
+  const el=document.getElementById('score');if(!el)return;
+  const qs=document.querySelectorAll('.q');let done=0,right=0;
+  qs.forEach(q=>{if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
+    else{const inp=q.querySelector('input.finput');if(inp&&inp.classList.contains('correct')){done++;right++;}else if(inp&&inp.classList.contains('wrong')){done++;}}});
+  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+}
+</script></body></html>
