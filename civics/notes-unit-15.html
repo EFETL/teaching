@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>公民　單元15　性別平等　教師講義</title>
+<style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
+header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
+header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
+header p{font-size:17px;opacity:.95;}
+.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
+.back:hover{background:#eef6ff;}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
+button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
+button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
+button.reveal{background:var(--accent);color:#3a2c00;}
+button.hide{background:#7b8a9a;color:#fff;}
+button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
+.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
+section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
+/* 講義條目 */
+.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
+.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
+/* 填空（「？」點擊即顯示答案） */
+span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
+span.blank::before{content:"？";}
+span.blank:hover{background:#fff6d8;}
+span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
+span.blank.on::before{content:"";}
+/* 解析 */
+.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain b{color:var(--main);}
+.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
+/* 題目 */
+.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
+.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
+.q-type.mc{background:#eaf3fb;color:var(--main);}
+.q-type.fill{background:#fdf0e3;color:#b9690a;}
+.q-stem{flex:1;font-size:18px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}}
+.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
+.opt:hover{border-color:var(--main);background:#f3f8fd;}
+.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
+.opt.picked{border-color:var(--main);background:#e8f1fb;}
+.opt.correct{border-color:var(--ok);background:#e7f6ee;}
+.opt.correct .lab{color:var(--ok);}
+.opt.wrong{border-color:var(--no);background:#fceae8;}
+.opt.wrong .lab{color:var(--no);}
+.q .explain{margin-left:40px;}
+.qbtn{margin:8px 0 0 40px;}
+.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* 頁碼（列印） */
+.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
+@media print{
+  body{background:#fff;padding:0;font-size:15px;}
+  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
+  header{box-shadow:none;}
+  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  .show-ans .explain,.explain{display:block;}
+  @page{margin:16mm 14mm 18mm;}
+  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
+  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+}
+</style></head><body>
+<header><div class="unit-tag">公民　單元 15</div>
+<h1>性別平等</h1><p>教師講義　·　全民補習班 線上教學</p>
+<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span>
+<button class="act reveal" onclick="revealAll()">顯示所有答案</button>
+<button class="act hide" onclick="hideAll()">隱藏答案</button>
+<button class="act clear" onclick="clearAll()">重置</button></div><section class="card"><div class="sec-h">重點複習</div><div class="note-pt"><span class="lead">1.</span>男女有別主要是 <span class="blank" data-ans="天生身體"></span> 上的特徵不同，其他差別大部分是後天學習而來。<div class="explain"><b>解析：</b>男女最大的差別在於天生的生理（身體）特徵，其他多數差別則是經由後天學習而來。</div></div><div class="note-pt"><span class="lead">2.</span>男女除身體差別外，在其他能力並沒有太大不同，應有更公平的發展機會，彼此更應學會相互 <span class="blank" data-ans="尊重"></span>。<div class="explain"><b>解析：</b>平等與尊重：男女在能力上差異不大，應給予公平的發展機會，並學會相互尊重。</div></div><div class="note-pt"><span class="lead">3.</span>團體中有不同個體，應培養尊重他人的態度——欣賞優點、主動幫忙、解決爭端、 <span class="blank" data-ans="分工合作"></span> 與同心協力，才能讓人際關係和諧。<div class="explain"><b>解析：</b>相處之道強調分工合作與同心協力，搭配欣賞優點、主動幫忙、解決爭端，才能維持和諧的人際關係。</div></div></section><section class="card"><div class="sec-h">課前預覽</div><div class="note-pt"><span class="lead">1.</span>性別的差異包含生理上的差別，以及 <span class="blank" data-ans="社會文化"></span> 的影響，使兩性經過學習後的行為方式也因而不同。<div class="explain"><b>解析：</b>性別差異來自生理差別與社會文化的影響；人類社會對不同性別角色有不同要求，經學習後兩性行為方式因而不同。</div></div><div class="note-pt"><span class="lead">2.</span>性別角色的形成與行為受 <span class="blank" data-ans="家庭"></span>、學校、傳播媒體影響。<div class="explain"><b>解析：</b>性別角色的形成與行為主要受家庭、學校與傳播媒體三方面影響。</div></div><div class="note-pt"><span class="lead">3.</span>在成長過程中被塑造成符合性別角色的表現，因而對男女的表現方式形成固定、僵化的認知與看法，稱為性別 <span class="blank" data-ans="刻板印象"></span>。<div class="explain"><b>解析：</b>性別刻板印象是指對男女表現方式形成固定、僵化的認知，例如男主外女主內、男生當醫生女生當護士等。</div></div><div class="note-pt"><span class="lead">4.</span>《性別工作平等法》已於民國112年修正為《 <span class="blank" data-ans="性別平等工作法"></span> 》。<div class="explain"><b>解析：</b>性別平等法規方面，《性別工作平等法》已於民國112年修正為《性別平等工作法》。</div></div><div class="note-pt"><span class="lead">5.</span>促進性別良好互動的最大原則是 <span class="blank" data-ans="互相尊重"></span>，不可以性別刻板印象評斷他人。<div class="explain"><b>解析：</b>促進性別良好互動的最大原則是互相尊重，不可用性別刻板印象評斷他人；國中時期累積的相處經驗會影響成人後與異性的互動。</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元15　性別平等</footer>
+<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元15　性別平等　教師講義</div>
+</div><script>
+function reveal(el){
+  if(el.classList.contains('on')) return;
+  el.classList.add('on');
+  el.textContent = el.dataset.ans;
+  const c = el.closest('.note-pt, .q');
+  if(c) c.classList.add('revealed');
+}
+document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
+
+function revealAll(){
+  document.body.classList.add('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{
+    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
+  });
+  document.querySelectorAll('.q').forEach(gradeQ);
+  updateScore(true);
+}
+function hideAll(){
+  document.body.classList.remove('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
+}
+function clearAll(){
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
+  document.body.classList.remove('show-ans');
+  updateScore(false);
+}
+function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
+function pickMC(q,idx,btn){
+  const ans=+q.dataset.ans;q.dataset.picked=idx;
+  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  btn.classList.add('picked');
+  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
+    q.querySelectorAll('.opt')[ans].classList.add('correct');}
+  q.classList.add('revealed');updateScore(false);
+}
+function gradeQ(q){
+  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
+    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  }
+}
+function toggleQ(q){q.classList.toggle('revealed');}
+function updateScore(force){
+  const el=document.getElementById('score');if(!el)return;
+  const qs=document.querySelectorAll('.q');let done=0,right=0;
+  qs.forEach(q=>{
+    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
+    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+  });
+  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+}
+</script></body></html>
