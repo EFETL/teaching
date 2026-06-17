@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>地理　單元5　家鄉的環境變遷　作業卷</title>
+<style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#9b59b6;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
+header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
+header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
+header p{font-size:17px;opacity:.95;}
+.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
+.back:hover{background:#eef6ff;}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
+button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
+button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
+button.reveal{background:var(--accent);color:#3a2c00;}
+button.hide{background:#7b8a9a;color:#fff;}
+button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
+.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
+section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
+/* 講義條目 */
+.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
+.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
+/* 填空（「？」點擊即顯示答案） */
+span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
+span.blank::before{content:"？";}
+span.blank:hover{background:#fff6d8;}
+span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
+span.blank.on::before{content:"";}
+/* 解析 */
+.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain b{color:var(--main);}
+.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
+/* 題目 */
+.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
+.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
+.q-type.mc{background:#eaf3fb;color:var(--main);}
+.q-type.fill{background:#fdf0e3;color:#b9690a;}
+.q-stem{flex:1;font-size:18px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}}
+.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
+.opt:hover{border-color:var(--main);background:#f3f8fd;}
+.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
+.opt.picked{border-color:var(--main);background:#e8f1fb;}
+.opt.correct{border-color:var(--ok);background:#e7f6ee;}
+.opt.correct .lab{color:var(--ok);}
+.opt.wrong{border-color:var(--no);background:#fceae8;}
+.opt.wrong .lab{color:var(--no);}
+.q .explain{margin-left:40px;}
+.qbtn{margin:8px 0 0 40px;}
+.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* 頁碼（列印） */
+.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
+@media print{
+  body{background:#fff;padding:0;font-size:15px;}
+  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
+  header{box-shadow:none;}
+  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  .show-ans .explain,.explain{display:block;}
+  @page{margin:16mm 14mm 18mm;}
+  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
+  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+}
+</style></head><body>
+<header><div class="unit-tag">地理　單元 5</div>
+<h1>家鄉的環境變遷</h1><p>作業卷　·　全民補習班 線上教學</p>
+<a class="back" href="./">← 回地理科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">作業卷　20 題（選擇點選・填空點「？」查看）</span>
+<span class="score" id="score">作答 0/20</span>
+<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
+<button class="act hide" onclick="hideAll()">隱藏答案</button>
+<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">臺灣四面環海，下列何者是其海洋方面的特色？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>海洋資源豐富</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>缺乏漁業資源</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>完全沒有海岸</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>海洋面積極小</button></div><div class="explain"><b>解析：</b>臺灣四面環海，海洋資源豐富。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">臺灣地處低緯度，氣候特徵為何？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>四季寒冷乾燥</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>終年酷熱無雨</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>四季溫暖、雨量豐沛</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>只有冬季降雪</button></div><div class="explain"><b>解析：</b>臺灣地處低緯，四季溫暖，雨量豐沛，自然景觀豐富。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">臺灣夏秋兩季常受到哪一種自然現象侵襲？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>沙塵暴</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>颱風</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>暴風雪</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>龍捲風群</button></div><div class="explain"><b>解析：</b>臺灣位於西北太平洋颱風的行進路徑，夏秋颱風來襲。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者是臺灣較易發生的自然災害組合？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>火山爆發與海嘯</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>地震、颱風與土石流</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>沙漠化與乾旱</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>雪崩與冰風暴</button></div><div class="explain"><b>解析：</b>臺灣島多山且位於颱風路徑，較易發生地震、颱風與土石流等自然災害。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">西南沿海地區大量抽取地下水，最直接導致下列哪一種環境問題？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>空氣污染</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>森林大火</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>地層下陷</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>海平面上升</button></div><div class="explain"><b>解析：</b>西南沿海魚塭廣布、大量抽取地下水，導致地層下陷。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">山坡地濫墾濫伐會造成下列何種後果？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>減少土壤沖刷</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>提高地下水位</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>改善空氣品質</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>增加土石流發生機會</button></div><div class="explain"><b>解析：</b>山坡地濫墾濫伐會加速地表土壤沖刷，增加土石流發生機會。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">工商業發展對家鄉環境的影響，下列敘述何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>生活方便但過度消耗環境資源</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>完全沒有任何負面影響</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>使環境資源不斷增加</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>讓自然災害完全消失</button></div><div class="explain"><b>解析：</b>工商業發展使生活方便，但過度消耗環境資源，造成嚴重環境問題。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者屬於環境保育工作中的水土保持措施？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>鼓勵在山坡地大量開發</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>增加化學肥料使用量</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>嚴格管制山地、丘陵區開發</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>放任工業汙水排放</button></div><div class="explain"><b>解析：</b>環境保育工作包含嚴格管制山地、丘陵區開發與水土保持。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">為了保護土地，環境保育工作建議如何處理化學肥料？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>大量增加施用</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>完全不需管理</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>改排入河川</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>減輕化學肥料對土地的污染</button></div><div class="explain"><b>解析：</b>環境保育工作之一是減輕化學肥料對土地的污染。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者是環境保育對工業汙水的正確做法？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>直接排入河川</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>鼓勵任意排放</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>排放管制</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>加倍排放</button></div><div class="explain"><b>解析：</b>環境保育工作包含工業汙水排放管制。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者屬於臺灣常見的污染類型？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>水、空氣、噪音、廢棄物與土壤污染</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>只有水污染一種</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>只有噪音一種</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>臺灣沒有任何污染</button></div><div class="explain"><b>解析：</b>臺灣的環境污染包括水、空氣、噪音、廢棄物與土壤污染。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者屬於經濟開發造成自然環境無法復原的破壞？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>四季溫暖</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>雨量豐沛</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>海洋資源豐富</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>地層下陷、山崩與土石流</button></div><div class="explain"><b>解析：</b>環境破壞指經濟開發造成自然環境無法復原的破壞，如地層下陷、山崩與土石流。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">過度開發破壞生物棲息地，最可能造成下列哪一種結果？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>物種數量大增</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>部分物種滅絕</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>氣候變得穩定</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>雨量明顯增加</button></div><div class="explain"><b>解析：</b>生態失衡是指過度開發破壞生物棲息地，造成部分物種滅絕。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">在山坡地開發高爾夫球場，最容易引發下列何種問題？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>海洋污染</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>水土流失</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>地下水暴增</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>空氣變清新</button></div><div class="explain"><b>解析：</b>在山坡地開發高爾夫球場易引發水土流失。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">關於植被與土石流的關係，下列敘述何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>植被茂密較不容易發生土石流</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>植被茂密反而更易土石流</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>植被與土石流毫無關係</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>砍光植被可防止土石流</button></div><div class="explain"><b>解析：</b>植被茂密比較不容易發生土石流，因植被可保護地表、減少土壤沖刷。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="颱風"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">臺灣位於西北太平洋颱風的行進路徑，夏秋兩季常有 <span class="blank" data-ans="颱風"></span> 來襲。</span></div><div class="explain"><b>解析：</b>臺灣位於颱風行進路徑，夏秋颱風來襲是其重要的自然災害成因。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="地層"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">西南沿海魚塭廣布、大量抽取地下水，會導致 <span class="blank" data-ans="地層"></span> 下陷。</span></div><div class="explain"><b>解析：</b>大量抽取地下水使地層下陷，是西南沿海地區常見的環境破壞。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="噪音"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">環境保育工作中，為改善都市生活品質，需防治空氣污染、<span class="blank" data-ans="噪音"></span> 與垃圾問題。</span></div><div class="explain"><b>解析：</b>環境保育工作包含防治空氣污染、噪音與垃圾問題。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="不是"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">把廢棄物與汙水排入河川，<span class="blank" data-ans="不是"></span>（是／不是）水資源保育的做法。</span></div><div class="explain"><b>解析：</b>把廢棄物與汙水排入河川不是水資源保育的做法，應予以禁止。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="政府"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">永續發展強調由 <span class="blank" data-ans="政府"></span> 與民間共同努力，兼顧開發與環境保護。</span></div><div class="explain"><b>解析：</b>永續發展需要政府與民間共同努力，才能達成長久的環境保育目標。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　地理科　單元5　家鄉的環境變遷</footer>
+<div class="page-foot">全民補習班　teaching.efetl.com　—　地理　單元5　家鄉的環境變遷　作業卷</div>
+</div><script>
+function reveal(el){
+  if(el.classList.contains('on')) return;
+  el.classList.add('on');
+  el.textContent = el.dataset.ans;
+  const c = el.closest('.note-pt, .q');
+  if(c) c.classList.add('revealed');
+}
+document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
+
+function revealAll(){
+  document.body.classList.add('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{
+    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
+  });
+  document.querySelectorAll('.q').forEach(gradeQ);
+  updateScore(true);
+}
+function hideAll(){
+  document.body.classList.remove('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
+}
+function clearAll(){
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
+  document.body.classList.remove('show-ans');
+  updateScore(false);
+}
+function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
+function pickMC(q,idx,btn){
+  const ans=+q.dataset.ans;q.dataset.picked=idx;
+  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  btn.classList.add('picked');
+  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
+    q.querySelectorAll('.opt')[ans].classList.add('correct');}
+  q.classList.add('revealed');updateScore(false);
+}
+function gradeQ(q){
+  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
+    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  }
+}
+function toggleQ(q){q.classList.toggle('revealed');}
+function updateScore(force){
+  const el=document.getElementById('score');if(!el)return;
+  const qs=document.querySelectorAll('.q');let done=0,right=0;
+  qs.forEach(q=>{
+    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
+    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+  });
+  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+}
+</script></body></html>
