@@ -1,8 +1,5 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>公民　單元14　學生自治　教師講義</title>
-<style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>公民　單元14　學生自治　教師講義</title><style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--bg:#eef3f9;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
 header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
@@ -18,72 +15,48 @@ button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;borde
 button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
 button.reveal{background:var(--accent);color:#3a2c00;}
 button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
+/* 簡介框 */
+.intro-box{background:#fff;border-left:5px solid var(--subject);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:22px;font-size:18px;color:#2a3a4a;box-shadow:0 1px 6px rgba(0,0,0,.07);}
+/* 卡片 */
+section.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:20px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+/* 本文段落 */
+.body-text{font-size:18px;line-height:1.9;color:#2a3a4a;background:#f8fbff;border-radius:10px;padding:14px 18px;margin-bottom:18px;border:1px solid #dae6f0;}
+.body-text b{color:var(--subject);}
+/* 筆記 */
+.notes-head{font-size:16px;font-weight:bold;color:var(--main);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e3ebf3;}
+.note-pt{font-size:18px;margin:10px 0;padding:8px 10px 8px 14px;border-left:4px solid #e3ebf3;border-radius:0 8px 8px 0;background:#fafcff;}
+.note-pt.revealed{border-left-color:var(--ok);background:#f3fdf6;}
+/* 填空（「？」點擊顯示答案） */
 span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
 span.blank::before{content:"？";}
 span.blank:hover{background:#fff6d8;}
 span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
 span.blank.on::before{content:"";}
 /* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain{display:none;font-size:16px;background:#f0f7ff;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:8px;color:#33414f;}
 .explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+.show-ans .explain,.note-pt.revealed .explain{display:block;}
+/* 資訊表格 */
+.info-table{width:100%;border-collapse:collapse;margin:16px 0 4px;font-size:17px;}
+.info-table caption{font-size:16px;font-weight:bold;color:var(--main);text-align:left;padding:0 0 8px;}
+.info-table th{background:var(--subject);color:#fff;padding:9px 12px;text-align:left;font-weight:bold;}
+.info-table td{padding:9px 12px;border-bottom:1px solid #d9e2ec;}
+.info-table tr:nth-child(even) td{background:#f4f8fd;}
+.info-table tr:hover td{background:#eaf3fb;}
 footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
 @media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  body{background:#fff;padding:0;}
+  .toolbar,.back{display:none!important;}
   .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+  section.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd;}
 }
-</style></head><body>
-<header><div class="unit-tag">公民　單元 14</div>
-<h1>學生自治</h1><p>教師講義　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">重置</button></div><section class="card"><div class="sec-h">重點複習</div><div class="note-pt"><span class="lead">1.</span>在學校除了積極學習外，也需要遵守校規和班級公約，並主動參與各項活動、學習<span class="blank" data-ans="民主"></span>生活。<div class="explain"><b>解析：</b>在校學習不只是知識的吸收，也要透過遵守規範、參與活動，學習民主生活的方式。</div></div><div class="note-pt"><span class="lead">2.</span>學校的校規或班級的<span class="blank" data-ans="班級公約"></span>，可以透過民主的方式修訂，讓它更符合現實需要。<div class="explain"><b>解析：</b>校規與班級公約並非一成不變，可依現實需要以民主方式修訂，使規範更貼近實際。</div></div><div class="note-pt"><span class="lead">3.</span>學生自治活動的重要參與包括：選舉班級幹部、服從多數<span class="blank" data-ans="尊重"></span>少數、遵守班會決定並積極參與班級事務。<div class="explain"><b>解析：</b>學生自治強調民主精神，除了服從多數決，也要尊重少數的意見，並落實班會的決議。</div></div></section><section class="card"><div class="sec-h">課前預覽</div><div class="note-pt"><span class="lead">1.</span>學生自治的定義是：由學生訂定規範、成立自治組織，讓學生學習管理<span class="blank" data-ans="公眾"></span>的事務。<div class="explain"><b>解析：</b>學生自治的核心在於讓學生練習自我管理與管理公眾事務，培養民主素養。</div></div><div class="note-pt"><span class="lead">2.</span>學生自治的範圍可分為班級性事務、<span class="blank" data-ans="年級"></span>性事務與全校性事務。<div class="explain"><b>解析：</b>學生自治依規模分為班級性、年級性、全校性三種層級的事務。</div></div><div class="note-pt"><span class="lead">3.</span>學生自治的實施步驟為：成立自治組織→訂定<span class="blank" data-ans="自治法規"></span>→推展各項自治活動。<div class="explain"><b>解析：</b>先有組織，再訂定共同遵守的法規，最後據以推展各項自治活動。</div></div><div class="note-pt"><span class="lead">4.</span>開會應遵守的程序依序為：推選主席→提出議案並充分討論→<span class="blank" data-ans="表決"></span>。<div class="explain"><b>解析：</b>會議程序由推選主席開始，經過議案討論後進行表決，最後做成決議。</div></div><div class="note-pt"><span class="lead">5.</span>表決時依「先提案先表決」及多數決原則，少數服從多數、多數尊重少數，將結果做成<span class="blank" data-ans="決議"></span>。<div class="explain"><b>解析：</b>表決後須把通過的提案或動議做成決議，作為大家共同遵守的結果。</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元14　學生自治</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元14　學生自治　教師講義</div>
-</div><script>
+</style></head><body><header><div class="unit-tag">公民　單元 14</div><h1>學生自治</h1><p>教師講義　·　全民補習班 線上教學</p><a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span><button class="act reveal" onclick="revealAll()">顯示所有答案</button><button class="act hide" onclick="hideAll()">隱藏答案</button></div><div class="intro-box">你有沒有參加過班長選舉？學生自治不只是選選幹部而已，它其實是在練習民主社會最重要的事——讓每個人的聲音都被聽見！</div><section class="card"><div class="sec-h"><span>🗳️</span>一、學生自治的意義</div><div class="body-text">學生自治是指學生透過<b>民主程序</b>，自己管理班級或學校的事務。它的核心精神包括：<b>參與</b>（每個人都有權利參與決策）、<b>負責</b>（當選後要認真執行職責）與<b>尊重</b>（接受多數決的結果，同時保障少數人的聲音）。透過學生自治，我們學習了民主社會的運作方式——選舉、審議、執行、監督，這些都是未來成為公民的重要訓練。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">學生自治的三大核心精神是：<span class="blank" data-ans="參與"></span>、<span class="blank" data-ans="負責"></span>與<span class="blank" data-ans="尊重"></span>。<div class="explain"><b>解析：</b>三者缺一不可</div></div><div class="note-pt">多數人決定的結果稱為<span class="blank" data-ans="多數決"></span>，但同時也要保障<span class="blank" data-ans="少數"></span>者的聲音。<div class="explain"><b>解析：</b>民主不等於多數暴力</div></div><div class="note-pt">學生自治的民主程序包括選舉、<span class="blank" data-ans="審議"></span>、執行與<span class="blank" data-ans="監督"></span>。<div class="explain"><b>解析：</b>這四個步驟組成完整的民主循環</div></div><div class="note-pt">幹部當選後要認真執行職責，體現了自治中<span class="blank" data-ans="負責（責任感）"></span>的精神。<div class="explain"><b>解析：</b>有了責任感，自治才有意義</div></div></section><section class="card"><div class="sec-h"><span>📋</span>二、班級幹部的選舉與職責</div><div class="body-text">班級幹部通常透過<b>競選演說</b>和<b>秘密投票</b>選出，遵循公平、公正、公開的原則。常見的幹部包括<b>班長</b>（代表班級對外，負責協調事務）、<b>副班長</b>（協助班長）、<b>學藝股長</b>（負責學習活動）、<b>風紀股長</b>（維護班級秩序）等。幹部的工作不是「管人」，而是<b>服務同學</b>——好的幹部能讓班級運作更順暢，讓每個人都有好的學習環境。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">班長選舉應遵守公<span class="blank" data-ans="平"></span>、公<span class="blank" data-ans="正"></span>、公<span class="blank" data-ans="開"></span>的原則。<div class="explain"><b>解析：</b>俗稱「三公原則」，是選舉的基本要求</div></div><div class="note-pt">班級幹部的本質是<span class="blank" data-ans="服務"></span>同學，而非管理同學。<div class="explain"><b>解析：</b>領導是一種服務，不是一種特權</div></div><div class="note-pt">負責維護班級秩序的幹部是<span class="blank" data-ans="風紀"></span>股長。<div class="explain"><b>解析：</b>風紀股長需公正處理違規行為</div></div><div class="note-pt">幹部選舉採用<span class="blank" data-ans="秘密（無記名）"></span>投票，保護每位選民的意願不被干預。<div class="explain"><b>解析：</b>秘密投票是現代民主選舉的基本原則</div></div><table class="info-table"><caption>常見班級幹部職責一覽</caption><thead><tr><th>幹部名稱</th><th>主要職責</th></tr></thead><tbody><tr><td>班長</td><td>代表班級對外，召集班會，協調事務</td></tr><tr><td>副班長</td><td>協助班長，班長缺席時代理</td></tr><tr><td>學藝股長</td><td>負責學習環境佈置、學習活動規劃</td></tr><tr><td>風紀股長</td><td>維護班規秩序，處理違規事件</td></tr><tr><td>總務股長</td><td>負責班費管理、物品採購</td></tr></tbody></table></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元14　學生自治</footer></div><script>
 function reveal(el){
   if(el.classList.contains('on')) return;
   el.classList.add('on');
   el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
+  const c = el.closest('.note-pt');
   if(c) c.classList.add('revealed');
 }
 document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
@@ -93,44 +66,11 @@ function revealAll(){
   document.querySelectorAll('span.blank').forEach(b=>{
     if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
   });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
+  document.querySelectorAll('.note-pt').forEach(c=>c.classList.add('revealed'));
 }
 function hideAll(){
   document.body.classList.remove('show-ans');
   document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
-  }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
-  });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+  document.querySelectorAll('.note-pt').forEach(c=>c.classList.remove('revealed'));
 }
 </script></body></html>

@@ -1,8 +1,5 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>公民　單元13　學校是個小社會　教師講義</title>
-<style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>公民　單元13　學校是個小社會　教師講義</title><style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--bg:#eef3f9;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
 header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
@@ -18,72 +15,48 @@ button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;borde
 button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
 button.reveal{background:var(--accent);color:#3a2c00;}
 button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
+/* 簡介框 */
+.intro-box{background:#fff;border-left:5px solid var(--subject);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:22px;font-size:18px;color:#2a3a4a;box-shadow:0 1px 6px rgba(0,0,0,.07);}
+/* 卡片 */
+section.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:20px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+/* 本文段落 */
+.body-text{font-size:18px;line-height:1.9;color:#2a3a4a;background:#f8fbff;border-radius:10px;padding:14px 18px;margin-bottom:18px;border:1px solid #dae6f0;}
+.body-text b{color:var(--subject);}
+/* 筆記 */
+.notes-head{font-size:16px;font-weight:bold;color:var(--main);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e3ebf3;}
+.note-pt{font-size:18px;margin:10px 0;padding:8px 10px 8px 14px;border-left:4px solid #e3ebf3;border-radius:0 8px 8px 0;background:#fafcff;}
+.note-pt.revealed{border-left-color:var(--ok);background:#f3fdf6;}
+/* 填空（「？」點擊顯示答案） */
 span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
 span.blank::before{content:"？";}
 span.blank:hover{background:#fff6d8;}
 span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
 span.blank.on::before{content:"";}
 /* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain{display:none;font-size:16px;background:#f0f7ff;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:8px;color:#33414f;}
 .explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+.show-ans .explain,.note-pt.revealed .explain{display:block;}
+/* 資訊表格 */
+.info-table{width:100%;border-collapse:collapse;margin:16px 0 4px;font-size:17px;}
+.info-table caption{font-size:16px;font-weight:bold;color:var(--main);text-align:left;padding:0 0 8px;}
+.info-table th{background:var(--subject);color:#fff;padding:9px 12px;text-align:left;font-weight:bold;}
+.info-table td{padding:9px 12px;border-bottom:1px solid #d9e2ec;}
+.info-table tr:nth-child(even) td{background:#f4f8fd;}
+.info-table tr:hover td{background:#eaf3fb;}
 footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
 @media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  body{background:#fff;padding:0;}
+  .toolbar,.back{display:none!important;}
   .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+  section.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd;}
 }
-</style></head><body>
-<header><div class="unit-tag">公民　單元 13</div>
-<h1>學校是個小社會</h1><p>教師講義　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">重置</button></div><section class="card"><div class="sec-h">重點複習</div><div class="note-pt"><span class="lead">1.</span>學校是我們學習 <span class="blank" data-ans="知識"></span> 和做人做事的場所，透過老師的教導與同學的互動，增加各種知識和生活能力。<div class="explain"><b>解析：</b>學校不只傳授課業知識，也是學習待人處世、培養生活能力的重要場所。</div></div><div class="note-pt"><span class="lead">2.</span>學校裡有校長、老師與許多辦公室人員，並有家長會、<span class="blank" data-ans="志工隊"></span> 等不同組織，為全校師生服務，讓學習更快樂、校園更安全。<div class="explain"><b>解析：</b>家長會、志工隊等組織協助學校運作，提供師生服務，使校園更安全、學習更快樂。</div></div><div class="note-pt"><span class="lead">3.</span>每個學校都有 <span class="blank" data-ans="校規"></span>，班級有班級公約，可以維持校園的安全與生活秩序。<div class="explain"><b>解析：</b>校規規範全校、班級公約規範班級，兩者都用來維持校園安全與生活秩序。</div></div></section><section class="card"><div class="sec-h">課前預覽</div><div class="note-pt"><span class="lead">1.</span>良好的學習態度：求學是為了自己、吸取知識、培養適應生活環境的能力，並培養 <span class="blank" data-ans="虛心求知"></span>、勇於發問的習慣。<div class="explain"><b>解析：</b>良好的學習態度包含認清求學是為了自己，以及養成虛心求知、勇於發問的習慣。</div></div><div class="note-pt"><span class="lead">2.</span>有效的學習方法：看（讀）、聽課、<span class="blank" data-ans="複習"></span> 是學習中重要的三步驟，並養成課前預習、課後複習、做筆記、歸納重點的習慣。<div class="explain"><b>解析：</b>看（讀）、聽課、複習是學習三步驟，再配合預習、複習、做筆記與歸納重點才能有效學習。</div></div><div class="note-pt"><span class="lead">3.</span>善用網路與媒體：網路與電視上的資訊不全都正確，應 <span class="blank" data-ans="慎選"></span> 並利用網路搜尋相關學科資料幫助學習。<div class="explain"><b>解析：</b>媒體與網路資訊未必正確，要慎選可靠資訊，並善用網路搜尋學科資料輔助學習。</div></div><div class="note-pt"><span class="lead">4.</span>建立良好的人際關係：國中時期透過學校人際互動，了解自己在社會中的定位，培養 <span class="blank" data-ans="自我管理"></span> 與參與社會的能力。<div class="explain"><b>解析：</b>國中時期藉由學校人際互動認識自我定位，並培養自我管理與參與社會的能力。</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元13　學校是個小社會</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元13　學校是個小社會　教師講義</div>
-</div><script>
+</style></head><body><header><div class="unit-tag">公民　單元 13</div><h1>學校是個小社會</h1><p>教師講義　·　全民補習班 線上教學</p><a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span><button class="act reveal" onclick="revealAll()">顯示所有答案</button><button class="act hide" onclick="hideAll()">隱藏答案</button></div><div class="intro-box">學校不只是念書的地方，更是你練習「如何跟別人一起生活」的場所。班規、選舉、分工合作——這些都在預習你未來的公民生活！</div><section class="card"><div class="sec-h"><span>🏫</span>一、學校的組織與功能</div><div class="body-text">學校是社會的縮影，它有一套<b>正式的組織結構</b>：校長負責整體行政，教師傳授知識與品德，學生是學習的主體。學校最主要的功能是<b>傳授知識與技能</b>，幫助學生為未來的社會生活做準備。此外，學校也承擔<b>社會化</b>的任務——透過班規、學生自治和各種活動，讓學生學習守法、合作與尊重他人。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">學校透過各種規範，讓學生學習守法與合作，這是學校的<span class="blank" data-ans="社會化"></span>功能。<div class="explain"><b>解析：</b>學校是家庭之後的第二個社會化場所</div></div><div class="note-pt">學校的正式組織由<span class="blank" data-ans="校長"></span>負責整體行政，<span class="blank" data-ans="教師"></span>負責教學。<div class="explain"><b>解析：</b>正式組織有明確的分工與層級</div></div><div class="note-pt">學校最主要的功能是<span class="blank" data-ans="傳授知識"></span>與技能，幫助學生為未來做準備。<div class="explain"><b>解析：</b>學校教育兼顧知識、品德與技能</div></div><div class="note-pt">班規是由師生共同<span class="blank" data-ans="制定"></span>，大家都有遵守的義務。<div class="explain"><b>解析：</b>共同制定的規範更能讓人認同與遵守</div></div></section><section class="card"><div class="sec-h"><span>🤝</span>二、班級經營與同儕關係</div><div class="body-text">班級是學生最直接的生活群體，良好的班級氛圍需要每個人的參與與貢獻。<b>班規</b>是大家共同約定的行為準則；<b>班會</b>是討論班級事務、表達意見的重要管道。同儕關係在學生生涯中至關重要——與同學的互動讓我們學習<b>同理心</b>、<b>溝通技巧</b>和<b>解決衝突</b>的能力。面對衝突時，應先<b>冷靜</b>，再透過溝通尋求共識，而非用暴力解決。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">班級中大家共同約定的行為準則，叫做<span class="blank" data-ans="班規"></span>。<div class="explain"><b>解析：</b>班規由師生共同制定，具有拘束力</div></div><div class="note-pt">同學之間有不同意見時，應先<span class="blank" data-ans="冷靜"></span>，再透過<span class="blank" data-ans="溝通"></span>尋求共識。<div class="explain"><b>解析：</b>衝突解決的首要步驟是控制情緒</div></div><div class="note-pt">理解並體會他人感受的能力，稱為<span class="blank" data-ans="同理心"></span>。<div class="explain"><b>解析：</b>同理心是良好人際關係的基礎</div></div><div class="note-pt">班會是學生表達<span class="blank" data-ans="意見"></span>、討論<span class="blank" data-ans="班級"></span>事務的重要管道。<div class="explain"><b>解析：</b>班會是班級民主自治的實踐</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元13　學校是個小社會</footer></div><script>
 function reveal(el){
   if(el.classList.contains('on')) return;
   el.classList.add('on');
   el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
+  const c = el.closest('.note-pt');
   if(c) c.classList.add('revealed');
 }
 document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
@@ -93,44 +66,11 @@ function revealAll(){
   document.querySelectorAll('span.blank').forEach(b=>{
     if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
   });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
+  document.querySelectorAll('.note-pt').forEach(c=>c.classList.add('revealed'));
 }
 function hideAll(){
   document.body.classList.remove('show-ans');
   document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
-  }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
-  });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+  document.querySelectorAll('.note-pt').forEach(c=>c.classList.remove('revealed'));
 }
 </script></body></html>

@@ -1,8 +1,5 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>公民　單元16　敦親睦鄰　教師講義</title>
-<style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>公民　單元16　敦親睦鄰　教師講義</title><style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--bg:#eef3f9;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
 header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
@@ -18,72 +15,48 @@ button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;borde
 button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
 button.reveal{background:var(--accent);color:#3a2c00;}
 button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
+/* 簡介框 */
+.intro-box{background:#fff;border-left:5px solid var(--subject);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:22px;font-size:18px;color:#2a3a4a;box-shadow:0 1px 6px rgba(0,0,0,.07);}
+/* 卡片 */
+section.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:20px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+/* 本文段落 */
+.body-text{font-size:18px;line-height:1.9;color:#2a3a4a;background:#f8fbff;border-radius:10px;padding:14px 18px;margin-bottom:18px;border:1px solid #dae6f0;}
+.body-text b{color:var(--subject);}
+/* 筆記 */
+.notes-head{font-size:16px;font-weight:bold;color:var(--main);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e3ebf3;}
+.note-pt{font-size:18px;margin:10px 0;padding:8px 10px 8px 14px;border-left:4px solid #e3ebf3;border-radius:0 8px 8px 0;background:#fafcff;}
+.note-pt.revealed{border-left-color:var(--ok);background:#f3fdf6;}
+/* 填空（「？」點擊顯示答案） */
 span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
 span.blank::before{content:"？";}
 span.blank:hover{background:#fff6d8;}
 span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
 span.blank.on::before{content:"";}
 /* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain{display:none;font-size:16px;background:#f0f7ff;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:8px;color:#33414f;}
 .explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+.show-ans .explain,.note-pt.revealed .explain{display:block;}
+/* 資訊表格 */
+.info-table{width:100%;border-collapse:collapse;margin:16px 0 4px;font-size:17px;}
+.info-table caption{font-size:16px;font-weight:bold;color:var(--main);text-align:left;padding:0 0 8px;}
+.info-table th{background:var(--subject);color:#fff;padding:9px 12px;text-align:left;font-weight:bold;}
+.info-table td{padding:9px 12px;border-bottom:1px solid #d9e2ec;}
+.info-table tr:nth-child(even) td{background:#f4f8fd;}
+.info-table tr:hover td{background:#eaf3fb;}
 footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
 @media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  body{background:#fff;padding:0;}
+  .toolbar,.back{display:none!important;}
   .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+  section.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd;}
 }
-</style></head><body>
-<header><div class="unit-tag">公民　單元 16</div>
-<h1>敦親睦鄰</h1><p>教師講義　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">重置</button></div><section class="card"><div class="sec-h">重點複習</div><div class="note-pt"><span class="lead">1.</span>每個人都有自己的家鄉，從自己身分證上的<span class="blank" data-ans="地址"></span>可以看到鄰、村里等名稱。<div class="explain"><b>解析：</b>身分證上記載的地址資訊中，包含了鄰、村里等行政區劃名稱，可用以辨識自己的家鄉。</div></div><div class="note-pt"><span class="lead">2.</span>「遠親不如<span class="blank" data-ans="近鄰"></span>」說明守望相助與敦親睦鄰可以讓我們的生活更愉快。<div class="explain"><b>解析：</b>「遠親不如近鄰」強調鄰里互助的重要，鄰居在生活中往往比遠方親戚更能即時提供協助。</div></div><div class="note-pt"><span class="lead">3.</span>我們生活的家鄉常由居民自願組成「<span class="blank" data-ans="社區發展協會"></span>」，舉辦各種社區活動，提供居民休閒娛樂與聯絡情感。<div class="explain"><b>解析：</b>社區發展協會由居民自願組成，透過舉辦活動提供休閒娛樂並聯絡居民之間的情感。</div></div><div class="note-pt"><span class="lead">4.</span>社區內的居民在工作之餘，會組成<span class="blank" data-ans="志工"></span>團體，如協助指揮交通、定期打掃社區，以服務社區、營造祥和安全的環境。<div class="explain"><b>解析：</b>居民利用工作之餘組成志工團體，藉由指揮交通、打掃社區等服務行動，營造祥和與安全的社區。</div></div></section><section class="card"><div class="sec-h">課前預覽</div><div class="note-pt"><span class="lead">1.</span>一群住在某一地區的居民，因彼此具有共同關係，透過互動所形成的公共生活領域稱為「<span class="blank" data-ans="社區"></span>」。<div class="explain"><b>解析：</b>社區是指住在某地區、彼此具共同關係並對該地區產生利害情感或認同的居民，透過互動所形成的公共生活領域。</div></div><div class="note-pt"><span class="lead">2.</span>社區居民在心理上對社區產生「<span class="blank" data-ans="休戚與共"></span>」、「我是當地人」的認同感與歸屬感，稱為社區意識。<div class="explain"><b>解析：</b>社區意識是居民在心理上對社區產生休戚與共、我是當地人的認同感與歸屬感。</div></div><div class="note-pt"><span class="lead">3.</span>由社區居民共同處理社區事務，例如維護社區治安、成立守望相助巡守隊，稱為「<span class="blank" data-ans="社區參與"></span>」。<div class="explain"><b>解析：</b>社區參與的意義是由社區居民共同處理社區事務，如維護治安、成立守望相助巡守隊。</div></div><div class="note-pt"><span class="lead">4.</span>社區參與能培養謀利他精神與處理<span class="blank" data-ans="公共事務"></span>的能力，改善社區生活與環境。<div class="explain"><b>解析：</b>社區參與的重要性在於培養謀利他精神與處理公共事務的能力，進而改善社區生活與環境。</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元16　敦親睦鄰</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元16　敦親睦鄰　教師講義</div>
-</div><script>
+</style></head><body><header><div class="unit-tag">公民　單元 16</div><h1>敦親睦鄰</h1><p>教師講義　·　全民補習班 線上教學</p><a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span><button class="act reveal" onclick="revealAll()">顯示所有答案</button><button class="act hide" onclick="hideAll()">隱藏答案</button></div><div class="intro-box">你認識你家的鄰居嗎？現代都市生活讓人與人之間的距離愈來愈遠，但社區的連結與守望相助，仍是讓生活更美好的力量！</div><section class="card"><div class="sec-h"><span>🏘️</span>一、社區的組成與功能</div><div class="body-text">社區是由生活在特定地區的人們所組成的<b>生活共同體</b>，成員共享相近的環境、設施與文化。社區的主要功能包括：提供<b>基本生活需求</b>（市場、學校、醫療）、提供<b>安全感</b>（守望相助、警察巡邏）與促進<b>社會凝聚</b>（鄰里活動、社區節慶）。健康的社區需要居民積極<b>參與</b>，例如參加里民大會、投票選出里長，或加入社區志工。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">生活在特定地區的人們共同組成的生活共同體，稱為<span class="blank" data-ans="社區"></span>。<div class="explain"><b>解析：</b>社區以共同的地理空間為基礎</div></div><div class="note-pt">鄰居之間互相關心、協助，稱為<span class="blank" data-ans="守望"></span>相助。<div class="explain"><b>解析：</b>守望相助是傳統社區精神的核心</div></div><div class="note-pt">居民選出<span class="blank" data-ans="里長（村長）"></span>代表社區參與行政事務，是基層民主的表現。<div class="explain"><b>解析：</b>里長是最基層的民選代表</div></div><div class="note-pt">參加社區活動、投票選舉，是居民<span class="blank" data-ans="參與"></span>社區事務的具體方式。<div class="explain"><b>解析：</b>積極參與是維持社區活力的關鍵</div></div></section><section class="card"><div class="sec-h"><span>💪</span>二、社區問題與公民行動</div><div class="body-text">社區常見的問題包括：<b>噪音汙染</b>、<b>垃圾處理</b>、<b>公共安全</b>（路燈損壞、道路坑洞）與<b>環境美化</b>等。面對這些問題，公民可以採取不同的行動：透過<b>陳情</b>（向里長或政府機關反映）、<b>請願</b>（收集連署向相關單位提出要求）或<b>參與社區組織</b>（加入社區發展協會、擔任志工）來推動改善。公民積極參與是民主社會運作的基石。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">向里長或政府機關反映問題，稱為<span class="blank" data-ans="陳情"></span>。<div class="explain"><b>解析：</b>陳情是公民表達意見的合法管道</div></div><div class="note-pt">收集多人連署，向相關單位提出要求，稱為<span class="blank" data-ans="請願"></span>。<div class="explain"><b>解析：</b>請願需達一定人數才有效力</div></div><div class="note-pt">公民參與社區事務，是<span class="blank" data-ans="民主"></span>社會運作的基礎。<div class="explain"><b>解析：</b>民主需要公民積極參與才能真正落實</div></div><div class="note-pt">加入社區發展協會或擔任<span class="blank" data-ans="志工"></span>，是參與社區服務的方式。<div class="explain"><b>解析：</b>志工提供無償服務，促進社區凝聚</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元16　敦親睦鄰</footer></div><script>
 function reveal(el){
   if(el.classList.contains('on')) return;
   el.classList.add('on');
   el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
+  const c = el.closest('.note-pt');
   if(c) c.classList.add('revealed');
 }
 document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
@@ -93,44 +66,11 @@ function revealAll(){
   document.querySelectorAll('span.blank').forEach(b=>{
     if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
   });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
+  document.querySelectorAll('.note-pt').forEach(c=>c.classList.add('revealed'));
 }
 function hideAll(){
   document.body.classList.remove('show-ans');
   document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
-  }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
-  });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+  document.querySelectorAll('.note-pt').forEach(c=>c.classList.remove('revealed'));
 }
 </script></body></html>
