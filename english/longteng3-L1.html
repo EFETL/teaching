@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1: The Day I Broke the Rules ── 龍騰高職英文互動教學</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header{background:linear-gradient(135deg,#1e40af 0%,#2563eb 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#1d4ed8;color:#fff}
+.sec-body{padding:6px 24px 26px}
+
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #2563eb;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
+.para-cn.open{display:block}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#1d4ed8}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #2563eb;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+
+.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.phrase-table th{background:#eff6ff;padding:10px 13px;text-align:left;font-weight:700;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.phrase-table tr:last-child td{border-bottom:none}
+.phrase-table tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1d4ed8}
+
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#1d4ed8}
+.q-main{flex:1}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#1d4ed8}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:.94em;color:#475569;line-height:1.75}
+
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+
+footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
+@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <h1>💙 L1: The Day I Broke the Rules</h1>
+  <p class="sub">龍騰高職英文 — 互動教學</p>
+</div>
+
+<!-- 課文分析 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
+  <div class="sec-body">
+
+    <div class="para">
+      <div class="para-head">Paragraph 1-2</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>A few years ago, I was employed by the McDonald's Corporation. On "Ronald Day," I would dress up as Ronald McDonald and visit the community hospital's sick children. Most of these young patients were suffering from terminal illnesses. Thus, I would try my best to ease their pain.</span>
+        </div>
+        <div class="para-cn">幾年前，我被麥當勞公司雇用。在「隆納日」，我會穿上隆納麥當勞的服裝，去訪問社區醫院生病的孩子。這些年輕患者中的大多數患有絕症。因此，我會盡力減輕他們的痛苦。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 3-4</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>And I found it tremendously rewarding to be able to bring some laughter to the kids. One of the rules of my job was never to visit the children alone when I was dressed as Ronald, for I might frighten them with my painted face and red wig. I wasn't permitted to have any physical contact with the children either, since doing so might pass on germs to them.</span>
+        </div>
+        <div class="para-cn">我發現能為孩子們帶去一些歡笑是極其有意義的。我工作的規則之一是穿著隆納時不能獨自訪問孩子，因為我可能會用我的油漆臉和紅色假髮嚇到他們。我也不被允許與孩子有任何身體接觸，因為這樣做可能會傳播細菌。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 5-6</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Though I understood the reasoning behind these rules, I also felt that sometimes nothing could convey love, empathy, and warmth like a heartfelt embrace. Once, as I was leaving the hospital after finishing my work for the day, I heard a voice coming from a half-open door. "Ronald," the frail voice called, prompting me to push open the door and go in.</span>
+        </div>
+        <div class="para-cn">雖然我理解這些規則的原因，但我也感到有時沒有什麼能像一個真誠的擁抱那樣傳達愛、同理心和溫暖。有一次，當我完成當天工作後離開醫院時，我聽到一個來自半開門的聲音。「隆納，」虛弱的聲音呼喊，促使我推開門走進去。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 7-9</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>I found a small boy of about five lying in bed and looking extremely weak and pale. "His name is Billy," his parents told me, smiling. It was really heartbreaking to see such a young boy confined to a hospital bed. I knew I had to do anything I could to cheer little Billy up, so I stayed and did some magic tricks for him. A sparkle soon came to his eyes and I asked if I could do anything else for him.</span>
+        </div>
+        <div class="para-cn">我發現一個大約五歲的小男孩躺在床上，看起來極其虛弱蒼白。「他的名字是比利，」他的父母對我微笑著說。看到這樣年輕的男孩被困在醫院床上真的很令人心碎。我知道我必須盡我所能讓小比利振作起來，所以我留下來為他表演一些魔術。他的眼睛很快閃閃發光，我問他是否還有什麼我可以為他做的。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 10-13</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Billy replied, "Ronald, can I have a hug?" Although having to turn him down pained me deeply, I had no choice. I told Billy that it was against the rules and then quickly added that we could do some coloring instead. A while later, it appeared that he was getting drowsy, so I rose to my feet to get ready to leave. That was when he stretched out his tiny arms to hug me. I was about to refuse again, but then I saw the look of hope in his eyes. Suddenly, I realized I no longer cared if I was caught breaking the rules.</span>
+        </div>
+        <div class="para-cn">比利回答，「隆納，我可以得到一個擁抱嗎？」雖然不得不拒絕他讓我感到很痛苦，但我別無選擇。我告訴比利這是違反規則的，然後迅速補充說我們可以改為著色。過了一會兒，他似乎變得昏昏欲睡，所以我站起身準備離開。就在那時，他伸出了他的小臂來擁抱我。我正要再次拒絕，但隨後我看到了他眼中的希望。突然，我意識到我不再在乎是否被抓住違反規則。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 14-16</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Some things in life, after all, were more important. I picked him up and held him in my arms. After that, we talked and talked. He confided his worries to me. He was afraid that his little brother would have no one to play with. Also, he was scared that his dog would go hungry because he had hidden all its bones. It seemed that Billy knew he would never be going home. And yet, even then, he was only thinking of others.</span>
+        </div>
+        <div class="para-cn">畢竟，生活中有些事情更重要。我抱起他，抱在我懷裡。在那之後，我們談呀談。他向我傾訴了他的擔憂。他擔心他的弟弟將沒有人和他一起玩。他也害怕他的狗會挨餓，因為他藏了所有的骨頭。看起來比利知道他永遠不會回家。然而，即使在那時，他也只是在想著別人。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 17-18</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>When I finally stood up to leave, I gave Billy's parents my number and told them not to hesitate to call me if I could be of any assistance. Two days later, I received a call from Billy's mom, who told me her son had passed away. She wanted to thank me for making a difference in his life, for he'd said to her, "Mommy, I don't mind if I can't see Santa this year because I've hugged Ronald."</span>
+        </div>
+        <div class="para-cn">當我最後站起來要離開時，我給了比利的父母我的電話號碼，並告訴他們如果我可以幫助，不要猶豫就給我打電話。兩天後，我接到了比利媽媽的電話，她告訴我她的兒子已經去世了。她想感謝我對他的生活做出了改變，因為他對她說，「媽媽，我不介意今年看不到聖誕老人，因為我已經擁抱了隆納。」</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 單字卡 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">employ <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">雇用</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The company employs over 500 workers.
+            <div class="cn">這家公司雇用了超過 500 名工人。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">terminal <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">末期的；致命的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> He was diagnosed with a terminal illness.
+            <div class="cn">他被診斷出患有絕症。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">tremendously <span class="v-pos">adv.</span></div>
+            <div class="v-cn-mini">極大地；非常地</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The new technology has improved efficiency tremendously.
+            <div class="cn">新技術極大地提高了效率。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">frighten <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">使害怕；驚嚇</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Loud noises frighten the baby.
+            <div class="cn">大聲的噪音會嚇到嬰兒。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">warmth <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">溫暖；熱情</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The warmth of her smile made everyone feel welcome.
+            <div class="cn">她微笑的溫暖使每個人都感到受歡迎。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">frail <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">虛弱的；脆弱的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The elderly woman's frail body needed careful handling.
+            <div class="cn">這位老婦人虛弱的身體需要小心對待。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">confine <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">限制；使侷限</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The patient was confined to bed due to illness.
+            <div class="cn">患者因病被困在床上。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">sparkle <span class="v-pos">n./v.</span></div>
+            <div class="v-cn-mini">閃光；閃耀</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Her eyes sparkled with joy.
+            <div class="cn">她的眼睛閃閃發光，充滿喜悅。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">hesitate <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">猶豫</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Don't hesitate to ask for help if you need it.
+            <div class="cn">如果需要，不要猶豫尋求幫助。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">germ <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">細菌；病菌</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Wash your hands to remove germs.
+            <div class="cn">洗手以清除細菌。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 片語講解 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+  <div class="sec-body">
+    <table class="phrase-table">
+      <tr>
+        <th>片語</th>
+        <th>中文</th>
+        <th>例句</th>
+      </tr>
+      <tr>
+        <td><span class="phr">pass on...to...</span></td>
+        <td>傳遞…給…</td>
+        <td>Don't pass on diseases to others.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">cheer...up</span></td>
+        <td>使…振作；使…高興</td>
+        <td>A good joke can cheer people up.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">turn...down</span></td>
+        <td>拒絕</td>
+        <td>She turned down the job offer.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">be about to</span></td>
+        <td>即將要</td>
+        <td>The movie is about to start.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">after all</span></td>
+        <td>畢竟；終究</td>
+        <td>After all, we tried our best.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">pass away</span></td>
+        <td>去世；過世</td>
+        <td>His grandfather passed away last year.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">make a difference</span></td>
+        <td>有影響；有意義</td>
+        <td>Your help made a big difference.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- 練習題 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+  <div class="sec-body">
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">1</div>
+        <div class="q-main">
+          <div class="q-en">What was the narrator's job?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) A hospital nurse</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) A person who dressed as Ronald McDonald for children</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) A children's magician</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) A McDonald's restaurant manager</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說：「I was employed by the McDonald's Corporation...I would dress up as Ronald McDonald and visit the community hospital's sick children.」敘述者是被麥當勞雇用來穿著隆納麥當勞的服裝訪問醫院生病孩子的人。</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">2</div>
+        <div class="q-main">
+          <div class="q-en">What rules was the narrator required to follow?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) Never visit the hospital after 5 PM</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(B) Always bring gifts for the children</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(C) Never visit alone and no physical contact with children</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) Only visit children who speak English</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：C</div>
+        <div class="ans-cn">課文明確說明：「One of the rules of my job was never to visit the children alone when I was dressed as Ronald...I wasn't permitted to have any physical contact with the children either.」</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">3</div>
+        <div class="q-main">
+          <div class="q-en">Why did the narrator finally decide to break the rules?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) Billy threatened to cry if he didn't get a hug</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(B) The nurse told him it was okay to break the rules</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(C) He saw the look of hope in Billy's eyes and realized some things were more important than rules</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) Billy's parents asked him to give Billy a hug</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：C</div>
+        <div class="ans-cn">課文說明：「I was about to refuse again, but then I saw the look of hope in his eyes. Suddenly, I realized I no longer cared if I was caught breaking the rules. Some things in life, after all, were more important.」</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">4</div>
+        <div class="q-main">
+          <div class="q-en">What was Billy worried about?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) He wouldn't be able to see Ronald again</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) His little brother would have no one to play with and his dog would go hungry</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) His parents would be sad</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) He wouldn't see Santa Claus</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說：「He was afraid that his little brother would have no one to play with. Also, he was scared that his dog would go hungry because he had hidden all its bones.」比利擔心他的弟弟沒人陪玩，他的狗會挨餓。</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">5</div>
+        <div class="q-main">
+          <div class="q-en">What did Billy tell his mother about the narrator?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) He wished he had gotten more magic tricks</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) He didn't mind missing Santa because he hugged Ronald</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) He wanted Ronald to visit every day</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) He wanted to tell Ronald about his worries</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文最後說明：「she wanted to thank me for making a difference in his life, for he'd said to her, 'Mommy, I don't mind if I can't see Santa this year because I've hugged Ronald.'」</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>龍騰高職英文 ── L1: The Day I Broke the Rules</footer>
+
+</div>
+
+<script>
+function toggleCN(elem) {
+  const icon = elem.querySelector('.ic');
+  const cn = elem.querySelector('.para-cn');
+  icon.classList.toggle('open');
+  cn.classList.toggle('open');
+}
+
+function toggleVocab(elem) {
+  const icon = elem.querySelector('.v-ic');
+  const body = elem.nextElementSibling;
+  icon.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function selectChoice(elem, isCorrect) {
+  const block = elem.closest('.q-block');
+  const allChoices = block.querySelectorAll('.choice');
+  allChoices.forEach(c => c.classList.remove('correct', 'wrong'));
+
+  if (isCorrect) {
+    elem.classList.add('correct');
+  } else {
+    elem.classList.add('wrong');
+  }
+
+  const ansBlock = block.querySelector('.q-ans');
+  ansBlock.classList.add('open');
+}
+</script>
+</body>
+</html>

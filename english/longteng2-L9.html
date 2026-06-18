@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L9: The Story behind Eponyms ── 龍騰高職英文互動教學</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header{background:linear-gradient(135deg,#0f766e 0%,#14b8a6 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#0f766e;color:#fff}
+.sec-body{padding:6px 24px 26px}
+
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #14b8a6;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
+.para-cn.open{display:block}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#0f766e}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #14b8a6;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+
+.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.phrase-table th{background:#f0fdfa;padding:10px 13px;text-align:left;font-weight:700;color:#0f766e;border-bottom:2px solid #99f6e4}
+.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.phrase-table tr:last-child td{border-bottom:none}
+.phrase-table tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#0f766e}
+
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#0f766e}
+.q-main{flex:1}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff;content:'✓'}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#0f766e}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:.94em;color:#475569;line-height:1.75}
+
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+
+footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
+@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <h1>📖 L9: The Story behind Eponyms</h1>
+  <p class="sub">龍騰高職英文 — 互動教學</p>
+</div>
+
+<!-- 課文分析 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
+  <div class="sec-body">
+
+    <div class="para">
+      <div class="para-head">Paragraph 1</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Have you ever heard the term "paparazzi"? Or how about "Photoshop" used as a verb? Both of these are examples of eponyms.</span>
+        </div>
+        <div class="para-cn">你曾經聽過「狗仔隊」這個詞嗎？或是「Photoshop」被當作動詞使用？這兩者都是「專名詞」的例子。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 2-3</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>An eponym is a word which usually started out as the name of someone or something but took on a more general meaning later on. An example of an eponym that is derived from a person's name is "paparazzi."</span>
+        </div>
+        <div class="para-cn">專名詞是一個詞，通常最初是某人或某物的名稱，但後來具有了更普遍的意義。源自人名的專名詞例子是「paparazzi」（狗仔隊）。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 4-6</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>It is said that this word came from a character called Paparazzo in the Italian film La Dolce Vita. Set in Rome, the film is about the writer of a popular newspaper column featuring celebrity gossip. Paparazzo is a photographer who works with the writer to reveal the secret lives of celebrities. After the film was released in 1960, people began to use the word paparazzo and its plural form paparazzi to refer to all photographers who chase celebrities around.</span>
+        </div>
+        <div class="para-cn">據說這個詞來自義大利電影《甜蜜生活》中一個名叫 Paparazzo 的角色。這部電影以羅馬為背景，講述了一位流行報紙專欄作家的故事，該專欄刊載名人八卦。Paparazzo 是與這位作家合作揭露名人秘密生活的攝影師。電影在 1960 年上映後，人們開始使用 paparazzo 及其複數形式 paparazzi 來指代所有追逐名人的攝影師。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 7-10</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Product-based eponyms such as Photoshop, on the other hand, are brand names that are commonly used to describe other similar products, or in this case an action. Photoshop is an image-editing software program created by Adobe Inc. It is used to create, modify, or digitally combine images and photographs. Since it was first released in 1987, Photoshop has become the standard software used by photographers and designers around the world. It became so widely known that over time, people began to use "Photoshop" as a verb to mean "to edit a photo." For example, no matter what software program is actually used, you could say, "The picture has obviously been photoshopped."</span>
+        </div>
+        <div class="para-cn">另一方面，基於產品的專名詞如 Photoshop，是通常用來描述其他類似產品或在這種情況下描述動作的品牌名稱。Photoshop 是由 Adobe Inc. 創建的圖像編輯軟體程序。它用於創建、修改或數位地組合圖像和照片。自 1987 年首次發布以來，Photoshop 已成為世界各地攝影師和設計師使用的標準軟體。由於它變得如此廣為人知，隨著時間的推移，人們開始使用「Photoshop」作為動詞，表示「編輯照片」。例如，無論實際使用什麼軟體程序，你都可以說「這張照片明顯被 Photoshop 過了。」</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 11-12</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>In the beginning, Adobe was not pleased that people were using their product name to describe the work of other companies' products, but the eponym has become too popular for them to stop its widespread usage. As you can see, eponyms play an important role in creating new words in our society. Language is constantly changing with the adoption of new words and alternative uses for existing words. Who knows what new words we will think up next?</span>
+        </div>
+        <div class="para-cn">起初，Adobe 對人們使用他們的產品名稱來描述其他公司產品的工作感到不高興，但這個專名詞變得太受歡迎，他們無法阻止其廣泛使用。如你所見，專名詞在我們社會創造新詞方面發揮著重要作用。語言不斷變化，採納新詞並為現有詞語的替代用法。誰知道我們接下來會想出什麼新詞呢？</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 單字卡 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">eponym <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">專名詞</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The word "boycott" is an eponym derived from Charles Boycott's name.
+            <div class="cn">「抵制」一詞是源自 Charles Boycott 名字的專名詞。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">derive <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">衍生；來源於</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The word "sandwich" is derived from the Earl of Sandwich.
+            <div class="cn">「三明治」一詞源自 Sandwich 伯爵。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">feature <span class="v-pos">v./n.</span></div>
+            <div class="v-cn-mini">以⋯為特色；特色</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The magazine features several articles about celebrities.
+            <div class="cn">這份雜誌刊載幾篇關於名人的文章。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">gossip <span class="v-pos">n./v.</span></div>
+            <div class="v-cn-mini">八卦；說閒話</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Don't gossip about other people's private matters.
+            <div class="cn">不要談論別人的隱私。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">reveal <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">揭露；透露</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The investigation revealed the truth about the scandal.
+            <div class="cn">調查揭露了醜聞的真相。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">release <span class="v-pos">v./n.</span></div>
+            <div class="v-cn-mini">發行；釋放</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Apple released a new iPhone model last month.
+            <div class="cn">蘋果上個月發布了新的 iPhone 型號。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">chase <span class="v-pos">v./n.</span></div>
+            <div class="v-cn-mini">追逐；追趕</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The dog chased the cat around the garden.
+            <div class="cn">狗在花園裡追著貓跑。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">modify <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">修改；修飾</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> I had to modify my plans due to the bad weather.
+            <div class="cn">由於天氣不好，我必須修改我的計劃。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">standard <span class="v-pos">n./adj.</span></div>
+            <div class="v-cn-mini">標準；規格</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> This company maintains high standards of quality.
+            <div class="cn">這家公司維持著高品質的標準。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">widespread <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">廣泛的；普遍的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> There is widespread support for the new policy.
+            <div class="cn">對新政策有廣泛的支持。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 片語講解 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+  <div class="sec-body">
+    <table class="phrase-table">
+      <tr>
+        <th>片語</th>
+        <th>中文</th>
+        <th>例句</th>
+      </tr>
+      <tr>
+        <td><span class="phr">take on</span></td>
+        <td>承擔；呈現（新的含義）</td>
+        <td>The word has taken on a new meaning.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">later on</span></td>
+        <td>以後；後來</td>
+        <td>I'll tell you more about it later on.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">in the beginning</span></td>
+        <td>起初；一開始</td>
+        <td>In the beginning, nobody knew about it.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">too...to...</span></td>
+        <td>太...以至於無法...</td>
+        <td>The noise is too loud to hear anything.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">play a/an...role</span></td>
+        <td>扮演...角色；發揮...作用</td>
+        <td>Language plays an important role in society.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">think up</span></td>
+        <td>想出；發明</td>
+        <td>They thought up a brilliant idea.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- 練習題 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+  <div class="sec-body">
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">1</div>
+        <div class="q-main">
+          <div class="q-en">What is an eponym?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) A word that means the opposite of another word</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) A word derived from a name but with a more general meaning</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) A brand name used only by one company</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) A word that describes only one specific thing</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">專名詞是源自某人或某物名稱的詞，但具有更普遍的含義。根據課文定義：「An eponym is a word which usually started out as the name of someone or something but took on a more general meaning later on.」</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">2</div>
+        <div class="q-main">
+          <div class="q-en">Where did the word "paparazzi" come from?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(A) From a character in an Italian film</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(B) From a famous photographer in Rome</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) From the Italian word for celebrity</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) From the name of a newspaper company</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：A</div>
+        <div class="ans-cn">根據課文：「It is said that this word came from a character called Paparazzo in the Italian film La Dolce Vita.」Paparazzi 來自義大利電影《甜蜜生活》中的角色 Paparazzo。</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">3</div>
+        <div class="q-main">
+          <div class="q-en">Why did Adobe initially not want people to use "Photoshop" as a verb?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(A) They didn't want their brand name used to describe other companies' products</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(B) Photoshop was not released until 1987</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) They preferred the word "editing" instead</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) The verb was too complicated for people to use</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：A</div>
+        <div class="ans-cn">課文說明：「Adobe was not pleased that people were using their product name to describe the work of other companies' products」Adobe 不高興人們用他們的產品名稱來描述其他公司產品的工作。</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">4</div>
+        <div class="q-main">
+          <div class="q-en">What does "take on" mean in the sentence "took on a more general meaning"?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) Accept employment from someone</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) Acquire or assume a new quality or meaning</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) Challenge someone to a competition</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) Hold or carry something physical</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">「Take on」在這個語境中意為「獲得、承擔」。句子的意思是詞語獲得了更普遍的含義。</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">5</div>
+        <div class="q-main">
+          <div class="q-en">According to the passage, eponyms are important because ___.</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) They are used only in formal English</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) They play an important role in creating new words in society</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) They can only be derived from company names</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) They make language more difficult to understand</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文結尾說明：「As you can see, eponyms play an important role in creating new words in our society.」專名詞在我們社會創造新詞方面發揮著重要作用。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>龍騰高職英文 ── L9: The Story behind Eponyms</footer>
+
+</div>
+
+<script>
+function toggleCN(elem) {
+  const icon = elem.querySelector('.ic');
+  const cn = elem.querySelector('.para-cn');
+  icon.classList.toggle('open');
+  cn.classList.toggle('open');
+}
+
+function toggleVocab(elem) {
+  const icon = elem.querySelector('.v-ic');
+  const body = elem.nextElementSibling;
+  icon.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function selectChoice(elem, isCorrect) {
+  const block = elem.closest('.q-block');
+  const allChoices = block.querySelectorAll('.choice');
+  allChoices.forEach(c => c.classList.remove('correct', 'wrong'));
+
+  if (isCorrect) {
+    elem.classList.add('correct');
+  } else {
+    elem.classList.add('wrong');
+  }
+
+  const ansBlock = block.querySelector('.q-ans');
+  ansBlock.classList.add('open');
+}
+</script>
+</body>
+</html>

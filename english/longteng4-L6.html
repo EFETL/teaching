@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L6: Dabbawalas ── 龍騰高職英文互動教學</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header{background:linear-gradient(135deg,#e74c3c 0%,#e67e22 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#9a3412;color:#fff}
+.sec-body{padding:6px 24px 26px}
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #e67e22;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
+.para-cn.open{display:block}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#9a3412}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #e67e22;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.phrase-table th{background:#fff7ed;padding:10px 13px;text-align:left;font-weight:700;color:#9a3412;border-bottom:2px solid #fed7aa}
+.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.phrase-table tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#9a3412}
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#9a3412}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#9a3412}
+.ans-cn{font-size:.94em;color:#374151;line-height:1.7}
+footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
+@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="header">
+  <h1>🧡 L6: Dabbawalas: Door-to-Door Meal Delivery</h1>
+  <p class="sub">龍騰高職英文 — 互動教學</p>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
+  <div class="sec-body">
+    <div class="para">
+      <div class="para-head">Paragraph 1-3</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Imagine a modern enterprise that completes around 400,000 transactions daily with an error rate of merely one in sixteen million. You might expect only highly advanced computers to be capable of such levels of accuracy, but actually, only simple tools like bicycles and colored pens are used. Furthermore, of this enterprise's 5,000 employees, 85% are illiterate!</span>
+        </div>
+        <div class="para-cn">想像一個現代企業，每天完成大約 40 萬筆交易，錯誤率僅為千六百萬分之一。你可能期望只有高度先進的計算機才能達到這樣的準確度水平，但實際上只使用自行車和彩色筆等簡單工具。此外，該企業的 5,000 名員工中，85% 是文盲！</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 4-6</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>What company could this possibly be? It's the Nutan Mumbai Tiffin Box Suppliers Association, a home-cooked lunch delivery organization situated in Mumbai, India. This company delivers around 200,000 home-made lunches daily to office and factory workers.</span>
+        </div>
+        <div class="para-cn">這可能是什麼公司？它是 Nutan 孟買便當盒供應商協會，一個位於印度孟買的家庭烹飪午餐遞送組織。這家公司每天向辦公室和工廠工人提供大約 20 萬份家庭烹飪的午餐。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 7-9</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Its success is due in large part to its employees, known as dabbawalas. A dabbawala, or "one who carries a box," picks up lunches from customers' homes and delivers these meals to their workplaces. Since most residents live in the suburbs and have to commute long distances to work every day, it's inconvenient for them to carry their lunches on cramped public transportation. Therefore, dabbawalas provide a useful service that enables workers to enjoy healthy, home-made midday meals at their offices.</span>
+        </div>
+        <div class="para-cn">其成功很大程度上歸功於其員工，被稱為 dabbawalas。Dabbawala 或「運送盒子的人」從客戶家中取走午餐，並將這些膳食遞送到他們的工作場所。由於大多數居民住在郊區，必須每天長距離通勤到工作地點，在擁擠的公共交通上攜帶午餐不方便。因此，dabbawalas 提供了一項有用的服務，使工人能夠在他們的辦公室享受健康的家庭烹飪午餐。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 10-13</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>The dabbawalas' delivery network has fascinated many people because it achieves a high level of efficiency through nothing but smart scheduling and teamwork. This is how it works: Each geographical area employs around twenty-five dabbawalas, each of whom routinely sorts thirty tiffin boxes. These boxes are then swiftly sorted according to their general destinations before being loaded onto trains for delivery. Then, the dabbawalas board their trains and travel with the lunchboxes.</span>
+        </div>
+        <div class="para-cn">Dabbawalas 的送餐網絡令人著迷，因為它通過簡單的調度和團隊合作達到高效率。工作方式是：每個地理區域雇用約 25 名 dabbawalas，每人定期分類 30 個便當盒。然後根據一般目的地迅速分類這些盒子，然後載入火車進行遞送。然後，dabbawalas 登上列車並與便當盒一起旅行。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 14-17</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>At each destination train station, these boxes are sorted again. This time, they are divided depending on the buildings or more specific locations to which they must go. Not until this second round of sorting has been completed can each tiffin box be delivered to its rightful owner. In the afternoon, the dabbawalas retrace their original routes in order to bring back these empty lunchboxes to their owner's home.</span>
+        </div>
+        <div class="para-cn">在每個目的地火車站，這些盒子再次被分類。這次根據他們必須去的建築物或更具體的位置進行分類。只有在完成第二輪分類後，每個便當盒才能遞送給其合法所有人。下午，dabbawalas 沿著原來的路線返回，以便將這些空的便當盒帶回其主人的家中。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 18-21</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>In a massive system resembling a relay race, each tiffin box is handled by at least three dabbawalas between its owner's home and workplace. Many people are curious about how the Nutan team manages to deliver all these lunches on time without accidentally sending them to the wrong location. To be specific, dabbawalas avoid mix-ups by writing special numbers and characters on each container's lid to indicate the particular neighborhood, building, and floor, as well as other delivery details. In addition, color schemes are used to show the train station of origin.</span>
+        </div>
+        <div class="para-cn">在一個類似接力賽的大規模系統中，每個便當盒在其主人的家和工作場所之間由至少三名 dabbawalas 處理。許多人很好奇 Nutan 團隊如何設法按時遞送所有這些午餐，而不會意外地將它們發送到錯誤的位置。具體來說，dabbawalas 通過在每個容器的蓋子上寫上特殊的數字和字符來避免混淆，以指示特定的街區、建築物和樓層以及其他遞送詳情。此外，使用配色方案來顯示出發火車站。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 22-24</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Together, these tactics ensure accurate delivery with a high degree of success. Because of the nearly flawless operating system of the dabbawalas, this food delivery service is recognized as a classic example of efficiency and teamwork. It has been studied by Harvard Business School and is greatly admired by the courier company FedEx. Without a doubt, the service performed by dabbawalas is a true model of excellence.</span>
+        </div>
+        <div class="para-cn">這些策略一起確保了高度準確的遞送成功。由於 dabbawalas 幾乎無懈可擊的運作系統，這項食物遞送服務被公認為效率和團隊合作的經典例子。它已被哈佛商學院研究，並受到快遞公司 FedEx 的讚賞。毫無疑問，dabbawalas 提供的服務是卓越的真實典範。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">enterprise <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">企業；事業</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> This business enterprise is highly successful.
+            <div class="cn">這家企業非常成功。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">accuracy <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">準確性；精確度</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The accuracy of this system is remarkable.
+            <div class="cn">這個系統的準確性很了不起。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">suburb <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">郊區</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> Many families live in the suburbs.
+            <div class="cn">許多家庭住在郊區。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">commute <span class="v-pos">v./n.</span></div>
+            <div class="v-cn-mini">通勤</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> I commute to work by train every day.
+            <div class="cn">我每天乘火車通勤上班。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">efficiency <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">效率</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The new system improved efficiency.
+            <div class="cn">新系統提高了效率。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">swiftly <span class="v-pos">adv.</span></div>
+            <div class="v-cn-mini">迅速地</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The package arrived swiftly.
+            <div class="cn">包裹迅速送達。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">massive <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">巨大的；大規模的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> This project is massive in scale.
+            <div class="cn">這個項目規模巨大。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">flawless <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">完美無瑕的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> Her performance was flawless.
+            <div class="cn">她的表現完美無瑕。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">excellence <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">卓越；優秀</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> This company is known for excellence.
+            <div class="cn">這家公司以卓越而聞名。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">handle <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">處理；操作</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> Can you handle this task?
+            <div class="cn">你能處理這項任務嗎？</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+  <div class="sec-body">
+    <table class="phrase-table">
+      <tr><th>片語</th><th>中文</th><th>例句</th></tr>
+      <tr><td><span class="phr">be capable of</span></td><td>能夠；有能力</td><td>He is capable of solving this problem.</td></tr>
+      <tr><td><span class="phr">be due to</span></td><td>由於；因為</td><td>The delay is due to bad weather.</td></tr>
+      <tr><td><span class="phr">in large part</span></td><td>大部分；很大程度上</td><td>Success was in large part due to teamwork.</td></tr>
+      <tr><td><span class="phr">on time</span></td><td>準時</td><td>The train arrived on time.</td></tr>
+      <tr><td><span class="phr">without a doubt</span></td><td>無疑地；毫無疑問</td><td>Without a doubt, this is the best solution.</td></tr>
+      <tr><td><span class="phr">not until...</span></td><td>直到…才…</td><td>Not until midnight did he arrive.</td></tr>
+    </table>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+  <div class="sec-body">
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">1</div>
+        <div class="q-main"><div class="q-en">What makes the dabbawala system remarkable?</div></div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Using advanced computers</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Achieving high accuracy with simple tools and smart system</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) All employees have college education</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Using only trains for delivery</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說明系統用簡單工具（自行車和彩色筆）達到了千六百萬分之一的錯誤率，這正是其卓越之處。</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">2</div>
+        <div class="q-main"><div class="q-en">What is a dabbawala?</div></div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) A type of lunch box</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) A person who picks up and delivers lunch boxes</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) A manager at the company</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) A train conductor</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文明確說：「A dabbawala, or 'one who carries a box,' picks up lunches from customers' homes and delivers these meals to their workplaces.」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">3</div>
+        <div class="q-main"><div class="q-en">How do dabbawalas avoid mix-ups in delivery?</div></div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) They memorize all customer addresses</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Using special codes and color schemes on containers</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) They deliver to the same addresses every day</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Using a computer tracking system</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說：「dabbawalas avoid mix-ups by writing special numbers and characters on each container's lid...In addition, color schemes are used to show the train station of origin.」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">4</div>
+        <div class="q-main"><div class="q-en">Which organizations have recognized the dabbawala system?</div></div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Only Indian government</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Harvard Business School and FedEx</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Only delivery companies</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Local food organizations</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文明確指出：「It has been studied by Harvard Business School and is greatly admired by the courier company FedEx.」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">5</div>
+        <div class="q-main"><div class="q-en">What does the passage mainly discuss?</div></div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Problems with Indian train systems</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) An efficient lunch delivery system using simple tools and smart organization</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) How to start a successful business</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Traditional Indian food culture</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">整篇課文的主題是介紹 dabbawala 系統如何以簡單工具和智能調度實現高效率的午餐遞送。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>龍騰高職英文 ── L6: Dabbawalas</footer>
+</div>
+<script>
+function toggleCN(elem){const icon=elem.querySelector('.ic');const cn=elem.querySelector('.para-cn');icon.classList.toggle('open');cn.classList.toggle('open')}
+function toggleVocab(elem){const icon=elem.querySelector('.v-ic');const body=elem.nextElementSibling;icon.classList.toggle('open');body.classList.toggle('open')}
+function selectChoice(elem,isCorrect){const block=elem.closest('.q-block');const allChoices=block.querySelectorAll('.choice');allChoices.forEach(c=>c.classList.remove('correct','wrong'));if(isCorrect){elem.classList.add('correct')}else{elem.classList.add('wrong')}const ansBlock=block.querySelector('.q-ans');ansBlock.classList.add('open')}
+</script>
+</body>
+</html>

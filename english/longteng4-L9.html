@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L9: To Kill a Mockingbird ── 龍騰高職英文互動教學</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header{background:linear-gradient(135deg,#1abc9c 0%,#16a085 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#0f766e;color:#fff}
+.sec-body{padding:6px 24px 26px}
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #14b8a6;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
+.para-cn.open{display:block}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#0f766e}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #14b8a6;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.phrase-table th{background:#f0fdfa;padding:10px 13px;text-align:left;font-weight:700;color:#0f766e;border-bottom:2px solid #99f6e4}
+.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.phrase-table tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#0f766e}
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#0f766e}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#0f766e}
+.ans-cn{font-size:.94em;color:#374151;line-height:1.7}
+footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
+@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="header">
+  <h1>💚 L9: To Kill a Mockingbird</h1>
+  <p class="sub">龍騰高職英文 — 互動教學</p>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
+  <div class="sec-body">
+    <div class="para">
+      <div class="para-head">Paragraph 1-4</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>"Remember it's a sin to kill a mockingbird," Atticus said, believing that mockingbirds were harmless and did nothing but sing their hearts out for people to enjoy. In the town of Maycomb, Alabama, in the 1930s, there lived a little girl, Scout Finch, her older brother, Jem, and their widowed father, Atticus. Their father, a well-respected lawyer in the community, taught them to be empathetic and just. When Scout was in second grade, Atticus was appointed to defend Tom Robinson, a black man accused of sexually assaulting Mayella Ewell.</span>
+        </div>
+        <div class="para-cn">「記住，殺死仿聲鳥是罪過，」阿迪克斯說，他相信仿聲鳥是無害的，只是盡情歌唱供人們享受。1930 年代在阿拉巴馬州的梅科姆鎮，住著一個小女孩 Scout Finch，她的哥哥 Jem，和他們喪偶的父親阿迪克斯。他們的父親是社區中受人尊敬的律師，教他們同理心和正義。當 Scout 上二年級時，阿迪克斯被指派為被控性侵 Mayella Ewell 的黑人 Tom Robinson 進行辯護。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 5-9</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Mayella Ewell came from Maycomb's poorest white family, and her father was a widowed drunkard who wasted all his money on alcohol instead of food for his hungry children. All the other people in Maycomb despised the Ewells. Even so, when people found out that Atticus was the man assigned to serve as the defense lawyer in this sexual assault case, they were on the Ewells' side. The Finches faced criticism from the community and even their own relatives. People called Atticus a "nigger-lover," which angered Jem and Scout.</span>
+        </div>
+        <div class="para-cn">Mayella Ewell 來自梅科姆最窮的白人家庭，她的父親是個喪偶的酒鬼，把他所有的錢都浪費在酒上，而不是買食物給他的飢餓孩子。梅科姆鎮的所有其他人都鄙視 Ewell 一家。即使如此，當人們發現阿迪克斯是被指派為這樁性侵案進行辯護的律師時，他們都站在 Ewell 一家那邊。Finch 一家面臨社區甚至他們自己親戚的批評。人們叫阿迪克斯「黑鬼情人，」這激怒了 Jem 和 Scout。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 10-15</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Atticus comforted them, telling them a lawyer should stand up for the rights of people regardless of their skin color, and he encouraged them to hold their heads up and keep their fists down. On the day of the trial, the courthouse was packed, and Jem and Scout secretly slipped in to watch. The Ewells' story was that Mayella had asked Tom to come over to fix something. While there, Tom beat and sexually assaulted Mayella until Mr. Ewell came home, scaring Tom off. However, Tom's version of the story was that Mayella came on to him and kissed him, and he pushed her away.</span>
+        </div>
+        <div class="para-cn">阿迪克斯安慰了他們，告訴他們律師應該為人民的權利辯護，無論他們的膚色如何，他鼓勵他們抬起頭來並保持雙拳不動。審判當天，法院擠滿了人，Jem 和 Scout 偷偷溜進去旁聽。Ewell 一家的故事是 Mayella 請 Tom 來修理東西。在那裡，Tom 毆打並性侵了 Mayella，直到 Ewell 先生回家，把 Tom 嚇跑了。然而，Tom 的版本是 Mayella 對他賣弄風情並吻了他，他把她推開了。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 16-21</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>At just that moment, Mr. Ewell arrived home and flew into a rage. Mr. Ewell yelled at Mayella, and she ran away out of fear. After hearing both sides' testimonies, the sheriff of Maycomb pointed out that Mayella's bruises were on the right side of her face. Upon hearing this, the audience in the courtroom realized that her injuries must have been caused by somebody left-handed. They also noticed that Tom's left arm had been injured in an accident, which meant he must have been innocent of giving Mayella her bruises. Meanwhile, Atticus asked Mr. Ewell to write his name. To the audience's surprise, he instinctively used his left hand.</span>
+        </div>
+        <div class="para-cn">就在那一刻，Ewell 先生回到家並突然大發脾氣。Ewell 先生對 Mayella 大聲喝斥，她出於恐懼跑開了。聽了雙方的證詞後，梅科姆警長指出 Mayella 的擦傷在她臉的右側。聽到這一點，法院中的觀眾意識到她的傷害必定是由左撇子造成的。他們還注意到 Tom 的左臂在一次事故中受傷，這意味著他必定無罪給 Mayella 留下她的擦傷。同時，阿迪克斯請 Ewell 先生寫他的名字。令觀眾驚訝的是，他本能地使用了他的左手。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 22-27</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Therefore, the injuries could only have been done by Mr. Ewell himself, and the Ewells must have been lying to protect their reputation. Despite the strong evidence, Tom was found guilty by the all-white jury and sent to prison. Feeling great despair for his future in a white-dominated legal system, Tom tried to escape from prison but was shot to death. Jem and Scout, who had watched the entire trial, had high hopes that Tom would be found innocent. They were devastated by the injustice of Tom's heartbreaking fate. Atticus explained that most people make sensible and moral decisions in everyday life, but when race is involved, they tend to be swayed by the person's skin color, turning into someone unrecognizable.</span>
+        </div>
+        <div class="para-cn">因此，傷害只能是 Ewell 先生自己造成的，Ewell 一家必定在說謊以保護他們的聲譽。儘管有強有力的證據，Tom 被全白人陪審團判定有罪並被送進監獄。由於對自己在白人主宰的法律體系中的未來感到絕望，Tom 試圖從監獄逃脫，但被槍殺。看過整個審判過程的 Jem 和 Scout 滿懷希望 Tom 將被判無罪。他們對 Tom 令人心碎命運的不公正感到心碎。阿迪克斯解釋說，大多數人在日常生活中做出明智和道德的決定，但當涉及種族時，他們傾向於被該人的膚色所動搖，變成了一個認不出的人。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 28-30</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Nevertheless, for Maycomb, a glimmer of hope remained. Atticus noted that the jury had spent a few hours deliberating the verdict. This was an encouraging sign because usually a jury would require only a few minutes to find a black person guilty. This delay in the verdict meant that at least one member of the jury must have believed in Tom's innocence. Therefore, although the guilty verdict could not really be considered a victory, the delay definitely represented progress and positive change.</span>
+        </div>
+        <div class="para-cn">儘管如此，梅科姆還留有一絲希望。阿迪克斯指出陪審團花了幾個小時來商議判決。這是一個令人鼓舞的信號，因為通常陪審團只需幾分鐘就能判定黑人有罪。判決的延遲意味著陪審團至少有一名成員必定相信 Tom 的無罪。因此，儘管有罪判決不能真正被視為勝利，但延遲肯定代表了進步和積極的變化。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">sin <span class="v-pos">n.</span></div><div class="v-cn-mini">罪過；罪惡</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> It is a sin to waste food.
+            <div class="cn">浪費食物是罪過。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">empathetic <span class="v-pos">adj.</span></div><div class="v-cn-mini">具同理心的</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> An empathetic person understands others' feelings.
+            <div class="cn">具有同理心的人理解他人的感受。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">defend <span class="v-pos">v.</span></div><div class="v-cn-mini">為…辯護</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The lawyer defended his client in court.
+            <div class="cn">律師在法庭上為他的當事人辯護。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">despise <span class="v-pos">v.</span></div><div class="v-cn-mini">鄙視；蔑視</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> I despise dishonesty.
+            <div class="cn">我鄙視不誠實。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">assault <span class="v-pos">n./v.</span></div><div class="v-cn-mini">攻擊；侵犯</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The assault left many people injured.
+            <div class="cn">這次攻擊導致許多人受傷。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">rage <span class="v-pos">n.</span></div><div class="v-cn-mini">憤怒；狂怒</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> He was filled with rage.
+            <div class="cn">他充滿了憤怒。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">verdict <span class="v-pos">n.</span></div><div class="v-cn-mini">判決；裁定</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The jury announced their verdict.
+            <div class="cn">陪審團宣布了他們的判決。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">innocence <span class="v-pos">n.</span></div><div class="v-cn-mini">無罪；天真</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The defendant maintained his innocence.
+            <div class="cn">被告堅持他的無罪。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">injustice <span class="v-pos">n.</span></div><div class="v-cn-mini">不公正；不公平</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The injustice of the situation angered everyone.
+            <div class="cn">這種情況的不公正激怒了每個人。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">progress <span class="v-pos">n.</span></div><div class="v-cn-mini">進步；進展</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> We are making progress on the project.
+            <div class="cn">我們在項目上取得進展。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+  <div class="sec-body">
+    <table class="phrase-table">
+      <tr><th>片語</th><th>中文</th><th>例句</th></tr>
+      <tr><td><span class="phr">sing one's heart out</span></td><td>盡情歌唱；竭盡全力地唱</td><td>The singer sang her heart out on stage.</td></tr>
+      <tr><td><span class="phr">stand up for</span></td><td>支持；維護</td><td>I will stand up for what is right.</td></tr>
+      <tr><td><span class="phr">be on sb's side</span></td><td>站在某人那一邊</td><td>Everyone was on her side after the incident.</td></tr>
+      <tr><td><span class="phr">fly into a rage</span></td><td>突然大發脾氣</td><td>He flew into a rage when he heard the news.</td></tr>
+      <tr><td><span class="phr">out of fear</span></td><td>出於恐懼</td><td>She left out of fear for her safety.</td></tr>
+      <tr><td><span class="phr">find sb guilty</span></td><td>判定某人有罪</td><td>The jury found the defendant guilty.</td></tr>
+    </table>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+  <div class="sec-body">
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">1</div><div class="q-main"><div class="q-en">What does Atticus teach his children about killing a mockingbird?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) It is an entertaining hobby</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) It is a sin because mockingbirds are harmless and only sing for people's enjoyment</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) It is a way to learn about nature</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) It is never mentioned by Atticus</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文開頭說：「Remember it's a sin to kill a mockingbird...believing that mockingbirds were harmless and did nothing but sing their hearts out for people to enjoy.」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">2</div><div class="q-main"><div class="q-en">Why does Atticus defend Tom Robinson despite community opposition?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) For money and fame</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Because a lawyer should stand up for people's rights regardless of skin color</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Because he was forced to by the court</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Because Tom Robinson was his friend</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說：「Atticus comforted them, telling them a lawyer should stand up for the rights of people regardless of their skin color.」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">3</div><div class="q-main"><div class="q-en">How did Atticus prove that Mr. Ewell was left-handed?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) A witness testified that Mr. Ewell was left-handed</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) When asked to write his name, Mr. Ewell instinctively used his left hand</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Medical records showed he was left-handed</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Mr. Ewell admitted being left-handed in court</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說：「Atticus asked Mr. Ewell to write his name. To the audience's surprise, he instinctively used his left hand.」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">4</div><div class="q-main"><div class="q-en">What is significant about the bruises on Mayella's face?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) They prove Tom beat her</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) They are on the right side of her face, indicating a left-handed person caused them</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) They don't prove anything</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) They were caused by her fall</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文指出：「Mayella's bruises were on the right side of her face...the audience in the courtroom realized that her injuries must have been caused by somebody left-handed.」右側的擦傷表明是左撇子所為。</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">5</div><div class="q-main"><div class="q-en">What sign of hope did Atticus see despite Tom's guilty verdict?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Tom escaped from prison</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) The jury took hours to deliberate, suggesting at least one member believed in Tom's innocence</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) The judge dismissed the verdict</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) The community apologized for their behavior</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說：「the jury had spent a few hours deliberating the verdict...usually a jury would require only a few minutes to find a black person guilty. This delay...meant that at least one member of the jury must have believed in Tom's innocence.」</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>龍騰高職英文 ── L9: To Kill a Mockingbird</footer>
+</div>
+<script>
+function toggleCN(elem){const icon=elem.querySelector('.ic');const cn=elem.querySelector('.para-cn');icon.classList.toggle('open');cn.classList.toggle('open')}
+function toggleVocab(elem){const icon=elem.querySelector('.v-ic');const body=elem.nextElementSibling;icon.classList.toggle('open');body.classList.toggle('open')}
+function selectChoice(elem,isCorrect){const block=elem.closest('.q-block');const allChoices=block.querySelectorAll('.choice');allChoices.forEach(c=>c.classList.remove('correct','wrong'));if(isCorrect){elem.classList.add('correct')}else{elem.classList.add('wrong')}const ansBlock=block.querySelector('.q-ans');ansBlock.classList.add('open')}
+</script>
+</body>
+</html>

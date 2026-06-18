@@ -5,31 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>英文科 互動學習</title>
 <style>
-  :root { --main:#2c5f8a; --accent:#e6a800; --subject:#2980b9; --teach:#7b6000; --bg:#eef3f9; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
-  header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
-  header h1 { font-size:30px; margin-bottom:8px; }
-  header p { font-size:18px; opacity:.95; }
-  .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
-  .back:hover { background:#eef6ff; }
-  .wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
-  .intro b { color:var(--main); }
-  .combo { display:block; text-align:center; background:var(--accent); color:#3a2c00; font-size:22px; font-weight:bold; text-decoration:none; padding:16px; border-radius:12px; margin-bottom:14px; box-shadow:0 2px 8px rgba(230,168,0,.4); transition:transform .12s; }
-  .combo:hover { transform:translateY(-2px); }
-  .unit { background:#fff; border-radius:12px; margin-bottom:18px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,.08); }
-  .unit-head { background:var(--main); color:#fff; font-size:21px; font-weight:bold; padding:12px 20px; }
-  .unit-head .n { background:#fff; color:var(--main); border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; font-size:18px; margin-right:10px; }
-  .links { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:16px 20px; }
-  .links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:14px 8px; font-size:18px; color:#1a1a1a; transition:all .12s; text-align:center; }
-  .links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
-  .links a .ic { font-size:26px; }
-  .links a.teach { border-color:#e7d9a8; }
-  .links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
-  .links a small { color:#667; font-size:14px; }
-  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-  @media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:24px; } }
+:root{--main:#2c5f8a;--accent:#e6a800;--bg:#eef3f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.7;padding:0 0 60px}
+header{background:linear-gradient(135deg,#2c5f8a,#3d7cb0);color:#fff;padding:30px 20px 26px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+header h1{font-size:30px;margin-bottom:8px}
+header p{font-size:18px;opacity:.95}
+.back{display:inline-block;margin:16px auto 0;color:#2c5f8a;background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 16px;font-size:16px;text-decoration:none}
+.back:hover{background:#eef6ff}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px}
+.intro{background:#fff;border-radius:12px;padding:18px 22px;margin-bottom:22px;box-shadow:0 1px 6px rgba(0,0,0,.07);font-size:18px}
+.intro b{color:var(--main)}
+
+/* Teaching Unit 1 特別按鈕 */
+.combo{display:block;text-align:center;background:var(--accent);color:#3a2c00;font-size:22px;font-weight:bold;text-decoration:none;padding:16px;border-radius:12px;margin-bottom:28px;box-shadow:0 2px 8px rgba(230,168,0,.4);transition:transform .12s}
+.combo:hover{transform:translateY(-2px)}
+
+/* 各冊區塊標題 */
+.section-title{font-size:20px;font-weight:800;color:#475569;margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;border-top:2px solid #d1d9e0}
+
+/* 書冊卡片 grid */
+.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-bottom:28px}
+.book{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);transition:transform .15s,box-shadow .15s}
+.book:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.13)}
+.book-header{padding:20px 18px 14px;color:#fff}
+.book-header .vol{font-size:13px;font-weight:700;opacity:.85;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.book-header h3{font-size:20px;font-weight:800;line-height:1.3}
+.book-header .desc{font-size:13px;opacity:.85;margin-top:4px}
+.book-lessons{padding:14px 18px 18px}
+.book-lessons a{display:flex;align-items:center;gap:10px;text-decoration:none;color:#1a1a1a;padding:9px 10px;border-radius:8px;transition:background .12s;font-size:15px}
+.book-lessons a:hover{background:#f0f6fc}
+.book-lessons a .lnum{flex-shrink:0;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff}
+.book-lessons a .ltitle{flex:1;line-height:1.35}
+.book-lessons a .ltitle small{display:block;font-size:12px;color:#889;margin-top:1px}
+.book-lessons a .arr{color:#b0b8c1;font-size:12px;flex-shrink:0}
+
+/* 書冊色系 */
+.b2 .book-header{background:linear-gradient(135deg,#0f766e,#14b8a6)}
+.b2 .lnum{background:#0f766e}
+.b3 .book-header{background:linear-gradient(135deg,#1d4ed8,#2563eb)}
+.b3 .lnum{background:#1d4ed8}
+.b4a .book-header{background:linear-gradient(135deg,#9a3412,#e67e22)}
+.b4a .lnum{background:#9a3412}
+.b4b .book-header{background:linear-gradient(135deg,#1565c0,#3498db)}
+.b4b .lnum{background:#1565c0}
+
+footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
+@media(max-width:600px){.books{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -39,10 +62,95 @@
   <a class="back" href="../">← 回主選單</a>
 </header>
 <div class="wrap">
-  <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
+  <div class="intro">點選下方課程即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
+
   <a class="combo" href="Teaching_Unit_1.html">⭐ Teaching Unit 1</a>
-  <div class="unit"><div class="links">
-  </div></div>
+
+  <div class="section-title">📚 龍騰高職英文 — 互動教學</div>
+
+  <div class="books">
+
+    <!-- 龍騰第二冊 -->
+    <div class="book b2">
+      <div class="book-header">
+        <div class="vol">龍騰高職英文</div>
+        <h3>第二冊</h3>
+        <div class="desc">1 課</div>
+      </div>
+      <div class="book-lessons">
+        <a href="longteng2-L9.html">
+          <span class="lnum">L9</span>
+          <span class="ltitle">The Story behind Eponyms<small>專名詞的故事</small></span>
+          <span class="arr">▶</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 龍騰第三冊 -->
+    <div class="book b3">
+      <div class="book-header">
+        <div class="vol">龍騰高職英文</div>
+        <h3>第三冊</h3>
+        <div class="desc">2 課</div>
+      </div>
+      <div class="book-lessons">
+        <a href="longteng3-L1.html">
+          <span class="lnum">L1</span>
+          <span class="ltitle">The Day I Broke the Rules<small>打破規則的那一天</small></span>
+          <span class="arr">▶</span>
+        </a>
+        <a href="longteng3-L2.html">
+          <span class="lnum">L2</span>
+          <span class="ltitle">The Marshmallow Challenge<small>棉花糖挑戰</small></span>
+          <span class="arr">▶</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 龍騰第四冊 L6-L7 -->
+    <div class="book b4a">
+      <div class="book-header">
+        <div class="vol">龍騰高職英文</div>
+        <h3>第四冊 上</h3>
+        <div class="desc">2 課</div>
+      </div>
+      <div class="book-lessons">
+        <a href="longteng4-L6.html">
+          <span class="lnum">L6</span>
+          <span class="ltitle">Dabbawalas<small>孟買便當快遞</small></span>
+          <span class="arr">▶</span>
+        </a>
+        <a href="longteng4-L7.html">
+          <span class="lnum">L7</span>
+          <span class="ltitle">Iceland's Road to Gender Equality<small>冰島的性別平等之路</small></span>
+          <span class="arr">▶</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 龍騰第四冊 L8-L9 -->
+    <div class="book b4b">
+      <div class="book-header">
+        <div class="vol">龍騰高職英文</div>
+        <h3>第四冊 下</h3>
+        <div class="desc">2 課</div>
+      </div>
+      <div class="book-lessons">
+        <a href="longteng4-L8.html">
+          <span class="lnum">L8</span>
+          <span class="ltitle">Overtourism in Barcelona<small>巴塞隆納的過度旅遊</small></span>
+          <span class="arr">▶</span>
+        </a>
+        <a href="longteng4-L9.html">
+          <span class="lnum">L9</span>
+          <span class="ltitle">To Kill a Mockingbird<small>梅岡城故事</small></span>
+          <span class="arr">▶</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
   <footer>英文科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
 </body>

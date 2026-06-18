@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L2: The Marshmallow Challenge ── 龍騰高職英文互動教學</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header{background:linear-gradient(135deg,#7c3aed 0%,#a855f7 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#6d28d9;color:#fff}
+.sec-body{padding:6px 24px 26px}
+
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #a855f7;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
+.para-cn.open{display:block}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#6d28d9}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #a855f7;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+
+.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.phrase-table th{background:#f5f3ff;padding:10px 13px;text-align:left;font-weight:700;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.phrase-table tr:last-child td{border-bottom:none}
+.phrase-table tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#6d28d9}
+
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#6d28d9}
+.q-main{flex:1}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#6d28d9}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+
+footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
+@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <h1>🟣 L2: The Marshmallow Challenge</h1>
+  <p class="sub">龍騰高職英文 — 互動教學</p>
+</div>
+
+<!-- 課文分析 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
+  <div class="sec-body">
+
+    <div class="para">
+      <div class="para-head">Paragraph 1-2</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>How can twenty sticks of dry spaghetti, a yard of tape, a yard of string, and one marshmallow help build a stronger team? An innovative team-building exercise known as the Marshmallow Challenge promises to do just that. In this challenge, with only the materials mentioned above, teams need to build the tallest free-standing structure capable of supporting the weight of one marshmallow at the top.</span>
+        </div>
+        <div class="para-cn">20 根乾意大利麵、1 碼膠帶、1 碼繩子和 1 個棉花糖怎樣能幫助建立一個更強大的團隊？一項名為「棉花糖挑戰」的創新團隊建設練習承諾就能做到。在這項挑戰中，僅使用上述材料，團隊需要建立最高的獨立結構，能夠在頂部支持一個棉花糖的重量。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 3-4</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>With only 18 minutes to complete the task, the teams must learn to collaborate quickly. The Marshmallow Challenge, promoted by Canadian technology expert Tom Wujec, has been conducted around the world with architects and engineers, CEOs, lawyers, business graduates, and even kindergarteners. Over the years the challenge has produced some surprising results.</span>
+        </div>
+        <div class="para-cn">團隊只有 18 分鐘的時間來完成任務，必須學會快速合作。由加拿大技術專家 Tom Wujec 推廣的「棉花糖挑戰」已在世界各地與建築師和工程師、首席執行官、律師、商業畢業生甚至幼兒園學生進行過。多年來，這項挑戰產生了一些令人驚訝的結果。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 5-7</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>In Wujec's study, the average height of the structures constructed was 20 inches. The group that built the highest structure was, as expected, architects and engineers. CEOs performed slightly better than average, coming in third. Lawyers, on the other hand, performed below average, ranking second to last. And despite working to create the best plan, business graduates performed the worst.</span>
+        </div>
+        <div class="para-cn">在 Wujec 的研究中，構造的結構的平均高度為 20 英寸。正如預期的那樣，建築師和工程師建造了最高的結構。首席執行官的表現略好於平均水平，排名第三。律師的表現低於平均水平，排名倒數第二。儘管商業畢業生努力創建最好的計劃，但他們的表現最差。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 8</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Amazingly, kindergarteners outperformed most of the adult teams, achieving the second-best performance. The impressive performance of the kindergarten group, whose structures were taller than those of most adult teams, can be explained by several reasons related to their unique way of working.</span>
+        </div>
+        <div class="para-cn">令人驚訝的是，幼兒園學生的表現超過了大多數成人團隊，取得了第二好的表現。幼兒園組的令人印象深刻的表現可以用幾個與他們獨特的工作方式相關的原因來解釋。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 9-10</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>One reason is that kids usually get started with what has been given to them right away, whereas adults usually don't start putting the structure together until they have spent most of the time planning. This leaves no time to adjust the design if it cannot support the marshmallow. Another reason is that unlike adults, kindergarteners are quicker to change their methods after failed approaches.</span>
+        </div>
+        <div class="para-cn">一個原因是孩子們通常立即開始使用給定的材料，而成人通常在花費大部分時間計劃後才開始組裝結構。這沒有時間調整設計是否無法支持棉花糖。另一個原因是，與成人不同，幼兒園學生在失敗的方法後更快地改變他們的方法。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 11-12</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>They rely on trial and error—if one method doesn't work, they quickly move on to the next. This approach gives them immediate feedback about what design elements work to give their structure height and stability. Still another reason for their success is that children tend to collaborate freely and naturally. They don't waste time deciding who is in charge. Instead, they are more focused on working together to figure out how to build the tallest structure.</span>
+        </div>
+        <div class="para-cn">他們依靠試錯法——如果一個方法不起作用，他們就快速轉向下一個。這種方法為他們提供了關於哪些設計元素可以提高結構的高度和穩定性的即時反饋。他們成功的另一個原因是孩子們傾向於自由自然地合作。他們不浪費時間決定誰負責。相反，他們更專注於合作，以找出如何建造最高的結構。</div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-head">Paragraph 13-14</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>The Marshmallow Challenge teaches us that age and experience are not the only routes to success. In order to solve problems, we must roll up our sleeves and get down to work right away, explore and experiment with new ideas, and collaborate effectively. In this way, we can surely keep the marshmallow at the top.</span>
+        </div>
+        <div class="para-cn">「棉花糖挑戰」教導我們年齡和經驗不是成功的唯一途徑。為了解決問題，我們必須捲起袖子立即開始工作，探索和嘗試新想法，並有效地合作。這樣，我們肯定可以將棉花糖保持在頂部。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 單字卡 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">innovative <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">創新的；革新的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Apple is known for its innovative products.
+            <div class="cn">蘋果以其創新產品而聞名。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">promise <span class="v-pos">v./n.</span></div>
+            <div class="v-cn-mini">有希望；保證；承諾</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> This new method promises to save time and money.
+            <div class="cn">這種新方法有希望節省時間和金錢。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">capable <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">有能力的；能夠的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> She is capable of handling this complex project.
+            <div class="cn">她有能力處理這個複雜的項目。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">collaborate <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">合作；協作</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> We need to collaborate with other teams to achieve our goals.
+            <div class="cn">我們需要與其他團隊合作以實現我們的目標。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">architect <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">建築師</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The famous architect designed the building.
+            <div class="cn">著名建築師設計了這座建築。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">rank <span class="v-pos">v./n.</span></div>
+            <div class="v-cn-mini">排名；等級</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> She ranks among the top students in the class.
+            <div class="cn">她是班級中排名最高的學生之一。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">unique <span class="v-pos">adj.</span></div>
+            <div class="v-cn-mini">獨特的；唯一的</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Each person has a unique fingerprint.
+            <div class="cn">每個人都有獨特的指紋。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">adjust <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">調整；適應</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> I need to adjust the temperature to be more comfortable.
+            <div class="cn">我需要調整溫度以更加舒適。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">stability <span class="v-pos">n.</span></div>
+            <div class="v-cn-mini">穩定性；穩固</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> The stability of the structure depends on a strong foundation.
+            <div class="cn">結構的穩定性取決於堅固的基礎。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div>
+            <div class="v-word">explore <span class="v-pos">v.</span></div>
+            <div class="v-cn-mini">探索；探查</div>
+          </div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex">
+            <strong>例句：</strong> Scientists explore new possibilities every day.
+            <div class="cn">科學家們每天都在探索新的可能性。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 片語講解 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+  <div class="sec-body">
+    <table class="phrase-table">
+      <tr>
+        <th>片語</th>
+        <th>中文</th>
+        <th>例句</th>
+      </tr>
+      <tr>
+        <td><span class="phr">trial and error</span></td>
+        <td>試錯；嘗試與錯誤</td>
+        <td>Learning to cook involves trial and error.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">in charge</span></td>
+        <td>負責；掌管</td>
+        <td>Who is in charge of this project?</td>
+      </tr>
+      <tr>
+        <td><span class="phr">figure out</span></td>
+        <td>弄清楚；想出</td>
+        <td>Can you figure out the answer?</td>
+      </tr>
+      <tr>
+        <td><span class="phr">roll up one's sleeves</span></td>
+        <td>捲起袖子；準備認真工作</td>
+        <td>It's time to roll up our sleeves and work hard.</td>
+      </tr>
+      <tr>
+        <td><span class="phr">get down to</span></td>
+        <td>開始認真做</td>
+        <td>Let's get down to business.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- 練習題 -->
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+  <div class="sec-body">
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">1</div>
+        <div class="q-main">
+          <div class="q-en">What is the main objective of the Marshmallow Challenge?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) To build a structure that can hold food</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) To build the tallest free-standing structure supporting a marshmallow at the top</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) To create a competition for engineers</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) To teach people how to organize teams</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文說明：「teams need to build the tallest free-standing structure capable of supporting the weight of one marshmallow at the top.」</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">2</div>
+        <div class="q-main">
+          <div class="q-en">Which group performed the best in the Marshmallow Challenge?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(A) Architects and engineers</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(B) CEOs</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) Business graduates</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) Kindergarteners</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：A</div>
+        <div class="ans-cn">課文說明：「The group that built the highest structure was, as expected, architects and engineers.」</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">3</div>
+        <div class="q-main">
+          <div class="q-en">Why did kindergarteners perform better than most adults?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) They had more experience with building structures</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) They started immediately, adjusted quickly, and collaborated freely without wasting time on planning or hierarchy</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) They were given more materials than adults</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) They spent more time planning before building</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文分析了幼兒園學生成功的三個原因：1) 他們立即開始工作 2) 他們快速適應和改變方法 3) 他們自由合作而不浪費時間決定誰負責。</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">4</div>
+        <div class="q-main">
+          <div class="q-en">How did business graduates perform in the challenge?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) They ranked first</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(B) They ranked third, better than average</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(C) Despite their careful planning, they performed the worst</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) They ranked second to last, above lawyers</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：C</div>
+        <div class="ans-cn">課文明確說明：「despite working to create the best plan, business graduates performed the worst.」儘管努力制定最好的計劃，商業畢業生的表現最差。</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-top">
+        <div class="q-num">5</div>
+        <div class="q-main">
+          <div class="q-en">What main lesson does the Marshmallow Challenge teach us?</div>
+        </div>
+      </div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(A) Age and experience guarantee success</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, true)">
+          <div class="mark"></div>
+          <span>(B) Age and experience are not the only routes to success; immediate action, experimentation, and collaboration matter</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(C) Careful planning is the most important factor for success</span>
+        </div>
+        <div class="choice" onclick="selectChoice(this, false)">
+          <div class="mark"></div>
+          <span>(D) Only engineers and architects can solve complex problems</span>
+        </div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文結尾說明：「The Marshmallow Challenge teaches us that age and experience are not the only routes to success. In order to solve problems, we must roll up our sleeves and get down to work right away, explore and experiment with new ideas, and collaborate effectively.」</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>龍騰高職英文 ── L2: The Marshmallow Challenge</footer>
+
+</div>
+
+<script>
+function toggleCN(elem) {
+  const icon = elem.querySelector('.ic');
+  const cn = elem.querySelector('.para-cn');
+  icon.classList.toggle('open');
+  cn.classList.toggle('open');
+}
+
+function toggleVocab(elem) {
+  const icon = elem.querySelector('.v-ic');
+  const body = elem.nextElementSibling;
+  icon.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function selectChoice(elem, isCorrect) {
+  const block = elem.closest('.q-block');
+  const allChoices = block.querySelectorAll('.choice');
+  allChoices.forEach(c => c.classList.remove('correct', 'wrong'));
+
+  if (isCorrect) {
+    elem.classList.add('correct');
+  } else {
+    elem.classList.add('wrong');
+  }
+
+  const ansBlock = block.querySelector('.q-ans');
+  ansBlock.classList.add('open');
+}
+</script>
+</body>
+</html>

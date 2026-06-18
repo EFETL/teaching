@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L8: Overtourism in Barcelona ── 龍騰高職英文互動教學</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header{background:linear-gradient(135deg,#e67e22 0%,#d35400 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#fff8e1;color:#e65100;border-bottom:2px solid #ffe0b2}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#e65100;color:#fff}
+.sec-body{padding:6px 24px 26px}
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#fff8e1;color:#e65100;border-bottom:2px solid #ffe0b2}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #f57c00;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
+.para-cn.open{display:block}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#e65100}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #f57c00;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.phrase-table th{background:#fff8e1;padding:10px 13px;text-align:left;font-weight:700;color:#e65100;border-bottom:2px solid #ffe0b2}
+.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.phrase-table tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#e65100}
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#e65100}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#e65100}
+.ans-cn{font-size:.94em;color:#374151;line-height:1.7}
+footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
+@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="header">
+  <h1>🧡 L8: Overtourism in Barcelona</h1>
+  <p class="sub">龍騰高職英文 — 互動教學</p>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
+  <div class="sec-body">
+    <div class="para">
+      <div class="para-head">Paragraph 1-4</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>In this busy European city, large groups of tourists are everywhere. They overflow the sidewalks and streets, taking pictures at landmarks like the "Sagrada Familia" and crowding narrow passageways leading to markets. The city in question is Barcelona, Spain, which each year receives more than fifteen times as many visitors as its actual population! Barcelona is suffering from a phenomenon called "overtourism." This occurs when an attraction becomes overrun with tourists to such an extent that the local residents' quality of life declines dramatically.</span>
+        </div>
+        <div class="para-cn">在這個繁忙的歐洲城市中，大量遊客無處不在。他們擠滿人行道和街道，在「聖家族教堂」等地標處拍照，擁擠狹窄的市場通道。所討論的城市是西班牙巴塞隆納，每年接待的遊客人數是其實際人口的十五倍以上！巴塞隆納正遭受被稱為「過度旅遊」的現象。當一個景點被遊客淹沒到當地居民的生活品質急劇下降的程度時，就會發生這種情況。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 5-9</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>The 1992 Olympics put Barcelona on the tourist map, and soon afterward the number of tourists flocking to the city began to increase. In 2017, the number of annual visitors to Barcelona grew to almost five times as large as that in 1992. As expected, local hotels and businesses benefited from this expansion of tourism. However, the city's residents had to bear the cost. This invasion of visitors has resulted in various problems. Complaints about problems caused by thoughtless visitors are common.</span>
+        </div>
+        <div class="para-cn">1992 年的奧運會將巴塞隆納放在了旅遊地圖上，不久之後，湧入該市的遊客數量開始增加。2017 年，巴塞隆納的年度遊客數量增長到 1992 年的近五倍。不出所料，當地酒店和企業從這次旅遊業的擴張中受益。然而，城市的居民必須承擔成本。這次遊客入侵導致了各種問題。對缺乏考慮的遊客引起的問題的抱怨很常見。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 10-14</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>"These people have no respect for others," said Emilio Shasta, a local who has lived in Barcelona his entire life. They play loud music late at night and throw garbage all over the place. Residents are also fed up with some visitors' inappropriate behavior, such as urinating and throwing up on streets outside nightclubs. Furthermore, some local tenants have even been forced to leave their apartments because landlords are partial to renting their places out through Airbnb. In this way, landlords can make more money by charging tourists higher nightly rents.</span>
+        </div>
+        <div class="para-cn">「這些人不尊重他人，」終身居住在巴塞隆納的當地人 Emilio Shasta 說。他們在深夜播放大聲音樂，並在各處扔垃圾。居民們還對某些遊客的不當行為感到厭煩，例如在夜店外的街道上小便和嘔吐。此外，一些當地房客甚至被迫離開其公寓，因為房東偏向於通過 Airbnb 出租其地方。這樣，房東可以通過向遊客收取更高的夜間租金來賺取更多的錢。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 15-19</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>As stated by Lucia Trebocini, the head of a Barcelona neighborhood association, "Many residents of this area are so sick and tired of tourists that they have decided to leave." Even I myself am also considering that option. The good news is that city officials are keenly aware of all these complaints. They believe that only by introducing practical measures can the impact of overtourism be reduced. Such measures include putting limits on the number of people who can visit certain hotspots at a time, and banning large tour groups in particularly popular areas.</span>
+        </div>
+        <div class="para-cn">巴塞隆納鄰里協會主席 Lucia Trebocini 說，「這個地區的許多居民對遊客感到如此厭煩，以至於他們決定離開。」連我自己也在考慮那個選項。好消息是城市官員充分意識到所有這些抱怨。他們相信只有通過引入實際措施才能減少過度旅遊的影響。這些措施包括限制一次可以訪問某些熱點的人數，以及禁止大型旅遊團進入特別受歡迎的地區。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 20-23</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>The city has also restricted the development of new hotels and ordered that websites like Airbnb take down their listings of guesthouses that are not licensed. Finally, the government has come up with a thorough plan that concentrates less on promotion and more on tourism management. It has been said that tourism is a double-edged sword. On the one hand, tourism provides local business owners with great economic benefits. On the other hand, it disturbs the lives of local residents and can cause numerous social problems.</span>
+        </div>
+        <div class="para-cn">該市還限制了新酒店的發展，並命令 Airbnb 等網站撤下未經許可的民宿列表。最後，政府制定了一項全面計劃，重點不在宣傳上，而在於旅遊管理上。有人說旅遊是一把雙刃劍。一方面，旅遊為當地商業所有人提供了巨大的經濟利益。另一方面，它擾亂了當地居民的生活，並可能引起眾多社會問題。</div>
+      </div>
+    </div>
+    <div class="para">
+      <div class="para-head">Paragraph 24-25</div>
+      <div class="para-line" onclick="toggleCN(this)">
+        <div class="para-en">
+          <span class="ic">▶</span>
+          <span>Clearly, Barcelona is striving to deal with the negative aspects of tourism and is acting to strike a balance between the local community and international visitors. Only after the authorities have developed sustainable solutions will overtourism be manageable and stop causing problems in society.</span>
+        </div>
+        <div class="para-cn">顯然，巴塞隆納正在努力應對旅遊業的負面影響，並正在努力在當地社區和國際遊客之間取得平衡。只有在當局開發出可持續解決方案之後，過度旅遊才會得到控制，並停止在社會中造成問題。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">overflow <span class="v-pos">v./n.</span></div><div class="v-cn-mini">溢出；擠滿</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The stadium overflowed with fans.
+            <div class="cn">體育場擠滿了球迷。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">decline <span class="v-pos">v./n.</span></div><div class="v-cn-mini">下降；衰退</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The quality declined over time.
+            <div class="cn">品質隨著時間而下降。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">invasion <span class="v-pos">n.</span></div><div class="v-cn-mini">入侵；侵襲</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The invasion of tourists overwhelmed the city.
+            <div class="cn">遊客的入侵淹沒了城市。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">complaint <span class="v-pos">n.</span></div><div class="v-cn-mini">抱怨；投訴</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> We received many complaints about the service.
+            <div class="cn">我們收到了許多關於服務的抱怨。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">thoughtless <span class="v-pos">adj.</span></div><div class="v-cn-mini">欠缺考慮的</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> His thoughtless comments hurt her feelings.
+            <div class="cn">他欠缺考慮的評論傷害了她的感受。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">landlord <span class="v-pos">n.</span></div><div class="v-cn-mini">房東；地主</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The landlord raised the rent.
+            <div class="cn">房東提高了租金。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">measure <span class="v-pos">v./n.</span></div><div class="v-cn-mini">措施；測量</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> The government took measures to reduce pollution.
+            <div class="cn">政府採取了措施來減少污染。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">license <span class="v-pos">n./v.</span></div><div class="v-cn-mini">執照；許可證</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> You need a license to operate the business.
+            <div class="cn">你需要執照來經營業務。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">strive <span class="v-pos">v.</span></div><div class="v-cn-mini">努力；奮鬥</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> We strive for excellence in everything we do.
+            <div class="cn">我們在做的一切事情中都力求卓越。</div></div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-top" onclick="toggleVocab(this)">
+          <div><div class="v-word">sustainable <span class="v-pos">adj.</span></div><div class="v-cn-mini">可持續的；永久的</div></div>
+          <div class="v-ic">▶</div>
+        </div>
+        <div class="v-body">
+          <div class="v-ex"><strong>例句：</strong> We need sustainable development.
+            <div class="cn">我們需要可持續發展。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+  <div class="sec-body">
+    <table class="phrase-table">
+      <tr><th>片語</th><th>中文</th><th>例句</th></tr>
+      <tr><td><span class="phr">in question</span></td><td>討論中的</td><td>The document in question is missing.</td></tr>
+      <tr><td><span class="phr">to such an extent that</span></td><td>到…的程度</td><td>The problem grew to such an extent that it couldn't be ignored.</td></tr>
+      <tr><td><span class="phr">be fed up with</span></td><td>對…感到厭煩</td><td>I am fed up with the noise.</td></tr>
+      <tr><td><span class="phr">throw up</span></td><td>嘔吐</td><td>He felt sick and threw up.</td></tr>
+      <tr><td><span class="phr">put a limit on</span></td><td>對…加以限制</td><td>The government put a limit on pollution.</td></tr>
+      <tr><td><span class="phr">strike a balance</span></td><td>取得平衡</td><td>We need to strike a balance between work and rest.</td></tr>
+    </table>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+  <div class="sec-body">
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">1</div><div class="q-main"><div class="q-en">What is "overtourism"?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Too many hotels in a city</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) When a destination has so many tourists that local residents' quality of life declines</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Tourists staying for too long</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Too expensive tourism packages</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文定義：「This occurs when an attraction becomes overrun with tourists to such an extent that the local residents' quality of life declines dramatically.」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">2</div><div class="q-main"><div class="q-en">How many times more visitors does Barcelona receive compared to its population?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Five times</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) More than fifteen times</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Twenty times</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Ten times</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文明確說：「each year receives more than fifteen times as many visitors as its actual population」每年接待的遊客人數是其實際人口的十五倍以上。</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">3</div><div class="q-main"><div class="q-en">What problems do residents complain about?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Only noise pollution</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Loud music at night, garbage, urinating and vomiting on streets, loss of housing</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Only loss of housing</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Only inappropriate behavior</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文提到了多個問題：「play loud music late at night and throw garbage...urinating and throwing up on streets...forced to leave their apartments because landlords are partial to renting through Airbnb。」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">4</div><div class="q-main"><div class="q-en">What measures has Barcelona taken to address overtourism?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Ban all tourists</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Limit visitor numbers, ban tour groups, restrict hotel development, and regulate Airbnb listings</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Increase tourism promotion</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Raise hotel prices</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文提列了多項措施：「putting limits on the number of people who can visit certain hotspots...banning large tour groups...restricted the development of new hotels...ordered that websites like Airbnb take down their listings。」</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-top"><div class="q-num">5</div><div class="q-main"><div class="q-en">What does "double-edged sword" mean in this context?</div></div></div>
+      <div class="q-choices">
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Tourism is always bad</span></div>
+        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Tourism has both positive economic benefits and negative social impacts</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Tourism is always good</span></div>
+        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Tourism creates weapons</span></div>
+      </div>
+      <div class="q-ans">
+        <div class="ans-badge">✓ 答案：B</div>
+        <div class="ans-cn">課文解釋：「On the one hand, tourism provides local business owners with great economic benefits. On the other hand, it disturbs the lives of local residents and can cause numerous social problems.」雙刃劍指既有利也有弊。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>龍騰高職英文 ── L8: Overtourism in Barcelona</footer>
+</div>
+<script>
+function toggleCN(elem){const icon=elem.querySelector('.ic');const cn=elem.querySelector('.para-cn');icon.classList.toggle('open');cn.classList.toggle('open')}
+function toggleVocab(elem){const icon=elem.querySelector('.v-ic');const body=elem.nextElementSibling;icon.classList.toggle('open');body.classList.toggle('open')}
+function selectChoice(elem,isCorrect){const block=elem.closest('.q-block');const allChoices=block.querySelectorAll('.choice');allChoices.forEach(c=>c.classList.remove('correct','wrong'));if(isCorrect){elem.classList.add('correct')}else{elem.classList.add('wrong')}const ansBlock=block.querySelector('.q-ans');ansBlock.classList.add('open')}
+</script>
+</body>
+</html>
