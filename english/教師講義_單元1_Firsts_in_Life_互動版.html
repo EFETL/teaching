@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1: Firsts in Life ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.header .time{margin-top:6px;font-size:.95em;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.9em;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:.92em;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:1.05em;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:.9em;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:.98em;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:1.02em;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#1e40af}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:.9em;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:.85em;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:.95em}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:.95em}
+.pex .cn{display:block;color:#94a3b8;font-size:.92em;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:1.08em}
+.slang-cn-mini{font-size:.9em;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:.96em;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:.94em;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:.92em;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:1.05em}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:.8em;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:.95em;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:.97em;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:.92em;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:.93em;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:.93em;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:.93em;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:.94em;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:1em;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:.94em;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:.95em;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:1.02em}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:1em;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:13px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .q-ans,.g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>L1: Firsts in Life ── 人生第一次</h1>
+  <div class="sub">龍騰版高中英文 第一冊 第一課｜互動教學講義（高一適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 課程時間分配 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">🗓️</div>兩小時課程節奏建議</div>
+  <div class="sec-body">
+    <table class="ptable">
+      <tr><th style="width:18%">時段</th><th style="width:30%">單元</th><th>內容重點</th></tr>
+      <tr><td><b>0–20 分</b></td><td>課文導讀</td><td>三位人物故事 + 課文逐句翻譯講解</td></tr>
+      <tr><td><b>20–50 分</b></td><td>字彙 + 片語</td><td>15 核心字 + 8 補充字 + 6 片語，字族與例句</td></tr>
+      <tr><td><b>50–60 分</b></td><td>俚語補充</td><td>6 個生活化常用俚語，提升口語語感</td></tr>
+      <tr><td><b>60–90 分</b></td><td>文法句型</td><td>5 大核心句型，搭配學測考點分析</td></tr>
+      <tr><td><b>90–110 分</b></td><td>學生自我測驗</td><td>10 題即時作答，點選項立即顯示對錯</td></tr>
+      <tr><td><b>110–120 分</b></td><td>老師精講題</td><td>10 題文法深度題，課堂講解或回家複習</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 重點解析」。</div>
+
+    <p style="margin-top:16px;font-size:.96em;color:#475569">本課以校刊《Longteng Senior High School News》的採訪形式呈現。記者 Jeremy 訪問三位同學，分享各自難忘的「人生第一次」經驗。</p>
+
+    <!-- Robbie -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🟦 Robbie｜A First Online Class（第一次線上課）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A few years ago, I took an online class for the first time. I never thought that I could take classes in my pajamas!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">幾年前，我第一次上了網路課。我從沒想過自己竟然可以穿著睡衣上課！</div>
+          <div class="para-note"><b>for the first time</b> = 第一次（副詞片語，置於句尾）。<b>pajamas</b>（睡衣）恆用複數，與 jeans、scissors 同類。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I also enjoyed using online tools such as Kahoot! and Quizlet. There were some memorable moments, too.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我也很享受使用像 Kahoot! 和 Quizlet 這類的線上工具。也有一些令人難忘的時刻。</div>
+          <div class="para-note"><b>enjoy + V-ing</b>（享受做某事，後接動名詞）；<b>such as</b> = 例如（舉例）；<b>memorable</b> 為本課核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Once, my grandmother suddenly came into the room. She yelled at me to try her perfect beef noodles.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有一次，我奶奶突然走進房間。她大聲叫我去嚐嚐她拿手的牛肉麵。</div>
+          <div class="para-note"><b>yell at sb. to V</b> = 對某人大叫要他做某事；<b>perfect</b> 此處意為「完美拿手的」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>My microphone was on, so the rest of the students heard it and started laughing.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我的麥克風是開著的，所以其他同學都聽到了，然後開始大笑。</div>
+          <div class="para-note"><b>the rest of</b> = 其餘的（接複數名詞時動詞用複數）；<b>start + V-ing / to V</b> 皆可。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Another time, our teacher accidentally turned on a funny filter on her camera. She looked like an alien on the screen, so my classmates and I had another good laugh.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">還有一次，我們老師不小心開了一個有趣的濾鏡。她在螢幕上看起來像個外星人，所以我和同學們又笑開了。</div>
+          <div class="para-note"><b>accidentally</b>（不小心地）為核心字；<b>turn on</b>（打開電源）↔ turn off；<b>look like + N</b> = 看起來像。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Online lessons were fun sometimes, but I still found that I enjoyed seeing others in person more.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">線上課程有時很有趣，但我還是發現我更喜歡親自和別人見面。</div>
+          <div class="para-note"><b>in person</b> = 親自、面對面（重要片語，與 online 對比）；<b>find that + 子句</b> = 發現……。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Claire -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🟩 Claire｜A First Failure（第一次失敗）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I can still recall my first crash-and-burn moment in school. For a group presentation last year, I was the speaker for my team.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我仍然記得在學校第一次徹底慘敗的時刻。去年的一次小組報告，我是我們這組上台的人。</div>
+          <div class="para-note"><b>recall</b>（回想，直接接受詞）為核心字；<b>crash-and-burn</b> = 慘敗（生動口語）；<b>speaker</b> = 發言者、報告者。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, I didn't take the task seriously and skipped several group meetings.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，我沒有認真看待這項任務，還翹掉了好幾次小組會議。</div>
+          <div class="para-note"><b>take...seriously</b> = 認真對待（片語）；<b>skip</b>（翹掉、略過）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When the time came for me to step onto the stage, I was nervous and unprepared.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">輪到我上台的時候，我既緊張又毫無準備。</div>
+          <div class="para-note"><b>When the time came for sb. to V</b> = 當輪到某人做……時；<b>step onto the stage</b> = 走上舞台；<b>unprepared</b> = 沒準備的（un- 否定字首）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Of course, I ruined the presentation and felt embarrassed in front of my classmates and teacher.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當然，我把報告搞砸了，在同學和老師面前覺得很尷尬。</div>
+          <div class="para-note"><b>ruin</b>（毀掉、搞砸）為核心字；<b>embarrassed</b>（人感到尷尬，-ed 結尾）為文法重點，見句型四。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>We got a very low grade, and I felt depressed about letting the team down.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我們拿到很低的分數，我因為讓團隊失望而感到沮喪。</div>
+          <div class="para-note"><b>depressed</b>（人感到沮喪，-ed）為核心字；<b>let...down</b> = 使……失望（片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The failure really upset me, but I reflected on it and learned from my mistake.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這次失敗真的讓我很難過，但我反省了這件事，並從錯誤中學到教訓。</div>
+          <div class="para-note"><b>upset</b>（使心煩，三態同形 upset-upset-upset）；<b>reflect on</b> = 反省（後接 on）；<b>learn from</b> = 從……學習。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These days, this memory reminds me to prepare well and make sure that I always put my team first!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些日子以來，這段回憶提醒我要好好準備，並確保我永遠把團隊放在第一位！</div>
+          <div class="para-note"><b>remind sb. to V</b> = 提醒某人做某事；<b>make sure (that)</b> = 確保；<b>put...first</b> = 把……放第一位。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nancy -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🟧 Nancy｜A First Foreign Visit（第一次出國）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>My first trip abroad—to Seoul, South Korea—was unforgettable.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我第一次出國旅行——去南韓首爾——令人難忘。</div>
+          <div class="para-note"><b>trip abroad</b> = 出國旅行（abroad 為副詞，前不加 to）；破折號補充說明目的地；<b>unforgettable</b> = 難忘的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The city's streets were busy, and delicious foods like Korean barbecue and kimchi were all around me.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">城市的街道很熱鬧，韓式烤肉、泡菜等美食在我周圍隨處可見。</div>
+          <div class="para-note"><b>all around me</b> = 在我周圍到處都是；<b>like</b> 此處 = such as（例如）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I soon realized that the markets were a treat for my other senses since cheerful K-pop and colorful clothes were everywhere.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我很快就意識到，這些市場對我的其他感官來說是種享受，因為到處都是歡快的 K-pop 和繽紛的衣服。</div>
+          <div class="para-note"><b>realize that</b> = 意識到（核心字）；<b>a treat for the senses</b> = 感官的享受；<b>since</b> = 因為（表原因）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I visited several old buildings and dressed up in traditional Korean clothes.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我參觀了幾棟古老的建築，還打扮穿上了傳統的韓服。</div>
+          <div class="para-note"><b>dress up in</b> = 打扮穿上（某種服裝）；<b>traditional</b>（傳統的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>While I was there, I tried to talk to locals. My Korean was poor, but fortunately, everyone was very friendly.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在那裡的時候，我試著和當地人交談。我的韓語很爛，但幸運的是，每個人都很友善。</div>
+          <div class="para-note"><b>While S + was V-ing</b> = 當……的時候（句型五）；<b>locals</b> = 當地人（名詞）；<b>fortunately</b>（幸運地）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>At the end of the trip, I left with a lot of great memories, and I can't wait to go back someday.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">旅程結束時，我帶著許多美好的回憶離開，我等不及哪天要再回去。</div>
+          <div class="para-note"><b>at the end of</b> = 在……的尾聲；<b>can't wait to V</b> = 等不及要做……（迫不及待）；<b>someday</b> = 將來某天。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結語 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie" style="background:#f8fafc;color:#475569;border-bottom:2px solid #e2e8f0">📌 Jeremy 的結語</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>High school is full of firsts, and you may all have unforgettable ones like Robbie, Claire, and Nancy. Share yours with us if you have any funny, embarrassing, or wonderful experiences!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">高中充滿了各種第一次，你們可能都會像 Robbie、Claire 和 Nancy 一樣，擁有難忘的經驗。如果你有任何有趣、尷尬或美好的經歷，跟我們分享吧！</div>
+          <div class="para-note"><b>be full of</b> = 充滿；<b>firsts</b> = 第一次的經驗（first 當名詞可數）；<b>ones</b> 代替前面的 firsts。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 課文大意 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>三位人物故事速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 Robbie｜線上課初體驗</h4>
+        第一次在家穿睡衣上網路課。奶奶突然闖進房間大叫他去吃牛肉麵，麥克風沒關全班都聽到；老師又誤開外星人濾鏡。雖然好笑，仍最愛<b>親自到校</b>互動。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 Claire｜第一次失敗</h4>
+        第一次<b>搞砸</b>上台報告。沒認真準備、翹掉組會，上台後緊張出糗、拿低分又沮喪。但她<b>反省</b>並學到教訓：以後一定把<b>團隊擺第一</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 Nancy｜第一次出國</h4>
+        第一次到首爾旅遊。嚐韓式烤肉泡菜、逛市場、穿韓服、大膽和當地人聊天。韓語很爛但大家都友善。帶回滿滿<b>美好回憶</b>，迫不及待再訪。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">memorable</span><span class="v-pos">adj.</span><div class="v-cn-mini">值得紀念的；令人難忘的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>memory (n.) 記憶</span><span>memorize (v.) 背誦</span><span>memorial (n.) 紀念碑</span></div>
+        <div class="v-ex">There were some <b>memorable</b> moments in my first online class.<span class="cn">我的第一次線上課有一些難忘的時刻。</span></div>
+        <span class="v-gsat">📊 與 unforgettable 為高頻同義字</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">accidentally</span><span class="v-pos">adv.</span><div class="v-cn-mini">意外地；不小心地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>accident (n.) 意外</span><span>accidental (adj.) 意外的</span></div>
+        <div class="v-ex">The teacher <b>accidentally</b> turned on a funny filter.<span class="cn">老師不小心開了一個有趣的濾鏡。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">failure</span><span class="v-pos">n.</span><div class="v-cn-mini">失敗；失敗的人/事</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>fail (v.) 失敗</span><span>successful (adj.) 成功的（反義）</span></div>
+        <div class="v-ex">The <b>failure</b> really upset me, but I learned from it.<span class="cn">這次失敗讓我很難過，但我從中學到教訓。</span></div>
+        <span class="v-gsat">📊 failure / succeed 字族為學測常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">recall</span><span class="v-pos">v.</span><div class="v-cn-mini">回想起（直接接受詞）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>回顧組：recall / remember / remind / reflect on</span></div>
+        <div class="v-ex">I can still <b>recall</b> my first crash-and-burn moment.<span class="cn">我仍能回想起我第一次慘敗的時刻。</span></div>
+        <span class="v-gsat">📊 112學測考過 recall (n.) = 記憶力</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">presentation</span><span class="v-pos">n.</span><div class="v-cn-mini">報告；演示</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>present (v.) 呈現</span><span>presenter (n.) 主持人</span></div>
+        <div class="v-ex">For a group <b>presentation</b>, I was the speaker for my team.<span class="cn">小組報告時，我是我們這組的報告者。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">skip</span><span class="v-pos">v.</span><div class="v-cn-mini">跳過；翹（課/會）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>skip class 翹課</span><span>skip breakfast 不吃早餐</span></div>
+        <div class="v-ex">I <b>skipped</b> several group meetings.<span class="cn">我翹掉了好幾次小組會議。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">ruin</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">毀掉；搞砸／廢墟</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>ruined (adj.) 被毀的</span><span>in ruins 成為廢墟</span></div>
+        <div class="v-ex">I <b>ruined</b> the presentation and felt embarrassed.<span class="cn">我把報告搞砸了，覺得很尷尬。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">embarrassed</span><span class="v-pos">adj.</span><div class="v-cn-mini">（人）感到尷尬的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>embarrassing (事)令人尷尬的</span><span>embarrassment (n.) 尷尬</span></div>
+        <div class="v-ex">I felt <b>embarrassed</b> in front of my classmates.<span class="cn">我在同學面前感到很尷尬。</span></div>
+        <span class="v-gsat">📊 學測超高頻！人+ed／事+ing 必考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">depressed</span><span class="v-pos">adj.</span><div class="v-cn-mini">（人）沮喪的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>depressing (事)令人沮喪的</span><span>depression (n.) 憂鬱</span></div>
+        <div class="v-ex">I felt <b>depressed</b> about letting the team down.<span class="cn">我因為讓團隊失望而感到沮喪。</span></div>
+        <span class="v-gsat">📊 與 embarrassed 一起背</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">reflect</span><span class="v-pos">v.</span><div class="v-cn-mini">反省；反映；反射</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>reflect on 反省</span><span>reflection (n.) 反省；倒影</span></div>
+        <div class="v-ex">I <b>reflected on</b> it and learned from my mistake.<span class="cn">我反省了這件事，並從錯誤中學習。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">remind</span><span class="v-pos">v.</span><div class="v-cn-mini">提醒；使想起</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>remind sb. of sth.</span><span>remind sb. to V</span></div>
+        <div class="v-ex">This memory <b>reminds</b> me <b>to</b> prepare well.<span class="cn">這段回憶提醒我要好好準備。</span></div>
+        <span class="v-gsat">📊 學測常考 of / to 介系詞辨別</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">realize</span><span class="v-pos">v.</span><div class="v-cn-mini">意識到；實現</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>realization (n.) 認識；實現</span></div>
+        <div class="v-ex">I soon <b>realized</b> that the markets were a treat.<span class="cn">我很快意識到這些市場是種享受。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">traditional</span><span class="v-pos">adj.</span><div class="v-cn-mini">傳統的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>tradition (n.) 傳統</span><span>traditionally (adv.)</span></div>
+        <div class="v-ex">I dressed up in <b>traditional</b> Korean clothes.<span class="cn">我打扮穿上了傳統的韓服。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">fortunately</span><span class="v-pos">adv.</span><div class="v-cn-mini">幸運地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>fortunate (adj.) 幸運的</span><span>unfortunately (反義)</span></div>
+        <div class="v-ex">My Korean was poor, but <b>fortunately</b>, everyone was friendly.<span class="cn">我韓語很爛，但幸運的是大家都很友善。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">unforgettable</span><span class="v-pos">adj.</span><div class="v-cn-mini">難以忘懷的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>forget (v.) 忘記</span><span>≈ memorable</span></div>
+        <div class="v-ex">My first trip abroad was <b>unforgettable</b>.<span class="cn">我第一次出國旅行令人難忘。</span></div></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">in person</span></td><td>親自；面對面</td><td class="pex">I enjoyed seeing others <b>in person</b> more.<span class="cn">我更喜歡親自和別人見面。</span></td></tr>
+      <tr><td><span class="phr">take...seriously</span></td><td>認真對待</td><td class="pex">I didn't <b>take</b> the task <b>seriously</b>.<span class="cn">我沒有認真看待這項任務。</span></td></tr>
+      <tr><td><span class="phr">let...down</span></td><td>使……失望</td><td class="pex">I felt bad about <b>letting</b> the team <b>down</b>.<span class="cn">我因讓團隊失望而難過。</span></td></tr>
+      <tr><td><span class="phr">make sure</span></td><td>確保；確認</td><td class="pex">I always <b>make sure</b> I put my team first.<span class="cn">我總是確保把團隊放第一。</span></td></tr>
+      <tr><td><span class="phr">put...first</span></td><td>把……放第一位</td><td class="pex">I always <b>put</b> my team <b>first</b>.<span class="cn">我總是把團隊放在第一位。</span></td></tr>
+      <tr><td><span class="phr">dress up (in)</span></td><td>打扮（穿上）</td><td class="pex">I <b>dressed up in</b> traditional Korean clothes.<span class="cn">我打扮穿上傳統韓服。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆出自課文相關主題（第一次、情緒、旅行、克服困難），並已在近年學測出現。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">overcome</span><span class="v-pos">v.</span><div class="v-cn-mini">克服（困難、恐懼）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>overcome fear / obstacles</span><span>三態：overcome-overcame-overcome</span></div>
+        <div class="v-ex">Claire eventually <b>overcame</b> her fear of public speaking.<span class="cn">克萊兒最終克服了她對公開演講的恐懼。</span></div>
+        <span class="v-gsat">📊 115學測閱讀出現 overcome 相關語境</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sincere</span><span class="v-pos">adj.</span><div class="v-cn-mini">誠懇的；真誠的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>sincerely (adv.)</span><span>sincerity (n.) 真誠</span></div>
+        <div class="v-ex">Even though Jack apologized, I felt no <b>sincerity</b> in his words.<span class="cn">儘管傑克道歉了，我感覺不到他話裡的真誠。</span></div>
+        <span class="v-gsat">📊 112學測第5題直接考 sincerity</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">awkward</span><span class="v-pos">adj.</span><div class="v-cn-mini">尷尬的；笨拙的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>awkwardly (adv.)</span><span>≈ embarrassing</span></div>
+        <div class="v-ex">The moment Robbie's grandma walked in was really <b>awkward</b>.<span class="cn">羅比奶奶走進來的那一刻真的很尷尬。</span></div>
+        <span class="v-gsat">📊 常與 embarrassing 並考的同義字</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">enormous</span><span class="v-pos">adj.</span><div class="v-cn-mini">巨大的；極大的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ huge / immense</span><span>enormously (adv.)</span></div>
+        <div class="v-ex">The <b>enormous</b> pressure of the presentation made Claire nervous.<span class="cn">報告的巨大壓力讓克萊兒很緊張。</span></div>
+        <span class="v-gsat">📊 114學測考 enormous courage（巨大的勇氣）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">seasonal</span><span class="v-pos">adj.</span><div class="v-cn-mini">季節性的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>season (n.) 季節</span><span>seasonally (adv.)</span></div>
+        <div class="v-ex">Nancy enjoyed the <b>seasonal</b> foods at the Seoul markets.<span class="cn">南希很享受首爾市場的季節性美食。</span></div>
+        <span class="v-gsat">📊 107學測第1題考 seasonal fruit（當季水果）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">fulfill</span><span class="v-pos">v.</span><div class="v-cn-mini">實現；達成（夢想）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>fulfillment (n.) 成就感</span><span>fulfill a dream / promise</span></div>
+        <div class="v-ex">Travelling abroad helped Nancy <b>fulfill</b> a childhood dream.<span class="cn">出國旅行幫助南希實現了童年的夢想。</span></div>
+        <span class="v-gsat">📊 107學測第3題考 fulfill our dreams</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">requirement</span><span class="v-pos">n.</span><div class="v-cn-mini">要求；必要條件</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>require (v.) 需要</span><span>required (adj.) 必修的</span></div>
+        <div class="v-ex">Giving oral reports is a common course <b>requirement</b>.<span class="cn">做口頭報告是常見的課程要求。</span></div>
+        <span class="v-gsat">📊 107學測第2題考 course requirements</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">twist</span><span class="v-pos">v.</span><div class="v-cn-mini">扭傷；扭轉</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>twist one's ankle 扭傷腳踝</span><span>a twist (n.) 轉折</span></div>
+        <div class="v-ex">She <b>twisted</b> her ankle while dancing in Korean costume.<span class="cn">她穿韓服跳舞時扭傷了腳踝。</span></div>
+        <span class="v-gsat">📊 107學測第5題考 twisted her ankle</span></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（第一次、犯錯、緊張）高度相關，能讓同學口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">crash and burn</span><div class="slang-cn-mini">徹底失敗、慘敗（課文出現）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">原指飛機墜毀起火，引申為「徹底搞砸、慘敗」。</div>
+      <div class="slang-ex">I didn't study at all, so I totally <b>crashed and burned</b> on the test.<span class="cn">我完全沒讀書，所以考試徹底考砸了。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">break a leg</span><div class="slang-cn-mini">祝好運（尤指上台前）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">表面是「跌斷腿」，其實是表演、上台前的「祝你好運！」反話祝福。</div>
+      <div class="slang-ex">Before Claire's presentation, her friend said, "<b>Break a leg!</b>"<span class="cn">克萊兒上台報告前，她朋友說：「祝你好運！」</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">butterflies in one's stomach</span><div class="slang-cn-mini">緊張到胃在翻（七上八下）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「肚子裡有蝴蝶」，形容緊張不安、忐忑的感覺。</div>
+      <div class="slang-ex">I had <b>butterflies in my stomach</b> before stepping onto the stage.<span class="cn">上台前我緊張得七上八下。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a piece of cake</span><div class="slang-cn-mini">小事一樁；非常簡單</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「一塊蛋糕」，形容事情輕而易舉、易如反掌。</div>
+      <div class="slang-ex">After lots of practice, speaking Korean became <b>a piece of cake</b>.<span class="cn">經過大量練習後，說韓語變得輕而易舉。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">spill the beans</span><div class="slang-cn-mini">不小心說溜嘴、洩密</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「打翻豆子」，意指不小心洩漏秘密、把事情說出去。</div>
+      <div class="slang-ex">Robbie's open mic <b>spilled the beans</b> about Grandma's beef noodles.<span class="cn">羅比沒關的麥克風把奶奶牛肉麵的事都抖了出來。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">learn the ropes</span><div class="slang-cn-mini">熟悉門路、上手</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">源自水手學習操控船帆繩索，引申為「學會做某事的方法、上手」。</div>
+      <div class="slang-ex">It took me a week to <b>learn the ropes</b> of online classes.<span class="cn">我花了一週才摸熟線上課程的門路。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜動名詞（V-ing）當主詞</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">[ V-ing + 受詞/修飾語 ] + 單數動詞 ...</div>
+      <div class="g-body">
+        <p style="font-size:.96em;margin-bottom:8px;color:#374151">動名詞片語當主詞時，視為「一件事」，動詞用<b>單數</b>。</p>
+        <div class="g-ex"><b>Taking</b> online classes at home <b>was</b> a new experience for Robbie.<div class="g-ex-cn">在家上網路課對羅比而言是個新體驗。</div></div>
+        <div class="g-ex"><b>Reflecting on</b> your mistakes <b>is</b> the best way to grow.<div class="g-ex-cn">反省你的錯誤是成長最好的方式。</div></div>
+        <div class="g-note">不可用動詞原形（Learn）或 To learning（不定詞不加 -ing）當主詞。</div>
+        <div class="g-tip">學測常考 V-ing 主詞 vs. to V 主詞；enjoy/avoid/finish + V-ing 也是必考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜so + adj./adv. + that（如此…以至於）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V + so + adj./adv. + that + S + V（結果）
+S + V + such + a/an + adj. + N + that + S + V</div>
+      <div class="g-body">
+        <p style="font-size:.96em;margin-bottom:8px;color:#374151">表「程度高，導致某結果」。so 接形容詞/副詞，such 接名詞片語。</p>
+        <div class="g-ex">Nancy was <b>so</b> excited <b>that</b> she could barely sleep.<div class="g-ex-cn">南希如此興奮，以至於幾乎睡不著。</div></div>
+        <div class="g-ex">It was <b>such</b> a memorable trip <b>that</b> she couldn't stop talking about it.<div class="g-ex-cn">那是一趟如此難忘的旅行，以至於她講個不停。</div></div>
+        <div class="g-note">✗ so an excited girl（so 後不接冠詞+名詞）；✓ such an excited girl。</div>
+        <div class="g-tip">學測常考 so / such / too / enough 辨析。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜used to vs. be used to</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">used to + V原形（過去習慣，現已不再）
+be / get used to + V-ing / N（習慣於）</div>
+      <div class="g-body">
+        <p style="font-size:.96em;margin-bottom:8px;color:#374151">最常被混淆的句型！差一個 be 動詞意思完全不同。</p>
+        <div class="g-ex">Robbie <b>used to</b> go to school for every class.<div class="g-ex-cn">羅比以前每堂課都去學校上。（過去習慣）</div></div>
+        <div class="g-ex">Now he <b>is used to</b> studying in his pajamas.<div class="g-ex-cn">現在他習慣穿睡衣讀書了。（已習慣）</div></div>
+        <div class="g-note">✗ is used to go（to 後要接 V-ing 或名詞，不是原形）。</div>
+        <div class="g-tip">113學測綜合測驗考過 used to be 相關用法。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜情感形容詞：-ed（人）vs. -ing（事）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">人 + feel/be + -ed 形容詞（人的感受）
+事物 + be + -ing 形容詞（事物的性質）</div>
+      <div class="g-body">
+        <p style="font-size:.96em;margin-bottom:8px;color:#374151">口訣：<b>人 + ed，事 + ing</b>。學測最高頻文法考點之一！</p>
+        <table class="gtab">
+          <tr><th>人的感受（-ed）</th><th>事物的性質（-ing）</th></tr>
+          <tr><td>embarrassed 感到尷尬</td><td>embarrassing 令人尷尬的</td></tr>
+          <tr><td>depressed 感到沮喪</td><td>depressing 令人沮喪的</td></tr>
+          <tr><td>excited 感到興奮</td><td>exciting 令人興奮的</td></tr>
+          <tr><td>interested 感到有興趣</td><td>interesting 有趣的</td></tr>
+        </table>
+        <div class="g-ex">Claire felt <b>embarrassed</b>. / The moment was <b>embarrassing</b>.<div class="g-ex-cn">克萊兒感到尷尬。／那一刻令人尷尬。</div></div>
+        <div class="g-note">✗ I feel embarrassing. ✗ The situation was embarrassed.（兩者皆錯）</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜時間副詞子句：when / while / after</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">When S + V-ed, S + V-ed.（當…時）
+While S + was V-ing, S + V-ed.（在…過程中）
+After S + V-ed, S + V-ed.（在…之後）</div>
+      <div class="g-body">
+        <div class="g-ex"><b>When</b> the time came for me to step onto the stage, I was nervous.<div class="g-ex-cn">當輪到我上台時，我很緊張。（課文）</div></div>
+        <div class="g-ex"><b>While</b> she was in Seoul, Nancy visited several old buildings.<div class="g-ex-cn">南希在首爾期間，參觀了幾棟古老建築。</div></div>
+        <table class="gtab">
+          <tr><th>連接詞</th><th>重點用法</th></tr>
+          <tr><td><b>when</b></td><td>時間點、突發事件</td></tr>
+          <tr><td><b>while</b></td><td>同時進行，常用進行式</td></tr>
+          <tr><td><b>after</b></td><td>強調先後順序</td></tr>
+        </table>
+        <div class="g-tip">113學測考 while/when/after 辨析；112學測考 despite（儘管）對比詞。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:.9em;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第一冊 第一課｜互動教學講義｜依學測 107–115 年命題趨勢設計<br>
+  📌 網頁版：點擊展開／點選作答｜列印版：所有解析自動顯示
+</div>
+
+</div>
+
+<script>
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['Looking back on my high school years, the first day of school was the most ',' experience I ever had.'],
+  cn:'回想我的高中歲月，開學第一天是我有過最令人難忘的經歷。',
+  opts:['memorable','depressed','traditional','accidental'],ans:0,
+  word:'memorable (adj.) 令人難忘的',
+  exp:'空格修飾 experience（經驗），需正面形容詞。(B) depressed 形容「人」沮喪；(C) traditional、(D) accidental 語意不符。',
+  note:'memorable ≈ unforgettable，常互換使用。'},
+ {q:['When Sophie dropped all her cards during her speech, she felt completely ',' in front of the whole class.'],
+  cn:'當蘇菲演講時把卡片全掉在地上，她在全班面前感到非常尷尬。',
+  opts:['recalled','depressed','embarrassing','embarrassed'],ans:3,
+  word:'embarrassed (adj.) 感到尷尬的（人的感受）',
+  exp:'she felt... 主詞是「人」，用 -ed 形容詞。(C) embarrassing 形容事物（令人尷尬的），不能說 she felt embarrassing。',
+  note:'必背：人 + -ed（感受）、事 + -ing（性質）。'},
+ {q:['Mark ',' three team meetings without any explanation, so his group thought he was irresponsible.'],
+  cn:'馬克沒有任何說明就翹了三次團隊會議，所以組員認為他不負責任。',
+  opts:['recalled','reflected','ruined','skipped'],ans:3,
+  word:'skip (v.) 翹（會）；略過',
+  exp:'受詞是 meetings，需「不出席」之意。(A) 回想、(B) 反省、(C) 毀掉皆不符。',
+  note:'skip class 翹課；skip breakfast 不吃早餐。'},
+ {q:['After receiving his lowest test score ever, Kevin felt ',' for days and lost interest in studying.'],
+  cn:'拿到有史以來最低分後，凱文沮喪了好幾天，對學習失去興趣。',
+  opts:['embarrassed','depressed','traditional','accidental'],ans:1,
+  word:'depressed (adj.) 感到沮喪的',
+  exp:'後文「失去興趣」是沮喪的表現。(A) embarrassed 偏社交尷尬，此題強調持續低落，選 depressed。',
+  note:'embarrassed=尷尬；depressed=沮喪（更嚴重、持續）。'},
+ {q:['It started raining when Nancy was at the market, but ',', she had brought her umbrella.'],
+  cn:'南希在市場時開始下雨，但幸運的是，她有帶傘。',
+  opts:['accidentally','traditionally','fortunately','seriously'],ans:2,
+  word:'fortunately (adv.) 幸運地',
+  exp:'but 轉折後是好結果（有帶傘），用 fortunately。(A) 意外地、(B) 傳統地、(D) 嚴肅地皆不符。',
+  note:'fortunately ↔ unfortunately（不幸地）。'},
+ {q:['Although Grandma could not speak Korean, she could still clearly ',' the smell of Korean barbecue from her trip ten years ago.'],
+  cn:'雖然奶奶不會說韓語，她仍能清楚回想起十年前旅行的韓式烤肉香氣。',
+  opts:['remind','realize','recall','reflect'],ans:2,
+  word:'recall (v.) 回想起（直接接受詞）',
+  exp:'空格後直接接受詞 the smell。(A) remind 需接 of；(D) reflect on 不能直接接受詞。',
+  note:'recall + 受詞｜remind sb. of sth.｜reflect on sth.'},
+ {q:['After months of chatting online, the two pen pals finally got to meet ',' at the airport.'],
+  cn:'在線上聊了幾個月後，兩位筆友終於在機場親自見面。',
+  opts:['in time','in person','in fact','in trouble'],ans:1,
+  word:'in person 親自；面對面',
+  exp:'前文 online，後文 airport，對比指向「面對面見面」。(A) 及時、(C) 事實上、(D) 有麻煩皆不符。',
+  note:'課文：I enjoyed seeing others in person more.'},
+ {q:['Jenny promised to help her friend move, but she canceled at the last minute, really ',' her friend ','.'],
+  cn:'珍妮答應幫朋友搬家，卻在最後一刻取消，真的讓她朋友很失望。',
+  opts:['put...first','made...sure','let...down','reflected...on'],ans:2,
+  word:'let...down 使……失望',
+  exp:'取消承諾使朋友失望 = let sb. down。受詞 her friend 夾在中間。',
+  note:'let + 人 + down（人可夾中間或放 down 後）。'},
+ {q:['His grandmother suddenly walked in while his microphone was on, which completely ',' his online class.'],
+  cn:'他奶奶在麥克風開著時突然走進來，這把他的網路課整個搞砸了。',
+  opts:['skipped','ruined','recalled','reflected'],ans:1,
+  word:'ruin (v.) 毀掉；搞砸',
+  exp:'which 代替前面事件，接「搞砸上課」。ruin 比 break、damage 更強烈。',
+  note:'呼應課文 Robbie 因奶奶闖入的插曲。'},
+ {q:['The old photo on the wall ',' Claire of the day she first stepped onto a stage.'],
+  cn:'牆上的舊照片讓克萊兒想起她第一次踏上舞台的那一天。',
+  opts:['recalls','reminds','reflects','realizes'],ans:1,
+  word:'remind sb. of sth.（固定搭配）',
+  exp:'「物」使「人」想起某事，固定搭配 remind sb. of sth.。(A) recall 主詞是人且不接 of。',
+  note:'remind sb. of sth.（想起）｜remind sb. to V（提醒做）。'}
+];
+
+var teacherQ=[
+ {q:[' from your mistakes is the most effective way to improve and grow as a person.'],
+  cn:'從錯誤中學習是提升自己、成長為更好的人最有效的方式。',
+  opts:['Learn','Learned','Learning','To learning'],ans:2,
+  word:'Learning（動名詞作主詞）',
+  tnote:'<b>動名詞作主詞</b>：Learning from your mistakes 是整個主詞，視為單一概念，動詞用單數 is。<br>(A) Learn 動詞原形不能單獨當主詞；(B) Learned 是過去式；(D) To learning 錯誤（to 後接原形 to learn）。<br>補充：To learn... 與 Learning... 皆可作主詞，動名詞更常見。'},
+ {q:['The presentation was ',' upsetting ',' Claire cried for the whole night afterward.'],
+  cn:'那場報告令人如此沮喪，以至於克萊兒之後整晚都在哭。',
+  opts:['such...that','so...that','very...because','too...to'],ans:1,
+  word:'so...that（如此…以至於）',
+  tnote:'<b>so vs. such</b>：空格後是形容詞 upsetting（無名詞），用 so + adj.；接名詞片語才用 such。<br>✓ so + adj. + that｜✓ such + a + adj. + N + that<br>(C) because 不引導結果；(D) too...to 後接不定詞，語意不同。'},
+ {q:['Robbie ',' take classes only at school, but now he also studies at home online.'],
+  cn:'羅比以前只在學校上課，但現在他也透過線上在家自學了。',
+  opts:['is used to','was used to','used to','uses to'],ans:2,
+  word:'used to + V原形（過去習慣）',
+  tnote:'<b>used to vs. be used to</b>：後面接 V原形 take，故用 used to（過去習慣，現已不再）。<br>(A)(B) be used to 後需接 V-ing/N；(D) uses to 英文無此用法。<br>範例：I used to be afraid of dogs, but now I am used to living with one.'},
+ {q:['After forgetting her lines in front of everyone, Claire felt ',' and wanted to hide.'],
+  cn:'在所有人面前忘詞後，克萊兒感到十分尷尬，只想躲起來。',
+  opts:['embarrassing','embarrassment','embarrassed','embarrass'],ans:2,
+  word:'embarrassed (adj.) 人感到尷尬',
+  tnote:'<b>-ed vs. -ing（學測超高頻）</b>：Claire（人）+ felt + 形容詞，描述人的感受用 -ed。<br>若主詞是事物則用 -ing：The situation was embarrassing.<br>(B) 名詞、(D) 動詞原形皆不可接在 felt 後。'},
+ {q:['That old Korean song ',' Nancy ',' the wonderful street markets she had visited in Seoul.'],
+  cn:'那首老韓語歌讓南希想起她在首爾逛過的美好街邊市場。',
+  opts:['recalls...to','reminds...of','reflects...on','realizes...about'],ans:1,
+  word:'remind sb. of sth.',
+  tnote:'<b>介系詞搭配</b>：主詞是「物」（歌），使「人」（Nancy）想起，固定搭配 remind sb. of sth.。<br>remind sb. of sth.（想起）｜remind sb. to V（提醒做）｜recall + 受詞｜reflect on sth.（主詞須為人）。'},
+ {q:['Nancy was shopping at the night market ',' she suddenly noticed that her phone was missing.'],
+  cn:'南希正在夜市逛街時，突然發現她的手機不見了。',
+  opts:['since','while','when','after'],ans:2,
+  word:'when（時間點、突發事件）',
+  tnote:'<b>when vs. while</b>：suddenly noticed 是瞬間動作，用 when。<br>when 強調時間點；while 強調持續過程（常接進行式：While she was shopping...）。<br>突發動作選 when，同時持續選 while。'},
+ {q:['The online class was not only convenient ',' also very interesting and interactive.'],
+  cn:'那堂線上課不只方便，而且還非常有趣、有互動性。',
+  opts:['and','or','but','however'],ans:2,
+  word:'not only...but (also)...',
+  tnote:'<b>固定搭配</b>：not only A but (also) B。also 可省略，but 不可省略。<br>✗ not only...and also...<br>進階（句首倒裝）：Not only was the class convenient, but it was also fun.'},
+ {q:[' nervous and completely unprepared, Claire walked onto the stage and forgot everything.'],
+  cn:'既緊張又毫無準備，克萊兒走上台後把一切都忘光了。',
+  opts:['Feel','Felt','Feeling','To feel'],ans:2,
+  word:'Feeling（現在分詞構句，主動）',
+  tnote:'<b>分詞構句</b>：句首修飾主詞 Claire，因 Claire 主動「感覺」，用現在分詞 V-ing。<br>= Because she was feeling nervous..., Claire walked...<br>(B) Felt 過去式動詞最易誤選，但不可作修飾語。被動則用過去分詞：Prepared carefully, she...'},
+ {q:['If you do not ',' your responsibilities ',', you will eventually disappoint your teammates.'],
+  cn:'如果你不認真對待你的責任，你最終將使隊友失望。',
+  opts:['put...first','let...down','take...seriously','make...sure'],ans:2,
+  word:'take...seriously（認真對待）',
+  tnote:'<b>本課片語辨析</b>：「不認真」→「讓隊友失望」，第一空填 take + O + seriously。<br>take...seriously 認真對待｜put...first 放第一｜let...down 使失望｜make sure 確保。<br>受詞夾在 take 與 seriously 之間。'},
+ {q:['The more you reflect on your past failures, ',' you will become as a learner and a person.'],
+  cn:'你越反思過去的失敗，你作為學習者和一個人就會變得越好。',
+  opts:['more better','the better','the most better','better and better'],ans:1,
+  word:'the + 比較級...the + 比較級（越…越…）',
+  tnote:'<b>「越…越…」句型</b>：The + 比較級 + S + V, the + 比較級 + S + V。<br>✓ The harder you work, the better your results.<br>✗ more better（重複比較）✗ the most better（混用最高級）✗ better and better（這是「越來越好」漸進，非「越A越B」）。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>
