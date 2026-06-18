@@ -1,137 +1,300 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民　單元13　學校是個小社會　練習卷</title>
 <style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
-header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
-header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
-header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
-header p{font-size:17px;opacity:.95;}
-.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
-.back:hover{background:#eef6ff;}
-.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
-.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
-button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
-button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
-button.reveal{background:var(--accent);color:#3a2c00;}
-button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
-span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
-span.blank::before{content:"？";}
-span.blank:hover{background:#fff6d8;}
-span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
-span.blank.on::before{content:"";}
-/* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
-.explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
-footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
-@media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
-  .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
-}
-</style></head><body>
-<header><div class="unit-tag">公民　單元 13</div>
-<h1>學校是個小社會</h1><p>練習卷　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">練習卷　20 題（選擇點選・填空點「？」查看）</span>
-<span class="score" id="score">作答 0/20</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者最能說明「學校是個小社會」的意義？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>學校只負責教課業知識</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>學校讓我們學習知識並學習與人相處、做人做事</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>學校只是考試的地方</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>學校與社會生活毫無關係</button></div><div class="explain"><b>解析：</b>學校是學習知識和做人做事的場所，如同小型社會，需與人互動相處。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者屬於學校中為師生服務的人員或組織？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>辦公室人員與志工隊</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>百貨公司店員</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>銀行行員</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>公車司機</button></div><div class="explain"><b>解析：</b>學校有校長、老師、辦公室人員及家長會、志工隊等組織為師生服務。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">校規與班級公約共同的功能是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>增加考試分數</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>維持校園的安全與生活秩序</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>決定學費高低</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>安排比賽名次</button></div><div class="explain"><b>解析：</b>校規與班級公約都可以維持校園的安全與生活秩序。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者最符合「良好的學習態度」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>認為讀書是為了別人</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>虛心求知、勇於發問</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>遇到問題就放棄</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>不願適應新環境</button></div><div class="explain"><b>解析：</b>良好的學習態度要培養虛心求知、勇於發問的習慣。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">求學除了吸取知識外，還要培養什麼能力？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>操作股市的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>經營公司的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>駕駛車輛的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>適應生活環境的能力</button></div><div class="explain"><b>解析：</b>求學是為了自己、吸取知識並培養適應生活環境的能力。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一項屬於「有效的學習方法」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>上課分心、回家不複習</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>課前預習、課後複習、做筆記、歸納重點</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>只看不聽也不讀</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>完全靠死背不理解</button></div><div class="explain"><b>解析：</b>有效學習要養成課前預習、課後複習、做筆記、歸納重點的習慣。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">小明想提升學習效果，下列做法何者最恰當？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>上課專心聽講並做筆記</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>上課時聊天傳紙條</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>回家後完全不複習</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>把課本束之高閣</button></div><div class="explain"><b>解析：</b>最佳讀書法是專心聽講做筆記、課前預習課後複習。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">面對網路與媒體資訊，正確的態度是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>全部照單全收</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>資訊不全都正確，應慎選後利用</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>完全不使用網路</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>只看標題不看內容</button></div><div class="explain"><b>解析：</b>網路與電視上的資訊不全都正確，應慎選並善用網路搜尋學科資料。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">依課本，善用網路幫助學習最恰當的做法是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>搜尋相關學科資料輔助學習</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>整天觀看娛樂影片</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>沉迷線上遊戲</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>瀏覽不實資訊</button></div><div class="explain"><b>解析：</b>善用網路是搜尋相關學科資料幫助學習。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">國中生在學校與人互動，最有助於下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>了解自己在社會中的定位</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>增加個人財富</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>提高比賽獎金</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>減少上課時間</button></div><div class="explain"><b>解析：</b>國中時期透過學校人際互動，可了解自己在社會中的定位。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">建立良好的人際關係，主要能培養哪一組能力？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>逃避與孤立的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>自我管理與參與社會的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>投機取巧的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>與世隔絕的能力</button></div><div class="explain"><b>解析：</b>建立良好人際關係能培養自我管理與參與社會的能力。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">依課本，學校中課程以外最重要的學習是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>賺取零用錢</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>與老師、同學建立和諧的人際關係</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>贏得各項比賽</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>認識更多明星</button></div><div class="explain"><b>解析：</b>課程之外重要的學習是與老師、同學建立和諧的人際關係。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一組是課本所提的學習三步驟？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>看（讀）、聽課、複習</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>睡覺、吃飯、運動</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>購物、聊天、休息</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>唱歌、跳舞、畫畫</button></div><div class="explain"><b>解析：</b>看（讀）、聽課、複習是學習中重要的三步驟。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者是課本明確提到的正確學習方法組合？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>歸納重點、做筆記</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>抄襲他人作業</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>考試夾帶小抄</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>上課睡覺</button></div><div class="explain"><b>解析：</b>試題範例指出正確學習方法是歸納重點、做筆記。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">小華想養成良好讀書習慣，下列何者最符合課本建議？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>平時不讀，考前熬夜</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>課前預習、課後複習，並歸納重點</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>只讀有興趣的部分</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>完全依賴網路答案</button></div><div class="explain"><b>解析：</b>有效學習要養成課前預習、課後複習、做筆記、歸納重點的習慣。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="校規"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">每個學校都有<span class="blank" data-ans="校規"></span>，班級有班級公約，可以維持校園的安全與生活秩序。</span></div><div class="explain"><b>解析：</b>校規規範全校、班級公約規範班級，都用來維持校園安全與秩序。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="虛心求知"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">良好的學習態度要培養<span class="blank" data-ans="虛心求知"></span>、勇於發問的習慣。</span></div><div class="explain"><b>解析：</b>良好的學習態度要培養虛心求知、勇於發問的習慣。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="筆記"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">正確的學習方法是歸納重點、做<span class="blank" data-ans="筆記"></span>。</span></div><div class="explain"><b>解析：</b>試題範例指出正確學習方法是歸納重點、做筆記。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="自我管理|自我管理能力"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">國中時期透過學校人際互動，可培養<span class="blank" data-ans="自我管理"></span>與參與社會的能力。</span></div><div class="explain"><b>解析：</b>建立良好人際關係能培養自我管理與參與社會的能力。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="學科|學科資料"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">善用網路最主要是用來搜尋相關<span class="blank" data-ans="學科"></span>資料，以幫助學習。</span></div><div class="explain"><b>解析：</b>善用網路是搜尋相關學科資料幫助學習。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元13　學校是個小社會</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元13　學校是個小社會　練習卷</div>
-</div><script>
-function reveal(el){
-  if(el.classList.contains('on')) return;
-  el.classList.add('on');
-  el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
-  if(c) c.classList.add('revealed');
-}
-document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
-
-function revealAll(){
-  document.body.classList.add('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{
-    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
-  });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
-}
-function hideAll(){
-  document.body.classList.remove('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  :root { --main:#6a3d9a; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f5f3fa; max-width:820px; margin:0 auto; padding:16px 16px 60px; }
+  .back { display:inline-block; margin:0 0 10px; color:var(--main); background:#fff; border:2px solid #d8c4ea; border-radius:20px; padding:5px 14px; font-size:15px; text-decoration:none; }
+  .back:hover { background:#f3ecfa; }
+  .cover-title { font-size:21px; font-weight:bold; text-align:center; color:var(--main); background:#f1e9f8; border:2.5px solid var(--main); border-radius:10px; padding:11px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(245,243,250,.96); border-bottom:1.5px solid #d8cce6; padding:9px; margin-bottom:14px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 15px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:13px 16px; margin-bottom:11px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:9px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d8d0e2; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#f3ecfa; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+  /* PRINT-CLEAN v1 */
+  @media print {
+    .scorebar, .done-msg, .back { display:none !important; }
+    .explain { display:none !important; }
+    .opt .mark { display:none !important; }
+    .opt.correct, .opt.wrong { background:#fff !important; border-color:#999 !important; color:#000 !important; font-weight:normal !important; text-decoration:none !important; }
+    .question { box-shadow:none !important; border:1px solid #bbb; break-inside:avoid; }
+    body { background:#fff !important; }
   }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+</style>
+</head>
+<body>
+  <a class="back" href="./">← 回公民科選單</a>
+  <div class="cover-title">公民 ── 單元13 學校是個小社會（練習卷）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">1.</span>為什麼說「學校是個小社會」？最主要的原因是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 因為學校的面積比社會小很多</button>
+      <button class="opt" data-opt="B">(B) 因為學校裡有許多人需要互動與合作，運作方式像縮小的社會</button>
+      <button class="opt" data-opt="C">(C) 因為學校只負責教知識，不負責教做人</button>
+      <button class="opt" data-opt="D">(D) 因為學校的人都互不認識</button>
+    </div>
+    <div class="explain">學校裡有師長、同學、職員等不同身分的人共同生活、互相依賴，運作方式與社會相似，所以稱為小社會。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">2.</span>到學校上學，除了學習知識之外，還特別要學會下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 與人相處、做人做事的道理</button>
+      <button class="opt" data-opt="B">(B) 如何逃避團體生活</button>
+      <button class="opt" data-opt="C">(C) 只顧自己、不管別人</button>
+      <button class="opt" data-opt="D">(D) 把工作都推給同學</button>
+    </div>
+    <div class="explain">學校的學習除了課本知識，更重要的是與人互動、合作與負責等生活能力。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">3.</span>學校裡負責綜理校務、領導全校的人是誰？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 班長</button>
+      <button class="opt" data-opt="B">(B) 志工</button>
+      <button class="opt" data-opt="C">(C) 校長</button>
+      <button class="opt" data-opt="D">(D) 家長會會長</button>
+    </div>
+    <div class="explain">校長是學校的領導者，負責整體校務的規劃與管理。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">4.</span>直接負責教學、指導學生學習與生活的是學校裡的哪一種人？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 出納人員</button>
+      <button class="opt" data-opt="B">(B) 校長</button>
+      <button class="opt" data-opt="C">(C) 志工隊</button>
+      <button class="opt" data-opt="D">(D) 老師</button>
+    </div>
+    <div class="explain">老師直接負責課程教學，並指導學生的學習與生活。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">5.</span>學校裡負責註冊、成績、總務、文書等事務，協助校園日常運作的人，通常稱為什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 辦公室（行政）人員</button>
+      <button class="opt" data-opt="B">(B) 任課老師</button>
+      <button class="opt" data-opt="C">(C) 家長代表</button>
+      <button class="opt" data-opt="D">(D) 風紀股長</button>
+    </div>
+    <div class="explain">行政（辦公室）人員負責許多幕後事務，例如註冊、文書、設備、經費等，讓學校順利運作。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">6.</span>下列何者是「由學生家長組成、協助學校事務並關心孩子學習」的組織？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 教務處</button>
+      <button class="opt" data-opt="B">(B) 家長會</button>
+      <button class="opt" data-opt="C">(C) 學生自治會</button>
+      <button class="opt" data-opt="D">(D) 合作社</button>
+    </div>
+    <div class="explain">家長會由學生家長組成，協助校務並關心孩子的學習。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">7.</span>由熱心人士義務幫忙交通導護、圖書館等工作，為師生服務的組織是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 訓導處</button>
+      <button class="opt" data-opt="B">(B) 家長會</button>
+      <button class="opt" data-opt="C">(C) 校務會議</button>
+      <button class="opt" data-opt="D">(D) 志工隊</button>
+    </div>
+    <div class="explain">志工隊由熱心人士義務幫忙，例如交通導護、圖書館服務等，協助校園運作。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">8.</span>下列關於「學校人員」與「協助組織」的分類，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 校長、家長會都屬於學校人員</button>
+      <button class="opt" data-opt="B">(B) 志工隊、老師都屬於協助組織</button>
+      <button class="opt" data-opt="C">(C) 校長、老師是人員；家長會、志工隊是組織</button>
+      <button class="opt" data-opt="D">(D) 校長、老師、家長會都是組織</button>
+    </div>
+    <div class="explain">校長、老師、行政人員是學校的「人員」；家長會、志工隊是協助校務的「組織」。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">9.</span>校規與班級公約最主要的共同功能是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 維持校園的安全與生活秩序</button>
+      <button class="opt" data-opt="B">(B) 增加學校的考試科目</button>
+      <button class="opt" data-opt="C">(C) 讓校長一個人說了算</button>
+      <button class="opt" data-opt="D">(D) 取消所有的下課時間</button>
+    </div>
+    <div class="explain">不論是校規或班級公約，目的都是維護安全、維持秩序，使師生能安心學習生活。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">10.</span>班級公約通常是怎麼產生的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 由校長一個人決定</button>
+      <button class="opt" data-opt="B">(B) 由全班共同討論訂定，再由大家一起遵守</button>
+      <button class="opt" data-opt="C">(C) 由家長會單獨決定</button>
+      <button class="opt" data-opt="D">(D) 完全不需要任何人同意</button>
+    </div>
+    <div class="explain">班級公約是全班一起參與、共同商量訂出的規範，因為是自己訂的，大家更願意遵守。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">11.</span>下列關於校規與班級公約「制定者」的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 校規由全班討論訂、班級公約由學校訂</button>
+      <button class="opt" data-opt="B">(B) 兩者都由家長會訂定</button>
+      <button class="opt" data-opt="C">(C) 校規由學校訂定，班級公約由全班共同討論訂定</button>
+      <button class="opt" data-opt="D">(D) 兩者都由學生自行隨意決定</button>
+    </div>
+    <div class="explain">校規是由學校訂定、全校共同遵守；班級公約則由全班共同討論訂定。制定者不同。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">12.</span>小明把分配到的打掃工作確實做好、不推給別人。這展現了哪一種學習？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 競爭</button>
+      <button class="opt" data-opt="B">(B) 投機</button>
+      <button class="opt" data-opt="C">(C) 偷懶</button>
+      <button class="opt" data-opt="D">(D) 負責</button>
+    </div>
+    <div class="explain">把自己份內的事確實做好、不推託，就是學習「負責」。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">13.</span>全班同學一起分工，合力完成班級布置。這主要展現了哪一種能力？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 合作</button>
+      <button class="opt" data-opt="B">(B) 排擠</button>
+      <button class="opt" data-opt="C">(C) 比較</button>
+      <button class="opt" data-opt="D">(D) 自私</button>
+    </div>
+    <div class="explain">與他人協調、分工完成共同目標，就是「合作」。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">14.</span>在學校學會與人相處、合作與守規矩，對將來最大的幫助是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 將來可以不必再與任何人來往</button>
+      <button class="opt" data-opt="B">(B) 將來能更順利地適應真正的社會生活</button>
+      <button class="opt" data-opt="C">(C) 將來考試一定都考一百分</button>
+      <button class="opt" data-opt="D">(D) 將來不需要再遵守任何規範</button>
+    </div>
+    <div class="explain">學校是練習群體生活的場所，養成的好習慣帶到社會，能讓人更順利與他人共事、適應社會。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">15.</span>下列何者「不是」學校的正式編制人員，而是協助校務的組織？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 校長</button>
+      <button class="opt" data-opt="B">(B) 任課老師</button>
+      <button class="opt" data-opt="C">(C) 志工隊</button>
+      <button class="opt" data-opt="D">(D) 註冊組行政人員</button>
+    </div>
+    <div class="explain">志工隊是義務協助校務的組織，並非學校的正式編制人員；其餘三者皆為學校人員。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">16.</span>關於「學校是個小社會」的說法，下列何者最恰當？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 在學校只要會讀書就好，不必管別人</button>
+      <button class="opt" data-opt="B">(B) 學校的規範越少越好，最好都沒有</button>
+      <button class="opt" data-opt="C">(C) 學校的事都由一個人決定就好</button>
+      <button class="opt" data-opt="D">(D) 學校需要許多人互動合作，是練習社會生活的好地方</button>
+    </div>
+    <div class="explain">學校如同縮小的社會，需要許多人互動合作，正是練習群體生活的好地方。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">17.</span>在班上同時是「同學」也是「衛生股長」，這說明了一個人在學校會？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 扮演不同的角色，承擔不同的責任</button>
+      <button class="opt" data-opt="B">(B) 只能有一種身分</button>
+      <button class="opt" data-opt="C">(C) 不必負任何責任</button>
+      <button class="opt" data-opt="D">(D) 可以不用上課</button>
+    </div>
+    <div class="explain">同一個人在學校可同時扮演不同角色，每個角色都要負起相對應的責任。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">18.</span>下列哪一個做法，最能展現對「班級公約」的尊重？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 認為是別人訂的，所以自己不必遵守</button>
+      <button class="opt" data-opt="B">(B) 因為是全班一起訂的，所以主動遵守</button>
+      <button class="opt" data-opt="C">(C) 只在老師看得到時才遵守</button>
+      <button class="opt" data-opt="D">(D) 想辦法鑽公約的漏洞</button>
+    </div>
+    <div class="explain">班級公約是全班共同訂定，主動遵守才能展現對共同規範的尊重。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">19.</span>下列關於「在學校為師生服務的人」，何者敘述正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 只有老師會為學生服務</button>
+      <button class="opt" data-opt="B">(B) 行政人員不算為學校服務</button>
+      <button class="opt" data-opt="C">(C) 校長、老師、行政人員都在為師生服務，使校園順利運作</button>
+      <button class="opt" data-opt="D">(D) 學生不需要感謝任何服務人員</button>
+    </div>
+    <div class="explain">校長、老師、行政人員各司其職，都是為了讓校園順利運作、為師生服務。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">20.</span>下列態度，何者最符合「學校是個小社會」帶給我們的提醒？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 我行我素，不必配合別人</button>
+      <button class="opt" data-opt="B">(B) 規定都是束縛，能不守就不守</button>
+      <button class="opt" data-opt="C">(C) 工作只要做一半就好</button>
+      <button class="opt" data-opt="D">(D) 學習與人合作、守規矩、負責任，做好自己的角色</button>
+    </div>
+    <div class="explain">學校這個小社會提醒我們要學會合作、守規矩、負責任，並做好自己扮演的角色。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
   });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
-}
-</script></body></html>
+  function showDone(){ const m=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); m.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; m.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; m.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; m.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const mk=b.querySelector('.mark'); if(mk) mk.remove(); }); }); }
+</script>
+</body>
+</html>

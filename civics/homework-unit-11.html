@@ -1,137 +1,300 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民　單元11　家庭的生活　作業卷</title>
 <style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
-header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
-header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
-header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
-header p{font-size:17px;opacity:.95;}
-.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
-.back:hover{background:#eef6ff;}
-.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
-.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
-button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
-button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
-button.reveal{background:var(--accent);color:#3a2c00;}
-button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
-span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
-span.blank::before{content:"？";}
-span.blank:hover{background:#fff6d8;}
-span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
-span.blank.on::before{content:"";}
-/* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
-.explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
-footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
-@media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
-  .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
-}
-</style></head><body>
-<header><div class="unit-tag">公民　單元 11</div>
-<h1>家庭的生活</h1><p>作業卷　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">作業卷　20 題（選擇點選・填空點「？」查看）</span>
-<span class="score" id="score">作答 0/20</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">依課本所述，家庭是我們成長的地方，在家人關心愛護下，我們才能怎麼樣長大？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>平安</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>孤單</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>快速</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>獨自</button></div><div class="explain"><b>解析：</b>課本指出在家人關心愛護下才能平安長大。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">課本以下列哪一個詞語來形容家庭，表示家庭能讓家人彼此照顧？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>遊樂場</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>競技場</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>避風港</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>辦公室</button></div><div class="explain"><b>解析：</b>課本以「避風港」形容家庭，強調家人之間相互關懷與照顧。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">家庭中「生活節儉」的主要目的是養成下列哪一種習慣，以保障家庭生活安定？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>消費</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>儲蓄</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>借貸</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>投資</button></div><div class="explain"><b>解析：</b>課本提到生活節儉是為了養成儲蓄習慣，以保障家庭生活安定。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">家人分享喜悅與悲傷、生病時互相照顧，屬於家庭避風港的哪一項表現？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>熱心家務</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>虛心學習</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>生活節儉</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>相互關懷</button></div><div class="explain"><b>解析：</b>課本將「分享喜悅悲傷、生病時互相照顧」歸為相互關懷。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">父母教導子女良好的生活習慣與做事道理，屬於家庭避風港的哪一項表現？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>虛心學習</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>珍惜相處</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>熱心家務</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>生活節儉</button></div><div class="explain"><b>解析：</b>課本將「父母教導良好生活習慣與做事道理」歸為虛心學習。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">家人共同分擔家務，屬於家庭避風港的哪一項表現？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>相互關懷</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>生活節儉</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>熱心家務</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>珍惜相處</button></div><div class="explain"><b>解析：</b>課本將「家人共同分擔家務」歸為熱心家務。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">依課本所述，家庭的種類不包括下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>小家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>折衷家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>大家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>單位家庭</button></div><div class="explain"><b>解析：</b>課本將家庭種類分為小家庭、折衷家庭與大家庭，並無「單位家庭」。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於家庭的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>家庭是構成社會的最大單位</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>家庭是構成社會的最小單位</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>家庭是個人最晚接觸的團體</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>家庭是互動最短暫的團體</button></div><div class="explain"><b>解析：</b>課本指出家庭是構成社會的最小單位，是個人最早接觸且互動最持久的團體。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">家庭提供子女金錢與生活所需，屬於家庭的哪一種功能？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>生育功能</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>經濟功能</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>保護與照顧功能</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>教育功能</button></div><div class="explain"><b>解析：</b>課本指出提供金錢生活所需屬於經濟功能。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">依課本所列，家庭的功能不包括下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>生育功能</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>經濟功能</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>保護與照顧功能</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>娛樂功能</button></div><div class="explain"><b>解析：</b>課本將家庭功能分為生育、經濟、保護與照顧三項，並無「娛樂功能」。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">小家庭（核心家庭）的組成是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>一對夫妻和未婚子女</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>祖父母、父母與子女三代</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>數個小家庭同住</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>單身一人獨居</button></div><div class="explain"><b>解析：</b>課本說明小家庭（核心家庭）由一對夫妻和未婚子女組成。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">「家有一老，如有一寶」這句話最符合下列哪一種家庭型態？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>小家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>折衷家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>大家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>核心家庭</button></div><div class="explain"><b>解析：</b>課本指出「家有一老如有一寶」對應折衷（三代）家庭。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">一個家庭裡同時包含數個小家庭，屬於下列哪一種家庭型態？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>小家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>折衷家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>大家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>核心家庭</button></div><div class="explain"><b>解析：</b>課本說明大家庭是一個家庭裡同時包含數個小家庭。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">因婚姻觀念轉變或考慮經濟負擔，使生育率逐年降低、幼年人口日益減少的現象稱為？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>高齡社會</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>少子化</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>都市化</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>全球化</button></div><div class="explain"><b>解析：</b>課本說明此現象為少子化，導因於婚姻觀念轉變或經濟負擔考量。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">依課本定義，一個國家 65 歲以上老年人口占總人口比例達到多少時，稱為高齡社會？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>7％</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>10％</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>14％</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>20％</button></div><div class="explain"><b>解析：</b>課本明確指出高齡社會指 65 歲以上老年人口占總人口比例達到 14％。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="避風港"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">課本以「<span class="blank" data-ans="避風港"></span>」一詞形容家庭，表示家庭能讓家人彼此關懷、相互照顧。</span></div><div class="explain"><b>解析：</b>課本以「避風港」形容家庭，包含相互關懷、生活節儉等面向。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="單位"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">家庭是構成社會的最小<span class="blank" data-ans="單位"></span>，是個人最早接觸且互動最持久的團體。</span></div><div class="explain"><b>解析：</b>課本指出家庭是構成社會的最小單位。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="經濟|經濟功能"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">家庭提供金錢與生活所需，屬於家庭的<span class="blank" data-ans="經濟"></span>功能。</span></div><div class="explain"><b>解析：</b>課本指出提供金錢生活所需屬於經濟功能。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="三代"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">折衷家庭又稱<span class="blank" data-ans="三代"></span>家庭，以三代同住為原則。</span></div><div class="explain"><b>解析：</b>課本說明折衷家庭又稱三代家庭，以三代同住為原則。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="14|14%|14％"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">高齡社會指一個國家 65 歲以上老年人口占總人口比例達到<span class="blank" data-ans="14"></span>％。</span></div><div class="explain"><b>解析：</b>課本明確指出高齡社會的標準為 14％。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元11　家庭的生活</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元11　家庭的生活　作業卷</div>
-</div><script>
-function reveal(el){
-  if(el.classList.contains('on')) return;
-  el.classList.add('on');
-  el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
-  if(c) c.classList.add('revealed');
-}
-document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
-
-function revealAll(){
-  document.body.classList.add('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{
-    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
-  });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
-}
-function hideAll(){
-  document.body.classList.remove('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  :root { --main:#99316b; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f5f3fa; max-width:820px; margin:0 auto; padding:16px 16px 60px; }
+  .back { display:inline-block; margin:0 0 10px; color:var(--main); background:#fff; border:2px solid #d8c4ea; border-radius:20px; padding:5px 14px; font-size:15px; text-decoration:none; }
+  .back:hover { background:#f3ecfa; }
+  .cover-title { font-size:21px; font-weight:bold; text-align:center; color:var(--main); background:#f1e9f8; border:2.5px solid var(--main); border-radius:10px; padding:11px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(245,243,250,.96); border-bottom:1.5px solid #d8cce6; padding:9px; margin-bottom:14px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 15px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:13px 16px; margin-bottom:11px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:9px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d8d0e2; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#f3ecfa; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+  /* PRINT-CLEAN v1 */
+  @media print {
+    .scorebar, .done-msg, .back { display:none !important; }
+    .explain { display:none !important; }
+    .opt .mark { display:none !important; }
+    .opt.correct, .opt.wrong { background:#fff !important; border-color:#999 !important; color:#000 !important; font-weight:normal !important; text-decoration:none !important; }
+    .question { box-shadow:none !important; border:1px solid #bbb; break-inside:avoid; }
+    body { background:#fff !important; }
   }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+</style>
+</head>
+<body>
+  <a class="back" href="./">← 回公民科選單</a>
+  <div class="cover-title">公民 ── 單元11　家庭的生活（作業卷）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">1.</span>關於「家庭」，下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 是我們最晚才加入的團體</button>
+      <button class="opt" data-opt="B">(B) 是我們最早接觸、互動最持久的團體</button>
+      <button class="opt" data-opt="C">(C) 是和我們相處時間最短的團體</button>
+      <button class="opt" data-opt="D">(D) 是和家人幾乎不互動的團體</button>
+    </div>
+    <div class="explain">家庭是我們出生後最先加入、相處時間最長、互動最持久的團體。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">2.</span>家庭被比喻為「避風港」，主要是強調家庭具有什麼作用？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 遇到挫折時提供支持與安慰</button>
+      <button class="opt" data-opt="B">(B) 提供大量金錢投資</button>
+      <button class="opt" data-opt="C">(C) 教導考試技巧</button>
+      <button class="opt" data-opt="D">(D) 安排旅遊行程</button>
+    </div>
+    <div class="explain">「避風港」是比喻：遇到困難、挫折時，家能提供支持與安慰。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">3.</span>「以謙虛的態度向家人請教、學習」屬於維持溫暖的家中的哪一項表現？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 相互關懷</button>
+      <button class="opt" data-opt="B">(B) 珍惜相處</button>
+      <button class="opt" data-opt="C">(C) 生活節儉</button>
+      <button class="opt" data-opt="D">(D) 虛心學習</button>
+    </div>
+    <div class="explain">以謙虛態度向家人學習，是「虛心學習」的表現。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">4.</span>「把握和家人相聚的時間，培養融洽氣氛與親密情誼」屬於哪一項？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 生活節儉</button>
+      <button class="opt" data-opt="B">(B) 熱心家務</button>
+      <button class="opt" data-opt="C">(C) 珍惜相處</button>
+      <button class="opt" data-opt="D">(D) 虛心學習</button>
+    </div>
+    <div class="explain">珍惜和家人相處的時間、培養親密情誼，是「珍惜相處」。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">5.</span>下列哪一組「全部」都是維持溫暖的家所提到的表現？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 相互關懷、考第一名、生活節儉</button>
+      <button class="opt" data-opt="B">(B) 相互關懷、珍惜相處、熱心家務</button>
+      <button class="opt" data-opt="C">(C) 熱心家務、出國旅遊、虛心學習</button>
+      <button class="opt" data-opt="D">(D) 生活節儉、購買名牌、珍惜相處</button>
+    </div>
+    <div class="explain">五個表現為相互關懷、珍惜相處、生活節儉、熱心家務、虛心學習。只有(B)三項都屬於其中。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">6.</span>媽媽教小芳記帳、把零用錢存起來，不要亂花。這在培養哪一項習慣？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 生活節儉</button>
+      <button class="opt" data-opt="B">(B) 相互關懷</button>
+      <button class="opt" data-opt="C">(C) 虛心學習</button>
+      <button class="opt" data-opt="D">(D) 珍惜相處</button>
+    </div>
+    <div class="explain">不亂花、養成儲蓄習慣以保障家庭安定，屬於「生活節儉」。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">7.</span>家庭的三大功能依課本所列，下列何者完全正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 生育、娛樂、保護與照顧</button>
+      <button class="opt" data-opt="B">(B) 經濟、政治、生育</button>
+      <button class="opt" data-opt="C">(C) 生育、經濟、保護與照顧</button>
+      <button class="opt" data-opt="D">(D) 經濟、考試、娛樂</button>
+    </div>
+    <div class="explain">家庭三大功能為生育功能、經濟功能、保護與照顧功能。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">8.</span>「家人分擔生活開支，維持生活所需」屬於家庭的哪一項功能？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 生育功能</button>
+      <button class="opt" data-opt="B">(B) 保護與照顧功能</button>
+      <button class="opt" data-opt="C">(C) 教育功能</button>
+      <button class="opt" data-opt="D">(D) 經濟功能</button>
+    </div>
+    <div class="explain">分擔生活開支、維持生活所需，是家庭的「經濟功能」。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">9.</span>下列哪一個例子最能展現家庭的「保護與照顧功能」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 弟弟發高燒，爸媽連夜帶他去看醫生並悉心照顧</button>
+      <button class="opt" data-opt="B">(B) 媽媽生下一個小寶寶</button>
+      <button class="opt" data-opt="C">(C) 全家人一起賺錢付房租</button>
+      <button class="opt" data-opt="D">(D) 一家人去公園散步</button>
+    </div>
+    <div class="explain">生病或困難時彼此照料、提供安全，是「保護與照顧功能」。(B)是生育、(C)是經濟功能。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">10.</span>媽媽懷孕生下小妹妹，使家族多了一個新成員。這展現家庭的哪一項功能？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 經濟功能</button>
+      <button class="opt" data-opt="B">(B) 生育功能</button>
+      <button class="opt" data-opt="C">(C) 保護與照顧功能</button>
+      <button class="opt" data-opt="D">(D) 娛樂功能</button>
+    </div>
+    <div class="explain">生兒育女、繁衍後代，是家庭的「生育功能」。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">11.</span>關於「小家庭」，下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 一定要三代同住</button>
+      <button class="opt" data-opt="B">(B) 人數通常最多</button>
+      <button class="opt" data-opt="C">(C) 由一對夫妻和未婚子女組成，又稱核心家庭</button>
+      <button class="opt" data-opt="D">(D) 由好幾個小家庭組成</button>
+    </div>
+    <div class="explain">小家庭＝核心家庭，由一對夫妻和未婚子女組成。(A)是折衷家庭、(B)(D)是大家庭的特徵。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">12.</span>「一個家庭中包含好幾個小家庭，人數通常最多」描述的是哪一種家庭類型？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 大家庭</button>
+      <button class="opt" data-opt="B">(B) 小家庭</button>
+      <button class="opt" data-opt="C">(C) 折衷家庭</button>
+      <button class="opt" data-opt="D">(D) 核心家庭</button>
+    </div>
+    <div class="explain">含數個小家庭、人數通常最多的是「大家庭」。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">13.</span>折衷家庭的組成是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 只有一對夫妻</button>
+      <button class="opt" data-opt="B">(B) 只有夫妻和未婚子女</button>
+      <button class="opt" data-opt="C">(C) 好幾個小家庭住在一起</button>
+      <button class="opt" data-opt="D">(D) 核心家庭再加上夫妻的父母，三代同住</button>
+    </div>
+    <div class="explain">折衷家庭＝核心家庭＋夫妻的父母，形成三代同住。(B)是小家庭、(C)是大家庭。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">14.</span>阿明家只有爸爸、媽媽和他三個人同住。這屬於哪一種家庭類型？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 折衷家庭</button>
+      <button class="opt" data-opt="B">(B) 小家庭</button>
+      <button class="opt" data-opt="C">(C) 大家庭</button>
+      <button class="opt" data-opt="D">(D) 三代同堂</button>
+    </div>
+    <div class="explain">一對夫妻和未婚子女組成，是小家庭（核心家庭）。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">15.</span>小玲家同住的有：祖父母、伯父一家、爸爸一家等多個小家庭。依組成判斷最接近哪一種家庭？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 小家庭</button>
+      <button class="opt" data-opt="B">(B) 折衷家庭</button>
+      <button class="opt" data-opt="C">(C) 大家庭</button>
+      <button class="opt" data-opt="D">(D) 單親家庭</button>
+    </div>
+    <div class="explain">一個家庭含好幾個小家庭、人數最多，屬於大家庭。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">16.</span>關於「少子化」，下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 生育率逐年降低、幼年人口日益減少</button>
+      <button class="opt" data-opt="B">(B) 生育率逐年升高</button>
+      <button class="opt" data-opt="C">(C) 幼年人口愈來愈多</button>
+      <button class="opt" data-opt="D">(D) 與家庭規模完全無關</button>
+    </div>
+    <div class="explain">少子化是生育率逐年降低、幼年人口日益減少，並使家庭規模縮小。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">17.</span>下列何者最可能是造成少子化的原因？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 養育孩子的成本降低</button>
+      <button class="opt" data-opt="B">(B) 婚姻、生育觀念改變且養育成本提高</button>
+      <button class="opt" data-opt="C">(C) 每對夫妻都想生很多孩子</button>
+      <button class="opt" data-opt="D">(D) 幼年人口快速增加</button>
+    </div>
+    <div class="explain">少子化與婚姻生育觀念改變、養育成本提高有關，使願意生育的人變少。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">18.</span>少子化使得家庭規模產生什麼變化？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 規模變大</button>
+      <button class="opt" data-opt="B">(B) 規模不變</button>
+      <button class="opt" data-opt="C">(C) 家庭功能消失</button>
+      <button class="opt" data-opt="D">(D) 規模縮小</button>
+    </div>
+    <div class="explain">孩子變少使家庭成員減少，家庭規模因此縮小。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">19.</span>哥哥組裝模型遇到困難，向爸爸請教技巧並虛心接受指導。這最符合哪一項表現？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 生活節儉</button>
+      <button class="opt" data-opt="B">(B) 熱心家務</button>
+      <button class="opt" data-opt="C">(C) 虛心學習</button>
+      <button class="opt" data-opt="D">(D) 珍惜相處</button>
+    </div>
+    <div class="explain">以謙虛態度向家人請教、學習，屬於「虛心學習」。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">20.</span>下列關於「家庭功能」與「家庭類型」的配對，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 經濟功能──家人分擔生活開支</button>
+      <button class="opt" data-opt="B">(B) 生育功能──祖孫三代同住</button>
+      <button class="opt" data-opt="C">(C) 折衷家庭──一對夫妻和未婚子女</button>
+      <button class="opt" data-opt="D">(D) 大家庭──人數通常最少</button>
+    </div>
+    <div class="explain">經濟功能是家人分擔生活開支，正確。(B)三代同住是折衷家庭、(C)夫妻＋未婚子女是小家庭、(D)大家庭人數通常最多。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
   });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
-}
-</script></body></html>
+  function showDone(){ const m=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); m.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; m.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; m.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; m.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const mk=b.querySelector('.mark'); if(mk) mk.remove(); }); }); }
+</script>
+</body>
+</html>

@@ -1,137 +1,300 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民　單元12　親人的往來　練習卷</title>
 <style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
-header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
-header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
-header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
-header p{font-size:17px;opacity:.95;}
-.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
-.back:hover{background:#eef6ff;}
-.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
-.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
-button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
-button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
-button.reveal{background:var(--accent);color:#3a2c00;}
-button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
-span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
-span.blank::before{content:"？";}
-span.blank:hover{background:#fff6d8;}
-span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
-span.blank.on::before{content:"";}
-/* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
-.explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
-footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
-@media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
-  .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
-}
-</style></head><body>
-<header><div class="unit-tag">公民　單元 12</div>
-<h1>親人的往來</h1><p>練習卷　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">練習卷　20 題（選擇點選・填空點「？」查看）</span>
-<span class="score" id="score">作答 0/20</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">想讓親人相處時氣氛更融洽，下列做法最適當的是？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>使用適當的稱呼與問候</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>故意叫錯對方稱呼</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>見面不打招呼</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>只談論金錢</button></div><div class="explain"><b>解析：</b>適當的稱呼與問候可使親人相處的氣氛更融洽。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">小明很久沒和外婆聯絡，依本單元觀念，他最該怎麼做？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>等外婆先打來</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>經常保持聯繫、相互關心</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>完全不聯絡</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>只在生日當天聯絡</button></div><div class="explain"><b>解析：</b>親人之間應經常保持聯繫、相互關心，才能拉近彼此距離。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">遇到隔壁的鄰居時，下列何種態度最恰當？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>假裝沒看見</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>轉身離開</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>親切問候</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>大聲斥責</button></div><div class="explain"><b>解析：</b>平時對鄰居或其他人也應親切問候，以拉近關係。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於家庭形成的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>靠買賣形成</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>靠租屋形成</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>靠抽籤形成</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>透過婚姻關係形成</button></div><div class="explain"><b>解析：</b>家庭是透過婚姻關係形成。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者屬於「直系血親」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>爺爺與孫子</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>兄弟姊妹</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>岳母與女婿</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>同學與同學</button></div><div class="explain"><b>解析：</b>爺爺與孫子是直系血親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者屬於「旁系血親」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>父母與子女</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>兄弟姊妹</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>配偶雙方</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>鄰居之間</button></div><div class="explain"><b>解析：</b>兄弟姊妹屬於旁系血親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">養父母與養子女之間，屬於下列何種親屬關係？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>姻親</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>配偶</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>直系血親</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>毫無關係</button></div><div class="explain"><b>解析：</b>養父母與養子女屬於直系血親，且為法定血親（屬血親關係）。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者屬於「姻親」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>親生父母</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>親兄弟</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>岳母、伯母、姑丈</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>親生子女</button></div><div class="explain"><b>解析：</b>岳母、伯母、姑丈屬於姻親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">因「自然事實」而產生的血親，下列敘述何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>稱為自然血親</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>稱為法定血親</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>稱為姻親</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>稱為配偶</button></div><div class="explain"><b>解析：</b>因自然事實而產生者稱為自然血親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">依法收養成立的親子關係，下列敘述何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>屬於姻親關係</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>兩者不算親屬</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>屬於配偶關係</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>成立法定血親，是直系血親</button></div><div class="explain"><b>解析：</b>依法收養成立的親子是法定血親，且為直系血親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者「不是」法律規定的親屬關係？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>同學、朋友</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>養父母</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>配偶</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>兄弟姊妹</button></div><div class="explain"><b>解析：</b>同學、朋友不是法律規定的親屬。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">「配偶」的正確定義是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>一起讀書的同學</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>一對有婚姻關係、依法律規定成為夫妻的男女</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>住在隔壁的鄰居</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>一起工作的同事</button></div><div class="explain"><b>解析：</b>配偶是指一對有婚姻關係、依法律規定成為夫妻的男女。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">姻親是因下列何種關係而產生的親屬？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>收養關係</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>夫妻的婚姻關係</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>自然血緣關係</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>同學關係</button></div><div class="explain"><b>解析：</b>姻親是因夫妻的婚姻關係而產生的雙方家人之間的關係。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一個團體是由血緣、婚姻或收養關係構成？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>球隊</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>社區管委會</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>讀書會</button></div><div class="explain"><b>解析：</b>由血緣、婚姻或收養關係構成的團體是家庭。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">收養所成立的血親，與透過自然事實產生的血親，最主要的差別在於？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>前者是法定血親、後者是自然血親</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>兩者都不是血親</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>前者是姻親、後者是配偶</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>兩者完全相同沒有差別</button></div><div class="explain"><b>解析：</b>收養成立的是法定血親；因自然事實而產生者是自然血親，兩者皆屬血親關係。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="融洽"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">適當的稱呼與問候可使親人相處的氣氛更＿＿。　<span class="blank" data-ans="融洽"></span></span></div><div class="explain"><b>解析：</b>適當的稱呼與問候可使親人相處的氣氛更融洽。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="婚姻"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">家庭是透過＿＿關係形成，範圍包括父、母、配偶三方的親屬。　<span class="blank" data-ans="婚姻"></span></span></div><div class="explain"><b>解析：</b>家庭是透過婚姻關係形成。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="直系|直系血親"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">父母與子女的關係稱為「＿＿血親」。　<span class="blank" data-ans="直系"></span></span></div><div class="explain"><b>解析：</b>父母與子女的關係稱為直系血親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="姻親"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">因夫妻的婚姻關係而產生的雙方家人之間的關係，稱為＿＿。　<span class="blank" data-ans="姻親"></span></span></div><div class="explain"><b>解析：</b>因夫妻的婚姻關係而產生的雙方家人之間的關係稱為姻親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="直系|直系血親"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">爺爺與孫子的親屬關係屬於「＿＿血親」。　<span class="blank" data-ans="直系"></span></span></div><div class="explain"><b>解析：</b>爺爺與孫子是直系血親。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元12　親人的往來</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元12　親人的往來　練習卷</div>
-</div><script>
-function reveal(el){
-  if(el.classList.contains('on')) return;
-  el.classList.add('on');
-  el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
-  if(c) c.classList.add('revealed');
-}
-document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
-
-function revealAll(){
-  document.body.classList.add('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{
-    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
-  });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
-}
-function hideAll(){
-  document.body.classList.remove('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  :root { --main:#6a3d9a; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f5f3fa; max-width:820px; margin:0 auto; padding:16px 16px 60px; }
+  .back { display:inline-block; margin:0 0 10px; color:var(--main); background:#fff; border:2px solid #d8c4ea; border-radius:20px; padding:5px 14px; font-size:15px; text-decoration:none; }
+  .back:hover { background:#f3ecfa; }
+  .cover-title { font-size:21px; font-weight:bold; text-align:center; color:var(--main); background:#f1e9f8; border:2.5px solid var(--main); border-radius:10px; padding:11px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(245,243,250,.96); border-bottom:1.5px solid #d8cce6; padding:9px; margin-bottom:14px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 15px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:13px 16px; margin-bottom:11px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:9px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d8d0e2; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#f3ecfa; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+  /* PRINT-CLEAN v1 */
+  @media print {
+    .scorebar, .done-msg, .back { display:none !important; }
+    .explain { display:none !important; }
+    .opt .mark { display:none !important; }
+    .opt.correct, .opt.wrong { background:#fff !important; border-color:#999 !important; color:#000 !important; font-weight:normal !important; text-decoration:none !important; }
+    .question { box-shadow:none !important; border:1px solid #bbb; break-inside:avoid; }
+    body { background:#fff !important; }
   }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+</style>
+</head>
+<body>
+  <a class="back" href="./">← 回公民科選單</a>
+  <div class="cover-title">公民 ── 單元12 親人的往來（練習卷）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">1.</span>與親人相處時，下列哪一種做法最能讓相處的氣氛更融洽？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 見到長輩故意不出聲</button>
+      <button class="opt" data-opt="B">(B) 只跟年紀相近的人說話</button>
+      <button class="opt" data-opt="C">(C) 使用適當的稱呼並主動問候</button>
+      <button class="opt" data-opt="D">(D) 把長輩的名字直接喊出來</button>
+    </div>
+    <div class="explain">使用適當的稱呼與問候，能讓相處氣氛更融洽，也是對長輩的基本尊重。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">2.</span>小華搬家後和阿公分隔兩地，要怎麼做才能拉近彼此的距離？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 等過年再說，平時不必聯絡</button>
+      <button class="opt" data-opt="B">(B) 經常打電話保持聯繫、相互關心</button>
+      <button class="opt" data-opt="C">(C) 只在有事要幫忙時才聯絡</button>
+      <button class="opt" data-opt="D">(D) 把聯絡的事完全交給爸媽</button>
+    </div>
+    <div class="explain">經常保持聯繫、相互關心，才能拉近距離；感情不會因為距離而變淡。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">3.</span>下列關於「親切問候」的敘述，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 對鄰居或其他人也應親切問候</button>
+      <button class="opt" data-opt="B">(B) 只要對家人客氣就好</button>
+      <button class="opt" data-opt="C">(C) 對鄰居不必理會</button>
+      <button class="opt" data-opt="D">(D) 問候只是浪費時間</button>
+    </div>
+    <div class="explain">親切待人不分對象，對鄰居或其他人也應親切問候，能營造和諧的生活環境。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">4.</span>家庭通常透過哪些方式形成？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 只有婚姻一種</button>
+      <button class="opt" data-opt="B">(B) 只有生育一種</button>
+      <button class="opt" data-opt="C">(C) 只有收養一種</button>
+      <button class="opt" data-opt="D">(D) 婚姻、血緣（生育）或收養等方式</button>
+    </div>
+    <div class="explain">家庭通常透過婚姻、血緣（生育）或收養等方式形成，並非只有單一一種途徑。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">5.</span>一對夫妻依法律程序把別人的孩子當成自己的子女養育，這是哪一種家庭形成方式？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 婚姻</button>
+      <button class="opt" data-opt="B">(B) 收養</button>
+      <button class="opt" data-opt="C">(C) 生育</button>
+      <button class="opt" data-opt="D">(D) 血緣</button>
+    </div>
+    <div class="explain">依法律程序把別人的孩子當成自己子女養育，屬於「收養」。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">6.</span>父母生育子女，是屬於家庭形成的哪一種方式？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 收養</button>
+      <button class="opt" data-opt="B">(B) 婚姻</button>
+      <button class="opt" data-opt="C">(C) 血緣（生育）</button>
+      <button class="opt" data-opt="D">(D) 友誼</button>
+    </div>
+    <div class="explain">父母生育子女是透過「血緣（生育）」形成的家庭關係。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">7.</span>家庭形成之後，會再向外延伸出什麼關係？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 親屬關係</button>
+      <button class="opt" data-opt="B">(B) 買賣關係</button>
+      <button class="opt" data-opt="C">(C) 師生關係</button>
+      <button class="opt" data-opt="D">(D) 同事關係</button>
+    </div>
+    <div class="explain">家庭形成後，會再延伸出祖父母、伯叔姑舅姨等親屬關係。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">8.</span>親屬依家族來源可分為哪兩類？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 直系與旁系</button>
+      <button class="opt" data-opt="B">(B) 長輩與晚輩</button>
+      <button class="opt" data-opt="C">(C) 親近與疏遠</button>
+      <button class="opt" data-opt="D">(D) 父系與母系</button>
+    </div>
+    <div class="explain">依家族來源，親屬可分為父系（父親方）與母系（母親方）。直系與旁系則是依血緣遠近的另一種分法。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">9.</span>下列哪一位親屬屬於「母系」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 祖父</button>
+      <button class="opt" data-opt="B">(B) 舅舅</button>
+      <button class="opt" data-opt="C">(C) 伯伯</button>
+      <button class="opt" data-opt="D">(D) 姑姑</button>
+    </div>
+    <div class="explain">舅舅是媽媽的兄弟，屬於母系；祖父、伯伯、姑姑都屬於父系。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">10.</span>下列哪一組親屬全部都屬於「直系」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 伯伯、舅舅</button>
+      <button class="opt" data-opt="B">(B) 堂哥、表妹</button>
+      <button class="opt" data-opt="C">(C) 祖父母、父母、子女</button>
+      <button class="opt" data-opt="D">(D) 姑姑、阿姨</button>
+    </div>
+    <div class="explain">直系是和自己上下一直線相連的親屬，如祖父母、父母、子女；其餘選項都是旁系。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">11.</span>下列哪一位親屬屬於「旁系」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 姑姑</button>
+      <button class="opt" data-opt="B">(B) 父親</button>
+      <button class="opt" data-opt="C">(C) 祖母</button>
+      <button class="opt" data-opt="D">(D) 自己的女兒</button>
+    </div>
+    <div class="explain">姑姑是從直系再分出去的旁邊一支，屬於旁系；父親、祖母、女兒都在上下直線上，屬於直系。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">12.</span>媽媽的兄弟，我們應該稱呼為？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 伯伯</button>
+      <button class="opt" data-opt="B">(B) 叔叔</button>
+      <button class="opt" data-opt="C">(C) 姑姑</button>
+      <button class="opt" data-opt="D">(D) 舅舅</button>
+    </div>
+    <div class="explain">媽媽的兄弟稱為舅舅；爸爸的兄弟才是伯伯、叔叔。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">13.</span>爸爸的姊妹，我們應該稱呼為？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 阿姨</button>
+      <button class="opt" data-opt="B">(B) 姑姑</button>
+      <button class="opt" data-opt="C">(C) 舅媽</button>
+      <button class="opt" data-opt="D">(D) 嬸嬸</button>
+    </div>
+    <div class="explain">爸爸的姊妹稱為姑姑；媽媽的姊妹才是阿姨。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">14.</span>學會正確稱呼長輩，最主要代表什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 代表家裡很有錢</button>
+      <button class="opt" data-opt="B">(B) 代表自己很會讀書</button>
+      <button class="opt" data-opt="C">(C) 是對長輩的尊重，也是基本禮貌</button>
+      <button class="opt" data-opt="D">(D) 是為了拿到紅包</button>
+    </div>
+    <div class="explain">叫對稱謂代表對長輩的尊重，學會正確稱呼是最基本的禮貌。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">15.</span>逢年過節親戚互相拜訪、平時相互聯繫，最主要的意義是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 維繫情感，讓親人更親近</button>
+      <button class="opt" data-opt="B">(B) 比較誰家的房子大</button>
+      <button class="opt" data-opt="C">(C) 趁機向親戚借錢</button>
+      <button class="opt" data-opt="D">(D) 炫耀自己的成績</button>
+    </div>
+    <div class="explain">逢年過節互相拜訪、平時相互聯繫，能維繫情感，讓親人更親近。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">16.</span>男女結婚組成新家庭，是屬於哪一種家庭形成方式？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 收養</button>
+      <button class="opt" data-opt="B">(B) 生育</button>
+      <button class="opt" data-opt="C">(C) 婚姻</button>
+      <button class="opt" data-opt="D">(D) 血緣</button>
+    </div>
+    <div class="explain">男女結婚組成家庭是透過「婚姻」這種方式形成。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">17.</span>小明常和爸爸那邊的堂哥一起玩，「堂兄弟姊妹」屬於哪一系？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 母系</button>
+      <button class="opt" data-opt="B">(B) 父系</button>
+      <button class="opt" data-opt="C">(C) 直系</button>
+      <button class="opt" data-opt="D">(D) 無法判斷</button>
+    </div>
+    <div class="explain">堂兄弟姊妹來自父親那一邊，屬於父系；表兄弟姊妹則來自母系。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">18.</span>下列關於「直系與旁系」的判斷，何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 伯伯是直系</button>
+      <button class="opt" data-opt="B">(B) 表妹是直系</button>
+      <button class="opt" data-opt="C">(C) 父母是旁系</button>
+      <button class="opt" data-opt="D">(D) 祖父母是直系，伯叔姑舅姨是旁系</button>
+    </div>
+    <div class="explain">能和自己連成上下一直線的（祖父母、父母、子女）是直系；要從這條線岔出去的（伯叔姑舅姨、堂表兄弟姊妹）是旁系。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">19.</span>下列哪一種態度「不利於」維繫親人之間的感情？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 平時從不聯絡、過節也不往來</button>
+      <button class="opt" data-opt="B">(B) 過年過節互相拜訪</button>
+      <button class="opt" data-opt="C">(C) 平時主動關心問候</button>
+      <button class="opt" data-opt="D">(D) 用訊息保持聯繫</button>
+    </div>
+    <div class="explain">平時不聯絡、過節也不往來，感情會逐漸變淡；要靠互相拜訪與聯繫才能維繫情感。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">20.</span>由家庭再向外延伸的親屬，依與自己血緣的遠近可分為哪兩類？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 父系與母系</button>
+      <button class="opt" data-opt="B">(B) 長輩與晚輩</button>
+      <button class="opt" data-opt="C">(C) 直系與旁系</button>
+      <button class="opt" data-opt="D">(D) 男性與女性</button>
+    </div>
+    <div class="explain">依與自己血緣的遠近，親屬可分為直系與旁系；父系與母系則是依家族來源的分法。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
   });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
-}
-</script></body></html>
+  function showDone(){ const m=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); m.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; m.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; m.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; m.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const mk=b.querySelector('.mark'); if(mk) mk.remove(); }); }); }
+</script>
+</body>
+</html>

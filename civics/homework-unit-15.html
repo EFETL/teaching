@@ -1,137 +1,300 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民　單元15　性別平等　作業卷</title>
 <style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
-header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
-header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
-header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
-header p{font-size:17px;opacity:.95;}
-.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
-.back:hover{background:#eef6ff;}
-.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
-.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
-button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
-button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
-button.reveal{background:var(--accent);color:#3a2c00;}
-button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
-span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
-span.blank::before{content:"？";}
-span.blank:hover{background:#fff6d8;}
-span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
-span.blank.on::before{content:"";}
-/* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
-.explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
-footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
-@media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
-  .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
-}
-</style></head><body>
-<header><div class="unit-tag">公民　單元 15</div>
-<h1>性別平等</h1><p>作業卷　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">作業卷　20 題（選擇點選・填空點「？」查看）</span>
-<span class="score" id="score">作答 0/20</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">男女最大的差別主要在於下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>天生的生理特徵</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>後天的學習能力</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>說話的方式</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>穿著的喜好</button></div><div class="explain"><b>解析：</b>男女最大的差別在於天生的生理（身體）特徵，其他差別大部分是後天學習而來。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">關於男女在能力上的差異，下列敘述何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>男生天生各方面都比女生強</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>女生天生各方面都比男生強</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>除身體差別外，能力並沒有太大不同</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>男女能力完全相同沒有任何差別</button></div><div class="explain"><b>解析：</b>男女除身體差別外，在其他能力並沒有太大不同，應有更公平的發展機會。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者是維持團體中和諧人際關係應培養的態度？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>凡事爭先</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>尊重他人、分工合作</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>避免與人來往</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>只看別人缺點</button></div><div class="explain"><b>解析：</b>相處之道應培養尊重他人的態度，欣賞優點、主動幫忙、解決爭端、分工合作與同心協力。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">性別的差異除了生理上的差別外，還受到下列何者的影響？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>天氣的變化</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>社會文化</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>身高的高低</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>出生的季節</button></div><div class="explain"><b>解析：</b>性別差異包含生理上的差別與社會文化的影響，經由學習使兩性行為方式因而不同。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者不是影響性別角色形成與行為的主要因素？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>家庭</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>學校</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>傳播媒體</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>天生血型</button></div><div class="explain"><b>解析：</b>性別角色的形成與行為受家庭、學校、傳播媒體影響，與天生血型無關。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">對男女的表現方式形成固定、僵化的認知與看法，稱為什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>性別平等</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>性別刻板印象</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>性別差異</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>性別尊重</button></div><div class="explain"><b>解析：</b>性別刻板印象是在成長過程中被塑造成符合性別角色，對男女表現方式形成固定、僵化的認知。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者是性別刻板印象的例子？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>男主外、女主內</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>男女都能擔任各種職業</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>依個人興趣選擇工作</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>尊重每個人的選擇</button></div><div class="explain"><b>解析：</b>男主外女主內、女人為母則強、男生當醫生女生當護士、男孩有淚不輕彈都是性別刻板印象的例子。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">《性別工作平等法》於民國112年修正為下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>性別工作保障法</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>兩性平等法</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>性別平等工作法</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>性別平等教育法</button></div><div class="explain"><b>解析：</b>《性別工作平等法》已於民國112年修正為《性別平等工作法》。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">促進性別良好互動的最大原則是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>互相尊重</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>互相比較</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>保持距離</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>彼此競爭</button></div><div class="explain"><b>解析：</b>促進性別良好互動的最大原則是互相尊重，不可以性別刻板印象評斷他人。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">與異性同學或朋友交往時，下列態度何者最恰當？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>互相尊重，不要有太親近的肢體碰觸</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>盡量避免與異性說話</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>以性別刻板印象評斷對方</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>認為異性各方面都不如自己</button></div><div class="explain"><b>解析：</b>與異性交往應互相尊重，不要有太親近的肢體碰觸。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">為什麼國中時期學習與異性相處很重要？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>可以拿到較高分數</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>此階段累積的相處經驗會影響成人後與異性的互動</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>可以避免被父母責罵</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>與將來工作完全無關</button></div><div class="explain"><b>解析：</b>國中時期累積的相處經驗會影響成人後與異性的互動，因此學習與異性相處很重要。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">「男孩有淚不輕彈」這句話反映了什麼觀念？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>性別平等</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>性別刻板印象</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>相互尊重</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>公平發展機會</button></div><div class="explain"><b>解析：</b>「男孩有淚不輕彈」是要求男性符合特定性別角色的性別刻板印象。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">人類社會對不同性別角色有不同要求，經過學習後造成的結果是什麼？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>兩性的生理構造改變</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>兩性的行為方式因而不同</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>兩性的身高出現差異</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>兩性完全沒有任何差異</button></div><div class="explain"><b>解析：</b>社會文化對不同性別角色有不同要求，經過學習，兩性的行為方式也因而不同。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於男女發展機會的敘述，何者最符合性別平等的精神？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>男生應有比女生更多的機會</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>女生應有比男生更多的機會</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>男女應有更公平的發展機會</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>依性別決定誰能發展</button></div><div class="explain"><b>解析：</b>男女在能力上差異不大，應有更公平的發展機會，並學會相互尊重。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者「不是」課本所提維持和諧人際關係的做法？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>欣賞優點</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>主動幫忙</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>解決爭端</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>凸顯自己貶低他人</button></div><div class="explain"><b>解析：</b>維持和諧人際關係應欣賞優點、主動幫忙、解決爭端、分工合作與同心協力，而非貶低他人。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="生理|身體"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">男女最大的差別在於天生的<span class="blank" data-ans="生理"></span>特徵。</span></div><div class="explain"><b>解析：</b>男女最大的差別在於天生的生理（身體）特徵。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="刻板印象"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">在成長過程中對男女表現方式形成固定、僵化認知與看法，稱為性別<span class="blank" data-ans="刻板印象"></span>。</span></div><div class="explain"><b>解析：</b>性別刻板印象是對男女表現方式形成固定、僵化的認知與看法。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="性別平等工作法|性別平等工作法"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">《性別工作平等法》已於民國112年修正為《<span class="blank" data-ans="性別平等工作法"></span>》。</span></div><div class="explain"><b>解析：</b>《性別工作平等法》已於民國112年修正為《性別平等工作法》。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="尊重"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">促進性別良好互動的最大原則是互相<span class="blank" data-ans="尊重"></span>。</span></div><div class="explain"><b>解析：</b>促進性別良好互動的最大原則是互相尊重。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="傳播媒體|媒體"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">性別角色的形成與行為受家庭、學校與<span class="blank" data-ans="傳播媒體"></span>的影響。</span></div><div class="explain"><b>解析：</b>性別角色的形成與行為受家庭、學校、傳播媒體影響。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元15　性別平等</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元15　性別平等　作業卷</div>
-</div><script>
-function reveal(el){
-  if(el.classList.contains('on')) return;
-  el.classList.add('on');
-  el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
-  if(c) c.classList.add('revealed');
-}
-document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
-
-function revealAll(){
-  document.body.classList.add('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{
-    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
-  });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
-}
-function hideAll(){
-  document.body.classList.remove('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  :root { --main:#99316b; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f5f3fa; max-width:820px; margin:0 auto; padding:16px 16px 60px; }
+  .back { display:inline-block; margin:0 0 10px; color:var(--main); background:#fff; border:2px solid #d8c4ea; border-radius:20px; padding:5px 14px; font-size:15px; text-decoration:none; }
+  .back:hover { background:#f3ecfa; }
+  .cover-title { font-size:21px; font-weight:bold; text-align:center; color:var(--main); background:#f1e9f8; border:2.5px solid var(--main); border-radius:10px; padding:11px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(245,243,250,.96); border-bottom:1.5px solid #d8cce6; padding:9px; margin-bottom:14px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 15px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:13px 16px; margin-bottom:11px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:9px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d8d0e2; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#f3ecfa; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+  /* PRINT-CLEAN v1 */
+  @media print {
+    .scorebar, .done-msg, .back { display:none !important; }
+    .explain { display:none !important; }
+    .opt .mark { display:none !important; }
+    .opt.correct, .opt.wrong { background:#fff !important; border-color:#999 !important; color:#000 !important; font-weight:normal !important; text-decoration:none !important; }
+    .question { box-shadow:none !important; border:1px solid #bbb; break-inside:avoid; }
+    body { background:#fff !important; }
   }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+</style>
+</head>
+<body>
+  <a class="back" href="./">← 回公民科選單</a>
+  <div class="cover-title">公民 ── 單元15 性別平等（作業卷）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">1.</span>下列哪一項差別，主要是「天生」就存在的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 喜歡的顏色</button>
+      <button class="opt" data-opt="B">(B) 擅長的科目</button>
+      <button class="opt" data-opt="C">(C) 生理構造（身體特徵）</button>
+      <button class="opt" data-opt="D">(D) 個性的溫和或活潑</button>
+    </div>
+    <div class="explain">男女天生的差別主要在身體特徵與生理構造；顏色喜好、擅長科目、個性等多由後天養成。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">2.</span>「女生比較細心、男生比較粗心」這種說法，正確的理解是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 這多是後天與環境造成，不是天生注定</button>
+      <button class="opt" data-opt="B">(B) 這是男女天生的能力差別</button>
+      <button class="opt" data-opt="C">(C) 這是不可改變的事實</button>
+      <button class="opt" data-opt="D">(D) 證明女生天生比男生優秀</button>
+    </div>
+    <div class="explain">細心與否屬於個性與習慣，大多受後天學習與環境影響，並非天生注定，更不能用來比較性別優劣。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">3.</span>下列何者屬於「性別刻板印象」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 讓男女同學一起打掃教室</button>
+      <button class="opt" data-opt="B">(B) 依興趣讓同學選擇才藝課</button>
+      <button class="opt" data-opt="C">(C) 尊重每個人的職業選擇</button>
+      <button class="opt" data-opt="D">(D) 認為「照顧小孩本來就是女生的事」</button>
+    </div>
+    <div class="explain">把照顧小孩固定歸給女生，是把工作硬性歸給某一性別，屬於性別刻板印象。其餘選項都是平等與尊重的做法。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">4.</span>關於「性別角色」會隨什麼而不同？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 隨血型不同而不同</button>
+      <button class="opt" data-opt="B">(B) 隨不同社會與時代而不同</button>
+      <button class="opt" data-opt="C">(C) 隨天生身高而不同</button>
+      <button class="opt" data-opt="D">(D) 永遠固定不會改變</button>
+    </div>
+    <div class="explain">性別角色是社會文化形成的，在不同社會與時代各有不同，會隨環境改變，而非固定不變。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">5.</span>同學說：「班長一定要男生來當才有威嚴。」這種想法的問題是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 符合性別平等</button>
+      <button class="opt" data-opt="B">(B) 是尊重的表現</button>
+      <button class="opt" data-opt="C">(C) 用性別刻板印象限制了女生擔任幹部的機會</button>
+      <button class="opt" data-opt="D">(D) 指出了天生的身體差別</button>
+    </div>
+    <div class="explain">擔任幹部與性別無關，把班長固定歸給男生，剝奪了女生公平發展的機會，是性別刻板印象。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">6.</span>下列哪一項是「相互尊重」的正確做法？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 不嘲笑與自己性別期待不同的同學</button>
+      <button class="opt" data-opt="B">(B) 強迫女同學一定要安靜文靜</button>
+      <button class="opt" data-opt="C">(C) 笑男生參加烹飪社很奇怪</button>
+      <button class="opt" data-opt="D">(D) 只聽自己這個性別的意見</button>
+    </div>
+    <div class="explain">尊重就是不嘲笑、不歧視、不強迫別人符合性別期待，並願意傾聽不同性別的想法。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">7.</span>性別平等的最終目標，是希望讓每個人能怎麼樣？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 男女做的事完全一樣</button>
+      <button class="opt" data-opt="B">(B) 某一性別享有特權</button>
+      <button class="opt" data-opt="C">(C) 消除天生的身體差別</button>
+      <button class="opt" data-opt="D">(D) 依自己的能力與興趣自由發展</button>
+    </div>
+    <div class="explain">性別平等的目標是讓每個人不受性別限制，依自己的能力與興趣公平發展。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">8.</span>下列敘述何者「不是」性別刻板印象？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 男生就應該很勇敢、不能害怕</button>
+      <button class="opt" data-opt="B">(B) 男生女生都可以害怕，也都可以勇敢</button>
+      <button class="opt" data-opt="C">(C) 女生就應該文靜、不能太活潑</button>
+      <button class="opt" data-opt="D">(D) 修理東西一定是男生的工作</button>
+    </div>
+    <div class="explain">(B) 不把特質固定歸給某一性別，是正確觀念。其餘都把情緒、個性或工作硬性歸給某一性別，屬刻板印象。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">9.</span>下列哪一句話最符合「性別平等」的精神？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 不論男女，都能依興趣選擇喜歡的職業</button>
+      <button class="opt" data-opt="B">(B) 賺錢養家是男生天生的責任</button>
+      <button class="opt" data-opt="C">(C) 家事是女生天生該做的工作</button>
+      <button class="opt" data-opt="D">(D) 男生不准做需要細心的工作</button>
+    </div>
+    <div class="explain">職業與責任不應因性別而限制，(A) 讓男女依興趣選擇，最符合性別平等。其餘都是刻板印象。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">10.</span>關於男女的差別，下列哪一個觀念是「錯誤」的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 身體特徵的差別主要是天生的</button>
+      <button class="opt" data-opt="B">(B) 個性、興趣多由後天造成</button>
+      <button class="opt" data-opt="C">(C) 男女所有的差別都是天生注定，無法改變</button>
+      <button class="opt" data-opt="D">(D) 能力高低不應只用性別來判斷</button>
+    </div>
+    <div class="explain">只有身體特徵主要是天生，其他差別多為後天，可以改變。(C) 把所有差別都說成天生，是錯誤觀念。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">11.</span>爸爸主動下廚、媽媽負責修水電，這樣的家庭分工反映了什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 違反性別角色，是不對的</button>
+      <button class="opt" data-opt="B">(B) 男女天生能力顛倒</button>
+      <button class="opt" data-opt="C">(C) 必須馬上糾正回來</button>
+      <button class="opt" data-opt="D">(D) 不受僵化觀念限制、依能力分工的好做法</button>
+    </div>
+    <div class="explain">家事分工不必受「誰該做什麼」的僵化觀念限制，依能力與意願分擔，正是破除刻板印象的好做法。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">12.</span>有人主張「女生不必念太多書，反正以後要嫁人」。這種說法最大的問題是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 符合性別平等</button>
+      <button class="opt" data-opt="B">(B) 剝奪女生公平受教育與發展的機會</button>
+      <button class="opt" data-opt="C">(C) 是尊重女生的表現</button>
+      <button class="opt" data-opt="D">(D) 指出女生天生的能力不足</button>
+    </div>
+    <div class="explain">教育機會不應因性別而被剝奪。這種說法用刻板印象限制女生發展，嚴重違反性別平等。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">13.</span>下列哪一種校園做法最能落實性別平等？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 各種社團都開放男女同學自由參加</button>
+      <button class="opt" data-opt="B">(B) 家政課只收女生</button>
+      <button class="opt" data-opt="C">(C) 工藝課只收男生</button>
+      <button class="opt" data-opt="D">(D) 體育課只讓男生打球</button>
+    </div>
+    <div class="explain">不分性別開放參加，讓每個人依興趣選擇，最能落實性別平等。其餘都用性別來設限。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">14.</span>「性別刻板印象」之所以需要破除，主要是因為它會？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 讓男女更平等</button>
+      <button class="opt" data-opt="B">(B) 增加每個人的發展機會</button>
+      <button class="opt" data-opt="C">(C) 限制一個人依興趣與能力發展</button>
+      <button class="opt" data-opt="D">(D) 幫助大家互相尊重</button>
+    </div>
+    <div class="explain">刻板印象會用固定觀念綁住人，讓人不敢追求真正的興趣與能力，因此需要破除。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">15.</span>關於「平等」與「完全一樣」的差別，下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 平等就是要求男女各方面都一模一樣</button>
+      <button class="opt" data-opt="B">(B) 平等是機會公平與彼此尊重，不是要男女變得完全相同</button>
+      <button class="opt" data-opt="C">(C) 平等就是消除天生的身體差別</button>
+      <button class="opt" data-opt="D">(D) 平等就是某一性別優先</button>
+    </div>
+    <div class="explain">平等強調的是機會公平與相互尊重，而非把男女變得完全一樣，也不是消除天生差別或讓某方優先。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">16.</span>小美數學很好想當工程師，家人卻說「那是男生的工作」。最適當的觀念是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 工程師確實只適合男生</button>
+      <button class="opt" data-opt="B">(B) 小美應該放棄夢想</button>
+      <button class="opt" data-opt="C">(C) 女生不可能學好數學</button>
+      <button class="opt" data-opt="D">(D) 職業不分性別，應支持小美依興趣與能力發展</button>
+    </div>
+    <div class="explain">職業選擇不應受性別限制，應支持小美依自己的能力與興趣去發展，這才符合性別平等。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">17.</span>下列哪一項「不」符合性別平等與尊重？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 因為同學是男生留長髮就嘲笑他</button>
+      <button class="opt" data-opt="B">(B) 接納同學不同的興趣選擇</button>
+      <button class="opt" data-opt="C">(C) 男女合作分擔班級事務</button>
+      <button class="opt" data-opt="D">(D) 傾聽不同性別的意見</button>
+    </div>
+    <div class="explain">嘲笑他人外型或選擇是歧視與不尊重，違反性別平等。其餘都是接納、合作與傾聽的正確態度。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">18.</span>下列關於本單元觀念的敘述，何者「正確」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 男女所有差別都是天生的</button>
+      <button class="opt" data-opt="B">(B) 性別角色固定不能改變</button>
+      <button class="opt" data-opt="C">(C) 個性與興趣的差別多由後天環境造成</button>
+      <button class="opt" data-opt="D">(D) 刻板印象是值得保留的好觀念</button>
+    </div>
+    <div class="explain">個性與興趣的差別多由後天學習與環境造成。其餘三項皆為錯誤觀念。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">19.</span>看到電視廣告把「打掃、煮飯」都安排給女性角色，較合適的反思是？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 這很正常，家事本來就是女生的事</button>
+      <button class="opt" data-opt="B">(B) 這可能強化了性別刻板印象，家事應男女共同分擔</button>
+      <button class="opt" data-opt="C">(C) 廣告應該再多強調女生做家事</button>
+      <button class="opt" data-opt="D">(D) 男生本來就不該碰家事</button>
+    </div>
+    <div class="explain">把家事只安排給女性，容易強化刻板印象。家事應由男女共同分擔，廣告也應呈現更平等的形象。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">20.</span>綜合本單元，下列哪一個觀念最值得我們培養？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 用性別決定一個人能做什麼</button>
+      <button class="opt" data-opt="B">(B) 把工作固定分給某一性別</button>
+      <button class="opt" data-opt="C">(C) 認為某一性別比較優越</button>
+      <button class="opt" data-opt="D">(D) 破除刻板印象，讓男女依能力與興趣公平發展、相互尊重</button>
+    </div>
+    <div class="explain">本單元的核心是破除性別刻板印象，追求機會公平與相互尊重，讓每個人依能力與興趣自由發展。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
   });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
-}
-</script></body></html>
+  function showDone(){ const m=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); m.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; m.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; m.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; m.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const mk=b.querySelector('.mark'); if(mk) mk.remove(); }); }); }
+</script>
+</body>
+</html>

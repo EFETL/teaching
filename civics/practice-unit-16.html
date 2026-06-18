@@ -1,137 +1,300 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民　單元16　敦親睦鄰　練習卷</title>
 <style>
-:root{--main:#2c5f8a;--accent:#e6a800;--subject:#1abc9c;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
-header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
-header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
-header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
-header p{font-size:17px;opacity:.95;}
-.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
-.back:hover{background:#eef6ff;}
-.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
-.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
-button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
-button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
-button.reveal{background:var(--accent);color:#3a2c00;}
-button.hide{background:#7b8a9a;color:#fff;}
-button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
-.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
-section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
-/* 講義條目 */
-.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
-.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
-/* 填空（「？」點擊即顯示答案） */
-span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
-span.blank::before{content:"？";}
-span.blank:hover{background:#fff6d8;}
-span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
-span.blank.on::before{content:"";}
-/* 解析 */
-.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
-.explain b{color:var(--main);}
-.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
-/* 題目 */
-.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
-.q:first-of-type{border-top:none;}
-.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
-.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
-.q-type.mc{background:#eaf3fb;color:var(--main);}
-.q-type.fill{background:#fdf0e3;color:#b9690a;}
-.q-stem{flex:1;font-size:18px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
-@media(max-width:600px){.opts{grid-template-columns:1fr;}}
-.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
-.opt:hover{border-color:var(--main);background:#f3f8fd;}
-.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
-.opt.picked{border-color:var(--main);background:#e8f1fb;}
-.opt.correct{border-color:var(--ok);background:#e7f6ee;}
-.opt.correct .lab{color:var(--ok);}
-.opt.wrong{border-color:var(--no);background:#fceae8;}
-.opt.wrong .lab{color:var(--no);}
-.q .explain{margin-left:40px;}
-.qbtn{margin:8px 0 0 40px;}
-.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
-footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
-/* 頁碼（列印） */
-.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
-@media print{
-  body{background:#fff;padding:0;font-size:15px;}
-  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
-  header{box-shadow:none;}
-  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
-  .show-ans .explain,.explain{display:block;}
-  @page{margin:16mm 14mm 18mm;}
-  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
-  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
-}
-</style></head><body>
-<header><div class="unit-tag">公民　單元 16</div>
-<h1>敦親睦鄰</h1><p>練習卷　·　全民補習班 線上教學</p>
-<a class="back" href="./">← 回公民科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">練習卷　20 題（選擇點選・填空點「？」查看）</span>
-<span class="score" id="score">作答 0/20</span>
-<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
-<button class="act hide" onclick="hideAll()">隱藏答案</button>
-<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者可以從身分證上的地址看出，用以辨識自己的家鄉？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>血型與身高</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>鄰、村里等名稱</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>存款金額</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>手機號碼</button></div><div class="explain"><b>解析：</b>身分證上的地址包含鄰、村里等名稱，可從中看出自己的家鄉。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">下列何種做法最能達到「敦親睦鄰」的效果？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>整天緊閉門窗不與人往來</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>把噪音開到最大</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>與鄰居守望相助、彼此關心</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>故意刁難鄰居</button></div><div class="explain"><b>解析：</b>與鄰居守望相助、彼此關心正是敦親睦鄰的表現，能讓生活更愉快。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">社區居民自願組成社區發展協會，下列何者『不是』其主要目的？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>提供休閒娛樂</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>聯絡居民情感</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>舉辦社區活動</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>替政府徵收稅金</button></div><div class="explain"><b>解析：</b>社區發展協會的目的是舉辦活動、提供休閒娛樂與聯絡居民情感，而非替政府徵收稅金。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一項是社區志工團體常見的服務內容？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>經營私人公司</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>舉辦個人生日會</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>替自己賺取高薪</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>協助指揮交通、定期打掃社區</button></div><div class="explain"><b>解析：</b>志工團體常協助學校附近指揮交通、定期打掃社區，以服務社區並營造安全環境。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於社區意識的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>指社區的地址編號</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>指居民對社區的認同感與歸屬感</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>指社區發展協會的章程</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>指社區商店的營業額</button></div><div class="explain"><b>解析：</b>社區意識是居民在心理上對社區產生休戚與共、我是當地人的認同感與歸屬感。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者『屬於』社區參與的具體事例？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>在家獨自玩手機</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>參加社區守望相助巡守隊</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>私人家庭聚餐</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>獨自慶祝生日</button></div><div class="explain"><b>解析：</b>參加社區守望相助巡守隊屬於共同處理社區事務的社區參與。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一件事『不屬於』社區公共事務？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>維護社區治安</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>成立守望相助巡守隊</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>在自家舉辦私人慶生</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>定期打掃社區環境</button></div><div class="explain"><b>解析：</b>在自家舉辦私人慶生屬於私人事務，不屬於社區公共事務。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">社區參與的重要性，下列何者敘述最適當？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>會讓居民變得自私</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>使社區環境變差</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>能培養謀利他精神與處理公共事務的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>讓居民不再往來</button></div><div class="explain"><b>解析：</b>社區參與能培養謀利他精神與處理公共事務的能力，並改善社區生活與環境。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一群人最符合課本所說的「社區」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>臨時搭同一班公車、互不相識的乘客</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>住在同一地區、有共同關係並形成公共生活領域的居民</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>在不同城市的網友</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>只在線上交易一次的買賣雙方</button></div><div class="explain"><b>解析：</b>社區是住在某地區、有共同關係並透過互動形成公共生活領域的居民群體。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">下列哪一項最能展現居民的「社區意識」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>覺得社區與自己無關</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>以身為當地人為榮、與社區休戚與共</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>對社區事務漠不關心</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>拒絕認識任何鄰居</button></div><div class="explain"><b>解析：</b>以身為當地人為榮、與社區休戚與共，正是社區意識的認同感與歸屬感。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">美美發動全家一起打掃社區環境，這個行為屬於下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>私人慶生</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>商業買賣</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>個人興趣與社區無關</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>社區參與</button></div><div class="explain"><b>解析：</b>發動全家一起打掃社區環境屬於共同處理社區事務的社區參與。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者『不是』社區參與所能帶來的效果？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>改善社區生活與環境</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>培養謀利他精神</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>提升處理公共事務的能力</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>使居民彼此更加冷漠疏離</button></div><div class="explain"><b>解析：</b>社區參與能改善社區、培養利他精神與處理公共事務的能力，不會使居民更冷漠疏離。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">「遠親不如近鄰」這句俗諺，最能對應下列哪一種社區精神？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>各自為政</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>守望相助</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>彼此競爭</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>互不往來</button></div><div class="explain"><b>解析：</b>「遠親不如近鄰」對應的是鄰里守望相助、敦親睦鄰的精神。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於社區發展協會的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>由政府強制指派成立</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>由居民自願組成並舉辦社區活動</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>只負責收取罰款</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>禁止居民參加活動</button></div><div class="explain"><b>解析：</b>社區發展協會由居民自願組成，舉辦活動以提供休閒娛樂並聯絡居民情感。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者最能營造「祥和的社區安全」？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>居民各自不理會社區事務</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>任由環境髒亂不打掃</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>拒絕參加巡守</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>居民組成志工團體服務社區</button></div><div class="explain"><b>解析：</b>居民組成志工團體協助指揮交通、打掃社區，能服務社區並營造祥和的社區安全。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="社區"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">一群住在某地區、有共同關係並形成公共生活領域的居民群體，稱為<span class="blank" data-ans="社區"></span>。</span></div><div class="explain"><b>解析：</b>社區是住在某地區、有共同關係並透過互動形成公共生活領域的居民群體。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="志工|志工團體"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">居民組成的服務團體，會協助指揮交通、定期打掃社區，這類成員通常稱為<span class="blank" data-ans="志工"></span>。</span></div><div class="explain"><b>解析：</b>居民在工作之餘組成志工團體，服務社區並營造祥和安全的環境。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="意識"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">居民對社區產生「休戚與共」、「我是當地人」的認同感與歸屬感，稱為社區<span class="blank" data-ans="意識"></span>。</span></div><div class="explain"><b>解析：</b>社區意識指居民對社區產生休戚與共、我是當地人的認同感與歸屬感。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="參與"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">由社區居民共同處理社區事務（如維護治安、成立巡守隊）的行為，稱為社區<span class="blank" data-ans="參與"></span>。</span></div><div class="explain"><b>解析：</b>社區參與的意義是由居民共同處理社區事務，例如維護治安、成立守望相助巡守隊。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="近鄰"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">守望相助與敦親睦鄰可以讓生活更愉快，正符合「遠親不如<span class="blank" data-ans="近鄰"></span>」這句俗諺。</span></div><div class="explain"><b>解析：</b>「遠親不如近鄰」強調鄰里守望相助與敦親睦鄰的重要。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　公民科　單元16　敦親睦鄰</footer>
-<div class="page-foot">全民補習班　teaching.efetl.com　—　公民　單元16　敦親睦鄰　練習卷</div>
-</div><script>
-function reveal(el){
-  if(el.classList.contains('on')) return;
-  el.classList.add('on');
-  el.textContent = el.dataset.ans;
-  const c = el.closest('.note-pt, .q');
-  if(c) c.classList.add('revealed');
-}
-document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
-
-function revealAll(){
-  document.body.classList.add('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{
-    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
-  });
-  document.querySelectorAll('.q').forEach(gradeQ);
-  updateScore(true);
-}
-function hideAll(){
-  document.body.classList.remove('show-ans');
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
-}
-function clearAll(){
-  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
-  document.body.classList.remove('show-ans');
-  updateScore(false);
-}
-function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
-function pickMC(q,idx,btn){
-  const ans=+q.dataset.ans;q.dataset.picked=idx;
-  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
-  btn.classList.add('picked');
-  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
-    q.querySelectorAll('.opt')[ans].classList.add('correct');}
-  q.classList.add('revealed');updateScore(false);
-}
-function gradeQ(q){
-  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
-    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
-    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  :root { --main:#6a3d9a; --ok:#2e7d32; --no:#c0392b; --exp:#a07000; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; font-size:16px; line-height:1.7; color:#1a1a1a; background:#f5f3fa; max-width:820px; margin:0 auto; padding:16px 16px 60px; }
+  .back { display:inline-block; margin:0 0 10px; color:var(--main); background:#fff; border:2px solid #d8c4ea; border-radius:20px; padding:5px 14px; font-size:15px; text-decoration:none; }
+  .back:hover { background:#f3ecfa; }
+  .cover-title { font-size:21px; font-weight:bold; text-align:center; color:var(--main); background:#f1e9f8; border:2.5px solid var(--main); border-radius:10px; padding:11px; margin-bottom:12px; }
+  .scorebar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; background:rgba(245,243,250,.96); border-bottom:1.5px solid #d8cce6; padding:9px; margin-bottom:14px; font-size:16px; }
+  .scorebar b { color:var(--main); font-size:18px; }
+  .scorebar button { font-size:16px; padding:6px 15px; border-radius:20px; border:2px solid var(--main); background:#fff; color:var(--main); cursor:pointer; }
+  .scorebar button:hover { background:var(--main); color:#fff; }
+  .question { background:#fff; border-radius:10px; padding:13px 16px; margin-bottom:11px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .q-text { font-size:16px; font-weight:500; margin-bottom:9px; }
+  .q-num { color:var(--main); font-weight:bold; margin-right:4px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .opt { font-size:16px; text-align:left; border:2px solid #d8d0e2; border-radius:8px; padding:8px 12px; background:#fff; cursor:pointer; line-height:1.5; }
+  .opt:hover:not(:disabled) { border-color:var(--main); background:#f3ecfa; }
+  .opt:disabled { cursor:default; }
+  .opt.correct { border-color:var(--ok); background:#e8f5e9; color:#1b5e20; font-weight:bold; }
+  .opt.wrong { border-color:var(--no); background:#ffebee; color:#7f0000; }
+  .opt .mark { font-weight:bold; margin-left:4px; }
+  .explain { display:none; margin-top:10px; padding:10px 14px; background:#fffbe6; border-left:4px solid var(--exp); border-radius:0 6px 6px 0; font-size:16px; color:#5a3e00; line-height:1.6; }
+  .question.answered .explain { display:block; }
+  .explain::before { content:"💡 解析："; font-weight:bold; color:var(--exp); }
+  .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
+  .done-msg.show { display:block; }
+  @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+  /* PRINT-CLEAN v1 */
+  @media print {
+    .scorebar, .done-msg, .back { display:none !important; }
+    .explain { display:none !important; }
+    .opt .mark { display:none !important; }
+    .opt.correct, .opt.wrong { background:#fff !important; border-color:#999 !important; color:#000 !important; font-weight:normal !important; text-decoration:none !important; }
+    .question { box-shadow:none !important; border:1px solid #bbb; break-inside:avoid; }
+    body { background:#fff !important; }
   }
-}
-function toggleQ(q){q.classList.toggle('revealed');}
-function updateScore(force){
-  const el=document.getElementById('score');if(!el)return;
-  const qs=document.querySelectorAll('.q');let done=0,right=0;
-  qs.forEach(q=>{
-    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
-    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+</style>
+</head>
+<body>
+  <a class="back" href="./">← 回公民科選單</a>
+  <div class="cover-title">公民 ── 單元16 敦親睦鄰（練習卷）</div>
+  <div class="scorebar">
+    <span>已作答 <b id="answered">0</b> / <span id="total">20</span></span>
+    <span>答對 <b id="correct">0</b></span>
+    <button onclick="resetQuiz()">重來</button>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">1.</span>小明想知道自己的家鄉在哪裡，下列哪一項證件上的資料最能直接看出？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 學生證上的座號</button>
+      <button class="opt" data-opt="B">(B) 健保卡上的卡號</button>
+      <button class="opt" data-opt="C">(C) 身分證上的地址</button>
+      <button class="opt" data-opt="D">(D) 圖書證上的編號</button>
+    </div>
+    <div class="explain">身分證上會登記戶籍地址，包含縣市、鄉鎮與村里、鄰等名稱，最能直接看出自己的家鄉。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">2.</span>身分證地址中常出現「○○里」、「第○鄰」等字樣，這些主要是用來表示什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 家庭的收入高低</button>
+      <button class="opt" data-opt="B">(B) 家鄉地方的編組單位</button>
+      <button class="opt" data-opt="C">(C) 個人的興趣專長</button>
+      <button class="opt" data-opt="D">(D) 學校的班級座號</button>
+    </div>
+    <div class="explain">「里」、「鄰」是地方上最基層的編組單位，用來劃分居民居住的範圍，方便聯絡與服務。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">3.</span>了解並認識自己的家鄉，對居民最主要的意義是什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 對居住的地方更有歸屬感</button>
+      <button class="opt" data-opt="B">(B) 可以免繳各種稅金</button>
+      <button class="opt" data-opt="C">(C) 能優先當選里長</button>
+      <button class="opt" data-opt="D">(D) 可以不必遵守法律</button>
+    </div>
+    <div class="explain">認識家鄉的地名與環境，會讓人覺得自己是這個地方的一份子，產生認同感與歸屬感。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">4.</span>下列何者最能表現「敦親睦鄰」的精神？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 故意把音響開到最大聲</button>
+      <button class="opt" data-opt="B">(B) 對鄰居不理不睬</button>
+      <button class="opt" data-opt="C">(C) 把垃圾丟到鄰居門口</button>
+      <button class="opt" data-opt="D">(D) 主動關心鄰居並守望相助</button>
+    </div>
+    <div class="explain">敦親睦鄰就是和鄰居和睦相處、互相關心照顧；主動關心、守望相助最能表現這種精神。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">5.</span>「守望相助」最主要是指鄰居之間做到下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 比較誰家的房子比較大</button>
+      <button class="opt" data-opt="B">(B) 互相注意安全、有困難時互相幫忙</button>
+      <button class="opt" data-opt="C">(C) 互相借錢不必歸還</button>
+      <button class="opt" data-opt="D">(D) 互相打聽彼此的私事</button>
+    </div>
+    <div class="explain">守望相助是鄰居間互相留意彼此的安全，遇到困難或危險時互相照應、幫忙。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">6.</span>社區居民做好敦親睦鄰，最直接的好處是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 房價一定會大漲</button>
+      <button class="opt" data-opt="B">(B) 可以不用繳水電費</button>
+      <button class="opt" data-opt="C">(C) 社區生活更愉快、更安全</button>
+      <button class="opt" data-opt="D">(D) 從此不會發生任何天災</button>
+    </div>
+    <div class="explain">鄰居互相關心、彼此照應，社區氣氛會更融洽，居住環境也更有保障，生活更愉快安全。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">7.</span>社區發展協會是怎麼組成的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 由社區居民自願組成</button>
+      <button class="opt" data-opt="B">(B) 由警察局強迫成立</button>
+      <button class="opt" data-opt="C">(C) 由外縣市的人指派</button>
+      <button class="opt" data-opt="D">(D) 由學校老師代為加入</button>
+    </div>
+    <div class="explain">社區發展協會是由社區居民「自願」組成的團體，並非被強迫加入。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">8.</span>下列何者「不是」社區發展協會的主要目的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 聯絡居民情感</button>
+      <button class="opt" data-opt="B">(B) 舉辦社區活動</button>
+      <button class="opt" data-opt="C">(C) 提供休閒娛樂</button>
+      <button class="opt" data-opt="D">(D) 替政府向居民徵收稅金</button>
+    </div>
+    <div class="explain">徵收稅金是政府機關的工作，並非社區發展協會的目的；協會主要在聯絡情感、辦活動與提供休閒娛樂。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">9.</span>社區發展協會舉辦中秋聯歡晚會，邀請居民一起參加，這最符合協會的哪一項目的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 替政府徵稅</button>
+      <button class="opt" data-opt="B">(B) 聯絡居民情感</button>
+      <button class="opt" data-opt="C">(C) 審判犯罪的人</button>
+      <button class="opt" data-opt="D">(D) 制定國家法律</button>
+    </div>
+    <div class="explain">舉辦聯歡晚會能讓居民彼此認識、增進感情，符合協會「聯絡居民情感」的目的。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">10.</span>身為社區的一份子，下列哪一種態度最恰當？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 社區的事都與我無關</button>
+      <button class="opt" data-opt="B">(B) 把公共空間當成自己的</button>
+      <button class="opt" data-opt="C">(C) 主動參與社區事務、愛護環境</button>
+      <button class="opt" data-opt="D">(D) 只享受權利不盡任何責任</button>
+    </div>
+    <div class="explain">主動參與社區事務、愛護家鄉環境，是身為社區一份子應盡的責任。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">11.</span>颱風來臨前，王伯伯主動提醒並協助獨居的鄰居把窗戶釘牢。王伯伯的行為最能說明下列哪一個概念？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 守望相助、敦親睦鄰</button>
+      <button class="opt" data-opt="B">(B) 替政府徵收稅金</button>
+      <button class="opt" data-opt="C">(C) 干涉他人隱私</button>
+      <button class="opt" data-opt="D">(D) 破壞社區環境</button>
+    </div>
+    <div class="explain">主動關心並協助有需要的鄰居，正是守望相助、敦親睦鄰的具體表現。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">12.</span>下列哪一種做法「最不能」達到敦親睦鄰的效果？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 在電梯遇到鄰居主動打招呼</button>
+      <button class="opt" data-opt="B">(B) 幫忙代收鄰居的包裹</button>
+      <button class="opt" data-opt="C">(C) 參加社區的聯誼活動</button>
+      <button class="opt" data-opt="D">(D) 深夜大聲喧嘩影響鄰居休息</button>
+    </div>
+    <div class="explain">深夜喧嘩會干擾鄰居、造成糾紛，無法和睦相處，反而違背敦親睦鄰的精神。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">13.</span>下列哪一個單位才是負責向人民徵收稅金的機關？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 社區發展協會</button>
+      <button class="opt" data-opt="B">(B) 政府的稅捐稽徵機關</button>
+      <button class="opt" data-opt="C">(C) 社區巡守隊</button>
+      <button class="opt" data-opt="D">(D) 鄰居組成的讀書會</button>
+    </div>
+    <div class="explain">徵收稅金是政府機關（如稅捐稽徵處）的職責，社區發展協會並不負責徵稅。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">14.</span>小華假日參加社區的環境清潔活動，撿拾公園裡的垃圾。他的行為展現了什麼？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 對家鄉漠不關心</button>
+      <button class="opt" data-opt="B">(B) 只想得到獎品</button>
+      <button class="opt" data-opt="C">(C) 愛護家鄉環境、參與公共事務</button>
+      <button class="opt" data-opt="D">(D) 破壞社區的整潔</button>
+    </div>
+    <div class="explain">參加環境清潔、維護公共空間整潔，是愛護家鄉、參與公共事務的具體行動。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">15.</span>關於社區發展協會，下列敘述何者正確？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 它是居民自願組成、為社區服務的團體</button>
+      <button class="opt" data-opt="B">(B) 它是強迫所有居民加入的政府機關</button>
+      <button class="opt" data-opt="C">(C) 它的主要工作是審理案件</button>
+      <button class="opt" data-opt="D">(D) 它負責替政府徵收稅金</button>
+    </div>
+    <div class="explain">社區發展協會是居民自願組成、為社區服務的團體，不是政府機關，也不負責審判或徵稅。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">16.</span>下列哪一項「不是」參與社區公共事務的表現？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 參加社區的資源回收</button>
+      <button class="opt" data-opt="B">(B) 加入社區巡守隊</button>
+      <button class="opt" data-opt="C">(C) 出席社區的會議發表意見</button>
+      <button class="opt" data-opt="D">(D) 在社區牆面隨意塗鴉破壞</button>
+    </div>
+    <div class="explain">隨意塗鴉破壞是破壞公物的行為，並非參與公共事務；參與公共事務應以維護、改善社區為出發點。</div>
+  </div>
+
+  <div class="question" data-correct="B">
+    <div class="q-text"><span class="q-num">17.</span>新搬來的鄰居對社區還不熟悉，下列哪一種做法最能展現敦親睦鄰？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 假裝沒看到不理會</button>
+      <button class="opt" data-opt="B">(B) 主動打招呼並介紹社區環境</button>
+      <button class="opt" data-opt="C">(C) 警告他不要靠近自己家</button>
+      <button class="opt" data-opt="D">(D) 到處說新鄰居的壞話</button>
+    </div>
+    <div class="explain">主動友善地打招呼、介紹社區，能讓新鄰居儘快融入，最能展現敦親睦鄰的精神。</div>
+  </div>
+
+  <div class="question" data-correct="C">
+    <div class="q-text"><span class="q-num">18.</span>「鄰」、「村里」這類地方編組，最主要的作用是下列何者？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 區分居民的貧富</button>
+      <button class="opt" data-opt="B">(B) 限制居民外出</button>
+      <button class="opt" data-opt="C">(C) 方便居民彼此聯絡與服務</button>
+      <button class="opt" data-opt="D">(D) 決定居民的成績</button>
+    </div>
+    <div class="explain">把住在一起的居民編成鄰、村里等單位，能方便彼此聯絡、傳達訊息與提供服務。</div>
+  </div>
+
+  <div class="question" data-correct="A">
+    <div class="q-text"><span class="q-num">19.</span>社區發展協會開辦土風舞、書法等休閒課程供居民參加，這符合協會的哪一項目的？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 提供休閒娛樂</button>
+      <button class="opt" data-opt="B">(B) 向居民徵稅</button>
+      <button class="opt" data-opt="C">(C) 逮捕嫌犯</button>
+      <button class="opt" data-opt="D">(D) 頒布命令</button>
+    </div>
+    <div class="explain">開辦休閒課程能讓居民放鬆身心、增添生活樂趣，符合協會「提供休閒娛樂」的目的。</div>
+  </div>
+
+  <div class="question" data-correct="D">
+    <div class="q-text"><span class="q-num">20.</span>關於敦親睦鄰，下列敘述何者「錯誤」？</div>
+    <div class="options">
+      <button class="opt" data-opt="A">(A) 鄰居間應互相關心、守望相助</button>
+      <button class="opt" data-opt="B">(B) 能讓社區生活更愉快、更安全</button>
+      <button class="opt" data-opt="C">(C) 是和鄰居和睦相處的表現</button>
+      <button class="opt" data-opt="D">(D) 就是不斷打聽並干涉鄰居的隱私</button>
+    </div>
+    <div class="explain">敦親睦鄰重在主動關心、互相幫忙與和睦相處，並不是去打聽或干涉鄰居的隱私。</div>
+  </div>
+
+  <div class="done-msg" id="doneMsg"></div>
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  document.getElementById('total').textContent = questions.length;
+  let answered = 0, correct = 0;
+  questions.forEach(q => {
+    const right = q.dataset.correct;
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        const pick = btn.dataset.opt;
+        if (pick === right) { btn.classList.add('correct'); btn.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); correct++; }
+        else { btn.classList.add('wrong'); btn.insertAdjacentHTML('beforeend','<span class="mark">✗</span>'); const rb=q.querySelector('.opt[data-opt="'+right+'"]'); if(rb){ rb.classList.add('correct'); rb.insertAdjacentHTML('beforeend','<span class="mark">✓</span>'); } }
+        q.querySelectorAll('.opt').forEach(b => b.disabled = true);
+        answered++;
+        document.getElementById('answered').textContent = answered;
+        document.getElementById('correct').textContent = correct;
+        if (answered === questions.length) showDone();
+      });
+    });
   });
-  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
-}
-</script></body></html>
+  function showDone(){ const m=document.getElementById('doneMsg'); const pct=Math.round(correct/questions.length*100); m.textContent='作答完成！答對 '+correct+' / '+questions.length+' 題（'+pct+'分）'; m.style.background=pct>=80?'#e8f5e9':pct>=60?'#fffde7':'#ffebee'; m.style.color=pct>=80?'#2e7d32':pct>=60?'#f57f17':'#c62828'; m.classList.add('show'); }
+  function resetQuiz(){ answered=0; correct=0; document.getElementById('answered').textContent=0; document.getElementById('correct').textContent=0; document.getElementById('doneMsg').classList.remove('show'); questions.forEach(q=>{ q.classList.remove('answered'); q.querySelectorAll('.opt').forEach(b=>{ b.disabled=false; b.classList.remove('correct','wrong'); const mk=b.querySelector('.mark'); if(mk) mk.remove(); }); }); }
+</script>
+</body>
+</html>
