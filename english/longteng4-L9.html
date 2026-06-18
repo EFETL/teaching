@@ -2,335 +2,1117 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L9: To Kill a Mockingbird ── 龍騰高職英文互動教學</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L9: To Kill a Mockingbird ── 梅岡城故事｜龍騰高中英文第四冊</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
 .page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
-.header{background:linear-gradient(135deg,#1abc9c 0%,#16a085 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:.9em;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#134e4a 0%,#0f766e 60%,#14b8a6 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
 .header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
 .header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.9em;font-weight:700}
+
 .section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
-.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
-.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#0f766e;color:#fff}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
 .sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:.92em;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
 .para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
-.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.para-speaker{font-weight:800;font-size:1.05em;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
 .para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
 .para-line:hover{background:#f8fafc}
 .para-line:last-child{border-bottom:none}
 .para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
 .para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
 .para-en .ic.open{transform:rotate(90deg)}
-.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #14b8a6;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
-.para-cn.open{display:block}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:.9em;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:.92em;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:.96em}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:.76em;color:#64748b;margin:0 5px 0 1px}
+.syn-legend{font-size:.82em;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
 .vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
 .v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .v-top:hover{background:#f8fafc}
-.v-word{font-size:1.18em;font-weight:800;color:#0f766e}
+.v-word{font-size:1.18em;font-weight:800;color:#1e40af}
 .v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
 .v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
 .v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
 .v-ic.open{transform:rotate(90deg)}
 .v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
 .v-body.open{display:block}
-.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #14b8a6;padding-left:10px;line-height:1.65}
+.v-fam{margin-top:10px;font-size:.9em;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
 .v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
-.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
-.phrase-table th{background:#f0fdfa;padding:10px 13px;text-align:left;font-weight:700;color:#0f766e;border-bottom:2px solid #99f6e4}
-.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
-.phrase-table tr:nth-child(even) td{background:#f8fafc}
-.phr{font-weight:700;color:#0f766e}
+.v-gsat{margin-top:9px;font-size:.85em;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:.95em}
+.pex .cn{display:block;color:#94a3b8;font-size:.92em;margin-top:2px}
+
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:1.05em}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:.8em;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:.95em;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:.97em;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:.92em;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:.93em;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:.93em;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:.93em;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
 .q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
 .q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
-.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#0f766e}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
 .q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:.94em;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
 .q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
 .choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
 .choice:hover{border-color:#94a3b8;background:#f1f5f9}
-.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent}
 .choice.correct{border-color:#16a34a;background:#f0fdf4}
 .choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
 .choice.wrong{border-color:#dc2626;background:#fef2f2}
 .choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
 .q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
 .q-ans.open{display:block}
-.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#0f766e}
-.ans-cn{font-size:.94em;color:#374151;line-height:1.7}
-footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
-@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:1em;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:.95em;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:1.02em}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:1em;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:13px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#134e4a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .q-ans,.g-body,.v-body,.para-exp{display:block!important}
+  .v-ic,.g-arrow,.para-en .ic,.show-btn,.sec-hint,.header-nav{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="page">
-<div class="header">
-  <h1>💚 L9: To Kill a Mockingbird</h1>
-  <p class="sub">龍騰高職英文 — 互動教學</p>
-</div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
-  <div class="sec-body">
-    <div class="para">
-      <div class="para-head">Paragraph 1-4</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>"Remember it's a sin to kill a mockingbird," Atticus said, believing that mockingbirds were harmless and did nothing but sing their hearts out for people to enjoy. In the town of Maycomb, Alabama, in the 1930s, there lived a little girl, Scout Finch, her older brother, Jem, and their widowed father, Atticus. Their father, a well-respected lawyer in the community, taught them to be empathetic and just. When Scout was in second grade, Atticus was appointed to defend Tom Robinson, a black man accused of sexually assaulting Mayella Ewell.</span>
-        </div>
-        <div class="para-cn">「記住，殺死仿聲鳥是罪過，」阿迪克斯說，他相信仿聲鳥是無害的，只是盡情歌唱供人們享受。1930 年代在阿拉巴馬州的梅科姆鎮，住著一個小女孩 Scout Finch，她的哥哥 Jem，和他們喪偶的父親阿迪克斯。他們的父親是社區中受人尊敬的律師，教他們同理心和正義。當 Scout 上二年級時，阿迪克斯被指派為被控性侵 Mayella Ewell 的黑人 Tom Robinson 進行辯護。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 5-9</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>Mayella Ewell came from Maycomb's poorest white family, and her father was a widowed drunkard who wasted all his money on alcohol instead of food for his hungry children. All the other people in Maycomb despised the Ewells. Even so, when people found out that Atticus was the man assigned to serve as the defense lawyer in this sexual assault case, they were on the Ewells' side. The Finches faced criticism from the community and even their own relatives. People called Atticus a "nigger-lover," which angered Jem and Scout.</span>
-        </div>
-        <div class="para-cn">Mayella Ewell 來自梅科姆最窮的白人家庭，她的父親是個喪偶的酒鬼，把他所有的錢都浪費在酒上，而不是買食物給他的飢餓孩子。梅科姆鎮的所有其他人都鄙視 Ewell 一家。即使如此，當人們發現阿迪克斯是被指派為這樁性侵案進行辯護的律師時，他們都站在 Ewell 一家那邊。Finch 一家面臨社區甚至他們自己親戚的批評。人們叫阿迪克斯「黑鬼情人，」這激怒了 Jem 和 Scout。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 10-15</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>Atticus comforted them, telling them a lawyer should stand up for the rights of people regardless of their skin color, and he encouraged them to hold their heads up and keep their fists down. On the day of the trial, the courthouse was packed, and Jem and Scout secretly slipped in to watch. The Ewells' story was that Mayella had asked Tom to come over to fix something. While there, Tom beat and sexually assaulted Mayella until Mr. Ewell came home, scaring Tom off. However, Tom's version of the story was that Mayella came on to him and kissed him, and he pushed her away.</span>
-        </div>
-        <div class="para-cn">阿迪克斯安慰了他們，告訴他們律師應該為人民的權利辯護，無論他們的膚色如何，他鼓勵他們抬起頭來並保持雙拳不動。審判當天，法院擠滿了人，Jem 和 Scout 偷偷溜進去旁聽。Ewell 一家的故事是 Mayella 請 Tom 來修理東西。在那裡，Tom 毆打並性侵了 Mayella，直到 Ewell 先生回家，把 Tom 嚇跑了。然而，Tom 的版本是 Mayella 對他賣弄風情並吻了他，他把她推開了。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 16-21</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>At just that moment, Mr. Ewell arrived home and flew into a rage. Mr. Ewell yelled at Mayella, and she ran away out of fear. After hearing both sides' testimonies, the sheriff of Maycomb pointed out that Mayella's bruises were on the right side of her face. Upon hearing this, the audience in the courtroom realized that her injuries must have been caused by somebody left-handed. They also noticed that Tom's left arm had been injured in an accident, which meant he must have been innocent of giving Mayella her bruises. Meanwhile, Atticus asked Mr. Ewell to write his name. To the audience's surprise, he instinctively used his left hand.</span>
-        </div>
-        <div class="para-cn">就在那一刻，Ewell 先生回到家並突然大發脾氣。Ewell 先生對 Mayella 大聲喝斥，她出於恐懼跑開了。聽了雙方的證詞後，梅科姆警長指出 Mayella 的擦傷在她臉的右側。聽到這一點，法院中的觀眾意識到她的傷害必定是由左撇子造成的。他們還注意到 Tom 的左臂在一次事故中受傷，這意味著他必定無罪給 Mayella 留下她的擦傷。同時，阿迪克斯請 Ewell 先生寫他的名字。令觀眾驚訝的是，他本能地使用了他的左手。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 22-27</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>Therefore, the injuries could only have been done by Mr. Ewell himself, and the Ewells must have been lying to protect their reputation. Despite the strong evidence, Tom was found guilty by the all-white jury and sent to prison. Feeling great despair for his future in a white-dominated legal system, Tom tried to escape from prison but was shot to death. Jem and Scout, who had watched the entire trial, had high hopes that Tom would be found innocent. They were devastated by the injustice of Tom's heartbreaking fate. Atticus explained that most people make sensible and moral decisions in everyday life, but when race is involved, they tend to be swayed by the person's skin color, turning into someone unrecognizable.</span>
-        </div>
-        <div class="para-cn">因此，傷害只能是 Ewell 先生自己造成的，Ewell 一家必定在說謊以保護他們的聲譽。儘管有強有力的證據，Tom 被全白人陪審團判定有罪並被送進監獄。由於對自己在白人主宰的法律體系中的未來感到絕望，Tom 試圖從監獄逃脫，但被槍殺。看過整個審判過程的 Jem 和 Scout 滿懷希望 Tom 將被判無罪。他們對 Tom 令人心碎命運的不公正感到心碎。阿迪克斯解釋說，大多數人在日常生活中做出明智和道德的決定，但當涉及種族時，他們傾向於被該人的膚色所動搖，變成了一個認不出的人。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 28-30</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>Nevertheless, for Maycomb, a glimmer of hope remained. Atticus noted that the jury had spent a few hours deliberating the verdict. This was an encouraging sign because usually a jury would require only a few minutes to find a black person guilty. This delay in the verdict meant that at least one member of the jury must have believed in Tom's innocence. Therefore, although the guilty verdict could not really be considered a victory, the delay definitely represented progress and positive change.</span>
-        </div>
-        <div class="para-cn">儘管如此，梅科姆還留有一絲希望。阿迪克斯指出陪審團花了幾個小時來商議判決。這是一個令人鼓舞的信號，因為通常陪審團只需幾分鐘就能判定黑人有罪。判決的延遲意味著陪審團至少有一名成員必定相信 Tom 的無罪。因此，儘管有罪判決不能真正被視為勝利，但延遲肯定代表了進步和積極的變化。</div>
-      </div>
-    </div>
+
+<!-- HEADER -->
+<div class="header" style="background:linear-gradient(135deg,#134e4a 0%,#0f766e 60%,#14b8a6 100%)">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L9: To Kill a Mockingbird ── 梅岡城故事</h1>
+  <div class="sub">龍騰高中版英文 第四冊 第九課｜互動教學講義</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 12</span>
+    <span class="tag">🔗 片語 × 10</span>
+    <span class="tag">📐 文法句型 × 3</span>
+    <span class="tag">✏️ 練習題 × 8</span>
   </div>
 </div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+
+<!-- SECTION 1: 課文逐句精講 -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">📖</div>
+    課文逐句精講
+  </div>
   <div class="sec-body">
+    <div class="syn-legend">
+      句型標色說明：
+      <span class="syn syn-s">S 主詞</span>
+      <span class="syn syn-v">V 動詞</span>
+      <span class="syn syn-o">O 受詞</span>
+      <span class="syn syn-c">C 補語</span>
+      <span class="syn syn-m">M 修飾語</span>
+      ── 點擊每句可展開中譯與解析
+    </div>
+
+    <!-- Para 1 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">第一段：名言引用與故事背景</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span>"Remember it's a sin to kill a mockingbird," <span class="syn syn-s">Atticus</span> <span class="syn syn-v">said</span>, <span class="syn syn-m">believing that mockingbirds were harmless and did nothing but sing their hearts out for people to enjoy</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">「記住，殺死一隻嘲鶇是一種罪過，」阿提克斯說道，他相信嘲鶇無害，除了盡情歌唱讓人欣賞之外什麼壞事也沒做。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">Atticus</span><span class="syn-t">S</span>
+            <span class="syn syn-v">said</span><span class="syn-t">V</span>
+            <span class="syn syn-m">believing that...（現在分詞構句，表伴隨狀態/原因）</span>
+          </div>
+          <div class="para-note"><b>do nothing but + V原形</b>：只做某事，除了…之外什麼都不做。<br><b>sin (n.)</b> 罪過；<b>harmless (adj.)</b> 無害的；<b>mockingbird</b> 嘲鶇（北美益鳥，全書象徵無辜者）。<br><b>sing one's heart out</b>：盡情歌唱（課文核心片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">In the town of Maycomb, Alabama, in the 1930s,</span> <span class="syn syn-v">there lived</span> <span class="syn syn-s">a little girl, Scout Finch, her older brother, Jem, and their widowed father, Atticus</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">在1930年代的阿拉巴馬州梅岡城，住著一個小女孩史考特．芬奇、她的哥哥傑姆，以及他們喪偶的父親阿提克斯。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析（地方副詞倒裝句）</span>
+            <span class="syn syn-m">In the town of Maycomb...</span><span class="syn-t">M（地方副詞片語置句首→主動倒裝）</span><br>
+            <span class="syn syn-v">there lived</span><span class="syn-t">V（倒裝）</span>
+            <span class="syn syn-s">a little girl...</span><span class="syn-t">S（後置）</span>
+          </div>
+          <div class="para-note"><b>地方副詞倒裝</b>：地方副詞片語置於句首時，主詞與動詞倒裝（there + V + S）。<br><b>widowed (adj.)</b> 喪偶的；<b>widow (n.)</b> 寡婦；<b>widower (n.)</b> 鰥夫。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">Their father, a well-respected lawyer in the community,</span> <span class="syn syn-v">taught</span> <span class="syn syn-o">them</span> <span class="syn syn-c">to be empathetic and just</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">他們的父親是社區中備受尊重的律師，教導他們要有同理心且公正。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析（SVOC）</span>
+            <span class="syn syn-s">Their father</span><span class="syn-t">S</span>（a well-respected lawyer in the community：同位語）
+            <span class="syn syn-v">taught</span><span class="syn-t">V</span>
+            <span class="syn syn-o">them</span><span class="syn-t">O</span>
+            <span class="syn syn-c">to be empathetic and just</span><span class="syn-t">C（不定詞片語）</span>
+          </div>
+          <div class="para-note"><b>teach sb. to V</b>：教某人做某事（SVOC句型）。<br><b>empathetic (adj.)</b> 有同理心的；名詞 <b>empathy (n.)</b> 同理心。<br><b>just (adj.)</b> 此處意為「公正的」，非「只是」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">When Scout was in second grade,</span> <span class="syn syn-s">Atticus</span> <span class="syn syn-v">was appointed</span> <span class="syn syn-c">to defend Tom Robinson</span>, <span class="syn syn-m">a black man accused of sexually assaulting Mayella Ewell</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">當史考特讀二年級時，阿提克斯被指派為湯姆．魯賓遜辯護，那是一名被控性侵梅耶拉．尤爾的黑人男子。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析（被動語態）</span>
+            <span class="syn syn-m">When Scout was in second grade</span><span class="syn-t">M（時間副詞子句）</span><br>
+            <span class="syn syn-s">Atticus</span><span class="syn-t">S</span>
+            <span class="syn syn-v">was appointed</span><span class="syn-t">V（被動）</span>
+            <span class="syn syn-c">to defend Tom Robinson</span><span class="syn-t">（不定詞片語）</span>
+          </div>
+          <div class="para-note"><b>be appointed to + V</b>：被指派做…（固定句型）。<br><b>accuse sb. of + N/V-ing</b>：控告某人…（介系詞必須用 of！學測必考）。<br><b>Tom Robinson, a black man accused of...</b>：同位語 + 分詞片語。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 2 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">第二段：社會偏見與家庭壓力</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">Mayella Ewell</span> <span class="syn syn-v">came</span> <span class="syn syn-m">from Maycomb's poorest white family</span>, and <span class="syn syn-s">her father</span> <span class="syn syn-v">was</span> <span class="syn syn-c">a widowed drunkard who wasted all his money on alcohol instead of food for his hungry children</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">梅耶拉．尤爾來自梅岡城最窮困的白人家庭，她父親是個喪偶的酒鬼，把所有錢花在酒上，而不是買食物給飢餓的孩子們。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心片語</span>
+            <b>instead of + N/V-ing</b>：而不是…（介系詞，後接名詞或動名詞，不接子句）<br>
+            <b>who wasted...</b>：限定性關係子句，修飾 drunkard
+          </div>
+          <div class="para-note"><b>instead (adv.)</b> 單獨使用；<b>instead of (prep.)</b> 後接名詞/動名詞。<br>例：He stayed home instead of going out.（他待在家裡，而不是出去）</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">All the other people in Maycomb</span> <span class="syn syn-v">despised</span> <span class="syn syn-o">the Ewells</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">梅岡城其他所有居民都鄙視尤爾一家。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析（SVO）</span>
+            <span class="syn syn-s">All the other people in Maycomb</span><span class="syn-t">S</span>
+            <span class="syn syn-v">despised</span><span class="syn-t">V</span>
+            <span class="syn syn-o">the Ewells</span><span class="syn-t">O</span>
+          </div>
+          <div class="para-note"><b>despise (v.)</b> 鄙視（強烈輕蔑，語氣遠強於 dislike）。<br>近義：look down on、scorn、contemn。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Even so,</span> <span class="syn syn-m">when people found out that Atticus was the man assigned to serve as the defense lawyer in this sexual assault case,</span> <span class="syn syn-s">they</span> <span class="syn syn-v">were</span> <span class="syn syn-m">on the Ewells' side</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">即便如此，當人們發現阿提克斯是被指派在這個性侵案中擔任辯護律師的人，他們還是站在尤爾一家那邊。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心片語</span>
+            <b>even so</b>：即便如此（句首轉折副詞）<br>
+            <b>be on sb's side</b>：站在某人那邊（課文核心片語）<br>
+            <b>be assigned to + V</b>：被指派做某事（被動語態）
+          </div>
+          <div class="para-note">種族偏見的核心矛盾：雖然尤爾一家地位低下，但白人社會因種族偏見仍支持白人而非黑人。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">The Finches</span> <span class="syn syn-v">faced</span> <span class="syn syn-o">criticism from the community and even their own relatives</span>. <span class="syn syn-s">People</span> <span class="syn syn-v">called</span> <span class="syn syn-o">Atticus</span> <span class="syn syn-c">a "nigger-lover,"</span> which <span class="syn syn-v">angered</span> <span class="syn syn-o">Jem and Scout</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">芬奇一家面臨來自社區甚至自家親戚的批評。人們稱阿提克斯為「黑鬼的朋友」，這激怒了傑姆和史考特。</div>
+          <div class="para-syntax">
+            <span class="lbl">關係代名詞 which</span>
+            <b>which</b>：非限定關係代名詞，代替前整句（人們這樣稱呼阿提克斯這件事）
+          </div>
+          <div class="para-note"><b>criticism (n.)</b> 批評（不可數名詞）；<b>criticize (v.)</b>；<b>critical (adj.)</b>。<br><b>face criticism</b>：面臨批評（常見搭配）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">Atticus</span> <span class="syn syn-v">comforted</span> <span class="syn syn-o">them</span>, <span class="syn syn-m">telling them a lawyer should stand up for the rights of people regardless of their skin color</span>, and <span class="syn syn-s">he</span> <span class="syn syn-v">encouraged</span> <span class="syn syn-o">them</span> <span class="syn syn-c">to hold their heads up and keep their fists down</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">阿提克斯安慰他們，告訴他們律師應該維護人們的權利，不論膚色為何；他也鼓勵他們昂首挺胸，克制衝動不動武。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心片語彙整</span>
+            <b>stand up for</b>：支持；維護（人或權利）<br>
+            <b>regardless of</b>：不論…（後接名詞，文法重點！）<br>
+            <b>hold one's head up</b>：保持自信、昂首挺胸<br>
+            <b>keep one's fists down</b>：忍住不動拳頭
+          </div>
+          <div class="para-note"><b>comfort (v./n.)</b> 安慰；<b>comfortable (adj.)</b> 舒適的（注意詞形）。<br><b>regardless of</b> 詳見第四節文法講解。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 3 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">第三段：法庭審判與雙方證詞</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">On the day of the trial,</span> <span class="syn syn-s">the courthouse</span> <span class="syn syn-v">was packed</span>, and <span class="syn syn-s">Jem and Scout</span> <span class="syn syn-v">secretly slipped in</span> <span class="syn syn-c">to watch</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">審判當天，法院擠滿了人，傑姆和史考特悄悄溜進去旁聽。</div>
+          <div class="para-syntax">
+            <span class="lbl">字彙解析</span>
+            <b>be packed</b>：擠滿了（= be crowded with people）<br>
+            <b>slip in</b>：悄悄溜進；<b>slip (v.)</b> 滑動；悄悄移動
+          </div>
+          <div class="para-note"><b>courthouse (n.)</b> 法院大樓；<b>trial (n.)</b> 審判；<b>try (v.)</b> 審判某人（法律用語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">The Ewells' story</span> <span class="syn syn-v">was</span> that Mayella had asked Tom to come over to fix something. <span class="syn syn-m">While there,</span> Tom beat and sexually assaulted Mayella until Mr. Ewell came home, <span class="syn syn-m">scaring Tom off</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">尤爾家的說法是：梅耶拉請湯姆過來修東西。就在那時，湯姆毆打並性侵了梅耶拉，直到尤爾先生回家，把湯姆嚇跑了。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心片語</span>
+            <b>scare sb. off</b>：把某人嚇跑（課文核心片語）<br>
+            <b>while there</b>：= while he was there（省略「主詞 + be動詞」的副詞子句）
+          </div>
+          <div class="para-note">此段為尤爾一家的「版本」，為後文反駁設下伏筆。<br>注意 <b>until</b> 引導時間副詞子句：「…直到…」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">However,</span> <span class="syn syn-s">Tom's version of the story</span> <span class="syn syn-v">was</span> that Mayella came on to him and kissed him, and <span class="syn syn-s">he</span> <span class="syn syn-v">pushed</span> her <span class="syn syn-m">away</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">然而，湯姆的說法是：梅耶拉主動接近並親吻了他，而他則把她推開了。</div>
+          <div class="para-syntax">
+            <span class="lbl">片語解析</span>
+            <b>come on to sb.</b>：向某人示好；主動挑逗<br>
+            <b>push... away</b>：推開；拒絕
+          </div>
+          <div class="para-note"><b>however</b>：轉折副詞（不是連接詞！），前句需用句號或分號，不可像 but 一樣直接連接兩個子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">At just that moment,</span> <span class="syn syn-s">Mr. Ewell</span> <span class="syn syn-v">arrived home</span> and <span class="syn syn-v">flew into a rage</span>. <span class="syn syn-s">Mr. Ewell</span> <span class="syn syn-v">yelled at</span> <span class="syn syn-o">Mayella</span>, and <span class="syn syn-s">she</span> <span class="syn syn-v">ran away</span> <span class="syn syn-m">out of fear</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">就在那一刻，尤爾先生到家，勃然大怒。尤爾先生對梅耶拉咆哮，她則出於恐懼而逃跑了。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心片語</span>
+            <b>fly into a rage</b>：勃然大怒（慣用語，fly 用過去式 flew）<br>
+            <b>out of fear</b>：出於恐懼（課文核心片語）
+          </div>
+          <div class="para-note"><b>out of + 情緒名詞</b>：表動機/原因。<br>如：out of curiosity（出於好奇）、out of love（出於愛）、out of jealousy（出於嫉妒）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 4 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">第四段：關鍵證據 ── 左手謎題</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">After hearing both sides' testimonies,</span> <span class="syn syn-s">the sheriff of Maycomb</span> <span class="syn syn-v">pointed out</span> that <span class="syn syn-s">Mayella's bruises</span> <span class="syn syn-v">were</span> <span class="syn syn-m">on the right side of her face</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">聽完雙方證詞後，梅岡城的警長指出，梅耶拉的瘀傷在她臉的右側。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <b>point out (that...)</b>：指出（某事）<br>
+            <span class="syn syn-m">After hearing...</span>：分詞構句（= After the audience heard...）
+          </div>
+          <div class="para-note"><b>bruise (n.)</b> 瘀傷、擦傷；<b>testimony (n.)</b> 證詞；<b>sheriff (n.)</b> 警長。<br>臉的右側被打 → 施暴者的左手正好打到右臉 → 兇手是慣用左手的人。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Upon hearing this,</span> <span class="syn syn-s">the audience in the courtroom</span> <span class="syn syn-v">realized</span> that <span class="syn syn-s">her injuries</span> <span class="syn syn-v">must have been caused</span> <span class="syn syn-m">by somebody left-handed</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">聽到這個消息，法庭旁聽席上的聽眾意識到，她的傷必定是某個慣用左手的人造成的。</div>
+          <div class="para-syntax">
+            <span class="lbl">文法重點（學測必考）</span>
+            <b>must have + p.p.</b>：對過去的肯定推測「一定曾經…」<br>
+            <b>must have been caused</b>：被動式 + 情態推測（must have been + p.p.）
+          </div>
+          <div class="para-note"><b>must have + p.p.</b> 詳見第四節文法講解。此為本課最重要的推論語法句型。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">They</span> also <span class="syn syn-v">noticed</span> that <span class="syn syn-s">Tom's left arm</span> <span class="syn syn-v">had been injured</span> <span class="syn syn-m">in an accident</span>, which meant <span class="syn syn-s">he</span> <span class="syn syn-v">must have been</span> <span class="syn syn-c">innocent</span> of giving Mayella her bruises.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">他們也注意到湯姆的左手臂曾在意外中受傷，這意味著他打傷梅耶拉一事必定是清白的。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <b>be innocent of</b>：對…是清白的（固定搭配）<br>
+            <b>which</b>：非限定關係代名詞，代整個前句
+          </div>
+          <div class="para-note"><b>innocent (adj.)</b> 無罪的；<b>innocence (n.)</b> 清白；反義：<b>guilty (adj.)</b> 有罪的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Meanwhile,</span> <span class="syn syn-s">Atticus</span> <span class="syn syn-v">asked</span> <span class="syn syn-o">Mr. Ewell</span> <span class="syn syn-c">to write his name</span>. <span class="syn syn-m">To the audience's surprise,</span> <span class="syn syn-s">he</span> <span class="syn syn-v">instinctively used</span> <span class="syn syn-o">his left hand</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">與此同時，阿提克斯請尤爾先生寫下他的名字。令旁聽席上的人感到驚訝的是，他本能地用了左手。</div>
+          <div class="para-syntax">
+            <span class="lbl">慣用句型</span>
+            <b>To one's surprise</b>：令某人驚訝的是（置句首，後接逗號）<br>
+            <b>instinctively (adv.)</b>：本能地（修飾動詞）
+          </div>
+          <div class="para-note"><b>instinctively (adv.)</b>；<b>instinctive (adj.)</b>；<b>instinct (n.)</b> 本能。<br>同類：To one's surprise / amazement / disappointment / relief。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Therefore,</span> <span class="syn syn-s">the injuries</span> <span class="syn syn-v">could only have been done</span> <span class="syn syn-m">by Mr. Ewell himself</span>, and <span class="syn syn-s">the Ewells</span> <span class="syn syn-v">must have been lying</span> <span class="syn syn-c">to protect their reputation</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">因此，那些傷只可能是尤爾先生自己造成的，而尤爾一家必定是為了保護名聲而說謊。</div>
+          <div class="para-syntax">
+            <span class="lbl">情態動詞推論文法</span>
+            <b>could only have been done</b>：只可能曾被…（情態動詞 + have + p.p. 對過去推論）<br>
+            <b>must have been lying</b>：must have + been + V-ing（過去進行狀態的推測）
+          </div>
+          <div class="para-note"><b>reputation (n.)</b> 名聲、聲譽；<b>protect one's reputation</b> 保護名聲。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 5 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">第五段：不公正的判決與悲劇結局</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Despite the strong evidence,</span> <span class="syn syn-s">Tom</span> <span class="syn syn-v">was found</span> <span class="syn syn-c">guilty</span> <span class="syn syn-m">by the all-white jury</span> and <span class="syn syn-v">sent to prison</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">儘管有確鑿證據，湯姆仍被全白人陪審團判定有罪，送進了監獄。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心片語</span>
+            <b>find sb. guilty/innocent</b>：判定某人有罪/無罪（課文核心片語）<br>
+            <span class="syn syn-m">Despite + N</span>：儘管（介系詞，後接名詞/動名詞，不接子句！≠ although 接子句）
+          </div>
+          <div class="para-note"><b>jury (n.)</b> 陪審團（集合名詞）；<b>all-white jury</b> 清一色白人陪審團（種族歧視象徵）。<br><b>despite vs. although</b>：despite 後接名詞，although 後接子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Feeling great despair for his future in a white-dominated legal system,</span> <span class="syn syn-s">Tom</span> <span class="syn syn-v">tried to escape from prison</span> but <span class="syn syn-v">was shot to death</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">因為對自己在白人主導的司法體系中的未來感到極度絕望，湯姆試圖越獄，卻被槍殺身亡。</div>
+          <div class="para-syntax">
+            <span class="lbl">分詞構句</span>
+            <b>Feeling great despair...</b>：現在分詞構句，說明 Tom 行動的原因（因為感到絕望）
+          </div>
+          <div class="para-note"><b>despair (n./v.)</b> 絕望；<b>in despair</b> 在絕望之中；<b>be shot to death</b> 被槍殺身亡（被動）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">Jem and Scout, who had watched the entire trial,</span> <span class="syn syn-v">had high hopes</span> that Tom would be found innocent. <span class="syn syn-s">They</span> <span class="syn syn-v">were devastated</span> <span class="syn syn-m">by the injustice of Tom's heartbreaking fate</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">親眼目睹整場審判的傑姆和史考特，原本對湯姆被判無罪抱有很高的期望。他們對於湯姆令人心碎的不公正命運感到萬分痛苦。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心字彙</span>
+            <b>devastate (v.)</b>：使崩潰；使心碎（情緒上的毀滅性打擊）<br>
+            <b>injustice (n.)</b>：不公正；不義（justice 的反義，in- 否定前綴）
+          </div>
+          <div class="para-note"><b>be devastated by</b>：被…毀滅性打擊（常用被動式）。<br><b>heartbreaking (adj.)</b> 令人心碎的；<b>heartbroken (adj.)</b> 心碎的（人的感受）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 6 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">第六段：阿提克斯的省思與一絲希望</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">Atticus</span> <span class="syn syn-v">explained</span> that most people make sensible and moral decisions in everyday life, but <span class="syn syn-m">when race is involved,</span> <span class="syn syn-s">they</span> <span class="syn syn-v">tend to be swayed</span> <span class="syn syn-m">by the person's skin color</span>, turning into someone unrecognizable.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">阿提克斯解釋說，大多數人在日常生活中能做出明智且符合道德的決定，但一旦涉及種族問題，他們往往會被對方的膚色所左右，變成令人認不出來的人。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心字彙與片語</span>
+            <b>be swayed by</b>：被…所影響／左右（課文核心片語）<br>
+            <b>sensible (adj.)</b>：明智的（≠ sensitive 敏感的，學測易混淆！）<br>
+            <b>tend to + V</b>：傾向於；往往會
+          </div>
+          <div class="para-note"><b>sensible vs. sensitive</b>：<br>sensible = 明智理性的（making good judgments）<br>sensitive = 敏感情緒化的（easily affected by feelings）<br>這是學測超高頻易混淆詞！</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Nevertheless,</span> <span class="syn syn-m">for Maycomb,</span> <span class="syn syn-s">a glimmer of hope</span> <span class="syn syn-v">remained</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">儘管如此，對梅岡城而言，仍留有一絲希望。</div>
+          <div class="para-syntax">
+            <span class="lbl">字彙解析</span>
+            <b>a glimmer of hope</b>：一絲希望（課文核心片語）<br>
+            <b>nevertheless</b>：儘管如此（正式副詞連接詞，≈ however，語氣更強）
+          </div>
+          <div class="para-note"><b>glimmer (n.)</b> 微光；一絲。<b>a glimmer of + N</b>：一絲…（常接抽象名詞 hope, light, truth）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-s">Atticus</span> <span class="syn syn-v">noted</span> that <span class="syn syn-s">the jury</span> <span class="syn syn-v">had spent</span> <span class="syn syn-o">a few hours</span> <span class="syn syn-c">deliberating the verdict</span>. <span class="syn syn-s">This</span> <span class="syn syn-v">was</span> <span class="syn syn-c">an encouraging sign</span> because usually a jury would require only a few minutes to find a black person guilty.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">阿提克斯注意到，陪審團花了幾個小時商議判決。這是個令人鼓舞的跡象，因為通常陪審團只需要幾分鐘就會判定一個黑人有罪。</div>
+          <div class="para-syntax">
+            <span class="lbl">核心字彙</span>
+            <b>deliberate (v.)</b>：仔細考慮；商議（此處為動詞）<br>
+            <b>verdict (n.)</b>：判決（陪審團的最終裁定）
+          </div>
+          <div class="para-note"><b>deliberate</b> 的雙重詞性：<br>deliberate <b>(adj.)</b> [重音第一音節] = 故意的（a deliberate act）<br>deliberate <b>(v.)</b> [重音第二音節] = 商議（deliberate on/about sth.）</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>
+          <span><span class="syn syn-m">Therefore, although the guilty verdict could not really be considered a victory,</span> <span class="syn syn-s">the delay</span> <span class="syn syn-v">definitely represented</span> <span class="syn syn-o">progress and positive change</span>.</span>
+        </div>
+        <div class="para-exp">
+          <div class="para-cn">因此，雖然有罪判決不能真正算作勝利，但這次的延遲無疑代表著進步與正向的改變。</div>
+          <div class="para-syntax">
+            <span class="lbl">文法重點（although 讓步結構）</span>
+            <b>although</b>...（讓步副詞子句）→ 主句（隱含轉折）<br>
+            ⚠ although 與 but 不可同時出現！（本課文法句型③的重點）
+          </div>
+          <div class="para-note"><b>victory (n.)</b> 勝利；<b>progress (n./v.)</b> 進步。<br>本段點明主旨：儘管結局悲劇，社會仍在緩慢進步，嘲鶇的象徵精神延續。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 2: 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head">
+    <div class="sec-icon">📝</div>
+    核心字彙 × 12
+  </div>
+  <div class="sec-body">
+    <div class="sec-hint">點擊字卡展開字族、例句與學測提示；點發音鈕聆聽正確發音。</div>
     <div class="vocab-grid">
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">sin <span class="v-pos">n.</span></div><div class="v-cn-mini">罪過；罪惡</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">empathy</span><span class="v-pos">n.</span></div><div class="v-cn-mini">同理心</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> It is a sin to waste food.
-            <div class="cn">浪費食物是罪過。</div></div>
+          <div class="v-fam"><span>empathize (v.) 感同身受</span><span>empathetic (adj.) 有同理心的</span></div>
+          <div class="v-ex">Atticus taught his children empathy — to understand others from their perspective.
+            <span class="cn">阿提克斯教導孩子同理心──從他人角度去理解。</span></div>
+          <div class="v-gsat">學測：empathy（感同身受）↔ sympathy（表面同情）；兩者含義不同！</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">empathetic <span class="v-pos">adj.</span></div><div class="v-cn-mini">具同理心的</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">appoint</span><span class="v-pos">v.</span></div><div class="v-cn-mini">指派；任命</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> An empathetic person understands others' feelings.
-            <div class="cn">具有同理心的人理解他人的感受。</div></div>
+          <div class="v-fam"><span>appointment (n.) 任命；預約</span><span>appointed (adj.) 指定的</span></div>
+          <div class="v-ex">The judge appointed Atticus to defend Tom Robinson.
+            <span class="cn">法官指派阿提克斯為湯姆辯護。</span></div>
+          <div class="v-gsat">學測：appoint sb. to + V（固定句型）；be appointed as + 職稱。</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">defend <span class="v-pos">v.</span></div><div class="v-cn-mini">為…辯護</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">defend</span><span class="v-pos">v.</span></div><div class="v-cn-mini">辯護；防衛</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The lawyer defended his client in court.
-            <div class="cn">律師在法庭上為他的當事人辯護。</div></div>
+          <div class="v-fam"><span>defense (n.) 辯護；防禦</span><span>defender (n.) 辯護人</span><span>defensive (adj.) 防禦性的</span></div>
+          <div class="v-ex">A good lawyer must defend their client no matter what others think.
+            <span class="cn">好律師必須為當事人辯護，無論他人怎麼想。</span></div>
+          <div class="v-gsat">學測：defend sb. against/from（保護某人免於…）</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">despise <span class="v-pos">v.</span></div><div class="v-cn-mini">鄙視；蔑視</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">accuse</span><span class="v-pos">v.</span></div><div class="v-cn-mini">指控；控告</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> I despise dishonesty.
-            <div class="cn">我鄙視不誠實。</div></div>
+          <div class="v-fam"><span>accusation (n.) 指控</span><span>accused (n./adj.) 被告；被控的</span></div>
+          <div class="v-ex">Tom Robinson was accused of assaulting Mayella, but evidence proved otherwise.
+            <span class="cn">湯姆被指控傷害梅耶拉，但證據顯示並非如此。</span></div>
+          <div class="v-gsat">學測必考：accuse sb. of + N/V-ing（介系詞一定是 of！）</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">assault <span class="v-pos">n./v.</span></div><div class="v-cn-mini">攻擊；侵犯</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">despise</span><span class="v-pos">v.</span></div><div class="v-cn-mini">鄙視；看不起</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The assault left many people injured.
-            <div class="cn">這次攻擊導致許多人受傷。</div></div>
+          <div class="v-fam"><span>despicable (adj.) 可鄙的</span><span>contempt (n.) 輕蔑（近義）</span></div>
+          <div class="v-ex">The townspeople despised the Ewells for their laziness and dishonesty.
+            <span class="cn">鎮民因尤爾一家的懶惰和不誠實而鄙視他們。</span></div>
+          <div class="v-gsat">學測：despise 語氣最強（強烈輕視），比 dislike 強烈得多。</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">rage <span class="v-pos">n.</span></div><div class="v-cn-mini">憤怒；狂怒</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">criticism</span><span class="v-pos">n.</span></div><div class="v-cn-mini">批評；批判</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> He was filled with rage.
-            <div class="cn">他充滿了憤怒。</div></div>
+          <div class="v-fam"><span>criticize (v.) 批評</span><span>critic (n.) 評論家</span><span>critical (adj.) 批判的；關鍵的</span></div>
+          <div class="v-ex">Atticus faced harsh criticism from neighbors for defending a Black man.
+            <span class="cn">阿提克斯因為為一名黑人辯護而遭受鄰居的嚴厲批評。</span></div>
+          <div class="v-gsat">學測：criticism 不可數；criticize sb. for + V-ing（固定搭配）。</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">verdict <span class="v-pos">n.</span></div><div class="v-cn-mini">判決；裁定</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">comfort</span><span class="v-pos">v./n.</span></div><div class="v-cn-mini">安慰；舒適</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The jury announced their verdict.
-            <div class="cn">陪審團宣布了他們的判決。</div></div>
+          <div class="v-fam"><span>comfortable (adj.) 舒適的</span><span>comforting (adj.) 令人安慰的</span><span>discomfort (n.) 不適</span></div>
+          <div class="v-ex">Atticus comforted his children after they were mocked by neighbors.
+            <span class="cn">阿提克斯在孩子們被鄰居嘲弄後安慰了他們。</span></div>
+          <div class="v-gsat">學測：comfort 兼作動詞與名詞；comfortable 是最常考的延伸形。</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">innocence <span class="v-pos">n.</span></div><div class="v-cn-mini">無罪；天真</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">verdict</span><span class="v-pos">n.</span></div><div class="v-cn-mini">判決；裁定</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The defendant maintained his innocence.
-            <div class="cn">被告堅持他的無罪。</div></div>
+          <div class="v-fam"><span>reach a verdict 達成判決</span><span>deliver/return a verdict 宣判</span></div>
+          <div class="v-ex">The jury took several hours before returning a guilty verdict.
+            <span class="cn">陪審團花了好幾個小時才做出有罪的判決。</span></div>
+          <div class="v-gsat">學測：verdict 專指陪審團的裁決；judgment 泛指法官或一般裁定。</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">injustice <span class="v-pos">n.</span></div><div class="v-cn-mini">不公正；不公平</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">innocent</span><span class="v-pos">adj.</span></div><div class="v-cn-mini">無罪的；清白的</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The injustice of the situation angered everyone.
-            <div class="cn">這種情況的不公正激怒了每個人。</div></div>
+          <div class="v-fam"><span>innocence (n.) 清白</span><span>innocently (adv.) 無辜地</span><span>guilty (adj.) 有罪的 [反義]</span></div>
+          <div class="v-ex">Despite the evidence, Tom Robinson was not found innocent by the all-white jury.
+            <span class="cn">儘管有證據，湯姆並未被全白人陪審團判為無罪。</span></div>
+          <div class="v-gsat">學測：be found innocent/guilty（被判為無罪/有罪）是本課核心片語。</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">progress <span class="v-pos">n.</span></div><div class="v-cn-mini">進步；進展</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">deliberate</span><span class="v-pos">v./adj.</span></div><div class="v-cn-mini">商議；故意的</div></div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> We are making progress on the project.
-            <div class="cn">我們在項目上取得進展。</div></div>
+          <div class="v-fam"><span>deliberation (n.) 商議</span><span>deliberately (adv.) 故意地</span></div>
+          <div class="v-ex">The jury spent hours deliberating before reaching their decision.
+            <span class="cn">陪審團商議了數小時才作出決定。</span></div>
+          <div class="v-gsat">學測：deliberate (v.) 商議；deliberate (adj.) 故意的 ─ 兩種詞性重音不同！</div>
         </div>
       </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">devastate</span><span class="v-pos">v.</span></div><div class="v-cn-mini">使崩潰；使心碎</div></div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam"><span>devastated (adj.) 悲痛欲絕的</span><span>devastating (adj.) 毀滅性的</span><span>devastation (n.) 毀滅</span></div>
+          <div class="v-ex">Scout and Jem were devastated when they heard the guilty verdict.
+            <span class="cn">史考特和傑姆聽到有罪判決時悲痛欲絕。</span></div>
+          <div class="v-gsat">學測：be devastated by（被…所打擊），被動式最常考。</div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div><div class="word-row"><span class="v-word">injustice</span><span class="v-pos">n.</span></div><div class="v-cn-mini">不公正；不義</div></div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam"><span>justice (n.) 公正 [反義]</span><span>unjust (adj.) 不公正的</span><span>justly (adv.) 公正地</span></div>
+          <div class="v-ex">The children struggled to understand the injustice of Tom's fate.
+            <span class="cn">孩子們努力想理解湯姆命運的不公正。</span></div>
+          <div class="v-gsat">學測：in- 否定前綴（injustice, inequality, inability, inaccurate）。</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+
+<!-- SECTION 3: 片語講解 -->
+<div class="section s-green">
+  <div class="sec-head">
+    <div class="sec-icon">🔗</div>
+    片語講解 × 10
+  </div>
   <div class="sec-body">
-    <table class="phrase-table">
-      <tr><th>片語</th><th>中文</th><th>例句</th></tr>
-      <tr><td><span class="phr">sing one's heart out</span></td><td>盡情歌唱；竭盡全力地唱</td><td>The singer sang her heart out on stage.</td></tr>
-      <tr><td><span class="phr">stand up for</span></td><td>支持；維護</td><td>I will stand up for what is right.</td></tr>
-      <tr><td><span class="phr">be on sb's side</span></td><td>站在某人那一邊</td><td>Everyone was on her side after the incident.</td></tr>
-      <tr><td><span class="phr">fly into a rage</span></td><td>突然大發脾氣</td><td>He flew into a rage when he heard the news.</td></tr>
-      <tr><td><span class="phr">out of fear</span></td><td>出於恐懼</td><td>She left out of fear for her safety.</td></tr>
-      <tr><td><span class="phr">find sb guilty</span></td><td>判定某人有罪</td><td>The jury found the defendant guilty.</td></tr>
+    <table class="ptable">
+      <thead>
+        <tr><th>片語</th><th>中文</th><th>例句與補充說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phr">sing one's heart out</span></td>
+          <td>盡情歌唱</td>
+          <td>
+            <div class="pex">The mockingbird sang its heart out every morning without harming anyone.<span class="cn">嘲鶇每天早晨盡情歌唱，卻不傷害任何人。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ V one's heart out：盡全力做某事（含情感投入）。如：cry one's heart out 痛哭；work one's heart out 拼命工作。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">stand up for</span></td>
+          <td>支持；維護</td>
+          <td>
+            <div class="pex">Atticus stood up for the rights of people regardless of their skin color.<span class="cn">阿提克斯維護人們的權利，不論膚色為何。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ stand up for sb./sth.：為某人/某事挺身而出。近義：speak up for、advocate for。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">hold one's head up</span></td>
+          <td>保持自信；昂首挺胸</td>
+          <td>
+            <div class="pex">Even after being mocked, the Finch children held their heads up with dignity.<span class="cn">即使被嘲弄，芬奇家的孩子們仍昂首挺胸、保持尊嚴。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ 字面：把頭抬起來；引申義：面對困境仍保持自信與尊嚴。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">be on sb's side</span></td>
+          <td>站在某人那一邊</td>
+          <td>
+            <div class="pex">Despite the evidence, the entire town seemed to be on the Ewells' side.<span class="cn">儘管有證據，整個小鎮似乎都站在尤爾一家那邊。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ 近義：support sb., take sb.'s side。反義：be against sb.。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">scare sb off</span></td>
+          <td>把某人嚇跑</td>
+          <td>
+            <div class="pex">Mr. Ewell's sudden arrival scared Tom off, according to Mayella's story.<span class="cn">根據梅耶拉的說法，尤爾先生突然到來把湯姆嚇跑了。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ 受詞可夾在中間：scare him off。近義：drive/chase sb. away。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">push away</span></td>
+          <td>推開；拒絕</td>
+          <td>
+            <div class="pex">Tom said he pushed Mayella away when she tried to kiss him.<span class="cn">湯姆說，當梅耶拉試圖親吻他時，他把她推開了。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ 引申義：情感上的拒絕或疏遠（push sb. away 推開某人）。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">out of fear</span></td>
+          <td>出於恐懼</td>
+          <td>
+            <div class="pex">Mayella ran away out of fear when her father started yelling.<span class="cn">梅耶拉出於恐懼，在父親開始咆哮時逃跑了。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ out of + 情緒名詞（表動機）：out of curiosity（好奇）、out of love（愛）、out of jealousy（嫉妒）。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">find sb guilty/innocent</span></td>
+          <td>判定有罪/無罪</td>
+          <td>
+            <div class="pex">The all-white jury found Tom Robinson guilty despite the lack of evidence.<span class="cn">全白人陪審團在缺乏證據的情況下仍判定湯姆有罪。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ find 此處為法律用語「裁定」。被動式：be found guilty/innocent。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">be swayed by</span></td>
+          <td>被…影響；被…左右</td>
+          <td>
+            <div class="pex">The jury was swayed by racial prejudice rather than the facts.<span class="cn">陪審團受到種族偏見的左右，而非案件事實。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ sway (v.) 本義「搖擺」，引申「影響判斷」。= be influenced/affected by。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">a glimmer of hope</span></td>
+          <td>一絲希望</td>
+          <td>
+            <div class="pex">Atticus saw a glimmer of hope in the jury's delay — progress was possible.<span class="cn">阿提克斯在陪審團的拖延中看到了一絲希望──進步是可能的。</span></div>
+            <div class="pex" style="margin-top:5px;font-size:.88em;color:#7c3aed">▸ a glimmer of + N（常接抽象名詞）：a glimmer of light / truth / chance。</div>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+
+<!-- SECTION 4: 文法句型 -->
+<div class="section s-purple">
+  <div class="sec-head">
+    <div class="sec-icon">📐</div>
+    文法句型 × 3
+  </div>
   <div class="sec-body">
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">1</div><div class="q-main"><div class="q-en">What does Atticus teach his children about killing a mockingbird?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) It is an entertaining hobby</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) It is a sin because mockingbirds are harmless and only sing for people's enjoyment</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) It is a way to learn about nature</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) It is never mentioned by Atticus</span></div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>① regardless of + N / V-ing（不論…；不管…）</span>
+        <span class="g-arrow">▼</span>
       </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文開頭說：「Remember it's a sin to kill a mockingbird...believing that mockingbirds were harmless and did nothing but sing their hearts out for people to enjoy.」</div>
-      </div>
-    </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">2</div><div class="q-main"><div class="q-en">Why does Atticus defend Tom Robinson despite community opposition?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) For money and fame</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Because a lawyer should stand up for people's rights regardless of skin color</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Because he was forced to by the court</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Because Tom Robinson was his friend</span></div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文說：「Atticus comforted them, telling them a lawyer should stand up for the rights of people regardless of their skin color.」</div>
-      </div>
-    </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">3</div><div class="q-main"><div class="q-en">How did Atticus prove that Mr. Ewell was left-handed?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) A witness testified that Mr. Ewell was left-handed</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) When asked to write his name, Mr. Ewell instinctively used his left hand</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Medical records showed he was left-handed</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Mr. Ewell admitted being left-handed in court</span></div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文說：「Atticus asked Mr. Ewell to write his name. To the audience's surprise, he instinctively used his left hand.」</div>
+      <div class="g-formula">regardless of + 名詞 / 動名詞
+= no matter + wh-子句（可互換）
+用法：表示「無論…都不影響結果」</div>
+      <div class="g-body">
+        <p style="font-size:.97em;color:#334155;margin-bottom:12px"><b>regardless of</b> 為介系詞片語，後接名詞或動名詞，表「不論…」。常見替換：<b>no matter what/who/how...</b>（後接子句）。</p>
+        <div class="g-ex">A lawyer should stand up for the rights of people <b>regardless of</b> their skin color.
+          <div class="g-ex-cn">律師應該維護人們的權利，不論其膚色為何。</div></div>
+        <div class="g-ex">She kept going <b>regardless of</b> the difficulties.
+          <div class="g-ex-cn">她不顧困難，繼續前行。（= no matter what difficulties she faced）</div></div>
+        <table class="gtab">
+          <tr><th>結構</th><th>後接</th><th>例子</th></tr>
+          <tr><td>regardless of</td><td>名詞 / V-ing</td><td>regardless of age（不論年齡）</td></tr>
+          <tr><td>no matter what</td><td>子句</td><td>no matter what happens（不管發生什麼）</td></tr>
+          <tr><td>regardless</td><td>單獨使用（副詞）</td><td>He did it regardless.（他還是做了）</td></tr>
+        </table>
+        <div class="g-note">✗ regardless of + that-子句（錯誤！regardless of 後不可接子句）。<br>✓ regardless of what he says（正確：what he says 為名詞子句）。</div>
+        <div class="g-tip">學測：regardless of age = no matter how old；regardless of what you say = no matter what you say。</div>
       </div>
     </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">4</div><div class="q-main"><div class="q-en">What is significant about the bruises on Mayella's face?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) They prove Tom beat her</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) They are on the right side of her face, indicating a left-handed person caused them</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) They don't prove anything</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) They were caused by her fall</span></div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>② must have + p.p.（對過去的肯定推測）</span>
+        <span class="g-arrow">▼</span>
       </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文指出：「Mayella's bruises were on the right side of her face...the audience in the courtroom realized that her injuries must have been caused by somebody left-handed.」右側的擦傷表明是左撇子所為。</div>
+      <div class="g-formula">情態動詞 + have + 過去分詞（p.p.）
+must have p.p.     → 一定曾經…（肯定推測）
+can't have p.p.    → 一定沒有…（否定推測）
+might/may have p.p. → 可能曾經…（不確定推測）
+should have p.p.   → 本來應該…（但沒有）</div>
+      <div class="g-body">
+        <p style="font-size:.97em;color:#334155;margin-bottom:12px"><b>must have + p.p.</b> 用於對「過去事實」的肯定邏輯推測，表示根據現有證據判斷「某事過去一定已發生」。</p>
+        <div class="g-ex">Her injuries <b>must have been caused</b> by somebody left-handed.
+          <div class="g-ex-cn">她的傷必定是某個慣用左手的人造成的。</div></div>
+        <div class="g-ex">He <b>must have been innocent</b> of giving Mayella her bruises.
+          <div class="g-ex-cn">他打傷梅耶拉一事必定是清白的。</div></div>
+        <div class="g-ex">At least one jury member <b>must have believed</b> in Tom's innocence.
+          <div class="g-ex-cn">至少有一位陪審員一定曾相信湯姆是清白的。</div></div>
+        <table class="gtab">
+          <tr><th>情態動詞</th><th>含義</th><th>確定程度</th></tr>
+          <tr><td>must have p.p.</td><td>一定曾…（肯定推測過去）</td><td>高（肯定）</td></tr>
+          <tr><td>can't/couldn't have p.p.</td><td>一定沒有…（否定推測過去）</td><td>高（否定）</td></tr>
+          <tr><td>might/may have p.p.</td><td>可能曾…（不確定推測）</td><td>低</td></tr>
+          <tr><td>should have p.p.</td><td>本來應該…（帶遺憾/責備）</td><td>—（情感色彩）</td></tr>
+        </table>
+        <div class="g-note">✗ must have + 動詞原形（錯誤！have 後必須接過去分詞 p.p.）。</div>
+        <div class="g-tip">學測：需判斷「肯定 vs. 否定」與「對現在 vs. 對過去」的推測，選出正確情態動詞。</div>
       </div>
     </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">5</div><div class="q-main"><div class="q-en">What sign of hope did Atticus see despite Tom's guilty verdict?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Tom escaped from prison</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) The jury took hours to deliberate, suggesting at least one member believed in Tom's innocence</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) The judge dismissed the verdict</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) The community apologized for their behavior</span></div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>③ although...yet...（讓步連接詞與轉折搭配用法）</span>
+        <span class="g-arrow">▼</span>
       </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文說：「the jury had spent a few hours deliberating the verdict...usually a jury would require only a few minutes to find a black person guilty. This delay...meant that at least one member of the jury must have believed in Tom's innocence.」</div>
+      <div class="g-formula">Although + 讓步子句, + 主句.          ← 最常見標準用法
+Although + A, yet + B.              ← 較正式，yet 強調轉折
+Although + A, still + B.            ← still 可加強
+⚠ Although 與 but 絕對不可同時出現！</div>
+      <div class="g-body">
+        <p style="font-size:.97em;color:#334155;margin-bottom:12px"><b>although</b>（雖然）引導讓步副詞子句，主句含隱含轉折。可搭配副詞 <b>yet/still</b> 加強轉折，但 <b>although 與 but 絕不可同時出現</b>。</p>
+        <div class="g-ex"><b>Although</b> the guilty verdict could not really be considered a victory, the delay definitely represented progress.
+          <div class="g-ex-cn">雖然有罪判決不能真正算作勝利，但這次延遲無疑代表著進步。</div></div>
+        <div class="g-ex"><b>Although</b> it was raining, <b>yet</b> she decided to go for a walk.
+          <div class="g-ex-cn">雖然下著雨，她還是決定出去散步。（yet 加強轉折語氣）</div></div>
+        <table class="gtab">
+          <tr><th>連接詞</th><th>正確搭配</th><th>錯誤搭配</th></tr>
+          <tr><td>although / though / even though</td><td>主句（可加 yet/still）</td><td>❌ 不可接 but</td></tr>
+          <tr><td>because / since / as</td><td>主句</td><td>❌ 不可接 so</td></tr>
+          <tr><td>not only...but also...</td><td>平行結構</td><td>❌ but 不可省略</td></tr>
+        </table>
+        <div class="g-note">✗ Although he was tired, but he kept working.（although 和 but 二擇一！）<br>✓ Although he was tired, he kept working.<br>✓ He was tired, but he kept working.</div>
+        <div class="g-tip">學測超高頻陷阱：一句中絕不能同時有 although 和 but。選擇題中兩者共存直接排除！</div>
       </div>
     </div>
+
   </div>
 </div>
-<footer>龍騰高職英文 ── L9: To Kill a Mockingbird</footer>
+
+<!-- SECTION 5: 練習題 -->
+<div class="section s-orange">
+  <div class="sec-head">
+    <div class="sec-icon">✏️</div>
+    練習題 × 8
+  </div>
+  <div class="sec-body">
+    <div class="sec-hint">點選選項後自動批改顯示對錯；點「看完整解析」查看詳細說明。</div>
+    <div id="q-wrap"></div>
+  </div>
 </div>
+
+</div><!-- end .page -->
+
 <script>
-function toggleCN(elem){const icon=elem.querySelector('.ic');const cn=elem.querySelector('.para-cn');icon.classList.toggle('open');cn.classList.toggle('open')}
-function toggleVocab(elem){const icon=elem.querySelector('.v-ic');const body=elem.nextElementSibling;icon.classList.toggle('open');body.classList.toggle('open')}
-function selectChoice(elem,isCorrect){const block=elem.closest('.q-block');const allChoices=block.querySelectorAll('.choice');allChoices.forEach(c=>c.classList.remove('correct','wrong'));if(isCorrect){elem.classList.add('correct')}else{elem.classList.add('wrong')}const ansBlock=block.querySelector('.q-ans');ansBlock.classList.add('open')}
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'),ic=el.querySelector('.ic');
+  exp.classList.toggle('open');if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'),ic=el.querySelector('.v-ic');
+  body.classList.toggle('open');if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US';u.rate=0.85;u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn';b.textContent='🔊';b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'),arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open');if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+  {q:['The teacher showed great ',' for her students by listening to their problems and offering support.'],
+   cn:'這位老師對學生展現了極大的同理心，傾聽他們的問題並給予支持。',
+   opts:['sympathy','empathy','criticism','despair'],ans:1,
+   word:'empathy (n.) 同理心',
+   exp:'empathy 強調能「站在對方立場」感同身受；sympathy 是同情心，較為表面。題目描述「傾聽問題並提供支持」強調深層理解，選 empathy。',
+   note:'empathy（感同身受）vs. sympathy（表面同情）：兩者含義不同，學測常考辨析！'},
+  {q:['The principal ',' the teacher to serve as the head of the school committee.'],
+   cn:'校長指派這位老師擔任學校委員會主席。',
+   opts:['accused','appointed','defended','despised'],ans:1,
+   word:'appoint (v.) 指派；任命',
+   exp:'appoint sb. to + V（指派某人擔任某職位/做某事）固定句型。(A) accused 控告；(C) defended 辯護；(D) despised 鄙視，均語意不符。',
+   note:'appoint → appointment (n.) 任命；be appointed to + V 為常見被動用法。'},
+  {q:['The lawyer agreed to ',' the young man who had been wrongly charged with theft.'],
+   cn:'這位律師同意為被錯誤指控偷竊的年輕人辯護。',
+   opts:['comfort','accuse','defend','despise'],ans:2,
+   word:'defend (v.) 辯護；防衛',
+   exp:'defend sb. in court（在法庭上為某人辯護）。(B) accuse 意思相反（指控）；(A) comfort 安慰；(D) despise 鄙視，均不符語境。',
+   note:'defense (n.) 辯護；defense attorney 辯護律師；defendant (n.) 被告。'},
+  {q:['Tom Robinson was ',' of sexually assaulting Mayella, but the evidence proved otherwise.'],
+   cn:'湯姆．魯賓遜被指控性侵梅耶拉，但證據顯示事實並非如此。',
+   opts:['appointed','defended','accused','comforted'],ans:2,
+   word:'accuse (v.) 指控',
+   exp:'accuse sb. of + N/V-ing 是固定搭配，介系詞必須用 of。選項 (A)(B)(D) 均不符語境。',
+   note:'be accused of（被指控…）：注意介系詞 of，不用 for 或 with。'},
+  {q:['The whole town seemed to ',' the Ewells, yet they still sided with them in court.'],
+   cn:'整個小鎮似乎都鄙視尤爾一家，但他們在法庭上仍站在尤爾那一邊。',
+   opts:['comfort','accuse','defend','despise'],ans:3,
+   word:'despise (v.) 鄙視；看不起',
+   exp:'despise 表達強烈的輕視與蔑視。此題「鄙視但仍支持」正是本課核心矛盾：種族偏見凌駕於個人判斷之上。',
+   note:'despise = look down on（較口語），語氣均強烈，遠強於 dislike。'},
+  {q:['The jury finally reached a ',' after deliberating for several hours.'],
+   cn:'陪審團商議了幾個小時後，終於達成了判決。',
+   opts:['criticism','verdict','glimmer','injustice'],ans:1,
+   word:'verdict (n.) 判決；裁定',
+   exp:'verdict 專指陪審團的最終裁決。(A) criticism 批評；(C) glimmer 微光；(D) injustice 不公正，均不符法律語境。',
+   note:'reach/deliver/return a verdict（達成/宣布/作出判決）：三種常見動詞搭配。'},
+  {q:['Although Tom was clearly ',' of the crime, the jury still found him guilty due to racial bias.'],
+   cn:'雖然湯姆顯然對這項罪行是清白的，陪審團仍因種族偏見而判他有罪。',
+   opts:['guilty','sensible','innocent','devastating'],ans:2,
+   word:'innocent (adj.) 無罪的；清白的',
+   exp:'innocent of + 罪名（對…是清白的），為固定搭配。反義詞是 guilty。此題考文章核心矛盾：雖然無辜卻被判有罪。',
+   note:'be innocent of（清白）↔ be guilty of（有罪）：兩者均接 of，為固定介系詞搭配。'},
+  {q:['Atticus warned his children not to be ',' by other people\'s prejudice when making moral decisions.'],
+   cn:'阿提克斯警告孩子們，做道德決定時不要受他人偏見的左右。',
+   opts:['devastated','swayed','appointed','deliberated'],ans:1,
+   word:'sway (v.) 影響；左右',
+   exp:'be swayed by = be influenced/affected by。此句強調不受外部偏見影響，選 swayed。(A) devastated 崩潰；(C) appointed 指派；(D) deliberated 商議，均不符。',
+   note:'sway 本義「搖擺」，引申「影響判斷」。be swayed by evidence/emotion/prejudice 為常見搭配。'}
+];
+
+(function(){
+  var wrap=document.getElementById('q-wrap');
+  if(!wrap)return;
+  studentQ.forEach(function(d,i){
+    var choices=d.opts.map(function(o,j){
+      return '<div class="choice" data-correct="'+(j===d.ans?'1':'0')+'" onclick="pickChoice(this)"><span class="mark"></span>('+'ABCD'[j]+') '+o+'</div>';
+    }).join('');
+    wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div><button class="show-btn" onclick="showAns(this)">看完整解析</button></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';
+  });
+})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
 </script>
 </body>
 </html>

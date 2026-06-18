@@ -3,334 +3,1267 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L8: Overtourism in Barcelona ── 龍騰高職英文互動教學</title>
+<title>L8: Overtourism in Barcelona ── 龍騰高中版英文 第四冊 互動教學</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
 .page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
-.header{background:linear-gradient(135deg,#e67e22 0%,#d35400 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:.9em;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#7c2d12;border-color:#fff}
+
+.header{color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
 .header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
 .header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.9em;font-weight:700}
+
 .section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
-.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#fff8e1;color:#e65100;border-bottom:2px solid #ffe0b2}
-.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#e65100;color:#fff}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
 .sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:.92em;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+
+/* 課文逐段 */
 .para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
-.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#fff8e1;color:#e65100;border-bottom:2px solid #ffe0b2}
 .para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
 .para-line:hover{background:#f8fafc}
 .para-line:last-child{border-bottom:none}
 .para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
 .para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
 .para-en .ic.open{transform:rotate(90deg)}
-.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #f57c00;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
-.para-cn.open{display:block}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:.9em;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:.92em;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:.96em}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:.76em;color:#64748b;margin:0 5px 0 1px}
+.syn-legend{font-size:.82em;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+/* 單字卡 */
 .vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
 .v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .v-top:hover{background:#f8fafc}
-.v-word{font-size:1.18em;font-weight:800;color:#e65100}
+.v-word{font-size:1.18em;font-weight:800;color:#1e40af}
 .v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
 .v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
 .v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
 .v-ic.open{transform:rotate(90deg)}
 .v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
 .v-body.open{display:block}
-.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #f57c00;padding-left:10px;line-height:1.65}
+.v-fam{margin-top:10px;font-size:.9em;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
 .v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
-.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
-.phrase-table th{background:#fff8e1;padding:10px 13px;text-align:left;font-weight:700;color:#e65100;border-bottom:2px solid #ffe0b2}
-.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
-.phrase-table tr:nth-child(even) td{background:#f8fafc}
-.phr{font-weight:700;color:#e65100}
+.v-gsat{margin-top:9px;font-size:.85em;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:.95em}
+.pex .cn{display:block;color:#94a3b8;font-size:.92em;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:1.05em}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:.8em;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:.95em;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:.97em;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:.92em;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:.93em;color:#78350f;line-height:1.7}
+.g-note::before{content:"常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:.93em;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:.93em;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
 .q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
 .q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
-.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#e65100}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
 .q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:.94em;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
 .q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
 .choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
 .choice:hover{border-color:#94a3b8;background:#f1f5f9}
-.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent}
 .choice.correct{border-color:#16a34a;background:#f0fdf4}
 .choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
 .choice.wrong{border-color:#dc2626;background:#fef2f2}
 .choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
 .q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
 .q-ans.open{display:block}
-.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#e65100}
-.ans-cn{font-size:.94em;color:#374151;line-height:1.7}
-footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
-@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:1em;color:#9a3412;margin-bottom:5px}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:.95em;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:1.02em}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:1em;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:13px}
+  .page{max-width:100%;padding:8px}
+  .header{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .q-ans,.g-body,.v-body,.para-exp{display:block!important}
+  .v-ic,.g-arrow,.show-btn,.sec-hint,.header-nav{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="page">
-<div class="header">
-  <h1>🧡 L8: Overtourism in Barcelona</h1>
-  <p class="sub">龍騰高職英文 — 互動教學</p>
-</div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
-  <div class="sec-body">
-    <div class="para">
-      <div class="para-head">Paragraph 1-4</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>In this busy European city, large groups of tourists are everywhere. They overflow the sidewalks and streets, taking pictures at landmarks like the "Sagrada Familia" and crowding narrow passageways leading to markets. The city in question is Barcelona, Spain, which each year receives more than fifteen times as many visitors as its actual population! Barcelona is suffering from a phenomenon called "overtourism." This occurs when an attraction becomes overrun with tourists to such an extent that the local residents' quality of life declines dramatically.</span>
-        </div>
-        <div class="para-cn">在這個繁忙的歐洲城市中，大量遊客無處不在。他們擠滿人行道和街道，在「聖家族教堂」等地標處拍照，擁擠狹窄的市場通道。所討論的城市是西班牙巴塞隆納，每年接待的遊客人數是其實際人口的十五倍以上！巴塞隆納正遭受被稱為「過度旅遊」的現象。當一個景點被遊客淹沒到當地居民的生活品質急劇下降的程度時，就會發生這種情況。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 5-9</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>The 1992 Olympics put Barcelona on the tourist map, and soon afterward the number of tourists flocking to the city began to increase. In 2017, the number of annual visitors to Barcelona grew to almost five times as large as that in 1992. As expected, local hotels and businesses benefited from this expansion of tourism. However, the city's residents had to bear the cost. This invasion of visitors has resulted in various problems. Complaints about problems caused by thoughtless visitors are common.</span>
-        </div>
-        <div class="para-cn">1992 年的奧運會將巴塞隆納放在了旅遊地圖上，不久之後，湧入該市的遊客數量開始增加。2017 年，巴塞隆納的年度遊客數量增長到 1992 年的近五倍。不出所料，當地酒店和企業從這次旅遊業的擴張中受益。然而，城市的居民必須承擔成本。這次遊客入侵導致了各種問題。對缺乏考慮的遊客引起的問題的抱怨很常見。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 10-14</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>"These people have no respect for others," said Emilio Shasta, a local who has lived in Barcelona his entire life. They play loud music late at night and throw garbage all over the place. Residents are also fed up with some visitors' inappropriate behavior, such as urinating and throwing up on streets outside nightclubs. Furthermore, some local tenants have even been forced to leave their apartments because landlords are partial to renting their places out through Airbnb. In this way, landlords can make more money by charging tourists higher nightly rents.</span>
-        </div>
-        <div class="para-cn">「這些人不尊重他人，」終身居住在巴塞隆納的當地人 Emilio Shasta 說。他們在深夜播放大聲音樂，並在各處扔垃圾。居民們還對某些遊客的不當行為感到厭煩，例如在夜店外的街道上小便和嘔吐。此外，一些當地房客甚至被迫離開其公寓，因為房東偏向於通過 Airbnb 出租其地方。這樣，房東可以通過向遊客收取更高的夜間租金來賺取更多的錢。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 15-19</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>As stated by Lucia Trebocini, the head of a Barcelona neighborhood association, "Many residents of this area are so sick and tired of tourists that they have decided to leave." Even I myself am also considering that option. The good news is that city officials are keenly aware of all these complaints. They believe that only by introducing practical measures can the impact of overtourism be reduced. Such measures include putting limits on the number of people who can visit certain hotspots at a time, and banning large tour groups in particularly popular areas.</span>
-        </div>
-        <div class="para-cn">巴塞隆納鄰里協會主席 Lucia Trebocini 說，「這個地區的許多居民對遊客感到如此厭煩，以至於他們決定離開。」連我自己也在考慮那個選項。好消息是城市官員充分意識到所有這些抱怨。他們相信只有通過引入實際措施才能減少過度旅遊的影響。這些措施包括限制一次可以訪問某些熱點的人數，以及禁止大型旅遊團進入特別受歡迎的地區。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 20-23</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>The city has also restricted the development of new hotels and ordered that websites like Airbnb take down their listings of guesthouses that are not licensed. Finally, the government has come up with a thorough plan that concentrates less on promotion and more on tourism management. It has been said that tourism is a double-edged sword. On the one hand, tourism provides local business owners with great economic benefits. On the other hand, it disturbs the lives of local residents and can cause numerous social problems.</span>
-        </div>
-        <div class="para-cn">該市還限制了新酒店的發展，並命令 Airbnb 等網站撤下未經許可的民宿列表。最後，政府制定了一項全面計劃，重點不在宣傳上，而在於旅遊管理上。有人說旅遊是一把雙刃劍。一方面，旅遊為當地商業所有人提供了巨大的經濟利益。另一方面，它擾亂了當地居民的生活，並可能引起眾多社會問題。</div>
-      </div>
-    </div>
-    <div class="para">
-      <div class="para-head">Paragraph 24-25</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>Clearly, Barcelona is striving to deal with the negative aspects of tourism and is acting to strike a balance between the local community and international visitors. Only after the authorities have developed sustainable solutions will overtourism be manageable and stop causing problems in society.</span>
-        </div>
-        <div class="para-cn">顯然，巴塞隆納正在努力應對旅遊業的負面影響，並正在努力在當地社區和國際遊客之間取得平衡。只有在當局開發出可持續解決方案之後，過度旅遊才會得到控制，並停止在社會中造成問題。</div>
-      </div>
-    </div>
+
+<!-- HEADER -->
+<div class="header" style="background:linear-gradient(135deg,#7c2d12 0%,#c2410c 60%,#fb923c 100%)">
+  <div class="header-nav">
+    <a href="./">&#128218; 回英文選單</a>
+    <a href="../">&#127968; 回主選單</a>
+  </div>
+  <h1>L8: Overtourism in Barcelona &#8212; 巴塞隆納的過度旅遊</h1>
+  <div class="sub">龍騰高中版英文 第四冊 第八課｜互動教學講義</div>
+  <div class="tags">
+    <span class="tag">課文逐句精講</span>
+    <span class="tag">核心字彙 x 12</span>
+    <span class="tag">片語 x 7</span>
+    <span class="tag">文法句型 x 3</span>
+    <span class="tag">練習題 x 8</span>
   </div>
 </div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: 課文逐句精講                                     -->
+<!-- ============================================================ -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">&#128214;</div>
+    課文逐句精講
+  </div>
+  <div class="sec-body">
+
+    <div class="syn-legend">
+      <strong>句法標色說明：</strong>
+      <span class="syn syn-s">S 主詞</span>&nbsp;
+      <span class="syn syn-v">V 動詞</span>&nbsp;
+      <span class="syn syn-o">O 受詞</span>&nbsp;
+      <span class="syn syn-c">C 補語</span>&nbsp;
+      <span class="syn syn-m">M 修飾語</span>&nbsp;
+      點擊每句可展開中文翻譯與講解。
+    </div>
+
+    <!-- Paragraph 1 -->
+    <div class="para">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>In this busy European city, large groups of tourists are everywhere.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在這座繁忙的歐洲城市，大批觀光客無處不在。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">介片</span> In this busy European city，
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span> large groups of tourists
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span> are
+            <span class="syn syn-c">C</span><span class="syn-t">補語</span> everywhere
+          </div>
+          <div class="para-note"><b>開篇倒裝效果：</b>介系詞片語 <b>In this busy European city</b> 移至句首，製造懸疑感。<b>large groups of</b> 強調數量眾多。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>They overflow the sidewalks and streets, taking pictures at landmarks like the "Sagrada Familia" and crowding narrow passageways leading to markets.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他們擠滿人行道和街道，在「聖家堂」等地標拍照，並擠進通往市場的狹窄通道。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> They
+            <span class="syn syn-v">V</span> overflow
+            <span class="syn syn-o">O</span> the sidewalks and streets，
+            <span class="syn syn-m">M</span><span class="syn-t">分詞構句</span> taking pictures… and crowding…
+          </div>
+          <div class="para-note">
+            <b>overflow (v.)</b> 溢出；擠滿（本課關鍵動詞）。<br>
+            <b>分詞構句</b>：taking… and crowding… 為伴隨狀態，主詞同為 They。<br>
+            <b>passageways leading to markets</b>：現在分詞片語 leading to markets 後位修飾 passageways。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>The city in question is Barcelona, Spain, which each year receives more than fifteen times as many visitors as its actual population!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">討論中的這座城市，正是西班牙巴塞隆納，它每年接待的遊客人數超過其實際人口的十五倍！</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> The city in question
+            <span class="syn syn-v">V</span> is
+            <span class="syn syn-c">C</span> Barcelona, Spain，
+            <span class="syn syn-m">M</span><span class="syn-t">關係子句</span> which each year receives more than fifteen times as many visitors as its actual population
+          </div>
+          <div class="para-note">
+            <b>in question</b>：片語，意為「討論中的；正提到的」。<br>
+            <b>倍數比較</b>：fifteen times as many visitors as… = 遊客數是…的十五倍。<br>
+            <b>which</b> 為非限制性關係代名詞，代替整個地名 Barcelona, Spain。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Barcelona is suffering from a phenomenon called "overtourism."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">巴塞隆納正深受一種稱為「過度旅遊」的現象所苦。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> Barcelona
+            <span class="syn syn-v">V</span> is suffering from
+            <span class="syn syn-o">O</span> a phenomenon called "overtourism"
+          </div>
+          <div class="para-note">
+            <b>suffer from</b>：受苦於；深受…困擾（固定片語）。<br>
+            <b>called "overtourism"</b>：過去分詞片語後位修飾 phenomenon。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>This occurs when an attraction becomes overrun with tourists to such an extent that the local residents' quality of life declines dramatically.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當一個景點被遊客擠得不堪重負，嚴重到當地居民的生活品質大幅下滑時，這種現象就會發生。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> This
+            <span class="syn syn-v">V</span> occurs
+            <span class="syn syn-m">M</span><span class="syn-t">時間子句</span> when an attraction becomes overrun with tourists
+            <span class="syn syn-m">M</span><span class="syn-t">程度/結果</span> to such an extent that the local residents' quality of life declines dramatically
+          </div>
+          <div class="para-note">
+            <b>to such an extent that…</b>：到…的程度（結果子句）。<br>
+            <b>decline dramatically</b>：大幅下滑（decline = 下降，dramatically = 大幅地）。<br>
+            <b>overrun with</b>：被…占滿/淹沒。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paragraph 2 -->
+    <div class="para" style="margin-top:20px">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>The 1992 Olympics put Barcelona on the tourist map, and soon afterward the number of tourists flocking to the city began to increase.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">1992 年奧運會將巴塞隆納推向了觀光地圖，此後不久，湧入這座城市的觀光客數量開始增加。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> The 1992 Olympics
+            <span class="syn syn-v">V</span> put
+            <span class="syn syn-o">O</span> Barcelona
+            <span class="syn syn-m">M</span> on the tourist map；
+            <span class="syn syn-s">S</span> the number of tourists flocking to the city
+            <span class="syn syn-v">V</span> began to increase
+          </div>
+          <div class="para-note">
+            <b>put … on the tourist map</b>：使…成為知名旅遊地（慣用表達）。<br>
+            <b>flock (v.)</b>：群集、蜂擁。tourists flocking to the city = 現在分詞片語修飾 tourists。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>In 2017, the number of annual visitors to Barcelona grew to almost five times as large as that in 1992.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">2017 年，巴塞隆納的年度遊客人數增長到幾乎是 1992 年的五倍。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> In 2017，
+            <span class="syn syn-s">S</span> the number of annual visitors to Barcelona
+            <span class="syn syn-v">V</span> grew
+            <span class="syn syn-m">M</span> to almost five times as large as that in 1992
+          </div>
+          <div class="para-note">
+            <b>five times as large as that in 1992</b>：倍數比較句。<b>that</b> 代替前面的 the number，避免重複。<br>
+            公式：<b>數字 + times + as + adj./adv. + as</b>（= 是…的幾倍）。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>As expected, local hotels and businesses benefited from this expansion of tourism.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">不出所料，當地飯店和商家從旅遊業的擴張中獲益。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> As expected，
+            <span class="syn syn-s">S</span> local hotels and businesses
+            <span class="syn syn-v">V</span> benefited from
+            <span class="syn syn-o">O</span> this expansion of tourism
+          </div>
+          <div class="para-note">
+            <b>As expected</b>：如預期般（慣用語）。<br>
+            <b>expansion (n.)</b>：擴張；expand (v.) 擴大。<b>benefit from</b>：從…獲益。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>However, the city's residents had to bear the cost.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，市民卻不得不承擔代價。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> However，
+            <span class="syn syn-s">S</span> the city's residents
+            <span class="syn syn-v">V</span> had to bear
+            <span class="syn syn-o">O</span> the cost
+          </div>
+          <div class="para-note"><b>bear the cost</b>：承擔代價（= pay the price）。此句為轉折，引出後段的負面影響。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paragraph 3 -->
+    <div class="para" style="margin-top:20px">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>This invasion of visitors has resulted in various problems.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這股訪客入侵已造成各種問題。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> This invasion of visitors
+            <span class="syn syn-v">V</span> has resulted in
+            <span class="syn syn-o">O</span> various problems
+          </div>
+          <div class="para-note">
+            <b>invasion (n.)</b>：入侵；invade (v.) 入侵。此處隱喻性用法，把觀光客比喻為「入侵者」。<br>
+            <b>result in</b>：導致（= lead to）。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Complaints about problems caused by thoughtless visitors are common.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">對於無禮遊客所造成問題的抱怨十分普遍。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> Complaints about problems caused by thoughtless visitors
+            <span class="syn syn-v">V</span> are
+            <span class="syn syn-c">C</span> common
+          </div>
+          <div class="para-note">
+            <b>complaint (n.)</b>：抱怨；complain (v.) 抱怨。<br>
+            <b>thoughtless (adj.)</b>：欠缺考慮的；不體貼的。thought (想法) + -less (無) = 無思考的。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>"These people have no respect for others," said Emilio Shasta, a local who has lived in Barcelona his entire life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">「這些人完全不尊重他人，」當地居民 Emilio Shasta 說，他一生都住在巴塞隆納。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析（引述句）</span>
+            直接引語：<span class="syn syn-s">S</span> These people <span class="syn syn-v">V</span> have no respect <span class="syn syn-m">M</span> for others。<br>
+            倒裝引述：<span class="syn syn-v">V</span> said <span class="syn syn-s">S</span> Emilio Shasta（動詞前置）。
+          </div>
+          <div class="para-note">
+            <b>have no respect for</b>：完全不尊重…。<br>
+            <b>who has lived in Barcelona his entire life</b>：限制性關係子句修飾 a local。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>They play loud music late at night and throw garbage all over the place.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他們在深夜大聲播放音樂，並將垃圾扔得到處都是。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> They
+            <span class="syn syn-v">V</span> play
+            <span class="syn syn-o">O</span> loud music
+            <span class="syn syn-m">M</span> late at night；
+            <span class="syn syn-v">V</span> throw
+            <span class="syn syn-o">O</span> garbage
+            <span class="syn syn-m">M</span> all over the place
+          </div>
+          <div class="para-note"><b>all over the place</b>：到處（慣用語）。<b>late at night</b>：深夜（固定搭配）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Residents are also fed up with some visitors' inappropriate behavior, such as urinating and throwing up on streets outside nightclubs.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">居民也對某些遊客的不當行為感到厭煩，例如在夜店外的街道上小便和嘔吐。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> Residents
+            <span class="syn syn-v">V</span> are
+            <span class="syn syn-c">C</span> fed up with some visitors' inappropriate behavior，
+            <span class="syn syn-m">M</span><span class="syn-t">舉例</span> such as urinating and throwing up…
+          </div>
+          <div class="para-note">
+            <b>be fed up with</b>：對…感到厭煩（片語；= be tired of / be sick of）。<br>
+            <b>throw up</b>：嘔吐（= vomit）。<br>
+            <b>such as</b>：例如（後接名詞或動名詞）。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Furthermore, some local tenants have even been forced to leave their apartments because landlords are partial to renting their places out through Airbnb.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，部分當地租客甚至被迫離開他們的公寓，因為房東偏好透過 Airbnb 出租房屋。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> Furthermore，
+            <span class="syn syn-s">S</span> some local tenants
+            <span class="syn syn-v">V</span> have been forced to leave
+            <span class="syn syn-o">O</span> their apartments，
+            <span class="syn syn-m">M</span><span class="syn-t">原因子句</span> because landlords are partial to renting their places out through Airbnb
+          </div>
+          <div class="para-note">
+            <b>tenant (n.)</b>：房客；<b>landlord (n.)</b>：房東。<br>
+            <b>be partial to + V-ing/N</b>：偏愛；偏袒（partial = 偏心的）。<br>
+            <b>have been forced to</b>：被迫（被動語態完成式）。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>In this way, landlords can make more money by charging tourists higher nightly rents.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">如此一來，房東可以向遊客收取更高的每晚租金，從中賺取更多錢。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> In this way，
+            <span class="syn syn-s">S</span> landlords
+            <span class="syn syn-v">V</span> can make
+            <span class="syn syn-o">O</span> more money
+            <span class="syn syn-m">M</span> by charging tourists higher nightly rents
+          </div>
+          <div class="para-note"><b>by + V-ing</b>：藉由…（表方法的介系詞）。<b>nightly</b>：每夜的（adj./adv.）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>"Many residents of this area are so sick and tired of tourists that they have decided to leave." Even I myself am also considering that option.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">「這個地區的許多居民已對觀光客深感厭倦，以至於決定離開。」就連我自己也在考慮這個選擇。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            引語：<span class="syn syn-s">S</span> Many residents
+            <span class="syn syn-v">V</span> are so sick and tired of tourists
+            <span class="syn syn-m">M</span><span class="syn-t">結果子句</span> that they have decided to leave；<br>
+            <span class="syn syn-m">M</span> Even
+            <span class="syn syn-s">S</span> I myself
+            <span class="syn syn-v">V</span> am considering
+            <span class="syn syn-o">O</span> that option
+          </div>
+          <div class="para-note">
+            <b>so + adj. + that…</b>：如此…以至於（結果子句）。<br>
+            <b>sick and tired of</b>：對…深感厭倦（= fed up with，語氣更強）。<br>
+            <b>myself</b>：反身代名詞，加強語氣（強調主詞 I）。<b>option (n.)</b>：選項、選擇。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paragraph 4 -->
+    <div class="para" style="margin-top:20px">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>The good news is that city officials are keenly aware of all these complaints.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">好消息是，市政官員對這些抱怨十分清楚。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> The good news
+            <span class="syn syn-v">V</span> is
+            <span class="syn syn-c">C</span><span class="syn-t">that子句</span> that city officials are keenly aware of all these complaints
+          </div>
+          <div class="para-note"><b>keenly aware of</b>：十分清楚/意識到（keenly = 非常，強調程度）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>They believe that only by introducing practical measures can the impact of overtourism be reduced.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他們認為，唯有引進實際措施，過度旅遊的衝擊才能被減輕。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析（倒裝句）</span>
+            <span class="syn syn-s">S</span> They
+            <span class="syn syn-v">V</span> believe（主句）；<br>
+            <span class="syn syn-m">M</span><span class="syn-t">only by…倒裝</span> only by introducing practical measures
+            <span class="syn syn-v">V</span> can（助動詞前移）
+            <span class="syn syn-s">S</span> the impact of overtourism
+            <span class="syn syn-v">V</span> be reduced
+          </div>
+          <div class="para-note">
+            <b>only by + V-ing 倒裝</b>：以 only + 副詞修飾語開頭時，主句須倒裝（助動詞提前）。<br>
+            <b>measure (n.)</b>：措施、方法（可數名詞）；<b>practical</b>：實際可行的。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Such measures include putting limits on the number of people who can visit certain hotspots at a time, and banning large tour groups in particularly popular areas.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些措施包括：限制每次可前往特定熱門景點的人數，以及禁止大型旅遊團進入特別受歡迎的地區。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> Such measures
+            <span class="syn syn-v">V</span> include
+            <span class="syn syn-o">O</span> putting limits on… and banning…（兩個動名詞片語並列）
+          </div>
+          <div class="para-note">
+            <b>put a limit on</b>：對…加以限制。<br>
+            <b>hotspot</b>：熱門景點、熱點。<b>at a time</b>：每次、一次（= at one time）。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>The city has also restricted the development of new hotels and ordered that websites like Airbnb take down their listings of guesthouses that are not licensed.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">該市還限制新飯店的開發，並命令 Airbnb 等網站下架未獲授權的民宿清單。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> The city
+            <span class="syn syn-v">V</span> has restricted
+            <span class="syn syn-o">O</span> the development of new hotels；
+            <span class="syn syn-v">V</span> ordered
+            <span class="syn syn-o">O</span><span class="syn-t">that子句</span> that websites like Airbnb take down their listings…
+          </div>
+          <div class="para-note">
+            <b>take down</b>：撤下；拆除（此指下架）。<br>
+            <b>order + that + S + V原形</b>：命令…（假設語氣，that 子句動詞用原形）。<br>
+            <b>licensed (adj.)</b>：有執照的（license 的形容詞）。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Finally, the government has come up with a thorough plan that concentrates less on promotion and more on tourism management.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">最後，政府提出了一個全面性計畫，著重於旅遊管理而非旅遊推廣。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> Finally，
+            <span class="syn syn-s">S</span> the government
+            <span class="syn syn-v">V</span> has come up with
+            <span class="syn syn-o">O</span> a thorough plan
+            <span class="syn syn-m">M</span><span class="syn-t">關係子句</span> that concentrates less on promotion and more on tourism management
+          </div>
+          <div class="para-note">
+            <b>come up with</b>：提出；想出（= devise / develop）。<br>
+            <b>thorough (adj.)</b>：徹底的、全面的。<br>
+            <b>concentrate (v.)</b>：專注；集中（在此為「著重於」）。<b>less… more…</b>：較少…較多…（對比結構）。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paragraph 5 -->
+    <div class="para" style="margin-top:20px">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>It has been said that tourism is a double-edged sword.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">人們常說，旅遊業是一把雙刃劍。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-s">S</span> It（虛主詞）
+            <span class="syn syn-v">V</span> has been said
+            <span class="syn syn-c">C</span><span class="syn-t">that子句</span> that tourism is a double-edged sword
+          </div>
+          <div class="para-note"><b>It has been said that…</b>：人們常說…（被動語態 + 虛主詞）。<b>double-edged sword</b>：雙刃劍（比喻有利有弊）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>On the one hand, tourism provides local business owners with great economic benefits. On the other hand, it disturbs the lives of local residents and can cause numerous social problems.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一方面，旅遊業為當地商家帶來巨大的經濟利益。另一方面，它擾亂了當地居民的生活，並可能造成眾多社會問題。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> On the one hand… On the other hand（對比結構）。<br>
+            <span class="syn syn-s">S</span> tourism <span class="syn syn-v">V</span> provides <span class="syn syn-o">O</span> local business owners <span class="syn syn-m">M</span> with great economic benefits（provide sb. with sth.）。
+          </div>
+          <div class="para-note"><b>provide sb. with sth.</b>：提供某人某物（= provide sth. for sb.）。<b>on the one hand… on the other hand</b>：一方面…另一方面（正式對比表達）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Clearly, Barcelona is striving to deal with the negative aspects of tourism and is acting to strike a balance between the local community and international visitors.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">顯然，巴塞隆納正努力應對旅遊業的負面影響，並採取行動在當地社區與國際訪客之間取得平衡。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析</span>
+            <span class="syn syn-m">M</span> Clearly，
+            <span class="syn syn-s">S</span> Barcelona
+            <span class="syn syn-v">V</span> is striving to deal with…；
+            <span class="syn syn-v">V</span> is acting to strike a balance between…
+          </div>
+          <div class="para-note">
+            <b>strive (v.)</b>：努力、奮鬥（三態：strive-strove-striven）。<br>
+            <b>strike a balance between A and B</b>：在 A 與 B 之間取得平衡（重要片語）。
+          </div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">&#9658;</span><span>Only after the authorities have developed sustainable solutions will overtourism be manageable and stop causing problems in society.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">唯有當局制定出永續解決方案後，過度旅遊才能變得可控，並不再對社會造成問題。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法分析（倒裝句）</span>
+            <span class="syn syn-m">M</span><span class="syn-t">only after…倒裝</span> Only after the authorities have developed sustainable solutions
+            <span class="syn syn-v">V</span> will（助動詞前移）
+            <span class="syn syn-s">S</span> overtourism
+            <span class="syn syn-c">C</span> be manageable and stop causing problems in society
+          </div>
+          <div class="para-note">
+            <b>Only after + 子句 + 倒裝</b>：否定副詞詞組置首，主句助動詞前移。<br>
+            <b>sustainable (adj.)</b>：永續的；<b>manageable (adj.)</b>：可管理的、可控的。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: 核心字彙                                         -->
+<!-- ============================================================ -->
+<div class="section s-teal">
+  <div class="sec-head">
+    <div class="sec-icon">&#128221;</div>
+    核心字彙 x 12
+  </div>
   <div class="sec-body">
     <div class="vocab-grid">
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">overflow <span class="v-pos">v./n.</span></div><div class="v-cn-mini">溢出；擠滿</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">overflow</span>
+              <span class="v-pos">v./n.</span>
+            </div>
+            <div class="v-cn-mini">溢出；擠滿</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The stadium overflowed with fans.
-            <div class="cn">體育場擠滿了球迷。</div></div>
+          <div class="v-fam"><span>overflow (v./n.)</span><span>overflowing (adj.)</span></div>
+          <div class="v-ex">The stadium <b>overflowed</b> with fans on championship night.<span class="cn">冠軍夜體育場裡擠滿了球迷。</span></div>
+          <div class="v-gsat">學測：over- 前綴表「超過」→ overflow / overrun / overwhelm</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">decline <span class="v-pos">v./n.</span></div><div class="v-cn-mini">下降；衰退</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">extent</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">程度；範圍</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The quality declined over time.
-            <div class="cn">品質隨著時間而下降。</div></div>
+          <div class="v-fam"><span>extent (n.)</span><span>extend (v.)</span><span>extensive (adj.)</span></div>
+          <div class="v-ex">The damage was so severe that residents couldn't grasp its full <b>extent</b>.<span class="cn">損害如此嚴重，居民無法完全掌握其程度。</span></div>
+          <div class="v-gsat">固定片語：to such an extent that（到…的程度）、to some extent（在某程度上）</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">invasion <span class="v-pos">n.</span></div><div class="v-cn-mini">入侵；侵襲</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">decline</span>
+              <span class="v-pos">v./n.</span>
+            </div>
+            <div class="v-cn-mini">下降；衰退；拒絕</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The invasion of tourists overwhelmed the city.
-            <div class="cn">遊客的入侵淹沒了城市。</div></div>
+          <div class="v-fam"><span>decline (v./n.)</span><span>declining (adj.)</span></div>
+          <div class="v-ex">The number of tourists has been in <b>decline</b> since new restrictions were introduced.<span class="cn">自新規定實施後，遊客人數持續下降。</span></div>
+          <div class="v-gsat">考點：decline = refuse（拒絕）時後接 to V；表「下降」時不及物。</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">complaint <span class="v-pos">n.</span></div><div class="v-cn-mini">抱怨；投訴</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">dramatically</span>
+              <span class="v-pos">adv.</span>
+            </div>
+            <div class="v-cn-mini">大幅地；戲劇性地</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> We received many complaints about the service.
-            <div class="cn">我們收到了許多關於服務的抱怨。</div></div>
+          <div class="v-fam"><span>dramatically (adv.)</span><span>dramatic (adj.)</span><span>drama (n.)</span></div>
+          <div class="v-ex">Prices rose <b>dramatically</b> after the earthquake.<span class="cn">地震後物價大幅上漲。</span></div>
+          <div class="v-gsat">近義詞：sharply / significantly / drastically（學測換句話說常用）</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">thoughtless <span class="v-pos">adj.</span></div><div class="v-cn-mini">欠缺考慮的</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">expansion</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">擴張；增長</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> His thoughtless comments hurt her feelings.
-            <div class="cn">他欠缺考慮的評論傷害了她的感受。</div></div>
+          <div class="v-fam"><span>expansion (n.)</span><span>expand (v.)</span><span>expansive (adj.)</span></div>
+          <div class="v-ex">The rapid <b>expansion</b> of the tech industry created many new jobs.<span class="cn">科技業的快速擴張創造了許多新工作。</span></div>
+          <div class="v-gsat">extend → extension；expand → expansion（字形變化）</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">landlord <span class="v-pos">n.</span></div><div class="v-cn-mini">房東；地主</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">invasion</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">入侵；侵入</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The landlord raised the rent.
-            <div class="cn">房東提高了租金。</div></div>
+          <div class="v-fam"><span>invasion (n.)</span><span>invade (v.)</span><span>invader (n.)</span><span>invasive (adj.)</span></div>
+          <div class="v-ex">Residents felt an <b>invasion</b> of their privacy by noisy tour groups.<span class="cn">居民感到嘈雜的旅遊團侵犯了他們的隱私。</span></div>
+          <div class="v-gsat">invasion of privacy（侵犯隱私）為學測常考組合</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">measure <span class="v-pos">v./n.</span></div><div class="v-cn-mini">措施；測量</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">complaint</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">抱怨；投訴</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> The government took measures to reduce pollution.
-            <div class="cn">政府採取了措施來減少污染。</div></div>
+          <div class="v-fam"><span>complaint (n.)</span><span>complain (v.)</span></div>
+          <div class="v-ex">The hotel received numerous <b>complaints</b> about the noise from tourists.<span class="cn">飯店收到許多關於遊客噪音的投訴。</span></div>
+          <div class="v-gsat">complain about sth.（抱怨某事）；file a complaint（提出投訴）</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">license <span class="v-pos">n./v.</span></div><div class="v-cn-mini">執照；許可證</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">thoughtless</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">欠缺考慮的；不體貼的</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> You need a license to operate the business.
-            <div class="cn">你需要執照來經營業務。</div></div>
+          <div class="v-fam"><span>thoughtless (adj.)</span><span>thoughtful (adj. 體貼)</span><span>thoughtlessly (adv.)</span></div>
+          <div class="v-ex">It was <b>thoughtless</b> of him to play music so loud at midnight.<span class="cn">他在午夜播這麼大聲的音樂是欠考慮的行為。</span></div>
+          <div class="v-gsat">反義詞：thoughtful（體貼的）。-less = 「缺乏」；-ful = 「充滿」</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">strive <span class="v-pos">v.</span></div><div class="v-cn-mini">努力；奮鬥</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">tenant</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">房客；租戶</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> We strive for excellence in everything we do.
-            <div class="cn">我們在做的一切事情中都力求卓越。</div></div>
+          <div class="v-fam"><span>tenant (n.)</span><span>tenancy (n.)</span></div>
+          <div class="v-ex">Several <b>tenants</b> were evicted to make way for short-term rentals.<span class="cn">幾位租客被驅逐，以便開放短租。</span></div>
+          <div class="v-gsat">tenant（房客）↔ landlord（房東）一組對比字，學測常一起出現</div>
         </div>
       </div>
+
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
-          <div><div class="v-word">sustainable <span class="v-pos">adj.</span></div><div class="v-cn-mini">可持續的；永久的</div></div>
-          <div class="v-ic">▶</div>
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">landlord</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">房東；地主</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
         </div>
         <div class="v-body">
-          <div class="v-ex"><strong>例句：</strong> We need sustainable development.
-            <div class="cn">我們需要可持續發展。</div></div>
+          <div class="v-fam"><span>landlord (n.)</span><span>landlady (n. 女房東)</span></div>
+          <div class="v-ex">The <b>landlord</b> raised the rent after discovering Airbnb's high demand.<span class="cn">房東在發現 Airbnb 需求旺盛後漲租。</span></div>
+          <div class="v-gsat">land（土地）+ lord（主人）= 土地主人 = 房東</div>
         </div>
       </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">measure</span>
+              <span class="v-pos">v./n.</span>
+            </div>
+            <div class="v-cn-mini">衡量；措施</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam"><span>measure (v./n.)</span><span>measurement (n.)</span><span>measurable (adj.)</span></div>
+          <div class="v-ex">The government introduced new <b>measures</b> to control the crowd at popular sites.<span class="cn">政府引進新措施管控熱門景點的人潮。</span></div>
+          <div class="v-gsat">take measures（採取措施）為學測高頻片語</div>
+        </div>
+      </div>
+
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">concentrate</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">專心；集中於</div>
+          </div>
+          <span class="v-ic">&#9658;</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam"><span>concentrate (v.)</span><span>concentration (n.)</span><span>concentrated (adj.)</span></div>
+          <div class="v-ex">The plan <b>concentrates</b> more on management than on attracting visitors.<span class="cn">這個計畫著重於管理而非吸引遊客。</span></div>
+          <div class="v-gsat">concentrate on = focus on（專注於）；固定介系詞 on</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: 片語講解                                         -->
+<!-- ============================================================ -->
+<div class="section s-green">
+  <div class="sec-head">
+    <div class="sec-icon">&#128279;</div>
+    片語講解 x 7
+  </div>
   <div class="sec-body">
-    <table class="phrase-table">
-      <tr><th>片語</th><th>中文</th><th>例句</th></tr>
-      <tr><td><span class="phr">in question</span></td><td>討論中的</td><td>The document in question is missing.</td></tr>
-      <tr><td><span class="phr">to such an extent that</span></td><td>到…的程度</td><td>The problem grew to such an extent that it couldn't be ignored.</td></tr>
-      <tr><td><span class="phr">be fed up with</span></td><td>對…感到厭煩</td><td>I am fed up with the noise.</td></tr>
-      <tr><td><span class="phr">throw up</span></td><td>嘔吐</td><td>He felt sick and threw up.</td></tr>
-      <tr><td><span class="phr">put a limit on</span></td><td>對…加以限制</td><td>The government put a limit on pollution.</td></tr>
-      <tr><td><span class="phr">strike a balance</span></td><td>取得平衡</td><td>We need to strike a balance between work and rest.</td></tr>
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th style="width:28%">片語</th>
+          <th style="width:20%">中文</th>
+          <th>例句 &amp; 說明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phr">in question</span></td>
+          <td>討論中的；正提到的</td>
+          <td>
+            <div class="pex">The city <b>in question</b> is Barcelona.<span class="cn">討論中的城市就是巴塞隆納。</span></div>
+            <div class="pex" style="margin-top:6px;color:#64748b">用於名詞後，修飾「正在談論的」事物，無需冠詞。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">to such an extent that</span></td>
+          <td>到…的程度（以至於）</td>
+          <td>
+            <div class="pex">The noise was <b>to such an extent</b> that neighbors called the police.<span class="cn">噪音嚴重到鄰居報警。</span></div>
+            <div class="pex" style="margin-top:6px;color:#64748b">= so... that...。結果子句，強調嚴重程度。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">be fed up with</span></td>
+          <td>對…感到厭煩</td>
+          <td>
+            <div class="pex">She was <b>fed up with</b> tourists blocking her doorway every morning.<span class="cn">她對每天早晨遊客堵住她門口感到厭煩。</span></div>
+            <div class="pex" style="margin-top:6px;color:#64748b">= be sick and tired of / be tired of。後接 N 或 V-ing。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">throw up</span></td>
+          <td>嘔吐</td>
+          <td>
+            <div class="pex">Some visitors even <b>threw up</b> on the streets after drinking.<span class="cn">部分遊客喝酒後甚至在街上嘔吐。</span></div>
+            <div class="pex" style="margin-top:6px;color:#64748b">= vomit。口語化用法。另義：「建造」(throw up a building)。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">take down</span></td>
+          <td>撤下；拆除；記下</td>
+          <td>
+            <div class="pex">The city ordered Airbnb to <b>take down</b> unlicensed listings.<span class="cn">市政府命令 Airbnb 下架未獲授權的房源。</span></div>
+            <div class="pex" style="margin-top:6px;color:#64748b">可分離片語（受詞可夾中間）：take it down / take down the listing。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">put a limit on</span></td>
+          <td>對…加以限制</td>
+          <td>
+            <div class="pex">Officials decided to <b>put a limit on</b> daily visitor numbers.<span class="cn">官員決定對每日遊客人數加以限制。</span></div>
+            <div class="pex" style="margin-top:6px;color:#64748b">= set a limit on / restrict。名詞 limit 可複數：put limits on。</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">strike a balance between</span></td>
+          <td>在…之間取得平衡</td>
+          <td>
+            <div class="pex">The city is trying to <b>strike a balance between</b> tourism and residents' needs.<span class="cn">該市正試圖在旅遊業與居民需求之間取得平衡。</span></div>
+            <div class="pex" style="margin-top:6px;color:#64748b">= find a balance between。strike（打擊）→ 比喻「找到」平衡點。</div>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: 文法句型                                         -->
+<!-- ============================================================ -->
+<div class="section s-purple">
+  <div class="sec-head">
+    <div class="sec-icon">&#128208;</div>
+    文法句型 x 3
+  </div>
   <div class="sec-body">
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">1</div><div class="q-main"><div class="q-en">What is "overtourism"?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Too many hotels in a city</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) When a destination has so many tourists that local residents' quality of life declines</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Tourists staying for too long</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Too expensive tourism packages</span></div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>1. 否定副詞詞組倒裝句：Only after / Only by + 倒裝</span>
+        <span class="g-arrow">&#9660;</span>
       </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文定義：「This occurs when an attraction becomes overrun with tourists to such an extent that the local residents' quality of life declines dramatically.」</div>
-      </div>
-    </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">2</div><div class="q-main"><div class="q-en">How many times more visitors does Barcelona receive compared to its population?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Five times</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) More than fifteen times</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Twenty times</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Ten times</span></div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文明確說：「each year receives more than fifteen times as many visitors as its actual population」每年接待的遊客人數是其實際人口的十五倍以上。</div>
-      </div>
-    </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">3</div><div class="q-main"><div class="q-en">What problems do residents complain about?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Only noise pollution</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Loud music at night, garbage, urinating and vomiting on streets, loss of housing</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Only loss of housing</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Only inappropriate behavior</span></div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文提到了多個問題：「play loud music late at night and throw garbage...urinating and throwing up on streets...forced to leave their apartments because landlords are partial to renting through Airbnb。」</div>
+      <div class="g-formula">Only after + S + V, 助動詞 + S + V (原形)
+Only by + V-ing, 助動詞 + S + V (原形)</div>
+      <div class="g-body">
+        <p style="color:#334155;margin-bottom:10px">當 <b>only</b> 修飾的副詞詞組（含 after / by / when / if 等）移至句首時，後面的主句須做「倒裝」——助動詞提前到主詞前。</p>
+        <div class="g-ex">
+          <b>課文例句一：</b><br>
+          <b>Only after</b> the authorities have developed sustainable solutions <b>will</b> overtourism be manageable.<br>
+          <div class="g-ex-cn">唯有當局制定出永續解決方案後，過度旅遊才能變得可控。</div>
+        </div>
+        <div class="g-ex">
+          <b>課文例句二：</b><br>
+          They believe that <b>only by</b> introducing practical measures <b>can</b> the impact of overtourism be reduced.<br>
+          <div class="g-ex-cn">他們認為，唯有引進實際措施，過度旅遊的衝擊才能被減輕。</div>
+        </div>
+        <div class="g-ex">
+          <b>額外練習：</b><br>
+          <b>Only when</b> we respect the environment <b>can</b> we ensure a sustainable future.<br>
+          <div class="g-ex-cn">唯有尊重環境，我們才能確保永續的未來。</div>
+        </div>
+        <table class="gtab">
+          <tr><th>常見否定詞組</th><th>倒裝格式</th></tr>
+          <tr><td>Only after + 子句</td><td>助動詞 + S + V</td></tr>
+          <tr><td>Only by + V-ing</td><td>助動詞 + S + V</td></tr>
+          <tr><td>Only when + 子句</td><td>助動詞 + S + V</td></tr>
+          <tr><td>Never / Seldom / Rarely</td><td>助動詞 + S + V</td></tr>
+        </table>
+        <div class="g-note">句首 Only 修飾的不是主詞時才倒裝。若 Only I know...（Only 修飾主詞 I），不需倒裝。</div>
+        <div class="g-tip">學測閱讀常見：Not until... did...（直到…才…）也是相同倒裝邏輯。</div>
       </div>
     </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">4</div><div class="q-main"><div class="q-en">What measures has Barcelona taken to address overtourism?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Ban all tourists</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Limit visitor numbers, ban tour groups, restrict hotel development, and regulate Airbnb listings</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Increase tourism promotion</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Raise hotel prices</span></div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>2. 強調句型：It is/was... that/who...</span>
+        <span class="g-arrow">&#9660;</span>
       </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文提列了多項措施：「putting limits on the number of people who can visit certain hotspots...banning large tour groups...restricted the development of new hotels...ordered that websites like Airbnb take down their listings。」</div>
+      <div class="g-formula">It is/was + 被強調成分 + that/who + 句子其餘部分</div>
+      <div class="g-body">
+        <p style="color:#334155;margin-bottom:10px">將想強調的成分（主詞、受詞、副詞）移至 <b>It is/was</b> 後，再接 <b>that/who</b> 連接剩餘句子。</p>
+        <div class="g-ex">
+          <b>強調地點（概念例句）：</b><br>
+          <b>It is</b> Barcelona <b>that</b> receives more than fifteen times as many visitors as its actual population.<br>
+          <div class="g-ex-cn">正是巴塞隆納，每年接待的遊客超過其人口的十五倍。</div>
+        </div>
+        <div class="g-ex">
+          <b>強調主詞（人）：</b><br>
+          <b>It was</b> the landlords <b>who</b> forced tenants to leave.<br>
+          <div class="g-ex-cn">正是那些房東迫使租客離開的。</div>
+        </div>
+        <div class="g-ex">
+          <b>強調時間：</b><br>
+          <b>It was</b> in 1992 <b>that</b> the Olympics put Barcelona on the tourist map.<br>
+          <div class="g-ex-cn">正是在 1992 年，奧運會使巴塞隆納成為旅遊名城。</div>
+        </div>
+        <table class="gtab">
+          <tr><th>強調成分</th><th>連接詞</th><th>例</th></tr>
+          <tr><td>主詞（人）</td><td>who / that</td><td>It was John who called.</td></tr>
+          <tr><td>主詞（物）</td><td>that</td><td>It was the storm that caused the damage.</td></tr>
+          <tr><td>受詞 / 副詞</td><td>that</td><td>It is hard work that matters.</td></tr>
+        </table>
+        <div class="g-note">強調句移除 It is/was...that 後，剩餘句子仍語法完整。若不完整則可能是「虛主詞」句，非強調句。</div>
+        <div class="g-tip">學測常考：分辨 It is...that（強調句）與 It is important that...（虛主詞）的結構差異。</div>
       </div>
     </div>
-    <div class="q-block">
-      <div class="q-top"><div class="q-num">5</div><div class="q-main"><div class="q-en">What does "double-edged sword" mean in this context?</div></div></div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(A) Tourism is always bad</span></div>
-        <div class="choice" onclick="selectChoice(this, true)"><div class="mark"></div><span>(B) Tourism has both positive economic benefits and negative social impacts</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(C) Tourism is always good</span></div>
-        <div class="choice" onclick="selectChoice(this, false)"><div class="mark"></div><span>(D) Tourism creates weapons</span></div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>3. 倍數比較句：數字 + times + as ... as</span>
+        <span class="g-arrow">&#9660;</span>
       </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文解釋：「On the one hand, tourism provides local business owners with great economic benefits. On the other hand, it disturbs the lives of local residents and can cause numerous social problems.」雙刃劍指既有利也有弊。</div>
+      <div class="g-formula">數字 + times + as + adj./adv. + as + 比較對象
+數字 + times + the + 名詞（size / number / amount...）+ of + 比較對象</div>
+      <div class="g-body">
+        <p style="color:#334155;margin-bottom:10px">表達「是…的幾倍」時，英文常用 <b>倍數 + as … as</b> 的結構。</p>
+        <div class="g-ex">
+          <b>課文例句一：</b><br>
+          Barcelona receives more than <b>fifteen times as many</b> visitors <b>as</b> its actual population.<br>
+          <div class="g-ex-cn">巴塞隆納每年接待的遊客超過其實際人口的十五倍。</div>
+        </div>
+        <div class="g-ex">
+          <b>課文例句二：</b><br>
+          The number of visitors grew to almost <b>five times as large as</b> that in 1992.<br>
+          <div class="g-ex-cn">遊客人數增長到幾乎是 1992 年的五倍。</div>
+        </div>
+        <div class="g-ex">
+          <b>另一常見格式：</b><br>
+          Taiwan is about <b>twice the size of</b> the island of Kyushu.<br>
+          <div class="g-ex-cn">台灣大約是九州島的兩倍大。</div>
+        </div>
+        <table class="gtab">
+          <tr><th>格式</th><th>說明</th></tr>
+          <tr><td>twice / three times / five times...</td><td>2 倍用 twice，其他用 數字 + times</td></tr>
+          <tr><td>as + adj. + as</td><td>形容詞原級比較</td></tr>
+          <tr><td>as many/much + N + as</td><td>可數/不可數名詞</td></tr>
+          <tr><td>the + 名詞 + of</td><td>the size/length/weight of</td></tr>
+        </table>
+        <div class="g-note">錯誤：three times more than（中式英文）→ 正確：three times as large as。</div>
+        <div class="g-tip">學測最常考：twice as large as / three times as many as，注意代名詞 that/those 代替名詞避免重複。</div>
       </div>
     </div>
+
   </div>
 </div>
-<footer>龍騰高職英文 ── L8: Overtourism in Barcelona</footer>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: 練習題                                           -->
+<!-- ============================================================ -->
+<div class="section s-orange">
+  <div class="sec-head">
+    <div class="sec-icon">&#9999;</div>
+    練習題 x 8
+  </div>
+  <div class="sec-body">
+    <div class="sec-hint">點選選項後，會自動標示對錯；點「看完整解析」可展開詳細說明。</div>
+    <div id="q-wrap"></div>
+  </div>
 </div>
+
+</div><!-- end .page -->
+
 <script>
-function toggleCN(elem){const icon=elem.querySelector('.ic');const cn=elem.querySelector('.para-cn');icon.classList.toggle('open');cn.classList.toggle('open')}
-function toggleVocab(elem){const icon=elem.querySelector('.v-ic');const body=elem.nextElementSibling;icon.classList.toggle('open');body.classList.toggle('open')}
-function selectChoice(elem,isCorrect){const block=elem.closest('.q-block');const allChoices=block.querySelectorAll('.choice');allChoices.forEach(c=>c.classList.remove('correct','wrong'));if(isCorrect){elem.classList.add('correct')}else{elem.classList.add('wrong')}const ansBlock=block.querySelector('.q-ans');ansBlock.classList.add('open')}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='&#128265;';setTimeout(function(){btn.textContent='&#128266;';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='&#128266;'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'&#9650;':'&#9660;';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='&#10003;';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='&#10007;';}
+  });
+  var ans=block.querySelector('.q-ans');
+  if(ans)ans.classList.add('open');
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+var studentQ=[
+  {
+    q:['The visitors ',', crowding into every corner of the old town.'],
+    cn:'遊客溢滿城市，擠進古城的每個角落。',
+    opts:['overflowed the city','declined the city','expanded the city','measured the city'],
+    ans:0,
+    word:'overflow (v.) 溢出；擠滿',
+    exp:'空格需填入能描述「遊客擠滿城市」的動詞片語，overflow the city（=擠滿城市）最符合語意。(B) decline（下降）、(C) expand（擴大）、(D) measure（衡量）皆不符。',
+    note:'overflow + 場所：直接接受詞，表「把…擠滿/溢出」。'
+  },
+  {
+    q:['The damage caused by the flood was beyond the full ',' of what we had imagined.'],
+    cn:'洪水造成的損害超出了我們所能想像的全部程度。',
+    opts:['expansion','measure','extent','complaint'],
+    ans:2,
+    word:'extent (n.) 程度；範圍',
+    exp:'空格需名詞，表示「程度/範圍」。extent 表「程度」最符合。(A) expansion（擴張）、(B) measure（措施）、(D) complaint（抱怨）皆不符語意。',
+    note:'固定片語：to such an extent that（到…的程度）、to some extent（在某程度上）。'
+  },
+  {
+    q:['After the government\'s new regulations, the number of tourists began to ',' sharply.'],
+    cn:'在政府新規定實施後，遊客人數開始急劇下降。',
+    opts:['concentrate','overflow','expand','decline'],
+    ans:3,
+    word:'decline (v.) 下降；衰退',
+    exp:'後文有 sharply（急劇地），需要「下降」類動詞。decline（下降）最符合。(A) concentrate（專心）、(B) overflow（擠滿）、(C) expand（擴大）皆反義或無關。',
+    note:'decline 作動詞為不及物，後不直接接受詞：decline sharply / decline in number。'
+  },
+  {
+    q:['The rapid ',' of tourism brought economic benefits but also serious social problems.'],
+    cn:'旅遊業的快速擴張帶來了經濟利益，但也造成嚴重的社會問題。',
+    opts:['complaint','invasion','expansion','measure'],
+    ans:2,
+    word:'expansion (n.) 擴張；增長',
+    exp:'空格修飾 tourism（旅遊業的…），需正面/中性名詞表「成長」。expansion（擴張）最符合。(A) complaint（抱怨）負面；(B) invasion（入侵）負面；(D) measure（措施）無關。',
+    note:'expand (v.) → expansion (n.)。字尾 -sion 注意拼法。'
+  },
+  {
+    q:['Residents filed many ',' against noisy tourists who partied late into the night.'],
+    cn:'居民對深夜喧鬧的派對遊客提出了許多投訴。',
+    opts:['measures','complaints','expansions','landlords'],
+    ans:1,
+    word:'complaint (n.) 抱怨；投訴',
+    exp:'file（提出）+ complaints（投訴）是固定搭配。(A) measures（措施）搭配 take；(C) expansions（擴張）語意不符；(D) landlords（房東）詞性錯誤。',
+    note:'complain (v.) → complaint (n.)。file a complaint / make a complaint = 提出投訴。'
+  },
+  {
+    q:['Some ',' were forced to move out of their apartments when landlords switched to Airbnb rentals.'],
+    cn:'當房東改為 Airbnb 出租時，部分房客被迫搬出公寓。',
+    opts:['landlords','measures','tenants','options'],
+    ans:2,
+    word:'tenant (n.) 房客；租戶',
+    exp:'空格為主詞，後文「被迫搬出公寓」表示是住在裡面的人，tenant（房客）符合。(A) landlords（房東）是趕人的一方；(B) measures（措施）語意錯；(D) options（選擇）語意錯。',
+    note:'tenant（房客）↔ landlord（房東）。課文：some local tenants have been forced to leave their apartments。'
+  },
+  {
+    q:['The city introduced practical ',' to control the number of visitors at popular sites.'],
+    cn:'市政府引進了實際措施來控制熱門景點的遊客人數。',
+    opts:['invasions','expansions','complaints','measures'],
+    ans:3,
+    word:'measure (n.) 措施',
+    exp:'空格需名詞表「措施/方法」，接動詞 introduced 與形容詞 practical，measure（措施）最符合。(A) invasions（入侵）、(B) expansions（擴張）、(C) complaints（抱怨）皆語意不符。',
+    note:'take measures = introduce measures（採取措施）；practical measures（實際可行的措施）為課文原句。'
+  },
+  {
+    q:['Many local residents were ',' tourists\' noisy behavior and decided to move away.'],
+    cn:'許多當地居民對遊客的嘈雜行為感到厭煩，決定搬走。',
+    opts:['fed up with','partial to','aware of','sick to'],
+    ans:0,
+    word:'be fed up with 對…感到厭煩',
+    exp:'空格後接「遊客的嘈雜行為」，語意為「厭煩」，be fed up with 最符合。(B) be partial to（偏愛）、(C) be aware of（意識到）、(D) sick to 非固定用法。',
+    note:'be fed up with = be tired of = be sick and tired of（後兩者也是課文片語）。後接 N 或 V-ing。'
+  }
+];
+
+(function(){
+  var wrap=document.getElementById('q-wrap');
+  if(!wrap)return;
+  studentQ.forEach(function(d,i){
+    var choices=d.opts.map(function(o,j){
+      return '<div class="choice" data-correct="'+(j===d.ans?'1':'0')+'" onclick="pickChoice(this)"><span class="mark"></span>('+'ABCD'[j]+') '+o+'</div>';
+    }).join('');
+    wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div><button class="show-btn" onclick="showAns(this)">看完整解析</button></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';
+  });
+})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim().replace(/\.\.\./g,' ').replace(/\([^)]*\)/g,'').replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
 </script>
 </body>
 </html>

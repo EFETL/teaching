@@ -2,558 +2,1051 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L9: The Story behind Eponyms ── 龍騰高職英文互動教學</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L9: The Story behind Eponyms｜龍騰高中英文 第二冊</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
 .page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
-.header{background:linear-gradient(135deg,#0f766e 0%,#14b8a6 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:.9em;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#0f766e;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#0f766e 0%,#14b8a6 60%,#67e8f9 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
 .header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
 .header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
-.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
-.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
-.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;background:#0f766e;color:#fff}
-.sec-body{padding:6px 24px 26px}
+.header .time{margin-top:6px;font-size:.95em;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.9em;font-weight:700}
 
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:.92em;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
 .para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
-.para-head{font-weight:800;font-size:1.05em;padding:11px 16px;background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.para-speaker{font-weight:800;font-size:1.05em;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
 .para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
 .para-line:hover{background:#f8fafc}
 .para-line:last-child{border-bottom:none}
 .para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
 .para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
 .para-en .ic.open{transform:rotate(90deg)}
-.para-cn{display:none;color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #14b8a6;padding:7px 12px;border-radius:0 6px 6px 0;margin-top:10px}
-.para-cn.open{display:block}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:.9em;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:.92em;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:.96em}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:.76em;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:.86em;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:.82em;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
 
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:.98em;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:1.02em;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
 .vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
 .v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .v-top:hover{background:#f8fafc}
-.v-word{font-size:1.18em;font-weight:800;color:#0f766e}
+.v-word{font-size:1.18em;font-weight:800;color:#1e40af}
 .v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
 .v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
 .v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
 .v-ic.open{transform:rotate(90deg)}
 .v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
 .v-body.open{display:block}
-.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #14b8a6;padding-left:10px;line-height:1.65}
+.v-fam{margin-top:10px;font-size:.9em;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
 .v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:.85em;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
 
-.phrase-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
-.phrase-table th{background:#f0fdfa;padding:10px 13px;text-align:left;font-weight:700;color:#0f766e;border-bottom:2px solid #99f6e4}
-.phrase-table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
-.phrase-table tr:last-child td{border-bottom:none}
-.phrase-table tr:nth-child(even) td{background:#f8fafc}
-.phr{font-weight:700;color:#0f766e}
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:.95em}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
 
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:.95em}
+.pex .cn{display:block;color:#94a3b8;font-size:.92em;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:1.05em}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:.8em;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:.95em;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:.97em;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:.92em;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:.93em;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:.93em;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:.93em;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
 .q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
 .q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
-.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff;background:#0f766e}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff}
+.s-orange .q-num{background:#9a3412}
 .q-main{flex:1}
 .q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:.94em;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
 .q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
 .choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
 .choice:hover{border-color:#94a3b8;background:#f1f5f9}
-.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent;background:#fff}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent}
 .choice.correct{border-color:#16a34a;background:#f0fdf4}
-.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff;content:'✓'}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
 .choice.wrong{border-color:#dc2626;background:#fef2f2}
 .choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
 
 .q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
 .q-ans.open{display:block}
-.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff;background:#0f766e}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:1em;color:#9a3412;margin-bottom:5px;display:block}
 .ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
-.ans-note{font-size:.94em;color:#475569;line-height:1.75}
-
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:.95em;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:1.02em}
 .show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
 .show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:1em;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
 
-footer{text-align:center;color:#789;font-size:15px;margin-top:30px}
-@media(max-width:640px){.vocab-grid{grid-template-columns:1fr}.q-choices{grid-template-columns:1fr}}
+@media print{
+  body{background:#fff;font-size:13px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#0f766e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .q-ans,.g-body,.v-body,.para-exp{display:block!important}
+  .v-ic,.g-arrow,.para-en .ic,.show-btn,.sec-hint,.header-nav{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="page">
 
-<div class="header">
-  <h1>📖 L9: The Story behind Eponyms</h1>
-  <p class="sub">龍騰高職英文 — 互動教學</p>
-</div>
-
-<!-- 課文分析 -->
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">📝</div>課文分析</div>
-  <div class="sec-body">
-
-    <div class="para">
-      <div class="para-head">Paragraph 1</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>Have you ever heard the term "paparazzi"? Or how about "Photoshop" used as a verb? Both of these are examples of eponyms.</span>
-        </div>
-        <div class="para-cn">你曾經聽過「狗仔隊」這個詞嗎？或是「Photoshop」被當作動詞使用？這兩者都是「專名詞」的例子。</div>
-      </div>
-    </div>
-
-    <div class="para">
-      <div class="para-head">Paragraph 2-3</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>An eponym is a word which usually started out as the name of someone or something but took on a more general meaning later on. An example of an eponym that is derived from a person's name is "paparazzi."</span>
-        </div>
-        <div class="para-cn">專名詞是一個詞，通常最初是某人或某物的名稱，但後來具有了更普遍的意義。源自人名的專名詞例子是「paparazzi」（狗仔隊）。</div>
-      </div>
-    </div>
-
-    <div class="para">
-      <div class="para-head">Paragraph 4-6</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>It is said that this word came from a character called Paparazzo in the Italian film La Dolce Vita. Set in Rome, the film is about the writer of a popular newspaper column featuring celebrity gossip. Paparazzo is a photographer who works with the writer to reveal the secret lives of celebrities. After the film was released in 1960, people began to use the word paparazzo and its plural form paparazzi to refer to all photographers who chase celebrities around.</span>
-        </div>
-        <div class="para-cn">據說這個詞來自義大利電影《甜蜜生活》中一個名叫 Paparazzo 的角色。這部電影以羅馬為背景，講述了一位流行報紙專欄作家的故事，該專欄刊載名人八卦。Paparazzo 是與這位作家合作揭露名人秘密生活的攝影師。電影在 1960 年上映後，人們開始使用 paparazzo 及其複數形式 paparazzi 來指代所有追逐名人的攝影師。</div>
-      </div>
-    </div>
-
-    <div class="para">
-      <div class="para-head">Paragraph 7-10</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>Product-based eponyms such as Photoshop, on the other hand, are brand names that are commonly used to describe other similar products, or in this case an action. Photoshop is an image-editing software program created by Adobe Inc. It is used to create, modify, or digitally combine images and photographs. Since it was first released in 1987, Photoshop has become the standard software used by photographers and designers around the world. It became so widely known that over time, people began to use "Photoshop" as a verb to mean "to edit a photo." For example, no matter what software program is actually used, you could say, "The picture has obviously been photoshopped."</span>
-        </div>
-        <div class="para-cn">另一方面，基於產品的專名詞如 Photoshop，是通常用來描述其他類似產品或在這種情況下描述動作的品牌名稱。Photoshop 是由 Adobe Inc. 創建的圖像編輯軟體程序。它用於創建、修改或數位地組合圖像和照片。自 1987 年首次發布以來，Photoshop 已成為世界各地攝影師和設計師使用的標準軟體。由於它變得如此廣為人知，隨著時間的推移，人們開始使用「Photoshop」作為動詞，表示「編輯照片」。例如，無論實際使用什麼軟體程序，你都可以說「這張照片明顯被 Photoshop 過了。」</div>
-      </div>
-    </div>
-
-    <div class="para">
-      <div class="para-head">Paragraph 11-12</div>
-      <div class="para-line" onclick="toggleCN(this)">
-        <div class="para-en">
-          <span class="ic">▶</span>
-          <span>In the beginning, Adobe was not pleased that people were using their product name to describe the work of other companies' products, but the eponym has become too popular for them to stop its widespread usage. As you can see, eponyms play an important role in creating new words in our society. Language is constantly changing with the adoption of new words and alternative uses for existing words. Who knows what new words we will think up next?</span>
-        </div>
-        <div class="para-cn">起初，Adobe 對人們使用他們的產品名稱來描述其他公司產品的工作感到不高興，但這個專名詞變得太受歡迎，他們無法阻止其廣泛使用。如你所見，專名詞在我們社會創造新詞方面發揮著重要作用。語言不斷變化，採納新詞並為現有詞語的替代用法。誰知道我們接下來會想出什麼新詞呢？</div>
-      </div>
-    </div>
-
+<!-- ═══ HEADER ═══ -->
+<div class="header" style="background:linear-gradient(135deg,#0f766e 0%,#14b8a6 60%,#67e8f9 100%)">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L9: The Story behind Eponyms ── 專名詞的故事</h1>
+  <div class="sub">龍騰高中版英文 第二冊 第九課｜互動教學講義</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 12</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">📐 文法句型 × 3</span>
+    <span class="tag">✏️ 練習題 × 8</span>
   </div>
 </div>
 
-<!-- 單字卡 -->
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">📚</div>單字卡</div>
+<!-- ═══ SECTION 1：課文逐句精講 ═══ -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">📖</div>
+    課文逐句精講
+  </div>
   <div class="sec-body">
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+    <div class="sec-hint">點擊每句英文可展開中文翻譯、句構分析與教學提示</div>
+
+    <div class="para">
+
+      <!-- S1 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Have you ever heard the term "paparazzi"?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">你有沒有聽說過「paparazzi（狗仔隊）」這個詞？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">you</span><span class="syn-t">S</span>
+            <span class="syn syn-v">Have...heard</span><span class="syn-t">V（現在完成式）</span>
+            <span class="syn syn-o">the term "paparazzi"</span><span class="syn-t">O</span>
+            <span class="syn syn-m">ever</span><span class="syn-t">M（加強語氣）</span>
+          </div>
+          <div class="para-note">現在完成式 <b>have + ever + p.p.</b> 常用於詢問「曾經有沒有過...的經驗」。<b>term</b>（n.）術語；詞彙。此句是全文的開場問句，引發讀者興趣。</div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Or how about "Photoshop" used as a verb?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">或者「Photoshop」被當作動詞使用的情形呢？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">Or how about</span><span class="syn-t">M（詢問語氣）</span>
+            <span class="syn syn-o">"Photoshop" used as a verb</span><span class="syn-t">O（名詞片語）</span>
+          </div>
+          <div class="para-note"><b>how about + N/V-ing</b> = 「...怎麼樣？」表提議或詢問看法。<b>used as a verb</b> 是過去分詞片語，後位修飾 "Photoshop"，= which is used as a verb。</div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Both of these are examples of eponyms.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這兩者都是「專名詞（eponyms）」的例子。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">Both of these</span><span class="syn-t">S</span>
+            <span class="syn syn-v">are</span><span class="syn-t">V（連綴動詞）</span>
+            <span class="syn syn-c">examples of eponyms</span><span class="syn-t">C（主詞補語）</span>
+          </div>
+          <div class="para-note"><b>eponym</b>（n.）專名詞：由某人名、地名或品牌名衍生出的普通詞彙，是本課核心主題詞。<b>Both of + 複數名詞</b> 後接複數動詞 are。</div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>An eponym is a word which usually started out as the name of someone or something but took on a more general meaning later on.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">專名詞是一個詞彙，通常起初是某人或某物的名稱，但後來衍生出更普遍的意思。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">An eponym</span><span class="syn-t">S</span>
+            <span class="syn syn-v">is</span><span class="syn-t">V</span>
+            <span class="syn syn-c">a word [<span class="syn-cl">which usually started out as...but took on...</span>]</span><span class="syn-t">C（含關係子句）</span>
+            <br>關係子句內：<span class="syn syn-v">started out / took on</span><span class="syn-t">V（並列）</span>
+            <span class="syn syn-o">a more general meaning</span><span class="syn-t">O</span>
+            <span class="syn syn-m">later on</span><span class="syn-t">M</span>
+          </div>
+          <div class="para-note"><b>take on</b>（片語）= 承擔；呈現（新含義）。<b>later on</b> = 後來；接下來。<b>general</b>（adj.）普遍的；一般的。<b>start out as</b> = 以...起頭/開始。</div>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>An example of an eponym that is derived from a person's name is "paparazzi."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一個由人名衍生出來的專名詞例子是「paparazzi」。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">An example of an eponym [<span class="syn-cl">that is derived from a person's name</span>]</span><span class="syn-t">S（含關係子句）</span>
+            <span class="syn syn-v">is</span><span class="syn-t">V</span>
+            <span class="syn syn-c">"paparazzi"</span><span class="syn-t">C</span>
+          </div>
+          <div class="para-note"><b>be derived from</b> = 衍生自；起源於（被動式）。<b>derive</b>（v.）主動：derive A from B（從B衍生出A）；被動：be derived from B（衍生自B）。注意主詞是長名詞片語，動詞仍用單數 is。</div>
+        </div>
+      </div>
+
+      <!-- S6 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It is said that this word came from a character called Paparazzo in the Italian film La Dolce Vita.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">據說這個詞來自義大利電影《甜蜜的生活》中一個名叫 Paparazzo 的角色。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">It</span><span class="syn-t">虛主詞</span>
+            <span class="syn syn-v">is said</span><span class="syn-t">V（被動語態）</span>
+            <span class="syn syn-o">that this word came from a character called Paparazzo...</span><span class="syn-t">真主詞（that子句）</span>
+          </div>
+          <div class="para-note"><b>It is said that...</b> = 據說...（被動語態句型，虛主詞 It）。同義：People say that... / S is said to V。<b>called Paparazzo</b> = 過去分詞片語後位修飾 a character，= who was called Paparazzo。</div>
+        </div>
+      </div>
+
+      <!-- S7 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Set in Rome, the film is about the writer of a popular newspaper column featuring celebrity gossip.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">以羅馬為背景，這部電影講述一位專寫名人八卦的熱門報紙專欄作家的故事。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">Set in Rome</span><span class="syn-t">M（分詞構句，被動）</span>
+            <span class="syn syn-s">the film</span><span class="syn-t">S</span>
+            <span class="syn syn-v">is about</span><span class="syn-t">V（介系詞片語）</span>
+            <span class="syn syn-c">the writer of a popular newspaper column [<span class="syn-cl">featuring celebrity gossip</span>]</span><span class="syn-t">C</span>
+          </div>
+          <div class="para-note"><b>Set in Rome</b> = 分詞構句（被動），= Because the film is set in Rome。<b>feature</b>（v.）以...為特色；以...為主角。<b>gossip</b>（n.）八卦；閒話。<b>celebrity</b>（n.）名人。</div>
+        </div>
+      </div>
+
+      <!-- S8 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Paparazzo is a photographer who works with the writer to reveal the secret lives of celebrities.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">帕帕拉佐是一位攝影師，他與那位作家合作，揭露名人的秘密生活。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">Paparazzo</span><span class="syn-t">S</span>
+            <span class="syn syn-v">is</span><span class="syn-t">V</span>
+            <span class="syn syn-c">a photographer [<span class="syn-cl">who works with the writer to reveal...</span>]</span><span class="syn-t">C（含關係子句）</span>
+          </div>
+          <div class="para-note"><b>reveal</b>（v.）揭露；透露。<b>work with sb. to V</b> = 與某人合作去做某事。<b>secret lives</b> = 秘密生活；不為人知的私生活。</div>
+        </div>
+      </div>
+
+      <!-- S9 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>After the film was released in 1960, people began to use the word paparazzo and its plural form paparazzi to refer to all photographers who chase celebrities around.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這部電影於1960年發行後，人們開始用 paparazzo 這個詞及其複數形 paparazzi 來指稱所有追逐名人的攝影師。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">After the film was released in 1960</span><span class="syn-t">M（副詞子句）</span><br>
+            <span class="syn syn-s">people</span><span class="syn-t">S</span>
+            <span class="syn syn-v">began to use</span><span class="syn-t">V</span>
+            <span class="syn syn-o">the word paparazzo and its plural form paparazzi</span><span class="syn-t">O</span>
+            <span class="syn syn-m">to refer to all photographers [<span class="syn-cl">who chase celebrities around</span>]</span><span class="syn-t">M（目的不定詞）</span>
+          </div>
+          <div class="para-note"><b>release</b>（v.）發行；釋放。<b>refer to</b> = 指稱；提及。<b>plural form</b> = 複數形式。注意：paparazzo 是義大利文單數，paparazzi 是複數（英文借詞保留義大利文變化）。</div>
+        </div>
+      </div>
+
+      <!-- S10 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Product-based eponyms such as Photoshop, on the other hand, are brand names that are commonly used to describe other similar products, or in this case an action.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">另一方面，以產品為基礎的專名詞，例如 Photoshop，是品牌名稱，通常被用來描述其他類似產品，或在本例中是一個動作。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">Product-based eponyms such as Photoshop</span><span class="syn-t">S</span>
+            <span class="syn syn-m">on the other hand</span><span class="syn-t">M（插入語）</span>
+            <span class="syn syn-v">are</span><span class="syn-t">V</span>
+            <span class="syn syn-c">brand names [<span class="syn-cl">that are commonly used to describe...</span>]</span><span class="syn-t">C</span>
+          </div>
+          <div class="para-note"><b>on the other hand</b> = 另一方面（對比前文）。<b>brand name</b> = 品牌名稱。<b>be used to + V原形</b> = 被用來做...（被動 + 目的不定詞，注意與「習慣於」的 be used to + V-ing 區別）。</div>
+        </div>
+      </div>
+
+      <!-- S11 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Photoshop is an image-editing software program created by Adobe Inc.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Photoshop 是由 Adobe 公司所創建的圖像編輯軟體程式。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">Photoshop</span><span class="syn-t">S</span>
+            <span class="syn syn-v">is</span><span class="syn-t">V</span>
+            <span class="syn syn-c">an image-editing software program [<span class="syn-cl">created by Adobe Inc.</span>]</span><span class="syn-t">C（含分詞後位修飾）</span>
+          </div>
+          <div class="para-note"><b>image-editing</b> = 複合形容詞（用連字號連接）修飾 software program。<b>created by</b> = 過去分詞片語後位修飾，= which was created by Adobe Inc.。</div>
+        </div>
+      </div>
+
+      <!-- S12 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It is used to create, modify, or digitally combine images and photographs.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它被用來建立、修改或數位合成影像和照片。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">It</span><span class="syn-t">S</span>
+            <span class="syn syn-v">is used to</span><span class="syn-t">V（被動 + 目的不定詞）</span>
+            <span class="syn syn-o">create, modify, or digitally combine images and photographs</span><span class="syn-t">O</span>
+          </div>
+          <div class="para-note"><b>modify</b>（v.）修改；調整。<b>combine</b>（v.）結合；合成。<b>digitally</b>（adv.）數位地。三個動詞 create / modify / combine 用 or 並列，共享同一受詞 images and photographs。</div>
+        </div>
+      </div>
+
+      <!-- S13 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Since it was first released in 1987, Photoshop has become the standard software used by photographers and designers around the world.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">自從1987年首次發行以來，Photoshop 已成為全球攝影師和設計師所使用的標準軟體。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">Since it was first released in 1987</span><span class="syn-t">M（副詞子句，since + 時間點）</span><br>
+            <span class="syn syn-s">Photoshop</span><span class="syn-t">S</span>
+            <span class="syn syn-v">has become</span><span class="syn-t">V（現在完成式）</span>
+            <span class="syn syn-c">the standard software [<span class="syn-cl">used by photographers and designers around the world</span>]</span><span class="syn-t">C</span>
+          </div>
+          <div class="para-note"><b>since + 時間點</b> 配合主要子句的現在完成式 <b>has become</b>，表示「自從...就一直...」。<b>standard</b>（adj.）標準的。<b>used by</b> = 過去分詞後位修飾 software。</div>
+        </div>
+      </div>
+
+      <!-- S14 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It became so widely known that over time, people began to use "Photoshop" as a verb to mean "to edit a photo."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它變得如此廣為人知，以至於隨著時間推移，人們開始把「Photoshop」用作動詞，表示「修圖」的意思。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">It</span><span class="syn-t">S</span>
+            <span class="syn syn-v">became</span><span class="syn-t">V</span>
+            <span class="syn syn-c">so widely known</span><span class="syn-t">C</span>
+            <span class="syn syn-m">that...people began to use "Photoshop" as a verb to mean...</span><span class="syn-t">M（結果子句 so...that）</span>
+          </div>
+          <div class="para-note"><b>so + adj./adv. + that...</b> = 如此...以至於...（結果子句句型，為本課重要文法）。<b>widely known</b> = 廣為人知。<b>over time</b> = 隨著時間推移。</div>
+        </div>
+      </div>
+
+      <!-- S15 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>For example, no matter what software program is actually used, you could say, "The picture has obviously been photoshopped."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">例如，無論實際上使用的是哪種軟體程式，你都可以說：「這張照片顯然被修過了。」</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">For example</span><span class="syn-t">M</span>
+            <span class="syn syn-m">no matter what software program is actually used</span><span class="syn-t">M（讓步副詞子句）</span><br>
+            <span class="syn syn-s">you</span><span class="syn-t">S</span>
+            <span class="syn syn-v">could say</span><span class="syn-t">V</span>
+            <span class="syn syn-o">"The picture has obviously been photoshopped."</span><span class="syn-t">O（直接引語）</span>
+          </div>
+          <div class="para-note"><b>no matter what...</b> = 無論...（讓步副詞子句，= whatever）。<b>has been photoshopped</b> = 現在完成式被動，表示圖片已遭修改。品牌名 Photoshop 小寫化並加 -ed，成為普通動詞過去分詞。</div>
+        </div>
+      </div>
+
+      <!-- S16 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In the beginning, Adobe was not pleased that people were using their product name to describe the work of other companies' products, but the eponym has become too popular for them to stop its widespread usage.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">起初，Adobe 並不高興人們用他們的產品名稱來描述其他公司產品所做的工作，但這個專名詞已變得太受歡迎，讓他們無法阻止其廣泛使用。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">In the beginning</span><span class="syn-t">M</span>
+            <span class="syn syn-s">Adobe</span><span class="syn-t">S</span>
+            <span class="syn syn-v">was not pleased</span><span class="syn-t">V</span>
+            <span class="syn syn-o">that people were using...</span><span class="syn-t">O（that子句）</span><br>
+            but <span class="syn syn-s">the eponym</span><span class="syn-t">S</span>
+            <span class="syn syn-v">has become</span><span class="syn-t">V</span>
+            <span class="syn syn-c">too popular for them to stop its widespread usage</span><span class="syn-t">C（too...for sb. to V）</span>
+          </div>
+          <div class="para-note"><b>in the beginning</b> = 起初；一開始（片語）。<b>too...for sb. to V</b> = 太...以至於某人無法做...（否定含義，為本課重要文法）。<b>widespread</b>（adj.）廣泛的。<b>usage</b>（n.）用法；使用。</div>
+        </div>
+      </div>
+
+      <!-- S17 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As you can see, eponyms play an important role in creating new words in our society.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">如您所見，專名詞在我們社會中創造新詞方面扮演著重要的角色。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-m">As you can see</span><span class="syn-t">M（副詞子句，引導總結）</span>
+            <span class="syn syn-s">eponyms</span><span class="syn-t">S</span>
+            <span class="syn syn-v">play</span><span class="syn-t">V</span>
+            <span class="syn syn-o">an important role</span><span class="syn-t">O</span>
+            <span class="syn syn-m">in creating new words in our society</span><span class="syn-t">M（介系詞片語）</span>
+          </div>
+          <div class="para-note"><b>play a/an...role in + V-ing</b> = 在...方面扮演...角色（固定片語）。<b>in creating</b> 中 creating 是動名詞，作介系詞 in 的受詞。<b>as you can see</b> = 如你所見，常用於引導總結句。</div>
+        </div>
+      </div>
+
+      <!-- S18 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Language is constantly changing with the adoption of new words and alternative uses for existing words.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">語言隨著新詞彙的採用以及現有詞彙的替代用法而持續不斷地改變著。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">Language</span><span class="syn-t">S</span>
+            <span class="syn syn-v">is constantly changing</span><span class="syn-t">V（現在進行式，強調持續）</span>
+            <span class="syn syn-m">with the adoption of new words and alternative uses for existing words</span><span class="syn-t">M（伴隨狀態）</span>
+          </div>
+          <div class="para-note"><b>constantly</b>（adv.）持續地；不斷地。<b>alternative</b>（adj.）替代的；另類的。<b>existing</b>（adj.）現有的；現存的。<b>adoption</b>（n.）採用；採納（= adopting）。</div>
+        </div>
+      </div>
+
+      <!-- S19 -->
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Who knows what new words we will think up next?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">誰知道我們接下來會想出什麼新詞彙？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="syn syn-s">Who</span><span class="syn-t">S</span>
+            <span class="syn syn-v">knows</span><span class="syn-t">V</span>
+            <span class="syn syn-o">what new words we will think up next</span><span class="syn-t">O（間接問句）</span>
+          </div>
+          <div class="para-note"><b>think up</b>（片語動詞）= 想出；發明；創造出（= come up with）。<b>who knows</b> = 誰知道呢（修辭疑問句，表示無人確知）。間接問句語序為「疑問詞 + S + V」，不倒裝：what new words we will think up（✓），不是 what new words will we think up（✗）。</div>
+        </div>
+      </div>
+
+    </div><!-- /.para -->
+  </div><!-- /.sec-body -->
+</div><!-- /.section s-blue -->
+
+<!-- ═══ SECTION 2：核心字彙 ═══ -->
+<div class="section s-teal">
+  <div class="sec-head">
+    <div class="sec-icon">📝</div>
+    核心字彙 × 12
+  </div>
+  <div class="sec-body">
+    <div class="sec-hint">點擊單字卡可展開字族、例句與學測重點</div>
     <div class="vocab-grid">
+
+      <!-- 1. eponym -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">eponym <span class="v-pos">n.</span></div>
-            <div class="v-cn-mini">專名詞</div>
+            <div class="word-row">
+              <span class="v-word">eponym</span><span class="v-pos">n.</span>
+              <button class="speak-btn" onclick="speak('eponym',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">專名詞；同名者</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> The word "boycott" is an eponym derived from Charles Boycott's name.
-            <div class="cn">「抵制」一詞是源自 Charles Boycott 名字的專名詞。</div>
-          </div>
+          <div class="v-fam"><span>eponymous (adj.) 同名的；以...命名的</span></div>
+          <div class="v-ex">The word "sandwich" is an eponym derived from the Earl of Sandwich.<span class="cn">「sandwich（三明治）」這個詞是由三明治伯爵的名字衍生而來的專名詞。</span></div>
+          <div class="v-gsat">📌 學測重點：本課核心概念詞，了解定義（由人名/地名/品牌名衍生的普通詞彙）</div>
         </div>
       </div>
 
+      <!-- 2. general -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">derive <span class="v-pos">v.</span></div>
-            <div class="v-cn-mini">衍生；來源於</div>
+            <div class="word-row">
+              <span class="v-word">general</span><span class="v-pos">adj.</span>
+              <button class="speak-btn" onclick="speak('general',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">普遍的；一般的；大體的</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> The word "sandwich" is derived from the Earl of Sandwich.
-            <div class="cn">「三明治」一詞源自 Sandwich 伯爵。</div>
-          </div>
+          <div class="v-fam"><span>generally (adv.) 一般來說；普遍地</span> <span>generalize (v.) 概括；推論</span></div>
+          <div class="v-ex">The word took on a more general meaning over time.<span class="cn">這個詞隨著時間推移衍生出更普遍的意思。</span></div>
+          <div class="v-gsat">📌 學測重點：in general = 一般來說；general knowledge = 常識；general public = 一般大眾</div>
         </div>
       </div>
 
+      <!-- 3. derive -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">feature <span class="v-pos">v./n.</span></div>
-            <div class="v-cn-mini">以⋯為特色；特色</div>
+            <div class="word-row">
+              <span class="v-word">derive</span><span class="v-pos">v.</span>
+              <button class="speak-btn" onclick="speak('derive',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">衍生；獲得；起源於</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> The magazine features several articles about celebrities.
-            <div class="cn">這份雜誌刊載幾篇關於名人的文章。</div>
-          </div>
+          <div class="v-fam"><span>derivation (n.) 衍生；起源</span> <span>derivative (n./adj.) 衍生詞/衍生的</span></div>
+          <div class="v-ex">Many English words are derived from Latin or Greek roots.<span class="cn">許多英語詞彙都是從拉丁語或希臘語字根衍生而來的。</span></div>
+          <div class="v-gsat">📌 學測重點：derive from（主動）= be derived from（被動），兩種形式都要會用；學測翻譯常考</div>
         </div>
       </div>
 
+      <!-- 4. feature -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">gossip <span class="v-pos">n./v.</span></div>
-            <div class="v-cn-mini">八卦；說閒話</div>
+            <div class="word-row">
+              <span class="v-word">feature</span><span class="v-pos">v./n.</span>
+              <button class="speak-btn" onclick="speak('feature',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">以⋯為特色；以⋯為主角（v.）；特色；特徵（n.）</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> Don't gossip about other people's private matters.
-            <div class="cn">不要談論別人的隱私。</div>
-          </div>
+          <div class="v-fam"><span>featured (adj.) 特色的；被推薦的</span></div>
+          <div class="v-ex">The museum's new exhibit features artwork from over 50 countries.<span class="cn">博物館的新展覽以來自50多個國家的藝術品為特色。</span></div>
+          <div class="v-gsat">📌 學測重點：feature (v.) 以...為特色/主角；key feature / special feature = 主要/特殊特徵</div>
         </div>
       </div>
 
+      <!-- 5. gossip -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">reveal <span class="v-pos">v.</span></div>
-            <div class="v-cn-mini">揭露；透露</div>
+            <div class="word-row">
+              <span class="v-word">gossip</span><span class="v-pos">n./v.</span>
+              <button class="speak-btn" onclick="speak('gossip',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">八卦；閒話（n.）；說閒話（v.）</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> The investigation revealed the truth about the scandal.
-            <div class="cn">調查揭露了醜聞的真相。</div>
-          </div>
+          <div class="v-fam"><span>gossipy (adj.) 愛說閒話的；充滿八卦的</span></div>
+          <div class="v-ex">She loves to gossip about celebrities with her coworkers during lunch.<span class="cn">她喜歡在午餐時間和同事聊名人八卦。</span></div>
+          <div class="v-gsat">📌 學測重點：celebrity gossip = 名人八卦；gossip about sb. = 談論某人的閒話（固定搭配）</div>
         </div>
       </div>
 
+      <!-- 6. reveal -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">release <span class="v-pos">v./n.</span></div>
-            <div class="v-cn-mini">發行；釋放</div>
+            <div class="word-row">
+              <span class="v-word">reveal</span><span class="v-pos">v.</span>
+              <button class="speak-btn" onclick="speak('reveal',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">揭露；透露；顯示</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> Apple released a new iPhone model last month.
-            <div class="cn">蘋果上個月發布了新的 iPhone 型號。</div>
-          </div>
+          <div class="v-fam"><span>revelation (n.) 揭露；啟示；重大發現</span> <span>revealing (adj.) 揭示性的；暴露的</span></div>
+          <div class="v-ex">The investigation revealed the truth behind the mysterious disappearance.<span class="cn">調查揭露了這起神秘失蹤事件背後的真相。</span></div>
+          <div class="v-gsat">📌 學測重點：reveal = expose = disclose（揭露），三詞為學測常見同義詞組，閱讀測驗高頻</div>
         </div>
       </div>
 
+      <!-- 7. release -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">chase <span class="v-pos">v./n.</span></div>
-            <div class="v-cn-mini">追逐；追趕</div>
+            <div class="word-row">
+              <span class="v-word">release</span><span class="v-pos">v./n.</span>
+              <button class="speak-btn" onclick="speak('release',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">發行；釋放；發布（v./n.）</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> The dog chased the cat around the garden.
-            <div class="cn">狗在花園裡追著貓跑。</div>
-          </div>
+          <div class="v-fam"><span>press release (n.) 新聞稿</span></div>
+          <div class="v-ex">The director's long-awaited film was finally released in theaters last Friday.<span class="cn">這位導演眾所期待的電影終於上週五在電影院正式上映。</span></div>
+          <div class="v-gsat">📌 學測重點：release an album/film/product = 發行專輯/電影/產品；release a prisoner = 釋放囚犯</div>
         </div>
       </div>
 
+      <!-- 8. modify -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">modify <span class="v-pos">v.</span></div>
-            <div class="v-cn-mini">修改；修飾</div>
+            <div class="word-row">
+              <span class="v-word">modify</span><span class="v-pos">v.</span>
+              <button class="speak-btn" onclick="speak('modify',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">修改；調整；修飾（文法用語）</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> I had to modify my plans due to the bad weather.
-            <div class="cn">由於天氣不好，我必須修改我的計劃。</div>
-          </div>
+          <div class="v-fam"><span>modification (n.) 修改；調整</span> <span>modifier (n.) 修飾語（文法）</span></div>
+          <div class="v-ex">She modified her research plan after receiving feedback from her professor.<span class="cn">她在收到教授的意見後修改了她的研究計畫。</span></div>
+          <div class="v-gsat">📌 學測重點：文法術語「modifier 修飾語」即來自此詞；modify = revise = alter（修改）</div>
         </div>
       </div>
 
+      <!-- 9. combine -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">standard <span class="v-pos">n./adj.</span></div>
-            <div class="v-cn-mini">標準；規格</div>
+            <div class="word-row">
+              <span class="v-word">combine</span><span class="v-pos">v.</span>
+              <button class="speak-btn" onclick="speak('combine',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">結合；合併；混合</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> This company maintains high standards of quality.
-            <div class="cn">這家公司維持著高品質的標準。</div>
-          </div>
+          <div class="v-fam"><span>combination (n.) 組合；結合</span> <span>combined (adj.) 聯合的；共同的</span></div>
+          <div class="v-ex">The recipe combines sweet and savory flavors to create a unique taste.<span class="cn">這道食譜將甜味和鹹香風味結合，創造出獨特的口感。</span></div>
+          <div class="v-gsat">📌 學測重點：combine A with B = 將A與B結合；a combination of = ...的組合（常見搭配）</div>
         </div>
       </div>
 
+      <!-- 10. widespread -->
       <div class="v-card">
-        <div class="v-top" onclick="toggleVocab(this)">
+        <div class="v-top" onclick="toggleV(this)">
           <div>
-            <div class="v-word">widespread <span class="v-pos">adj.</span></div>
-            <div class="v-cn-mini">廣泛的；普遍的</div>
+            <div class="word-row">
+              <span class="v-word">widespread</span><span class="v-pos">adj.</span>
+              <button class="speak-btn" onclick="speak('widespread',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">廣泛的；普遍的；分布廣的</div>
           </div>
-          <div class="v-ic">▶</div>
+          <span class="v-ic">▶</span>
         </div>
         <div class="v-body">
-          <div class="v-ex">
-            <strong>例句：</strong> There is widespread support for the new policy.
-            <div class="cn">對新政策有廣泛的支持。</div>
-          </div>
+          <div class="v-fam"><span>widely (adv.) 廣泛地；廣為地</span> <span>spread (v.) 蔓延；傳播</span></div>
+          <div class="v-ex">The use of smartphones has become widespread in almost every country.<span class="cn">智慧型手機的使用在幾乎每個國家都已變得非常普遍。</span></div>
+          <div class="v-gsat">📌 學測重點：widespread + 名詞（widespread use/concern/support/damage）；= prevalent = common</div>
         </div>
       </div>
-    </div>
+
+      <!-- 11. constantly -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">constantly</span><span class="v-pos">adv.</span>
+              <button class="speak-btn" onclick="speak('constantly',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">持續地；不斷地；時常地</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam"><span>constant (adj.) 持續的；不變的；恆定的</span> <span>constancy (n.) 恆常；堅定</span></div>
+          <div class="v-ex">Technology is constantly evolving, and we must keep up with new developments.<span class="cn">科技不斷進步，我們必須跟上新的發展。</span></div>
+          <div class="v-gsat">📌 學測重點：constantly = continuously = all the time（持續不斷）；常搭配進行式表示持續進行的動作</div>
+        </div>
+      </div>
+
+      <!-- 12. alternative -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">alternative</span><span class="v-pos">adj./n.</span>
+              <button class="speak-btn" onclick="speak('alternative',this,event)">🔊</button>
+            </div>
+            <div class="v-cn-mini">替代的（adj.）；替代品；另一選擇（n.）</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam"><span>alternatively (adv.) 或者；作為替代選擇</span> <span>alternate (v./adj.) 輪流/交替的</span></div>
+          <div class="v-ex">If you can't afford a gym membership, cycling outdoors is a great alternative.<span class="cn">如果你負擔不起健身房會員費，在戶外騎腳踏車是一個很好的替代選擇。</span></div>
+          <div class="v-gsat">📌 學測重點：an alternative to sth. = ...的替代方案；alternative energy = 替代能源（環保議題常考詞）</div>
+        </div>
+      </div>
+
+    </div><!-- /.vocab-grid -->
+  </div><!-- /.sec-body -->
+</div><!-- /.section s-teal -->
+
+<!-- ═══ SECTION 3：片語講解 ═══ -->
+<div class="section s-green">
+  <div class="sec-head">
+    <div class="sec-icon">🔗</div>
+    片語講解 × 6
   </div>
-</div>
-
-<!-- 片語講解 -->
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">🔗</div>片語講解</div>
   <div class="sec-body">
-    <table class="phrase-table">
-      <tr>
-        <th>片語</th>
-        <th>中文</th>
-        <th>例句</th>
-      </tr>
-      <tr>
-        <td><span class="phr">take on</span></td>
-        <td>承擔；呈現（新的含義）</td>
-        <td>The word has taken on a new meaning.</td>
-      </tr>
-      <tr>
-        <td><span class="phr">later on</span></td>
-        <td>以後；後來</td>
-        <td>I'll tell you more about it later on.</td>
-      </tr>
-      <tr>
-        <td><span class="phr">in the beginning</span></td>
-        <td>起初；一開始</td>
-        <td>In the beginning, nobody knew about it.</td>
-      </tr>
-      <tr>
-        <td><span class="phr">too...to...</span></td>
-        <td>太...以至於無法...</td>
-        <td>The noise is too loud to hear anything.</td>
-      </tr>
-      <tr>
-        <td><span class="phr">play a/an...role</span></td>
-        <td>扮演...角色；發揮...作用</td>
-        <td>Language plays an important role in society.</td>
-      </tr>
-      <tr>
-        <td><span class="phr">think up</span></td>
-        <td>想出；發明</td>
-        <td>They thought up a brilliant idea.</td>
-      </tr>
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th style="width:22%">片語</th>
+          <th style="width:20%">中文意思</th>
+          <th>課文例句 / 補充例句</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phr">take on</span></td>
+          <td>承擔；呈現（新含義）</td>
+          <td class="pex">
+            ...but <b>took on</b> a more general meaning <b>later on</b>.
+            <span class="cn">...但後來呈現出更普遍的意思。</span>
+            She decided to <b>take on</b> more responsibilities at her new job.
+            <span class="cn">她決定在新工作中承擔更多責任。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">later on</span></td>
+          <td>以後；後來；接下來</td>
+          <td class="pex">
+            ...but took on a more general meaning <b>later on</b>.
+            <span class="cn">...但後來衍生出更普遍的意思。</span>
+            We can discuss the details <b>later on</b> in the meeting.
+            <span class="cn">我們可以在會議稍後討論細節。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">in the beginning</span></td>
+          <td>起初；一開始；最初</td>
+          <td class="pex">
+            <b>In the beginning</b>, Adobe was not pleased that people were using their product name...
+            <span class="cn">起初，Adobe 並不高興人們用他們的產品名稱...</span>
+            <b>In the beginning</b>, learning a new language can feel overwhelming.
+            <span class="cn">一開始，學習一門新語言可能會讓人感到不知所措。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">too...to...</span></td>
+          <td>太...以至於無法...<br>（句型含否定）</td>
+          <td class="pex">
+            ...the eponym has become <b>too</b> popular <b>for them to stop</b> its widespread usage.
+            <span class="cn">這個專名詞已太受歡迎，讓他們無法阻止其廣泛使用。</span>
+            The suitcase was <b>too</b> heavy <b>for her to carry</b> upstairs.
+            <span class="cn">這只行李箱太重了，她搬不上樓。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">play a/an...role (in)</span></td>
+          <td>在...方面扮演...角色；起...作用</td>
+          <td class="pex">
+            Eponyms <b>play an important role in</b> creating new words in our society.
+            <span class="cn">專名詞在我們社會中創造新詞方面扮演著重要角色。</span>
+            Parents <b>play a crucial role in</b> shaping their children's values.
+            <span class="cn">父母在塑造孩子的價值觀方面扮演著關鍵角色。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">think up</span></td>
+          <td>想出；發明；創造出</td>
+          <td class="pex">
+            Who knows what new words we will <b>think up</b> next?
+            <span class="cn">誰知道我們接下來會想出什麼新詞彙？</span>
+            The marketing team <b>thought up</b> a creative slogan for the new product.
+            <span class="cn">行銷團隊為新產品想出了一個富有創意的口號。</span>
+          </td>
+        </tr>
+      </tbody>
     </table>
-  </div>
-</div>
+  </div><!-- /.sec-body -->
+</div><!-- /.section s-green -->
 
-<!-- 練習題 -->
-<div class="section">
-  <div class="sec-head"><div class="sec-icon">✏️</div>練習題</div>
+<!-- ═══ SECTION 4：文法句型 ═══ -->
+<div class="section s-purple">
+  <div class="sec-head">
+    <div class="sec-icon">📐</div>
+    文法句型 × 3
+  </div>
   <div class="sec-body">
 
-    <div class="q-block">
-      <div class="q-top">
-        <div class="q-num">1</div>
-        <div class="q-main">
-          <div class="q-en">What is an eponym?</div>
+    <!-- G1: It is said that -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型1｜It is said that... 據說...（被動語態 + 虛主詞 it + that子句）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">It is said that + S + V...
+= People say that + S + V...
+= S + is said to + V (原形) / have + p.p.
+
+It is believed / thought / reported / known that + S + V...</div>
+      <div class="g-body">
+        <p>這個句型用虛主詞 <b>It</b> 代替真正的主詞（that子句），動詞用被動式 <b>is said</b>，表示「據說...」。也可以替換成 is believed（據信）、is thought（據認為）、is reported（據報導）、is known（眾所周知）。</p>
+        <div class="g-ex">
+          It is said that this word came from a character called Paparazzo in the Italian film La Dolce Vita.
+          <div class="g-ex-cn">據說這個詞來自義大利電影《甜蜜的生活》中一個名叫帕帕拉佐的角色。</div>
         </div>
-      </div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(A) A word that means the opposite of another word</span>
+        <div class="g-ex">
+          It is believed that regular exercise can significantly improve mental health.
+          <div class="g-ex-cn">據信，規律運動能顯著改善心理健康。</div>
         </div>
-        <div class="choice" onclick="selectChoice(this, true)">
-          <div class="mark"></div>
-          <span>(B) A word derived from a name but with a more general meaning</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(C) A brand name used only by one company</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(D) A word that describes only one specific thing</span>
-        </div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">專名詞是源自某人或某物名稱的詞，但具有更普遍的含義。根據課文定義：「An eponym is a word which usually started out as the name of someone or something but took on a more general meaning later on.」</div>
+        <div class="g-note">不要用 "It says that..." 來表示「據說」。"It says" 只適用於引用文章/文字內容，例如：It says in the article that...（那篇文章中說...）。兩者意思和用法完全不同。</div>
+        <div class="g-tip">It is said / believed / thought / reported / known that... 在學測閱讀和翻譯中頻繁出現。另一種寫法：The word is said to have come from a character...（不定詞用 to have + p.p. 表示比主要動詞更早發生的事）。</div>
       </div>
     </div>
 
-    <div class="q-block">
-      <div class="q-top">
-        <div class="q-num">2</div>
-        <div class="q-main">
-          <div class="q-en">Where did the word "paparazzi" come from?</div>
+    <!-- G2: be used to vs used to -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型2｜be used to + V 與 used to + V 的三向辨析</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">① be used to + V原形  = 被用來做...（被動語態 + 目的不定詞）
+   例：It is used to create images.（它被用來建立影像）
+
+② be used to + V-ing/N = 習慣於...（be + 介系詞 to）
+   例：She is used to working late.（她習慣晚工作）
+
+③ used to + V原形    = 過去習慣...，現已不再（助動詞）
+   例：He used to live in Paris.（他以前住在巴黎）</div>
+      <div class="g-body">
+        <p>課文出現的是第①種：<b>be used to + V原形</b>，表示「被用來做某事」，是被動語態加目的不定詞。注意三種用法的關鍵差異：</p>
+        <table class="gtab">
+          <tr><th>句型</th><th>to 後面</th><th>中文意思</th><th>例子</th></tr>
+          <tr><td>be used to + <b>V原形</b></td><td>不定詞（目的）</td><td>被用來做...（目的）</td><td>Photoshop is used to edit photos.</td></tr>
+          <tr><td>be used to + <b>V-ing/N</b></td><td>介系詞 to</td><td>習慣於...（現在狀態）</td><td>I am used to waking up early.</td></tr>
+          <tr><td>used to + <b>V原形</b></td><td>不定詞（助動詞）</td><td>過去習慣...（已改變）</td><td>I used to wake up late.</td></tr>
+        </table>
+        <div class="g-ex">
+          It is used to create, modify, or digitally combine images and photographs.
+          <div class="g-ex-cn">它被用來建立、修改或數位合成影像和照片。（① be used to + V原形）</div>
         </div>
-      </div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, true)">
-          <div class="mark"></div>
-          <span>(A) From a character in an Italian film</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(B) From a famous photographer in Rome</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(C) From the Italian word for celebrity</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(D) From the name of a newspaper company</span>
-        </div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：A</div>
-        <div class="ans-cn">根據課文：「It is said that this word came from a character called Paparazzo in the Italian film La Dolce Vita.」Paparazzi 來自義大利電影《甜蜜生活》中的角色 Paparazzo。</div>
+        <div class="g-note">最易混淆：② be used to + V-ing（習慣）vs. ③ used to + V原形（過去習慣）。判斷方法：看有無 be 動詞。有 be → to 是介系詞，後接 V-ing；無 be（直接 used to）→ to 是不定詞，後接 V原形。</div>
+        <div class="g-tip">學測超高頻考點！常出現「be used to + V-ing / used to + V原形」的選擇題。記住：be used to 習慣(現在)，used to 過去習慣(現在不再)。I used to be afraid of dogs, but now I am used to living with three dogs.</div>
       </div>
     </div>
 
-    <div class="q-block">
-      <div class="q-top">
-        <div class="q-num">3</div>
-        <div class="q-main">
-          <div class="q-en">Why did Adobe initially not want people to use "Photoshop" as a verb?</div>
+    <!-- G3: too...for sb. to V -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型3｜too...for sb. to V（太...以至於某人無法...）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + be + too + adj./adv. + (for sb.) + to V原形
+= S + be + so + adj./adv. + that + (sb.) + can't/couldn't + V
+
+例：The problem is too difficult for beginners to solve.
+= The problem is so difficult that beginners can't solve it.
+（這個問題太難了，初學者無法解決。）</div>
+      <div class="g-body">
+        <p><b>too...to V</b> 含有<b>否定意義</b>，即「太...所以不能...」。若不定詞的邏輯主詞與句子主詞不同，用 <b>for + 受格</b> 引出不定詞的邏輯主詞。注意：若不定詞的受詞與句子主詞相同，要省略。</p>
+        <div class="g-ex">
+          ...the eponym has become too popular for them to stop its widespread usage.
+          <div class="g-ex-cn">這個專名詞已變得太受歡迎，讓他們無法阻止其廣泛使用。</div>
         </div>
-      </div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, true)">
-          <div class="mark"></div>
-          <span>(A) They didn't want their brand name used to describe other companies' products</span>
+        <div class="g-ex">
+          The coffee was too hot for the child to drink.
+          <div class="g-ex-cn">這杯咖啡太燙了，小孩沒辦法喝。</div>
         </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(B) Photoshop was not released until 1987</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(C) They preferred the word "editing" instead</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(D) The verb was too complicated for people to use</span>
-        </div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：A</div>
-        <div class="ans-cn">課文說明：「Adobe was not pleased that people were using their product name to describe the work of other companies' products」Adobe 不高興人們用他們的產品名稱來描述其他公司產品的工作。</div>
+        <div class="g-note">too...to 本身已有否定意義，千萬不可再加 not：✗ too tired to not sleep → ✓ too tired to sleep（太累了睡不著）。進階用法：too...not to V = 太...不可能不...（雙重否定 = 肯定）：She's too smart not to notice.（她太聰明了，不可能沒注意到。）</div>
+        <div class="g-tip">學測翻譯和克漏字都愛考 too...to 和 so...that 的互換。公式：too + adj. + (for sb.) to V ↔ so + adj. + that (sb.) can't + V。另外 enough to V（夠...可以...）也是相關句型：old enough to drive = not too young to drive。</div>
       </div>
     </div>
 
-    <div class="q-block">
-      <div class="q-top">
-        <div class="q-num">4</div>
-        <div class="q-main">
-          <div class="q-en">What does "take on" mean in the sentence "took on a more general meaning"?</div>
-        </div>
-      </div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(A) Accept employment from someone</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, true)">
-          <div class="mark"></div>
-          <span>(B) Acquire or assume a new quality or meaning</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(C) Challenge someone to a competition</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(D) Hold or carry something physical</span>
-        </div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">「Take on」在這個語境中意為「獲得、承擔」。句子的意思是詞語獲得了更普遍的含義。</div>
-      </div>
-    </div>
+  </div><!-- /.sec-body -->
+</div><!-- /.section s-purple -->
 
-    <div class="q-block">
-      <div class="q-top">
-        <div class="q-num">5</div>
-        <div class="q-main">
-          <div class="q-en">According to the passage, eponyms are important because ___.</div>
-        </div>
-      </div>
-      <div class="q-choices">
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(A) They are used only in formal English</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, true)">
-          <div class="mark"></div>
-          <span>(B) They play an important role in creating new words in society</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(C) They can only be derived from company names</span>
-        </div>
-        <div class="choice" onclick="selectChoice(this, false)">
-          <div class="mark"></div>
-          <span>(D) They make language more difficult to understand</span>
-        </div>
-      </div>
-      <div class="q-ans">
-        <div class="ans-badge">✓ 答案：B</div>
-        <div class="ans-cn">課文結尾說明：「As you can see, eponyms play an important role in creating new words in our society.」專名詞在我們社會創造新詞方面發揮著重要作用。</div>
-      </div>
-    </div>
-
+<!-- ═══ SECTION 5：練習題 ═══ -->
+<div class="section s-orange">
+  <div class="sec-head">
+    <div class="sec-icon">✏️</div>
+    練習題 × 8
   </div>
-</div>
+  <div class="sec-body">
+    <div class="sec-hint">點選選項後會立即顯示對錯，再點「看完整解析」可展開詳細說明</div>
+    <div id="q-wrap"></div>
+  </div><!-- /.sec-body -->
+</div><!-- /.section s-orange -->
 
-<footer>龍騰高職英文 ── L9: The Story behind Eponyms</footer>
-
-</div>
+</div><!-- /.page -->
 
 <script>
-function toggleCN(elem) {
-  const icon = elem.querySelector('.ic');
-  const cn = elem.querySelector('.para-cn');
-  icon.classList.toggle('open');
-  cn.classList.toggle('open');
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
 }
 
-function toggleVocab(elem) {
-  const icon = elem.querySelector('.v-ic');
-  const body = elem.nextElementSibling;
-  icon.classList.toggle('open');
-  body.classList.toggle('open');
-}
+// ===== 練習題資料 =====
+var studentQ=[
+  {q:['The word "jacuzzi" is an ',' because it originally came from the name of a family that invented the whirlpool bath.'],
+   cn:'「jacuzzi（按摩浴缸）」這個詞是一個專名詞，因為它最初來自一個發明漩渦浴缸的家族名字。',
+   opts:['eponym','adjective','abbreviation','acronym'],ans:0,
+   word:'eponym (n.) 專名詞（由人名/品牌名衍生的普通詞彙）',
+   exp:'空格需填入「由人名衍生的詞彙」，只有 (A) eponym 符合本課定義。(B) adjective 形容詞；(C) abbreviation 縮寫（如 Dr.）；(D) acronym 首字母縮略詞（如 NASA），皆與語意不符。',
+   note:'eponym = 由人名、地名或品牌名衍生出的普通詞彙，是本課核心概念，必須理解並記住。'},
+  {q:['The word "tsunami" is ',' from Japanese and is now widely used in many languages around the world.'],
+   cn:'「tsunami（海嘯）」這個詞從日語衍生而來，現在在世界上許多語言中被廣泛使用。',
+   opts:['modified','derived','released','combined'],ans:1,
+   word:'derived (v./adj.) 衍生的（be derived from = 衍生自）',
+   exp:'be derived from = 衍生自（固定被動語態搭配）。(A) modified 被修改的，不與 from 搭配；(C) released 發行，語意不符；(D) combined 結合，不與 from 搭配。',
+   note:'derive from（主動：sth. derives from...）= be derived from（被動：sth. is derived from...），兩種形式都要記住。'},
+  {q:['The documentary aims to ',' the unfair working conditions that factory workers face every day.'],
+   cn:'這部紀錄片旨在揭露工廠工人每天面對的不公平工作環境。',
+   opts:['release','modify','reveal','combine'],ans:2,
+   word:'reveal (v.) 揭露；透露；顯示',
+   exp:'空格需填入「揭露不公平情況」之動詞，(C) reveal 最符合語意。(A) release 發行/釋放；(B) modify 修改；(D) combine 結合，皆與「揭露隱藏真相」的語境不符。',
+   note:'reveal = expose = disclose，三詞同義，學測閱讀測驗中常作為同義詞替換出現，需一起記憶。'},
+  {q:['The engineer ',' the blueprint after realizing there were several design flaws in the original plan.'],
+   cn:'這位工程師在發現原始計畫有幾處設計缺陷後，修改了設計藍圖。',
+   opts:['released','modified','combined','derived'],ans:1,
+   word:'modify (v.) 修改；調整',
+   exp:'修改設計藍圖以修正缺陷，選 (B) modified。(A) released 發行；(C) combined 結合；(D) derived 衍生，三者皆與「修正設計問題」的語意不符。',
+   note:'modify = revise = alter，三詞皆有「修改」之意，學測常在同義詞填空或克漏字中相互替換。'},
+  {q:['The use of social media has become so ',' that it is almost impossible to imagine life without it.'],
+   cn:'社群媒體的使用已變得如此廣泛，以至於幾乎無法想像沒有它的生活。',
+   opts:['constantly','alternative','widespread','general'],ans:2,
+   word:'widespread (adj.) 廣泛的；普遍的',
+   exp:'空格填修飾 use（使用）的形容詞，且配合 so...that 結果子句語境，(C) widespread（廣泛的）最精確。(A) constantly 是副詞，不可直接接在 so 後修飾名詞；(B) alternative 替代的；(D) general 一般的，語意較弱。',
+   note:'widespread 常見搭配：widespread use / support / concern / damage。so widespread that... 是學測 so...that 句型的典型應用。'},
+  {q:['Technology is ',' improving, so it is important for students to keep updating their skills.'],
+   cn:'科技持續不斷地進步，因此學生保持更新技能是很重要的。',
+   opts:['alternatively','widely','constantly','generally'],ans:2,
+   word:'constantly (adv.) 持續地；不斷地',
+   exp:'修飾動詞 improving，語意是「持續地、不間斷地」，(C) constantly 最符合。(A) alternatively 換個方式；(B) widely 廣泛地（常搭配 known/used，不搭配 improving）；(D) generally 一般來說（副詞修飾習慣/通則，不強調持續性）。',
+   note:'constantly = continuously = all the time，三詞同義。常與進行式搭配：is constantly changing / improving / evolving。'},
+  {q:['The artist ',' different types of paint and fabric to create a mixed-media artwork that amazed everyone.'],
+   cn:'這位藝術家將不同類型的顏料和布料結合，創作出令所有人驚嘆的混合媒材藝術作品。',
+   opts:['released','modified','featured','combined'],ans:3,
+   word:'combine (v.) 結合；合併；混合',
+   exp:'將不同媒材「結合」，選 (D) combined。(A) released 發行；(B) modified 修改；(C) featured 以...為特色，三者與「將兩種材料合在一起」的語意不符。',
+   note:'combine A and B = combine A with B（將A與B結合）；a combination of A and B（A與B的組合），兩種句型都需熟練。'},
+  {q:['The band finally ',' their long-awaited third album after nearly four years of recording in the studio.'],
+   cn:'這個樂團在錄音室錄製了將近四年後，終於發行了他們眾所期待的第三張專輯。',
+   opts:['derived','revealed','released','modified'],ans:2,
+   word:'release (v.) 發行；公開發布（音樂/電影/產品等）',
+   exp:'發行專輯用 (C) released。(A) derived 衍生；(B) revealed 揭露；(D) modified 修改，皆不能與「發行音樂作品」搭配使用。',
+   note:'release an album / film / book / product = 發行專輯/電影/書籍/產品，是極高頻固定搭配，學測翻譯與克漏字都常考。'}
+];
 
-function selectChoice(elem, isCorrect) {
-  const block = elem.closest('.q-block');
-  const allChoices = block.querySelectorAll('.choice');
-  allChoices.forEach(c => c.classList.remove('correct', 'wrong'));
+(function(){
+  var wrap=document.getElementById('q-wrap');
+  if(!wrap)return;
+  studentQ.forEach(function(d,i){
+    var choices=d.opts.map(function(o,j){
+      return '<div class="choice" data-correct="'+(j===d.ans?'1':'0')+'" onclick="pickChoice(this)"><span class="mark"></span>('+'ABCD'[j]+') '+o+'</div>';
+    }).join('');
+    wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div><button class="show-btn" onclick="showAns(this)">看完整解析</button></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';
+  });
+})();
 
-  if (isCorrect) {
-    elem.classList.add('correct');
-  } else {
-    elem.classList.add('wrong');
-  }
-
-  const ansBlock = block.querySelector('.q-ans');
-  ansBlock.classList.add('open');
-}
+document.addEventListener('DOMContentLoaded',function(){
+  // 片語發音鈕
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
 </script>
 </body>
 </html>
