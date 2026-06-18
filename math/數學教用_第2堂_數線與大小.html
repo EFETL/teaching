@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>國一數學 暑期先修 · 教用互動版 ── 第2堂課 數線進階、數的大小</title>
+<title>國一數學 暑期先修 · 教用互動版 ── 第2堂課　數線進階、數的大小</title>
 <style>
   :root { --main:#2b6cb0; --accent:#e6a800; --ok:#1d8a4c; --step:#2b6cb0; --bg:#eef3f9; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -43,11 +43,16 @@
   .answer { display:none; margin-top:10px; padding:11px 16px; background:#e7f6ee; border:1.5px solid var(--ok); border-radius:10px; font-size:19px; font-weight:bold; color:#13633a; }
   .answer.show { display:block; animation:fade .25s ease; }
   .answer::before { content:"✅ 答案："; }
+  /* 數線圖 */
+  .numline { display:none; margin:10px 0 2px; padding:8px 10px; background:#fff; border:1px solid #d9e2ec; border-radius:10px; overflow-x:auto; }
+  .answer.show + .numline { display:block; }
+  .numline svg { display:block; max-width:100%; height:auto; }
   footer { text-align:center; color:#789; font-size:16px; margin-top:26px; }
   @media print {
     .toolbar { display:none!important; }
     .txt { display:block!important; }
     .answer { display:block!important; }
+    .numline { display:block!important; }
     .prob { break-inside:avoid; box-shadow:none; border:1px solid #ddd; }
     body { background:#fff; }
   }
@@ -65,177 +70,190 @@
     <button class="act col" onclick="resetAll()">全部隱藏</button>
   </div>
 
-  <!-- ===================== 概念 1 ===================== -->
+  <!-- ========== 概念 1 ========== -->
   <div class="concept">
     <h2>💡 概念 1　分數、小數在數線上的畫法</h2>
     <ul>
-      <li>整數以外的數，可以把一個單位長 <b>「等分」</b> 後，再數格子標出對應的點。</li>
-      <li>分數：如 ½ 把 0 到 1 等分成 <b>2 段</b>，取第 1 段的端點；<b>−1½</b> 在 −1 與 −2 的中間。</li>
+      <li>整數以外的數，可以把一個單位長「<b>等分</b>」後，再數格子標出對應的點。</li>
+      <li>分數：如 <b>½</b> 把 0 到 1 等分成 2 段，取第 1 段的端點；<b>−1½</b> 在 −1 與 −2 的中間。</li>
       <li>小數：如 <b>2.5</b> 在 2 與 3 的中間；<b>−0.5</b> 在 0 與 −1 的中間。</li>
-      <li>畫法重點：先看是幾分之幾或幾點幾，決定要把單位長 <b>等分成幾段</b>，再從整數點往正向或負向數格子。</li>
+      <li>畫法重點：先看是幾分之幾或幾點幾，決定要把單位長等分成幾段，再從整數點往正向或負向數格子。</li>
     </ul>
+    <div class="numline" style="display:block" data-min="-2" data-max="2" data-points="0.5=½,1=1,-1.5=−1½"></div>
   </div>
 
-  <!-- 概念1 老師講解 -->
-  <div class="group-h">👨‍🏫 概念 1　老師講解（4 題）</div>
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">在數線上畫出 ⅖。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">分母是 5：把 0 到 1 之間的單位長 <b>等分成 5 段</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">分子是 2：從 0 往右數 <b>2 格</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">⅖ 就是 0 到 1 等分成 5 段的 <b>第 2 個點</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">⅖ 是 5 分之 2，先把 0 到 1 等分成 <b>5 段</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">從 0 往右數 2 格，標在 <b>第 2 個分點</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">這個點就是 <b>⅖</b>（在 0 與 1 之間、偏左）。</span></div>
     </div>
     <div class="answer">0 到 1 等分成 5 段的第 2 點</div>
+    <div class="numline" data-min="-1" data-max="2" data-points="0.4=⅖"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">在數線上畫出 3.5。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">3.5 介於 <b>3 與 4</b> 之間。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">小數 .5 表示半個單位 → 把 3 到 4 等分成 2 段。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">取 <b>3 與 4 的正中間</b>那一點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">3.5 介於整數 <b>3 與 4</b> 之間。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">把 3 到 4 等分成 2 段，取中間的點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">這個點就是 <b>3.5</b>（3 與 4 的正中間）。</span></div>
     </div>
     <div class="answer">3 與 4 的正中間</div>
+    <div class="numline" data-min="2" data-max="5" data-points="3.5=3.5"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">在數線上畫出 −2½。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負數在原點 <b>左邊</b>，且 2½ 介於 2 與 3 之間。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 −2½ 介於 <b>−2 與 −3</b> 之間。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">½ 表示半格 → 取 <b>−2 與 −3 的正中間</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−2½ 是負數，要往原點 <b>左邊</b>找。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">它介於 <b>−2 與 −3</b> 之間，把這段等分成 2 段。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">取中間的點就是 <b>−2½</b>（−2 與 −3 的正中間）。</span></div>
     </div>
     <div class="answer">−2 與 −3 的正中間</div>
+    <div class="numline" data-min="-4" data-max="0" data-points="-2.5=−2½"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">在數線上畫出 −0.75 與 ＋1.25。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">把每個單位長等分成 4 小格（每格 0.25）。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−0.75 在 <b>0 與 −1 之間、靠近 0</b>（從 0 往左 3 小格）。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">＋1.25 在 <b>1 與 2 之間、靠近 1</b>（從 1 往右 1 小格）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−0.75 介於 0 與 −1 之間，把這段等分成 4 段。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">從 0 往左數 3 格 → <b>−0.75</b>（靠近 0）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">＋1.25 在 1 與 2 之間，從 1 往右數 1 格（4 段中的第 1 格）→ <b>＋1.25</b>（靠近 1）。</span></div>
     </div>
     <div class="answer">−0.75 在 0 與 −1 間靠近 0；＋1.25 在 1 與 2 間靠近 1</div>
+    <div class="numline" data-min="-2" data-max="3" data-points="-0.75=−0.75,1.25=＋1.25"></div>
   </div>
 
-  <!-- 概念1 學生練習 -->
-  <div class="group-h practice">✏️ 概念 1　學生練習（4 題）</div>
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">在數線上畫出 ⅓。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">分母是 3：把 0 到 1 <b>等分成 3 段</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">分子是 1：從 0 往右數 1 格 → <b>第 1 個點</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">⅓ 是 3 分之 1，把 0 到 1 等分成 <b>3 段</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">從 0 往右數 1 格，取 <b>第 1 個分點</b>。</span></div>
     </div>
     <div class="answer">0 到 1 等分成 3 段的第 1 點</div>
+    <div class="numline" data-min="-1" data-max="2" data-points="0.3333=⅓"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">在數線上畫出 1.5 與 −1.9。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">1.5 介於 1 與 2 之間，.5 表示半格 → <b>1、2 的中間</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−1.9 介於 −1 與 −2 之間，已很接近 −2。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">所以 −1.9 標在 <b>非常接近 −2</b> 的位置。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">1.5 在 <b>1 與 2 的中間</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−1.9 介於 −1 與 −2 之間，且 <b>非常接近 −2</b>。</span></div>
     </div>
     <div class="answer">1.5 在 1、2 中間；−1.9 接近 −2</div>
+    <div class="numline" data-min="-3" data-max="3" data-points="1.5=1.5,-1.9=−1.9"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">在數線上畫出 −2¼。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負數在原點左邊；2¼ 介於 2 與 3 之間。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 −2¼ 介於 <b>−2 與 −3</b> 之間。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">¼ 只有四分之一格 → <b>靠近 −2</b> 的位置。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−2¼ 是負數，介於 <b>−2 與 −3</b> 之間。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">把這段等分成 4 段，從 −2 往左數 1 格 → 靠近 −2 的位置。</span></div>
     </div>
     <div class="answer">−2 與 −3 之間、靠近 −2 的位置</div>
+    <div class="numline" data-min="-4" data-max="0" data-points="-2.25=−2¼"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">在數線上畫出 1¼ 與 −0.5。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">1¼ 介於 1 與 2 之間，¼ 表示四分之一格 → <b>靠近 1</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−0.5 介於 0 與 −1 之間，.5 是半格 → <b>0、−1 的正中間</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">1¼ 在 1 與 2 之間，把這段等分成 4 段，取第 1 格 → <b>靠近 1</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−0.5 在 <b>0 與 −1 的正中間</b>。</span></div>
     </div>
     <div class="answer">1¼ 在 1、2 間靠近 1；−0.5 在 0、−1 中間</div>
+    <div class="numline" data-min="-2" data-max="3" data-points="1.25=1¼,-0.5=−0.5"></div>
   </div>
 
-  <!-- 概念1 回家作業 -->
-  <div class="group-h hw">🏠 概念 1　回家作業（6 題）</div>
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">在數線上畫出 ¾。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">分母 4：把 0 到 1 <b>等分成 4 段</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">分子 3：從 0 往右數 3 格 → <b>第 3 個點</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">¾ 是 4 分之 3，把 0 到 1 等分成 <b>4 段</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">從 0 往右數 3 格，取 <b>第 3 個分點</b>（靠近 1）。</span></div>
     </div>
     <div class="answer">0 到 1 等分 4 段的第 3 點</div>
+    <div class="numline" data-min="-1" data-max="2" data-points="0.75=¾"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">在數線上畫出 −2.5。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負數在左邊；2.5 介於 2 與 3 之間。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">.5 是半格 → 取 <b>−2 與 −3 的正中間</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−2.5 是負數，介於 <b>−2 與 −3</b> 之間。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">取中間的點 → <b>−2 與 −3 的正中間</b>。</span></div>
     </div>
     <div class="answer">−2 與 −3 的正中間</div>
+    <div class="numline" data-min="-4" data-max="0" data-points="-2.5=−2.5"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">在數線上畫出 ＋1⅓。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">1⅓ 介於 1 與 2 之間。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">⅓ 把 1 到 2 等分成 3 段、取第 1 點 → <b>靠近 1</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">＋1⅓ 介於 <b>1 與 2</b> 之間。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">把 1 到 2 等分成 3 段，取第 1 個分點 → <b>靠近 1</b>。</span></div>
     </div>
     <div class="answer">1 與 2 之間靠近 1 的位置</div>
+    <div class="numline" data-min="-1" data-max="3" data-points="1.3333=＋1⅓"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">½ 在 0 與 1 的（　）位置。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">分母 2 → 把 0 到 1 等分成 2 段。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">取第 1 點，剛好在 <b>正中間</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">½ 把 0 到 1 等分成 2 段，取第 1 段端點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 ½ 在 0 與 1 的 <b>正中間</b>。</span></div>
     </div>
     <div class="answer">正中間</div>
+    <div class="numline" data-min="-1" data-max="2" data-points="0.5=½"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">在數線上畫出 −0.5、0、＋0.5。</span></div>
     <div class="steps">
       <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">0 在原點正中央。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−0.5 在 0 左邊半格、＋0.5 在 0 右邊半格 → <b>0 居中，左右各半個單位</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">＋0.5 在 0 與 1 的中間（右半個單位）；−0.5 在 0 與 −1 的中間（左半個單位）。</span></div>
     </div>
     <div class="answer">0 居中，左右各半個單位</div>
+    <div class="numline" data-min="-2" data-max="2" data-points="-0.5=−0.5,0=0,0.5=＋0.5"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">2.5 介於哪兩個整數之間？</span></div>
     <div class="steps">
       <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">2.5 比 2 大、比 3 小。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以介於 <b>2 與 3</b> 之間。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 2.5 介於 <b>2 與 3</b> 之間（正中間）。</span></div>
     </div>
     <div class="answer">2 與 3</div>
+    <div class="numline" data-min="0" data-max="4" data-points="2.5=2.5"></div>
   </div>
 
-  <!-- ===================== 概念 2 ===================== -->
+  <!-- ========== 概念 2 ========== -->
   <div class="concept">
     <h2>💡 概念 2　有理數</h2>
     <ul>
-      <li>整數、分數、小數都能在數線上找到對應的點，這些數統稱為 <b>「有理數」</b>。</li>
-      <li>整數可以看成 <b>分母是 1 的分數</b>（如 3 ＝ 3/1），所以整數也是有理數。</li>
-      <li><b>分數、有限小數</b>都是有理數。</li>
-      <li>每一個有理數，在數線上都有 <b>一個對應的點</b>。</li>
+      <li>整數、分數、小數都能在數線上找到對應的點，這些數統稱為「<b>有理數</b>」。</li>
+      <li>整數可以看成分母是 1 的分數（如 3 ＝ 3/1），所以 <b>整數也是有理數</b>。</li>
+      <li>分數、<b>有限小數</b>都是有理數。</li>
+      <li>每一個有理數，在數線上都有一個對應的點。</li>
     </ul>
   </div>
 
-  <!-- 概念2 老師講解 -->
-  <div class="group-h">👨‍🏫 概念 2　老師講解（4 題）</div>
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">整數、分數、小數在數線上都有對應點，統稱什麼數？（舉例 7、⅗、−1.4）</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">7 是整數、⅗ 是分數、−1.4 是小數，它們都能在數線上標出對應的點。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">這類數統稱為 <b>有理數</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">7 是整數、⅗ 是分數、−1.4 是小數，都能在數線上找到點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">這些能在數線上找到對應點的數，統稱 <b>有理數</b>。</span></div>
     </div>
     <div class="answer">有理數</div>
   </div>
@@ -243,8 +261,8 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">下列哪些是有理數？ 8、−⅔、0、4.5、−10。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">逐一檢查：8、−10、0 是整數；−⅔ 是分數；4.5 是小數。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">整數、分數、小數 <b>全都是有理數</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數（8、0、−10）、分數（−⅔）、有限小數（4.5）都是有理數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 <b>全部都是有理數</b>。</span></div>
     </div>
     <div class="answer">全部都是有理數</div>
   </div>
@@ -252,29 +270,30 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">在數線上找出 −2、¾、5 的對應點，它們都是什麼數？</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−2 在左 2；¾ 在 0、1 間第 3 點；5 在右 5，三者都能在數線上找到點。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">能在數線上對應的數都是 <b>有理數</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−2 在原點左 2；¾ 在 0 與 1 間（4 段的第 3 點）；5 在原點右 5。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">三個數在數線上都有對應點，所以都是 <b>有理數</b>。</span></div>
     </div>
     <div class="answer">有理數</div>
+    <div class="numline" data-min="-3" data-max="6" data-points="-2=−2,0.75=¾,5=5"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">整數是不是有理數？舉一例說明。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數可以寫成分母是 1 的分數。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">例如 6 ＝ 6/1，是分數的一種，所以整數 <b>是</b> 有理數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數可寫成分母是 1 的分數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">例如 6 ＝ 6/1，所以整數 <b>是</b>有理數。</span></div>
     </div>
     <div class="answer">是；如 6 ＝ 6/1</div>
   </div>
 
-  <!-- 概念2 學生練習 -->
-  <div class="group-h practice">✏️ 概念 2　學生練習（4 題）</div>
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">下列哪些是有理數？ −4、⅔、0、＋1.5、−9。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−4、−9、0 是整數；⅔ 是分數；＋1.5 是小數。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">整數、分數、小數都是有理數 → <b>全部都是</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數（−4、0、−9）、分數（⅔）、有限小數（＋1.5）都是有理數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 <b>全部都是有理數</b>。</span></div>
     </div>
     <div class="answer">全部都是有理數</div>
   </div>
@@ -282,7 +301,7 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">寫出三個介於 0 與 1 之間的有理數。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">在 0 與 1 之間找分數或小數即可。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">在 0 與 1 之間取分數或小數即可。</span></div>
       <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">例如 <b>¼、½、0.7</b>（答案不唯一）。</span></div>
     </div>
     <div class="answer">例：¼、½、0.7</div>
@@ -291,28 +310,29 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">−2.5 是不是有理數？在數線上的哪裡？</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−2.5 是小數，小數都是有理數 → <b>是</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">.5 是半格，負數在左邊 → 在 <b>−2 與 −3 的中間</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−2.5 是有限小數，所以 <b>是</b>有理數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">它在數線上 −2 與 −3 的 <b>正中間</b>。</span></div>
     </div>
     <div class="answer">是；在 −2 與 −3 的中間</div>
+    <div class="numline" data-min="-4" data-max="0" data-points="-2.5=−2.5"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">判斷對錯：所有整數都是有理數。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">任何整數都能寫成分母 1 的分數（如 −7 ＝ −7/1）。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以整數都是有理數 → <b>對</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數都能寫成分母 1 的分數，也都在數線上有對應點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以這句話 <b>對</b>。</span></div>
     </div>
     <div class="answer">對</div>
   </div>
 
-  <!-- 概念2 回家作業 -->
-  <div class="group-h hw">🏠 概念 2　回家作業（6 題）</div>
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">整數、分數、小數統稱為（　）數。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">這三類數都能在數線上找到對應的點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">這些數在數線上都有對應點。</span></div>
       <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">統稱為 <b>有理</b>數。</span></div>
     </div>
     <div class="answer">有理</div>
@@ -321,8 +341,8 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">下列哪些是有理數？ 7、−⅖、0、3.25、−12。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">7、−12、0 是整數；−⅖ 是分數；3.25 是小數。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">三類都是有理數 → <b>全部都是</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數、分數、有限小數都是有理數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 <b>全部都是有理數</b>。</span></div>
     </div>
     <div class="answer">全部都是有理數</div>
   </div>
@@ -330,7 +350,7 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">寫出兩個介於 −1 與 0 之間的有理數。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">在 −1 與 0 之間找負的分數或小數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">在 −1 與 0 之間取負的分數或小數。</span></div>
       <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">例如 <b>−½、−0.3</b>（答案不唯一）。</span></div>
     </div>
     <div class="answer">例：−½、−0.3</div>
@@ -339,8 +359,8 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">0 是不是有理數？</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">0 是整數，也能寫成 0 ＝ 0/1。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 0 <b>是</b> 有理數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">0 是整數（0 ＝ 0/1），在數線上是原點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以 0 <b>是</b>有理數。</span></div>
     </div>
     <div class="answer">是</div>
   </div>
@@ -348,51 +368,52 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">在數線上標出 ½、−1.5、2，它們都是（　）數。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">½ 是分數、−1.5 是小數、2 是整數，都能在數線上標出。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">它們都是 <b>有理</b>數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">½ 在 0、1 中間；−1.5 在 −1、−2 中間；2 在原點右 2。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">三者都有對應點，都是 <b>有理</b>數。</span></div>
     </div>
     <div class="answer">有理</div>
+    <div class="numline" data-min="-3" data-max="3" data-points="0.5=½,-1.5=−1.5,2=2"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">判斷對錯：有理數都能在數線上找到對應的點。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">有理數的定義就是能在數線上找到對應點的整數、分數、小數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">有理數的定義就是能在數線上找到對應點的數。</span></div>
       <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以這句話 <b>對</b>。</span></div>
     </div>
     <div class="answer">對</div>
   </div>
 
-  <!-- ===================== 概念 3 ===================== -->
+  <!-- ========== 概念 3 ========== -->
   <div class="concept">
     <h2>💡 概念 3　數的大小比較</h2>
     <ul>
-      <li>在數線上，越靠 <b>右邊</b> 的數越大：右邊的數 <b>＞</b> 左邊的數。</li>
-      <li><b>正數 ＞ 0 ＞ 負數</b>。</li>
-      <li>兩個正數：<b>絕對值（數字）大的比較大</b>。</li>
-      <li>兩個負數：<b>絕對值（數字）大的反而比較小</b>，例如 −7 ＜ −3。</li>
+      <li>在數線上，越靠 <b>右邊</b>的數越大：右邊的數 <b>＞</b> 左邊的數。</li>
+      <li>正數 ＞ 0 ＞ 負數。</li>
+      <li>兩個正數：絕對值（數字）大的比較大。</li>
+      <li>兩個負數：絕對值（數字）大的反而 <b>比較小</b>，例如 −7 ＜ −3。</li>
     </ul>
   </div>
 
-  <!-- 概念3 老師講解 -->
-  <div class="group-h">👨‍🏫 概念 3　老師講解（4 題）</div>
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">用數線比較 −4 與 ＋1 的大小。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−4 在原點左邊、＋1 在原點右邊。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">數線上越右邊越大，＋1 在右邊。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">把 −4 與 ＋1 都標在數線上。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">＋1 在 −4 的 <b>右邊</b>，越右邊越大。</span></div>
       <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">所以 <b>−4 ＜ ＋1</b>。</span></div>
     </div>
     <div class="answer">−4 ＜ ＋1（＋1 在右邊較大）</div>
+    <div class="numline" data-min="-5" data-max="3" data-points="-4=−4,1=＋1"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">比較 0 與 −6；比較 ＋5 與 0。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">口訣：正數 ＞ 0 ＞ 負數。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−6 是負數，比 0 小 → <b>0 ＞ −6</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">＋5 是正數，比 0 大 → <b>＋5 ＞ 0</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">0 比任何負數大，所以 <b>0 ＞ −6</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正數比 0 大，所以 <b>＋5 ＞ 0</b>。</span></div>
     </div>
     <div class="answer">0 ＞ −6；＋5 ＞ 0</div>
   </div>
@@ -400,9 +421,8 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">比較兩個負數 −2 與 −9。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩個都是負數，先看絕對值：｜−2｜＝2、｜−9｜＝9。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">負數中 <b>絕對值大的反而小</b>，9 ＞ 2，所以 −9 較小。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">所以 <b>−2 ＞ −9</b>（−2 在數線右邊）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩個負數，數字大的反而比較小。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">9 比 2 大，所以 −9 比較小 → <b>−2 ＞ −9</b>。</span></div>
     </div>
     <div class="answer">−2 ＞ −9</div>
   </div>
@@ -410,23 +430,22 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">將 −1、＋4、0、−6 由小到大排列。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">先分類：負數 −1、−6；零 0；正數 ＋4。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">兩負數比大小：絕對值大的小 → −6 ＜ −1。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">負 ＜ 0 ＜ 正，依序排出 <b>−6 ＜ −1 ＜ 0 ＜ ＋4</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">在數線上越左邊越小，從左往右讀出順序。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">負數：−6 比 −1 小（−6 在更左邊）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">由小到大：<b>−6 ＜ −1 ＜ 0 ＜ ＋4</b>。</span></div>
     </div>
     <div class="answer">−6 ＜ −1 ＜ 0 ＜ ＋4</div>
+    <div class="numline" data-min="-7" data-max="6" data-points="-6=−6,-1=−1,0=0,4=＋4"></div>
   </div>
 
-  <!-- 概念3 學生練習 -->
-  <div class="group-h practice">✏️ 概念 3　學生練習（4 題）</div>
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">填 ＞、＜ 或 ＝：−3（　）+2；0（　）−5；−1（　）−7；+½（　）+¾。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−3 是負、+2 是正 → 負 ＜ 正 → <b>−3 ＜ +2</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0 ＞ 負數 → <b>0 ＞ −5</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">兩負數，絕對值大的小：｜−7｜＞｜−1｜ → <b>−1 ＞ −7</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">4</button><span class="txt">兩正數化同分母 ½＝2/4、¾＝3/4，2/4 ＜ 3/4 → <b>+½ ＜ +¾</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−3 在 +2 左邊 → <b>−3 ＜ +2</b>；0 比 −5 大 → <b>0 ＞ −5</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">兩負數：−1 ＞ −7（7 大反而小）；兩正數：½＝0.5 ＜ ¾＝0.75 → <b>+½ ＜ +¾</b>。</span></div>
     </div>
     <div class="answer">＜；＞；＞；＜</div>
   </div>
@@ -434,9 +453,9 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">7、−3、0、8、−16 中，最大（　），最小（　），相差（　）。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">正數中最大的是 <b>8</b>（8 ＞ 7）。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">負數中絕對值最大的最小 → <b>−16</b>（｜−16｜＞｜−3｜）。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">相差＝最大−最小＝8−(−16)＝8＋16＝<b>24</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">最右邊（最大）是 <b>8</b>；最左邊（最小）是 <b>−16</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">相差＝最大−最小＝8−(−16)。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">8−(−16)＝8＋16＝<b>24</b>。</span></div>
     </div>
     <div class="answer">最大 8、最小 −16；相差 8−(−16)＝24</div>
   </div>
@@ -444,9 +463,9 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">將 −1.49、0、3⅓、−2⅓ 由大到小排列。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">分類：正數 3⅓；零 0；負數 −1.49、−2⅓。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">兩負數比：｜−2⅓｜＞｜−1.49｜，絕對值大的小 → −1.49 ＞ −2⅓。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">由大到小：正 ＞ 0 ＞ 負 → <b>3⅓ ＞ 0 ＞ −1.49 ＞ −2⅓</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">正數最大：3⅓；再來是 0。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">兩負數比大小：−1.49 ＞ −2⅓（−2⅓≈−2.33 更小）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">由大到小：<b>3⅓ ＞ 0 ＞ −1.49 ＞ −2⅓</b>。</span></div>
     </div>
     <div class="answer">3⅓ ＞ 0 ＞ −1.49 ＞ −2⅓</div>
   </div>
@@ -454,22 +473,21 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">大於 −3 且小於 5 的整數有哪些？它們的和是多少？</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">「大於 −3」不含 −3、「小於 5」不含 5，取中間的整數。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">整數為 <b>−2、−1、0、1、2、3、4</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">求和：(−2)＋(−1)＋0＋1＋2＋3＋4，相反數先抵消 → 剩 3＋4＝<b>7</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">大於 −3、小於 5（不含 −3 與 5）的整數：−2、−1、0、1、2、3、4。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−2 與 2、−1 與 1 互相抵消，剩 0＋3＋4。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">和＝0＋3＋4＝<b>7</b>。</span></div>
     </div>
     <div class="answer">−2,−1,0,1,2,3,4；和＝7</div>
   </div>
 
-  <!-- 概念3 回家作業 -->
-  <div class="group-h hw">🏠 概念 3　回家作業（6 題）</div>
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">填 ＞、＜：−8（　）−3；＋5（　）−10；0（　）+2。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩負數，絕對值大的小：｜−8｜＞｜−3｜ → <b>−8 ＜ −3</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正 ＞ 負 → <b>＋5 ＞ −10</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">0 ＜ 正數 → <b>0 ＜ +2</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩負數：8 大反而小 → <b>−8 ＜ −3</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正數 ＞ 負數 → <b>＋5 ＞ −10</b>；0 ＜ 正數 → <b>0 ＜ +2</b>。</span></div>
     </div>
     <div class="answer">＜；＞；＜</div>
   </div>
@@ -477,8 +495,8 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">最大的負整數是（　）；最小的正整數是（　）。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負整數 −1、−2、−3…，越靠近 0 越大 → 最大是 <b>−1</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正整數 1、2、3…，最小是 <b>1</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負整數 …−3、−2、−1 中，最靠近 0（最右）的是 <b>−1</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正整數 1、2、3… 中最小的是 <b>1</b>。</span></div>
     </div>
     <div class="answer">−1；1</div>
   </div>
@@ -486,18 +504,18 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">將 −4、＋1、−2、0、＋3 由小到大排列。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">分類：負數 −4、−2；零 0；正數 ＋1、＋3。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">兩負數：絕對值大的小 → −4 ＜ −2；兩正數：＋1 ＜ ＋3。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">負 ＜ 0 ＜ 正 → <b>−4 ＜ −2 ＜ 0 ＜ ＋1 ＜ ＋3</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">在數線上由左往右排：負數先（−4、−2），再 0，再正數（＋1、＋3）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">由小到大：<b>−4 ＜ −2 ＜ 0 ＜ ＋1 ＜ ＋3</b>。</span></div>
     </div>
     <div class="answer">−4 ＜ −2 ＜ 0 ＜ ＋1 ＜ ＋3</div>
+    <div class="numline" data-min="-5" data-max="4" data-points="-4=−4,-2=−2,0=0,1=＋1,3=＋3"></div>
   </div>
 
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">判斷對錯：(1) 0 比任何負數大。 (2) 兩個負數，數字大的比較大。</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">(1) 正數 ＞ 0 ＞ 負數，0 確實比所有負數大 → <b>對</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">(2) 兩負數中數字（絕對值）大的反而 <b>小</b>，例如 −7 ＜ −3 → <b>錯</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">(1) 0 在所有負數的右邊，所以 0 比任何負數大 → <b>對</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">(2) 兩負數中數字大的反而 <b>小</b>（如 −7 ＜ −3），所以這句 <b>錯</b>。</span></div>
     </div>
     <div class="answer">(1) 對 (2) 錯（數字大反而小）</div>
   </div>
@@ -505,9 +523,8 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">大於 −5 且小於 0 的整數有哪些？共幾個？</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">「大於 −5」不含 −5、「小於 0」不含 0。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">整數為 <b>−4、−3、−2、−1</b>。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">數一數共 <b>4 個</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">大於 −5、小於 0（不含 −5 與 0）的整數：−4、−3、−2、−1。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">共有 <b>4 個</b>。</span></div>
     </div>
     <div class="answer">−4,−3,−2,−1；共 4 個</div>
   </div>
@@ -515,14 +532,14 @@
   <div class="prob">
     <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">在 −2.5、−3、＋1、−0.5 中，哪個最小？哪個最大？</span></div>
     <div class="steps">
-      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">正數最大 → <b>＋1</b>（唯一正數）。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">三個負數比：絕對值最大的最小，｜−3｜＞｜−2.5｜＞｜−0.5｜。</span></div>
-      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">所以最小是 <b>−3</b>、最大是 <b>＋1</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">正數 ＋1 在最右邊 → <b>最大</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">三個負數中，−3 最靠左（−3 ＜ −2.5 ＜ −0.5）→ <b>最小是 −3</b>。</span></div>
     </div>
     <div class="answer">最小 −3；最大 ＋1</div>
+    <div class="numline" data-min="-4" data-max="2" data-points="-3=−3,-2.5=−2.5,-0.5=−0.5,1=＋1"></div>
   </div>
 
-  <footer>全民補習班　teaching.efetl.com　·　國一數學 暑期先修　·　第 2 堂課　數線進階、數的大小</footer>
+  <footer>全民補習班　teaching.efetl.com　·　國一數學 暑期先修　·　第2堂課　數線進階、數的大小</footer>
 </div>
 
 <script>
@@ -542,6 +559,25 @@
     document.querySelectorAll('.step').forEach(s => s.classList.remove('shown'));
     document.querySelectorAll('.answer').forEach(a => a.classList.remove('show'));
   }
+  function drawNumLine(el){
+    const min=parseFloat(el.dataset.min), max=parseFloat(el.dataset.max);
+    const pts=(el.dataset.points||'').split(',').map(s=>s.trim()).filter(Boolean).map(s=>{
+      const i=s.indexOf('='); return i>=0?{v:parseFloat(s.slice(0,i)),label:s.slice(i+1)}:{v:parseFloat(s),label:s};
+    });
+    const W=640,H=92,padL=34,padR=34,y=58,x0=padL,x1=W-padR,sc=(x1-x0)/(max-min),X=v=>x0+(v-min)*sc;
+    let s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:\'Noto Sans TC\',sans-serif">';
+    s+='<line x1="'+(x0-16)+'" y1="'+y+'" x2="'+(x1+16)+'" y2="'+y+'" stroke="#333" stroke-width="2"/>';
+    s+='<polygon points="'+(x1+16)+','+y+' '+(x1+6)+','+(y-5)+' '+(x1+6)+','+(y+5)+'" fill="#333"/>';
+    s+='<polygon points="'+(x0-16)+','+y+' '+(x0-6)+','+(y-5)+' '+(x0-6)+','+(y+5)+'" fill="#333"/>';
+    for(let n=Math.ceil(min);n<=Math.floor(max);n++){const x=X(n);
+      s+='<line x1="'+x+'" y1="'+(y-6)+'" x2="'+x+'" y2="'+(y+6)+'" stroke="#333" stroke-width="'+(n===0?2.5:1.4)+'"/>';
+      s+='<text x="'+x+'" y="'+(y+24)+'" text-anchor="middle" font-size="15" fill="#444">'+n+'</text>';}
+    pts.forEach(p=>{const x=X(p.v);
+      s+='<circle cx="'+x+'" cy="'+y+'" r="6" fill="#cc0000"/>';
+      s+='<text x="'+x+'" y="'+(y-13)+'" text-anchor="middle" font-size="16" fill="#cc0000" font-weight="bold">'+p.label+'</text>';});
+    s+='</svg>'; el.innerHTML=s;
+  }
+  document.querySelectorAll('.numline').forEach(drawNumLine);
 </script>
 </body>
 </html>
