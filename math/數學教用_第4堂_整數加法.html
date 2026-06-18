@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一數學 暑期先修 · 教用互動版 ── 第4堂課 整數的加法</title>
+<style>
+  :root { --main:#2b6cb0; --accent:#e6a800; --ok:#1d8a4c; --step:#2b6cb0; --bg:#eef3f9; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.8; font-size:19px; padding:0 0 80px; }
+  header { background:linear-gradient(135deg,var(--main),#3d8bd4); color:#fff; padding:26px 20px 22px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+  header .tag { display:inline-block; background:rgba(255,255,255,.22); border-radius:20px; padding:4px 16px; font-size:17px; margin-bottom:8px; }
+  header h1 { font-size:28px; margin-bottom:4px; }
+  header p { font-size:17px; opacity:.95; }
+  .wrap { max-width:920px; margin:0 auto; padding:22px 16px; }
+  .toolbar { position:sticky; top:0; z-index:40; background:#fff; border:1px solid #d9e2ec; border-radius:12px; padding:12px 16px; margin-bottom:20px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  button.act { font-family:inherit; font-size:16px; font-weight:bold; border:none; border-radius:10px; padding:9px 16px; cursor:pointer; }
+  button.exp { background:var(--main); color:#fff; }
+  button.col { background:#7b8a9a; color:#fff; }
+  /* 概念說明 */
+  .concept { background:#fff8e6; border:1.5px solid #f0cf6a; border-radius:14px; padding:18px 22px; margin-bottom:22px; }
+  .concept h2 { font-size:21px; color:#9a6b00; margin-bottom:10px; }
+  .concept ul { padding-left:22px; } .concept li { margin:6px 0; }
+  .concept b { color:#b3007a; }
+  /* 分組標題 */
+  .group-h { font-size:20px; font-weight:bold; color:#fff; background:var(--main); border-radius:8px; padding:8px 16px; margin:24px 0 14px; }
+  .group-h.practice { background:#1d8a4c; } .group-h.hw { background:#b06a00; }
+  /* 題目卡 */
+  .prob { background:#fff; border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 1px 6px rgba(0,0,0,.08); }
+  .q-line { display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; }
+  .q-badge { flex-shrink:0; background:#e8f0fb; color:var(--main); font-weight:bold; border-radius:8px; padding:2px 12px; font-size:17px; white-space:nowrap; }
+  .q-text { font-size:19px; }
+  /* 步驟：按數字才顯示內容 */
+  .steps { margin:8px 0 0; }
+  .step { display:flex; gap:12px; align-items:flex-start; margin:9px 0; }
+  button.num { flex-shrink:0; width:34px; height:34px; border-radius:50%; background:var(--step); color:#fff; font-weight:bold; font-size:17px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 4px rgba(43,108,176,.4); transition:transform .1s,filter .1s; font-family:inherit; }
+  button.num:hover { filter:brightness(1.12); transform:scale(1.1); }
+  .step.shown button.num { background:var(--ok); box-shadow:none; cursor:default; }
+  .txt { display:none; font-size:18px; padding:8px 14px; background:#f5f9fe; border-left:4px solid var(--step); border-radius:0 10px 10px 0; flex:1; }
+  .step.shown .txt { display:block; animation:fade .25s ease; }
+  .txt b { color:#b3007a; }
+  @keyframes fade { from{opacity:0; transform:translateX(-6px);} to{opacity:1;} }
+  .answer { display:none; margin-top:10px; padding:11px 16px; background:#e7f6ee; border:1.5px solid var(--ok); border-radius:10px; font-size:19px; font-weight:bold; color:#13633a; }
+  .answer.show { display:block; animation:fade .25s ease; }
+  .answer::before { content:"✅ 答案："; }
+  footer { text-align:center; color:#789; font-size:16px; margin-top:26px; }
+  @media print {
+    .toolbar { display:none!important; }
+    .txt { display:block!important; }
+    .answer { display:block!important; }
+    .prob { break-inside:avoid; box-shadow:none; border:1px solid #ddd; }
+    body { background:#fff; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">國一數學 · 暑期先修 · 教用互動版</div>
+  <h1>第 4 堂課　整數的加法</h1>
+  <p>按數字 1、2、3… 逐步顯示步驟與解析 · 全民補習班 線上教學</p>
+</header>
+<div class="wrap">
+  <div class="toolbar">
+    <button class="act exp" onclick="showAll()">全部顯示</button>
+    <button class="act col" onclick="resetAll()">全部隱藏</button>
+  </div>
+
+  <!-- ===================== 概念 1 ===================== -->
+  <div class="concept">
+    <h2>💡 概念 1　同號數相加</h2>
+    <ul>
+      <li><b>同號數相加</b>：把兩數的<b>絕對值相加</b>，和的前面加上<b>與原來相同的符號</b>。</li>
+      <li>正數加正數：3＋4＝<b>7</b>。</li>
+      <li>負數加負數：(−5)＋(−2)＝−(5＋2)＝<b>−7</b>。</li>
+      <li>兩個正數的和一定是<b>正數</b>；兩個負數的和一定是<b>負數</b>。</li>
+    </ul>
+  </div>
+
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">計算 6＋8。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數同號（都是正數），<b>取正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相加：6＋8＝<b>14</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上正號 → <b>＋14</b>。</span></div>
+    </div>
+    <div class="answer">14</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">計算 (−9)＋(−4)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數同號（都是負數），<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相加：9＋4＝<b>13</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上負號 → <b>−13</b>。</span></div>
+    </div>
+    <div class="answer">−13</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">計算 (−11)＋(−6)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數同號（都是負數），<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相加：11＋6＝<b>17</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上負號 → <b>−17</b>。</span></div>
+    </div>
+    <div class="answer">−17</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">計算 (−12)＋(−13)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數同號（都是負數），<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相加：12＋13＝<b>25</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上負號 → <b>−25</b>。</span></div>
+    </div>
+    <div class="answer">−25</div>
+  </div>
+
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">計算 12＋9。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數同號（都是正數），<b>取正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相加：12＋9＝<b>21</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上正號 → <b>＋21</b>。</span></div>
+    </div>
+    <div class="answer">21</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">計算 (−13)＋(−4)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數同號（都是負數），<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相加：13＋4＝<b>17</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上負號 → <b>−17</b>。</span></div>
+    </div>
+    <div class="answer">−17</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">計算 (−42)＋(−39)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數同號（都是負數），<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相加：42＋39＝<b>81</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上負號 → <b>−81</b>。</span></div>
+    </div>
+    <div class="answer">−81</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">寒流昨天降 3°C、今天又降 4°C，兩天共降幾度？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">下降記為負：昨天 <b>−3</b>、今天 <b>−4</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">同號（都是負數）取負號，絕對值相加 3＋4＝7 → (−3)＋(−4)＝<b>−7</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">−7 表示共下降 <b>7°C</b>。</span></div>
+    </div>
+    <div class="answer">(−3)＋(−4)＝−7，共降 7°C</div>
+  </div>
+
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">計算 25＋18。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號（正數）取正號，絕對值相加：25＋18＝<b>43</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">加上正號 → <b>＋43</b>。</span></div>
+    </div>
+    <div class="answer">43</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">計算 (−6)＋(−7)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號（負數）取負號，絕對值相加：6＋7＝<b>13</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">加上負號 → <b>−13</b>。</span></div>
+    </div>
+    <div class="answer">−13</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">計算 (−20)＋(−30)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號（負數）取負號，絕對值相加：20＋30＝<b>50</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">加上負號 → <b>−50</b>。</span></div>
+    </div>
+    <div class="answer">−50</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">計算 (−15)＋(−25)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號（負數）取負號，絕對值相加：15＋25＝<b>40</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">加上負號 → <b>−40</b>。</span></div>
+    </div>
+    <div class="answer">−40</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">兩個負數相加，和一定是（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號相加取相同符號，兩負數取<b>負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以和一定是 <b>負數</b>。</span></div>
+    </div>
+    <div class="answer">負數</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">計算 (−100)＋(−1)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號（負數）取負號，絕對值相加：100＋1＝<b>101</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">加上負號 → <b>−101</b>。</span></div>
+    </div>
+    <div class="answer">−101</div>
+  </div>
+
+  <!-- ===================== 概念 2 ===================== -->
+  <div class="concept">
+    <h2>💡 概念 2　異號數相加（含相反數、與 0 相加）</h2>
+    <ul>
+      <li><b>異號數相加</b>：把兩數的<b>絕對值相減</b>，和的前面加上<b>絕對值較大者的符號</b>。</li>
+      <li>例：5＋(−2)＝＋(5−2)＝<b>3</b>；(−4)＋3＝−(4−3)＝<b>−1</b>。</li>
+      <li><b>相反數相加等於 0</b>：(−6)＋6＝<b>0</b>。</li>
+      <li>任何數<b>與 0 相加，值不變</b>：5＋0＝5、0＋(−7)＝−7。</li>
+    </ul>
+  </div>
+
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">計算 13＋(−9)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數異號，比絕對值：｜13｜＝13 ＞ ｜−9｜＝9，<b>取正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：13−9＝<b>4</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上正號 → <b>＋4</b>。</span></div>
+    </div>
+    <div class="answer">4</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">計算 (−12)＋20。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">兩數異號，比絕對值：｜20｜＝20 ＞ ｜−12｜＝12，<b>取正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：20−12＝<b>8</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">加上正號 → <b>＋8</b>。</span></div>
+    </div>
+    <div class="answer">8</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">計算 (−15)＋15。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−15 與 15 互為<b>相反數</b>（絕對值相等、符號相反）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">相反數相加 → 絕對值相減 15−15＝0，和為 <b>0</b>。</span></div>
+    </div>
+    <div class="answer">0</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">計算 0＋(−13)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">任何數與 <b>0 相加，值不變</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0＋(−13)＝<b>−13</b>。</span></div>
+    </div>
+    <div class="answer">−13</div>
+  </div>
+
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">計算 8＋(−5)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">異號，比絕對值：｜8｜＝8 ＞ ｜−5｜＝5，<b>取正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：8−5＝<b>3</b> → <b>＋3</b>。</span></div>
+    </div>
+    <div class="answer">3</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">計算 17＋(−49)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">異號，比絕對值：｜−49｜＝49 ＞ ｜17｜＝17，<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：49−17＝<b>32</b> → <b>−32</b>。</span></div>
+    </div>
+    <div class="answer">−32</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">計算 (−12)＋72。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">異號，比絕對值：｜72｜＝72 ＞ ｜−12｜＝12，<b>取正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：72−12＝<b>60</b> → <b>＋60</b>。</span></div>
+    </div>
+    <div class="answer">60</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">計算 (−8)＋8。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">−8 與 8 互為<b>相反數</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">相反數相加，和為 <b>0</b>。</span></div>
+    </div>
+    <div class="answer">0</div>
+  </div>
+
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">計算 4＋(−12)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">異號，比絕對值：｜−12｜＝12 ＞ ｜4｜＝4，<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：12−4＝<b>8</b> → <b>−8</b>。</span></div>
+    </div>
+    <div class="answer">−8</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">計算 (−20)＋35。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">異號，比絕對值：｜35｜＝35 ＞ ｜−20｜＝20，<b>取正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：35−20＝<b>15</b> → <b>＋15</b>。</span></div>
+    </div>
+    <div class="answer">15</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">計算 50＋(−50)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">50 與 −50 互為<b>相反數</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">相反數相加，和為 <b>0</b>。</span></div>
+    </div>
+    <div class="answer">0</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">計算 0＋(−9)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">任何數與 <b>0 相加，值不變</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0＋(−9)＝<b>−9</b>。</span></div>
+    </div>
+    <div class="answer">−9</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">計算 (−13)＋4。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">異號，比絕對值：｜−13｜＝13 ＞ ｜4｜＝4，<b>取負號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">絕對值相減：13−4＝<b>9</b> → <b>−9</b>。</span></div>
+    </div>
+    <div class="answer">−9</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">兩數相加得 0，這兩數互為（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">和為 0 表示絕對值相等、符號相反。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">這兩數互為 <b>相反數</b>。</span></div>
+    </div>
+    <div class="answer">相反數</div>
+  </div>
+
+  <!-- ===================== 概念 3 ===================== -->
+  <div class="concept">
+    <h2>💡 概念 3　加法運算律與加法應用</h2>
+    <ul>
+      <li><b>交換律</b>：甲＋乙＝乙＋甲。</li>
+      <li><b>結合律</b>：(甲＋乙)＋丙＝甲＋(乙＋丙)。</li>
+      <li><b>連加</b>：三個以上的數相加可任意次序，常把<b>同號的</b>、或能<b>湊成整十整百</b>的先加，計算較快。</li>
+      <li><b>加法應用</b>：賺賠（賺正、賠負）、方向位移（一向為正、反向為負）等問題，把情境翻成正負數再相加。</li>
+    </ul>
+  </div>
+
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">用結合律計算 999＋48＋1。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">用<b>交換律、結合律</b>把能湊整的先加：999＋48＋1＝999＋1＋48。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">999＋1＝<b>1000</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">1000＋48＝<b>1048</b>。</span></div>
+    </div>
+    <div class="answer">999＋1＋48＝1048</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">計算 (−7452)＋3854＋7452。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">找出<b>相反數</b>：−7452 與 7452，先把它們配成一組。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">[(−7452)＋7452]＝<b>0</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">0＋3854＝<b>3854</b>。</span></div>
+    </div>
+    <div class="answer">[(−7452)＋7452]＋3854＝3854</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">計算 14＋(−13)＋(−6)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">先把兩個<b>同號（負數）</b>相加：(−13)＋(−6)＝<b>−19</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">再算 14＋(−19)：異號取負號，19−14＝<b>5</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">所以 14＋(−19)＝<b>−5</b>。</span></div>
+    </div>
+    <div class="answer">14＋(−19)＝−5</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">計算 25＋(−18)＋(−26)＋24。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">用交換、結合律把<b>同號的</b>各自相加：(25＋24)＋[(−18)＋(−26)]。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正數組：25＋24＝<b>49</b>；負數組：(−18)＋(−26)＝<b>−44</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">再算 49＋(−44)：異號取正號，49−44＝<b>5</b>。</span></div>
+    </div>
+    <div class="answer">(25＋24)＋[(−18)＋(−26)]＝49＋(−44)＝5</div>
+  </div>
+
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">計算 (−6＋10)＋(−3)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">先算括號內：(−6)＋10，異號取正號，10−6＝<b>4</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">再算 4＋(−3)：異號取正號，4−3＝<b>1</b>。</span></div>
+    </div>
+    <div class="answer">4＋(−3)＝1</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">計算 48＋(−15)＋(−48)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">找相反數：48 與 −48 先配成一組 → [48＋(−48)]＝<b>0</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0＋(−15)＝<b>−15</b>。</span></div>
+    </div>
+    <div class="answer">[48＋(−48)]＋(−15)＝−15</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">商人第一週賺 4520、第二週賺 3540、第三週賠 1500，三週共賺（賠）多少？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">賺記正、賠記負：<b>＋4520、＋3540、−1500</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">先加同號（正數）：4520＋3540＝<b>8060</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">再算 8060＋(−1500)：異號取正號，8060−1500＝<b>6560</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">4</button><span class="txt">結果為正，表示<b>賺 6560 元</b>。</span></div>
+    </div>
+    <div class="answer">4520＋3540＋(−1500)＝6560，賺 6560 元</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">北為正，從校門口向南 15、再向北 8、再向北 7（公尺），最後在何處？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">北為正、南為負：<b>−15、＋8、＋7</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">先加同號（正數）：8＋7＝<b>15</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">再算 (−15)＋15：相反數相加＝<b>0</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">4</button><span class="txt">結果 0，表示<b>回到校門口</b>。</span></div>
+    </div>
+    <div class="answer">(−15)＋8＋7＝0，回到校門口</div>
+  </div>
+
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">計算 36＋(−19)＋(−36)。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">找相反數：36 與 −36 → [36＋(−36)]＝<b>0</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0＋(−19)＝<b>−19</b>。</span></div>
+    </div>
+    <div class="answer">−19</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">計算 (−25)＋40＋25。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">找相反數：−25 與 25 → [(−25)＋25]＝<b>0</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0＋40＝<b>40</b>。</span></div>
+    </div>
+    <div class="answer">40</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">計算 (−8)＋5＋(−2)＋5。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號各自相加：負數 (−8)＋(−2)＝<b>−10</b>；正數 5＋5＝<b>10</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">再算 (−10)＋10：相反數相加＝<b>0</b>。</span></div>
+    </div>
+    <div class="answer">0</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">兩個正數相加，和一定是（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">同號相加取相同符號，兩正數取<b>正號</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">所以和一定是 <b>正數</b>。</span></div>
+    </div>
+    <div class="answer">正數</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">甲為正數、乙為負數，且 ｜甲｜＝｜乙｜，則 甲＋乙＝（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">絕對值相等、符號相反 → 甲、乙互為<b>相反數</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">相反數相加，和為 <b>0</b>。</span></div>
+    </div>
+    <div class="answer">0</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">北為正，某人向北 15、再向南 20（公尺），最後在哪一邊、幾公尺？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">北為正、南為負：<b>＋15、−20</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">15＋(−20)：異號取負號，20−15＝<b>5</b> → <b>−5</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">結果為負，表示在<b>南邊 5 公尺</b>。</span></div>
+    </div>
+    <div class="answer">15＋(−20)＝−5，南邊 5 公尺</div>
+  </div>
+
+  <footer>全民補習班　teaching.efetl.com　·　國一數學 暑期先修　·　第4堂課 整數的加法</footer>
+</div>
+
+<script>
+  function showStep(btn){
+    const step = btn.closest('.step');
+    step.classList.add('shown');
+    const prob = btn.closest('.prob');
+    if (!prob.querySelector('.step:not(.shown)')) {     // 該題步驟全部點開
+      prob.querySelector('.answer')?.classList.add('show');   // 自動顯示答案
+    }
+  }
+  function showAll(){
+    document.querySelectorAll('.step').forEach(s => s.classList.add('shown'));
+    document.querySelectorAll('.answer').forEach(a => a.classList.add('show'));
+  }
+  function resetAll(){
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('shown'));
+    document.querySelectorAll('.answer').forEach(a => a.classList.remove('show'));
+  }
+</script>
+</body>
+</html>
