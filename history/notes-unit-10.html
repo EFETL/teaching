@@ -15,29 +15,22 @@ button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;borde
 button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
 button.reveal{background:var(--accent);color:#3a2c00;}
 button.hide{background:#7b8a9a;color:#fff;}
-/* 簡介框 */
 .intro-box{background:#fff;border-left:5px solid var(--subject);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:22px;font-size:18px;color:#2a3a4a;box-shadow:0 1px 6px rgba(0,0,0,.07);}
-/* 卡片 */
 section.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
 .sec-h{font-size:20px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-/* 本文段落 */
 .body-text{font-size:18px;line-height:1.9;color:#2a3a4a;background:#f8fbff;border-radius:10px;padding:14px 18px;margin-bottom:18px;border:1px solid #dae6f0;}
 .body-text b{color:var(--subject);}
-/* 筆記 */
 .notes-head{font-size:16px;font-weight:bold;color:var(--main);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e3ebf3;}
 .note-pt{font-size:18px;margin:10px 0;padding:8px 10px 8px 14px;border-left:4px solid #e3ebf3;border-radius:0 8px 8px 0;background:#fafcff;}
 .note-pt.revealed{border-left-color:var(--ok);background:#f3fdf6;}
-/* 填空（「？」點擊顯示答案） */
 span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
 span.blank::before{content:"？";}
 span.blank:hover{background:#fff6d8;}
 span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
 span.blank.on::before{content:"";}
-/* 解析 */
 .explain{display:none;font-size:16px;background:#f0f7ff;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:8px;color:#33414f;}
 .explain b{color:var(--main);}
 .show-ans .explain,.note-pt.revealed .explain{display:block;}
-/* 資訊表格 */
 .info-table{width:100%;border-collapse:collapse;margin:16px 0 4px;font-size:17px;}
 .info-table caption{font-size:16px;font-weight:bold;color:var(--main);text-align:left;padding:0 0 8px;}
 .info-table th{background:var(--subject);color:#fff;padding:9px 12px;text-align:left;font-weight:bold;}
@@ -45,13 +38,45 @@ span.blank.on::before{content:"";}
 .info-table tr:nth-child(even) td{background:#f4f8fd;}
 .info-table tr:hover td{background:#eaf3fb;}
 footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* PRINT-CLEAN v1：列印時隱藏答案與解析，空格留白可手寫 */
 @media print{
   body{background:#fff;padding:0;}
   .toolbar,.back{display:none!important;}
-  .show-ans .explain,.explain{display:block;}
+  .explain{display:none!important;}
+  span.blank,span.blank.on{color:transparent!important;background:#fff!important;border:1px solid #999!important;}
+  span.blank::before{content:""!important;}
   section.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd;}
 }
-</style></head><body><header><div class="unit-tag">歷史　單元 10</div><h1>唐山過臺灣</h1><p>教師講義　·　全民補習班 線上教學</p><a class="back" href="./">← 回歷史科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span><button class="act reveal" onclick="revealAll()">顯示所有答案</button><button class="act hide" onclick="hideAll()">隱藏答案</button></div><div class="intro-box">「唐山過台灣，心肝結歸丸」——移民的勇氣與鄉愁，交織成了清代臺灣最動人的故事。</div><section class="card"><div class="sec-h"><span>🚢</span>一、清末的開港與現代化</div><div class="body-text">1858年清朝在第二次鴉片戰爭後簽訂<b>天津條約</b>，1860年臺灣正式開港，<b>淡水、基隆、安平、打狗</b>成為通商口岸。開港帶動了臺灣與國際的貿易往來，<b>茶葉、樟腦、砂糖</b>是主要出口品。1885年，臺灣正式升格為<b>行省</b>，首任巡撫<b>劉銘傳</b>大力推動現代化：建設鐵路（基隆到臺北）、架設電報線、設立學堂，奠定了臺灣近代化的基礎。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">1860年臺灣正式開港，主要通商口岸包括淡水、<span class="blank" data-ans="基隆"></span>、<span class="blank" data-ans="安平"></span>、打狗。<div class="explain"><b>解析：</b>四大港口連接臺灣與世界貿易</div></div><div class="note-pt">清末臺灣三大出口商品是<span class="blank" data-ans="茶葉"></span>、<span class="blank" data-ans="樟腦"></span>、<span class="blank" data-ans="砂糖"></span>。<div class="explain"><b>解析：</b>茶葉由大稻埕出口，外銷歐洲</div></div><div class="note-pt">1885年臺灣升格為<span class="blank" data-ans="行省"></span>，首任巡撫是<span class="blank" data-ans="劉銘傳"></span>。<div class="explain"><b>解析：</b>劉銘傳大力推動臺灣現代化</div></div><div class="note-pt">劉銘傳建設了臺灣第一條<span class="blank" data-ans="鐵路"></span>，路線為<span class="blank" data-ans="基隆"></span>到臺北。<div class="explain"><b>解析：</b>1891年基隆到臺北鐵路通車</div></div><table class="info-table"><caption>清末臺灣現代化建設一覽</caption><thead><tr><th>建設項目</th><th>時間</th><th>意義</th></tr></thead><tbody><tr><td>臺灣設省</td><td>1885年</td><td>臺灣脫離福建省單獨設省，提升行政地位</td></tr><tr><td>鐵路（基隆–臺北）</td><td>1891年通車</td><td>臺灣第一條鐵路，縮短交通時間</td></tr><tr><td>電報線架設</td><td>1887年</td><td>通訊現代化，連結各地官府</td></tr><tr><td>近代學堂設立</td><td>1887年起</td><td>培育現代人才，推廣新式教育</td></tr></tbody></table></section><section class="card"><div class="sec-h"><span>🕊️</span>二、乙未割台與日治初期</div><div class="body-text">1894年清朝在<b>甲午戰爭</b>中敗給日本，1895年簽訂<b>馬關條約</b>，將臺灣割讓給日本。消息傳到臺灣，仕紳與民眾一時抵制，成立了短命的<b>臺灣民主國</b>，但僅存在一百五十多天便瓦解。日本於1895年6月正式接管臺灣，進入長達<b>五十年的日治時期</b>。初期遭到武裝抵抗，日本以軍事鎮壓手段平定後，開始全面建設現代化殖民地。</div><div class="notes-head">📝 重點筆記（點「？」看答案）</div><div class="note-pt">1894年清朝在<span class="blank" data-ans="甲午"></span>戰爭中落敗，簽訂<span class="blank" data-ans="馬關"></span>條約將臺灣割讓日本。<div class="explain"><b>解析：</b>1895年4月馬關條約簽訂</div></div><div class="note-pt">消息傳到臺灣後，成立了短命的<span class="blank" data-ans="臺灣民主國"></span>，但僅持續了<span class="blank" data-ans="約150（一百五十）"></span>天。<div class="explain"><b>解析：</b>1895年5~10月，最終瓦解</div></div><div class="note-pt">日本正式統治臺灣始於<span class="blank" data-ans="1895"></span>年，共持續<span class="blank" data-ans="50（五十）"></span>年。<div class="explain"><b>解析：</b>1895~1945年，直到二戰結束</div></div><div class="note-pt">日治初期的抵抗運動稱為<span class="blank" data-ans="武裝抗日"></span>，日本以<span class="blank" data-ans="軍事鎮壓"></span>手段平定。<div class="explain"><b>解析：</b>多次武裝起義均被鎮壓</div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　歷史科　單元10　唐山過臺灣</footer></div><script>
+</style></head><body><header><div class="unit-tag">歷史　單元 10</div><h1>唐山過臺灣</h1><p>教師講義　·　全民補習班 線上教學</p><a class="back" href="./">← 回歷史科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">點「？」空格即可查看答案；老師可一次顯示全部</span><button class="act reveal" onclick="revealAll()">顯示所有答案</button><button class="act hide" onclick="hideAll()">隱藏答案</button></div>
+
+<div class="intro-box">「唐山過台灣，心肝結歸丸」——清朝統治臺灣兩百多年間，成千上萬的漢人冒著生命危險橫渡黑水溝，把唐山（中國大陸）的語言、信仰與生活方式帶到了這座島嶼。</div>
+
+<section class="card"><div class="sec-h"><span>🚢</span>一、清朝治臺與渡臺禁令</div>
+<div class="body-text">西元1683年，清廷派<b>施琅</b>攻臺，鄭氏政權結束，臺灣正式納入清朝版圖，設<b>臺灣府</b>隸屬<b>福建省</b>。清初對臺灣採取<b>消極治理</b>，目的在防止臺灣再度成為反清基地，因此頒布<b>渡臺禁令</b>，限制漢人移居。但禁令成效有限，許多漢人仍冒險偷渡，橫渡風浪險惡的<b>黑水溝</b>（臺灣海峽）來臺，這就是「唐山過臺灣」。</div>
+<div class="notes-head">📝 重點筆記（點「？」看答案）</div>
+<div class="note-pt"><span class="blank" data-ans="1683"></span>年清將施琅攻臺，臺灣納入清朝版圖，設<span class="blank" data-ans="臺灣府"></span>隸屬福建省。<div class="explain"><b>解析：</b>鄭氏政權至此結束</div></div>
+<div class="note-pt">清初採<span class="blank" data-ans="消極"></span>治臺，頒布<span class="blank" data-ans="渡臺禁令"></span>限制漢人移居。<div class="explain"><b>解析：</b>目的在防止臺灣成為反清基地</div></div>
+<div class="note-pt">漢人冒險橫渡風浪險惡的<span class="blank" data-ans="黑水溝"></span>（臺灣海峽）來臺，即「<span class="blank" data-ans="唐山過臺灣"></span>」。<div class="explain"><b>解析：</b>偷渡風險高，俗諺「六死三留一回頭」</div></div>
+</section>
+
+<section class="card"><div class="sec-h"><span>⛩️</span>二、移民社會的特色</div>
+<div class="body-text">來到臺灣的移民，<b>同族或同鄉</b>的人習慣<b>聚居在一處</b>，彼此照應。他們也從原鄉<b>迎來神明、建廟奉祀</b>，廟宇成為移民的<b>精神寄託</b>與節慶祭典中心。隨著開墾興盛，商業市鎮陸續發展，出現了「<b>一府二鹿三艋舺</b>」的繁榮景象——一府指臺南府城、二鹿指鹿港、三艋舺指今臺北萬華。清前期臺灣向中國輸出稻米、蔗糖，輸入藥材與布匹。</div>
+<div class="notes-head">📝 重點筆記（點「？」看答案）</div>
+<div class="note-pt">移民來臺後，同族或同鄉者多<span class="blank" data-ans="聚居一處"></span>，彼此照應。<div class="explain"><b>解析：</b>依血緣與地緣關係結成聚落</div></div>
+<div class="note-pt">移民從原鄉迎來<span class="blank" data-ans="神明"></span>建廟，廟宇成為<span class="blank" data-ans="精神寄託"></span>與節慶祭典中心。<div class="explain"><b>解析：</b>宗教信仰凝聚移民情感</div></div>
+<div class="note-pt">清代繁榮商港「一府二鹿三艋舺」中，「二鹿」指<span class="blank" data-ans="鹿港"></span>。<div class="explain"><b>解析：</b>一府為臺南府城、三艋舺為今臺北萬華</div></div>
+<table class="info-table"><caption>清代三大商港「一府二鹿三艋舺」</caption><thead><tr><th>稱號</th><th>地點</th></tr></thead><tbody><tr><td>一府</td><td>臺南府城</td></tr><tr><td>二鹿</td><td>鹿港（中部）</td></tr><tr><td>三艋舺</td><td>今臺北萬華</td></tr></tbody></table>
+</section>
+
+<section class="card"><div class="sec-h"><span>🗺️</span>三、行政區擴展與開港通商</div>
+<div class="body-text">隨著開墾由<b>南向北</b>推進，清廷的行政區也逐步增設：<b>雍正</b>年間增設彰化縣、淡水廳、澎湖廳；<b>嘉慶</b>年間在東北部增設噶瑪蘭廳。到了<b>1860年</b>，清廷在英法聯軍之役失利後，被迫開放臺灣港口——<b>安平、打狗、淡水、雞籠</b>四港開放通商，<b>茶葉、樟腦、砂糖</b>成為主要出口品，臺灣與世界的貿易往來更加密切。</div>
+<div class="notes-head">📝 重點筆記（點「？」看答案）</div>
+<div class="note-pt">雍正年間增設<span class="blank" data-ans="彰化縣"></span>、淡水廳、澎湖廳；嘉慶年間增設<span class="blank" data-ans="噶瑪蘭廳"></span>。<div class="explain"><b>解析：</b>行政區由南向北持續擴展</div></div>
+<div class="note-pt"><span class="blank" data-ans="1860"></span>年英法聯軍之役後，臺灣開放安平、打狗、淡水、<span class="blank" data-ans="雞籠"></span>四港通商。<div class="explain"><b>解析：</b>雞籠即今基隆、打狗即今高雄</div></div>
+<div class="note-pt">開港後<span class="blank" data-ans="茶葉"></span>、樟腦、砂糖成為臺灣主要出口品。<div class="explain"><b>解析：</b>北部茶與樟腦帶動經濟重心北移</div></div>
+</section>
+
+<footer class="foot">全民補習班　teaching.efetl.com　·　歷史科　單元10　唐山過臺灣</footer></div><script>
 function reveal(el){
   if(el.classList.contains('on')) return;
   el.classList.add('on');
@@ -60,7 +85,6 @@ function reveal(el){
   if(c) c.classList.add('revealed');
 }
 document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
-
 function revealAll(){
   document.body.classList.add('show-ans');
   document.querySelectorAll('span.blank').forEach(b=>{
