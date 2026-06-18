@@ -30,6 +30,19 @@
   .done-msg { display:none; text-align:center; font-size:18px; font-weight:bold; padding:14px; border-radius:10px; margin-top:14px; }
   .done-msg.show { display:block; }
   @media (max-width:520px){ .options{ grid-template-columns:1fr; } }
+/* PRINT-CLEAN v1 */
+@media print {
+  .scorebar, .done-msg { display:none !important; }
+  .explain { display:none !important; }              /* 解析不印 */
+  .opt .mark { display:none !important; }            /* ✓✗ 不印 */
+  .opt.correct, .opt.wrong {                          /* 還原作答著色 */
+    background:#fff !important; border-color:#999 !important;
+    color:#000 !important; font-weight:normal !important; text-decoration:none !important;
+  }
+  .question { box-shadow:none !important; border:1px solid #bbb; break-inside:avoid; }
+  body { background:#fff !important; }
+}
+
 </style>
 </head>
 <body>

@@ -101,6 +101,18 @@
   .mistake::before { content:"🔍 常見錯誤提醒："; font-weight:bold; }
 
   .flow { font-weight:bold; color:var(--main); }
+/* PRINT-CLEAN v1 */
+@media print {
+  .toolbar, .hint { display:none !important; }
+  .explain { display:none !important; }              /* 解析不印 */
+  .blank, .blank.on {                                 /* 答案不印，保留空格可手寫 */
+    color:transparent !important; background:#fff !important;
+    border:1px solid #999 !important; border-radius:4px !important;
+  }
+  .blank::before { content:"" !important; }
+  body { background:#fff !important; }
+}
+
 </style>
 </head>
 <body>
