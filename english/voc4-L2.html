@@ -1280,6 +1280,8 @@ function pickChoice(choiceEl){
     if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
     else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
   });
+  var ans=block.querySelector('.q-ans');
+  if(ans)ans.classList.add('open');
 }
 function showAns(btn){
   var ans=btn.closest('.q-block').querySelector('.q-ans');
@@ -1346,7 +1348,7 @@ var studentQ=[
     var choices=d.opts.map(function(o,j){
       return '<div class="choice" data-correct="'+(j===d.ans?'1':'0')+'" onclick="pickChoice(this)"><span class="mark"></span>('+'ABCD'[j]+') '+o+'</div>';
     }).join('');
-    wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div><button class="show-btn" onclick="showAns(this)">看完整解析</button></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';
+    wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';
   });
 })();
 
