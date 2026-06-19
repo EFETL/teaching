@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L4: Dopamine: Finding Balance for a Happier Life ── 龍騰高職英文 第四冊</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:.9em;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.header .time{margin-top:6px;font-size:.95em;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.9em;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:.92em;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:1.05em;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:.9em;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:.92em;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:.96em}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:.76em;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:.86em;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:.82em;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:.98em;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:1.02em;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#1e40af}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:.9em;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:.85em;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:.95em}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:.95em}
+.pex .cn{display:block;color:#94a3b8;font-size:.92em;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:1.05em}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:.8em;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:.95em;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:.97em;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:.92em;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:.93em;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:.93em;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 重點提示：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:.93em;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:.94em;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:1em;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:.95em;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:1.02em}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:1em;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:13px}
+  .page{max-width:100%;padding:8px}
+  .header{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .q-ans,.g-body,.v-body,.para-exp{display:block!important}
+  .v-ic,.g-arrow,.para-en .ic,.show-btn,.sec-hint,.header-nav{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+  .header{padding:20px 18px}
+  .header h1{font-size:1.45em}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══════════════ HEADER ══════════════ -->
+<div class="header" style="background:linear-gradient(135deg,#14532d 0%,#16a34a 60%,#4ade80 100%)">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L4: Dopamine: Finding Balance for a Happier Life ── 多巴胺：找到快樂生活的平衡</h1>
+  <div class="sub">龍騰高職英文 第四冊 第四課｜互動教學講義</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">🗣️ 對話精講</span>
+    <span class="tag">📝 核心字彙 × 12</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">📐 文法句型 × 3</span>
+    <span class="tag">✏️ 練習題 × 8</span>
+  </div>
+</div>
+
+<!-- ══════════════ 課文逐句精講 ══════════════ -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">📖</div>
+    課文逐句精講 — Dopamine: Finding Balance for a Happier Life
+  </div>
+  <div class="sec-body">
+    <div class="syn-legend">
+      句型標記說明：
+      <span class="syn syn-s">S</span> 主詞 &nbsp;
+      <span class="syn syn-v">V</span> 動詞 &nbsp;
+      <span class="syn syn-o">O</span> 受詞 &nbsp;
+      <span class="syn syn-c">C</span> 補語 &nbsp;
+      <span class="syn syn-m">M</span> 修飾語／副詞子句 &nbsp;
+      點擊每行句子展開詳細解析 ↓
+    </div>
+
+    <!-- 段落 1 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📄 第一段｜多巴胺是什麼？</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Have you ever felt that you can't stop checking your phone?</div>
+        <div class="para-exp">
+          <div class="para-cn">你曾經感覺自己停不下來、一直查看手機嗎？</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>you &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>Have...felt &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞子句</span>that you can't stop checking your phone
+          </div>
+          <div class="para-note"><b>文法：</b>現在完成式 Have you ever + p.p. 用來詢問「曾經有過的經驗」。<b>stop + V-ing</b> 表「停止做某事」；stop to V 表「停下來去做某事」，兩者意義截然不同。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Or have you felt excited after eating your favorite snack?</div>
+        <div class="para-exp">
+          <div class="para-cn">或者你有沒有在吃了最喜歡的零食之後感到興奮？</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>you &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>have felt &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">主詞補語</span>excited &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">時間副詞片語</span>after eating your favorite snack
+          </div>
+          <div class="para-note"><b>字詞：</b><b>excited</b>（人感到興奮，-ed 形容詞修飾人）。after eating 為介系詞片語，介系詞後接動名詞 (V-ing)。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>These sudden but powerful feelings are linked to dopamine, a chemical that causes your brain to feel pleasure and pushes you to take action.</div>
+        <div class="para-exp">
+          <div class="para-cn">這些突如其來卻強烈的感覺都與多巴胺有關，多巴胺是一種讓大腦感受到快樂並促使你採取行動的化學物質。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>These sudden but powerful feelings &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>are linked to &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>dopamine &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">同位語</span>a chemical that causes your brain to feel pleasure and pushes you to take action
+          </div>
+          <div class="para-note"><b>文法：</b>逗號後的 <b>a chemical that...</b> 是同位語，進一步解釋 dopamine。關係代名詞 that 引導形容詞子句，修飾 a chemical。<b>cause + O + to V</b>（使……做某事）和 <b>push + O + to V</b>（促使……做某事）均為使役動詞結構。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>When you do something rewarding, dopamine is released in your brain, where the chemical rush encourages you to repeat the behavior.</div>
+        <div class="para-exp">
+          <div class="para-cn">當你做一件有回報的事情時，多巴胺就會在大腦中釋放，那種化學物質的湧入會促使你重複這個行為。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">時間副詞子句</span>When you do something rewarding &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>dopamine &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">被動動詞</span>is released &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">地方副詞</span>in your brain &nbsp;
+            <span class="syn syn-cl">關係副詞子句</span>where the chemical rush encourages you to repeat the behavior
+          </div>
+          <div class="para-note"><b>文法：</b><b>where</b> 為關係副詞，代替 in your brain，引導非限定子句。<b>encourage + O + to V</b>（鼓勵某人做某事）。<b>rewarding</b>（有回報的、值得做的）是 -ing 形容詞，修飾事物。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Moreover, it drives you to participate in new activities and stay engaged.</div>
+        <div class="para-exp">
+          <div class="para-cn">此外，它驅使你參與新活動並保持投入。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">連接副詞</span>Moreover &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>it &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>drives &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>you &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">不定詞片語</span>to participate in new activities and stay engaged
+          </div>
+          <div class="para-note"><b>字詞：</b><b>drive + O + to V</b>（驅使……去做）。<b>participate in</b>（參與……）為固定片語，不可說 participate at。<b>engaged</b> 在此意為「投入的、專注的」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>In short, dopamine is a key part of the body's reward center, driving us to seek out more ways to experience pleasure.</div>
+        <div class="para-exp">
+          <div class="para-cn">簡言之，多巴胺是身體獎勵中樞的關鍵部分，驅使我們去尋找更多體驗快樂的方式。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">副詞片語</span>In short &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>dopamine &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>is &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">主詞補語</span>a key part of the body's reward center &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">分詞構句</span>driving us to seek out more ways to experience pleasure
+          </div>
+          <div class="para-note"><b>片語：</b><b>in short</b>（簡言之）= in brief = in a word。<b>seek out</b>（尋找；尋求）。分詞構句 driving... 修飾主詞 dopamine，表示附加描述。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 段落 2 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📄 第二段｜多巴胺失衡的問題</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>However, there are also situations when dopamine levels become unbalanced.</div>
+        <div class="para-exp">
+          <div class="para-cn">然而，也存在多巴胺水平失衡的情況。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">連接副詞</span>However &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">虛主詞句型</span>there are &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">真正主詞</span>situations &nbsp;
+            <span class="syn syn-cl">關係副詞子句</span>when dopamine levels become unbalanced
+          </div>
+          <div class="para-note"><b>文法：</b><b>there + be</b> 存在句。關係副詞 when 代替 in which，修飾 situations。<b>unbalanced</b>（不平衡的）= 過去分詞作形容詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Certain lifestyle habits, such as constant snacking or using social media too much, can cause frequent release of dopamine.</div>
+        <div class="para-exp">
+          <div class="para-cn">某些生活習慣，例如不斷吃零食或過度使用社群媒體，可能導致多巴胺頻繁釋放。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>Certain lifestyle habits &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">插入語（舉例）</span>such as constant snacking or using social media too much &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>can cause &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>frequent release of dopamine
+          </div>
+          <div class="para-note"><b>字詞：</b><b>such as</b>（例如）後面用逗號包夾，為插入語，不影響主要句型。<b>constant</b>（持續不斷的）= 形容詞，修飾 snacking。<b>frequent</b>（頻繁的）修飾 release。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>This can make you overly emotional or more likely to do things without thinking.</div>
+        <div class="para-exp">
+          <div class="para-cn">這可能讓你過度情緒化，或是更容易不加思考地行事。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>This &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">使役動詞</span>can make &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>you &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">受詞補語</span>overly emotional or more likely to do things without thinking
+          </div>
+          <div class="para-note"><b>文法重點：make + O + adj.（使役動詞）</b>。此句 make you + 形容詞（overly emotional / more likely）。<b>without thinking</b> = without + V-ing，介系詞後接動名詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>On the other hand, poor diet or lack of sleep can bring about reduced dopamine production.</div>
+        <div class="para-exp">
+          <div class="para-cn">另一方面，不良飲食或缺乏睡眠可能導致多巴胺產量下降。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">對比連接副詞</span>On the other hand &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>poor diet or lack of sleep &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞片語</span>can bring about &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>reduced dopamine production
+          </div>
+          <div class="para-note"><b>片語：</b><b>bring about</b>（導致；引起）= cause = result in。<b>reduced</b> 在此為形容詞，修飾 production（產量降低的）。<b>lack of</b>（缺乏……）後接名詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Low dopamine can make you feel tired or unmotivated so that even small tasks feel too hard.</div>
+        <div class="para-exp">
+          <div class="para-cn">低多巴胺會讓你感到疲倦或缺乏動力，以至於連小事都感覺太難了。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>Low dopamine &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">使役動詞</span>can make &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>you &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">受詞補語</span>feel tired or unmotivated &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">結果子句</span>so that even small tasks feel too hard
+          </div>
+          <div class="para-note"><b>文法重點：so + adj./adv. + that...（如此……以至於……）</b>。此句 make you feel + 形容詞（tired / unmotivated）是使役動詞句型。<b>so that</b> 引導結果子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>In serious cases, it can lead to depression.</div>
+        <div class="para-exp">
+          <div class="para-cn">在嚴重的情況下，它可能導致憂鬱症。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">條件副詞片語</span>In serious cases &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>it &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞片語</span>can lead to &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>depression
+          </div>
+          <div class="para-note"><b>字詞：</b><b>lead to + N/V-ing</b>（導致）= result in = cause。<b>depression</b>（憂鬱症；沮喪）為核心字彙，也可指「不景氣」（economic depression）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 段落 3 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📄 第三段｜如何維持健康的多巴胺水平</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>To ensure that you maintain a healthy dopamine level, experts recommend small, positive steps.</div>
+        <div class="para-exp">
+          <div class="para-cn">為了確保你維持健康的多巴胺水平，專家建議採取小而積極的步驟。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">目的不定詞片語</span>To ensure that you maintain a healthy dopamine level &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>experts &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>recommend &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>small, positive steps
+          </div>
+          <div class="para-note"><b>字詞：</b><b>ensure (that) + S + V</b>（確保……）；that 可省略。<b>recommend + N / V-ing</b>（建議……），後面接動名詞而非不定詞。例：recommend doing，不說 recommend to do。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>For instance, you can set limits on your daily screen time or replace phone with activities like exercise and making social connections.</div>
+        <div class="para-exp">
+          <div class="para-cn">例如，你可以設定每日使用螢幕的時間限制，或用運動和建立社交連結等活動來取代手機。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">舉例副詞</span>For instance &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>you &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>can set...or replace &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>limits on your daily screen time / phone with activities
+          </div>
+          <div class="para-note"><b>片語：</b><b>set limits on</b>（對……設限）。<b>replace A with B</b>（用 B 取代 A）= substitute B for A。<b>making social connections</b>（建立社交連結）= 動名詞片語作受詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Eating a balanced diet and getting enough sleep can also help keep dopamine levels in check.</div>
+        <div class="para-exp">
+          <div class="para-cn">均衡飲食和充足睡眠也有助於控制多巴胺水平。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">動名詞片語主詞</span>Eating a balanced diet and getting enough sleep &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>can also help &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>keep dopamine levels in check
+          </div>
+          <div class="para-note"><b>文法重點：動名詞片語當主詞</b>。Eating...and getting... 並列兩個動名詞片語作主詞，視為整體，動詞用複數 can help。<b>keep...in check</b>（控制；抑制）是本課重要片語。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Moreover, try to become more aware of your thoughts and desires.</div>
+        <div class="para-exp">
+          <div class="para-cn">此外，試著對自己的想法和慾望更有覺察力。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">連接副詞</span>Moreover &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">祈使動詞</span>try &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">不定詞片語</span>to become more aware of your thoughts and desires
+          </div>
+          <div class="para-note"><b>字詞：</b><b>be aware of</b>（意識到……；察覺……）。<b>desire</b>（慾望；渴望）為本課核心字彙，可作名詞或動詞。<b>try to V</b>（試圖去做），與 try V-ing（試試看做某事）語意不同。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>When you pause to think before acting, you can make better choices in the long run.</div>
+        <div class="para-exp">
+          <div class="para-cn">當你在行動前先暫停思考，從長遠來看，你能做出更好的選擇。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">時間副詞子句</span>When you pause to think before acting &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>you &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>can make &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>better choices &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">副詞片語</span>in the long run
+          </div>
+          <div class="para-note"><b>片語：</b><b>in the long run</b>（長遠來看；終究）= in the long term。<b>pause to think</b>（暫停下來思考），pause to V 表「停下來去做某事」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>As you build healthier habits, you'll rely on instant rewards less and enjoy life's simple pleasures more.</div>
+        <div class="para-exp">
+          <div class="para-cn">隨著你建立更健康的習慣，你會越來越少依賴即時獎勵，也會更多地享受生活中的簡單樂趣。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">時間副詞子句</span>As you build healthier habits &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>you &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>will rely on...less and enjoy...more
+          </div>
+          <div class="para-note"><b>片語：</b><b>rely on</b>（依賴；仰賴）= depend on。<b>instant rewards</b>（即時獎勵）。<b>as</b> 在此為連接詞，意為「隨著……」（表時間漸進）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>In summary, it is important to keep things in balance.</div>
+        <div class="para-exp">
+          <div class="para-cn">總而言之，保持事物的平衡是很重要的。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">副詞片語</span>In summary &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">虛主詞</span>it &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>is &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">主詞補語</span>important &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">真正主詞</span>to keep things in balance
+          </div>
+          <div class="para-note"><b>文法：</b>It is + adj. + to V（虛主詞句型）；it 是虛主詞，真正主詞是 to keep things in balance。<b>in summary</b>（總而言之）= in conclusion = to sum up。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Dopamine is a powerful tool helping us stay motivated and cheerful, but we shouldn't let it control our lives.</div>
+        <div class="para-exp">
+          <div class="para-cn">多巴胺是一個強大的工具，幫助我們保持積極和開心，但我們不應該讓它控制我們的生活。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>Dopamine &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>is &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">主詞補語</span>a powerful tool &nbsp;
+            <span class="syn syn-m">M</span><span class="syn-t">現在分詞片語</span>helping us stay motivated and cheerful
+          </div>
+          <div class="para-note"><b>字詞：</b><b>powerful</b>（強大的；有力的）是本課核心字彙。<b>let + O + V原形</b>（讓……做……），let 為使役動詞，不接 to V。<b>motivated</b>（有動力的）、<b>cheerful</b>（愉快的）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>With the right amount of dopamine, you can increase your enjoyment of life.</div>
+        <div class="para-exp">
+          <div class="para-cn">有了適量的多巴胺，你就能提升對生活的享受。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">條件副詞片語</span>With the right amount of dopamine &nbsp;
+            <span class="syn syn-s">S</span><span class="syn-t">主詞</span>you &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>can increase &nbsp;
+            <span class="syn syn-o">O</span><span class="syn-t">受詞</span>your enjoyment of life
+          </div>
+          <div class="para-note"><b>字詞：</b><b>the right amount of</b>（適量的……）。<b>enjoyment</b> 是 enjoy 的名詞形（enjoy → enjoyment）。本句是全文結語，強調「平衡」的重要性。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-hint">💡 點擊任何句子展開中文翻譯、句構分析與老師筆記。再次點擊即可收合。</div>
+  </div>
+</div>
+
+<!-- ══════════════ 對話精講 ══════════════ -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">🗣️</div>
+    對話精講 — 三人討論多巴胺
+  </div>
+  <div class="sec-body">
+    <div class="syn-legend">
+      人物：
+      <span style="color:#1d4ed8;font-weight:700">● Jeffrey</span>（藍）&nbsp;
+      <span style="color:#166534;font-weight:700">● Catherine</span>（綠）&nbsp;
+      <span style="color:#9a3412;font-weight:700">● Daniel</span>（橙）
+    </div>
+
+    <!-- Jeffrey 1 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">💬 Jeffrey</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Oh, hi there, Daniel. Is everything okay?</div>
+        <div class="para-exp">
+          <div class="para-cn">喔，嘿，丹尼爾。你還好嗎？</div>
+          <div class="para-note"><b>口語：</b><b>hi there</b> 是較隨意的打招呼語，接近「嘿，你好」。<b>Is everything okay?</b> 是表達關心對方的常用語。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daniel 1 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">💬 Daniel</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>I get sad easily these days. Maybe I'm just tired. I've had a few late nights recently.</div>
+        <div class="para-exp">
+          <div class="para-cn">我最近很容易感到難過。也許我只是累了。我最近熬了幾個夜。</div>
+          <div class="para-note"><b>文法：</b><b>get + adj.</b>（變得……）= become。<b>I've had a few late nights</b>（我有幾個晚上熬夜）= 現在完成式，強調近期的影響。<b>recently</b> 常與現在完成式連用。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Catherine 1 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">💬 Catherine</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Oh, that's a shame. Getting enough sleep is super important, you know.</div>
+        <div class="para-exp">
+          <div class="para-cn">喔，真可惜。你也知道，充足的睡眠非常重要。</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">動名詞主詞</span>Getting enough sleep &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>is &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">主詞補語</span>super important
+          </div>
+          <div class="para-note"><b>文法：動名詞當主詞</b>。Getting enough sleep 是動名詞片語作主詞，視為單一概念，故動詞用單數 is。<b>That's a shame</b>（真可惜；太遺憾了）= That's a pity。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daniel 2 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">💬 Daniel</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>I know, but I really get a buzz from chatting with my friends on social media!</div>
+        <div class="para-exp">
+          <div class="para-cn">我知道，但是和朋友在社群媒體上聊天真的讓我很亢奮！</div>
+          <div class="para-note"><b>口語：</b><b>get a buzz from</b>（從……得到刺激感；因……而感到興奮）= get excited from。此為口語慣用語，buzz 本意是「嗡嗡聲」，引申為「興奮感、亢奮感」，對應課文中的「多巴胺釋放」帶來的快感。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jeffrey 2 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">💬 Jeffrey</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Well, did you see this article? That buzz might not be so healthy...</div>
+        <div class="para-exp">
+          <div class="para-cn">這個嘛，你有看這篇文章嗎？那種亢奮感可能沒那麼健康……</div>
+          <div class="para-note"><b>句型：</b><b>might not be</b>（可能不是）= 表示不確定、推測語氣。Jeffrey 在此引導話題，暗示過多的多巴胺刺激（buzz）其實有害。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daniel 3 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">💬 Daniel</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Really? But releasing feel-good chemicals into your brain is good for you.</div>
+        <div class="para-exp">
+          <div class="para-cn">真的嗎？但是把讓人感覺良好的化學物質釋放到大腦不是對你有好處嗎？</div>
+          <div class="para-syntax">
+            <span class="lbl">句構分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">動名詞主詞</span>releasing feel-good chemicals into your brain &nbsp;
+            <span class="syn syn-v">V</span><span class="syn-t">動詞</span>is &nbsp;
+            <span class="syn syn-c">C</span><span class="syn-t">主詞補語</span>good for you
+          </div>
+          <div class="para-note"><b>字詞：</b><b>feel-good</b> 為複合形容詞（連字號），修飾 chemicals。<b>be good for</b>（對……有益）↔ be bad for（對……有害）。動名詞片語 releasing... 作主詞。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Catherine 2 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">💬 Catherine</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>You bet! However, you need to release them in the right way.</div>
+        <div class="para-exp">
+          <div class="para-cn">沒錯！然而，你需要用正確的方式釋放它們。</div>
+          <div class="para-note"><b>口語：</b><b>You bet!</b>（當然！絕對是！）= Absolutely! / Of course! 是口語中表示強力肯定的慣用語。<b>in the right way</b>（用正確的方式）= correctly。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daniel 4 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">💬 Daniel</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Right, like exercising, sleeping well, or eating healthy foods.</div>
+        <div class="para-exp">
+          <div class="para-cn">對，像是運動、睡好覺，或吃健康的食物。</div>
+          <div class="para-note"><b>文法：</b>三個動名詞並列（exercising, sleeping well, eating healthy foods），以逗號和 or 連接。這是對話中的舉例（like = such as），由 Daniel 回應出正確的多巴胺釋放方式。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jeffrey 3 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">💬 Jeffrey</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Oh, I see. So, it's not just about the chemistry. What you need is good chemistry.</div>
+        <div class="para-exp">
+          <div class="para-cn">喔，我明白了。所以，這不只是關於化學物質。你需要的是良好的化學反應（好的相處）。</div>
+          <div class="para-note"><b>雙關語：</b><b>chemistry</b> 本意是「化學；化學物質」，但在對話中有雙關——<b>good chemistry</b> 也可指「良好的默契、融洽的關係」。Jeffrey 在此使用雙關語，為對話增添幽默感。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daniel 5 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">💬 Daniel</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Exactly!</div>
+        <div class="para-exp">
+          <div class="para-cn">完全正確！</div>
+          <div class="para-note"><b>口語：</b><b>Exactly!</b>（完全正確！）= That's exactly right! 是表示完全同意的強調語。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Catherine 3 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">💬 Catherine</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>You mean like the chemistry between you two?</div>
+        <div class="para-exp">
+          <div class="para-cn">你是說像你們兩個之間的默契嗎？</div>
+          <div class="para-note"><b>雙關語延伸：</b>Catherine 把 chemistry（化學/默契）的雙關意義推進一步，指 Jeffrey 和 Daniel 兩人之間的默契，為對話增添趣味結尾。<b>You mean...?</b>（你的意思是……？）= Do you mean...?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ 核心字彙 ══════════════ -->
+<div class="section s-teal">
+  <div class="sec-head">
+    <div class="sec-icon">📝</div>
+    核心字彙 × 12
+  </div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+
+      <!-- 1. powerful -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">powerful</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">強大的；有力的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>power (n.) 力量</span>
+            <span>powerfully (adv.) 強而有力地</span>
+            <span>powerless (adj.) 無力的</span>
+          </div>
+          <div class="v-ex">
+            Dopamine sends a <span class="hi">powerful</span> signal to the brain.
+            <span class="cn">多巴胺向大腦發送強烈的信號。</span>
+          </div>
+          <div class="v-gsat">💡 常考：powerful = strong/forceful（強而有力的）</div>
+        </div>
+      </div>
+
+      <!-- 2. link -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">link</span>
+              <span class="v-pos">v. / n.</span>
+            </div>
+            <div class="v-cn-mini">連結；與……有關</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>linked (adj.) 相連的</span>
+            <span>linkage (n.) 連結；關聯</span>
+          </div>
+          <div class="v-ex">
+            These feelings are <span class="hi">linked</span> to dopamine.
+            <span class="cn">這些感覺與多巴胺有關。</span>
+          </div>
+          <div class="v-ex">
+            There is a strong <span class="hi">link</span> between sleep and mood.
+            <span class="cn">睡眠與情緒之間有強烈的關聯。</span>
+          </div>
+          <div class="v-gsat">💡 be linked to = be connected to = be related to</div>
+        </div>
+      </div>
+
+      <!-- 3. rewarding -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">rewarding</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">有回報的；值得做的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>reward (n./v.) 報酬；獎勵</span>
+            <span>rewarded (adj.) 得到回報的</span>
+          </div>
+          <div class="v-ex">
+            When you do something <span class="hi">rewarding</span>, dopamine is released.
+            <span class="cn">當你做一件有回報的事時，多巴胺就會釋放。</span>
+          </div>
+          <div class="v-gsat">💡 rewarding（事物令人有成就感）↔ rewarded（人獲得了回報）</div>
+        </div>
+      </div>
+
+      <!-- 4. release -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">release</span>
+              <span class="v-pos">v. / n.</span>
+            </div>
+            <div class="v-cn-mini">釋放；分泌</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>release (n.) 釋放；發行</span>
+          </div>
+          <div class="v-ex">
+            Dopamine is <span class="hi">released</span> in your brain when you feel good.
+            <span class="cn">當你感覺良好時，多巴胺就會在大腦中釋放。</span>
+          </div>
+          <div class="v-ex">
+            The <span class="hi">release</span> of dopamine encourages you to repeat the behavior.
+            <span class="cn">多巴胺的釋放鼓勵你重複該行為。</span>
+          </div>
+          <div class="v-gsat">💡 release 也可指「新歌/電影發行」= The new album was released last Friday.</div>
+        </div>
+      </div>
+
+      <!-- 5. participate -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">participate</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">參與；參加</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>participation (n.) 參與</span>
+            <span>participant (n.) 參與者</span>
+          </div>
+          <div class="v-ex">
+            Dopamine drives you to <span class="hi">participate</span> in new activities.
+            <span class="cn">多巴胺驅使你參與新的活動。</span>
+          </div>
+          <div class="v-gsat">💡 participate in（固定搭配，介系詞用 in，不用 at）= take part in</div>
+        </div>
+      </div>
+
+      <!-- 6. engaged -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">engaged</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">投入的；專注的；訂婚的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>engage (v.) 使投入；吸引</span>
+            <span>engagement (n.) 投入；訂婚</span>
+            <span>engaging (adj.) 吸引人的</span>
+          </div>
+          <div class="v-ex">
+            Dopamine helps you stay <span class="hi">engaged</span> in activities.
+            <span class="cn">多巴胺幫助你在活動中保持投入。</span>
+          </div>
+          <div class="v-gsat">💡 多義字：engaged = 投入的 / 訂婚的（engaged couple 訂婚的一對）</div>
+        </div>
+      </div>
+
+      <!-- 7. constant -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">constant</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">持續的；不斷的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>constantly (adv.) 不斷地</span>
+            <span>constancy (n.) 持續；恆常</span>
+          </div>
+          <div class="v-ex">
+            <span class="hi">Constant</span> snacking can cause frequent release of dopamine.
+            <span class="cn">不斷地吃零食可能導致多巴胺頻繁釋放。</span>
+          </div>
+          <div class="v-gsat">💡 constant = continuous / unceasing（不間斷的）；constantly = always（總是在做某事）</div>
+        </div>
+      </div>
+
+      <!-- 8. frequent -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">frequent</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">頻繁的；時常發生的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>frequently (adv.) 頻繁地</span>
+            <span>frequency (n.) 頻率</span>
+          </div>
+          <div class="v-ex">
+            Bad habits can cause <span class="hi">frequent</span> release of dopamine.
+            <span class="cn">不良習慣可能導致多巴胺頻繁釋放。</span>
+          </div>
+          <div class="v-gsat">💡 frequent（頻繁的）vs. constant（持續不斷的）：frequent 強調次數多，constant 強調連續不中斷。</div>
+        </div>
+      </div>
+
+      <!-- 9. depression -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">depression</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">憂鬱症；沮喪；不景氣</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>depressed (adj.) 感到沮喪的</span>
+            <span>depressing (adj.) 令人沮喪的</span>
+            <span>depress (v.) 使沮喪</span>
+          </div>
+          <div class="v-ex">
+            Low dopamine can lead to <span class="hi">depression</span>.
+            <span class="cn">低多巴胺可能導致憂鬱症。</span>
+          </div>
+          <div class="v-gsat">💡 -ed/-ing 辨別：He feels depressed.（他很沮喪）/ The news is depressing.（這消息令人沮喪）</div>
+        </div>
+      </div>
+
+      <!-- 10. ensure -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">ensure</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">確保；保證</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>assure (v.) 向……保證（接人）</span>
+            <span>insure (v.) 投保</span>
+          </div>
+          <div class="v-ex">
+            To <span class="hi">ensure</span> that you maintain a healthy dopamine level, follow these steps.
+            <span class="cn">為了確保你維持健康的多巴胺水平，請遵循這些步驟。</span>
+          </div>
+          <div class="v-gsat">💡 ensure (that) + S + V（確保……）。ensure / assure / insure 三字辨別！</div>
+        </div>
+      </div>
+
+      <!-- 11. recommend -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">recommend</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">建議；推薦</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>recommendation (n.) 建議；推薦</span>
+            <span>recommended (adj.) 被推薦的</span>
+          </div>
+          <div class="v-ex">
+            Experts <span class="hi">recommend</span> small, positive steps to boost dopamine.
+            <span class="cn">專家建議採取小而積極的步驟來提升多巴胺。</span>
+          </div>
+          <div class="v-gsat">💡 recommend + N / V-ing（不接 to V）：I recommend reading this article. ✓ I recommend to read... ✗</div>
+        </div>
+      </div>
+
+      <!-- 12. desire -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">desire</span>
+              <span class="v-pos">n. / v.</span>
+            </div>
+            <div class="v-cn-mini">慾望；渴望</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>desirable (adj.) 令人嚮往的</span>
+            <span>desired (adj.) 渴望得到的</span>
+          </div>
+          <div class="v-ex">
+            Try to become more aware of your thoughts and <span class="hi">desires</span>.
+            <span class="cn">試著對自己的想法和慾望更有覺察力。</span>
+          </div>
+          <div class="v-ex">
+            She <span class="hi">desires</span> a life free from stress.
+            <span class="cn">她渴望過一種無壓力的生活。</span>
+          </div>
+          <div class="v-gsat">💡 desire (n.) = longing / craving；desire (v.) = want strongly / long for</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="sec-hint">💡 點擊單字卡展開字族、例句與考試重點。每張卡右側有🔊發音按鈕。</div>
+  </div>
+</div>
+
+<!-- ══════════════ 片語講解 ══════════════ -->
+<div class="section s-green">
+  <div class="sec-head">
+    <div class="sec-icon">🔗</div>
+    片語講解 × 6
+  </div>
+  <div class="sec-body">
+    <table class="ptable">
+      <tr>
+        <th>片語</th>
+        <th>中文意思</th>
+        <th>課文例句 &amp; 說明</th>
+      </tr>
+      <tr>
+        <td><span class="phr">in short</span></td>
+        <td>簡言之；總之</td>
+        <td>
+          <div class="pex">
+            <em>In short</em>, dopamine is a key part of the body's reward center.
+            <span class="cn">簡言之，多巴胺是身體獎勵中樞的關鍵部分。</span>
+          </div>
+          <div class="pex">= in brief / in a word / to sum up（放句首，後加逗號）</div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="phr">bring about</span></td>
+        <td>導致；引起</td>
+        <td>
+          <div class="pex">
+            Poor diet can <em>bring about</em> reduced dopamine production.
+            <span class="cn">不良飲食可能導致多巴胺產量減少。</span>
+          </div>
+          <div class="pex">= cause / lead to / result in（皆後接名詞）</div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="phr">keep sth. in check</span></td>
+        <td>控制；抑制……</td>
+        <td>
+          <div class="pex">
+            Eating well can help <em>keep</em> dopamine levels <em>in check</em>.
+            <span class="cn">均衡飲食有助於控制多巴胺水平。</span>
+          </div>
+          <div class="pex">= keep sth. under control / restrain sth.</div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="phr">in the long run</span></td>
+        <td>長遠來看；終究</td>
+        <td>
+          <div class="pex">
+            When you pause to think, you make better choices <em>in the long run</em>.
+            <span class="cn">當你先暫停思考，長遠來看你能做出更好的選擇。</span>
+          </div>
+          <div class="pex">= in the long term ↔ in the short run（短期來看）</div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="phr">rely on</span></td>
+        <td>依賴；仰賴</td>
+        <td>
+          <div class="pex">
+            You'll <em>rely on</em> instant rewards less as you build healthier habits.
+            <span class="cn">隨著你建立更健康的習慣，你對即時獎勵的依賴會越來越少。</span>
+          </div>
+          <div class="pex">= depend on / count on（固定接介系詞 on，後接名詞/V-ing）</div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="phr">in summary</span></td>
+        <td>總而言之</td>
+        <td>
+          <div class="pex">
+            <em>In summary</em>, it is important to keep things in balance.
+            <span class="cn">總而言之，保持事物的平衡是很重要的。</span>
+          </div>
+          <div class="pex">= in conclusion / to conclude / in short（放句首，後加逗號）</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════ 文法句型 ══════════════ -->
+<div class="section s-purple">
+  <div class="sec-head">
+    <div class="sec-icon">📐</div>
+    文法句型 × 3
+  </div>
+  <div class="sec-body">
+
+    <!-- 文法 1 -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>① 使役動詞 make + O + adj. / V原形</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">make + 受詞 (O) + 形容詞 (adj.)  →  使某人/某物處於某種狀態
+make + 受詞 (O) + 動詞原形 (V)  →  使某人做某件事</div>
+      <div class="g-body">
+        <p style="color:#475569;margin-bottom:10px;font-size:.96em">make 是使役動詞，後面可接「受詞 + 形容詞」或「受詞 + 動詞原形」，表示「使某人/物處於某狀態」或「使某人做某事」。</p>
+
+        <div class="g-ex">
+          Dopamine <strong>makes</strong> you <strong>feel</strong> pleasure.
+          <div class="g-ex-cn">多巴胺使你感受到快樂。（make + O + V原形：feel）</div>
+        </div>
+        <div class="g-ex">
+          This can <strong>make</strong> you <strong>overly emotional</strong>.
+          <div class="g-ex-cn">這可能讓你過度情緒化。（make + O + adj.：overly emotional）</div>
+        </div>
+        <div class="g-ex">
+          Low dopamine can <strong>make</strong> you <strong>feel tired</strong> or <strong>unmotivated</strong>.
+          <div class="g-ex-cn">低多巴胺會讓你感到疲倦或缺乏動力。</div>
+        </div>
+
+        <table class="gtab">
+          <tr><th>使役動詞</th><th>後接結構</th><th>例句</th></tr>
+          <tr><td>make</td><td>O + V原形（主動）/ O + adj.</td><td>make her cry / make him sad</td></tr>
+          <tr><td>let</td><td>O + V原形</td><td>let me try</td></tr>
+          <tr><td>have</td><td>O + V原形（主動）/ O + p.p.（被動）</td><td>have him fix it / have it fixed</td></tr>
+          <tr><td>get</td><td>O + to V（主動）/ O + p.p.（被動）</td><td>get him to help / get it done</td></tr>
+        </table>
+
+        <div class="g-note">make 後面的動詞用「原形」，不加 to！✗ make you to feel ✓ make you feel</div>
+        <div class="g-tip">課文也出現 cause + O + to V（使某人做某事）和 push + O + to V（促使某人做某事），這兩個接 to V，和 make/let 不同。</div>
+      </div>
+    </div>
+
+    <!-- 文法 2 -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>② so + adj./adv. + that... 結果子句</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">S + V + so + adj./adv. + that + S + V
+（如此……以至於……）
+
+若後接名詞片語：
+S + V + such + (a/an) + adj. + N + that + S + V</div>
+      <div class="g-body">
+        <p style="color:#475569;margin-bottom:10px;font-size:.96em">so...that 句型表示「程度」導致某個「結果」，that 子句說明結果。</p>
+
+        <div class="g-ex">
+          Low dopamine can make you feel tired <strong>so that</strong> even small tasks feel too hard.
+          <div class="g-ex-cn">低多巴胺讓你感到疲倦，以至於連小事都感覺太難了。</div>
+        </div>
+        <div class="g-ex">
+          The news was <strong>so</strong> shocking <strong>that</strong> everyone was speechless.
+          <div class="g-ex-cn">那個消息如此震驚，以至於每個人都說不出話來。</div>
+        </div>
+        <div class="g-ex">
+          It was <strong>such</strong> a hot day <strong>that</strong> we stayed indoors.
+          <div class="g-ex-cn">天氣熱得我們待在室內不出門。（so → such，後接名詞片語 a hot day）</div>
+        </div>
+
+        <table class="gtab">
+          <tr><th>型態</th><th>後接</th><th>例句</th></tr>
+          <tr><td>so</td><td>形容詞 / 副詞</td><td>so tired that...</td></tr>
+          <tr><td>such</td><td>a(n) + adj. + 可數單數名詞</td><td>such a nice day that...</td></tr>
+          <tr><td>such</td><td>adj. + 複數名詞 / 不可數名詞</td><td>such good books that... / such great weather that...</td></tr>
+        </table>
+
+        <div class="g-note">✗ so a hot day that...（so 後不可直接接名詞）→ 要改用 such a hot day that...</div>
+        <div class="g-tip">課文 so that 也可表「目的」（= in order that），需依上下文判斷是「結果」還是「目的」。</div>
+      </div>
+    </div>
+
+    <!-- 文法 3 -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>③ 動名詞片語當主詞</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">V-ing (片語) + 單數動詞 + ...
+（動名詞片語視為單一概念，動詞用單數）
+
+兩個動名詞片語並列：
+V-ing ... and V-ing ... + 動詞（視情況單/複數）</div>
+      <div class="g-body">
+        <p style="color:#475569;margin-bottom:10px;font-size:.96em">動名詞（V-ing）可以作為句子的主詞，代表一個動作或概念，通常視為單一概念，接單數動詞。</p>
+
+        <div class="g-ex">
+          <strong>Eating</strong> a balanced diet and <strong>getting</strong> enough sleep can also help keep dopamine levels in check.
+          <div class="g-ex-cn">均衡飲食和充足睡眠也有助於控制多巴胺水平。（兩個動名詞片語並列，視為一整體）</div>
+        </div>
+        <div class="g-ex">
+          <strong>Getting</strong> enough sleep <strong>is</strong> super important.
+          <div class="g-ex-cn">充足的睡眠是非常重要的。（單一動名詞片語 → 單數動詞 is）</div>
+        </div>
+        <div class="g-ex">
+          <strong>Releasing</strong> feel-good chemicals into your brain <strong>is</strong> good for you.
+          <div class="g-ex-cn">把讓人感覺良好的化學物質釋放到大腦對你有好處。</div>
+        </div>
+
+        <table class="gtab">
+          <tr><th>主詞形式</th><th>動詞形式</th><th>例句</th></tr>
+          <tr><td>V-ing（動名詞）</td><td>單數動詞</td><td>Swimming is fun.</td></tr>
+          <tr><td>To V（不定詞）</td><td>單數動詞</td><td>To swim is fun.</td></tr>
+          <tr><td>A and B 並列（兩個獨立概念）</td><td>複數動詞</td><td>Eating and sleeping are both important.</td></tr>
+        </table>
+
+        <div class="g-note">✗ Eating a balanced diet are important.（動名詞主詞用單數動詞）✓ Eating a balanced diet IS important.</div>
+        <div class="g-tip">It is + adj. + to V 是動名詞主詞的替代句型（虛主詞句型）：It is important to eat well. = Eating well is important.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ 練習題 ══════════════ -->
+<div class="section s-orange">
+  <div class="sec-head">
+    <div class="sec-icon">✏️</div>
+    練習題 × 8 — 核心字彙應用
+  </div>
+  <div class="sec-body">
+    <p style="color:#475569;font-size:.95em;margin-top:10px">點選選項作答，系統即時回饋正確答案與詳細解析。</p>
+    <div id="q-wrap"></div>
+  </div>
+</div>
+
+</div><!-- /.page -->
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+  var ans=block.querySelector('.q-ans');
+  if(ans)ans.classList.add('open');
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+  {q:['Social media is a very ',' tool that can both connect people and cause serious problems.'],
+   cn:'社群媒體是一個非常強大的工具，既能連結人們，也可能造成嚴重的問題。',
+   opts:['frequent','powerful','constant','depressed'],ans:1,
+   word:'powerful (adj.) 強大的；有力的',
+   exp:'空格修飾 tool（工具），需表示「強大的」形容詞。(A) frequent 頻繁的、(C) constant 持續的、(D) depressed 形容人沮喪，均不符。',
+   note:'powerful = strong / forceful，常用於描述「有影響力或效果顯著的事物」。'},
+  {q:['Scientists have found that exercise is ',' to a better mood and higher energy levels.'],
+   cn:'科學家發現，運動與更好的心情和更高的能量水平有關聯。',
+   opts:['linked','released','engaged','ensured'],ans:0,
+   word:'linked (adj./v.) 與……相連；有關聯的',
+   exp:'be linked to 是固定搭配，表示「與……有關聯」。(B) released 釋放、(C) engaged 投入的、(D) ensured 確保，均不符語意。',
+   note:'be linked to = be connected to = be related to，三個說法可互換。'},
+  {q:['When you do something ',' like helping others, your brain releases dopamine.'],
+   cn:'當你做一些有意義有回報的事，例如幫助他人時，你的大腦會釋放多巴胺。',
+   opts:['constant','rewarding','frequent','depressing'],ans:1,
+   word:'rewarding (adj.) 有回報的；令人有成就感的',
+   exp:'空格修飾 something，後文「幫助他人」暗示有意義、有收穫的事，選 rewarding。(A) constant 持續的、(C) frequent 頻繁的、(D) depressing 令人沮喪的，均不符。',
+   note:'rewarding（事物令人有成就感）≠ rewarded（人得到了回報）。'},
+  {q:['Dopamine is ',' in the brain when you experience something pleasurable.'],
+   cn:'當你體驗到令人愉快的事物時，大腦就會釋放多巴胺。',
+   opts:['participated','released','ensured','recommended'],ans:1,
+   word:'release (v.) 釋放；分泌',
+   exp:'be released in the brain 是課文原句，表示「在大腦中被釋放」。(A) participated 參與（不及物）、(C) ensured 確保、(D) recommended 建議，均不符。',
+   note:'release 作動詞「釋放」，被動式 be released；作名詞 the release of dopamine。'},
+  {q:['The teacher encouraged all students to ',' in the science fair this year.'],
+   cn:'老師鼓勵所有學生今年參加科學展覽。',
+   opts:['participate in','bring about','rely on','keep in check'],ans:0,
+   word:'participate in 參與；參加',
+   exp:'空格後接 the science fair，需有「參與……」語意的片語，選 participate in。(B) bring about 導致、(C) rely on 依賴、(D) keep in check 控制，均不符。',
+   note:'participate in = take part in，固定搭配，介系詞必須用 in。'},
+  {q:['If you feel constantly sad, tired, and unmotivated, you might be experiencing ',' and should see a doctor.'],
+   cn:'如果你持續感到悲傷、疲倦和缺乏動力，你可能正在經歷憂鬱症，應該去看醫生。',
+   opts:['desire','depression','engagement','frequency'],ans:1,
+   word:'depression (n.) 憂鬱症；沮喪',
+   exp:'持續感到悲傷、疲倦、缺乏動力是憂鬱症的症狀，選 depression。(A) desire 慾望、(C) engagement 投入、(D) frequency 頻率，均不符。',
+   note:'depression 也可指「經濟不景氣」（economic depression），需依上下文判斷。'},
+  {q:['Experts ',' that you limit your screen time to two hours a day to protect your mental health.'],
+   cn:'專家建議你每天將螢幕使用時間限制在兩小時內，以保護心理健康。',
+   opts:['ensure','release','recommend','participate'],ans:2,
+   word:'recommend (v.) 建議；推薦',
+   exp:'空格後接 that 子句說明建議內容，選 recommend（建議）。(A) ensure 確保（也接 that，但語意偏「確保結果」）、(B) release 釋放、(D) participate 參與，均不符此語意。',
+   note:'recommend + V-ing 或 recommend + that + S + (should) V，不接 to V。'},
+  {q:['She had a strong ',' to check her phone every few minutes, even during class.'],
+   cn:'她有強烈的慾望每隔幾分鐘就查看手機，即使是在上課期間。',
+   opts:['depression','release','desire','frequency'],ans:2,
+   word:'desire (n.) 慾望；渴望',
+   exp:'空格需「慾望」名詞，描述想查看手機的強烈衝動，選 desire。(A) depression 憂鬱、(B) release 釋放、(D) frequency 頻率，均不符語意。',
+   note:'desire 可作名詞「慾望」或動詞「渴望」：She desires a better life.（她渴望更好的生活）。'}
+];
+
+(function(){
+  var wrap=document.getElementById('q-wrap');
+  if(!wrap)return;
+  studentQ.forEach(function(d,i){
+    var choices=d.opts.map(function(o,j){
+      return '<div class="choice" data-correct="'+(j===d.ans?'1':'0')+'" onclick="pickChoice(this)"><span class="mark"></span>('+'ABCD'[j]+') '+o+'</div>';
+    }).join('');
+    wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div><button class="show-btn" onclick="showAns(this)">看完整解析</button></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';
+  });
+})();
+
+// 發音按鈕注入
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>

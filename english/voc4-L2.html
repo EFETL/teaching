@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L2: How Do You Take Your Tea, High or Low? ─ 龍騰高職英文 第四冊</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:.9em;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#451a03 0%,#92400e 60%,#d97706 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.header .time{margin-top:6px;font-size:.95em;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.9em;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:.92em;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:1.05em;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:.9em;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:.92em;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:.96em}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:.76em;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:.86em;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:.82em;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:.98em;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:1.02em;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#1e40af}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:.9em;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:.85em;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:.95em}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:.95em}
+.pex .cn{display:block;color:#94a3b8;font-size:.92em;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:1.08em}
+.slang-cn-mini{font-size:.9em;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:.96em;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:.94em;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:.92em;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:1.05em}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:.8em;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:.95em;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:.97em;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:.92em;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:.93em;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:.93em;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學習重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:.93em;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:.94em;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:1em;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:.94em;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:.95em;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:1.02em}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:1em;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:13px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#451a03!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .q-ans,.g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ===== HEADER ===== -->
+<div class="header" style="background:linear-gradient(135deg,#451a03 0%,#92400e 60%,#d97706 100%)">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L2: How Do You Take Your Tea, High or Low? ── 你喝的是高茶還是低茶？</h1>
+  <div class="sub">龍騰高職英文 第四冊 第二課｜互動教學講義</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">🗣️ 對話精講</span>
+    <span class="tag">📝 核心字彙 × 12</span>
+    <span class="tag">🔗 片語 × 5</span>
+    <span class="tag">📐 文法句型 × 3</span>
+    <span class="tag">✏️ 練習題 × 8</span>
+  </div>
+</div>
+
+<!-- ===== 課文逐句精講 ===== -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">📖</div>
+    課文逐句精講
+  </div>
+  <div class="sec-body">
+    <div class="syn-legend">
+      句型標色說明：
+      <span class="syn syn-s">S 主詞</span>
+      <span class="syn syn-v">V 動詞</span>
+      <span class="syn syn-o">O 受詞</span>
+      <span class="syn syn-c">C 補語</span>
+      <span class="syn syn-m">M 修飾語</span>
+      ｜點擊每一句可展開中文翻譯與句法分析
+    </div>
+
+    <!-- Para 1 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📖 第一段 — 引入下午茶習俗</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>You may have heard of the delightful custom of sipping hot tea in the late afternoon.</div>
+        <div class="para-exp">
+          <div class="para-cn">你或許曾聽說過在下午時分品飲熱茶這個令人愉快的習俗。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">You</span><span class="syn-t">S</span>
+            <span class="syn syn-v">may have heard of</span><span class="syn-t">V（情態助動詞+現在完成式）</span>
+            <span class="syn syn-o">the delightful custom</span><span class="syn-t">O</span>
+            <span class="syn syn-m">of sipping hot tea in the late afternoon</span><span class="syn-t">M（介系詞片語修飾 custom）</span>
+          </div>
+          <div class="para-note"><b>may have heard of</b>：情態助動詞 may + 完成式，表「對過去的推測」，意思是「也許已經聽過」。<br><b>hear of</b> = 聽說（知道有這件事）；<b>hear from</b> = 收到……的消息。<br><b>delightful</b> adj. 令人愉快的；<b>sip</b> v. 小口地啜飲。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>But do you know who started this tea-drinking tradition?</div>
+        <div class="para-exp">
+          <div class="para-cn">但你知道是誰開創了這個飲茶傳統嗎？</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（疑問句 + 間接問句）</span>
+            <span class="syn syn-v">do you know</span><span class="syn-t">V（主要疑問句）</span>
+            <span class="syn syn-o">who started this tea-drinking tradition</span><span class="syn-t">O（間接問句，語序為直述句）</span>
+          </div>
+          <div class="para-note"><b>間接問句</b>：do you know + who + 直述語序（S+V），不用倒裝。<br>✓ do you know <b>who started</b>...　✗ do you know <b>who did start</b>...</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>And are you aware that the British have both "low" and "high" tea?</div>
+        <div class="para-exp">
+          <div class="para-cn">你是否知道英國人既有「低茶」也有「高茶」？</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">you</span><span class="syn-t">S</span>
+            <span class="syn syn-v">are</span><span class="syn-t">V</span>
+            <span class="syn syn-c">aware</span><span class="syn-t">C（形容詞）</span>
+            <span class="syn syn-o">that the British have both "low" and "high" tea</span><span class="syn-t">O（that子句）</span>
+          </div>
+          <div class="para-note"><b>be aware that...</b> = 知道……、意識到……。<b>both A and B</b> = 兩者皆有（A 與 B 都）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Afternoon tea can typically be described as sitting down for a period of time in the afternoon to enjoy tea and some snacks.</div>
+        <div class="para-exp">
+          <div class="para-cn">下午茶通常可以被描述為在下午坐下來享受一段時間的茶飲與點心。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（被動語態）</span>
+            <span class="syn syn-s">Afternoon tea</span><span class="syn-t">S</span>
+            <span class="syn syn-v">can typically be described as</span><span class="syn-t">V（情態助動詞+被動）</span>
+            <span class="syn syn-o">sitting down...to enjoy tea and some snacks</span><span class="syn-t">O（動名詞片語）</span>
+          </div>
+          <div class="para-note"><b>be described as + Ving</b>：被描述為……。<b>typically</b> adv. 通常地、典型地。<b>to enjoy</b> 是不定詞表目的「為了享用」。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 2 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📖 第二段 — 低茶的起源（公爵夫人安娜）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Some people believe that the English duchess Anna Russell might have started this custom in the mid-1800s.</div>
+        <div class="para-exp">
+          <div class="para-cn">有些人認為英國公爵夫人安娜·羅素可能在十九世紀中葉開創了這個習俗。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（may/might have + p.p. 對過去推測）</span>
+            <span class="syn syn-s">Some people</span><span class="syn-t">S</span>
+            <span class="syn syn-v">believe</span><span class="syn-t">V</span>
+            <span class="syn syn-o">that...Anna Russell <b>might have started</b> this custom in the mid-1800s</span><span class="syn-t">O（that子句，推測過去）</span>
+          </div>
+          <div class="para-note"><b>might have started</b>：對過去事實的推測（本課重要文法），意思是「可能已開始」，但不確定。<br><b>duchess</b> n. 公爵夫人；<b>mid-1800s</b> = 十九世紀中葉（約1850年代）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>At that time, members of the upper class normally had a light lunch and late dinner.</div>
+        <div class="para-exp">
+          <div class="para-cn">在那個時代，上流社會的成員通常只吃簡單的午餐，晚餐也很晚才吃。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-m">At that time</span><span class="syn-t">M（時間副詞）</span>
+            <span class="syn syn-s">members of the upper class</span><span class="syn-t">S</span>
+            <span class="syn syn-v">had</span><span class="syn-t">V</span>
+            <span class="syn syn-o">a light lunch and late dinner</span><span class="syn-t">O</span>
+          </div>
+          <div class="para-note"><b>upper class</b> 上流社會；<b>light lunch</b> 簡單/清淡的午餐（light 此處表「不豐盛的」）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>However, Lady Russell grew extremely hungry between meals and found it very difficult to wait so long until dinnertime.</div>
+        <div class="para-exp">
+          <div class="para-cn">然而，羅素夫人在兩餐之間會感到極度飢餓，覺得要等那麼久到晚餐時間是非常困難的事。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（雙謂語 + 假受詞 it）</span>
+            <span class="syn syn-s">Lady Russell</span><span class="syn-t">S</span>
+            <span class="syn syn-v">grew</span><span class="syn-t">V₁（連綴動詞）</span>
+            <span class="syn syn-c">extremely hungry</span><span class="syn-t">C₁</span>
+            and
+            <span class="syn syn-v">found</span><span class="syn-t">V₂</span>
+            <span class="syn syn-o">it</span><span class="syn-t">假受詞（代替後方不定詞）</span>
+            <span class="syn syn-c">very difficult</span><span class="syn-t">C₂</span>
+            <span class="syn syn-o">to wait so long until dinnertime</span><span class="syn-t">真正受詞（不定詞）</span>
+          </div>
+          <div class="para-note"><b>found it + adj. + to V</b>：虛受詞句型，it 代替後方不定詞。<br>例：I find it hard to concentrate. 我覺得很難集中注意力。<br><b>grow</b>（連綴動詞）= become，後接形容詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Her solution to this daily struggle was to ask for some snacks and tea at 4 p.m.</div>
+        <div class="para-exp">
+          <div class="para-cn">她解決每日煎熬的方法，是在下午四點要求提供一些點心和茶。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">Her solution to this daily struggle</span><span class="syn-t">S</span>
+            <span class="syn syn-v">was</span><span class="syn-t">V</span>
+            <span class="syn syn-c">to ask for some snacks and tea at 4 p.m.</span><span class="syn-t">C（不定詞片語）</span>
+          </div>
+          <div class="para-note"><b>ask for</b> = 要求、索取（本課重要片語）。<br><b>struggle</b> n. 掙扎、煎熬；<b>solution to + N</b> = 某問題的解決之道。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>She later started inviting friends over for these little tea parties, and because of this, her idea soon spread throughout British high society.</div>
+        <div class="para-exp">
+          <div class="para-cn">她後來開始邀請朋友來參加這些小型茶會，也因此，她的想法很快傳遍了英國上流社會。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（複合句）</span>
+            <span class="syn syn-s">She</span><span class="syn-t">S₁</span>
+            <span class="syn syn-v">started inviting</span><span class="syn-t">V₁</span>
+            <span class="syn syn-o">friends over</span><span class="syn-t">O₁</span> /
+            <span class="syn syn-s">her idea</span><span class="syn-t">S₂</span>
+            <span class="syn syn-v">spread</span><span class="syn-t">V₂</span>
+            <span class="syn syn-m">throughout British high society</span><span class="syn-t">M</span>
+          </div>
+          <div class="para-note"><b>invite sb. over</b> = 邀請某人來（家裡）。<b>because of this</b> = 因此（介系詞片語，後接名詞）。<b>spread throughout</b> = 傳遍……。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Hosts at these events served high-quality teas and delicious snacks on luxurious low tables.</div>
+        <div class="para-exp">
+          <div class="para-cn">這些活動的主人在豪華的矮桌上供應高品質的茶和美味點心。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">Hosts at these events</span><span class="syn-t">S</span>
+            <span class="syn syn-v">served</span><span class="syn-t">V</span>
+            <span class="syn syn-o">high-quality teas and delicious snacks</span><span class="syn-t">O</span>
+            <span class="syn syn-m">on luxurious low tables</span><span class="syn-t">M（地點介系詞片語）</span>
+          </div>
+          <div class="para-note"><b>serve</b> v. 供應、端上（食物飲料）；<b>luxurious</b> adj. 奢華的、豪華的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>This explains why we now call this custom "low tea." Despite the word "low," low tea clearly represents British high culture.</div>
+        <div class="para-exp">
+          <div class="para-cn">這就解釋了為何我們現在稱這個習俗為「低茶」。儘管有「低」這個字，低茶顯然代表了英國的上流文化。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">This</span><span class="syn-t">S₁</span>
+            <span class="syn syn-v">explains</span><span class="syn-t">V₁</span>
+            <span class="syn syn-o">why we call this custom "low tea"</span><span class="syn-t">O（間接問句）</span> /
+            <span class="syn syn-m">Despite the word "low"</span><span class="syn-t">M（讓步介系詞）</span>
+            <span class="syn syn-s">low tea</span><span class="syn-t">S₂</span>
+            <span class="syn syn-v">represents</span><span class="syn-t">V₂</span>
+            <span class="syn syn-o">British high culture</span><span class="syn-t">O₂</span>
+          </div>
+          <div class="para-note"><b>despite + N/Ving</b> = 儘管……（後接名詞或動名詞，不接子句）。<br><b>represent</b> v. 代表；<b>high culture</b> 高雅文化、上流文化。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 3 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📖 第三段 — 高茶的起源（工人階級）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>High tea, by comparison, functioned as one of the main meals during the day for the working class.</div>
+        <div class="para-exp">
+          <div class="para-cn">相比之下，高茶是工人階級一天中的主要正餐之一。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">High tea</span><span class="syn-t">S</span>
+            <span class="syn syn-m">by comparison</span><span class="syn-t">M（插入語）</span>
+            <span class="syn syn-v">functioned as</span><span class="syn-t">V（function as = 充當、作為……的功能）</span>
+            <span class="syn syn-c">one of the main meals</span><span class="syn-t">C</span>
+          </div>
+          <div class="para-note"><b>by comparison</b> = 相比之下（本課片語）；<b>function as</b> = 充當、起……的功能；<b>working class</b> 工人階級。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>In the seventeenth and early eighteenth centuries, people mostly worked in agriculture and ate their biggest meal at noon.</div>
+        <div class="para-exp">
+          <div class="para-cn">在十七世紀及十八世紀初，人們大多從事農業，並在中午享用最豐盛的一餐。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-m">In the seventeenth and early eighteenth centuries</span><span class="syn-t">M（時間）</span>
+            <span class="syn syn-s">people</span><span class="syn-t">S</span>
+            <span class="syn syn-v">mostly worked in</span><span class="syn-t">V₁</span>
+            <span class="syn syn-o">agriculture</span><span class="syn-t">O₁</span>
+            and
+            <span class="syn syn-v">ate</span><span class="syn-t">V₂</span>
+            <span class="syn syn-o">their biggest meal at noon</span><span class="syn-t">O₂</span>
+          </div>
+          <div class="para-note"><b>agriculture</b> n. 農業（本課核心字彙）；<b>at noon</b> 在中午。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>This was followed by a light supper in the evening.</div>
+        <div class="para-exp">
+          <div class="para-cn">在那之後，傍晚時分再吃一頓簡單的晚餐。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（被動語態表順序）</span>
+            <span class="syn syn-s">This</span><span class="syn-t">S（代指正午大餐）</span>
+            <span class="syn syn-v">was followed by</span><span class="syn-t">V（被動，緊接著……）</span>
+            <span class="syn syn-o">a light supper in the evening</span><span class="syn-t">受動者</span>
+          </div>
+          <div class="para-note"><b>be followed by</b> = 緊接著……（本課重要句型），用被動表示「先有A，接著是B」。<br>例：Dinner was followed by dessert. 晚餐之後接著是甜點。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>During the Industrial Revolution, however, laborers were working longer hours in factories.</div>
+        <div class="para-exp">
+          <div class="para-cn">然而，在工業革命期間，工人在工廠工作的時間越來越長。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-m">During the Industrial Revolution</span><span class="syn-t">M（時間）</span>
+            <span class="syn syn-s">laborers</span><span class="syn-t">S</span>
+            <span class="syn syn-v">were working</span><span class="syn-t">V（過去進行式）</span>
+            <span class="syn syn-m">longer hours in factories</span><span class="syn-t">M</span>
+          </div>
+          <div class="para-note"><b>Industrial Revolution</b> 工業革命（18–19世紀）；<b>laborer</b> n. 勞工、工人（本課核心字彙）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>These long hours made it not so convenient to eat a big lunch.</div>
+        <div class="para-exp">
+          <div class="para-cn">這些漫長的工時使得在中午吃頓豐盛午餐變得不那麼方便。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（使役動詞 + 假受詞）</span>
+            <span class="syn syn-s">These long hours</span><span class="syn-t">S</span>
+            <span class="syn syn-v">made</span><span class="syn-t">V（使役動詞）</span>
+            <span class="syn syn-o">it</span><span class="syn-t">假受詞</span>
+            <span class="syn syn-c">not so convenient</span><span class="syn-t">C</span>
+            <span class="syn syn-o">to eat a big lunch</span><span class="syn-t">真正受詞（不定詞）</span>
+          </div>
+          <div class="para-note"><b>make it + adj. + to V</b>：使某事（做起來）……（虛受詞句型，與 find it + adj. + to V 平行）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>When they got off work, they were starving.</div>
+        <div class="para-exp">
+          <div class="para-cn">當他們下班時，早已飢腸轆轆。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-m">When they got off work</span><span class="syn-t">M（時間副詞子句）</span>
+            <span class="syn syn-s">they</span><span class="syn-t">S</span>
+            <span class="syn syn-v">were</span><span class="syn-t">V</span>
+            <span class="syn syn-c">starving</span><span class="syn-t">C（形容詞）</span>
+          </div>
+          <div class="para-note"><b>get off work</b> = 下班；<b>starving</b> adj. 極度飢餓的（比 hungry 程度更深）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Therefore, these workers had high tea immediately after work, usually between 5 and 7 p.m.</div>
+        <div class="para-exp">
+          <div class="para-cn">因此，這些工人下班後立即喝高茶，通常在下午五點至七點之間。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-m">Therefore</span><span class="syn-t">M（結果副詞）</span>
+            <span class="syn syn-s">these workers</span><span class="syn-t">S</span>
+            <span class="syn syn-v">had</span><span class="syn-t">V</span>
+            <span class="syn syn-o">high tea</span><span class="syn-t">O</span>
+            <span class="syn syn-m">immediately after work, usually between 5 and 7 p.m.</span><span class="syn-t">M（時間）</span>
+          </div>
+          <div class="para-note"><b>immediately</b> adv. 立刻、馬上；<b>between A and B</b> = 在A與B之間。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>This was an energy-packed meal with food that was as filling as possible, such as meat, vegetables, fish, and pies.</div>
+        <div class="para-exp">
+          <div class="para-cn">這是一頓充滿能量的餐食，搭配盡可能飽腹的食物，例如肉類、蔬菜、魚和派。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（as...as possible）</span>
+            <span class="syn syn-s">This</span><span class="syn-t">S</span>
+            <span class="syn syn-v">was</span><span class="syn-t">V</span>
+            <span class="syn syn-c">an energy-packed meal</span><span class="syn-t">C</span>
+            <span class="syn syn-m">with food that was <b>as filling as possible</b></span><span class="syn-t">M（關係子句含 as...as possible 句型）</span>
+          </div>
+          <div class="para-note"><b>as + adj. + as possible</b> = 盡可能……（本課片語）；<b>energy-packed</b> 複合形容詞，充滿能量的；<b>filling</b> adj. 易飽的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Strong black tea was served in ordinary teapots, and diners were seated on high-backed chairs at the dining table.</div>
+        <div class="para-exp">
+          <div class="para-cn">濃郁的紅茶盛裝在普通茶壺中端上，用餐者則坐在餐桌旁的高背椅上。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（被動語態）</span>
+            <span class="syn syn-s">Strong black tea</span><span class="syn-t">S₁</span>
+            <span class="syn syn-v">was served</span><span class="syn-t">V₁（被動）</span> /
+            <span class="syn syn-s">diners</span><span class="syn-t">S₂</span>
+            <span class="syn syn-v">were seated</span><span class="syn-t">V₂（被動）</span>
+            <span class="syn syn-m">on high-backed chairs at the dining table</span><span class="syn-t">M</span>
+          </div>
+          <div class="para-note"><b>serve</b>（端上）與 <b>seat</b>（使就座）均用被動。<b>high-backed</b> 高背的（複合形容詞）——「高茶」名稱由此而來。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>This inspired the term "high tea."</div>
+        <div class="para-exp">
+          <div class="para-cn">這便啟發了「高茶」這個名稱的誕生。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">This</span><span class="syn-t">S（指前文整體描述）</span>
+            <span class="syn syn-v">inspired</span><span class="syn-t">V</span>
+            <span class="syn syn-o">the term "high tea"</span><span class="syn-t">O</span>
+          </div>
+          <div class="para-note"><b>inspire</b> v. 啟發、激發；<b>term</b> n. 術語、名稱。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 4 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📖 第四段 — 茶文化的現代意義</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Research shows that, on average, each British person drinks 3.5 cups of tea a day.</div>
+        <div class="para-exp">
+          <div class="para-cn">研究顯示，平均而言，每位英國人每天喝三點五杯茶。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">Research</span><span class="syn-t">S</span>
+            <span class="syn syn-v">shows</span><span class="syn-t">V</span>
+            <span class="syn syn-o">that...each British person drinks 3.5 cups of tea a day</span><span class="syn-t">O（that子句）</span>
+            <span class="syn syn-m">on average</span><span class="syn-t">M（插入語）</span>
+          </div>
+          <div class="para-note"><b>on average</b> = 平均而言（本課片語）；<b>a day</b> = per day 每天（頻率副詞）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>This indicates that teatime has become a fundamental part of British culture.</div>
+        <div class="para-exp">
+          <div class="para-cn">這表明喝茶時間已成為英國文化不可或缺的一部分。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">This</span><span class="syn-t">S</span>
+            <span class="syn syn-v">indicates</span><span class="syn-t">V</span>
+            <span class="syn syn-o">that teatime has become a fundamental part of British culture</span><span class="syn-t">O（that子句）</span>
+          </div>
+          <div class="para-note"><b>fundamental</b> adj. 基本的、根本的（本課核心字彙）；<b>indicate</b> v. 指出、表明。<b>has become</b> 現在完成式表示持續至今的狀態。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Afternoon tea is now a way of life all across the country, and it is no longer restricted to the upper class.</div>
+        <div class="para-exp">
+          <div class="para-cn">下午茶現在是全國各地的一種生活方式，而且它不再僅限於上流社會。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構（it is no longer + adj./p.p.）</span>
+            <span class="syn syn-s">Afternoon tea</span><span class="syn-t">S₁</span>
+            <span class="syn syn-v">is</span><span class="syn-t">V₁</span>
+            <span class="syn syn-c">a way of life all across the country</span><span class="syn-t">C₁</span> /
+            <span class="syn syn-s">it</span><span class="syn-t">S₂</span>
+            <span class="syn syn-v">is <b>no longer</b> restricted to</span><span class="syn-t">V₂（被動 + no longer 否定）</span>
+            <span class="syn syn-o">the upper class</span><span class="syn-t">O₂</span>
+          </div>
+          <div class="para-note"><b>is no longer + p.p.</b>：不再……（強調情況已改變）。<br><b>be restricted to</b> = 被限制於；<b>a way of life</b> = 一種生活方式。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>In fact, people enjoy it in just about every corner of the world.</div>
+        <div class="para-exp">
+          <div class="para-cn">事實上，世界上幾乎每一個角落的人們都喜愛下午茶。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-m">In fact</span><span class="syn-t">M（插入語）</span>
+            <span class="syn syn-s">people</span><span class="syn-t">S</span>
+            <span class="syn syn-v">enjoy</span><span class="syn-t">V</span>
+            <span class="syn syn-o">it</span><span class="syn-t">O（代指午後茶習俗）</span>
+            <span class="syn syn-m">in just about every corner of the world</span><span class="syn-t">M（地方副詞）</span>
+          </div>
+          <div class="para-note"><b>just about</b> = 幾乎（nearly）；<b>every corner of the world</b> = 世界的每個角落。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 對話精講 -->
+    <div class="divlabel">🗣️ 對話精講 — Sophie × Kristin × Waiter</div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">🔵 Sophie（藍）</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Thanks for inviting me today. It's so nice to hang out with you and enjoy a nice afternoon tea.</div>
+        <div class="para-exp">
+          <div class="para-cn">謝謝你今天邀請我。能和你出來玩、享受美好的下午茶真的很棒。</div>
+          <div class="para-syntax">
+            <span class="lbl">句法結構</span>
+            <span class="syn syn-s">It</span><span class="syn-t">形式主詞</span>
+            <span class="syn syn-v">is</span><span class="syn-t">V</span>
+            <span class="syn syn-c">so nice</span><span class="syn-t">C</span>
+            <span class="syn syn-o">to hang out with you and enjoy a nice afternoon tea</span><span class="syn-t">真正主詞（不定詞）</span>
+          </div>
+          <div class="para-note"><b>hang out with sb.</b> = 和某人出來玩/消磨時間；<b>Thanks for + V-ing</b> = 謝謝你……。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">🟢 Kristin（綠）</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>My pleasure. We haven't had a good chat in a long time.</div>
+        <div class="para-exp">
+          <div class="para-cn">不客氣。我們好久沒有好好聊天了。</div>
+          <div class="para-note"><b>My pleasure.</b> = 不客氣、這是我的榮幸（比 You're welcome 更正式有禮）。<b>haven't had... in a long time</b> = 好久沒……了（現在完成式）。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-nancy">🟠 Waiter（橘）</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Good afternoon ladies. Are you ready to order?</div>
+        <div class="para-exp">
+          <div class="para-cn">午安，女士們。請問你們準備好點餐了嗎？</div>
+          <div class="para-note"><b>Are you ready to order?</b> 餐廳服務常用句，詢問是否要點餐。</div>
+        </div>
+      </div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Well, our Classic English Afternoon Tea set is really popular. It comes with different kinds of desserts, cakes, and sandwiches.</div>
+        <div class="para-exp">
+          <div class="para-cn">嗯，我們的經典英式下午茶套餐非常受歡迎。它附有各種甜點、蛋糕和三明治。</div>
+          <div class="para-note"><b>come with</b> = 附帶、搭配；<b>popular</b> adj. 受歡迎的。</div>
+        </div>
+      </div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Yes, you can choose from this page for herbal tea, fruit tea, or milk tea.</div>
+        <div class="para-exp">
+          <div class="para-cn">是的，您可以從這一頁選擇草本茶、水果茶或奶茶。</div>
+          <div class="para-note"><b>herbal tea</b> 草本茶；<b>choose from</b> = 從……中選擇。</div>
+        </div>
+      </div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>No problem. And what would you like to drink? / I'll be right back with your order.</div>
+        <div class="para-exp">
+          <div class="para-cn">沒問題。那您想喝什麼？ / 我馬上帶著您的餐點回來。</div>
+          <div class="para-note"><b>I'll be right back.</b> 餐廳常用語，「我馬上回來」。<b>What would you like to...?</b> 禮貌詢問偏好的句型。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">🟢 Kristin（綠）</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Is this served with drinks? / Okay. I'll have the Classic set with a rose lemon tea, please.</div>
+        <div class="para-exp">
+          <div class="para-cn">這有附飲料嗎？ / 好的，我要經典套餐，搭配玫瑰檸檬茶，謝謝。</div>
+          <div class="para-note"><b>be served with</b> = 附有、搭配（被動）；<b>I'll have...</b> = 我要點……（餐廳點餐常用）。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">🔵 Sophie（藍）</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Hi. What do you recommend? / I'll have the same set, please. / I'll have English black tea, please.</div>
+        <div class="para-exp">
+          <div class="para-cn">你好，你推薦什麼？ / 我也要一樣的套餐，謝謝。 / 我要英式紅茶，謝謝。</div>
+          <div class="para-note"><b>What do you recommend?</b> = 你有什麼推薦？（詢問服務員建議的實用句）<br><b>I'll have the same.</b> = 我要一樣的（點餐常用）。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 核心字彙 ===== -->
+<div class="section s-teal">
+  <div class="sec-head">
+    <div class="sec-icon">📝</div>
+    核心字彙 × 12
+  </div>
+  <div class="sec-body">
+    <div class="sec-hint">點擊單字卡可展開字族、例句與學習提示；發音鈕🔊可聆聽英語發音。</div>
+    <div class="vocab-grid">
+
+      <!-- 1. delightful -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">delightful</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">令人愉快的；迷人的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>delight (n./v.) 喜悅；使高興</span>
+            <span>delighted (adj.) 感到高興的（人）</span>
+            <span>delightfully (adv.) 令人愉快地</span>
+          </div>
+          <div class="v-ex">
+            The <b>delightful</b> aroma of fresh tea filled the room.
+            <span class="cn">新鮮茶葉的迷人香氣充滿了整個房間。</span>
+          </div>
+          <div class="v-gsat">💡 辨析：delightful（令人愉快的，形容事物）vs. delighted（人感到高興的）</div>
+        </div>
+      </div>
+
+      <!-- 2. sip -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">sip</span>
+              <span class="v-pos">v./n.</span>
+            </div>
+            <div class="v-cn-mini">小口啜飲；一小口</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>sip (n.) 一小口</span>
+            <span>sipped (過去式)</span>
+          </div>
+          <div class="v-ex">
+            She <b>sipped</b> her hot tea slowly, enjoying every drop.
+            <span class="cn">她慢慢啜飲著熱茶，細細品味每一滴。</span>
+          </div>
+          <div class="v-gsat">💡 比較：sip（小口慢喝）vs. gulp（大口吞嚥）</div>
+        </div>
+      </div>
+
+      <!-- 3. typically -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">typically</span>
+              <span class="v-pos">adv.</span>
+            </div>
+            <div class="v-cn-mini">通常地；典型地</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>typical (adj.) 典型的</span>
+            <span>typify (v.) 成為……的典型</span>
+          </div>
+          <div class="v-ex">
+            Afternoon tea is <b>typically</b> enjoyed between 3 and 5 p.m.
+            <span class="cn">下午茶通常在下午三點到五點之間享用。</span>
+          </div>
+          <div class="v-gsat">💡 同義詞：usually, normally, generally</div>
+        </div>
+      </div>
+
+      <!-- 4. upper -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">upper</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">上層的；上流的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>upper class 上流社會</span>
+            <span>upper hand 優勢</span>
+            <span>upper body 上半身</span>
+          </div>
+          <div class="v-ex">
+            The <b>upper</b> class in Britain enjoyed low tea as a social event.
+            <span class="cn">英國上流社會將低茶視為一種社交活動來享受。</span>
+          </div>
+          <div class="v-gsat">💡 社會階層：upper class → middle class → working class</div>
+        </div>
+      </div>
+
+      <!-- 5. serve -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">serve</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">供應；端上；服務</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>service (n.) 服務</span>
+            <span>servant (n.) 僕人</span>
+            <span>server (n.) 服務員；伺服器</span>
+          </div>
+          <div class="v-ex">
+            The waiter <b>served</b> tea and cakes on a silver tray.
+            <span class="cn">服務員用銀托盤端上茶和蛋糕。</span>
+          </div>
+          <div class="v-gsat">💡 常見搭配：serve food/tea/customers；be served with（附有）</div>
+        </div>
+      </div>
+
+      <!-- 6. luxurious -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">luxurious</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">奢華的；豪華的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>luxury (n.) 奢華；奢侈品</span>
+            <span>luxuriously (adv.) 奢華地</span>
+          </div>
+          <div class="v-ex">
+            The hotel's <b>luxurious</b> lounge was perfect for afternoon tea.
+            <span class="cn">這家飯店奢華的休息室非常適合享用下午茶。</span>
+          </div>
+          <div class="v-gsat">💡 課文：served...on luxurious low tables（在豪華的矮桌上供應）</div>
+        </div>
+      </div>
+
+      <!-- 7. represent -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">represent</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">代表；象徵</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>representative (n./adj.) 代表（人/的）</span>
+            <span>representation (n.) 代表；表現</span>
+          </div>
+          <div class="v-ex">
+            Low tea <b>represents</b> British high culture despite its name.
+            <span class="cn">儘管名稱如此，低茶代表著英國的高雅文化。</span>
+          </div>
+          <div class="v-gsat">💡 represent = stand for（象徵）；be represented by（由……代表）</div>
+        </div>
+      </div>
+
+      <!-- 8. function -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">function</span>
+              <span class="v-pos">v./n.</span>
+            </div>
+            <div class="v-cn-mini">充當；運作；功能</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>functional (adj.) 功能性的</span>
+            <span>function as 充當、起……作用</span>
+          </div>
+          <div class="v-ex">
+            High tea <b>functioned as</b> a main meal for the working class.
+            <span class="cn">高茶充當了工人階級的主要正餐。</span>
+          </div>
+          <div class="v-gsat">💡 function as = serve as = act as（均表「充當」）</div>
+        </div>
+      </div>
+
+      <!-- 9. agriculture -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">agriculture</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">農業</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>agricultural (adj.) 農業的</span>
+            <span>agriculturalist (n.) 農學家</span>
+          </div>
+          <div class="v-ex">
+            Before the Industrial Revolution, most people worked in <b>agriculture</b>.
+            <span class="cn">在工業革命之前，大多數人從事農業工作。</span>
+          </div>
+          <div class="v-gsat">💡 相關：industry（工業）、commerce（商業）、agriculture（農業）</div>
+        </div>
+      </div>
+
+      <!-- 10. revolution -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">revolution</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">革命；大變革</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>revolutionary (adj./n.) 革命性的；革命者</span>
+            <span>revolve (v.) 旋轉；圍繞</span>
+          </div>
+          <div class="v-ex">
+            The Industrial <b>Revolution</b> changed how and when people ate.
+            <span class="cn">工業革命改變了人們的飲食方式與時間。</span>
+          </div>
+          <div class="v-gsat">💡 Industrial Revolution 工業革命；revolution 也可指「旋轉一圈」</div>
+        </div>
+      </div>
+
+      <!-- 11. laborer -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">laborer</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">勞工；工人</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>labor (n./v.) 勞動；努力</span>
+            <span>laborious (adj.) 費力的</span>
+          </div>
+          <div class="v-ex">
+            Factory <b>laborers</b> had to work long hours six days a week.
+            <span class="cn">工廠工人每週六天都必須長時間工作。</span>
+          </div>
+          <div class="v-gsat">💡 同義詞：worker, employee；勞動節 Labor Day</div>
+        </div>
+      </div>
+
+      <!-- 12. fundamental -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">fundamental</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">基本的；根本的；不可或缺的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>fundamentally (adv.) 根本上</span>
+            <span>fundamentals (n.) 基本原理</span>
+          </div>
+          <div class="v-ex">
+            Teatime has become a <b>fundamental</b> part of British culture.
+            <span class="cn">喝茶時間已成為英國文化不可或缺的一部分。</span>
+          </div>
+          <div class="v-gsat">💡 同義詞：basic, essential, core；課文原句直接考出</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== 片語講解 ===== -->
+<div class="section s-green">
+  <div class="sec-head">
+    <div class="sec-icon">🔗</div>
+    片語講解 × 5
+  </div>
+  <div class="sec-body">
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th>片語</th>
+          <th>中文</th>
+          <th>例句與補充</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phr">hear of</span></td>
+          <td>聽說；知道有……</td>
+          <td>
+            <div class="pex">
+              Have you <b>heard of</b> the new café downtown?
+              <span class="cn">你有聽說市中心那家新咖啡廳嗎？</span>
+            </div>
+            <div class="pex">💡 比較：hear of（知道有），hear from（收到消息/聯絡），hear about（聽說某事詳情）</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">ask for</span></td>
+          <td>要求；索取；請求</td>
+          <td>
+            <div class="pex">
+              She <b>asked for</b> more time to finish the project.
+              <span class="cn">她要求更多時間來完成這項專案。</span>
+            </div>
+            <div class="pex">💡 課文：Her solution was to <b>ask for</b> some snacks and tea at 4 p.m.</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">by comparison</span></td>
+          <td>相比之下</td>
+          <td>
+            <div class="pex">
+              Low tea is elegant; high tea, <b>by comparison</b>, is more filling.
+              <span class="cn">低茶十分優雅；高茶相比之下更加飽腹。</span>
+            </div>
+            <div class="pex">💡 同義：in comparison, by contrast（更強調對比）</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">as...as possible</span></td>
+          <td>盡可能……</td>
+          <td>
+            <div class="pex">
+              They packed food <b>as filling as possible</b> for the long day.
+              <span class="cn">他們為了漫長的一天準備了盡可能飽腹的食物。</span>
+            </div>
+            <div class="pex">💡 結構：as + adj./adv. + as possible（可用 as + adj. + as one can 替換）</div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">on average</span></td>
+          <td>平均而言</td>
+          <td>
+            <div class="pex">
+              <b>On average</b>, British people drink 3.5 cups of tea per day.
+              <span class="cn">平均而言，英國人每天喝三點五杯茶。</span>
+            </div>
+            <div class="pex">💡 常作插入語，放句首或句中；on average = on the average</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 文法句型 ===== -->
+<div class="section s-purple">
+  <div class="sec-head">
+    <div class="sec-icon">📐</div>
+    文法句型 × 3
+  </div>
+  <div class="sec-body">
+
+    <!-- G1 -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>① may / might have + p.p. — 對過去的推測</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">主詞 + may/might + have + 過去分詞 (p.p.)
+→ 表示說話者對「過去某事是否發生」的推測，不確定程度：might &lt; may</div>
+      <div class="g-body">
+        <div class="g-ex">
+          Anna Russell <span class="hi">might have started</span> this custom in the mid-1800s.
+          <div class="g-ex-cn">安娜·羅素可能在十九世紀中葉開創了這個習俗。（說話者不確定）</div>
+        </div>
+        <div class="g-ex">
+          You <span class="hi">may have heard of</span> the delightful custom of sipping hot tea.
+          <div class="g-ex-cn">你或許已經聽說過品飲熱茶這個令人愉快的習俗。</div>
+        </div>
+        <table class="gtab">
+          <thead><tr><th>句型</th><th>意義</th><th>例句</th></tr></thead>
+          <tbody>
+            <tr><td>may have + p.p.</td><td>過去某事「可能」已發生（較肯定）</td><td>She may have left already.</td></tr>
+            <tr><td>might have + p.p.</td><td>過去某事「可能」已發生（更不確定）</td><td>He might have missed the train.</td></tr>
+            <tr><td>must have + p.p.</td><td>過去某事「一定」已發生（強推測）</td><td>You must have been tired.</td></tr>
+            <tr><td>can't have + p.p.</td><td>過去某事「不可能」已發生</td><td>She can't have said that.</td></tr>
+          </tbody>
+        </table>
+        <div class="g-note">✗ She <b>might started</b> this custom.（must/may/might 後須接 have + p.p. 才表過去推測）</div>
+        <div class="g-tip">此句型為高職英文高頻考點。課文明確示範 might have started 與 may have heard of 兩個例句。</div>
+      </div>
+    </div>
+
+    <!-- G2 -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>② This was followed by... — 被動語態表順序</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">A + was/were + followed by + B
+→ 被動式，表示「A 之後緊接著是 B」（表示順序/時間先後）</div>
+      <div class="g-body">
+        <div class="g-ex">
+          This <span class="hi">was followed by</span> a light supper in the evening.
+          <div class="g-ex-cn">（中午大餐）之後，傍晚再吃一頓簡單的晚餐。</div>
+        </div>
+        <div class="g-ex">
+          The opening ceremony <span class="hi">was followed by</span> a grand dinner.
+          <div class="g-ex-cn">開幕典禮之後，緊接著是一場盛大的晚宴。</div>
+        </div>
+        <div class="g-ex">
+          主動對應句：A light supper <span class="hig">followed</span> (after) the big lunch.
+          <div class="g-ex-cn">（主動語態：簡單晚餐在大餐之後）</div>
+        </div>
+        <div class="g-note">常見錯誤：A was followed by B — 注意 B 是「跟在 A 後面的事情」，順序不要搞反。</div>
+        <div class="g-tip">學習重點：be followed by 常用於說明事件順序，在說明文、歷史類文章非常常見。</div>
+      </div>
+    </div>
+
+    <!-- G3 -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>③ it is no longer + adj./p.p. — 強調「已不再」的否定變化</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">主詞 + is/are + no longer + 形容詞 / 過去分詞
+→ 表示某狀態在過去存在，但現在已不再如此（強調改變）</div>
+      <div class="g-body">
+        <div class="g-ex">
+          It <span class="hi">is no longer restricted</span> to the upper class.
+          <div class="g-ex-cn">它不再僅限於上流社會。（現在已普及各階層）</div>
+        </div>
+        <div class="g-ex">
+          Afternoon tea <span class="hi">is no longer</span> a luxury; everyone can enjoy it.
+          <div class="g-ex-cn">下午茶不再是奢侈品；每個人都可以享用。</div>
+        </div>
+        <table class="gtab">
+          <thead><tr><th>類型</th><th>結構</th><th>例句</th></tr></thead>
+          <tbody>
+            <tr><td>否定形容詞</td><td>is no longer + adj.</td><td>He is no longer young.</td></tr>
+            <tr><td>否定被動</td><td>is no longer + p.p.</td><td>Tea is no longer restricted to Britain.</td></tr>
+            <tr><td>否定動詞</td><td>no longer + V（一般動詞前）</td><td>She no longer drinks coffee.</td></tr>
+          </tbody>
+        </table>
+        <div class="g-note">注意位置：no longer 放在 be 動詞/助動詞「之後」，一般動詞「之前」。<br>✗ She <b>drinks no longer</b> coffee.　✓ She <b>no longer drinks</b> coffee.</div>
+        <div class="g-tip">no longer = not...anymore（語氣更正式）；強調過去有、現在無的轉變，是課文結語的重點句型。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 練習題 ===== -->
+<div class="section s-orange">
+  <div class="sec-head">
+    <div class="sec-icon">✏️</div>
+    練習題 × 8 — 選出最適合的單字
+  </div>
+  <div class="sec-body">
+    <div class="sec-hint">點擊選項即可作答，系統自動判斷對錯，並可點「看完整解析」閱讀詳細說明。</div>
+    <div id="q-wrap"></div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫 =====
+var studentQ=[
+  {q:['The afternoon tea ceremony was a truly ',' experience that made everyone feel relaxed and happy.'],
+   cn:'下午茶儀式是一次令人真正愉快的體驗，讓所有人感到放鬆而快樂。',
+   opts:['delightful','depressed','anxious','boring'],ans:0,
+   word:'delightful (adj.) 令人愉快的；迷人的',
+   exp:'空格修飾 experience（體驗），後文說「放鬆而快樂」，需正面形容詞。(B) 沮喪 (C) 焦慮 (D) 無聊均語意相反。',
+   note:'delightful 形容「令人愉快的事物/場合」；delighted 形容「人感到高興」。'},
+  {q:['On a cold morning, she sat by the window and slowly ',' her hot jasmine tea.'],
+   cn:'在一個寒冷的早晨，她坐在窗邊，慢慢地啜飲著熱茉莉花茶。',
+   opts:['poured','served','sipped','boiled'],ans:2,
+   word:'sip (v.) 小口啜飲',
+   exp:'動作是「慢慢」飲用熱茶，選 sip（小口慢喝）。(A) pour 倒（液體）(B) serve 端上 (D) boil 煮沸，均不符合「慢慢品嚐」之意。',
+   note:'sip 強調小口、慢慢地喝，與 gulp（大口快吞）相對。'},
+  {q:['The hotel suite was so ',' that it came with a private pool, a chef, and a butler.'],
+   cn:'那個飯店套房是如此奢華，甚至配備了私人泳池、廚師和管家。',
+   opts:['ordinary','luxurious','fundamental','agricultural'],ans:1,
+   word:'luxurious (adj.) 奢華的；豪華的',
+   exp:'後文列舉私人泳池、廚師、管家，說明其「豪華」程度，選 luxurious。(A) 普通的 (C) 基本的 (D) 農業的，均不符。',
+   note:'luxury (n.) 奢華；luxurious (adj.)，常考拼寫與詞性轉換。'},
+  {q:['The red maple leaf on the Canadian flag ',' the country\'s natural beauty and national pride.'],
+   cn:'加拿大國旗上的紅楓葉代表了這個國家的自然之美與國家自豪感。',
+   opts:['functions','serves','represents','indicates'],ans:2,
+   word:'represent (v.) 代表；象徵',
+   exp:'主詞是「紅楓葉」，謂語是「代表……自然美與自豪」，選 represent（象徵/代表）。(A) function as 充當 (B) serve 服務/端上 (D) indicate 指出/表明，語意不完全符合。',
+   note:'represent = stand for，表示事物象徵或代表某種意義。'},
+  {q:['Before the Industrial Revolution, most people in Britain worked in ',' and lived in rural areas.'],
+   cn:'在工業革命之前，英國大多數人從事農業並居住在農村地區。',
+   opts:['revolution','agriculture','luxury','society'],ans:1,
+   word:'agriculture (n.) 農業',
+   exp:'後文說「住在農村」，與農業生活相符，選 agriculture。(A) 革命 (C) 奢華 (D) 社會，均不符語境。',
+   note:'agriculture（農業）→ agricultural（adj.）；課文對比：agriculture（農業時代）vs. Industrial Revolution（工業時代）。'},
+  {q:['The factory ',' worked from dawn to dusk, earning barely enough money to feed their families.'],
+   cn:'工廠工人從清晨工作到日落，賺的錢幾乎不夠養家糊口。',
+   opts:['laborers','duchesses','hosts','servants'],ans:0,
+   word:'laborer (n.) 勞工；工人',
+   exp:'主詞的動作是「從清晨工作到日落，賺極少的錢」，描述底層工人的生活，選 laborers。(B) 公爵夫人 (C) 主人 (D) 僕人，均不符。',
+   note:'laborer = worker；Industrial Revolution 帶來大量 factory laborers（工廠工人）。'},
+  {q:['Taking a break is not a sign of weakness; on the contrary, it is ',' for maintaining good mental health.'],
+   cn:'休息並不是軟弱的表現；恰恰相反，它對於維持良好的心理健康是不可或缺的。',
+   opts:['optional','fundamental','ordinary','convenient'],ans:1,
+   word:'fundamental (adj.) 基本的；不可或缺的',
+   exp:'後半句強調休息的「必要性」，選 fundamental（根本的、不可或缺的）。(A) 可選的 (C) 普通的 (D) 方便的，均弱化了必要性。',
+   note:'fundamental = essential = basic；課文原句 a fundamental part of British culture。'},
+  {q:['The new high-speed train made it very ',' for passengers to travel between the two cities in under an hour.'],
+   cn:'新的高鐵使乘客在不到一小時內往返兩座城市變得非常方便。',
+   opts:['delightful','difficult','luxurious','convenient'],ans:3,
+   word:'convenient (adj.) 方便的；便利的',
+   exp:'新高鐵「使……很方便」旅行，選 convenient。(A) 令人愉快的 (B) 困難的 (C) 奢華的，語意不符。',
+   note:'課文反例：These long hours made it not so convenient to eat a big lunch.（不方便吃午餐）'}
+];
+
+(function(){
+  var wrap=document.getElementById('q-wrap');
+  if(!wrap)return;
+  studentQ.forEach(function(d,i){
+    var choices=d.opts.map(function(o,j){
+      return '<div class="choice" data-correct="'+(j===d.ans?'1':'0')+'" onclick="pickChoice(this)"><span class="mark"></span>('+'ABCD'[j]+') '+o+'</div>';
+    }).join('');
+    wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div><button class="show-btn" onclick="showAns(this)">看完整解析</button></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';
+  });
+})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  // 核心字彙發音按鈕
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 片語發音按鈕
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>

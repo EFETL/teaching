@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L3: TED Talks — 龍騰高職英文 第四冊</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:.9em;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:2em;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:1.02em}
+.header .time{margin-top:6px;font-size:.95em;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:.9em;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:1.2em;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:.92em;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:1.05em;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:1.02em;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:.85em;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:.96em;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:.9em;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:.92em;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:.96em}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:.76em;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:.86em;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:.82em;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:.98em;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:1.02em;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:1.18em;font-weight:800;color:#1e40af}
+.v-pos{font-size:.78em;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:.92em;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:.85em;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:.9em;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:.94em;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:.92em;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:.85em;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:.95em}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.96em}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:.95em}
+.pex .cn{display:block;color:#94a3b8;font-size:.92em;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:1.08em}
+.slang-cn-mini{font-size:.9em;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:.96em;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:.94em;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:.92em;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:1.05em}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:.8em;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:.95em;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:.97em;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:.92em;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:.93em;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:.93em;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:.93em;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:1.02em;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:.94em;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.97em;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:.95em;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:1em;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:.94em;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:.94em;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:.95em;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:1.02em}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.95em;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:1em;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:13px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .q-ans,.g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ===== HEADER ===== -->
+<div class="header" style="background:linear-gradient(135deg,#3b0764 0%,#7c3aed 60%,#a78bfa 100%)">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L3: TED Talks ── 散播改變世界的想法</h1>
+  <div class="sub">龍騰高職英文 第四冊 第三課｜互動教學講義</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">🗣️ 對話精講</span>
+    <span class="tag">📝 核心字彙 × 12</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">📐 文法句型 × 3</span>
+    <span class="tag">✏️ 練習題 × 8</span>
+  </div>
+</div>
+
+<!-- ===== SECTION 1: 課文逐句精講 ===== -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">📖</div>
+    課文逐句精講
+  </div>
+  <div class="sec-body">
+    <div class="syn-legend">
+      <strong>句型標示說明：</strong>
+      <span class="syn syn-s">S</span><span class="syn-t">主詞</span>
+      <span class="syn syn-v">V</span><span class="syn-t">動詞</span>
+      <span class="syn syn-o">O</span><span class="syn-t">受詞</span>
+      <span class="syn syn-c">C</span><span class="syn-t">補語</span>
+      <span class="syn syn-m">M</span><span class="syn-t">修飾語｜點一下句子展開解析</span>
+    </div>
+
+    <!-- Para 1 -->
+    <div class="para">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Everyone has his or her own favorite way of spending free time.</div>
+        <div class="para-exp">
+          <div class="para-cn">每個人都有自己最喜歡的打發空閒時間的方式。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Everyone</span>
+            <span class="syn syn-v">V</span><span class="syn-t">has</span>
+            <span class="syn syn-o">O</span><span class="syn-t">his or her own favorite way of spending free time</span>
+          </div>
+          <div class="para-note"><b>重點：</b>Everyone 視為單數，動詞用 has（非 have）。"way of + V-ing" 是常見搭配，意為「…的方式」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Some like to have fun by playing video games or surfing the Internet.</div>
+        <div class="para-exp">
+          <div class="para-cn">有些人喜歡透過玩電動或上網來找樂子。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Some</span>
+            <span class="syn syn-v">V</span><span class="syn-t">like</span>
+            <span class="syn syn-o">O</span><span class="syn-t">to have fun</span>
+            <span class="syn syn-m">M</span><span class="syn-t">by playing video games or surfing the Internet（方式副詞片語）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"by + V-ing" 表「藉由…方法」。have fun = 玩得愉快。surf the Internet = 瀏覽網路。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Others choose to educate themselves by reading books or newspapers.</div>
+        <div class="para-exp">
+          <div class="para-cn">其他人選擇透過閱讀書籍或報紙來自我充實。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Others</span>
+            <span class="syn syn-v">V</span><span class="syn-t">choose</span>
+            <span class="syn syn-o">O</span><span class="syn-t">to educate themselves</span>
+            <span class="syn syn-m">M</span><span class="syn-t">by reading books or newspapers</span>
+          </div>
+          <div class="para-note"><b>重點：</b>educate oneself = 自我教育、自學。反身代名詞 themselves 對應主詞 Others。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Still others, however, seek fun as well as knowledge.</div>
+        <div class="para-exp">
+          <div class="para-cn">然而，還有一些人既追求樂趣也追求知識。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Still others</span>
+            <span class="syn syn-m">M</span><span class="syn-t">however（插入語，表轉折）</span>
+            <span class="syn syn-v">V</span><span class="syn-t">seek</span>
+            <span class="syn syn-o">O</span><span class="syn-t">fun as well as knowledge</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"as well as" = and also，連接兩個並列名詞。Some...Others...Still others 是分類列舉的常見句式。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>For such people, the best choice may be to watch TED Talks, a series of short online videos.</div>
+        <div class="para-exp">
+          <div class="para-cn">對這樣的人來說，最好的選擇可能是觀看 TED Talks——一系列簡短的線上影片。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">For such people（介系詞片語，修飾全句）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">the best choice</span>
+            <span class="syn syn-v">V</span><span class="syn-t">may be</span>
+            <span class="syn syn-c">C</span><span class="syn-t">to watch TED Talks</span>
+            <span class="syn syn-m">M</span><span class="syn-t">a series of short online videos（同位語，補充說明 TED Talks）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"a series of" = 一系列的，後接複數名詞。同位語（appositive）緊接名詞後方，加以解釋補充。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>TED, which stands for Technology, Entertainment, Design, is a nonprofit foundation that was established in 1984.</div>
+        <div class="para-exp">
+          <div class="para-cn">TED 代表科技、娛樂、設計，是一個於 1984 年成立的非營利基金會。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">TED</span>
+            <span class="syn syn-m">M</span><span class="syn-t">which stands for Technology, Entertainment, Design（非限定關係子句，逗號隔開）</span>
+            <span class="syn syn-v">V</span><span class="syn-t">is</span>
+            <span class="syn syn-c">C</span><span class="syn-t">a nonprofit foundation that was established in 1984</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"stand for" = 代表、代表縮寫意義。非限定關係子句（which...）用逗號隔開，提供補充資訊，不可省略。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>With the slogan "ideas worth spreading," it held its first conference that same year, giving each speaker eighteen minutes to present his or her ideas.</div>
+        <div class="para-exp">
+          <div class="para-cn">以「值得傳播的想法」為口號，它在同年舉辦了第一場研討會，給每位演講者十八分鐘來發表想法。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">With the slogan "ideas worth spreading"（介系詞片語）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">it</span>
+            <span class="syn syn-v">V</span><span class="syn-t">held</span>
+            <span class="syn syn-o">O</span><span class="syn-t">its first conference</span>
+            <span class="syn syn-m">M</span><span class="syn-t">that same year</span>
+            <span class="syn syn-m">M</span><span class="syn-t">giving each speaker eighteen minutes to present his or her ideas（現在分詞片語，表伴隨結果）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>分詞片語 "giving..." 接在主要子句後，表「同時」或「結果」。worth + V-ing = 值得被…（形容詞用法）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>As TED conferences became increasingly popular, their organizers decided to invite thinkers from a broader range of fields.</div>
+        <div class="para-exp">
+          <div class="para-cn">隨著 TED 研討會越來越受歡迎，主辦者決定邀請來自更廣泛領域的思想家。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">As TED conferences became increasingly popular（從屬子句，as = 隨著）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">their organizers</span>
+            <span class="syn syn-v">V</span><span class="syn-t">decided</span>
+            <span class="syn syn-o">O</span><span class="syn-t">to invite thinkers from a broader range of fields</span>
+          </div>
+          <div class="para-note"><b>重點：</b>increasingly = 越來越（副詞修飾形容詞）。"a broad range of" = 廣泛的。decide + to V 是固定搭配。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>These included science, business, and even medicine.</div>
+        <div class="para-exp">
+          <div class="para-cn">這些領域包括科學、商業，甚至醫學。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">These</span>
+            <span class="syn syn-v">V</span><span class="syn-t">included</span>
+            <span class="syn syn-o">O</span><span class="syn-t">science, business, and even medicine</span>
+          </div>
+          <div class="para-note"><b>重點：</b>These 指代上句 "fields"。even 用於強調，語氣上表示「出乎意料」，此處說明連醫學這樣的領域也包含在內。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>The TED.com website was not created until 2007.</div>
+        <div class="para-exp">
+          <div class="para-cn">TED.com 網站直到 2007 年才建立。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">The TED.com website</span>
+            <span class="syn syn-v">V</span><span class="syn-t">was not created</span>
+            <span class="syn syn-m">M</span><span class="syn-t">until 2007（"not...until" = 直到…才）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"not...until" 句型：「直到…才…」。此句被動語態：was created（由某人建立）。此句型為本課文法重點之一，考試常考。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>After that, many of the speakers' talks were uploaded for the public to watch for free.</div>
+        <div class="para-exp">
+          <div class="para-cn">此後，許多演講者的演講被上傳供大眾免費觀看。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">After that</span>
+            <span class="syn syn-s">S</span><span class="syn-t">many of the speakers' talks</span>
+            <span class="syn syn-v">V</span><span class="syn-t">were uploaded</span>
+            <span class="syn syn-m">M</span><span class="syn-t">for the public to watch for free（不定詞片語，表目的）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"for + 受詞 + to V" 表目的或原因。for free = 免費地（= free of charge）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>At present, the collection of TED Talk videos is growing week by week, and it has helped spread new ideas around the world.</div>
+        <div class="para-exp">
+          <div class="para-cn">目前，TED Talk 影片的收藏量正在逐週增加，且已幫助將新想法傳播至全世界。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">At present（目前）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">the collection of TED Talk videos</span>
+            <span class="syn syn-v">V</span><span class="syn-t">is growing</span>
+            <span class="syn syn-m">M</span><span class="syn-t">week by week（逐週）</span>
+            / <span class="syn syn-s">S</span><span class="syn-t">it</span>
+            <span class="syn syn-v">V</span><span class="syn-t">has helped spread</span>
+            <span class="syn syn-o">O</span><span class="syn-t">new ideas around the world</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"at present" = 目前（片語副詞）。"week by week" = 逐週（漸進式副詞）。"help + V" 或 "help + to V" 皆可。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 2 -->
+    <div class="para" style="margin-top:20px">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Over the years, numerous celebrities have given TED Talks and shared interesting ideas with their audiences.</div>
+        <div class="para-exp">
+          <div class="para-cn">多年來，許多名人發表了 TED 演講，並與觀眾分享有趣的想法。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">Over the years（多年來）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">numerous celebrities</span>
+            <span class="syn syn-v">V</span><span class="syn-t">have given...and shared</span>
+            <span class="syn syn-o">O</span><span class="syn-t">TED Talks / interesting ideas with their audiences</span>
+          </div>
+          <div class="para-note"><b>重點：</b>numerous = many（數量眾多）。現在完成式 have given 強調「截至目前為止」的累積結果。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>One was chef Jamie Oliver, who presented his idea of starting a food revolution.</div>
+        <div class="para-exp">
+          <div class="para-cn">其中一位是廚師傑米·奧利佛，他提出了發起飲食革命的想法。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">One</span>
+            <span class="syn syn-v">V</span><span class="syn-t">was</span>
+            <span class="syn syn-c">C</span><span class="syn-t">chef Jamie Oliver</span>
+            <span class="syn syn-m">M</span><span class="syn-t">who presented his idea of starting a food revolution（非限定關係子句）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>present (v.) = 提出、呈現（不同於 present 形容詞「目前的」）。idea of + V-ing = …的想法。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Oliver wanted to improve people's health by teaching everyone ways to choose and prepare healthy meals.</div>
+        <div class="para-exp">
+          <div class="para-cn">奧利佛希望藉由教導每個人選擇和準備健康餐點的方法來改善人們的健康。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Oliver</span>
+            <span class="syn syn-v">V</span><span class="syn-t">wanted</span>
+            <span class="syn syn-o">O</span><span class="syn-t">to improve people's health</span>
+            <span class="syn syn-m">M</span><span class="syn-t">by teaching everyone ways to choose and prepare healthy meals</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"by + V-ing" 表方法/手段。teach sb. sth. = 教某人某事（雙受詞句型）。prepare meals = 準備餐點。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Another was James Cameron, the director of the movies Aliens and Avatar.</div>
+        <div class="para-exp">
+          <div class="para-cn">另一位是詹姆斯·卡麥隆，電影《異形》和《阿凡達》的導演。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Another</span>
+            <span class="syn syn-v">V</span><span class="syn-t">was</span>
+            <span class="syn syn-c">C</span><span class="syn-t">James Cameron</span>
+            <span class="syn syn-m">M</span><span class="syn-t">the director of the movies Aliens and Avatar（同位語）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>One...Another...Still another 是列舉「三者」的固定句式。同位語緊接名詞後，補充說明其身份。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Cameron talked about his childhood fascination with science fiction. He also spoke of how his interest in space, aliens, and robots eventually led him to make blockbuster films.</div>
+        <div class="para-exp">
+          <div class="para-cn">卡麥隆談到了他童年時對科幻小說的著迷。他也談到他對太空、外星人和機器人的興趣如何最終使他創作出賣座電影。</div>
+          <div class="para-syntax">
+            <span class="lbl">第一句</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Cameron</span>
+            <span class="syn syn-v">V</span><span class="syn-t">talked about</span>
+            <span class="syn syn-o">O</span><span class="syn-t">his childhood fascination with science fiction</span><br>
+            <span class="lbl" style="margin-top:8px">第二句（間接問句）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">He</span>
+            <span class="syn syn-v">V</span><span class="syn-t">spoke of</span>
+            <span class="syn syn-o">O</span><span class="syn-t">how his interest...eventually led him to make blockbuster films（名詞子句）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>fascination with = 對…的著迷。"lead sb. to V" = 導致某人做某事。blockbuster = 賣座大片（字面義：炸毀一整個街區的炸彈）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Still another was Bill Gates, the co-founder of Microsoft.</div>
+        <div class="para-exp">
+          <div class="para-cn">還有另一位是比爾·蓋茲，微軟的共同創辦人。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Still another</span>
+            <span class="syn syn-v">V</span><span class="syn-t">was</span>
+            <span class="syn syn-c">C</span><span class="syn-t">Bill Gates</span>
+            <span class="syn syn-m">M</span><span class="syn-t">the co-founder of Microsoft（同位語）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>co-founder = 共同創辦人（co- 字首表「共同」）。同位語不需要關係代名詞或逗號以外的連接詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>He, however, didn't talk about computers. Instead, Gates suggested that the government do more to monitor and control the spread of deadly diseases in the future.</div>
+        <div class="para-exp">
+          <div class="para-cn">然而，他並沒有談論電腦。相反地，蓋茲建議政府在未來應該採取更多行動來監測和控制致命疾病的擴散。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析（建議句型）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Gates</span>
+            <span class="syn syn-v">V</span><span class="syn-t">suggested</span>
+            <span class="syn syn-o">O</span><span class="syn-t">that the government do more...（名詞子句，that 後用原形動詞）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>suggest/recommend/insist + that + S + (should) + 原形V（虛擬語氣）。此句 do 為原形，非第三人稱 does，是文法重點必考！</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>These are just a few examples of the celebrity speakers who have inspired millions through their TED Talks.</div>
+        <div class="para-exp">
+          <div class="para-cn">這些只是透過 TED 演講激勵了數百萬人的名人演講者的幾個例子。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">These</span>
+            <span class="syn syn-v">V</span><span class="syn-t">are</span>
+            <span class="syn syn-c">C</span><span class="syn-t">just a few examples of the celebrity speakers</span>
+            <span class="syn syn-m">M</span><span class="syn-t">who have inspired millions through their TED Talks（限定關係子句）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>who 引導限定關係子句，限定修飾 speakers。inspire + 人 = 激勵某人。millions = 數百萬人（無需加 of 時）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para 3 -->
+    <div class="para" style="margin-top:20px">
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Listening to one of these TED Talks is like standing on the shoulders of a giant—you get to see farther and understand more.</div>
+        <div class="para-exp">
+          <div class="para-cn">聆聽其中一場 TED 演講就像站在巨人的肩膀上——你得以看得更遠、理解更多。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-s">S</span><span class="syn-t">Listening to one of these TED Talks（動名詞片語作主詞）</span>
+            <span class="syn syn-v">V</span><span class="syn-t">is</span>
+            <span class="syn syn-c">C</span><span class="syn-t">like standing on the shoulders of a giant（介系詞片語）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>動名詞片語 "Listening to..." 作主詞，視為單數。"get to + V" = 有機會/得以做某事。破折號（—）引出補充說明。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>You won't realize just how much you can learn in eighteen minutes until you give it a try.</div>
+        <div class="para-exp">
+          <div class="para-cn">在你嘗試之前，你不會知道在十八分鐘內你能學到多少。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析（not...until）</span>
+            <span class="syn syn-s">S</span><span class="syn-t">You</span>
+            <span class="syn syn-v">V</span><span class="syn-t">won't realize</span>
+            <span class="syn syn-o">O</span><span class="syn-t">just how much you can learn in eighteen minutes（名詞子句）</span>
+            <span class="syn syn-m">M</span><span class="syn-t">until you give it a try（直到你嘗試為止）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"give it a try" = 嘗試看看（= try it）。how much 引導名詞子句作 realize 的受詞。"not...until" 再次出現，強調「等到…才」的時間概念。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>In fact, there is a good chance that it will broaden your horizons and even inspire you to try to change the world.</div>
+        <div class="para-exp">
+          <div class="para-cn">事實上，它很可能會拓展你的視野，甚至激勵你試著去改變世界。</div>
+          <div class="para-syntax">
+            <span class="lbl">句型分析</span>
+            <span class="syn syn-m">M</span><span class="syn-t">In fact</span>
+            <span class="syn syn-v">V</span><span class="syn-t">there is</span>
+            <span class="syn syn-s">S</span><span class="syn-t">a good chance</span>
+            <span class="syn syn-m">M</span><span class="syn-t">that it will broaden your horizons and even inspire you to try to change the world（同位語子句）</span>
+          </div>
+          <div class="para-note"><b>重點：</b>"there is a good chance that..." = 很可能…（機會大）。broaden one's horizons = 拓展視野（本課片語）。inspire sb. to V = 激勵某人去做某事。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-hint">💡 點擊每一句話可展開中文翻譯、句型分析與老師筆記。</div>
+  </div>
+</div>
+
+<!-- ===== SECTION 2: 對話精講 ===== -->
+<div class="section s-blue">
+  <div class="sec-head">
+    <div class="sec-icon">🗣️</div>
+    對話精講
+  </div>
+  <div class="sec-body">
+    <div class="divlabel">Albert 與 Eric 的課後對話</div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">👨 Albert</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Thank goodness that's over. It was probably one of the most boring lectures I've ever heard.</div>
+        <div class="para-exp">
+          <div class="para-cn">謝天謝地終於結束了。那大概是我聽過最無聊的演講之一。</div>
+          <div class="para-note"><b>重點：</b>"Thank goodness" = 謝天謝地（口語表達解脫之情）。"one of the most + 形容詞 + 複數名詞" = 最…之一（最高級句型）。I've ever heard = 我曾聽過的（現在完成式）。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">👦 Eric</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>What?! I thought it was quite good, to be honest.</div>
+        <div class="para-exp">
+          <div class="para-cn">什麼？！老實說，我覺得講得蠻好的。</div>
+          <div class="para-note"><b>重點：</b>"to be honest" = 老實說（插入語，表達個人真實看法）。quite = 相當地（副詞加強語氣）。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">👨 Albert</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Really? What did you like about it?</div>
+        <div class="para-exp">
+          <div class="para-cn">真的嗎？你喜歡它的哪裡？</div>
+          <div class="para-note"><b>重點：</b>"What did you like about it?" 詢問具體喜歡之處，是非常實用的英文問句，可用於討論電影、書籍、演講等場合。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">👦 Eric</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Well, for starters, I thought it was cool how she talked about her experience volunteering to fight Ebola in Africa.</div>
+        <div class="para-exp">
+          <div class="para-cn">嗯，首先，我覺得她談到自願去非洲對抗伊波拉病毒的經歷很酷。</div>
+          <div class="para-note"><b>重點：</b>"for starters" = 首先（口語）。"how she talked about..." 是名詞子句作受詞。volunteer to V = 自願去做某事。fight Ebola = 對抗伊波拉病毒。</div>
+        </div>
+      </div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>And it was also interesting to hear about all the safaris she's been on.</div>
+        <div class="para-exp">
+          <div class="para-cn">而且聽到她去過的所有野生動物園之旅也很有趣。</div>
+          <div class="para-note"><b>重點：</b>It is + adj. + to V（虛主詞句型）。safari = 非洲野生動物觀光之旅（源自斯瓦希里語）。she's been on = she has been on（現在完成式，曾去過）。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">👨 Albert</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>I see. I didn't think that part was that good....</div>
+        <div class="para-exp">
+          <div class="para-cn">我明白了。我不覺得那個部分有那麼好……</div>
+          <div class="para-note"><b>重點：</b>"I see." = 我明白了（表示理解或勉強接受）。"that good" 中的 that 是副詞，修飾形容詞，意為「那麼好」。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">👨 Albert</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Fine. I'll agree with you on that one. I guess it was wonderful to see pictures of those lions and snakes.</div>
+        <div class="para-exp">
+          <div class="para-cn">好吧。在那一點上我同意你。我猜看到那些獅子和蛇的圖片確實很棒。</div>
+          <div class="para-note"><b>重點：</b>"agree with sb. on sth." = 在某事上同意某人。"I guess" = 我猜想（語氣較不確定）。It was wonderful to V（虛主詞句型）。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">👦 Eric</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>See? You did enjoy some parts of the talk.</div>
+        <div class="para-exp">
+          <div class="para-cn">看吧？你確實有享受演講的某些部分。</div>
+          <div class="para-note"><b>重點：</b>"did enjoy" 中的 did 是強調助動詞，表示「確實、真的」，加強語氣。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">👨 Albert</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Umm...that was pretty much it.</div>
+        <div class="para-exp">
+          <div class="para-cn">嗯……大概就那樣了。</div>
+          <div class="para-note"><b>重點：</b>"pretty much it" = 大概就這樣了（口語）。pretty 在此作副詞，修飾 much，意為「相當、差不多」。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">👦 Eric</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>You're joking, right?</div>
+        <div class="para-exp">
+          <div class="para-cn">你在開玩笑吧？</div>
+          <div class="para-note"><b>重點：</b>附加問句的語氣用法。"right?" 附加在句尾，尋求確認，帶有不敢置信的語氣。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">👨 Albert</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>Not really. I guess it's because everything she talked about feels so far away from us.</div>
+        <div class="para-exp">
+          <div class="para-cn">不完全是。我猜是因為她談到的一切感覺跟我們距離太遙遠了。</div>
+          <div class="para-note"><b>重點：</b>"Not really" = 不盡然、不完全是（比 No 更委婉）。"feel + adj." = 感覺像（連綴動詞）。far away from us = 離我們很遠。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">👦 Eric</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>That's true, but her talk about Ebola inspired me to help out.</div>
+        <div class="para-exp">
+          <div class="para-cn">那倒是真的，但她關於伊波拉的演講激勵我想要出一份力。</div>
+          <div class="para-note"><b>重點：</b>"That's true, but..." = 先承認對方說法，再提出反駁，是有禮貌的辯論方式。inspire sb. to V = 激勵某人去做某事。help out = 出力、幫忙。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">👨 Albert</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>You should look it up online. I'm sure they'll put some information on the TED website soon.</div>
+        <div class="para-exp">
+          <div class="para-cn">你應該在網路上查一查。我確定他們很快就會在 TED 網站上放一些資訊。</div>
+          <div class="para-note"><b>重點：</b>"look up" = 查找（可分片語，受詞可放中間：look it up）。"I'm sure + that 子句" = 我確信…。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">👦 Eric</div>
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span>You're right! I'll do that.</div>
+        <div class="para-exp">
+          <div class="para-cn">你說得對！我會去查的。</div>
+          <div class="para-note"><b>重點：</b>"You're right!" = 你說得對！（表示接受建議）。"I'll do that." = 我會那樣做的（簡短的承諾或同意）。</div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="sec-hint">💡 點擊每一句可展開中文翻譯與重點解析。</div>
+  </div>
+</div>
+
+<!-- ===== SECTION 3: 核心字彙 ===== -->
+<div class="section s-teal">
+  <div class="sec-head">
+    <div class="sec-icon">📝</div>
+    核心字彙 × 12
+  </div>
+  <div class="sec-body">
+    <div class="vocab-grid">
+
+      <!-- 1. educate -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">educate</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">教育；教導</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>education (n.) 教育</span>
+            <span>educated (adj.) 受過教育的</span>
+            <span>educational (adj.) 有教育意義的</span>
+          </div>
+          <div class="v-ex">
+            Others choose to <b>educate</b> themselves by reading books.
+            <span class="cn">其他人選擇透過閱讀書籍來自我教育。</span>
+          </div>
+          <div class="v-gsat">字根 educ- = 引出、培養；education 為學測核心字</div>
+        </div>
+      </div>
+
+      <!-- 2. seek -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">seek</span>
+              <span class="v-pos">v.</span>
+            </div>
+            <div class="v-cn-mini">尋求；追求（三態：seek-sought-sought）</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>seeker (n.) 尋求者</span>
+            <span>seek after / for 尋求</span>
+          </div>
+          <div class="v-ex">
+            Still others <b>seek</b> fun as well as knowledge.
+            <span class="cn">還有一些人既追求樂趣也追求知識。</span>
+          </div>
+          <div class="v-gsat">不規則動詞：seek → sought → sought（與 think → thought 同型）</div>
+        </div>
+      </div>
+
+      <!-- 3. technology -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">technology</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">技術；科技</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>technological (adj.) 科技的</span>
+            <span>technologically (adv.)</span>
+            <span>tech (n.) 科技（口語縮寫）</span>
+          </div>
+          <div class="v-ex">
+            TED stands for <b>Technology</b>, Entertainment, Design.
+            <span class="cn">TED 代表科技、娛樂、設計。</span>
+          </div>
+          <div class="v-gsat">字根 techno- = 技術；-logy = 學科</div>
+        </div>
+      </div>
+
+      <!-- 4. worth -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">worth</span>
+              <span class="v-pos">adj./prep.</span>
+            </div>
+            <div class="v-cn-mini">值得…的；有…價值的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>worthwhile (adj.) 值得做的</span>
+            <span>worthless (adj.) 毫無價值的</span>
+            <span>worthy (adj.) 值得尊敬的</span>
+          </div>
+          <div class="v-ex">
+            With the slogan "ideas <b>worth</b> spreading."
+            <span class="cn">以「值得傳播的想法」為口號。</span>
+          </div>
+          <div class="v-gsat">worth + V-ing（注意：後接動名詞，不接不定詞）</div>
+        </div>
+      </div>
+
+      <!-- 5. conference -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">conference</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">研討會；會議</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>confer (v.) 商討；授予</span>
+            <span>press conference 記者會</span>
+            <span>video conference 視訊會議</span>
+          </div>
+          <div class="v-ex">
+            It held its first <b>conference</b> that same year.
+            <span class="cn">它在同年舉辦了第一場研討會。</span>
+          </div>
+          <div class="v-gsat">hold / attend / organize a conference 舉辦/出席/籌備研討會</div>
+        </div>
+      </div>
+
+      <!-- 6. present -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">present</span>
+              <span class="v-pos">v./adj./n.</span>
+            </div>
+            <div class="v-cn-mini">提出；呈現 / 目前的 / 禮物</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>presentation (n.) 簡報；呈現</span>
+            <span>presenter (n.) 主持人；發表者</span>
+            <span>at present 目前（片語）</span>
+          </div>
+          <div class="v-ex">
+            Giving each speaker eighteen minutes to <b>present</b> his or her ideas.
+            <span class="cn">給每位演講者十八分鐘來發表想法。</span>
+          </div>
+          <div class="v-gsat">一字多性：present [ˈprɛznt] (n./adj.) / present [prɪˈzɛnt] (v.)，重音不同！</div>
+        </div>
+      </div>
+
+      <!-- 7. increasingly -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">increasingly</span>
+              <span class="v-pos">adv.</span>
+            </div>
+            <div class="v-cn-mini">越來越（地）</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>increase (v./n.) 增加</span>
+            <span>increasing (adj.) 不斷增加的</span>
+          </div>
+          <div class="v-ex">
+            As TED conferences became <b>increasingly</b> popular.
+            <span class="cn">隨著 TED 研討會越來越受歡迎。</span>
+          </div>
+          <div class="v-gsat">increasingly + 形容詞，強調漸進式的改變，可替換 more and more。</div>
+        </div>
+      </div>
+
+      <!-- 8. numerous -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">numerous</span>
+              <span class="v-pos">adj.</span>
+            </div>
+            <div class="v-cn-mini">眾多的；許多的</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>number (n.) 數字</span>
+            <span>innumerable (adj.) 無數的（更強調）</span>
+          </div>
+          <div class="v-ex">
+            <b>Numerous</b> celebrities have given TED Talks.
+            <span class="cn">眾多名人曾發表 TED 演講。</span>
+          </div>
+          <div class="v-gsat">numerous ≈ many / a large number of，用於正式文體中。</div>
+        </div>
+      </div>
+
+      <!-- 9. celebrity -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">celebrity</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">名人；知名人士</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>celeb (n.) 名人（口語）</span>
+            <span>celebrate (v.) 慶祝</span>
+            <span>celebration (n.) 慶典</span>
+          </div>
+          <div class="v-ex">
+            Numerous <b>celebrities</b> have given TED Talks.
+            <span class="cn">眾多名人曾發表 TED 演講。</span>
+          </div>
+          <div class="v-gsat">複數：celebrities。同字根 celebrate（慶祝）← 使名聲傳揚。</div>
+        </div>
+      </div>
+
+      <!-- 10. audience -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">audience</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">觀眾；聽眾（集合名詞）</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>audio (adj.) 聲音的</span>
+            <span>auditorium (n.) 禮堂；觀眾席</span>
+          </div>
+          <div class="v-ex">
+            They shared interesting ideas with their <b>audiences</b>.
+            <span class="cn">他們與觀眾分享有趣的想法。</span>
+          </div>
+          <div class="v-gsat">字根 audi- = 聽（listen）；audience 原義「聽講的人群」。</div>
+        </div>
+      </div>
+
+      <!-- 11. fascination -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">fascination</span>
+              <span class="v-pos">n.</span>
+            </div>
+            <div class="v-cn-mini">著迷；迷戀</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>fascinate (v.) 使著迷</span>
+            <span>fascinating (adj.) 令人著迷的</span>
+            <span>fascinated (adj.) 著迷的（人）</span>
+          </div>
+          <div class="v-ex">
+            Cameron talked about his childhood <b>fascination</b> with science fiction.
+            <span class="cn">卡麥隆談到他童年對科幻的著迷。</span>
+          </div>
+          <div class="v-gsat">fascination with = 對…的著迷（介系詞固定用 with）。</div>
+        </div>
+      </div>
+
+      <!-- 12. monitor -->
+      <div class="v-card">
+        <div class="v-top" onclick="toggleV(this)">
+          <div>
+            <div class="word-row">
+              <span class="v-word">monitor</span>
+              <span class="v-pos">v./n.</span>
+            </div>
+            <div class="v-cn-mini">監控；監測 / 螢幕；班長</div>
+          </div>
+          <span class="v-ic">▶</span>
+        </div>
+        <div class="v-body">
+          <div class="v-fam">
+            <span>monitoring (n.) 監控（行為）</span>
+            <span>monitor closely 密切監控</span>
+          </div>
+          <div class="v-ex">
+            Gates suggested that the government do more to <b>monitor</b> the spread of diseases.
+            <span class="cn">蓋茲建議政府應做更多來監控疾病的擴散。</span>
+          </div>
+          <div class="v-gsat">一字多義：monitor (v.) 監控 / (n.) 電腦螢幕 / 班長（學校用語）。</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="sec-hint">💡 點擊每個字卡展開字族、例句與學習提示。🔊 鈕可聽發音。</div>
+  </div>
+</div>
+
+<!-- ===== SECTION 4: 片語講解 ===== -->
+<div class="section s-green">
+  <div class="sec-head">
+    <div class="sec-icon">🔗</div>
+    片語講解 × 6
+  </div>
+  <div class="sec-body">
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th>片語</th>
+          <th>中文</th>
+          <th>例句</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phr">as well as</span></td>
+          <td>以及；也</td>
+          <td class="pex">
+            Still others seek fun <b>as well as</b> knowledge.
+            <span class="cn">還有一些人既追求樂趣也追求知識。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">a series of</span></td>
+          <td>一系列的</td>
+          <td class="pex">
+            TED Talks is <b>a series of</b> short online videos.
+            <span class="cn">TED Talks 是一系列的短線上影片。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">stand for</span></td>
+          <td>代表；象徵</td>
+          <td class="pex">
+            TED <b>stands for</b> Technology, Entertainment, Design.
+            <span class="cn">TED 代表科技、娛樂、設計。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">at present</span></td>
+          <td>目前；現在</td>
+          <td class="pex">
+            <b>At present</b>, the collection of videos is growing week by week.
+            <span class="cn">目前，影片收藏正在逐週增加。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">give it a try</span></td>
+          <td>試一試；嘗試</td>
+          <td class="pex">
+            You won't realize how much you can learn until you <b>give it a try</b>.
+            <span class="cn">在你嘗試之前，你不會知道能學多少。</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="phr">broaden one's horizons</span></td>
+          <td>拓展某人的視野</td>
+          <td class="pex">
+            There is a good chance that it will <b>broaden your horizons</b>.
+            <span class="cn">它很可能會拓展你的視野。</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="sec-hint">💡 片語欄位旁的 🔊 可點擊聆聽發音。</div>
+  </div>
+</div>
+
+<!-- ===== SECTION 5: 文法句型 ===== -->
+<div class="section s-purple">
+  <div class="sec-head">
+    <div class="sec-icon">📐</div>
+    文法句型精講 × 3
+  </div>
+  <div class="sec-body">
+
+    <!-- Grammar 1: Not...until -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>① Not...until 直到…才（否定延遲句型）</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">S + do not/did not + V...until + 時間點/事件
+倒裝形式（強調）：Not until + 時間點/事件 + 助動詞 + S + V</div>
+      <div class="g-body">
+        <p style="margin-bottom:10px;color:#374151">表示某事「直到某時間點或某事件發生後，才真正實現」。</p>
+
+        <div class="g-ex">
+          The TED.com website was <b>not</b> created <b>until</b> 2007.
+          <div class="g-ex-cn">TED.com 網站直到 2007 年才建立。</div>
+        </div>
+        <div class="g-ex">
+          You won't realize just how much you can learn in eighteen minutes <b>until</b> you give it a try.
+          <div class="g-ex-cn">在你嘗試之前，你不會知道在十八分鐘內你能學到多少。</div>
+        </div>
+        <div class="g-ex">
+          She did <b>not</b> start studying <b>until</b> midnight.
+          <div class="g-ex-cn">她直到午夜才開始讀書。</div>
+        </div>
+
+        <p style="margin:12px 0 6px;font-weight:700;color:#6d28d9">倒裝強調形式（Not until 放句首）：</p>
+        <div class="g-ex">
+          <b>Not until</b> 2007 <b>was</b> the TED.com website created.
+          <div class="g-ex-cn">直到 2007 年，TED.com 網站才被建立。（倒裝，強調語氣）</div>
+        </div>
+        <div class="g-ex">
+          <b>Not until</b> midnight <b>did</b> she start studying.
+          <div class="g-ex-cn">直到午夜，她才開始讀書。（倒裝）</div>
+        </div>
+
+        <div class="g-note">Not until 放句首時，主要子句的主詞與助動詞必須倒裝（did/was/were + S + V）。</div>
+        <div class="g-tip">此句型為大考高頻考點，特別注意倒裝時助動詞的選擇。</div>
+      </div>
+    </div>
+
+    <!-- Grammar 2: suggest that S (should) + V -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>② suggest that S (should) + 原形V（建議虛擬語氣）</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">suggest / recommend / insist / demand + that + S + (should) + 原形V
+注意：that 子句中的動詞用原形（虛擬語氣，should 可省略）</div>
+      <div class="g-body">
+        <p style="margin-bottom:10px;color:#374151">表達「建議、要求、堅持」等意涵的動詞，後面接 that 子句時，子句中動詞須用原形（不管主詞是誰）。</p>
+
+        <div class="g-ex">
+          Gates <b>suggested that</b> the government <b>do</b> more to monitor and control the spread of deadly diseases.
+          <div class="g-ex-cn">蓋茲建議政府應做更多來監控和控制致命疾病的擴散。（do 不加 s）</div>
+        </div>
+        <div class="g-ex">
+          The doctor <b>recommended that</b> he <b>take</b> the medicine twice a day.
+          <div class="g-ex-cn">醫生建議他每天服藥兩次。（take 非 takes）</div>
+        </div>
+        <div class="g-ex">
+          The teacher <b>insisted that</b> all students <b>submit</b> their work on time.
+          <div class="g-ex-cn">老師堅持所有學生都要準時繳交作業。</div>
+        </div>
+
+        <table class="gtab">
+          <thead><tr><th>動詞</th><th>中文</th><th>例</th></tr></thead>
+          <tbody>
+            <tr><td>suggest</td><td>建議</td><td>suggest that he be...</td></tr>
+            <tr><td>recommend</td><td>推薦</td><td>recommend that she go...</td></tr>
+            <tr><td>insist</td><td>堅持</td><td>insist that they come...</td></tr>
+            <tr><td>demand</td><td>要求</td><td>demand that he pay...</td></tr>
+            <tr><td>request</td><td>要求</td><td>request that we attend...</td></tr>
+          </tbody>
+        </table>
+
+        <div class="g-note">that 子句中不管主詞是第幾人稱，動詞均用原形（不加 -s/-es），切忌寫成 does / goes / takes。</div>
+        <div class="g-tip">大考常以「第三人稱單數主詞 + 選原形 vs. 加 -s 的動詞」出題，答案選原形。</div>
+      </div>
+    </div>
+
+    <!-- Grammar 3: 分詞片語 -->
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)">
+        <span>③ 分詞片語（表伴隨、方式或結果）</span>
+        <span class="g-arrow">▼</span>
+      </div>
+      <div class="g-formula">主動：主詞 + V..., + V-ing...（與主要動作同時進行或為其結果）
+被動：主詞 + V..., + V-p.p...（被動關係）
+句首：V-ing/V-p.p., + 主要子句（表原因、時間或方式）</div>
+      <div class="g-body">
+        <p style="margin-bottom:10px;color:#374151">分詞片語取代副詞子句或另一個子句，使句子更簡潔。分詞的邏輯主詞必須與主句主詞一致。</p>
+
+        <p style="margin-bottom:6px;font-weight:700;color:#6d28d9">課文例句 ①（伴隨結果）：</p>
+        <div class="g-ex">
+          It held its first conference, <b>giving</b> each speaker eighteen minutes to present ideas.
+          <div class="g-ex-cn">它舉辦了第一場研討會，並給每位演講者十八分鐘發表想法。（giving 表示隨之而來的情況）</div>
+        </div>
+
+        <p style="margin:12px 0 6px;font-weight:700;color:#6d28d9">課文例句 ②（方式比喻）：</p>
+        <div class="g-ex">
+          <b>Standing</b> on the shoulders of a giant—you get to see farther and understand more.
+          <div class="g-ex-cn">站在巨人的肩膀上——你得以看得更遠、理解更多。</div>
+        </div>
+
+        <p style="margin:12px 0 6px;font-weight:700;color:#6d28d9">其他常見用法：</p>
+        <div class="g-ex">
+          <b>Knowing</b> the answer, she raised her hand confidently.
+          <div class="g-ex-cn">知道答案後，她自信地舉起手。（= Because she knew...）</div>
+        </div>
+        <div class="g-ex">
+          <b>Exhausted</b> from the long trip, he fell asleep immediately.
+          <div class="g-ex-cn">從漫長旅途中精疲力竭後，他立刻睡著了。（= Because he was exhausted...）</div>
+        </div>
+
+        <table class="gtab">
+          <thead><tr><th>分詞類型</th><th>形式</th><th>關係</th></tr></thead>
+          <tbody>
+            <tr><td>現在分詞</td><td>V-ing</td><td>主動（主詞主動執行）</td></tr>
+            <tr><td>過去分詞</td><td>V-p.p.</td><td>被動（主詞被動承受）</td></tr>
+          </tbody>
+        </table>
+
+        <div class="g-note">分詞片語的邏輯主詞必須與主句主詞一致，否則為「懸垂分詞」（dangling participle），是常見錯誤。</div>
+        <div class="g-tip">學測常考：句首分詞片語後，選主句主詞時需符合邏輯；也常考現在分詞 vs. 過去分詞的選擇。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== SECTION 6: 練習題 ===== -->
+<div class="section s-orange">
+  <div class="sec-head">
+    <div class="sec-icon">✏️</div>
+    練習題 × 8
+  </div>
+  <div class="sec-body">
+    <div class="sec-hint" style="margin-top:6px">點選選項後，系統自動批改。</div>
+    <div id="q-wrap"></div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 本課練習題 =====
+var studentQ=[
+  {q:['She always tries to ',' herself by reading books and watching educational videos.'],
+   cn:'她總是嘗試透過閱讀書籍和觀看教育影片來自我教育。',
+   opts:['entertain','educate','monitor','present'],ans:1,
+   word:'educate (v.) 教育；教導',
+   exp:'空格語境是「自我充實」，educate oneself = 自我教育，最符合句意。entertain = 娛樂；monitor = 監控；present = 呈現。',
+   note:'educate oneself = 自學；educated adj. 受過教育的'},
+  {q:['People who ',' adventure often enjoy hiking in mountains or exploring new cities.'],
+   cn:'追求冒險的人通常喜歡在山中健行或探索新城市。',
+   opts:['avoid','reject','seek','monitor'],ans:2,
+   word:'seek (v.) 尋求；追求',
+   exp:'語境是「追求冒險」，seek adventure = 追求冒險。avoid/reject 表逃避；monitor = 監控，皆不符。',
+   note:'seek 三態：seek → sought → sought（不規則動詞）'},
+  {q:['The annual science ',' attracted experts from all over the world.'],
+   cn:'年度科學研討會吸引了來自世界各地的專家。',
+   opts:['concert','conference','contest','convention'],ans:1,
+   word:'conference (n.) 研討會；會議',
+   exp:'語境「科學…吸引專家」，conference = 正式研討會，最合適。concert = 演唱會；contest = 競賽；convention 偏向大型代表大會。',
+   note:'hold / attend a conference 舉辦/出席研討會'},
+  {q:['There are ',' reasons why TED Talks have become so popular around the world.'],
+   cn:'TED 演講在全世界如此受歡迎有許多原因。',
+   opts:['rare','few','numerous','single'],ans:2,
+   word:'numerous (adj.) 眾多的；許多的',
+   exp:'語境是正面強調「很多」原因，numerous = many（正式語）。rare = 稀少；few = 少數（負面）；single = 單一。',
+   note:'numerous ≈ many，用於正式書面語。'},
+  {q:['Jamie Oliver is a well-known food ',' who has appeared on many TV shows.'],
+   cn:'傑米·奧利佛是一位曾出現在許多電視節目上的知名美食名人。',
+   opts:['scholar','criminal','celebrity','volunteer'],ans:2,
+   word:'celebrity (n.) 名人；知名人士',
+   exp:'語境「知名人物、電視節目」，celebrity = 名人，最合適。scholar = 學者；criminal = 罪犯；volunteer = 志工。',
+   note:'celebrities = 複數。celeb 為口語縮寫。'},
+  {q:["Cameron's childhood ',' with science fiction eventually led him to make great films."],
+   cn:'卡麥隆童年對科幻小說的著迷最終使他拍出了偉大的電影。',
+   opts:['boredom','fascination','disappointment','satisfaction'],ans:1,
+   word:'fascination (n.) 著迷；迷戀',
+   exp:'語境「童年對某事的著迷讓他成就…」，fascination with = 對…的著迷。boredom = 無聊；disappointment = 失望；satisfaction = 滿足。',
+   note:'fascination with sth.（介系詞固定用 with）'},
+  {q:['The government needs to closely ',' the spread of the new virus to protect public health.'],
+   cn:'政府需要密切監控新病毒的擴散以保護公共健康。',
+   opts:['ignore','celebrate','monitor','broadcast'],ans:2,
+   word:'monitor (v.) 監控；監測',
+   exp:'語境「政府…病毒擴散…保護健康」，monitor = 監控，最合適。ignore = 忽略；celebrate = 慶祝；broadcast = 廣播。',
+   note:'monitor closely 密切監控；monitor 也可作名詞（螢幕）'},
+  {q:['Traveling to different countries can really ',' your ',' and help you understand the world better.'],
+   cn:'到不同國家旅行真的可以拓展你的視野，並幫助你更了解世界。',
+   opts:['broaden...horizons','narrow...views','limit...knowledge','close...minds'],ans:0,
+   word:'broaden one\'s horizons 拓展視野',
+   exp:'語境「旅行有益、更了解世界」，broaden one\'s horizons = 拓展視野。narrow = 縮小（反義）；limit = 限制；close minds = 封閉思想，皆與語境相反。',
+   note:'broaden one\'s horizons 是課文重要片語，常見於大考作文。'}
+];
+
+(function(){var wrap=document.getElementById('q-wrap');if(!wrap)return;studentQ.forEach(function(d,i){var choices=d.opts.map(function(o,j){return '<div class="choice" data-correct="'+(j===d.ans?'1':'0')+'" onclick="pickChoice(this)"><span class="mark"></span>('+'ABCD'[j]+') '+o+'</div>';}).join('');wrap.innerHTML+='<div class="q-block"><div class="q-top"><div class="s-orange q-num">'+(i+1)+'</div><div class="q-main"><div class="q-en">'+d.q[0]+'<span class="blank">________</span>'+(d.q[1]||'')+'</div><div class="q-cn">'+d.cn+'</div><div class="q-choices">'+choices+'</div><button class="show-btn" onclick="showAns(this)">看完整解析</button></div></div><div class="q-ans"><span class="ans-badge badge-orange">正解</span> <span class="ans-word">'+d.word+'</span><div class="ans-cn">'+d.exp+'</div>'+(d.note?'<div class="tnote">'+d.note+'</div>':'')+'</div></div>';});})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  // 核心字彙：每個單字加發音鈕
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 片語：每個片語加發音鈕
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/one's/g,'your')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>
