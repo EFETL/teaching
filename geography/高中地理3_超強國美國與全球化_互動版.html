@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高中地理(3) 互動講義｜超強國美國 × 全球化</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f2744;--gold:#e8a000;--teal:#0a7ea4;
+  --green:#15803d;--red:#b91c1c;--bg:#f0f4f9;
+  --card:#fff;--border:#dde3ed;--text:#1a1a2e;--muted:#6b7280;
+}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text);font-size:15px}
+
+header{background:linear-gradient(135deg,#0f2744 0%,#1e4080 60%,#0a7ea4 100%);color:#fff;padding:22px 18px 18px;text-align:center}
+header h1{font-size:1.5rem;font-weight:800}
+header p{margin-top:5px;font-size:.85rem;opacity:.85}
+.hbadges{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.hbadge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:2px 11px;font-size:.75rem}
+
+#sbar{background:#0f2744;color:#fff;display:flex;align-items:center;justify-content:center;gap:18px;padding:8px 14px;font-size:.82rem;flex-wrap:wrap}
+.si span.val{font-weight:700;font-size:.95rem}
+#ptbar{height:5px;background:rgba(255,255,255,.2);width:180px;border-radius:3px;overflow:hidden}
+#ptfill{height:100%;background:var(--gold);width:0%;transition:width .3s}
+
+.ttabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07);-webkit-overflow-scrolling:touch}
+.ttabs::-webkit-scrollbar{height:3px}
+.ttab{flex:0 0 auto;padding:12px 14px;font-size:.8rem;font-weight:700;background:none;border:none;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap}
+.ttab.on{color:var(--navy);border-bottom-color:var(--gold)}
+.ttab:hover{background:#f5f7fb}
+
+#main{max-width:860px;margin:0 auto;padding:18px 14px 60px}
+
+.note-box{background:#fff;border:1.5px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden}
+.note-hd{padding:13px 16px;display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
+.note-hd h2{font-size:.95rem;font-weight:700;color:var(--navy);flex:1}
+.note-hd .arr{color:var(--muted);font-size:.72rem;transition:.2s}
+.note-hd.open .arr{transform:rotate(180deg)}
+.note-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.note-body.open{display:block}
+
+.concept{margin-top:13px}
+.concept h3{font-size:.85rem;font-weight:700;color:var(--teal);margin-bottom:5px}
+.concept p,.concept li{font-size:.82rem;line-height:1.8;color:#333}
+.concept ul{padding-left:16px;margin-top:3px}
+.eg{background:#fdf6e3;border-left:3px solid var(--gold);padding:7px 11px;border-radius:0 6px 6px 0;font-size:.8rem;color:#5a3e00;margin-top:5px;line-height:1.7}
+.tbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:.8rem}
+.tbl th{background:var(--navy);color:#fff;padding:6px 9px;text-align:left}
+.tbl td{padding:6px 9px;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl tr:nth-child(even) td{background:#f5f7fb}
+.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:.7rem;font-weight:700;margin:1px}
+.tag.g{background:#dcfce7;color:#166534}
+.tag.r{background:#fee2e2;color:#991b1b}
+.tag.b{background:#dbeafe;color:#1e40af}
+.tag.y{background:#fef9c3;color:#854d0e}
+.map-txt{background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:10px 13px;margin-top:8px;font-size:.78rem;line-height:1.9;font-family:ui-monospace,monospace;white-space:pre-wrap;overflow-x:auto}
+
+.q-hd{display:flex;align-items:center;gap:9px;margin:22px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.q-hd h2{font-size:.92rem;font-weight:700;color:var(--navy)}
+.q-cnt{background:var(--navy);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px}
+
+.qcard{background:#fff;border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden}
+.qcard:hover{box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.qhd{padding:13px 15px 9px;display:flex;gap:9px;align-items:flex-start}
+.qnum{background:var(--navy);color:#fff;border-radius:5px;padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.qtxt{font-size:.88rem;line-height:1.75;flex:1}
+.opts{padding:0 15px 5px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;margin-bottom:6px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:.84rem;line-height:1.5;transition:.13s;user-select:none}
+.opt:hover:not(.done){border-color:var(--teal);background:#f0f9ff}
+.ol{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.opt.ok{border-color:var(--green)!important;background:#f0fdf4}
+.opt.ok .ol{background:var(--green);border-color:var(--green);color:#fff}
+.opt.ng{border-color:var(--red)!important;background:#fff5f5}
+.opt.ng .ol{background:var(--red);border-color:var(--red);color:#fff}
+.opt.fade{opacity:.35}
+.exp{display:none;margin:3px 15px 13px;padding:10px 13px;background:#fffbe8;border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:.81rem;line-height:1.75;color:#4a3b00}
+.exp.show{display:block}
+.exp b{color:var(--navy)}
+
+.rbtn{display:block;width:fit-content;margin:26px auto 0;padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:inherit}
+.rbtn:hover{background:#1a3a6e}
+</style>
+</head>
+<body>
+<header>
+  <h1>📖 高中地理(3) 互動講義</h1>
+  <p>《學習寶典》課本精華 ✕ 學測歷屆試題｜自然組三年級</p>
+  <div class="hbadges">
+    <span class="hbadge">🌎 美國環境背景</span>
+    <span class="hbadge">👥 移民多元文化</span>
+    <span class="hbadge">🏙️ 城市與產業</span>
+    <span class="hbadge">📜 USMCA</span>
+    <span class="hbadge">🌐 全球化</span>
+    <span class="hbadge">📊 人口與HDI</span>
+    <span class="hbadge">🌿 中南美洲</span>
+  </div>
+</header>
+
+<div id="sbar">
+  <div class="si">已答 <span class="val" id="s-done">0</span></div>
+  <div id="ptbar"><div id="ptfill"></div></div>
+  <div class="si">答對 <span class="val" id="s-ok" style="color:#86efac">0</span></div>
+  <div class="si">答錯 <span class="val" id="s-ng" style="color:#fca5a5">0</span></div>
+  <div class="si">正確率 <span class="val" id="s-pct">—</span></div>
+</div>
+
+<div class="ttabs" id="ttabs"></div>
+<div id="main"></div>
+
+<script>
+const TOPICS = [
+  {id:"env",  icon:"🌎", name:"美國環境背景"},
+  {id:"ppl",  icon:"👥", name:"移民多元文化"},
+  {id:"city", icon:"🏙️", name:"城市與產業"},
+  {id:"usmca",icon:"📜", name:"USMCA協定"},
+  {id:"glob", icon:"🌐", name:"全球化"},
+  {id:"hdi",  icon:"📊", name:"人口與HDI"},
+  {id:"latam",icon:"🌿", name:"中南美洲"},
+];
+
+const NOTES = {
+
+env:`
+<div class="concept">
+  <h3>📍 一、美國的優越位置（課本P.154）</h3>
+  <table class="tbl">
+    <tr><th>要素</th><th>說明</th></tr>
+    <tr><td>本土範圍</td><td>北緯 25～49度、西經 70～130度</td></tr>
+    <tr><td>地理屏障</td><td>東臨大西洋、西瀕太平洋，19-20世紀不受海外戰火波及，利於海洋貿易</td></tr>
+    <tr><td>陸地邊界</td><td>南北僅與墨西哥、加拿大接壤，地緣政治相對單純</td></tr>
+    <tr><td>海外領土</td><td>阿拉斯加、夏威夷及多個太平洋島嶼，擴大全球軍事影響力</td></tr>
+  </table>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>🏔️ 二、地形三大分區（P.155）</h3>
+  <div class="map-txt">  西岸                中部                東岸
+┌──────────┐  ┌────────────┐  ┌──────────┐
+│ 西部高原山地 │  │  中部大平原   │  │ 東部低山丘陵 │
+│（板塊聚合帶）│  │（土壤肥沃）  │  │（古老丘陵）│
+│洛磯/海岸山脈 │  │五大湖/黃土區 │  │ 阿帕拉契山脈 │
+│ 多火山地震   │  │ → 農業發達   │  │ → 煤鐵資源  │
+└──────────┘  └────────────┘  └──────────┘</div>
+  <table class="tbl" style="margin-top:8px">
+    <tr><th>分區</th><th>特色</th></tr>
+    <tr><td><b>東部低山丘陵</b></td><td>阿帕拉契山以東；外營力侵蝕的古老丘陵；冰河U型谷；早期移民進入中西部的天然通道；<span class="tag b">出產煤鐵</span></td></tr>
+    <tr><td><b>中部大平原</b></td><td>平原北部：冰蝕地形→五大湖（世界最大淡水湖群）<br>平原中南部：風積黃土＋密西比河沖積平原→<span class="tag g">土壤肥沃，農業發達</span><br>過去為淺海盆地→富含石油天然氣（墨西哥灣）</td></tr>
+    <tr><td><b>西部高原山地</b></td><td>環太平洋板塊聚合帶→<span class="tag r">多火山、地震</span><br>胡佛水壩蓄積科羅拉多河→供電加州/內華達/亞利桑那州</td></tr>
+  </table>
+  <div class="eg"><strong>【頁岩油】</strong>中部大平原地下（過去淺海）蘊藏豐富頁岩油。2010年代<b>水平鑽井＋水壓裂岩</b>技術突破→美國成為<b>全球最大石油生產國</b>（超越沙烏地阿拉伯與俄羅斯）。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>☁️ 三、多樣的氣候（P.157-158）</h3>
+  <p>美國除阿拉斯加與夏威夷外，大多位於溫帶，受<b>緯度、氣團、洋流和地形</b>影響，氣候多樣。</p>
+  <table class="tbl" style="margin-top:6px">
+    <tr><th>分區</th><th>氣候類型</th><th>成因特色</th></tr>
+    <tr><td>北極海沿岸</td><td>極地苔原</td><td>冬長嚴寒，夏短日涼</td></tr>
+    <tr><td>阿拉斯加南部</td><td>副極地</td><td>西岸受<b>阿拉斯加暖流</b>影響，比同緯度暖；最暖月可達10°C以上</td></tr>
+    <tr><td>西北太平洋岸</td><td>溫帶海洋性</td><td>受<b>盛行西風＋北太平洋暖流</b>，全年溫和濕潤（西雅圖）</td></tr>
+    <tr><td>加州西南岸</td><td>地中海型</td><td>夏乾冬雨（洛杉磯）；副熱帶高壓＋加利福尼亞寒流</td></tr>
+    <tr><td>山地內陸</td><td>溫帶乾燥/半乾燥</td><td>山地雨影效應，降水稀少（拉斯維加斯）</td></tr>
+    <tr><td>中部大平原</td><td>溫帶大陸性</td><td>冬冷夏熱、年溫差大；降水由東向西遞減</td></tr>
+    <tr><td>東南部</td><td>夏雨型暖溫帶</td><td>東南季風帶來夏雨（邁阿密）</td></tr>
+  </table>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>⚡ 四、自然災害（P.158-159）</h3>
+  <table class="tbl">
+    <tr><th>災害</th><th>季節</th><th>好發地區</th></tr>
+    <tr><td>龍捲風</td><td>春、秋</td><td>中部平原（冷暖氣團交界帶）</td></tr>
+    <tr><td>颶風</td><td>夏、秋</td><td>東南部（墨西哥灣、大西洋）</td></tr>
+    <tr><td>暴風雪</td><td>冬季</td><td>東北部、五大湖區</td></tr>
+    <tr><td>火山與地震</td><td>—</td><td>西岸（環太平洋火環）及阿拉斯加</td></tr>
+    <tr><td>野火</td><td>夏末秋初</td><td>加州（山地森林茂密，乾燥溫暖）</td></tr>
+  </table>
+  <div class="eg"><b>2020年加州野火：</b>8-9月大規模燃燒，濃煙使舊金山灣區天空轉橘紅色，嚴重影響海陸交通。</div>
+</div>`,
+
+ppl:`
+<div class="concept">
+  <h3>🚢 一、各族移民路線（P.161）</h3>
+  <table class="tbl">
+    <tr><th>族群</th><th>時期</th><th>移民路徑與背景</th></tr>
+    <tr><td><b>美洲原住民</b></td><td>2萬年前</td><td>大冰河時期，從西伯利亞越過白令海峽陸橋到達美洲</td></tr>
+    <tr><td><b>西班牙人</b></td><td>1565年起</td><td>在佛羅里達建殖民地，沿加勒比海北上；地名密布西南各州（洛杉磯）</td></tr>
+    <tr><td><b>法國人</b></td><td>17世紀起</td><td>沿聖勞倫斯河及密西比河推進，路易斯安那州因此得名</td></tr>
+    <tr><td><b>英國人</b></td><td>17世紀起</td><td>東岸建立13個殖民地，後獨立建國；紐約（New York）源自英國約克郡</td></tr>
+    <tr><td><b>非裔黑人</b></td><td>16世紀起</td><td>以奴隸身分大量輸入，集中在<b>東南部各州</b>（棉花種植園）</td></tr>
+  </table>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>📊 二、移民波次統計（P.163）</h3>
+  <div class="map-txt">甲（北歐、西歐）：1840-1880高峰 ── 愛爾蘭大饑荒、工業革命推力
+乙（東歐、南歐）：1880-1921高峰 ── 農業危機、貧困、政治迫害推力
+丙（亞洲、中南美）：1970年後持續大增
+
+⚠️ 1921年：限制東南歐移民數量
+⚠️ 1924年：移民配額制（按國籍嚴格限額）→ 移民銳減
+✅ 1965年：廢除種族歧視配額 → 亞洲、拉美移民大增</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>👥 三、種族組成（P.164-165）</h3>
+  <table class="tbl">
+    <tr><th>種族</th><th>比例</th><th>主要分布</th><th>特色</th></tr>
+    <tr><td>歐裔白人</td><td>57.8%</td><td>—</td><td>人口組成大宗（不含混血）</td></tr>
+    <tr><td>非裔黑人</td><td>—</td><td><b>東南部</b>各州</td><td>早期棉花種植奴隸後裔</td></tr>
+    <tr><td>亞裔</td><td>—</td><td>東西兩岸大都市＋夏威夷</td><td>白領工作比例高（如黃仁勳）</td></tr>
+    <tr><td>拉丁裔</td><td><b>18.7%</b></td><td>西南各州、佛羅里達</td><td>成長最快，已超越非裔成<b>第二大族群</b></td></tr>
+    <tr><td>美國原住民</td><td>低</td><td>西部保留地</td><td>—</td></tr>
+  </table>
+  <div class="eg"><b>2010-2020變化：</b>純歐裔白人數量大幅降低（混血多重族裔認同者增加）；拉丁裔、亞裔持續增加。每年約100萬新移民進入美國。</div>
+</div>`,
+
+city:`
+<div class="concept">
+  <h3>🏙️ 一、美國重要城市（P.153）</h3>
+  <div class="map-txt">C 西雅圖 ── 波音公司創立地；亞馬遜、星巴克總部
+A 紐約 ──── 美國第一大城；聯合國總部；國際金融中心
+B 華盛頓D.C. ── 美國首都
+D 底特律 ── 「汽車城 Motor City」；通用/福特/克萊斯勒三大車廠
+E 洛杉磯 ── 好萊塢；航太工業
+F 休士頓 ── 石化工業；NASA航太中心
+矽谷（舊金山灣區）── 全球最重要高科技園區</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>🦀 二、鏽帶（Rust Belt）與聚集經濟（P.181）</h3>
+  <p>鏽帶：環繞五大湖區東南部、傳統重工業密集地帶。</p>
+  <table class="tbl">
+    <tr><th>特色</th><th>說明</th></tr>
+    <tr><td>汽車製造核心</td><td>密西根州：擁有 <b>16家</b> 汽車原廠總部；100大供應商中 <b>60家</b> 設點</td></tr>
+    <tr><td>聚集效應</td><td>三大車廠→吸引零件廠、設計中心、裝配廠群聚→台灣鴻海也進駐採購零件</td></tr>
+  </table>
+  <div class="eg"><b>聚集經濟（Agglomeration Economy）：</b>廠商群聚共享供應鏈、技術人才、基礎設施，降低成本。底特律就是最經典的工業聚集案例。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>⛏️ 三、美國礦產分布（P.156）</h3>
+  <table class="tbl">
+    <tr><th>礦產</th><th>主要分布</th></tr>
+    <tr><td>煤</td><td>東部（阿帕拉契山脈）</td></tr>
+    <tr><td>鐵</td><td>五大湖區（明尼蘇達州）</td></tr>
+    <tr><td>石油/天然氣</td><td>中部/南部（德州、墨西哥灣沿岸）</td></tr>
+    <tr><td>頁岩油</td><td>全境廣布；2010年代技術突破→美國成全球最大原油生產國</td></tr>
+  </table>
+</div>`,
+
+usmca:`
+<div class="concept">
+  <h3>📜 NAFTA → USMCA（P.183-184）</h3>
+  <p>美、墨、加三方2018年簽署《美加墨協定》（USMCA），取代舊版NAFTA。</p>
+  <table class="tbl">
+    <tr><th>項目</th><th>NAFTA（舊）</th><th>USMCA（新）</th></tr>
+    <tr><td>汽車含量</td><td>北美含量 ≥ 62.5%</td><td>≥ <b>75%</b>（更嚴格）</td></tr>
+    <tr><td>農業</td><td>加拿大官控乳品售價</td><td>加拿大開放 <b>3.5%</b> 乳品市場；取消對美國葡萄酒限制</td></tr>
+    <tr><td>落日條款</td><td>無（可無限延續）</td><td>每 <b>6年</b> 評估；可延長16年；提前6個月可退出</td></tr>
+    <tr><td>貨幣</td><td>無規定</td><td>不能壓低本國匯率保護產業</td></tr>
+    <tr><td>毒丸條款</td><td>—</td><td>若一方與「非市場經濟國家」（如中國）簽FTA，其他兩國可退出</td></tr>
+  </table>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>🗺️ 北美農業地圖（P.184）</h3>
+  <div class="map-txt">         丙（牧場帶）
+─────────────────────────
+   甲          乙          丁（酪農業）
+（棉花帶）  （玉米帶）   靠近五大湖/大城市
+
+甲 = 棉花帶（美國南部）
+乙 = 玉米帶（Corn Belt，中部，玉米/大豆/肉牛）
+丙 = 牧場帶（Great Plains，廣大畜牧）
+丁 = 酪農業帶（五大湖周邊，靠近消費市場）</div>
+  <div class="eg"><b>加拿大開放3.5%乳品市場→衝擊哪區？</b>加拿大酪農業集中在五大湖以北（丁區的加拿大部分），美國廉價牛奶進入後，加拿大酪農面臨競爭壓力。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>🚗 對汽車業的影響</h3>
+  <ul>
+    <li>北美含量需達75%→墨/加車廠須用更多北美零件</li>
+    <li>勞工時薪要求：至少40%零件由時薪≥16美元（約480台幣）勞工生產→防止超低工資競爭</li>
+    <li>從墨/加銷售到美國須注意：①美國課高關稅 ②勞工時薪不宜過低 ③應產自北美</li>
+  </ul>
+</div>`,
+
+glob:`
+<div class="concept">
+  <h3>📉 一、全球化推動力：交通成本下降（P.245）</h3>
+  <div class="map-txt">海運運費（1920=100）：大幅下降至約 20
+航空客運成本（1930=100）：下降劇烈
+電話通訊成本（1930=100）：下降至近乎 0
+
+→ 運輸＋通訊成本↓ → 全球貿易量↑ → 全球化加速</div>
+  <div class="eg">台灣製造的半導體運到美國，運費比50年前便宜80%以上——這是全球化得以實現的物質基礎。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>🌐 二、全球在地化（Glocalization）（P.248）</h3>
+  <table class="tbl">
+    <tr><th>案例</th><th>全球元素</th><th>在地化特色</th></tr>
+    <tr><td>馬祖南竿星巴克</td><td>美國跨國連鎖</td><td>閩東石屋外觀＋竹篩工藝＋全台唯一暖氣（因應馬祖冬季寒冷）</td></tr>
+    <tr><td>無印良品(台灣)</td><td>日本跨國品牌</td><td>與嘉義義竹鄉農會合作有機非基改爆米花＋鐵觀音口味</td></tr>
+  </table>
+  <div class="eg"><b>全球在地化 ≠ 文化帝國主義。</b>文化帝國主義是強勢文化「取代」弱勢；全球在地化是跨國品牌「融合」在地，方向相反。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>🏙️ 三、世界都市（World City）（P.246）</h3>
+  <p>薩森（Saskia Sassen）提出：全球化下，少數城市成為<b>跨國資本、金融、決策的管控中心</b>。</p>
+  <ul>
+    <li>特徵：金融地產＋跨國企業/國際組織總部設點→吸引全球資金；核心閾值人口達1000萬</li>
+    <li>例子：紐約、倫敦、東京、新加坡、香港</li>
+    <li><b>人口多 ≠ 世界都市</b>（孟買人口超千萬但功能不同）</li>
+  </ul>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>📦 四、JIT與COVID（P.247）</h3>
+  <table class="tbl">
+    <tr><th></th><th>JIT（just in time）</th><th>COVID後：just in case</th></tr>
+    <tr><td>庫存</td><td>接近零庫存</td><td>保持安全庫存</td></tr>
+    <tr><td>供應鏈</td><td>高效但脆弱</td><td>分散供應商、降低依賴</td></tr>
+    <tr><td>目標</td><td>降低成本</td><td>提升韌性</td></tr>
+  </table>
+  <div class="eg">貝萊德執行長Larry Fink：COVID讓企業從「just in time」轉向「just in case」。<b>2011年日本311地震</b>一次就癱瘓全球供應鏈，是過度依賴單一供應地的血淋淋教訓。</div>
+</div>`,
+
+hdi:`
+<div class="concept">
+  <h3>📊 一、人類發展指數 HDI（P.219）</h3>
+  <p>聯合國UNDP根據三大領域編製，衡量一國<b>綜合發展成果</b>：</p>
+  <table class="tbl">
+    <tr><th>面向</th><th>指標</th></tr>
+    <tr><td>🏥 健康</td><td>預期壽命（歲）</td></tr>
+    <tr><td>📚 教育</td><td>預期在學年數＋平均在校年數</td></tr>
+    <tr><td>💰 生活水準</td><td>平均每人GNI（美元）</td></tr>
+  </table>
+  <p style="font-size:.82rem;font-weight:700;color:var(--navy);margin-top:10px">▼ 課本原表（2023年）：</p>
+  <table class="tbl">
+    <tr><th>國家</th><th>預期壽命</th><th>GNI</th><th>HDI</th></tr>
+    <tr><td>甲（尼加拉瓜）</td><td>67.3</td><td>$2,796</td><td>0.497</td></tr>
+    <tr><td>乙（瑞士）</td><td>84.0</td><td>$81,949</td><td>0.970</td></tr>
+    <tr><td>丙</td><td>72.5</td><td>$7,157</td><td>0.709</td></tr>
+    <tr><td>丁</td><td>74.9</td><td>$6,881</td><td>0.706</td></tr>
+    <tr><td>戊（澳洲）</td><td>83.9</td><td>$58,277</td><td>0.958</td></tr>
+  </table>
+  <div class="eg"><b>北方≠北半球！</b>「北方（Global North）」指已開發高收入國家。<b>澳洲</b>在南半球但HDI=0.958，屬「北方國家」。最可能屬「南方」的三國：甲、丙、丁。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>👶👴 二、人口金字塔（P.219）</h3>
+  <table class="tbl">
+    <tr><th></th><th>北方國家（收縮型）</th><th>南方國家（擴張型）</th></tr>
+    <tr><td>形狀</td><td>底窄、倒三角/燈籠型</td><td>底寬、正三角形</td></tr>
+    <tr><td>出生率</td><td>低</td><td>高</td></tr>
+    <tr><td>老化</td><td>嚴重</td><td>較輕</td></tr>
+    <tr><td>代表</td><td>日本、台灣、德國</td><td>非洲國家</td></tr>
+  </table>
+</div>`,
+
+latam:`
+<div class="concept">
+  <h3>🌿 一、亞馬遜雨林砍伐（P.218）</h3>
+  <p>巴西佔全球亞馬遜面積最大。《自然通訊》期刊指出：</p>
+  <ul>
+    <li>熱帶南美40%的雨林<b>已面臨退化</b></li>
+    <li>砍伐高峰在<b>每年7月（旱季）</b>：乾燥→利於放火焚林→清出農地</li>
+    <li>主因：農業企業用作<b>大豆種植與牛隻放牧</b></li>
+    <li>後果：碳吸收↓→暖化加速；局部降雨↓→乾旱惡性循環</li>
+  </ul>
+  <div class="eg">氣候變遷使亞馬遜持續乾燥化，加上大規模砍伐（deforestation），形成惡性循環——越乾旱越易燃，越燃越乾旱。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>🎭 二、中南美洲「多元的合成文化」（P.217）</h3>
+  <table class="tbl">
+    <tr><th>成分</th><th>來源</th><th>例子</th></tr>
+    <tr><td>原住民基礎</td><td>馬雅、阿茲特克、印加</td><td>五聲音階、可可、玉米</td></tr>
+    <tr><td>歐洲殖民者</td><td>西班牙、葡萄牙</td><td>語言、天主教、和弦節奏</td></tr>
+    <tr><td>非洲黑人</td><td>奴隸貿易帶入</td><td>打擊節奏、藍調元素</td></tr>
+  </table>
+  <div class="eg"><b>探戈前身（拉布拉他平原音樂）：</b>原住民提供五聲音階，殖民者帶來和弦與西班牙節奏，黑人增加變化音修飾——三種文化融合的典型。</div>
+</div>
+<div class="concept" style="margin-top:12px">
+  <h3>📉 三、失落的十年（P.217）</h3>
+  <p>中南美洲1980年代陷入嚴重債務危機，稱「失落的十年」。IMF介入建議結構性改革（私有化、開放市場、緊縮支出），引發弱勢勞工爭議。都市化率普遍偏高（阿根廷92.5%），但常伴隨貧民窟，呈「過度都市化」。</p>
+</div>`
+
+};
+
+const QDB = [
+
+/* 美國環境背景 10題 */
+{tid:"env",q:"根據課本第154頁，美國本土位於哪個緯度／經度範圍？",
+ opts:["北緯10～35度，西經60～90度","北緯25～49度，西經70～130度","南緯10～30度，西經60～90度","北緯30～60度，西經80～120度"],
+ ans:1,exp:"<b>【P.154原表】</b>美國本土位於北緯25～49度、西經70～130度之間。記憶訣：「25到49度、70到130度」，涵蓋亞熱帶到溫帶，兼具海洋商貿與大陸農業發展條件。"},
+
+{tid:"env",q:"課本說美國19-20世紀「不受海外戰火波及」，主要因為哪個地理優勢？",
+ opts:["軍力強大令外國不敢入侵","東臨大西洋、西瀕太平洋，兩大洋形成天然屏障","加入盟約系統受鄰國保護","位於赤道附近地形險惡"],
+ ans:1,exp:"<b>【P.154地理屏障】</b>兩大洋天然屏障是美國能在兩次世界大戰中保留完整工業基礎、成為世界第一的關鍵。歐洲、亞洲戰場都在對岸，美國本土幾乎未受轟炸。"},
+
+{tid:"env",q:"課本將美國地形分三大區。下列何者對「東部低山丘陵」描述最正確？",
+ opts:["環太平洋板塊聚合帶，多火山地震","因冰蝕地形發達，形成世界最大淡水湖群五大湖","阿帕拉契山以東、外營力侵蝕的古老丘陵，冰河U型谷，出產煤鐵，是早期移民進入中西部的天然通道","過去曾為淺海盆地，富含石油天然氣"],
+ ans:2,exp:"<b>【P.155】</b>東部低山丘陵三特色：①古老且被侵蝕的丘陵 ②冰河U型谷（提供交通通道）③出產煤鐵（工業革命資源）。注意：五大湖在中部北部；石油在中南部；火山在西部。"},
+
+{tid:"env",q:"「美國頁岩油因開採技術進步開始量產，成世界石油霸主」。促成此革命的技術突破是？",
+ opts:["深海鑽油技術突破","水平鑽井＋水壓裂岩技術，讓難開採的頁岩油大量產出","太陽能板效率提升","核能技術突破"],
+ ans:1,exp:"<b>【P.155頁岩油】</b>頁岩油藏在岩石裂縫中，傳統鑽井無法有效開採。2010年代「水平鑽井＋水壓裂岩（Fracking）」技術讓美國一舉超越沙烏地阿拉伯，成全球最大原油生產國。"},
+
+{tid:"env",q:"課本第157頁，美國西北太平洋沿岸（西雅圖）為溫帶海洋性氣候。除盛行西風外，深受哪股洋流影響？",
+ opts:["加利福尼亞寒流，使沿岸降溫","北太平洋暖流，增溫增濕","墨西哥灣暖流，影響東岸","赤道逆流，帶來熱帶海水"],
+ ans:1,exp:"<b>【P.157+P.182奧林匹克公園題】</b>北太平洋暖流沿北美西岸北上增溫，配合盛行西風帶來水氣，使西雅圖、奧林匹克國家公園一帶形成全年溫和濕潤的溫帶雨林/海洋性氣候。"},
+
+{tid:"env",q:"課本第158頁，龍捲風主要發生在哪個地區與季節？",
+ opts:["西岸（夏秋），受太平洋颶風影響","中部大平原（春、秋），冷暖氣團交界帶交會","東南部（冬季），受大西洋冷氣團影響","阿拉斯加（全年），氣候寒冷"],
+ ans:1,exp:"<b>【P.158】</b>龍捲風好發於美國中部平原（龍捲風走廊 Tornado Alley），春、秋之際極地氣團南下與墨西哥灣暖濕氣流交會，形成強烈對流。"},
+
+{tid:"env",q:"課本第159頁「2020年加州野火」。造成加州夏末野火的最主要地理成因組合是？",
+ opts:["颶風帶來強風引發野火","地中海型氣候夏季乾燥＋山地森林茂密＋強風助燃","春季融雪導致地面乾燥","全球暖化使加州降雨完全消失"],
+ ans:1,exp:"<b>【P.159】</b>加州西南部地中海型氣候（夏乾）→夏末森林乾燥；山地森林茂密；風勢助燃→火勢一發不可收拾。2020年8-9月濃煙使舊金山灣橘紅天空。"},
+
+{tid:"env",q:"課本第160頁，下列哪種雨溫圖最符合「副極地氣候（阿拉斯加南部）」？",
+ opts:["全年高溫(>18°C)、降雨均勻","夏季高溫降雨多、冬季乾燥","月均溫多在-20至10°C，最暖月勉強達10°C以上；降水不多且全年分散","冬暖夏涼，降雨集中冬季"],
+ ans:2,exp:"<b>【P.160概念命題】</b>副極地氣候：冬天極長嚴寒；夏天很短，最暖月勉強超過10°C；降水量不大且全年分散（無明顯乾濕季）。書中答案選B。"},
+
+{tid:"env",q:"課本第156頁「美國礦產分布圖」，煤礦主要集中在美國哪個方位？",
+ opts:["西部高原山地","中部大平原","東部（阿帕拉契山脈地區）","阿拉斯加與夏威夷"],
+ ans:2,exp:"<b>【P.156】</b>東部阿帕拉契山脈是美國最重要煤礦區（賓州、西維吉尼亞）；石油/天然氣/頁岩油則主要在中部與南部（德州、奧克拉荷馬）。"},
+
+{tid:"env",q:"課本第155頁「北美第四紀冰河分布圖」，五大湖以南最可能出現哪種冰河遺留地形？",
+ opts:["高山角峰與刃嶺","沖積扇","風積黃土（冰河消融後細顆粒被風吹積）","珊瑚礁"],
+ ans:2,exp:"<b>【P.155】</b>五大湖以南，冰河退縮後留下大量細粒物質，被風搬運堆積成「黃土（Loess）」。密西比河中下游肥沃農業土壤，很大程度正是這些風積黃土。"},
+
+/* 移民多元文化 8題 */
+{tid:"ppl",q:"課本第161頁，最早進入美洲的美洲原住民，主要透過哪個路徑到達？",
+ opts:["搭木筏從太平洋島嶼遷來","2萬年前大冰河時期，從西伯利亞越過白令海峽陸橋抵達阿拉斯加，再向南擴散","從歐洲跨越大西洋","從非洲繞過南極漂流而來"],
+ ans:1,exp:"<b>【P.161】</b>大冰河時期海平面下降，白令海峽形成陸橋（Beringia），西伯利亞的人類步行越過，逐步向南擴散至整個美洲。"},
+
+{tid:"ppl",q:"課本第163頁，下列哪個城市名稱來自法語？",
+ opts:["紐約（源自英國約克郡）","洛杉磯（西班牙語「天使之城」）","底特律（法語「海峽」）","亞特蘭大（英語命名）"],
+ ans:2,exp:"<b>【P.163】</b>底特律（Detroit）位於伊利湖與休倫湖之間海峽，法語「détroit」即「海峽」。另路易斯安那（Louisiana）為法王路易十四命名；聖路易也是法語地名。"},
+
+{tid:"ppl",q:"課本第163頁，1924-1930年移民人數大幅銳減，最主要原因是哪兩項？",
+ opts:["美西戰爭＋全球農業危機","1924年移民配額制（按國籍限額）＋經濟大蕭條","愛爾蘭大饑荒＋工業革命","1965年移民法開放＋亞洲勞工減少"],
+ ans:1,exp:"<b>【P.163+P.182】</b>1924年移民配額制（按各國比例嚴格限制，壓縮東南歐移民）＋1929年大蕭條（經濟惡化，赴美意願降低）→移民銳減。"},
+
+{tid:"ppl",q:"課本第164頁，亞裔移民從事白領工作，主要集中在哪兩種地區？",
+ opts:["中部農業帶","南部各州","東西兩岸大都市＋夏威夷","北部邊境各州"],
+ ans:2,exp:"<b>【P.164】</b>亞裔集中在：①東西兩岸大都市（矽谷、紐約、洛杉磯）②夏威夷（歷史上甘蔗農場引進亞洲勞工）。"},
+
+{tid:"ppl",q:"課本第164頁，拉丁裔現占美國總人口18.7%，成第二大族群。主要分布在哪？",
+ opts:["五大湖區","東北部","西南各州（加州、德州）和佛羅里達","太平洋西北岸"],
+ ans:2,exp:"<b>【P.164】</b>拉丁裔（墨西哥裔、波多黎各裔、古巴裔）分布在：①西南各州（靠近墨西哥邊界）②佛羅里達（古巴裔聚集）。成長最快，已超越非裔成第二大族群。"},
+
+{tid:"ppl",q:"課本第162頁，19世紀末歐洲移民前往美國的推力與拉力，哪項最完整正確？",
+ opts:["推力：美國薪資高；拉力：歐洲農業破壞","推力：歐洲農業破壞、社會運動失敗；拉力：美國廣大土地、工業發展機會、政策開放","推力：美國排斥移民；拉力：歐洲提供高薪","推力：歐洲氣候良好；拉力：美國氣候多樣"],
+ ans:1,exp:"<b>【P.162】</b>推力（離開歐洲）：農業危機、工業革命破壞傳統農業、政治壓迫。拉力（吸引去美國）：廣大土地、工業機會、礦產、移民政策。推拉理論是人口遷移的核心框架。"},
+
+{tid:"ppl",q:"課本第165頁，非裔人口比例最高的地區是哪個方位？",
+ opts:["西部（加州、內華達）","東南部各州","五大湖區","西南部（德州、新墨西哥）"],
+ ans:1,exp:"<b>【P.165】</b>非裔集中在東南部，因歷史上棉花種植園奴隸制度（以東南部為主）。廢奴後長期社會經濟結構使許多非裔仍留在東南部。"},
+
+{tid:"ppl",q:"課本第161頁，英國人建立13個殖民地最終導致美國獨立。殖民地主要集中在哪？",
+ opts:["西南部（近墨西哥灣）","東岸（大西洋沿岸13州）","內陸大平原","北部五大湖區"],
+ ans:1,exp:"<b>【P.161】</b>英國人為宗教自由在東北部建普利茅斯殖民地（1620五月花號），擴展至大西洋沿岸13州。1776獨立，美國由東向西發展，東岸至今仍是最重要都市聚集區。"},
+
+/* 城市與產業 8題 */
+{tid:"city",q:"課本第153頁，圖中A=紐約、B=華盛頓D.C.。下列何者為美國第一大城？",
+ opts:["B 華盛頓D.C.（首都）","C 西雅圖","A 紐約（人口最多、金融、聯合國所在）","D 底特律"],
+ ans:2,exp:"<b>【P.153答案】</b>「美國第一大都市是A-紐約；首都是B-華盛頓哥倫比亞特區。」注意：美國首都≠最大城市，紐約不是首都但是第一大城。"},
+
+{tid:"city",q:"課本第153頁，波音公司是在哪個城市創立的？",
+ opts:["A 紐約","B 華盛頓D.C.","C 西雅圖","D 底特律"],
+ ans:2,exp:"<b>【P.153答案：C西雅圖（1916年）</b>。西雅圖是重要科技城：波音（航太）、微軟、亞馬遜、星巴克均在此發跡或設總部。"},
+
+{tid:"city",q:"課本第153頁，有「汽車城」（Motor City）之稱的城市是哪一個？",
+ opts:["A 紐約","B 華盛頓D.C.","C 西雅圖","D 底特律"],
+ ans:3,exp:"<b>【P.153答案：D底特律</b>。位於密西根州五大湖區，通用、福特、克萊斯勒三大車廠總部均在此，得名「汽車城 Motor City」。"},
+
+{tid:"city",q:"課本第181頁，密西根州100大汽車供應商中有60家設點於此。零件廠靠近整車廠最重要的考量是哪個概念？",
+ opts:["規模經濟：單一大廠越大越有效率","比較利益","聚集經濟、產業連鎖：靠近整車廠可即時供應、共享技術人才與基礎設施","外部成本"],
+ ans:2,exp:"<b>【P.181】</b>零件廠靠近整車廠原因：①JIT供應 ②技術人才共享 ③產業連鎖互相依存。這就是「聚集經濟（Agglomeration Economy）」。"},
+
+{tid:"city",q:"課本第181頁，台灣鴻海看上鏽帶供應鏈進駐採購。這反映鏽帶哪項優勢？",
+ opts:["地價低廉","已形成完整汽車零件供應鏈生態系，外來企業可即時採購","有豐富頁岩油資源","工人薪資極低"],
+ ans:1,exp:"<b>【P.181】</b>鴻海進駐目的是「採購」——鏽帶已有密集的輕型卡車供應商、設計中心、裝配廠。說明聚集效應的外部價值：連外來廠商也想就近採購。"},
+
+{tid:"city",q:"課本第181頁「美國2020年人口密度圖」，美國人口密度最高的地區在哪裡？",
+ opts:["西部（洛磯山脈）","中部大平原","東北部海岸走廊（波士頓-紐約-華盛頓）＋五大湖南緣","阿拉斯加"],
+ ans:2,exp:"<b>【P.181】</b>人口密度最高：①東北部「波士頓-華盛頓走廊（BosWash）」②五大湖南緣（芝加哥、底特律）③西岸加州。地圖顏色深處即高密度區。"},
+
+{tid:"city",q:"課本第153頁，美國高科技園區「矽谷」位於哪個城市附近？",
+ opts:["底特律附近","休士頓附近","舊金山灣區（San Jose一帶）","波士頓附近"],
+ ans:2,exp:"<b>【P.153】</b>矽谷（Silicon Valley）位於舊金山灣區聖荷西，靠近史丹佛大學與柏克萊，是全球最重要的科技聚落。"},
+
+{tid:"city",q:"課本第181頁，密西根州鏽帶傳統工業的發展條件主要與哪些因素有關？",
+ opts:["只與氣候溫暖有關","煤鐵資源豐富＋勞工充足＋五大湖水運發達","只與港口距離有關","與農業條件好有關"],
+ ans:1,exp:"<b>【P.181第8題】</b>鏽帶工業發展條件：①煤（賓州）＋鐵（明尼蘇達）經五大湖運輸方便 ②勞工充足（大量移民）③五大湖提供豐富工業用水 ④氣候適宜居住。"},
+
+/* USMCA 6題 */
+{tid:"usmca",q:"課本第183頁，USMCA相較NAFTA，對汽車「北美含量」的要求如何改變？",
+ opts:["從75%降至62.5%，放寬","從62.5%提高至75%，更嚴格","完全取消北美含量要求","從50%提高至100%"],
+ ans:1,exp:"<b>【P.183】</b>NAFTA要求北美含量≥62.5%；USMCA提高至≥75%，且至少40%零件須由時薪≥16美元勞工生產，目的：防止低薪競爭、確保製造業留在北美。"},
+
+{tid:"usmca",q:"課本第183頁，USMCA的「毒丸條款（Poison Pill）」是指什麼？",
+ opts:["違反環保被課重稅","若任一方與「非市場經濟國家」（如中國）簽FTA，其他兩國有權退出","汽車含量未達標課超高關稅","農業開放不符標準須付罰款"],
+ ans:1,exp:"<b>【P.183毒丸條款】</b>目的：阻止加/墨單獨與中國簽FTA，以免中國製品透過夥伴國「走後門」進入美國。這是美國主導USMCA最重要的地緣政治條款。"},
+
+{tid:"usmca",q:"課本第183頁，USMCA「落日條款」規定什麼？",
+ opts:["10年後自動終止","每6年評估；可延長16年；退出須提前6個月告知","協議永遠有效不得退出","5年評估，每次延長5年"],
+ ans:1,exp:"<b>【P.183】</b>NAFTA無落日條款（可無限延續）。USMCA加入：每6年評估→決定是否延長16年，建立定期審查機制，避免協議過時。"},
+
+{tid:"usmca",q:"課本第184頁「北美農業地圖」，加拿大開放3.5%乳品市場後，最直接受衝擊的是哪個農業區？（丁=靠近五大湖的酪農業帶）",
+ opts:["甲（棉花帶，南部）","乙（玉米帶，中部）","丙（牧場帶）","丁（酪農業帶，五大湖周邊，含加拿大安大略）"],
+ ans:3,exp:"<b>【P.184第14題答案：丁】</b>加拿大酪農業集中在五大湖南側（安大略省）。美國廉價牛奶進入後，最直接影響「丁區」加拿大酪農，也是加拿大談判中最抵制的條款。"},
+
+{tid:"usmca",q:"課本第184頁，汽車商從墨/加銷售到美國應注意哪些事項？",
+ opts:["①美國課高關稅 ②勞工時薪不宜過低 ③應產自北美","只需注意關稅","在北美生產就無任何限制","只有加拿大產品受限"],
+ ans:0,exp:"<b>【P.184第15題（答案乙丙）】</b>從墨/加銷售到美國須注意：①美國課高關稅 ②勞工時薪不宜過低（須達薪資要求）③應產自北美。交通運輸不便不是主要考量。"},
+
+{tid:"usmca",q:"課本第183頁，亞裔（丙族裔）「多為高教育、高白領比例、家庭收入高的菁英移民」。哪張地圖最能代表其分布？",
+ opts:["均勻分散全美","集中中部農業帶","集中東西兩岸大都市＋夏威夷","集中南部各州"],
+ ans:2,exp:"<b>【P.183移民圖】</b>亞裔特色：高教育、高白領、高收入。分布集中東西兩岸大都市（矽谷、洛杉磯、紐約）及夏威夷，地圖應顯示東西岸城市群高比例。"},
+
+/* 全球化 8題 */
+{tid:"glob",q:"課本第245頁「國際交通費用趨勢圖」，1920-2015年哪三項成本大幅下降，推動全球化？",
+ opts:["人工、土地、原料成本","海運運費、航空客運成本、電話通訊成本","關稅、貿易壁壘、政治管制費","農業生產、工業原料、勞動薪資"],
+ ans:1,exp:"<b>【P.245】</b>三條線：海運運費、航空客運成本、電話通訊成本，均大幅下降，其中電話費下降最大（近乎免費）。「運輸＋通訊成本降低」=全球化的物質基礎。"},
+
+{tid:"glob",q:"課本第246頁，薩森的「世界都市」理論，世界都市最主要的特徵是什麼？",
+ opts:["人口超過1000萬的超大城市","以製造業為主的工業基礎","金融地產＋跨國企業/國際組織設點，吸引全球資金，成為資本與決策管控中心","政治上是大國首都，軍事強大"],
+ ans:2,exp:"<b>【P.246】</b>原文：「金融地產業者＋跨國企業與國際組織總部設點於此→吸引全球大量資金；以核心閾值人口達1000萬」。注意：1000萬是核心閾值非必要，功能比人口重要。"},
+
+{tid:"glob",q:"課本第248頁，馬祖南竿星巴克外觀呼應閩東傳統石屋。此行銷策略最能用哪個概念說明？",
+ opts:["文化帝國主義","全球在地化（跨國品牌結合在地建築、氣候與工藝）","聚集經濟","空間擴散"],
+ ans:1,exp:"<b>【P.248原題】</b>全球在地化＝全球品牌＋在地適應。星巴克（美國）＋閩東石屋＋竹篩工藝＋全台唯一暖氣（因應馬祖寒冷）=典型全球在地化，不是文化帝國主義（後者是取代而非融合）。"},
+
+{tid:"glob",q:"課本第248頁，無印良品與嘉義義竹鄉農會合作推出有機爆米花＋鐵觀音口味。此策略可用何概念解釋？",
+ opts:["文化資本","全球在地化（跨國品牌融合在地農業與飲食文化）","另類全球化","外部成本內部化"],
+ ans:1,exp:"<b>【P.248★原題】</b>無印良品（日本品牌）＋義竹鄉玉米（台灣農產）＋鐵觀音口味（台灣茶飲）=全球在地化。學測高頻：分辨「全球在地化」（融合）vs「文化帝國主義」（取代）。"},
+
+{tid:"glob",q:"課本第247頁，COVID後企業從「just in time」轉向「just in case」。這代表哪種供應鏈轉變？",
+ opts:["從零庫存轉向保持安全庫存，從追求效率轉向重視韌性","從囤貨轉向零庫存進一步省成本","轉向多元供應商但仍維持零庫存","轉向完全在地化生產排除國際供應鏈"],
+ ans:0,exp:"<b>【P.247】</b>JIT=零庫存、效率最大化但脆弱；Just in case=保持安全庫存緩衝，重視韌性。COVID後企業認識到完全追求效率（JIT）是有代價的。"},
+
+{tid:"glob",q:"課本第246頁，泰國工業地圖顯示Toyota、Honda設廠，Seagate、Apple設零件廠。最能說明哪個全球化現象？",
+ opts:["文化帝國主義","全球分工：跨國企業依成本與供應鏈優勢，在不同國家安排不同生產環節","全球在地化","空間擴散"],
+ ans:1,exp:"<b>【P.246】</b>Toyota、Honda在泰國設廠=利用泰國中等技術、地理位置（東南亞中心）和成本優勢進行全球分工布局。這是「全球價值鏈（GVC）」典型案例。"},
+
+{tid:"glob",q:"課本第246頁，可汗學院提供免費線上課程。「全球各地農村學生最能透過哪種方式獲益？」（答案D）",
+ opts:["交通革新","國際分工","人力移動（勞工移民）","全球依存關係加深（全球化使知識資源跨界流通）"],
+ ans:3,exp:"<b>【P.246原題，答案D】</b>可汗學院的意義：網路（通訊成本近零）打破地理限制，農村學生可免費獲得與都市相同的教育資源。這是「全球依存關係加深」——知識不再被地域阻隔。"},
+
+{tid:"glob",q:"課本第245頁，日本二戰後成世界第二大經濟強國。其最值得借鑑之處是？（答案C）",
+ opts:["擁有豐富礦產與廣大農地","全球分工下大量輸出原物料","以科研能力、人力素質和工業效率在缺乏自然資源下實現快速發展","開放邊境吸引大量移民勞工"],
+ ans:2,exp:"<b>【P.245第3題答案C】</b>日本幾乎沒有礦產（石油、鐵礦都要進口），但靠「人力素質＋科研能力＋工業效率」在戰後快速重建。最重要的資源是人才，不是礦產。"},
+
+/* 人口與HDI 6題 */
+{tid:"hdi",q:"課本第219頁HDI表，甲國預期壽命67.3歲、在校年數2.4年、GNI=2,796美元、HDI=0.497。甲國最可能是？",
+ opts:["瑞士","澳洲","尼加拉瓜（中美洲低收入國）","委內瑞拉"],
+ ans:2,exp:"<b>【P.219】</b>甲特徵：HDI=0.497（低度發展<0.55）、預期壽命偏低、在校年數2.4年（極低）、GNI極低。符合尼加拉瓜。委內瑞拉雖也是南方國家但收入較高（石油富國）。"},
+
+{tid:"hdi",q:"課本第219頁，「南方區域國家」的正確定義是？",
+ opts:["地理上位於南半球的國家","政治上屬社會主義陣營","發展程度較低、收入偏低的國家（不論在哪個半球）","人口密度低的國家"],
+ ans:2,exp:"<b>【P.219核心觀念】</b>「南方（Global South）」=低度/中等發展的低收入國家，是經濟地理概念，非地理位置。HDI低的甲、丙、丁屬南方。澳洲在南半球但屬北方——最常見陷阱。"},
+
+{tid:"hdi",q:"課本第219頁，「何者位於南半球，卻為北方區域國家？」（答案：戊）。戊國最可能是？",
+ opts:["尼加拉瓜","委內瑞拉","衣索比亞","澳洲（HDI=0.958，在南半球但屬北方已開發國）"],
+ ans:3,exp:"<b>【P.219第16題答案：戊=澳洲】</b>澳洲HDI=0.958、預期壽命83.9歲、GNI=$58,277——所有指標頂尖，是典型北方已開發國家，但地理上位於南半球。考驗學生理解「北方/南方」是發展概念非緯度。"},
+
+{tid:"hdi",q:"課本第219頁，A國金字塔「底部窄縮、高齡層比例高」（北方國家）最可能面臨哪個人口問題？",
+ opts:["人口爆炸糧食不足","人口老齡化嚴重、勞動力不足、社會保障壓力大","人口向都市集中造成廢村","青少年就業壓力大"],
+ ans:1,exp:"<b>【P.219】</b>A國（收縮型，北方已開發國）面臨：①低出生率→人口不足以更替 ②高齡化→退休人口多、工作人口少→健保退休金負擔重 ③勞動力不足。台灣目前也面臨此問題。"},
+
+{tid:"hdi",q:"若一國HDI極高（0.9以上），但人均GNI遠低於同樣HDI水準的其他國家，最可能原因是？",
+ opts:["統計資料錯誤","教育系統完善且預期壽命長，但經濟相對較弱（如古巴醫療教育優於其GNI水準）","剛發現大量石油","政府刻意壓低數字"],
+ ans:1,exp:"<b>【HDI三面向的獨立性】</b>HDI三面向各自獨立——長壽命+高教育不等於高收入。古巴是典型：醫療體系世界前列、教育普及，但人均GNI極低。說明HDI能揭示GDP無法反映的發展面向。"},
+
+{tid:"hdi",q:"人口金字塔從「擴張型（正三角）」轉為「收縮型（倒三角）」，最主要代表哪種轉型？",
+ opts:["戰爭使人口減少","從高出生率/高死亡率→低出生率/低死亡率，人口增長趨緩、老齡化加重","移民湧入使中壯年增加","政府強制計劃生育"],
+ ans:1,exp:"<b>【人口轉型理論】</b>發展提升過程：①醫療進步→死亡率降 ②教育提升→出生率降 ③人口從「年輕高成長」轉為「老齡低成長」。台、日、德都完成此轉型，正面對少子化老齡化。"},
+
+/* 中南美洲 4題 */
+{tid:"latam",q:"課本第218頁，亞馬遜雨林砍伐高峰集中在每年7月，最主要的地理原因是？",
+ opts:["7月農業採收旺季需趕開墾","7月是旱季無雨乾燥，有利放火焚林（雨季放火會被澆熄）","跨國企業採購計畫都在7月","政府7月才批准開發"],
+ ans:1,exp:"<b>【P.218】</b>亞馬遜過渡帶有明顯旱季（5-9月），旱季→植被乾燥→火燒效率最高→農民趁此放火清地→砍伐高峰在7月。相反雨季（10-3月）放火往往失敗。"},
+
+{tid:"latam",q:"課本第217頁，中南美洲「多元的合成文化」主要指不同族群文化接觸而生。下列哪項與此有關？",
+ opts:["大地主制與貧富差距","工業業務與市場開放","奴隸貿易和歐洲殖民、及與非洲黑奴的背景","市場開放和熱帶雨林開發"],
+ ans:2,exp:"<b>【P.217原題答案C】</b>中南美文化多元性三來源：①原住民（馬雅、阿茲特克、印加）②歐洲殖民者（西、葡帶來語言宗教音樂）③非洲黑奴（節奏音樂）。三者融合產生「合成文化」。"},
+
+{tid:"latam",q:"課本第218頁，某小說以秘魯首都舊城區為背景，提到道路、教堂聚落、歐洲情調等。最可能是哪種研究主題？",
+ opts:["印度教文化研究","殖民城市的都市形式：以拉美秘魯（印加/西班牙混合）研究城市空間結構","新教民主主義研究","原住民文化保存研究"],
+ ans:1,exp:"<b>【P.217原題答案B】</b>「道路規劃」→殖民地城市規劃；「教堂聚落」→西班牙天主教；「歐洲情調」→歐式外觀。這是研究「殖民地都市的空間結構」，以拉美秘魯（西班牙殖民）為典型。"},
+
+{tid:"latam",q:"課本第218頁，中南美都市化率（阿根廷92.5%、巴西87.8%）與全球57.5%相比，可得什麼結論？",
+ opts:["整體都市化偏低落後全球","普遍高於全球平均，阿根廷達92.5%，呈「過度都市化」的發展中國家特徵","完全沒有農業人口","已開發程度與北美相當"],
+ ans:1,exp:"<b>【P.218】</b>中南美都市化率（70-92%）遠高於全球平均（57.5%），但常伴隨「貧民窟（Favela）」——農村貧窮人口湧入城市但缺乏就業，形成「假性/過度都市化」。"}
+
+];
+
+/* ENGINE */
+let curTopic="env";
+const TOTAL=QDB.length;
+const answered={};
+
+const ttabs=document.getElementById("ttabs");
+TOPICS.forEach(t=>{
+  const cnt=QDB.filter(q=>q.tid===t.id).length;
+  const btn=document.createElement("button");
+  btn.className="ttab"+(t.id===curTopic?" on":"");
+  btn.id="tab-"+t.id;
+  btn.innerHTML=`${t.icon} ${t.name} <span style="background:#0f2744;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px;margin-left:3px">${cnt}</span>`;
+  btn.onclick=()=>switchTopic(t.id);
+  ttabs.appendChild(btn);
+});
+
+function switchTopic(id){
+  curTopic=id;
+  document.querySelectorAll(".ttab").forEach(b=>b.classList.remove("on"));
+  document.getElementById("tab-"+id).classList.add("on");
+  render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  const topic=TOPICS.find(t=>t.id===curTopic);
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  let html=`
+  <div class="note-box">
+    <div class="note-hd" onclick="toggleNote(this)">
+      <span style="font-size:1.2rem">${topic.icon}</span>
+      <h2>${topic.name}｜重點整理（點此展開）</h2>
+      <span class="arr">▼</span>
+    </div>
+    <div class="note-body">${NOTES[curTopic]||"<p>整理中…</p>"}</div>
+  </div>
+  <div class="q-hd"><h2>${topic.icon} 練習題</h2><span class="q-cnt">${qs.length} 題</span></div>`;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    const optsHtml=q.opts.map((o,oi)=>`
+      <div class="opt" id="opt_${aid}_${oi}" onclick="pick('${aid}',${oi},${q.ans})">
+        <span class="ol" id="ol_${aid}_${oi}">${"ABCD"[oi]}</span><span>${o}</span>
+      </div>`).join("");
+    html+=`
+    <div class="qcard">
+      <div class="qhd"><span class="qnum">Q${i+1}</span><span class="qtxt">${q.q}</span></div>
+      <div class="opts">${optsHtml}</div>
+      <div class="exp" id="exp_${aid}">${q.exp}</div>
+    </div>`;
+  });
+  html+=`<button class="rbtn" onclick="resetTopic()">🔄 重置本主題</button>`;
+  document.getElementById("main").innerHTML=html;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    if(answered[aid]) applyResult(aid,answered[aid].sel,answered[aid].correct,q.ans);
+  });
+}
+
+function toggleNote(hd){hd.classList.toggle("open");hd.nextElementSibling.classList.toggle("open");}
+
+function pick(aid,sel,ans){
+  if(answered[aid])return;
+  const correct=sel===ans;
+  answered[aid]={sel,correct};
+  applyResult(aid,sel,correct,ans);
+  updateScore();
+}
+
+function applyResult(aid,sel,correct,ans){
+  [0,1,2,3].forEach(i=>{
+    const opt=document.getElementById("opt_"+aid+"_"+i);
+    if(!opt)return;
+    opt.classList.add("done");
+    if(i===sel&&correct)opt.classList.add("ok");
+    else if(i===sel&&!correct)opt.classList.add("ng");
+    else if(i===ans&&!correct)opt.classList.add("ok");
+    else opt.classList.add("fade");
+  });
+  const exp=document.getElementById("exp_"+aid);
+  if(exp)exp.classList.add("show");
+}
+
+function resetTopic(){
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  qs.forEach((_,i)=>delete answered[curTopic+"_"+i]);
+  render();updateScore();
+}
+
+function updateScore(){
+  const all=Object.values(answered);
+  const done=all.length;
+  const ok=all.filter(a=>a.correct).length;
+  document.getElementById("s-done").textContent=done;
+  document.getElementById("s-ok").textContent=ok;
+  document.getElementById("s-ng").textContent=done-ok;
+  document.getElementById("s-pct").textContent=done>0?Math.round(ok/done*100)+"%":"—";
+  document.getElementById("ptfill").style.width=(done/TOTAL*100)+"%";
+}
+
+render();
+</script>
+</body>
+</html>
