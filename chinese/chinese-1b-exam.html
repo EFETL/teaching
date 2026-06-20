@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國小國語 1下 第6～12課 模擬測驗</title>
+<style>
+  :root{
+    --primary:#d97642;      /* 主色：暖橘 */
+    --primary-dark:#b85c2e;
+    --accent:#5b9279;       /* 輔色：草綠 */
+    --accent-light:#e7f0ea;
+    --bg:#fdf8f3;
+    --card:#ffffff;
+    --line:#ecdfd3;
+    --text:#3a332e;
+    --muted:#8a7d72;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC","Helvetica Neue",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.9;
+    font-size:18px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:24px 20px 80px;}
+
+  /* ── 頁首 ── */
+  header.hero{
+    background:linear-gradient(135deg,var(--primary),#e89a5c);
+    color:#fff;border-radius:20px;padding:28px 30px;
+    box-shadow:0 6px 18px rgba(217,118,66,.25);
+  }
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:1px;}
+  header.hero .sub{font-size:15px;opacity:.95;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .meta-row .tag{background:rgba(255,255,255,.22);padding:4px 12px;border-radius:30px;font-size:14px;}
+
+  /* ── 工具列（不列印） ── */
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 8px;}
+  .toolbar button{
+    border:none;cursor:pointer;font-size:15px;font-family:inherit;
+    padding:10px 18px;border-radius:30px;font-weight:600;transition:.15s;
+  }
+  .btn-print{background:var(--primary);color:#fff;}
+  .btn-print:hover{background:var(--primary-dark);}
+  .btn-toggle{background:var(--accent);color:#fff;}
+  .btn-toggle:hover{filter:brightness(.93);}
+  .hint{font-size:14px;color:var(--muted);margin:4px 0 0;}
+
+  /* ── 學生資訊列 ── */
+  .info-bar{
+    display:flex;gap:24px;flex-wrap:wrap;
+    border:1px dashed var(--line);border-radius:12px;
+    padding:12px 18px;margin:18px 0;font-size:16px;color:var(--muted);
+  }
+  .info-bar span{flex:1;min-width:140px;}
+
+  /* ── 大題卡片 ── */
+  .section{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:22px 24px;margin:22px 0;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .section > h2{
+    margin:0 0 6px;font-size:21px;color:var(--primary-dark);
+    display:flex;align-items:center;gap:10px;
+  }
+  .section > h2 .num{
+    background:var(--primary);color:#fff;border-radius:8px;
+    font-size:16px;padding:2px 10px;flex:none;
+  }
+  .section .lead{font-size:15px;color:var(--muted);margin:0 0 16px;}
+
+  /* ── 題目 ── */
+  .q{padding:12px 0;border-top:1px dashed var(--line);}
+  .q:first-of-type{border-top:none;}
+  .q-text{font-size:18px;}
+  .q-text .qn{color:var(--primary);font-weight:700;margin-right:6px;}
+  .zhuyin{
+    color:var(--accent);font-weight:700;
+    background:var(--accent-light);padding:1px 7px;border-radius:6px;
+    font-size:16px;letter-spacing:1px;
+  }
+  /* 注音 ruby（標在國字上方，一年級可讀） */
+  ruby{ruby-align:center;margin:0 1px;}
+  ruby rt{
+    font-size:.5em;color:var(--accent);font-weight:600;
+    letter-spacing:0;line-height:1;
+  }
+  .q1 .q-text{line-height:2.6;font-size:19px;}
+  .blank{display:inline-block;min-width:46px;border-bottom:2px solid var(--primary);
+    margin:0 3px;vertical-align:bottom;height:1.2em;}
+  .blank-lg{display:inline-block;min-width:100%;border-bottom:2px solid var(--line);
+    height:1.6em;margin-top:6px;}
+  .write-lines .blank-lg{margin-top:14px;}
+
+  /* 選擇題 */
+  .options{margin:8px 0 2px;display:flex;flex-direction:column;gap:4px;}
+  .options label{font-size:17px;cursor:pointer;}
+  .options .ch{display:inline-block;width:1.6em;color:var(--primary);font-weight:700;}
+
+  /* 改錯字格 */
+  .fix-line{
+    font-size:21px;letter-spacing:3px;line-height:2.4;
+    border:1px solid var(--line);border-radius:10px;padding:10px 14px;
+    background:#fffdfb;
+  }
+  .fix-correct{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px;font-size:16px;}
+  .fix-correct .pair{background:var(--accent-light);border-radius:8px;padding:3px 12px;}
+  .fix-correct .wrong{color:#c0392b;text-decoration:line-through;}
+  .fix-correct .right{color:var(--accent);font-weight:700;}
+
+  /* ── 解析（可點開、列印時隱藏） ── */
+  .reveal{
+    margin-top:10px;border:none;cursor:pointer;font-family:inherit;
+    background:var(--accent-light);color:var(--accent);
+    padding:6px 14px;border-radius:20px;font-size:14px;font-weight:600;
+  }
+  .reveal:hover{background:#d8e8df;}
+  .reveal::before{content:"▸ ";}
+  .reveal.open::before{content:"▾ ";}
+  .explain{
+    display:none;margin-top:10px;padding:12px 16px;
+    background:#fbf4ec;border-left:4px solid var(--primary);
+    border-radius:0 10px 10px 0;font-size:16px;color:#4a4038;
+  }
+  .explain.show{display:block;}
+  .explain b{color:var(--primary-dark);}
+  .explain .ans{font-size:18px;}
+
+  /* 照樣寫句子：模式示範卡 */
+  .pattern-box{margin:6px 0 14px;padding:12px 16px;background:var(--accent-light);
+    border-radius:12px;}
+  .pattern-box .ptitle{font-weight:700;color:var(--accent);font-size:16px;margin-bottom:8px;}
+  .demo{display:inline-flex;align-items:center;gap:10px;font-size:20px;
+    background:#fff;border:1.5px dashed var(--accent);border-radius:10px;padding:6px 14px;}
+  .demo .arrow{color:var(--primary);font-weight:700;font-size:18px;}
+  .demo b{color:var(--primary);}
+  .pat-q{font-size:19px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .pat-q .arrow{color:var(--primary);font-weight:700;}
+  .pat-q b{color:var(--text);}
+
+  footer.foot{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;}
+
+  /* ════════ 列印樣式 ════════ */
+  @media print{
+    @page{ margin:1.6cm 1.4cm 1.8cm; }
+    body{background:#fff;font-size:15px;line-height:1.7;}
+    .wrap{max-width:none;padding:0;}
+    .toolbar,.hint,.reveal,.explain,footer.foot{display:none !important;}
+    header.hero{
+      background:none;color:#000;box-shadow:none;
+      border:none;border-bottom:2px solid #000;border-radius:0;
+      padding:0 0 8px;margin-bottom:6px;
+    }
+    header.hero .sub{opacity:1;}
+    .meta-row .tag{background:none;border:1px solid #999;color:#000;}
+    .section{border:none;box-shadow:none;border-radius:0;padding:6px 0;
+      margin:8px 0;break-inside:avoid;}
+    .section > h2{color:#000;border-bottom:1px solid #000;padding-bottom:3px;}
+    .section > h2 .num{background:#000;color:#fff;}
+    .q{break-inside:avoid;}
+    .zhuyin{background:none;color:#000;border:1px solid #aaa;}
+    .fix-line{background:none;}
+    /* 每頁右下角頁碼 */
+    .print-pagenum{
+      position:fixed;bottom:0;right:0;font-size:12px;color:#000;
+    }
+    .print-pagenum::after{
+      counter-increment:page;
+      content:"— " counter(page) " —";
+    }
+  }
+  .print-pagenum{display:none;}
+  @media print{ .print-pagenum{display:block;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>國小國語 一年級下學期　第 6～12 課　模擬測驗</h1>
+    <div class="sub">康軒版　•　全班適用（中等難度）　•　奶奶的小跟班、作夢的雲、妹妹的紅雨鞋、七彩的虹、和你在一起、生日快樂、小黑</div>
+    <div class="meta-row">
+      <span class="tag">一、國字與注音 10 題</span>
+      <span class="tag">二、改錯字 10 題</span>
+      <span class="tag">三、造句 3 題</span>
+      <span class="tag">四、課文理解 20 題</span>
+      <span class="tag">五、照樣寫句子 5 題</span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <button class="btn-print" onclick="window.print()">🖨️ 列印測驗卷（不含解析）</button>
+    <button class="btn-toggle" onclick="toggleAll()">👁️ 顯示／隱藏全部解析</button>
+  </div>
+  <p class="hint">老師、家長使用說明：點題目下方的「查看解析」可單題展開答案與說明；列印時解析會自動隱藏，每頁右下角會標上頁碼。</p>
+
+  <div class="info-bar">
+    <span>班級：______　座號：______</span>
+    <span>姓名：________________</span>
+    <span>分數：__________</span>
+  </div>
+
+  <!-- ════════ 第一大題 ════════ -->
+  <section class="section q1">
+    <h2><span class="num">一</span> 國字與注音（每題 5 分，共 10 題）</h2>
+    <p class="lead">請依照（　）裡的注音，在空格中寫出正確的國字。國字上方的注音可以幫助你讀句子。</p>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">1.</span><ruby>弟<rt>ㄉㄧˋ</rt></ruby><ruby>弟<rt>ㄉㄧˋ</rt></ruby><ruby>天<rt>ㄊㄧㄢ</rt></ruby><ruby>天<rt>ㄊㄧㄢ</rt></ruby><ruby>跟<rt>ㄍㄣ</rt></ruby><ruby>著<rt>ㄓㄜ˙</rt></ruby>（<span class="zhuyin">ㄋㄞˇ ㄋㄞ˙</span>）<span class="blank"></span><span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>奶奶</b></span>　「奶奶」是爸爸或媽媽的媽媽。（第六課〈奶奶的小跟班〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">2.</span><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>喜<rt>ㄒㄧˇ</rt></ruby>（<span class="zhuyin">ㄏㄨㄢ</span>）<span class="blank"></span><ruby>和<rt>ㄏㄢˋ</rt></ruby><ruby>你<rt>ㄋㄧˇ</rt></ruby><ruby>在<rt>ㄗㄞˋ</rt></ruby><ruby>一<rt>ㄧ</rt></ruby><ruby>起<rt>ㄑㄧˇ</rt></ruby>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>歡</b></span>　「喜歡」表示愛好、心裡高興。（第十課〈和你在一起〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">3.</span><ruby>小<rt>ㄒㄧㄠˇ</rt></ruby><ruby>雨<rt>ㄩˇ</rt></ruby><ruby>滴<rt>ㄉㄧ</rt></ruby><ruby>把<rt>ㄅㄚˇ</rt></ruby><ruby>馬<rt>ㄇㄚˇ</rt></ruby><ruby>路<rt>ㄌㄨˋ</rt></ruby><ruby>洗<rt>ㄒㄧˇ</rt></ruby><ruby>得<rt>ㄉㄜ˙</rt></ruby><ruby>很<rt>ㄏㄣˇ</rt></ruby><ruby>乾<rt>ㄍㄢ</rt></ruby>（<span class="zhuyin">ㄐㄧㄥˋ</span>）<span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>淨</b></span>　「乾淨」是三點水（氵）部。（第九課〈七彩的虹〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">4.</span><ruby>作<rt>ㄗㄨㄛˋ</rt></ruby><ruby>夢<rt>ㄇㄥˋ</rt></ruby><ruby>的<rt>ㄉㄜ˙</rt></ruby><ruby>雲<rt>ㄩㄣˊ</rt></ruby><ruby>把<rt>ㄅㄚˇ</rt></ruby><ruby>天<rt>ㄊㄧㄢ</rt></ruby><ruby>空<rt>ㄎㄨㄥ</rt></ruby>（<span class="zhuyin">ㄅㄧㄢˋ</span>）<span class="blank"></span><ruby>得<rt>ㄉㄜ˙</rt></ruby><ruby>更<rt>ㄍㄥˋ</rt></ruby><ruby>漂<rt>ㄆㄧㄠˋ</rt></ruby><ruby>亮<rt>ㄌㄧㄤˋ</rt></ruby>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>變</b></span>　「變得」表示改變了樣子。（第七課〈作夢的雲〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">5.</span><ruby>放<rt>ㄈㄤˋ</rt></ruby>（<span class="zhuyin">ㄒㄩㄝˊ</span>）<span class="blank"></span><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>老<rt>ㄌㄠˇ</rt></ruby><ruby>師<rt>ㄕ</rt></ruby><ruby>提<rt>ㄊㄧˊ</rt></ruby><ruby>醒<rt>ㄒㄧㄥˇ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>們<rt>ㄇㄣ˙</rt></ruby><ruby>整<rt>ㄓㄥˇ</rt></ruby><ruby>理<rt>ㄌㄧˇ</rt></ruby><ruby>書<rt>ㄕㄨ</rt></ruby><ruby>包<rt>ㄅㄠ</rt></ruby>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>學</b></span>　「放學」是子（孑）部。（第十一課〈生日快樂〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">6.</span><ruby>這<rt>ㄓㄜˋ</rt></ruby><ruby>是<rt>ㄕˋ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>第<rt>ㄉㄧˋ</rt></ruby><ruby>一<rt>ㄧ</rt></ruby><ruby>次<rt>ㄘˋ</rt></ruby><ruby>收<rt>ㄕㄡ</rt></ruby><ruby>到<rt>ㄉㄠˋ</rt></ruby><ruby>生<rt>ㄕㄥ</rt></ruby><ruby>日<rt>ㄖˋ</rt></ruby>（<span class="zhuyin">ㄎㄚˇ ㄆㄧㄢˋ</span>）<span class="blank"></span><span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>卡片</b></span>　弟弟也寫卡片給奶奶。（第六、十一課）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">7.</span><ruby>我<rt>ㄨㄛˇ</rt></ruby>（<span class="zhuyin">ㄅㄤ</span>）<span class="blank"></span><ruby>小<rt>ㄒㄧㄠˇ</rt></ruby><ruby>黑<rt>ㄏㄟ</rt></ruby><ruby>加<rt>ㄐㄧㄚ</rt></ruby>（<span class="zhuyin">ㄧㄡˊ</span>）<span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>幫</b>、<b>油</b></span>　「幫」是巾部，「加油」的油是三點水。（第十二課〈小黑〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">8.</span><ruby>太<rt>ㄊㄞˋ</rt></ruby><ruby>陽<rt>ㄧㄤˊ</rt></ruby><ruby>國<rt>ㄍㄨㄛˊ</rt></ruby><ruby>王<rt>ㄨㄤˊ</rt></ruby><ruby>要<rt>ㄧㄠˋ</rt></ruby><ruby>大<rt>ㄉㄚˋ</rt></ruby>（<span class="zhuyin">ㄙㄠˇ</span>）<span class="blank"></span><ruby>除<rt>ㄔㄨˊ</rt></ruby>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>掃</b></span>　「掃除」是提手旁（扌）。（第九課〈七彩的虹〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">9.</span><ruby>風<rt>ㄈㄥ</rt></ruby>（<span class="zhuyin">ㄓㄥ</span>）<span class="blank"></span><ruby>升<rt>ㄕㄥ</rt></ruby><ruby>高<rt>ㄍㄠ</rt></ruby><ruby>好<rt>ㄏㄠˇ</rt></ruby><ruby>神<rt>ㄕㄣˊ</rt></ruby>（<span class="zhuyin">ㄑㄧˊ</span>）<span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>箏</b>、<b>奇</b></span>　「風箏」是竹（⺮）部，「神奇」很奇妙。（第十課〈和你在一起〉）</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">10.</span><ruby>一<rt>ㄧ</rt></ruby>（<span class="zhuyin">ㄎㄞ ㄕˇ</span>）<span class="blank"></span><span class="blank"></span>，<ruby>小<rt>ㄒㄧㄠˇ</rt></ruby><ruby>黑<rt>ㄏㄟ</rt></ruby><ruby>跑<rt>ㄆㄠˇ</rt></ruby><ruby>在<rt>ㄗㄞˋ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>前<rt>ㄑㄧㄢˊ</rt></ruby><ruby>面<rt>ㄇㄧㄢˋ</rt></ruby>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>開始</b></span>　句型「一開始……後來……」。（第十二課〈小黑〉）</div>
+    </div>
+  </section>
+
+  <!-- ════════ 第二大題 ════════ -->
+  <section class="section">
+    <h2><span class="num">二</span> 改錯字（每題 10 分，共 10 題）</h2>
+    <p class="lead">下面每一句話都是 <b>20 個字</b>，句子裡藏著 <b>3 個錯字</b>。請把錯字圈出來，並在旁邊寫出正確的字。</p>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">1.</span></div>
+      <div class="fix-line">奶奶在花園裡重花，弟弟在旁邊邦忙繞水做家事。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">重</span>→<span class="right">種</span></span>
+          <span class="pair"><span class="wrong">邦</span>→<span class="right">幫</span></span>
+          <span class="pair"><span class="wrong">繞</span>→<span class="right">澆</span></span>
+        </div>
+        正確：奶奶在花園裡<b>種</b>花，弟弟在旁邊<b>幫</b>忙<b>澆</b>水做家事。（第六課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">2.</span></div>
+      <div class="fix-line">昨夢的白雲變成綿花糖，天空變得更票亮更好玩。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">昨</span>→<span class="right">作</span></span>
+          <span class="pair"><span class="wrong">綿</span>→<span class="right">棉</span></span>
+          <span class="pair"><span class="wrong">票</span>→<span class="right">漂</span></span>
+        </div>
+        正確：<b>作</b>夢的白雲變成<b>棉</b>花糖，天空變得更<b>漂</b>亮更好玩。（第七課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">3.</span></div>
+      <div class="fix-line">太陽國王大掃徐，小雨滴洗靜馬路，送他們七採虹。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">徐</span>→<span class="right">除</span></span>
+          <span class="pair"><span class="wrong">靜</span>→<span class="right">淨</span></span>
+          <span class="pair"><span class="wrong">採</span>→<span class="right">彩</span></span>
+        </div>
+        正確：太陽國王大掃<b>除</b>，小雨滴洗<b>淨</b>馬路，送他們七<b>彩</b>虹。（第九課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">4.</span></div>
+      <div class="fix-line">下雨天，雨低一洛下，水面就開出一躲躲的小水花。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">低</span>→<span class="right">滴</span></span>
+          <span class="pair"><span class="wrong">洛</span>→<span class="right">落</span></span>
+          <span class="pair"><span class="wrong">躲</span>→<span class="right">朵</span></span>
+        </div>
+        正確：下雨天，雨<b>滴</b>一<b>落</b>下，水面就開出一<b>朵</b>朵的小水花。（第八課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">5.</span></div>
+      <div class="fix-line">我喜換和你在一起放風箏，美天都有好心晴真好。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">換</span>→<span class="right">歡</span></span>
+          <span class="pair"><span class="wrong">美</span>→<span class="right">每</span></span>
+          <span class="pair"><span class="wrong">晴</span>→<span class="right">情</span></span>
+        </div>
+        正確：我喜<b>歡</b>和你在一起放風箏，<b>每</b>天都有好心<b>情</b>真好。（第十課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">6.</span></div>
+      <div class="fix-line">放學時，我手到一張寫著住服的生日卡片好開心。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">手</span>→<span class="right">收</span></span>
+          <span class="pair"><span class="wrong">住</span>→<span class="right">祝</span></span>
+          <span class="pair"><span class="wrong">服</span>→<span class="right">福</span></span>
+        </div>
+        正確：放學時，我<b>收</b>到一張寫著<b>祝</b><b>福</b>的生日卡片好開心。（第十一課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">7.</span></div>
+      <div class="fix-line">跑著跑著，我幫小黑家油，小黑也大聲象我說加由。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">家</span>→<span class="right">加</span></span>
+          <span class="pair"><span class="wrong">象</span>→<span class="right">向</span></span>
+          <span class="pair"><span class="wrong">由</span>→<span class="right">油</span></span>
+        </div>
+        正確：跑著跑著，我幫小黑<b>加</b>油，小黑也大聲<b>向</b>我說加<b>油</b>。（第十二課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">8.</span></div>
+      <div class="fix-line">一開使小黑跑得塊，後來離開路燈變得不太青楚。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">使</span>→<span class="right">始</span></span>
+          <span class="pair"><span class="wrong">塊</span>→<span class="right">快</span></span>
+          <span class="pair"><span class="wrong">青</span>→<span class="right">清</span></span>
+        </div>
+        正確：一開<b>始</b>小黑跑得<b>快</b>，後來離開路燈變得不太<b>清</b>楚。（第十二課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">9.</span></div>
+      <div class="fix-line">今天放學時，我和第弟一起跑跑跳跳，心晴都狠好。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">第</span>→<span class="right">弟</span></span>
+          <span class="pair"><span class="wrong">晴</span>→<span class="right">情</span></span>
+          <span class="pair"><span class="wrong">狠</span>→<span class="right">很</span></span>
+        </div>
+        正確：今天放學時，我和<b>弟</b>弟一起跑跑跳跳，心<b>情</b>都<b>很</b>好。（第十、十一課）
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">10.</span></div>
+      <div class="fix-line">白雲變成棉花唐，黑雲變成黑天蛾，在空中自由非。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">
+        <div class="fix-correct">
+          <span class="pair"><span class="wrong">唐</span>→<span class="right">糖</span></span>
+          <span class="pair"><span class="wrong">蛾</span>→<span class="right">鵝</span></span>
+          <span class="pair"><span class="wrong">非</span>→<span class="right">飛</span></span>
+        </div>
+        正確：白雲變成棉花<b>糖</b>，黑雲變成黑天<b>鵝</b>，在空中自由<b>飛</b>。（第七課）
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 第三大題 ════════ -->
+  <section class="section">
+    <h2><span class="num">三</span> 造句（每題 10 分，共 3 題）</h2>
+    <p class="lead">請用下列的詞語或句型，各寫出一個通順的句子。</p>
+
+    <div class="q write-lines">
+      <div class="q-text"><span class="qn">1.</span>用「<b>一……就……</b>」造句。</div>
+      <div class="blank-lg"></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：太陽<b>一</b>出來，花兒<b>就</b>開了。／我<b>一</b>回到家，<b>就</b>先寫功課。（第八課句型）</div>
+    </div>
+
+    <div class="q write-lines">
+      <div class="q-text"><span class="qn">2.</span>用「<b>一開始……後來……</b>」造句。</div>
+      <div class="blank-lg"></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：<b>一開始</b>我不會騎腳踏車，<b>後來</b>多練習就會了。（第十二課句型）</div>
+    </div>
+
+    <div class="q write-lines">
+      <div class="q-text"><span class="qn">3.</span>用「<b>把……變得……</b>」造句。</div>
+      <div class="blank-lg"></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：春天<b>把</b>大地<b>變得</b>更綠了。／笑容<b>把</b>教室<b>變得</b>好溫暖。（第七課句型）</div>
+    </div>
+  </section>
+
+  <!-- ════════ 第四大題 ════════ -->
+  <section class="section">
+    <h2><span class="num">四</span> 課文理解（每題 5 分，共 20 題）</h2>
+    <p class="lead">請仔細閱讀題目，把正確答案的代號圈起來。</p>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">1.</span>〈奶奶的小跟班〉中，弟弟天天跟著誰？</div>
+      <div class="options"><label><span class="ch">(A)</span>奶奶</label><label><span class="ch">(B)</span>媽媽</label><label><span class="ch">(C)</span>老師</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　弟弟是奶奶的小跟班，所以天天跟著奶奶。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">2.</span>弟弟和奶奶晚上會一起到哪裡散步？</div>
+      <div class="options"><label><span class="ch">(A)</span>學校</label><label><span class="ch">(B)</span>公園</label><label><span class="ch">(C)</span>市場</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　晚上他們會到公園散步。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">3.</span>弟弟寫卡片給奶奶，上面寫著什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>我愛吃糖</label><label><span class="ch">(B)</span>我喜歡和您在一起</label><label><span class="ch">(C)</span>生日快樂</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　卡片上寫「我喜歡和您在一起」，「您」是有禮貌的說法。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">4.</span>〈作夢的雲〉中，白雲作夢變成了什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>棉花糖</label><label><span class="ch">(B)</span>黑天鵝</label><label><span class="ch">(C)</span>小帆船</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　白雲作夢變成白白的棉花糖。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">5.</span>〈作夢的雲〉中，黑雲作夢變成了什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>棉花糖</label><label><span class="ch">(B)</span>黑天鵝</label><label><span class="ch">(C)</span>蝴蝶</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　黑雲作夢變成黑黑的黑天鵝。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">6.</span>作夢的雲把天空變得怎麼樣？</div>
+      <div class="options"><label><span class="ch">(A)</span>更漂亮、更好玩</label><label><span class="ch">(B)</span>更黑</label><label><span class="ch">(C)</span>更安靜</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　句型「把天空變得更漂亮、更好玩」。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">7.</span>〈妹妹的紅雨鞋〉中，妹妹在什麼天氣最開心？</div>
+      <div class="options"><label><span class="ch">(A)</span>晴天</label><label><span class="ch">(B)</span>雨天</label><label><span class="ch">(C)</span>雪天</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　妹妹喜歡下雨天穿紅雨鞋，和雨滴玩遊戲。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">8.</span>雨滴一落下，水面就開出什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>一朵朵小水花</label><label><span class="ch">(B)</span>荷花</label><label><span class="ch">(C)</span>雪花</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　「雨滴一落下，水面就開出一朵朵的小水花。」</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">9.</span>〈七彩的虹〉中，太陽國王要做什麼事？</div>
+      <div class="options"><label><span class="ch">(A)</span>睡覺</label><label><span class="ch">(B)</span>大掃除</label><label><span class="ch">(C)</span>種花</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　太陽國王要大掃除，於是請小雨滴幫忙。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">10.</span>小雨滴把馬路、山頭洗得怎麼樣？</div>
+      <div class="options"><label><span class="ch">(A)</span>很乾淨</label><label><span class="ch">(B)</span>很髒</label><label><span class="ch">(C)</span>很黑</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　小雨滴掃得很認真，把東西洗得很乾淨。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">11.</span>太陽國王送給認真工作的小雨滴什麼禮物？</div>
+      <div class="options"><label><span class="ch">(A)</span>糖果</label><label><span class="ch">(B)</span>七彩的虹</label><label><span class="ch">(C)</span>雨傘</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　這是故事的「結果」：太陽國王送他們七彩的虹。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">12.</span>〈和你在一起〉中，作者拉著長線在做什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>放風箏</label><label><span class="ch">(B)</span>釣魚</label><label><span class="ch">(C)</span>跳繩</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　「拉著長線放風箏，風箏升高好神奇。」</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">13.</span>和好朋友在一起，作者覺得每天都怎麼樣？</div>
+      <div class="options"><label><span class="ch">(A)</span>有好心情</label><label><span class="ch">(B)</span>很無聊</label><label><span class="ch">(C)</span>很累</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　「每件事情都好玩，每天都有好心情。」</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">14.</span>〈生日快樂〉中，今天是誰的生日？</div>
+      <div class="options"><label><span class="ch">(A)</span>心雲</label><label><span class="ch">(B)</span>「我」（作者）</label><label><span class="ch">(C)</span>老師</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　「今天是我的生日」，作者擔心朋友會不會記得。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">15.</span>放學時，「我」收到了什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>生日卡片</label><label><span class="ch">(B)</span>生日蛋糕</label><label><span class="ch">(C)</span>玩具</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　收到一張寫著心雲祝福的生日卡片。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">16.</span>收到卡片以後，「我」和心雲的心情怎麼樣？</div>
+      <div class="options"><label><span class="ch">(A)</span>很難過</label><label><span class="ch">(B)</span>很開心、很快樂</label><label><span class="ch">(C)</span>很生氣</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　這是兩人第一次收到、送出卡片，「我們都快樂的笑了」。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">17.</span>〈小黑〉中，「我」想和小黑比什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>看誰跳得高</label><label><span class="ch">(B)</span>看誰跑得快</label><label><span class="ch">(C)</span>看誰力氣大</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　「我想和小黑比一比，看誰跑得快。」</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">18.</span>讀完課文後，你發現「小黑」其實是什麼？</div>
+      <div class="options"><label><span class="ch">(A)</span>小狗</label><label><span class="ch">(B)</span>「我」的影子</label><label><span class="ch">(C)</span>同學</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(B)</b></span>　從「我做什麼，小黑也跟著做什麼」「離開路燈就變不清楚」可以推論小黑是影子。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">19.</span>跑到一半時，小黑為什麼變得不太清楚？</div>
+      <div class="options"><label><span class="ch">(A)</span>離開了路燈的光</label><label><span class="ch">(B)</span>小黑跑走了</label><label><span class="ch">(C)</span>下雨了</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(A)</b></span>　影子要有光才清楚，離開路燈光線變暗，影子就不清楚了。</div>
+    </div>
+
+    <div class="q">
+      <div class="q-text"><span class="qn">20.</span>最後「我」和小黑跑到路燈下，結果怎麼樣？</div>
+      <div class="options"><label><span class="ch">(A)</span>我贏了</label><label><span class="ch">(B)</span>小黑贏了</label><label><span class="ch">(C)</span>分不出誰快誰慢</label></div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain"><span class="ans">答案：<b>(C)</b></span>　「分不出誰快誰慢」，因為小黑是影子，會和「我」一起到。</div>
+    </div>
+  </section>
+
+  <!-- ════════ 第五大題 ════════ -->
+  <section class="section">
+    <h2><span class="num">五</span> 照樣寫句子（每題 8 分，共 5 題）</h2>
+
+    <!-- 模式一：動作 + 得 + 怎麼樣 -->
+    <div class="pattern-box">
+      <div class="ptitle">模式一　動作 ＋「得」＋ 怎麼樣</div>
+      <div class="demo"><ruby>掃<rt>ㄙㄠˇ</rt></ruby><span class="arrow">➜</span>掃<b>得</b>很認真</div>
+    </div>
+
+    <div class="q">
+      <div class="pat-q"><span class="qn">1.</span><ruby>洗<rt>ㄒㄧˇ</rt></ruby><span class="arrow">➜</span>洗<b>得</b><span class="blank"></span><span class="blank"></span><span class="blank"></span><span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：洗<b>得很乾淨</b>。（第九課句型「動作＋得」）</div>
+    </div>
+
+    <div class="q">
+      <div class="pat-q"><span class="qn">2.</span><ruby>唱<rt>ㄔㄤˋ</rt></ruby><span class="arrow">➜</span>唱<b>得</b><span class="blank"></span><span class="blank"></span><span class="blank"></span><span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：唱<b>得真好聽</b>。（第九課句型「動作＋得」）</div>
+    </div>
+
+    <div class="q">
+      <div class="pat-q"><span class="qn">3.</span><ruby>笑<rt>ㄒㄧㄠˋ</rt></ruby><span class="arrow">➜</span>笑<b>得</b><span class="blank"></span><span class="blank"></span><span class="blank"></span><span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：笑<b>得好開心</b>。（第九課句型「動作＋得」）</div>
+    </div>
+
+    <!-- 模式二：疊詞 + 心情 -->
+    <div class="pattern-box">
+      <div class="ptitle">模式二　疊詞 ＋ 心情</div>
+      <div class="demo">我們<ruby>說<rt>ㄕㄨㄛ</rt></ruby>說<ruby>笑<rt>ㄒㄧㄠˋ</rt></ruby>笑，好歡喜。</div>
+    </div>
+
+    <div class="q">
+      <div class="pat-q"><span class="qn">4.</span>大家唱唱跳跳，<span class="blank"></span><span class="blank"></span><span class="blank"></span>。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：大家唱唱跳跳，<b>真開心</b>。（第十課句型「疊詞＋心情」）</div>
+    </div>
+
+    <div class="q">
+      <div class="pat-q"><span class="qn">5.</span>大家<span class="blank"></span><span class="blank"></span><span class="blank"></span><span class="blank"></span>，真快樂。</div>
+      <button class="reveal" onclick="toggle(this)">查看解析</button>
+      <div class="explain">參考答案：大家<b>吃吃喝喝</b>，真快樂。（第十課句型「疊詞＋心情」）</div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    國小國語 1下　第 6～12 課　互動測驗　•　康軒版　•　全班適用
+  </footer>
+
+</div>
+
+<div class="print-pagenum"></div>
+
+<script>
+  function toggle(btn){
+    var ex = btn.nextElementSibling;
+    ex.classList.toggle('show');
+    btn.classList.toggle('open');
+    btn.textContent = (btn.classList.contains('open') ? '收合解析' : '查看解析');
+  }
+  function toggleAll(){
+    var btns = document.querySelectorAll('.reveal');
+    // 只要還有任何一題是收合的，就全部展開；否則全部收合
+    var anyClosed = Array.prototype.some.call(btns, function(b){ return !b.classList.contains('open'); });
+    btns.forEach(function(b){
+      var ex = b.nextElementSibling;
+      if(anyClosed){ ex.classList.add('show'); b.classList.add('open'); b.textContent='收合解析'; }
+      else        { ex.classList.remove('show'); b.classList.remove('open'); b.textContent='查看解析'; }
+    });
+  }
+</script>
+</body>
+</html>
