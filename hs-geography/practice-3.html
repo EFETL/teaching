@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>練習卷三：時事綜合</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f2744;--gold:#e8a000;--teal:#0a7ea4;--green:#15803d;--red:#b91c1c;--bg:#f0f4f9;--border:#dde3ed}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:#1a1a2e;font-size:15px}
+header{background:linear-gradient(135deg,#0f2744 0%,#1e4080 60%,#6c4ab6 100%);color:#fff;padding:20px 18px 16px;text-align:center}
+header h1{font-size:1.4rem;font-weight:800}
+header p{margin-top:5px;font-size:.82rem;opacity:.88}
+.back{display:inline-block;margin-top:10px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 14px;font-size:.78rem;text-decoration:none}
+#sbar{background:#0f2744;color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 14px;font-size:.8rem;flex-wrap:wrap}
+.si span.val{font-weight:700;font-size:.95rem}
+#ptbar{height:5px;background:rgba(255,255,255,.2);width:160px;border-radius:3px;overflow:hidden}
+#ptfill{height:100%;background:var(--gold);width:0%;transition:width .3s}
+.ttabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.ttab{flex:0 0 auto;padding:11px 13px;font-size:.78rem;font-weight:700;background:none;border:none;cursor:pointer;color:#6b7280;border-bottom:3px solid transparent;white-space:nowrap}
+.ttab.on{color:var(--navy);border-bottom-color:var(--gold)}
+#main{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+.q-hd{display:flex;align-items:center;gap:9px;margin:6px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.q-hd h2{font-size:.92rem;font-weight:700;color:var(--navy)}
+.q-cnt{background:var(--navy);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px}
+.qcard{background:#fff;border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden}
+.qhd{padding:13px 15px 9px;display:flex;gap:9px;align-items:flex-start}
+.qnum{background:var(--navy);color:#fff;border-radius:5px;padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.qtxt{font-size:.88rem;line-height:1.75;flex:1}
+.opts{padding:0 15px 5px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;margin-bottom:6px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:.84rem;line-height:1.5;transition:.13s;user-select:none}
+.opt:hover:not(.done){border-color:var(--teal);background:#f0f9ff}
+.ol{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.opt.ok{border-color:var(--green)!important;background:#f0fdf4}
+.opt.ok .ol{background:var(--green);border-color:var(--green);color:#fff}
+.opt.ng{border-color:var(--red)!important;background:#fff5f5}
+.opt.ng .ol{background:var(--red);border-color:var(--red);color:#fff}
+.opt.fade{opacity:.4}
+.exp{display:none;margin:3px 15px 13px;padding:10px 13px;background:#fffbe8;border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:.81rem;line-height:1.75;color:#4a3b00}
+.exp.show{display:block}
+.exp b{color:var(--navy)}
+.rbtn{display:block;width:fit-content;margin:24px auto 0;padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <h1>📝 高中地理 練習卷三</h1>
+  <p>時事連結與綜合分析題 ‧ 50題 ‧ 點選項即顯示解析</p>
+  <a class="back" href="./">← 回高中地理</a>
+</header>
+<div id="sbar">
+  <div class="si">已答 <span class="val" id="s-done">0</span>/50</div>
+  <div id="ptbar"><div id="ptfill"></div></div>
+  <div class="si">答對 <span class="val" id="s-ok" style="color:#86efac">0</span></div>
+  <div class="si">答錯 <span class="val" id="s-ng" style="color:#fca5a5">0</span></div>
+  <div class="si">正確率 <span class="val" id="s-pct">—</span></div>
+</div>
+<div class="ttabs" id="ttabs"></div>
+<div id="main"></div>
+<script>
+const TOPICS=[{"id": "env", "icon": "🌎", "name": "美國環境"}, {"id": "ppl", "icon": "👥", "name": "移民文化"}, {"id": "city", "icon": "🏙️", "name": "城市產業"}, {"id": "usmca", "icon": "📜", "name": "USMCA"}, {"id": "glob", "icon": "🌐", "name": "全球化"}, {"id": "hdi", "icon": "📊", "name": "人口HDI"}, {"id": "latam", "icon": "🌿", "name": "中南美洲"}];
+const QDB=[{"tid": "env", "q": "2024年台積電赴美國亞利桑那州設廠，部分原因是看中美國「19至20世紀本土免於戰火、政治穩定」的特性。此一優勢最根本的地理基礎為何？", "opts": ["中部大平原的肥沃土壤", "東部煤鐵資源豐富", "東西兩側臨太平洋與大西洋形成的位置屏障", "頁岩油革命帶來的能源優勢"], "ans": 2, "exp": "課本P.154指出美國<b>東西臨兩大洋形成位置屏障</b>，使本土在兩次世界大戰中免於戰火，保留完整工業基礎而成世界第一強國。土壤、煤鐵、頁岩油屬資源面，非「免於戰火」的根本原因。"}, {"tid": "env", "q": "美國中部大平原能成為「世界糧倉」，與下列哪兩項地形作用形成的肥沃土壤關係最密切？", "opts": ["風積黃土與河流沖積", "板塊聚合與斷層作用", "海水入侵與潟湖沉積", "火山噴發與冰河侵蝕"], "ans": 0, "exp": "課本P.155說明中部大平原由<b>風積黃土加上河流沖積平原</b>構成，土壤肥沃成為世界糧倉。火山、板塊聚合是西部特徵，與中部平原無關。"}, {"tid": "env", "q": "頁岩油革命使美國從石油進口國躍升為全球最大原油生產國，這項轉變對國際局勢最直接的影響是？", "opts": ["加速永凍土融化", "改變地緣政治與全球能源版圖", "讓中部成為世界糧倉", "使美國放棄製造業"], "ans": 1, "exp": "課本P.155指出2010年代<b>水平鑽井加水壓裂岩</b>技術引爆頁岩革命，美國能源自主大增，<b>改變地緣政治與能源版圖</b>，削弱中東產油國影響力。此為時事連結重點。"}, {"tid": "env", "q": "2020年加州野火規模空前，從「氣候類型」與「全球變遷」雙重角度分析，最主要的成因組合是？", "opts": ["溫帶海洋性氣候多雨疊加聖嬰現象", "地中海型氣候夏乾特性疊加全球暖化", "副極地氣候永凍土融化疊加甲烷釋放", "熱帶莽原氣候乾季疊加焚風"], "ans": 1, "exp": "課本P.159指出加州屬<b>地中海型氣候</b>（夏乾），加上<b>全球暖化</b>使乾旱加劇，野火頻率與規模上升。永凍土甲烷是阿拉斯加問題，非加州。"}, {"tid": "env", "q": "阿拉斯加永凍土融化會釋放二氧化碳與甲烷，進而加速暖化、又使更多永凍土融化。這種機制在科學上稱為？", "opts": ["聖嬰現象", "碳中和", "正回饋（惡性循環）", "負回饋"], "ans": 2, "exp": "課本P.160說明永凍土融化釋放溫室氣體→加速暖化→更多融化，形成<b>正回饋（惡性循環）</b>，使變化不斷放大，是氣候變遷的關鍵警訊。"}, {"tid": "env", "q": "西雅圖與舊金山緯度相近，但西雅圖為溫帶海洋性氣候、舊金山附近為地中海型氣候。造成此差異的關鍵是？", "opts": ["海拔高度差異懸殊", "距海遠近差異大", "所受洋流與氣壓帶不同", "板塊運動造成地形差異"], "ans": 2, "exp": "課本P.157指出西雅圖受<b>北太平洋暖流加西風</b>形成溫帶海洋性；加州受<b>加利福尼亞寒流加副熱帶高壓</b>形成地中海型。兩者皆沿海，差異來自洋流與氣壓帶。"}, {"tid": "env", "q": "阿拉斯加南部冬季氣溫較同緯度其他地區溫暖，主要原因為何？", "opts": ["阿拉斯加暖流的調節", "永凍土的保溫作用", "火山地熱影響", "頁岩油開採產生熱能"], "ans": 0, "exp": "課本P.157指出<b>阿拉斯加暖流</b>使阿拉斯加南部沿岸較同緯度地區溫暖，顯示洋流對氣候的調節作用。"}, {"tid": "env", "q": "颶風卡崔娜重創美國東南部，這類災害頻繁侵襲東南部，與下列何種環境條件最相關？", "opts": ["阿拉斯加永凍土", "西部板塊聚合帶", "臨墨西哥灣與大西洋暖海域", "中部風積黃土區"], "ans": 2, "exp": "課本P.159指出<b>颶風（如卡崔娜）侵襲東南部</b>，因該區臨墨西哥灣與大西洋暖海域，提供颶風所需的暖濕能量。"}, {"tid": "env", "q": "課本導言指出美國能擁有「產業發展的良好環境」，是下列哪三項條件交互作用的結果？", "opts": ["廣大殖民地、廉價勞工與低稅率", "豐富自然資源、先進科技與穩定政治", "高山屏障、火山地熱與季風氣候", "單一民族、嚴格管制與封閉市場"], "ans": 1, "exp": "課本P.154導言指出美國以<b>豐富自然資源＋先進科技＋穩定政治</b>三者交互，構成產業良好發展環境，缺一不可，這是綜合分析的核心。"}, {"tid": "ppl", "q": "美國1924年實施移民配額制、1965年廢除種族配額，導致亞洲與拉美移民大增。這個歷程最能說明的概念是？", "opts": ["地形屏障阻擋移民", "洋流影響人口分布", "氣候決定移民流向", "移民政策能塑造一國的族群結構"], "ans": 3, "exp": "課本P.163指出1924配額制排斥東南歐、1965廢除種族配額後亞拉移民大增，顯示<b>移民政策（人為制度）塑造族群結構</b>，而非自然因素。"}, {"tid": "ppl", "q": "輝達(NVIDIA)創辦人黃仁勳是美國亞裔的代表。課本指出亞裔族群在美國社會的整體特徵是？", "opts": ["多為非法移民缺乏技術", "主要分布東南部棉花帶", "低教育程度、集中於農業", "高教育程度、多從事白領與科技業"], "ans": 3, "exp": "課本P.164-165指出美國<b>亞裔具高教育、高白領比例</b>，黃仁勳所在的科技業即為代表。非裔因奴隸歷史多分布東南部，與亞裔不同。"}, {"tid": "ppl", "q": "美國非裔人口主要集中於東南部各州，這個分布格局最直接反映的歷史背景是？", "opts": ["昔日棉花種植園的奴隸制歷史遺緒", "地中海型氣候適宜居住", "頁岩油開採的勞動需求", "近代科技業群聚吸引"], "ans": 0, "exp": "課本P.165指出非裔集中東南部，源於<b>棉花種植園奴隸制的歷史遺緒</b>，是殖民與蓄奴歷史在當代人口分布上的延續。"}, {"tid": "ppl", "q": "拉丁裔已超越非裔成為美國第二大族群且成長最快。課本指出每年約100萬新移民湧入，對美國社會的正面意義主要為何？", "opts": ["減少都市化壓力", "提高糧食自給率", "降低族群衝突與歧視", "緩解少子化、補充勞動力並帶來技術"], "ans": 3, "exp": "課本P.164指出每年百萬新移民可<b>緩解少子化、補充勞動力、帶來技術</b>，這正呼應已開發國家以移民彌補人口老化的趨勢。族群衝突反而是其挑戰面。"}, {"tid": "ppl", "q": "洛杉磯、舊金山等地名源自西班牙文，底特律、路易斯安那源自法文，紐約源自英文。這現象最能說明？", "opts": ["地名隨移民政策變動", "地名反映地形高低", "地名是殖民歷史與勢力範圍的縮影", "地名由氣候類型決定"], "ans": 2, "exp": "課本P.163指出英(紐約)、法(底特律)、西(洛杉磯)等地名分布，<b>反映各殖民勢力的歷史範圍</b>，是文化景觀中的歷史印記。"}, {"tid": "ppl", "q": "19世紀大量歐洲人移民美國，下列何者屬於「推力」而非「拉力」？", "opts": ["美國工業就業機會", "美國開放的移民政策", "美國廣大可耕土地", "歐洲農業破壞與政治壓迫"], "ans": 3, "exp": "課本P.162指出<b>推力</b>是原居地的不利因素，如歐洲農業破壞、社會運動失敗、政治壓迫；廣大土地、工業機會、政策開放屬美國的<b>拉力</b>。"}, {"tid": "ppl", "q": "面對少子化與人口老化，美國仰賴新移民補充勞動力，但多元移民也帶來挑戰。下列何者為其主要負面議題？", "opts": ["能源供給不足", "糧食生產過剩", "族群價值衝突與種族歧視", "地震災害增加"], "ans": 2, "exp": "課本P.164-165指出多元文化雖帶來活力，但也產生<b>族群價值衝突與種族歧視</b>議題，這是移民社會須面對的張力，呼應當代美國的種族對立時事。"}, {"tid": "city", "q": "鴻海等台灣企業赴美國鏽帶設電動車與零件廠，並就近採購供應鏈。從經濟地理看，企業群聚於同地最主要可獲得？", "opts": ["地中海型氣候優勢", "政治屏障保護", "聚集經濟，降低生產與運輸成本", "廉價的頁岩油"], "ans": 2, "exp": "課本P.181指出汽車產業群聚（車廠＋零件＋裝配）可形成<b>聚集經濟</b>，共享供應鏈與人才、降低成本。外資進駐鏽帶正是看中此效益。"}, {"tid": "city", "q": "底特律被稱為「汽車城」，但20世紀後期一度衰退並被歸入「鏽帶(Rust Belt)」。其衰退的主因是？", "opts": ["颶風重創沿海港口", "永凍土融化破壞地基", "製造業外移導致產業空洞化", "地震頻繁摧毀工廠"], "ans": 2, "exp": "課本P.181指出鏽帶因<b>產業（製造業）外移</b>而衰退，Rust（鏽）象徵工廠閒置生鏽。近年外資回流（如電動車廠）則為其帶來復甦契機。"}, {"tid": "city", "q": "矽谷的半導體與科技公司群聚，和密西根州的汽車產業群聚，在地理概念上屬於同一類現象。此概念為？", "opts": ["比較利益", "全球在地化", "人口轉型", "聚集經濟"], "ans": 3, "exp": "課本P.153、181指出矽谷科技群聚與底特律汽車群聚皆為<b>聚集經濟</b>的案例，廠商相鄰可共享人才、技術與供應鏈。"}, {"tid": "city", "q": "台積電赴美國亞利桑那、日本熊本設廠，與矽谷的科技群聚相比，更能反映下列何種趨勢？", "opts": ["單一國家的聚集經濟", "鏽帶的產業衰退", "殖民城市的空間結構", "全球供應鏈的跨國布局"], "ans": 3, "exp": "課本P.153指出台積電赴美、赴日設廠是<b>全球供應鏈布局</b>的體現，是廠商在多國分散風險、貼近市場的策略，與單純在地群聚不同。"}, {"tid": "city", "q": "休士頓同時是石化重鎮與NASA太空中心所在地，這說明城市機能的何種特性？", "opts": ["一個城市可同時具備多種專業化機能", "城市只能發展單一產業", "機能與資源無關", "城市機能由氣候單獨決定"], "ans": 0, "exp": "課本P.153指出休士頓兼具<b>石化與太空科技</b>機能，顯示大城市常具多元專業機能。紐約(金融)、西雅圖(科技)、洛杉磯(影視)亦各有專業。"}, {"tid": "city", "q": "美國人口密度最高的地區為東北走廊、五大湖區與加州。此分布格局最能反映？", "opts": ["板塊聚合帶的分布", "歷史工業化與經濟機會的累積", "降水量由東向西遞增", "颶風路徑的影響"], "ans": 1, "exp": "課本P.181指出人口密集區與<b>歷史工業化及經濟機會</b>高度相關，東北與五大湖是老工業核心，加州則因近代科技與經濟發展而人口聚集。"}, {"tid": "city", "q": "西雅圖是亞馬遜、星巴克、波音的總部所在。一座城市能孕育多家全球企業總部，最能展現？", "opts": ["地震帶的資源優勢", "農業生產的優勢", "都市作為決策管控與創新節點的角色", "廉價土地與勞工"], "ans": 2, "exp": "課本P.153指出西雅圖匯聚亞馬遜、星巴克、波音等企業總部，顯示其作為<b>創新與決策管控節點</b>的都市機能，呼應世界都市理論。"}, {"tid": "usmca", "q": "USMCA規定汽車須有75%區域含量、且部分零件由時薪≥16美元的勞工生產。這兩項規定的共同目的是？", "opts": ["擴大農產品出口", "促進中國商品輸入", "降低北美汽車品質", "鼓勵製造業回流北美並抑制低薪競爭"], "ans": 3, "exp": "課本P.183指出<b>75%含量＋時薪16美元</b>門檻，意在<b>促製造業留北美、抑制低薪國（如墨西哥過去）的削價競爭</b>，鞏固區域產業鏈。"}, {"tid": "usmca", "q": "USMCA設有「毒丸條款」，限制成員國與「非市場經濟國家」簽署自貿協定。此條款最直接針對的背景是？", "opts": ["落日條款的補充", "防止匯率操縱", "美中貿易戰，防堵中國經墨、加走後門", "加拿大乳品保護"], "ans": 2, "exp": "課本P.183指出<b>毒丸條款</b>防止中國透過墨西哥、加拿大轉口進入美國市場，是<b>美中貿易戰</b>下的地緣經濟設計，為重要時事連結。"}, {"tid": "usmca", "q": "USMCA的「落日條款」規定協議每6年檢討、16年到期。設此條款的用意為何？", "opts": ["定期審查以避免協議過時僵化", "永久固定關稅稅率", "保障酪農利益", "防止匯率貶值"], "ans": 0, "exp": "課本P.183指出<b>落日條款</b>要求每6年評估，使協議能<b>定期檢討、避免過時</b>，反映貿易協定須隨情勢調整的彈性思維。"}, {"tid": "usmca", "q": "USMCA下加拿大開放3.5%乳品市場給美國，美國乳製品得以外銷加拿大，但加拿大酪農受衝擊。這最能說明貿易協定的何種本質？", "opts": ["協定只保護弱勢產業", "協定使所有產業均受益", "協定是有得有失的權衡，各產業利弊不一", "協定與農業無關"], "ans": 2, "exp": "課本P.184指出加拿大酪農受衝擊、美國乳品得利，顯示貿易協定是<b>有得有失的權衡</b>，不同產業與群體利弊不同，需整體評估。"}, {"tid": "usmca", "q": "近年晶片與電動車供應鏈出現「近岸外包(nearshoring)」趨勢，與USMCA的精神最相呼應之處在於？", "opts": ["鼓勵生產移往最遠的低薪國", "推動供應鏈在地化、提升區域韌性", "加強對中國的依賴", "完全放棄區域合作"], "ans": 1, "exp": "課本P.184指出USMCA與<b>近岸外包、供應鏈在地化</b>趨勢呼應，企業將生產移回鄰近區域以提升韌性、降低地緣風險，呼應晶片戰後的供應鏈重組。"}, {"tid": "usmca", "q": "USMCA設有「匯率條款」，要求成員國不得進行競爭性貶值。此規定的經濟邏輯為何？", "opts": ["促進資本自由外流", "固定三國貨幣為同一種", "鼓勵各國自由印鈔", "防止以貶值人為壓低出口價格搶占市場"], "ans": 3, "exp": "課本P.183指出<b>匯率條款</b>防止成員國<b>競爭性貶值</b>，因貶值會人為壓低出口價、形成不公平競爭，破壞協定的公平基礎。"}, {"tid": "glob", "q": "《世界是平的》一書認為全球化使生產可全球分工，其背後最關鍵的兩項驅動力是？", "opts": ["殖民擴張與軍事衝突", "關稅提高與貿易壁壘", "氣候變遷與人口老化", "運輸成本與通訊成本大幅下降"], "ans": 3, "exp": "課本P.245指出<b>運輸與通訊成本大降</b>是全球化的核心推力，使生產要素可跨國流動、形成全球分工，「世界是平的」。"}, {"tid": "glob", "q": "豐田汽車採JIT(及時生產、零庫存)制度，卻在2011年日本311地震與COVID疫情時暴露脆弱性。事後企業轉向「just in case」策略，這反映供應鏈思維的何種轉變？", "opts": ["從製造業轉向農業", "從在地化轉向全球化", "從零庫存轉向完全不生產", "從追求效率轉向重視韌性與安全庫存"], "ans": 3, "exp": "課本P.247指出JIT雖省成本，但天災疫情使其脆弱，故轉向<b>just in case（安全庫存）重韌性</b>。貝萊德Larry Fink亦倡此轉變，呼應晶片荒下的供應鏈重組。"}, {"tid": "glob", "q": "星巴克在馬祖開設融入閩東石屋風格的門市、無印良品推出鐵觀音爆米花。這類做法稱為「全球在地化」，其與「文化帝國主義」最大的差異在於？", "opts": ["兩者完全相同", "全球在地化會消滅在地文化", "文化帝國主義更尊重在地", "全球在地化是融合在地，而非單向取代"], "ans": 3, "exp": "課本P.248指出<b>全球在地化</b>是全球品牌<b>融合</b>在地特色；<b>文化帝國主義</b>則是強勢文化<b>取代</b>弱勢文化。前者共存、後者單向，是綜合比較重點。"}, {"tid": "glob", "q": "Toyota與Apple在泰國設廠生產，是依據各地生產條件進行全球布局。這體現的核心經濟原理為？", "opts": ["比較利益下的全球分工", "人口轉型", "聚集經濟", "全球在地化"], "ans": 0, "exp": "課本P.246指出企業赴泰國等地設廠，是依<b>比較利益</b>選擇最有利的生產地，形成全球分工的供應鏈布局。"}, {"tid": "glob", "q": "紐約、倫敦、東京被視為全球化下的「世界都市」，其關鍵角色為何？", "opts": ["跨國資本與決策管控的核心節點", "全球糧食生產中心", "原料開採基地", "廉價勞動力供應地"], "ans": 0, "exp": "課本P.246引薩森(Sassen)觀點，指出<b>世界都市是跨國資本與決策管控中心</b>，全球化使少數城市成為網絡節點，掌控全球經濟命脈。"}, {"tid": "glob", "q": "可汗學院(Khan Academy)提供全球免費線上課程，使知識跨界流通。這最能說明全球化的哪一面向？", "opts": ["文化帝國主義的擴張", "知識全球化使全球依存加深", "比較利益的生產分工", "競爭性貶值"], "ans": 1, "exp": "課本P.246指出可汗學院等使<b>知識全球化、跨界流通</b>，加深全球依存。日本戰後靠人力素質與科研突破資源限制，亦屬知識經濟的展現。"}, {"tid": "glob", "q": "貝萊德(BlackRock)等資產管理公司近年大力推動ESG投資。從全球化脈絡看，ESG趨勢最能呼應下列何種議題？", "opts": ["殖民地名分布", "全球化下的永續發展與碳排責任", "頁岩油革命", "文化帝國主義"], "ans": 1, "exp": "全球化使環境與碳排成為跨國共同責任，<b>ESG（環境、社會、治理）投資</b>促使企業重視永續、氣候正義，是全球化與氣候變遷交織下的金融時事。"}, {"tid": "glob", "q": "晶片荒期間，各國體認到過度依賴單一地區（如台灣）生產晶片的風險，紛紛推動本土製造。這與全球分工形成何種張力？", "opts": ["殖民與獨立的兩難", "人口與糧食的兩難", "氣候與地形的兩難", "效率（全球分工）與安全（自主韌性）的兩難"], "ans": 3, "exp": "課本P.246-247指出全球分工追求效率，但晶片荒暴露其脆弱，各國轉求<b>自主與韌性</b>，形成效率與安全的兩難，是供應鏈重組的核心時事議題。"}, {"tid": "glob", "q": "鼎泰豐、珍珠奶茶成功走向國際市場，與星巴克在地化策略相比，台灣案例展現的是？", "opts": ["僅限國內市場發展", "完全被外來文化取代", "拒絕全球化的孤立", "在地品牌反向輸出，參與全球文化流動"], "ans": 3, "exp": "課本P.248以鼎泰豐、珍奶為例，說明<b>在地品牌也能反向輸出</b>、參與全球文化流動，顯示全球化非單向，弱勢文化亦能成為全球元素。"}, {"tid": "glob", "q": "日本戰後天然資源匱乏，卻靠提升人力素質與科技研發成為經濟大國。這最能印證全球化時代的何種發展模式？", "opts": ["以知識經濟突破自然資源限制", "以低薪勞工吸引外資", "以廣大土地發展農業", "以軍事擴張取得資源"], "ans": 0, "exp": "課本P.246指出日本以<b>人力素質與科研（知識經濟）</b>突破資源限制，說明在全球化下，知識與技術可取代天然資源成為競爭優勢。"}, {"tid": "hdi", "q": "古巴的人均國民所得(GNI)偏低，但因醫療與教育水準高，HDI並不低。這最能說明？", "opts": ["醫療與HDI無關", "HDI只看所得", "GNI越低HDI必越高", "GNI高低不等於HDI高低，發展應多面向衡量"], "ans": 3, "exp": "課本P.219指出<b>GNI高≠HDI必高</b>，古巴所得低但健康教育佳，HDI不差；產油國則可能GNI高而HDI普通。HDI納入健康、教育、所得三面向，比GDP更全面。"}, {"tid": "hdi", "q": "HDI包含三大面向，下列何者組合正確？", "opts": ["出口、進口、關稅", "軍力、人口、面積", "健康(壽命)、教育(在學年數)、生活(GNI)", "降水、氣溫、地形"], "ans": 2, "exp": "課本P.219指出HDI三面向為<b>健康（平均壽命）、教育（在學年數）、生活水準（GNI）</b>，三者整合比單一GDP更能反映真實發展程度。"}, {"tid": "hdi", "q": "澳洲位於南半球，卻被歸為發展程度高的「北方國家」。這說明「南北」之分的本質是？", "opts": ["指人口多寡", "指國土面積", "指緯度高低", "指經濟發展程度，非地理半球"], "ans": 3, "exp": "課本P.219指出<b>「北方」指已開發程度，非地理半球</b>。澳洲(HDI約0.958)在南半球卻屬北方；南北差距是發展概念而非位置概念。"}, {"tid": "hdi", "q": "台灣、日本、德國等北方國家面臨少子化與人口老化，最可能引發的連鎖問題是？", "opts": ["出生率快速回升", "都市化率驟降", "勞動力不足與社會保障壓力，須以移民補充", "糧食嚴重過剩"], "ans": 2, "exp": "課本P.219指出人口轉型後北方國家<b>少子化老化→勞動力不足、社會保障壓力</b>，須引進移民補充，呼應台灣移工與長照議題。"}, {"tid": "hdi", "q": "某國甲HDI為0.497(尼加拉瓜)、某國乙為0.970(瑞士)。從人口金字塔推論，甲國相較乙國最可能呈現？", "opts": ["擴張型金字塔、較高的扶養比", "完全相同的人口結構", "沒有任何差異", "收縮型金字塔、嚴重老化"], "ans": 0, "exp": "課本P.219指出南方（低HDI）國家多處人口轉型早期，呈<b>擴張型金字塔、高扶養比</b>；北方（高HDI）則趨收縮型、老化。甲乙差距正反映此對比。"}, {"tid": "hdi", "q": "為何HDI被認為比單純的GDP更能評估一國發展？", "opts": ["GDP納入更多面向", "HDI納入健康與教育，反映生活品質而非僅經濟產出", "HDI計算較簡單", "HDI只看所得最準確"], "ans": 1, "exp": "課本P.219指出HDI除所得外還納入<b>健康與教育</b>，更全面反映人民生活品質；GDP僅衡量經濟產出，可能掩蓋分配與福祉問題。"}, {"tid": "latam", "q": "巴西亞馬遜雨林因種植大豆與牛隻放牧而遭大量砍伐，形成「砍伐→碳吸收降→降雨減→更易乾旱砍伐」的循環。這種機制屬於？", "opts": ["碳中和的過程", "負回饋使系統穩定", "與氣候變遷無關", "惡性循環(正回饋)，加劇氣候變遷"], "ans": 3, "exp": "課本P.218指出亞馬遜砍伐使碳匯下降、降雨減少，形成<b>惡性循環（正回饋）</b>，雨林作為「地球之肺」的碳吸存功能受損，是全球氣候變遷的關鍵議題。"}, {"tid": "latam", "q": "探戈、嘉年華等中南美文化，融合了原住民、歐洲與非洲三方元素。這種文化特徵稱為？", "opts": ["單一民族文化", "文化帝國主義", "文化孤立", "合成（融合）文化"], "ans": 3, "exp": "課本P.217指出中南美洲是<b>原住民＋歐＋非三元融合</b>的合成文化，探戈、嘉年華即為代表，展現高度文化多樣性。"}, {"tid": "latam", "q": "1980年代中南美洲爆發債務危機，IMF要求私有化、開放、緊縮的「結構性改革」，史稱「失落的十年」。批評者認為其最大問題是？", "opts": ["使雨林得到保護", "完全消除貧富差距", "弱勢族群受害，加深南北差距與依賴", "使各國快速致富"], "ans": 2, "exp": "課本P.217指出失落十年的<b>IMF結構性改革</b>引發爭議，<b>弱勢受害、依賴加深</b>，呼應依賴理論對南北不平等結構的批判。"}, {"tid": "latam", "q": "阿根廷都市化率高達92.5%，卻伴隨大量貧民窟(Favela)。這種現象被稱為「過度都市化」或「假性都市化」，其根本成因是？", "opts": ["都市規劃完善吸引人口", "工業高度發達需大量勞工", "政府刻意限制人口進城", "農村推力過大，移入都市卻缺乏足夠就業"], "ans": 3, "exp": "課本P.218指出中南美<b>過度（假性）都市化</b>，因<b>農村推力</b>（貧困、大地主制）將人口推入都市，但都市無足夠就業，形成貧民窟，是城鄉差距的表現。"}, {"tid": "latam", "q": "秘魯等地的殖民城市空間結構、大地主制與懸殊貧富差距，被視為中南美洲區域問題的根源。這最能說明？", "opts": ["殖民遺緒對當代社會結構的長遠影響", "全球化消除了殖民影響", "氣候是貧富差距主因", "地震造成貧富不均"], "ans": 0, "exp": "課本P.218指出<b>殖民遺緒</b>（殖民城市空間、大地主制）造成根深的貧富差距，是區域問題的歷史根源，顯示殖民歷史對當代發展的長遠制約。"}];
+let curTopic="env";
+const TOTAL=QDB.length;
+const answered={};
+const ttabs=document.getElementById("ttabs");
+TOPICS.forEach(t=>{
+  const cnt=QDB.filter(q=>q.tid===t.id).length;
+  if(!cnt)return;
+  const b=document.createElement("button");
+  b.className="ttab"+(t.id===curTopic?" on":"");b.id="tab-"+t.id;
+  b.innerHTML=`${t.icon} ${t.name} <span style="background:#0f2744;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px">${cnt}</span>`;
+  b.onclick=()=>switchTopic(t.id);ttabs.appendChild(b);
+});
+function switchTopic(id){curTopic=id;document.querySelectorAll(".ttab").forEach(x=>x.classList.remove("on"));document.getElementById("tab-"+id).classList.add("on");render();window.scrollTo(0,0);}
+function render(){
+  const t=TOPICS.find(x=>x.id===curTopic);
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  let h=`<div class="q-hd"><h2>${t.icon} ${t.name}</h2><span class="q-cnt">${qs.length} 題</span></div>`;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    const o=q.opts.map((op,oi)=>`<div class="opt" id="opt_${aid}_${oi}" onclick="pick('${aid}',${oi},${q.ans})"><span class="ol" id="ol_${aid}_${oi}">${"ABCD"[oi]}</span><span>${op}</span></div>`).join("");
+    h+=`<div class="qcard"><div class="qhd"><span class="qnum">Q${i+1}</span><span class="qtxt">${q.q}</span></div><div class="opts">${o}</div><div class="exp" id="exp_${aid}">${q.exp}</div></div>`;
+  });
+  h+=`<button class="rbtn" onclick="resetTopic()">🔄 重置本主題</button>`;
+  document.getElementById("main").innerHTML=h;
+  qs.forEach((q,i)=>{const aid=curTopic+"_"+i;if(answered[aid])applyResult(aid,answered[aid].sel,answered[aid].correct,q.ans);});
+}
+function pick(aid,sel,ans){if(answered[aid])return;const c=sel===ans;answered[aid]={sel,correct:c};applyResult(aid,sel,c,ans);updateScore();}
+function applyResult(aid,sel,correct,ans){
+  [0,1,2,3].forEach(i=>{const o=document.getElementById("opt_"+aid+"_"+i);if(!o)return;o.classList.add("done");
+    if(i===sel&&correct)o.classList.add("ok");else if(i===sel&&!correct)o.classList.add("ng");else if(i===ans&&!correct)o.classList.add("ok");else o.classList.add("fade");});
+  const e=document.getElementById("exp_"+aid);if(e)e.classList.add("show");
+}
+function resetTopic(){QDB.filter(q=>q.tid===curTopic).forEach((_,i)=>delete answered[curTopic+"_"+i]);render();updateScore();}
+function updateScore(){const a=Object.values(answered),d=a.length,ok=a.filter(x=>x.correct).length;
+  document.getElementById("s-done").textContent=d;document.getElementById("s-ok").textContent=ok;document.getElementById("s-ng").textContent=d-ok;
+  document.getElementById("s-pct").textContent=d>0?Math.round(ok/d*100)+"%":"—";document.getElementById("ptfill").style.width=(d/TOTAL*100)+"%";}
+render();
+</script>
+</body>
+</html>

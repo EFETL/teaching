@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>練習卷一：基礎觀念</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f2744;--gold:#e8a000;--teal:#0a7ea4;--green:#15803d;--red:#b91c1c;--bg:#f0f4f9;--border:#dde3ed}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:#1a1a2e;font-size:15px}
+header{background:linear-gradient(135deg,#0f2744 0%,#1e4080 60%,#6c4ab6 100%);color:#fff;padding:20px 18px 16px;text-align:center}
+header h1{font-size:1.4rem;font-weight:800}
+header p{margin-top:5px;font-size:.82rem;opacity:.88}
+.back{display:inline-block;margin-top:10px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 14px;font-size:.78rem;text-decoration:none}
+#sbar{background:#0f2744;color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 14px;font-size:.8rem;flex-wrap:wrap}
+.si span.val{font-weight:700;font-size:.95rem}
+#ptbar{height:5px;background:rgba(255,255,255,.2);width:160px;border-radius:3px;overflow:hidden}
+#ptfill{height:100%;background:var(--gold);width:0%;transition:width .3s}
+.ttabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.ttab{flex:0 0 auto;padding:11px 13px;font-size:.78rem;font-weight:700;background:none;border:none;cursor:pointer;color:#6b7280;border-bottom:3px solid transparent;white-space:nowrap}
+.ttab.on{color:var(--navy);border-bottom-color:var(--gold)}
+#main{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+.q-hd{display:flex;align-items:center;gap:9px;margin:6px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.q-hd h2{font-size:.92rem;font-weight:700;color:var(--navy)}
+.q-cnt{background:var(--navy);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px}
+.qcard{background:#fff;border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden}
+.qhd{padding:13px 15px 9px;display:flex;gap:9px;align-items:flex-start}
+.qnum{background:var(--navy);color:#fff;border-radius:5px;padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.qtxt{font-size:.88rem;line-height:1.75;flex:1}
+.opts{padding:0 15px 5px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;margin-bottom:6px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:.84rem;line-height:1.5;transition:.13s;user-select:none}
+.opt:hover:not(.done){border-color:var(--teal);background:#f0f9ff}
+.ol{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.opt.ok{border-color:var(--green)!important;background:#f0fdf4}
+.opt.ok .ol{background:var(--green);border-color:var(--green);color:#fff}
+.opt.ng{border-color:var(--red)!important;background:#fff5f5}
+.opt.ng .ol{background:var(--red);border-color:var(--red);color:#fff}
+.opt.fade{opacity:.4}
+.exp{display:none;margin:3px 15px 13px;padding:10px 13px;background:#fffbe8;border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:.81rem;line-height:1.75;color:#4a3b00}
+.exp.show{display:block}
+.exp b{color:var(--navy)}
+.rbtn{display:block;width:fit-content;margin:24px auto 0;padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <h1>📝 高中地理 練習卷一</h1>
+  <p>基礎觀念與定義題 ‧ 50題 ‧ 點選項即顯示解析</p>
+  <a class="back" href="./">← 回高中地理</a>
+</header>
+<div id="sbar">
+  <div class="si">已答 <span class="val" id="s-done">0</span>/50</div>
+  <div id="ptbar"><div id="ptfill"></div></div>
+  <div class="si">答對 <span class="val" id="s-ok" style="color:#86efac">0</span></div>
+  <div class="si">答錯 <span class="val" id="s-ng" style="color:#fca5a5">0</span></div>
+  <div class="si">正確率 <span class="val" id="s-pct">—</span></div>
+</div>
+<div class="ttabs" id="ttabs"></div>
+<div id="main"></div>
+<script>
+const TOPICS=[{"id": "env", "icon": "🌎", "name": "美國環境"}, {"id": "ppl", "icon": "👥", "name": "移民文化"}, {"id": "city", "icon": "🏙️", "name": "城市產業"}, {"id": "usmca", "icon": "📜", "name": "USMCA"}, {"id": "glob", "icon": "🌐", "name": "全球化"}, {"id": "hdi", "icon": "📊", "name": "人口HDI"}, {"id": "latam", "icon": "🌿", "name": "中南美洲"}];
+const QDB=[{"tid": "env", "q": "美國本土的經緯度範圍，下列何者最接近課本所述？", "opts": ["北緯10~30度、西經50~90度", "北緯25~49度、西經70~130度", "北緯30~60度、東經70~130度", "南緯25~49度、西經70~130度"], "ans": 1, "exp": "課本P.154，美國本土約位於<b>北緯25~49度、西經70~130度</b>，東臨大西洋、西瀕太平洋。"}, {"tid": "env", "q": "美國東臨大西洋、西瀕太平洋，這對其歷史發展的最大影響是？", "opts": ["造成嚴重地震災害", "形成天然屏障，19-20世紀本土不受海外戰火波及", "終年降雨豐沛適合農業", "阻隔了對外貿易"], "ans": 1, "exp": "課本P.154，兩大洋形成<b>天然屏障</b>，使美國本土在19-20世紀不受海外戰火波及，同時有利海洋貿易。"}, {"tid": "env", "q": "美國地形三分區中，盛產煤鐵、是早期移民進入中西部通道的是哪一區？", "opts": ["西部高原山地", "中部大平原", "東部低山丘陵（阿帕拉契山以東）", "海外阿拉斯加"], "ans": 2, "exp": "課本P.155，<b>東部低山丘陵</b>為古老侵蝕丘陵，出產煤鐵，是早期移民進入中西部的通道。"}, {"tid": "env", "q": "世界最大的淡水湖群「五大湖」是由何種作用形成？", "opts": ["風力堆積作用", "火山噴發作用", "冰河侵蝕作用", "河流沖積作用"], "ans": 2, "exp": "課本P.155，五大湖位於中部大平原北部，由<b>冰河侵蝕</b>而成，是世界最大的淡水湖群。"}, {"tid": "env", "q": "美國中南部大平原土壤肥沃、農業發達，主因是哪兩種作用？", "opts": ["風積黃土加上密西西比河沖積", "火山灰加上冰河堆積", "板塊擠壓加上隆起", "海水沉積加上鹽鹼化"], "ans": 0, "exp": "課本P.155，中南部由<b>風積黃土與密西西比河沖積平原</b>構成，土壤肥沃，農業發達。"}, {"tid": "env", "q": "美國西部高原山地多火山地震，主要是因為位於哪一構造帶？", "opts": ["環太平洋板塊聚合帶", "非洲大裂谷", "印度洋張裂帶", "大西洋中洋脊"], "ans": 0, "exp": "課本P.155，西部高原山地位於<b>環太平洋板塊聚合帶</b>，故多火山與地震。"}, {"tid": "env", "q": "胡佛水壩攔蓄哪一條河流的水，供電給加州、內華達、亞利桑那？", "opts": ["哥倫比亞河", "科羅拉多河", "聖勞倫斯河", "密西西比河"], "ans": 1, "exp": "課本P.155，胡佛水壩蓄<b>科羅拉多河</b>，供電與供水給加州、內華達、亞利桑那等地。"}, {"tid": "env", "q": "美國在2010年代靠哪項技術突破成為全球最大原油生產國？", "opts": ["生質燃料", "深海鑽油平台", "油砂提煉", "水平鑽井加水壓裂岩（Fracking）開採頁岩油"], "ans": 3, "exp": "課本P.155，<b>頁岩油</b>藏於岩石裂縫，靠水平鑽井加水壓裂岩（Fracking）技術突破，使美國成全球最大原油生產國。"}, {"tid": "env", "q": "加州西南岸（洛杉磯）屬於何種氣候，其特徵為夏乾冬雨？", "opts": ["地中海型氣候", "溫帶大陸性氣候", "熱帶莽原氣候", "溫帶海洋性氣候"], "ans": 0, "exp": "課本P.157-158，洛杉磯為<b>地中海型氣候</b>，受副熱帶高壓與加利福尼亞寒流影響，夏乾冬雨。"}, {"tid": "env", "q": "美國西北太平洋岸（西雅圖）為溫帶海洋性氣候，主要受何種因素影響？", "opts": ["副熱帶高壓與乾燥氣團", "極地冷氣團", "盛行西風與北太平洋暖流", "東南季風與寒流"], "ans": 2, "exp": "課本P.157-158，西雅圖受<b>盛行西風與北太平洋暖流</b>影響，全年溫和多雨。"}, {"tid": "ppl", "q": "美國原住民最早是經由哪條路線抵達美洲？", "opts": ["從南極大陸北上", "大冰河期經白令海峽陸橋從西伯利亞到阿拉斯加", "從非洲沿赤道遷入", "搭船橫渡大西洋"], "ans": 1, "exp": "課本P.161，原住民約2萬年前大冰河期經<b>白令海峽陸橋</b>從西伯利亞到阿拉斯加，再向南擴散。"}, {"tid": "ppl", "q": "洛杉磯（Los Angeles）、舊金山（San Francisco）等西南各州地名密布，反映哪一移民族群的影響？", "opts": ["英國人", "非洲裔", "法國人", "西班牙人"], "ans": 3, "exp": "課本P.161，<b>西班牙人</b>1565年起在佛羅里達建殖民地，地名密布西南各州，如洛杉磯（天使之城）、舊金山、聖地牙哥。"}, {"tid": "ppl", "q": "路易斯安那（Louisiana）、底特律（Detroit）、紐奧良等地名，源自哪一移民族群？", "opts": ["西班牙人", "荷蘭人", "法國人", "英國人"], "ans": 2, "exp": "課本P.161，<b>法國人</b>17世紀沿聖勞倫斯河與密西西比河活動，留下路易斯安那、底特律、聖路易、紐奧良等地名。"}, {"tid": "ppl", "q": "紐約（New York）的地名源自英國的哪個地方？", "opts": ["曼徹斯特", "倫敦", "約克郡", "利物浦"], "ans": 2, "exp": "課本P.161，英國人在東岸建立13殖民地，紐約（New York）源自英國<b>約克郡（York）</b>。"}, {"tid": "ppl", "q": "非洲裔最初以何種身分被輸入美國，並集中於東南部？", "opts": ["契約工人", "奴隸（在棉花種植園工作）", "傳教士", "自由移民"], "ans": 1, "exp": "課本P.161，非裔16世紀以<b>奴隸身分</b>被輸入，集中於東南部棉花種植園。"}, {"tid": "ppl", "q": "美國1840-1880年移民高峰以北歐、西歐為主，下列何者是主因？", "opts": ["愛爾蘭大饑荒與工業革命", "亞洲經濟危機", "冷戰結束", "二次世界大戰"], "ans": 0, "exp": "課本P.163，第一波（甲）<b>北歐西歐</b>移民高峰於1840-1880年，與愛爾蘭大饑荒、工業革命有關。"}, {"tid": "ppl", "q": "美國1965年的移民政策有何重大轉變？", "opts": ["首次設立移民配額制", "廢除種族歧視配額，使亞洲、拉美移民大增", "只開放歐洲移民", "全面禁止移民"], "ans": 1, "exp": "課本P.163，1965年<b>廢除種族歧視配額</b>制度，使亞洲與拉丁美洲移民大增。"}, {"tid": "city", "q": "美國的首都是下列哪一個城市？", "opts": ["華盛頓D.C.", "洛杉磯", "費城", "紐約"], "ans": 0, "exp": "課本P.153，美國首都是<b>華盛頓D.C.</b>；紐約雖是第一大城與金融中心，但並非首都。"}, {"tid": "city", "q": "波音、亞馬遜、星巴克、微軟等知名企業，主要與哪一城市相關？", "opts": ["邁阿密", "休士頓", "底特律", "西雅圖"], "ans": 3, "exp": "課本P.153，<b>西雅圖</b>有波音（1916創立）、亞馬遜、星巴克、微軟等知名企業。"}, {"tid": "city", "q": "被稱為「汽車城（Motor City）」、是通用、福特、克萊斯勒三大車廠所在地的城市是？", "opts": ["底特律", "休士頓", "洛杉磯", "西雅圖"], "ans": 0, "exp": "課本P.153，<b>底特律</b>是汽車城，為通用、福特、克萊斯勒三大車廠所在地。"}, {"tid": "city", "q": "好萊塢與航太工業是哪一城市的代表產業？", "opts": ["洛杉磯", "芝加哥", "紐約", "華盛頓D.C."], "ans": 0, "exp": "課本P.153，<b>洛杉磯</b>以好萊塢電影與航太工業著稱。"}, {"tid": "city", "q": "被視為全球最重要高科技園區的矽谷，位於哪一灣區？", "opts": ["紐約灣區", "休士頓灣區", "西雅圖灣區", "舊金山灣區（San Jose）"], "ans": 3, "exp": "課本P.153，矽谷位於<b>舊金山灣區（San Jose）</b>，是全球最重要的高科技園區。"}, {"tid": "city", "q": "美國「鏽帶（Rust Belt）」指的是哪個地區的傳統重工業帶？", "opts": ["西岸加州", "五大湖區東南部", "東南部墨西哥灣", "西南部沙漠區"], "ans": 1, "exp": "課本P.181，<b>鏽帶</b>指五大湖區東南部的傳統重工業帶。"}, {"tid": "city", "q": "許多廠商在鏽帶群聚，可共享供應鏈、人才與基礎設施以降低成本，這稱為？", "opts": ["垂直整合", "聚集經濟（Agglomeration Economy）", "產業空洞化", "規模不經濟"], "ans": 1, "exp": "課本P.181，廠商群聚共享供應鏈、技術人才、基礎設施以降成本，稱為<b>聚集經濟</b>。"}, {"tid": "usmca", "q": "NAFTA改為USMCA後，汽車要享免關稅，北美零件含量規定有何改變？", "opts": ["由75%降到62.5%", "完全取消含量規定", "由62.5%提高到75%（更嚴格）", "維持不變"], "ans": 2, "exp": "課本P.183-184，USMCA將汽車北美含量由<b>62.5%提高到75%</b>，規定更嚴格。"}, {"tid": "usmca", "q": "USMCA規定汽車至少40%零件須由時薪達多少美元的勞工生產？", "opts": ["16美元", "30美元", "25美元", "8美元"], "ans": 0, "exp": "課本P.183-184，USMCA要求汽車至少40%零件由時薪<b>≥16美元</b>的勞工生產，以保障較高工資。"}, {"tid": "usmca", "q": "USMCA中所謂的「落日條款」內容為何？", "opts": ["每6年評估、可延長16年、提前6個月可退出", "只適用於農業", "永久有效不可退出", "每年重新談判一次"], "ans": 0, "exp": "課本P.183-184，<b>落日條款</b>規定每6年評估、可延長16年、提前6個月可退出，NAFTA則無此條款。"}, {"tid": "usmca", "q": "USMCA中的「毒丸條款」是指？", "opts": ["禁止任何國家生產藥品", "任一方與非市場經濟國家（如中國）簽FTA，其他兩國可退出", "三國共用同一貨幣", "禁止農產品貿易"], "ans": 1, "exp": "課本P.183-184，<b>毒丸條款</b>指任一方與非市場經濟國家（如中國）簽FTA時，其他兩國可退出協定。"}, {"tid": "usmca", "q": "USMCA在農業方面，加拿大做出哪項讓步？", "opts": ["全面禁止乳品進口", "提高乳品關稅", "開放3.5%乳品市場並取消對美葡萄酒限制", "限制美國小麥進口"], "ans": 2, "exp": "課本P.183-184，加拿大原由官方控制乳品售價，USMCA後<b>開放3.5%乳品市場</b>，並取消對美葡萄酒限制。"}, {"tid": "usmca", "q": "北美農業地圖中，位於中部、以玉米、大豆、肉牛為主的是哪一帶？", "opts": ["玉米帶（Corn Belt）", "牧場帶", "酪農業帶", "棉花帶"], "ans": 0, "exp": "課本P.184，<b>玉米帶（Corn Belt）</b>位於中部，以玉米、大豆、肉牛為主。"}, {"tid": "glob", "q": "1920至2015年間，海運、航空、電話通訊成本均大幅下降，其中下降幅度最大、近乎為零的是？", "opts": ["航空客運成本", "電話通訊成本", "海運運費", "鐵路運費"], "ans": 1, "exp": "課本P.245，<b>電話通訊成本</b>下降最多、近乎為零，運輸與通訊成本下降是全球化的物質基礎。"}, {"tid": "glob", "q": "提出「世界都市（World City）」概念的學者是誰？", "opts": ["克里斯徒勒", "華勒斯坦", "薩森（Saskia Sassen）", "韋伯"], "ans": 2, "exp": "課本P.246，世界都市概念由<b>薩森（Saskia Sassen）</b>提出，是資本與決策管控中心。"}, {"tid": "glob", "q": "關於世界都市的敘述，下列何者正確？", "opts": ["是資本與決策管控中心，核心閾值人口約1000萬", "人口越多就一定是世界都市", "必須是該國首都", "只看工業產值高低"], "ans": 0, "exp": "課本P.246，世界都市是<b>資本與決策管控中心</b>，核心閾值人口約1000萬；人口多不等於世界都市（如孟買）。"}, {"tid": "glob", "q": "馬祖南竿星巴克結合閩東石屋外觀、竹篩工藝，這種「全球品牌＋在地特色」稱為？", "opts": ["去全球化", "全球在地化（Glocalization）", "文化帝國主義", "標準化"], "ans": 1, "exp": "課本P.248，<b>全球在地化（Glocalization）</b>是全球品牌結合在地特色，與「取代而非融合」的文化帝國主義不同。"}, {"tid": "glob", "q": "豐田發明、強調「零庫存、高效率」的生產管理方式是？", "opts": ["以防萬一（Just-in-case）", "計畫經濟", "即時生產（JIT, Just-In-Time）", "大量庫存制"], "ans": 2, "exp": "課本P.247，<b>JIT（Just-In-Time）</b>由豐田發明，零庫存高效率但較脆弱。"}, {"tid": "glob", "q": "COVID疫情後，企業供應鏈策略由JIT轉向何種模式以提升韌性？", "opts": ["停止國際貿易", "集中單一供應地", "以防萬一（Just-in-case），保有安全庫存", "完全取消庫存"], "ans": 2, "exp": "課本P.247，疫情後供應鏈由JIT轉向<b>Just-in-case</b>，保有安全庫存以重視韌性。"}, {"tid": "glob", "q": "2011年日本哪一事件一次癱瘓全球供應鏈，成為過度依賴單一供應地的教訓？", "opts": ["廣島核爆", "東京奧運", "311大地震", "關東大地震"], "ans": 2, "exp": "課本P.247，2011年日本<b>311大地震</b>癱瘓全球供應鏈，是過度依賴單一供應地的教訓。"}, {"tid": "glob", "q": "可汗學院（Khan Academy）提供免費線上課程使偏鄉學生受益，最能說明哪一概念？", "opts": ["文化帝國主義", "去全球化", "保護主義", "全球依存關係加深"], "ans": 3, "exp": "課本P.246，可汗學院使偏鄉學生受益，說明<b>全球依存關係的加深</b>。"}, {"tid": "glob", "q": "日本二戰後創造經濟奇蹟，主要依靠下列何者？", "opts": ["龐大的石油蘊藏", "豐富的自然資源", "人力素質、科研與工業效率", "廣大的國土面積"], "ans": 2, "exp": "課本P.246，日本缺乏自然資源，戰後經濟奇蹟靠<b>人力素質、科研與工業效率</b>。"}, {"tid": "hdi", "q": "聯合國（UNDP）的人類發展指數（HDI）包含哪三個面向？", "opts": ["人口、面積、軍力", "政治、宗教、語言", "出口、進口、外匯", "健康、教育、生活水準"], "ans": 3, "exp": "課本P.219，HDI三面向為<b>健康（預期壽命）、教育（在學年數）、生活水準（人均GNI）</b>。"}, {"tid": "hdi", "q": "HDI中「生活水準」面向是以何種指標衡量？", "opts": ["預期壽命", "識字率", "人口密度", "人均GNI（國民所得毛額）"], "ans": 3, "exp": "課本P.219，生活水準以<b>人均GNI</b>衡量；健康看預期壽命，教育看在學年數。"}, {"tid": "hdi", "q": "關於「北方國家」的定義，下列何者正確？", "opts": ["一定位於北半球", "指已開發、高收入國家，不完全等於地理上的北半球", "以緯度高低劃分", "只看人口多寡"], "ans": 1, "exp": "課本P.219，<b>北方國家</b>指已開發高收入國家，如澳洲在南半球卻屬北方國家，與地理半球無關。"}, {"tid": "hdi", "q": "課本HDI表中，澳洲（戊）位於南半球卻被歸為北方國家，原因是？", "opts": ["面積最大", "人口最多", "位於赤道附近", "HDI高、屬已開發高收入國家"], "ans": 3, "exp": "課本P.219，澳洲HDI達0.958、屬<b>已開發高收入</b>，故為北方國家，南北方以發展程度而非地理半球劃分。"}, {"tid": "hdi", "q": "北方國家（如日、台、德）的人口金字塔通常呈何種型態？", "opts": ["靜止型完全方形", "倒三角形無老年人口", "收縮型（底窄、高齡層寬）", "擴張型（底寬正三角）"], "ans": 2, "exp": "課本P.219，北方國家為<b>收縮型</b>（底窄、高齡層寬，低出生低死亡高老化）；南方國家為擴張型。"}, {"tid": "hdi", "q": "人口轉型過程中，通常先發生下列何種變化？", "opts": ["出生率先下降", "人口零成長", "死亡率上升", "醫療進步使死亡率先下降"], "ans": 3, "exp": "課本P.219，人口轉型先因<b>醫療進步使死亡率下降</b>，之後教育提升才使出生率下降。"}, {"tid": "latam", "q": "全球亞馬遜雨林砍伐面積最大的國家是？", "opts": ["哥倫比亞", "玻利維亞", "巴西", "祕魯"], "ans": 2, "exp": "課本P.218，<b>巴西</b>佔亞馬遜雨林砍伐面積最大，熱帶南美約40%雨林已退化。"}, {"tid": "latam", "q": "亞馬遜雨林砍伐的高峰通常在每年7月，主因為何？", "opts": ["氣溫最低利於伐木", "旱季乾燥，利於放火焚林清地", "颶風季節樹木易倒", "雨季方便耕作"], "ans": 1, "exp": "課本P.218，砍伐高峰在7月，因<b>旱季乾燥</b>，便於放火焚林清地，主因為大豆種植與牛隻放牧。"}, {"tid": "latam", "q": "中南美洲的「多元合成文化」是由哪三大來源融合而成？", "opts": ["原住民、歐洲殖民者、非洲黑奴", "原住民、亞洲移民、阿拉伯人", "北美人、非洲人、印度人", "歐洲人、亞洲人、大洋洲人"], "ans": 0, "exp": "課本P.217，中南美多元合成文化由<b>原住民、歐洲殖民者、非洲黑奴</b>三者融合。"}, {"tid": "latam", "q": "中南美洲所謂「失落的十年」是指哪個年代的什麼危機？", "opts": ["1990年代的金融海嘯", "2000年代的網路泡沫", "1970年代的石油危機", "1980年代的債務危機"], "ans": 3, "exp": "課本P.217，<b>失落的十年</b>指1980年代債務危機，IMF介入建議結構性改革，引發弱勢勞工爭議。"}, {"tid": "latam", "q": "中南美洲都市化率普遍偏高，卻常伴隨大量貧民窟（Favela），這種現象稱為？", "opts": ["逆都市化", "過度都市化（假性都市化）", "再都市化", "郊區化"], "ans": 1, "exp": "課本P.218，中南美都市化率遠高於全球平均，卻伴隨貧民窟，屬<b>過度都市化（假性都市化）</b>。"}];
+let curTopic="env";
+const TOTAL=QDB.length;
+const answered={};
+const ttabs=document.getElementById("ttabs");
+TOPICS.forEach(t=>{
+  const cnt=QDB.filter(q=>q.tid===t.id).length;
+  if(!cnt)return;
+  const b=document.createElement("button");
+  b.className="ttab"+(t.id===curTopic?" on":"");b.id="tab-"+t.id;
+  b.innerHTML=`${t.icon} ${t.name} <span style="background:#0f2744;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px">${cnt}</span>`;
+  b.onclick=()=>switchTopic(t.id);ttabs.appendChild(b);
+});
+function switchTopic(id){curTopic=id;document.querySelectorAll(".ttab").forEach(x=>x.classList.remove("on"));document.getElementById("tab-"+id).classList.add("on");render();window.scrollTo(0,0);}
+function render(){
+  const t=TOPICS.find(x=>x.id===curTopic);
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  let h=`<div class="q-hd"><h2>${t.icon} ${t.name}</h2><span class="q-cnt">${qs.length} 題</span></div>`;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    const o=q.opts.map((op,oi)=>`<div class="opt" id="opt_${aid}_${oi}" onclick="pick('${aid}',${oi},${q.ans})"><span class="ol" id="ol_${aid}_${oi}">${"ABCD"[oi]}</span><span>${op}</span></div>`).join("");
+    h+=`<div class="qcard"><div class="qhd"><span class="qnum">Q${i+1}</span><span class="qtxt">${q.q}</span></div><div class="opts">${o}</div><div class="exp" id="exp_${aid}">${q.exp}</div></div>`;
+  });
+  h+=`<button class="rbtn" onclick="resetTopic()">🔄 重置本主題</button>`;
+  document.getElementById("main").innerHTML=h;
+  qs.forEach((q,i)=>{const aid=curTopic+"_"+i;if(answered[aid])applyResult(aid,answered[aid].sel,answered[aid].correct,q.ans);});
+}
+function pick(aid,sel,ans){if(answered[aid])return;const c=sel===ans;answered[aid]={sel,correct:c};applyResult(aid,sel,c,ans);updateScore();}
+function applyResult(aid,sel,correct,ans){
+  [0,1,2,3].forEach(i=>{const o=document.getElementById("opt_"+aid+"_"+i);if(!o)return;o.classList.add("done");
+    if(i===sel&&correct)o.classList.add("ok");else if(i===sel&&!correct)o.classList.add("ng");else if(i===ans&&!correct)o.classList.add("ok");else o.classList.add("fade");});
+  const e=document.getElementById("exp_"+aid);if(e)e.classList.add("show");
+}
+function resetTopic(){QDB.filter(q=>q.tid===curTopic).forEach((_,i)=>delete answered[curTopic+"_"+i]);render();updateScore();}
+function updateScore(){const a=Object.values(answered),d=a.length,ok=a.filter(x=>x.correct).length;
+  document.getElementById("s-done").textContent=d;document.getElementById("s-ok").textContent=ok;document.getElementById("s-ng").textContent=d-ok;
+  document.getElementById("s-pct").textContent=d>0?Math.round(ok/d*100)+"%":"—";document.getElementById("ptfill").style.width=(d/TOTAL*100)+"%";}
+render();
+</script>
+</body>
+</html>

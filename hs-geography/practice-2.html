@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>練習卷二：圖表判讀</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f2744;--gold:#e8a000;--teal:#0a7ea4;--green:#15803d;--red:#b91c1c;--bg:#f0f4f9;--border:#dde3ed}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:#1a1a2e;font-size:15px}
+header{background:linear-gradient(135deg,#0f2744 0%,#1e4080 60%,#6c4ab6 100%);color:#fff;padding:20px 18px 16px;text-align:center}
+header h1{font-size:1.4rem;font-weight:800}
+header p{margin-top:5px;font-size:.82rem;opacity:.88}
+.back{display:inline-block;margin-top:10px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 14px;font-size:.78rem;text-decoration:none}
+#sbar{background:#0f2744;color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 14px;font-size:.8rem;flex-wrap:wrap}
+.si span.val{font-weight:700;font-size:.95rem}
+#ptbar{height:5px;background:rgba(255,255,255,.2);width:160px;border-radius:3px;overflow:hidden}
+#ptfill{height:100%;background:var(--gold);width:0%;transition:width .3s}
+.ttabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.ttab{flex:0 0 auto;padding:11px 13px;font-size:.78rem;font-weight:700;background:none;border:none;cursor:pointer;color:#6b7280;border-bottom:3px solid transparent;white-space:nowrap}
+.ttab.on{color:var(--navy);border-bottom-color:var(--gold)}
+#main{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+.q-hd{display:flex;align-items:center;gap:9px;margin:6px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.q-hd h2{font-size:.92rem;font-weight:700;color:var(--navy)}
+.q-cnt{background:var(--navy);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px}
+.qcard{background:#fff;border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden}
+.qhd{padding:13px 15px 9px;display:flex;gap:9px;align-items:flex-start}
+.qnum{background:var(--navy);color:#fff;border-radius:5px;padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.qtxt{font-size:.88rem;line-height:1.75;flex:1}
+.opts{padding:0 15px 5px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;margin-bottom:6px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:.84rem;line-height:1.5;transition:.13s;user-select:none}
+.opt:hover:not(.done){border-color:var(--teal);background:#f0f9ff}
+.ol{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.opt.ok{border-color:var(--green)!important;background:#f0fdf4}
+.opt.ok .ol{background:var(--green);border-color:var(--green);color:#fff}
+.opt.ng{border-color:var(--red)!important;background:#fff5f5}
+.opt.ng .ol{background:var(--red);border-color:var(--red);color:#fff}
+.opt.fade{opacity:.4}
+.exp{display:none;margin:3px 15px 13px;padding:10px 13px;background:#fffbe8;border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:.81rem;line-height:1.75;color:#4a3b00}
+.exp.show{display:block}
+.exp b{color:var(--navy)}
+.rbtn{display:block;width:fit-content;margin:24px auto 0;padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <h1>📝 高中地理 練習卷二</h1>
+  <p>圖表判讀與情境應用題 ‧ 50題 ‧ 點選項即顯示解析</p>
+  <a class="back" href="./">← 回高中地理</a>
+</header>
+<div id="sbar">
+  <div class="si">已答 <span class="val" id="s-done">0</span>/50</div>
+  <div id="ptbar"><div id="ptfill"></div></div>
+  <div class="si">答對 <span class="val" id="s-ok" style="color:#86efac">0</span></div>
+  <div class="si">答錯 <span class="val" id="s-ng" style="color:#fca5a5">0</span></div>
+  <div class="si">正確率 <span class="val" id="s-pct">—</span></div>
+</div>
+<div class="ttabs" id="ttabs"></div>
+<div id="main"></div>
+<script>
+const TOPICS=[{"id": "env", "icon": "🌎", "name": "美國環境"}, {"id": "ppl", "icon": "👥", "name": "移民文化"}, {"id": "city", "icon": "🏙️", "name": "城市產業"}, {"id": "usmca", "icon": "📜", "name": "USMCA"}, {"id": "glob", "icon": "🌐", "name": "全球化"}, {"id": "hdi", "icon": "📊", "name": "人口HDI"}, {"id": "latam", "icon": "🌿", "name": "中南美洲"}];
+const QDB=[{"tid": "env", "q": "下圖為北美洲約40°N由西向東的地形剖面示意圖，沿線依序出現「高聳山脈→中部低平→低矮丘陵」。請問剖面最東側、緊鄰大西洋的低矮丘陵最可能是下列何者？", "opts": ["阿帕拉契山脈", "海岸山脈", "內華達山脈", "洛磯山脈"], "ans": 0, "exp": "<b>判讀關鍵</b>：40°N剖面由西向東為太平洋→洛磯山脈(高)→中部大平原(低)→東部低矮古老丘陵→大西洋。最東側緊鄰大西洋的古老低丘為<b>阿帕拉契山脈</b>(P.155-156)。洛磯山脈在西側且高聳。"}, {"tid": "env", "q": "某氣象站的雨溫圖顯示：月均溫多介於-20°C~10°C之間，最暖月勉強超過10°C，全年降水偏少且分散。此地最可能位於美國何處？", "opts": ["洛杉磯(地中海型)", "西雅圖(溫帶海洋性)", "阿拉斯加南部(副極地氣候)", "邁阿密(夏雨型暖溫帶)"], "ans": 2, "exp": "<b>判讀關鍵</b>：最暖月勉強>10°C、冬季嚴寒到-20°C、年溫差大、降水少，是<b>副極地氣候</b>特徵，對應緯度高的阿拉斯加南部(P.157,160)。"}, {"tid": "env", "q": "下圖某地雨溫圖顯示全年溫和、各月降水均勻偏多、夏不酷熱冬不嚴寒。已知該地位於美國西北沿海。造成此氣候的主要因素為何？", "opts": ["副熱帶高壓籠罩", "盛行西風加北太平洋暖流", "季風氣候影響", "信風帶與寒流"], "ans": 1, "exp": "<b>判讀關鍵</b>：全年溫和濕潤、降水均勻=溫帶海洋性氣候(西雅圖)。成因為<b>盛行西風</b>把海洋暖濕氣團帶上岸，再加<b>北太平洋暖流</b>增溫增濕(P.157)。"}, {"tid": "env", "q": "下表為美國四城市的氣候資料，其中某城「夏季幾乎不降雨、冬季為降水集中期」。此特徵最符合下列哪種氣候類型？", "opts": ["溫帶海洋性氣候", "溫帶大陸性氣候", "副極地氣候", "地中海型氣候"], "ans": 3, "exp": "<b>判讀關鍵</b>：<b>夏乾冬雨</b>是地中海型氣候的招牌(洛杉磯)，受夏季副熱帶高壓下沉乾燥、冬季西風帶南移帶來降水(P.157)。"}, {"tid": "env", "q": "丹佛的雨溫圖顯示「冬季很冷、夏季偏熱、年溫差大、降水以夏季稍多」。此地深處內陸，最符合的氣候類型為何？", "opts": ["熱帶莽原氣候", "溫帶海洋性氣候", "溫帶大陸性氣候", "地中海型氣候"], "ans": 2, "exp": "<b>判讀關鍵</b>：<b>年溫差大</b>(冬冷夏熱)是內陸性的指標，丹佛位於洛磯山東側內陸，屬<b>溫帶大陸性氣候</b>(P.157)。"}, {"tid": "env", "q": "下圖為美國自然災害分布圖，某類災害集中於中部大平原，且好發於春、秋兩季。此災害最可能為何？", "opts": ["野火", "颶風", "暴風雪", "龍捲風"], "ans": 3, "exp": "<b>判讀關鍵</b>：中部大平原是冷暖氣團交會處，春秋對流旺盛，<b>龍捲風</b>頻發(P.158-159)。颶風在東南、暴風雪在東北、野火在加州。"}, {"tid": "env", "q": "下圖顯示某類災害的路徑多自墨西哥灣形成後向北推進，影響美國東南沿海，好發於夏、秋。此災害為何？", "opts": ["颶風", "地震", "暴風雪", "龍捲風"], "ans": 0, "exp": "<b>判讀關鍵</b>：路徑由<b>墨西哥灣北上</b>、影響東南沿海、夏秋好發，是<b>颶風</b>(P.158-159)。"}, {"tid": "env", "q": "美國某類自然災害集中於西岸，沿太平洋呈帶狀分布。下列何者為此分布最直接的成因？", "opts": ["盛行西風帶來強對流", "位於板塊聚合的環太平洋地震帶", "副熱帶高壓籠罩", "冰河作用強烈"], "ans": 1, "exp": "<b>判讀關鍵</b>：西岸火山地震集中，因美西位於<b>板塊聚合帶(環太平洋火環)</b>，多火山地震(P.155,158-159)。"}, {"tid": "env", "q": "2010年代美國因某項技術突破，一躍成為全球最大原油生產國。下圖石油生產區遍布全境。此關鍵技術為何？", "opts": ["核能發電擴張", "太陽能板大規模布設", "水平鑽井加水壓裂岩開採頁岩油", "深海鑽油平台"], "ans": 2, "exp": "<b>判讀關鍵</b>：2010年代<b>水平鑽井+水壓裂岩</b>技術讓頁岩油大量開採，美國成為全球最大原油生產國(P.155)。"}, {"tid": "env", "q": "下圖為美國礦產分布，某礦產集中於東部阿帕拉契山一帶。此礦產最可能為何？", "opts": ["鈾礦", "煤礦", "石油", "鐵礦"], "ans": 1, "exp": "<b>判讀關鍵</b>：阿帕拉契山一帶是美國<b>煤礦</b>主要產區；鐵礦在五大湖、石油天然氣在中南部(P.156)。"}, {"tid": "ppl", "q": "下圖為美國各時期移民人數統計圖。甲時期(約1840-1880)移民達高峰，主要來自北歐、西歐。下列何者為此波移民的主要推力？", "opts": ["非洲奴隸貿易", "1965年廢除配額制", "愛爾蘭馬鈴薯饑荒與工業革命", "亞洲戰亂"], "ans": 2, "exp": "<b>判讀關鍵</b>：1840-1880北歐西歐移民高峰，推力為<b>愛爾蘭馬鈴薯饑荒</b>及工業革命造成的社會變動(P.163)。"}, {"tid": "ppl", "q": "美國移民統計圖中，1924-1930年間移民人數驟減。下列何者為造成此現象的關鍵原因？", "opts": ["愛爾蘭饑荒", "1924年移民配額制與1929年經濟大蕭條", "越戰結束", "南北戰爭爆發"], "ans": 1, "exp": "<b>判讀關鍵</b>：1924年實施<b>移民配額制</b>限制移入，加上1929年<b>經濟大蕭條</b>，使1924-1930移民銳減(P.163)。"}, {"tid": "ppl", "q": "美國某波移民(丙)在1970年後大幅增加，來源以亞洲與中南美洲為主。下列何者為促成此轉變的政策？", "opts": ["新政", "禁酒令", "1924年配額制", "1965年廢除移民配額制"], "ans": 3, "exp": "<b>判讀關鍵</b>：<b>1965年廢除配額制</b>後，亞洲與拉美移民大量湧入(P.163)。"}, {"tid": "ppl", "q": "下圖為美國種族分布圖。某族裔集中於東南部各州，與歷史上的棉花種植業密切相關。此族裔最可能為何？", "opts": ["原住民", "拉丁裔", "非裔", "亞裔"], "ans": 2, "exp": "<b>判讀關鍵</b>：<b>非裔</b>因歷史上被引入東南部從事棉花種植，至今仍集中於東南各州(P.164-165)。"}, {"tid": "ppl", "q": "美國某族裔(丙)在分布圖上集中於東西兩岸大都市，且具高教育、高白領、高收入特徵。此族裔最可能為何？", "opts": ["亞裔", "原住民", "非裔", "拉丁裔"], "ans": 0, "exp": "<b>判讀關鍵</b>：<b>亞裔</b>多為菁英移民，高教育、高白領、高收入，集中於東西兩岸城市與夏威夷(P.164-165)。"}, {"tid": "ppl", "q": "下圖種族分布圖中，某族裔在西南各州及佛羅里達比例特別高，是美國第二大族群(約18.7%)。此族裔為何？", "opts": ["原住民", "亞裔", "非裔", "拉丁裔"], "ans": 3, "exp": "<b>判讀關鍵</b>：<b>拉丁裔</b>集中於西南各州與佛羅里達，占約18.7%，為第二大族群(P.164-165)。"}, {"tid": "ppl", "q": "美國某些西南部地名(如洛杉磯Los Angeles)源自西班牙語，反映早期殖民與移民路線。下列何者最能解釋此現象？", "opts": ["非裔移民聚居", "法國人沿密西西比河南下", "西班牙人由佛羅里達向西南拓展", "英國人從東岸13州西進"], "ans": 2, "exp": "<b>判讀關鍵</b>：<b>西班牙</b>勢力由佛羅里達向西南延伸，留下大量西語地名如洛杉磯(P.161)。"}, {"tid": "city", "q": "下圖為美國主要城市位置圖。A城為全國第一大城，但並非首都。此城最可能為何？", "opts": ["洛杉磯", "底特律", "華盛頓D.C.", "紐約"], "ans": 3, "exp": "<b>判讀關鍵</b>：<b>紐約</b>是美國第一大城卻非首都；首都為華盛頓D.C.(P.153)。"}, {"tid": "city", "q": "城市位置圖中，C城位於西北沿海，以某航太大廠總部聞名。此城與企業組合最可能為何？", "opts": ["洛杉磯—迪士尼", "休士頓—NASA", "底特律—通用汽車", "西雅圖—波音"], "ans": 3, "exp": "<b>判讀關鍵</b>：<b>西雅圖</b>位西北沿海，是航太巨擘<b>波音</b>的重要基地(P.153)。"}, {"tid": "city", "q": "下圖鏽帶範圍位於五大湖區東南部。某X城所在的密西根州擁有16家車廠總部、百大供應商中60家設廠。X城最可能為何？", "opts": ["休士頓", "邁阿密", "西雅圖", "底特律"], "ans": 3, "exp": "<b>判讀關鍵</b>：密西根州的<b>底特律</b>是汽車城，車廠與供應商高度聚集，形成鏽帶核心(P.181)。"}, {"tid": "city", "q": "承上題，鏽帶當年得以發展成重工業帶，下列何者「不是」其主要區位條件？", "opts": ["充足勞工", "五大湖廉價水運", "阿帕拉契煤礦與五大湖鐵礦", "終年炎熱乾燥的氣候"], "ans": 3, "exp": "<b>判讀關鍵</b>：鏽帶條件為<b>煤鐵原料+五大湖水運+勞工</b>等；氣候並非乾熱，反而冬季寒冷多暴風雪，故D錯(P.181)。"}, {"tid": "city", "q": "許多汽車零件供應商選擇集中設廠於底特律周邊，以共享勞工、降低運輸與資訊成本。此現象最符合下列哪一概念？", "opts": ["空間擴散", "購買力平價", "全球在地化", "聚集經濟"], "ans": 3, "exp": "<b>判讀關鍵</b>：同類與相關產業集中以共享資源、降低成本，是<b>聚集經濟</b>(P.181)。"}, {"tid": "city", "q": "下圖為美國2020年某項人口統計圖，顏色愈深數值愈高，最深區集中於東北走廊、五大湖南緣與加州沿海。此圖最可能呈現何種數據？", "opts": ["老年人口比例", "失業率", "人口自然增加率", "人口密度"], "ans": 3, "exp": "<b>判讀關鍵</b>：高值集中於東北大都會帶、五大湖南緣、加州，與大都會帶分布吻合，最可能是<b>人口密度</b>(P.181)。"}, {"tid": "city", "q": "北美40°N地形剖面圖中，甲位於東部，為低矮古老的山脈。下列關於甲的敘述何者正確？", "opts": ["甲為火山活躍帶", "甲為板塊聚合帶的年輕高山", "甲為阿帕拉契山脈，古老而低矮", "甲為洛磯山脈"], "ans": 2, "exp": "<b>判讀關鍵</b>：剖面東部低矮古老山脈為<b>阿帕拉契山脈</b>，形成年代久、經侵蝕而低矮(P.156)。"}, {"tid": "usmca", "q": "下表為USMCA與舊NAFTA汽車原產地規定對照。新協定將汽車區域含量要求由62.5%提高至75%。此規定最直接的目的為何？", "opts": ["提高在北美生產的比例以保護區域產業", "鼓勵自亞洲進口零件", "取消所有關稅", "降低汽車售價"], "ans": 0, "exp": "<b>判讀關鍵</b>：含量由62.5%提高到<b>75%</b>，要求更多零件在北美生產才享免關稅，藉此<b>保護區域產業</b>(P.183-184)。"}, {"tid": "usmca", "q": "USMCA規定汽車中需有40%零件由時薪不低於16美元的勞工生產。此條款主要受惠或保護的是下列何國的勞工？", "opts": ["中國勞工", "美國與加拿大相對高薪勞工", "墨西哥低薪勞工", "日本勞工"], "ans": 1, "exp": "<b>判讀關鍵</b>：設定<b>時薪≥16美元</b>門檻，墨西哥低薪難達標，實際保護的是<b>美、加高薪勞工</b>(P.183-184)。"}, {"tid": "usmca", "q": "下圖為北美農業帶分布，丁區位於五大湖周邊以酪農業為主。USMCA中「加拿大開放3.5%乳品市場」最可能衝擊下列何者？", "opts": ["丙牧場帶", "乙玉米帶", "丁區的加拿大酪農", "甲棉花帶"], "ans": 2, "exp": "<b>判讀關鍵</b>：乳品市場開放最直接衝擊以<b>酪農業</b>為主、原受保護的<b>加拿大酪農(丁區)</b>(P.184)。"}, {"tid": "usmca", "q": "北美農業地圖中，乙區位於中部大平原，是世界重要的糧倉，盛產供作飼料與工業原料的作物。乙區最可能為何？", "opts": ["酪農業帶", "棉花帶", "玉米帶", "牧場帶"], "ans": 2, "exp": "<b>判讀關鍵</b>：中部大平原為<b>玉米帶</b>，玉米兼作飼料與工業原料(P.184)。"}, {"tid": "usmca", "q": "USMCA設有所謂「毒丸條款」，規定若成員國與「非市場經濟國家」簽署自由貿易協定，其他成員得退出。此條款主要針對下列何國？", "opts": ["日本", "英國", "中國", "德國"], "ans": 2, "exp": "<b>判讀關鍵</b>：毒丸條款針對<b>非市場經濟國家</b>，實質目的在防堵成員國與<b>中國</b>簽FTA(P.183-184)。"}, {"tid": "usmca", "q": "USMCA以「落日條款」規定協定每6年檢討一次，有效期16年。此設計最主要的用意為何？", "opts": ["讓協定永久不變", "立即取消協定", "定期檢討以保留調整或退出的彈性", "強制所有國家加入"], "ans": 2, "exp": "<b>判讀關鍵</b>：<b>落日條款</b>每6年評估、效期16年，目的在<b>定期檢討、保留調整彈性</b>(P.183-184)。"}, {"tid": "glob", "q": "下圖顯示1920-2015年海運、航空客運、電話通訊三種費用的趨勢，三者皆大幅下降，其中某項降幅最大。降幅最大的最可能是下列何者？", "opts": ["航空客運費用", "海運費用", "郵寄費用", "電話通訊費用"], "ans": 3, "exp": "<b>判讀關鍵</b>：1920-2015三項交通通訊費用均下降，其中<b>電話通訊</b>因科技進步降幅最大(P.245)。"}, {"tid": "glob", "q": "馬祖某星巴克門市以閩東石屋外觀、竹篩、暖氣等在地元素設計。此做法最符合下列哪一概念？", "opts": ["聚集經濟", "購買力平價", "全球在地化", "空間擴散"], "ans": 2, "exp": "<b>判讀關鍵</b>：跨國品牌融入<b>當地特色</b>(石屋、竹篩)，是<b>全球在地化(glocalization)</b>(P.248)。"}, {"tid": "glob", "q": "美式速食、好萊塢電影等美國文化透過全球化向各地傳播。此一文化由源地向外傳布的過程，最符合下列哪一概念？", "opts": ["零庫存", "購買力平價", "全球在地化", "空間擴散"], "ans": 3, "exp": "<b>判讀關鍵</b>：文化由源地向外傳布是<b>空間擴散</b>；若是品牌融入當地特色才是全球在地化(P.248)。"}, {"tid": "glob", "q": "2011年泰國發生嚴重水災，導致Toyota、Honda、Apple、Seagate等公司的當地工廠停擺，全球相關產品供應受影響。此案例最能說明下列何者？", "opts": ["全球在地化使品牌客製化", "跨國企業全球分工使供應鏈高度連動", "都市閾值的提高", "購買力平價的計算"], "ans": 1, "exp": "<b>判讀關鍵</b>：一地災害衝擊全球供應，反映<b>跨國企業全球分工、供應鏈高度連動</b>(P.246)。"}, {"tid": "glob", "q": "學者薩森(Sassen)提出「世界都市」概念，指其為金融與跨國企業總部的管控中心，並以人口達1000萬作為門檻。下列敘述何者正確？", "opts": ["世界都市是全球金融與跨國企業的管控中心", "世界都市必為各國首都", "世界都市不需門檻人口", "世界都市僅以人口多寡定義"], "ans": 0, "exp": "<b>判讀關鍵</b>：世界都市的核心在<b>金融與跨國企業總部的管控功能</b>，閾值約1000萬人(P.246)。"}, {"tid": "glob", "q": "印度偏鄉學生透過可汗學院(Khan Academy)的免費線上課程獲得優質教育資源。此現象最能說明下列何者？", "opts": ["全球依存關係加深", "逆都市化", "產業空洞化", "全球在地化"], "ans": 0, "exp": "<b>判讀關鍵</b>：偏鄉學生因全球網路資源受益，顯示<b>全球依存關係加深</b>(P.246)。"}, {"tid": "glob", "q": "《經濟學人》雜誌曾以各地一杯咖啡(或大麥克漢堡)的價格，比較不同國家貨幣的實質購買力。此指數所依據的概念為何？", "opts": ["空間擴散", "聚集經濟", "落日條款", "購買力平價"], "ans": 3, "exp": "<b>判讀關鍵</b>：用同一商品價格比較各國貨幣實質購買力，依據<b>購買力平價(PPP)</b>(P.247)。"}, {"tid": "glob", "q": "COVID-19疫情後，許多企業將生產策略由「just in time(零庫存)」轉向「just in case(安全庫存)」。此轉變最主要反映企業重視下列何者？", "opts": ["供應鏈的韌性與抗風險能力", "降低庫存成本", "加速全球擴張", "提高品牌在地化"], "ans": 0, "exp": "<b>判讀關鍵</b>：由零庫存轉向安全庫存，是為強化<b>供應鏈韌性與抗風險能力</b>(P.247)。"}, {"tid": "glob", "q": "2011年日本311大地震造成半導體與汽車零件供應中斷，全球多家工廠被迫減產。此事件凸顯JIT(零庫存)生產的何種弱點？", "opts": ["面對突發災害時缺乏緩衝、易斷鏈", "品牌無法在地化", "庫存成本過高", "運輸費用上升"], "ans": 0, "exp": "<b>判讀關鍵</b>：JIT幾乎不留庫存，遇311這類突發災害<b>缺乏緩衝、容易斷鏈</b>(P.247)。"}, {"tid": "glob", "q": "下圖顯示全球海運貨櫃流通量於近數十年大幅成長。此趨勢最能反映下列何者？", "opts": ["各國貿易保護加強", "全球貿易量持續成長", "空運完全取代海運", "區域自給自足提高"], "ans": 1, "exp": "<b>判讀關鍵</b>：海運貨櫃量大增直接反映<b>全球貿易量成長</b>與分工加深(P.245)。"}, {"tid": "hdi", "q": "下表為五國HDI資料。乙國平均壽命84.0、預期在學16.7年、人均GNI 81949美元、HDI 0.970。此國最可能為何？", "opts": ["澳洲", "瑞士", "巴西", "尼加拉瓜"], "ans": 1, "exp": "<b>判讀關鍵</b>：HDI高達0.970、人均GNI約8.2萬美元，是高度發展的<b>瑞士</b>(P.219)。"}, {"tid": "hdi", "q": "HDI表中，甲國平均壽命67.3、HDI僅0.497，三項指標皆偏低。甲國最可能屬於下列何者？", "opts": ["世界都市核心國", "高所得移民國", "北方已開發國家", "南方開發中國家"], "ans": 3, "exp": "<b>判讀關鍵</b>：壽命短、教育低、HDI低(0.497)，屬發展程度較低的<b>南方國家</b>(尼加拉瓜)(P.219)。"}, {"tid": "hdi", "q": "HDI由健康、教育、生活水準三面向構成。下表中用以衡量「生活水準」面向的指標最可能是下列何者？", "opts": ["平均在校年數", "人均國民所得(GNI)", "平均壽命", "預期在學年數"], "ans": 1, "exp": "<b>判讀關鍵</b>：健康看壽命、教育看在學/在校年數、<b>生活水準看人均GNI</b>(P.219)。"}, {"tid": "hdi", "q": "HDI表中戊國平均壽命83.9、HDI 0.958，位於南半球卻被歸為北方(已開發)國家。戊國最可能為何？", "opts": ["阿根廷", "祕魯", "澳洲", "巴西"], "ans": 2, "exp": "<b>判讀關鍵</b>：南半球但屬已開發北方國家、HDI極高者為<b>澳洲</b>(P.219)。「南北」是發展程度概念，非單純地理半球。"}, {"tid": "hdi", "q": "下圖為兩種人口金字塔。A型底部窄、頂部相對寬，呈現收縮狀。此類型最可能對應下列哪一組國家？", "opts": ["奈及利亞、印度", "日本、台灣、德國", "尼加拉瓜、祕魯", "沙烏地阿拉伯"], "ans": 1, "exp": "<b>判讀關鍵</b>：底窄(低出生)、頂寬(高齡多)的<b>收縮型</b>金字塔，對應老化的北方國家如<b>日、台、德</b>(P.219)。"}, {"tid": "hdi", "q": "人口金字塔B型呈底部寬大的正三角形。由此可判斷該國最主要的人口特徵為何？", "opts": ["人口零成長", "老年人口比例極高", "出生率高、人口年輕", "性別比嚴重失衡"], "ans": 2, "exp": "<b>判讀關鍵</b>：底部寬的<b>擴張型</b>金字塔代表<b>高出生率、人口結構年輕</b>，多見於南方國家(P.219)。"}, {"tid": "latam", "q": "下圖為亞馬遜流域某地雨溫圖，顯示一年中有明顯旱季。亞馬遜森林砍伐火燒最常發生於旱季。依此推斷，砍伐高峰最可能在哪個月份前後？", "opts": ["1月", "10月", "4月", "7月"], "ans": 3, "exp": "<b>判讀關鍵</b>：旱季利於放火清地，亞馬遜砍伐高峰約在<b>7月</b>(旱季)(P.218)。"}, {"tid": "latam", "q": "亞馬遜雨林遭砍伐的兩大主因，與下列哪一組產業最相關？", "opts": ["觀光與金融", "大豆種植與牛隻放牧", "石油與天然氣", "半導體與汽車製造"], "ans": 1, "exp": "<b>判讀關鍵</b>：亞馬遜砍伐主因為擴張<b>大豆種植與牛隻放牧</b>用地(P.218)。"}, {"tid": "latam", "q": "隨亞馬遜雨林退化，當地景觀依序變化。下列何者為正確的退化順序？", "opts": ["草原→疏林草原→雨林", "雨林→沙漠→草原", "疏林草原→雨林→草原", "雨林→疏林草原→草原"], "ans": 3, "exp": "<b>判讀關鍵</b>：森林退化的景觀序列為<b>雨林→疏林草原→草原</b>，反映植被逐步劣化(P.218)。"}, {"tid": "latam", "q": "下表為中南美洲各國都市化率，阿根廷92.5%、巴西87.8%、智利88.0%，均遠高於全球平均57.5%。此一現象常伴隨下列哪種問題？", "opts": ["都市化不足", "人口負成長", "鄉村人口過多", "過度都市化與貧民窟蔓延"], "ans": 3, "exp": "<b>判讀關鍵</b>：都市化率遠高於全球且工商業未同步，屬<b>過度都市化</b>，常伴<b>貧民窟</b>問題(P.218)。"}];
+let curTopic="env";
+const TOTAL=QDB.length;
+const answered={};
+const ttabs=document.getElementById("ttabs");
+TOPICS.forEach(t=>{
+  const cnt=QDB.filter(q=>q.tid===t.id).length;
+  if(!cnt)return;
+  const b=document.createElement("button");
+  b.className="ttab"+(t.id===curTopic?" on":"");b.id="tab-"+t.id;
+  b.innerHTML=`${t.icon} ${t.name} <span style="background:#0f2744;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px">${cnt}</span>`;
+  b.onclick=()=>switchTopic(t.id);ttabs.appendChild(b);
+});
+function switchTopic(id){curTopic=id;document.querySelectorAll(".ttab").forEach(x=>x.classList.remove("on"));document.getElementById("tab-"+id).classList.add("on");render();window.scrollTo(0,0);}
+function render(){
+  const t=TOPICS.find(x=>x.id===curTopic);
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  let h=`<div class="q-hd"><h2>${t.icon} ${t.name}</h2><span class="q-cnt">${qs.length} 題</span></div>`;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    const o=q.opts.map((op,oi)=>`<div class="opt" id="opt_${aid}_${oi}" onclick="pick('${aid}',${oi},${q.ans})"><span class="ol" id="ol_${aid}_${oi}">${"ABCD"[oi]}</span><span>${op}</span></div>`).join("");
+    h+=`<div class="qcard"><div class="qhd"><span class="qnum">Q${i+1}</span><span class="qtxt">${q.q}</span></div><div class="opts">${o}</div><div class="exp" id="exp_${aid}">${q.exp}</div></div>`;
+  });
+  h+=`<button class="rbtn" onclick="resetTopic()">🔄 重置本主題</button>`;
+  document.getElementById("main").innerHTML=h;
+  qs.forEach((q,i)=>{const aid=curTopic+"_"+i;if(answered[aid])applyResult(aid,answered[aid].sel,answered[aid].correct,q.ans);});
+}
+function pick(aid,sel,ans){if(answered[aid])return;const c=sel===ans;answered[aid]={sel,correct:c};applyResult(aid,sel,c,ans);updateScore();}
+function applyResult(aid,sel,correct,ans){
+  [0,1,2,3].forEach(i=>{const o=document.getElementById("opt_"+aid+"_"+i);if(!o)return;o.classList.add("done");
+    if(i===sel&&correct)o.classList.add("ok");else if(i===sel&&!correct)o.classList.add("ng");else if(i===ans&&!correct)o.classList.add("ok");else o.classList.add("fade");});
+  const e=document.getElementById("exp_"+aid);if(e)e.classList.add("show");
+}
+function resetTopic(){QDB.filter(q=>q.tid===curTopic).forEach((_,i)=>delete answered[curTopic+"_"+i]);render();updateScore();}
+function updateScore(){const a=Object.values(answered),d=a.length,ok=a.filter(x=>x.correct).length;
+  document.getElementById("s-done").textContent=d;document.getElementById("s-ok").textContent=ok;document.getElementById("s-ng").textContent=d-ok;
+  document.getElementById("s-pct").textContent=d>0?Math.round(ok/d*100)+"%":"—";document.getElementById("ptfill").style.width=(d/TOTAL*100)+"%";}
+render();
+</script>
+</body>
+</html>
