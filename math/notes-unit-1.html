@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一數學 暑期先修 · 教用互動版 ── 第 1 堂課　正數與負數、認識數線</title>
+<style>
+  :root { --main:#2b6cb0; --accent:#e6a800; --ok:#1d8a4c; --step:#2b6cb0; --bg:#eef3f9; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.8; font-size:19px; padding:0 0 80px; }
+  header { background:linear-gradient(135deg,var(--main),#3d8bd4); color:#fff; padding:26px 20px 22px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+  header .tag { display:inline-block; background:rgba(255,255,255,.22); border-radius:20px; padding:4px 16px; font-size:17px; margin-bottom:8px; }
+  header h1 { font-size:28px; margin-bottom:4px; }
+  header p { font-size:17px; opacity:.95; }
+  .wrap { max-width:920px; margin:0 auto; padding:22px 16px; }
+  .toolbar { position:sticky; top:0; z-index:40; background:#fff; border:1px solid #d9e2ec; border-radius:12px; padding:12px 16px; margin-bottom:20px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  button.act { font-family:inherit; font-size:16px; font-weight:bold; border:none; border-radius:10px; padding:9px 16px; cursor:pointer; }
+  button.exp { background:var(--main); color:#fff; }
+  button.col { background:#7b8a9a; color:#fff; }
+  /* 概念說明 */
+  .concept { background:#fff8e6; border:1.5px solid #f0cf6a; border-radius:14px; padding:18px 22px; margin-bottom:22px; }
+  .concept h2 { font-size:21px; color:#9a6b00; margin-bottom:10px; }
+  .concept ul { padding-left:22px; } .concept li { margin:6px 0; }
+  .concept b { color:#b3007a; }
+  /* 分組標題 */
+  .group-h { font-size:20px; font-weight:bold; color:#fff; background:var(--main); border-radius:8px; padding:8px 16px; margin:24px 0 14px; }
+  .group-h.practice { background:#1d8a4c; } .group-h.hw { background:#b06a00; }
+  /* 題目卡 */
+  .prob { background:#fff; border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 1px 6px rgba(0,0,0,.08); }
+  .q-line { display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; }
+  .q-badge { flex-shrink:0; background:#e8f0fb; color:var(--main); font-weight:bold; border-radius:8px; padding:2px 12px; font-size:17px; white-space:nowrap; }
+  .q-text { font-size:19px; }
+  /* 步驟：按數字才顯示內容 */
+  .steps { margin:8px 0 0; }
+  .step { display:flex; gap:12px; align-items:flex-start; margin:9px 0; }
+  button.num { flex-shrink:0; width:34px; height:34px; border-radius:50%; background:var(--step); color:#fff; font-weight:bold; font-size:17px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 4px rgba(43,108,176,.4); transition:transform .1s,filter .1s; font-family:inherit; }
+  button.num:hover { filter:brightness(1.12); transform:scale(1.1); }
+  .step.shown button.num { background:var(--ok); box-shadow:none; cursor:default; }
+  .txt { display:none; font-size:18px; padding:8px 14px; background:#f5f9fe; border-left:4px solid var(--step); border-radius:0 10px 10px 0; flex:1; }
+  .step.shown .txt { display:block; animation:fade .25s ease; }
+  .txt b { color:#b3007a; }
+  @keyframes fade { from{opacity:0; transform:translateX(-6px);} to{opacity:1;} }
+  .answer { display:none; margin-top:10px; padding:11px 16px; background:#e7f6ee; border:1.5px solid var(--ok); border-radius:10px; font-size:19px; font-weight:bold; color:#13633a; }
+  .answer.show { display:block; animation:fade .25s ease; }
+  .answer::before { content:"✅ 答案："; }
+  /* 數線圖 */
+  .numline { display:none; margin:10px 0 2px; padding:8px 10px; background:#fff; border:1px solid #d9e2ec; border-radius:10px; overflow-x:auto; }
+  .answer.show + .numline { display:block; }
+  .numline svg { display:block; max-width:100%; height:auto; }
+  footer { text-align:center; color:#789; font-size:16px; margin-top:26px; }
+  @media print {
+    .toolbar { display:none!important; }
+    .txt { display:block!important; }
+    .answer { display:block!important; }
+    .numline { display:block!important; }
+    .prob { break-inside:avoid; box-shadow:none; border:1px solid #ddd; }
+    body { background:#fff; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">國一數學 · 暑期先修 · 教用互動版</div>
+  <h1>第 1 堂課　正數與負數、認識數線</h1>
+  <p>按數字 1、2、3… 逐步顯示步驟與解析 · 全民補習班 線上教學</p>
+</header>
+<div class="wrap">
+  <div class="toolbar">
+    <button class="act exp" onclick="showAll()">全部顯示</button>
+    <button class="act col" onclick="resetAll()">全部隱藏</button>
+  </div>
+
+  <!-- ════════ 概念 1　正數與負數 ════════ -->
+  <div class="concept">
+    <h2>💡 概念 1　正數與負數</h2>
+    <ul>
+      <li>在日常生活中，意義「相對或相反」的量，都可以用帶有 <b>＋（讀作正）</b> 和 <b>−（讀作負）</b> 的數來表示。</li>
+      <li>溫度：攝氏 30 度記為 <b>＋30 度</b>；零下 10 度記為 <b>−10 度</b>。</li>
+      <li>方向：以基準點為 0，東為正、西為負——向東 2 公里 <b>＋2 公里</b>、向西 3 公里 <b>−3 公里</b>。</li>
+      <li>賺賠：賺 35000 元記 <b>＋35000 元</b>；賠 2300 元記 <b>−2300 元</b>。</li>
+      <li><b>正數</b>：凡是大於 0 的數（如 ＋5、＋3.5、＋¾）。<b>負數</b>：凡是小於 0 的數（如 −5、−3.5、−¾）。</li>
+      <li><b>0 既不是正數，也不是負數</b>。</li>
+    </ul>
+  </div>
+
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">溫度：攝氏零上 28 度與零下 6 度各記為多少？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">以 0 度為基準：零上記為「＋」、零下記為「−」。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">零上 28 度 → <b>＋28 度</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">零下 6 度 → <b>−6 度</b>。</span></div>
+    </div>
+    <div class="answer">＋28 度、−6 度</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">以基準點為 0、東為正，向東 7 公里與向西 9 公里各記為多少？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">規定方向：東為正（＋）、西為負（−）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">向東 7 公里 → <b>＋7 公里</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">向西 9 公里 → <b>−9 公里</b>。</span></div>
+    </div>
+    <div class="answer">＋7 公里、−9 公里</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">做生意賺 48000 元、賠 5600 元各記為多少？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">賺為正（＋）、賠為負（−）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">賺 48000 → <b>＋48000 元</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">賠 5600 → <b>−5600 元</b>。</span></div>
+    </div>
+    <div class="answer">＋48000 元、−5600 元</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">判斷為正數、負數或零：＋9、−4.2、0、＋⅖、−21。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">判斷方法：把每個數和 0 比大小。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">大於 0 的是正數：<b>＋9、＋⅖</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">小於 0 的是負數：<b>−4.2、−21</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">4</button><span class="txt">等於 0 的是零：<b>0</b>（不正不負）。</span></div>
+    </div>
+    <div class="answer">正數、負數、零、正數、負數</div>
+  </div>
+
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">賺 2500 元記為（　）元；下降 3 公尺記為（　）公尺；向西走 2.5 公里記為（　）公里。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">賺、上升、向東 → 正；賠、下降、向西 → 負。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">賺 2500 → <b>＋2500 元</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">下降 3 → <b>−3 公尺</b>；向西 2.5 → <b>−2.5 公里</b>。</span></div>
+    </div>
+    <div class="answer">＋2500 元、−3 公尺、−2.5 公里</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">地平線為基準，山高 3500 公尺記為 ＋3500，海溝深 4100 公尺記為（　）公尺。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">以地平線為 0：高於地平線為正、低於為負。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">海溝在地平線「下方」 → 用負號。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">深 4100 → <b>−4100 公尺</b>。</span></div>
+    </div>
+    <div class="answer">−4100 公尺</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">體重以 45 公斤為準，48 公斤記為 ＋3，則 37 公斤記為（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">比基準多記正、少記負，數值＝體重−基準。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">驗證：48−45＝＋3 ✓，方法正確。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">37−45＝<b>−8</b>。</span></div>
+    </div>
+    <div class="answer">−8（37−45＝−8）</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">判斷為正數、負數或零：＋5、−3.5、0、＋¾、−16。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">每個數和 0 比大小。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正：<b>＋5、＋¾</b>；負：<b>−3.5、−16</b>；零：<b>0</b>。</span></div>
+    </div>
+    <div class="answer">正、負、零、正、負</div>
+  </div>
+
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">收入 800 元記為 ＋800，則支出 500 元記為（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">收入為正、支出為負。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">支出 500 → <b>−500</b>。</span></div>
+    </div>
+    <div class="answer">−500</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">電梯上升 4 層記為 ＋4，下降 3 層記為（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">上升為正、下降為負。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">下降 3 → <b>−3</b>。</span></div>
+    </div>
+    <div class="answer">−3</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">比標準多 2 公分記為 ＋2，少 5 公分記為（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">多為正、少為負。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">少 5 → <b>−5</b>。</span></div>
+    </div>
+    <div class="answer">−5</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">球隊勝 3 場記為 ＋3，輸 2 場記為（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">勝為正、輸為負。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">輸 2 → <b>−2</b>。</span></div>
+    </div>
+    <div class="answer">−2</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">判斷為正數、負數或零：−1、0、＋8、−2.5、＋100。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">每個數和 0 比大小。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">負：<b>−1、−2.5</b>；零：<b>0</b>；正：<b>＋8、＋100</b>。</span></div>
+    </div>
+    <div class="answer">負、零、正、負、正</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">丙記為 ＋8（體重基準 45 公斤），則丙體重為（　）公斤。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">＋8 表示比基準「多」8 公斤。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">體重＝基準＋8＝45＋8。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">45＋8＝<b>53 公斤</b>。</span></div>
+    </div>
+    <div class="answer">53 公斤（45＋8）</div>
+  </div>
+
+  <!-- ════════ 概念 2　整數 ════════ -->
+  <div class="concept">
+    <h2>💡 概念 2　整數</h2>
+    <ul>
+      <li>整數包括：<b>正整數</b>、<b>零</b>、<b>負整數</b>。</li>
+      <li><b>正整數</b>：1、2、3、4…，又稱為「<b>自然數</b>」。</li>
+      <li><b>負整數</b>：−1、−2、−3、−4…。</li>
+      <li><b>0 是整數</b>，但 0 <b>不是正整數、也不是負整數</b>；0 <b>不是自然數</b>。</li>
+    </ul>
+  </div>
+
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">下列何者是整數？ 6、−8、0、3.5、−⅖、＋11。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數＝正整數、零、負整數；含小數、分數者不是整數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">3.5（小數）、−⅖（分數）不是整數，先剔除。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">其餘皆為整數：<b>6、−8、0、＋11</b>。</span></div>
+    </div>
+    <div class="answer">6、−8、0、＋11</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">下列哪些是自然數（正整數）？ 8、0、−5、11、＋20。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">自然數＝正整數（1、2、3…），0 與負數都不是。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0（非正）、−5（負）剔除。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">是自然數的有：<b>8、11、＋20</b>。</span></div>
+    </div>
+    <div class="answer">8、11、＋20</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">寫出 ＋5 到 ＋9 之間（含）所有的整數。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">「含」表示兩端 5 與 9 都要算進去。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">依序列出：<b>5、6、7、8、9</b>。</span></div>
+    </div>
+    <div class="answer">5、6、7、8、9</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">在 −7、0、＋6、−11、＋8 中，哪些是負整數？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負整數＝小於 0 的整數（−1、−2、−3…）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0、＋6、＋8 非負，剔除。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">負整數有：<b>−7、−11</b>。</span></div>
+    </div>
+    <div class="answer">−7、−11</div>
+  </div>
+
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">下列何者為整數？ −7、0、＋12、3.5、−⅔、＋100。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">小數 3.5、分數 −⅔ 不是整數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">其餘皆整數：<b>−7、0、＋12、＋100</b>。</span></div>
+    </div>
+    <div class="answer">−7、0、＋12、＋100</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">下列哪些是自然數？ 0、5、−3、＋9、2.5。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">自然數＝正整數；0、負數、小數都不是。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">是自然數的有：<b>5、＋9</b>。</span></div>
+    </div>
+    <div class="answer">5、＋9</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">寫出 −4 到 ＋1 之間（含）所有的整數。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">「含」兩端：從 −4 一路數到 1。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">依序：<b>−4、−3、−2、−1、0、1</b>。</span></div>
+    </div>
+    <div class="answer">−4、−3、−2、−1、0、1</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">在 −6、0、＋2、−1、＋8 中，哪些是負整數？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負整數＝小於 0 的整數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">0、＋2、＋8 非負，剔除 → 答 <b>−6、−1</b>。</span></div>
+    </div>
+    <div class="answer">−6、−1</div>
+  </div>
+
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">整數包括正整數、（　）、（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">整數的三大類：正整數、零、負整數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">空格填 <b>零</b>、<b>負整數</b>。</span></div>
+    </div>
+    <div class="answer">零、負整數</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">正整數又稱為（　）數。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">正整數 1、2、3… 又叫自然數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">答：<b>自然</b>。</span></div>
+    </div>
+    <div class="answer">自然</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">下列何者為整數？ ＋6、−2.7、0、−9、4¼、＋30。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">小數 −2.7、帶分數 4¼ 不是整數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">其餘皆整數：<b>＋6、0、−9、＋30</b>。</span></div>
+    </div>
+    <div class="answer">＋6、0、−9、＋30</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">寫出 −5 與 ＋3 之間（含）所有的整數，共幾個？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">列出：−5、−4、−3、−2、−1、0、1、2、3。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">數一數共 <b>9 個</b>（也可算 3−(−5)＋1＝9）。</span></div>
+    </div>
+    <div class="answer">−5～3 共 9 個</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">0 是不是整數？是不是自然數？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">0 屬於整數（整數含零）。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">但自然數＝正整數，0 不算 → 答：<b>是整數；不是自然數</b>。</span></div>
+    </div>
+    <div class="answer">是整數；不是自然數</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">最小的正整數是（　）；最大的負整數是（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">正整數由小到大 1、2、3…，最小是 <b>1</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">負整數越靠近 0 越大，最大是 <b>−1</b>。</span></div>
+    </div>
+    <div class="answer">1；−1</div>
+  </div>
+
+  <!-- ════════ 概念 3　數線三要素與整數的畫法 ════════ -->
+  <div class="concept">
+    <h2>💡 概念 3　數線三要素與整數的畫法</h2>
+    <ul>
+      <li>數線有三個要素：<b>原點</b>、<b>正向</b>、<b>單位長</b>。</li>
+      <li><b>原點</b>：在直線上任取一點 O 當基準點，代表數字 <b>0</b>。</li>
+      <li><b>正向</b>：通常規定向右為正向（在右端加箭號）；原點右邊的點是正數，左邊的點是負數。</li>
+      <li><b>單位長</b>：在原點右方選取一段定長當作一個單位。</li>
+      <li><b>整數的畫法</b>：自原點向右，每隔一個單位長取一點，依序標 1、2、3…；向左每隔一個單位長取一點，依序標 −1、−2、−3…。</li>
+    </ul>
+    <div class="numline" style="display:block" data-min="-5" data-max="5" data-points=""></div>
+  </div>
+
+  <!-- 老師講解 -->
+  <div class="group-h">👨‍🏫 老師講解（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 1</span><span class="q-text">數線的原點代表什麼數？正向通常朝哪一邊？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">原點 O 是基準點，代表數字 <b>0</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正向通常規定向右（右端加箭號）。</span></div>
+    </div>
+    <div class="answer">原點代表 0；正向朝右</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 2</span><span class="q-text">在數線上畫出 4、5、−4、−5。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">先定原點 0，向右每隔一單位標 1、2、3、4、5。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">4 在原點右第 4 點、5 在右第 5 點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">向左標 −1…−5：−4 在左第 4 點、−5 在左第 5 點。</span></div>
+    </div>
+    <div class="answer">自原點向右第 4、5 點；向左第 4、5 點</div>
+    <div class="numline" data-min="-6" data-max="6" data-points="4,5,-4,-5"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 3</span><span class="q-text">某點在原點右邊 6 個單位是哪個數？左邊 8 個單位呢？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">原點右邊為正：右 6 個單位 → <b>＋6</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">原點左邊為負：左 8 個單位 → <b>−8</b>。</span></div>
+    </div>
+    <div class="answer">＋6；−8</div>
+    <div class="numline" data-min="-9" data-max="9" data-points="6=＋6,-8=−8"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">講 4</span><span class="q-text">＋7 與 −7 各在原點哪一邊？距原點幾個單位？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">＋7 為正 → 在原點右邊，距原點 7 個單位。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−7 為負 → 在原點左邊，距原點 7 個單位。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">兩數分居原點兩側、距離相等。</span></div>
+    </div>
+    <div class="answer">＋7 在右邊、−7 在左邊，皆距原點 7 個單位</div>
+    <div class="numline" data-min="-8" data-max="8" data-points="7=＋7,-7=−7"></div>
+  </div>
+
+  <!-- 學生練習 -->
+  <div class="group-h practice">✏️ 學生練習（4 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 1</span><span class="q-text">將 3、−2、0、＋1、−4 標在數線上。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">0 標在原點；正數在右、負數在左。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">右邊：＋1 在右 1、3 在右 3。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">左邊：−2 在左 2、−4 在左 4。</span></div>
+    </div>
+    <div class="answer">原點右 3、右 1；原點左 2、左 4；0 在原點</div>
+    <div class="numline" data-min="-5" data-max="5" data-points="3,-2,0,1,-4"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 2</span><span class="q-text">某點在原點右邊 5 個單位代表（　）；左邊 6 個單位代表（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">右邊為正：右 5 個單位 → <b>＋5</b>。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">左邊為負：左 6 個單位 → <b>−6</b>。</span></div>
+    </div>
+    <div class="answer">＋5；−6</div>
+    <div class="numline" data-min="-7" data-max="7" data-points="5=＋5,-6=−6"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 3</span><span class="q-text">在數線上標出 −4、＋1、＋3 三點。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負數在左：−4 在原點左 4。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">正數在右：＋1 在右 1、＋3 在右 3。</span></div>
+    </div>
+    <div class="answer">原點左 4；右 1；右 3</div>
+    <div class="numline" data-min="-5" data-max="5" data-points="-4,1,3"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">練 4</span><span class="q-text">在數線上，＋2 與 −2 距原點各幾個單位？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">＋2 在原點右 2 個單位。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">−2 在原點左 2 個單位 → 兩者距原點皆 <b>2 個單位</b>。</span></div>
+    </div>
+    <div class="answer">都是 2 個單位</div>
+    <div class="numline" data-min="-5" data-max="5" data-points="2=＋2,-2=−2"></div>
+  </div>
+
+  <!-- 回家作業 -->
+  <div class="group-h hw">🏠 回家作業（6 題）</div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 1</span><span class="q-text">數線的基準點稱為（　），代表數字（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">直線上的基準點 O 稱為原點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">原點代表數字 <b>0</b>。</span></div>
+    </div>
+    <div class="answer">原點；0</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 2</span><span class="q-text">數線上原點右邊的點表示（　）數，左邊表示（　）數。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">向右為正向 → 右邊是正數。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">左邊是負數 → 答：<b>正</b>；<b>負</b>。</span></div>
+    </div>
+    <div class="answer">正；負</div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 3</span><span class="q-text">將 −5、−1、2、4、0 標在數線上。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">0 標在原點。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">負數在左：−5 在左 5、−1 在左 1。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">3</button><span class="txt">正數在右：2 在右 2、4 在右 4。</span></div>
+    </div>
+    <div class="answer">原點左 5、左 1；右 2、右 4；0 在原點</div>
+    <div class="numline" data-min="-6" data-max="6" data-points="-5,-1,2,4,0"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 4</span><span class="q-text">某點在原點左邊 7 個單位，代表（　）。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">原點左邊為負。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">左 7 個單位 → <b>−7</b>。</span></div>
+    </div>
+    <div class="answer">−7</div>
+    <div class="numline" data-min="-9" data-max="9" data-points="-7=−7"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 5</span><span class="q-text">將 −3、＋1、−2、＋4 標在數線上，並說出最左、最右的數。</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">負數在左：−3 在左 3、−2 在左 2；正數在右：＋1、＋4。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">越左越小、越右越大 → 最左 <b>−3</b>、最右 <b>＋4</b>。</span></div>
+    </div>
+    <div class="answer">最左 −3、最右 ＋4</div>
+    <div class="numline" data-min="-5" data-max="5" data-points="-3,1,-2,4"></div>
+  </div>
+
+  <div class="prob">
+    <div class="q-line"><span class="q-badge">作 6</span><span class="q-text">在 −2、＋1、−3、＋5 中，哪個數距離原點最近？</span></div>
+    <div class="steps">
+      <div class="step"><button class="num" onclick="showStep(this)">1</button><span class="txt">距原點遠近看「離 0 幾個單位」：2、1、3、5。</span></div>
+      <div class="step"><button class="num" onclick="showStep(this)">2</button><span class="txt">最小是 1 → <b>＋1</b> 距原點最近。</span></div>
+    </div>
+    <div class="answer">＋1（距原點 1）</div>
+    <div class="numline" data-min="-5" data-max="6" data-points="-2,1,-3,5"></div>
+  </div>
+
+  <footer>全民補習班　teaching.efetl.com　·　國一數學 暑期先修　·　第 1 堂課　正數與負數、認識數線</footer>
+</div>
+
+<script>
+  function showStep(btn){
+    const step = btn.closest('.step');
+    step.classList.add('shown');
+    const prob = btn.closest('.prob');
+    if (!prob.querySelector('.step:not(.shown)')) {     // 該題步驟全部點開
+      prob.querySelector('.answer')?.classList.add('show');   // 自動顯示答案
+    }
+  }
+  function showAll(){
+    document.querySelectorAll('.step').forEach(s => s.classList.add('shown'));
+    document.querySelectorAll('.answer').forEach(a => a.classList.add('show'));
+  }
+  function resetAll(){
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('shown'));
+    document.querySelectorAll('.answer').forEach(a => a.classList.remove('show'));
+  }
+  function drawNumLine(el){
+    const min=parseFloat(el.dataset.min), max=parseFloat(el.dataset.max);
+    const pts=(el.dataset.points||'').split(',').map(s=>s.trim()).filter(Boolean).map(s=>{
+      const i=s.indexOf('='); return i>=0?{v:parseFloat(s.slice(0,i)),label:s.slice(i+1)}:{v:parseFloat(s),label:s};
+    });
+    const W=640,H=92,padL=34,padR=34,y=58,x0=padL,x1=W-padR,sc=(x1-x0)/(max-min),X=v=>x0+(v-min)*sc;
+    let s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:\'Noto Sans TC\',sans-serif">';
+    s+='<line x1="'+(x0-16)+'" y1="'+y+'" x2="'+(x1+16)+'" y2="'+y+'" stroke="#333" stroke-width="2"/>';
+    s+='<polygon points="'+(x1+16)+','+y+' '+(x1+6)+','+(y-5)+' '+(x1+6)+','+(y+5)+'" fill="#333"/>';
+    for(let n=Math.ceil(min);n<=Math.floor(max);n++){const x=X(n);
+      s+='<line x1="'+x+'" y1="'+(y-6)+'" x2="'+x+'" y2="'+(y+6)+'" stroke="#333" stroke-width="'+(n===0?2.5:1.4)+'"/>';
+      s+='<text x="'+x+'" y="'+(y+24)+'" text-anchor="middle" font-size="15" fill="#444">'+n+'</text>';}
+    pts.forEach(p=>{const x=X(p.v);
+      s+='<circle cx="'+x+'" cy="'+y+'" r="6" fill="#cc0000"/>';
+      s+='<text x="'+x+'" y="'+(y-13)+'" text-anchor="middle" font-size="16" fill="#cc0000" font-weight="bold">'+p.label+'</text>';});
+    s+='</svg>'; el.innerHTML=s;
+  }
+  document.querySelectorAll('.numline').forEach(drawNumLine);
+</script>
+</body>
+</html>
