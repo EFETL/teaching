@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>等高三角形 例題1 — 動畫解題</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+#header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+#header h1 { font-size: 1.9rem; color: #7dd3fc; letter-spacing: 0.05em; }
+#header p  { font-size: 0.95rem; color: #64748b; margin-top: 4px; }
+
+#stage {
+  width: 820px; max-width: 100%;
+  background: #1e293b;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 72px rgba(0,0,0,0.6);
+}
+
+/* Problem bar */
+#problem-bar {
+  background: #0c2340;
+  padding: 14px 24px;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  border-bottom: 1px solid #1e3a5f;
+}
+#problem-bar .tag {
+  display: inline-block;
+  background: #1d4ed8;
+  color: #bfdbfe;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 0.8rem;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Main animation area */
+#animation-area {
+  display: flex;
+  height: 340px;
+}
+#svg-panel {
+  width: 360px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  background: #162032;
+}
+#text-panel {
+  flex: 1;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  border-left: 1px solid #1e3a5f;
+  overflow: hidden;
+}
+
+/* Step cards */
+.step-card {
+  background: #0f2742;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity 0.45s, transform 0.45s;
+  border-left: 3px solid transparent;
+}
+.step-card.vis { opacity: 1; transform: none; }
+.step-card.vis:nth-child(1) { border-color: #6366f1; }
+.step-card.vis:nth-child(2) { border-color: #3b82f6; }
+.step-card.vis:nth-child(3) { border-color: #0ea5e9; }
+
+.badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 0.72rem; font-weight: 700;
+  margin-right: 7px;
+  vertical-align: middle;
+}
+.f { font-family: 'Courier New', monospace; color: #fbbf24; font-size: 0.9rem; }
+.blue { color: #60a5fa; }
+.green { color: #4ade80; }
+.purple { color: #c4b5fd; }
+
+.answer-card {
+  background: #052e16;
+  border: 2px solid #22c55e;
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.answer-card.vis { opacity: 1; transform: none; }
+.answer-card .main { font-size: 1.15rem; font-weight: 700; color: #4ade80; }
+.answer-card .sub  { font-size: 0.78rem; color: #86efac; margin-top: 2px; }
+
+/* SVG elements — transition-driven show/hide */
+.svg-layer {
+  transition: opacity 0.7s;
+}
+
+/* Progress & controls */
+#controls {
+  width: 820px; max-width: 100%;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cbtn {
+  background: #1e3a5f;
+  color: #7dd3fc;
+  border: 1px solid #2d5a9e;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.cbtn:hover { background: #2d5a9e; }
+#btn-play { min-width: 88px; font-weight: 600; }
+
+#progress-bar {
+  flex: 1; height: 6px;
+  background: #334155;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+}
+#progress-fill {
+  height: 100%; background: #3b82f6;
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.35s;
+}
+#step-lbl {
+  color: #64748b; font-size: 0.82rem;
+  min-width: 42px; text-align: right;
+}
+
+/* Caption bar */
+#caption {
+  width: 820px; max-width: 100%;
+  margin-top: 10px;
+  padding: 12px 20px;
+  background: #1e293b;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  text-align: center;
+  min-height: 46px;
+  transition: color 0.3s;
+  line-height: 1.6;
+}
+
+/* Frame dots */
+#frame-dots {
+  display: flex; gap: 6px; margin: 10px 0 4px;
+  justify-content: center;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #334155; cursor: pointer; transition: background 0.3s;
+}
+.dot.active { background: #3b82f6; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>等高三角形</h1>
+  <p>例題 1 &nbsp;—&nbsp; 面積比＝底邊比 &nbsp;｜&nbsp; 動畫解題</p>
+</div>
+
+<div id="stage">
+  <div id="problem-bar">
+    <span class="tag">例題 1</span>
+    如圖，△ABC 中，D 在 BC 上，BD＝3，DC＝5。
+    若 S<sub>△ABC</sub>＝40，求 S<sub>△ABD</sub> 與 S<sub>△ACD</sub>。
+  </div>
+
+  <div id="animation-area">
+    <!-- SVG panel -->
+    <div id="svg-panel">
+      <svg id="fig" viewBox="0 0 320 230" width="320" height="230" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Layer 0: fills (appear at frame 4) -->
+        <polygon id="L-fill-abd" class="svg-layer"
+          points="160,18 50,198 133,198"
+          fill="#3b82f6" fill-opacity="0.28" stroke="none" opacity="0"/>
+        <polygon id="L-fill-acd" class="svg-layer"
+          points="160,18 133,198 270,198"
+          fill="#22c55e" fill-opacity="0.28" stroke="none" opacity="0"/>
+
+        <!-- Layer 1: triangle ABC (frame 1) -->
+        <g id="L-tri" class="svg-layer" opacity="0">
+          <line x1="50" y1="198" x2="270" y2="198" stroke="#cbd5e1" stroke-width="2.5"/>
+          <line x1="50"  y1="198" x2="160" y2="18"  stroke="#cbd5e1" stroke-width="2.5"/>
+          <line x1="270" y1="198" x2="160" y2="18"  stroke="#cbd5e1" stroke-width="2.5"/>
+          <text x="160" y="11"  font-size="16" fill="#fbbf24" font-weight="bold" text-anchor="middle">A</text>
+          <text x="36"  y="214" font-size="15" fill="#cbd5e1" font-weight="bold">B</text>
+          <text x="272" y="214" font-size="15" fill="#cbd5e1" font-weight="bold">C</text>
+        </g>
+
+        <!-- Layer 2: point D + BD DC labels (frame 2) -->
+        <g id="L-d" class="svg-layer" opacity="0">
+          <circle cx="133" cy="198" r="4.5" fill="#fb923c"/>
+          <text x="133" y="220" font-size="14" fill="#fb923c" font-weight="bold" text-anchor="middle">D</text>
+          <!-- segment tick marks -->
+          <line x1="91" y1="193" x2="91" y2="203" stroke="#f87171" stroke-width="1.5"/>
+          <line x1="88" y1="193" x2="88" y2="203" stroke="#f87171" stroke-width="1.5"/>
+          <line x1="201" y1="193" x2="201" y2="203" stroke="#86efac" stroke-width="1.5"/>
+          <text x="91"  y="190" font-size="13" fill="#f87171" text-anchor="middle" font-weight="bold">3</text>
+          <text x="201" y="190" font-size="13" fill="#86efac" text-anchor="middle" font-weight="bold">5</text>
+        </g>
+
+        <!-- Layer 3: altitude (frame 3) -->
+        <g id="L-alt" class="svg-layer" opacity="0">
+          <line x1="160" y1="18" x2="160" y2="198"
+            stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="6,4"/>
+          <text x="170" y="112" font-size="13" fill="#a78bfa" font-style="italic">h</text>
+          <!-- right-angle marker -->
+          <polyline points="154,198 154,192 160,192" fill="none" stroke="#a78bfa" stroke-width="1.3"/>
+        </g>
+
+        <!-- Layer 5: S values on fills (frame 5) -->
+        <g id="L-sv" class="svg-layer" opacity="0">
+          <text x="96"  y="148" font-size="13" fill="#93c5fd" text-anchor="middle" font-weight="bold">S=15</text>
+          <text x="202" y="148" font-size="13" fill="#86efac" text-anchor="middle" font-weight="bold">S=25</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Step text panel -->
+    <div id="text-panel">
+      <div class="step-card" id="s1">
+        <span class="badge">①</span><strong>確認等高條件</strong><br>
+        △ABD 和 △ACD 共同頂點 A，高 h 相同<br>
+        → 底邊都落在直線 BC 上，<span class="purple">兩三角形等高</span>
+      </div>
+      <div class="step-card" id="s2">
+        <span class="badge">②</span><strong>套用公式</strong><br>
+        等高三角形：<span class="f">S△ABD : S△ACD = BD : DC</span><br>
+        代入 BD＝3，DC＝5 → 面積比 = <strong style="color:#fbbf24">3 : 5</strong>
+      </div>
+      <div class="step-card" id="s3">
+        <span class="badge">③</span><strong>計算各面積</strong><br>
+        <span class="f">S<sub>△ABD</sub> = 40 × <sup>3</sup>/<sub>8</sub> = <span class="blue">15</span></span><br>
+        <span class="f">S<sub>△ACD</sub> = 40 × <sup>5</sup>/<sub>8</sub> = <span class="green">25</span></span>
+      </div>
+      <div class="answer-card" id="s4">
+        <div class="sub">∴ 答案</div>
+        <div class="main">S<sub>△ABD</sub> = 15 ，S<sub>△ACD</sub> = 25</div>
+      </div>
+    </div>
+  </div>
+</div><!-- #stage -->
+
+<!-- Frame dots -->
+<div id="frame-dots">
+  <div class="dot" data-f="0"></div>
+  <div class="dot" data-f="1"></div>
+  <div class="dot" data-f="2"></div>
+  <div class="dot" data-f="3"></div>
+  <div class="dot" data-f="4"></div>
+  <div class="dot" data-f="5"></div>
+  <div class="dot" data-f="6"></div>
+</div>
+
+<!-- Controls -->
+<div id="controls">
+  <button class="cbtn" id="btn-restart">↺ 重播</button>
+  <button class="cbtn" id="btn-prev">◀</button>
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+  <button class="cbtn" id="btn-next">▶</button>
+  <button class="cbtn" id="btn-play">▶ 播放</button>
+  <span id="step-lbl">0/6</span>
+</div>
+
+<div id="caption">按「播放」自動演示，或點「▶」逐步查看解題過程</div>
+
+<script>
+const TOTAL = 7; // 0..6
+const DELAY = 2600; // ms per frame during auto-play
+
+const FRAMES = [
+  // frame 0: blank + problem
+  {
+    svgOn: [],
+    stepsOn: [],
+    caption: '【例題1】△ABC 中，D 在 BC 上，BD＝3，DC＝5，S△ABC＝40，求兩個小三角形的面積。',
+  },
+  // frame 1: draw triangle
+  {
+    svgOn: ['L-tri'],
+    stepsOn: [],
+    caption: '先畫出 △ABC，頂點 A 在上方，B、C 在底部。',
+  },
+  // frame 2: add D point and labels
+  {
+    svgOn: ['L-tri','L-d'],
+    stepsOn: [],
+    caption: '在 BC 上標點 D：BD＝3，DC＝5，所以 BC＝BD+DC＝8。',
+  },
+  // frame 3: altitude + step 1
+  {
+    svgOn: ['L-tri','L-d','L-alt'],
+    stepsOn: ['s1'],
+    caption: '① 從頂點 A 作 BC 的垂線（高 h）— △ABD 和 △ACD 共用同一個高度 h！',
+  },
+  // frame 4: color fills + step 2
+  {
+    svgOn: ['L-tri','L-d','L-alt','L-fill-abd','L-fill-acd'],
+    stepsOn: ['s1','s2'],
+    caption: '② 藍色 △ABD 和綠色 △ACD 等高，所以面積比 = 底邊比 = 3:5。',
+  },
+  // frame 5: S values + step 3
+  {
+    svgOn: ['L-tri','L-d','L-alt','L-fill-abd','L-fill-acd','L-sv'],
+    stepsOn: ['s1','s2','s3'],
+    caption: '③ 按照 3:5 的比例分配面積 40：S△ABD = 40×3/8 = 15；S△ACD = 40×5/8 = 25。',
+  },
+  // frame 6: final answer
+  {
+    svgOn: ['L-tri','L-d','L-alt','L-fill-abd','L-fill-acd','L-sv'],
+    stepsOn: ['s1','s2','s3','s4'],
+    caption: '✓ 解題完畢！關鍵觀念：等高三角形，面積比 = 底邊比。',
+  },
+];
+
+const SVG_IDS = ['L-fill-abd','L-fill-acd','L-tri','L-d','L-alt','L-sv'];
+const STEP_IDS = ['s1','s2','s3','s4'];
+
+let cur = 0, playing = false, timer = null;
+
+function applyFrame(n) {
+  const f = FRAMES[n];
+  SVG_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.opacity = f.svgOn.includes(id) ? '1' : '0';
+  });
+  STEP_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (f.stepsOn.includes(id)) el.classList.add('vis');
+    else el.classList.remove('vis');
+  });
+  document.getElementById('caption').textContent = f.caption || '';
+  document.getElementById('progress-fill').style.width = (n / (TOTAL-1) * 100) + '%';
+  document.getElementById('step-lbl').textContent = n + '/' + (TOTAL-1);
+  document.querySelectorAll('.dot').forEach(d => {
+    d.classList.toggle('active', parseInt(d.dataset.f) === n);
+  });
+  cur = n;
+}
+
+function next() { if (cur < TOTAL-1) applyFrame(cur+1); else stop(); }
+function prev() { if (cur > 0) applyFrame(cur-1); }
+
+function play() {
+  if (playing) return;
+  playing = true;
+  document.getElementById('btn-play').textContent = '⏸ 暫停';
+  timer = setInterval(() => { if (cur >= TOTAL-1) stop(); else next(); }, DELAY);
+}
+function stop() {
+  playing = false;
+  document.getElementById('btn-play').textContent = '▶ 播放';
+  clearInterval(timer); timer = null;
+}
+function toggle() { playing ? stop() : play(); }
+
+document.getElementById('btn-play').addEventListener('click', toggle);
+document.getElementById('btn-next').addEventListener('click', () => { stop(); next(); });
+document.getElementById('btn-prev').addEventListener('click', () => { stop(); prev(); });
+document.getElementById('btn-restart').addEventListener('click', () => { stop(); applyFrame(0); });
+
+document.getElementById('progress-bar').addEventListener('click', function(e) {
+  const r = this.getBoundingClientRect();
+  const n = Math.round((e.clientX - r.left) / r.width * (TOTAL-1));
+  stop(); applyFrame(Math.max(0, Math.min(TOTAL-1, n)));
+});
+
+document.querySelectorAll('.dot').forEach(d => {
+  d.addEventListener('click', () => { stop(); applyFrame(parseInt(d.dataset.f)); });
+});
+
+// keyboard support
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') { stop(); next(); }
+  if (e.key === 'ArrowLeft')  { stop(); prev(); }
+  if (e.key === ' ')          { e.preventDefault(); toggle(); }
+  if (e.key === 'r' || e.key === 'R') { stop(); applyFrame(0); }
+});
+
+applyFrame(0);
+</script>
+</body>
+</html>
