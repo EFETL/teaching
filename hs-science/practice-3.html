@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高一化學 練習卷三：綜合應用與生活情境（50題）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f2744;--gold:#e8a000;--teal:#0a7ea4;--green:#15803d;--red:#b91c1c;--bg:#f0f4f9;--border:#dde3ed}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:#1a1a2e;font-size:15px}
+header{background:linear-gradient(135deg,#0f2744 0%,#1e4080 60%,#6c4ab6 100%);color:#fff;padding:20px 18px 16px;text-align:center}
+header h1{font-size:1.4rem;font-weight:800}
+header p{margin-top:5px;font-size:.82rem;opacity:.88}
+.back{display:inline-block;margin-top:10px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 14px;font-size:.78rem;text-decoration:none}
+#sbar{background:#0f2744;color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 14px;font-size:.8rem;flex-wrap:wrap}
+.si span.val{font-weight:700;font-size:.95rem}
+#ptbar{height:5px;background:rgba(255,255,255,.2);width:160px;border-radius:3px;overflow:hidden}
+#ptfill{height:100%;background:var(--gold);width:0%;transition:width .3s}
+.ttabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.ttab{flex:0 0 auto;padding:11px 13px;font-size:.78rem;font-weight:700;background:none;border:none;cursor:pointer;color:#6b7280;border-bottom:3px solid transparent;white-space:nowrap}
+.ttab.on{color:var(--navy);border-bottom-color:var(--gold)}
+#main{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+.note-box{background:#fff;border:1.5px solid var(--border);border-radius:12px;margin-bottom:18px;overflow:hidden}
+.note-hd{padding:13px 16px;display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
+.note-hd h2{font-size:.95rem;font-weight:700;color:var(--navy);flex:1}
+.note-hd .arr{color:#6b7280;font-size:.72rem;transition:.2s}
+.note-hd.open .arr{transform:rotate(180deg)}
+.note-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.note-body.open{display:block}
+.q-hd{display:flex;align-items:center;gap:9px;margin:6px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.q-hd h2{font-size:.92rem;font-weight:700;color:var(--navy)}
+.q-cnt{background:var(--navy);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px}
+.qcard{background:#fff;border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden}
+.qhd{padding:13px 15px 9px;display:flex;gap:9px;align-items:flex-start}
+.qnum{background:var(--navy);color:#fff;border-radius:5px;padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.qtxt{font-size:.88rem;line-height:1.75;flex:1}
+.opts{padding:0 15px 5px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;margin-bottom:6px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:.84rem;line-height:1.5;transition:.13s;user-select:none}
+.opt:hover:not(.done){border-color:var(--teal);background:#f0f9ff}
+.ol{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.opt.ok{border-color:var(--green)!important;background:#f0fdf4}
+.opt.ok .ol{background:var(--green);border-color:var(--green);color:#fff}
+.opt.ng{border-color:var(--red)!important;background:#fff5f5}
+.opt.ng .ol{background:var(--red);border-color:var(--red);color:#fff}
+.opt.fade{opacity:.4}
+.exp{display:none;margin:3px 15px 13px;padding:10px 13px;background:#fffbe8;border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:.81rem;line-height:1.75;color:#4a3b00}
+.exp.show{display:block}
+.exp b{color:var(--navy)}
+.rbtn{display:block;width:fit-content;margin:24px auto 0;padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔬 練習卷三　綜合應用與生活情境</h1>
+  <p>跨概念×生活時事×學測情境 ‧ 50題 ‧ 點選項即顯示解析</p>
+  <a class="back" href="./">← 返回</a>
+</header>
+<div id="sbar">
+  <div class="si">已答 <span class="val" id="s-done">0</span>/50</div>
+  <div id="ptbar"><div id="ptfill"></div></div>
+  <div class="si">答對 <span class="val" id="s-ok" style="color:#86efac">0</span></div>
+  <div class="si">答錯 <span class="val" id="s-ng" style="color:#fca5a5">0</span></div>
+  <div class="si">正確率 <span class="val" id="s-pct">—</span></div>
+</div>
+<div class="ttabs" id="ttabs"></div>
+<div id="main"></div>
+<script>
+const TOPICS=[{"id": "conc", "icon": "🧪", "name": "溶液與濃度"}, {"id": "solub", "icon": "🌡️", "name": "溶解度"}, {"id": "acid", "icon": "⚗️", "name": "酸鹼反應"}];
+const NOTES={};
+const QDB=[{"tid": "conc", "q": "市售一瓶汽水標示含糖量為「每100毫升含11克糖」，已知此汽水密度約1.04 g/mL。下列關於此汽水的敘述何者正確？", "opts": ["此標示相當於糖的重量百分濃度恰為11%", "汽水靜置一段時間後糖會自動沉澱到瓶底", "汽水中的糖屬於膠體粒子，會產生廷得耳效應", "此標示相當於糖的重量百分濃度約為10.6%"], "ans": 3, "exp": "重量%以溶液質量為分母。100毫升汽水質量＝100×1.04＝104克，含糖11克，故重量%＝11÷104×100%≒10.6%(P.45)。糖溶於水形成真溶液(粒子<1nm)，無廷得耳效應也不會沉澱，故其餘皆錯。"}, {"tid": "conc", "q": "小明用手電筒分別照射「鹽水、牛奶、糖水」三杯液體，發現只有牛奶能看到一條明亮光徑。下列推論何者最正確？", "opts": ["牛奶屬於懸浮液，粒子大於100nm", "只有牛奶含有水，所以能散射光線", "牛奶屬於膠體，粒子介於1～100nm之間", "鹽水與糖水的粒子比牛奶大，所以光直接穿過"], "ans": 2, "exp": "能產生廷得耳效應(明亮光徑)的是膠體，粒子1～100nm能散射光(P.44)。牛奶是典型膠體。鹽水、糖水是真溶液(<1nm)粒子太小不散射光。懸浮液粒子>100nm會沉降，牛奶不會沉澱，故非懸浮液。"}, {"tid": "conc", "q": "自來水中含微量氟離子，某地自來水標示氟含量為0.8 ppm。假設水的密度為1.0 g/mL，則每公升此自來水約含氟離子多少毫克？", "opts": ["0.8毫克", "80毫克", "8毫克", "0.08毫克"], "ans": 0, "exp": "1 ppm≈1 mg/L(每公升溶液含1毫克溶質)(P.46)。故0.8 ppm即每公升約含0.8毫克氟離子。ppm用於表示微量成分濃度。"}, {"tid": "conc", "q": "取濃度0.5 M的氯化鈉溶液100 mL，加水稀釋到500 mL。下列敘述何者正確？", "opts": ["稀釋會使氯化鈉部分分解，莫耳數減少", "稀釋後濃度變為2.5 M", "稀釋後氯化鈉的莫耳數變為原來的5倍", "稀釋後濃度變為0.1 M，氯化鈉莫耳數不變"], "ans": 3, "exp": "稀釋用M1V1=M2V2：0.5×100=M2×500，M2＝0.1 M(P.47)。稀釋只是加水，溶質莫耳數不變(0.05 mol)，只是體積變大濃度變小。"}, {"tid": "conc", "q": "泥水、豆漿、食鹽水三者依「分散粒子大小」由大到小排列，正確的是？", "opts": ["泥水＞食鹽水＞豆漿", "食鹽水＞豆漿＞泥水", "豆漿＞泥水＞食鹽水", "泥水＞豆漿＞食鹽水"], "ans": 3, "exp": "粒子大小：懸浮液(>100nm)＞膠體(1～100nm)＞真溶液(<1nm)(P.44)。泥水是懸浮液最大，豆漿是膠體居中，食鹽水是真溶液最小，故泥水＞豆漿＞食鹽水。"}, {"tid": "conc", "q": "已知濃硫酸的比重為1.84，重量百分濃度為98%，硫酸莫耳質量98 g/mol。則此濃硫酸的體積莫耳濃度約為多少？", "opts": ["9.2 M", "12 M", "15 M", "18.4 M"], "ans": 3, "exp": "M＝(1000×比重×重量%)÷莫耳質量＝(1000×1.84×0.98)÷98＝18.4 M(P.46)。此為由比重與重量%換算莫耳濃度的標準公式。"}, {"tid": "conc", "q": "要準確配製250 mL、0.1 M的氫氧化鈉標準溶液，下列做法何者最正確？", "opts": ["在燒杯中加水到250 mL刻度即可", "用試管混合後搖勻即完成", "用量筒量取250 mL水後加入氫氧化鈉", "將氫氧化鈉溶解後移入250 mL量瓶定容到刻度"], "ans": 3, "exp": "準確定容須使用量瓶(容量瓶)，因其刻度精準(P.47)。先溶解再移入量瓶加水至刻度線。量筒、燒杯刻度不夠精準，無法用於準確配製標準溶液。"}, {"tid": "conc", "q": "將200 mL 0.3 M葡萄糖水溶液與300 mL 0.8 M葡萄糖水溶液混合（體積加成），混合後葡萄糖的莫耳濃度約為多少？", "opts": ["0.5 M", "0.6 M", "0.55 M", "0.7 M"], "ans": 1, "exp": "總莫耳數＝0.2×0.3＋0.3×0.8＝0.06＋0.24＝0.30 mol，總體積＝0.5 L，濃度＝0.30÷0.5＝0.6 M(P.47)。同溶質混合用總莫耳數除以總體積。"}, {"tid": "conc", "q": "墨水、雲霧、糖水三者中，能產生廷得耳效應的是？", "opts": ["只有糖水", "三者皆可", "墨水與雲霧", "只有雲霧"], "ans": 2, "exp": "墨水與雲霧都是膠體(粒子1～100nm)，能產生廷得耳效應(P.44)。糖水是真溶液(粒子<1nm)，光直接穿過不散射，故無廷得耳效應。"}, {"tid": "conc", "q": "海水中含鹽量約為3.5%(重量百分濃度)。若取1000克海水，其中含水量約為多少克？", "opts": ["996.5克", "350克", "965克", "35克"], "ans": 2, "exp": "重量%以溶液質量為分母(P.45)。1000克海水含鹽1000×3.5%＝35克，故含水＝1000−35＝965克。"}, {"tid": "conc", "q": "關於膠體與真溶液的比較，下列敘述何者錯誤？", "opts": ["膠體會產生廷得耳效應，真溶液不會", "真溶液的分散粒子小於1奈米", "膠體粒子會像懸浮液一樣很快沉降到底部", "牛奶、豆漿都屬於膠體"], "ans": 2, "exp": "膠體粒子1～100nm，受分子撞擊呈布朗運動而穩定懸浮，不會像懸浮液(>100nm)般快速沉降(P.44)。其餘三項皆正確，故(C)為錯誤敘述。"}, {"tid": "conc", "q": "某運動飲料標示鈉含量為「每100 mL含45 mg鈉」。若一瓶為500 mL，則一瓶飲料約含鈉多少毫克？", "opts": ["450毫克", "225毫克", "90毫克", "45毫克"], "ans": 1, "exp": "每100 mL含45 mg，500 mL即為5倍：45×5＝225毫克(P.46)。此為依比例換算含量的情境題。"}, {"tid": "conc", "q": "下列關於濃度表示法的敘述何者正確？", "opts": ["體積莫耳濃度M的單位是mol/L", "ppm常用來表示溶液中含量很高的主成分", "重量百分濃度的分母是溶劑的質量", "稀釋過程會改變溶質的莫耳數"], "ans": 0, "exp": "M(體積莫耳濃度)＝溶質莫耳數÷溶液體積(L)，單位mol/L(P.46)。重量%分母是「溶液」質量非溶劑；ppm用於「微量」成分；稀釋只加水不改變溶質莫耳數，故僅(B)正確。"}, {"tid": "conc", "q": "欲配製濃度3 M的鹽酸500 mL，但手邊只有12 M濃鹽酸。應量取多少毫升濃鹽酸再加水稀釋？", "opts": ["100 mL", "250 mL", "125 mL", "150 mL"], "ans": 2, "exp": "用M1V1=M2V2：12×V1＝3×500，V1＝125 mL(P.47)。量取125 mL濃鹽酸後加水至500 mL即得3 M鹽酸。"}, {"tid": "conc", "q": "關於懸浮液的敘述，下列何者正確？", "opts": ["典型例子是泥漿，粒子大於100奈米", "分散粒子小於1奈米", "用濾紙無法將其粒子濾除", "靜置後粒子不會沉降"], "ans": 0, "exp": "懸浮液粒子>100nm，如泥漿，靜置會沉降，且可用濾紙濾除(P.44)。粒子<1nm是真溶液；不沉降是膠體特性，故僅(C)正確。"}, {"tid": "conc", "q": "血液中含有血球與血漿，血漿屬於膠體。下列關於人體體液濃度的敘述何者最合理？", "opts": ["血球是真溶液粒子", "生理食鹽水(0.9%)屬於膠體，會產生廷得耳效應", "血液中所有成分粒子都小於1奈米", "血漿中蛋白質粒子屬於膠體尺寸範圍"], "ans": 3, "exp": "血漿中的蛋白質分子尺寸落在膠體範圍(1～100nm)(P.44)。生理食鹽水是真溶液(NaCl粒子<1nm)非膠體；血球體積遠大於膠體，不是真溶液粒子，故(B)正確。"}, {"tid": "solub", "q": "打開一瓶冰鎮汽水時會嘶嘶冒泡，喝下肚後不久常會打嗝。下列對此現象的解釋何者正確？", "opts": ["汽水冒泡是因為水分蒸發", "開瓶後壓力降低，CO2溶解度變小而逸出；入體後溫度升高，溶解度更小故打嗝", "開瓶後溫度升高使CO2溶解度變大", "CO2在高溫下溶解度變大，所以體溫使氣泡增多"], "ans": 1, "exp": "氣體溶解度隨壓力增大而增大(亨利定律)、隨溫度升高而減小(P.51)。開瓶壓力驟降使CO2逸出冒泡；喝下後體溫(約37°C)高於汽水，溶解度更小，CO2釋出造成打嗝。"}, {"tid": "solub", "q": "汽水未開封時為了「不易跑氣」，最佳的保存方式是？", "opts": ["加熱後再冷卻", "低溫保存，因低溫時CO2溶解度較大", "開蓋透氣保存", "放在高溫處，因高溫CO2溶解度大"], "ans": 1, "exp": "氣體溶解度隨溫度升高而變小(P.51)。低溫時CO2溶解度較大，較不易逸出，故冷藏保存最不易跑氣。高溫反而使CO2易逸出而跑氣。"}, {"tid": "solub", "q": "在20°C時某物質的溶解度為25克(每100克水)。今在20°C的100克水中加入30克此物質並充分攪拌。下列敘述何者正確？", "opts": ["溶解25克，剩5克固體未溶，溶液為飽和", "全部溶解形成未飽和溶液", "30克全部溶解形成過飽和溶液", "完全不溶解"], "ans": 0, "exp": "溶解度25克表示100克水最多溶25克(P.49)。加入30克只能溶25克，剩5克未溶沉於底，此時溶液達飽和。過飽和需特殊手段(如熱溶後緩冷)才形成，直接攪拌不會。"}, {"tid": "solub", "q": "在60°C配製某鹽的飽和溶液後，緩慢冷卻到20°C卻沒有結晶析出，輕輕一擾動立刻大量結晶。此溶液在擾動前屬於？", "opts": ["稀溶液", "過飽和溶液", "飽和溶液", "未飽和溶液"], "ans": 1, "exp": "過飽和溶液所含溶質超過該溫度飽和量，狀態不穩定，受擾動或加晶種即析出多餘溶質(P.50)。緩慢冷卻常形成過飽和，一擾動就大量結晶是其典型特徵。"}, {"tid": "solub", "q": "某物質在40°C的溶解度為60克(每100克水)。則40°C時此飽和溶液的重量百分濃度約為多少？", "opts": ["40%", "37.5%", "60%", "6%"], "ans": 1, "exp": "飽和%＝溶解度÷(溶解度＋100)×100%＝60÷(60＋100)×100%＝37.5%(P.49)。分母為溶液質量(溶質60＋水100)。"}, {"tid": "solub", "q": "深海潛水員上升太快會得「潛水夫病」(氣泡阻塞血管)。下列解釋何者最符合溶解度原理？", "opts": ["深海低溫使氮氣溶解度變小", "上升時溫度升高使氮氣溶解度變大", "氮氣不溶於血液", "深海高壓使氮氣溶於血液較多，快速上升壓力驟降使氮氣大量釋出形成氣泡"], "ans": 3, "exp": "氣體溶解度隨壓力增大而增大(亨利定律)(P.51)。深海高壓下大量氮氣溶入血液，若快速上升外壓驟降，溶解度急減，溶解的氮氣來不及排出而在血管內形成氣泡。"}, {"tid": "solub", "q": "硝酸鉀的溶解度隨溫度升高大幅增加，氯化鈉的溶解度幾乎不隨溫度改變。今有一混合物含大量硝酸鉀與少量氯化鈉，欲提純硝酸鉀，最適合的方法是？", "opts": ["加大量水稀釋後靜置", "高溫配成濃溶液後冷卻結晶，再過濾取出硝酸鉀晶體", "直接過濾固體混合物", "加熱蒸乾全部水分"], "ans": 1, "exp": "利用溶解度隨溫度差異做冷卻結晶(P.52)。高溫溶解後冷卻，硝酸鉀溶解度大降而析出結晶，氯化鈉因溶解度幾乎不變仍留在溶液，過濾即可分離純化硝酸鉀。"}, {"tid": "solub", "q": "關於「固體溶質」與「氣體溶質」受壓力影響的比較，下列何者正確？", "opts": ["兩者都不受壓力影響", "固體溶解度幾乎不受壓力影響，氣體溶解度隨壓力增大而增大", "固體與氣體溶解度都隨壓力增大而大增", "固體溶解度隨壓力增大而增大，氣體不受影響"], "ans": 1, "exp": "壓力對固體溶解度幾乎無影響；氣體溶解度則隨壓力增大而增大(亨利定律)(P.51)。汽水加壓充入大量CO2即為此原理的應用。"}, {"tid": "solub", "q": "下列哪一種物質的溶解度「受溫度影響最小」？", "opts": ["硝酸鉀KNO3", "氯化銨NH4Cl", "硫酸鈰Ce2(SO4)3", "氯化鈉NaCl"], "ans": 3, "exp": "氯化鈉的溶解度幾乎不隨溫度改變，受溫度影響最小(P.50)。故海水曬鹽多靠蒸發水分而非降溫。硝酸鉀、氯化銨隨溫度升高大增，硫酸鈰反而隨溫度升高而減小。"}, {"tid": "solub", "q": "硫酸鈰Ce2(SO4)3的溶解度「隨溫度升高反而變小」。由此可推論其溶解過程屬於？", "opts": ["放熱過程", "與熱無關", "不吸熱也不放熱", "吸熱過程"], "ans": 0, "exp": "若溶解度隨溫度升高而減小，依勒沙特列原理推知溶解為放熱過程(升溫不利溶解)(P.50)。多數鹽溶解吸熱(升溫溶解度增大)，硫酸鈰是放熱的特例。"}, {"tid": "solub", "q": "一杯50°C的硝酸鉀飽和溶液，在維持溫度不變下「蒸發掉一些水」，會發生什麼？", "opts": ["溶液仍未達飽和不會變化", "溶液變未飽和", "溶解度變大", "有硝酸鉀結晶析出"], "ans": 3, "exp": "飽和溶液在固定溫度下蒸發水分，溶劑減少而無法容納原有溶質，多餘的硝酸鉀便析出結晶(P.49)。溫度不變溶解度不變，但水變少，超出的溶質結晶。"}, {"tid": "solub", "q": "已知某鹽在10°C溶解度20克、在80°C溶解度120克(皆每100克水)。今在80°C的100克水中溶入120克此鹽達飽和，冷卻到10°C，約有多少克結晶析出？", "opts": ["60克", "120克", "20克", "100克"], "ans": 3, "exp": "80°C溶120克，冷卻到10°C只能溶20克(P.52)。析出量＝120−20＝100克。冷卻結晶析出量＝高溫溶解量−低溫溶解量。"}, {"tid": "solub", "q": "想把含少量雜質的硝酸鉀晶體純化，常用「再結晶」法。其原理是？", "opts": ["加熱使硝酸鉀汽化分離", "用磁鐵吸出雜質", "用適量熱水溶解後冷卻，使硝酸鉀重新結晶而雜質留在溶液", "利用硝酸鉀與雜質的顏色不同"], "ans": 2, "exp": "再結晶是用熱水溶解粗產物，冷卻時主成分(硝酸鉀)因溶解度大降而重新結晶析出，少量雜質仍溶在母液中，藉此提高純度(P.52)。"}, {"tid": "solub", "q": "關於汽水中二氧化碳的敘述，下列何者錯誤？", "opts": ["製造時加壓充入CO2，使其溶解度增大", "加熱汽水會使CO2溶解度變大而更不易冒泡", "冰鎮的汽水比常溫汽水更不易跑氣", "開瓶後氣泡冒出，是因為壓力降低CO2溶解度變小"], "ans": 1, "exp": "氣體溶解度隨溫度升高而變小(P.51)，加熱汽水反而使CO2大量逸出冒泡更劇烈，故(D)錯誤。其餘三項皆正確描述壓力與溫度對氣體溶解度的影響。"}, {"tid": "solub", "q": "在25°C的飽和食鹽水中再加入一小匙食鹽並攪拌，最可能的結果是？", "opts": ["食鹽會分解", "食鹽不再溶解，沉在杯底", "食鹽全部溶解，濃度升高", "食鹽使溶液變成過飽和"], "ans": 1, "exp": "飽和溶液已達該溫度最大溶解量，再加溶質不會再溶，會沉於杯底(P.49)。溫度不變溶解度不變，多加的食鹽無法溶解。"}, {"tid": "solub", "q": "關於氣體在水中溶解，下列敘述何者正確？", "opts": ["氣體溶解度與溫度、壓力都無關", "溫度越高，氣體在水中溶解度越大", "加壓會使氣體溶解度變小", "壓力越大，氣體在水中溶解度越大"], "ans": 3, "exp": "氣體溶解度隨壓力增大而增大、隨溫度升高而減小(P.51)。故(B)正確。這也解釋了為何深海高壓處CO2能溶得更多。"}, {"tid": "solub", "q": "某生想分離「硝酸鉀與氯化鈉」的混合溶液。已知硝酸鉀溶解度隨溫度變化大、氯化鈉變化極小。下列流程何者最合理？", "opts": ["加酸使兩者分解", "用磁鐵分開兩種鹽", "直接冷凍兩者一起結晶", "蒸發濃縮後趁熱過濾→冷卻結晶取硝酸鉀→再蒸發母液取氯化鈉"], "ans": 3, "exp": "先蒸發部分水使NaCl達飽和析出(NaCl溶解度不隨溫度變，冷卻無法析出)，趁熱過濾移除NaCl；再冷卻濾液，KNO3因溶解度大降而結晶析出(P.52)。利用兩鹽溶解度對溫度反應差異分離。"}, {"tid": "acid", "q": "檸檬汁、純水、肥皂水的pH值，由小到大排列最合理的是？", "opts": ["肥皂水＜純水＜檸檬汁", "純水＜檸檬汁＜肥皂水", "檸檬汁＜純水＜肥皂水", "檸檬汁＜肥皂水＜純水"], "ans": 2, "exp": "檸檬汁含檸檬酸呈酸性(pH<7)，純水中性(pH≈7)，肥皂水呈鹼性(pH>7)(P.56)。pH由小到大即酸→中→鹼，故檸檬汁＜純水＜肥皂水。"}, {"tid": "acid", "q": "下列各物質溶於水後，何者屬於「強電解質」(幾乎完全解離)？", "opts": ["乙醇", "氟化氫HF", "醋酸CH3COOH", "氯化鈉NaCl"], "ans": 3, "exp": "鹽類(如NaCl)為強電解質，在水中完全解離(P.55)。醋酸、HF是弱電解質(部分解離)；乙醇是非電解質(不解離)。"}, {"tid": "acid", "q": "某溶液在25°C時[H+]＝1×10⁻³ M。下列關於此溶液的敘述何者正確？", "opts": ["pH＝3，呈鹼性", "pH＝3，呈酸性，能使藍色石蕊變紅", "pH＝11，呈酸性", "pH＝3，使酚酞變紅"], "ans": 1, "exp": "pH＝−log[H+]＝−log10⁻³＝3，pH<7呈酸性(P.56)。酸能使藍色石蕊變紅；酚酞在酸性中無色(鹼性才變紅)，故(A)正確。"}, {"tid": "acid", "q": "關於水的離子積常數Kw的敘述，下列何者正確？", "opts": ["Kw只在25°C時等於1×10⁻¹⁴，且不隨溫度改變", "Kw＝[H+]＋[OH⁻]", "升高溫度時Kw會變大", "純水加酸後Kw會變大"], "ans": 2, "exp": "Kw＝[H+][OH⁻]，只隨溫度改變，升溫時水解離增強，Kw變大(P.57)。25°C時Kw＝1×10⁻¹⁴；加酸不改變Kw(只改變H+、OH⁻比例)，故(B)正確。"}, {"tid": "acid", "q": "取0.1 M鹽酸45 mL與0.1 M氫氧化鈉55 mL混合(25°C)，混合後溶液的pH約為多少？", "opts": ["pH＝2", "pH＝1", "pH＝7", "pH＝12"], "ans": 3, "exp": "HCl＝0.1×0.045＝0.0045 mol，NaOH＝0.1×0.055＝0.0055 mol，NaOH過量0.001 mol(P.57)。總體積0.1 L，[OH⁻]＝0.001÷0.1＝0.01 M，pOH＝2，pH＝14−2＝12。"}, {"tid": "acid", "q": "人體血液的pH值約維持在7.4。下列關於血液酸鹼性的敘述何者正確？", "opts": ["血液呈弱鹼性，[OH⁻]略大於[H+]", "血液呈強酸性", "血液中[H+]＝[OH⁻]", "血液pH＝7.4表示呈酸性"], "ans": 0, "exp": "血液pH≈7.4＞7，呈弱鹼性(P.56)。pH>7表示[H+]<[OH⁻]，即[OH⁻]略大於[H+]。pH=7才中性([H+]=[OH⁻])，7.4已偏鹼。"}, {"tid": "acid", "q": "將pH＝3的鹽酸溶液加水稀釋10倍(25°C)，稀釋後的pH最接近？", "opts": ["pH＝7", "pH＝2", "pH＝13", "pH＝4"], "ans": 3, "exp": "強酸稀釋10倍，[H+]變為原來1/10，pH升高1，由3變4(P.57)。注意稀釋酸pH只會「趨近但不超過7」，稀釋10倍由pH3到pH4合理。"}, {"tid": "acid", "q": "下列關於指示劑的敘述，何者正確？", "opts": ["紅色石蕊試紙遇鹼性溶液變藍色", "酚酞在酸性溶液中呈紅色", "藍色石蕊試紙遇鹼性溶液變紅色", "酚酞遇純水會變紅色"], "ans": 0, "exp": "紅色石蕊試紙遇鹼變藍、藍色石蕊遇酸變紅(P.56)。酚酞在酸性與中性中無色、鹼性中才變紅，故(A)(D)錯，(C)方向相反，僅(B)正確。"}, {"tid": "acid", "q": "牛乳的pH約為6.6，當酸度增加使pH降到約5.3時，乳蛋白會凝聚(製作乳酪原理)。下列推論何者正確？", "opts": ["pH從6.6降到5.3表示[H+]增大，酸性增強", "乳酪凝聚是因為加入鹼", "牛乳本來就是鹼性", "pH從6.6降到5.3表示牛乳變得更鹼"], "ans": 0, "exp": "pH降低表示[H+]增大、酸性增強(P.57)。牛乳pH6.6本即略偏酸，加酸(或發酵產酸)使pH降到約5.3，酸度增加使乳蛋白凝聚成乳酪(學測112)。"}, {"tid": "acid", "q": "在25°C時，某溶液pH＝9。下列關於此溶液的敘述何者正確？", "opts": ["[H+]＝10⁻⁹ M，[OH⁻]＝10⁻⁵ M，呈鹼性", "[H+]＝10⁻⁹ M，呈酸性", "[H+]＝[OH⁻]", "[OH⁻]＝10⁻⁹ M，呈鹼性"], "ans": 0, "exp": "pH＝9則[H+]＝10⁻⁹ M；25°C時pH＋pOH＝14，pOH＝5，[OH⁻]＝10⁻⁵ M(P.56)。[OH⁻]＞[H+]故呈鹼性，(A)正確。"}, {"tid": "acid", "q": "下列關於阿瑞尼斯酸鹼學說的敘述，何者正確？", "opts": ["酸與鹼都解離產生H+", "酸在水中解離產生OH⁻", "鹼在水中解離產生H+", "酸在水中解離產生H+，鹼解離產生OH⁻"], "ans": 3, "exp": "阿瑞尼斯定義：酸是在水中解離出H+的物質，鹼是解離出OH⁻的物質(P.55)。如HCl→H++Cl⁻、NaOH→Na++OH⁻。"}, {"tid": "acid", "q": "純水在90°C時，因升溫使水解離增強，其pH約為6.1，但仍為中性。最合理的解釋是？", "opts": ["90°C純水pH<7，所以是酸性", "升溫使純水變酸", "pH<7一定代表酸性", "90°C時[H+]＝[OH⁻]仍成立，故仍中性，只是pH不再是7"], "ans": 3, "exp": "升溫使Kw變大，純水[H+]與[OH⁻]同步增大但仍相等，故仍中性(P.57)。pH=7代表中性「只在25°C成立」；高溫時中性pH<7，故(B)正確，不能單憑pH<7就判酸性。"}, {"tid": "acid", "q": "pH＝2的溶液與pH＝5的溶液相比，[H+]濃度相差幾倍？", "opts": ["3倍", "1000倍", "30倍", "100倍"], "ans": 1, "exp": "pH每差1，[H+]相差10倍(P.56)。pH2與pH5相差3，故[H+]相差10³＝1000倍。pH2溶液的[H+]是pH5溶液的1000倍。"}, {"tid": "acid", "q": "將pH＝11的氫氧化鈉溶液加水稀釋，下列敘述何者最正確？", "opts": ["pH會升高且可能超過14", "pH會降低且最低趨近於7但不低於7", "稀釋不會改變pH", "pH會降到3"], "ans": 1, "exp": "稀釋鹼會使[OH⁻]變小、pH降低，但只會「趨近於7而不低於7」(P.57)。鹼再怎麼稀釋也不會變酸，故pH最多趨近中性7。"}, {"tid": "acid", "q": "下列五種日常液體：胃酸、純水、小蘇打水、氨水、醋。其中呈「鹼性」的有幾種？", "opts": ["2種", "4種", "3種", "1種"], "ans": 0, "exp": "小蘇打水、氨水呈鹼性(pH>7)(P.56)。胃酸、醋呈酸性，純水中性，故呈鹼性者有小蘇打水與氨水共2種。"}, {"tid": "acid", "q": "已知log2＝0.30。某酸性溶液pH原為3.0，若使其[H+]增為原來的20倍，新的pH約為多少？", "opts": ["pH≈2.0", "pH≈1.3", "pH≈1.7", "pH≈4.3"], "ans": 2, "exp": "[H+]增20倍，pH變化＝−log20＝−(log2＋log10)＝−(0.30＋1)＝−1.3(P.57)。新pH＝3.0−1.3＝1.7。[H+]增大故pH變小，1.7合理。"}, {"tid": "solub", "q": "下列關於「飽和、未飽和、過飽和」的敘述，何者正確？", "opts": ["過飽和溶液所含溶質少於飽和量", "過飽和溶液很穩定，不會析出溶質", "飽和溶液一定是濃溶液", "未飽和溶液還能再溶解更多溶質"], "ans": 3, "exp": "未飽和溶液未達最大溶解量，還能再溶溶質(P.49-50)。過飽和不穩定、含溶質超過飽和量；飽和不一定濃(溶解度小的鹽飽和也很稀)，故僅(B)正確。"}];
+let curTopic=TOPICS.find(t=>QDB.some(q=>q.tid===t.id)).id;
+const TOTAL=QDB.length;
+const answered={};
+const ttabs=document.getElementById("ttabs");
+TOPICS.forEach(t=>{
+  const cnt=QDB.filter(q=>q.tid===t.id).length;
+  if(!cnt)return;
+  const b=document.createElement("button");
+  b.className="ttab"+(t.id===curTopic?" on":"");b.id="tab-"+t.id;
+  b.innerHTML=`${t.icon} ${t.name} <span style="background:#0f2744;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px">${cnt}</span>`;
+  b.onclick=()=>switchTopic(t.id);ttabs.appendChild(b);
+});
+function switchTopic(id){curTopic=id;document.querySelectorAll(".ttab").forEach(x=>x.classList.remove("on"));document.getElementById("tab-"+id).classList.add("on");render();window.scrollTo(0,0);}
+function render(){
+  const t=TOPICS.find(x=>x.id===curTopic);
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  let h="";
+  if(NOTES&&NOTES[curTopic]){
+    h+=`<div class="note-box"><div class="note-hd" onclick="toggleNote(this)"><span style="font-size:1.2rem">${t.icon}</span><h2>${t.name}｜重點筆記（點此展開）</h2><span class="arr">▼</span></div><div class="note-body">${NOTES[curTopic]}</div></div>`;
+  }
+  h+=`<div class="q-hd"><h2>${t.icon} ${t.name}</h2><span class="q-cnt">${qs.length} 題</span></div>`;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    const o=q.opts.map((op,oi)=>`<div class="opt" id="opt_${aid}_${oi}" onclick="pick('${aid}',${oi},${q.ans})"><span class="ol" id="ol_${aid}_${oi}">${"ABCD"[oi]}</span><span>${op}</span></div>`).join("");
+    h+=`<div class="qcard"><div class="qhd"><span class="qnum">Q${i+1}</span><span class="qtxt">${q.q}</span></div><div class="opts">${o}</div><div class="exp" id="exp_${aid}">${q.exp}</div></div>`;
+  });
+  h+=`<button class="rbtn" onclick="resetTopic()">🔄 重置本主題</button>`;
+  document.getElementById("main").innerHTML=h;
+  qs.forEach((q,i)=>{const aid=curTopic+"_"+i;if(answered[aid])applyResult(aid,answered[aid].sel,answered[aid].correct,q.ans);});
+}
+function toggleNote(hd){hd.classList.toggle("open");hd.nextElementSibling.classList.toggle("open");}
+function pick(aid,sel,ans){if(answered[aid])return;const c=sel===ans;answered[aid]={sel,correct:c};applyResult(aid,sel,c,ans);updateScore();}
+function applyResult(aid,sel,correct,ans){
+  [0,1,2,3].forEach(i=>{const o=document.getElementById("opt_"+aid+"_"+i);if(!o)return;o.classList.add("done");
+    if(i===sel&&correct)o.classList.add("ok");else if(i===sel&&!correct)o.classList.add("ng");else if(i===ans&&!correct)o.classList.add("ok");else o.classList.add("fade");});
+  const e=document.getElementById("exp_"+aid);if(e)e.classList.add("show");
+}
+function resetTopic(){QDB.filter(q=>q.tid===curTopic).forEach((_,i)=>delete answered[curTopic+"_"+i]);render();updateScore();}
+function updateScore(){const a=Object.values(answered),d=a.length,ok=a.filter(x=>x.correct).length;
+  document.getElementById("s-done").textContent=d;document.getElementById("s-ok").textContent=ok;document.getElementById("s-ng").textContent=d-ok;
+  document.getElementById("s-pct").textContent=d>0?Math.round(ok/d*100)+"%":"—";document.getElementById("ptfill").style.width=(d/TOTAL*100)+"%";}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高一化學 練習卷一：基礎觀念與定義（50題）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f2744;--gold:#e8a000;--teal:#0a7ea4;--green:#15803d;--red:#b91c1c;--bg:#f0f4f9;--border:#dde3ed}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:#1a1a2e;font-size:15px}
+header{background:linear-gradient(135deg,#0f2744 0%,#1e4080 60%,#6c4ab6 100%);color:#fff;padding:20px 18px 16px;text-align:center}
+header h1{font-size:1.4rem;font-weight:800}
+header p{margin-top:5px;font-size:.82rem;opacity:.88}
+.back{display:inline-block;margin-top:10px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 14px;font-size:.78rem;text-decoration:none}
+#sbar{background:#0f2744;color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 14px;font-size:.8rem;flex-wrap:wrap}
+.si span.val{font-weight:700;font-size:.95rem}
+#ptbar{height:5px;background:rgba(255,255,255,.2);width:160px;border-radius:3px;overflow:hidden}
+#ptfill{height:100%;background:var(--gold);width:0%;transition:width .3s}
+.ttabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.ttab{flex:0 0 auto;padding:11px 13px;font-size:.78rem;font-weight:700;background:none;border:none;cursor:pointer;color:#6b7280;border-bottom:3px solid transparent;white-space:nowrap}
+.ttab.on{color:var(--navy);border-bottom-color:var(--gold)}
+#main{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+.note-box{background:#fff;border:1.5px solid var(--border);border-radius:12px;margin-bottom:18px;overflow:hidden}
+.note-hd{padding:13px 16px;display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
+.note-hd h2{font-size:.95rem;font-weight:700;color:var(--navy);flex:1}
+.note-hd .arr{color:#6b7280;font-size:.72rem;transition:.2s}
+.note-hd.open .arr{transform:rotate(180deg)}
+.note-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.note-body.open{display:block}
+.q-hd{display:flex;align-items:center;gap:9px;margin:6px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.q-hd h2{font-size:.92rem;font-weight:700;color:var(--navy)}
+.q-cnt{background:var(--navy);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px}
+.qcard{background:#fff;border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden}
+.qhd{padding:13px 15px 9px;display:flex;gap:9px;align-items:flex-start}
+.qnum{background:var(--navy);color:#fff;border-radius:5px;padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.qtxt{font-size:.88rem;line-height:1.75;flex:1}
+.opts{padding:0 15px 5px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;margin-bottom:6px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:.84rem;line-height:1.5;transition:.13s;user-select:none}
+.opt:hover:not(.done){border-color:var(--teal);background:#f0f9ff}
+.ol{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.opt.ok{border-color:var(--green)!important;background:#f0fdf4}
+.opt.ok .ol{background:var(--green);border-color:var(--green);color:#fff}
+.opt.ng{border-color:var(--red)!important;background:#fff5f5}
+.opt.ng .ol{background:var(--red);border-color:var(--red);color:#fff}
+.opt.fade{opacity:.4}
+.exp{display:none;margin:3px 15px 13px;padding:10px 13px;background:#fffbe8;border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:.81rem;line-height:1.75;color:#4a3b00}
+.exp.show{display:block}
+.exp b{color:var(--navy)}
+.rbtn{display:block;width:fit-content;margin:24px auto 0;padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <h1>📝 練習卷一　基礎觀念與定義</h1>
+  <p>溶液濃度×溶解度×酸鹼 ‧ 50題 ‧ 點選項即顯示解析</p>
+  <a class="back" href="./">← 返回</a>
+</header>
+<div id="sbar">
+  <div class="si">已答 <span class="val" id="s-done">0</span>/50</div>
+  <div id="ptbar"><div id="ptfill"></div></div>
+  <div class="si">答對 <span class="val" id="s-ok" style="color:#86efac">0</span></div>
+  <div class="si">答錯 <span class="val" id="s-ng" style="color:#fca5a5">0</span></div>
+  <div class="si">正確率 <span class="val" id="s-pct">—</span></div>
+</div>
+<div class="ttabs" id="ttabs"></div>
+<div id="main"></div>
+<script>
+const TOPICS=[{"id": "conc", "icon": "🧪", "name": "溶液與濃度"}, {"id": "solub", "icon": "🌡️", "name": "溶解度"}, {"id": "acid", "icon": "⚗️", "name": "酸鹼反應"}];
+const NOTES={};
+const QDB=[{"tid": "conc", "q": "下列何者屬於「真溶液」？", "opts": ["泥漿", "未搖勻的果汁", "牛奶", "食鹽水"], "ans": 3, "exp": "真溶液粒子小於1nm，無廷得耳效應、不沉降，如<b>食鹽水、糖水、醋</b>。牛奶/豆漿為膠體，泥漿與未搖勻果汁為懸浮液。(P.44)"}, {"tid": "conc", "q": "分散系中，粒子大小由大到小排列正確的是？", "opts": ["真溶液 > 膠體溶液 > 懸浮液", "懸浮液 > 真溶液 > 膠體溶液", "膠體溶液 > 懸浮液 > 真溶液", "懸浮液 > 膠體溶液 > 真溶液"], "ans": 3, "exp": "粒子大小：<b>懸浮液(>100nm) > 膠體(1–100nm) > 真溶液(<1nm)</b>。(P.44)"}, {"tid": "conc", "q": "在霧中可看到車燈射出的光錐，這是哪一種現象？", "opts": ["蒸發結晶", "廷得耳效應", "中和反應", "電解現象"], "ans": 1, "exp": "<b>廷得耳效應</b>是膠體粒子使光散射產生可見光徑，如陽光穿樹叢的光柱、車燈在霧中的光錐。(P.45)"}, {"tid": "conc", "q": "下列哪一種分散系靜置後會沉降，並可用濾紙過濾分離出來？", "opts": ["以上皆可", "懸浮液", "真溶液", "膠體溶液"], "ans": 1, "exp": "<b>懸浮液</b>粒子大於100nm，會沉降且可被濾紙濾出，如泥漿。真溶液與膠體都不會沉降。(P.44)"}, {"tid": "conc", "q": "重量百分濃度的計算式中，分母應為下列何者？", "opts": ["溶液的體積", "溶劑(水)的質量", "溶質的質量", "溶液的質量"], "ans": 3, "exp": "重量百分濃度% = 溶質質量÷<b>溶液質量</b>×100%，分母是溶液(溶質+溶劑)，不是只有水。(P.46)"}, {"tid": "conc", "q": "將15克食鹽溶於135克水中，此溶液的重量百分濃度為何？", "opts": ["15%", "13.5%", "11.1%", "10%"], "ans": 3, "exp": "溶液質量=15+135=150克，重量%=15÷150×100%=<b>10%</b>。(P.46)"}, {"tid": "conc", "q": "體積莫耳濃度(M)的定義是？", "opts": ["溶質莫耳數÷溶液體積(公升)", "溶質莫耳數÷溶劑體積", "溶質質量÷溶液質量", "溶質質量÷溶液體積"], "ans": 0, "exp": "體積莫耳濃度M=<b>溶質莫耳數÷溶液體積(L)</b>，單位為mol/L。(P.46)"}, {"tid": "conc", "q": "將2克NaOH(莫耳質量40)溶於水配成0.2L溶液，其體積莫耳濃度為何？", "opts": ["0.25 M", "2 M", "0.5 M", "0.1 M"], "ans": 0, "exp": "NaOH莫耳數=2÷40=0.05mol，M=0.05÷0.2=<b>0.25 M</b>。(P.47)"}, {"tid": "conc", "q": "在稀薄水溶液中，1 ppm 約等於下列何者？", "opts": ["1 mg/L", "1 mol/L", "1 kg/L", "1 g/L"], "ans": 0, "exp": "ppm=溶質質量÷溶液質量×10^6，稀薄水溶液中<b>1ppm約等於1mg/L</b>。(P.46)"}, {"tid": "conc", "q": "某飲品中某成分濃度為500 ppm，則每1 mL此飲品約含該成分多少質量？", "opts": ["5 mg", "0.5 mg", "0.05 mg", "50 mg"], "ans": 1, "exp": "500ppm約500mg/L，即每1L含500mg，每1mL含<b>0.5mg</b>。(P.46)"}, {"tid": "conc", "q": "準確配製定容到指定體積的溶液時，應使用下列哪種玻璃器材？", "opts": ["錐形瓶", "量瓶(容量瓶)", "燒杯", "圓底燒瓶"], "ans": 1, "exp": "準確定容到指定體積必須使用<b>量瓶(容量瓶)</b>，燒杯、錐形瓶、量筒等精度不足。(P.47)"}, {"tid": "conc", "q": "配製定量溶液時，加水至刻度線後最後一個步驟是？", "opts": ["加熱", "過濾", "搖勻使濃度均勻", "再加更多水"], "ans": 2, "exp": "步驟：稱取溶質→燒杯加少量水溶解→倒入量瓶→加水至刻度線→<b>搖勻</b>使濃度均勻。(P.47)"}, {"tid": "conc", "q": "將0.1M鹽酸稀釋，下列敘述何者正確？", "opts": ["稀釋前後體積不變", "稀釋前後溶質莫耳數不變", "稀釋後溶質莫耳數增加", "稀釋前後濃度不變"], "ans": 1, "exp": "稀釋只是加水，溶質莫耳數不變，符合<b>M1V1=M2V2</b>。(P.47)"}, {"tid": "conc", "q": "將0.5M溶液100mL稀釋成0.1M，需加水使總體積為多少mL？", "opts": ["500 mL", "1000 mL", "250 mL", "400 mL"], "ans": 0, "exp": "M1V1=M2V2，0.5×100=0.1×V2，V2=<b>500mL</b>。(P.47)"}, {"tid": "conc", "q": "下列何者為膠體溶液的例子？", "opts": ["豆漿", "食鹽水", "糖水", "醋"], "ans": 0, "exp": "<b>豆漿、牛奶、雲霧、墨水</b>為膠體；食鹽水、糖水、醋為真溶液。(P.44)"}, {"tid": "conc", "q": "葡萄糖的莫耳質量為180，則9克葡萄糖為多少莫耳？", "opts": ["0.09 mol", "0.5 mol", "0.18 mol", "0.05 mol"], "ans": 3, "exp": "莫耳數=質量÷莫耳質量=9÷180=<b>0.05mol</b>。(P.46)"}, {"tid": "conc", "q": "98%、比重1.8的濃硫酸(H2SO4=98)，其體積莫耳濃度約為？", "opts": ["98 M", "9 M", "18 M", "1.8 M"], "ans": 2, "exp": "M=(1000×比重×重量%)÷莫耳質量=(1000×1.8×0.98)÷98=<b>18M</b>。(P.47)"}, {"tid": "solub", "q": "溶解度的定義是？", "opts": ["某溫度下100克水所能溶解溶質的最大克數", "100克溶液中溶質的克數", "1公升水所能溶解溶質的莫耳數", "溶質質量÷溶液質量"], "ans": 0, "exp": "溶解度=<b>某溫度下100克水能溶解溶質的最大克數</b>(g/100g水)。(P.49)"}, {"tid": "solub", "q": "溶液中所含溶質超過該溫度下的最大溶解量，且狀態不穩定，這種溶液稱為？", "opts": ["稀溶液", "飽和溶液", "過飽和溶液", "未飽和溶液"], "ans": 2, "exp": "<b>過飽和溶液</b>所含溶質超過最大量，不穩定，受擾動或加晶種即析出。(P.50)"}, {"tid": "solub", "q": "某物質在某溫度的溶解度為40 g/100g水，則此溫度下飽和溶液的重量百分濃度約為？", "opts": ["60%", "40%", "71.4%", "28.6%"], "ans": 3, "exp": "飽和溶液重量%=溶解度÷(溶解度+100)×100%=40÷140×100%≈<b>28.6%</b>。(P.50)"}, {"tid": "solub", "q": "大多數固體溶質隨溫度升高溶解度變大，代表其溶解過程屬於？", "opts": ["吸熱", "放熱", "與熱量無關", "等溫"], "ans": 0, "exp": "升溫溶解度變大表示溶解<b>吸熱</b>，如KNO3；多數固體屬此類。(P.51)"}, {"tid": "solub", "q": "下列哪一種固體的溶解度受溫度影響最小？", "opts": ["KNO3", "Ce2(SO4)3·9H2O", "NaCl", "Na2HAsO4"], "ans": 2, "exp": "<b>NaCl</b>升溫溶解度幾乎不變，受溫度影響最小。(P.51)"}, {"tid": "solub", "q": "氣體溶於水時，溫度升高其溶解度會如何變化？", "opts": ["不變", "變大", "變小", "先變大後變小"], "ans": 2, "exp": "氣體<b>升溫溶解度變小</b>，因氣體溶解放熱；故汽水應低溫保存以免跑氣。(P.52)"}, {"tid": "solub", "q": "對於氣體在水中的溶解度，增加壓力會使溶解度如何變化？", "opts": ["不變", "變大", "先變小後變大", "變小"], "ans": 1, "exp": "氣體<b>加壓溶解度變大</b>(亨利定律)；開瓶後壓力降低CO2即冒出。(P.52)"}, {"tid": "solub", "q": "壓力的改變對下列何者的溶解度幾乎沒有影響？", "opts": ["氣體溶於水", "二氧化碳溶於水", "固體溶於水", "氧氣溶於水"], "ans": 2, "exp": "<b>固體溶解度受溫度影響大、壓力幾乎無影響</b>；氣體才受壓力影響。(P.52)"}, {"tid": "solub", "q": "汽水開瓶後氣泡大量冒出，主要原因是？", "opts": ["溶質莫耳數增加", "加入了晶種", "瓶內壓力降低使CO2溶解度變小", "溫度突然下降"], "ans": 2, "exp": "開瓶後<b>壓力降低</b>，CO2溶解度變小而冒出。(P.52)"}, {"tid": "solub", "q": "欲分離溶解度受溫度影響差異大的兩種固體(如KNO3與NaCl)，最適合的方法是？", "opts": ["加入晶種", "冷卻結晶後過濾", "加壓", "直接蒸發全部水分"], "ans": 1, "exp": "<b>冷卻結晶+過濾</b>，降溫時KNO3大量析出、NaCl多留在溶液中。(P.53)"}, {"tid": "solub", "q": "從食鹽水中取得食鹽，最適合的方法是？", "opts": ["再結晶用汽油", "蒸發結晶", "加壓析出", "冷卻結晶"], "ans": 1, "exp": "NaCl溶解度受溫度影響小，宜用<b>蒸發結晶</b>。(P.53)"}, {"tid": "solub", "q": "純化KNO3進行再結晶時，下列何者為適當的溶劑？", "opts": ["食用油", "汽油", "酒精", "水"], "ans": 3, "exp": "再結晶純化KNO3應用<b>水</b>，不可用汽油等非極性溶劑。(P.53)"}, {"tid": "solub", "q": "KNO3在20°C的溶解度約32 g/100g水。若20°C時將50克KNO3加入100克水中，下列敘述何者正確？", "opts": ["全部溶解形成過飽和溶液", "形成懸浮液不溶解", "全部溶解形成未飽和溶液", "約有18克無法溶解"], "ans": 3, "exp": "20°C最多溶32克，加50克則<b>約18克無法溶解</b>，溶液為飽和並有未溶固體。(P.53)"}, {"tid": "solub", "q": "在某溫度下，加入溶質後不再溶解、且與未溶固體達成平衡的溶液稱為？", "opts": ["飽和溶液", "稀溶液", "未飽和溶液", "過飽和溶液"], "ans": 0, "exp": "<b>飽和溶液</b>已達該溫度最大溶解量，與未溶固體達溶解平衡。(P.50)"}, {"tid": "solub", "q": "關於溶解度曲線，下列敘述何者正確？", "opts": ["氣體溶解度隨溫度升高而增大", "所有固體溶解度都隨溫度升高而減小", "NaCl溶解度隨溫度升高而急遽增大", "多數固體的溶解度隨溫度升高而增大"], "ans": 3, "exp": "<b>多數固體升溫溶解度增大</b>(吸熱)；氣體升溫變小；NaCl幾乎不變。(P.51)"}, {"tid": "solub", "q": "喝下冰汽水後，在胃中容易打嗝排氣，主要是因為？", "opts": ["溶解度變大", "胃酸使CO2增加", "壓力升高", "體溫較高使CO2溶解度降低而釋出"], "ans": 3, "exp": "體溫高於冰汽水，<b>升溫使CO2溶解度降低</b>而釋出氣體。(P.52)"}, {"tid": "solub", "q": "下列哪一種固體在課本溶解度曲線中，溶解度隨溫度升高反而下降？", "opts": ["Ba(NO3)2", "Na2HAsO4", "Ce2(SO4)3·9H2O", "KNO3"], "ans": 2, "exp": "<b>Ce2(SO4)3·9H2O</b>溶解放熱，升溫溶解度下降。(P.51)"}, {"tid": "acid", "q": "依阿瑞尼斯定義，「酸」是指在水中能解離出何種離子的物質？", "opts": ["Cl-", "Na+", "H+", "OH-"], "ans": 2, "exp": "阿瑞尼斯定義：酸在水中解離出<b>H+</b>，鹼在水中解離出OH-。(P.55)"}, {"tid": "acid", "q": "下列何者為強電解質？", "opts": ["CH3COOH", "乙醇", "H2CO3", "HCl"], "ans": 3, "exp": "<b>HCl</b>為強電解質(完全解離)；醋酸、碳酸為弱電解質；乙醇為非電解質。(P.55)"}, {"tid": "acid", "q": "下列何者為非電解質？", "opts": ["NaOH", "HCl", "葡萄糖", "NaCl"], "ans": 2, "exp": "<b>葡萄糖、蔗糖、乙醇</b>溶於水不解離，為非電解質。(P.55)"}, {"tid": "acid", "q": "25°C時水的離子積常數Kw值為？", "opts": ["1.0×10^14", "1.0×10^-7", "1.0×10^-14", "1.0×10^-10"], "ans": 2, "exp": "25°C時Kw=[H+][OH-]=<b>1.0×10^-14</b>。(P.56)"}, {"tid": "acid", "q": "Kw的值會隨下列何者改變？", "opts": ["溫度", "溶液體積", "加入的指示劑", "壓力"], "ans": 0, "exp": "Kw<b>只隨溫度改變</b>(升溫變大)，與壓力、體積無關。(P.56)"}, {"tid": "acid", "q": "25°C下，某溶液[H+]=1.0×10^-3 M，其pH值為？", "opts": ["-3", "7", "3", "11"], "ans": 2, "exp": "pH=−log[H+]=−log(10^-3)=<b>3</b>，屬酸性。(P.56)"}, {"tid": "acid", "q": "25°C時，純水的pH值為？", "opts": ["1", "14", "0", "7"], "ans": 3, "exp": "25°C純水[H+]=[OH-]=10^-7，pH=<b>7</b>，呈中性。(P.56)"}, {"tid": "acid", "q": "25°C下，pH=5的溶液其性質為？", "opts": ["無法判斷", "中性", "酸性", "鹼性"], "ans": 2, "exp": "25°C時pH<7為<b>酸性</b>，[H+]>[OH-]。(P.56)"}, {"tid": "acid", "q": "酸性溶液能使下列哪種指示劑變色？", "opts": ["藍色石蕊試紙變紅", "酚酞變紅", "酚酞變藍", "紅色石蕊試紙變藍"], "ans": 0, "exp": "酸性使<b>藍色石蕊變紅</b>，酚酞在酸性中無色。(P.56)"}, {"tid": "acid", "q": "鹼性溶液能使酚酞指示劑呈現何種顏色？", "opts": ["藍色", "綠色", "無色", "紅(粉紅)色"], "ans": 3, "exp": "<b>酚酞在鹼性中變紅(粉紅)</b>，在酸性與中性中無色。(P.57)"}, {"tid": "acid", "q": "25°C時，pH=2與pH=4的兩溶液相比，pH=2溶液的[H+]為pH=4的幾倍？", "opts": ["10倍", "0.01倍", "2倍", "100倍"], "ans": 3, "exp": "pH每差1，[H+]差10倍，差2即<b>10^2=100倍</b>。(P.57)"}, {"tid": "acid", "q": "將強酸溶液加水稀釋，其pH值的變化趨勢為？", "opts": ["pH下降至低於7", "pH上升但不超過7", "pH不變", "pH降至0"], "ans": 1, "exp": "稀釋酸使[H+]變小，<b>pH上升但趨近7不超過7</b>。(P.57)"}, {"tid": "acid", "q": "25°C下，某溶液[OH-]=1.0×10^-2 M，則其pOH與pH分別為？", "opts": ["pOH=2，pH=2", "pOH=7，pH=7", "pOH=12，pH=2", "pOH=2，pH=12"], "ans": 3, "exp": "pOH=−log(10^-2)=2，25°C時pH=14−pOH=<b>12</b>，呈鹼性。(P.56)"}, {"tid": "acid", "q": "將0.1M HCl 45mL與0.1M NaOH 55mL混合後(25°C)，所得溶液的pH約為？", "opts": ["12", "2", "10", "7"], "ans": 0, "exp": "HCl=0.0045mol、NaOH=0.0055mol，NaOH過量0.001mol÷0.1L→[OH-]=0.01，pOH=2，pH=<b>12</b>。(P.57)"}, {"tid": "acid", "q": "強酸與強鹼中和反應的產物為？", "opts": ["酸和鹼", "只有鹽", "只有水", "鹽和水"], "ans": 3, "exp": "強酸+強鹼→<b>鹽+水</b>，如HCl+NaOH→NaCl+H2O。(P.57)"}, {"tid": "acid", "q": "高溫(如80°C)的純水，下列敘述何者正確？", "opts": ["為鹼性溶液", "pH一定等於7", "為酸性溶液", "仍為中性，但pH小於7"], "ans": 3, "exp": "升溫Kw變大，純水[H+]=[OH-]上升使<b>pH<7但仍為中性</b>。(P.56)"}];
+let curTopic=TOPICS.find(t=>QDB.some(q=>q.tid===t.id)).id;
+const TOTAL=QDB.length;
+const answered={};
+const ttabs=document.getElementById("ttabs");
+TOPICS.forEach(t=>{
+  const cnt=QDB.filter(q=>q.tid===t.id).length;
+  if(!cnt)return;
+  const b=document.createElement("button");
+  b.className="ttab"+(t.id===curTopic?" on":"");b.id="tab-"+t.id;
+  b.innerHTML=`${t.icon} ${t.name} <span style="background:#0f2744;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px">${cnt}</span>`;
+  b.onclick=()=>switchTopic(t.id);ttabs.appendChild(b);
+});
+function switchTopic(id){curTopic=id;document.querySelectorAll(".ttab").forEach(x=>x.classList.remove("on"));document.getElementById("tab-"+id).classList.add("on");render();window.scrollTo(0,0);}
+function render(){
+  const t=TOPICS.find(x=>x.id===curTopic);
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  let h="";
+  if(NOTES&&NOTES[curTopic]){
+    h+=`<div class="note-box"><div class="note-hd" onclick="toggleNote(this)"><span style="font-size:1.2rem">${t.icon}</span><h2>${t.name}｜重點筆記（點此展開）</h2><span class="arr">▼</span></div><div class="note-body">${NOTES[curTopic]}</div></div>`;
+  }
+  h+=`<div class="q-hd"><h2>${t.icon} ${t.name}</h2><span class="q-cnt">${qs.length} 題</span></div>`;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    const o=q.opts.map((op,oi)=>`<div class="opt" id="opt_${aid}_${oi}" onclick="pick('${aid}',${oi},${q.ans})"><span class="ol" id="ol_${aid}_${oi}">${"ABCD"[oi]}</span><span>${op}</span></div>`).join("");
+    h+=`<div class="qcard"><div class="qhd"><span class="qnum">Q${i+1}</span><span class="qtxt">${q.q}</span></div><div class="opts">${o}</div><div class="exp" id="exp_${aid}">${q.exp}</div></div>`;
+  });
+  h+=`<button class="rbtn" onclick="resetTopic()">🔄 重置本主題</button>`;
+  document.getElementById("main").innerHTML=h;
+  qs.forEach((q,i)=>{const aid=curTopic+"_"+i;if(answered[aid])applyResult(aid,answered[aid].sel,answered[aid].correct,q.ans);});
+}
+function toggleNote(hd){hd.classList.toggle("open");hd.nextElementSibling.classList.toggle("open");}
+function pick(aid,sel,ans){if(answered[aid])return;const c=sel===ans;answered[aid]={sel,correct:c};applyResult(aid,sel,c,ans);updateScore();}
+function applyResult(aid,sel,correct,ans){
+  [0,1,2,3].forEach(i=>{const o=document.getElementById("opt_"+aid+"_"+i);if(!o)return;o.classList.add("done");
+    if(i===sel&&correct)o.classList.add("ok");else if(i===sel&&!correct)o.classList.add("ng");else if(i===ans&&!correct)o.classList.add("ok");else o.classList.add("fade");});
+  const e=document.getElementById("exp_"+aid);if(e)e.classList.add("show");
+}
+function resetTopic(){QDB.filter(q=>q.tid===curTopic).forEach((_,i)=>delete answered[curTopic+"_"+i]);render();updateScore();}
+function updateScore(){const a=Object.values(answered),d=a.length,ok=a.filter(x=>x.correct).length;
+  document.getElementById("s-done").textContent=d;document.getElementById("s-ok").textContent=ok;document.getElementById("s-ng").textContent=d-ok;
+  document.getElementById("s-pct").textContent=d>0?Math.round(ok/d*100)+"%":"—";document.getElementById("ptfill").style.width=(d/TOTAL*100)+"%";}
+render();
+</script>
+</body>
+</html>
