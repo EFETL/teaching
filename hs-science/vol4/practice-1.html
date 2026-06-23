@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>練習卷一：基礎觀念（50題）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f2744;--gold:#e8a000;--teal:#0a7ea4;--green:#15803d;--red:#b91c1c;--bg:#f0f4f9;--border:#dde3ed}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:#1a1a2e;font-size:15px}
+header{background:linear-gradient(135deg,#0f2744 0%,#1e4080 60%,#6c4ab6 100%);color:#fff;padding:20px 18px 16px;text-align:center}
+header h1{font-size:1.4rem;font-weight:800}
+header p{margin-top:5px;font-size:.82rem;opacity:.88}
+.back{display:inline-block;margin-top:10px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 14px;font-size:.78rem;text-decoration:none}
+#sbar{background:#0f2744;color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 14px;font-size:.8rem;flex-wrap:wrap}
+.si span.val{font-weight:700;font-size:.95rem}
+#ptbar{height:5px;background:rgba(255,255,255,.2);width:160px;border-radius:3px;overflow:hidden}
+#ptfill{height:100%;background:var(--gold);width:0%;transition:width .3s}
+.ttabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.ttab{flex:0 0 auto;padding:11px 13px;font-size:.78rem;font-weight:700;background:none;border:none;cursor:pointer;color:#6b7280;border-bottom:3px solid transparent;white-space:nowrap}
+.ttab.on{color:var(--navy);border-bottom-color:var(--gold)}
+#main{max-width:860px;margin:0 auto;padding:16px 14px 60px}
+.note-box{background:#fff;border:1.5px solid var(--border);border-radius:12px;margin-bottom:18px;overflow:hidden}
+.note-hd{padding:13px 16px;display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
+.note-hd h2{font-size:.95rem;font-weight:700;color:var(--navy);flex:1}
+.note-hd .arr{color:#6b7280;font-size:.72rem;transition:.2s}
+.note-hd.open .arr{transform:rotate(180deg)}
+.note-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.note-body.open{display:block}
+.q-hd{display:flex;align-items:center;gap:9px;margin:6px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.q-hd h2{font-size:.92rem;font-weight:700;color:var(--navy)}
+.q-cnt{background:var(--navy);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px}
+.qcard{background:#fff;border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden}
+.qhd{padding:13px 15px 9px;display:flex;gap:9px;align-items:flex-start}
+.qnum{background:var(--navy);color:#fff;border-radius:5px;padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.qtxt{font-size:.88rem;line-height:1.75;flex:1}
+.opts{padding:0 15px 5px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;margin-bottom:6px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:.84rem;line-height:1.5;transition:.13s;user-select:none}
+.opt:hover:not(.done){border-color:var(--teal);background:#f0f9ff}
+.ol{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.opt.ok{border-color:var(--green)!important;background:#f0fdf4}
+.opt.ok .ol{background:var(--green);border-color:var(--green);color:#fff}
+.opt.ng{border-color:var(--red)!important;background:#fff5f5}
+.opt.ng .ol{background:var(--red);border-color:var(--red);color:#fff}
+.opt.fade{opacity:.4}
+.exp{display:none;margin:3px 15px 13px;padding:10px 13px;background:#fffbe8;border-left:4px solid var(--gold);border-radius:0 7px 7px 0;font-size:.81rem;line-height:1.75;color:#4a3b00}
+.exp.show{display:block}
+.exp b{color:var(--navy)}
+.rbtn{display:block;width:fit-content;margin:24px auto 0;padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:.86rem;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <h1>📝 練習卷一 基礎觀念</h1>
+  <p>名詞辨析與定義 ‧ 50題 ‧ 點選項即顯示解析</p>
+  <a class="back" href="./">← 返回</a>
+</header>
+<div id="sbar">
+  <div class="si">已答 <span class="val" id="s-done">0</span>/50</div>
+  <div id="ptbar"><div id="ptfill"></div></div>
+  <div class="si">答對 <span class="val" id="s-ok" style="color:#86efac">0</span></div>
+  <div class="si">答錯 <span class="val" id="s-ng" style="color:#fca5a5">0</span></div>
+  <div class="si">正確率 <span class="val" id="s-pct">—</span></div>
+</div>
+<div class="ttabs" id="ttabs"></div>
+<div id="main"></div>
+<script>
+const TOPICS=[{"id": "mol", "icon": "🧪", "name": "生命的化學組成"}, {"id": "cell", "icon": "🔬", "name": "細胞構造與運輸"}, {"id": "enz", "icon": "⚙️", "name": "酵素"}, {"id": "fate", "icon": "🌱", "name": "細胞分化與命運"}];
+const NOTES={};
+const QDB=[{"tid": "mol", "q": "下列何者是構成蛋白質的基本單體（單元）？", "opts": ["核苷酸", "脂肪酸", "胺基酸", "葡萄糖"], "ans": 2, "exp": "蛋白質的單體是<b>胺基酸</b>，共有20種，胺基酸間以<b>肽鍵</b>相連成多肽鏈。葡萄糖是醣類的單元、核苷酸是核酸的單元、脂肪酸是脂肪的組成之一。"}, {"tid": "mol", "q": "關於核酸的元素組成，下列何者正確？", "opts": ["含C、H、O、N", "含C、H、O、N、S", "含C、H、O、N、P", "只含C、H、O"], "ans": 2, "exp": "核酸（DNA、RNA）由核苷酸組成，核苷酸含磷酸基，因此核酸含有<b>C、H、O、N、P</b>五種元素。核酸<b>含P不含S</b>，含S的是部分蛋白質。"}, {"tid": "mol", "q": "葡萄糖、果糖與半乳糖三者的分子式都是C6H12O6，但結構不同，因此三者互為下列何種關係？", "opts": ["聚合物", "同位素", "同素異形體", "同分異構物"], "ans": 3, "exp": "分子式相同但結構不同的化合物互為<b>同分異構物</b>（isomer）。三者實驗式皆為CH2O，分子式皆為C6H12O6，但原子排列方式不同。"}, {"tid": "mol", "q": "下列關於水的性質敘述，何者錯誤？", "opts": ["水解離可直接提供細胞活動所需能量", "水是極性分子，分子間可形成氫鍵", "水比熱大，有助生物體維持體溫穩定", "水是良好溶劑，協助體內物質運輸"], "ans": 0, "exp": "水<b>不能</b>靠解離直接提供能量，這是常見錯誤觀念；細胞能量主要來自ATP。水的極性、可形成氫鍵、比熱大、為良好溶劑都是正確的性質。"}, {"tid": "mol", "q": "三酸甘油酯（中性脂）是由下列何者組成？", "opts": ["甘油＋膽固醇", "磷酸＋甘油＋2個脂肪酸", "3個甘油＋1個脂肪酸", "1個甘油＋3個脂肪酸"], "ans": 3, "exp": "三酸甘油酯（脂肪、中性脂）由<b>1個甘油與3個脂肪酸</b>結合而成，主要功能為儲存能量。磷酸＋甘油＋2脂肪酸的是<b>磷脂</b>，為細胞膜主成分。"}, {"tid": "mol", "q": "下列何者屬於雙醣？", "opts": ["蔗糖", "澱粉", "果糖", "葡萄糖"], "ans": 0, "exp": "<b>蔗糖</b>由葡萄糖和果糖組成，是雙醣。葡萄糖、果糖是單醣；澱粉是多醣。常見雙醣還有麥芽糖（葡萄糖+葡萄糖）和乳糖。"}, {"tid": "mol", "q": "關於DNA與RNA的比較，下列何者正確？", "opts": ["DNA所含的五碳醣是核糖", "DNA是遺傳物質、RNA通常為單股", "RNA通常為雙股螺旋", "兩者皆含硫元素"], "ans": 1, "exp": "<b>DNA是遺傳物質，通常為雙股螺旋；RNA通常為單股</b>。DNA含去氧核糖、RNA含核糖。兩者皆含P不含S。"}, {"tid": "mol", "q": "磷脂分子同時具有親水的頭部與疏水的尾部，這種性質稱為？", "opts": ["全透性", "催化性", "兩親性", "專一性"], "ans": 2, "exp": "磷脂一端親水（磷酸頭）、一端疏水（脂肪酸尾），同時具親水與疏水特性稱為<b>兩親性</b>，是構成細胞膜磷脂雙層的關鍵。"}, {"tid": "mol", "q": "下列何種多醣是植物細胞壁的主成分？", "opts": ["澱粉", "纖維素", "幾丁質", "肝醣"], "ans": 1, "exp": "<b>纖維素</b>是植物細胞壁的主成分。澱粉是植物儲存葡萄糖的形式、肝醣是動物儲存葡萄糖的形式、幾丁質構成節肢動物外骨骼與真菌細胞壁。"}, {"tid": "mol", "q": "核苷酸是核酸的單體，其組成不包含下列何者？", "opts": ["五碳醣", "含氮鹼基", "胺基酸", "磷酸"], "ans": 2, "exp": "核苷酸由<b>含氮鹼基＋五碳醣＋磷酸</b>三部分組成，不含胺基酸。胺基酸是蛋白質的單體。"}, {"tid": "mol", "q": "下列何種生物分子的組成元素只有C、H、O三種？", "opts": ["醣類", "蛋白質", "核酸", "葉綠素"], "ans": 0, "exp": "<b>醣類</b>與脂質的組成元素只有C、H、O。蛋白質含N（部分含S）、核酸含N和P。"}, {"tid": "mol", "q": "單體聚合成大分子（如多醣、蛋白質）時，通常伴隨下列何種反應？", "opts": ["水解反應", "氧化反應", "脫水（縮合）反應", "解離反應"], "ans": 2, "exp": "單體聚合成大分子時會移除水分子，稱為<b>脫水（縮合）反應</b>；相反地，大分子分解成單體時加入水分子，稱為水解反應。"}, {"tid": "cell", "q": "下列哪一種胞器負責有氧呼吸並製造大量ATP？", "opts": ["高基氏體", "核糖體", "溶體", "粒線體"], "ans": 3, "exp": "<b>粒線體</b>是有氧呼吸的場所，可製造大量ATP，具雙層膜並含有自己的DNA、RNA與核糖體。核糖體合成蛋白質、高基氏體負責修飾包裝、溶體含水解酶。"}, {"tid": "cell", "q": "下列哪一種構造為動物細胞具有、而植物細胞通常沒有？", "opts": ["細胞壁", "大液胞", "中心粒", "葉綠體"], "ans": 2, "exp": "<b>中心粒</b>為動物細胞所有、與紡錘絲形成有關，植物細胞通常沒有。反之細胞壁、葉綠體、大液胞為植物細胞所有而動物細胞沒有。"}, {"tid": "cell", "q": "關於核糖體的敘述，下列何者正確？", "opts": ["具有雙層膜", "負責合成脂質", "負責合成蛋白質", "只存在於細胞核內"], "ans": 2, "exp": "<b>核糖體負責合成蛋白質</b>，本身無膜構造，可游離於細胞質中或附著於粗糙內質網上。合成脂質的是平滑內質網。"}, {"tid": "cell", "q": "細胞膜的構造可用「流體鑲嵌模型」描述，其基本骨架是下列何者？", "opts": ["蛋白質單層", "磷脂雙層", "醣類網狀結構", "纖維素層"], "ans": 1, "exp": "細胞膜以<b>磷脂雙層</b>為基本骨架（親水頭朝外、疏水尾相對朝內），上面鑲嵌蛋白質、膽固醇與醣類，整體具流動性，故稱流體鑲嵌模型。"}, {"tid": "cell", "q": "O2與CO2等小分子順著濃度梯度、不需運輸蛋白也不耗ATP而通過細胞膜，此種運輸方式為？", "opts": ["促進性擴散", "主動運輸", "簡單擴散", "胞吞作用"], "ans": 2, "exp": "O2、CO2及脂溶性小分子順濃度梯度、不需運輸蛋白、不耗ATP通過細胞膜，屬於<b>簡單擴散</b>。促進性擴散需運輸蛋白；主動運輸需運輸蛋白且耗ATP。"}, {"tid": "cell", "q": "下列何種運輸方式必須消耗ATP且可逆濃度梯度進行？", "opts": ["簡單擴散", "滲透", "主動運輸", "促進性擴散"], "ans": 2, "exp": "<b>主動運輸</b>需消耗ATP、可逆濃度梯度進行、需運輸蛋白，如鈉鉀幫浦、腎小管再吸收葡萄糖、甲狀腺吸碘。簡單擴散、滲透、促進性擴散皆為被動運輸，不耗ATP。"}, {"tid": "cell", "q": "水分子順著濃度梯度通過半透膜的被動運輸方式特稱為？", "opts": ["簡單擴散", "胞吐", "滲透", "主動運輸"], "ans": 2, "exp": "水分子經半透膜的擴散特稱為<b>滲透</b>，屬被動運輸，不耗ATP。"}, {"tid": "cell", "q": "關於植物細胞壁的敘述，下列何者正確？", "opts": ["屬於全透性構造", "屬於半透膜", "所有植物細胞都有次生細胞壁", "主成分為磷脂"], "ans": 0, "exp": "細胞壁主成分為<b>纖維素，屬全透性</b>構造（不是半透膜），各種物質大多可自由通過。初生細胞壁較薄、次生細胞壁較厚，但並非所有植物細胞都有次生細胞壁。"}, {"tid": "cell", "q": "下列哪一胞器負責修飾、包裝及分泌蛋白質？", "opts": ["粗糙內質網", "高基氏體", "核仁", "粒線體"], "ans": 1, "exp": "<b>高基氏體</b>負責將蛋白質修飾、包裝並形成囊泡分泌。粗糙內質網合成與運輸蛋白質、粒線體製造ATP、核仁製造核糖體次單元。"}, {"tid": "cell", "q": "白血球吞噬細菌、以及分泌性蛋白送出細胞外，分別屬於下列何種運輸方式？", "opts": ["胞吞作用與胞吐作用", "主動運輸與滲透", "皆為簡單擴散", "皆為促進性擴散"], "ans": 0, "exp": "白血球吞噬細菌是把大分子或顆粒吞入細胞的<b>胞吞作用</b>；分泌性蛋白以囊泡送出細胞外是<b>胞吐作用</b>。兩者都用於大分子運輸且需耗能。"}, {"tid": "cell", "q": "細胞核的核膜上有許多孔洞，可供物質進出，這些孔洞稱為？", "opts": ["核仁", "溶體", "核孔", "中心粒"], "ans": 2, "exp": "核膜為雙層膜，上有<b>核孔</b>供mRNA等物質進出。核仁位於核內負責製造核糖體次單元，不是孔洞。"}, {"tid": "cell", "q": "製造胰島素的細胞中，新合成的胰島素多肽鏈離開核糖體後，最先進入下列哪一構造進行後續加工？", "opts": ["溶體", "粒線體", "葉綠體", "粗糙內質網"], "ans": 3, "exp": "胰島素製造路徑為：核糖體轉譯後進入<b>粗糙內質網</b>→再到高基氏體修飾（切割胰島素原成A、B鏈以雙硫鍵結合）→囊泡沿微管運送→胞吐送出。"}, {"tid": "cell", "q": "下列哪一組胞器同時含有DNA、RNA、蛋白質與磷脂質，且具雙層膜？", "opts": ["粒線體與葉綠體", "高基氏體與液胞", "核糖體與溶體", "中心粒與核仁"], "ans": 0, "exp": "<b>粒線體與葉綠體</b>都具雙層膜、含自己的DNA、RNA與核糖體（蛋白質），且膜由磷脂質構成，因此同時含這四類成分。"}, {"tid": "enz", "q": "酵素的主要化學本質是下列何者（少數例外為具催化活性的RNA）？", "opts": ["核苷酸", "醣類", "脂質", "蛋白質"], "ans": 3, "exp": "絕大多數酵素的本質是<b>蛋白質</b>（胺基酸的聚合物）；少數具催化活性的RNA稱為核糖酶（ribozyme）為例外。"}, {"tid": "enz", "q": "關於酵素降低活化能的敘述，下列何者正確？", "opts": ["酵素在反應後會被消耗而無法再用", "酵素提高反應的活化能", "酵素改變反應前後的淨能量變化", "酵素降低活化能但不改變反應物與生成物的能量差"], "ans": 3, "exp": "酵素<b>降低活化能</b>以加速反應，但<b>不改變</b>反應物與生成物之間的能量差（淨能量變化）。酵素反應前後本身不變，可重複使用。"}, {"tid": "enz", "q": "酵素上與受質結合並進行催化的特定部位稱為？", "opts": ["核孔", "活性位（active site）", "端粒", "輔因子"], "ans": 1, "exp": "<b>活性位</b>位於酵素分子上（不是受質上），受質與活性位結合後進行催化。催化過程中受質結構會改變，酵素本身不變。"}, {"tid": "enz", "q": "人體內多數酵素的最適溫度約為下列何者？", "opts": ["約80℃", "約20℃", "約37℃", "約0℃"], "ans": 2, "exp": "人體酵素的最適溫度約為<b>37℃</b>（接近體溫）。溫度過高會使蛋白質變性、活性急降，故並非溫度越高活性越強。"}, {"tid": "enz", "q": "關於溫度對酵素活性的影響，下列何者正確？", "opts": ["溫度完全不影響酵素活性", "低於最適溫度時活性最高", "超過最適溫度後，因蛋白質變性使活性急降", "溫度越高，活性永遠越強"], "ans": 2, "exp": "酵素活性隨溫度上升先增加，但<b>超過最適溫度後，蛋白質變性使活性急降</b>，呈先升後降的曲線。並非溫度越高活性越強。"}, {"tid": "enz", "q": "協助酵素作用的非蛋白成分，若為金屬離子（如鋅、鎂、鐵）則屬於下列何者？", "opts": ["受質", "抗體", "輔因子", "端粒酶"], "ans": 2, "exp": "協助酵素作用的非蛋白成分稱為<b>輔因子</b>，可為無機的金屬離子（如鋅、鎂、鐵），也可為有機分子（輔酶）。"}, {"tid": "enz", "q": "有機性的輔因子（如NAD⁺、FAD、維生素衍生物）又特別稱為？", "opts": ["抗原", "受質", "核糖酶", "輔酶"], "ans": 3, "exp": "有機的輔因子又稱<b>輔酶（coenzyme）</b>，如NAD⁺/NADH、FAD等。無機的輔因子則為金屬離子。輔因子與輔酶皆可重複使用。"}, {"tid": "enz", "q": "在酵素濃度固定下，逐漸增加受質濃度時，反應速率的變化趨勢為何？", "opts": ["持續下降", "先上升，直到酵素飽和後趨於最大速率（Vmax）", "維持不變", "持續無上限地直線上升"], "ans": 1, "exp": "受質濃度上升時反應速率隨之上升，但當酵素被受質<b>飽和</b>後，速率趨於最大值（<b>Vmax</b>），不再隨受質濃度增加而上升。"}, {"tid": "enz", "q": "胃蛋白酶在胃中作用，其最適pH最接近下列何者？", "opts": ["pH 8", "pH 7", "pH 2", "pH 11"], "ans": 2, "exp": "胃蛋白酶在強酸環境作用，最適pH約為<b>pH 2</b>。胰蛋白酶最適約pH 8、唾液澱粉酶約pH 7，各酵素最適pH不同。"}, {"tid": "enz", "q": "下列關於酵素與輔因子的關係，何者正確？", "opts": ["輔因子使用一次後即被破壞無法再用", "重金屬如汞、鉛會抑制酵素活性", "所有酵素都必須有輔因子才能作用", "一種輔因子只能協助一種酵素"], "ans": 1, "exp": "<b>重金屬（如鎘、汞、鉛）會抑制酵素活性</b>。並非所有酵素都需要輔因子；一種輔因子可協助多種酵素；輔因子可重複使用。"}, {"tid": "enz", "q": "在米氏動力學中，達到一半最大反應速率（½Vmax）時所需的受質濃度，可用來反映下列何者？", "opts": ["反應的淨能量變化", "受質的顏色", "酵素的分子量", "酵素與受質的親和力"], "ans": 3, "exp": "達<b>½Vmax所需的受質濃度</b>愈低，表示酵素與受質的<b>親和力</b>愈高；此值是評估酵素對受質親和力的重要指標。"}, {"tid": "enz", "q": "下列關於酵素的敘述，(甲)可降低活化能 (乙)反應前後本身不變 (丙)可重複使用 (丁)會改變反應物與生成物的能量差。哪些正確？", "opts": ["甲乙丙丁", "乙丙丁", "甲乙丙", "甲丁"], "ans": 2, "exp": "<b>甲、乙、丙</b>正確。酵素降低活化能、反應前後本身不變、可重複使用。丁錯誤：酵素<b>不改變</b>反應物與生成物的能量差（淨能量變化）。"}, {"tid": "enz", "q": "服用大量制酸劑（中和胃酸、使胃內pH升高）時，對胃蛋白酶活性最可能的影響為何？", "opts": ["完全不受影響", "活性降低", "活性增強", "變性後活性更強"], "ans": 1, "exp": "胃蛋白酶最適pH約為2（強酸），服用大量制酸劑會使胃內pH升高、偏離最適pH，導致胃蛋白酶<b>活性降低</b>。"}, {"tid": "fate", "q": "同一個人的神經細胞與皮膚細胞，其DNA序列與所表現的蛋白質的關係為何？", "opts": ["DNA序列不同，蛋白質種類相同", "DNA序列與蛋白質皆相同", "DNA序列與蛋白質皆不同", "DNA序列相同，但所表現的蛋白質種類不同"], "ans": 3, "exp": "同一受精卵分裂而來的細胞具<b>相同的DNA序列</b>，但因<b>基因選擇性表現</b>，不同細胞表現出的RNA與蛋白質種類不同，因而分化成不同功能的細胞。"}, {"tid": "fate", "q": "下列細胞依分化潛能由大到小排列，何者正確？", "opts": ["成體幹細胞＞受精卵＞胚胎幹細胞", "胚胎幹細胞＞受精卵＞成體幹細胞", "受精卵＞胚胎幹細胞＞成體幹細胞", "成體幹細胞＞胚胎幹細胞＞受精卵"], "ans": 2, "exp": "分化潛能由大到小為<b>受精卵（全能性）＞胚胎幹細胞（多能性）＞成體幹細胞</b>＞已分化的成熟細胞。受精卵可發育成完整個體，潛能最大。"}, {"tid": "fate", "q": "具有「全能性」的細胞，意指其能夠？", "opts": ["完全不能分裂", "只能無限分裂但不能分化", "發育成一個完整的個體", "僅能分化成血球"], "ans": 2, "exp": "<b>全能性</b>指細胞具有發育成一個<b>完整個體</b>所需的全部能力，如受精卵、植物分生組織細胞。胚胎幹細胞為多能性，可分化成各種體細胞但不能單獨成完整個體。"}, {"tid": "fate", "q": "染色體末端的「端粒」會隨DNA每次複製而逐漸縮短，當端粒過短時，細胞會發生何種情形？", "opts": ["立即發生壞死並引起發炎", "停止分裂而趨於衰老", "分裂速度加快", "變回幹細胞"], "ans": 1, "exp": "DNA每次複製，染色體末端的<b>端粒</b>會逐漸縮短，端粒過短時細胞<b>停止分裂、趨於衰老</b>。端粒酶可延長端粒，幹細胞、生殖細胞、癌細胞端粒酶活性高。"}, {"tid": "fate", "q": "受基因調控的「程序性細胞死亡」稱為下列何者？", "opts": ["細胞凋亡（apoptosis）", "細胞分化", "細胞融合", "細胞壞死（necrosis）"], "ans": 0, "exp": "<b>細胞凋亡</b>是受基因調控的程序性細胞死亡，屬正常生理現象（如蝌蚪變態尾巴消失、胚胎手指間蹼消失）。細胞壞死則是外傷、缺氧、毒素等意外造成的死亡。"}, {"tid": "fate", "q": "下列何者是「細胞壞死（necrosis）」的特徵？", "opts": ["DNA規律斷裂成片段", "受基因嚴格調控的正常生理過程", "細胞腫脹、細胞膜破裂、內容物外漏並引起發炎", "細胞萎縮變小、被吞噬不引起發炎"], "ans": 2, "exp": "<b>細胞壞死</b>特徵為細胞腫脹、細胞膜破裂、內容物外漏並<b>引起發炎</b>，多由外傷、缺氧、毒素等意外造成。其他選項皆為細胞凋亡的特徵。"}, {"tid": "fate", "q": "1962年Gurdon將已分化的蛙腸細胞核移植到去核卵中，發育成完整個體。此實驗主要證明了什麼？", "opts": ["卵細胞不含任何遺傳物質", "端粒酶可使細胞無限分裂", "已分化細胞已喪失大部分基因", "已分化細胞的細胞核仍保有發育成完整個體所需的全部遺傳訊息"], "ans": 3, "exp": "Gurdon的核移植實驗證明：<b>已分化細胞的細胞核仍保有發育成完整個體所需的全部遺傳訊息</b>，只是因基因選擇性表現而呈現分化狀態。"}, {"tid": "fate", "q": "下列何種細胞通常具有較高的端粒酶活性，因而能近乎無限分裂？", "opts": ["一般皮膚體細胞", "成熟的神經細胞", "癌細胞（如海拉細胞）", "已衰老停止分裂的細胞"], "ans": 2, "exp": "<b>癌細胞（如海拉細胞HeLa）</b>以及幹細胞、生殖細胞的端粒酶活性高，可延長端粒而近乎無限分裂。一般體細胞分裂約20～50次後即衰老（海佛烈克極限）。"}, {"tid": "fate", "q": "關於幹細胞的敘述，下列何者正確？", "opts": ["完全不能分化成其他細胞", "與受精卵相比都具有全能性", "具有自我更新並分化的能力", "已完全分化、無法再分裂"], "ans": 2, "exp": "<b>幹細胞</b>是尚未完全分化的細胞，具有<b>自我更新並分化</b>的能力。但只有受精卵具全能性，胚胎幹細胞為多能性，成體幹細胞分化能力更有限。"}, {"tid": "fate", "q": "胚胎發育過程中，手指間原本相連的蹼逐漸消失，使手指分開。此現象屬於下列何者？", "opts": ["細胞壞死", "細胞凋亡", "細胞分裂", "細胞癌化"], "ans": 1, "exp": "胚胎手指間蹼消失是受基因調控的<b>細胞凋亡（程序性細胞死亡）</b>，屬正常生理現象，特徵是細胞萎縮、被吞噬不引起發炎。"}, {"tid": "fate", "q": "關於細胞凋亡的特徵，(甲)細胞萎縮變小 (乙)細胞膜破裂使內容物外漏 (丙)DNA規律斷裂成片段 (丁)被吞噬而不引起發炎。哪些正確？", "opts": ["甲乙丙丁", "乙丁", "甲丙丁", "甲乙丙"], "ans": 2, "exp": "<b>甲、丙、丁</b>正確。細胞凋亡特徵為細胞萎縮、DNA規律斷裂成片段、被吞噬而不引起發炎，且細胞膜保持完整形成膜泡。乙（細胞膜破裂、內容物外漏）是<b>細胞壞死</b>的特徵。"}, {"tid": "fate", "q": "植物的分生組織細胞可培養再生成完整植株，這表示這些細胞具有下列何種特性？", "opts": ["端粒酶活性為零", "無法分裂", "只具壞死能力", "全能性"], "ans": 3, "exp": "植物<b>分生組織細胞具有全能性</b>，可在適當條件下分化發育成完整植株，這也是植物組織培養的基礎。"}];
+let curTopic=TOPICS.find(t=>QDB.some(q=>q.tid===t.id)).id;
+const TOTAL=QDB.length;
+const answered={};
+const ttabs=document.getElementById("ttabs");
+TOPICS.forEach(t=>{
+  const cnt=QDB.filter(q=>q.tid===t.id).length;
+  if(!cnt)return;
+  const b=document.createElement("button");
+  b.className="ttab"+(t.id===curTopic?" on":"");b.id="tab-"+t.id;
+  b.innerHTML=`${t.icon} ${t.name} <span style="background:#0f2744;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px">${cnt}</span>`;
+  b.onclick=()=>switchTopic(t.id);ttabs.appendChild(b);
+});
+function switchTopic(id){curTopic=id;document.querySelectorAll(".ttab").forEach(x=>x.classList.remove("on"));document.getElementById("tab-"+id).classList.add("on");render();window.scrollTo(0,0);}
+function render(){
+  const t=TOPICS.find(x=>x.id===curTopic);
+  const qs=QDB.filter(q=>q.tid===curTopic);
+  let h="";
+  if(NOTES&&NOTES[curTopic]){
+    h+=`<div class="note-box"><div class="note-hd" onclick="toggleNote(this)"><span style="font-size:1.2rem">${t.icon}</span><h2>${t.name}｜重點筆記（點此展開）</h2><span class="arr">▼</span></div><div class="note-body">${NOTES[curTopic]}</div></div>`;
+  }
+  h+=`<div class="q-hd"><h2>${t.icon} ${t.name}</h2><span class="q-cnt">${qs.length} 題</span></div>`;
+  qs.forEach((q,i)=>{
+    const aid=curTopic+"_"+i;
+    const o=q.opts.map((op,oi)=>`<div class="opt" id="opt_${aid}_${oi}" onclick="pick('${aid}',${oi},${q.ans})"><span class="ol" id="ol_${aid}_${oi}">${"ABCD"[oi]}</span><span>${op}</span></div>`).join("");
+    h+=`<div class="qcard"><div class="qhd"><span class="qnum">Q${i+1}</span><span class="qtxt">${q.q}</span></div><div class="opts">${o}</div><div class="exp" id="exp_${aid}">${q.exp}</div></div>`;
+  });
+  h+=`<button class="rbtn" onclick="resetTopic()">🔄 重置本主題</button>`;
+  document.getElementById("main").innerHTML=h;
+  qs.forEach((q,i)=>{const aid=curTopic+"_"+i;if(answered[aid])applyResult(aid,answered[aid].sel,answered[aid].correct,q.ans);});
+}
+function toggleNote(hd){hd.classList.toggle("open");hd.nextElementSibling.classList.toggle("open");}
+function pick(aid,sel,ans){if(answered[aid])return;const c=sel===ans;answered[aid]={sel,correct:c};applyResult(aid,sel,c,ans);updateScore();}
+function applyResult(aid,sel,correct,ans){
+  [0,1,2,3].forEach(i=>{const o=document.getElementById("opt_"+aid+"_"+i);if(!o)return;o.classList.add("done");
+    if(i===sel&&correct)o.classList.add("ok");else if(i===sel&&!correct)o.classList.add("ng");else if(i===ans&&!correct)o.classList.add("ok");else o.classList.add("fade");});
+  const e=document.getElementById("exp_"+aid);if(e)e.classList.add("show");
+}
+function resetTopic(){QDB.filter(q=>q.tid===curTopic).forEach((_,i)=>delete answered[curTopic+"_"+i]);render();updateScore();}
+function updateScore(){const a=Object.values(answered),d=a.length,ok=a.filter(x=>x.correct).length;
+  document.getElementById("s-done").textContent=d;document.getElementById("s-ok").textContent=ok;document.getElementById("s-ng").textContent=d-ok;
+  document.getElementById("s-pct").textContent=d>0?Math.round(ok/d*100)+"%":"—";document.getElementById("ptfill").style.width=(d/TOTAL*100)+"%";}
+render();
+</script>
+</body>
+</html>
