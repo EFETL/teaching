@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>數學科 互動學習</title>
 <style>
-  :root { --main:#2c5f8a; --accent:#e6a800; --subject:#3498db; --teach:#7b6000; --bg:#eef3f9; }
+  :root { --main:#2c5f8a; --bg:#eef3f9; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
   header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
@@ -13,34 +13,26 @@
   header p { font-size:18px; opacity:.95; }
   .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
   .back:hover { background:#eef6ff; }
-  .wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
+  .wrap { max-width:900px; margin:0 auto; padding:22px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:24px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
   .intro b { color:var(--main); }
-  .combo { display:block; text-align:center; background:var(--accent); color:#3a2c00; font-size:22px; font-weight:bold; text-decoration:none; padding:16px; border-radius:12px; margin-bottom:14px; box-shadow:0 2px 8px rgba(230,168,0,.4); transition:transform .12s; }
-  .combo:hover { transform:translateY(-2px); }
-  .unit { background:#fff; border-radius:12px; margin-bottom:18px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,.08); }
-  .unit-head { background:var(--main); color:#fff; font-size:21px; font-weight:bold; padding:12px 20px; }
-  .unit-head .n { background:#fff; color:var(--main); border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; font-size:18px; margin-right:10px; }
-  .links { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:16px 20px; }
-  .links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:14px 8px; font-size:18px; color:#1a1a1a; transition:all .12s; text-align:center; }
-  .links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
-  .links a .ic { font-size:26px; }
-  .links a.teach { border-color:#e7d9a8; }
-  .links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
-  .links a small { color:#667; font-size:14px; }
-  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-  .tsec-h { font-size:20px; font-weight:bold; color:var(--main); margin:6px 2px 12px; padding-left:10px; border-left:5px solid var(--subject); }
-  .tcards { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:16px; margin-bottom:26px; }
-  .tcard { display:block; text-decoration:none; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.10); border:1px solid #e2e8f0; transition:transform .12s, box-shadow .12s; }
-  .tcard:hover { transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,90,105,.22); }
-  .tcard .thumb { background:linear-gradient(135deg,#006d7d,#16aec0); padding:12px 12px 10px; }
-  .tcard .thumb .badge { display:inline-block; background:rgba(255,255,255,.22); color:#fff; font-size:12.5px; border-radius:20px; padding:2px 11px; margin-bottom:8px; }
-  .tcard .thumb svg { display:block; width:100%; height:auto; }
-  .tcard .tbody { padding:12px 15px 15px; }
-  .tcard .tlabel { font-size:21px; font-weight:800; color:#0a4f5a; }
-  .tcard .tsub { font-size:15px; color:#54707a; margin-top:2px; }
-  .tcard .tmeta { font-size:13px; color:#93a4ac; margin-top:7px; }
-  @media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:24px; } .tcards{ grid-template-columns:1fr; } }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
+  .vcard { display:block; text-decoration:none; background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.10); border:1px solid #e2e8f0; transition:transform .12s, box-shadow .12s; position:relative; }
+  .vcard:hover { transform:translateY(-5px); box-shadow:0 10px 22px rgba(20,60,90,.20); }
+  .vthumb { height:104px; display:flex; align-items:center; justify-content:center; gap:6px; color:#fff; background:linear-gradient(135deg,var(--g1),var(--g2)); position:relative; }
+  .vthumb::after { content:"📐"; position:absolute; right:10px; bottom:6px; font-size:20px; opacity:.5; }
+  .vthumb .vn { font-size:52px; font-weight:800; line-height:1; letter-spacing:1px; text-shadow:0 2px 6px rgba(0,0,0,.18); }
+  .vthumb .vn.txt { font-size:34px; }
+  .vthumb .vc { font-size:20px; font-weight:700; align-self:flex-end; margin-bottom:18px; opacity:.92; }
+  .vbody { padding:13px 16px 15px; }
+  .vlabel { font-size:21px; font-weight:800; color:#15324a; }
+  .vsub { font-size:14.5px; color:#5a6b78; margin-top:3px; }
+  .vcard.soon { cursor:default; }
+  .vcard.soon .vthumb { filter:grayscale(.55) opacity(.75); }
+  .vcard.soon:hover { transform:none; box-shadow:0 2px 10px rgba(0,0,0,.10); }
+  .ribbon { position:absolute; top:10px; left:10px; background:rgba(255,255,255,.92); color:#7a8794; font-size:12.5px; font-weight:700; border-radius:14px; padding:2px 11px; }
+  footer { text-align:center; color:#789; font-size:15px; margin-top:34px; }
+  @media (max-width:560px){ header h1{ font-size:24px; } .grid{ grid-template-columns:1fr 1fr; gap:12px; } .vthumb .vn{ font-size:42px; } }
 </style>
 </head>
 <body>
@@ -50,72 +42,48 @@
   <a class="back" href="../">← 回主選單</a>
 </header>
 <div class="wrap">
-  <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
+  <div class="intro">選擇下方<b>冊別</b>進入，即可在線上<b>作答練習</b>，系統會<b>即時顯示對錯與解析</b>。</div>
+  <div class="grid">
 
-  <div class="tsec-h">📐 國中數學 ‧ 七年級（第一冊）</div>
-  <div class="tcards">
-    <a class="tcard" href="book1-1-1.html">
-      <div class="thumb">
-        <span class="badge">第一冊 ‧ 教用互動版</span>
-        <svg viewBox="0 0 260 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="數線縮圖">
-          <defs><marker id="thar" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#ffffff"/></marker></defs>
-          <line x1="14" y1="32" x2="246" y2="32" stroke="#ffffff" stroke-width="2.6" marker-end="url(#thar)"/>
-          <line x1="32" y1="26" x2="32" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <line x1="57" y1="26" x2="57" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <line x1="82" y1="26" x2="82" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <line x1="107" y1="26" x2="107" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <line x1="132" y1="24" x2="132" y2="40" stroke="#ffffff" stroke-width="2.6"/>
-          <line x1="157" y1="26" x2="157" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <line x1="182" y1="26" x2="182" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <line x1="207" y1="26" x2="207" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <line x1="232" y1="26" x2="232" y2="38" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="82" cy="32" r="5.5" fill="#ffd24d"/>
-          <circle cx="182" cy="32" r="5.5" fill="#ff8a8a"/>
-          <text x="132" y="52" fill="#cfeef2" font-size="11" text-anchor="middle" font-family="sans-serif">O</text>
-          <text x="20" y="20" fill="#bfeaf0" font-size="12" font-family="sans-serif">−</text>
-          <text x="240" y="20" fill="#bfeaf0" font-size="12" text-anchor="end" font-family="sans-serif">＋</text>
-        </svg>
-      </div>
-      <div class="tbody">
-        <div class="tlabel">第一冊 1-1</div>
-        <div class="tsub">負數與數線</div>
-        <div class="tmeta">老師講解 ‧ 學生練習 ‧ 段考題目練習</div>
-      </div>
+    <a class="vcard" href="prep.html">
+      <div class="vthumb" style="--g1:#d98b00;--g2:#f0b93a"><span class="vn txt">先修</span></div>
+      <div class="vbody"><div class="vlabel">先修</div><div class="vsub">暑期先修 ‧ 共 6 份</div></div>
     </a>
-  </div>
 
-  <a class="combo" href="student-guide.html">⭐ student-guide</a>
-  <a class="combo" href="第一章-相似形與三角比-互動講義.html">⭐ 第一章-相似形與三角比-互動講義</a>
-  <a class="combo" href="等高三角形-例題1-動畫.html">⭐ 等高三角形-例題1-動畫</a>
-  <div class="unit">
-    <div class="unit-head"><span class="n">1</span>單元 1</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-1.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+    <a class="vcard" href="book1.html">
+      <div class="vthumb" style="--g1:#006d7d;--g2:#16aec0"><span class="vn">1</span><span class="vc">冊</span></div>
+      <div class="vbody"><div class="vlabel">第一冊</div><div class="vsub">七年級上 ‧ 1 份教材</div></div>
+    </a>
+
+    <div class="vcard soon">
+      <span class="ribbon">敬請期待</span>
+      <div class="vthumb" style="--g1:#1e5fa8;--g2:#4a90d6"><span class="vn">2</span><span class="vc">冊</span></div>
+      <div class="vbody"><div class="vlabel">第二冊</div><div class="vsub">七年級下 ‧ 準備中</div></div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">2</span>單元 2</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-2.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+
+    <div class="vcard soon">
+      <span class="ribbon">敬請期待</span>
+      <div class="vthumb" style="--g1:#1f8a4c;--g2:#45b86a"><span class="vn">3</span><span class="vc">冊</span></div>
+      <div class="vbody"><div class="vlabel">第三冊</div><div class="vsub">八年級上 ‧ 準備中</div></div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">3</span>單元 3</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-3.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+
+    <div class="vcard soon">
+      <span class="ribbon">敬請期待</span>
+      <div class="vthumb" style="--g1:#6d3fb0;--g2:#9b6fd0"><span class="vn">4</span><span class="vc">冊</span></div>
+      <div class="vbody"><div class="vlabel">第四冊</div><div class="vsub">八年級下 ‧ 準備中</div></div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">4</span>單元 4</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-4.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+
+    <a class="vcard" href="book5.html">
+      <div class="vthumb" style="--g1:#c0392b;--g2:#e35d4e"><span class="vn">5</span><span class="vc">冊</span></div>
+      <div class="vbody"><div class="vlabel">第五冊</div><div class="vsub">九年級上 ‧ 2 份教材</div></div>
+    </a>
+
+    <div class="vcard soon">
+      <span class="ribbon">敬請期待</span>
+      <div class="vthumb" style="--g1:#3f4f9e;--g2:#6172c8"><span class="vn">6</span><span class="vc">冊</span></div>
+      <div class="vbody"><div class="vlabel">第六冊</div><div class="vsub">九年級下 ‧ 準備中</div></div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">5</span>單元 5</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-5.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-    </div>
+
   </div>
   <footer>數學科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
