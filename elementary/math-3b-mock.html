@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>小三下數學　互動模擬卷（A／B／C 卷）</title>
+<style>
+:root{
+  --bg:#f4eee1; --card:#fffdf8; --ink:#33312e; --muted:#7c756a;
+  --accent:#c0563b; --accent2:#2f6f8f; --line:#e6ddcb; --reveal:#fbf3e6;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;
+  font-size:17px;line-height:1.7;}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px;}
+h1{font-size:20px;margin:0 0 4px;}
+.paper-head{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:18px 20px;margin-bottom:18px;box-shadow:0 2px 10px rgba(120,90,40,.06);}
+.meta{color:var(--muted);font-size:16px;margin:2px 0;}
+.fill-line{font-size:16px;margin-top:10px;letter-spacing:1px;}
+.section{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:14px 18px 6px;margin-bottom:16px;box-shadow:0 2px 10px rgba(120,90,40,.06);}
+.section>h2{font-size:18px;color:var(--accent2);margin:6px 0 2px;
+  border-left:6px solid var(--accent2);padding-left:10px;}
+.section .note{color:var(--muted);font-size:16px;margin:0 0 8px 16px;}
+.q{padding:12px 6px;border-top:1px dashed var(--line);}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:8px;align-items:baseline;}
+.qno{color:var(--accent);font-weight:700;flex:0 0 auto;}
+.stem{font-size:17px;}
+.opts{margin:8px 0 4px 26px;padding:0;list-style:none;}
+.opts li{margin:3px 0;font-size:17px;}
+.fig{margin:10px 0 4px 26px;}
+.fig svg{max-width:100%;}
+.dtable{border-collapse:collapse;margin:10px 0 6px 26px;background:#fff;font-size:16px;}
+.dtable caption{caption-side:top;text-align:left;color:var(--muted);font-size:16px;margin-bottom:4px;}
+.dtable th,.dtable td{border:1px solid #c9bfa9;padding:5px 12px;text-align:center;}
+.dtable th{background:#f3ead6;}
+.frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:-0.55em;
+  line-height:1.05;margin:0 2px;}
+.frac .n{border-bottom:1.5px solid currentColor;padding:0 4px;}
+.frac .d{padding:0 4px;}
+.ans{margin:8px 0 2px 26px;background:var(--reveal);border:1px solid #ecd9b8;
+  border-radius:10px;padding:8px 12px;font-size:16px;}
+.ans .lab{color:var(--accent);font-weight:700;}
+.ans .lab2{color:var(--accent2);font-weight:700;}
+
+.topbar{position:sticky;top:0;z-index:5;background:rgba(244,238,225,.96);
+  backdrop-filter:blur(4px);padding:12px 16px;border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.topbar .title{font-weight:700;font-size:18px;margin-right:6px;}
+.btn{border:1px solid #d7caae;background:var(--card);color:var(--ink);
+  border-radius:999px;padding:6px 14px;font-size:16px;cursor:pointer;font-family:inherit;}
+.btn:hover{background:#f3ead6;}
+.btn.active{background:var(--accent2);color:#fff;border-color:var(--accent2);}
+.btn.accent{background:var(--accent);color:#fff;border-color:var(--accent);}
+.paper{display:none;}
+.paper.show{display:block;}
+.q{cursor:pointer;border-radius:10px;transition:background .15s;}
+.q:hover{background:#fbf7ee;}
+.q .ans{display:none;}
+.q.open .ans{display:block;}
+.hint{margin:6px 0 0 26px;color:var(--accent);font-size:16px;}
+.q.open .hint{color:var(--muted);}
+.tip{max-width:860px;margin:10px auto 0;color:var(--muted);font-size:16px;padding:0 16px;}
+@media print{.topbar,.tip{display:none;}}
+</style></head>
+<body>
+<div class="topbar"><div class="inner">
+  <span class="title">📘 小三下數學 互動模擬卷</span>
+  <button class="btn switch active" data-target="A">A 卷</button><button class="btn switch" data-target="B">B 卷</button><button class="btn switch" data-target="C">C 卷</button>
+  <button class="btn accent" id="toggleAll">展開全部解析</button>
+</div></div>
+<p class="tip">切換上方 A／B／C 卷；每題點一下即可展開該題的答案與解析，再點一下收合。</p>
+<div class="wrap">
+<section class="paper show" data-id="A">
+<div class="paper-head">
+<h1>小三下數學　期末總複習模擬卷（A 卷）</h1>
+<div class="meta">三年級下學期　數學　|　作答時間 40 分鐘　|　滿分 100 分（共 28 題）</div>
+<div class="fill-line">班級：________　座號：______　姓名：____________　得分：________</div>
+</div>
+<div class="section">
+<h2>一、選擇題</h2>
+<div class="note">每題 3 分，共 18 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">兩個同分母的分數相加以後，分母會怎麼變化？</span></div>
+<ul class="opts"><li>① 變大</li><li>② 變小</li><li>③ 不變</li><li>④ 不一定</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>③ 不變<br><span class="lab2">💡 解析：</span>同分母分數相加，只把「分子」相加，分母保持不變。例如 <span class="frac"><span class="n">2</span><span class="d">5</span></span>＋<span class="frac"><span class="n">1</span><span class="d">5</span></span>＝<span class="frac"><span class="n">3</span><span class="d">5</span></span>。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">2 個 0.4 和 1 個 0.1 合起來是多少？</span></div>
+<ul class="opts"><li>① 0.9</li><li>② 0.5</li><li>③ 9</li><li>④ 0.09</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>① 0.9<br><span class="lab2">💡 解析：</span>2 個 0.4 是 0.8，再加 1 個 0.1 是 0.1，合起來 0.8＋0.1＝0.9。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">下列關於重量的敘述，哪一個最合理？</span></div>
+<ul class="opts"><li>① 一個雞蛋約重 60 公斤</li><li>② 一臺洗衣機約重 50 公斤</li><li>③ 一隻螞蟻約重 5 公克</li><li>④ 一本課本約重 3 公斤</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>② 一臺洗衣機約重 50 公斤<br><span class="lab2">💡 解析：</span>雞蛋約 60 公克、螞蟻不到 1 公克、課本約 300 公克；只有「洗衣機約 50 公斤」合理。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">在「□÷7＝8」這個算式中，要算出 □，可以用下面哪一個算式？</span></div>
+<ul class="opts"><li>① 7×8</li><li>② 7÷8</li><li>③ 8÷7</li><li>④ 7＋8</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>① 7×8<br><span class="lab2">💡 解析：</span>被除數＝除數×商，所以 □＝7×8＝56。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">一個數除以 9，它的餘數「不可能」是下面哪一個？</span></div>
+<ul class="opts"><li>① 0</li><li>② 6</li><li>③ 8</li><li>④ 9</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>④ 9<br><span class="lab2">💡 解析：</span>餘數一定比除數小，除以 9 的餘數只能是 0～8，所以不可能是 9。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">6.</span><span class="stem">一場電影從下午 1 時 40 分開始，播放 2 小時，幾點結束？</span></div>
+<ul class="opts"><li>① 下午 3 時 20 分</li><li>② 下午 3 時 40 分</li><li>③ 下午 4 時 40 分</li><li>④ 下午 3 時 00 分</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>② 下午 3 時 40 分<br><span class="lab2">💡 解析：</span>1 時 40 分加上 2 小時，就是 3 時 40 分（分鐘不變）。</div>
+</div>
+</div>
+<div class="section">
+<h2>二、填充題</h2>
+<div class="note">每格 3 分，共 24 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">8 個 0.1 是（　　），再加上（　　）就會變成 1。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>0.8；0.2<br><span class="lab2">💡 解析：</span>8 個 0.1 是 0.8；1－0.8＝0.2，所以要再加 0.2。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">1 打鉛筆有 12 枝。6 枝是（　　）打，9 枝是（　　）打。（請用分數作答）</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">6</span><span class="d">12</span></span> 打；<span class="frac"><span class="n">9</span><span class="d">12</span></span> 打<br><span class="lab2">💡 解析：</span>把 12 枝看成 1 打，6 枝就是 <span class="frac"><span class="n">6</span><span class="d">12</span></span> 打，9 枝就是 <span class="frac"><span class="n">9</span><span class="d">12</span></span> 打。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">4070 公克 ＝（　　）公斤（　　）公克。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>4 公斤 70 公克<br><span class="lab2">💡 解析：</span>1 公斤＝1000 公克。4070＝4000＋70，所以是 4 公斤 70 公克。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">看下面的磅秤，指針指的重量是（　　）公斤（　　）公克。</span></div>
+<div class="fig"><svg viewBox="0 0 210 210" width="210" height="210" style="max-width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'PingFang TC','Microsoft JhengHei',sans-serif"><circle cx="105.0" cy="105.0" r="87.0" fill="#fffdf8" stroke="#33312e" stroke-width="2.5"/><circle cx="105.0" cy="105.0" r="79.0" fill="none" stroke="#33312e" stroke-width="1.2"/><line x1="105.0" y1="26.0" x2="105.0" y2="40.0" stroke="#33312e" stroke-width="2.4"/><line x1="121.4" y1="27.7" x2="120.2" y2="33.6" stroke="#33312e" stroke-width="0.9"/><line x1="137.1" y1="32.8" x2="134.7" y2="38.3" stroke="#33312e" stroke-width="0.9"/><line x1="151.4" y1="41.1" x2="147.9" y2="45.9" stroke="#33312e" stroke-width="0.9"/><line x1="163.7" y1="52.1" x2="159.2" y2="56.2" stroke="#33312e" stroke-width="0.9"/><line x1="173.4" y1="65.5" x2="164.8" y2="70.5" stroke="#33312e" stroke-width="1.6"/><line x1="180.1" y1="80.6" x2="174.4" y2="82.4" stroke="#33312e" stroke-width="0.9"/><line x1="183.6" y1="96.7" x2="177.6" y2="97.4" stroke="#33312e" stroke-width="0.9"/><line x1="183.6" y1="113.3" x2="177.6" y2="112.6" stroke="#33312e" stroke-width="0.9"/><line x1="180.1" y1="129.4" x2="174.4" y2="127.6" stroke="#33312e" stroke-width="0.9"/><line x1="173.4" y1="144.5" x2="161.3" y2="137.5" stroke="#33312e" stroke-width="2.4"/><line x1="163.7" y1="157.9" x2="159.2" y2="153.8" stroke="#33312e" stroke-width="0.9"/><line x1="151.4" y1="168.9" x2="147.9" y2="164.1" stroke="#33312e" stroke-width="0.9"/><line x1="137.1" y1="177.2" x2="134.7" y2="171.7" stroke="#33312e" stroke-width="0.9"/><line x1="121.4" y1="182.3" x2="120.2" y2="176.4" stroke="#33312e" stroke-width="0.9"/><line x1="105.0" y1="184.0" x2="105.0" y2="174.0" stroke="#33312e" stroke-width="1.6"/><line x1="88.6" y1="182.3" x2="89.8" y2="176.4" stroke="#33312e" stroke-width="0.9"/><line x1="72.9" y1="177.2" x2="75.3" y2="171.7" stroke="#33312e" stroke-width="0.9"/><line x1="58.6" y1="168.9" x2="62.1" y2="164.1" stroke="#33312e" stroke-width="0.9"/><line x1="46.3" y1="157.9" x2="50.8" y2="153.8" stroke="#33312e" stroke-width="0.9"/><line x1="36.6" y1="144.5" x2="48.7" y2="137.5" stroke="#33312e" stroke-width="2.4"/><line x1="29.9" y1="129.4" x2="35.6" y2="127.6" stroke="#33312e" stroke-width="0.9"/><line x1="26.4" y1="113.3" x2="32.4" y2="112.6" stroke="#33312e" stroke-width="0.9"/><line x1="26.4" y1="96.7" x2="32.4" y2="97.4" stroke="#33312e" stroke-width="0.9"/><line x1="29.9" y1="80.6" x2="35.6" y2="82.4" stroke="#33312e" stroke-width="0.9"/><line x1="36.6" y1="65.5" x2="45.2" y2="70.5" stroke="#33312e" stroke-width="1.6"/><line x1="46.3" y1="52.1" x2="50.8" y2="56.2" stroke="#33312e" stroke-width="0.9"/><line x1="58.6" y1="41.1" x2="62.1" y2="45.9" stroke="#33312e" stroke-width="0.9"/><line x1="72.9" y1="32.8" x2="75.3" y2="38.3" stroke="#33312e" stroke-width="0.9"/><line x1="88.6" y1="27.7" x2="89.8" y2="33.6" stroke="#33312e" stroke-width="0.9"/><text x="92.0" y="56.0" font-size="13" text-anchor="middle" fill="#33312e">0</text><text x="123.0" y="56.0" font-size="12" text-anchor="middle" fill="#8a8378">3公斤</text><text x="150.9" y="135.5" font-size="13" text-anchor="middle" fill="#33312e">1公斤</text><text x="59.1" y="135.5" font-size="13" text-anchor="middle" fill="#33312e">2公斤</text><line x1="99.3" y1="92.2" x2="130.6" y2="162.6" stroke="#c0563b" stroke-width="3" stroke-linecap="round"/><circle cx="105.0" cy="105.0" r="7" fill="#c0563b"/><circle cx="105.0" cy="105.0" r="3" fill="#fffdf8"/></svg></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>1 公斤 300 公克<br><span class="lab2">💡 解析：</span>指針指在「1 公斤」再過 3 個小格，每小格 100 公克，所以是 1 公斤 300 公克（即 1300 公克）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">7 公分 6 毫米 ＝（　　）毫米 ＝（　　）公分。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>76 毫米；7.6 公分<br><span class="lab2">💡 解析：</span>1 公分＝10 毫米。7 公分 6 毫米＝76 毫米；76 毫米＝7.6 公分。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">6.</span><span class="stem">把下面四個數從「大到小」重新排列：<br><span class="frac"><span class="n">9</span><span class="d">10</span></span>、　1.2、　<span class="frac"><span class="n">13</span><span class="d">10</span></span>、　0.8</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">13</span><span class="d">10</span></span> ＞ 1.2 ＞ <span class="frac"><span class="n">9</span><span class="d">10</span></span> ＞ 0.8<br><span class="lab2">💡 解析：</span>先化成小數：<span class="frac"><span class="n">9</span><span class="d">10</span></span>＝0.9、<span class="frac"><span class="n">13</span><span class="d">10</span></span>＝1.3。比較 0.8、0.9、1.2、1.3，由大到小是 <span class="frac"><span class="n">13</span><span class="d">10</span></span>＞1.2＞<span class="frac"><span class="n">9</span><span class="d">10</span></span>＞0.8。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">7.</span><span class="stem">下面是三年級兩個班參加直笛隊的人數統計表，請把表中（甲）～（丁）填完整。</span></div>
+<div class="fig"><table class="dtable"><caption>直笛隊人數統計表（單位：人）</caption><tr><th>班級</th><th>男生</th><th>女生</th><th>合計</th></tr><tr><td>301 班</td><td>14</td><td>13</td><td>（甲）</td></tr><tr><td>302 班</td><td>（乙）</td><td>13</td><td>29</td></tr><tr><td>合計</td><td>30</td><td>（丙）</td><td>（丁）</td></tr></table></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>甲＝27；乙＝16；丙＝26；丁＝56<br><span class="lab2">💡 解析：</span>甲＝14＋13＝27；乙＝29－13＝16；丙＝13＋13＝26；丁＝30＋26＝56（也可用 27＋29＝56 檢查）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">8.</span><span class="stem">一個長方形的長是 8 公分、寬是 5 公分，它的周長是（　　）公分。</span></div>
+<div class="fig"><svg viewBox="0 0 250 150" width="250" height="150" style="max-width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" font-family="'PingFang TC','Microsoft JhengHei',sans-serif"><rect x="64" y="34" width="122" height="72" fill="#fbf3e6" stroke="#33312e" stroke-width="2.2"/><text x="125.0" y="130" font-size="14" text-anchor="middle" fill="#c0563b">8 公分</text><text x="54" y="75.0" font-size="14" text-anchor="end" fill="#c0563b">5 公分</text></svg></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>26 公分<br><span class="lab2">💡 解析：</span>長方形周長＝(長＋寬)×2＝(8＋5)×2＝13×2＝26 公分。</div>
+</div>
+</div>
+<div class="section">
+<h2>三、比大小（在（　）中填入 ＞、＜ 或 ＝）</h2>
+<div class="note">每格 2 分，共 8 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">6 公斤 40 公克（　　）6400 公克</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＜<br><span class="lab2">💡 解析：</span>6 公斤 40 公克＝6040 公克，6040＜6400，所以填 ＜。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem"><span class="frac"><span class="n">7</span><span class="d">7</span></span>（　　）0.7</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＞<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">7</span><span class="d">7</span></span>＝1，1＞0.7，所以填 ＞。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">4.5＋2.5（　　）10－3.2</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＞<br><span class="lab2">💡 解析：</span>左邊＝7，右邊＝6.8，7＞6.8，所以填 ＞。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem"><span class="frac"><span class="n">5</span><span class="d">8</span></span>（　　）<span class="frac"><span class="n">8</span><span class="d">8</span></span></span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＜<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">8</span><span class="d">8</span></span>＝1，<span class="frac"><span class="n">5</span><span class="d">8</span></span>＜1，所以填 ＜。</div>
+</div>
+</div>
+<div class="section">
+<h2>四、計算題</h2>
+<div class="note">每題 4 分，共 20 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">17.5 － 8.6 ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>8.9<br><span class="lab2">💡 解析：</span>小數點對齊相減：17.5－8.6＝8.9。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem"><span class="frac"><span class="n">7</span><span class="d">9</span></span> ＋ <span class="frac"><span class="n">5</span><span class="d">9</span></span> ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">12</span><span class="d">9</span></span>（＝1又<span class="frac"><span class="n">3</span><span class="d">9</span></span>）<br><span class="lab2">💡 解析：</span>同分母相加，分子 7＋5＝12，分母不變，得 <span class="frac"><span class="n">12</span><span class="d">9</span></span>，也可寫成帶分數 1又<span class="frac"><span class="n">3</span><span class="d">9</span></span>。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">3 公斤 600 公克 ＋ 2 公斤 800 公克 ＝（　　）公斤（　　）公克</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>6 公斤 400 公克<br><span class="lab2">💡 解析：</span>公克：600＋800＝1400 公克＝1 公斤 400 公克；公斤：3＋2＋1＝6。合計 6 公斤 400 公克。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">245 ÷ 6 ＝（　　）…（　　），並驗算。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>商 40，餘 5<br><span class="lab2">💡 解析：</span>6×40＝240，245－240＝5，餘數 5＜6，所以商 40 餘 5。驗算：6×40＋5＝245。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">1 － <span class="frac"><span class="n">3</span><span class="d">8</span></span> ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">5</span><span class="d">8</span></span><br><span class="lab2">💡 解析：</span>1＝<span class="frac"><span class="n">8</span><span class="d">8</span></span>，<span class="frac"><span class="n">8</span><span class="d">8</span></span>－<span class="frac"><span class="n">3</span><span class="d">8</span></span>＝<span class="frac"><span class="n">5</span><span class="d">8</span></span>。</div>
+</div>
+</div>
+<div class="section">
+<h2>五、應用題</h2>
+<div class="note">每題 6 分，共 30 分（要列式）</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">一個南瓜重 2 公斤 300 公克，小明切掉一部分後，剩下 1 公斤 750 公克。請問他切掉了多少公克？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>550 公克<br><span class="lab2">💡 解析：</span>2 公斤 300 公克＝2300 公克，1 公斤 750 公克＝1750 公克。2300－1750＝550（公克）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">1 條土司有 10 片。媽媽買了 <span class="frac"><span class="n">15</span><span class="d">10</span></span> 條，早餐吃掉了 <span class="frac"><span class="n">4</span><span class="d">10</span></span> 條，還剩下幾「片」土司？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>11 片<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">15</span><span class="d">10</span></span>－<span class="frac"><span class="n">4</span><span class="d">10</span></span>＝<span class="frac"><span class="n">11</span><span class="d">10</span></span> 條；1 條 10 片，<span class="frac"><span class="n">11</span><span class="d">10</span></span> 條就是 11 片。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">農場採了一批草莓，平分裝成 8 盒，每盒裝 25 顆，最後還多出 3 顆。農場一共採了多少顆草莓？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>203 顆<br><span class="lab2">💡 解析：</span>8 盒×每盒 25 顆＝200 顆，再加多出的 3 顆，200＋3＝203（顆）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">甲數比乙數多 3.6，已知乙數是 18.5，請問甲數是多少？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>22.1<br><span class="lab2">💡 解析：</span>甲數＝乙數＋3.6＝18.5＋3.6＝22.1。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">看下面的火車時刻表回答：<br>① 小華要從臺中坐到嘉義，想在 10:00 以前到達，他應該搭哪一班車？<br>② 501 車次從臺中到嘉義，一共要坐多少分鐘？</span></div>
+<div class="fig"><table class="dtable"><caption>區間車時刻表</caption><tr><th>車次</th><th>臺中</th><th>彰化</th><th>員林</th><th>斗六</th><th>嘉義</th></tr><tr><td>501</td><td>09:00</td><td>09:12</td><td>—</td><td>09:40</td><td>09:55</td></tr><tr><td>503</td><td>09:30</td><td>09:42</td><td>09:54</td><td>10:08</td><td>10:22</td></tr><tr><td>505</td><td>10:10</td><td>—</td><td>—</td><td>—</td><td>10:48</td></tr></table></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>① 搭 501 車次；② 55 分鐘<br><span class="lab2">💡 解析：</span>① 想在 10:00 前到嘉義：501 是 09:55 到（來得及），503 是 10:22、505 是 10:48 都太晚，所以搭 501。② 501 從 09:00 坐到 09:55，共經過 55 分鐘。</div>
+</div>
+</div>
+</section>
+<section class="paper" data-id="B">
+<div class="paper-head">
+<h1>小三下數學　期末總複習模擬卷（B 卷）</h1>
+<div class="meta">三年級下學期　數學　|　作答時間 40 分鐘　|　滿分 100 分（共 28 題）</div>
+<div class="fill-line">班級：________　座號：______　姓名：____________　得分：________</div>
+</div>
+<div class="section">
+<h2>一、選擇題</h2>
+<div class="note">每題 3 分，共 18 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">兩個同分母的分數相減以後，分母會怎麼變化？</span></div>
+<ul class="opts"><li>① 變大</li><li>② 變小</li><li>③ 不變</li><li>④ 不一定</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>③ 不變<br><span class="lab2">💡 解析：</span>同分母分數相減，只把「分子」相減，分母保持不變。例如 <span class="frac"><span class="n">4</span><span class="d">6</span></span>－<span class="frac"><span class="n">1</span><span class="d">6</span></span>＝<span class="frac"><span class="n">3</span><span class="d">6</span></span>。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">5 個 0.1 和 2 個 0.3 合起來是多少？</span></div>
+<ul class="opts"><li>① 1.1</li><li>② 0.7</li><li>③ 11</li><li>④ 0.11</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>① 1.1<br><span class="lab2">💡 解析：</span>5 個 0.1 是 0.5，2 個 0.3 是 0.6，合起來 0.5＋0.6＝1.1。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">下列關於重量的敘述，哪一個最合理？</span></div>
+<ul class="opts"><li>① 一袋白米約重 3 公克</li><li>② 一隻大象約重 4 公斤</li><li>③ 一顆西瓜約重 5 公斤</li><li>④ 一枝鉛筆約重 200 公斤</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>③ 一顆西瓜約重 5 公斤<br><span class="lab2">💡 解析：</span>白米一袋通常好幾公斤、大象重達數千公斤、鉛筆只有幾公克；只有「西瓜約 5 公斤」合理。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">在「6×□＝54」這個算式中，要算出 □，可以用下面哪一個算式？</span></div>
+<ul class="opts"><li>① 54×6</li><li>② 54÷6</li><li>③ 54＋6</li><li>④ 6÷54</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>② 54÷6<br><span class="lab2">💡 解析：</span>其中一個因數＝積÷另一個因數，所以 □＝54÷6＝9。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">一個數除以 6，它的餘數「不可能」是下面哪一個？</span></div>
+<ul class="opts"><li>① 0</li><li>② 4</li><li>③ 5</li><li>④ 6</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>④ 6<br><span class="lab2">💡 解析：</span>餘數一定比除數小，除以 6 的餘數只能是 0～5，所以不可能是 6。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">6.</span><span class="stem">一列火車從上午 11 時 50 分出發，行駛 1 小時 30 分到站，幾點到站？</span></div>
+<ul class="opts"><li>① 下午 1 時 20 分</li><li>② 下午 1 時 00 分</li><li>③ 中午 12 時 20 分</li><li>④ 下午 1 時 30 分</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>① 下午 1 時 20 分<br><span class="lab2">💡 解析：</span>11 時 50 分＋1 小時 30 分＝13 時 20 分，也就是下午 1 時 20 分。</div>
+</div>
+</div>
+<div class="section">
+<h2>二、填充題</h2>
+<div class="note">每格 3 分，共 24 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">6 個 0.1 是（　　），再加上（　　）就會變成 1。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>0.6；0.4<br><span class="lab2">💡 解析：</span>6 個 0.1 是 0.6；1－0.6＝0.4，所以要再加 0.4。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">1 打雞蛋有 12 個。5 個是（　　）打，11 個是（　　）打。（請用分數作答）</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">5</span><span class="d">12</span></span> 打；<span class="frac"><span class="n">11</span><span class="d">12</span></span> 打<br><span class="lab2">💡 解析：</span>把 12 個看成 1 打，5 個就是 <span class="frac"><span class="n">5</span><span class="d">12</span></span> 打，11 個就是 <span class="frac"><span class="n">11</span><span class="d">12</span></span> 打。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">5008 公克 ＝（　　）公斤（　　）公克。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>5 公斤 8 公克<br><span class="lab2">💡 解析：</span>1 公斤＝1000 公克。5008＝5000＋8，所以是 5 公斤 8 公克。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">看下面的磅秤，指針指的重量是（　　）公斤（　　）公克。</span></div>
+<div class="fig"><svg viewBox="0 0 210 210" width="210" height="210" style="max-width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'PingFang TC','Microsoft JhengHei',sans-serif"><circle cx="105.0" cy="105.0" r="87.0" fill="#fffdf8" stroke="#33312e" stroke-width="2.5"/><circle cx="105.0" cy="105.0" r="79.0" fill="none" stroke="#33312e" stroke-width="1.2"/><line x1="105.0" y1="26.0" x2="105.0" y2="40.0" stroke="#33312e" stroke-width="2.4"/><line x1="121.4" y1="27.7" x2="120.2" y2="33.6" stroke="#33312e" stroke-width="0.9"/><line x1="137.1" y1="32.8" x2="134.7" y2="38.3" stroke="#33312e" stroke-width="0.9"/><line x1="151.4" y1="41.1" x2="147.9" y2="45.9" stroke="#33312e" stroke-width="0.9"/><line x1="163.7" y1="52.1" x2="159.2" y2="56.2" stroke="#33312e" stroke-width="0.9"/><line x1="173.4" y1="65.5" x2="164.8" y2="70.5" stroke="#33312e" stroke-width="1.6"/><line x1="180.1" y1="80.6" x2="174.4" y2="82.4" stroke="#33312e" stroke-width="0.9"/><line x1="183.6" y1="96.7" x2="177.6" y2="97.4" stroke="#33312e" stroke-width="0.9"/><line x1="183.6" y1="113.3" x2="177.6" y2="112.6" stroke="#33312e" stroke-width="0.9"/><line x1="180.1" y1="129.4" x2="174.4" y2="127.6" stroke="#33312e" stroke-width="0.9"/><line x1="173.4" y1="144.5" x2="161.3" y2="137.5" stroke="#33312e" stroke-width="2.4"/><line x1="163.7" y1="157.9" x2="159.2" y2="153.8" stroke="#33312e" stroke-width="0.9"/><line x1="151.4" y1="168.9" x2="147.9" y2="164.1" stroke="#33312e" stroke-width="0.9"/><line x1="137.1" y1="177.2" x2="134.7" y2="171.7" stroke="#33312e" stroke-width="0.9"/><line x1="121.4" y1="182.3" x2="120.2" y2="176.4" stroke="#33312e" stroke-width="0.9"/><line x1="105.0" y1="184.0" x2="105.0" y2="174.0" stroke="#33312e" stroke-width="1.6"/><line x1="88.6" y1="182.3" x2="89.8" y2="176.4" stroke="#33312e" stroke-width="0.9"/><line x1="72.9" y1="177.2" x2="75.3" y2="171.7" stroke="#33312e" stroke-width="0.9"/><line x1="58.6" y1="168.9" x2="62.1" y2="164.1" stroke="#33312e" stroke-width="0.9"/><line x1="46.3" y1="157.9" x2="50.8" y2="153.8" stroke="#33312e" stroke-width="0.9"/><line x1="36.6" y1="144.5" x2="48.7" y2="137.5" stroke="#33312e" stroke-width="2.4"/><line x1="29.9" y1="129.4" x2="35.6" y2="127.6" stroke="#33312e" stroke-width="0.9"/><line x1="26.4" y1="113.3" x2="32.4" y2="112.6" stroke="#33312e" stroke-width="0.9"/><line x1="26.4" y1="96.7" x2="32.4" y2="97.4" stroke="#33312e" stroke-width="0.9"/><line x1="29.9" y1="80.6" x2="35.6" y2="82.4" stroke="#33312e" stroke-width="0.9"/><line x1="36.6" y1="65.5" x2="45.2" y2="70.5" stroke="#33312e" stroke-width="1.6"/><line x1="46.3" y1="52.1" x2="50.8" y2="56.2" stroke="#33312e" stroke-width="0.9"/><line x1="58.6" y1="41.1" x2="62.1" y2="45.9" stroke="#33312e" stroke-width="0.9"/><line x1="72.9" y1="32.8" x2="75.3" y2="38.3" stroke="#33312e" stroke-width="0.9"/><line x1="88.6" y1="27.7" x2="89.8" y2="33.6" stroke="#33312e" stroke-width="0.9"/><text x="92.0" y="56.0" font-size="13" text-anchor="middle" fill="#33312e">0</text><text x="123.0" y="56.0" font-size="12" text-anchor="middle" fill="#8a8378">3公斤</text><text x="150.9" y="135.5" font-size="13" text-anchor="middle" fill="#33312e">1公斤</text><text x="59.1" y="135.5" font-size="13" text-anchor="middle" fill="#33312e">2公斤</text><line x1="118.3" y1="109.3" x2="45.1" y2="85.5" stroke="#c0563b" stroke-width="3" stroke-linecap="round"/><circle cx="105.0" cy="105.0" r="7" fill="#c0563b"/><circle cx="105.0" cy="105.0" r="3" fill="#fffdf8"/></svg></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>2 公斤 400 公克<br><span class="lab2">💡 解析：</span>指針指在「2 公斤」再過 4 個小格，每小格 100 公克，所以是 2 公斤 400 公克（即 2400 公克）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">4 公分 3 毫米 ＝（　　）毫米 ＝（　　）公分。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>43 毫米；4.3 公分<br><span class="lab2">💡 解析：</span>1 公分＝10 毫米。4 公分 3 毫米＝43 毫米；43 毫米＝4.3 公分。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">6.</span><span class="stem">把下面四個數從「大到小」重新排列：<br><span class="frac"><span class="n">3</span><span class="d">10</span></span>、　1.5、　<span class="frac"><span class="n">12</span><span class="d">10</span></span>、　0.7</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>1.5 ＞ <span class="frac"><span class="n">12</span><span class="d">10</span></span> ＞ 0.7 ＞ <span class="frac"><span class="n">3</span><span class="d">10</span></span><br><span class="lab2">💡 解析：</span>先化成小數：<span class="frac"><span class="n">3</span><span class="d">10</span></span>＝0.3、<span class="frac"><span class="n">12</span><span class="d">10</span></span>＝1.2。比較 0.3、0.7、1.2、1.5，由大到小是 1.5＞<span class="frac"><span class="n">12</span><span class="d">10</span></span>＞0.7＞<span class="frac"><span class="n">3</span><span class="d">10</span></span>。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">7.</span><span class="stem">下面是三年級兩個班買水果的數量統計表，請把表中（甲）～（丁）填完整。</span></div>
+<div class="fig"><table class="dtable"><caption>水果數量統計表（單位：個）</caption><tr><th>班級</th><th>蘋果</th><th>香蕉</th><th>合計</th></tr><tr><td>一班</td><td>（甲）</td><td>12</td><td>30</td></tr><tr><td>二班</td><td>16</td><td>（乙）</td><td>25</td></tr><tr><td>合計</td><td>34</td><td>（丙）</td><td>（丁）</td></tr></table></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>甲＝18；乙＝9；丙＝21；丁＝55<br><span class="lab2">💡 解析：</span>甲＝30－12＝18；乙＝25－16＝9；丙＝12＋9＝21；丁＝34＋21＝55（也可用 30＋25＝55 檢查）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">8.</span><span class="stem">一個正方形的邊長是 7 公分，它的周長是（　　）公分。</span></div>
+<div class="fig"><svg viewBox="0 0 250 150" width="250" height="150" style="max-width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" font-family="'PingFang TC','Microsoft JhengHei',sans-serif"><rect x="64" y="34" width="122" height="72" fill="#fbf3e6" stroke="#33312e" stroke-width="2.2"/><text x="125.0" y="130" font-size="14" text-anchor="middle" fill="#c0563b">7 公分</text><text x="125.0" y="22" font-size="12" text-anchor="middle" fill="#8a8378">（正方形）</text></svg></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>28 公分<br><span class="lab2">💡 解析：</span>正方形周長＝邊長×4＝7×4＝28 公分。</div>
+</div>
+</div>
+<div class="section">
+<h2>三、比大小（在（　）中填入 ＞、＜ 或 ＝）</h2>
+<div class="note">每格 2 分，共 8 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">3 公斤 90 公克（　　）3900 公克</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＜<br><span class="lab2">💡 解析：</span>3 公斤 90 公克＝3090 公克，3090＜3900，所以填 ＜。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem"><span class="frac"><span class="n">6</span><span class="d">6</span></span>（　　）1</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＝<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">6</span><span class="d">6</span></span>＝1，所以填 ＝。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">5.6＋1.4（　　）12－4.5</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＜<br><span class="lab2">💡 解析：</span>左邊＝7，右邊＝7.5，7＜7.5，所以填 ＜。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem"><span class="frac"><span class="n">9</span><span class="d">10</span></span>（　　）0.9</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＝<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">9</span><span class="d">10</span></span>＝0.9，兩邊相等，所以填 ＝。</div>
+</div>
+</div>
+<div class="section">
+<h2>四、計算題</h2>
+<div class="note">每題 4 分，共 20 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">20.3 － 6.8 ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>13.5<br><span class="lab2">💡 解析：</span>小數點對齊相減：20.3－6.8＝13.5。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem"><span class="frac"><span class="n">8</span><span class="d">7</span></span> ＋ <span class="frac"><span class="n">6</span><span class="d">7</span></span> ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">14</span><span class="d">7</span></span>（＝2）<br><span class="lab2">💡 解析：</span>同分母相加，分子 8＋6＝14，分母不變，得 <span class="frac"><span class="n">14</span><span class="d">7</span></span>＝2。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">4 公斤 250 公克 ＋ 1 公斤 900 公克 ＝（　　）公斤（　　）公克</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>6 公斤 150 公克<br><span class="lab2">💡 解析：</span>公克：250＋900＝1150 公克＝1 公斤 150 公克；公斤：4＋1＋1＝6。合計 6 公斤 150 公克。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">395 ÷ 7 ＝（　　）…（　　），並驗算。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>商 56，餘 3<br><span class="lab2">💡 解析：</span>7×56＝392，395－392＝3，餘數 3＜7，所以商 56 餘 3。驗算：7×56＋3＝395。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">1 － <span class="frac"><span class="n">4</span><span class="d">9</span></span> ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">5</span><span class="d">9</span></span><br><span class="lab2">💡 解析：</span>1＝<span class="frac"><span class="n">9</span><span class="d">9</span></span>，<span class="frac"><span class="n">9</span><span class="d">9</span></span>－<span class="frac"><span class="n">4</span><span class="d">9</span></span>＝<span class="frac"><span class="n">5</span><span class="d">9</span></span>。</div>
+</div>
+</div>
+<div class="section">
+<h2>五、應用題</h2>
+<div class="note">每題 6 分，共 30 分（要列式）</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">一箱蘋果連同箱子共重 5 公斤 200 公克，空箱子重 800 公克。請問裡面的蘋果重多少公斤多少公克？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>4 公斤 400 公克<br><span class="lab2">💡 解析：</span>5 公斤 200 公克＝5200 公克，5200－800＝4400 公克＝4 公斤 400 公克。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">1 盒蛋糕有 8 塊。姐姐買了 <span class="frac"><span class="n">13</span><span class="d">8</span></span> 盒，下午吃掉了 <span class="frac"><span class="n">6</span><span class="d">8</span></span> 盒，還剩下幾「塊」蛋糕？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>7 塊<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">13</span><span class="d">8</span></span>－<span class="frac"><span class="n">6</span><span class="d">8</span></span>＝<span class="frac"><span class="n">7</span><span class="d">8</span></span> 盒；1 盒 8 塊，<span class="frac"><span class="n">7</span><span class="d">8</span></span> 盒就是 7 塊。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">老師把 148 顆彈珠平分給 6 個小組，每組可以分到幾顆？還剩下幾顆？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>每組 24 顆，剩 4 顆<br><span class="lab2">💡 解析：</span>148÷6＝24…4，每組分到 24 顆，最後剩下 4 顆。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">一條緞帶長 6.5 公尺，做花用掉了 2.8 公尺，還剩下多少公尺？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>3.7 公尺<br><span class="lab2">💡 解析：</span>6.5－2.8＝3.7（公尺）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">看下面的門票價目表回答：<br>王老師帶家人去農場玩，買了 2 張全票和 3 張兒童票，一共要付多少元？</span></div>
+<div class="fig"><table class="dtable"><caption>快樂農場門票價目表</caption><tr><th>票種</th><th>全票</th><th>學生票</th><th>兒童票</th><th>敬老票</th></tr><tr><td>票價（元）</td><td>350</td><td>250</td><td>150</td><td>120</td></tr></table></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>1150 元<br><span class="lab2">💡 解析：</span>全票 2 張：350×2＝700 元；兒童票 3 張：150×3＝450 元。700＋450＝1150（元）。</div>
+</div>
+</div>
+</section>
+<section class="paper" data-id="C">
+<div class="paper-head">
+<h1>小三下數學　期末總複習模擬卷（C 卷）</h1>
+<div class="meta">三年級下學期　數學　|　作答時間 40 分鐘　|　滿分 100 分（共 28 題）</div>
+<div class="fill-line">班級：________　座號：______　姓名：____________　得分：________</div>
+</div>
+<div class="section">
+<h2>一、選擇題</h2>
+<div class="note">每題 3 分，共 18 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">下面哪一個分數和 1 一樣大？</span></div>
+<ul class="opts"><li>① <span class="frac"><span class="n">3</span><span class="d">4</span></span></li><li>② <span class="frac"><span class="n">5</span><span class="d">5</span></span></li><li>③ <span class="frac"><span class="n">6</span><span class="d">7</span></span></li><li>④ <span class="frac"><span class="n">2</span><span class="d">3</span></span></li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>② <span class="frac"><span class="n">5</span><span class="d">5</span></span><br><span class="lab2">💡 解析：</span>分子和分母相同的分數等於 1，所以 <span class="frac"><span class="n">5</span><span class="d">5</span></span>＝1。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">「2.4」是由幾個 0.1 合起來的？</span></div>
+<ul class="opts"><li>① 24 個</li><li>② 2 個</li><li>③ 4 個</li><li>④ 240 個</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>① 24 個<br><span class="lab2">💡 解析：</span>2 個 1 是 20 個 0.1，再加 4 個 0.1，一共 24 個 0.1。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">下列單位換算的敘述，哪一個是「正確」的？</span></div>
+<ul class="opts"><li>① 1 公斤＝100 公克</li><li>② 1 公升＝1000 毫升</li><li>③ 1 公分＝100 毫米</li><li>④ 1 公斤＝10 公克</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>② 1 公升＝1000 毫升<br><span class="lab2">💡 解析：</span>1 公斤＝1000 公克、1 公分＝10 毫米；只有「1 公升＝1000 毫升」正確。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">在「□÷8＝7…3」這個算式中，被除數 □ 是多少？</span></div>
+<ul class="opts"><li>① 56</li><li>② 59</li><li>③ 11</li><li>④ 24</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>② 59<br><span class="lab2">💡 解析：</span>被除數＝除數×商＋餘數＝8×7＋3＝56＋3＝59。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">一個數除以 5，它的餘數「不可能」是下面哪一個？</span></div>
+<ul class="opts"><li>① 0</li><li>② 3</li><li>③ 4</li><li>④ 5</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>④ 5<br><span class="lab2">💡 解析：</span>餘數一定比除數小，除以 5 的餘數只能是 0～4，所以不可能是 5。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">6.</span><span class="stem">一場表演從下午 2 時 30 分開始，演了 1 小時 50 分，幾點結束？</span></div>
+<ul class="opts"><li>① 下午 4 時 10 分</li><li>② 下午 4 時 20 分</li><li>③ 下午 3 時 20 分</li><li>④ 下午 4 時 00 分</li></ul>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>② 下午 4 時 20 分<br><span class="lab2">💡 解析：</span>2 時 30 分＋1 小時 50 分＝3 時 80 分＝4 時 20 分。</div>
+</div>
+</div>
+<div class="section">
+<h2>二、填充題</h2>
+<div class="note">每格 3 分，共 24 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">9 個 0.1 是（　　），再加上（　　）就會變成 1。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>0.9；0.1<br><span class="lab2">💡 解析：</span>9 個 0.1 是 0.9；1－0.9＝0.1，所以要再加 0.1。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">1 打彩色筆有 12 枝。4 枝是（　　）打，10 枝是（　　）打。（請用分數作答）</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">4</span><span class="d">12</span></span> 打；<span class="frac"><span class="n">10</span><span class="d">12</span></span> 打<br><span class="lab2">💡 解析：</span>把 12 枝看成 1 打，4 枝就是 <span class="frac"><span class="n">4</span><span class="d">12</span></span> 打，10 枝就是 <span class="frac"><span class="n">10</span><span class="d">12</span></span> 打。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">6090 公克 ＝（　　）公斤（　　）公克。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>6 公斤 90 公克<br><span class="lab2">💡 解析：</span>1 公斤＝1000 公克。6090＝6000＋90，所以是 6 公斤 90 公克。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">看下面的磅秤，指針指的重量是（　　）公斤（　　）公克。</span></div>
+<div class="fig"><svg viewBox="0 0 210 210" width="210" height="210" style="max-width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'PingFang TC','Microsoft JhengHei',sans-serif"><circle cx="105.0" cy="105.0" r="87.0" fill="#fffdf8" stroke="#33312e" stroke-width="2.5"/><circle cx="105.0" cy="105.0" r="79.0" fill="none" stroke="#33312e" stroke-width="1.2"/><line x1="105.0" y1="26.0" x2="105.0" y2="40.0" stroke="#33312e" stroke-width="2.4"/><line x1="121.4" y1="27.7" x2="120.2" y2="33.6" stroke="#33312e" stroke-width="0.9"/><line x1="137.1" y1="32.8" x2="134.7" y2="38.3" stroke="#33312e" stroke-width="0.9"/><line x1="151.4" y1="41.1" x2="147.9" y2="45.9" stroke="#33312e" stroke-width="0.9"/><line x1="163.7" y1="52.1" x2="159.2" y2="56.2" stroke="#33312e" stroke-width="0.9"/><line x1="173.4" y1="65.5" x2="164.8" y2="70.5" stroke="#33312e" stroke-width="1.6"/><line x1="180.1" y1="80.6" x2="174.4" y2="82.4" stroke="#33312e" stroke-width="0.9"/><line x1="183.6" y1="96.7" x2="177.6" y2="97.4" stroke="#33312e" stroke-width="0.9"/><line x1="183.6" y1="113.3" x2="177.6" y2="112.6" stroke="#33312e" stroke-width="0.9"/><line x1="180.1" y1="129.4" x2="174.4" y2="127.6" stroke="#33312e" stroke-width="0.9"/><line x1="173.4" y1="144.5" x2="161.3" y2="137.5" stroke="#33312e" stroke-width="2.4"/><line x1="163.7" y1="157.9" x2="159.2" y2="153.8" stroke="#33312e" stroke-width="0.9"/><line x1="151.4" y1="168.9" x2="147.9" y2="164.1" stroke="#33312e" stroke-width="0.9"/><line x1="137.1" y1="177.2" x2="134.7" y2="171.7" stroke="#33312e" stroke-width="0.9"/><line x1="121.4" y1="182.3" x2="120.2" y2="176.4" stroke="#33312e" stroke-width="0.9"/><line x1="105.0" y1="184.0" x2="105.0" y2="174.0" stroke="#33312e" stroke-width="1.6"/><line x1="88.6" y1="182.3" x2="89.8" y2="176.4" stroke="#33312e" stroke-width="0.9"/><line x1="72.9" y1="177.2" x2="75.3" y2="171.7" stroke="#33312e" stroke-width="0.9"/><line x1="58.6" y1="168.9" x2="62.1" y2="164.1" stroke="#33312e" stroke-width="0.9"/><line x1="46.3" y1="157.9" x2="50.8" y2="153.8" stroke="#33312e" stroke-width="0.9"/><line x1="36.6" y1="144.5" x2="48.7" y2="137.5" stroke="#33312e" stroke-width="2.4"/><line x1="29.9" y1="129.4" x2="35.6" y2="127.6" stroke="#33312e" stroke-width="0.9"/><line x1="26.4" y1="113.3" x2="32.4" y2="112.6" stroke="#33312e" stroke-width="0.9"/><line x1="26.4" y1="96.7" x2="32.4" y2="97.4" stroke="#33312e" stroke-width="0.9"/><line x1="29.9" y1="80.6" x2="35.6" y2="82.4" stroke="#33312e" stroke-width="0.9"/><line x1="36.6" y1="65.5" x2="45.2" y2="70.5" stroke="#33312e" stroke-width="1.6"/><line x1="46.3" y1="52.1" x2="50.8" y2="56.2" stroke="#33312e" stroke-width="0.9"/><line x1="58.6" y1="41.1" x2="62.1" y2="45.9" stroke="#33312e" stroke-width="0.9"/><line x1="72.9" y1="32.8" x2="75.3" y2="38.3" stroke="#33312e" stroke-width="0.9"/><line x1="88.6" y1="27.7" x2="89.8" y2="33.6" stroke="#33312e" stroke-width="0.9"/><text x="92.0" y="56.0" font-size="13" text-anchor="middle" fill="#33312e">0</text><text x="123.0" y="56.0" font-size="12" text-anchor="middle" fill="#8a8378">3公斤</text><text x="150.9" y="135.5" font-size="13" text-anchor="middle" fill="#33312e">1公斤</text><text x="59.1" y="135.5" font-size="13" text-anchor="middle" fill="#33312e">2公斤</text><line x1="115.4" y1="95.6" x2="58.2" y2="147.2" stroke="#c0563b" stroke-width="3" stroke-linecap="round"/><circle cx="105.0" cy="105.0" r="7" fill="#c0563b"/><circle cx="105.0" cy="105.0" r="3" fill="#fffdf8"/></svg></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>1 公斤 900 公克<br><span class="lab2">💡 解析：</span>指針指在「1 公斤」再過 9 個小格，每小格 100 公克，所以是 1 公斤 900 公克（即 1900 公克）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">8 公分 5 毫米 ＝（　　）毫米 ＝（　　）公分。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>85 毫米；8.5 公分<br><span class="lab2">💡 解析：</span>1 公分＝10 毫米。8 公分 5 毫米＝85 毫米；85 毫米＝8.5 公分。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">6.</span><span class="stem">把下面四個數從「大到小」重新排列：<br><span class="frac"><span class="n">7</span><span class="d">10</span></span>、　1.4、　<span class="frac"><span class="n">11</span><span class="d">10</span></span>、　0.6</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>1.4 ＞ <span class="frac"><span class="n">11</span><span class="d">10</span></span> ＞ <span class="frac"><span class="n">7</span><span class="d">10</span></span> ＞ 0.6<br><span class="lab2">💡 解析：</span>先化成小數：<span class="frac"><span class="n">7</span><span class="d">10</span></span>＝0.7、<span class="frac"><span class="n">11</span><span class="d">10</span></span>＝1.1。比較 0.6、0.7、1.1、1.4，由大到小是 1.4＞<span class="frac"><span class="n">11</span><span class="d">10</span></span>＞<span class="frac"><span class="n">7</span><span class="d">10</span></span>＞0.6。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">7.</span><span class="stem">下面是學校兩個球類社團的人數統計表，請把表中（甲）～（丁）填完整。</span></div>
+<div class="fig"><table class="dtable"><caption>球類社團人數統計表（單位：人）</caption><tr><th>社團</th><th>男生</th><th>女生</th><th>合計</th></tr><tr><td>籃球社</td><td>18</td><td>（甲）</td><td>30</td></tr><tr><td>桌球社</td><td>（乙）</td><td>15</td><td>28</td></tr><tr><td>合計</td><td>（丙）</td><td>27</td><td>（丁）</td></tr></table></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>甲＝12；乙＝13；丙＝31；丁＝58<br><span class="lab2">💡 解析：</span>甲＝30－18＝12；乙＝28－15＝13；丙＝18＋13＝31；丁＝31＋27＝58（也可用 30＋28＝58 檢查）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">8.</span><span class="stem">一個長方形的長是 9 公分、寬是 4 公分，它的周長是（　　）公分。</span></div>
+<div class="fig"><svg viewBox="0 0 250 150" width="250" height="150" style="max-width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" font-family="'PingFang TC','Microsoft JhengHei',sans-serif"><rect x="64" y="34" width="122" height="72" fill="#fbf3e6" stroke="#33312e" stroke-width="2.2"/><text x="125.0" y="130" font-size="14" text-anchor="middle" fill="#c0563b">9 公分</text><text x="54" y="75.0" font-size="14" text-anchor="end" fill="#c0563b">4 公分</text></svg></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>26 公分<br><span class="lab2">💡 解析：</span>長方形周長＝(長＋寬)×2＝(9＋4)×2＝13×2＝26 公分。</div>
+</div>
+</div>
+<div class="section">
+<h2>三、比大小（在（　）中填入 ＞、＜ 或 ＝）</h2>
+<div class="note">每格 2 分，共 8 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">4 公斤 8 公克（　　）4080 公克</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＜<br><span class="lab2">💡 解析：</span>4 公斤 8 公克＝4008 公克，4008＜4080，所以填 ＜。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem"><span class="frac"><span class="n">8</span><span class="d">8</span></span>（　　）0.8</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＞<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">8</span><span class="d">8</span></span>＝1，1＞0.8，所以填 ＞。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">6.2＋0.8（　　）9－2.5</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＞<br><span class="lab2">💡 解析：</span>左邊＝7，右邊＝6.5，7＞6.5，所以填 ＞。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem"><span class="frac"><span class="n">4</span><span class="d">10</span></span>（　　）0.4</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>＝<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">4</span><span class="d">10</span></span>＝0.4，兩邊相等，所以填 ＝。</div>
+</div>
+</div>
+<div class="section">
+<h2>四、計算題</h2>
+<div class="note">每題 4 分，共 20 分</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">15.3 － 7.7 ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>7.6<br><span class="lab2">💡 解析：</span>小數點對齊相減：15.3－7.7＝7.6。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem"><span class="frac"><span class="n">9</span><span class="d">6</span></span> ＋ <span class="frac"><span class="n">5</span><span class="d">6</span></span> ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">14</span><span class="d">6</span></span>（＝2又<span class="frac"><span class="n">2</span><span class="d">6</span></span>）<br><span class="lab2">💡 解析：</span>同分母相加，分子 9＋5＝14，分母不變，得 <span class="frac"><span class="n">14</span><span class="d">6</span></span>，也可寫成帶分數 2又<span class="frac"><span class="n">2</span><span class="d">6</span></span>。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">2 公斤 750 公克 ＋ 3 公斤 500 公克 ＝（　　）公斤（　　）公克</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>6 公斤 250 公克<br><span class="lab2">💡 解析：</span>公克：750＋500＝1250 公克＝1 公斤 250 公克；公斤：2＋3＋1＝6。合計 6 公斤 250 公克。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">458 ÷ 8 ＝（　　）…（　　），並驗算。</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>商 57，餘 2<br><span class="lab2">💡 解析：</span>8×57＝456，458－456＝2，餘數 2＜8，所以商 57 餘 2。驗算：8×57＋2＝458。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">1 － <span class="frac"><span class="n">5</span><span class="d">12</span></span> ＝</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span><span class="frac"><span class="n">7</span><span class="d">12</span></span><br><span class="lab2">💡 解析：</span>1＝<span class="frac"><span class="n">12</span><span class="d">12</span></span>，<span class="frac"><span class="n">12</span><span class="d">12</span></span>－<span class="frac"><span class="n">5</span><span class="d">12</span></span>＝<span class="frac"><span class="n">7</span><span class="d">12</span></span>。</div>
+</div>
+</div>
+<div class="section">
+<h2>五、應用題</h2>
+<div class="note">每題 6 分，共 30 分（要列式）</div>
+<div class="q">
+<div class="q-head"><span class="qno">1.</span><span class="stem">一桶油連同桶子共重 3 公斤 150 公克，倒出一些油以後，剩下 2 公斤 480 公克。請問倒出了多少公克的油？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>670 公克<br><span class="lab2">💡 解析：</span>3 公斤 150 公克＝3150 公克，2 公斤 480 公克＝2480 公克。3150－2480＝670（公克）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">2.</span><span class="stem">1 條巧克力有 10 格。哥哥買了 <span class="frac"><span class="n">18</span><span class="d">10</span></span> 條，吃掉了 <span class="frac"><span class="n">7</span><span class="d">10</span></span> 條，還剩下幾「格」巧克力？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>11 格<br><span class="lab2">💡 解析：</span><span class="frac"><span class="n">18</span><span class="d">10</span></span>－<span class="frac"><span class="n">7</span><span class="d">10</span></span>＝<span class="frac"><span class="n">11</span><span class="d">10</span></span> 條；1 條 10 格，<span class="frac"><span class="n">11</span><span class="d">10</span></span> 條就是 11 格。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">3.</span><span class="stem">做一個燈籠要用 9 張色紙。老師有 200 張色紙，最多可以做幾個燈籠？還剩下幾張色紙？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>最多 22 個，剩 2 張<br><span class="lab2">💡 解析：</span>200÷9＝22…2，最多可以做 22 個燈籠，最後剩下 2 張色紙。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">4.</span><span class="stem">弟弟的體重是 25.5 公斤，哥哥比弟弟重 4.8 公斤。請問哥哥的體重是多少公斤？</span></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>30.3 公斤<br><span class="lab2">💡 解析：</span>25.5＋4.8＝30.3（公斤）。</div>
+</div>
+<div class="q">
+<div class="q-head"><span class="qno">5.</span><span class="stem">看下面的高鐵（南下）時刻表回答：<br>① 阿成要從臺北坐到臺中，想在 9:10 以前到達，他應該搭哪一班車？<br>② 601 車次從臺北到臺中，一共要坐多少分鐘？</span></div>
+<div class="fig"><table class="dtable"><caption>高鐵南下時刻表</caption><tr><th>車次</th><th>臺北</th><th>板橋</th><th>臺中</th><th>嘉義</th><th>左營</th></tr><tr><td>601</td><td>08:00</td><td>08:08</td><td>09:00</td><td>09:30</td><td>09:55</td></tr><tr><td>607</td><td>08:30</td><td>08:38</td><td>09:24</td><td>—</td><td>10:15</td></tr><tr><td>611</td><td>09:00</td><td>—</td><td>09:48</td><td>10:18</td><td>10:42</td></tr></table></div>
+<div class="hint">👆 點一下看答案與解析</div>
+<div class="ans"><span class="lab">✅ 答案：</span>① 搭 601 車次；② 60 分鐘（1 小時）<br><span class="lab2">💡 解析：</span>① 想在 9:10 前到臺中：601 是 09:00 到（來得及），607 是 09:24、611 是 09:48 都太晚，所以搭 601。② 601 從 08:00 坐到 09:00，共經過 60 分鐘，也就是 1 小時。</div>
+</div>
+</div>
+</section>
+</div>
+
+<script>
+const $=s=>document.querySelectorAll(s);
+function showPaper(id){
+  document.querySelectorAll('.paper').forEach(p=>p.classList.toggle('show',p.dataset.id===id));
+  document.querySelectorAll('.switch').forEach(b=>b.classList.toggle('active',b.dataset.target===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.switch').forEach(b=>b.onclick=()=>showPaper(b.dataset.target));
+document.querySelectorAll('.q').forEach(q=>q.addEventListener('click',e=>{q.classList.toggle('open');}));
+let allOpen=false;
+document.getElementById('toggleAll').onclick=function(){
+  allOpen=!allOpen;
+  const cur=document.querySelector('.paper.show');
+  cur.querySelectorAll('.q').forEach(q=>q.classList.toggle('open',allOpen));
+  this.textContent=allOpen?'收合全部解析':'展開全部解析';
+};
+</script>
+</body></html>
