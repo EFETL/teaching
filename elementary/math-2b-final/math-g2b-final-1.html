@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二年級下數學期末複習卷 第1卷</title>
+<style>
+  :root{
+    --primary:#2f7d8a;--primary-dark:#1f5b66;--accent:#e08a3c;--accent-dark:#c0712a;
+    --good:#3a8a5f;--bad:#c0392b;--bg:#f4faf9;--card:#ffffff;--line:#d8e8e6;
+    --text:#23332f;--muted:#5f726e;--shade:#9fd0cf;--shade2:#ffd9a8;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.9;font-size:18px;}
+  .wrap{max-width:880px;margin:0 auto;padding:22px 20px 96px;}
+
+  header.hero{background:linear-gradient(135deg,var(--primary),#48a0ad);color:#fff;
+    border-radius:20px;padding:24px 28px;box-shadow:0 6px 18px rgba(47,125,138,.22);}
+  header.hero h1{margin:0 0 8px;font-size:25px;letter-spacing:1px;}
+  header.hero .sub{font-size:16px;opacity:.97;line-height:1.7;}
+  .backlink{display:inline-block;margin-bottom:12px;color:var(--primary-dark);
+    text-decoration:none;font-size:16px;font-weight:600;}
+  .backlink:hover{text-decoration:underline;}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 4px;}
+  .toolbar button{border:none;cursor:pointer;font-size:16px;font-family:inherit;
+    padding:11px 18px;border-radius:30px;font-weight:700;transition:.15s;}
+  .btn-p1{background:var(--primary);color:#fff;}
+  .btn-p1:hover{background:var(--primary-dark);}
+  .btn-p2{background:var(--accent);color:#fff;}
+  .btn-p2:hover{background:var(--accent-dark);}
+  .btn-toggle{background:#6b8f8a;color:#fff;}
+  .hint{font-size:16px;color:var(--muted);margin:8px 0 0;}
+
+  .info-bar{display:flex;gap:18px;flex-wrap:wrap;border:1.5px dashed var(--line);
+    border-radius:12px;padding:14px 18px;margin:18px 0;font-size:17px;color:#3a4a47;}
+  .info-bar span{flex:1;min-width:150px;}
+
+  .section{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 22px;margin:18px 0;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+  .section>h3{margin:0 0 4px;font-size:20px;color:var(--primary-dark);display:flex;align-items:center;gap:10px;}
+  .section>h3 .num{background:var(--primary);color:#fff;border-radius:8px;font-size:16px;padding:3px 11px;flex:none;}
+  .section>h3 .pts{font-size:16px;color:var(--muted);font-weight:400;}
+  .section .lead{font-size:16px;color:var(--muted);margin:2px 0 12px;}
+
+  .q{padding:13px 0;border-top:1px dashed var(--line);}
+  .q:first-of-type{border-top:none;}
+  .q-text{font-size:18px;}
+  .q-text .qn{color:var(--accent-dark);font-weight:800;margin-right:7px;}
+  .q-row{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;}
+  .q-fig{flex:none;}
+  .q-body{flex:1;min-width:230px;}
+
+  .blank{display:inline-block;min-width:46px;border-bottom:2px solid var(--accent-dark);
+    margin:0 4px;vertical-align:bottom;height:1.25em;}
+  .blank-sm{min-width:34px;}
+  .tf-box{display:inline-block;width:2.2em;border-bottom:2px solid var(--accent-dark);
+    text-align:center;margin-left:8px;}
+  .ans-line{margin-top:8px;font-size:17px;color:#3a4a47;}
+  .work{border:1.5px solid var(--line);border-radius:10px;background:#fbfdfd;
+    min-height:74px;margin:10px 0 4px;padding:8px 12px;}
+  .work .lab{font-size:16px;color:var(--muted);}
+  .answ{margin-top:6px;font-size:17px;}
+  .answ .blank{min-width:80px;}
+
+  .options{margin:8px 0 2px;display:flex;flex-direction:column;gap:5px;}
+  .options label{font-size:17px;}
+  .options .ch{display:inline-block;width:1.9em;color:var(--accent-dark);font-weight:800;}
+  .opt-inline{display:flex;flex-wrap:wrap;gap:6px 22px;}
+  .opt-inline label{flex:0 0 auto;}
+
+  /* 圖形 */
+  svg{display:block;}
+  .fig-cap{font-size:16px;color:var(--muted);text-align:center;margin-top:3px;}
+  .grid-set{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;}
+  .grid-one{text-align:center;}
+  .grid-one .gl{font-size:17px;font-weight:700;color:var(--primary-dark);margin-top:2px;}
+
+  .reveal{margin-top:11px;border:none;cursor:pointer;font-family:inherit;background:#e3f1ef;
+    color:var(--primary-dark);padding:7px 15px;border-radius:20px;font-size:16px;font-weight:700;}
+  .reveal::before{content:"▸ ";}
+  .reveal.open::before{content:"▾ ";}
+  .explain{display:none;margin-top:10px;padding:12px 16px;background:#fbf6ee;
+    border-left:4px solid var(--accent);border-radius:0 10px 10px 0;font-size:16.5px;color:#43392c;}
+  .explain.show{display:block;}
+  .explain b{color:var(--accent-dark);}
+  .explain .ans{font-weight:800;color:var(--good);}
+
+  footer.foot{text-align:center;color:var(--muted);font-size:16px;margin-top:30px;line-height:1.7;}
+  .print-pagenum{display:none;}
+
+  @media print{
+    @page{margin:1.5cm 1.3cm 1.7cm;}
+    body{background:#fff;font-size:16px;line-height:1.65;}
+    .wrap{max-width:none;padding:0;}
+    .toolbar,.hint,.backlink,.reveal,footer.foot{display:none !important;}
+    header.hero{background:none;color:#000;box-shadow:none;border:none;
+      border-bottom:2.5px solid #000;border-radius:0;padding:0 0 8px;margin-bottom:6px;}
+    header.hero h1{font-size:21px;}
+    header.hero .sub{opacity:1;font-size:16px;}
+    .info-bar{border:1.5px solid #000;color:#000;}
+    .section{border:none;box-shadow:none;border-radius:0;padding:4px 0;margin:8px 0;break-inside:avoid;}
+    .section>h3{color:#000;border-bottom:1.5px solid #000;padding-bottom:3px;}
+    .section>h3 .num{background:#000;color:#fff;}
+    .q{break-inside:avoid;}
+    .work{background:none;border:1.2px solid #555;}
+    /* 學用版：隱藏解析；教用版：顯示解析 */
+    .explain{display:none !important;}
+    body.print-teacher .explain{display:block !important;background:none;border-left:3px solid #000;}
+    .print-pagenum{display:block;position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:16px;color:#000;}
+    .print-pagenum::after{counter-increment:page;content:"— 第 " counter(page) " 頁 —";}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="index.html">← 回數學考卷選單</a>
+  <header class="hero">
+    <h1>國小二年級下學期　數學期末複習卷</h1>
+    <div class="sub">第 1 卷　•　全範圍：分數初步・分裝與平分・乘除兩步驟・立體形體・面積比較・時間　•　滿分 100 分　•　共 6 大題</div>
+  </header>
+
+  <div class="toolbar">
+    <button class="btn-p1" onclick="printAs(false)">🖨️ 列印學用版（無解析）</button>
+    <button class="btn-p2" onclick="printAs(true)">🖨️ 列印教用版（含解析）</button>
+    <button class="btn-toggle" onclick="toggleAll()">👁️ 顯示／隱藏全部解析</button>
+  </div>
+  <p class="hint">操作：點每題下方「查看解析」看詳解 ▸　列印時頁碼會置於每頁底部中央。學用版不印解析、教用版印出解析。</p>
+
+  <div id="paper"></div>
+
+  <footer class="foot">國小二年級下學期數學期末複習卷（共 5 卷）　•　全民補習班 線上教學　teaching.efetl.com</footer>
+</div>
+<div class="print-pagenum"></div>
+
+<script>
+const PAPER = {"n": 1, "sections": [{"cn": "一", "title": "是非題", "pts": "每題 2 分，共 10 分", "type": "tf", "lead": "對的在後面（ ）打○，錯的打✕。", "items": [{"q": "正方體有 6 個面、12 個邊和 8 個頂點。", "ans": true, "ex": "正方體的面、邊、頂點數量正是 6、12、8，敘述正確。"}, {"q": "長方體每個面一定都是長方形。", "ans": false, "ex": "長方體有時會有正方形的面（例如有兩個面是正方形的盒子），不一定每個面都是長方形。"}, {"q": "同樣長的彩帶，1/5 條比 1/3 條長。", "ans": false, "ex": "分子都是 1 時，分母越大每份越小，1/5＜1/3，所以 1/5 條比較短。"}, {"q": "把 1 個西瓜平分成 8 片，1 片是 1/8 個西瓜。", "ans": true, "ex": "平分成 8 份、取其中 1 份，就是 1/8 個西瓜。"}, {"q": "一枝筆 8 元，買 7 枝付給老闆 50 元，老闆要找 6 元。", "ans": false, "ex": "8×7＝56 元，付 50 元根本不夠，不可能找錢。"}]}, {"cn": "二", "title": "選擇題", "pts": "每題 2 分，共 10 分", "type": "choice", "lead": "把正確答案的代號填在（ ）裡。", "items": [{"q": "老師有 45 包餅乾，每 6 包裝 1 盒，裝滿後還剩幾包？", "opts": ["2 包", "3 包", "5 包"], "ans": 1, "ex": "6×7＝42，45－42＝3，剩 3 包。"}, {"q": "下列哪一個數量「沒辦法」剛好平分給 6 個小朋友？", "opts": ["18 顆", "24 顆", "32 顆"], "ans": 2, "ex": "18＝6×3、24＝6×4 都能整除；32÷6＝5…剩 2，沒辦法剛好平分。"}, {"q": "1 顆蘋果平分給 6 個人，每人分到多少？", "opts": ["1/6 片蘋果", "1/6 顆蘋果", "1 顆蘋果"], "ans": 1, "ex": "把 1 顆平分成 6 份，每人是 1/6 顆蘋果。"}, {"q": "下列哪一種物品可能是「正方體」？", "opts": ["魔術方塊", "籃球", "鉛筆"], "ans": 0, "ex": "魔術方塊 6 個面都是一樣大的正方形，是正方體。"}, {"q": "右圖有 24 個●，每 4 個圈成 1 圈，可以圈成幾圈？", "fig": {"t": "dots", "total": 24, "perRow": 8}, "opts": ["5 圈", "6 圈", "7 圈"], "ans": 1, "ex": "24÷4＝6（4×6＝24），可以圈成 6 圈。"}]}, {"cn": "三", "title": "填填看", "pts": "每格 2 分，共 20 分", "type": "fill", "lead": "把答案寫在（ ）裡。", "items": [{"q": "『1/9』讀作[]。", "ans": "九分之一", "ex": "分母 9 在橫線下、分子 1 在上，讀作九分之一。"}, {"q": "一個分數，橫線上面的數叫做[]，下面的數叫做[]。", "ans": "分子；分母", "ex": "橫線上面是分子、下面是分母。"}, {"q": "1 條土司平分成 8 片，1 片是[]條土司。", "ans": "1/8", "ex": "平分 8 份取 1 份＝1/8 條。"}, {"q": "長方體有[]個面、[]個邊和[]個頂點。", "ans": "6；12；8", "ex": "長方體固定有 6 面、12 邊、8 頂點。"}, {"q": "今年暑假有 8 個星期又 3 天，一共是[]天。", "ans": "59", "ex": "8×7＝56，56＋3＝59 天。"}, {"q": "妹妹今年 9 歲，媽媽的年齡是妹妹的 4 倍少 5 歲，媽媽[]歲。", "ans": "31", "ex": "9×4＝36，36－5＝31 歲。"}, {"q": "1 包堅果有 8 顆，買 5 包，吃掉 7 顆，還剩[]顆。", "ans": "33", "ex": "8×5＝40，40－7＝33 顆。"}]}, {"cn": "四", "title": "看圖作答", "pts": "每格 2 分，共 20 分", "type": "figq", "lead": "看圖回答問題，把答案寫在（ ）裡。", "items": [{"q": "右圖的圓平分成[]份，塗色[]份，塗色部分是[]個圓。", "fig": {"t": "fracCircle", "parts": 4, "shaded": 1}, "ans": "4；1；1/4", "ex": "平分 4 份、塗 1 份，就是 1/4 個圓。"}, {"q": "右邊的立體形體是[]體，有[]個面、[]個頂點。", "fig": {"t": "box", "l": 6, "w": 3, "h": 3}, "ans": "長方；6；8", "ex": "長、寬、高不完全相同，是長方體，有 6 個面、8 個頂點。"}, {"q": "數一數，甲佔[]格、乙佔[]格、丙佔[]格，面最大的是[]。", "fig": {"t": "grids", "shapes": [{"label": "甲", "rows": 3, "cols": 2, "cells": [[0, 0], [0, 1], [1, 0], [1, 1], [2, 0], [2, 1]]}, {"label": "乙", "rows": 3, "cols": 4, "cells": [[0, 0], [0, 1], [0, 2], [0, 3], [1, 0], [1, 1], [2, 0], [2, 1]]}, {"label": "丙", "rows": 3, "cols": 3, "cells": [[0, 1], [1, 0], [1, 1], [1, 2], [2, 1]]}]}, "ans": "6；8；5；乙", "ex": "甲 6 格、乙 8 格、丙 5 格，乙的格數最多，面最大。"}]}, {"cn": "五", "title": "分裝與平分（把做法用算式記下來）", "pts": "每題 4 分，共 16 分", "type": "div", "lead": "先列出算式再作答，計算過程寫在框內。", "items": [{"q": "把 56 顆草莓平分裝進 7 個盒子，每盒裝幾顆？", "method": "乘法", "unit": "顆", "eq": "7×8＝56，每盒 8 顆", "ex": "想 7 乘多少等於 56，7×8＝56，每盒 8 顆。"}, {"q": "有 32 個包子，每 8 個裝 1 籠，可以裝幾籠？", "method": "減法", "unit": "籠", "eq": "32－8－8－8－8＝0，可裝 4 籠", "ex": "一直減 8，減 4 次剛好到 0，可裝 4 籠。"}, {"q": "一條壽司長 36 公分，平分成 4 段，每段長幾公分？", "method": "乘法", "unit": "公分", "eq": "4×9＝36，每段 9 公分", "ex": "想 4 乘多少等於 36，4×9＝36，每段 9 公分。"}, {"q": "有 27 枝彩虹筆，每 9 枝裝 1 袋，可以裝幾袋？", "method": "減法", "unit": "袋", "eq": "27－9－9－9＝0，可裝 3 袋", "ex": "一直減 9，減 3 次到 0，可裝 3 袋。"}]}, {"cn": "六", "title": "應用題（兩步驟）", "pts": "每題 4 分，共 24 分", "type": "app", "lead": "用兩步驟解題，算式寫在框內，並寫出答案。", "items": [{"q": "1 盒布丁有 6 個，桌上原本有 8 個，哥哥又買了 3 盒，現在一共有幾個布丁？", "unit": "個", "eq": "6×3＋8＝26", "ex": "先算買的 6×3＝18，再加原有 8，18＋8＝26 個。"}, {"q": "1 包巧克力有 8 顆，買了 5 包，送給朋友 6 顆，還剩幾顆？", "unit": "顆", "eq": "8×5－6＝34", "ex": "先算 8×5＝40，再減送出的 6，40－6＝34 顆。"}, {"q": "做 1 條手鍊要用 4 顆藍珠子和 5 顆紅珠子，做 8 條手鍊一共要幾顆珠子？", "unit": "顆", "eq": "(4＋5)×8＝72", "ex": "先算 1 條 4＋5＝9 顆，再 9×8＝72 顆。"}, {"q": "弟弟今年 4 歲，姊姊的年齡是弟弟的 6 倍少 8 歲，姊姊今年幾歲？", "unit": "歲", "eq": "4×6－8＝16", "ex": "先算 4×6＝24，再減 8，24－8＝16 歲。"}, {"q": "1 支棒棒糖 9 元，小明買了 4 支，付給老闆 50 元，老闆要找回幾元？", "unit": "元", "eq": "50－9×4＝14", "ex": "先算 9×4＝36，再 50－36＝14 元。"}, {"q": "蔥油餅原價 35 元，特價 27 元，買 5 個一共可以省下幾元？", "unit": "元", "eq": "(35－27)×5＝40", "ex": "1 個省 35－27＝8 元，5 個省 8×5＝40 元。"}]}]};
+
+/* ---------- 工具 ---------- */
+const esc = s => String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const blanks = (n,cls) => ('<span class="blank '+(cls||'')+'"></span>').repeat(Number(n)||1);
+const ABCD = ['①','②','③','④'];
+// 把題幹中的 [] 換成填空底線
+function fillText(t){ return esc(t).replace(/\[\]/g,'<span class="blank"></span>'); }
+function reveal(html){
+  return '<button class="reveal" onclick="tg(this)">查看解析</button>'+
+         '<div class="explain">'+html+'</div>';
+}
+function ansHTML(ans, ex){
+  return '<span class="ans">答案：'+ans+'</span>'+(ex?'　'+ex:'');
+}
+
+/* ---------- 圖形引擎（SVG） ---------- */
+function figFracCircle(parts,shaded){
+  const cx=62,cy=62,r=54; let p='';
+  for(let i=0;i<parts;i++){
+    const a0=(-90+i*360/parts)*Math.PI/180, a1=(-90+(i+1)*360/parts)*Math.PI/180;
+    const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    const fill=i<shaded?'var(--shade)':'#fff';
+    if(parts===1){ p='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+(shaded?'var(--shade)':'#fff')+'" stroke="#2f7d8a" stroke-width="2"/>'; break;}
+    p+='<path d="M'+cx+','+cy+' L'+x0.toFixed(1)+','+y0.toFixed(1)+' A'+r+','+r+' 0 0 1 '+x1.toFixed(1)+','+y1.toFixed(1)+' Z" fill="'+fill+'" stroke="#2f7d8a" stroke-width="2"/>';
+  }
+  return '<svg width="124" height="124" viewBox="0 0 124 124" role="img">'+p+'</svg>';
+}
+function figFracBar(parts,shaded){
+  const W=252,H=52,bw=W/parts; let p='';
+  for(let i=0;i<parts;i++){
+    p+='<rect x="'+(i*bw).toFixed(1)+'" y="1" width="'+bw.toFixed(1)+'" height="'+(H-2)+'" fill="'+(i<shaded?'var(--shade)':'#fff')+'" stroke="#2f7d8a" stroke-width="2"/>';
+  }
+  return '<svg width="'+(W+2)+'" height="'+(H+2)+'" viewBox="0 0 '+(W+2)+' '+(H+2)+'" role="img">'+p+'</svg>';
+}
+// 等角立體：長 l、深 w、高 h，單位公分
+function figBox(l,w,h,labels){
+  const u=12;                         // 每公分像素
+  const fw=l*u, fh=h*u;
+  const dx=w*u*0.6, dy=w*u*0.42;      // 往後上方的位移量（dy 為正值＝往上）
+  const padL=72, padT=26, padR=46, padB=26;
+  const ox=padL, oy=padT+dy+fh;       // 前面左下角
+  const A=[ox,oy-fh], B=[ox+fw,oy-fh], C=[ox+fw,oy], D=[ox,oy];           // 前面四角
+  const A2=[A[0]+dx,A[1]-dy], B2=[B[0]+dx,B[1]-dy], C2=[C[0]+dx,C[1]-dy]; // 後面（往後上）
+  const pl=(pts)=>pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  let s='';
+  s+='<polygon points="'+pl([A,B,B2,A2])+'" fill="#eaf6f5" stroke="#1f5b66" stroke-width="2"/>';   // 頂面
+  s+='<polygon points="'+pl([B,C,C2,B2])+'" fill="#d7eeec" stroke="#1f5b66" stroke-width="2"/>';   // 右側面
+  s+='<polygon points="'+pl([A,B,C,D])+'" fill="#f7fdfc" stroke="#1f5b66" stroke-width="2.4"/>';   // 前面
+  let lab='';
+  if(labels){
+    // 長：前面下緣中央
+    lab+='<text x="'+((D[0]+C[0])/2)+'" y="'+(C[1]+19)+'" text-anchor="middle" font-size="16" fill="#1f5b66">'+l+'公分</text>';
+    // 高：前面左緣外側
+    lab+='<text x="'+(A[0]-9)+'" y="'+((A[1]+D[1])/2+5)+'" text-anchor="end" font-size="16" fill="#1f5b66">'+h+'公分</text>';
+    // 寬（深度）：左上斜邊上方中央
+    lab+='<text x="'+((A[0]+A2[0])/2-2)+'" y="'+(Math.min(A[1],A2[1])-6)+'" text-anchor="middle" font-size="16" fill="#1f5b66">'+w+'公分</text>';
+  }
+  const Wd=Math.ceil(ox+fw+dx+padR), Hd=Math.ceil(oy+padB);
+  return '<svg width="'+Wd+'" height="'+Hd+'" viewBox="0 0 '+Wd+' '+Hd+'" role="img">'+s+lab+'</svg>';
+}
+// 方格圖（多形）：shapes=[{label,rows,cols,cells:[[r,c]...]}]
+function figGrids(shapes){
+  const u=20;
+  let out='<div class="grid-set">';
+  shapes.forEach(sh=>{
+    const W=sh.cols*u, H=sh.rows*u; let g='';
+    for(let r=0;r<sh.rows;r++)for(let c=0;c<sh.cols;c++){
+      const on=sh.cells.some(p=>p[0]===r&&p[1]===c);
+      g+='<rect x="'+(c*u)+'" y="'+(r*u)+'" width="'+u+'" height="'+u+'" fill="'+(on?'var(--shade)':'#fff')+'" stroke="#9bb1ae" stroke-width="1"/>';
+    }
+    out+='<div class="grid-one"><svg width="'+(W+2)+'" height="'+(H+2)+'" viewBox="-1 -1 '+(W+2)+' '+(H+2)+'">'+g+'</svg><div class="gl">'+esc(sh.label)+'</div></div>';
+  });
+  return out+'</div>';
+}
+// 分裝畫圈：total 個圓點，每列 perRow
+function figDots(total,perRow,emoji){
+  perRow=perRow||10; const u=30, R=11; const rows=Math.ceil(total/perRow);
+  let g=''; let n=0;
+  for(let r=0;r<rows;r++)for(let c=0;c<perRow&&n<total;c++,n++){
+    g+='<circle cx="'+(c*u+u/2)+'" cy="'+(r*u+u/2)+'" r="'+R+'" fill="#fff" stroke="#e08a3c" stroke-width="2"/>';
+  }
+  const W=perRow*u, H=rows*u;
+  return '<svg width="'+(W+2)+'" height="'+(H+2)+'" viewBox="-1 -1 '+(W+2)+' '+(H+2)+'" role="img">'+g+'</svg>';
+}
+// 長條統計圖：cats=[{label,val}], max
+function figBar(cats,max){
+  const u=22, bw=40, gap=26, padL=34, padB=26, H=max*u;
+  const W=padL+cats.length*(bw+gap);
+  let g='';
+  for(let v=0;v<=max;v++){const y=H-v*u; g+='<line x1="'+padL+'" y1="'+y+'" x2="'+W+'" y2="'+y+'" stroke="#cfe0de" stroke-width="1"/>';
+    g+='<text x="'+(padL-6)+'" y="'+(y+5)+'" text-anchor="end" font-size="13" fill="#5f726e">'+v+'</text>';}
+  cats.forEach((c,i)=>{const x=padL+gap/2+i*(bw+gap); const bh=c.val*u;
+    g+='<rect x="'+x+'" y="'+(H-bh)+'" width="'+bw+'" height="'+bh+'" fill="var(--shade)" stroke="#1f5b66" stroke-width="1.5"/>';
+    g+='<text x="'+(x+bw/2)+'" y="'+(H+18)+'" text-anchor="middle" font-size="15" fill="#23332f">'+esc(c.label)+'</text>';});
+  g+='<line x1="'+padL+'" y1="0" x2="'+padL+'" y2="'+H+'" stroke="#1f5b66" stroke-width="2"/>';
+  g+='<line x1="'+padL+'" y1="'+H+'" x2="'+W+'" y2="'+H+'" stroke="#1f5b66" stroke-width="2"/>';
+  return '<svg width="'+(W+6)+'" height="'+(H+padB)+'" viewBox="0 0 '+(W+6)+' '+(H+padB)+'" role="img">'+g+'</svg>';
+}
+function drawFig(f){
+  if(!f) return '';
+  switch(f.t){
+    case 'fracCircle': return figFracCircle(f.parts,f.shaded);
+    case 'fracBar': return figFracBar(f.parts,f.shaded);
+    case 'box': return figBox(f.l,f.w,f.h,f.labels!==false);
+    case 'grids': return figGrids(f.shapes);
+    case 'dots': return figDots(f.total,f.perRow);
+    case 'bar': return figBar(f.cats,f.max);
+  }
+  return '';
+}
+
+/* ---------- 各大題渲染 ---------- */
+function renderTF(sec){
+  let h='';
+  sec.items.forEach((it,i)=>{
+    h+='<div class="q"><div class="q-text"><span class="qn">'+(i+1)+'.</span>'+esc(it.q)+
+       '<span class="tf-box"></span></div>'+
+       reveal(ansHTML('<span class="ans">'+(it.ans?'○（對）':'✕（錯）')+'</span>', esc(it.ex)))+'</div>';
+  });
+  return h;
+}
+function renderChoice(sec){
+  let h='';
+  sec.items.forEach((it,i)=>{
+    const inline = it.opts.every(o=>String(o).length<=8);
+    const opts=it.opts.map((o,j)=>'<label><span class="ch">'+ABCD[j]+'</span>'+esc(o)+'</label>').join('');
+    h+='<div class="q"><div class="q-row">'+(it.fig?'<div class="q-fig">'+drawFig(it.fig)+'</div>':'')+
+       '<div class="q-body"><div class="q-text"><span class="qn">'+(i+1)+'.</span>'+esc(it.q)+'</div>'+
+       '<div class="options'+(inline?' opt-inline':'')+'">'+opts+'</div></div></div>'+
+       reveal(ansHTML('<span class="ans">'+ABCD[it.ans]+'　'+esc(it.opts[it.ans])+'</span>', esc(it.ex)))+'</div>';
+  });
+  return h;
+}
+function renderFill(sec){
+  let h='';
+  sec.items.forEach((it,i)=>{
+    h+='<div class="q"><div class="q-row">'+(it.fig?'<div class="q-fig">'+drawFig(it.fig)+'</div>':'')+
+       '<div class="q-body"><div class="q-text"><span class="qn">'+(i+1)+'.</span>'+fillText(it.q)+'</div></div></div>'+
+       reveal(ansHTML('<span class="ans">'+esc(it.ans)+'</span>', esc(it.ex)))+'</div>';
+  });
+  return h;
+}
+function renderFigq(sec){
+  let h='';
+  sec.items.forEach((it,i)=>{
+    h+='<div class="q"><div class="q-text"><span class="qn">'+(i+1)+'.</span>'+fillText(it.q)+'</div>'+
+       '<div style="margin:10px 0">'+drawFig(it.fig)+'</div>'+
+       (it.q2?'<div class="q-text" style="margin-top:6px">'+fillText(it.q2)+'</div>':'')+
+       reveal(ansHTML('<span class="ans">'+esc(it.ans)+'</span>', esc(it.ex)))+'</div>';
+  });
+  return h;
+}
+function renderDiv(sec){
+  let h='';
+  sec.items.forEach((it,i)=>{
+    h+='<div class="q"><div class="q-row">'+(it.fig?'<div class="q-fig">'+drawFig(it.fig)+'</div>':'')+
+       '<div class="q-body"><div class="q-text"><span class="qn">'+(i+1)+'.</span>'+esc(it.q)+
+       '<span style="color:var(--bad);font-weight:700">（請用'+esc(it.method)+'算式記下來）</span></div></div></div>'+
+       '<div class="work"><span class="lab">算式：</span></div>'+
+       '<div class="answ">答：'+blanks(1)+esc(it.unit||'')+'</div>'+
+       reveal(ansHTML('<span class="ans">'+esc(it.eq)+'</span>', esc(it.ex)))+'</div>';
+  });
+  return h;
+}
+function renderApp(sec){
+  let h='';
+  sec.items.forEach((it,i)=>{
+    h+='<div class="q"><div class="q-text"><span class="qn">'+(i+1)+'.</span>'+esc(it.q)+'</div>'+
+       '<div class="work"><span class="lab">算式：</span></div>'+
+       '<div class="answ">答：'+blanks(1)+esc(it.unit||'')+'</div>'+
+       reveal(ansHTML('<span class="ans">'+esc(it.eq)+'</span>', esc(it.ex)))+'</div>';
+  });
+  return h;
+}
+const RENDER={tf:renderTF,choice:renderChoice,fill:renderFill,figq:renderFigq,div:renderDiv,app:renderApp};
+
+function infoBar(){
+  return '<div class="info-bar"><span>班級：________</span><span>座號：______</span>'+
+         '<span>姓名：____________</span><span>分數：__________</span></div>';
+}
+function render(){
+  let html=infoBar();
+  PAPER.sections.forEach(sec=>{
+    html+='<section class="section"><h3><span class="num">'+esc(sec.cn)+'</span>'+esc(sec.title)+
+          ' <span class="pts">'+esc(sec.pts)+'</span></h3>'+
+          (sec.lead?'<p class="lead">'+esc(sec.lead)+'</p>':'')+
+          (RENDER[sec.type]?RENDER[sec.type](sec):'')+'</section>';
+  });
+  document.getElementById('paper').innerHTML=html;
+}
+function tg(btn){const ex=btn.nextElementSibling;ex.classList.toggle('show');
+  btn.classList.toggle('open');btn.textContent=btn.classList.contains('open')?'收合解析':'查看解析';}
+function toggleAll(){
+  const bs=document.querySelectorAll('.reveal');
+  const anyClosed=[...bs].some(b=>!b.classList.contains('open'));
+  bs.forEach(b=>{const ex=b.nextElementSibling;
+    if(anyClosed){ex.classList.add('show');b.classList.add('open');b.textContent='收合解析';}
+    else{ex.classList.remove('show');b.classList.remove('open');b.textContent='查看解析';}});
+}
+function printAs(teacher){
+  document.body.classList.toggle('print-teacher',teacher);
+  window.print();
+}
+window.addEventListener('afterprint',()=>document.body.classList.remove('print-teacher'));
+render();
+</script>
+</body>
+</html>
