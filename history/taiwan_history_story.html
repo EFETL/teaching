@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>臺灣早期歷史｜互動故事教材</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-sec: #f5f5f3;
+    --text: #1a1a18;
+    --text-sec: #5a5a56;
+    --text-ter: #9a9a94;
+    --border: rgba(0,0,0,0.1);
+    --border-med: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a;
+      --bg-sec: #252523;
+      --text: #f0ede8;
+      --text-sec: #a8a8a0;
+      --text-ter: #666660;
+      --border: rgba(255,255,255,0.1);
+      --border-med: rgba(255,255,255,0.18);
+    }
+    .card-amber { background: #2a2010 !important; }
+    .card-teal  { background: #0e201a !important; }
+    .card-purple{ background: #1a1828 !important; }
+    .card-coral { background: #241510 !important; }
+    .card-gray  { background: #1e1e1c !important; }
+    .era-tag.tag-a { background:#3a2608; color:#FAC775; }
+    .era-tag.tag-b { background:#082818; color:#5DCAA5; }
+    .era-tag.tag-c { background:#18163a; color:#AFA9EC; }
+    .era-tag.tag-d { background:#2a1008; color:#F09975; }
+    .quote-block   { background:#252523; }
+    .lbl-熟        { background:#2a2010; color:#FAC775; }
+    .lbl-生        { background:#0e201a; color:#5DCAA5; }
+    .city-card, .person-card { background: #252523; }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── 頁首 ─────────────────────────── */
+  header {
+    padding: 2.5rem 1.5rem 2rem;
+    border-bottom: 0.5px solid var(--border);
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  header .site-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-ter);
+    margin-bottom: .5rem;
+  }
+  header h1 { font-size: 26px; font-weight: 500; margin-bottom: .4rem; }
+  header p  { font-size: 15px; color: var(--text-sec); }
+
+  /* ── 主體容器 ─────────────────────── */
+  .container { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ── 章節切換按鈕 ────────────────── */
+  .chapter-nav {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2.5rem;
+  }
+  .nav-btn {
+    padding: 7px 16px; font-size: 13px;
+    border: 0.5px solid var(--border-med);
+    border-radius: 20px; background: transparent;
+    cursor: pointer; color: var(--text-sec);
+    transition: all .2s; font-family: inherit;
+  }
+  .nav-btn:hover { background: var(--bg-sec); color: var(--text); }
+  .nav-btn.active {
+    background: var(--bg-sec); color: var(--text);
+    border-color: var(--border-med); font-weight: 500;
+  }
+
+  /* ── 章節動畫 ────────────────────── */
+  .chapter { display: none; animation: fadeIn .35s ease; }
+  .chapter.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── 章節頭部 ────────────────────── */
+  .ch-header {
+    margin-bottom: 2.5rem; padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .era-tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 11px; border-radius: 20px;
+    margin-bottom: .75rem; letter-spacing: .5px;
+  }
+  .tag-a { background: #FAEEDA; color: #633806; }
+  .tag-b { background: #E1F5EE; color: #085041; }
+  .tag-c { background: #EEEDFE; color: #3C3489; }
+  .tag-d { background: #FAECE7; color: #712B13; }
+  .ch-header h2 { font-size: 22px; font-weight: 500; margin-bottom: .5rem; }
+  .ch-header .lead { font-size: 15px; color: var(--text-sec); }
+
+  /* ── 事件區塊 ────────────────────── */
+  .event-block { margin-bottom: 2.5rem; }
+  .event-title {
+    font-size: 16px; font-weight: 500;
+    margin-bottom: 1.25rem; padding-bottom: .6rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  /* ── 四格因果卡 ──────────────────── */
+  .causal-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 1rem;
+  }
+  @media (max-width: 520px) {
+    .causal-grid { grid-template-columns: 1fr; }
+    .full-w { grid-column: 1; }
+    .city-row, .person-row { grid-template-columns: 1fr; }
+  }
+  .full-w { grid-column: 1 / -1; }
+
+  .causal-card {
+    border-radius: var(--radius-md);
+    padding: .9rem 1rem;
+    border: 0.5px solid var(--border);
+  }
+  .c-label {
+    font-size: 11px; font-weight: 500; letter-spacing: .6px;
+    margin-bottom: .5rem; display: flex; align-items: center; gap: 5px;
+  }
+  .c-label i { font-size: 14px; }
+  .causal-card p { font-size: 13px; color: var(--text-sec); line-height: 1.65; }
+
+  .card-gray   { background: var(--bg-sec); }
+  .card-gray   .c-label { color: var(--text-ter); }
+  .card-amber  { background: #FAEEDA; border-left: 3px solid #BA7517; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+  .card-amber  .c-label { color: #633806; }
+  .card-amber  p { color: #4A1B0C; }
+  .card-teal   { background: #E1F5EE; border-left: 3px solid #0F6E56; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+  .card-teal   .c-label { color: #085041; }
+  .card-teal   p { color: #04342C; }
+  .card-purple { background: #EEEDFE; border-left: 3px solid #534AB7; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+  .card-purple .c-label { color: #3C3489; }
+  .card-purple p { color: #26215C; }
+  .card-coral  { background: #FAECE7; border-left: 3px solid #993C1D; border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+  .card-coral  .c-label { color: #712B13; }
+  .card-coral  p { color: #4A1B0C; }
+
+  /* ── 引言 ─────────────────────────── */
+  .quote-block {
+    font-size: 14px; color: var(--text-sec);
+    padding: .875rem 1.1rem; border-left: 2px solid var(--border-med);
+    margin: 1rem 0; line-height: 1.85; background: var(--bg-sec);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+  .quote-block .source { font-size: 12px; opacity: .65; margin-top: .25rem; display: block; }
+
+  /* ── 人物卡片 ────────────────────── */
+  .person-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin: 0 0 1.5rem;
+  }
+  .person-card {
+    border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+    padding: .875rem; background: var(--bg);
+  }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 500; margin-bottom: .65rem;
+  }
+  .av-p { background: #EEEDFE; color: #3C3489; }
+  .av-a { background: #FAEEDA; color: #633806; }
+  .person-card h4 { font-size: 14px; font-weight: 500; margin-bottom: .25rem; }
+  .person-card p  { font-size: 12px; color: var(--text-sec); line-height: 1.55; }
+
+  /* ── 城市卡片 ────────────────────── */
+  .city-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-top: .75rem;
+  }
+  .city-card {
+    border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+    padding: .875rem; background: var(--bg);
+  }
+  .city-card .rank  { font-size: 20px; font-weight: 500; margin-bottom: .2rem; }
+  .city-card .cname { font-size: 14px; font-weight: 500; margin-bottom: .1rem; }
+  .city-card .cnow  { font-size: 11px; color: var(--text-ter); margin-bottom: .5rem; }
+  .city-card .cdesc { font-size: 12px; color: var(--text-sec); line-height: 1.55; }
+  .c1 { border-top: 3px solid #BA7517; }
+  .c2 { border-top: 3px solid #0F6E56; }
+  .c3 { border-top: 3px solid #534AB7; }
+
+  /* ── 比較格 ──────────────────────── */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1rem 0; }
+  .cmp-card { border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: .875rem; }
+  .cmp-label {
+    display: inline-block; font-size: 11px; padding: 2px 9px;
+    border-radius: 10px; margin-bottom: .5rem; font-weight: 500;
+  }
+  .lbl-熟 { background: #FAEEDA; color: #633806; }
+  .lbl-生 { background: #E1F5EE; color: #085041; }
+  .cmp-card h4 { font-size: 13px; font-weight: 500; margin-bottom: .35rem; }
+  .cmp-card p  { font-size: 13px; color: var(--text-sec); line-height: 1.55; }
+
+  /* ── 底部導覽 ────────────────────── */
+  .bottom-nav {
+    display: flex; justify-content: space-between;
+    margin-top: 2.5rem; padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .nav-arrow {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--text-sec);
+    cursor: pointer; background: none; border: none;
+    font-family: inherit; padding: 4px 0;
+  }
+  .nav-arrow:hover { color: var(--text); }
+
+  /* ── 頁尾 ─────────────────────────── */
+  footer {
+    text-align: center; padding: 2rem 1rem;
+    font-size: 12px; color: var(--text-ter);
+    border-top: 0.5px solid var(--border);
+  }
+
+  /* ── 大引言橫幅 ──────────────────── */
+  .proverb {
+    text-align: center; font-size: 20px; font-weight: 500;
+    letter-spacing: 2px; padding: 1.25rem 1rem;
+    border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+    margin: 1rem 0; color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="site-label">全民補習班 · 歷史科</div>
+  <h1>臺灣早期歷史</h1>
+  <p>原住民、紅毛人、鄭氏家族，到唐山過臺灣——四個時代的背景、起因、事蹟與結果。</p>
+</header>
+
+<div class="container">
+
+  <nav class="chapter-nav" aria-label="章節選單">
+    <button class="nav-btn active" onclick="go(0)">一、島嶼與原住民</button>
+    <button class="nav-btn" onclick="go(1)">二、紅毛人來了</button>
+    <button class="nav-btn" onclick="go(2)">三、漢人的遺址</button>
+    <button class="nav-btn" onclick="go(3)">四、唐山過臺灣</button>
+  </nav>
+
+  <!-- ═══════════ 第一章 ═══════════ -->
+  <section class="chapter active" id="ch0" aria-labelledby="ch0-title">
+    <div class="ch-header">
+      <span class="era-tag tag-a">遠古 ── 清代以前</span>
+      <h2 id="ch0-title">島嶼上的臺灣與原住民</h2>
+      <p class="lead">在文字出現之前，這座島嶼上早已有人生活了幾萬年。這些文化留下的遺址，是我們唯一的線索。</p>
+    </div>
+
+    <!-- 長濱文化 -->
+    <div class="event-block">
+      <div class="event-title">長濱文化：臺灣最早的人</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>距今約五萬年前，末次冰期剛結束，海平面較低，人類得以從亞洲大陸沿海岸向南遷徙，逐漸抵達臺灣島。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>氣候變遷驅使人類跟著獵物移動。臺灣東岸多海蝕洞穴，適合棲身，吸引最早的人類在此定居。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-hammer" aria-hidden="true"></i> 事蹟</div>
+          <p>以<strong>打製石器</strong>為工具，靠漁獵與採集維生。沒有農業、沒有陶器。遺址位於台東長濱鄉八仙洞。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>確立臺灣有人類活動的最早紀錄，代表舊石器時代，是後來所有文化的共同起點。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 十三行文化 -->
+    <div class="event-block">
+      <div class="event-title">十三行文化：臺灣史前的「鐵器革命」</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>距今約 1,800 年前，臺灣各地進入新石器晚期。鐵器技術已從亞洲大陸沿貿易路線傳播至各地。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>淡水河口地形便於對外交流，煉鐵技術由外傳入，加上豐富農業資源，促成一個技術領先的族群在此發展。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-flame" aria-hidden="true"></i> 事蹟</div>
+          <p>會<strong>煉鐵</strong>、製精緻陶器，並和周遭族群以物易物。遺址在今新北市八里，是臺灣金石並用時代最重要的代表。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>這群人即為<strong>凱達格蘭族</strong>的祖先。鐵器大幅提升農業與戰鬥力，確立北台灣平埔族群的文化根基。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 南島語族 -->
+    <div class="event-block">
+      <div class="event-title">原住民的祖先：臺灣是南島語族的老家？</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>語言學家發現，從馬達加斯加、菲律賓、印尼，一路到夏威夷、紐西蘭的毛利人，說的語言都源自同一個祖先——「南島語族」。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>語言學與考古研究均指向臺灣是南島語族最古老的分布地。臺灣原住民保留了最多南島語族的古老語言特徵。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-world" aria-hidden="true"></i> 事蹟</div>
+          <p>臺灣原住民族（如阿美族、泰雅族、排灣族等）在島上繁衍發展，各族語言、文化、祭儀各具特色，共有 16 族官方認定。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>臺灣可能是整個太平洋、印度洋民族的「老家」，這讓臺灣在人類遷徙史上占有極為重要的地位。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 生番熟番 -->
+    <div class="event-block">
+      <div class="event-title">生番與熟番：清朝的原住民分類政策</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>1683 年清朝接管臺灣後，島上已有數十個原住民族，清廷需要一套管理辦法，決定誰可以被「收編」、誰要被隔離。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>清廷以「是否繳稅、服役、接受漢化」作為標準。一方面便於稅收，一方面也是為了維持統治穩定。</p>
+        </div>
+        <div class="causal-card card-teal full-w">
+          <div class="c-label"><i class="ti ti-users" aria-hidden="true"></i> 事蹟：兩種分類</div>
+          <div class="compare-grid" style="margin-top:.5rem">
+            <div class="cmp-card" style="background:rgba(255,255,255,.4)">
+              <span class="cmp-label lbl-熟">熟番</span>
+              <h4>已接受漢化者</h4>
+              <p>繳稅服役，被清廷視為「編戶齊民」。平埔族（如凱達格蘭族、西拉雅族）多屬此類。</p>
+            </div>
+            <div class="cmp-card" style="background:rgba(255,255,255,.4)">
+              <span class="cmp-label lbl-生">生番</span>
+              <h4>未歸化者</h4>
+              <p>居住山林、拒絕臣服，以「番界」隔離。泰雅族、賽德克族、布農族等高山族多屬此類。</p>
+            </div>
+          </div>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>漢人移民不斷突破番界往山區擴張，原住民生存空間日益壓縮。平埔族（熟番）逐漸被漢化同化，語言與文化幾近消失。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <span></span>
+      <button class="nav-arrow" onclick="go(1)">二、紅毛人來了 <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第二章 ═══════════ -->
+  <section class="chapter" id="ch1" aria-labelledby="ch1-title">
+    <div class="ch-header">
+      <span class="era-tag tag-b">1624 ── 1662 年</span>
+      <h2 id="ch1-title">漂洋過海的紅毛人</h2>
+      <p class="lead">荷蘭人為什麼要來臺灣？他們做了什麼？最後又怎麼離開的？</p>
+    </div>
+
+    <!-- 為什麼叫紅毛 -->
+    <div class="event-block">
+      <div class="event-title">「紅毛人」這個名字從哪裡來？</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>17 世紀初，閩南人、廣東人從未見過歐洲人。荷蘭人的頭髮（紅棕色、橙色系）、眼珠（藍、綠色）對東亞人而言極為陌生。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>以外觀命名是最直覺的方式。毛髮顏色是和黑髮的東亞人最大差異。最早文獻出現於 1636 年廣東官員對葡萄牙人的稱呼：「紅毛夷人」。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-message-circle" aria-hidden="true"></i> 事蹟</div>
+          <p>「紅毛人」成為整個臺灣、閩南對西方人的通稱。日本人也因荷蘭人髮色改口叫「紅毛人」。今天淡水的「紅毛城」是最具體的地標遺存。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>閩南移民把這個稱呼帶到新加坡、馬來西亞，成為整個華人世界對西方人的俗稱，沿用至今，現帶有戲謔意味。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 荷蘭佔領 -->
+    <div class="event-block">
+      <div class="event-title">荷蘭人佔領臺灣（1624–1662）</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>17 世紀初，荷蘭東印度公司（VOC）是全球最強大的貿易集團，壟斷亞洲香料貿易，掌控南洋（今印尼），急需一個連接中日貿易的東亞中繼站。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>荷蘭人先試圖佔領澎湖（1622），被明朝驅逐。明朝官員建議他們改去「無主之地」臺灣，荷蘭人就在大員（今台南安平）登陸建城。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-building-castle" aria-hidden="true"></i> 事蹟</div>
+          <p>建造<strong>熱蘭遮城</strong>（軍事核心，今安平古堡）與<strong>普羅民遮城</strong>（行政中心，今赤崁樓）。大量引進漢人移民種甘蔗、水稻，對原住民課稅，以臺灣為貿易轉口港牟利。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>臺灣成為東亞貿易網絡節點。漢人大規模移民臺灣的基礎在荷治時期奠定，但原住民社會受到嚴重衝擊，傳統文化被迫改變。</p>
+        </div>
+      </div>
+      <div class="quote-block">「他們帶來了耕牛、蔗糖技術，也帶來了徵稅與壓迫。這座島嶼對荷蘭人而言，是一台賺錢機器。」</div>
+    </div>
+
+    <!-- 荷蘭被趕走 -->
+    <div class="event-block">
+      <div class="event-title">荷蘭人被趕走（1662）</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>1644 年，清朝入主中原，明朝覆滅。南明遺臣鄭成功在東南沿海抵抗清軍，逐漸失去大陸據點，急需一個可長期抗清的海外基地。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>鄭成功決定奪取臺灣作為反清根據地。荷蘭在台兵力有限（約千餘人），且無法等到援軍，守城陷入困境。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-sword" aria-hidden="true"></i> 事蹟</div>
+          <p>1661 年，鄭成功從鹿耳門登陸，以約兩萬五千名士兵圍攻熱蘭遮城達九個月。荷蘭長官揆一彈盡援絕，1662 年 2 月簽下降書。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>荷據時期正式結束（歷時 38 年）。臺灣進入鄭氏政權時期，成為東亞唯一以反清復明為旗號的漢人政權所在地。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-arrow" onclick="go(0)"><i class="ti ti-arrow-left" aria-hidden="true"></i> 一、島嶼與原住民</button>
+      <button class="nav-arrow" onclick="go(2)">三、漢人的遺址 <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第三章 ═══════════ -->
+  <section class="chapter" id="ch2" aria-labelledby="ch2-title">
+    <div class="ch-header">
+      <span class="era-tag tag-c">1661 ── 1683 年</span>
+      <h2 id="ch2-title">漢人的文化遺址</h2>
+      <p class="lead">鄭氏家族統治臺灣只有 22 年，卻奠定了漢人社會在臺灣的根基。</p>
+    </div>
+
+    <div class="person-row">
+      <div class="person-card">
+        <div class="avatar av-p">成</div>
+        <h4>鄭成功</h4>
+        <p>「國姓爺」。打走荷蘭人，改台灣為東都。1662 年病逝，年僅 39 歲。</p>
+      </div>
+      <div class="person-card">
+        <div class="avatar av-p">經</div>
+        <h4>鄭經</h4>
+        <p>鄭成功之子，改台灣為「東寧王國」，重用陳永華，主導內政建設。</p>
+      </div>
+      <div class="person-card">
+        <div class="avatar av-a">華</div>
+        <h4>陳永華</h4>
+        <p>鄭經首席謀臣，「臺灣的諸葛亮」，推動文教與農業建設。</p>
+      </div>
+    </div>
+
+    <!-- 鄭成功攻台 -->
+    <div class="event-block">
+      <div class="event-title">鄭成功攻台（1661–1662）</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>1661 年，清朝已幾乎統一大陸。鄭成功的抗清勢力被迫退守廈門、金門，補給困難，長期抗戰面臨崩潰。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>需要一個可以長期自給自足、遠離清朝攻擊的基地。臺灣土地肥沃、易守難攻，是最理想選擇。鄭成功喊出「驅荷復台、反清復明」的旗號。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-ship" aria-hidden="true"></i> 事蹟</div>
+          <p>1661 年 4 月從鹿耳門水道奇襲登陸，繞過荷蘭艦隊封鎖，圍攻熱蘭遮城。荷蘭長官揆一在 1662 年 2 月投降。鄭成功將臺灣改名「東都」。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>臺灣成為東亞唯一由漢人政權主導的政治實體。然而鄭成功在四個月後病逝，反清復明大業未竟，由其子鄭經繼承。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 陳永華建設 -->
+    <div class="event-block">
+      <div class="event-title">陳永華的治台建設</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>鄭經繼位後，明鄭政權急需穩定內部：士兵要吃飯、百姓要安頓、文化要傳承。政權的正當性也需要儒家禮教來支撐。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>鄭經重用陳永華，全權委以治台重任。陳永華認為，要在台灣「紮根」，必須同時解決糧食問題（農業）與文化認同問題（教育）。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-school" aria-hidden="true"></i> 事蹟</div>
+          <p>建臺灣<strong>第一座孔廟</strong>（先師聖廟，今台南孔廟），旁設明倫堂推廣教育；推行「寓兵於農」，士兵平時耕種；引進明朝典章制度，建立系統化行政架構。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>漢人文化在臺灣正式生根。後世評語：「<strong>鄭成功開之，陳永華經營之。</strong>」這 22 年奠定了臺灣漢化的基礎，影響此後三百年。</p>
+        </div>
+      </div>
+      <div class="quote-block">「孔廟蓋起來了，學生有書讀了，農田開墾了——臺灣終於不只是一個軍事基地，而開始像一個家。」</div>
+    </div>
+
+    <!-- 鄭氏終結 -->
+    <div class="event-block">
+      <div class="event-title">鄭氏政權的終結（1683）</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>1681 年鄭經去世，年幼的鄭克塽繼位，政權內訌嚴重。清朝趁機整備水師，任命熟悉臺灣地形的施琅為水師提督。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>鄭氏政權內部分裂，失去凝聚力。施琅對臺灣地形與海況極為熟悉，且抓住了颱風季後風向轉換的戰機，一舉進攻。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-sword" aria-hidden="true"></i> 事蹟</div>
+          <p>1683 年，施琅率清朝水師在澎湖大敗鄭軍。鄭克塽見大勢已去，同年 8 月投降，明鄭政權正式落幕。</p>
+        </div>
+        <div class="causal-card card-purple">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>臺灣正式納入清朝版圖，設「臺灣府」隸屬福建省。漢人開發臺灣的下一章——大規模移民時代，就此開啟。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-arrow" onclick="go(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i> 二、紅毛人來了</button>
+      <button class="nav-arrow" onclick="go(3)">四、唐山過臺灣 <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第四章 ═══════════ -->
+  <section class="chapter" id="ch3" aria-labelledby="ch3-title">
+    <div class="ch-header">
+      <span class="era-tag tag-d">1683 ── 1875 年</span>
+      <h2 id="ch3-title">唐山過臺灣</h2>
+      <p class="lead">禁令再嚴，也擋不住飢餓的人渡海的腳步。</p>
+    </div>
+
+    <!-- 渡台禁令 -->
+    <div class="event-block">
+      <div class="event-title">渡臺禁令的頒布（1684）</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>1683 年清朝取得臺灣後，在施琅力爭下決定留台、設臺灣府，但清廷對台灣局勢始終不放心——這裡剛是抗清根據地。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>清廷擔心臺灣再度成為亂民聚集之地，也怕漢人與原住民衝突失控。施琅建議以限制移民來防止叛亂，康熙帝採納，頒布渡臺禁令。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-ban" aria-hidden="true"></i> 事蹟：三大禁令</div>
+          <p>① 需在原籍取得官方許可才能渡台，偷渡者嚴懲；② 不准攜帶家眷（製造大量「羅漢腳」孤身移民）；③ 廣東人因曾大量支持鄭成功而被完全禁止入台。</p>
+        </div>
+        <div class="causal-card card-coral">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>禁令形同虛設，執法時鬆時緊，移民照樣湧入。反而製造了大量單身男性移民社會，造成臺灣早期嚴重的社會問題與械鬥頻發。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 移民浪潮 -->
+    <div class="event-block">
+      <div class="event-title">為何禁令擋不住？移民浪潮</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>17–18 世紀閩南（今福建）與粵東（廣東）人口持續增長，可耕地有限。糧食不足、天災頻繁，底層百姓生活極為艱困。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>臺灣土地肥沃、人口稀少，農業潛力巨大。只要敢去，就有田種、有飯吃。相較於大陸的貧困，渡海的風險是值得冒的賭注。</p>
+        </div>
+        <div class="causal-card card-teal">
+          <div class="c-label"><i class="ti ti-ship" aria-hidden="true"></i> 事蹟</div>
+          <p>民間形成成熟的偷渡網絡，「水客」專門帶人越禁。臺灣海峽風浪兇險，民間說「三在水、七在天」——能否平安抵達，命比努力重要。</p>
+        </div>
+        <div class="causal-card card-coral">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>漢人移民持續湧入，閩南人、客家人遍布全台。到 1800 年代，台灣漢人人口已超過百萬，成為島上的主體族群。1875 年禁令正式廢除。</p>
+        </div>
+      </div>
+      <div class="quote-block">
+        「唐山過臺灣，心肝結歸丸。」
+        <span class="source">── 臺灣閩南俚語，描述渡海移民的忐忑與決絕</span>
+      </div>
+    </div>
+
+    <!-- 一府二鹿三艋舺 -->
+    <div class="event-block">
+      <div class="event-title">一府二鹿三艋舺：城市如何崛起</div>
+      <div class="causal-grid">
+        <div class="causal-card card-gray">
+          <div class="c-label"><i class="ti ti-map" aria-hidden="true"></i> 背景</div>
+          <p>隨著移民增加，開墾範圍從南部逐漸往北推進。港口是當時最重要的商業命脈——能停船，就能做生意，就能發展城市。</p>
+        </div>
+        <div class="causal-card card-amber">
+          <div class="c-label"><i class="ti ti-help-circle" aria-hidden="true"></i> 起因</div>
+          <p>台南最早開墾，自然成為首府。1784 年鹿港開放直航廈門，中部迅速繁榮。嘉慶年後北台灣人口大增，艋舺因河運之利崛起。</p>
+        </div>
+        <div class="causal-card card-teal full-w">
+          <div class="c-label"><i class="ti ti-building-skyscraper" aria-hidden="true"></i> 事蹟：三大城市</div>
+          <div class="city-row">
+            <div class="city-card c1">
+              <div class="rank" style="color:#BA7517">一府</div>
+              <div class="cname">臺灣府城</div>
+              <div class="cnow">今 台南市</div>
+              <div class="cdesc">清朝設置行政首府，南部農業最發達，長期主導台灣經濟，後因港口淤積而衰退。</div>
+            </div>
+            <div class="city-card c2">
+              <div class="rank" style="color:#0F6E56">二鹿</div>
+              <div class="cname">鹿港</div>
+              <div class="cnow">今 彰化縣鹿港鎮</div>
+              <div class="cdesc">1784 年開放對渡廈門，成為中部最大港口，後因泥沙淤積失去優勢。</div>
+            </div>
+            <div class="city-card c3">
+              <div class="rank" style="color:#534AB7">三艋舺</div>
+              <div class="cname">艋舺</div>
+              <div class="cnow">今 台北萬華區</div>
+              <div class="cdesc">河流交匯、水運樞紐，嘉慶後成為北台灣核心，是台北城市發展的根基。</div>
+            </div>
+          </div>
+        </div>
+        <div class="causal-card card-coral">
+          <div class="c-label"><i class="ti ti-flag" aria-hidden="true"></i> 結果</div>
+          <p>三個城市的排序，呈現台灣開發「由南往北」的歷史軌跡，也反映了港口貿易主導城市興衰的規律。1875 年禁令廢除後，北台灣開發加速，台北最終取代台南成為全台核心。</p>
+        </div>
+      </div>
+
+      <div class="proverb">一府・二鹿・三艋舺</div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-arrow" onclick="go(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i> 三、漢人的遺址</button>
+      <span></span>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<footer>
+  全民補習班 線上教學 · teaching.efetl.com/history
+</footer>
+
+<script>
+  var btns = document.querySelectorAll('.nav-btn');
+  var chapters = ['ch0','ch1','ch2','ch3'];
+
+  function go(n) {
+    chapters.forEach(function(id, i) {
+      document.getElementById(id).classList.toggle('active', i === n);
+      btns[i].classList.toggle('active', i === n);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
