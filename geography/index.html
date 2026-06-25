@@ -43,31 +43,54 @@
       <div class="thumb">
         <svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
           <defs>
-            <linearGradient id="gb1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#1a6ea8"/>
-              <stop offset="0.55" stop-color="#1f8f72"/>
-              <stop offset="1" stop-color="#166a50"/>
+            <!-- 海洋漸層 -->
+            <linearGradient id="ocean1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#8ecfe8"/>
+              <stop offset="1" stop-color="#b2e2ea"/>
             </linearGradient>
+            <!-- 台灣地形色：西岸平原→西部丘陵→中央山脈→東側坡→東岸 -->
+            <linearGradient id="topo1" x1="94" y1="0" x2="209" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#8fc86e"/>
+              <stop offset="28%"  stop-color="#c8c84a"/>
+              <stop offset="55%"  stop-color="#8b3a22"/>
+              <stop offset="78%"  stop-color="#b07838"/>
+              <stop offset="100%" stop-color="#6aae72"/>
+            </linearGradient>
+            <!-- 遮罩：讓地形漸層只填在島形內 -->
+            <clipPath id="twClip1">
+              <path d="M 180.8,15.0 L 206.1,27.9 L 209.1,57.1 L 200.2,92.6 L 189.6,131.5 L 173.7,163.8 L 158.9,209.1 L 146.0,235.0 L 129.5,225.3 L 107.1,189.7 L 98.8,144.4 L 94.1,112.1 L 104.7,86.2 L 128.3,59.0 L 151.9,33.1 Z"/>
+            </clipPath>
           </defs>
-          <rect width="420" height="250" rx="18" fill="url(#gb1)"/>
-          <!-- 台灣島形（簡化輪廓） -->
-          <path d="M188,52 L202,48 L218,55 L228,72 L232,95 L230,122 L224,148 L214,170 L202,182 L192,180 L182,165 L178,140 L180,112 L182,88 Z" fill="#dff5e8" opacity="0.82"/>
-          <path d="M188,52 L202,48 L218,55 L228,72 L232,95 L230,122 L224,148 L214,170 L202,182 L192,180 L182,165 L178,140 L180,112 L182,88 Z" fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.9"/>
-          <!-- 羅盤 -->
-          <circle cx="340" cy="125" r="58" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.35"/>
-          <circle cx="340" cy="125" r="40" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.25"/>
-          <polygon points="340,72 334,100 346,100" fill="#fff" opacity="0.9"/>
-          <polygon points="340,178 334,150 346,150" fill="#a8cce0" opacity="0.7"/>
-          <polygon points="287,125 315,119 315,131" fill="#fff" opacity="0.9"/>
-          <polygon points="393,125 365,119 365,131" fill="#a8cce0" opacity="0.7"/>
-          <circle cx="340" cy="125" r="6" fill="#e6a800"/>
-          <text x="340" y="65" text-anchor="middle" font-size="13" fill="#fff" font-family="sans-serif" font-weight="bold">N</text>
-          <!-- Badge -->
+          <!-- 海洋底色 -->
+          <rect width="420" height="250" rx="18" fill="url(#ocean1)"/>
+          <!-- 海浪裝飾線 -->
+          <path d="M 0,230 Q 60,222 120,230 Q 180,238 240,230 Q 300,222 360,230 Q 390,234 420,230" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.35"/>
+          <path d="M 0,242 Q 60,234 120,242 Q 180,250 240,242 Q 300,234 360,242" fill="none" stroke="#fff" stroke-width="1" opacity="0.25"/>
+          <!-- 台灣島形：地形漸層底色 -->
+          <path d="M 180.8,15.0 L 206.1,27.9 L 209.1,57.1 L 200.2,92.6 L 189.6,131.5 L 173.7,163.8 L 158.9,209.1 L 146.0,235.0 L 129.5,225.3 L 107.1,189.7 L 98.8,144.4 L 94.1,112.1 L 104.7,86.2 L 128.3,59.0 L 151.9,33.1 Z"
+                fill="url(#topo1)" opacity="0.95"/>
+          <!-- 台灣島形：海岸線 -->
+          <path d="M 180.8,15.0 L 206.1,27.9 L 209.1,57.1 L 200.2,92.6 L 189.6,131.5 L 173.7,163.8 L 158.9,209.1 L 146.0,235.0 L 129.5,225.3 L 107.1,189.7 L 98.8,144.4 L 94.1,112.1 L 104.7,86.2 L 128.3,59.0 L 151.9,33.1 Z"
+                fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.85"/>
+          <!-- 台北市位置點 -->
+          <circle cx="170" cy="36" r="5" fill="#fff" opacity="0.9"/>
+          <text x="172" y="30" font-size="11" fill="#fff" font-family="sans-serif" opacity="0.85">臺北</text>
+          <!-- 高雄市位置點 -->
+          <circle cx="122" cy="208" r="4" fill="#fff" opacity="0.85"/>
+          <text x="90" y="212" font-size="11" fill="#fff" font-family="sans-serif" opacity="0.8">高雄</text>
+          <!-- 玉山山峰符號 -->
+          <path d="M 152,108 L 146,122 L 158,122 Z" fill="#fff" opacity="0.75"/>
+          <text x="162" y="122" font-size="10" fill="#fff" font-family="sans-serif" opacity="0.75">玉山</text>
+          <!-- Badge 第一冊 -->
           <rect x="248" y="24" width="152" height="48" rx="12" fill="#e6a800"/>
           <text x="324" y="57" text-anchor="middle" font-size="26" font-weight="800" fill="#3a2c00" font-family="sans-serif">第一冊</text>
-          <!-- 說明文字 -->
-          <text x="130" y="210" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff" font-family="sans-serif">臺灣地理基礎</text>
-          <text x="130" y="234" text-anchor="middle" font-size="13" fill="#cce8f8" font-family="sans-serif">位置・海岸・地形・氣候・環境・人口</text>
+          <!-- 副標說明 -->
+          <text x="316" y="115" text-anchor="middle" font-size="14" fill="#fff" font-family="sans-serif" opacity="0.85">臺灣地理基礎</text>
+          <text x="316" y="138" text-anchor="middle" font-size="12" fill="#dff5eb" font-family="sans-serif" opacity="0.8">位置 · 海岸 · 地形</text>
+          <text x="316" y="156" text-anchor="middle" font-size="12" fill="#dff5eb" font-family="sans-serif" opacity="0.8">氣候 · 環境 · 人口</text>
+          <!-- 小離島 -->
+          <ellipse cx="228" cy="192" rx="5" ry="3" fill="#8fc86e" opacity="0.85"/>
+          <ellipse cx="113" cy="238" rx="6" ry="4" fill="#8fc86e" opacity="0.8"/>
         </svg>
       </div>
       <div class="vmeta">
