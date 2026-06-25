@@ -5,57 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>地理科 互動學習</title>
 <style>
-:root { --main:#2c5f8a; --accent:#e6a800; --b1:#3a7ca5; --b2:#2c7a5c; --teach:#7b6000; --bg:#eef3f9; }
-* { box-sizing:border-box; margin:0; padding:0; }
-body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; font-size:17px; }
-header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
-header h1 { font-size:28px; margin-bottom:8px; }
-header p { font-size:17px; opacity:.95; }
-.back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 18px; font-size:16px; text-decoration:none; }
-.back:hover { background:#eef6ff; }
-.wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
-.intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:24px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
-.intro b { color:var(--main); }
-
-/* 縮圖卡片 */
-.book-card { border-radius:16px; margin-bottom:24px; overflow:hidden; box-shadow:0 3px 12px rgba(0,0,0,.12); }
-.book-head {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:18px 24px; font-size:22px; font-weight:bold; color:#fff; cursor:pointer;
-  user-select:none; transition:filter .15s;
-}
-.book-head:hover { filter:brightness(1.08); }
-.b1-head { background:linear-gradient(135deg,#3a7ca5,#2c5f8a); }
-.b2-head { background:linear-gradient(135deg,#2c7a5c,#1a5c42); }
-.book-head .badge { background:rgba(255,255,255,.25); border-radius:8px; padding:2px 12px; font-size:16px; }
-.book-head .arr { font-size:20px; transition:transform .25s; }
-.book-body { background:#fff; padding:0; max-height:0; overflow:hidden; transition:max-height .35s ease; }
-.book-body.open { max-height:2000px; }
-
-/* 直接連結（第二冊） */
-.b2-link { display:block; text-decoration:none; padding:24px 28px; background:#fff; }
-.b2-link:hover { background:#f0faf5; }
-.b2-link-inner { display:flex; align-items:center; gap:16px; }
-.b2-icon { font-size:42px; flex-shrink:0; }
-.b2-text h3 { font-size:20px; color:#1a5c42; margin-bottom:4px; }
-.b2-text p { font-size:16px; color:#555; }
-.b2-arrow { font-size:28px; color:#2c7a5c; margin-left:auto; }
-
-/* 單元 */
-.unit { border-bottom:1px solid #e8eaed; }
-.unit:last-child { border-bottom:none; }
-.unit-head { padding:12px 20px; background:#f5f8fc; font-size:18px; font-weight:700; color:#2c5f8a; display:flex; align-items:center; gap:10px; }
-.unit-num { background:#2c5f8a; color:#fff; border-radius:50%; width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
-.links { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:14px 20px; }
-.links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:12px 8px; font-size:17px; color:#1a1a1a; transition:all .12s; text-align:center; }
-.links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
-.links a .ic { font-size:24px; }
-.links a.teach { border-color:#e7d9a8; }
-.links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
-.links a small { color:#667; font-size:14px; }
-
-footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-@media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:22px; } .book-head { font-size:19px; } }
+  :root { --main:#2c5f8a; --geo:#2c7a5c; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:#eef3f9; line-height:1.7; padding:0 0 60px; }
+  header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+  header h1 { font-size:30px; margin-bottom:8px; }
+  header p  { font-size:18px; opacity:.95; }
+  .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
+  .back:hover { background:#eef6ff; }
+  .wrap { max-width:900px; margin:0 auto; padding:22px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
+  .intro b { color:var(--main); }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .vcard { display:block; background:#fff; border-radius:16px; overflow:hidden; text-decoration:none; color:#1a1a1a; box-shadow:0 3px 14px rgba(0,0,0,.12); transition:transform .14s, box-shadow .14s; }
+  .vcard:hover { transform:translateY(-4px); box-shadow:0 10px 26px rgba(0,0,0,.18); }
+  .thumb { line-height:0; }
+  .vmeta { padding:14px 18px 18px; }
+  .vmeta h2 { font-size:20px; color:var(--geo); margin-bottom:4px; }
+  .vmeta p  { font-size:15px; color:#445; }
+  .go { display:inline-block; margin-top:10px; color:#fff; background:var(--geo); border-radius:18px; padding:5px 16px; font-size:14px; font-weight:bold; }
+  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
+  @media (max-width:620px){ .grid{ grid-template-columns:1fr; } header h1{ font-size:24px; } }
 </style>
 </head>
 <body>
@@ -65,103 +35,96 @@ footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
   <a class="back" href="../">← 回主選單</a>
 </header>
 <div class="wrap">
-  <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
+  <div class="intro">依<b>冊別</b>選擇教材，每冊均含<b>重點講義</b>與多份<b>互動考卷</b>：點「？」即顯示填空答案、點選項即<b>批改並顯示解析</b>。</div>
+  <div class="grid">
 
-  <!-- 先修（第一冊） -->
-  <div class="book-card">
-    <div class="book-head b1-head" onclick="toggle('b1')">
-      <span>📚 先修（第一冊）</span>
-      <span class="badge">第一學期 單元 1–6</span>
-      <span class="arr" id="arr-b1">▼</span>
-    </div>
-    <div class="book-body" id="b1">
-      <div class="unit">
-        <div class="unit-head"><span class="unit-num">1</span>臺灣在哪裡</div>
-        <div class="links">
-          <a class="teach" href="notes-unit-1.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-          <a href="practice-unit-1.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-          <a href="homework-unit-1.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-        </div>
+    <!-- 第一冊（含先修） -->
+    <a class="vcard" href="book1.html">
+      <div class="thumb">
+        <svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+          <defs>
+            <linearGradient id="gb1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1a6ea8"/>
+              <stop offset="0.55" stop-color="#1f8f72"/>
+              <stop offset="1" stop-color="#166a50"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="250" rx="18" fill="url(#gb1)"/>
+          <!-- 台灣島形（簡化輪廓） -->
+          <path d="M188,52 L202,48 L218,55 L228,72 L232,95 L230,122 L224,148 L214,170 L202,182 L192,180 L182,165 L178,140 L180,112 L182,88 Z" fill="#dff5e8" opacity="0.82"/>
+          <path d="M188,52 L202,48 L218,55 L228,72 L232,95 L230,122 L224,148 L214,170 L202,182 L192,180 L182,165 L178,140 L180,112 L182,88 Z" fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.9"/>
+          <!-- 羅盤 -->
+          <circle cx="340" cy="125" r="58" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.35"/>
+          <circle cx="340" cy="125" r="40" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.25"/>
+          <polygon points="340,72 334,100 346,100" fill="#fff" opacity="0.9"/>
+          <polygon points="340,178 334,150 346,150" fill="#a8cce0" opacity="0.7"/>
+          <polygon points="287,125 315,119 315,131" fill="#fff" opacity="0.9"/>
+          <polygon points="393,125 365,119 365,131" fill="#a8cce0" opacity="0.7"/>
+          <circle cx="340" cy="125" r="6" fill="#e6a800"/>
+          <text x="340" y="65" text-anchor="middle" font-size="13" fill="#fff" font-family="sans-serif" font-weight="bold">N</text>
+          <!-- Badge -->
+          <rect x="248" y="24" width="152" height="48" rx="12" fill="#e6a800"/>
+          <text x="324" y="57" text-anchor="middle" font-size="26" font-weight="800" fill="#3a2c00" font-family="sans-serif">第一冊</text>
+          <!-- 說明文字 -->
+          <text x="130" y="210" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff" font-family="sans-serif">臺灣地理基礎</text>
+          <text x="130" y="234" text-anchor="middle" font-size="13" fill="#cce8f8" font-family="sans-serif">位置・海岸・地形・氣候・環境・人口</text>
+        </svg>
       </div>
-      <div class="unit">
-        <div class="unit-head"><span class="unit-num">2</span>海岸與島嶼</div>
-        <div class="links">
-          <a class="teach" href="notes-unit-2.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-          <a href="practice-unit-2.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-          <a href="homework-unit-2.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-        </div>
+      <div class="vmeta">
+        <h2>第一冊（含先修）</h2>
+        <p>臺灣在哪裡・海岸與島嶼・地形與河川・天氣與氣候・環境變遷・臺灣人口（單元 1–6）</p>
+        <span class="go">進入 →</span>
       </div>
-      <div class="unit">
-        <div class="unit-head"><span class="unit-num">3</span>地形與河川</div>
-        <div class="links">
-          <a class="teach" href="notes-unit-3.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-          <a href="practice-unit-3.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-          <a href="homework-unit-3.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-        </div>
+    </a>
+
+    <!-- 第二冊 -->
+    <a class="vcard" href="geo-b2-final-review.html">
+      <div class="thumb">
+        <svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+          <defs>
+            <linearGradient id="gb2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#166a50"/>
+              <stop offset="0.55" stop-color="#2c7a5c"/>
+              <stop offset="1" stop-color="#1f8f72"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="250" rx="18" fill="url(#gb2)"/>
+          <!-- 網格底紋 -->
+          <line x1="60" y1="60"  x2="360" y2="60"  stroke="#fff" stroke-width="1" opacity="0.18"/>
+          <line x1="60" y1="100" x2="360" y2="100" stroke="#fff" stroke-width="1" opacity="0.13"/>
+          <line x1="60" y1="140" x2="360" y2="140" stroke="#fff" stroke-width="1" opacity="0.13"/>
+          <line x1="100" y1="40" x2="100" y2="200" stroke="#fff" stroke-width="1" opacity="0.13"/>
+          <line x1="200" y1="40" x2="200" y2="200" stroke="#fff" stroke-width="1" opacity="0.13"/>
+          <line x1="300" y1="40" x2="300" y2="200" stroke="#fff" stroke-width="1" opacity="0.13"/>
+          <!-- 高鐵路線（金色曲線） -->
+          <path d="M55,185 Q120,95 205,82 Q270,72 365,88" fill="none" stroke="#e6a800" stroke-width="4" opacity="0.92" stroke-linecap="round"/>
+          <!-- 城市點 -->
+          <circle cx="68"  cy="182" r="9"  fill="#fff" opacity="0.9"/>
+          <circle cx="140" cy="116" r="7"  fill="#fff" opacity="0.85"/>
+          <circle cx="205" cy="83"  r="9"  fill="#fff" opacity="0.9"/>
+          <circle cx="268" cy="76"  r="7"  fill="#fff" opacity="0.85"/>
+          <circle cx="360" cy="90"  r="11" fill="#e6a800" opacity="0.95"/>
+          <!-- 都市化長條圖 -->
+          <rect x="310" y="136" width="16" height="48" rx="3" fill="#fff" opacity="0.65"/>
+          <rect x="332" y="120" width="16" height="64" rx="3" fill="#fff" opacity="0.65"/>
+          <rect x="354" y="105" width="16" height="79" rx="3" fill="#e6a800" opacity="0.9"/>
+          <!-- Badge -->
+          <rect x="248" y="24" width="152" height="48" rx="12" fill="#e6a800"/>
+          <text x="324" y="57" text-anchor="middle" font-size="26" font-weight="800" fill="#3a2c00" font-family="sans-serif">第二冊</text>
+          <!-- 文字 -->
+          <text x="175" y="209" text-anchor="middle" font-size="20" font-weight="800" fill="#ffffff" font-family="sans-serif">交通・都市化・四大區域・離島</text>
+          <text x="175" y="233" text-anchor="middle" font-size="13" fill="#dffaee" font-family="sans-serif">重點講義 ＋ 三回互動考卷 ｜ 含解析</text>
+        </svg>
       </div>
-      <div class="unit">
-        <div class="unit-head"><span class="unit-num">4</span>天氣與氣候</div>
-        <div class="links">
-          <a class="teach" href="notes-unit-4.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-          <a href="practice-unit-4.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-          <a href="homework-unit-4.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-        </div>
+      <div class="vmeta">
+        <h2>第二冊 ‧ 期末複習</h2>
+        <p>交通運輸・都市化與城鄉・四大區域・國家公園・離島（三份講義 ＋ 三回 40 題互動考卷）</p>
+        <span class="go">進入 →</span>
       </div>
-      <div class="unit">
-        <div class="unit-head"><span class="unit-num">5</span>家鄉的環境變遷</div>
-        <div class="links">
-          <a class="teach" href="notes-unit-5.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-          <a href="practice-unit-5.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-          <a href="homework-unit-5.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-        </div>
-      </div>
-      <div class="unit">
-        <div class="unit-head"><span class="unit-num">6</span>臺灣的人口</div>
-        <div class="links">
-          <a class="teach" href="notes-unit-6.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-          <a href="practice-unit-6.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-          <a href="homework-unit-6.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-        </div>
-      </div>
-    </div>
+    </a>
+
   </div>
-
-  <!-- 第二冊 -->
-  <div class="book-card">
-    <div class="book-head b2-head" onclick="toggle('b2')">
-      <span>🗺 第二冊</span>
-      <span class="badge">交通運輸 · 都市化 · 四大區域 · 離島</span>
-      <span class="arr" id="arr-b2">▼</span>
-    </div>
-    <div class="book-body" id="b2">
-      <a class="b2-link" href="geo-b2-final-review.html">
-        <div class="b2-link-inner">
-          <span class="b2-icon">📋</span>
-          <div class="b2-text">
-            <h3>期末複習三回考卷（含重點講義）</h3>
-            <p>三份重點複習講義 ＋ 三份 40 題互動考卷 ｜ 含解析</p>
-            <p style="font-size:15px;color:#888;margin-top:4px">第一回：交通運輸 ｜ 第二回：都市化與城鄉 ｜ 第三回：四大區域與離島</p>
-          </div>
-          <span class="b2-arrow">→</span>
-        </div>
-      </a>
-    </div>
-  </div>
-
+  <footer>地理科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
-<footer>© 全民補習班 teaching.efetl.com</footer>
-<script>
-function toggle(id) {
-  const body = document.getElementById(id);
-  const arr = document.getElementById('arr-' + id);
-  if (body.classList.contains('open')) {
-    body.classList.remove('open');
-    arr.style.transform = '';
-  } else {
-    body.classList.add('open');
-    arr.style.transform = 'rotate(180deg)';
-  }
-}
-</script>
 </body>
 </html>

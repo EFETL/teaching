@@ -46,10 +46,13 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 .fill-table tr:nth-child(even){background:#f0faf5}
 .fill-list{padding-left:20px;margin-bottom:20px}
 .fill-list li{margin-bottom:10px;font-size:17px}
-.b{color:#1a5c42;font-weight:700}
+.blank-wrap{display:inline-flex;align-items:center;gap:2px;vertical-align:middle}
+.qm-btn{display:inline-block;background:#2c7a5c;color:#fff;border:none;border-radius:6px;padding:1px 10px;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s;line-height:1.6}
+.qm-btn:hover{background:#1a5c42}
+.blank-ans{display:none;color:#1a5c42;font-weight:700;background:#e8f7f0;border-radius:4px;padding:1px 7px;font-size:16px}
+.blank-ans.shown{display:inline}
 .btn-reveal{margin-top:16px;padding:10px 24px;background:#e67e22;color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-weight:700;transition:.2s}
 .btn-reveal:hover{background:#ca6f1e}
-.handout-hidden .b{background:#888;color:#888;border-radius:2px}
 </style>
 </head>
 <body>
@@ -81,32 +84,32 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 <tbody>
 <tr>
   <td><strong>公路</strong></td>
-  <td>機動性高，可<span class="b">門到門</span>服務</td>
-  <td>易<span class="b">塞車</span>，運量較小</td>
+  <td>機動性高，可<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">門到門</span></span>服務</td>
+  <td>易<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">塞車</span></span>，運量較小</td>
   <td>短途宅配、日常商品</td>
 </tr>
 <tr>
   <td><strong>鐵路</strong></td>
-  <td><span class="b">定時定點、運量大</span>，不易塞車</td>
-  <td>路線<span class="b">固定</span>，機動性低</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">定時定點、運量大</span></span>，不易塞車</td>
+  <td>路線<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">固定</span></span>，機動性低</td>
   <td>中長途客運、大宗工業品</td>
 </tr>
 <tr>
   <td><strong>海運（水運）</strong></td>
-  <td>運費<span class="b">最低廉</span>，運量<span class="b">最大</span></td>
-  <td>速度<span class="b">最慢</span></td>
+  <td>運費<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">最低廉</span></span>，運量<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">最大</span></span></td>
+  <td>速度<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">最慢</span></span></td>
   <td>國際貿易大宗原物料（石油、礦砂）</td>
 </tr>
 <tr>
   <td><strong>空運</strong></td>
-  <td>速度<span class="b">最快</span></td>
-  <td>運費<span class="b">最貴</span>，受天氣影響</td>
+  <td>速度<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">最快</span></span></td>
+  <td>運費<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">最貴</span></span>，受天氣影響</td>
   <td>高價值、時效性強貨物（晶片、鮮果）</td>
 </tr>
 <tr>
   <td><strong>通訊</strong></td>
-  <td>不受<span class="b">地形距離</span>限制，幾乎即時</td>
-  <td>只能傳遞<span class="b">資訊</span>，無法運送實體</td>
+  <td>不受<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">地形距離</span></span>限制，幾乎即時</td>
+  <td>只能傳遞<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">資訊</span></span>，無法運送實體</td>
   <td>跨國資訊傳遞、電子商務</td>
 </tr>
 </tbody>
@@ -114,30 +117,30 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 
 <h3 class="sec-title">二、台灣鐵路系統</h3>
 <ol class="fill-list">
-<li>台灣鐵路主要呈<span class="b">環島（南北向）</span>分布，缺乏<span class="b">東西向</span>橫向路線，原因是受<span class="b">中央山脈</span>阻隔。</li>
-<li>高速鐵路（高鐵）行駛於<span class="b">西部走廊</span>（台北—高雄），通車後使台北—高雄間的國內<span class="b">航班</span>大幅減少。</li>
-<li>台灣鐵路支線（阿里山線、集集線等）在日治時期興建，主要目的是<span class="b">開發山林資源</span>。</li>
-<li>「北迴鐵路」連接<span class="b">花蓮（蘇澳）</span>與<span class="b">宜蘭</span>，是東部與北部鐵路網的重要連結。</li>
-<li>「南迴鐵路」連接<span class="b">台東（枋寮）</span>與<span class="b">屏東</span>，穿越<span class="b">中央山脈</span>南端，完成環島路網。</li>
+<li>台灣鐵路主要呈<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">環島（南北向）</span></span>分布，缺乏<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">東西向</span></span>橫向路線，原因是受<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">中央山脈</span></span>阻隔。</li>
+<li>高速鐵路（高鐵）行駛於<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">西部走廊</span></span>（台北—高雄），通車後使台北—高雄間的國內<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">航班</span></span>大幅減少。</li>
+<li>台灣鐵路支線（阿里山線、集集線等）在日治時期興建，主要目的是<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">開發山林資源</span></span>。</li>
+<li>「北迴鐵路」連接<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">花蓮（蘇澳）</span></span>與<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">宜蘭</span></span>，是東部與北部鐵路網的重要連結。</li>
+<li>「南迴鐵路」連接<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">台東（枋寮）</span></span>與<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">屏東</span></span>，穿越<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">中央山脈</span></span>南端，完成環島路網。</li>
 </ol>
 
 <h3 class="sec-title">三、台灣四大港口</h3>
 <table class="fill-table">
 <thead><tr><th>港口</th><th>位置</th><th>特色</th></tr></thead>
 <tbody>
-<tr><td><strong><span class="b">高雄港</span></strong></td><td>南部</td><td>台灣最大國際港，<span class="b">港闊水深</span>，重工業發達</td></tr>
-<tr><td><strong><span class="b">基隆港</span></strong></td><td>北部</td><td><span class="b">岬灣</span>天然良港，但<span class="b">雨日多</span>影響裝卸</td></tr>
-<tr><td><strong><span class="b">台中港</span></strong></td><td>中部</td><td><span class="b">人工</span>港口，服務中部工業區</td></tr>
-<tr><td><strong><span class="b">花蓮港</span></strong></td><td>東部</td><td>東部最重要港口，輸出<span class="b">水泥、大理石</span></td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">高雄港</span></span></strong></td><td>南部</td><td>台灣最大國際港，<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">港闊水深</span></span>，重工業發達</td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">基隆港</span></span></strong></td><td>北部</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">岬灣</span></span>天然良港，但<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">雨日多</span></span>影響裝卸</td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">台中港</span></span></strong></td><td>中部</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">人工</span></span>港口，服務中部工業區</td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">花蓮港</span></span></strong></td><td>東部</td><td>東部最重要港口，輸出<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">水泥、大理石</span></span></td></tr>
 </tbody>
 </table>
 
 <h3 class="sec-title">四、台灣高速公路路網</h3>
 <ul class="fill-list">
-<li>國道標誌形狀：<span class="b">梅花形</span>；省道標誌形狀：<span class="b">盾形</span></li>
-<li>國道5號（<span class="b">北宜高速公路</span>）穿越<span class="b">雪山山脈</span>，連接台北與宜蘭。</li>
-<li>國道6號（<span class="b">水沙連高速公路</span>）連接台中與<span class="b">南投</span>。</li>
-<li>「幸福巴士」目的：彌補<span class="b">偏鄉地區</span>公共運輸網的不足。</li>
+<li>國道標誌形狀：<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">梅花形</span></span>；省道標誌形狀：<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">盾形</span></span></li>
+<li>國道5號（<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">北宜高速公路</span></span>）穿越<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">雪山山脈</span></span>，連接台北與宜蘭。</li>
+<li>國道6號（<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">水沙連高速公路</span></span>）連接台中與<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">南投</span></span>。</li>
+<li>「幸福巴士」目的：彌補<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">偏鄉地區</span></span>公共運輸網的不足。</li>
 </ul>
 
 <button class="btn-reveal" onclick="toggleHandout(this)">查看所有填空解答</button>
@@ -766,32 +769,32 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 <table class="fill-table">
 <thead><tr><th>概念</th><th>定義</th></tr></thead>
 <tbody>
-<tr><td><strong>都市化</strong></td><td><span class="b">鄉村人口</span>往都市集中，使都市人口比例增加的過程</td></tr>
-<tr><td><strong>都市化程度</strong></td><td>都市人口 ÷ <span class="b">全國總人口</span> × 100%</td></tr>
-<tr><td><strong>郊區化</strong></td><td>都市人口往<span class="b">郊區</span>遷移，原因是<span class="b">交通建設革新</span>（捷運/高速公路）</td></tr>
-<tr><td><strong>都會區</strong></td><td>都市持續擴張，與<span class="b">周邊城鎮</span>界線模糊化所形成的大範圍都市化地區</td></tr>
-<tr><td><strong>都市更新</strong></td><td>對老舊市區進行<span class="b">整建改善</span>，提升生活品質與土地利用效益</td></tr>
+<tr><td><strong>都市化</strong></td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">鄉村人口</span></span>往都市集中，使都市人口比例增加的過程</td></tr>
+<tr><td><strong>都市化程度</strong></td><td>都市人口 ÷ <span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">全國總人口</span></span> × 100%</td></tr>
+<tr><td><strong>郊區化</strong></td><td>都市人口往<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">郊區</span></span>遷移，原因是<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">交通建設革新</span></span>（捷運/高速公路）</td></tr>
+<tr><td><strong>都會區</strong></td><td>都市持續擴張，與<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">周邊城鎮</span></span>界線模糊化所形成的大範圍都市化地區</td></tr>
+<tr><td><strong>都市更新</strong></td><td>對老舊市區進行<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">整建改善</span></span>，提升生活品質與土地利用效益</td></tr>
 </tbody>
 </table>
 
 <h3 class="sec-title">二、台灣都市化程度</h3>
 <ul class="fill-list">
-<li>台灣目前都市化程度約 <span class="b">79%</span>，從民國62年的約 <span class="b">54%</span> 持續上升。</li>
-<li>都市化程度上升最主要原因：<span class="b">工商業（經濟）</span>發展。</li>
-<li>台灣「六都」合計人口約佔全國總人口的 <span class="b">七成（約70%）</span>。</li>
-<li>都市化的問題：<span class="b">交通擁塞、地價上漲、老舊建築閒置、城鄉差距擴大</span>。</li>
+<li>台灣目前都市化程度約 <span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">79%</span></span>，從民國62年的約 <span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">54%</span></span> 持續上升。</li>
+<li>都市化程度上升最主要原因：<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">工商業（經濟）</span></span>發展。</li>
+<li>台灣「六都」合計人口約佔全國總人口的 <span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">七成（約70%）</span></span>。</li>
+<li>都市化的問題：<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">交通擁塞、地價上漲、老舊建築閒置、城鄉差距擴大</span></span>。</li>
 </ul>
 
 <h3 class="sec-title">三、台灣六都特色比較</h3>
 <table class="fill-table">
 <thead><tr><th>直轄市</th><th>主要特色</th></tr></thead>
 <tbody>
-<tr><td><strong>台北市</strong></td><td>全台<span class="b">政治、經濟、文化中心</span>；人口密度<span class="b">最高</span></td></tr>
-<tr><td><strong>新北市</strong></td><td>全台<span class="b">人口最多</span>的城市（約400萬人）</td></tr>
-<tr><td><strong>桃園市</strong></td><td>桃園國際<span class="b">機場</span>；東南亞外籍移工<span class="b">最多</span>；航空城計畫</td></tr>
-<tr><td><strong>台中市</strong></td><td>中小企業、<span class="b">精密機械</span>工業；大肚山<span class="b">科技走廊</span></td></tr>
-<tr><td><strong>台南市</strong></td><td>台灣最早開發（<span class="b">明鄭</span>時期）；<span class="b">文化古都</span>；安平古堡</td></tr>
-<tr><td><strong>高雄市</strong></td><td><span class="b">重工業</span>（中鋼、造船）；<span class="b">高雄港</span>（全台最大國際港）；雙港城市</td></tr>
+<tr><td><strong>台北市</strong></td><td>全台<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">政治、經濟、文化中心</span></span>；人口密度<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">最高</span></span></td></tr>
+<tr><td><strong>新北市</strong></td><td>全台<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">人口最多</span></span>的城市（約400萬人）</td></tr>
+<tr><td><strong>桃園市</strong></td><td>桃園國際<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">機場</span></span>；東南亞外籍移工<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">最多</span></span>；航空城計畫</td></tr>
+<tr><td><strong>台中市</strong></td><td>中小企業、<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">精密機械</span></span>工業；大肚山<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">科技走廊</span></span></td></tr>
+<tr><td><strong>台南市</strong></td><td>台灣最早開發（<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">明鄭</span></span>時期）；<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">文化古都</span></span>；安平古堡</td></tr>
+<tr><td><strong>高雄市</strong></td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">重工業</span></span>（中鋼、造船）；<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">高雄港</span></span>（全台最大國際港）；雙港城市</td></tr>
 </tbody>
 </table>
 
@@ -799,19 +802,19 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 <table class="fill-table">
 <thead><tr><th>比較項目</th><th>都市</th><th>鄉村</th></tr></thead>
 <tbody>
-<tr><td>人口密度</td><td><span class="b">較高</span></td><td><span class="b">較低</span></td></tr>
-<tr><td>主要產業</td><td><span class="b">二、三級</span>產業為主</td><td><span class="b">一級</span>產業（農業）為主</td></tr>
-<tr><td>就業機會</td><td><span class="b">較多</span></td><td><span class="b">較少</span></td></tr>
-<tr><td>公共設施</td><td><span class="b">完善</span>（醫院、百貨）</td><td><span class="b">較少</span>（診所、小超商）</td></tr>
-<tr><td>聚落型態</td><td>高樓林立、道路密集</td><td>集村或<span class="b">散村</span></td></tr>
+<tr><td>人口密度</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">較高</span></span></td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">較低</span></span></td></tr>
+<tr><td>主要產業</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">二、三級</span></span>產業為主</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">一級</span></span>產業（農業）為主</td></tr>
+<tr><td>就業機會</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">較多</span></span></td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">較少</span></span></td></tr>
+<tr><td>公共設施</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">完善</span></span>（醫院、百貨）</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">較少</span></span>（診所、小超商）</td></tr>
+<tr><td>聚落型態</td><td>高樓林立、道路密集</td><td>集村或<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">散村</span></span></td></tr>
 </tbody>
 </table>
 
 <h3 class="sec-title">五、聚落型態</h3>
 <ul class="fill-list">
-<li><span class="b">集村</span>：居民集中居住，常見於水源缺乏地區（如<span class="b">嘉南平原</span>、桃園台地）。</li>
-<li><span class="b">散村</span>：居民分散居住，常見於水源充沛地區（如<span class="b">宜蘭平原</span>）。</li>
-<li>地方創生目的：吸引<span class="b">青年回流</span>鄉村，發展<span class="b">在地特色產業</span>，縮小城鄉差距。</li>
+<li><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">集村</span></span>：居民集中居住，常見於水源缺乏地區（如<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">嘉南平原</span></span>、桃園台地）。</li>
+<li><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">散村</span></span>：居民分散居住，常見於水源充沛地區（如<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">宜蘭平原</span></span>）。</li>
+<li>地方創生目的：吸引<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">青年回流</span></span>鄉村，發展<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">在地特色產業</span></span>，縮小城鄉差距。</li>
 </ul>
 
 <button class="btn-reveal" onclick="toggleHandout(this)">查看所有填空解答</button>
@@ -1442,23 +1445,23 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 <tbody>
 <tr>
   <td><strong>北部</strong></td>
-  <td><span class="b">日治</span>時期</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">日治</span></span>時期</td>
   <td>茶葉</td>
-  <td><span class="b">高科技</span>（竹科）</td>
-  <td><span class="b">政治、經濟、文化</span>中心；基隆港、桃園機場</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">高科技</span></span>（竹科）</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">政治、經濟、文化</span></span>中心；基隆港、桃園機場</td>
 </tr>
 <tr>
   <td><strong>中部</strong></td>
   <td>日治時期</td>
-  <td><span class="b">蔬菜、花卉</span>專業區；濁水溪灌溉</td>
-  <td><span class="b">精密機械</span>、腳踏車</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">蔬菜、花卉</span></span>專業區；濁水溪灌溉</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">精密機械</span></span>、腳踏車</td>
   <td>日月潭、阿里山；濁水溪最長河川</td>
 </tr>
 <tr>
   <td><strong>南部</strong></td>
-  <td><span class="b">明鄭</span>時期（最早）</td>
-  <td><span class="b">熱帶水果</span>（芒果、蓮霧）；養殖漁業</td>
-  <td><span class="b">重工業</span>（中鋼、造船）</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">明鄭</span></span>時期（最早）</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">熱帶水果</span></span>（芒果、蓮霧）；養殖漁業</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">重工業</span></span>（中鋼、造船）</td>
   <td>台南文化古都；高雄雙港城市；墾丁珊瑚礁</td>
 </tr>
 <tr>
@@ -1466,7 +1469,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
   <td>日治時期</td>
   <td>無污染優質農產品</td>
   <td>較少工業</td>
-  <td><span class="b">地形阻隔</span>交通不便；<span class="b">原住民</span>文化；太魯閣峽谷；花東縱谷</td>
+  <td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">地形阻隔</span></span>交通不便；<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">原住民</span></span>文化；太魯閣峽谷；花東縱谷</td>
 </tr>
 </tbody>
 </table>
@@ -1475,10 +1478,10 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 <table class="fill-table">
 <thead><tr><th>分區</th><th>主要範圍</th><th>主要目的</th></tr></thead>
 <tbody>
-<tr><td><strong><span class="b">城鄉發展地區</span></strong></td><td>都市及建成區</td><td>規劃都市成長，提供居住與產業空間</td></tr>
-<tr><td><strong><span class="b">農業發展地區</span></strong></td><td>嘉南平原等優質農耕地</td><td>確保<span class="b">糧食安全</span>，保護農業用地</td></tr>
-<tr><td><strong><span class="b">國土保育地區</span></strong></td><td>五大<span class="b">山脈</span>、生態敏感區</td><td>保護自然生態與水源涵養</td></tr>
-<tr><td><strong><span class="b">海洋資源地區</span></strong></td><td>台灣周邊海域</td><td>永續利用海洋資源</td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">城鄉發展地區</span></span></strong></td><td>都市及建成區</td><td>規劃都市成長，提供居住與產業空間</td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">農業發展地區</span></span></strong></td><td>嘉南平原等優質農耕地</td><td>確保<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">糧食安全</span></span>，保護農業用地</td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">國土保育地區</span></span></strong></td><td>五大<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">山脈</span></span>、生態敏感區</td><td>保護自然生態與水源涵養</td></tr>
+<tr><td><strong><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">海洋資源地區</span></span></strong></td><td>台灣周邊海域</td><td>永續利用海洋資源</td></tr>
 </tbody>
 </table>
 
@@ -1486,15 +1489,15 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 <table class="fill-table">
 <thead><tr><th>國家公園</th><th>位置</th><th>主要特色</th></tr></thead>
 <tbody>
-<tr><td>墾丁</td><td>屏東（南端）</td><td><span class="b">珊瑚礁</span>生態、熱帶季風林、落山風</td></tr>
-<tr><td>玉山</td><td>中部山地</td><td>台灣最高峰（<span class="b">玉山</span>3952m）、八通關古道</td></tr>
-<tr><td>陽明山</td><td>北部</td><td><span class="b">火山</span>地形、噴氣孔、溫泉、花季</td></tr>
-<tr><td>太魯閣</td><td>花蓮</td><td>立霧溪<span class="b">大理石</span>峽谷（燕子口、九曲洞）</td></tr>
-<tr><td>雪霸</td><td>中部山地</td><td><span class="b">雪山</span>（3886m）、<span class="b">櫻花鉤吻鮭</span>保育</td></tr>
-<tr><td>金門</td><td>金門縣</td><td>戰地遺跡、閩南建築、<span class="b">風獅爺</span></td></tr>
-<tr><td>東沙環礁</td><td>南海</td><td><span class="b">珊瑚礁</span>海洋生態保育（海洋國家公園管理處）</td></tr>
-<tr><td>台江</td><td>台南沿海</td><td>沙洲<span class="b">潟湖</span>、<span class="b">黑面琵鷺</span>冬候鳥</td></tr>
-<tr><td>澎湖南方四島</td><td>澎湖南部</td><td><span class="b">玄武岩</span>、珊瑚礁（海洋國家公園管理處）</td></tr>
+<tr><td>墾丁</td><td>屏東（南端）</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">珊瑚礁</span></span>生態、熱帶季風林、落山風</td></tr>
+<tr><td>玉山</td><td>中部山地</td><td>台灣最高峰（<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">玉山</span></span>3952m）、八通關古道</td></tr>
+<tr><td>陽明山</td><td>北部</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">火山</span></span>地形、噴氣孔、溫泉、花季</td></tr>
+<tr><td>太魯閣</td><td>花蓮</td><td>立霧溪<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">大理石</span></span>峽谷（燕子口、九曲洞）</td></tr>
+<tr><td>雪霸</td><td>中部山地</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">雪山</span></span>（3886m）、<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">櫻花鉤吻鮭</span></span>保育</td></tr>
+<tr><td>金門</td><td>金門縣</td><td>戰地遺跡、閩南建築、<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">風獅爺</span></span></td></tr>
+<tr><td>東沙環礁</td><td>南海</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">珊瑚礁</span></span>海洋生態保育（海洋國家公園管理處）</td></tr>
+<tr><td>台江</td><td>台南沿海</td><td>沙洲<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">潟湖</span></span>、<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">黑面琵鷺</span></span>冬候鳥</td></tr>
+<tr><td>澎湖南方四島</td><td>澎湖南部</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">玄武岩</span></span>、珊瑚礁（海洋國家公園管理處）</td></tr>
 </tbody>
 </table>
 
@@ -1502,20 +1505,20 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;fo
 <table class="fill-table">
 <thead><tr><th>離島</th><th>地質類型</th><th>最著名特色</th></tr></thead>
 <tbody>
-<tr><td><strong>澎湖</strong></td><td><span class="b">火山島</span>（玄武岩）</td><td><span class="b">石滬</span>（傳統捕魚）、仙人掌冰淇淋、雙心石滬</td></tr>
-<tr><td><strong>金門</strong></td><td><span class="b">大陸島</span>（花崗岩）</td><td><span class="b">風獅爺</span>、閩南古厝、高粱酒、戰地遺跡</td></tr>
-<tr><td><strong>馬祖</strong></td><td><span class="b">大陸島</span>（花崗岩）</td><td><span class="b">藍眼淚</span>（4-6月夜光藻）、鐵堡坑道</td></tr>
-<tr><td><strong>綠島</strong></td><td>火山島</td><td><span class="b">朝日溫泉</span>（世界少見海底溫泉）</td></tr>
-<tr><td><strong>蘭嶼</strong></td><td>火山島</td><td><span class="b">達悟族</span>文化、飛魚季、<span class="b">拼板舟</span></td></tr>
+<tr><td><strong>澎湖</strong></td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">火山島</span></span>（玄武岩）</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">石滬</span></span>（傳統捕魚）、仙人掌冰淇淋、雙心石滬</td></tr>
+<tr><td><strong>金門</strong></td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">大陸島</span></span>（花崗岩）</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">風獅爺</span></span>、閩南古厝、高粱酒、戰地遺跡</td></tr>
+<tr><td><strong>馬祖</strong></td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">大陸島</span></span>（花崗岩）</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">藍眼淚</span></span>（4-6月夜光藻）、鐵堡坑道</td></tr>
+<tr><td><strong>綠島</strong></td><td>火山島</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">朝日溫泉</span></span>（世界少見海底溫泉）</td></tr>
+<tr><td><strong>蘭嶼</strong></td><td>火山島</td><td><span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">達悟族</span></span>文化、飛魚季、<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">拼板舟</span></span></td></tr>
 </tbody>
 </table>
 
 <h3 class="sec-title">五、重要河川與地形</h3>
 <ul class="fill-list">
-<li>台灣最長河川：<span class="b">濁水溪</span>（約186公里），為中部農業重要灌溉水源。</li>
-<li>東部縱谷（花東縱谷）：位於<span class="b">中央山脈</span>與<span class="b">海岸山脈</span>之間。</li>
-<li>屏東縣能種植熱帶水果，因位於北回歸線以南，屬<span class="b">熱帶氣候</span>。</li>
-<li>台東鹿野高台每年7-8月舉辦<span class="b">國際熱氣球嘉年華</span>。</li>
+<li>台灣最長河川：<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">濁水溪</span></span>（約186公里），為中部農業重要灌溉水源。</li>
+<li>東部縱谷（花東縱谷）：位於<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">中央山脈</span></span>與<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">海岸山脈</span></span>之間。</li>
+<li>屏東縣能種植熱帶水果，因位於北回歸線以南，屬<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">熱帶氣候</span></span>。</li>
+<li>台東鹿野高台每年7-8月舉辦<span class="blank-wrap"><button class="qm-btn" onclick="revealBlank(this)" title="點擊查看答案">？</button><span class="blank-ans">國際熱氣球嘉年華</span></span>。</li>
 </ul>
 
 <button class="btn-reveal" onclick="toggleHandout(this)">查看所有填空解答</button>
@@ -2156,23 +2159,20 @@ function toggleExplain(btn) {
     btn.style.background = '#2c7a5c';
   }
 }
+function revealBlank(btn) {
+  btn.style.display = 'none';
+  btn.nextElementSibling.classList.add('shown');
+}
 function toggleHandout(btn) {
   const section = btn.closest('.handout-section');
-  const spans = section.querySelectorAll('.b');
-  if (btn.textContent.includes('查看')) {
-    spans.forEach(s => {
-      s.style.background = '';
-      s.style.color = '';
-      s.style.borderRadius = '';
-    });
-    btn.textContent = '隱藏解答';
+  const qms = section.querySelectorAll('.qm-btn');
+  const anyHidden = [...qms].some(q => q.style.display !== 'none');
+  if (anyHidden) {
+    qms.forEach(q => { q.style.display = 'none'; q.nextElementSibling.classList.add('shown'); });
+    btn.textContent = '隱藏答案';
     btn.style.background = '#666';
   } else {
-    spans.forEach(s => {
-      s.style.background = '#888';
-      s.style.color = '#888';
-      s.style.borderRadius = '2px';
-    });
+    qms.forEach(q => { q.style.display = ''; q.nextElementSibling.classList.remove('shown'); });
     btn.textContent = '查看所有填空解答';
     btn.style.background = '#e67e22';
   }
