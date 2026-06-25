@@ -5,31 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>地理科 互動學習</title>
 <style>
-  :root { --main:#2c5f8a; --accent:#e6a800; --subject:#9b59b6; --teach:#7b6000; --bg:#eef3f9; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
-  header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
-  header h1 { font-size:30px; margin-bottom:8px; }
-  header p { font-size:18px; opacity:.95; }
-  .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
-  .back:hover { background:#eef6ff; }
-  .wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
-  .intro b { color:var(--main); }
-  .combo { display:block; text-align:center; background:var(--accent); color:#3a2c00; font-size:22px; font-weight:bold; text-decoration:none; padding:16px; border-radius:12px; margin-bottom:14px; box-shadow:0 2px 8px rgba(230,168,0,.4); transition:transform .12s; }
-  .combo:hover { transform:translateY(-2px); }
-  .unit { background:#fff; border-radius:12px; margin-bottom:18px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,.08); }
-  .unit-head { background:var(--main); color:#fff; font-size:21px; font-weight:bold; padding:12px 20px; }
-  .unit-head .n { background:#fff; color:var(--main); border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; font-size:18px; margin-right:10px; }
-  .links { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:16px 20px; }
-  .links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:14px 8px; font-size:18px; color:#1a1a1a; transition:all .12s; text-align:center; }
-  .links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
-  .links a .ic { font-size:26px; }
-  .links a.teach { border-color:#e7d9a8; }
-  .links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
-  .links a small { color:#667; font-size:14px; }
-  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-  @media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:24px; } }
+:root { --main:#2c5f8a; --accent:#e6a800; --b1:#3a7ca5; --b2:#2c7a5c; --teach:#7b6000; --bg:#eef3f9; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; font-size:17px; }
+header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+header h1 { font-size:28px; margin-bottom:8px; }
+header p { font-size:17px; opacity:.95; }
+.back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 18px; font-size:16px; text-decoration:none; }
+.back:hover { background:#eef6ff; }
+.wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
+.intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:24px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
+.intro b { color:var(--main); }
+
+/* 縮圖卡片 */
+.book-card { border-radius:16px; margin-bottom:24px; overflow:hidden; box-shadow:0 3px 12px rgba(0,0,0,.12); }
+.book-head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 24px; font-size:22px; font-weight:bold; color:#fff; cursor:pointer;
+  user-select:none; transition:filter .15s;
+}
+.book-head:hover { filter:brightness(1.08); }
+.b1-head { background:linear-gradient(135deg,#3a7ca5,#2c5f8a); }
+.b2-head { background:linear-gradient(135deg,#2c7a5c,#1a5c42); }
+.book-head .badge { background:rgba(255,255,255,.25); border-radius:8px; padding:2px 12px; font-size:16px; }
+.book-head .arr { font-size:20px; transition:transform .25s; }
+.book-body { background:#fff; padding:0; max-height:0; overflow:hidden; transition:max-height .35s ease; }
+.book-body.open { max-height:2000px; }
+
+/* 直接連結（第二冊） */
+.b2-link { display:block; text-decoration:none; padding:24px 28px; background:#fff; }
+.b2-link:hover { background:#f0faf5; }
+.b2-link-inner { display:flex; align-items:center; gap:16px; }
+.b2-icon { font-size:42px; flex-shrink:0; }
+.b2-text h3 { font-size:20px; color:#1a5c42; margin-bottom:4px; }
+.b2-text p { font-size:16px; color:#555; }
+.b2-arrow { font-size:28px; color:#2c7a5c; margin-left:auto; }
+
+/* 單元 */
+.unit { border-bottom:1px solid #e8eaed; }
+.unit:last-child { border-bottom:none; }
+.unit-head { padding:12px 20px; background:#f5f8fc; font-size:18px; font-weight:700; color:#2c5f8a; display:flex; align-items:center; gap:10px; }
+.unit-num { background:#2c5f8a; color:#fff; border-radius:50%; width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+.links { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:14px 20px; }
+.links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:12px 8px; font-size:17px; color:#1a1a1a; transition:all .12s; text-align:center; }
+.links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
+.links a .ic { font-size:24px; }
+.links a.teach { border-color:#e7d9a8; }
+.links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
+.links a small { color:#667; font-size:14px; }
+
+footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
+@media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:22px; } .book-head { font-size:19px; } }
 </style>
 </head>
 <body>
@@ -40,55 +66,102 @@
 </header>
 <div class="wrap">
   <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">1</span>臺灣在哪裡</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-1.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-1.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-1.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+
+  <!-- 先修（第一冊） -->
+  <div class="book-card">
+    <div class="book-head b1-head" onclick="toggle('b1')">
+      <span>📚 先修（第一冊）</span>
+      <span class="badge">第一學期 單元 1–6</span>
+      <span class="arr" id="arr-b1">▼</span>
+    </div>
+    <div class="book-body" id="b1">
+      <div class="unit">
+        <div class="unit-head"><span class="unit-num">1</span>臺灣在哪裡</div>
+        <div class="links">
+          <a class="teach" href="notes-unit-1.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+          <a href="practice-unit-1.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-1.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
+      <div class="unit">
+        <div class="unit-head"><span class="unit-num">2</span>海岸與島嶼</div>
+        <div class="links">
+          <a class="teach" href="notes-unit-2.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+          <a href="practice-unit-2.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-2.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
+      <div class="unit">
+        <div class="unit-head"><span class="unit-num">3</span>地形與河川</div>
+        <div class="links">
+          <a class="teach" href="notes-unit-3.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+          <a href="practice-unit-3.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-3.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
+      <div class="unit">
+        <div class="unit-head"><span class="unit-num">4</span>天氣與氣候</div>
+        <div class="links">
+          <a class="teach" href="notes-unit-4.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+          <a href="practice-unit-4.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-4.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
+      <div class="unit">
+        <div class="unit-head"><span class="unit-num">5</span>家鄉的環境變遷</div>
+        <div class="links">
+          <a class="teach" href="notes-unit-5.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+          <a href="practice-unit-5.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-5.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
+      <div class="unit">
+        <div class="unit-head"><span class="unit-num">6</span>臺灣的人口</div>
+        <div class="links">
+          <a class="teach" href="notes-unit-6.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
+          <a href="practice-unit-6.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-6.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">2</span>海岸與島嶼</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-2.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-2.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-2.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+
+  <!-- 第二冊 -->
+  <div class="book-card">
+    <div class="book-head b2-head" onclick="toggle('b2')">
+      <span>🗺 第二冊</span>
+      <span class="badge">交通運輸 · 都市化 · 四大區域 · 離島</span>
+      <span class="arr" id="arr-b2">▼</span>
+    </div>
+    <div class="book-body" id="b2">
+      <a class="b2-link" href="geo-b2-final-review.html">
+        <div class="b2-link-inner">
+          <span class="b2-icon">📋</span>
+          <div class="b2-text">
+            <h3>期末複習三回考卷（含重點講義）</h3>
+            <p>三份重點複習講義 ＋ 三份 40 題互動考卷 ｜ 含解析</p>
+            <p style="font-size:15px;color:#888;margin-top:4px">第一回：交通運輸 ｜ 第二回：都市化與城鄉 ｜ 第三回：四大區域與離島</p>
+          </div>
+          <span class="b2-arrow">→</span>
+        </div>
+      </a>
     </div>
   </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">3</span>地形與河川</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-3.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-3.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-3.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">4</span>天氣與氣候</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-4.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-4.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-4.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">5</span>家鄉的環境變遷</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-5.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-5.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-5.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">6</span>認識地圖</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-6.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-6.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-6.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
-  <footer>地理科 互動學習 ‧ teaching.efetl.com</footer>
+
 </div>
+<footer>© 全民補習班 teaching.efetl.com</footer>
+<script>
+function toggle(id) {
+  const body = document.getElementById(id);
+  const arr = document.getElementById('arr-' + id);
+  if (body.classList.contains('open')) {
+    body.classList.remove('open');
+    arr.style.transform = '';
+  } else {
+    body.classList.add('open');
+    arr.style.transform = 'rotate(180deg)';
+  }
+}
+</script>
 </body>
 </html>
