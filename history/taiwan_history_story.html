@@ -246,6 +246,33 @@
     border: 0.5px solid var(--border); border-radius: var(--radius-lg);
     margin: 1rem 0; color: var(--text);
   }
+
+  /* ── 音樂按鈕 ────────────────────── */
+  .music-fab {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 54px; height: 54px; border-radius: 50%;
+    background: var(--bg); border: 0.5px solid var(--border-med);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 2px;
+    cursor: pointer; z-index: 200;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    transition: border-color .25s, background .2s;
+    font-family: inherit;
+  }
+  .music-fab i { font-size: 20px; color: var(--text-sec); transition: color .25s; }
+  .music-fab span { font-size: 9px; color: var(--text-ter); letter-spacing: .4px; }
+  .music-fab:hover { background: var(--bg-sec); }
+  .music-fab.on { border-color: #0F6E56; }
+  .music-fab.on i { color: #0F6E56; }
+  .music-fab.on span { color: #0F6E56; }
+
+  /* 波動動畫（播放中） */
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(15,110,86,.35); }
+    70%  { box-shadow: 0 0 0 10px rgba(15,110,86,0); }
+    100% { box-shadow: 0 0 0 0 rgba(15,110,86,0); }
+  }
+  .music-fab.on { animation: pulse-ring 2.5s ease-out infinite; }
 </style>
 </head>
 <body>
@@ -682,7 +709,14 @@
   全民補習班 線上教學 · teaching.efetl.com/history
 </footer>
 
+<!-- 浮動音樂按鈕 -->
+<button class="music-fab" id="musicFab" onclick="toggleMusic()" title="背景音樂開關" aria-label="切換背景音樂">
+  <i class="ti ti-music" aria-hidden="true"></i>
+  <span id="musicLabel">音樂</span>
+</button>
+
 <script>
+  /* ── 章節導覽 ── */
   var btns = document.querySelectorAll('.nav-btn');
   var chapters = ['ch0','ch1','ch2','ch3'];
 
@@ -692,6 +726,146 @@
       btns[i].classList.toggle('active', i === n);
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── 五聲音階古琴風格背景音樂（Web Audio API） ── */
+  var AC = window.AudioContext || window.webkitAudioContext;
+
+  // C 五聲音階各八度（C D E G A）
+  var PENTA = [
+    130.81, 146.83, 164.81, 196.00, 220.00,   // 低八度
+    261.63, 293.66, 329.63, 392.00, 440.00,   // 中八度
+    523.25, 587.33, 659.25, 783.99, 880.00    // 高八度
+  ];
+
+  var mus = {
+    ctx: null, master: null, droneNodes: [],
+    playing: false, timer: null, nextBeat: 0,
+
+    start: function () {
+      if (!AC) return;
+      this.ctx = new AC();
+
+      // 主音量（淡入 2 秒）
+      this.master = this.ctx.createGain();
+      this.master.gain.setValueAtTime(0, this.ctx.currentTime);
+      this.master.gain.linearRampToValueAtTime(0.55, this.ctx.currentTime + 2);
+
+      // 殘響：一組延遲回授，模擬空間感
+      var delay    = this.ctx.createDelay(2.5);
+      var feedback = this.ctx.createGain();
+      var wetGain  = this.ctx.createGain();
+      delay.delayTime.value  = 0.55;
+      feedback.gain.value    = 0.28;
+      wetGain.gain.value     = 0.38;
+      delay.connect(feedback);
+      feedback.connect(delay);
+      delay.connect(wetGain);
+      wetGain.connect(this.ctx.destination);
+      this.master.connect(this.ctx.destination);
+      this.master.connect(delay);
+
+      // 低頻持續音（兩支微差音程 → 產生拍頻）
+      var self = this;
+      [65.406, 65.604].forEach(function (hz) {
+        var o = self.ctx.createOscillator();
+        var g = self.ctx.createGain();
+        var f = self.ctx.createBiquadFilter();
+        o.type = 'sine';
+        o.frequency.value = hz;
+        f.type = 'lowpass';
+        f.frequency.value = 280;
+        g.gain.value = 0.07;
+        o.connect(f); f.connect(g); g.connect(self.master);
+        o.start();
+        self.droneNodes.push(o);
+      });
+
+      this.playing  = true;
+      this.nextBeat = this.ctx.currentTime + 0.8;
+      this.schedule();
+    },
+
+    // 模擬古琴撥弦：極短 attack + 指數衰減
+    pluck: function (freq, t, vol) {
+      var ctx = this.ctx;
+
+      // 基音（正弦）
+      var o1 = ctx.createOscillator();
+      var g1 = ctx.createGain();
+      o1.type = 'sine';
+      o1.frequency.value = freq;
+      g1.gain.setValueAtTime(0, t);
+      g1.gain.linearRampToValueAtTime(vol, t + 0.012);
+      g1.gain.exponentialRampToValueAtTime(0.0001, t + 3.2 + Math.random() * 1.8);
+      o1.connect(g1); g1.connect(this.master);
+      o1.start(t); o1.stop(t + 5.5);
+
+      // 二次泛音（三角波 × 低音量）增加質感
+      var o2 = ctx.createOscillator();
+      var g2 = ctx.createGain();
+      o2.type = 'triangle';
+      o2.frequency.value = freq * 2.005;
+      g2.gain.setValueAtTime(0, t);
+      g2.gain.linearRampToValueAtTime(vol * 0.18, t + 0.01);
+      g2.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
+      o2.connect(g2); g2.connect(this.master);
+      o2.start(t); o2.stop(t + 2.5);
+    },
+
+    schedule: function () {
+      if (!this.playing) return;
+      var lookahead = 2.2;
+      var now = this.ctx.currentTime;
+
+      while (this.nextBeat < now + lookahead) {
+        // 70% 機率落在中八度，增加溫暖感
+        var pool = Math.random() < 0.70 ? PENTA.slice(5, 10) : PENTA.slice(0, 15);
+        var freq = pool[Math.floor(Math.random() * pool.length)];
+        var vol  = 0.055 + Math.random() * 0.09;
+        this.pluck(freq, this.nextBeat, vol);
+
+        // 每拍間距 0.9 ~ 2.6 秒，不規則感
+        this.nextBeat += 0.9 + Math.random() * 1.7;
+      }
+
+      var self = this;
+      this.timer = setTimeout(function () { self.schedule(); }, 400);
+    },
+
+    stop: function () {
+      this.playing = false;
+      clearTimeout(this.timer);
+      if (!this.ctx) return;
+      var now = this.ctx.currentTime;
+      this.master.gain.linearRampToValueAtTime(0, now + 1.8);
+      var ctx = this.ctx;
+      var dns = this.droneNodes;
+      this.ctx = null;
+      this.droneNodes = [];
+      setTimeout(function () {
+        dns.forEach(function (o) { try { o.stop(); } catch (e) {} });
+        ctx.close();
+      }, 2000);
+    }
+  };
+
+  var musicOn = false;
+
+  function toggleMusic() {
+    var fab   = document.getElementById('musicFab');
+    var label = document.getElementById('musicLabel');
+    if (musicOn) {
+      mus.stop();
+      musicOn = false;
+      fab.classList.remove('on');
+      label.textContent = '音樂';
+    } else {
+      mus.start();
+      musicOn = true;
+      fab.classList.add('on');
+      label.textContent = '靜音';
+    }
   }
 </script>
 </body>
