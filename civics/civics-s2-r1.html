@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公民 第 01 回 | 互動練習</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--card:#fff;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:22px 18px 18px;text-align:center;}
+header h1{font-size:24px;font-weight:bold;}
+header p{font-size:15px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:14px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.score-bar{background:#fff;border-radius:12px;padding:12px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
+.score-bar b{color:var(--red);font-size:20px;}
+.progress{font-size:14px;color:#667;}
+/* 題組情境框 */
+.ctx-box{background:#fff8e6;border:1px solid #e0c060;border-radius:12px;padding:14px 18px;margin-bottom:18px;}
+.ctx-intro{font-size:15px;margin-bottom:8px;color:#444;}
+.ctx-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;}
+.ctx-table th{background:#c5a028;color:#fff;padding:6px 8px;text-align:left;}
+.ctx-table td{padding:5px 8px;border:1px solid #e0c060;}
+.ctx-table tr:nth-child(even){background:#fffbe8;}
+.group-label{background:#fff3cd;border-left:4px solid var(--gold);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#5a3e00;margin-bottom:14px;}
+/* 題目卡片 */
+.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.q-num{display:inline-block;background:var(--red);color:#fff;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px;font-size:14px;font-weight:bold;margin-right:8px;flex-shrink:0;}
+.q-text{font-size:16px;font-weight:500;margin-bottom:12px;display:flex;align-items:flex-start;gap:6px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.opt-btn{display:flex;align-items:flex-start;gap:8px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:9px 12px;cursor:pointer;font-size:15px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
+.opt-btn:hover:not(:disabled){border-color:var(--red);background:#fdf0f0;}
+.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 7px;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.opt-btn.correct{border-color:var(--ok);background:#e8f5ee;}
+.opt-btn.correct .ol{background:var(--ok);color:#fff;}
+.opt-btn.wrong{border-color:var(--err);background:#fde8e8;}
+.opt-btn.wrong .ol{background:var(--err);color:#fff;}
+.opt-btn.reveal{border-color:var(--ok);background:#e8f5ee;opacity:.8;}
+.opt-btn.reveal .ol{background:var(--ok);color:#fff;}
+.exp-box{margin-top:10px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:8px 12px;font-size:14px;color:#1a4a2c;display:none;}
+.exp-box.show{display:block;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:560px){
+  .opts{grid-template-columns:1fr;}
+  header h1{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 公民下學期複習 第 01 回</h1>
+  <p>翰林版 | 社會地位、社會流動、社會安全制度 | 共 40 題</p>
+  <a class="back" href="mock-exam-s2.html">← 回考卷選單</a>
+</header>
+<div class="wrap">
+  <div class="score-bar">
+    <span>得分：<b id="score">0</b> / 80 分</span>
+    <span class="progress">已作答 <span id="done">0</span> / 40 題</span>
+  </div>
+  <div id="app"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+const QS = [{"n": 1, "q": "根據上表，四位校友中哪一位的「現職」最能說明「成就地位」的概念？", "opts": ["阿明，靠苦讀取得醫師資格", "小芸，繼承父親政治人脈當選", "志偉，身為富商之子繼承家業", "美華，因排灣族身分獲得職位"], "ans": "A", "exp": "成就地位是靠個人後天努力取得的社會地位。阿明出身農村，靠自己讀書考上醫學院成為醫師，是典型的成就地位。小芸靠家族人脈、志偉靠繼承，美華的族群身分是先賦地位，均不符合成就地位的定義。", "group": true}, {"n": 2, "q": "志偉的人生經歷最能說明哪一種社會流動？", "opts": ["水平流動，工作性質改變但地位相同", "向下流動，社會地位由高往低變動", "向上流動，透過努力提升社會地位", "世代流動，地位與父母不同"], "ans": "B", "exp": "志偉從億萬富翁之子淪為打工族，社會經濟地位明顯下降，屬於向下的垂直流動。水平流動是同一層次的移動，向上流動是地位提升，世代流動強調的是跨代比較而非個人的地位下降。", "group": true}, {"n": 3, "q": "美華的「排灣族人」身分，在社會地位的分類上屬於？", "opts": ["成就地位，因為她靠努力通過考試", "成就地位，因為她在委員會中表現優秀", "先賦地位，因為這是出生時便被賦予的", "先賦地位，因為這是由社會賦予的榮譽"], "ans": "C", "exp": "先賦地位是與生俱來、無法靠個人意志改變的地位，例如性別、種族、出身家庭。美華的「排灣族人」身分是她出生時便天生具有的，屬於先賦地位。她的「科長」職位才是靠考試和努力取得的成就地位。", "group": true}, {"n": 4, "q": "阿明的成功故事，最能說明下列哪個因素對促進社會流動最為關鍵？", "opts": ["家庭背景與財富積累", "政治人脈與社會關係", "教育機會與個人努力", "地區發展與城鄉差距"], "ans": "C", "exp": "阿明出身農村貧困家庭，靠苦讀考上醫學院，這說明教育是突破社會階層、促進向上流動的重要管道。翰林版課文強調，教育機會的公平化是現代民主社會實現社會流動的重要基礎。", "group": true}, {"n": 5, "q": "根據上表的四位校友，下列哪一項說法最為正確？", "opts": ["在民主社會中，只有先賦地位才能決定一個人的命運", "現代社會中，成就地位已完全取代先賦地位的重要性", "先賦地位與成就地位在現實生活中可以同時存在於一人身上", "社會流動只有向上流動，沒有向下流動的可能性"], "ans": "C", "exp": "美華同時具有「排灣族人」（先賦地位）和「科長」（成就地位），說明兩者可以並存。A錯，民主社會強調成就地位；B過於絕對，先賦地位仍存在影響；D錯，志偉的例子說明向下流動確實存在。", "group": true}, {"n": 6, "q": "下列社會地位中，哪一項屬於「先賦地位」？", "opts": ["擔任學生代表的能力", "出生時的性別", "靠努力取得的律師執照", "透過學習得到的廚師證照"], "ans": "B", "exp": "先賦地位是出生時就被決定、無法靠個人意志改變的地位，如性別、種族、出身家庭等。律師和廚師執照都是靠努力學習取得的成就地位，學生代表也是透過選舉或表現得來的。", "group": false}, {"n": 7, "q": "小莉原本在台北的出版社擔任編輯，後來轉到高雄的一家出版社繼續擔任同職級的編輯。請問，小莉的這項改變屬於何種社會流動？", "opts": ["向上流動", "水平流動", "向下流動", "世代流動"], "ans": "B", "exp": "水平流動是指社會地位沒有高低改變，只有地理位置或工作單位的變動。小莉職位等級未變，只是換了城市和公司，屬於水平流動（又稱橫向流動）。向上或向下流動涉及地位的高低變化。", "group": false}, {"n": 8, "q": "有四位同學討論「先賦地位」與「成就地位」，下列何人說法最正確？", "opts": ["阿強：王位繼承人的地位是成就地位，因為必須表現好才能繼位", "小美：博士學位是先賦地位，因為父母讀書多，自然影響子女", "阿志：醫師執照是成就地位，因為是靠個人努力學習取得的", "小惠：性別是成就地位，因為現代社會可以透過手術改變"], "ans": "C", "exp": "成就地位是靠個人後天努力取得的，醫師執照需要考試和學習，是典型的成就地位。A錯，王位是先賦地位；B錯，博士學位是需要個人學習努力取得的成就地位；D錯，性別是先賦地位（是出生時的生理性別）。", "group": false}, {"n": 9, "q": "社會流動中，「世代間流動」是指？", "opts": ["同一個人在不同年齡階段的地位變化", "子女的社會地位與父母不同", "在同一世代中，朋友間的地位差異", "移民到其他國家後地位的改變"], "ans": "B", "exp": "世代間流動（代際流動）是指子女和父母之間的社會地位差異，例如父親是農夫、兒子成為醫師，這跨越了世代的地位變化。與此相對，個人在一生中的地位變化屬於「代內流動」（世代內流動）。", "group": false}, {"n": 10, "q": "下列哪一個情境最能說明「向上社會流動」？", "opts": ["林老師從台北市調到新北市任教，薪資待遇相同", "王大明從公司副理被降職為普通職員", "出身貧農家庭的陳阿土，靠苦讀成為大學教授", "李小明從普通話部門轉調到英語部門"], "ans": "C", "exp": "向上社會流動是指個人的社會經濟地位提升。陳阿土從農村貧困家庭透過努力讀書成為大學教授，是社會地位向上流動的典型例子。A是水平流動，B是向下流動，D也是水平調動。", "group": false}, {"n": 11, "q": "孔子的第七十三代傳人被稱為「孔聖人後裔」，享有特殊的社會地位與文化尊崇。這種地位屬於？", "opts": ["先賦地位，因為這是出生時便承繼的身分", "成就地位，因為傳承孔子的學問需要努力", "先賦地位，但只在儒家文化圈有效", "成就地位，因為受到社會認可才有此地位"], "ans": "A", "exp": "「孔子後裔」這個身分是透過血統繼承而來，不需要靠個人努力，出生時便自動具有，屬於先賦地位。雖然B選項提到傳承學問需要努力，但「後裔身分」本身是先賦的，不因個人努力多寡而改變。", "group": false}, {"n": 12, "q": "西方國家在19世紀工業革命後，開始以政府力量推動社會安全制度，主要是因為？", "opts": ["科技進步使人類壽命延長，老人照護需求增加", "工業化後貧富差距擴大，個人無力單獨應對生活風險", "宗教勢力衰退，慈善機構無力再承擔救濟工作", "國際競爭激烈，政府需吸引勞工支持"], "ans": "B", "exp": "工業革命後，大量農民湧入城市成為工人，卻面臨低薪、失業、工傷等風險，貧富差距擴大，個人和家庭無力自行解決。政府因此開始介入，建立社會安全制度，以保障勞工基本生活。", "group": false}, {"n": 13, "q": "下列哪一個例子最能說明社會階層的存在？", "opts": ["某國憲法規定人人生而平等", "某公司依員工職位高低，給予不同薪資與福利", "某學校對所有學生一視同仁，不分貴賤", "某社區居民共同舉辦活動，增進感情"], "ans": "B", "exp": "社會階層是指社會中存在高低不同地位的層次結構。公司依職位高低給予不同待遇，正反映了社會中確實存在層次差異的現象。A、C、D反而描述的是平等或和諧的社會現象。", "group": false}, {"n": 14, "q": "下列關於社會流動的描述，何者正確？", "opts": ["傳統封建社會的社會流動較現代民主社會更為活躍", "社會流動只有「垂直流動」，沒有「水平流動」", "現代民主社會強調機會均等，有助於促進社會流動", "社會流動越頻繁，代表社會越不穩定"], "ans": "C", "exp": "現代民主社會強調機會平等，透過教育制度讓個人有機會改變社會地位，有助於促進社會流動。A錯，傳統封建社會階層固化，流動性反而較低；B錯，社會流動分垂直和水平兩種；D錯，適度的社會流動代表社會是開放且公平的。", "group": false}, {"n": 15, "q": "全民健康保險在我國社會福利制度中屬於哪一類？", "opts": ["社會保險", "社會救助", "社會津貼", "福利服務"], "ans": "A", "exp": "全民健保是政府依法強制國民投保，透過共同繳納保費、分散疾病風險的制度，屬於社會保險的範疇。社會救助是針對急難或低收入戶的補助；社會津貼是無須投保即可領取的定期給付；福利服務則是針對特定族群提供的服務。", "group": false}, {"n": 16, "q": "下列哪一個說法最能說明「社會地位」對個人生活的影響？", "opts": ["社會地位高的人一定比社會地位低的人更快樂", "社會地位決定了個人在社會中所能取得的資源與機會", "先賦地位對個人的影響遠大於成就地位", "成就地位是由社會整體共同決定，個人無法改變"], "ans": "B", "exp": "社會地位影響個人在社會中所能取得的資源（如財富、教育機會、人際關係）和所受到的尊重程度。A不必然正確，幸福感不完全由地位決定；C過於絕對；D錯，成就地位的定義就是靠個人努力改變的。", "group": false}, {"n": 17, "q": "《禮記·禮運篇·大同章》提到「使老有所終，壯有所用，幼有所長，矜寡孤獨廢疾者，皆有所養」，這段話的精神最接近現代哪一個概念？", "opts": ["社會競爭", "自由市場", "社會安全制度", "個人主義"], "ans": "C", "exp": "這段話強調老弱婦孺都應得到妥善照顧，與現代「社會安全制度」的精神高度一致——政府透過有計畫的制度，保障全民基本生活所需，照顧不同族群的需求。", "group": false}, {"n": 18, "q": "非裔法國人的「非裔」身分屬於何種社會地位？", "opts": ["成就地位，因為他在法國社會中努力取得認可", "先賦地位，因為這是出生時就具有的種族特徵", "成就地位，因為移民法國是個人主動選擇的結果", "先賦地位，但只在種族多元的社會中才有意義"], "ans": "B", "exp": "「非裔」是指個人的種族或族裔背景，是出生時便具有的先天特徵，無法靠個人意志改變，屬於先賦地位。即使是個人選擇移民，種族/族裔背景仍是先賦的。", "group": false}, {"n": 19, "q": "早期社會（工業革命前）中，主要由哪些力量承擔救濟貧困民眾的責任？", "opts": ["政府財政部門統籌分配資源", "宗教團體與善心人士的慈善救濟", "跨國組織協調各國資源", "企業自發性提供員工福利"], "ans": "B", "exp": "在工業革命以前，政府尚未有完整的社會福利制度，救濟貧困者主要依靠宗教機構（如教會、廟宇）和善心人士的慈善行為。現代社會才逐漸轉型為政府統籌的社會安全制度。", "group": false}, {"n": 20, "q": "某同學說：「我爸爸是個農夫，可是我努力讀書考上公務員，現在薪資穩定、社會地位也提升了。」這段話最能說明下列哪一個概念？", "opts": ["先賦地位的重要性", "成就地位的侷限性", "垂直向上的社會流動", "水平的世代間流動"], "ans": "C", "exp": "該同學從農家子弟透過讀書考試成為公務員，社會經濟地位相對於父母明顯提升，屬於跨世代的向上垂直社會流動，同時也是個人靠努力取得成就地位的例子。", "group": false}, {"n": 21, "q": "關於國民年金保險，下列敘述何者正確？", "opts": ["只有65歲以上老人才能加入", "加入對象是尚未納入職業保險網絡的國民", "由政府全額支付保費，個人不需繳納", "屬於社會救助，針對低收入戶提供生活補助"], "ans": "B", "exp": "國民年金保險是針對年滿25歲、未滿65歲，且未加入勞保、農保、公教保等職業保險的國民強制投保，保費由個人和政府共同負擔。A錯，65歲以上才能領取老年給付，但加入年齡是25-65歲；C錯；D錯，國民年金是保險不是救助。", "group": false}, {"n": 22, "q": "「女兒國的唯一男性」在女兒國中享有特殊的社會地位，這種地位屬於？", "opts": ["成就地位，因為在女兒國表現突出", "先賦地位，因為性別是出生時便決定的", "成就地位，因為被女兒國人民共同認可", "先賦地位，只因出生在女兒國"], "ans": "B", "exp": "在女兒國全是女性的社會環境中，「男性」的性別屬於先天決定、無法改變的特徵，因此是先賦地位。雖然這個地位因特殊社會環境而顯得突出，但性別本身仍是先賦的。", "group": false}, {"n": 23, "q": "社會保險的核心精神是？", "opts": ["社會互助與風險共同分擔", "政府全額補貼弱勢族群", "企業自願提供員工保障", "個人自行儲蓄以備不時之需"], "ans": "A", "exp": "社會保險的核心精神是「社會互助、風險分擔」，由眾多參保人共同繳納保費，形成共同資金池，當有人遭遇特定風險（疾病、失業、傷殘等）時，由此資金提供保障。這與個人儲蓄或政府補貼不同。", "group": false}, {"n": 24, "q": "下列關於「社會流動」的敘述，何者正確？", "opts": ["社會流動只發生在不同世代之間，同一人一生中地位不會改變", "現代社會的社會流動完全由先天條件（家庭背景）決定", "社會流動包含垂直流動與水平流動兩種主要形式", "社會流動越少，代表社會越公平"], "ans": "C", "exp": "社會流動分為垂直流動（地位高低改變）和水平流動（地位不變，位置改變），這是教科書的基本分類。A錯，同一人一生也可能有地位改變；B錯，現代社會個人努力也是重要因素；D錯，社會流動少反而可能代表社會固化不公平。", "group": false}, {"n": 25, "q": "下列哪一種措施屬於「社會津貼」？", "opts": ["勞工保險的老年給付", "政府發放的育兒津貼", "社會局提供的急難救助金", "全民健康保險的醫療給付"], "ans": "B", "exp": "社會津貼是政府不需個人投保，直接針對特定身分或條件的國民發給的現金給付，如育兒津貼、老人年金（未投保者）等。A和D屬於社會保險給付；C屬於社會救助。", "group": false}, {"n": 26, "q": "下列哪一個情況，說明某人同時具有「先賦地位」和「成就地位」？", "opts": ["阿明的父親是總統，阿明長大後也成為政治人物", "出生於貧困家庭的小芸，靠努力考上律師", "原住民阿德透過公職考試成為地方官員", "富家子弟繼承家業，並將公司發展壯大"], "ans": "C", "exp": "阿德的「原住民」身分是先賦地位（出生時便有），「地方官員」職位是透過公職考試努力取得的成就地位，兩者同時存在。A的情況可能兩者都是先賦（政治世家繼承）；B只有成就地位；D主要是先賦（繼承家業）。", "group": false}, {"n": 27, "q": "下列關於社會安全制度演變的描述，何者正確？", "opts": ["社會安全制度一開始就是由政府統籌規劃的", "現代社會安全制度強調政府整合各種資源，保障全民生活", "進入21世紀後，宗教團體成為社會安全的主要負責者", "社會安全制度只針對弱勢族群，一般民眾不受保障"], "ans": "B", "exp": "現代社會安全制度由政府統籌，整合政府、民間、企業等各方資源，目的是保障「全體國民」的基本生活，不限於弱勢族群。A錯，早期是宗教慈善承擔；C錯，現代已轉型為政府主導；D錯，全民都有保障。", "group": false}, {"n": 28, "q": "下列哪一個選項屬於「社會救助」的範疇？", "opts": ["失業勞工按月領取的失業給付", "政府提供低收入戶的生活扶助費", "老年人領取的勞保老年給付", "家長為孩子申請的育兒津貼"], "ans": "B", "exp": "社會救助是針對生活陷入困境的弱勢族群（如低收入戶、急難家庭）提供的補助，生活扶助費是其典型代表。A是社會保險（就業保險）的給付；C是社會保險（勞保）的給付；D是社會津貼。", "group": false}, {"n": 29, "q": "在封建社會中，農夫的兒子幾乎一定也是農夫，貴族的後代也幾乎都是貴族。這說明封建社會具有什麼特色？", "opts": ["社會流動頻繁，個人可透過努力改變地位", "社會結構固化，階層之間難以流動", "成就地位比先賦地位更重要", "政府積極推動社會平等政策"], "ans": "B", "exp": "封建社會以出身（先賦地位）決定一個人的社會位置，階層之間幾乎沒有流動，社會結構非常固化。與現代民主社會強調個人努力（成就地位）和機會平等截然不同。", "group": false}, {"n": 30, "q": "「國民就業」在我國社會福利制度中，主要目的是？", "opts": ["提供失業者長期生活補助，直到找到工作為止", "促進充分就業，保障勞動者的工作權益與職業安全", "為低收入戶免費提供工作機會，解決貧窮問題", "強制企業為員工提供職業保險，分擔失業風險"], "ans": "B", "exp": "國民就業措施的目的是促進充分就業，包含職業訓練、就業媒合、勞動條件保障等，保障勞動者的基本工作權益。A描述的比較像社會救助；C是以工代賑的概念；D較接近社會保險的概念。", "group": false}, {"n": 31, "q": "教育機會的公平化，為何有助於促進社會流動？", "opts": ["因為教育讓每個人的先賦地位更加穩固", "因為教育讓有錢人的子女得到更好的資源", "因為教育提供了改變社會地位的重要管道，讓個人靠努力出頭", "因為教育讓社會階層更加清晰，各司其職"], "ans": "C", "exp": "教育是現代社會中促進向上社會流動的最重要管道。當教育機會公平時，出身弱勢家庭的個人也能透過努力學習提升自己的社會地位，突破先天條件的限制，實現社會流動。", "group": false}, {"n": 32, "q": "下列哪一個情境，屬於「水平社會流動」？", "opts": ["小陳從工廠工人升任為工廠廠長", "小玉從高雄的護士轉調到台北擔任同等級的護士", "小李原本是公務員，因失業而轉為打工族", "小黃從普通職員晉升為部門主管"], "ans": "B", "exp": "水平流動是指社會地位等級沒有改變，只是職位所在地點或機構改變。小玉從高雄轉到台北，職級相同，是典型的水平流動。A和D是向上流動，C是向下流動。", "group": false}, {"n": 33, "q": "下列哪一項措施，最能幫助有居住需求的弱勢家庭改善住的問題？", "opts": ["社會保險", "社會津貼", "社會住宅", "醫療保健"], "ans": "C", "exp": "社會住宅是政府興建租金相對低廉的住宅，優先提供給中低收入戶、身心障礙者、單親家庭等弱勢族群承租，目的是保障弱勢家庭的居住權益。其他選項與住屋需求較不直接相關。", "group": false}, {"n": 34, "q": "下列何者的社會地位「不屬於」成就地位？", "opts": ["廚師執照", "律師資格", "出生時的性別", "大學學歷"], "ans": "C", "exp": "出生時的性別是與生俱來、無法靠個人意志改變的，屬於先賦地位。廚師執照、律師資格、大學學歷都是靠後天學習、考試、努力取得的成就地位。", "group": false}, {"n": 35, "q": "政府推動社會安全制度的根本目的是什麼？", "opts": ["增加政府的財政收入，以維持國家運作", "保障全民基本生活，維護人性尊嚴，建構安居樂業的社會", "鼓勵民間慈善事業取代政府的社會救濟責任", "限制社會流動，維持社會的穩定秩序"], "ans": "B", "exp": "社會安全制度的根本目的是保障全體國民的基本生活需求，維護每個人的人性尊嚴，讓人民能安居樂業。A、C、D都偏離了社會安全制度的核心理念。", "group": false}, {"n": 36, "q": "全民健保採取「強制納保」的方式，主要原因是？", "opts": ["政府希望從保費中獲取財政收入", "為了確保有足夠多的參保人，分擔風險，使制度永續運作", "因為自願性保險無法保障政府的利益", "為了懲罰不願投保的民眾"], "ans": "B", "exp": "社會保險採強制納保，是為了確保有足夠多的參保人數，使風險能充分分散，保費能維持合理水準，讓整個保險制度能永續運作。若改為自願，則健康者可能不投保，導致資金不足。", "group": false}, {"n": 37, "q": "下列四種情況，何者最能說明「先賦地位」影響個人生活機遇的現象？", "opts": ["甲：靠苦讀考上名校，改善家庭經濟", "乙：因出生在富裕家庭，從小就讀貴族學校，接觸更多資源", "丙：透過職業技能訓練，轉換到更好的工作", "丁：積極參與社區活動，獲得鄰居尊重"], "ans": "B", "exp": "乙的情況說明出生在富裕家庭（先賦地位）使其能接觸到一般人難以獲得的優質教育資源，體現了先賦地位對個人生活機遇的影響。甲、丙、丁都是靠後天努力改變的成就地位例子。", "group": false}, {"n": 38, "q": "下列哪一項屬於「福利服務」的範疇？", "opts": ["為失業勞工提供就業保險給付", "政府補助低收入戶的生活費用", "提供老人日間照顧及居家照護服務", "強制國民加入全民健保"], "ans": "C", "exp": "福利服務是針對特定族群（如老人、兒童、身障者、婦女等）提供的專業服務，老人日間照顧和居家照護屬於福利服務。A是社會保險；B是社會救助；D是社會保險（全民健保）。", "group": false}, {"n": 39, "q": "小明的父親是醫師，小明長大後也努力考取醫師執照，繼承了父親的職業。這個現象說明了？", "opts": ["小明的醫師職位屬於先賦地位", "父親的職業是先賦地位，但小明的醫師資格是成就地位", "小明的例子說明現代社會沒有社會流動的空間", "世代之間的社會地位完全由先賦條件決定"], "ans": "B", "exp": "父親是醫師屬於父親的成就地位；小明的「醫師執照」是靠個人考試取得的，屬於成就地位。但從世代流動的角度看，小明與父親地位相近，屬於「世代間流動極小」的例子。A錯，醫師資格是成就地位，不是先賦地位。", "group": false}, {"n": 40, "q": "社會福利制度的演變中，下列哪一個描述最符合「現代社會安全制度」的特色？", "opts": ["以個人慈善心為基礎，由善心人士自發救濟窮人", "由宗教機構統籌，以宗教慈善取代政府責任", "由政府有計劃地統籌整合資源，保障全體國民生活", "以市場機制為主，個人自行購買私人保險"], "ans": "C", "exp": "現代社會安全制度的核心特色是由政府有計劃地統籌所有資源（包含政府、民間、企業等），建立完善的制度架構，目標是保障「全體國民」的基本生活需求，而非只針對少數弱勢。", "group": false}];
+const OPT_LABELS = ['Ａ','Ｂ','Ｃ','Ｄ'];
+
+let score = 0, done = 0;
+
+function updateScore(){
+  document.getElementById('score').textContent = score;
+  document.getElementById('done').textContent = done;
+}
+
+function buildUI(){
+  const app = document.getElementById('app');
+
+  // 題組情境框
+  const ctxBox = document.createElement('div');
+  ctxBox.className = 'ctx-box';
+  ctxBox.innerHTML = `<div class="group-label">📋 題組情境 — 請閱讀後回答第 1～5 題</div><p class="ctx-intro">下表為某校舉辦「職涯博覽會」邀請四位校友分享人生經歷，請閱讀後回答第 1～5 題。</p>
+<table class="ctx-table">
+<thead><tr><th>校友</th><th>出身背景</th><th>現職</th><th>取得地位的方式</th></tr></thead>
+<tbody>
+<tr><td>阿明</td><td>農村貧困家庭</td><td>外科主治醫師</td><td>努力苦讀，考上醫學院</td></tr>
+<tr><td>小芸</td><td>政治世家，父親為立委</td><td>地方議員</td><td>繼承父親人脈，直接投身政壇</td></tr>
+<tr><td>志偉</td><td>富商之子，繼承億元家業</td><td>現為打工族</td><td>揮霍無度導致家產散盡</td></tr>
+<tr><td>美華</td><td>排灣族人</td><td>原住民族委員會科長</td><td>通過公務員考試後逐步升遷</td></tr>
+</tbody></table>
+`;
+  app.appendChild(ctxBox);
+
+  let inRegular = false;
+  QS.forEach((item, idx) => {
+    if(!item.group && !inRegular){
+      inRegular = true;
+      const sep = document.createElement('div');
+      sep.className = 'group-label';
+      sep.style.cssText = 'margin-bottom:14px;margin-top:4px;background:#eef3f9;border-left-color:#2c5f8a;color:#1a3a6b;';
+      sep.textContent = '一、單一選擇題（第 6～40 題）';
+      app.appendChild(sep);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'q-card';
+
+    const qtxt = document.createElement('div');
+    qtxt.className = 'q-text';
+    qtxt.innerHTML = `<span class="q-num">${item.n}</span><span>${item.q}</span>`;
+    card.appendChild(qtxt);
+
+    const opts = document.createElement('div');
+    opts.className = 'opts';
+    let answered = false;
+
+    item.opts.forEach((opt, j) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.innerHTML = `<span class="ol">${OPT_LABELS[j]}</span><span>${opt}</span>`;
+      btn.addEventListener('click', () => {
+        if(answered) return;
+        answered = true;
+        done++;
+        const isCorrect = OPT_LABELS[j] === item.ans;
+        if(isCorrect){ score += 2; btn.classList.add('correct'); }
+        else{ btn.classList.add('wrong'); }
+        // reveal correct
+        opts.querySelectorAll('.opt-btn').forEach((b, k) => {
+          b.disabled = true;
+          if(OPT_LABELS[k] === item.ans && !isCorrect) b.classList.add('reveal');
+        });
+        exp.classList.add('show');
+        updateScore();
+      });
+      opts.appendChild(btn);
+    });
+    card.appendChild(opts);
+
+    const exp = document.createElement('div');
+    exp.className = 'exp-box';
+    exp.textContent = '【解析】' + item.exp;
+    card.appendChild(exp);
+
+    app.appendChild(card);
+  });
+}
+
+buildUI();
+updateScore();
+</script>
+</body>
+</html>
