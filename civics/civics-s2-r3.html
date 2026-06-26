@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民 第 03 回 | 互動練習</title>
 <style>
-:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--card:#fff;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;}
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;--blue:#2c5f8a;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
 header{background:var(--red);color:#fff;padding:22px 18px 18px;text-align:center;}
@@ -14,10 +14,26 @@ header p{font-size:15px;opacity:.9;margin-top:4px;}
 .back{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:14px;text-decoration:none;}
 .back:hover{background:rgba(255,255,255,.3);}
 .wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
-.score-bar{background:#fff;border-radius:12px;padding:12px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
+
+/* ── 填充講義區 ── */
+.ho-section{background:#fff;border-radius:14px;padding:18px 20px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.09);}
+.ho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid var(--blue);padding-bottom:8px;}
+.ho-header h2{font-size:18px;color:var(--blue);font-weight:bold;}
+.reveal-all-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:14px;cursor:pointer;font-family:inherit;}
+.reveal-all-btn:hover{background:#1a4a7a;}
+.ho-item{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;font-size:16px;line-height:1.8;}
+.ho-num{background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.ho-body{flex:1;}
+.blank-wrap{display:inline-block;vertical-align:baseline;margin:0 2px;}
+.qm-btn{display:inline-block;background:var(--gold);color:#fff;border:none;border-radius:6px;padding:1px 10px;font-size:15px;font-weight:bold;cursor:pointer;font-family:inherit;vertical-align:baseline;line-height:1.5;}
+.qm-btn:hover{background:#a08020;}
+.blank-ans{display:none;background:#e8f5ee;color:var(--ok);border:1px solid #a8d8b8;border-radius:6px;padding:1px 10px;font-weight:bold;font-size:15px;vertical-align:baseline;}
+
+/* ── 得分列 ── */
+.score-bar{background:#fff;border-radius:12px;padding:11px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
 .score-bar b{color:var(--red);font-size:20px;}
-.progress{font-size:14px;color:#667;}
-/* 題組情境框 */
+
+/* ── 題組情境框 ── */
 .ctx-box{background:#fff8e6;border:1px solid #e0c060;border-radius:12px;padding:14px 18px;margin-bottom:18px;}
 .ctx-intro{font-size:15px;margin-bottom:8px;color:#444;}
 .ctx-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;}
@@ -25,27 +41,26 @@ header p{font-size:15px;opacity:.9;margin-top:4px;}
 .ctx-table td{padding:5px 8px;border:1px solid #e0c060;}
 .ctx-table tr:nth-child(even){background:#fffbe8;}
 .group-label{background:#fff3cd;border-left:4px solid var(--gold);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#5a3e00;margin-bottom:14px;}
-/* 題目卡片 */
-.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.q-num{display:inline-block;background:var(--red);color:#fff;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px;font-size:14px;font-weight:bold;margin-right:8px;flex-shrink:0;}
-.q-text{font-size:16px;font-weight:500;margin-bottom:12px;display:flex;align-items:flex-start;gap:6px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.opt-btn{display:flex;align-items:flex-start;gap:8px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:9px 12px;cursor:pointer;font-size:15px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
+.section-label{background:#eef3f9;border-left:4px solid var(--blue);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#1a3a6b;margin-bottom:14px;margin-top:4px;}
+
+/* ── 題目卡片 ── */
+.q-card{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:13px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;border-radius:50%;width:27px;height:27px;font-size:13px;font-weight:bold;margin-right:7px;flex-shrink:0;}
+.q-text{font-size:16px;font-weight:500;margin-bottom:11px;display:flex;align-items:flex-start;gap:4px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.opt-btn{display:flex;align-items:flex-start;gap:7px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:8px 11px;cursor:pointer;font-size:14px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
 .opt-btn:hover:not(:disabled){border-color:var(--red);background:#fdf0f0;}
-.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 7px;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 6px;font-size:12px;font-weight:bold;flex-shrink:0;margin-top:2px;}
 .opt-btn.correct{border-color:var(--ok);background:#e8f5ee;}
 .opt-btn.correct .ol{background:var(--ok);color:#fff;}
 .opt-btn.wrong{border-color:var(--err);background:#fde8e8;}
 .opt-btn.wrong .ol{background:var(--err);color:#fff;}
 .opt-btn.reveal{border-color:var(--ok);background:#e8f5ee;opacity:.8;}
 .opt-btn.reveal .ol{background:var(--ok);color:#fff;}
-.exp-box{margin-top:10px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:8px 12px;font-size:14px;color:#1a4a2c;display:none;}
+.exp-box{margin-top:9px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:7px 11px;font-size:13px;color:#1a4a2c;display:none;}
 .exp-box.show{display:block;}
 footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
-@media(max-width:560px){
-  .opts{grid-template-columns:1fr;}
-  header h1{font-size:20px;}
-}
+@media(max-width:560px){.opts{grid-template-columns:1fr;}header h1{font-size:20px;}.ho-item{font-size:15px;}}
 </style>
 </head>
 <body>
@@ -55,31 +70,174 @@ footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
   <a class="back" href="mock-exam-s2.html">← 回考卷選單</a>
 </header>
 <div class="wrap">
+
+  <!-- ── 填充題講義 ── -->
+  <div class="ho-section">
+    <div class="ho-header">
+      <h2>📖 重點填充講義</h2>
+      <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+    </div>
+    <div class="ho-item"><span class="ho-num">1</span><span class="ho-body">我國社會福利制度七大類：<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會保險</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會救助</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會津貼</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">福利服務</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">醫療保健</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">國民就業</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會住宅</span></span>。</span></div>
+<div class="ho-item"><span class="ho-num">2</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會保險</span></span>以社會互助與風險分擔為原則，通常強制納保；財源來自<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">個人保費</span></span>、雇主和政府共同負擔。</span></div>
+<div class="ho-item"><span class="ho-num">3</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會救助</span></span>不需投保，針對生活陷入困境的弱勢者由政府編列<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">預算</span></span>直接補助，包含<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">生活扶助</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">急難救助</span></span>、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">災害救助</span></span>。</span></div>
+<div class="ho-item"><span class="ho-num">4</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會津貼</span></span>是政府針對特定<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">身分</span></span>或條件者（如育有幼兒的家庭、達一定年齡的長者）直接發放的<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">現金</span></span>給付，不需事先投保。</span></div>
+<div class="ho-item"><span class="ho-num">5</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">福利服務</span></span>針對特定需求族群（老人、兒童、身障者、婦女等）提供專業<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">服務</span></span>，如長照居家服務、職業重建等。</span></div>
+<div class="ho-item"><span class="ho-num">6</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">醫療保健</span></span>措施包含疫苗接種、<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">全民健保</span></span>、健康檢查、疾病防治等，目的是保障全民<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">健康</span></span>。</span></div>
+<div class="ho-item"><span class="ho-num">7</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">國民就業</span></span>措施包含<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">職業訓練</span></span>、就業媒合、勞動條件保障等，目標是促進<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">充分就業</span></span>。</span></div>
+<div class="ho-item"><span class="ho-num">8</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會住宅</span></span>由政府興建，以低廉<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">租金</span></span>提供給中低收入戶、身障者、單親家庭等弱勢族群優先承租。</span></div>
+<div class="ho-item"><span class="ho-num">9</span><span class="ho-body">社會保險（例如全民健保）採強制納保，是為了確保有足夠多的參保人分散<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">風險</span></span>，使制度<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">永續運作</span></span>。</span></div>
+<div class="ho-item"><span class="ho-num">10</span><span class="ho-body">社會救助與社會保險最大的差異：社會救助不需<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">投保</span></span>，由政府<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">預算</span></span>支應；社會保險需繳納<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">保費</span></span>才能享有給付。</span></div>
+
+  </div>
+
+  <!-- ── 互動選擇題 ── -->
   <div class="score-bar">
     <span>得分：<b id="score">0</b> / 80 分</span>
-    <span class="progress">已作答 <span id="done">0</span> / 40 題</span>
+    <span style="font-size:14px;color:#667">已作答 <span id="done">0</span> / 40 題</span>
   </div>
   <div id="app"></div>
   <footer>全民補習班線上教學 | teaching.efetl.com</footer>
 </div>
 <script>
-const QS = [{"n": 1, "q": "根據上表，甲項目所列的「全民健康保險」在我國社會福利制度中屬於哪一類？", "opts": ["社會救助", "社會保險", "社會津貼", "福利服務"], "ans": "B", "exp": "全民健保透過強制納保、共同繳費、分散風險的方式運作，屬於「社會保險」。其特色是由個人、雇主和政府共同負擔保費，有別於政府全額補助的社會救助或直接發放的社會津貼。", "group": true}, {"n": 2, "q": "乙項目中的「低收入戶生活扶助」和「急難救助金」，屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "醫療保健"], "ans": "B", "exp": "社會救助的核心對象是生活陷入困境的弱勢族群，包含針對低收入戶的「生活扶助」（長期補助）和遭逢突發困難時的「急難救助」（短期緊急補助），均由政府編列預算支應，不需個人投保。", "group": true}, {"n": 3, "q": "丙項目中的「育兒津貼」和「老人重陽敬老金」屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "福利服務"], "ans": "C", "exp": "社會津貼是政府不需投保，直接對符合特定身分或條件的國民定期發放現金給付。育兒津貼（對有幼兒的家庭）和重陽敬老金（對特定年齡以上長者）都是針對特定身分者直接發放的現金給付，屬於社會津貼。", "group": true}, {"n": 4, "q": "丁項目「老人日間照護、身障者職業重建」屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "福利服務"], "ans": "D", "exp": "福利服務是針對特定需求族群（老人、兒童、身障者、婦女、原住民等）提供的專業服務，如照護、輔導、職業重建等，重點在於「服務的提供」，而非現金給付，屬於福利服務的範疇。", "group": true}, {"n": 5, "q": "根據上表，下列哪一種說法對「甲、乙、丙、丁」四項措施的比較，最為正確？", "opts": ["四項措施都是以政府預算為唯一經費來源，性質相同", "甲、乙、丙都是以現金方式給付，丁是提供服務", "甲靠保費運作有別於乙、丙、丁主要靠政府預算", "四項措施的受益對象都是全體國民，沒有針對性"], "ans": "C", "exp": "甲（全民健保）靠個人、雇主、政府共同繳納保費運作，是社會保險；乙（救助）、丙（津貼）、丁（福利服務）主要靠政府預算。甲的財源結構與其他三項明顯不同。A錯，甲有保費；B錯，丁是服務不是現金；D錯，各項針對不同對象。", "group": true}, {"n": 6, "q": "關於「社會保險」的特性，下列何者正確？", "opts": ["屬於自願性參加，個人可依需求決定是否投保", "以社會互助與風險分擔為原則，通常具有強制性", "由政府全額出資，個人不需負擔任何費用", "只針對低收入戶提供保障，一般民眾不適用"], "ans": "B", "exp": "社會保險的兩大核心特性是：（1）社會互助與風險分擔——眾多參保人共同分擔個別風險；（2）強制性——通常依法強制納保，確保足夠參保人數使制度永續。全民健保、勞保等均採強制納保。", "group": false}, {"n": 7, "q": "在0403花蓮大地震後，政府提供受損住宅的「房貸利息補貼」和「租屋補貼」，這屬於哪一種社會福利措施？", "opts": ["社會保險", "社會救助", "社會住宅", "社會津貼"], "ans": "B", "exp": "房貸利息補貼和租屋補貼是政府對遭受天災而陷入急難困境的民眾提供的補助，屬於社會救助中「災害救助」或「急難救助」的範疇，由政府編列預算直接提供。", "group": false}, {"n": 8, "q": "下列關於「國民年金保險」的敘述，何者正確？", "opts": ["對象是所有已退休的老年人，無論是否曾就業", "對象是年滿25歲、未滿65歲且未加入職業保險的國民", "對象是年滿65歲以上的老年人，強制參加", "對象是低收入戶的失業者，由政府全額補助"], "ans": "B", "exp": "國民年金保險的設計是為了填補職業保險的空缺，凡是年滿25歲、未滿65歲，且未參加勞保、農保、公教保等職業保險的國民，均應強制加入。老年後（65歲起）才開始領取老年年金給付。", "group": false}, {"n": 9, "q": "「以工代賑」讓經濟弱勢者以勞動換取收入，培養工作技能。這項措施屬於哪類社會福利？", "opts": ["社會保險", "社會救助", "國民就業", "福利服務"], "ans": "C", "exp": "「以工代賑」的核心在於提供工作機會、培養勞動技能，讓弱勢者透過工作自立，屬於「國民就業」措施的範疇，而非社會救助（直接給予補助）。國民就業強調的是促進就業能力和工作機會。", "group": false}, {"n": 10, "q": "有人說：「繳了那麼多健保費，就要多去醫院拿藥，才不虧本。」這種想法可能造成什麼問題？", "opts": ["使健保保費有效率地被使用，節省醫療資源", "導致醫療資源的浪費，增加全體納保人的負擔，損害健保財務", "鼓勵民眾積極就醫，有助於提早發現疾病", "減少政府的健保補助支出，有利財政平衡"], "ans": "B", "exp": "這種「拿藥才不虧」的心態是社會保險制度的道德風險問題——過度或不必要地使用醫療資源，浪費了公共醫療資源，增加健保財務負擔，最終可能導致保費提高，全體納保人都受害。", "group": false}, {"n": 11, "q": "下列哪一種措施，最能幫助因失業而陷入困境的家庭「維持基本生活」？", "opts": ["提供職業訓練課程，提升就業能力", "發放失業給付，讓失業者在過渡期間維持基本生計", "興建社會住宅，提供低廉住所", "辦理就業博覽會，媒合求職者與企業"], "ans": "B", "exp": "失業給付（就業保險的給付項目之一）直接提供失業者在求職過渡期間的現金收入，使其能維持基本生活所需。其他選項雖然也有幫助，但A和D是幫助找工作的國民就業措施，C解決的是住屋問題，均非最直接維持生計的方式。", "group": false}, {"n": 12, "q": "《禮記》中「壯有所用」的精神，與現代哪一項社會福利措施最相符？", "opts": ["社會救助（提供生活補助）", "福利服務（提供照護服務）", "國民就業（促進就業、保障工作機會）", "社會保險（分擔工作風險）"], "ans": "C", "exp": "「壯有所用」意指讓壯年勞動力都能有機會工作、貢獻社會，與現代「國民就業」的精神最吻合——政府透過職業訓練、就業媒合、保障勞動權益等，促使每個人都有工作機會，實現「人人有所用」。", "group": false}, {"n": 13, "q": "下列哪一個情境，最符合「社會住宅」的設計目的？", "opts": ["政府補貼高收入家庭購置豪宅，提振房市景氣", "政府興建租金低廉的住宅，優先提供給中低收入戶和弱勢族群承租", "政府補助建商興建高級住宅，吸引外資", "政府提供企業主廉價宿舍，降低勞工成本"], "ans": "B", "exp": "社會住宅的設計目的是解決弱勢族群的居住問題，由政府興建後以低於市場的租金提供給中低收入家庭、身障者、單親家庭、青年等有居住需求的弱勢族群承租，保障其居住權利。", "group": false}, {"n": 14, "q": "「疾病管制署推動防疫雲系統，強化傳染病通報機制、爭取防疫時效」，這屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "醫療保健", "福利服務"], "ans": "C", "exp": "防疫雲系統屬於政府推動的公共衛生和醫療照護體系的一部分，目的是保障全體國民的健康，屬於「醫療保健」類的社會福利措施，與辦理疫苗接種、健康檢查等同屬此類。", "group": false}, {"n": 15, "q": "下列哪一個例子，屬於「社會保險」而非「社會救助」？", "opts": ["政府發放低收入老人生活補助費", "政府對急難受災戶提供緊急救助金", "勞工在遭受職業災害後，領取勞保的職業災害給付", "政府補助中低收入戶子女的學費"], "ans": "C", "exp": "社會保險需透過繳費投保，遭遇特定風險時才能領取給付。勞保職業災害給付是勞工曾投保勞保、發生工作傷害後所領的保險給付，屬於社會保險。A、B、D都是政府編列預算對弱勢者直接補助的社會救助。", "group": false}, {"n": 16, "q": "某位高雄市長候選人提出「實踐租金實價登錄」、「倡議青銀共居」等政見，請問這針對的是哪一項社會福利措施？", "opts": ["社會保險", "國民就業", "社會住宅", "社會津貼"], "ans": "C", "exp": "「租金實價登錄」和「青銀共居」都是與住宅政策相關的倡議，旨在讓租屋市場更透明並提供不同族群（青年和銀髮族）可負擔的居住解決方案，屬於「社會住宅」議題範疇。", "group": false}, {"n": 17, "q": "在我國社會安全制度中，「社會救助」的主要特色是？", "opts": ["強制所有國民投保，共同分擔生活風險", "不需投保，針對生活陷入困境的弱勢者直接提供補助", "由民間企業管理，政府不介入資金運用", "給付對象是所有符合年齡條件的國民，不限於弱勢者"], "ans": "B", "exp": "社會救助的特色是：不需個人事先投保，針對因各種原因（貧窮、急難、天災等）陷入生活困境的弱勢者，由政府編列預算直接提供補助。目標是保障每個人的基本生存尊嚴，與社會保險的「投保才給付」不同。", "group": false}, {"n": 18, "q": "「法律扶助基金會」為經濟弱勢族群提供免費法律諮詢、訴訟代理服務，這最接近哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "福利服務"], "ans": "D", "exp": "法律扶助提供的是「服務」（法律諮詢、訴訟代理），而非現金給付，且針對的是有特殊需求的弱勢族群（無力負擔法律費用者），屬於「福利服務」的範疇——針對特定族群提供專業服務，提升其生活品質和保障。", "group": false}, {"n": 19, "q": "台灣政府推動「長期照顧十年計畫」，為失能老人或身障者提供居家服務、日間照顧等服務，這屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "國民就業", "福利服務"], "ans": "D", "exp": "長期照顧（長照）服務是針對失能老人、身心障礙者等有特殊照護需求的族群，提供居家照顧、日間照護等專業服務，屬於「福利服務」的範疇，重點是服務的提供而非現金給付。", "group": false}, {"n": 20, "q": "下列哪一種描述最符合「社會津貼」的特色？", "opts": ["強制所有國民投保，遭遇特定風險時請領", "針對特定身分者，由政府直接發放現金，不需事先投保", "針對生活陷入困境者，評估需求後提供生活補助", "由民間企業提供，員工自願加入的福利制度"], "ans": "B", "exp": "社會津貼的特色是：（1）不需投保；（2）針對特定身分或條件（如有幼兒的家庭、達一定年齡的長者）；（3）直接發放現金給付。育兒津貼、老人津貼等均屬此類，與社會保險（需投保）和社會救助（需審查貧困）不同。", "group": false}, {"n": 21, "q": "「職業訓練中心為失業者辦理電腦技能培訓班，協助其再就業」，這屬於哪類社會福利措施？", "opts": ["社會保險", "社會救助", "國民就業", "醫療保健"], "ans": "C", "exp": "職業技能培訓班的目的是提升失業者的就業能力，幫助其重回勞動市場，屬於「國民就業」措施的一部分。國民就業類措施包含職業訓練、就業媒合、就業諮詢等，目標是促進充分就業、保障勞動者的工作機會。", "group": false}, {"n": 22, "q": "某學生說：「社會保險應該是自願性的，不應強迫大家參加。」下列哪一個理由最能反駁此說法？", "opts": ["強制參加才能確保政府財政收入穩定", "自願參加會導致健康者不投保，使風險無法有效分散，制度難以永續", "強制參加是政府控制人民的方式，不是出於好意", "社會保險費用太高，自願參加根本沒人要買"], "ans": "B", "exp": "社會保險的強制性設計有其重要理由：若改為自願，健康的人可能不投保（反正不會生病），使參保者主要是高風險群體，保費必須大幅提高，最終導致制度崩潰。強制參加才能確保風險充分分散，讓制度永續運作。", "group": false}, {"n": 23, "q": "下列哪一個人符合「國民年金保險」的加保對象？", "opts": ["70歲已退休的前公務員（已加入公教保）", "35歲在大型企業上班的工程師（已加入勞保）", "42歲的全職家庭主夫，未加入任何職業保險", "25歲以下在校就讀的大學生"], "ans": "C", "exp": "國民年金保險的對象是年滿25歲、未滿65歲，且未加入其他職業保險（勞保、農保、公教保等）的國民。42歲全職家庭主夫未加入任何職業保險，符合加保條件。A加入公教保、B加入勞保，均不適用；D未滿25歲不符資格。", "group": false}, {"n": 24, "q": "某社區長者因獨居且行動不便，無法自行購買食物，社會局安排居家服務員定期送餐並協助日常家務。這屬於哪一類社會福利？", "opts": ["社會保險", "社會津貼", "福利服務", "社會救助"], "ans": "C", "exp": "社會局安排居家服務員提供送餐、家務協助等，是針對有特殊照護需求的長者提供的專業服務，屬於「福利服務」的範疇，具體包含居家服務、照護協助等，重點在服務的提供，而非現金給付。", "group": false}, {"n": 25, "q": "下列關於我國社會福利制度的敘述，何者最為正確？", "opts": ["我國社會福利只包含社會保險和社會救助兩大類", "我國社會福利制度涵蓋社會保險、社會救助、津貼、就業、住宅、福利服務、醫療保健等多元面向", "社會福利只服務弱勢族群，一般國民不需也不應享受社會福利", "台灣社會福利制度完全仿照歐洲國家，沒有本土特色"], "ans": "B", "exp": "我國社會福利制度架構完整，包含多種類型：社會保險（健保、勞保等）、社會救助（生活扶助等）、社會津貼（育兒津貼等）、國民就業、社會住宅、福利服務（長照等）、醫療保健等，涵蓋全體國民的各種生活需求。", "group": false}, {"n": 26, "q": "因應高齡化社會，政府應加強哪一類社會福利措施，以回應老年人口增加帶來的照護需求？", "opts": ["社會救助（擴大低收入補助）", "社會保險（提高保費補助）", "福利服務（擴充長照和老人服務）", "社會津貼（增加育兒津貼）"], "ans": "C", "exp": "高齡化社會帶來大量老年人口的照護需求，最直接的因應措施是擴充「福利服務」類型——如長期照顧服務、日間照顧中心、居家服務、安養機構等，讓有照護需求的老人能獲得適切服務。D的育兒津貼反而是因應少子化問題。", "group": false}, {"n": 27, "q": "某新聞報導：「健保財務吃緊，考慮調漲保費。」造成此問題的主要原因可能包含哪些？", "opts": ["民眾就醫次數增加但繳費意願降低，以及高齡化社會使醫療支出上升", "政府對健保投入過多補助，造成政府財政困難", "民眾普遍身體很好，不需要就醫卻仍強制繳費", "醫院數量太少，民眾就醫不便導致費用下降"], "ans": "A", "exp": "健保財務吃緊的常見原因包括：（1）高齡化使老年人就醫需求和醫療費用增加；（2）部分民眾過度使用醫療資源（如領多餘藥物）；（3）新醫療技術和藥物費用上漲；加上（4）保費調漲幅度趕不上醫療費用成長。", "group": false}, {"n": 28, "q": "下列哪一個情境，正確說明「社會救助」和「社會保險」的不同？", "opts": ["社會救助需要事先投保，社會保險不需要", "社會救助針對急難弱勢直接補助，不需投保；社會保險需投保，發生特定風險才給付", "兩者都需要個人繳納保費，只是給付條件不同", "社會保險只保障老年，社會救助保障所有年齡"], "ans": "B", "exp": "兩者的核心差異：社會救助是針對陷入困境的弱勢者直接補助，不需事先投保（由政府預算支應）；社會保險需要個人（和雇主）事先繳納保費，遭遇特定風險（疾病、失業、死亡等）時才能請領給付。", "group": false}, {"n": 29, "q": "某市政府舉辦就業博覽會，邀請200多家企業提供1萬2千個就業機會，協助年輕人找到工作。這屬於哪類社會福利措施？", "opts": ["社會救助（協助失業者維持生活）", "社會保險（分擔失業風險）", "國民就業（促進充分就業、媒合求職者）", "福利服務（提供生活照護）"], "ans": "C", "exp": "政府辦理就業博覽會是典型的「國民就業」措施——透過就業媒合服務，協助求職者找到工作機會，目的是促進充分就業，實現「人人都有工作」的社會目標，屬於國民就業類福利措施。", "group": false}, {"n": 30, "q": "「某政府提供青年購屋優惠貸款，讓年輕人能以低利率購買人生第一棟房屋」，這屬於哪類社會福利措施？", "opts": ["社會保險", "社會住宅", "社會救助", "福利服務"], "ans": "B", "exp": "青年購屋優惠貸款是政府為解決年輕人居住問題而推出的政策措施，屬於「社會住宅」類的廣義範疇——協助有住屋需求的族群（此處為青年）取得可負擔的住宅。此類政策目標是保障居住正義。", "group": false}, {"n": 31, "q": "某位有四個孩子的家庭主婦問：「我沒有工作，有辦法在退休後有錢用嗎？」政府哪一項制度最能直接幫助她？", "opts": ["勞工保險的老年給付", "全民健康保險", "國民年金保險的老年年金", "社會救助的生活扶助"], "ans": "C", "exp": "該家庭主婦沒有就業，無法參加勞保，但符合國民年金保險的投保資格（未加入職業保險的國民）。在達到65歲後，可請領國民年金的老年年金給付，作為退休後的基本收入保障，正是國民年金設計的目的之一。", "group": false}, {"n": 32, "q": "下列四個情境，何者屬於「社會救助」中的「急難救助」？", "opts": ["老年人每月領取國民年金老年給付", "一家之主突然病逝，遺孀帶著孩子面臨無力維持生活的緊急困境，向社會局申請救助", "育有兩歲幼兒的家長定期領取育兒津貼", "身障者參加政府提供的職業技能訓練課程"], "ans": "B", "exp": "急難救助是針對突發性、緊急性困境提供的短期補助，如家庭突遭變故（家長病逝）導致立即陷入生活危機。A是社會保險給付；C是社會津貼；D是福利服務中的職業重建，均非急難救助。", "group": false}, {"n": 33, "q": "下列關於「社會保險」和「一般商業保險」的差異，何者最為正確？", "opts": ["社會保險是自願參加，商業保險是強制參加", "社會保險帶有社會互助性質、通常強制參加，商業保險以營利為目的、個人自願購買", "兩者都是以賺取利潤為主要目的", "社會保險只適用於老年保障，商業保險則全面涵蓋各種風險"], "ans": "B", "exp": "社會保險（如全民健保、勞保）強調社會互助和風險分擔，通常由政府或法定機構辦理，多為強制參加；商業保險由私人保險公司辦理，以營利為目的，個人自願購買。兩者在目的、辦理主體和參加方式上有本質差異。", "group": false}, {"n": 34, "q": "某社會局網站公布個案：王先生因照顧年邁雙親而離職，後來向社會局申請長照服務，獲得居家服務和喘息服務，使雙親生活自理能力逐漸回復，王先生也得以重返職場。這說明社會福利具有什麼功能？", "opts": ["完善的社會福利只是協助弱勢者維持生計，無助於社會參與", "完善的社會福利能維護人性尊嚴，並讓照顧者也能重回社會參與", "長照服務的主要目的是縮小貧富差距", "社會福利依賴政府，個人不需做任何努力"], "ans": "B", "exp": "此案例說明長照服務不只幫助被照顧者（雙親），也讓照顧者（王先生）從沉重的照顧壓力中解放出來，能重返職場再次參與社會。這體現了完善社會福利「維護人性尊嚴、促進社會參與」的重要功能。", "group": false}, {"n": 35, "q": "「政府辦理全民健保，讓全國民眾繳費加入，遭受疾病時可以得到醫療給付」，這段描述最能體現社會福利哪一項核心精神？", "opts": ["市場競爭：讓民間醫療市場自由發展", "個人責任：每個人要靠自己存錢準備醫療費用", "社會互助：眾人共同承擔生活風險，保障每個人面對疾病時的基本醫療需求", "慈善救助：由政府資助最貧困的人的醫療費用"], "ans": "C", "exp": "全民健保的精神是「社會互助」——全民共同繳費進入保險池，任何人生病時都能從中獲得保障，不必擔心因疾病而財務崩潰。這與個人儲蓄或慈善救助不同，強調的是集體互助、風險分擔，是社會保險的核心精神。", "group": false}, {"n": 36, "q": "政府推動「優化偏鄉醫療計畫」，搭配醫療資訊化和巡迴醫療，讓偏鄉居民也能享有醫療照護。這個政策最主要試圖解決哪一種不公平？", "opts": ["族群不平等（原住民醫療權益）", "城鄉差距（都市偏鄉醫療資源不均）", "性別不平等（女性就醫機會較少）", "貧富差距（富人和窮人的醫療品質差異）"], "ans": "B", "exp": "「偏鄉醫療計畫」的出發點是讓偏遠地區（鄉村）居民也能享有和都市居民同等的醫療照護，直接針對的是「城鄉差距」——都市醫療資源豐富、偏鄉資源匱乏的不公平問題。", "group": false}, {"n": 37, "q": "下列哪一個選項所描述的人，「不符合」申請社會救助的基本精神？", "opts": ["遭逢颱風財產損失嚴重，生活陷入困境的受災戶", "家庭收入遠低於最低生活費標準的低收入戶", "因意外事故致家庭成員死亡，生計頓失支柱的急難家庭", "月薪100萬的高收入上班族，因不滿意自己的社會地位而申請補助"], "ans": "D", "exp": "社會救助的設計是針對生活真正陷入困境的弱勢族群（貧窮、急難、天災等），提供基本生存保障。高收入上班族並未面臨生活困境，不符合社會救助的對象條件。A、B、C均屬於確實需要社會救助的情況。", "group": false}, {"n": 38, "q": "台灣政府近年推出「2至6歲育兒津貼」，家長每月可領取固定金額。這項措施的目的最可能是？", "opts": ["解決高齡化社會的老年照護需求", "鼓勵生育、減輕育兒家庭經濟負擔，應對少子化問題", "協助低收入失業家庭維持基本生活", "提供就業機會，促進年輕父母重返職場"], "ans": "B", "exp": "育兒津貼的目的是鼓勵民眾生育、減輕有幼兒家庭的育兒經濟壓力，是政府因應「少子化」問題（生育率持續下降）的重要政策工具。屬於社會津貼類措施，不論家庭貧富均可申請（符合年齡條件即可）。", "group": false}, {"n": 39, "q": "下列哪一個情境，說明了「醫療保健」類社會福利措施的功能？", "opts": ["政府補助低收入家庭子女就學費用，促進教育機會公平", "政府推動國小學童定期接種流感疫苗，預防流感疫情蔓延", "政府提供身障者輔具購置補助，協助日常生活自立", "政府輔導失業者參加職業技能培訓，提升就業競爭力"], "ans": "B", "exp": "推動學童接種流感疫苗是政府主動保障全體國民健康、預防疾病傳播的措施，屬於「醫療保健」類社會福利——包含疫苗接種、健康檢查、疾病預防、公共衛生等，目的是提升全民健康水準。", "group": false}, {"n": 40, "q": "下列哪一句話最能說明「社會安全制度」的整體精神？", "opts": ["政府的工作只是管理秩序，個人的生活問題由個人自行負責", "政府透過有計畫的制度，整合各方資源，保障全民應有的生活品質，讓人人都能安居樂業", "社會安全制度只是臨時性的措施，待社會富裕後就不再需要", "社會安全制度的目的是讓政府完全掌控人民的生活"], "ans": "B", "exp": "社會安全制度的整體精神是：政府扮演積極角色，透過法令、政策、預算等方式，有計畫地整合政府、民間、企業等所有資源，提供適當的服務和保障，讓全體國民無論面對何種困難，都能維持基本生活品質，安居樂業。", "group": false}];
-const OPT_LABELS = ['Ａ','Ｂ','Ｃ','Ｄ'];
 
-let score = 0, done = 0;
-
-function updateScore(){
-  document.getElementById('score').textContent = score;
-  document.getElementById('done').textContent = done;
+function revealBlank(btn){
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='inline';
+}
+function revealAll(){
+  document.querySelectorAll('.qm-btn').forEach(b=>{
+    b.style.display='none';
+    b.nextElementSibling.style.display='inline';
+  });
 }
 
-function buildUI(){
-  const app = document.getElementById('app');
+const OPT_LABELS=['Ａ','Ｂ','Ｃ','Ｄ'];
+let score=0,done=0;
+function updateScore(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('done').textContent=done;
+}
+function buildQuiz(QS,ctxHtml){
+  const app=document.getElementById('app');
 
   // 題組情境框
-  const ctxBox = document.createElement('div');
-  ctxBox.className = 'ctx-box';
-  ctxBox.innerHTML = `<div class="group-label">📋 題組情境 — 請閱讀後回答第 1～5 題</div><p class="ctx-intro">某市政府社會局公布年度社會福利支出摘要報告，請閱讀後回答第 1～5 題。</p>
+  const ctxBox=document.createElement('div');
+  ctxBox.className='ctx-box';
+  ctxBox.innerHTML='<div class="group-label">📋 題組情境 — 請閱讀後回答第 1～5 題</div>'+ctxHtml;
+  app.appendChild(ctxBox);
+
+  let inRegular=false;
+  QS.forEach(item=>{
+    if(!item.group&&!inRegular){
+      inRegular=true;
+      const sep=document.createElement('div');
+      sep.className='section-label';
+      sep.textContent='一、單一選擇題（第 6～40 題）';
+      app.appendChild(sep);
+    }
+    const card=document.createElement('div');
+    card.className='q-card';
+    const qtxt=document.createElement('div');
+    qtxt.className='q-text';
+    qtxt.innerHTML='<span class="q-num">'+item.n+'</span><span>'+item.q+'</span>';
+    card.appendChild(qtxt);
+    const opts=document.createElement('div');
+    opts.className='opts';
+    let answered=false;
+    item.opts.forEach((opt,j)=>{
+      const btn=document.createElement('button');
+      btn.className='opt-btn';
+      btn.innerHTML='<span class="ol">'+OPT_LABELS[j]+'</span><span>'+opt+'</span>';
+      btn.addEventListener('click',()=>{
+        if(answered)return;
+        answered=true; done++;
+        const ok=OPT_LABELS[j]===item.ans;
+        if(ok){score+=2;btn.classList.add('correct');}
+        else btn.classList.add('wrong');
+        opts.querySelectorAll('.opt-btn').forEach((b,k)=>{
+          b.disabled=true;
+          if(OPT_LABELS[k]===item.ans&&!ok)b.classList.add('reveal');
+        });
+        exp.classList.add('show');
+        updateScore();
+      });
+      opts.appendChild(btn);
+    });
+    card.appendChild(opts);
+    const exp=document.createElement('div');
+    exp.className='exp-box';
+    exp.textContent='【解析】'+item.exp;
+    card.appendChild(exp);
+    app.appendChild(card);
+  });
+}
+
+const QS=[{"n": 1, "q": "根據上表，甲項目所列的「全民健康保險」在我國社會福利制度中屬於哪一類？", "opts": ["社會救助", "社會保險", "社會津貼", "福利服務"], "ans": "B", "exp": "全民健保透過強制納保、共同繳費、分散風險的方式運作，屬於「社會保險」。其特色是由個人、雇主和政府共同負擔保費，有別於政府全額補助的社會救助或直接發放的社會津貼。", "group": true}, {"n": 2, "q": "乙項目中的「低收入戶生活扶助」和「急難救助金」，屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "醫療保健"], "ans": "B", "exp": "社會救助的核心對象是生活陷入困境的弱勢族群，包含針對低收入戶的「生活扶助」（長期補助）和遭逢突發困難時的「急難救助」（短期緊急補助），均由政府編列預算支應，不需個人投保。", "group": true}, {"n": 3, "q": "丙項目中的「育兒津貼」和「老人重陽敬老金」屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "福利服務"], "ans": "C", "exp": "社會津貼是政府不需投保，直接對符合特定身分或條件的國民定期發放現金給付。育兒津貼（對有幼兒的家庭）和重陽敬老金（對特定年齡以上長者）都是針對特定身分者直接發放的現金給付，屬於社會津貼。", "group": true}, {"n": 4, "q": "丁項目「老人日間照護、身障者職業重建」屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "福利服務"], "ans": "D", "exp": "福利服務是針對特定需求族群（老人、兒童、身障者、婦女、原住民等）提供的專業服務，如照護、輔導、職業重建等，重點在於「服務的提供」，而非現金給付，屬於福利服務的範疇。", "group": true}, {"n": 5, "q": "根據上表，下列哪一種說法對「甲、乙、丙、丁」四項措施的比較，最為正確？", "opts": ["四項措施都是以政府預算為唯一經費來源，性質相同", "甲、乙、丙都是以現金方式給付，丁是提供服務", "甲靠保費運作有別於乙、丙、丁主要靠政府預算", "四項措施的受益對象都是全體國民，沒有針對性"], "ans": "C", "exp": "甲（全民健保）靠個人、雇主、政府共同繳納保費運作，是社會保險；乙（救助）、丙（津貼）、丁（福利服務）主要靠政府預算。甲的財源結構與其他三項明顯不同。A錯，甲有保費；B錯，丁是服務不是現金；D錯，各項針對不同對象。", "group": true}, {"n": 6, "q": "關於「社會保險」的特性，下列何者正確？", "opts": ["屬於自願性參加，個人可依需求決定是否投保", "以社會互助與風險分擔為原則，通常具有強制性", "由政府全額出資，個人不需負擔任何費用", "只針對低收入戶提供保障，一般民眾不適用"], "ans": "B", "exp": "社會保險的兩大核心特性是：（1）社會互助與風險分擔——眾多參保人共同分擔個別風險；（2）強制性——通常依法強制納保，確保足夠參保人數使制度永續。全民健保、勞保等均採強制納保。", "group": false}, {"n": 7, "q": "在0403花蓮大地震後，政府提供受損住宅的「房貸利息補貼」和「租屋補貼」，這屬於哪一種社會福利措施？", "opts": ["社會保險", "社會救助", "社會住宅", "社會津貼"], "ans": "B", "exp": "房貸利息補貼和租屋補貼是政府對遭受天災而陷入急難困境的民眾提供的補助，屬於社會救助中「災害救助」或「急難救助」的範疇，由政府編列預算直接提供。", "group": false}, {"n": 8, "q": "下列關於「國民年金保險」的敘述，何者正確？", "opts": ["對象是所有已退休的老年人，無論是否曾就業", "對象是年滿25歲、未滿65歲且未加入職業保險的國民", "對象是年滿65歲以上的老年人，強制參加", "對象是低收入戶的失業者，由政府全額補助"], "ans": "B", "exp": "國民年金保險的設計是為了填補職業保險的空缺，凡是年滿25歲、未滿65歲，且未參加勞保、農保、公教保等職業保險的國民，均應強制加入。老年後（65歲起）才開始領取老年年金給付。", "group": false}, {"n": 9, "q": "「以工代賑」讓經濟弱勢者以勞動換取收入，培養工作技能。這項措施屬於哪類社會福利？", "opts": ["社會保險", "社會救助", "國民就業", "福利服務"], "ans": "C", "exp": "「以工代賑」的核心在於提供工作機會、培養勞動技能，讓弱勢者透過工作自立，屬於「國民就業」措施的範疇，而非社會救助（直接給予補助）。國民就業強調的是促進就業能力和工作機會。", "group": false}, {"n": 10, "q": "有人說：「繳了那麼多健保費，就要多去醫院拿藥，才不虧本。」這種想法可能造成什麼問題？", "opts": ["使健保保費有效率地被使用，節省醫療資源", "導致醫療資源的浪費，增加全體納保人的負擔，損害健保財務", "鼓勵民眾積極就醫，有助於提早發現疾病", "減少政府的健保補助支出，有利財政平衡"], "ans": "B", "exp": "這種「拿藥才不虧」的心態是社會保險制度的道德風險問題——過度或不必要地使用醫療資源，浪費了公共醫療資源，增加健保財務負擔，最終可能導致保費提高，全體納保人都受害。", "group": false}, {"n": 11, "q": "下列哪一種措施，最能幫助因失業而陷入困境的家庭「維持基本生活」？", "opts": ["提供職業訓練課程，提升就業能力", "發放失業給付，讓失業者在過渡期間維持基本生計", "興建社會住宅，提供低廉住所", "辦理就業博覽會，媒合求職者與企業"], "ans": "B", "exp": "失業給付（就業保險的給付項目之一）直接提供失業者在求職過渡期間的現金收入，使其能維持基本生活所需。其他選項雖然也有幫助，但A和D是幫助找工作的國民就業措施，C解決的是住屋問題，均非最直接維持生計的方式。", "group": false}, {"n": 12, "q": "《禮記》中「壯有所用」的精神，與現代哪一項社會福利措施最相符？", "opts": ["社會救助（提供生活補助）", "福利服務（提供照護服務）", "國民就業（促進就業、保障工作機會）", "社會保險（分擔工作風險）"], "ans": "C", "exp": "「壯有所用」意指讓壯年勞動力都能有機會工作、貢獻社會，與現代「國民就業」的精神最吻合——政府透過職業訓練、就業媒合、保障勞動權益等，促使每個人都有工作機會，實現「人人有所用」。", "group": false}, {"n": 13, "q": "下列哪一個情境，最符合「社會住宅」的設計目的？", "opts": ["政府補貼高收入家庭購置豪宅，提振房市景氣", "政府興建租金低廉的住宅，優先提供給中低收入戶和弱勢族群承租", "政府補助建商興建高級住宅，吸引外資", "政府提供企業主廉價宿舍，降低勞工成本"], "ans": "B", "exp": "社會住宅的設計目的是解決弱勢族群的居住問題，由政府興建後以低於市場的租金提供給中低收入家庭、身障者、單親家庭、青年等有居住需求的弱勢族群承租，保障其居住權利。", "group": false}, {"n": 14, "q": "「疾病管制署推動防疫雲系統，強化傳染病通報機制、爭取防疫時效」，這屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "醫療保健", "福利服務"], "ans": "C", "exp": "防疫雲系統屬於政府推動的公共衛生和醫療照護體系的一部分，目的是保障全體國民的健康，屬於「醫療保健」類的社會福利措施，與辦理疫苗接種、健康檢查等同屬此類。", "group": false}, {"n": 15, "q": "下列哪一個例子，屬於「社會保險」而非「社會救助」？", "opts": ["政府發放低收入老人生活補助費", "政府對急難受災戶提供緊急救助金", "勞工在遭受職業災害後，領取勞保的職業災害給付", "政府補助中低收入戶子女的學費"], "ans": "C", "exp": "社會保險需透過繳費投保，遭遇特定風險時才能領取給付。勞保職業災害給付是勞工曾投保勞保、發生工作傷害後所領的保險給付，屬於社會保險。A、B、D都是政府編列預算對弱勢者直接補助的社會救助。", "group": false}, {"n": 16, "q": "某位高雄市長候選人提出「實踐租金實價登錄」、「倡議青銀共居」等政見，請問這針對的是哪一項社會福利措施？", "opts": ["社會保險", "國民就業", "社會住宅", "社會津貼"], "ans": "C", "exp": "「租金實價登錄」和「青銀共居」都是與住宅政策相關的倡議，旨在讓租屋市場更透明並提供不同族群（青年和銀髮族）可負擔的居住解決方案，屬於「社會住宅」議題範疇。", "group": false}, {"n": 17, "q": "在我國社會安全制度中，「社會救助」的主要特色是？", "opts": ["強制所有國民投保，共同分擔生活風險", "不需投保，針對生活陷入困境的弱勢者直接提供補助", "由民間企業管理，政府不介入資金運用", "給付對象是所有符合年齡條件的國民，不限於弱勢者"], "ans": "B", "exp": "社會救助的特色是：不需個人事先投保，針對因各種原因（貧窮、急難、天災等）陷入生活困境的弱勢者，由政府編列預算直接提供補助。目標是保障每個人的基本生存尊嚴，與社會保險的「投保才給付」不同。", "group": false}, {"n": 18, "q": "「法律扶助基金會」為經濟弱勢族群提供免費法律諮詢、訴訟代理服務，這最接近哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "社會津貼", "福利服務"], "ans": "D", "exp": "法律扶助提供的是「服務」（法律諮詢、訴訟代理），而非現金給付，且針對的是有特殊需求的弱勢族群（無力負擔法律費用者），屬於「福利服務」的範疇——針對特定族群提供專業服務，提升其生活品質和保障。", "group": false}, {"n": 19, "q": "台灣政府推動「長期照顧十年計畫」，為失能老人或身障者提供居家服務、日間照顧等服務，這屬於哪一類社會福利措施？", "opts": ["社會保險", "社會救助", "國民就業", "福利服務"], "ans": "D", "exp": "長期照顧（長照）服務是針對失能老人、身心障礙者等有特殊照護需求的族群，提供居家照顧、日間照護等專業服務，屬於「福利服務」的範疇，重點是服務的提供而非現金給付。", "group": false}, {"n": 20, "q": "下列哪一種描述最符合「社會津貼」的特色？", "opts": ["強制所有國民投保，遭遇特定風險時請領", "針對特定身分者，由政府直接發放現金，不需事先投保", "針對生活陷入困境者，評估需求後提供生活補助", "由民間企業提供，員工自願加入的福利制度"], "ans": "B", "exp": "社會津貼的特色是：（1）不需投保；（2）針對特定身分或條件（如有幼兒的家庭、達一定年齡的長者）；（3）直接發放現金給付。育兒津貼、老人津貼等均屬此類，與社會保險（需投保）和社會救助（需審查貧困）不同。", "group": false}, {"n": 21, "q": "「職業訓練中心為失業者辦理電腦技能培訓班，協助其再就業」，這屬於哪類社會福利措施？", "opts": ["社會保險", "社會救助", "國民就業", "醫療保健"], "ans": "C", "exp": "職業技能培訓班的目的是提升失業者的就業能力，幫助其重回勞動市場，屬於「國民就業」措施的一部分。國民就業類措施包含職業訓練、就業媒合、就業諮詢等，目標是促進充分就業、保障勞動者的工作機會。", "group": false}, {"n": 22, "q": "某學生說：「社會保險應該是自願性的，不應強迫大家參加。」下列哪一個理由最能反駁此說法？", "opts": ["強制參加才能確保政府財政收入穩定", "自願參加會導致健康者不投保，使風險無法有效分散，制度難以永續", "強制參加是政府控制人民的方式，不是出於好意", "社會保險費用太高，自願參加根本沒人要買"], "ans": "B", "exp": "社會保險的強制性設計有其重要理由：若改為自願，健康的人可能不投保（反正不會生病），使參保者主要是高風險群體，保費必須大幅提高，最終導致制度崩潰。強制參加才能確保風險充分分散，讓制度永續運作。", "group": false}, {"n": 23, "q": "下列哪一個人符合「國民年金保險」的加保對象？", "opts": ["70歲已退休的前公務員（已加入公教保）", "35歲在大型企業上班的工程師（已加入勞保）", "42歲的全職家庭主夫，未加入任何職業保險", "25歲以下在校就讀的大學生"], "ans": "C", "exp": "國民年金保險的對象是年滿25歲、未滿65歲，且未加入其他職業保險（勞保、農保、公教保等）的國民。42歲全職家庭主夫未加入任何職業保險，符合加保條件。A加入公教保、B加入勞保，均不適用；D未滿25歲不符資格。", "group": false}, {"n": 24, "q": "某社區長者因獨居且行動不便，無法自行購買食物，社會局安排居家服務員定期送餐並協助日常家務。這屬於哪一類社會福利？", "opts": ["社會保險", "社會津貼", "福利服務", "社會救助"], "ans": "C", "exp": "社會局安排居家服務員提供送餐、家務協助等，是針對有特殊照護需求的長者提供的專業服務，屬於「福利服務」的範疇，具體包含居家服務、照護協助等，重點在服務的提供，而非現金給付。", "group": false}, {"n": 25, "q": "下列關於我國社會福利制度的敘述，何者最為正確？", "opts": ["我國社會福利只包含社會保險和社會救助兩大類", "我國社會福利制度涵蓋社會保險、社會救助、津貼、就業、住宅、福利服務、醫療保健等多元面向", "社會福利只服務弱勢族群，一般國民不需也不應享受社會福利", "台灣社會福利制度完全仿照歐洲國家，沒有本土特色"], "ans": "B", "exp": "我國社會福利制度架構完整，包含多種類型：社會保險（健保、勞保等）、社會救助（生活扶助等）、社會津貼（育兒津貼等）、國民就業、社會住宅、福利服務（長照等）、醫療保健等，涵蓋全體國民的各種生活需求。", "group": false}, {"n": 26, "q": "因應高齡化社會，政府應加強哪一類社會福利措施，以回應老年人口增加帶來的照護需求？", "opts": ["社會救助（擴大低收入補助）", "社會保險（提高保費補助）", "福利服務（擴充長照和老人服務）", "社會津貼（增加育兒津貼）"], "ans": "C", "exp": "高齡化社會帶來大量老年人口的照護需求，最直接的因應措施是擴充「福利服務」類型——如長期照顧服務、日間照顧中心、居家服務、安養機構等，讓有照護需求的老人能獲得適切服務。D的育兒津貼反而是因應少子化問題。", "group": false}, {"n": 27, "q": "某新聞報導：「健保財務吃緊，考慮調漲保費。」造成此問題的主要原因可能包含哪些？", "opts": ["民眾就醫次數增加但繳費意願降低，以及高齡化社會使醫療支出上升", "政府對健保投入過多補助，造成政府財政困難", "民眾普遍身體很好，不需要就醫卻仍強制繳費", "醫院數量太少，民眾就醫不便導致費用下降"], "ans": "A", "exp": "健保財務吃緊的常見原因包括：（1）高齡化使老年人就醫需求和醫療費用增加；（2）部分民眾過度使用醫療資源（如領多餘藥物）；（3）新醫療技術和藥物費用上漲；加上（4）保費調漲幅度趕不上醫療費用成長。", "group": false}, {"n": 28, "q": "下列哪一個情境，正確說明「社會救助」和「社會保險」的不同？", "opts": ["社會救助需要事先投保，社會保險不需要", "社會救助針對急難弱勢直接補助，不需投保；社會保險需投保，發生特定風險才給付", "兩者都需要個人繳納保費，只是給付條件不同", "社會保險只保障老年，社會救助保障所有年齡"], "ans": "B", "exp": "兩者的核心差異：社會救助是針對陷入困境的弱勢者直接補助，不需事先投保（由政府預算支應）；社會保險需要個人（和雇主）事先繳納保費，遭遇特定風險（疾病、失業、死亡等）時才能請領給付。", "group": false}, {"n": 29, "q": "某市政府舉辦就業博覽會，邀請200多家企業提供1萬2千個就業機會，協助年輕人找到工作。這屬於哪類社會福利措施？", "opts": ["社會救助（協助失業者維持生活）", "社會保險（分擔失業風險）", "國民就業（促進充分就業、媒合求職者）", "福利服務（提供生活照護）"], "ans": "C", "exp": "政府辦理就業博覽會是典型的「國民就業」措施——透過就業媒合服務，協助求職者找到工作機會，目的是促進充分就業，實現「人人都有工作」的社會目標，屬於國民就業類福利措施。", "group": false}, {"n": 30, "q": "「某政府提供青年購屋優惠貸款，讓年輕人能以低利率購買人生第一棟房屋」，這屬於哪類社會福利措施？", "opts": ["社會保險", "社會住宅", "社會救助", "福利服務"], "ans": "B", "exp": "青年購屋優惠貸款是政府為解決年輕人居住問題而推出的政策措施，屬於「社會住宅」類的廣義範疇——協助有住屋需求的族群（此處為青年）取得可負擔的住宅。此類政策目標是保障居住正義。", "group": false}, {"n": 31, "q": "某位有四個孩子的家庭主婦問：「我沒有工作，有辦法在退休後有錢用嗎？」政府哪一項制度最能直接幫助她？", "opts": ["勞工保險的老年給付", "全民健康保險", "國民年金保險的老年年金", "社會救助的生活扶助"], "ans": "C", "exp": "該家庭主婦沒有就業，無法參加勞保，但符合國民年金保險的投保資格（未加入職業保險的國民）。在達到65歲後，可請領國民年金的老年年金給付，作為退休後的基本收入保障，正是國民年金設計的目的之一。", "group": false}, {"n": 32, "q": "下列四個情境，何者屬於「社會救助」中的「急難救助」？", "opts": ["老年人每月領取國民年金老年給付", "一家之主突然病逝，遺孀帶著孩子面臨無力維持生活的緊急困境，向社會局申請救助", "育有兩歲幼兒的家長定期領取育兒津貼", "身障者參加政府提供的職業技能訓練課程"], "ans": "B", "exp": "急難救助是針對突發性、緊急性困境提供的短期補助，如家庭突遭變故（家長病逝）導致立即陷入生活危機。A是社會保險給付；C是社會津貼；D是福利服務中的職業重建，均非急難救助。", "group": false}, {"n": 33, "q": "下列關於「社會保險」和「一般商業保險」的差異，何者最為正確？", "opts": ["社會保險是自願參加，商業保險是強制參加", "社會保險帶有社會互助性質、通常強制參加，商業保險以營利為目的、個人自願購買", "兩者都是以賺取利潤為主要目的", "社會保險只適用於老年保障，商業保險則全面涵蓋各種風險"], "ans": "B", "exp": "社會保險（如全民健保、勞保）強調社會互助和風險分擔，通常由政府或法定機構辦理，多為強制參加；商業保險由私人保險公司辦理，以營利為目的，個人自願購買。兩者在目的、辦理主體和參加方式上有本質差異。", "group": false}, {"n": 34, "q": "某社會局網站公布個案：王先生因照顧年邁雙親而離職，後來向社會局申請長照服務，獲得居家服務和喘息服務，使雙親生活自理能力逐漸回復，王先生也得以重返職場。這說明社會福利具有什麼功能？", "opts": ["完善的社會福利只是協助弱勢者維持生計，無助於社會參與", "完善的社會福利能維護人性尊嚴，並讓照顧者也能重回社會參與", "長照服務的主要目的是縮小貧富差距", "社會福利依賴政府，個人不需做任何努力"], "ans": "B", "exp": "此案例說明長照服務不只幫助被照顧者（雙親），也讓照顧者（王先生）從沉重的照顧壓力中解放出來，能重返職場再次參與社會。這體現了完善社會福利「維護人性尊嚴、促進社會參與」的重要功能。", "group": false}, {"n": 35, "q": "「政府辦理全民健保，讓全國民眾繳費加入，遭受疾病時可以得到醫療給付」，這段描述最能體現社會福利哪一項核心精神？", "opts": ["市場競爭：讓民間醫療市場自由發展", "個人責任：每個人要靠自己存錢準備醫療費用", "社會互助：眾人共同承擔生活風險，保障每個人面對疾病時的基本醫療需求", "慈善救助：由政府資助最貧困的人的醫療費用"], "ans": "C", "exp": "全民健保的精神是「社會互助」——全民共同繳費進入保險池，任何人生病時都能從中獲得保障，不必擔心因疾病而財務崩潰。這與個人儲蓄或慈善救助不同，強調的是集體互助、風險分擔，是社會保險的核心精神。", "group": false}, {"n": 36, "q": "政府推動「優化偏鄉醫療計畫」，搭配醫療資訊化和巡迴醫療，讓偏鄉居民也能享有醫療照護。這個政策最主要試圖解決哪一種不公平？", "opts": ["族群不平等（原住民醫療權益）", "城鄉差距（都市偏鄉醫療資源不均）", "性別不平等（女性就醫機會較少）", "貧富差距（富人和窮人的醫療品質差異）"], "ans": "B", "exp": "「偏鄉醫療計畫」的出發點是讓偏遠地區（鄉村）居民也能享有和都市居民同等的醫療照護，直接針對的是「城鄉差距」——都市醫療資源豐富、偏鄉資源匱乏的不公平問題。", "group": false}, {"n": 37, "q": "下列哪一個選項所描述的人，「不符合」申請社會救助的基本精神？", "opts": ["遭逢颱風財產損失嚴重，生活陷入困境的受災戶", "家庭收入遠低於最低生活費標準的低收入戶", "因意外事故致家庭成員死亡，生計頓失支柱的急難家庭", "月薪100萬的高收入上班族，因不滿意自己的社會地位而申請補助"], "ans": "D", "exp": "社會救助的設計是針對生活真正陷入困境的弱勢族群（貧窮、急難、天災等），提供基本生存保障。高收入上班族並未面臨生活困境，不符合社會救助的對象條件。A、B、C均屬於確實需要社會救助的情況。", "group": false}, {"n": 38, "q": "台灣政府近年推出「2至6歲育兒津貼」，家長每月可領取固定金額。這項措施的目的最可能是？", "opts": ["解決高齡化社會的老年照護需求", "鼓勵生育、減輕育兒家庭經濟負擔，應對少子化問題", "協助低收入失業家庭維持基本生活", "提供就業機會，促進年輕父母重返職場"], "ans": "B", "exp": "育兒津貼的目的是鼓勵民眾生育、減輕有幼兒家庭的育兒經濟壓力，是政府因應「少子化」問題（生育率持續下降）的重要政策工具。屬於社會津貼類措施，不論家庭貧富均可申請（符合年齡條件即可）。", "group": false}, {"n": 39, "q": "下列哪一個情境，說明了「醫療保健」類社會福利措施的功能？", "opts": ["政府補助低收入家庭子女就學費用，促進教育機會公平", "政府推動國小學童定期接種流感疫苗，預防流感疫情蔓延", "政府提供身障者輔具購置補助，協助日常生活自立", "政府輔導失業者參加職業技能培訓，提升就業競爭力"], "ans": "B", "exp": "推動學童接種流感疫苗是政府主動保障全體國民健康、預防疾病傳播的措施，屬於「醫療保健」類社會福利——包含疫苗接種、健康檢查、疾病預防、公共衛生等，目的是提升全民健康水準。", "group": false}, {"n": 40, "q": "下列哪一句話最能說明「社會安全制度」的整體精神？", "opts": ["政府的工作只是管理秩序，個人的生活問題由個人自行負責", "政府透過有計畫的制度，整合各方資源，保障全民應有的生活品質，讓人人都能安居樂業", "社會安全制度只是臨時性的措施，待社會富裕後就不再需要", "社會安全制度的目的是讓政府完全掌控人民的生活"], "ans": "B", "exp": "社會安全制度的整體精神是：政府扮演積極角色，透過法令、政策、預算等方式，有計畫地整合政府、民間、企業等所有資源，提供適當的服務和保障，讓全體國民無論面對何種困難，都能維持基本生活品質，安居樂業。", "group": false}];
+const CTX_HTML=`<p class="ctx-intro">某市政府社會局公布年度社會福利支出摘要報告，請閱讀後回答第 1～5 題。</p>
 <table class="ctx-table">
 <thead><tr><th>福利項目</th><th>主要內容</th><th>受益對象</th><th>經費來源</th></tr></thead>
 <tbody>
@@ -89,64 +247,7 @@ function buildUI(){
 <tr><td>丁</td><td>老人日間照護、身障者職業重建</td><td>特殊需求族群</td><td>政府預算＋民間資源</td></tr>
 </tbody></table>
 `;
-  app.appendChild(ctxBox);
-
-  let inRegular = false;
-  QS.forEach((item, idx) => {
-    if(!item.group && !inRegular){
-      inRegular = true;
-      const sep = document.createElement('div');
-      sep.className = 'group-label';
-      sep.style.cssText = 'margin-bottom:14px;margin-top:4px;background:#eef3f9;border-left-color:#2c5f8a;color:#1a3a6b;';
-      sep.textContent = '一、單一選擇題（第 6～40 題）';
-      app.appendChild(sep);
-    }
-
-    const card = document.createElement('div');
-    card.className = 'q-card';
-
-    const qtxt = document.createElement('div');
-    qtxt.className = 'q-text';
-    qtxt.innerHTML = `<span class="q-num">${item.n}</span><span>${item.q}</span>`;
-    card.appendChild(qtxt);
-
-    const opts = document.createElement('div');
-    opts.className = 'opts';
-    let answered = false;
-
-    item.opts.forEach((opt, j) => {
-      const btn = document.createElement('button');
-      btn.className = 'opt-btn';
-      btn.innerHTML = `<span class="ol">${OPT_LABELS[j]}</span><span>${opt}</span>`;
-      btn.addEventListener('click', () => {
-        if(answered) return;
-        answered = true;
-        done++;
-        const isCorrect = OPT_LABELS[j] === item.ans;
-        if(isCorrect){ score += 2; btn.classList.add('correct'); }
-        else{ btn.classList.add('wrong'); }
-        // reveal correct
-        opts.querySelectorAll('.opt-btn').forEach((b, k) => {
-          b.disabled = true;
-          if(OPT_LABELS[k] === item.ans && !isCorrect) b.classList.add('reveal');
-        });
-        exp.classList.add('show');
-        updateScore();
-      });
-      opts.appendChild(btn);
-    });
-    card.appendChild(opts);
-
-    const exp = document.createElement('div');
-    exp.className = 'exp-box';
-    exp.textContent = '【解析】' + item.exp;
-    card.appendChild(exp);
-
-    app.appendChild(card);
-  });
-}
-
-buildUI();
+buildQuiz(QS,CTX_HTML);
 updateScore();
 </script>
 </body>

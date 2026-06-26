@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民 第 02 回 | 互動練習</title>
 <style>
-:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--card:#fff;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;}
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;--blue:#2c5f8a;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
 header{background:var(--red);color:#fff;padding:22px 18px 18px;text-align:center;}
@@ -14,10 +14,26 @@ header p{font-size:15px;opacity:.9;margin-top:4px;}
 .back{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:14px;text-decoration:none;}
 .back:hover{background:rgba(255,255,255,.3);}
 .wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
-.score-bar{background:#fff;border-radius:12px;padding:12px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
+
+/* ── 填充講義區 ── */
+.ho-section{background:#fff;border-radius:14px;padding:18px 20px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.09);}
+.ho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid var(--blue);padding-bottom:8px;}
+.ho-header h2{font-size:18px;color:var(--blue);font-weight:bold;}
+.reveal-all-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:14px;cursor:pointer;font-family:inherit;}
+.reveal-all-btn:hover{background:#1a4a7a;}
+.ho-item{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;font-size:16px;line-height:1.8;}
+.ho-num{background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.ho-body{flex:1;}
+.blank-wrap{display:inline-block;vertical-align:baseline;margin:0 2px;}
+.qm-btn{display:inline-block;background:var(--gold);color:#fff;border:none;border-radius:6px;padding:1px 10px;font-size:15px;font-weight:bold;cursor:pointer;font-family:inherit;vertical-align:baseline;line-height:1.5;}
+.qm-btn:hover{background:#a08020;}
+.blank-ans{display:none;background:#e8f5ee;color:var(--ok);border:1px solid #a8d8b8;border-radius:6px;padding:1px 10px;font-weight:bold;font-size:15px;vertical-align:baseline;}
+
+/* ── 得分列 ── */
+.score-bar{background:#fff;border-radius:12px;padding:11px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
 .score-bar b{color:var(--red);font-size:20px;}
-.progress{font-size:14px;color:#667;}
-/* 題組情境框 */
+
+/* ── 題組情境框 ── */
 .ctx-box{background:#fff8e6;border:1px solid #e0c060;border-radius:12px;padding:14px 18px;margin-bottom:18px;}
 .ctx-intro{font-size:15px;margin-bottom:8px;color:#444;}
 .ctx-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;}
@@ -25,27 +41,26 @@ header p{font-size:15px;opacity:.9;margin-top:4px;}
 .ctx-table td{padding:5px 8px;border:1px solid #e0c060;}
 .ctx-table tr:nth-child(even){background:#fffbe8;}
 .group-label{background:#fff3cd;border-left:4px solid var(--gold);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#5a3e00;margin-bottom:14px;}
-/* 題目卡片 */
-.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
-.q-num{display:inline-block;background:var(--red);color:#fff;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px;font-size:14px;font-weight:bold;margin-right:8px;flex-shrink:0;}
-.q-text{font-size:16px;font-weight:500;margin-bottom:12px;display:flex;align-items:flex-start;gap:6px;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.opt-btn{display:flex;align-items:flex-start;gap:8px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:9px 12px;cursor:pointer;font-size:15px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
+.section-label{background:#eef3f9;border-left:4px solid var(--blue);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#1a3a6b;margin-bottom:14px;margin-top:4px;}
+
+/* ── 題目卡片 ── */
+.q-card{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:13px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;border-radius:50%;width:27px;height:27px;font-size:13px;font-weight:bold;margin-right:7px;flex-shrink:0;}
+.q-text{font-size:16px;font-weight:500;margin-bottom:11px;display:flex;align-items:flex-start;gap:4px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.opt-btn{display:flex;align-items:flex-start;gap:7px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:8px 11px;cursor:pointer;font-size:14px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
 .opt-btn:hover:not(:disabled){border-color:var(--red);background:#fdf0f0;}
-.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 7px;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 6px;font-size:12px;font-weight:bold;flex-shrink:0;margin-top:2px;}
 .opt-btn.correct{border-color:var(--ok);background:#e8f5ee;}
 .opt-btn.correct .ol{background:var(--ok);color:#fff;}
 .opt-btn.wrong{border-color:var(--err);background:#fde8e8;}
 .opt-btn.wrong .ol{background:var(--err);color:#fff;}
 .opt-btn.reveal{border-color:var(--ok);background:#e8f5ee;opacity:.8;}
 .opt-btn.reveal .ol{background:var(--ok);color:#fff;}
-.exp-box{margin-top:10px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:8px 12px;font-size:14px;color:#1a4a2c;display:none;}
+.exp-box{margin-top:9px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:7px 11px;font-size:13px;color:#1a4a2c;display:none;}
 .exp-box.show{display:block;}
 footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
-@media(max-width:560px){
-  .opts{grid-template-columns:1fr;}
-  header h1{font-size:20px;}
-}
+@media(max-width:560px){.opts{grid-template-columns:1fr;}header h1{font-size:20px;}.ho-item{font-size:15px;}}
 </style>
 </head>
 <body>
@@ -55,31 +70,151 @@ footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
   <a class="back" href="mock-exam-s2.html">← 回考卷選單</a>
 </header>
 <div class="wrap">
+
+  <!-- ── 填充題講義 ── -->
+  <div class="ho-section">
+    <div class="ho-header">
+      <h2>📖 重點填充講義</h2>
+      <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+    </div>
+    <div class="ho-item"><span class="ho-num">1</span><span class="ho-body">社會不公平可從四個面向理解：「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">利益分配不均</span></span>」、「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">責任承擔不公</span></span>」、「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">貢獻未獲尊重</span></span>」、「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">個人需求未獲滿足</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">2</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">刻板印象</span></span>是對特定群體過度簡化的固定看法，可能導致歧視與<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">差別對待</span></span>。</span></div>
+<div class="ho-item"><span class="ho-num">3</span><span class="ho-body">家庭主婦的勞動付出不被社會認可，屬於「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">貢獻未獲尊重</span></span>」面向的不公平；育嬰假全由媽媽承擔，屬於「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">責任承擔不公</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">4</span><span class="ho-body">改善社會不公平的四種力量：「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">個人的努力</span></span>」、「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">政府的作為</span></span>」、「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會團體的協助</span></span>」、「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">國際組織的援助</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">5</span><span class="ho-body"><span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">形式平等</span></span>是對所有人給予完全相同的待遇；<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">實質公平</span></span>則是依不同需求提供差異化的協助，才能達到真正的公平。</span></div>
+<div class="ho-item"><span class="ho-num">6</span><span class="ho-body">都市與偏遠地區在醫療、教育、就業等資源與機會上的不均等現象，稱為「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">城鄉差距</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">7</span><span class="ho-body">社會中財富在不同群體間分配差距懸殊的現象，稱為「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">貧富差距</span></span>」；這可能進一步影響<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">教育</span></span>、醫療等機會，使不平等世代複製。</span></div>
+<div class="ho-item"><span class="ho-num">8</span><span class="ho-body">因族裔身分而遭受歧視或不公平對待，屬於「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">族群</span></span>」議題；因性別而被差別對待或刻板化，屬於「<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">性別</span></span>」不平等。</span></div>
+<div class="ho-item"><span class="ho-num">9</span><span class="ho-body">政府透過<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">立法</span></span>和<span class="blank-wrap"
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">政策</span></span>改善不公平，例如制定《性別平等工作法》、《原住民族基本法》等。</span></div>
+
+  </div>
+
+  <!-- ── 互動選擇題 ── -->
   <div class="score-bar">
     <span>得分：<b id="score">0</b> / 80 分</span>
-    <span class="progress">已作答 <span id="done">0</span> / 40 題</span>
+    <span style="font-size:14px;color:#667">已作答 <span id="done">0</span> / 40 題</span>
   </div>
   <div id="app"></div>
   <footer>全民補習班線上教學 | teaching.efetl.com</footer>
 </div>
 <script>
-const QS = [{"n": 1, "q": "根據上表，乙新聞所反映的不公平，最主要屬於哪一種議題？", "opts": ["性別不平等", "族群不平等", "城鄉差距", "貧富差距"], "ans": "B", "exp": "乙新聞提到原住民孩子教育資源不足，這是因族群身分（原住民）而在教育機會上受到不公平對待，屬於族群不平等的議題。雖然也有城鄉因素，但核心問題在於族群身分造成的教育資源差異。", "group": true}, {"n": 2, "q": "甲新聞中「家庭主婦付出不被視為社會貢獻」，這呈現出哪一方面的社會不公平？", "opts": ["利益分配不均，家庭主婦沒有獲得相應報酬", "責任承擔不公，家庭主婦不需要承擔社會責任", "貢獻未獲尊重，家庭主婦的努力沒有被社會認可", "個人需求不足，家庭主婦的基本生活需求未被滿足"], "ans": "C", "exp": "翰林版教材將社會不公平分為四個面向：利益分配不均、責任承擔不公、貢獻未獲尊重、個人需求未獲滿足。甲新聞中，家庭主婦付出了大量勞動，卻被社會忽視，屬於「貢獻未獲尊重」的不公平。", "group": true}, {"n": 3, "q": "丙新聞中台北與台東醫療資源的差距，主要反映哪一種不公平議題？", "opts": ["族群不平等", "性別不平等", "城鄉差距", "貧富差距"], "ans": "C", "exp": "台北（都市）和台東（偏遠地區）之間的醫療資源分布不均，是典型的城鄉差距問題——都市資源豐富，偏鄉資源匱乏，影響偏鄉居民享有醫療的機會和品質。", "group": true}, {"n": 4, "q": "丁新聞中「頂層富人財富遠超底層人口」，最能說明哪一種社會不公平現象？", "opts": ["城鄉差距", "族群歧視", "貧富差距", "性別偏見"], "ans": "C", "exp": "丁新聞描述的是財富在不同收入族群之間分配極度不均的現象，頂層少數人掌握大量財富，底層多數人財富極少，這是典型的「貧富差距」問題。", "group": true}, {"n": 5, "q": "若政府想改善丙新聞所呈現的不公平問題，下列哪一個措施最為直接有效？", "opts": ["提高城市醫師薪資，吸引更多人投入醫療業", "推動醫療資源向偏遠地區傾斜，如增設診所或巡迴醫療", "開放更多私人醫院進入市場，讓市場決定資源分配", "強制民眾遷居至都市，以便享有完善醫療資源"], "ans": "B", "exp": "改善城鄉醫療差距，需要政府主動將資源引導至偏遠地區，如增設診所、辦理巡迴醫療、派遣醫師前往偏鄉服務等，才能使偏鄉居民也能享有基本的醫療照護。A雖有助，但不是針對偏鄉；C讓市場決定可能使差距更大；D不切實際。", "group": true}, {"n": 6, "q": "瑞典育嬰假制度規定父親和母親各有60天保留假，另有360天可自由分配，若任一方未請假即喪失保留天數。這項制度試圖改善哪一方面的社會不公平？", "opts": ["貢獻未獲尊重，父親育兒貢獻不被社會肯定", "責任承擔不公，育兒責任長期由女性單獨承擔", "利益分配不均，父親無法享有育嬰假的薪資補貼", "個人需求不足，父親的心理健康需求未被政策考慮"], "ans": "B", "exp": "瑞典育嬰假制度強制要求父母雙方都必須請育嬰假，目的是改變「育兒責任全由媽媽承擔」的不公平現象，讓父親也分擔育兒責任，屬於「責任承擔不公」的不公平改善。", "group": false}, {"n": 7, "q": "媒體常以「原住民很會唱歌、愛酗酒」的刻板印象報導原住民族群，導致社會大眾產生偏見，進而讓原住民在求職時遭受差別待遇。這主要呈現哪一種不公平？", "opts": ["貧富差距造成的經濟不公平", "族群議題中的歧視與不平等對待", "性別刻板印象造成的職場不公", "城鄉差距中的教育資源不均"], "ans": "B", "exp": "此題描述的是原住民族群因族裔身分被媒體貼上標籤、形成刻板印象，進而在求職等社會場合受到不公平對待，這屬於族群議題中的歧視與不平等。", "group": false}, {"n": 8, "q": "下列何種改善不公平的方式，屬於「政府的作為」？", "opts": ["某公司自發性地提高女性員工薪資，縮小性別薪資差距", "立法院三讀通過同性婚姻合法化，保障同性伴侶的平等權利", "某民間團體為偏鄉孩子募資設立圖書館", "某慈善機構每年固定捐款給偏鄉學校"], "ans": "B", "exp": "政府的作為是透過法律制定或政策推行來改善不公平。立法院通過同性婚姻法是政府以立法方式保障群體的平等權利，屬於政府作為。A是企業行為；C、D是民間團體的作為。", "group": false}, {"n": 9, "q": "「某公司以男性為主擔任技術、管理職位，女性則多在行政、文書部門」，這最能說明哪一種不公平？", "opts": ["族群議題：公司偏好特定種族擔任技術職", "城鄉差距：都市才有機會擔任管理職位", "性別不平等：刻板印象造成職場性別分工固化", "貧富差距：高薪職位只對富人開放"], "ans": "C", "exp": "依據性別（男/女）決定適合從事的職務，是典型的性別刻板印象造成的職場性別不平等，讓女性在某些職位上受到不公平的限制，無法依能力取得機會。", "group": false}, {"n": 10, "q": "下列哪一項措施最能體現「改善貧富差距不公平」的目標？", "opts": ["政府興建社會住宅，優先提供給中低收入家庭承租", "政府補助都市地區的交通建設，便利上班族通勤", "政府提高企業所得稅，增加國庫收入", "政府舉辦國際文化活動，提升城市形象"], "ans": "A", "exp": "社會住宅提供租金低廉的住房給中低收入家庭，讓弱勢家庭也能有穩定的居住環境，是直接改善貧富差距（具體表現為住屋問題）的措施。其他選項改善貧富差距的效果較不直接。", "group": false}, {"n": 11, "q": "電影《關鍵少數》描述1960年代黑人女性凱薩琳在NASA工作，每次上廁所必須跑800公尺到允許黑人使用的廁所。凱薩琳所遭受的不公平「不包含」下列何者？", "opts": ["族群方面的不公平", "性別方面的不公平", "城鄉差距的不公平", "基本需求未獲滿足的不公平"], "ans": "C", "exp": "凱薩琳遭受的不公平包含：（族群）黑人被隔離；（性別）黑人女性在科技職場的雙重弱勢；（基本需求）無法使用近處廁所，造成生理基本需求無法被滿足。題目中並未提到城鄉差距的問題，故C不包含在內。", "group": false}, {"n": 12, "q": "居仁國中提供視障學生考試延長作答時間、弱勢學生申請午餐補助，這些措施最能體現哪一種公平正義的概念？", "opts": ["形式平等：對所有人給予完全相同的對待", "實質公平：依據不同需求提供差異化的協助", "絕對平均：讓所有人得到完全相同的資源", "市場競爭：依能力高下決定資源分配"], "ans": "B", "exp": "「視障生延長考試時間」和「弱勢學生午餐補助」都是針對不同需求，給予差異化的照顧，目的是讓所有人都能在公平的基礎上參與學習。這體現了「實質公平」——對不同處境的人給予符合其需求的不同對待，才能達到真正的公平。", "group": false}, {"n": 13, "q": "下列哪一種情境最能說明「個人需求未獲滿足」的不公平？", "opts": ["某工廠女性員工薪資低於同職位男性員工", "身障者因缺乏無障礙設施，無法進入公共建築使用服務", "原住民孩子因語言差異，被同學排斥嘲笑", "農村孩子與城市孩子接受到的教育資源差距懸殊"], "ans": "B", "exp": "「個人需求未獲滿足」的不公平，是指個人的基本生活需求（如行動、醫療、安全等）無法得到滿足。身障者因缺乏無障礙設施而無法進入公共空間，正是其基本出行需求未被社會環境滿足的例子。A是利益/責任面向；C是族群歧視；D是城鄉差距的資源不均。", "group": false}, {"n": 14, "q": "下列哪一個選項所描述的行動，屬於「社會團體」改善不公平的方式？", "opts": ["政府制定《性別平等教育法》保障校園性平環境", "聯合國發表宣言呼籲各國保障原住民族群權利", "某基金會在偏遠地區設立免費課後輔導班，縮小城鄉教育差距", "個人透過升學、考試改善自身的社會經濟地位"], "ans": "C", "exp": "改善不公平的力量分為：個人的努力、政府的作為、社會（民間）團體的協助、國際組織的援助。基金會在偏鄉設立課後輔導班，是民間社會團體主動採取行動縮小城鄉差距，屬於社會團體的協助。A是政府；B是國際組織；D是個人。", "group": false}, {"n": 15, "q": "下列關於「城鄉差距」的描述，何者正確？", "opts": ["城鄉差距只出現在醫療資源方面，其他資源分布均衡", "城鄉差距是指都市與偏遠地區在各種資源與機會上的不均等", "改善城鄉差距最有效的方式是讓偏鄉居民全部遷移至都市", "城鄉差距問題只發生在發展中國家，台灣已完全克服"], "ans": "B", "exp": "城鄉差距是指都市（城市）與偏遠地區（鄉村）之間，在醫療、教育、就業、交通、文化等各種資源和機會上存在不均等的現象。A、C、D均過於絕對或錯誤。", "group": false}, {"n": 16, "q": "下列哪一個選項最能說明「利益分配不均」的不公平？", "opts": ["家庭主婦的育兒工作不被社會認為有價值", "女性員工與男性員工同工同酬，薪資完全相同", "高薪職位幾乎全由富裕家庭出身的人佔據，弱勢者難以分享經濟成果", "企業要求男女員工承擔相同的工作量"], "ans": "C", "exp": "「利益分配不均」是指社會的財富、機會等利益，沒有依公平原則分配給各群體，主要落在少數優勢族群手中。高薪職位由富裕家庭壟斷，弱勢者無法分享社會的經濟成果，是典型的利益分配不均。A是貢獻未獲尊重；B是公平現象；D是責任承擔。", "group": false}, {"n": 17, "q": "某社會局在颱風後提供受災戶的「急難救助金」，這是為了回應哪一種社會不公平的情況？", "opts": ["利益分配不均，受災戶無法分享社會資源", "個人需求未獲滿足，受災戶的基本生活需求受到威脅", "責任承擔不公，受災戶被迫承擔所有颱風損失", "貢獻未獲尊重，受災戶的重建努力沒有被社會認可"], "ans": "B", "exp": "颱風災後提供急難救助金，是為了幫助受災戶維持基本生活，回應的是「個人需求未獲滿足」——受災者因天災導致基本生活需求（居住、食物、安全）受到嚴重威脅。政府出手是為了確保每個人的基本生活需求都能得到保障。", "group": false}, {"n": 18, "q": "聯合國通過《身心障礙者權利公約》，要求各國保障身障者的教育、就業、公共參與等基本權利。這種改善不公平的力量屬於？", "opts": ["個人的努力", "政府的作為", "社會團體的協助", "國際組織的援助"], "ans": "D", "exp": "聯合國是國際組織，透過制定國際公約要求各成員國遵守，以改善身障者的不平等處境，屬於「國際組織的援助」。個人努力、政府作為、社會團體協助均是不同層面的力量。", "group": false}, {"n": 19, "q": "「刻板印象」對特定族群或性別造成哪一種不公平的影響？", "opts": ["讓人們對特定群體有固定化的既定印象，進而在就業、生活中造成差別對待", "幫助社會更有效率地辨識不同群體的特徵，提升社會分工效率", "讓優勢族群能夠維持其社會地位，促進社會穩定", "減少社會中不必要的歧視，因為刻板印象通常是正確的"], "ans": "A", "exp": "刻板印象是對特定群體（族群、性別等）過度簡化的固定看法。這種先入為主的觀念會導致人們在就業、教育、社交等方面對特定群體做出不公平的差別對待（如歧視原住民、排斥女性擔任某些職位），對當事人造成不公平的影響。", "group": false}, {"n": 20, "q": "下列哪一個例子，最能說明「形式平等」與「實質公平」的差異？", "opts": ["所有學生都使用同一本教科書，是形式平等；視障生使用點字書，是實質公平", "富有家庭的孩子繳較少學費，是形式平等；貧困孩子繳較多學費，是實質公平", "男女員工薪資相同，是形式平等；男性比女性多領獎金，是實質公平", "所有人都有投票權，是形式平等；有錢人多一票，是實質公平"], "ans": "A", "exp": "形式平等是指對所有人給予完全相同的待遇；實質公平則是依據不同人的需求和處境，給予有差異的對待，以達到真正意義上的公平。所有學生用同一本書（形式平等），但視障生因需求不同改用點字書（實質公平），正是這組概念的最佳說明。", "group": false}, {"n": 21, "q": "下列哪一個行為，最能展現個人在日常生活中改善族群不公平的方式？", "opts": ["主動學習不同族群的文化，尊重並理解其歷史背景，避免使用歧視性語言", "認為原住民就是應該住在山上，才能保持文化傳統", "看到外籍移工總是特別小心，因為新聞說他們會犯罪", "認為不同族群就是有不同能力，這是天生的差異"], "ans": "A", "exp": "個人改善族群不公平的方式，首先是消除刻板印象和偏見，透過主動了解、尊重不同族群的文化，以及在日常言行中避免歧視性表達。B、C、D都是基於刻板印象的歧視行為，只會加深族群不公平。", "group": false}, {"n": 22, "q": "池田香代子的繪本描述：「100人村中，有20人營養不良，1人瀕臨餓死，而另外有15人卻過度肥胖。」這段描述最能說明哪種不公平？", "opts": ["城鄉差距：偏鄉糧食生產不足", "族群不平等：特定族群無法獲得糧食", "貧富差距：糧食資源在不同群體之間分配極度不均", "性別不平等：女性獲得的糧食少於男性"], "ans": "C", "exp": "繪本描述的是同一社會中，有人嚴重缺乏食物、有人卻過度飲食的強烈對比，核心反映的是社會資源（糧食）在不同群體之間分配嚴重不均——即「貧富差距」導致的資源分配不公平。", "group": false}, {"n": 23, "q": "下列關於「社會不公平」的敘述，何者正確？", "opts": ["社會不公平只出現在經濟落後的國家，已開發國家不存在此問題", "社會不公平包含族群、性別、貧富差距、城鄉差距等多種面向", "社會不公平完全由個人能力不足造成，與社會制度無關", "社會不公平問題只要靠個人努力就能完全解決"], "ans": "B", "exp": "社會不公平是多面向的複雜社會現象，包含族群歧視、性別不平等、貧富差距、城鄉差距等，在各種不同發展程度的社會中都可能存在。A、C、D均過於片面或絕對化。", "group": false}, {"n": 24, "q": "《月薪嬌妻》日劇中，男主角計算家庭主婦創造的年收入高達95.2萬元台幣，遠超一般上班族。這部劇試圖指出哪種不公平？", "opts": ["利益分配不均：家庭主婦應獲得政府補貼", "責任承擔不公：丈夫不分擔家務", "貢獻未獲尊重：家庭主婦的勞動價值被社會忽視", "個人需求不足：家庭主婦的個人自由受到限制"], "ans": "C", "exp": "劇中透過具體計算家庭主婦的勞動價值，試圖讓社會正視「家庭勞動是有價值的」，批評社會長期將家庭主婦的付出視為理所當然、不認為是「真正的工作」，屬於「貢獻未獲尊重」的不公平。", "group": false}, {"n": 25, "q": "「運動競賽依年齡分組」、「視障學生考試延長時間」，這兩種安排共同體現了什麼概念？", "opts": ["絕對平等：讓所有人受到完全相同的對待", "形式平等：規則對所有人都一樣", "實質公平：依據不同條件和需求，給予適切的差異化安排", "社會救助：對弱勢族群提供特殊資源"], "ans": "C", "exp": "這兩個例子都是根據參與者的不同條件（年齡、障礙狀況），給予不同的競賽或考試規則，目的是讓每個人都能在公平的基礎上參與，體現的是「實質公平」——給予不同需求的人差異化的安排，才是真正的公平。", "group": false}, {"n": 26, "q": "在討論「如何改善貧富差距」時，下列哪一個措施最能直接縮小貧富差距？", "opts": ["增加高速公路數量，便利民眾交通", "實施累進所得稅制，對高收入者課徵較高稅率，並將稅收用於弱勢補助", "推廣民眾投資股票，讓大家都能分享經濟成長", "加強文化活動推廣，提升全民精神生活品質"], "ans": "B", "exp": "累進所得稅制對高收入者課以較高稅率，政府再將稅收用於社會福利和弱勢補助，能有效將資源從富裕階層重分配給弱勢族群，是縮小貧富差距的重要財政工具。其他選項對縮小貧富差距的直接效果有限。", "group": false}, {"n": 27, "q": "下列哪一個描述，屬於「責任承擔不公」的不公平？", "opts": ["公司給女性主管的薪水少於同職位男性主管", "社會普遍認為照顧家庭是女性的責任，男性不需要承擔同等比例的家務", "原住民孩子教育機會不如都市孩子", "偏鄉居民就醫要花費更長的時間和費用"], "ans": "B", "exp": "「責任承擔不公」是指某個群體被要求承擔不成比例的義務或責任。社會習俗將照顧家庭的責任主要壓在女性身上，而男性不必承擔同等分量，這使女性在職業發展上受到更多限制，屬於責任承擔不公的性別不平等。", "group": false}, {"n": 28, "q": "下列何者屬於「國際組織援助」改善社會不公平的例子？", "opts": ["台灣政府制定《原住民族基本法》保障原住民權利", "某民間協會在偏鄉辦理免費閱讀課程", "世界衛生組織（WHO）協助開發中國家建立公共衛生體系", "個人選擇購買公平貿易產品，支持農民獲得合理報酬"], "ans": "C", "exp": "世界衛生組織（WHO）是國際組織，透過提供技術和資源協助各國建立公共衛生體系，是國際組織援助改善不公平的典型例子。A是政府作為；B是社會團體協助；D是個人行動。", "group": false}, {"n": 29, "q": "下列哪一個現象，說明了「貧富差距」可能影響「教育機會均等」？", "opts": ["富裕家庭子女就讀私立貴族學校，接受更多教育資源，而貧困家庭子女只能讀公立學校", "政府規定所有學生都必須接受九年國民教育", "學校對所有學生提供免費的教科書", "政府補助清寒學生的學費，讓他們也能繼續升學"], "ans": "A", "exp": "貧富差距可能使不同家庭背景的孩子，能接受到的教育資源產生巨大差異——富裕家庭能提供私立貴族學校、補習班等更多資源，而貧困家庭孩子則只能依賴有限的公立資源。這說明貧富差距進一步影響了教育機會的公平性。", "group": false}, {"n": 30, "q": "下列描述中，哪一個最符合公平正義的核心精神？", "opts": ["讓所有人接受完全相同的對待，不論個別差異", "依據每個人的需求和處境，提供符合其實際狀況的資源和機會", "強者優先獲得資源，弱者自行找出路，符合自然法則", "維持現有的社會秩序，不輕易改變資源分配方式"], "ans": "B", "exp": "公平正義的核心精神，不只是形式上「人人相同」，更強調依據不同需求和處境給予適切對待（實質公平）。當每個人的基本需求和機會都能被滿足，才算是達到真正的公平正義。A是形式平等；C是弱肉強食；D是保守主義立場，都不完整。", "group": false}, {"n": 31, "q": "下列哪一個是改善「城鄉差距」的具體措施？", "opts": ["提高都市房屋稅，讓人口自然往偏鄉移動", "政府在偏遠地區設立巡迴醫療車，讓偏鄉居民也能就近看診", "取消偏鄉居民的交通補貼，鼓勵他們自食其力", "只在都市集中建設優質學校，再讓偏鄉學生自行前來就讀"], "ans": "B", "exp": "改善城鄉差距的方向是讓資源流向偏遠地區，確保偏鄉居民也能享有基本的公共服務。設立巡迴醫療車，讓偏鄉居民不必長途跋涉就能獲得醫療服務，是針對城鄉醫療差距的具體改善措施。", "group": false}, {"n": 32, "q": "某電視廣告宣稱「女生就該做家事、男生就要負責賺錢」，這類廣告最可能產生什麼不良影響？", "opts": ["讓社會分工更有效率，男女各司其職", "強化性別刻板印象，限制個人依照自身能力和興趣發展的自由", "幫助維持傳統家庭的和諧關係", "鼓勵男女平等地分擔家庭責任"], "ans": "B", "exp": "廣告傳遞「女生做家事、男生賺錢」的性別刻板印象，會使社會大眾對男女的角色有固定期待，進而限制個人（無論男女）依照自身興趣和能力選擇生活方式的自由，強化性別不平等的文化氛圍。", "group": false}, {"n": 33, "q": "下列哪一種政府作為，最能說明「以法律和政策改善族群不平等」？", "opts": ["媒體鼓勵閱聽眾更公平地看待不同族群", "政府制定原住民族語教育政策，在學校中保存並推廣族語", "某企業自發性多雇用原住民員工", "個人選擇學習不同族群的傳統文化"], "ans": "B", "exp": "政府透過制定法律和政策（如原住民族語教育政策）來保障族群文化和語言的傳承，是政府以公權力改善族群不平等的例子。A是媒體的作用；C是企業行為；D是個人行動。", "group": false}, {"n": 34, "q": "在討論「社會不公平問題的解決」時，下列哪一個說法最為合理？", "opts": ["社會不公平問題只能靠政府解決，個人無能為力", "社會不公平問題是自然現象，不需要也無法改變", "改善社會不公平需要個人、政府、社會團體和國際組織共同努力", "只要每個人努力工作，社會不公平自然就會消失"], "ans": "C", "exp": "改善社會不公平是複雜的系統性工程，需要多方力量共同配合：個人的行動（消除偏見、支持公平）、政府的政策和立法、社會團體的服務與倡議，以及國際組織的資源和規範，缺一不可。", "group": false}, {"n": 35, "q": "下列哪一個例子，說明了「族群刻板印象」如何造成不公平？", "opts": ["新住民媽媽認真學習中文，融入台灣社會", "某雇主以「東南亞人英文不好」為由，拒絕讓新住民應徵翻譯職位，不論其實際能力如何", "學校為新住民子女提供課後輔導，幫助他們追上學習進度", "政府開辦新住民生活適應課程，幫助移民融入台灣社會"], "ans": "B", "exp": "雇主以「東南亞人英文不好」的刻板印象，不論應聘者實際能力如何就直接拒絕，是刻板印象造成不公平的典型例子——個人未被以其真實能力評估，而是因族群身分被先入為主地歧視。", "group": false}, {"n": 36, "q": "為什麼說「貧富差距」是影響社會公平的重要因素？", "opts": ["因為有錢人本來就比窮人有能力，差距是自然現象", "因為財富不均會影響教育、醫療、居住等各方面的機會，使弱勢者處於更不利的處境", "因為窮人本身不夠努力，所以貧富差距是個人責任問題", "因為政府稅收來自富人，所以富人本來就應享有更多社會資源"], "ans": "B", "exp": "貧富差距的危害在於其「連鎖效應」：財富多寡影響一個人能接受的教育品質、就醫機會、居住環境等，使弱勢者在多個生活面向都處於不利地位，而富裕者則能憑藉財富優勢獲得更多機會，貧富差距因而可能世代複製。", "group": false}, {"n": 37, "q": "下列四個改善社會不公平的行動中，哪一個是「個人的努力」？", "opts": ["政府推動《性別平等工作法》保障職場性別平等", "世界糧食計畫署向缺糧地區提供糧食援助", "民間婦女團體遊說政府修改歧視性法規", "小美看到同班同學被排擠，主動站出來表示支持，拒絕霸凌"], "ans": "D", "exp": "小美個人主動站出來支持被排擠的同學，是個人在日常生活中以行動改善不公平對待的例子，屬於個人的努力。A是政府作為；B是國際組織援助；C是社會團體（婦女團體）的協助。", "group": false}, {"n": 38, "q": "關於「城鄉差距」產生的原因，下列何者最為正確？", "opts": ["完全是因為偏鄉居民不夠努力，所以無法發展", "主要是因為都市和偏鄉在歷史、地理、政策資源分配等方面長期存在不均等", "城鄉差距是因為偏鄉居民不願意遷移到都市所造成的", "城鄉差距只在台灣存在，其他國家沒有此問題"], "ans": "B", "exp": "城鄉差距的形成是複雜的結構性問題，涉及歷史發展差異、地理條件限制（如偏遠、交通不便）以及長期以來政策和資源集中投入都市地區等因素，並非個人責任問題，也是世界各國普遍存在的現象。", "group": false}, {"n": 39, "q": "比爾蓋茲手持人類排泄物樣本，在博覽會上呼籲重視開發中國家廁所不足的問題。這個行動最能象徵何種不公平正義的概念？", "opts": ["加速各國經濟發展，縮小國際差距", "追求社會公平正義，讓每個人的基本需求（衛生設施）都能被滿足", "透過個人財富影響力，改變政治決策", "鼓勵個人慈善捐款解決全球衛生問題"], "ans": "B", "exp": "比爾蓋茲此舉是為了喚起社會對開發中國家數十億人口缺乏基本衛生設施問題的關注，體現「追求公平正義」的精神——每個人都應有權獲得基本的衛生和健康保障，這屬於「個人基本需求應被滿足」的公平正義訴求。", "group": false}, {"n": 40, "q": "下列哪一個措施，最能同時改善「族群不平等」和「城鄉差距」兩種不公平？", "opts": ["在偏遠山地部落興建社區圖書館，並配備族語書籍和學習資源，讓原住民孩子能在家鄉就地學習族群文化和知識", "只補助都市地區的原住民族群活動，方便政府統一管理", "鼓勵原住民全部遷移至都市生活，融入主流社會", "取消山地保留地制度，讓土地自由買賣"], "ans": "A", "exp": "在偏遠山地部落建立圖書館並提供族語資源，同時解決了：（城鄉差距）偏鄉缺乏教育資源的問題，以及（族群不平等）原住民族語文化傳承和學習機會不足的問題，能同時改善兩種不公平。", "group": false}];
-const OPT_LABELS = ['Ａ','Ｂ','Ｃ','Ｄ'];
 
-let score = 0, done = 0;
-
-function updateScore(){
-  document.getElementById('score').textContent = score;
-  document.getElementById('done').textContent = done;
+function revealBlank(btn){
+  btn.style.display='none';
+  btn.nextElementSibling.style.display='inline';
+}
+function revealAll(){
+  document.querySelectorAll('.qm-btn').forEach(b=>{
+    b.style.display='none';
+    b.nextElementSibling.style.display='inline';
+  });
 }
 
-function buildUI(){
-  const app = document.getElementById('app');
+const OPT_LABELS=['Ａ','Ｂ','Ｃ','Ｄ'];
+let score=0,done=0;
+function updateScore(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('done').textContent=done;
+}
+function buildQuiz(QS,ctxHtml){
+  const app=document.getElementById('app');
 
   // 題組情境框
-  const ctxBox = document.createElement('div');
-  ctxBox.className = 'ctx-box';
-  ctxBox.innerHTML = `<div class="group-label">📋 題組情境 — 請閱讀後回答第 1～5 題</div><p class="ctx-intro">小恩的公民老師在課堂上展示了以下四則新聞標題，請根據內容回答第 1～5 題。</p>
+  const ctxBox=document.createElement('div');
+  ctxBox.className='ctx-box';
+  ctxBox.innerHTML='<div class="group-label">📋 題組情境 — 請閱讀後回答第 1～5 題</div>'+ctxHtml;
+  app.appendChild(ctxBox);
+
+  let inRegular=false;
+  QS.forEach(item=>{
+    if(!item.group&&!inRegular){
+      inRegular=true;
+      const sep=document.createElement('div');
+      sep.className='section-label';
+      sep.textContent='一、單一選擇題（第 6～40 題）';
+      app.appendChild(sep);
+    }
+    const card=document.createElement('div');
+    card.className='q-card';
+    const qtxt=document.createElement('div');
+    qtxt.className='q-text';
+    qtxt.innerHTML='<span class="q-num">'+item.n+'</span><span>'+item.q+'</span>';
+    card.appendChild(qtxt);
+    const opts=document.createElement('div');
+    opts.className='opts';
+    let answered=false;
+    item.opts.forEach((opt,j)=>{
+      const btn=document.createElement('button');
+      btn.className='opt-btn';
+      btn.innerHTML='<span class="ol">'+OPT_LABELS[j]+'</span><span>'+opt+'</span>';
+      btn.addEventListener('click',()=>{
+        if(answered)return;
+        answered=true; done++;
+        const ok=OPT_LABELS[j]===item.ans;
+        if(ok){score+=2;btn.classList.add('correct');}
+        else btn.classList.add('wrong');
+        opts.querySelectorAll('.opt-btn').forEach((b,k)=>{
+          b.disabled=true;
+          if(OPT_LABELS[k]===item.ans&&!ok)b.classList.add('reveal');
+        });
+        exp.classList.add('show');
+        updateScore();
+      });
+      opts.appendChild(btn);
+    });
+    card.appendChild(opts);
+    const exp=document.createElement('div');
+    exp.className='exp-box';
+    exp.textContent='【解析】'+item.exp;
+    card.appendChild(exp);
+    app.appendChild(card);
+  });
+}
+
+const QS=[{"n": 1, "q": "根據上表，乙新聞所反映的不公平，最主要屬於哪一種議題？", "opts": ["性別不平等", "族群不平等", "城鄉差距", "貧富差距"], "ans": "B", "exp": "乙新聞提到原住民孩子教育資源不足，這是因族群身分（原住民）而在教育機會上受到不公平對待，屬於族群不平等的議題。雖然也有城鄉因素，但核心問題在於族群身分造成的教育資源差異。", "group": true}, {"n": 2, "q": "甲新聞中「家庭主婦付出不被視為社會貢獻」，這呈現出哪一方面的社會不公平？", "opts": ["利益分配不均，家庭主婦沒有獲得相應報酬", "責任承擔不公，家庭主婦不需要承擔社會責任", "貢獻未獲尊重，家庭主婦的努力沒有被社會認可", "個人需求不足，家庭主婦的基本生活需求未被滿足"], "ans": "C", "exp": "翰林版教材將社會不公平分為四個面向：利益分配不均、責任承擔不公、貢獻未獲尊重、個人需求未獲滿足。甲新聞中，家庭主婦付出了大量勞動，卻被社會忽視，屬於「貢獻未獲尊重」的不公平。", "group": true}, {"n": 3, "q": "丙新聞中台北與台東醫療資源的差距，主要反映哪一種不公平議題？", "opts": ["族群不平等", "性別不平等", "城鄉差距", "貧富差距"], "ans": "C", "exp": "台北（都市）和台東（偏遠地區）之間的醫療資源分布不均，是典型的城鄉差距問題——都市資源豐富，偏鄉資源匱乏，影響偏鄉居民享有醫療的機會和品質。", "group": true}, {"n": 4, "q": "丁新聞中「頂層富人財富遠超底層人口」，最能說明哪一種社會不公平現象？", "opts": ["城鄉差距", "族群歧視", "貧富差距", "性別偏見"], "ans": "C", "exp": "丁新聞描述的是財富在不同收入族群之間分配極度不均的現象，頂層少數人掌握大量財富，底層多數人財富極少，這是典型的「貧富差距」問題。", "group": true}, {"n": 5, "q": "若政府想改善丙新聞所呈現的不公平問題，下列哪一個措施最為直接有效？", "opts": ["提高城市醫師薪資，吸引更多人投入醫療業", "推動醫療資源向偏遠地區傾斜，如增設診所或巡迴醫療", "開放更多私人醫院進入市場，讓市場決定資源分配", "強制民眾遷居至都市，以便享有完善醫療資源"], "ans": "B", "exp": "改善城鄉醫療差距，需要政府主動將資源引導至偏遠地區，如增設診所、辦理巡迴醫療、派遣醫師前往偏鄉服務等，才能使偏鄉居民也能享有基本的醫療照護。A雖有助，但不是針對偏鄉；C讓市場決定可能使差距更大；D不切實際。", "group": true}, {"n": 6, "q": "瑞典育嬰假制度規定父親和母親各有60天保留假，另有360天可自由分配，若任一方未請假即喪失保留天數。這項制度試圖改善哪一方面的社會不公平？", "opts": ["貢獻未獲尊重，父親育兒貢獻不被社會肯定", "責任承擔不公，育兒責任長期由女性單獨承擔", "利益分配不均，父親無法享有育嬰假的薪資補貼", "個人需求不足，父親的心理健康需求未被政策考慮"], "ans": "B", "exp": "瑞典育嬰假制度強制要求父母雙方都必須請育嬰假，目的是改變「育兒責任全由媽媽承擔」的不公平現象，讓父親也分擔育兒責任，屬於「責任承擔不公」的不公平改善。", "group": false}, {"n": 7, "q": "媒體常以「原住民很會唱歌、愛酗酒」的刻板印象報導原住民族群，導致社會大眾產生偏見，進而讓原住民在求職時遭受差別待遇。這主要呈現哪一種不公平？", "opts": ["貧富差距造成的經濟不公平", "族群議題中的歧視與不平等對待", "性別刻板印象造成的職場不公", "城鄉差距中的教育資源不均"], "ans": "B", "exp": "此題描述的是原住民族群因族裔身分被媒體貼上標籤、形成刻板印象，進而在求職等社會場合受到不公平對待，這屬於族群議題中的歧視與不平等。", "group": false}, {"n": 8, "q": "下列何種改善不公平的方式，屬於「政府的作為」？", "opts": ["某公司自發性地提高女性員工薪資，縮小性別薪資差距", "立法院三讀通過同性婚姻合法化，保障同性伴侶的平等權利", "某民間團體為偏鄉孩子募資設立圖書館", "某慈善機構每年固定捐款給偏鄉學校"], "ans": "B", "exp": "政府的作為是透過法律制定或政策推行來改善不公平。立法院通過同性婚姻法是政府以立法方式保障群體的平等權利，屬於政府作為。A是企業行為；C、D是民間團體的作為。", "group": false}, {"n": 9, "q": "「某公司以男性為主擔任技術、管理職位，女性則多在行政、文書部門」，這最能說明哪一種不公平？", "opts": ["族群議題：公司偏好特定種族擔任技術職", "城鄉差距：都市才有機會擔任管理職位", "性別不平等：刻板印象造成職場性別分工固化", "貧富差距：高薪職位只對富人開放"], "ans": "C", "exp": "依據性別（男/女）決定適合從事的職務，是典型的性別刻板印象造成的職場性別不平等，讓女性在某些職位上受到不公平的限制，無法依能力取得機會。", "group": false}, {"n": 10, "q": "下列哪一項措施最能體現「改善貧富差距不公平」的目標？", "opts": ["政府興建社會住宅，優先提供給中低收入家庭承租", "政府補助都市地區的交通建設，便利上班族通勤", "政府提高企業所得稅，增加國庫收入", "政府舉辦國際文化活動，提升城市形象"], "ans": "A", "exp": "社會住宅提供租金低廉的住房給中低收入家庭，讓弱勢家庭也能有穩定的居住環境，是直接改善貧富差距（具體表現為住屋問題）的措施。其他選項改善貧富差距的效果較不直接。", "group": false}, {"n": 11, "q": "電影《關鍵少數》描述1960年代黑人女性凱薩琳在NASA工作，每次上廁所必須跑800公尺到允許黑人使用的廁所。凱薩琳所遭受的不公平「不包含」下列何者？", "opts": ["族群方面的不公平", "性別方面的不公平", "城鄉差距的不公平", "基本需求未獲滿足的不公平"], "ans": "C", "exp": "凱薩琳遭受的不公平包含：（族群）黑人被隔離；（性別）黑人女性在科技職場的雙重弱勢；（基本需求）無法使用近處廁所，造成生理基本需求無法被滿足。題目中並未提到城鄉差距的問題，故C不包含在內。", "group": false}, {"n": 12, "q": "居仁國中提供視障學生考試延長作答時間、弱勢學生申請午餐補助，這些措施最能體現哪一種公平正義的概念？", "opts": ["形式平等：對所有人給予完全相同的對待", "實質公平：依據不同需求提供差異化的協助", "絕對平均：讓所有人得到完全相同的資源", "市場競爭：依能力高下決定資源分配"], "ans": "B", "exp": "「視障生延長考試時間」和「弱勢學生午餐補助」都是針對不同需求，給予差異化的照顧，目的是讓所有人都能在公平的基礎上參與學習。這體現了「實質公平」——對不同處境的人給予符合其需求的不同對待，才能達到真正的公平。", "group": false}, {"n": 13, "q": "下列哪一種情境最能說明「個人需求未獲滿足」的不公平？", "opts": ["某工廠女性員工薪資低於同職位男性員工", "身障者因缺乏無障礙設施，無法進入公共建築使用服務", "原住民孩子因語言差異，被同學排斥嘲笑", "農村孩子與城市孩子接受到的教育資源差距懸殊"], "ans": "B", "exp": "「個人需求未獲滿足」的不公平，是指個人的基本生活需求（如行動、醫療、安全等）無法得到滿足。身障者因缺乏無障礙設施而無法進入公共空間，正是其基本出行需求未被社會環境滿足的例子。A是利益/責任面向；C是族群歧視；D是城鄉差距的資源不均。", "group": false}, {"n": 14, "q": "下列哪一個選項所描述的行動，屬於「社會團體」改善不公平的方式？", "opts": ["政府制定《性別平等教育法》保障校園性平環境", "聯合國發表宣言呼籲各國保障原住民族群權利", "某基金會在偏遠地區設立免費課後輔導班，縮小城鄉教育差距", "個人透過升學、考試改善自身的社會經濟地位"], "ans": "C", "exp": "改善不公平的力量分為：個人的努力、政府的作為、社會（民間）團體的協助、國際組織的援助。基金會在偏鄉設立課後輔導班，是民間社會團體主動採取行動縮小城鄉差距，屬於社會團體的協助。A是政府；B是國際組織；D是個人。", "group": false}, {"n": 15, "q": "下列關於「城鄉差距」的描述，何者正確？", "opts": ["城鄉差距只出現在醫療資源方面，其他資源分布均衡", "城鄉差距是指都市與偏遠地區在各種資源與機會上的不均等", "改善城鄉差距最有效的方式是讓偏鄉居民全部遷移至都市", "城鄉差距問題只發生在發展中國家，台灣已完全克服"], "ans": "B", "exp": "城鄉差距是指都市（城市）與偏遠地區（鄉村）之間，在醫療、教育、就業、交通、文化等各種資源和機會上存在不均等的現象。A、C、D均過於絕對或錯誤。", "group": false}, {"n": 16, "q": "下列哪一個選項最能說明「利益分配不均」的不公平？", "opts": ["家庭主婦的育兒工作不被社會認為有價值", "女性員工與男性員工同工同酬，薪資完全相同", "高薪職位幾乎全由富裕家庭出身的人佔據，弱勢者難以分享經濟成果", "企業要求男女員工承擔相同的工作量"], "ans": "C", "exp": "「利益分配不均」是指社會的財富、機會等利益，沒有依公平原則分配給各群體，主要落在少數優勢族群手中。高薪職位由富裕家庭壟斷，弱勢者無法分享社會的經濟成果，是典型的利益分配不均。A是貢獻未獲尊重；B是公平現象；D是責任承擔。", "group": false}, {"n": 17, "q": "某社會局在颱風後提供受災戶的「急難救助金」，這是為了回應哪一種社會不公平的情況？", "opts": ["利益分配不均，受災戶無法分享社會資源", "個人需求未獲滿足，受災戶的基本生活需求受到威脅", "責任承擔不公，受災戶被迫承擔所有颱風損失", "貢獻未獲尊重，受災戶的重建努力沒有被社會認可"], "ans": "B", "exp": "颱風災後提供急難救助金，是為了幫助受災戶維持基本生活，回應的是「個人需求未獲滿足」——受災者因天災導致基本生活需求（居住、食物、安全）受到嚴重威脅。政府出手是為了確保每個人的基本生活需求都能得到保障。", "group": false}, {"n": 18, "q": "聯合國通過《身心障礙者權利公約》，要求各國保障身障者的教育、就業、公共參與等基本權利。這種改善不公平的力量屬於？", "opts": ["個人的努力", "政府的作為", "社會團體的協助", "國際組織的援助"], "ans": "D", "exp": "聯合國是國際組織，透過制定國際公約要求各成員國遵守，以改善身障者的不平等處境，屬於「國際組織的援助」。個人努力、政府作為、社會團體協助均是不同層面的力量。", "group": false}, {"n": 19, "q": "「刻板印象」對特定族群或性別造成哪一種不公平的影響？", "opts": ["讓人們對特定群體有固定化的既定印象，進而在就業、生活中造成差別對待", "幫助社會更有效率地辨識不同群體的特徵，提升社會分工效率", "讓優勢族群能夠維持其社會地位，促進社會穩定", "減少社會中不必要的歧視，因為刻板印象通常是正確的"], "ans": "A", "exp": "刻板印象是對特定群體（族群、性別等）過度簡化的固定看法。這種先入為主的觀念會導致人們在就業、教育、社交等方面對特定群體做出不公平的差別對待（如歧視原住民、排斥女性擔任某些職位），對當事人造成不公平的影響。", "group": false}, {"n": 20, "q": "下列哪一個例子，最能說明「形式平等」與「實質公平」的差異？", "opts": ["所有學生都使用同一本教科書，是形式平等；視障生使用點字書，是實質公平", "富有家庭的孩子繳較少學費，是形式平等；貧困孩子繳較多學費，是實質公平", "男女員工薪資相同，是形式平等；男性比女性多領獎金，是實質公平", "所有人都有投票權，是形式平等；有錢人多一票，是實質公平"], "ans": "A", "exp": "形式平等是指對所有人給予完全相同的待遇；實質公平則是依據不同人的需求和處境，給予有差異的對待，以達到真正意義上的公平。所有學生用同一本書（形式平等），但視障生因需求不同改用點字書（實質公平），正是這組概念的最佳說明。", "group": false}, {"n": 21, "q": "下列哪一個行為，最能展現個人在日常生活中改善族群不公平的方式？", "opts": ["主動學習不同族群的文化，尊重並理解其歷史背景，避免使用歧視性語言", "認為原住民就是應該住在山上，才能保持文化傳統", "看到外籍移工總是特別小心，因為新聞說他們會犯罪", "認為不同族群就是有不同能力，這是天生的差異"], "ans": "A", "exp": "個人改善族群不公平的方式，首先是消除刻板印象和偏見，透過主動了解、尊重不同族群的文化，以及在日常言行中避免歧視性表達。B、C、D都是基於刻板印象的歧視行為，只會加深族群不公平。", "group": false}, {"n": 22, "q": "池田香代子的繪本描述：「100人村中，有20人營養不良，1人瀕臨餓死，而另外有15人卻過度肥胖。」這段描述最能說明哪種不公平？", "opts": ["城鄉差距：偏鄉糧食生產不足", "族群不平等：特定族群無法獲得糧食", "貧富差距：糧食資源在不同群體之間分配極度不均", "性別不平等：女性獲得的糧食少於男性"], "ans": "C", "exp": "繪本描述的是同一社會中，有人嚴重缺乏食物、有人卻過度飲食的強烈對比，核心反映的是社會資源（糧食）在不同群體之間分配嚴重不均——即「貧富差距」導致的資源分配不公平。", "group": false}, {"n": 23, "q": "下列關於「社會不公平」的敘述，何者正確？", "opts": ["社會不公平只出現在經濟落後的國家，已開發國家不存在此問題", "社會不公平包含族群、性別、貧富差距、城鄉差距等多種面向", "社會不公平完全由個人能力不足造成，與社會制度無關", "社會不公平問題只要靠個人努力就能完全解決"], "ans": "B", "exp": "社會不公平是多面向的複雜社會現象，包含族群歧視、性別不平等、貧富差距、城鄉差距等，在各種不同發展程度的社會中都可能存在。A、C、D均過於片面或絕對化。", "group": false}, {"n": 24, "q": "《月薪嬌妻》日劇中，男主角計算家庭主婦創造的年收入高達95.2萬元台幣，遠超一般上班族。這部劇試圖指出哪種不公平？", "opts": ["利益分配不均：家庭主婦應獲得政府補貼", "責任承擔不公：丈夫不分擔家務", "貢獻未獲尊重：家庭主婦的勞動價值被社會忽視", "個人需求不足：家庭主婦的個人自由受到限制"], "ans": "C", "exp": "劇中透過具體計算家庭主婦的勞動價值，試圖讓社會正視「家庭勞動是有價值的」，批評社會長期將家庭主婦的付出視為理所當然、不認為是「真正的工作」，屬於「貢獻未獲尊重」的不公平。", "group": false}, {"n": 25, "q": "「運動競賽依年齡分組」、「視障學生考試延長時間」，這兩種安排共同體現了什麼概念？", "opts": ["絕對平等：讓所有人受到完全相同的對待", "形式平等：規則對所有人都一樣", "實質公平：依據不同條件和需求，給予適切的差異化安排", "社會救助：對弱勢族群提供特殊資源"], "ans": "C", "exp": "這兩個例子都是根據參與者的不同條件（年齡、障礙狀況），給予不同的競賽或考試規則，目的是讓每個人都能在公平的基礎上參與，體現的是「實質公平」——給予不同需求的人差異化的安排，才是真正的公平。", "group": false}, {"n": 26, "q": "在討論「如何改善貧富差距」時，下列哪一個措施最能直接縮小貧富差距？", "opts": ["增加高速公路數量，便利民眾交通", "實施累進所得稅制，對高收入者課徵較高稅率，並將稅收用於弱勢補助", "推廣民眾投資股票，讓大家都能分享經濟成長", "加強文化活動推廣，提升全民精神生活品質"], "ans": "B", "exp": "累進所得稅制對高收入者課以較高稅率，政府再將稅收用於社會福利和弱勢補助，能有效將資源從富裕階層重分配給弱勢族群，是縮小貧富差距的重要財政工具。其他選項對縮小貧富差距的直接效果有限。", "group": false}, {"n": 27, "q": "下列哪一個描述，屬於「責任承擔不公」的不公平？", "opts": ["公司給女性主管的薪水少於同職位男性主管", "社會普遍認為照顧家庭是女性的責任，男性不需要承擔同等比例的家務", "原住民孩子教育機會不如都市孩子", "偏鄉居民就醫要花費更長的時間和費用"], "ans": "B", "exp": "「責任承擔不公」是指某個群體被要求承擔不成比例的義務或責任。社會習俗將照顧家庭的責任主要壓在女性身上，而男性不必承擔同等分量，這使女性在職業發展上受到更多限制，屬於責任承擔不公的性別不平等。", "group": false}, {"n": 28, "q": "下列何者屬於「國際組織援助」改善社會不公平的例子？", "opts": ["台灣政府制定《原住民族基本法》保障原住民權利", "某民間協會在偏鄉辦理免費閱讀課程", "世界衛生組織（WHO）協助開發中國家建立公共衛生體系", "個人選擇購買公平貿易產品，支持農民獲得合理報酬"], "ans": "C", "exp": "世界衛生組織（WHO）是國際組織，透過提供技術和資源協助各國建立公共衛生體系，是國際組織援助改善不公平的典型例子。A是政府作為；B是社會團體協助；D是個人行動。", "group": false}, {"n": 29, "q": "下列哪一個現象，說明了「貧富差距」可能影響「教育機會均等」？", "opts": ["富裕家庭子女就讀私立貴族學校，接受更多教育資源，而貧困家庭子女只能讀公立學校", "政府規定所有學生都必須接受九年國民教育", "學校對所有學生提供免費的教科書", "政府補助清寒學生的學費，讓他們也能繼續升學"], "ans": "A", "exp": "貧富差距可能使不同家庭背景的孩子，能接受到的教育資源產生巨大差異——富裕家庭能提供私立貴族學校、補習班等更多資源，而貧困家庭孩子則只能依賴有限的公立資源。這說明貧富差距進一步影響了教育機會的公平性。", "group": false}, {"n": 30, "q": "下列描述中，哪一個最符合公平正義的核心精神？", "opts": ["讓所有人接受完全相同的對待，不論個別差異", "依據每個人的需求和處境，提供符合其實際狀況的資源和機會", "強者優先獲得資源，弱者自行找出路，符合自然法則", "維持現有的社會秩序，不輕易改變資源分配方式"], "ans": "B", "exp": "公平正義的核心精神，不只是形式上「人人相同」，更強調依據不同需求和處境給予適切對待（實質公平）。當每個人的基本需求和機會都能被滿足，才算是達到真正的公平正義。A是形式平等；C是弱肉強食；D是保守主義立場，都不完整。", "group": false}, {"n": 31, "q": "下列哪一個是改善「城鄉差距」的具體措施？", "opts": ["提高都市房屋稅，讓人口自然往偏鄉移動", "政府在偏遠地區設立巡迴醫療車，讓偏鄉居民也能就近看診", "取消偏鄉居民的交通補貼，鼓勵他們自食其力", "只在都市集中建設優質學校，再讓偏鄉學生自行前來就讀"], "ans": "B", "exp": "改善城鄉差距的方向是讓資源流向偏遠地區，確保偏鄉居民也能享有基本的公共服務。設立巡迴醫療車，讓偏鄉居民不必長途跋涉就能獲得醫療服務，是針對城鄉醫療差距的具體改善措施。", "group": false}, {"n": 32, "q": "某電視廣告宣稱「女生就該做家事、男生就要負責賺錢」，這類廣告最可能產生什麼不良影響？", "opts": ["讓社會分工更有效率，男女各司其職", "強化性別刻板印象，限制個人依照自身能力和興趣發展的自由", "幫助維持傳統家庭的和諧關係", "鼓勵男女平等地分擔家庭責任"], "ans": "B", "exp": "廣告傳遞「女生做家事、男生賺錢」的性別刻板印象，會使社會大眾對男女的角色有固定期待，進而限制個人（無論男女）依照自身興趣和能力選擇生活方式的自由，強化性別不平等的文化氛圍。", "group": false}, {"n": 33, "q": "下列哪一種政府作為，最能說明「以法律和政策改善族群不平等」？", "opts": ["媒體鼓勵閱聽眾更公平地看待不同族群", "政府制定原住民族語教育政策，在學校中保存並推廣族語", "某企業自發性多雇用原住民員工", "個人選擇學習不同族群的傳統文化"], "ans": "B", "exp": "政府透過制定法律和政策（如原住民族語教育政策）來保障族群文化和語言的傳承，是政府以公權力改善族群不平等的例子。A是媒體的作用；C是企業行為；D是個人行動。", "group": false}, {"n": 34, "q": "在討論「社會不公平問題的解決」時，下列哪一個說法最為合理？", "opts": ["社會不公平問題只能靠政府解決，個人無能為力", "社會不公平問題是自然現象，不需要也無法改變", "改善社會不公平需要個人、政府、社會團體和國際組織共同努力", "只要每個人努力工作，社會不公平自然就會消失"], "ans": "C", "exp": "改善社會不公平是複雜的系統性工程，需要多方力量共同配合：個人的行動（消除偏見、支持公平）、政府的政策和立法、社會團體的服務與倡議，以及國際組織的資源和規範，缺一不可。", "group": false}, {"n": 35, "q": "下列哪一個例子，說明了「族群刻板印象」如何造成不公平？", "opts": ["新住民媽媽認真學習中文，融入台灣社會", "某雇主以「東南亞人英文不好」為由，拒絕讓新住民應徵翻譯職位，不論其實際能力如何", "學校為新住民子女提供課後輔導，幫助他們追上學習進度", "政府開辦新住民生活適應課程，幫助移民融入台灣社會"], "ans": "B", "exp": "雇主以「東南亞人英文不好」的刻板印象，不論應聘者實際能力如何就直接拒絕，是刻板印象造成不公平的典型例子——個人未被以其真實能力評估，而是因族群身分被先入為主地歧視。", "group": false}, {"n": 36, "q": "為什麼說「貧富差距」是影響社會公平的重要因素？", "opts": ["因為有錢人本來就比窮人有能力，差距是自然現象", "因為財富不均會影響教育、醫療、居住等各方面的機會，使弱勢者處於更不利的處境", "因為窮人本身不夠努力，所以貧富差距是個人責任問題", "因為政府稅收來自富人，所以富人本來就應享有更多社會資源"], "ans": "B", "exp": "貧富差距的危害在於其「連鎖效應」：財富多寡影響一個人能接受的教育品質、就醫機會、居住環境等，使弱勢者在多個生活面向都處於不利地位，而富裕者則能憑藉財富優勢獲得更多機會，貧富差距因而可能世代複製。", "group": false}, {"n": 37, "q": "下列四個改善社會不公平的行動中，哪一個是「個人的努力」？", "opts": ["政府推動《性別平等工作法》保障職場性別平等", "世界糧食計畫署向缺糧地區提供糧食援助", "民間婦女團體遊說政府修改歧視性法規", "小美看到同班同學被排擠，主動站出來表示支持，拒絕霸凌"], "ans": "D", "exp": "小美個人主動站出來支持被排擠的同學，是個人在日常生活中以行動改善不公平對待的例子，屬於個人的努力。A是政府作為；B是國際組織援助；C是社會團體（婦女團體）的協助。", "group": false}, {"n": 38, "q": "關於「城鄉差距」產生的原因，下列何者最為正確？", "opts": ["完全是因為偏鄉居民不夠努力，所以無法發展", "主要是因為都市和偏鄉在歷史、地理、政策資源分配等方面長期存在不均等", "城鄉差距是因為偏鄉居民不願意遷移到都市所造成的", "城鄉差距只在台灣存在，其他國家沒有此問題"], "ans": "B", "exp": "城鄉差距的形成是複雜的結構性問題，涉及歷史發展差異、地理條件限制（如偏遠、交通不便）以及長期以來政策和資源集中投入都市地區等因素，並非個人責任問題，也是世界各國普遍存在的現象。", "group": false}, {"n": 39, "q": "比爾蓋茲手持人類排泄物樣本，在博覽會上呼籲重視開發中國家廁所不足的問題。這個行動最能象徵何種不公平正義的概念？", "opts": ["加速各國經濟發展，縮小國際差距", "追求社會公平正義，讓每個人的基本需求（衛生設施）都能被滿足", "透過個人財富影響力，改變政治決策", "鼓勵個人慈善捐款解決全球衛生問題"], "ans": "B", "exp": "比爾蓋茲此舉是為了喚起社會對開發中國家數十億人口缺乏基本衛生設施問題的關注，體現「追求公平正義」的精神——每個人都應有權獲得基本的衛生和健康保障，這屬於「個人基本需求應被滿足」的公平正義訴求。", "group": false}, {"n": 40, "q": "下列哪一個措施，最能同時改善「族群不平等」和「城鄉差距」兩種不公平？", "opts": ["在偏遠山地部落興建社區圖書館，並配備族語書籍和學習資源，讓原住民孩子能在家鄉就地學習族群文化和知識", "只補助都市地區的原住民族群活動，方便政府統一管理", "鼓勵原住民全部遷移至都市生活，融入主流社會", "取消山地保留地制度，讓土地自由買賣"], "ans": "A", "exp": "在偏遠山地部落建立圖書館並提供族語資源，同時解決了：（城鄉差距）偏鄉缺乏教育資源的問題，以及（族群不平等）原住民族語文化傳承和學習機會不足的問題，能同時改善兩種不公平。", "group": false}];
+const CTX_HTML=`<p class="ctx-intro">小恩的公民老師在課堂上展示了以下四則新聞標題，請根據內容回答第 1～5 題。</p>
 <table class="ctx-table">
 <thead><tr><th>編號</th><th>新聞標題</th><th>核心現象</th></tr></thead>
 <tbody>
@@ -89,64 +224,7 @@ function buildUI(){
 <tr><td>丁</td><td>頂層10%富人財富是底層50%的總和，貧富差距持續拉大</td><td>財富分配不均問題</td></tr>
 </tbody></table>
 `;
-  app.appendChild(ctxBox);
-
-  let inRegular = false;
-  QS.forEach((item, idx) => {
-    if(!item.group && !inRegular){
-      inRegular = true;
-      const sep = document.createElement('div');
-      sep.className = 'group-label';
-      sep.style.cssText = 'margin-bottom:14px;margin-top:4px;background:#eef3f9;border-left-color:#2c5f8a;color:#1a3a6b;';
-      sep.textContent = '一、單一選擇題（第 6～40 題）';
-      app.appendChild(sep);
-    }
-
-    const card = document.createElement('div');
-    card.className = 'q-card';
-
-    const qtxt = document.createElement('div');
-    qtxt.className = 'q-text';
-    qtxt.innerHTML = `<span class="q-num">${item.n}</span><span>${item.q}</span>`;
-    card.appendChild(qtxt);
-
-    const opts = document.createElement('div');
-    opts.className = 'opts';
-    let answered = false;
-
-    item.opts.forEach((opt, j) => {
-      const btn = document.createElement('button');
-      btn.className = 'opt-btn';
-      btn.innerHTML = `<span class="ol">${OPT_LABELS[j]}</span><span>${opt}</span>`;
-      btn.addEventListener('click', () => {
-        if(answered) return;
-        answered = true;
-        done++;
-        const isCorrect = OPT_LABELS[j] === item.ans;
-        if(isCorrect){ score += 2; btn.classList.add('correct'); }
-        else{ btn.classList.add('wrong'); }
-        // reveal correct
-        opts.querySelectorAll('.opt-btn').forEach((b, k) => {
-          b.disabled = true;
-          if(OPT_LABELS[k] === item.ans && !isCorrect) b.classList.add('reveal');
-        });
-        exp.classList.add('show');
-        updateScore();
-      });
-      opts.appendChild(btn);
-    });
-    card.appendChild(opts);
-
-    const exp = document.createElement('div');
-    exp.className = 'exp-box';
-    exp.textContent = '【解析】' + item.exp;
-    card.appendChild(exp);
-
-    app.appendChild(card);
-  });
-}
-
-buildUI();
+buildQuiz(QS,CTX_HTML);
 updateScore();
 </script>
 </body>
