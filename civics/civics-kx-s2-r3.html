@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康軒版公民 第 03 回 | L5+L6 綜合複習（素養導向）</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--blue:#2c5f8a;--gold:#c5a028;--ok:#1a7a3c;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:20px 16px 16px;text-align:center;}
+header h1{font-size:22px;font-weight:bold;}
+header p{font-size:14px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:18px;padding:4px 14px;font-size:13px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.ho-section{background:#fff8ee;border:2px solid #e8c060;border-radius:14px;padding:20px 24px;margin:24px 0;}
+.ho-section h2{color:#7b5000;font-size:20px;margin-bottom:14px;}
+.ho-item{margin-bottom:10px;font-size:17px;line-height:1.9;}
+.ho-num{color:#8b2326;font-weight:bold;margin-right:6px;}
+.qm-btn{background:#e8c060;border:none;border-radius:8px;padding:2px 10px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+.qm-btn:hover{background:#d4a800;}
+.blank-ans{background:#fffacc;border-radius:4px;padding:1px 8px;font-weight:bold;color:#5a3e00;}
+.reveal-all-btn{display:block;margin:14px auto 0;background:#8b2326;color:#fff;border:none;border-radius:20px;padding:8px 24px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+#score-bar{background:var(--blue);color:#fff;padding:12px 20px;border-radius:10px;font-size:17px;font-weight:bold;margin:20px 0 16px;text-align:center;}
+.question{background:#fff;border-radius:12px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 5px rgba(0,0,0,.08);}
+.q-group-ctx{background:#fffbee;border:2px solid #e8c060;border-radius:10px;padding:14px 18px;margin:18px 0 10px;font-size:15px;}
+.q-group-ctx p{margin-bottom:6px;}
+.qtext{font-size:17px;font-weight:bold;margin-bottom:10px;}
+.opt{display:block;width:100%;text-align:left;padding:8px 12px;margin:5px 0;border:2px solid #dde3ee;border-radius:8px;cursor:pointer;font-size:16px;font-family:inherit;background:#fff;transition:background .1s,border-color .1s;}
+.opt:hover{background:#f0f6fc;border-color:var(--blue);}
+.opt.correct{background:#e6f9ee;border-color:var(--ok);color:var(--ok);font-weight:bold;}
+.opt.wrong{background:#ffeaea;border-color:#c0392b;color:#c0392b;}
+.opt.reveal{background:#e8f0fb;border-color:var(--blue);font-weight:bold;}
+.explain-btn{margin-top:8px;background:none;border:1px solid #bbb;border-radius:6px;padding:4px 12px;font-size:13px;cursor:pointer;font-family:inherit;}
+.explain{display:none;background:#fffbee;border-left:3px solid #e8c060;padding:8px 12px;margin-top:8px;font-size:14px;border-radius:0 6px 6px 0;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:600px){header h1{font-size:18px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 康軒版公民 ‧ 第 03 回 互動練習</h1>
+  <p>L5+L6 綜合複習（素養導向） ｜ 共 40 題（含題組 5 題）</p>
+  <a class="back" href="mock-exam-kx-s2.html">← 回考卷列表</a>
+</header>
+<div class="wrap">
+  <div class="ho-section">
+    <h2>📝 填充講義</h2>
+    <div class="ho-item"><span class="ho-num">1.</span>社會福利發展歷程：早期是宗教或善心人士的「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">慈善救濟</span>」，工業革命後逐漸演變為政府主導的「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">制度性保障</span>」。</div><div class="ho-item"><span class="ho-num">2.</span>全民健康保險屬於「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">社會保險（醫療保健）</span>」，由政府、雇主、被保險人「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">三方</span>」共同負擔保費。</div><div class="ho-item"><span class="ho-num">3.</span>社會住宅由「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">政府</span>」興建，提供弱勢族群以「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">低於市場行情的合理租金</span>」租用，屬於廣義福利服務。</div><div class="ho-item"><span class="ho-num">4.</span>「數位落差」常因「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">城鄉</span>」或「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">貧富</span>」差距造成，是社會變遷帶來的不公平現象。</div><div class="ho-item"><span class="ho-num">5.</span>累進稅制讓高所得者繳較高比例的稅，體現「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">責任承擔</span>」角度的公平正義——能力越強，承擔越多。</div><div class="ho-item"><span class="ho-num">6.</span>三層次社會變遷可「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">相互影響</span>」：器物、制度、理念之間皆可相互帶動，並非單一方向。</div><div class="ho-item"><span class="ho-num">7.</span>建立完善的「社會安全網」，需要「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">政府</span>」、「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">民間團體</span>」、「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">個人</span>」三方共同建構，各部門跨領域合作。</div>
+    <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+  </div>
+  <div id="score-bar">共 40 題，點選選項開始作答</div>
+  <div id="quiz-container"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+
+function revealBlank(btn) {
+  btn.style.display = 'none';
+  btn.nextElementSibling.style.display = 'inline';
+}
+function revealAll() {
+  document.querySelectorAll('.qm-btn').forEach(b => revealBlank(b));
+}
+function buildQuiz(QS, GROUP_CTX_HTML) {
+  let total = QS.length, done = 0, correct = 0;
+  const LETTERS = ['A','B','C','D'];
+  const container = document.getElementById('quiz-container');
+  const scoreBar  = document.getElementById('score-bar');
+  function updateScore() {
+    scoreBar.textContent = done
+      ? `已作答 ${done}／${total}　正確 ${correct}　正確率 ${Math.round(correct/done*100)}%`
+      : `共 ${total} 題，點選選項開始作答`;
+  }
+  updateScore();
+  if (GROUP_CTX_HTML) {
+    const ctx = document.createElement('div');
+    ctx.className = 'q-group-ctx';
+    ctx.innerHTML = GROUP_CTX_HTML;
+    container.appendChild(ctx);
+  }
+  QS.forEach(([q, opts, ans, exp], idx) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.innerHTML = `<div class="qtext">${idx+1}. ${q}</div>`;
+    let answered = false;
+    opts.forEach((o, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = `（${LETTERS[i]}）${o}`;
+      btn.onclick = () => {
+        if (answered) return;
+        answered = true; done++;
+        const isOk = LETTERS[i] === ans;
+        if (isOk) correct++;
+        btn.classList.add(isOk ? 'correct' : 'wrong');
+        div.querySelectorAll('.opt').forEach(b => {
+          if (b.textContent.startsWith(`（${ans}）`)) b.classList.add('reveal');
+          b.disabled = true;
+        });
+        updateScore();
+      };
+      div.appendChild(btn);
+    });
+    const eb = document.createElement('button');
+    eb.className = 'explain-btn';
+    eb.textContent = '查看解析';
+    eb.onclick = () => {
+      const ed = div.querySelector('.explain');
+      ed.style.display = ed.style.display === 'none' ? 'block' : 'none';
+    };
+    const ed = document.createElement('div');
+    ed.className = 'explain';
+    ed.textContent = `【解析】${exp}`;
+    div.appendChild(eb);
+    div.appendChild(ed);
+    container.appendChild(div);
+  });
+}
+
+const QS = [
+  [
+    "全民健康保險屬於哪一類社會福利措施？",
+    [
+      "社會救助",
+      "社會津貼",
+      "社會保險（醫療保健）",
+      "福利服務"
+    ],
+    "C",
+    "全民健保是政府強制辦理的「社會保險」，屬於醫療保健類別，保費由政府、雇主、民眾三方共同負擔。"
+  ],
+  [
+    "政府「落實醫療院所分級制度」，從社會變遷的角度來看，這屬於哪個層次的變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "器物與理念同時"
+    ],
+    "B",
+    "醫療院所分級制度屬於政府的制度安排與規範，是「制度層次」的社會變遷。"
+  ],
+  [
+    "民眾「不看白不看」的心態導致醫療資源浪費，若政府透過宣導希望改變此心態，是希望達成哪一層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "風俗習慣"
+    ],
+    "C",
+    "改變民眾的就醫心態與觀念，屬於「理念層次」的社會變遷目標。"
+  ],
+  [
+    "若有民眾因無力繳納健保費而被停保，導致生病無法就醫，這體現哪種不公平現象？",
+    [
+      "貢獻肯定",
+      "責任承擔",
+      "利益分配",
+      "需求滿足"
+    ],
+    "D",
+    "低收入民眾的醫療需求未能獲得滿足，屬於「需求滿足」角度的不公平。政府應確保每個人的基本醫療需求都能被照顧。"
+  ],
+  [
+    "根據文章，以下哪一種做法最能「善盡個人對社會福利的責任」？",
+    [
+      "多申請各種社會福利補助，充分利用政府資源",
+      "生病時盡量去大醫院，取得最好的醫療品質",
+      "按時繳納健保費，小病先到診所就診",
+      "要求政府免除所有保費，改由稅收全額支應"
+    ],
+    "C",
+    "善盡個人責任包括：按時繳費（對制度的貢獻）＋合理使用資源（小病看診所），兩者皆符合，故選C。"
+  ],
+  [
+    "臺灣《民法》在婦女團體的倡議下，修訂了「子女從父姓」的相關條文，讓子女可以選擇從父姓或母姓。此事件包含哪幾個層次的社會變遷？",
+    [
+      "只有理念層次",
+      "只有制度層次",
+      "理念層次→制度層次（先有平等觀念倡議，再推動修法）",
+      "器物層次→制度層次"
+    ],
+    "C",
+    "婦女團體先有「性別平等」的理念倡議（理念層次），再推動修訂《民法》（制度層次），是理念帶動制度的社會變遷。"
+  ],
+  [
+    "下列哪一項是「制度層次影響器物層次」的社會變遷？",
+    [
+      "民眾環保觀念形成，促使政府頒布限塑令",
+      "政府規定機車必須配備ABS防鎖死煞車系統，廠商因此改良機車設計",
+      "AI技術發展讓許多人使用生成式AI工具",
+      "民眾運動意識提升，健身房數量大幅增加"
+    ],
+    "B",
+    "政府規定（制度）→廠商改良機車設計（器物），是「制度→器物」的社會變遷。A是理念→制度，C、D是理念或器物自發演變。"
+  ],
+  [
+    "下列哪一組不公平現象與改善力量的配對「正確」？",
+    [
+      "城鄉醫療差距—個人自力救濟",
+      "同工不同酬—民間倡議推動立法",
+      "身障者就業困難—政府制定《身心障礙者權益保障法》",
+      "偏鄉數位落差—政府不需介入，市場自然解決"
+    ],
+    "C",
+    "政府制定《身心障礙者權益保障法》，保障身障者就業及生活權益，是政府透過立法改善不公平的例子。A城鄉醫療差距需要政府政策與民間資源共同解決，個人力量有限；B民間倡議立法也正確，但C最直接明確；D偏鄉數位落差無法靠市場自然解決。"
+  ],
+  [
+    "關於臺灣各種社會保險，下列配對何者「正確」？",
+    [
+      "全職家庭主婦—勞工保險",
+      "國小教師—農民保險",
+      "電子工廠作業員—勞工保險",
+      "年滿60歲未參加任何保險者—公教人員保險"
+    ],
+    "C",
+    "電子工廠作業員屬於受僱勞工，應參加「勞工保險」。全職家庭主婦參加國民年金；國小教師參加公教人員保險；未參加任何保險的成人參加國民年金（非公教保險）。"
+  ],
+  [
+    "下列對「社會福利四大措施」的說明，何者「錯誤」？",
+    [
+      "社會保險—預先繳費，遭遇風險時獲得給付",
+      "社會救助—針對急難或貧困者提供補助",
+      "社會津貼—依特定身份定期發放現金，不需事先繳費",
+      "福利服務—僅限以金錢補助方式提供給弱勢族群"
+    ],
+    "D",
+    "福利服務是提供「服務」（如托育、輔導、職訓、復康巴士等），並非僅限金錢補助，故D錯誤。"
+  ],
+  [
+    "某縣市政府每月發放「身心障礙生活補助」給中低收入的身障者，此屬於哪種社會福利措施？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "B",
+    "中低收入的身障者屬於經濟弱勢，政府提供生活補助屬於「社會救助」。若是針對所有身障者（不論收入）才是社會津貼。"
+  ],
+  [
+    "下列何者屬於「社會津貼」？",
+    [
+      "勞工失業後申請的失業給付",
+      "低收入戶家庭申請的緊急急難救助",
+      "政府對65歲以上老人每月發放的敬老津貼",
+      "職業災害補償給付"
+    ],
+    "C",
+    "政府對65歲以上老人（不論收入）發放的敬老津貼，屬於「社會津貼」。其他三項皆屬社會保險或社會救助。"
+  ],
+  [
+    "公民老師請同學說明「社會福利基本法」的意義，下列哪位同學的說明最正確？",
+    [
+      "阿明：社會福利基本法只保障勞工的就業權利",
+      "小芬：政府制定此法是為了確保國民享有人格與人性尊嚴的發展，滿足不同群體的基本生活需求",
+      "大雄：社會福利基本法讓所有人都可以免費使用政府的社會服務",
+      "美玲：此法只針對低收入戶和身心障礙者"
+    ],
+    "B",
+    "《社會福利基本法》的目的是確保國民享有人格與人性尊嚴的發展，滿足不同群體需求，保障全體國民基本生活，非限定特定族群。"
+  ],
+  [
+    "政府所得稅採用「累進稅率」，高所得者繳較高比例的稅，低所得者繳較低比例。此措施最能對應哪種公平正義角度？",
+    [
+      "需求滿足",
+      "貢獻肯定",
+      "責任承擔",
+      "利益分配"
+    ],
+    "C",
+    "累進稅率的核心是「量能負擔」，能力強（高所得）者承擔更多稅務責任，屬於「責任承擔」角度的公平正義。"
+  ],
+  [
+    "原住民族學生升學加分或外加名額制度，主要是基於哪種公平正義的考量？",
+    [
+      "確保每個人獲得完全相同的機會（齊頭式平等）",
+      "彌補原住民族因歷史與環境因素導致的教育劣勢（需求滿足）",
+      "肯定原住民族對社會的貢獻（貢獻肯定）",
+      "讓原住民族承擔更多社會責任（責任承擔）"
+    ],
+    "B",
+    "加分與外加名額制度是為了彌補原住民族因歷史不平等、偏鄉環境等不利條件造成的教育劣勢，屬「需求滿足」的公平正義——讓弱勢者獲得更多照顧以達到實質公平。"
+  ],
+  [
+    "下列關於「社會變遷對社會造成不公平」的例子，何者敘述「最適當」？",
+    [
+      "工業革命後城市發展，使農村勞動力減少，這是社會的自然調整，並無不公平",
+      "AI與自動化技術發展，導致部分低技術工人失業，加劇了貧富差距",
+      "手機普及讓老人也能輕鬆使用科技，縮小了數位落差",
+      "科技發展對所有人的影響完全相同，不會製造新的不公平"
+    ],
+    "B",
+    "AI與自動化讓低技術工人面臨失業風險，而能掌握新技術者收入提升，加劇了貧富差距，是社會變遷帶來不公平的典型例子。"
+  ],
+  [
+    "下列哪一個例子最能說明「個人行動」可以改善社會不公平現象？",
+    [
+      "立法院通過《長期照顧服務法》",
+      "基金會發起募款活動幫助偏鄉學童",
+      "一名大學生利用課餘時間擔任視障學生的口述影像志工",
+      "政府推動偏鄉教師加給制度"
+    ],
+    "C",
+    "大學生個人自願擔任口述影像志工，是「個人」直接行動改善視障者需求的例子。A是政府立法，B是民間基金會，D是政府政策。"
+  ],
+  [
+    "「凱米颱風造成屏東農業損失，縣政府依《農業天然災害救助作業要點》提供農民現金補助。」此屬於哪種社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "B",
+    "天然災害現金補助是針對突發急難（颱風災害）的緊急補助，屬於「社會救助」。"
+  ],
+  [
+    "下列選項中，哪一項最能呈現「器物、制度、理念三層次」相互影響？",
+    [
+      "電動車技術（器物）成熟→政府制定補貼政策（制度）→民眾環保意識提升（理念）",
+      "民眾觀念改變（理念）→手機新款式推出（器物）",
+      "政府立法（制度）→人民觀念不變",
+      "器物層次一定先於制度和理念改變"
+    ],
+    "A",
+    "電動車技術（器物）→政府政策（制度）→民眾環保觀念（理念），呈現三個層次連鎖影響的完整例子。"
+  ],
+  [
+    "公民老師說：「改善社會不公平，需要三種力量共同努力。」下列哪一組力量組合最完整？",
+    [
+      "政府＋企業",
+      "個人＋民間團體",
+      "政府＋民間團體＋個人",
+      "政府＋國際組織"
+    ],
+    "C",
+    "改善社會不公平的三種力量為：政府（制定政策）、民間團體（倡議、服務）、個人（直接行動），三者缺一不可。"
+  ],
+  [
+    "若某縣市提供「到宅送餐服務」給行動不便的獨居老人，此措施屬於哪類社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "D",
+    "到宅送餐是針對老人特殊需求（行動不便）提供的生活服務，屬於「福利服務」，而非現金補助。"
+  ],
+  [
+    "下列各種社會變遷現象，哪一個屬於「理念層次」帶動「器物層次」的例子？",
+    [
+      "政府立法規定公共建築必須設無障礙廁所，建商因此改建設計",
+      "因環保意識抬頭，廠商開發出可分解的環保餐具",
+      "手機出現後，民眾通訊習慣改變",
+      "颱風造成停電，民眾被迫改變生活作息"
+    ],
+    "B",
+    "環保意識（理念）→廠商開發環保餐具（器物），是理念帶動器物層次變遷的例子。A是制度→器物，C是器物→理念，D是自然事件影響。"
+  ],
+  [
+    "王太太在家全職照顧三個孩子，她的配偶在外工作。調查顯示，王太太每日照顧家人和做家務的時間是配偶的三倍以上。這呈現了哪種角度的不公平？",
+    [
+      "貢獻肯定",
+      "責任承擔",
+      "利益分配",
+      "需求滿足"
+    ],
+    "B",
+    "王太太承擔了遠超過配偶的家務與照顧責任，屬於「責任承擔」角度的不公平（性別責任不均）。"
+  ],
+  [
+    "以下哪項最不可能被歸類為「社會變遷」的例子？",
+    [
+      "智慧手機改變了人們溝通的方式",
+      "政府修訂《消費者保護法》增加線上購物保護條款",
+      "每個人對音樂的喜好不同",
+      "越來越多人支持環保，減少使用一次性塑膠"
+    ],
+    "C",
+    "個人對音樂的喜好差異是「個人差異」，並非整個社會整體發生的結構性改變，不屬於「社會變遷」。其他三項皆為整體社會發生的變化。"
+  ],
+  [
+    "下列關於「社會福利制度」的敘述，何者「正確」？",
+    [
+      "臺灣的社會福利制度在工業革命時期已相當完善",
+      "現代社會福利強調以維護人性尊嚴為核心，保障全體國民基本生活",
+      "社會福利是一種慈善救濟，屬於個人的善心捐助",
+      "社會福利只有政府才能提供，民間不得參與"
+    ],
+    "B",
+    "現代社會福利以「維護人性尊嚴」為核心，強調制度性保障全體國民，政府整合民間資源共同推動，非單純慈善救濟。"
+  ],
+  [
+    "下列哪一項屬於「貢獻肯定」角度的不公平現象？",
+    [
+      "身障者因缺乏無障礙設施而無法上班",
+      "偏鄉兒童缺乏課輔資源",
+      "女性員工同工不同酬",
+      "女性主管的工作成就鮮少被媒體報導或社會認可"
+    ],
+    "D",
+    "女性主管的成就（貢獻）未獲媒體報導和社會認可，屬於「貢獻肯定」角度的不公平。A是需求滿足，B是利益分配，C是利益分配。"
+  ],
+  [
+    "下列哪一項措施最能幫助解決「數位落差」帶來的不公平？",
+    [
+      "提高稅率，讓富人繳更多稅",
+      "政府提供偏鄉學童免費上網設備及數位學習課程",
+      "增加社會住宅數量",
+      "設立更多日間照護中心"
+    ],
+    "B",
+    "數位落差是城鄉/貧富差距帶來的不公平，政府提供設備與課程直接解決偏鄉學童無法使用科技的問題，最對症。"
+  ],
+  [
+    "以下關於「社會安全網」的說明，何者「錯誤」？",
+    [
+      "社會安全網需要各部門（社福、醫療、警政、教育等）跨領域合作",
+      "完善的社會安全網應從「預防」開始做起，而非只在事後補救",
+      "只要社工人力充足，社會安全網就能完整發揮功能",
+      "社會安全網需要政府、民間、個人共同建構"
+    ],
+    "C",
+    "社會安全網的功能不只依賴社工，還需要醫療、警政、教育、司法等各部門共同合作，光靠社工人力增加是不夠的。"
+  ],
+  [
+    "某位公民老師問學生：「下列哪種行為不符合公平正義？」請選出最正確的答案。",
+    [
+      "公司以能力而非性別決定升遷",
+      "政府對弱勢學童提供額外補助",
+      "雇主對身障求職者不給予任何面試機會，直接拒絕",
+      "法院依罪刑輕重判決，而非依當事人身分"
+    ],
+    "C",
+    "雇主不給身障者面試機會，是基於身分（障礙）而非能力的歧視，不符合公平正義（均等機會）的精神。"
+  ],
+  [
+    "「《身心障礙者權益保障法》規定，企業每僱用一定比例員工，就必須聘用身障者。」這最能說明政府透過何種方式改善身障就業的不公平？",
+    [
+      "倡導觀念改變",
+      "訂定制度規範",
+      "提供直接服務",
+      "發放現金補助"
+    ],
+    "B",
+    "政府制定法律（制度規範），強制企業聘用一定比例的身障者，是透過「訂定制度規範」改善不公平。"
+  ],
+  [
+    "某社區活動中心設有「老人日間照顧中心」，提供老人白天的生活照顧、健康促進活動，讓家屬能安心上班。此屬於哪種社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "D",
+    "老人日間照顧中心提供生活服務（非現金），針對老人特殊需求，屬於「福利服務」。"
+  ],
+  [
+    "「城中城大樓火災中，發現部分罹難者生前未參加任何社會保險，導致家屬無法申請理賠。」此事最能說明哪種社會福利制度的重要性？",
+    [
+      "社會救助",
+      "社會保險",
+      "社會津貼",
+      "福利服務"
+    ],
+    "B",
+    "未參加社會保險導致身故後家屬無法申請理賠，凸顯「社會保險」制度（如勞保、國民年金）的重要性，透過預先繳費保障意外風險。"
+  ],
+  [
+    "關於「公平正義的四個角度」，下列敘述何者「錯誤」？",
+    [
+      "責任承擔——每個人應按照自身能力，承擔相應的責任",
+      "貢獻肯定——對於個人對社會的貢獻，應給予適當的認可與回報",
+      "利益分配——指每個人都應獲得完全相同份量的資源",
+      "需求滿足——政府與社會應照顧不同族群的特殊需求"
+    ],
+    "C",
+    "公平正義的「利益分配」並非要求結果完全相同，而是「合理分配」——讓每個人都能獲得與其貢獻、需求相符的利益，並非齊頭式平均。"
+  ],
+  [
+    "下列哪一項屬於「器物層次」的社會變遷？",
+    [
+      "政府修訂《著作權法》因應生成式AI的侵權問題",
+      "民眾對AI科技的倫理問題產生廣泛討論和關注",
+      "ChatGPT等生成式AI工具問世，改變了人們工作的方式",
+      "聯合國發表《AI倫理建議書》，建立國際規範"
+    ],
+    "C",
+    "ChatGPT等AI工具（技術/器物）問世，改變人們工作方式，屬於「器物層次」的社會變遷。A是制度，B是理念，D是制度（國際規範）。"
+  ],
+  [
+    "根據「公平正義」的精神，以下哪一項政策設計「最能同時兼顧均等機會與照顧弱勢」？",
+    [
+      "所有大學入學名額完全以分數排列，不設任何加分或保障名額",
+      "原住民、身障生、單親等弱勢族群以「外加名額」方式保障入學機會，不影響一般生的競爭",
+      "家庭收入越高的學生，大學名額越多，以鼓勵努力",
+      "廢除大學入學考試，以抽籤方式分配大學名額"
+    ],
+    "B",
+    "外加名額制度讓弱勢族群有額外保障，同時不影響一般生的競爭機會，最能同時兼顧「均等機會」（一般生競爭不受影響）＋「照顧弱勢」（外加名額保障）。"
+  ],
+  [
+    "「老師發現班上某位原住民學生因家裡無網路，無法完成老師指定的線上作業。」此情況最能反映哪種不公平現象？",
+    [
+      "性別不平等",
+      "城鄉數位落差導致教育資源不均",
+      "族群文化歧視",
+      "貢獻未獲肯定"
+    ],
+    "B",
+    "原住民學生家中無網路導致學習困難，是城鄉（或貧富）差距造成的數位落差，進而影響教育資源公平，屬「城鄉數位落差」問題。"
+  ],
+  [
+    "關於社會福利的責任，下列敘述何者最正確？",
+    [
+      "個人只需要繳稅，其餘社會福利的推動完全是政府的責任",
+      "民間慈善機構應完全取代政府承擔社會福利責任",
+      "個人、民間團體、政府都有責任共同推動社會福利",
+      "社會福利是慈善行為，個人自願參與即可，無須負擔任何責任"
+    ],
+    "C",
+    "建立完善的社會福利需要「政府制度保障＋民間團體服務＋個人積極參與（繳費、服務、珍惜資源）」三方共同負責。"
+  ],
+  [
+    "下列哪一種情境，最能體現「社會福利」發展歷程中，從「慈善救濟」演變為「制度性保障」的精神？",
+    [
+      "某善心人士每月自掏腰包資助鄰近貧困家庭",
+      "政府制定《社會救助法》，明確規定低收入戶可申請的補助項目及標準",
+      "企業依照老闆的心情決定是否捐款給慈善機構",
+      "志工在假日煮食物分送遊民"
+    ],
+    "B",
+    "制定法律（制度）明確規定保障標準，是從「個人慈善」演變為「制度性保障」的具體體現——全體公民的基本生活受到法律保障，而非依靠個人善心。"
+  ],
+  [
+    "下列哪一項措施最能體現「縮小城鄉差距」以促進公平正義？",
+    [
+      "在偏鄉學校建設圖書館並提供數位學習設備",
+      "增加都市社會住宅數量",
+      "提高高所得者的所得稅稅率",
+      "增設大都市的社區老人日間照護中心"
+    ],
+    "A",
+    "在偏鄉建設圖書館並提供數位設備，直接縮小城鄉教育資源差距，促進公平正義。其他選項皆非針對城鄉差距的措施。"
+  ],
+  [
+    "公民老師說：「社會變遷讓生活更便利，但也創造出新的不公平。」以下哪一例子最能說明此觀點？",
+    [
+      "傳統市場因超市興起而業績下滑，但所有民眾都能享受更便利的購物",
+      "電商平台興起，城市消費者購物更便利，但偏鄉居民因物流問題無法享受同等服務",
+      "政府因科技進步推出電子公文系統，讓行政效率大幅提升",
+      "網路普及讓學生可以自主學習，縮短了城鄉教育差距"
+    ],
+    "B",
+    "電商平台讓城市消費者更便利，但偏鄉民眾因物流問題反而受限制更大，社會變遷（科技發展）加劇了城鄉的不平等，最能說明老師的觀點。"
+  ]
+];
+const CTX_HTML = "<p>（第 1–5 題）閱讀以下資料，回答問題。</p>\n<p>全民健康保險自1995年實施至今已超過30年，讓民眾以低廉的費用享受高品質醫療服務， 深受國際好評。然而，健保制度也面臨嚴重挑戰——民眾常抱持「不看白不看」的心態， 頻繁至大醫院就診小病，每年丟棄藥品約193公噸，造成龐大浪費。 截至2024年，中央健康保險局已虧損約500億元。 對此，政府推出多項改革：提高保費、落實醫療院所分級制度（小病看診所、大病看醫院）、 取消「出國停保」制度，並加強向民眾宣導珍惜醫療資源的觀念。</p>";
+buildQuiz(QS, CTX_HTML);
+</script>
+</body>
+</html>

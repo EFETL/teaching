@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康軒版公民 第 02 回 | L5 公平正義四角度 ＋ L6 福利五大類</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--blue:#2c5f8a;--gold:#c5a028;--ok:#1a7a3c;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:20px 16px 16px;text-align:center;}
+header h1{font-size:22px;font-weight:bold;}
+header p{font-size:14px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:18px;padding:4px 14px;font-size:13px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.ho-section{background:#fff8ee;border:2px solid #e8c060;border-radius:14px;padding:20px 24px;margin:24px 0;}
+.ho-section h2{color:#7b5000;font-size:20px;margin-bottom:14px;}
+.ho-item{margin-bottom:10px;font-size:17px;line-height:1.9;}
+.ho-num{color:#8b2326;font-weight:bold;margin-right:6px;}
+.qm-btn{background:#e8c060;border:none;border-radius:8px;padding:2px 10px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+.qm-btn:hover{background:#d4a800;}
+.blank-ans{background:#fffacc;border-radius:4px;padding:1px 8px;font-weight:bold;color:#5a3e00;}
+.reveal-all-btn{display:block;margin:14px auto 0;background:#8b2326;color:#fff;border:none;border-radius:20px;padding:8px 24px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+#score-bar{background:var(--blue);color:#fff;padding:12px 20px;border-radius:10px;font-size:17px;font-weight:bold;margin:20px 0 16px;text-align:center;}
+.question{background:#fff;border-radius:12px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 5px rgba(0,0,0,.08);}
+.q-group-ctx{background:#fffbee;border:2px solid #e8c060;border-radius:10px;padding:14px 18px;margin:18px 0 10px;font-size:15px;}
+.q-group-ctx p{margin-bottom:6px;}
+.qtext{font-size:17px;font-weight:bold;margin-bottom:10px;}
+.opt{display:block;width:100%;text-align:left;padding:8px 12px;margin:5px 0;border:2px solid #dde3ee;border-radius:8px;cursor:pointer;font-size:16px;font-family:inherit;background:#fff;transition:background .1s,border-color .1s;}
+.opt:hover{background:#f0f6fc;border-color:var(--blue);}
+.opt.correct{background:#e6f9ee;border-color:var(--ok);color:var(--ok);font-weight:bold;}
+.opt.wrong{background:#ffeaea;border-color:#c0392b;color:#c0392b;}
+.opt.reveal{background:#e8f0fb;border-color:var(--blue);font-weight:bold;}
+.explain-btn{margin-top:8px;background:none;border:1px solid #bbb;border-radius:6px;padding:4px 12px;font-size:13px;cursor:pointer;font-family:inherit;}
+.explain{display:none;background:#fffbee;border-left:3px solid #e8c060;padding:8px 12px;margin-top:8px;font-size:14px;border-radius:0 6px 6px 0;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:600px){header h1{font-size:18px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 康軒版公民 ‧ 第 02 回 互動練習</h1>
+  <p>L5 公平正義四角度 ＋ L6 福利五大類 ｜ 共 40 題（含題組 5 題）</p>
+  <a class="back" href="mock-exam-kx-s2.html">← 回考卷列表</a>
+</header>
+<div class="wrap">
+  <div class="ho-section">
+    <h2>📝 填充講義</h2>
+    <div class="ho-item"><span class="ho-num">1.</span>社會保險採「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">強制</span>」投保，保費由「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">個人</span>」、「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">雇主</span>」、「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">政府</span>」三方共同分擔。</div><div class="ho-item"><span class="ho-num">2.</span>「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">勞工保險</span>」保障受私人企業僱用的勞工，給付項目包括失業、職災、老年等。</div><div class="ho-item"><span class="ho-num">3.</span>「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">農民保險</span>」（農保）保障農業及漁業從業人員的職業相關風險。</div><div class="ho-item"><span class="ho-num">4.</span>「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">公教人員保險</span>」（公保）保障政府機關及學校的公務員與教師。</div><div class="ho-item"><span class="ho-num">5.</span>「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">國民年金保險</span>」保障年滿 25 歲、未加入其他職業保險的國民。</div><div class="ho-item"><span class="ho-num">6.</span>「社會救助」針對「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">急難或貧困</span>」者提供補助，「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">不需</span>」事先繳費，例如低收入戶生活補助、天災救助。</div><div class="ho-item"><span class="ho-num">7.</span>「社會津貼」由政府依「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">特定身份</span>」（如老人、幼兒、身障者）定期發放現金，「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">不需</span>」事先繳費，例如老年津貼、育兒補助。</div><div class="ho-item"><span class="ho-num">8.</span>「福利服務」提供具體的「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">服務</span>」而非現金，例如復康巴士、日間照顧中心、職業訓練。</div>
+    <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+  </div>
+  <div id="score-bar">共 40 題，點選選項開始作答</div>
+  <div id="quiz-container"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+
+function revealBlank(btn) {
+  btn.style.display = 'none';
+  btn.nextElementSibling.style.display = 'inline';
+}
+function revealAll() {
+  document.querySelectorAll('.qm-btn').forEach(b => revealBlank(b));
+}
+function buildQuiz(QS, GROUP_CTX_HTML) {
+  let total = QS.length, done = 0, correct = 0;
+  const LETTERS = ['A','B','C','D'];
+  const container = document.getElementById('quiz-container');
+  const scoreBar  = document.getElementById('score-bar');
+  function updateScore() {
+    scoreBar.textContent = done
+      ? `已作答 ${done}／${total}　正確 ${correct}　正確率 ${Math.round(correct/done*100)}%`
+      : `共 ${total} 題，點選選項開始作答`;
+  }
+  updateScore();
+  if (GROUP_CTX_HTML) {
+    const ctx = document.createElement('div');
+    ctx.className = 'q-group-ctx';
+    ctx.innerHTML = GROUP_CTX_HTML;
+    container.appendChild(ctx);
+  }
+  QS.forEach(([q, opts, ans, exp], idx) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.innerHTML = `<div class="qtext">${idx+1}. ${q}</div>`;
+    let answered = false;
+    opts.forEach((o, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = `（${LETTERS[i]}）${o}`;
+      btn.onclick = () => {
+        if (answered) return;
+        answered = true; done++;
+        const isOk = LETTERS[i] === ans;
+        if (isOk) correct++;
+        btn.classList.add(isOk ? 'correct' : 'wrong');
+        div.querySelectorAll('.opt').forEach(b => {
+          if (b.textContent.startsWith(`（${ans}）`)) b.classList.add('reveal');
+          b.disabled = true;
+        });
+        updateScore();
+      };
+      div.appendChild(btn);
+    });
+    const eb = document.createElement('button');
+    eb.className = 'explain-btn';
+    eb.textContent = '查看解析';
+    eb.onclick = () => {
+      const ed = div.querySelector('.explain');
+      ed.style.display = ed.style.display === 'none' ? 'block' : 'none';
+    };
+    const ed = document.createElement('div');
+    ed.className = 'explain';
+    ed.textContent = `【解析】${exp}`;
+    div.appendChild(eb);
+    div.appendChild(ed);
+    container.appendChild(div);
+  });
+}
+
+const QS = [
+  [
+    "《中高齡者及高齡者就業促進法》的通過，屬於哪一層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "科技層次"
+    ],
+    "B",
+    "立法屬於「制度層次」的社會變遷，法律是社會制度的一部分。"
+  ],
+  [
+    "中高齡者在職場受到年齡歧視，這是屬於哪種角度的不公平現象？",
+    [
+      "責任承擔",
+      "貢獻肯定",
+      "利益分配",
+      "需求滿足"
+    ],
+    "C",
+    "就業機會（薪資、工作機會）屬於「利益」，中高齡者因年齡無法公平獲得就業機會，屬於「利益分配」不公平。"
+  ],
+  [
+    "政府提供「就業獎勵金」給僱用中高齡者的企業，此屬於哪種社會福利措施？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "D",
+    "政府提供就業輔導、獎勵等服務性質的措施，屬於「福利服務」（就業服務），而非現金補助或保險。"
+  ],
+  [
+    "「銀色大門」企業主動僱用銀髮族，這是透過哪種力量改善中高齡就業問題？",
+    [
+      "政府立法的力量",
+      "民間企業的主動投入",
+      "個人自主爭取",
+      "國際公約的要求"
+    ],
+    "B",
+    "民間企業「銀色大門」屬於「民間」力量，主動僱用銀髮族是民間企業投入社會責任的表現。"
+  ],
+  [
+    "若中高齡失業者申請失業給付，屬於哪種社會保險的給付？",
+    [
+      "農民保險",
+      "公教人員保險",
+      "勞工保險",
+      "國民年金保險"
+    ],
+    "C",
+    "失業給付屬於「勞工保險」的給付項目之一，受僱勞工遭遇非自願失業時可以申請。"
+  ],
+  [
+    "關於「社會福利」的說明，下列何者「錯誤」？",
+    [
+      "社會福利的發展歷程是從慈善救濟走向制度性保障",
+      "現代社會福利強調以維護人性尊嚴為核心",
+      "社會福利僅包含政府的社會保險與救助措施",
+      "社會福利整合政府與民間力量共同推動"
+    ],
+    "C",
+    "社會福利不只限於政府的保險與救助，還包含津貼、福利服務、醫療保健，以及民間團體的投入，故C錯誤。"
+  ],
+  [
+    "下列哪一項社會福利措施，「不需要」事先繳納保費，由政府直接撥付？",
+    [
+      "勞工保險老年給付",
+      "全民健康保險就醫補助",
+      "老人年金津貼",
+      "農民保險身故給付"
+    ],
+    "C",
+    "老人年金津貼（社會津貼）由政府直接撥付，無需事先繳費；其他三項皆屬社會保險，需要繳納保費。"
+  ],
+  [
+    "王老先生今年78歲，年輕時務農，目前已退休未參加任何職業保險。他每月可以領取政府發放的生活補助金。請問他領的最可能是哪種社會福利？",
+    [
+      "農民保險老年給付",
+      "老農津貼（農民津貼）",
+      "勞工保險老年給付",
+      "公教人員退休給付"
+    ],
+    "B",
+    "老農津貼（農民津貼）是社會津貼，專門發放給年滿65歲且符合資格的農民，無須事先繳費。若他年輕時參加農保，也可能有農保給付，但題目說「未參加任何職業保險」，故最可能是老農津貼。"
+  ],
+  [
+    "下列社會福利中，屬於「福利服務」的是？",
+    [
+      "政府每月發放老人年金",
+      "政府提供新住民職業訓練與就業輔導",
+      "政府對低收入家庭提供急難救助金",
+      "全體勞工參加勞工保險"
+    ],
+    "B",
+    "職業訓練、就業輔導屬於提供「服務」（非現金），且針對特定族群（新住民）的需求，屬於「福利服務」。"
+  ],
+  [
+    "以下哪一項措施屬於「社會救助」？",
+    [
+      "政府發放65歲以上老人每月3,500元的敬老津貼",
+      "政府提供凱米颱風受災家庭臨時生活救助金",
+      "政府補助勞工參加職業訓練課程",
+      "全民健保補助民眾就醫費用"
+    ],
+    "B",
+    "急難或災害救助（颱風受災）屬於「社會救助」，是針對突發困境的緊急補助，非長期制度性保費。"
+  ],
+  [
+    "關於「全民健康保險」，下列敘述何者「正確」？",
+    [
+      "全民健保屬於社會津貼，政府全額補助不需繳費",
+      "全民健保的保費由政府、雇主、個人三方共同負擔",
+      "只有低收入戶才能享有全民健保",
+      "全民健保的費用完全來自政府稅收"
+    ],
+    "B",
+    "全民健保是社會保險，保費由「政府、雇主、被保險人」三方按比例共同負擔，並非政府全額補助。"
+  ],
+  [
+    "李小姐在私人公司擔任業務員，每月薪資由公司代扣保險費。若她不幸因病住院，可申請哪項保險的醫療給付？",
+    [
+      "農民保險",
+      "公教人員保險",
+      "勞工保險",
+      "國民年金保險"
+    ],
+    "C",
+    "受僱於私人企業的員工（業務員）參加「勞工保險」，遭遇傷病住院可申請勞保醫療給付。"
+  ],
+  [
+    "張老師在國中任職已滿30年，現在退休。她的退休金和相關福利來自哪一種社會保險？",
+    [
+      "勞工保險",
+      "農民保險",
+      "國民年金保險",
+      "公教人員保險"
+    ],
+    "D",
+    "公立學校教師屬於「公教人員」，退休福利由「公教人員保險」（公保）提供。"
+  ],
+  [
+    "阿雄今年28歲，大學畢業後一直在家幫忙務農，沒有參加其他職業保險。請問他最應該參加哪種保險？",
+    [
+      "勞工保險",
+      "農民保險",
+      "國民年金保險",
+      "公教人員保險"
+    ],
+    "B",
+    "從事農業工作者應參加「農民保險」（農保），保障其農業相關風險。若未加入農保，也可能適用國民年金，但農民優先參加農保。"
+  ],
+  [
+    "社會福利的「醫療保健」類別，下列何者屬之？",
+    [
+      "政府提供低收入戶急難救助金",
+      "政府推動社區心理衛生服務",
+      "政府每月發放育兒補助",
+      "老人院提供長照服務"
+    ],
+    "B",
+    "心理衛生服務屬於廣義的「醫療保健」，政府推動社區心理健康服務是保障國民身心健康的措施。"
+  ],
+  [
+    "關於社會福利措施的分類，下列何者配對「正確」？",
+    [
+      "職業災害補助—社會津貼",
+      "復康巴士服務—福利服務",
+      "急難救助金—社會保險",
+      "老年津貼—社會救助"
+    ],
+    "B",
+    "復康巴士是提供給身心障礙者的交通服務，屬於「福利服務」。A職災補助屬社會保險；C急難救助金屬社會救助；D老年津貼屬社會津貼。"
+  ],
+  [
+    "下列何者是改善「貧富差距」不公平現象最直接有效的社會福利措施？",
+    [
+      "全民健康保險",
+      "社會救助（低收入戶補助）",
+      "老人年金津貼",
+      "社區托育服務"
+    ],
+    "B",
+    "社會救助直接針對經濟弱勢（低收入戶）提供生活補助，最能直接縮小貧富差距。"
+  ],
+  [
+    "新住民小珊從越南嫁到臺灣，剛來時語言不通、不了解臺灣文化，生活困難。政府提供她中文課程和職業訓練，請問這屬於哪一類社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "D",
+    "語言課程和職業訓練是提供服務（非現金），針對新住民特殊需求而設，屬於「福利服務」。"
+  ],
+  [
+    "陳家因火災失去房屋，政府緊急安置其入住政府宿舍，並提供生活費補助。請問政府的作為屬於哪些社會福利的結合？",
+    [
+      "社會保險＋社會救助",
+      "社會救助＋社會住宅",
+      "社會津貼＋福利服務",
+      "醫療保健＋社會保險"
+    ],
+    "B",
+    "提供生活費補助屬「社會救助」，提供政府宿舍入住屬「社會住宅」，兩者皆有涉及，故選B。"
+  ],
+  [
+    "下列何者最能呈現「社會保險」與「社會救助」的根本差別？",
+    [
+      "社會保險只限公務員參加；社會救助開放所有人",
+      "社會保險需事先繳費才有給付；社會救助是針對特定困境者提供補助，不需事先繳費",
+      "社會保險由民間保險公司經營；社會救助由政府辦理",
+      "社會保險針對老人；社會救助針對兒童"
+    ],
+    "B",
+    "社會保險的機制是「事先繳費、分散風險」；社會救助是政府對遭受急難或貧困者提供補助，不需事先繳費，兩者性質不同。"
+  ],
+  [
+    "某縣市在偏鄉提供「到宅沐浴服務」給行動不便的老人，這屬於哪種社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "D",
+    "到宅沐浴屬於提供給老人的生活照顧「服務」，屬於「福利服務」。"
+  ],
+  [
+    "公平正義的四個角度中，「利益分配」最能描述下列哪種情況？",
+    [
+      "女性科學家的成就未獲媒體報導",
+      "單親媽媽同時承擔工作與家務",
+      "偏鄉學童缺乏圖書館及教育資源",
+      "身障者上下班沒有無障礙交通工具"
+    ],
+    "C",
+    "偏鄉學童缺乏圖書館等教育資源，是教育資源（利益）分配不均，屬於「利益分配」不公平。A是貢獻肯定，B是責任承擔，D是需求滿足。"
+  ],
+  [
+    "下列何種行為屬於民眾「善盡社會福利責任」的表現？",
+    [
+      "生病時盡量到大醫院就診，確保獲得最好的治療",
+      "準時繳納健保保費，珍惜醫療資源",
+      "申請所有可申請的社會津貼以增加收入",
+      "要求政府提供更多福利服務而不需要繳費"
+    ],
+    "B",
+    "準時繳費、珍惜資源，是善盡社會福利責任的正確表現。"
+  ],
+  [
+    "下列關於「社會變遷」的敘述，何者正確？",
+    [
+      "社會變遷只帶來正面的改變",
+      "社會變遷一定由器物層次開始",
+      "社會變遷三層次的改變速度以理念層次最快",
+      "社會變遷可能帶來正面影響，也可能帶來新的不公平"
+    ],
+    "D",
+    "社會變遷可帶來便利（正面），也可能帶來數位落差、貧富差距擴大等新的不公平，D最正確。"
+  ],
+  [
+    "科技發展使某些傳統職業（如收費員、打字員）消失，導致這些人面臨失業困境。這最能說明社會變遷帶來的哪種不公平？",
+    [
+      "性別不平等",
+      "族群歧視",
+      "貧富差距擴大",
+      "城鄉教育資源不均"
+    ],
+    "C",
+    "科技發展讓部分人因技術被取代而失業，加劇了能掌握新技術者與無法跟上者之間的「貧富差距」。"
+  ],
+  [
+    "社會福利的目的不包括下列哪一項？",
+    [
+      "保障全民基本生活品質",
+      "縮小社會貧富差距",
+      "追求政府財政盈餘",
+      "促進弱勢群體融入社會"
+    ],
+    "C",
+    "社會福利的目的是保障民眾生活、促進公平正義，並非以政府財政盈餘為目標。"
+  ],
+  [
+    "下列哪一項最能說明「公平正義首先確保均等機會，其次照顧弱勢」的精神？",
+    [
+      "全國統一大考所有考生同樣試卷、同樣時間作答，同時對身障考生提供延長作答時間",
+      "政府規定所有工作薪資一律相同，以達到平等",
+      "政府只補助富有家庭的小孩，讓他們上私立學校",
+      "政府只保障弱勢族群，不關心一般民眾的需求"
+    ],
+    "A",
+    "同樣試卷、時間是「均等機會」；對身障考生延長時間是「照顧弱勢」。兩者同時兼顧，最符合公平正義精神。"
+  ],
+  [
+    "「數位落差」（Digital Divide）是指因資訊科技的普及，導致能使用科技的人與不能使用的人之間差距擴大。這屬於哪一類不公平現象？",
+    [
+      "性別不平等",
+      "族群歧視",
+      "城鄉與貧富差距",
+      "身心障礙歧視"
+    ],
+    "C",
+    "數位落差常因地區（城鄉）或經濟能力（貧富）造成，屬於城鄉/貧富差距帶來的不公平。"
+  ],
+  [
+    "政府推動「所得稅累進制度」，讓收入越高者繳越多的稅，其目的最接近以下哪項公平正義角度？",
+    [
+      "責任承擔（能力越強，承擔越多）",
+      "貢獻肯定（獎勵努力工作者）",
+      "需求滿足（滿足每人基本需求）",
+      "利益均等（每人薪資相同）"
+    ],
+    "A",
+    "累進稅制讓高收入者承擔更多稅務責任（量能課稅），體現「責任承擔」的公平正義，能力越強應承擔越多的社會責任。"
+  ],
+  [
+    "下列何者是「民間非政府組織（NGO）」透過行動改善社會不公平的例子？",
+    [
+      "立法院通過《性別工作平等法》修正案",
+      "教育部推動偏鄉數位教育計畫",
+      "芒草心慈善協會幫助無家者重返職場",
+      "政府設立原住民族委員會處理族群議題"
+    ],
+    "C",
+    "芒草心慈善協會是民間非政府組織（NGO），直接幫助無家者就業，屬於「民間團體」改善社會不公平。其他選項皆屬政府作為。"
+  ],
+  [
+    "下列哪一個情境不屬於「需求滿足」角度的不公平現象？",
+    [
+      "身障者無法搭乘一般公車，需要特殊交通工具",
+      "偏鄉學童學校無圖書館，不利學習",
+      "女性主管人數遠少於男性主管",
+      "新住民不了解臺灣法律，缺乏法律諮詢管道"
+    ],
+    "C",
+    "女性主管人數少於男性，反映的是就業機會（利益分配）和社會地位（貢獻肯定）的不公平，較非「需求滿足」角度。A、B、D皆為特定群體的特殊需求未被滿足。"
+  ],
+  [
+    "下列關於「社會保險」的特色，何者「不正確」？",
+    [
+      "採強制投保，由法律規定必須參加",
+      "保費由個人、雇主、政府三方共同分擔",
+      "以弱勢或急難者為唯一服務對象",
+      "目的是分散個人風險，保障基本生活"
+    ],
+    "C",
+    "社會保險不是「只」針對弱勢者，而是針對特定職業群體（勞工、農民、公教人員）或全體國民（如健保、國民年金），非以急難者為唯一對象。"
+  ],
+  [
+    "下列各項改善社會不公平的方式，屬於「政府訂定政策」的是？",
+    [
+      "企業自願提高女性管理職比例",
+      "義工定期拜訪獨居老人",
+      "政府規定育嬰留職停薪期間雇主不得開除員工",
+      "家長組成讀書會推廣性別平等觀念"
+    ],
+    "C",
+    "政府規定育嬰留職停薪保障屬於「政府訂定政策」保障員工權益；A是企業自主，B是個人/志工行動，D是民間推廣。"
+  ],
+  [
+    "小君的爸爸去年因病住院，龐大的醫藥費令家庭陷入困境，幸好健保幫忙負擔大部分費用，自費部分也向社會局申請急難救助。請問以上各分別用到哪些社會福利？",
+    [
+      "社會保險＋社會救助",
+      "社會津貼＋福利服務",
+      "社會保險＋社會津貼",
+      "社會救助＋福利服務"
+    ],
+    "A",
+    "健保屬於「社會保險」；向社會局申請急難救助金屬於「社會救助」，兩者都有運用。"
+  ],
+  [
+    "一個完善的社會安全網需要哪些力量共同合作？",
+    [
+      "只需政府力量",
+      "政府、民間團體、個人三方共同協作",
+      "只需民間慈善機構",
+      "政府和企業即可，不需個人參與"
+    ],
+    "B",
+    "一個完善的社會安全網需要「政府制度、民間團體投入、個人積極參與」三方共同合作，缺一不可。"
+  ],
+  [
+    "關於「社會變遷」，何者敘述最恰當？",
+    [
+      "社會變遷只會帶來進步，讓社會更美好",
+      "社會變遷速度在現代社會越來越緩慢",
+      "社會變遷是社會的持續轉變，可能帶來新的機會也可能帶來新的問題",
+      "社會變遷只影響器物層次，不影響制度和理念"
+    ],
+    "C",
+    "社會變遷不一定只帶來進步，也可能帶來如貧富差距、數位落差等問題；變遷速度在現代反而越來越快；三個層次都可能受到影響。"
+  ],
+  [
+    "下列哪一項最能說明「理念層次」的社會變遷？",
+    [
+      "臺灣引進電動巴士，取代傳統柴油公車",
+      "政府修訂《民法》，保障同性伴侶的財產繼承權",
+      "社會大眾逐漸接受並支持同性婚姻平權",
+      "政府興建捷運，改善都市交通問題"
+    ],
+    "C",
+    "社會大眾「觀念」改變（接受同性婚姻）屬於「理念層次」的社會變遷；A、D是器物，B是制度。"
+  ],
+  [
+    "下列哪一個不公平現象是「性別」面向的不平等？",
+    [
+      "客家族群在某些地區面臨就業歧視",
+      "女性在同等職位上薪資普遍低於男性",
+      "偏鄉兒童缺乏課外活動資源",
+      "身障者搭乘大眾運輸困難重重"
+    ],
+    "B",
+    "男女薪資差距是「性別」面向的不平等；A是族群，C是城鄉，D是身心障礙。"
+  ],
+  [
+    "國際「4月30日不打小孩日」倡議改變家長的教養觀念，不使用體罰。這最能呈現哪一種改善不公平的方式？",
+    [
+      "個人直接行動",
+      "政府制定政策",
+      "民間倡議推動觀念改變",
+      "國際法規約束"
+    ],
+    "C",
+    "「4月30日不打小孩日」是由民間倡議，希望透過推廣活動改變家長教養「觀念」（理念）的方式，屬民間推動觀念改變。"
+  ],
+  [
+    "下列哪一句話最能完整說明「公平正義」的核心意涵？",
+    [
+      "每個人必須獲得完全相同的資源和機會",
+      "弱勢族群必須自己努力克服困境，政府不需介入",
+      "確保每個人有均等機會，並讓弱勢者獲得更多照顧，共同維護人性尊嚴",
+      "公平正義只針對經濟弱勢，不涉及性別或族群議題"
+    ],
+    "C",
+    "公平正義的核心是：均等機會（非結果完全相同）＋照顧弱勢＋維護人性尊嚴，C最完整。"
+  ]
+];
+const CTX_HTML = "<p>（第 1–5 題）閱讀以下資料，回答問題。</p>\n<p>108年12月，臺灣通過《中高齡者及高齡者就業促進法》，規定雇主不得因年齡歧視 拒絕僱用55歲以上的求職者，並鼓勵企業聘用中高齡員工，政府也提供就業獎勵金 給願意僱用中高齡者的企業。 此外，民間企業「銀色大門」則主動招募退休銀髮族擔任店員，讓長者重返職場， 不僅增加收入，也讓他們感受到自身的價值與對社會的貢獻。</p>";
+buildQuiz(QS, CTX_HTML);
+</script>
+</body>
+</html>
