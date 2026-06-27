@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民科 互動學習</title>
 <style>
-  :root { --main:#2c5f8a; --accent:#e6a800; --subject:#1abc9c; --teach:#7b6000; --bg:#eef3f9; }
+  :root { --main:#2c5f8a; --accent:#e6a800; --subject:#1abc9c; --bg:#eef3f9; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
   header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
@@ -13,23 +13,32 @@
   header p { font-size:18px; opacity:.95; }
   .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
   .back:hover { background:#eef6ff; }
-  .wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
+  .wrap { max-width:960px; margin:0 auto; padding:28px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:28px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
   .intro b { color:var(--main); }
-  .combo { display:block; text-align:center; background:var(--accent); color:#3a2c00; font-size:22px; font-weight:bold; text-decoration:none; padding:16px; border-radius:12px; margin-bottom:14px; box-shadow:0 2px 8px rgba(230,168,0,.4); transition:transform .12s; }
-  .combo:hover { transform:translateY(-2px); }
-  .unit { background:#fff; border-radius:12px; margin-bottom:18px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,.08); }
-  .unit-head { background:var(--main); color:#fff; font-size:21px; font-weight:bold; padding:12px 20px; }
-  .unit-head .n { background:#fff; color:var(--main); border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; font-size:18px; margin-right:10px; }
-  .links { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:16px 20px; }
-  .links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:14px 8px; font-size:18px; color:#1a1a1a; transition:all .12s; text-align:center; }
-  .links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
-  .links a .ic { font-size:26px; }
-  .links a.teach { border-color:#e7d9a8; }
-  .links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
-  .links a small { color:#667; font-size:14px; }
-  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-  @media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:24px; } }
+
+  /* ── 縮圖卡片格 ─────────────────── */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+
+  .book-card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,.10); transition:transform .18s,box-shadow .18s; }
+  .book-card:hover { transform:translateY(-5px); box-shadow:0 8px 28px rgba(0,0,0,.16); }
+  .book-card.coming { opacity:.88; }
+  .book-card.coming:hover { transform:none; box-shadow:0 2px 14px rgba(0,0,0,.10); }
+
+  .thumb-link { display:block; text-decoration:none; }
+  .thumb { width:100%; aspect-ratio:3/2; overflow:hidden; display:block; }
+  .thumb svg { width:100%; height:100%; display:block; }
+
+  .card-body { padding:16px 20px 22px; }
+  .card-body h3 { font-size:20px; font-weight:bold; color:#1a1a1a; margin-bottom:6px; }
+  .card-body p { font-size:15px; color:#556; margin-bottom:14px; min-height:2.2em; }
+
+  .btn-enter { display:inline-block; background:var(--main); color:#fff; text-decoration:none; padding:9px 22px; border-radius:22px; font-size:16px; font-weight:bold; transition:background .15s; }
+  .btn-enter:hover { background:#3d7cb0; }
+  .btn-wait { display:inline-block; background:#ccc; color:#888; border:none; padding:9px 22px; border-radius:22px; font-size:16px; font-weight:bold; cursor:not-allowed; font-family:inherit; }
+
+  footer { text-align:center; color:#789; font-size:15px; margin-top:36px; }
+  @media (max-width:560px){ header h1{ font-size:24px; } .card-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -40,63 +49,146 @@
 </header>
 <div class="wrap">
   <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
-  <a class="combo" href="mock-exam-s2.html">📋 七年級下學期複習考卷（第一～三回）— PDF 下載</a>
-  <div class="unit">
-    <div class="unit-head"><span class="n">11</span>家庭的生活</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-11.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-11.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-11.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+
+  <div class="card-grid">
+
+    <!-- 先修（第一冊 L11–L17）-->
+    <div class="book-card">
+      <a href="civics-pre.html" class="thumb-link">
+        <div class="thumb">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gPre" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2c5f8a"/>
+                <stop offset="100%" stop-color="#1abc9c"/>
+              </linearGradient>
+            </defs>
+            <rect width="300" height="200" fill="url(#gPre)"/>
+            <!-- 裝飾圓 -->
+            <circle cx="260" cy="30" r="50" fill="rgba(255,255,255,.07)"/>
+            <circle cx="40" cy="170" r="40" fill="rgba(255,255,255,.06)"/>
+            <!-- 建築 -->
+            <rect x="110" y="100" width="80" height="72" rx="3" fill="rgba(255,255,255,.22)"/>
+            <!-- 屋頂 -->
+            <polygon points="100,100 150,58 200,100" fill="rgba(255,255,255,.32)"/>
+            <!-- 旗杆 -->
+            <line x1="150" y1="58" x2="150" y2="38" stroke="rgba(255,255,255,.6)" stroke-width="3"/>
+            <rect x="150" y="38" width="22" height="14" rx="2" fill="rgba(255,200,0,.8)"/>
+            <!-- 門 -->
+            <rect x="135" y="138" width="30" height="34" rx="3" fill="rgba(255,255,255,.55)"/>
+            <!-- 窗 -->
+            <rect x="115" y="112" width="20" height="18" rx="3" fill="rgba(255,255,255,.5)"/>
+            <rect x="165" y="112" width="20" height="18" rx="3" fill="rgba(255,255,255,.5)"/>
+            <!-- 天秤 -->
+            <line x1="46" y1="82" x2="92" y2="82" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
+            <line x1="69" y1="65" x2="69" y2="115" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
+            <circle cx="46" cy="92" r="10" fill="rgba(255,255,255,.3)" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+            <circle cx="92" cy="90" r="10" fill="rgba(255,255,255,.3)" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+            <polygon points="69,63 64,73 74,73" fill="rgba(255,255,255,.7)"/>
+            <!-- L11~L17 標籤 -->
+            <rect x="12" y="160" width="106" height="28" rx="14" fill="rgba(0,0,0,.3)"/>
+            <text x="65" y="179" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" font-weight="bold">L11 – L17</text>
+          </svg>
+        </div>
+      </a>
+      <div class="card-body">
+        <h3>先修・第一冊</h3>
+        <p>家庭、學校、社區與文化｜第 11–17 課</p>
+        <a href="civics-pre.html" class="btn-enter">進入 →</a>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">12</span>親人的往來</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-12.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-12.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-12.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+
+    <!-- 第二冊 翰林版期末考 -->
+    <div class="book-card">
+      <a href="mock-exam-s2.html" class="thumb-link">
+        <div class="thumb">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gHL" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#6b1215"/>
+                <stop offset="100%" stop-color="#c44040"/>
+              </linearGradient>
+            </defs>
+            <rect width="300" height="200" fill="url(#gHL)"/>
+            <circle cx="270" cy="170" r="60" fill="rgba(255,255,255,.06)"/>
+            <circle cx="20" cy="20" r="35" fill="rgba(255,255,255,.06)"/>
+            <!-- 鉛筆 -->
+            <g transform="rotate(-38,65,155)">
+              <rect x="38" y="60" width="14" height="88" rx="2" fill="rgba(255,220,80,.85)"/>
+              <polygon points="38,148 52,148 45,170" fill="rgba(255,255,255,.9)"/>
+              <polygon points="38,148 52,148 45,162" fill="#e8c060"/>
+              <rect x="38" y="60" width="14" height="10" rx="2" fill="rgba(160,50,50,.9)"/>
+            </g>
+            <!-- 考卷 3 張 (後→前) -->
+            <g transform="rotate(10,182,108)">
+              <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.18)"/>
+            </g>
+            <g transform="rotate(4,182,108)">
+              <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.28)"/>
+            </g>
+            <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.92)"/>
+            <!-- 標題欄 -->
+            <rect x="137" y="42" width="90" height="24" rx="5" fill="#8b2326"/>
+            <text x="182" y="58" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" font-weight="bold">複習考卷 ×3</text>
+            <!-- 線條 -->
+            <line x1="150" y1="79" x2="215" y2="79" stroke="#ccc" stroke-width="1.5"/>
+            <line x1="150" y1="93" x2="215" y2="93" stroke="#ccc" stroke-width="1.5"/>
+            <line x1="150" y1="107" x2="205" y2="107" stroke="#ccc" stroke-width="1.5"/>
+            <line x1="150" y1="121" x2="210" y2="121" stroke="#ccc" stroke-width="1.5"/>
+            <line x1="150" y1="135" x2="200" y2="135" stroke="#ccc" stroke-width="1.5"/>
+            <!-- 打勾 -->
+            <text x="153" y="154" fill="#1a7a3c" font-size="14" font-family="sans-serif">✓</text>
+            <text x="171" y="154" fill="#1a7a3c" font-size="14" font-family="sans-serif">✓</text>
+            <text x="189" y="154" fill="#888" font-size="14" font-family="sans-serif">✓</text>
+            <!-- 翰林標籤 -->
+            <rect x="14" y="160" width="76" height="26" rx="13" fill="rgba(0,0,0,.3)"/>
+            <text x="52" y="177" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" font-weight="bold">翰林版</text>
+          </svg>
+        </div>
+      </a>
+      <div class="card-body">
+        <h3>第二冊翰林版期末考</h3>
+        <p>三份複習考卷・填充題講義・互動練習</p>
+        <a href="mock-exam-s2.html" class="btn-enter">進入 →</a>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">13</span>學校是個小社會</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-13.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-13.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-13.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+
+    <!-- 第二冊 康軒版期末考（敬請期待）-->
+    <div class="book-card coming">
+      <div class="thumb">
+        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gKX" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#4a5568"/>
+              <stop offset="100%" stop-color="#718096"/>
+            </linearGradient>
+          </defs>
+          <rect width="300" height="200" fill="url(#gKX)"/>
+          <rect x="16" y="16" width="268" height="168" rx="12" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="10,5"/>
+          <!-- 時鐘 -->
+          <circle cx="150" cy="88" r="42" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.5)" stroke-width="2.5"/>
+          <line x1="150" y1="50" x2="150" y2="58" stroke="rgba(255,255,255,.6)" stroke-width="2"/>
+          <line x1="150" y1="118" x2="150" y2="126" stroke="rgba(255,255,255,.6)" stroke-width="2"/>
+          <line x1="108" y1="88" x2="116" y2="88" stroke="rgba(255,255,255,.6)" stroke-width="2"/>
+          <line x1="184" y1="88" x2="192" y2="88" stroke="rgba(255,255,255,.6)" stroke-width="2"/>
+          <line x1="150" y1="88" x2="150" y2="62" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".9"/>
+          <line x1="150" y1="88" x2="170" y2="100" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+          <circle cx="150" cy="88" r="4" fill="white"/>
+          <text x="150" y="158" text-anchor="middle" fill="rgba(255,255,255,.9)" font-size="15" font-family="sans-serif" font-weight="bold">敬請期待</text>
+          <!-- 康軒標籤 -->
+          <rect x="14" y="160" width="76" height="26" rx="13" fill="rgba(0,0,0,.25)"/>
+          <text x="52" y="177" text-anchor="middle" fill="rgba(255,255,255,.8)" font-size="12" font-family="sans-serif" font-weight="bold">康軒版</text>
+        </svg>
+      </div>
+      <div class="card-body">
+        <h3>第二冊康軒版期末考</h3>
+        <p>持續製作中，即將推出</p>
+        <button class="btn-wait" disabled>敬請期待</button>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">14</span>學生自治</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-14.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-14.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-14.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">15</span>性別平等</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-15.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-15.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-15.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">16</span>敦親睦鄰</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-16.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-16.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-16.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">17</span>原住民族的部落文化</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-17.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-17.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-17.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
-    </div>
-  </div>
+
+  </div><!-- /card-grid -->
+
   <footer>公民科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
 </body>
