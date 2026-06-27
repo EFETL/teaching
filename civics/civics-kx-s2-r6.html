@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康軒版公民 第 06 回 | L5+L6 綜合素養導向（新住民融合情境）</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--blue:#2c5f8a;--gold:#c5a028;--ok:#1a7a3c;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:20px 16px 16px;text-align:center;}
+header h1{font-size:22px;font-weight:bold;}
+header p{font-size:14px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:18px;padding:4px 14px;font-size:13px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.ho-section{background:#fff8ee;border:2px solid #e8c060;border-radius:14px;padding:20px 24px;margin:24px 0;}
+.ho-section h2{color:#7b5000;font-size:20px;margin-bottom:14px;}
+.ho-item{margin-bottom:10px;font-size:17px;line-height:1.9;}
+.ho-num{color:#8b2326;font-weight:bold;margin-right:6px;}
+.qm-btn{background:#e8c060;border:none;border-radius:8px;padding:2px 10px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+.qm-btn:hover{background:#d4a800;}
+.blank-ans{background:#fffacc;border-radius:4px;padding:1px 8px;font-weight:bold;color:#5a3e00;}
+.reveal-all-btn{display:block;margin:14px auto 0;background:#8b2326;color:#fff;border:none;border-radius:20px;padding:8px 24px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+#score-bar{background:var(--blue);color:#fff;padding:12px 20px;border-radius:10px;font-size:17px;font-weight:bold;margin:20px 0 16px;text-align:center;}
+.question{background:#fff;border-radius:12px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 5px rgba(0,0,0,.08);}
+.q-group-ctx{background:#fffbee;border:2px solid #e8c060;border-radius:10px;padding:14px 18px;margin:18px 0 10px;font-size:15px;}
+.q-group-ctx p{margin-bottom:6px;}
+.qtext{font-size:17px;font-weight:bold;margin-bottom:10px;}
+.opt{display:block;width:100%;text-align:left;padding:8px 12px;margin:5px 0;border:2px solid #dde3ee;border-radius:8px;cursor:pointer;font-size:16px;font-family:inherit;background:#fff;transition:background .1s,border-color .1s;}
+.opt:hover{background:#f0f6fc;border-color:var(--blue);}
+.opt.correct{background:#e6f9ee;border-color:var(--ok);color:var(--ok);font-weight:bold;}
+.opt.wrong{background:#ffeaea;border-color:#c0392b;color:#c0392b;}
+.opt.reveal{background:#e8f0fb;border-color:var(--blue);font-weight:bold;}
+.explain-btn{margin-top:8px;background:none;border:1px solid #bbb;border-radius:6px;padding:4px 12px;font-size:13px;cursor:pointer;font-family:inherit;}
+.explain{display:none;background:#fffbee;border-left:3px solid #e8c060;padding:8px 12px;margin-top:8px;font-size:14px;border-radius:0 6px 6px 0;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:600px){header h1{font-size:18px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 康軒版公民 ‧ 第 06 回 互動練習</h1>
+  <p>L5+L6 綜合素養導向（新住民融合情境） ｜ 共 40 題（含題組 5 題）</p>
+  <a class="back" href="mock-exam-kx-s2.html">← 回考卷列表</a>
+</header>
+<div class="wrap">
+  <div class="ho-section">
+    <h2>📝 填充講義</h2>
+    <div class="ho-item"><span class="ho-num">1.</span>社會變遷三層次中，「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">制度</span>」層次包含法律、政策與組織規範；「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">理念</span>」層次包含價值觀與信念的改變。</div><div class="ho-item"><span class="ho-num">2.</span>公平正義四角度中，「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">需求滿足</span>」是照顧特定族群的特殊困境，例如為新住民提供多語服務。</div><div class="ho-item"><span class="ho-num">3.</span>「勞工保險」保障「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">私人企業</span>」員工；「公教人員保險」保障「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">政府機關及學校</span>」的公務員與教師。</div><div class="ho-item"><span class="ho-num">4.</span>「農民保險（農保）」保障農業及「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">漁業</span>」從業人員；「國民年金保險」保障年滿「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">25</span>」歲未加入其他職業保險的國民。</div><div class="ho-item"><span class="ho-num">5.</span>社會救助針對「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">急難或貧困</span>」者提供補助；社會津貼針對「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">特定身份</span>」者定期發放現金，兩者都「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">不需</span>」事先繳費。</div><div class="ho-item"><span class="ho-num">6.</span>推動社會公平的三大力量缺一不可：「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">政府</span>」、「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">民間團體</span>」、「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">個人</span>」三方應共同合作。</div><div class="ho-item"><span class="ho-num">7.</span>「貢獻肯定」與「責任承擔」的差別：前者依「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">付出多少</span>」給予回報；後者依「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">能力大小</span>」決定承擔比例。</div>
+    <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+  </div>
+  <div id="score-bar">共 40 題，點選選項開始作答</div>
+  <div id="quiz-container"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+
+function revealBlank(btn) {
+  btn.style.display = 'none';
+  btn.nextElementSibling.style.display = 'inline';
+}
+function revealAll() {
+  document.querySelectorAll('.qm-btn').forEach(b => revealBlank(b));
+}
+function buildQuiz(QS, GROUP_CTX_HTML) {
+  let total = QS.length, done = 0, correct = 0;
+  const LETTERS = ['A','B','C','D'];
+  const container = document.getElementById('quiz-container');
+  const scoreBar  = document.getElementById('score-bar');
+  function updateScore() {
+    scoreBar.textContent = done
+      ? `已作答 ${done}／${total}　正確 ${correct}　正確率 ${Math.round(correct/done*100)}%`
+      : `共 ${total} 題，點選選項開始作答`;
+  }
+  updateScore();
+  if (GROUP_CTX_HTML) {
+    const ctx = document.createElement('div');
+    ctx.className = 'q-group-ctx';
+    ctx.innerHTML = GROUP_CTX_HTML;
+    container.appendChild(ctx);
+  }
+  QS.forEach(([q, opts, ans, exp], idx) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.innerHTML = `<div class="qtext">${idx+1}. ${q}</div>`;
+    let answered = false;
+    opts.forEach((o, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = `（${LETTERS[i]}）${o}`;
+      btn.onclick = () => {
+        if (answered) return;
+        answered = true; done++;
+        const isOk = LETTERS[i] === ans;
+        if (isOk) correct++;
+        btn.classList.add(isOk ? 'correct' : 'wrong');
+        div.querySelectorAll('.opt').forEach(b => {
+          if (b.textContent.startsWith(`（${ans}）`)) b.classList.add('reveal');
+          b.disabled = true;
+        });
+        updateScore();
+      };
+      div.appendChild(btn);
+    });
+    const eb = document.createElement('button');
+    eb.className = 'explain-btn';
+    eb.textContent = '查看解析';
+    eb.onclick = () => {
+      const ed = div.querySelector('.explain');
+      ed.style.display = ed.style.display === 'none' ? 'block' : 'none';
+    };
+    const ed = document.createElement('div');
+    ed.className = 'explain';
+    ed.textContent = `【解析】${exp}`;
+    div.appendChild(eb);
+    div.appendChild(ed);
+    container.appendChild(div);
+  });
+}
+
+const QS = [
+  [
+    "政府設立「新住民家庭服務中心」，提供語言學習、法律諮詢等服務，這屬於哪類社會福利？",
+    [
+      "社會救助",
+      "社會津貼",
+      "福利服務",
+      "社會保險"
+    ],
+    "Ｃ",
+    "提供語言學習、法律諮詢等具體服務，非現金給付，屬「福利服務」類型的社會福利。"
+  ],
+  [
+    "各縣市推動「多元文化節」，讓社會大眾認識並欣賞不同文化，這有助於改變哪個層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "科技層次"
+    ],
+    "Ｃ",
+    "改變社會大眾對不同文化的態度與觀念，屬「理念層次」的社會變遷。理念層次改變是最難也最慢的。"
+  ],
+  [
+    "政府立法保障新住民的就業平等權，禁止雇主因國籍而歧視新住民，這屬於哪個層次的社會變遷？",
+    [
+      "理念層次",
+      "器物層次",
+      "制度層次",
+      "文化層次"
+    ],
+    "Ｃ",
+    "立法保障就業平等屬「制度層次」的社會變遷，制度層次包含法律與正式規則的制定。"
+  ],
+  [
+    "新住民取得智慧型手機，使用翻譯 App 解決語言障礙，這屬於哪個層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "社會層次"
+    ],
+    "Ａ",
+    "使用具體的技術工具（手機、翻譯 App）解決問題，屬「器物層次」的改變與應用。"
+  ],
+  [
+    "文中提到「真正的公平，在於尊重每個人的文化背景並滿足其特殊需求」，這最符合哪個公平正義角度？",
+    [
+      "責任承擔",
+      "貢獻肯定",
+      "利益分配",
+      "需求滿足"
+    ],
+    "Ｄ",
+    "強調滿足不同族群的特殊需求（語言、文化差異造成的困境），屬「需求滿足」角度的公平正義。"
+  ],
+  [
+    "「某市政府為推廣電動機車，設立大量充電站並提供補貼」，充電站的設置屬於哪個層次的社會變遷？",
+    [
+      "制度層次",
+      "器物層次",
+      "理念層次",
+      "文化層次"
+    ],
+    "Ｂ",
+    "充電站是具體設施（硬體），屬「器物層次」的社會變遷；補貼政策則屬制度層次。"
+  ],
+  [
+    "政府推動《家庭暴力防治法》，改變過去「家務事不干外人」的執法態度，這屬於哪個層次的社會變遷？",
+    [
+      "理念層次",
+      "制度層次",
+      "器物層次",
+      "文化層次"
+    ],
+    "Ｂ",
+    "立法改變執法態度屬「制度層次」的社會變遷，制度層次包含法律、組織規範與正式規則。"
+  ],
+  [
+    "越來越多臺灣人開始尊重並欣賞原住民文化，願意學習原住民語言，這屬於哪個層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "文化多樣層次",
+      "理念層次"
+    ],
+    "Ｄ",
+    "對文化態度的轉變屬「理念層次」的社會變遷，是三層次中改變最慢的，但也最根本。"
+  ],
+  [
+    "「學校引進 AI 輔助教學系統，取代部分傳統板書教學」，這屬於哪個層次的社會變遷？",
+    [
+      "制度層次",
+      "理念層次",
+      "文化層次",
+      "器物層次"
+    ],
+    "Ｄ",
+    "引進 AI 教學系統是技術設備的改變，屬「器物層次」的社會變遷，也是三層次中改變最快的。"
+  ],
+  [
+    "「政府因應少子化，修訂《性別平等工作法》延長育嬰假並強制男性也可申請」，此後也有更多爸爸實際請假，請問這依序反映了哪兩個層次的社會變遷？",
+    [
+      "器物→制度",
+      "制度→理念",
+      "理念→器物",
+      "器物→理念"
+    ],
+    "Ｂ",
+    "修法屬制度層次，爸爸實際請育嬰假反映觀念改變，是制度層次帶動理念層次改變的例子。"
+  ],
+  [
+    "「政府提供新住民免費的中文語言課程」，這主要體現了哪個公平正義角度？",
+    [
+      "責任承擔",
+      "貢獻肯定",
+      "利益分配",
+      "需求滿足"
+    ],
+    "Ｄ",
+    "針對新住民的語言需求提供特殊協助，屬「需求滿足」角度——照顧特定族群的特殊困境。"
+  ],
+  [
+    "「越南籍媽媽因在臺灣工作並繳稅多年，退休後可領取較高的老年年金」，這體現了哪個公平正義角度？",
+    [
+      "貢獻肯定",
+      "責任承擔",
+      "需求滿足",
+      "利益分配"
+    ],
+    "Ａ",
+    "依照繳納年資（貢獻多少）給予相應回報（較高年金），屬「貢獻肯定」角度的公平正義。"
+  ],
+  [
+    "「政府規定廠商若造成環境汙染，須支付高額罰款並負責清理」，這體現了哪個公平正義角度？",
+    [
+      "責任承擔",
+      "利益分配",
+      "需求滿足",
+      "貢獻肯定"
+    ],
+    "Ａ",
+    "依照造成的傷害要求廠商承擔相應責任，屬「責任承擔」角度的公平正義——能力與過失越大，承擔越多。"
+  ],
+  [
+    "「全體市民不分財富多寡，都有權免費使用公立圖書館與公園」，這體現了哪個公平正義角度？",
+    [
+      "利益分配",
+      "責任承擔",
+      "貢獻肯定",
+      "需求滿足"
+    ],
+    "Ａ",
+    "公共資源供全民公平使用，屬「利益分配」角度，強調公共利益的公平共享。"
+  ],
+  [
+    "某社會企業招募新住民婦女製作傳統手工藝品並幫助銷售，讓她們獲得收入，這代表哪種力量推動社會公平？",
+    [
+      "民間團體服務與倡議",
+      "政府立法",
+      "個人直接行動",
+      "企業強制規定"
+    ],
+    "Ａ",
+    "社會企業屬於民間組織，透過提供就業服務協助新住民，是「民間團體」推動社會公平的表現。"
+  ],
+  [
+    "政府頒布《多元文化教育法》，要求各級學校必須納入多元文化課程，這代表哪種力量推動社會公平？",
+    [
+      "民間倡議",
+      "政府立法執行",
+      "個人直接行動",
+      "企業自律"
+    ],
+    "Ｂ",
+    "政府透過立法強制要求多元文化教育，屬「政府」推動社會公平的具體表現。"
+  ],
+  [
+    "一位社工師個人主動在週末到移工社群辦理免費法律諮詢，這代表哪種力量推動社會公平？",
+    [
+      "個人力量",
+      "政府力量",
+      "民間團體力量",
+      "企業力量"
+    ],
+    "Ａ",
+    "社工師個人主動提供服務，屬「個人直接行動」推動社會公平，是三大力量之一。"
+  ],
+  [
+    "阿成是自耕農，種植蔬菜維生，他應加入哪一種職業保險？",
+    [
+      "勞工保險",
+      "農民保險",
+      "公教人員保險",
+      "國民年金保險"
+    ],
+    "Ｂ",
+    "農業從業人員（含自耕農）應加入「農民保險（農保）」，保障農業相關職業風險。"
+  ],
+  [
+    "阿嘉在政府機關擔任公務員，他應加入哪一種職業保險？",
+    [
+      "勞工保險",
+      "農民保險",
+      "公教人員保險",
+      "國民年金保險"
+    ],
+    "Ｃ",
+    "政府機關公務員屬於「公教人員」，應加入「公教人員保險（公保）」。"
+  ],
+  [
+    "小梅是自由業者（接案翻譯），沒有固定雇主，年齡已滿 25 歲，也沒有加入其他職業保險，她應加入哪種保險？",
+    [
+      "勞工保險",
+      "農民保險",
+      "公教人員保險",
+      "國民年金保險"
+    ],
+    "Ｄ",
+    "年滿 25 歲、未加入其他職業保險者，應加入「國民年金保險」，獲得基本老年與身障保障。"
+  ],
+  [
+    "小明在大型民營企業擔任業務，他應加入哪一種職業保險？",
+    [
+      "農民保險",
+      "公教人員保險",
+      "國民年金保險",
+      "勞工保險"
+    ],
+    "Ｄ",
+    "受私人企業僱用的員工（勞工）應加入「勞工保險」，保障就業期間的各種職業風險。"
+  ],
+  [
+    "下列哪一項最能代表「社會救助」的特性？",
+    [
+      "需事先繳費方可申請",
+      "依特定身份定期發放現金",
+      "針對急難貧困者，不需繳費，由政府辦理",
+      "提供具體服務而非現金"
+    ],
+    "Ｃ",
+    "「社會救助」的特性：針對急難或貧困者，不需繳費，由政府辦理，是事後補救性質的保障措施。"
+  ],
+  [
+    "「政府每月給予符合條件的身心障礙者生活津貼」，這屬於哪類社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "Ｃ",
+    "依特定身份（身心障礙者）定期發放現金，不需繳費，屬「社會津貼」類型的社會福利。"
+  ],
+  [
+    "「政府為新住民設立職業訓練課程，協助其學習一技之長」，這屬於哪類社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "Ｄ",
+    "提供職業訓練是具體的服務，而非現金給付，屬「福利服務」類型的社會福利。"
+  ],
+  [
+    "颱風過後，政府緊急提供受災戶「生活急難救助金」，這屬於哪類社會福利？",
+    [
+      "社會保險",
+      "社會津貼",
+      "福利服務",
+      "社會救助"
+    ],
+    "Ｄ",
+    "天災後緊急補助屬「社會救助」——針對急難者提供補助，不需繳費，是事後補救的保障措施。"
+  ],
+  [
+    "「全民健保」讓每個國民都能以合理費用就醫，主要體現了社會福利中哪個類型？",
+    [
+      "醫療保健",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "Ａ",
+    "全民健康保險屬社會福利五大類中的「醫療保健」，保障全民的基本醫療需求。"
+  ],
+  [
+    "「政府透過保險、救助、津貼等多種制度，確保每個人在面臨困境時都有基本保障」，這最能說明哪個概念？",
+    [
+      "社會企業",
+      "社會安全網",
+      "社會保險",
+      "社會救助"
+    ],
+    "Ｂ",
+    "以多種制度交織保障每個人，不讓任何人因困境而陷入絕境，是「社會安全網」概念的體現。"
+  ],
+  [
+    "關於推動社會公平的三大力量，下列哪一項說明最正確？",
+    [
+      "只有政府有能力推動社會公平",
+      "民間團體比政府更有效率",
+      "個人力量太小，無法影響社會公平",
+      "政府、民間團體、個人三者都是推動社會公平的力量"
+    ],
+    "Ｄ",
+    "推動社會公平的三大力量：政府（立法執行）、民間團體（服務與倡議）、個人（直接行動），三者缺一不可。"
+  ],
+  [
+    "若政府的社會福利制度完善，是否代表個人與民間團體就不需要參與推動社會公平？",
+    [
+      "是，政府完善的制度可取代個人與民間力量",
+      "否，政府、民間、個人三者應共同合作",
+      "是，政府是最有效的力量，其他力量可省略",
+      "否，但民間力量比政府力量更重要"
+    ],
+    "Ｂ",
+    "社會公平需要「政府、民間、個人」三方共同努力，政府制度再完善，也需要個人與民間的配合與補充。"
+  ],
+  [
+    "「新住民婦女因不熟悉健保制度而沒有加入健保，導致生病無法就醫」，最應從哪個公平正義角度來回應這個問題？",
+    [
+      "需求滿足",
+      "貢獻肯定",
+      "責任承擔",
+      "利益分配"
+    ],
+    "Ａ",
+    "新住民因資訊不足而無法取得醫療保障，具有特殊需求，應從「需求滿足」角度提供協助（如提供多語言說明、主動協助加保）。"
+  ],
+  [
+    "「公平正義不只是讓所有人得到一模一樣的對待，而是讓每個人都能過有尊嚴的生活」，這段話說明了公平正義的哪個核心精神？",
+    [
+      "公平就是規則面前人人平等，不需考慮差異",
+      "公平需考量個人差異與需求，讓每人都有尊嚴",
+      "公平只需考慮貢獻，不考慮需求",
+      "公平只需由政府決定，無需民間參與"
+    ],
+    "Ｂ",
+    "公平正義的核心在於讓每個人都能有尊嚴地生活，需考量個人差異與特殊需求，而非機械式的「一律相同」。"
+  ],
+  [
+    "一個完善的社會安全網，應該如何整合社會保險與社會救助？",
+    [
+      "以社會保險完全取代社會救助",
+      "兩者各司其職：保險保障有繳費者，救助保障急難貧困者",
+      "只需社會救助，不需要社會保險",
+      "以社會救助完全取代社會保險"
+    ],
+    "Ｂ",
+    "社會保險與社會救助功能不同、對象不同，應相輔相成：保險面向有繳費的工作者，救助面向急難或貧困者。"
+  ],
+  [
+    "「有能力者多繳稅，無力者少繳甚至免稅，稅收再用於照顧弱勢」，這套制度體現了哪兩個公平正義角度？",
+    [
+      "只體現責任承擔",
+      "只體現需求滿足",
+      "責任承擔（有能力者多繳）與需求滿足（照顧弱勢）",
+      "貢獻肯定與利益分配"
+    ],
+    "Ｃ",
+    "有能力者多繳稅是「責任承擔」；稅收用於照顧弱勢是「需求滿足」——兩個角度同時體現。"
+  ],
+  [
+    "關於社會變遷，下列哪項敘述最正確？",
+    [
+      "社會變遷只有「好」的一面，沒有負面影響",
+      "社會變遷只包含技術的改變",
+      "社會變遷可能帶來新機會，也可能帶來新問題，需要制度與觀念共同回應",
+      "社會變遷速度均等，三層次同時改變"
+    ],
+    "Ｃ",
+    "社會變遷具有雙面性：新技術帶來便利也可能帶來失業，需要制度（立法）與理念（觀念調整）共同因應。"
+  ],
+  [
+    "「社會保險、社會救助、社會津貼、福利服務、醫療保健」合稱為社會福利的五大類，下列何者對應正確？",
+    [
+      "育兒補助（依身份定期發放）→社會津貼",
+      "勞工保險→社會救助",
+      "低收入戶補助→社會保險",
+      "全民健保→福利服務"
+    ],
+    "Ａ",
+    "育兒補助依特定身份（育兒家庭）定期發放現金，不需繳費，屬「社會津貼」。其他選項均分類錯誤。"
+  ],
+  [
+    "關於「全民健康保險」，下列何者正確？",
+    [
+      "屬自願性質，民眾自行決定是否加入",
+      "保費全部由政府負擔",
+      "屬強制性社會保險，由個人、雇主、政府共同負擔保費",
+      "只保障在職勞工，退休人員需另外購買保險"
+    ],
+    "Ｃ",
+    "全民健保屬強制性社會保險，所有國民必須投保，保費由個人、雇主（若有）、政府三方共同分擔。"
+  ],
+  [
+    "小新 28 歲，是私立幼兒園的教保員，請問她應加入哪一種職業保險？",
+    [
+      "勞工保險",
+      "公教人員保險",
+      "農民保險",
+      "國民年金保險"
+    ],
+    "Ａ",
+    "私立幼兒園屬私人機構，教保員身份等同私人企業員工，應加入「勞工保險」。（公立學校教師才加入公保）"
+  ],
+  [
+    "在討論「AI 科技是否會造成社會不公平」時，以下哪個說法最能反映公平正義的完整觀點？",
+    [
+      "只要技術進步就是公平的",
+      "科技帶來的利益與衝擊，應透過責任承擔、需求滿足等多角度共同因應",
+      "公平就是讓所有人一樣使用 AI",
+      "政府不應介入 AI 發展，交由市場決定"
+    ],
+    "Ｂ",
+    "科技帶來的利益與失業衝擊，需要同時從「責任承擔」（強者多負擔）、「需求滿足」（照顧弱勢）等多角度來回應，才能實現公平正義。"
+  ],
+  [
+    "「新住民小孩在學校可獲得母語學習機會，與其他同學一起學習對方的文化」，這有助於推動哪個層次的社會變遷？",
+    [
+      "器物層次，因為學習需要設備",
+      "制度層次，因為這是學校政策",
+      "理念層次，讓下一代從小建立多元文化觀念",
+      "器物層次與制度層次，但不影響理念"
+    ],
+    "Ｃ",
+    "從小培養對多元文化的尊重與接受，是影響「理念層次」的深遠工程，也是改變社會觀念最根本的途徑。"
+  ],
+  [
+    "若某位新住民因不熟悉社會福利申辦流程，而未能取得應有的健保、托育補助等福利，政府應如何回應才符合公平正義？",
+    [
+      "要求新住民自行了解法規，政府不需特別協助",
+      "依「貢獻肯定」角度，先確認繳稅年資再決定是否協助",
+      "此問題不屬於政府職責，應由民間自行解決",
+      "依「需求滿足」角度，提供多語言申辦說明與主動協助"
+    ],
+    "Ｄ",
+    "新住民因語言障礙無法取得應有福利，政府應從「需求滿足」角度主動提供多語言協助，這也是推動社會公平的政府責任。"
+  ]
+];
+const CTX_HTML = "<p>根據統計，臺灣目前有超過 70 萬名新住民（來自東南亞、中國大陸等地的移民配偶或工作者），他們為臺灣的人口組成與文化多樣性帶來重大影響。然而，新住民也常面臨語言障礙、文化差異、就業歧視等挑戰，部分新住民甚至因不了解本地法規而陷入困境。</p>\n<p>政府為此設立「新住民家庭服務中心」，提供語言學習、法律諮詢、生活輔導等服務；各縣市也推動「多元文化節」活動，讓社會大眾認識並欣賞不同文化。許多民間團體則深入社區，協助新住民取得應有的社會福利資源，如健保加入、子女教育補助等。</p>\n<p>學者指出，若社會長期對新住民存有歧視觀念，不僅損害個人尊嚴，也可能影響社會和諧。真正的公平，不在於讓大家一模一樣，而在於尊重每個人的文化背景並滿足其特殊需求。</p>";
+buildQuiz(QS, CTX_HTML);
+</script>
+</body>
+</html>

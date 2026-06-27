@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康軒版公民 第 05 回 | L5+L6 社會福利五大類（少子高齡化情境）</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--blue:#2c5f8a;--gold:#c5a028;--ok:#1a7a3c;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:20px 16px 16px;text-align:center;}
+header h1{font-size:22px;font-weight:bold;}
+header p{font-size:14px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:18px;padding:4px 14px;font-size:13px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.ho-section{background:#fff8ee;border:2px solid #e8c060;border-radius:14px;padding:20px 24px;margin:24px 0;}
+.ho-section h2{color:#7b5000;font-size:20px;margin-bottom:14px;}
+.ho-item{margin-bottom:10px;font-size:17px;line-height:1.9;}
+.ho-num{color:#8b2326;font-weight:bold;margin-right:6px;}
+.qm-btn{background:#e8c060;border:none;border-radius:8px;padding:2px 10px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+.qm-btn:hover{background:#d4a800;}
+.blank-ans{background:#fffacc;border-radius:4px;padding:1px 8px;font-weight:bold;color:#5a3e00;}
+.reveal-all-btn{display:block;margin:14px auto 0;background:#8b2326;color:#fff;border:none;border-radius:20px;padding:8px 24px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:bold;}
+#score-bar{background:var(--blue);color:#fff;padding:12px 20px;border-radius:10px;font-size:17px;font-weight:bold;margin:20px 0 16px;text-align:center;}
+.question{background:#fff;border-radius:12px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 5px rgba(0,0,0,.08);}
+.q-group-ctx{background:#fffbee;border:2px solid #e8c060;border-radius:10px;padding:14px 18px;margin:18px 0 10px;font-size:15px;}
+.q-group-ctx p{margin-bottom:6px;}
+.qtext{font-size:17px;font-weight:bold;margin-bottom:10px;}
+.opt{display:block;width:100%;text-align:left;padding:8px 12px;margin:5px 0;border:2px solid #dde3ee;border-radius:8px;cursor:pointer;font-size:16px;font-family:inherit;background:#fff;transition:background .1s,border-color .1s;}
+.opt:hover{background:#f0f6fc;border-color:var(--blue);}
+.opt.correct{background:#e6f9ee;border-color:var(--ok);color:var(--ok);font-weight:bold;}
+.opt.wrong{background:#ffeaea;border-color:#c0392b;color:#c0392b;}
+.opt.reveal{background:#e8f0fb;border-color:var(--blue);font-weight:bold;}
+.explain-btn{margin-top:8px;background:none;border:1px solid #bbb;border-radius:6px;padding:4px 12px;font-size:13px;cursor:pointer;font-family:inherit;}
+.explain{display:none;background:#fffbee;border-left:3px solid #e8c060;padding:8px 12px;margin-top:8px;font-size:14px;border-radius:0 6px 6px 0;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:600px){header h1{font-size:18px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 康軒版公民 ‧ 第 05 回 互動練習</h1>
+  <p>L5+L6 社會福利五大類（少子高齡化情境） ｜ 共 40 題（含題組 5 題）</p>
+  <a class="back" href="mock-exam-kx-s2.html">← 回考卷列表</a>
+</header>
+<div class="wrap">
+  <div class="ho-section">
+    <h2>📝 填充講義</h2>
+    <div class="ho-item"><span class="ho-num">1.</span>社會變遷三層次中，「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">器物</span>」改變最快（如智慧照護設備），「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">理念</span>」改變最慢（如改變年齡歧視觀念）。</div><div class="ho-item"><span class="ho-num">2.</span>三個層次可以「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">相互影響</span>」：例如新技術（器物）促使政府立法（制度），法律又逐漸改變觀念（理念）。</div><div class="ho-item"><span class="ho-num">3.</span>「利益分配」強調公共資源應「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">公平共享</span>」；「貢獻肯定」強調依「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">貢獻多寡</span>」給予相應回報。</div><div class="ho-item"><span class="ho-num">4.</span>「福利服務」提供具體「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">服務</span>」而非現金，例如復康巴士、日間照顧中心、居家照顧。</div><div class="ho-item"><span class="ho-num">5.</span>「社會津貼」依「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">特定身份</span>」（如老人、幼兒）定期發放現金，「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">不需</span>」事先繳費。</div><div class="ho-item"><span class="ho-num">6.</span>「全民健康保險」屬社會福利中的「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">醫療保健</span>」類，採「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">強制</span>」投保，保費由三方共同分擔。</div><div class="ho-item"><span class="ho-num">7.</span>「社會安全網」是指由保險、救助、津貼等多種制度交織而成，讓每人在面臨困境時都能得到「<button class="qm-btn" onclick="revealBlank(this)">？</button><span class="blank-ans" style="display:none">基本保障</span>」的整體制度架構。</div>
+    <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+  </div>
+  <div id="score-bar">共 40 題，點選選項開始作答</div>
+  <div id="quiz-container"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+
+function revealBlank(btn) {
+  btn.style.display = 'none';
+  btn.nextElementSibling.style.display = 'inline';
+}
+function revealAll() {
+  document.querySelectorAll('.qm-btn').forEach(b => revealBlank(b));
+}
+function buildQuiz(QS, GROUP_CTX_HTML) {
+  let total = QS.length, done = 0, correct = 0;
+  const LETTERS = ['A','B','C','D'];
+  const container = document.getElementById('quiz-container');
+  const scoreBar  = document.getElementById('score-bar');
+  function updateScore() {
+    scoreBar.textContent = done
+      ? `已作答 ${done}／${total}　正確 ${correct}　正確率 ${Math.round(correct/done*100)}%`
+      : `共 ${total} 題，點選選項開始作答`;
+  }
+  updateScore();
+  if (GROUP_CTX_HTML) {
+    const ctx = document.createElement('div');
+    ctx.className = 'q-group-ctx';
+    ctx.innerHTML = GROUP_CTX_HTML;
+    container.appendChild(ctx);
+  }
+  QS.forEach(([q, opts, ans, exp], idx) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.innerHTML = `<div class="qtext">${idx+1}. ${q}</div>`;
+    let answered = false;
+    opts.forEach((o, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = `（${LETTERS[i]}）${o}`;
+      btn.onclick = () => {
+        if (answered) return;
+        answered = true; done++;
+        const isOk = LETTERS[i] === ans;
+        if (isOk) correct++;
+        btn.classList.add(isOk ? 'correct' : 'wrong');
+        div.querySelectorAll('.opt').forEach(b => {
+          if (b.textContent.startsWith(`（${ans}）`)) b.classList.add('reveal');
+          b.disabled = true;
+        });
+        updateScore();
+      };
+      div.appendChild(btn);
+    });
+    const eb = document.createElement('button');
+    eb.className = 'explain-btn';
+    eb.textContent = '查看解析';
+    eb.onclick = () => {
+      const ed = div.querySelector('.explain');
+      ed.style.display = ed.style.display === 'none' ? 'block' : 'none';
+    };
+    const ed = document.createElement('div');
+    ed.className = 'explain';
+    ed.textContent = `【解析】${exp}`;
+    div.appendChild(eb);
+    div.appendChild(ed);
+    container.appendChild(div);
+  });
+}
+
+const QS = [
+  [
+    "政府修訂《長期照顧服務法》並建立長照 2.0 體系，這屬於社會變遷的哪個層次？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "文化層次"
+    ],
+    "Ｂ",
+    "修訂法律、建立服務體系屬「制度層次」的社會變遷，制度層次包含法律、政策與組織規範。"
+  ],
+  [
+    "政府設立公共托育場所、建置智慧照顧系統等硬體設施，這屬於哪個層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "物質層次"
+    ],
+    "Ａ",
+    "設立硬體設施（托育場所、智慧照顧設備）是具體設備與技術的改變，屬「器物層次」的社會變遷。"
+  ],
+  [
+    "政府增加育兒補助，讓年輕家庭的育兒費用得到部分補助，這主要體現了公平正義的哪個角度？",
+    [
+      "責任承擔",
+      "貢獻肯定",
+      "利益分配",
+      "需求滿足"
+    ],
+    "Ｄ",
+    "針對育兒家庭的特殊需求（育兒壓力）提供補助，屬「需求滿足」角度的公平正義。"
+  ],
+  [
+    "學者呼籲社會調整「年齡歧視」觀念，認可老人的貢獻，這是哪個層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "科技層次"
+    ],
+    "Ｃ",
+    "扭轉歧視觀念、改變社會態度，屬「理念層次」的社會變遷，是三層次中最難、最慢的改變。"
+  ],
+  [
+    "為應對高齡化社會的照護需求，政府推動「居家照顧」服務，讓老人在家也能接受照護，這最符合哪類社會福利？",
+    [
+      "社會救助",
+      "福利服務",
+      "社會津貼",
+      "社會保險"
+    ],
+    "Ｂ",
+    "「居家照顧」是政府提供的具體服務，而非現金給付，屬「福利服務」類型的社會福利。"
+  ],
+  [
+    "「社區引進智慧型老人健康監測手環，隨時偵測長者健康狀況」，這屬於哪個層次的社會變遷？",
+    [
+      "器物層次",
+      "制度層次",
+      "理念層次",
+      "醫療層次"
+    ],
+    "Ａ",
+    "智慧手環是具體設備與技術的改變，屬「器物層次」的社會變遷。"
+  ],
+  [
+    "政府推動《托育服務法》，規範公私立托育機構的設立標準，這屬於哪個層次的社會變遷？",
+    [
+      "理念層次",
+      "制度層次",
+      "器物層次",
+      "文化層次"
+    ],
+    "Ｂ",
+    "立法規範托育機構屬「制度層次」的社會變遷，制度層次包含法律、政策與規範體系。"
+  ],
+  [
+    "越來越多人接受「男性也應分擔家務與育兒」的觀念，這屬於哪個層次的社會變遷？",
+    [
+      "理念層次",
+      "器物層次",
+      "制度層次",
+      "教育層次"
+    ],
+    "Ａ",
+    "觀念與態度的轉變屬「理念層次」，也是三層次中改變速度最慢的，通常需要數代人的時間。"
+  ],
+  [
+    "下列哪一項最能說明「社會變遷三層次」的改變順序（從最快到最慢）？",
+    [
+      "器物→制度→理念",
+      "理念→制度→器物",
+      "制度→器物→理念",
+      "理念→器物→制度"
+    ],
+    "Ａ",
+    "三層次改變速度：器物（技術設備，最快）→ 制度（法律規範，中等）→ 理念（觀念價值，最慢）。"
+  ],
+  [
+    "「政府因應少子化修訂育嬰假規定，後來社會大眾也逐漸接受父親請育嬰假」，以下哪個說法最正確？",
+    [
+      "器物改變帶動了制度改變",
+      "理念改變一定早於制度改變",
+      "三層次改變彼此無關",
+      "制度改變可能進而帶動理念改變"
+    ],
+    "Ｄ",
+    "修法屬制度層次，爸爸實際請育嬰假反映觀念改變，是制度層次帶動理念層次改變的例子。"
+  ],
+  [
+    "政府規定，財產較多的老人，領取老年年金的金額相對較少，這體現了哪個公平正義角度？",
+    [
+      "貢獻肯定",
+      "責任承擔",
+      "利益分配",
+      "需求滿足"
+    ],
+    "Ｂ",
+    "依照財富多寡決定補助多少，能力越強（財富越多）承擔越多（領較少補助），屬「責任承擔」角度。"
+  ],
+  [
+    "「藝術家、老師等對社會有特殊貢獻者，應給予特殊嘉獎或待遇」，這體現了哪個公平正義角度？",
+    [
+      "貢獻肯定",
+      "責任承擔",
+      "需求滿足",
+      "利益分配"
+    ],
+    "Ａ",
+    "依照對社會的貢獻給予相應的認可與獎勵，屬「貢獻肯定」角度的公平正義。"
+  ],
+  [
+    "「偏鄉學童享有與都市學童相同的政府教育資源」，這反映了哪個公平正義角度？",
+    [
+      "責任承擔",
+      "需求滿足",
+      "貢獻肯定",
+      "利益分配"
+    ],
+    "Ｄ",
+    "讓所有學童公平享有公共教育資源，屬「利益分配」角度，強調公共資源的公平分享。"
+  ],
+  [
+    "為幫助肢體障礙者就業，政府強制要求一定規模以上企業需雇用一定比例的身心障礙員工，這體現了哪個公平正義角度？",
+    [
+      "需求滿足",
+      "責任承擔",
+      "利益分配",
+      "貢獻肯定"
+    ],
+    "Ａ",
+    "強制企業雇用障礙者，是針對特定族群（身心障礙者）的需求所做的政策，屬「需求滿足」角度。"
+  ],
+  [
+    "某非政府組織（NGO）長期為獨居老人提供送餐、陪伴和緊急救助服務，這代表哪種力量推動社會公平？",
+    [
+      "民間團體服務與倡議",
+      "政府立法執行",
+      "個人直接行動",
+      "企業社會責任"
+    ],
+    "Ａ",
+    "NGO 屬民間組織，透過提供服務推動社會公平，是「民間團體」力量的體現。"
+  ],
+  [
+    "「個人主動當志工，在假日到老人安養院陪伴長者」，這代表哪種力量推動社會公平？",
+    [
+      "個人力量",
+      "政府力量",
+      "民間團體力量",
+      "企業力量"
+    ],
+    "Ａ",
+    "個人主動投入志願服務，屬「個人直接行動」推動社會公平，是三大力量之一。"
+  ],
+  [
+    "全民健保屬於社會福利五大類中的哪一類？",
+    [
+      "社會救助",
+      "社會津貼",
+      "福利服務",
+      "醫療保健"
+    ],
+    "Ｄ",
+    "全民健康保險屬社會福利五大類中的「醫療保健」類，是廣義社會保險的一種，保障全民基本醫療需求。"
+  ],
+  [
+    "關於國民年金保險的對象，下列何者正確？",
+    [
+      "只針對農民",
+      "只針對公教人員",
+      "只針對私人企業勞工",
+      "保障年滿25歲未加入其他職業保險的國民"
+    ],
+    "Ｄ",
+    "「國民年金保險」保障年滿 25 歲、未加入其他職業保險（勞保、農保、公保等）的一般國民。"
+  ],
+  [
+    "關於勞工保險的給付範圍，下列何者「不包含」？",
+    [
+      "傷病給付",
+      "老年給付",
+      "農作物損失補償",
+      "失業給付"
+    ],
+    "Ｃ",
+    "勞工保險保障「勞工」的職業風險，包含傷病、失業、老年等。「農作物損失補償」屬農業政策，非勞工保險範疇。"
+  ],
+  [
+    "下列對「農民保險」的說明，何者正確？",
+    [
+      "農民保險保障所有職業的從業人員",
+      "農民保險保障農業及漁業從業人員",
+      "農民保險由民間農業公司辦理",
+      "農民保險等同於勞工保險"
+    ],
+    "Ｂ",
+    "農民保險（農保）專門保障農業及漁業從業人員，是針對農漁業特殊職業風險設計的保險制度。"
+  ],
+  [
+    "社會保險的保費來源，下列何者最正確？",
+    [
+      "完全由政府負擔",
+      "完全由個人負擔",
+      "由個人、雇主、政府三方共同分擔",
+      "由雇主與政府共同負擔，個人不需繳費"
+    ],
+    "Ｃ",
+    "社會保險保費通常由「個人、雇主、政府」三方共同分擔，比例依不同保險種類而有差異。"
+  ],
+  [
+    "下列何者屬於「社會救助」的範疇？",
+    [
+      "低收入戶生活扶助",
+      "老農津貼",
+      "全民健康保險",
+      "老人日間照顧中心"
+    ],
+    "Ａ",
+    "低收入戶生活扶助針對貧困者，不需繳費即可申請，屬「社會救助」。其他選項分別屬社會津貼、社會保險、福利服務。"
+  ],
+  [
+    "關於社會救助，下列何者正確？",
+    [
+      "需事先繳納保費才可申請",
+      "只提供現金補助，不提供實物援助",
+      "針對急難或貧困者，不需繳費",
+      "由民間慈善機構辦理，政府不介入"
+    ],
+    "Ｃ",
+    "社會救助針對「急難或貧困者」提供補助，且不需事先繳費，由政府統籌辦理，是事後補救性質的福利措施。"
+  ],
+  [
+    "「育兒津貼」是政府針對符合條件的家庭，每月發放固定金額補助育兒支出，這屬於哪類社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "Ｃ",
+    "依特定身份（育有幼兒的家庭）定期發放現金補助，且不需繳保費，屬「社會津貼」類型的社會福利。"
+  ],
+  [
+    "下列哪一項屬於「社會津貼」類型？",
+    [
+      "全民健康保險給付",
+      "老農津貼",
+      "低收入戶緊急生活救助",
+      "職業訓練服務"
+    ],
+    "Ｂ",
+    "「老農津貼」依農民身份定期發放現金，不需繳保費，屬「社會津貼」。其他選項分屬社保、社救、福利服務。"
+  ],
+  [
+    "下列哪一項屬於「福利服務」類型的社會福利？",
+    [
+      "全民健康保險給付",
+      "勞工退休給付",
+      "復康巴士接送身心障礙者",
+      "老年現金津貼"
+    ],
+    "Ｃ",
+    "「復康巴士」是提供身心障礙者具體的交通服務，屬「福利服務」——提供服務而非現金。"
+  ],
+  [
+    "「政府在各社區設置關懷據點，提供老人餐食、健康促進活動」，這最符合哪類社會福利？",
+    [
+      "社會保險",
+      "社會救助",
+      "社會津貼",
+      "福利服務"
+    ],
+    "Ｄ",
+    "在社區提供餐食、活動等具體服務，屬「福利服務」——以服務回應需求，而非現金補助。"
+  ],
+  [
+    "「長照 2.0」整合了居家照顧、社區照顧等多種服務，這說明了什麼概念？",
+    [
+      "社會保險取代其他福利",
+      "以多元服務建構完整的社會安全網",
+      "政府退出社會福利領域",
+      "社會救助是唯一必要的福利"
+    ],
+    "Ｂ",
+    "整合多種服務建構完整保障體系，正是「社會安全網」的概念——讓每個人在不同困境中都能獲得相應的支持。"
+  ],
+  [
+    "下列哪一種情況，當事人最可能同時涉及「社會保險」與「社會救助」兩種福利？",
+    [
+      "一位在私人公司上班的健康員工",
+      "一位剛剛退休的國小老師",
+      "一位因工廠倒閉失業、又因貧困申請低收入補助的勞工",
+      "一位擁有多棟房產的老年退休人士"
+    ],
+    "Ｃ",
+    "勞工失業後可申請勞工保險的失業給付（社會保險），若同時陷入貧困也可申請低收入補助（社會救助），兩者同時適用。"
+  ],
+  [
+    "高齡化社會導致對老年照護需求大增，政府因應設立長照體系，這說明了什麼？",
+    [
+      "社會變遷不影響社會福利政策",
+      "器物層次的改變無法影響制度層次",
+      "社會福利只能由慈善機構提供",
+      "社會變遷（高齡化）推動了制度層次的改變（長照立法）"
+    ],
+    "Ｄ",
+    "高齡化是社會變遷，促使政府制定長照法規（制度層次），說明社會變遷會帶動制度層次的回應。"
+  ],
+  [
+    "下列哪一項最能說明社會福利制度對社會公平的貢獻？",
+    [
+      "讓有錢人繳更多稅，用於補貼富人",
+      "透過社會保險、救助等機制，縮小貧富差距、保障弱勢者基本生活",
+      "完全由市場機制決定資源分配，無需政府介入",
+      "只針對老年人提供服務，年輕人不在保障範圍"
+    ],
+    "Ｂ",
+    "社會福利制度透過多種機制保障弱勢者基本生活、縮小貧富差距，是政府實踐公平正義的重要手段。"
+  ],
+  [
+    "若一個社會只重視「貢獻肯定」而忽視「需求滿足」，可能產生什麼問題？",
+    [
+      "富人承擔過多稅務負擔",
+      "弱勢族群的基本需求無法被照顧，加劇社會不公平",
+      "公共資源無法公平分配",
+      "社會保險制度將面臨財務危機"
+    ],
+    "Ｄ",
+    "若只依貢獻給予回報而不顧弱勢需求，失能老人、身心障礙者等無法「貢獻」者將缺乏保障，造成社會不公平。"
+  ],
+  [
+    "「社會住宅」讓弱勢族群能以低於市場的租金居住，這主要體現了哪個公平正義角度？",
+    [
+      "貢獻肯定",
+      "責任承擔",
+      "利益分配",
+      "需求滿足"
+    ],
+    "Ｄ",
+    "針對無力負擔市場租金的弱勢族群（特殊需求）提供優惠居住，屬「需求滿足」角度的公平正義。"
+  ],
+  [
+    "有學者主張「政府補助應優先給最需要的人，而不是平均分配給所有人」，這反映了哪個公平正義角度的思維？",
+    [
+      "責任承擔",
+      "貢獻肯定",
+      "利益分配",
+      "需求滿足"
+    ],
+    "Ｄ",
+    "「優先照顧最需要的人」正是「需求滿足」角度的精神，強調應針對特殊困境與需求，而非一律平等。"
+  ],
+  [
+    "民間公益基金會定期發放助學金給清寒學生，這代表哪種力量推動社會公平？",
+    [
+      "個人直接行動",
+      "政府執法",
+      "民間團體服務",
+      "企業自律"
+    ],
+    "Ｃ",
+    "公益基金會屬民間組織，透過提供服務（助學金）推動社會公平，是「民間團體」力量的體現。"
+  ],
+  [
+    "當社會保險費用不斷提高時，哪個族群最可能受到額外保護？",
+    [
+      "高收入者，因為他們繳費最多",
+      "中產階級，因為他們人數最多",
+      "低收入者，因為政府會補助其保費",
+      "雇主，因為他們負擔最大份額"
+    ],
+    "Ｃ",
+    "對低收入者，政府通常會提供保費補助或減免，以確保他們能夠繼續參與社會保險，體現「需求滿足」的精神。"
+  ],
+  [
+    "下列哪一項最能說明「社會變遷帶來的正面影響」？",
+    [
+      "科技進步使部分職業消失",
+      "傳統家庭結構因社會變遷而改變",
+      "醫療技術進步使人類平均壽命延長",
+      "少子化加重社會的長照負擔"
+    ],
+    "Ｃ",
+    "醫療技術進步（器物層次）帶來壽命延長，是社會變遷帶來的正面效益。其他選項描述的是挑戰而非正面影響。"
+  ],
+  [
+    "「受到 COVID-19 衝擊的失業勞工，同時可申請勞保失業給付，且若生活困難還可申請急難救助」，這說明了什麼？",
+    [
+      "社會保險取代了社會救助",
+      "不同類型的社會福利可以同時並用，形成多層保障",
+      "失業勞工只能選擇其中一種福利",
+      "政府不允許重複申請福利"
+    ],
+    "Ｂ",
+    "勞保失業給付（社會保險）與急難救助（社會救助）可同時申請，這正是社會安全網多層保障概念的體現。"
+  ],
+  [
+    "下列哪一項社會福利五大類型的說明組合是完全正確的？",
+    [
+      "保險→強制，救助→不需繳費，津貼→特定身份定期現金，服務→具體服務，醫療保健→健保",
+      "保險→自願，救助→需繳費，津貼→任何人都可領，服務→現金，醫療保健→自費醫療",
+      "保險→政府全額補助，救助→需身份證，津貼→需繳費，服務→只給老人，醫療保健→企業辦理",
+      "以上皆錯"
+    ],
+    "Ａ",
+    "社會福利五大類：保險（強制投保）、救助（不需繳費，針對急難貧困）、津貼（特定身份定期現金）、服務（具體服務非現金）、醫療保健（全民健保）。"
+  ],
+  [
+    "「多元文化社會」中，不同族群的語言與文化習慣各異，若要實踐公平正義，政府最應採取哪種措施？",
+    [
+      "要求所有人使用同一語言，消除文化差異",
+      "針對語言弱勢族群提供翻譯、語言學習等特殊協助",
+      "完全放任，不介入文化差異問題",
+      "只保護主流文化，不照顧少數族群"
+    ],
+    "Ｂ",
+    "針對語言文化差異造成的特殊困境提供協助，屬「需求滿足」角度的公平正義，也是政府推動多元文化融合的責任。"
+  ]
+];
+const CTX_HTML = "<p>根據統計，臺灣的生育率持續下降，同時老年人口比例快速上升，已正式進入「超高齡社會」。這一趨勢對社會帶來多重挑戰：一方面，工作年齡人口減少，勞動力短缺；另一方面，老年照護需求大增，政府的長照支出與老年年金壓力也隨之攀升。</p>\n<p>為應對此問題，政府推動多項政策：包括修訂《長期照顧服務法》、建立「長照 2.0」服務體系，以及推廣「居家照顧」與「社區照顧」等多元服務。此外，政府也擴大對生育的鼓勵措施，如增加育兒補助、設立公共托育場所。</p>\n<p>面對少子高齡化，學者強調社會各界應調整「年齡歧視」觀念，認可老年人的人生智慧與貢獻，同時也需建立讓年輕家庭願意生育的友善環境。</p>";
+buildQuiz(QS, CTX_HTML);
+</script>
+</body>
+</html>
