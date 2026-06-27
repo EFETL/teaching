@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公民 第 04 回 | 互動練習</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;--blue:#2c5f8a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:22px 18px 18px;text-align:center;}
+header h1{font-size:24px;font-weight:bold;}
+header p{font-size:15px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:14px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.ho-section{background:#fff;border-radius:14px;padding:18px 20px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.09);}
+.ho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid var(--blue);padding-bottom:8px;}
+.ho-header h2{font-size:18px;color:var(--blue);font-weight:bold;}
+.reveal-all-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:14px;cursor:pointer;font-family:inherit;}
+.reveal-all-btn:hover{background:#1a4a7a;}
+.ho-item{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;font-size:16px;line-height:1.8;}
+.ho-num{background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.ho-body{flex:1;}
+.blank-wrap{display:inline-block;vertical-align:baseline;margin:0 2px;}
+.qm-btn{display:inline-block;background:var(--gold);color:#fff;border:none;border-radius:6px;padding:1px 10px;font-size:15px;font-weight:bold;cursor:pointer;font-family:inherit;vertical-align:baseline;line-height:1.5;}
+.qm-btn:hover{background:#a08020;}
+.blank-ans{display:none;background:#e8f5ee;color:var(--ok);border:1px solid #a8d8b8;border-radius:6px;padding:1px 10px;font-weight:bold;font-size:15px;vertical-align:baseline;}
+.score-bar{background:#fff;border-radius:12px;padding:11px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
+.score-bar b{color:var(--red);font-size:20px;}
+.ctx-box{background:#fff8e6;border:1px solid #e0c060;border-radius:12px;padding:14px 18px;margin-bottom:18px;}
+.ctx-intro{font-size:15px;margin-bottom:8px;color:#444;}
+.ctx-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;}
+.ctx-table th{background:#c5a028;color:#fff;padding:6px 8px;text-align:left;}
+.ctx-table td{padding:5px 8px;border:1px solid #e0c060;}
+.ctx-table tr:nth-child(even){background:#fffbe8;}
+.group-label{background:#fff3cd;border-left:4px solid var(--gold);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#5a3e00;margin-bottom:14px;}
+.section-label{background:#eef3f9;border-left:4px solid var(--blue);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#1a3a6b;margin-bottom:14px;margin-top:4px;}
+.q-card{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:13px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;border-radius:50%;width:27px;height:27px;font-size:13px;font-weight:bold;margin-right:7px;flex-shrink:0;}
+.q-text{font-size:16px;font-weight:500;margin-bottom:11px;display:flex;align-items:flex-start;gap:4px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.opt-btn{display:flex;align-items:flex-start;gap:7px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:8px 11px;cursor:pointer;font-size:14px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
+.opt-btn:hover:not(:disabled){border-color:var(--red);background:#fdf0f0;}
+.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 6px;font-size:12px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.opt-btn.correct{border-color:var(--ok);background:#e8f5ee;}
+.opt-btn.correct .ol{background:var(--ok);color:#fff;}
+.opt-btn.wrong{border-color:var(--err);background:#fde8e8;}
+.opt-btn.wrong .ol{background:var(--err);color:#fff;}
+.opt-btn.reveal{border-color:var(--ok);background:#e8f5ee;opacity:.8;}
+.opt-btn.reveal .ol{background:var(--ok);color:#fff;}
+.exp-box{margin-top:9px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:7px 11px;font-size:13px;color:#1a4a2c;display:none;}
+.exp-box.show{display:block;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:560px){.opts{grid-template-columns:1fr;}header h1{font-size:20px;}.ho-item{font-size:15px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 公民下學期複習 第 04 回</h1>
+  <p>翰林版 | 社會地位多元面向、代間代內流動、流動管道與結構因素 | 共 40 題</p>
+  <a class="back" href="mock-exam-s2.html">← 回考卷選單</a>
+</header>
+<div class="wrap">
+
+  <!-- 填充題講義 -->
+  <div class="ho-section">
+    <div class="ho-header">
+      <h2>📖 重點填充講義</h2>
+      <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+    </div>
+<div class="ho-item"><span class="ho-num">1</span><span class="ho-body">社會地位包括「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">先賦地位</span></span>」（出生即決定）和「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">自致地位</span></span>」（靠個人努力獲得）兩種。</span></div>
+<div class="ho-item"><span class="ho-num">2</span><span class="ho-body">跨越世代的社會流動稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">代間流動</span></span>」；個人一生中的地位變化稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">代內流動</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">3</span><span class="ho-body">表格中建宏由搬運工的兒子成為高中老師，屬於「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">代間</span></span>」流動，方向為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">向上</span></span>」流動。</span></div>
+<div class="ho-item"><span class="ho-num">4</span><span class="ho-body">文成一生中由中小企業主變成夜市攤販，屬於「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">代內</span></span>」流動，方向為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">向下</span></span>」流動。</span></div>
+<div class="ho-item"><span class="ho-num">5</span><span class="ho-body">秀英由平地農民家庭出身卻當選地方鄉長，靠的是「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社區服務</span></span>」與「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">投入選舉</span></span>」這兩個社會流動管道。</span></div>
+<div class="ho-item"><span class="ho-num">6</span><span class="ho-body">促進社會流動的常見管道包括「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">教育</span></span>」、「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">職業</span></span>」、「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">婚姻</span></span>」等。</span></div>
+<div class="ho-item"><span class="ho-num">7</span><span class="ho-body">社會地位高低改變，稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">垂直流動</span></span>」；地位不變只是換了類似職位，稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">水平流動</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">8</span><span class="ho-body">家庭背景、社會制度等個人無法控制的外在條件，稱為影響社會流動的「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">結構性因素</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">9</span><span class="ho-body">開放的社會允許個人憑藉努力向上流動，社會學家稱此為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">開放式社會</span></span>」；反之則稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">封閉式社會</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">10</span><span class="ho-body">影響社會地位的三個主要面向是「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">財富</span></span>」、「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">聲望</span></span>」和「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">權力</span></span>」。</span></div>
+  </div>
+
+  <!-- 互動選擇題 -->
+  <div id="quiz-wrap"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+
+function revealBlank(btn){
+  var wrap=btn.parentNode;
+  btn.style.display='none';
+  wrap.querySelector('.blank-ans').style.display='inline';
+}
+function revealAll(){
+  document.querySelectorAll('.qm-btn').forEach(b=>revealBlank(b));
+}
+
+var QS=[];
+function buildQuiz(qs,ctxHtml){
+  QS=qs;
+  var wrap=document.getElementById('quiz-wrap');
+  if(!wrap)return;
+  var html='<div class="score-bar">得分：<b id="sc">0</b> / '+qs.length+'　　已作答：<span id="done">0</span>题</div>';
+  if(ctxHtml){
+    html+='<div class="ctx-box">'+ctxHtml+'</div>';
+    html+='<div class="group-label">【題組】根據上方資料，回答第 1～5 題。</div>';
+  }
+  qs.forEach(function(q,i){
+    var num=i+1;
+    if(i===5 && ctxHtml){
+      html+='<div class="section-label">以下為一般選擇題（第 6～'+qs.length+' 題）</div>';
+    }
+    html+='<div class="q-card" id="qc'+i+'">';
+    html+='<div class="q-text"><span class="q-num">'+num+'</span>'+q[0]+'</div>';
+    html+='<div class="opts">';
+    var keys=['Ａ','Ｂ','Ｃ','Ｄ'];
+    q[1].forEach(function(opt,j){
+      html+='<button class="opt-btn" onclick="pick('+i+','+j+')" id="opt'+i+'_'+j+'">'
+           +'<span class="ol">'+keys[j]+'</span>'+opt+'</button>';
+    });
+    html+='</div>';
+    html+='<div class="exp-box" id="exp'+i+'">'+q[3]+'</div>';
+    html+='</div>';
+  });
+  wrap.innerHTML=html;
+}
+
+var answered={}, score=0;
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  var q=QS[qi];
+  var correct='ABCD'.indexOf(q[2]);
+  var allBtns=document.querySelectorAll('#qc'+qi+' .opt-btn');
+  allBtns.forEach(function(b,j){
+    b.disabled=true;
+    if(j===correct)b.classList.add(oi===correct?'correct':'reveal');
+  });
+  if(oi!==correct){
+    document.getElementById('opt'+qi+'_'+oi).classList.add('wrong');
+  } else {
+    score++;
+    document.getElementById('sc').textContent=score;
+  }
+  document.getElementById('exp'+qi).classList.add('show');
+  document.getElementById('done').textContent=Object.keys(answered).length;
+}
+
+var QS_DATA=[
+  ["建宏從搬運工家庭成為高中老師，這最能說明哪一種社會流動類型？",["代內向下流動，自己的地位比父母低","水平流動，職業性質改變但地位相當","代間向上流動，跨越親子兩代的地位提升","代內向上流動，自己一生中地位提高"],"C","代間流動是比較上下世代（父母與子女）之間的社會地位差異。建宏父親是搬運工，建宏自己成為老師，跨越親子兩代地位明顯提升，屬於代間向上流動。若是同一個人一生中地位提升，才稱代內向上流動。"],
+  ["雅婷的例子，從社會流動的角度分析，最符合哪種說法？",["她是明確的向下流動，收入減少代表地位降低","家庭主婦與職業婦女難以直接比較高低，較接近水平流動或角色轉換","她的選擇屬於代間向下流動，因為地位低於父母","她的案例說明婚姻管道一定造成地位下降"],"B","家庭主婦與職業婦女難以直接用高低排列社會地位，且這是個人自主選擇，通常視為水平流動（角色轉換）。代間流動需比較兩代地位差異，雅婷的改變是自己一生（代內）的職業轉換。"],
+  ["文成從企業主淪為夜市攤販，最能說明向下流動的什麼特點？",["向下流動一定是個人不努力造成的","向下流動只發生在沒有受過教育的人身上","向下流動只影響收入，不影響個人聲望","向下流動有時受到結構或環境因素影響，非純屬個人失敗"],"D","文成公司倒閉可能受到整體經濟環境、市場競爭等結構性因素影響，並非純粹個人努力不足。這說明向下流動不只是個人問題，外在結構或不可控的環境也可能導致地位下降。"],
+  ["秀英透過長期社區服務後當選鄉長，她主要是透過哪個管道實現社會地位提升？",["政治管道——靠長期社區服務與選舉投入取得公職","教育管道——靠學歷取得公職資格","婚姻管道——靠婚配關係提升社會地位","商業管道——靠累積財富進入政壇"],"A","秀英透過長期社區服務建立聲望，進而投入選舉當選鄉長，屬於政治參與管道。教育管道靠學業成就，商業管道靠財富，婚姻管道靠婚配關係，三者均不符合秀英的情況。"],
+  ["綜合四人的故事，下列哪項說法最能反映現代民主社會的特點？",["社會流動只有向上，不可能出現向下情況","個人命運在民主社會中完全由先賦地位決定","社會流動管道多元，但個人機會仍受到結構因素影響","只有接受高等教育，才能在現代社會改變地位"],"C","四人的故事說明：建宏靠教育、秀英靠政治參與向上流動，文成則因結構因素向下流動，雅婷展示水平流動。現代民主社會流動管道多元，但資源分配不均等結構性因素仍影響個人機會。"],
+  ["社會學者通常用哪三個面向衡量個人的社會地位？",["職業、學歷、年齡","財富、聲望、權力","收入、性別、族群","婚姻狀況、工作、宗教信仰"],"B","社會學通常以「財富（經濟資源的多寡）」「聲望（受他人尊重的程度）」「權力（影響或控制他人的能力）」三個面向衡量一個人的社會地位，這三個面向不一定同步。"],
+  ["一位藝術家作品備受各界推崇、廣受尊敬，但他生前幾乎不賣作品，收入極低。這最能說明什麼？",["社會地位的財富、聲望、權力三個面向不一定同步","財富是衡量社會地位最重要的唯一指標","高聲望通常伴隨著高收入","缺乏財富就無法擁有較高的社會地位"],"A","這位藝術家聲望高（廣受尊敬）但財富極低（收入甚少），清楚說明財富、聲望、權力三個面向可以各自獨立，不一定同時高或同時低。"],
+  ["下列哪一個例子，最能說明「聲望」是社會地位的一個面向？",["某銀行總裁年薪千萬，持有多間豪宅","一名縣長握有人事任免的最終決定權","一位年長的村落長老雖無收入，但村民遇到大事都來請教他","一位大地主靠土地租金積累可觀財富"],"C","聲望是指社會對某人的尊重程度。村落長老無高收入（非財富面向）也無決策權（非權力面向），但廣受村民尊敬，正是「聲望」面向的典型例子。"],
+  ["下列哪一項，屬於「成就地位」的典型範例？",["出生在皇室家庭，自幼被視為王位繼承人","因父親為現任議員，而受媒體關注曝光率高","繼承家族世代相傳的農地與財富","通過司法特考後，在法院擔任法官"],"D","成就地位是靠個人後天努力取得的地位。通過司法特考需要多年準備，是個人努力的結果，屬於成就地位。王室繼承、議員之子、繼承家業等，都是由出生或家庭背景決定的先賦地位。"],
+  ["下列有關先賦地位與成就地位的敘述，何者正確？",["先賦地位包含出生時的性別、族群、家庭背景等與生俱來的身分","民主社會中，先賦地位已完全不存在","先賦地位是靠個人後天努力才能取得的","成就地位是出生時便決定好的地位"],"A","先賦地位是與生俱來、無法靠個人意志改變的地位，包含性別、族群、出生家庭的社會階層等。民主社會中先賦地位仍然存在，只是其決定性影響相對縮小；成就地位才是靠後天努力取得的。"],
+  ["小明的父親是工廠作業員，小明靠獎學金讀完大學，目前擔任工程師。這最能說明哪種社會流動？",["代內向上流動","代間向上流動","水平流動","代內向下流動"],"B","代間流動是比較親子兩代之間社會地位的變化。父親是作業員、兒子成為工程師，跨越父子兩代地位向上提升，是代間向上流動。若是同一個人在自己一生中地位提升，才稱代內向上流動。"],
+  ["一名業務員憑藉優秀業績，在同一家公司五年內晉升為部門主管。這屬於哪種社會流動？",["代間向上流動","水平流動","代內向上流動","代間水平流動"],"C","代內流動是指同一個人在自己一生中發生的流動。這名業務員在自己的職業生涯中從業務員升為主管，地位向上提升，屬於代內向上流動，並非代間流動（代間需比較兩代的地位差異）。"],
+  ["某工程師因不滿工作環境，換到另一家科技公司擔任相同職位，薪資大致相當。這屬於哪種社會流動？",["代間向上流動","向下流動","代內向上流動","水平流動"],"D","水平流動是指社會地位高低沒有改變，只有工作地點或單位的平行移動。這名工程師換了公司但職稱、薪資不變，屬於水平（橫向）流動。"],
+  ["在傳統社會中，女性因出生性別被限制不得繼承財產或參與公共事務，這種現象反映了哪種地位的作用？",["先賦地位（性別）限制了個人的社會機會","成就地位主導了個人的社會角色","水平流動被制度嚴格限制","代間流動機制發揮了最大效果"],"A","先賦地位是與生俱來的，如性別。傳統社會以出生性別限制女性的權利，正是先賦地位影響個人社會機會的典型例子，與成就地位或社會流動的概念無直接關聯。"],
+  ["「小雨的曾祖父是佃農，祖父成為小學老師，父親成為大學教授，小雨就讀醫學院。」這最能說明什麼？",["水平流動在台灣相當普遍","多代累積的代間向上流動","先賦地位主導了這個家族的命運","代內向下流動導致家族的衰落"],"B","從佃農→小學老師→大學教授→醫學院學生，歷經數代、地位持續向上攀升，是典型的多代累積代間向上流動，說明教育機會的延伸帶動了世代間的社會流動。"],
+  ["一位平凡女子嫁給知名企業家後，生活品質與社會地位都明顯改善。這說明了哪種社會流動管道？",["教育管道","宗教管道","婚姻管道","軍事管道"],"C","婚姻是社會流動管道之一，透過婚配關係可能使個人的財富、聲望或社會地位發生改變。這個例子中，婚姻帶來地位向上的改變，屬於透過婚姻管道實現的社會流動。"],
+  ["一名農村青年投入軍旅，因表現優異不斷晉升，最終獲封軍官職位。這說明了哪種社會流動管道？",["教育管道","政治管道","商業管道","軍事管道"],"D","軍事服役是社會流動管道之一，個人可以透過軍旅生涯的晉升提升社會地位。這名青年藉由軍隊中的升遷改變地位，屬於軍事管道實現的社會流動。"],
+  ["在現代民主社會中，下列哪一種管道通常被認為是最重要、最能體現機會公平的社會流動管道？",["教育","商業財富的積累","政治裙帶關係","宗教皈依活動"],"A","民主社會中，教育被視為最重要也最能體現機會平等的流動管道。透過接受教育，個人能取得知識與技能、進而取得較高社會職業地位，突破出生背景的限制。"],
+  ["某人出生平凡，長期投入宗教社群奉獻服務，最終成為廣受信眾敬仰的住持。這說明了哪種社會流動管道？",["教育管道","宗教管道","政治管道","婚姻管道"],"B","宗教是社會流動的管道之一。在宗教共同體中，個人透過修行或神職地位提升社會聲望，是宗教管道的典型例子。"],
+  ["下列哪一項因素，最可能「阻礙」個人的向上社會流動？",["完善的公立教育體系","政府提供清寒學生獎學金","家庭貧困使孩子無力負擔高等教育費用","社會流動管道多元且暢通"],"C","家庭貧困使孩子無法接受高等教育，是結構性障礙，阻礙了個人透過教育向上流動的機會。完善公立教育、獎學金與多元管道，都是有助於促進社會流動的因素。"],
+  ["台灣在1960至70年代的工業化時期，許多農家子弟進入工廠或辦公室工作，收入提升。這個現象最能說明什麼？",["台灣曾發生大規模的向下流動","水平流動是台灣這時期最主要的型態","先賦地位決定了這個時代台灣人的命運","工業化與教育普及促進了向上的代間流動"],"D","1960-70年代台灣工業化大量需求勞動力，配合教育普及，許多農家子弟取得工廠或事務性工作，地位與收入普遍提升，展現代間向上流動的趨勢。"],
+  ["若甲國的「社會流動率」高於乙國，這最可能代表什麼？",["在甲國，個人有更多機會透過努力改變自己的社會地位","甲國的GDP一定比乙國高","甲國的先賦地位比乙國更加重要","在甲國，向下流動比乙國更嚴重"],"A","社會流動率高代表在該社會中，個人的地位不完全由出生決定，有更多機會透過後天努力改變地位，反映社會的開放性較高、機會相對平等。"],
+  ["「偏鄉地區缺乏高品質學校資源，影響當地孩子升學機會。」這個現象最能說明哪種概念？",["個人努力不足影響了升學機會","結構性因素（資源分配不均）對社會流動的阻礙","先賦地位（族群）直接決定升學機會","水平流動的管道受到地理因素的限制"],"B","結構性因素是指社會制度、資源分配不均等外在條件。偏鄉學校資源不足是社會資源分配不均的問題，集體性地影響偏鄉孩子的社會流動機會，而非個人努力或選擇的問題。"],
+  ["政府推行「教育機會均等」政策，主要目的是？",["讓所有人的社會地位變得完全相同","降低整體社會的社會流動率","減少先賦地位（如家庭背景）對個人機會的影響","讓教育成為唯一的社會流動管道"],"C","教育機會均等政策的核心目標是讓不同出身背景的孩子，都能平等地獲得教育資源，透過教育取得成就地位，減少出生背景決定命運的現象。"],
+  ["下列哪一種做法，最能幫助弱勢家庭的孩子透過教育實現向上流動？",["廢除義務教育，讓市場決定教育品質","增加私立學校數量以提升整體教育水準","讓學校收取更高學費以改善師資品質","提供清寒學生獎學金與助學貸款"],"D","提供清寒學生獎學金或助學貸款，是直接減少家庭貧困對教育機會阻礙的有效政策。廢除義務教育、增加私立學校或提高學費，都可能加大教育不平等，反而不利弱勢孩子向上流動。"],
+  ["若「性別刻板印象」導致企業不願晉升女性主管，這對社會流動會造成什麼影響？",["成為阻礙特定群體向上流動的結構性因素","使全體社會的流動機會增加","對各性別的流動機會並無實質影響","使水平流動變得更加普遍"],"A","性別刻板印象若被制度化於職場，會形成「玻璃天花板」，阻礙女性在職場中晉升，是一種阻礙特定群體向上流動的結構性因素，而非個人努力問題。"],
+  ["下列有關「社會流動管道多元」的敘述，何者最為正確？",["管道多元代表所有人一定都能向上流動","不同才能或背景的人，能透過不同途徑改善社會地位","管道多元讓先賦地位的影響力完全消除","管道愈多元，社會中的向下流動就愈少"],"B","流動管道多元意味著除了教育之外，還有政治、商業、婚姻、宗教、軍事等管道，不同才能或背景的人可以找到適合自己的方式改善地位，增加整體社會開放性。但管道多元並不保證每人都成功，也不代表向下流動消失。"],
+  ["下列哪一項現象，最能說明「制度性障礙」阻礙了社會流動？",["乙選擇不升學，因為她想早點工作賺錢","丙雖然努力，但因個人選擇錯誤而錯失升遷機會","甲成績優異，但因家庭無力繳交大學學費而被迫放棄升學","丁因性格內向，在職場上表現較不突出"],"C","制度性障礙是指社會制度或資源分配問題導致個人機會受限，而非個人選擇或能力問題。甲成績優異卻因家庭貧困無法就讀大學，是家庭經濟條件（結構因素）對教育機會造成的阻礙。"],
+  ["若某社會的主流論述強調「努力就能成功」，但研究卻顯示窮人家的孩子幾乎無法取得高等教育機會，這種矛盾最能說明什麼？",["教育機會均等政策已成功落實","成就地位的重要性已超越先賦地位","水平流動成為該社會的常態","以個人努力論包裝結構性不平等的現象"],"D","當主流論述強調個人努力、但結構性不平等（如教育機會差距）實際上阻礙了弱勢群體的向上流動，這是一種「以個人努力論包裝、忽視結構性問題」的矛盾現象，無法真實反映社會流動的現實。"],
+  ["下列哪一組配對，說明了「先賦地位」與「成就地位」的正確例子？",["先賦地位：出生家庭富裕；成就地位：通過公務員考試","先賦地位：律師執照；成就地位：出生性別","先賦地位：獲選學生代表；成就地位：家族傳統職業","先賦地位：工作表現優秀；成就地位：年齡"],"A","出生在富裕家庭是與生俱來、無法改變的先賦地位；通過公務員考試則是靠個人後天努力取得的成就地位。選項B的配對相反（律師執照是成就地位，出生性別是先賦地位）。"],
+  ["民主社會中強調「擴大成就地位的重要性」，主要是因為？",["先賦地位讓社會秩序更加穩定","讓個人的努力才能決定其社會地位，而非出身背景","成就地位能完全消除社會上的不平等現象","先賦地位在現代社會已無任何影響力"],"B","民主社會強調公平與機會均等，因此重視成就地位——讓個人後天努力、才能和貢獻決定其社會地位，而非出生背景（先賦地位）。這並不代表先賦地位已消失，而是期望降低其對個人命運的決定性影響。"],
+  ["下列哪一項說法，關於現代台灣社會的社會流動，最為正確？",["台灣社會的先賦地位已完全失去影響力","成就地位是台灣唯一決定個人命運的因素","台灣流動管道多元，但家庭背景等先賦因素仍有一定影響","台灣已完全實現社會地位的全面平等"],"C","現代台灣有教育、政治、商業等多元流動管道，且法律保障機會平等，但研究顯示家庭背景、族群身分等先賦因素仍對教育機會和職業發展有一定影響，並未完全消失。"],
+  ["「社會流動率」與「社會平等」之間的關係，下列敘述何者最正確？",["社會流動率高代表社會已經完全平等","社會流動是指財富分配均等化的過程","社會流動與社會平等之間完全無關","高流動率代表個人更有機會依據努力改變命運，但不等於財富完全平均"],"D","社會流動率高意味著個人有更多機會透過努力改變地位，反映社會開放性與機會平等程度，但並不意味財富或地位分布完全平均。高流動率是社會平等的重要指標之一，但兩者並不完全等同。"],
+  ["下列哪一種社會政策，最有助於提升弱勢族群的社會流動機會？",["擴大弱勢學生的教育補助與職業培訓資源","限制企業招聘外部人才以保護現有員工","提高所有大學的學費以改善教育品質","取消公開考試制度，以面試取代筆試"],"A","擴大弱勢學生的教育補助與職業培訓，直接幫助弱勢群體克服結構性障礙、取得向上流動機會。限制招聘、提高學費或取消公考，反而可能加重障礙或製造新的不公平。"],
+  ["「個人的社會地位由多個面向構成，且不一定一致。」這句話最能用哪個例子說明？",["某官員既有財富也有權力，地位各方面都高","某宗教人士收入微薄，但在其信眾中享有極高聲望與影響力","一名律師既有高收入也受人尊重，且有決策影響力","某富翁財富驚人，被選為公司董事長後影響力大增"],"B","題目說的是「各面向不一定一致」。某宗教人士收入低（財富低）但聲望極高（廣受信眾敬仰），正好說明財富、聲望、權力三個面向可以不同步。其他選項均是各面向高度一致的例子。"],
+  ["阿桂原本是夜市攤販，後來因商業頭腦靠做生意積累財富，成為擁有多家連鎖店的企業家。這屬於哪種社會流動？",["代間向上流動","代間向下流動","代內向上流動","水平流動"],"C","代內流動是指同一個人在自己一生中的社會地位改變。阿桂從攤販到企業家，是自己一生中地位向上提升，屬於代內向上流動。若比較的是阿桂與父母的地位差異，才算代間流動。"],
+  ["下列哪一項說法，最能說明「先賦地位」在現代民主社會中仍有影響力？",["民主國家法律已規定先賦地位對個人生活完全沒有影響","在民主社會中，個人努力是決定命運的唯一因素","先賦地位只在考試評分時才有影響","研究顯示出生在富裕家庭的孩子，接受高等教育的機會普遍高於貧困家庭的孩子"],"D","儘管民主社會強調機會平等，但研究數據顯示家庭背景（先賦地位的一種）仍影響孩子的教育機會。這說明先賦地位在現代民主社會中雖不像傳統社會那麼決定性，但仍然存在影響力。"],
+  ["下列有關「代間流動」與「代內流動」的敘述，何者正確？",["代間流動比較的是不同世代（如父母與子女）之間的地位差異","代間流動是指同一個人一生中發生的地位改變","代內流動是指父母與子女之間社會地位的差異","代內流動只能是向下流動"],"A","代間流動（intergenerational mobility）比較的是不同世代之間的社會地位差異，例如父母與子女的職業地位比較。代內流動（intragenerational mobility）則是同一個人在一生中的地位變化。兩者的方向均可能向上、向下或水平。"],
+  ["哪一種制度安排，最能體現「減少先賦地位決定性影響」的民主價值？",["以家族關係決定職位分配","建立公開透明的考試與選拔制度","讓財富較多的家庭優先享有教育資源","由政府官員指定下一代接班人"],"B","公開透明的考試與選拔制度（如公務員考試、教師甄試），讓個人靠才能與努力競爭職位，而非靠家族或出身背景，正是現代民主社會「減少先賦地位決定性影響」的具體體現。"],
+  ["公民若想在制度層面促進社會流動機會的公平，最適合採取哪種行動？",["完全不干涉政府政策，相信個人努力才是關鍵","只關注個人的向上流動，不理會他人機會","關注並支持教育機會均等、反歧視等相關政策","反對任何形式的社會福利，避免影響個人進取心"],"C","公民參與是民主社會的重要機制。關注並支持教育機會均等、反歧視等政策，是公民在制度層面促進社會流動、減少結構性障礙的重要方式。個人努力固然重要，但結構性條件的改善需要公民共同推動。"],
+];
+
+var CTX_HTML=`<p class="ctx-intro">社區互助協會整理了四位成員的生命故事，請閱讀後回答第 1～5 題。</p>
+<table class="ctx-table">
+<thead><tr><th>姓名</th><th>父母職業</th><th>本人職業</th><th>改變原因</th></tr></thead>
+<tbody>
+<tr><td>建宏</td><td>漁港搬運工</td><td>高中老師</td><td>考上師範大學，通過教師甄試</td></tr>
+<tr><td>雅婷</td><td>中學校長女兒</td><td>家庭主婦</td><td>婚後自主選擇在家照顧子女</td></tr>
+<tr><td>文成</td><td>中小企業主</td><td>夜市攤販</td><td>公司倒閉、負債後轉型謀生</td></tr>
+<tr><td>秀英</td><td>平地農民</td><td>地方鄉長</td><td>長期社區服務後投入地方選舉</td></tr>
+</tbody></table>
+`;
+buildQuiz(QS_DATA, CTX_HTML);
+</script>
+</body>
+</html>

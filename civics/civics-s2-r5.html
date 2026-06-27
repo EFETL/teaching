@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公民 第 05 回 | 互動練習</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;--blue:#2c5f8a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:22px 18px 18px;text-align:center;}
+header h1{font-size:24px;font-weight:bold;}
+header p{font-size:15px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:14px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.ho-section{background:#fff;border-radius:14px;padding:18px 20px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.09);}
+.ho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid var(--blue);padding-bottom:8px;}
+.ho-header h2{font-size:18px;color:var(--blue);font-weight:bold;}
+.reveal-all-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:14px;cursor:pointer;font-family:inherit;}
+.reveal-all-btn:hover{background:#1a4a7a;}
+.ho-item{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;font-size:16px;line-height:1.8;}
+.ho-num{background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.ho-body{flex:1;}
+.blank-wrap{display:inline-block;vertical-align:baseline;margin:0 2px;}
+.qm-btn{display:inline-block;background:var(--gold);color:#fff;border:none;border-radius:6px;padding:1px 10px;font-size:15px;font-weight:bold;cursor:pointer;font-family:inherit;vertical-align:baseline;line-height:1.5;}
+.qm-btn:hover{background:#a08020;}
+.blank-ans{display:none;background:#e8f5ee;color:var(--ok);border:1px solid #a8d8b8;border-radius:6px;padding:1px 10px;font-weight:bold;font-size:15px;vertical-align:baseline;}
+.score-bar{background:#fff;border-radius:12px;padding:11px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
+.score-bar b{color:var(--red);font-size:20px;}
+.ctx-box{background:#fff8e6;border:1px solid #e0c060;border-radius:12px;padding:14px 18px;margin-bottom:18px;}
+.ctx-intro{font-size:15px;margin-bottom:8px;color:#444;}
+.ctx-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;}
+.ctx-table th{background:#c5a028;color:#fff;padding:6px 8px;text-align:left;}
+.ctx-table td{padding:5px 8px;border:1px solid #e0c060;}
+.ctx-table tr:nth-child(even){background:#fffbe8;}
+.group-label{background:#fff3cd;border-left:4px solid var(--gold);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#5a3e00;margin-bottom:14px;}
+.section-label{background:#eef3f9;border-left:4px solid var(--blue);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#1a3a6b;margin-bottom:14px;margin-top:4px;}
+.q-card{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:13px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;border-radius:50%;width:27px;height:27px;font-size:13px;font-weight:bold;margin-right:7px;flex-shrink:0;}
+.q-text{font-size:16px;font-weight:500;margin-bottom:11px;display:flex;align-items:flex-start;gap:4px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.opt-btn{display:flex;align-items:flex-start;gap:7px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:8px 11px;cursor:pointer;font-size:14px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
+.opt-btn:hover:not(:disabled){border-color:var(--red);background:#fdf0f0;}
+.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 6px;font-size:12px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.opt-btn.correct{border-color:var(--ok);background:#e8f5ee;}
+.opt-btn.correct .ol{background:var(--ok);color:#fff;}
+.opt-btn.wrong{border-color:var(--err);background:#fde8e8;}
+.opt-btn.wrong .ol{background:var(--err);color:#fff;}
+.opt-btn.reveal{border-color:var(--ok);background:#e8f5ee;opacity:.8;}
+.opt-btn.reveal .ol{background:var(--ok);color:#fff;}
+.exp-box{margin-top:9px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:7px 11px;font-size:13px;color:#1a4a2c;display:none;}
+.exp-box.show{display:block;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:560px){.opts{grid-template-columns:1fr;}header h1{font-size:20px;}.ho-item{font-size:15px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 公民下學期複習 第 05 回</h1>
+  <p>翰林版 | 社會不公平成因分析、影響、政府政策與解決方向 | 共 40 題</p>
+  <a class="back" href="mock-exam-s2.html">← 回考卷選單</a>
+</header>
+<div class="wrap">
+
+  <!-- 填充題講義 -->
+  <div class="ho-section">
+    <div class="ho-header">
+      <h2>📖 重點填充講義</h2>
+      <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+    </div>
+<div class="ho-item"><span class="ho-num">1</span><span class="ho-body">社會不公平是指在資源、機會、待遇上存在不合理差異，使特定群體長期處於「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">不利地位</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">2</span><span class="ho-body">以性別為由的職場不公平中，女性難以晉升到高階職位的隱形障礙，稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">玻璃天花板</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">3</span><span class="ho-body">社會期待女性同時兼顧職場與家庭，形成的「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">雙重負擔</span></span>」，是性別刻板印象造成不公平的典型例子。</span></div>
+<div class="ho-item"><span class="ho-num">4</span><span class="ho-body">個人將自己的處境與他人比較後，感到所獲資源相對不足而產生的不公平感，稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">相對剝奪感</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">5</span><span class="ho-body">「城鄉差距」在教育方面，主要表現為偏鄉地區「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">師資不足</span></span>」及教學「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">設備缺乏</span></span>」等問題。</span></div>
+<div class="ho-item"><span class="ho-num">6</span><span class="ho-body">政府採取「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">累進稅制</span></span>」，對高收入者課征較高稅率，是解決「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">貧富差距</span></span>」的重要政策工具。</span></div>
+<div class="ho-item"><span class="ho-num">7</span><span class="ho-body">對特定弱勢族群提供升學加分、名額保留等補償措施，稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">積極性差別待遇</span></span>」政策，目的是達到實質公平。</span></div>
+<div class="ho-item"><span class="ho-num">8</span><span class="ho-body">個人或群體在就業、教育、醫療等方面被邊緣化、無法融入社會主流，稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會排除</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">9</span><span class="ho-body">族群不公平的根本成因，多指向歷史上的「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">政治壓迫</span></span>」、「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">經濟剝削</span></span>」或「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">文化壓制</span></span>」形成的結構性不平等。</span></div>
+<div class="ho-item"><span class="ho-num">10</span><span class="ho-body">解決社會不公平需要整合：「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">累進稅制</span></span>」＋「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">教育機會均等</span></span>」＋「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">反歧視法規</span></span>」＋「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會福利制度</span></span>」。</span></div>
+  </div>
+
+  <!-- 互動選擇題 -->
+  <div id="quiz-wrap"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+
+function revealBlank(btn){
+  var wrap=btn.parentNode;
+  btn.style.display='none';
+  wrap.querySelector('.blank-ans').style.display='inline';
+}
+function revealAll(){
+  document.querySelectorAll('.qm-btn').forEach(b=>revealBlank(b));
+}
+
+var QS=[];
+function buildQuiz(qs,ctxHtml){
+  QS=qs;
+  var wrap=document.getElementById('quiz-wrap');
+  if(!wrap)return;
+  var html='<div class="score-bar">得分：<b id="sc">0</b> / '+qs.length+'　　已作答：<span id="done">0</span>题</div>';
+  if(ctxHtml){
+    html+='<div class="ctx-box">'+ctxHtml+'</div>';
+    html+='<div class="group-label">【題組】根據上方資料，回答第 1～5 題。</div>';
+  }
+  qs.forEach(function(q,i){
+    var num=i+1;
+    if(i===5 && ctxHtml){
+      html+='<div class="section-label">以下為一般選擇題（第 6～'+qs.length+' 題）</div>';
+    }
+    html+='<div class="q-card" id="qc'+i+'">';
+    html+='<div class="q-text"><span class="q-num">'+num+'</span>'+q[0]+'</div>';
+    html+='<div class="opts">';
+    var keys=['Ａ','Ｂ','Ｃ','Ｄ'];
+    q[1].forEach(function(opt,j){
+      html+='<button class="opt-btn" onclick="pick('+i+','+j+')" id="opt'+i+'_'+j+'">'
+           +'<span class="ol">'+keys[j]+'</span>'+opt+'</button>';
+    });
+    html+='</div>';
+    html+='<div class="exp-box" id="exp'+i+'">'+q[3]+'</div>';
+    html+='</div>';
+  });
+  wrap.innerHTML=html;
+}
+
+var answered={}, score=0;
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  var q=QS[qi];
+  var correct='ABCD'.indexOf(q[2]);
+  var allBtns=document.querySelectorAll('#qc'+qi+' .opt-btn');
+  allBtns.forEach(function(b,j){
+    b.disabled=true;
+    if(j===correct)b.classList.add(oi===correct?'correct':'reveal');
+  });
+  if(oi!==correct){
+    document.getElementById('opt'+qi+'_'+oi).classList.add('wrong');
+  } else {
+    score++;
+    document.getElementById('sc').textContent=score;
+  }
+  document.getElementById('exp'+qi).classList.add('show');
+  document.getElementById('done').textContent=Object.keys(answered).length;
+}
+
+var QS_DATA=[
+  ["哪則報導最能說明「性別不公平」的問題？",["甲報導——女性薪資差距反映職場的性別不平等","乙報導——城鄉教育資源差距問題","丙報導——外籍移工薪資遭剋扣問題","丁報導——貧富差距的財富集中問題"],"A","甲報導呈現的是女性薪資比男性低、晉升機會不平等，屬於以性別為基礎的社會不公平。乙是城鄉差距，丙涉及外籍移工的族群/勞動不公平，丁是貧富差距。"],
+  ["四則報導中，哪一則涉及的社會不公平，主要與「族群身分」有關？",["甲報導——與性別不平等有關","乙報導——與城鄉差距有關","丁報導——與貧富差距有關","丙報導——外籍移工因族群/外籍身分而遭受的不平等待遇"],"D","丙報導中的外籍移工是因為其外籍身分而在職場中可能遭受不平等對待（如薪資被剋扣），這與族群身分直接相關。甲是性別問題，乙是城鄉問題，丁是貧富問題。"],
+  ["哪則報導反映的問題，主要是「城鄉差距」造成的？",["甲報導——職場性別不公平","乙報導——偏遠山區學校師資不足、教育資源不均","丙報導——外籍移工薪資被剋扣","丁報導——貧富差距的財富分配問題"],"B","乙報導描述的是偏遠山區（農村、偏鄉）學校師資不足，與城市形成明顯的教育資源差距，是城鄉差距在教育方面的具體表現。"],
+  ["哪則報導的數據，最能說明台灣存在嚴重的「貧富差距」問題？",["甲報導——性別薪資差距18%","乙報導——城鄉教育資源差距","丙報導——移工薪資被剋扣","丁報導——最富裕前10%家庭財富是最貧困後10%的65倍"],"C","丁報導以具體數字（65倍財富差距）說明了台灣最富裕與最貧困家庭之間財富分配的嚴重不平等，是衡量「貧富差距」最直接的指標。"],
+  ["綜合四則報導，它們共同說明了什麼重要概念？",["社會上存在多種不同類型的社會不公平，需要不同的政策回應","社會不公平只存在於發展中國家，民主國家不受影響","只要個人努力，就可以完全克服所有社會不公平","政府的政策干預一定能立即解決所有社會不公平問題"],"A","四則報導分別涉及性別、族群（外籍移工）、城鄉、貧富四種不同類型的社會不公平，說明不公平是多面向的，存在於各類社會，需要有針對性的多元政策加以回應。"],
+  ["「社會不公平」的概念，下列哪項定義最為正確？",["社會不公平是指所有人的財富必須完全相同","社會不公平是指在資源、機會、待遇上存在不合理差異，使特定群體持續處於不利地位","社會不公平只發生在威權國家，民主國家完全不存在","社會不公平完全是個人選擇造成的結果，與社會制度無關"],"B","社會不公平是指社會中某些群體因性別、族群、階級、地區等因素，在取得資源、教育機會、就業機會或社會參與等方面存在不合理的差異，導致這些群體持續處於不利地位。這不只是個人選擇問題，也涉及制度性因素。"],
+  ["造成社會不公平的「歷史因素」，最能用下列哪個例子說明？",["某人選擇不認真讀書，導致收入較低","某人因個人懶惰，喪失職場晉升機會","台灣原住民族因歷史上的土地流失與文化壓制，造成至今仍影響族群發展的結構性不利","某人因選擇了風險較高的行業而面臨收入不穩定"],"C","歷史因素指過去的政治、經濟或文化政策，對特定族群造成的長期影響。台灣原住民族在歷史上遭受土地剝奪、文化語言壓制，這些歷史不公平的後果延續至今，形成結構性不利，是歷史因素造成社會不公平的典型例子。"],
+  ["「職場中的性別不公平」，下列哪種說法最為正確？",["性別不公平只在私人企業中存在，政府部門不受影響","女性就業比率已與男性相同，性別不公平問題已不存在","女性薪資較低完全是因為個人選擇了薪資較低的職業","即使從事相同工作，部分女性仍可能因性別而面臨晉升障礙或薪資差距（同工不同酬）"],"D","研究顯示，即使在職業類別相同的情況下，女性仍可能因性別刻板印象或職場中的隱性歧視，面臨晉升機會較少（玻璃天花板）或薪資低於男性的問題，這說明性別不公平存在且涉及制度性因素。"],
+  ["下列何者屬於政府解決「族群不公平」的具體政策？",["推動原住民族教育文化復振計畫，提供升學加分優惠與族語教學資源","增加所有族群的稅率以強制縮小財富差距","規定所有族群必須使用相同的語言和文化習俗","取消所有族群身分的官方登記制度"],"A","針對歷史上受到文化壓制和機會不平等的原住民族，政府推動文化復振計畫、升學加分、族語教學等積極性差別待遇政策，目的是彌補歷史不公平，促進族群實質的機會平等。"],
+  ["「貧富差距」持續擴大，可能對社會造成哪些影響？",["貧富差距擴大，但不會影響社會的穩定性與凝聚力","可能造成社會對立加劇、弱勢族群的社會流動機會減少，影響整體社會和諧","貧富差距是鼓勵個人努力最好的動力，不需要加以解決","貧富差距只影響最窮困的人，對其他社會成員完全沒有影響"],"B","貧富差距擴大時，富裕階層掌握更多教育、醫療、居住等資源，弱勢群體的向上流動機會減少，可能產生階層固化，並引發社會對立、政治不信任，威脅社會的整體穩定。"],
+  ["「城鄉差距」在教育方面最可能的具體表現為何？",["城市學校的學費比偏鄉學校更高","偏鄉學生比城市學生更努力讀書","偏鄉學校面臨師資不足、設備缺乏等問題，學生受教品質不如城市","城市地區的學校學生人數比偏鄉學校少"],"C","城鄉差距在教育方面的主要表現是：偏鄉學校師資不足（優質教師多集中在城市）、教學設備老舊、課外活動資源匱乏，使偏鄉學生在升學競爭中處於結構性弱勢。"],
+  ["政府推行「社會住宅」政策，主要是為了解決哪種社會不公平問題？",["族群不公平——讓不同族群都有機會取得土地","性別不公平——讓女性有更多機會取得住屋","城鄉差距——引導偏鄉居民移居城市","貧富差距引發的居住不公平——讓無力負擔高房價的弱勢家庭也有適合的居所"],"D","社會住宅是政府提供低於市場租金的住屋，主要服務對象是因高房價而無法安居的弱勢家庭，如低收入戶、青年、身心障礙者等，目的是解決貧富差距在居住方面造成的不公平。"],
+  ["下列哪一項，屬於「性別不公平」的具體例子？",["企業以「女性可能懷孕」為由，拒絕錄用能力相當的女性應徵者","法律規定男女享有相同的投票權利","政府推行無性別差異的公共廁所建設計畫","男女均可申請相同金額的創業補助"],"A","以「女性可能懷孕」為由拒絕錄用相同能力的女性，是以性別為由的就業歧視，屬於性別不公平。這種行為違反性別工作平等的原則，也是法律所禁止的就業歧視行為。"],
+  ["「相對貧窮」的定義，下列哪項最正確？",["相對貧窮是指收入為零、無法溫飽的極端貧困狀態","相對貧窮是指個人或家庭的收入，低於社會中位數的特定比例，生活水準明顯低於社會一般標準","相對貧窮只存在於開發中國家，已開發國家不存在此問題","相對貧窮是指個人財富與他人完全相同的狀態"],"B","相對貧窮是以社會一般水準為基準的比較概念，例如收入低於社會中位數50%。即使基本生活需求已滿足，相對貧窮仍反映個人無法參與社會主流生活，是衡量社會不平等的重要指標。"],
+  ["哪一種現象，最能說明社會不公平源於「結構性因素」而非純粹個人問題？",["某人選擇不升學，導致職業選擇受限","某人性格懶惰，導致工作效率低落","某族群因歷史上的土地政策影響，至今在教育資源取得上仍較為不利","某人因個人健康問題，影響了工作能力"],"C","結構性因素是指社會制度、歷史政策或資源分配不均等，非個人所能控制的外在條件。某族群因歷史土地政策的影響而長期處於教育資源不利的處境，是典型的結構性不公平，而非個人選擇或能力問題。"],
+  ["「城鄉差距」在醫療方面最常見的具體表現為何？",["城市醫院的費用比偏鄉醫院高很多","偏鄉居民比城市居民更不重視健康預防","城市醫療院所的服務態度不如偏鄉友善","偏鄉地區缺乏足夠的醫療機構與專科醫師，居民就醫交通不便、等待時間長"],"D","城鄉醫療資源差距主要表現在：偏鄉地區醫院、診所數量少，缺乏專科醫師，居民需長途就醫，遇到緊急醫療狀況時尤其不利。這是城鄉差距在醫療衛生方面的具體影響。"],
+  ["下列哪一項政府政策，最能直接減少「貧富差距」？",["建立累進稅制，對高收入者課征較高稅率，並將稅收用於弱勢補助及公共服務","取消所有稅收，讓個人完全保有所有賺取的財富","規定所有人的薪資必須完全相同","讓市場完全自由競爭，政府完全不介入"],"A","累進稅制讓高收入者按比例繳交更多稅金，再透過社會福利措施重新分配，是政府縮小貧富差距最重要的制度工具之一。完全不課稅或強制同工資，均不是可行或公平的政策方向。"],
+  ["「玻璃天花板」（glass ceiling）這個概念，最能說明職場中哪種不公平現象？",["職場中的城鄉差距：偏鄉員工較難升遷到都市企業的高階職位","女性或少數群體雖有能力，卻因性別或族群因素，難以晉升到組織高階職位的隱性障礙","職場貧富差距：低收入員工較難取得高薪職位","外籍勞工在職場中遭受的薪資歧視"],"B","玻璃天花板是比喻職場中存在的隱性障礙，讓有能力的女性（或其他少數群體）即使努力，也難以突破到企業最高層。這種障礙「透明」（看不見），但確實存在，是職場性別不公平的重要體現。"],
+  ["下列哪一種做法，最有助於縮小「城鄉教育差距」？",["將所有偏鄉學校合併關閉，讓學生移居城市就讀","提高城市學校的收費，限制就讀人數","招募師資赴偏鄉服務、提供設備補助，並推廣數位遠距教學以補足資源差距","在偏鄉地區廢除教育機構，改設職業訓練所"],"C","縮小城鄉教育差距的有效方式包括：誘因吸引優質師資到偏鄉（如加薪、特殊補助）、補助教學設備、善用數位科技提供遠距教學，讓偏鄉學生也能接觸城市學生可獲得的教育資源。"],
+  ["台灣政府為保障「外籍移工」基本勞動權益，採取了哪些措施？",["禁止外籍移工在台灣換僱主，以維持社會秩序","規定外籍移工只能從事特定類型的農業工作","取消外籍移工適用的最低薪資保障","設立外籍勞工申訴專線，提供多語言諮詢服務，並加強勞動檢查保障基本權利"],"D","台灣設有1955外籍勞工諮詢保護專線，提供多語言服務，並由勞動檢查機構定期稽查雇主是否違反勞動法規。這些措施旨在保障外籍移工不因語言或身分差異而遭受剝削，維護其基本勞動權益。"],
+  ["「族群不公平」的根本成因，最常被學者指向哪一方面？",["歷史上的政治、經濟、文化歧視與制度安排，形成長期累積的結構性不平等","少數族群個人能力天生不足，難以在社會中競爭","族群不公平是自然演化的結果，社會無法改變","族群不公平只在宗教不自由的國家才存在"],"A","學者普遍認為，族群不公平的根本原因在於歷史上對特定族群的政治壓迫、經濟剝削或文化壓制，這些不公平透過制度延續至今，形成結構性的不利，並非族群成員的個人能力問題。"],
+  ["下列有關「性別薪資差距」的說法，何者最為正確？",["男女薪資差距完全是因為女性選擇了薪資較低的行業","男女薪資差距除了職業選擇因素外，也存在同工不同酬的制度性問題","只要女性更努力工作，薪資差距問題自然會消失","性別薪資差距只存在於傳統行業，在科技業已完全消失"],"B","研究顯示，即使控制了職業類別、工作年資等因素，男女薪資差距仍然存在，說明這不只是個人職業選擇的問題，也涉及職場文化、晉升機制等制度性的性別不公平。"],
+  ["下列哪一種現象，最能說明「貧富差距」對社會流動的負面影響？",["富裕家庭的孩子成績優異，因此取得好的工作機會","貧困家庭的孩子因個人懶惰，放棄了接受教育的機會","出身貧困家庭的孩子，因缺乏補習、課外活動等資源，在升學競爭中持續處於結構性弱勢","貧富差距促使每個人更努力工作以改善生活"],"C","貧富差距會導致教育機會不平等：富裕家庭的孩子能享有補習、才藝課、家教等資源，而貧困家庭的孩子缺乏這些資源，在同一考試制度下實質上處於不公平的競爭起點，這是結構性弱勢，而非個人懶惰造成的。"],
+  ["政府推行「原住民族語教學」政策，主要是為了實現哪種社會目標？",["讓原住民族放棄傳統語言，加速融入主流社會","提升原住民族的就業競爭力，縮小薪資差距","在原住民族地區推廣更多外語教學","保障原住民族的文化認同，減少歷史上文化壓制所造成的族群不公平"],"D","原住民族語教學政策的目的是積極保存原住民族的語言與文化，這是對歷史上文化壓制（如強制使用漢語）的糾正，也是實現族群文化公平的重要措施，讓各族群的文化都能受到平等的尊重與保護。"],
+  ["「相對剝奪感」（relative deprivation）是指？",["個人將自己的處境與參考群體比較後，感到自己所獲得的資源或機會相對不足，產生被剝奪的感受","個人因絕對貧窮而無法取得基本生活所需的極端困境","少數族群被多數族群強制剝奪財產的歷史現象","政府收取稅款後，個人感到財富被強制剝奪的心理反應"],"A","相對剝奪感是社會心理學概念，指個人看到他人（參考群體）擁有更多資源或機會時，感到自己的處境相對不公平。這種感受不一定源於絕對貧窮，而是來自與他人的比較，可能引發對社會的不滿。"],
+  ["社會不公平問題若長期未能改善，最可能對民主社會造成什麼影響？",["民主社會的經濟一定會因此持續成長","可能造成社會對立加劇、弱勢群體對制度失去信心，影響社會穩定與民主品質","社會不公平問題完全無法影響民主社會的正常運作","只要民主選舉持續進行，社會不公平自然會逐漸解決"],"B","長期社會不公平會使弱勢群體感到被社會排除在外，對民主制度失去信心，可能導致政治冷漠、社會衝突、甚至民粹主義興起。民主社會的健全運作需要一定程度的公平，不公平不會自動消失。"],
+  ["下列哪一組政策，最能「綜合性」地改善社會不公平問題？",["完全由市場決定資源分配，政府不需任何干預","只針對最窮困的人提供補助，其他人完全依靠市場競爭","累進稅制、教育機會均等、反歧視法規、社會福利制度的整合運用","只依賴道德教化讓社會成員自願分享資源"],"C","社會不公平是多面向的（貧富、性別、族群、城鄉），需要綜合性政策應對：累進稅制解決財富集中問題，教育機會均等解決流動障礙，反歧視法規解決制度性歧視，社會福利制度保障基本生活。"],
+  ["「積極性差別待遇」（Affirmative Action）政策（如提供弱勢學生升學加分）的主要目的是？",["讓弱勢學生不需努力就能進入頂尖學校","讓所有學生的考試成績強制變得完全相同","讓頂尖學校的競爭更加激烈","彌補歷史上或結構性不平等所造成的機會差距，促進實質的公平競爭"],"D","積極性差別待遇不是「逆向歧視」，而是承認不同群體的起點不同，透過政策主動補償，使原本處於結構性弱勢的群體能夠在較為公平的條件下競爭，追求實質平等而非只有形式平等。"],
+  ["下列哪一種情況，最能說明「形式平等」（formal equality）無法完全解決社會不公平？",["法律規定男女薪資相等，但實際職場中女性仍因隱性歧視而面臨晉升困難","政府明確立法禁止種族歧視，所有族群均受法律平等保護","所有學生都參加同一場大學入學考試，規則完全相同","民主選舉中每個公民都有一票同等的投票權"],"A","形式平等是指規則或法律上的平等（如同工同酬法），但若社會中仍存在隱性歧視或結構性不平等，單靠法律條文難以達到實質平等。法律保障同薪，但職場中女性仍可能遭受無法量化的歧視，是形式平等的侷限。"],
+  ["下列哪一項，最能說明「城鄉差距」在資訊科技普及方面的影響？",["偏鄉居民使用網路的意願比城市居民低，屬於個人選擇問題","偏鄉地區因網路基礎建設不足，學生取得數位學習資源的機會少於城市","城市居民比偏鄉居民更聰明，因此更能有效使用資訊科技","科技產品在偏鄉地區的定價比城市高很多，形成消費不公平"],"B","偏鄉地區常因網路基礎建設不足（如光纖覆蓋率低）而造成「數位落差」，使學生無法充分使用線上教學資源。這是城鄉差距在資訊科技時代的具體延伸，屬於結構性問題而非個人選擇。"],
+  ["在台灣，下列哪一項政策最能直接解決職場「性別歧視」問題？",["要求女性在工作能力上必須比男性更優秀才能獲得錄用","規定女性必須優先獲得所有工作機會","制定性別工作平等法，禁止職場性別歧視，並提供友善親職的工作環境","完全取消女性勞工的特殊保護措施，讓職場完全自由競爭"],"C","《性別工作平等法》明確禁止企業因性別而歧視求職者或員工，要求提供育嬰留停、哺乳場所等友善親職環境，並規定同工同酬，是台灣解決職場性別不公平的核心法律機制。"],
+  ["某研究顯示，相同學歷的不同族群在寄出求職履歷後，獲得面試邀請的回覆率存在顯著差異。這最能說明什麼問題？",["部分族群的求職者能力確實較為不足","職場差異只是反映了公司的合理商業判斷","不同族群的工作能力本來就有天生差異","職場中存在以族群身分為基礎的就業歧視（隱性族群歧視）"],"D","在其他條件（學歷、經驗）相同的情況下，不同族群的回覆率出現差異，說明雇主決策中存在以族群身分為依據的偏見或歧視。這種隱性歧視使特定族群在就業市場中處於不平等的地位。"],
+  ["「社會排除」（social exclusion）是指？",["某些社會群體在就業、教育、醫療、社會參與等方面被邊緣化，無法充分融入社會主流","政府規定特定群體不得參與特定公共活動的明文制度","個人自主選擇退出社會活動的個人行為","社會組織將高風險成員排除在保險範圍外的商業決策"],"A","社會排除是一種多面向的不公平現象，指特定群體因貧窮、歧視、身心障礙或其他因素，被排除在就業、教育、醫療、住房、社會網絡等重要資源之外，無法完整參與社會生活，是社會不公平的嚴重形式。"],
+  ["下列哪一種行動，是公民在日常生活中促進「消除社會不公平」的具體方式？",["只關注自己家庭的利益，完全不理會他人的處境","尊重不同族群、性別的文化差異，拒絕在日常言行中使用歧視性言語與行為","拒絕繳交稅款，以表達對政府社會政策的不滿","反對任何幫助弱勢群體的政策，認為這違反公平競爭原則"],"B","從個人層面消除社會不公平，最具體的方式包括：在語言和行為上尊重不同族群和性別，不使用歧視性稱謂或做出歧視性行為。個人的態度和行動是減少日常生活中的偏見與歧視的重要起點。"],
+  ["台灣推動「多元文化主義」（multiculturalism）政策，主要目的是？",["要求所有族群都必須放棄各自的語言和文化，融入主流文化","只保護人數最多的族群的語言和文化","承認並尊重各族群的文化差異，讓不同文化背景的人在社會中都能受到平等的尊重與保護","讓不同族群相互競爭，由市場決定哪種文化最有價值"],"C","多元文化主義政策的核心理念是「求同存異」——承認社會中存在多種族群文化，並給予平等的尊重與保護，而非強制要求少數族群放棄自身文化以融入主流。台灣的原住民族語言政策、客家文化保存等均體現此理念。"],
+  ["「數位落差」（digital divide）最主要是哪種社會不公平的延伸？",["族群不公平——不同族群對數位科技的使用態度不同","性別不公平——男性天生比女性更能使用數位科技","宗教不公平——某些宗教文化禁止使用數位科技","城鄉差距與貧富差距——基礎建設不均與資源差異，使不同群體取得數位資源的機會不平等"],"D","數位落差主要反映城鄉差距（偏鄉網路覆蓋率低）和貧富差距（低收入家庭難以負擔設備費用）的交叉影響，使弱勢群體在資訊時代更難以取得教育、就業等數位機會，是既有不公平在新領域的延伸。"],
+  ["下列哪一種現象，最能說明「性別刻板印象」對社會不公平的影響？",["社會普遍期待女性負責家務，導致職業婦女需同時兼顧工作與家庭，面臨「雙重負擔」的不公平","女性在所有工作上都被要求比男性更加努力才能獲得相同待遇","男性在職場上被要求比女性更早退休，導致退休收入較少","學校規定男生必須學習更多數學，女生學習更多文學"],"A","性別刻板印象讓社會期待女性主要負責照顧家庭，這使得職業婦女必須同時肩負職場工作與家庭照顧的雙重壓力（雙重負擔），而男性較少面臨相同的期待，是性別刻板印象在日常生活中製造不公平的典型例子。"],
+  ["「積極消除歧視」（active non-discrimination）與「消極不歧視」（passive non-discrimination）的最主要差異是？",["兩者完全相同，只是用不同語言表達同一概念","積極消除歧視指主動採取措施改善不平等現況；消極不歧視只是避免做出歧視行為，但不主動介入改善","消極不歧視比積極消除歧視更能有效地解決社會不公平問題","積極消除歧視只適用於解決性別問題，消極不歧視適用於所有社會不公平問題"],"B","消極不歧視是「不做壞事」——避免歧視行為；積極消除歧視則是「主動做好事」——採取具體行動（如提供弱勢補助、推動多元招募），主動縮短現有的不平等差距。後者更能有效改善結構性不公平。"],
+  ["下列哪一種說法，最能說明「貧富差距」是現代社會的重要議題？",["貧富差距是自然現象，民主社會不應介入","只要每個人都努力工作，貧富差距自然會消失","貧富差距若持續擴大，可能使教育、醫療、住宅等基本機會更加不平等，形成惡性循環與世代貧窮","貧富差距只影響最低收入的人，對中產階級完全沒有影響"],"C","當貧富差距擴大，富裕家庭的孩子獲得更多教育資源、醫療服務、住宅保障等，而貧困家庭的孩子則陷入資源不足的惡性循環，難以透過努力改變命運，形成「世代貧窮」的問題，影響整體社會的公平性與流動性。"],
+  ["下列哪一項，是政府針對「外籍移工遭遇不公平對待」可採取的最直接有效措施？",["全面禁止雇用外籍移工，以完全避免剝削問題","讓外籍移工的待遇完全依賴雇主自行判斷，政府不需介入","將外籍移工勞動問題完全交由市場機制自然調節","建立完善的勞動檢查制度與外籍移工保護法規，提供申訴管道與多語服務"],"D","保障外籍移工權益最有效的方式是：制定明確的法規（如最低薪資、工作時間保障）、建立有效的申訴管道、提供多語言諮詢服務，並定期進行勞動稽查，讓外籍移工在遭受不公平對待時有管道尋求幫助。"],
+];
+
+var CTX_HTML=`<p class="ctx-intro">《社會觀察雜誌》本期整理四則社會報導標題，請閱讀後回答第 1～5 題。</p>
+<table class="ctx-table">
+<thead><tr><th>編號</th><th>報導標題</th></tr></thead>
+<tbody>
+<tr><td>甲</td><td>女性薪資平均比男性低 18%，職場晉升天花板依然存在</td></tr>
+<tr><td>乙</td><td>偏遠山區學校師資嚴重不足，城鄉教育資源差距持續擴大</td></tr>
+<tr><td>丙</td><td>本學期外籍移工申訴遭剋扣薪資件數創歷史新高</td></tr>
+<tr><td>丁</td><td>最富裕前 10% 家庭財富，是最貧困後 10% 家庭的 65 倍</td></tr>
+</tbody></table>
+`;
+buildQuiz(QS_DATA, CTX_HTML);
+</script>
+</body>
+</html>

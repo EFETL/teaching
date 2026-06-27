@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公民 第 06 回 | 互動練習</title>
+<style>
+:root{--red:#8b2326;--red2:#b03034;--cream:#f5f0e8;--ok:#1a7a3c;--err:#b03034;--gold:#c5a028;--blue:#2c5f8a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--cream);color:#1a1a1a;padding-bottom:60px;line-height:1.7;}
+header{background:var(--red);color:#fff;padding:22px 18px 18px;text-align:center;}
+header h1{font-size:24px;font-weight:bold;}
+header p{font-size:15px;opacity:.9;margin-top:4px;}
+.back{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:14px;text-decoration:none;}
+.back:hover{background:rgba(255,255,255,.3);}
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px;}
+.ho-section{background:#fff;border-radius:14px;padding:18px 20px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.09);}
+.ho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:2px solid var(--blue);padding-bottom:8px;}
+.ho-header h2{font-size:18px;color:var(--blue);font-weight:bold;}
+.reveal-all-btn{background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:14px;cursor:pointer;font-family:inherit;}
+.reveal-all-btn:hover{background:#1a4a7a;}
+.ho-item{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;font-size:16px;line-height:1.8;}
+.ho-num{background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.ho-body{flex:1;}
+.blank-wrap{display:inline-block;vertical-align:baseline;margin:0 2px;}
+.qm-btn{display:inline-block;background:var(--gold);color:#fff;border:none;border-radius:6px;padding:1px 10px;font-size:15px;font-weight:bold;cursor:pointer;font-family:inherit;vertical-align:baseline;line-height:1.5;}
+.qm-btn:hover{background:#a08020;}
+.blank-ans{display:none;background:#e8f5ee;color:var(--ok);border:1px solid #a8d8b8;border-radius:6px;padding:1px 10px;font-weight:bold;font-size:15px;vertical-align:baseline;}
+.score-bar{background:#fff;border-radius:12px;padding:11px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.08);font-size:16px;}
+.score-bar b{color:var(--red);font-size:20px;}
+.ctx-box{background:#fff8e6;border:1px solid #e0c060;border-radius:12px;padding:14px 18px;margin-bottom:18px;}
+.ctx-intro{font-size:15px;margin-bottom:8px;color:#444;}
+.ctx-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;}
+.ctx-table th{background:#c5a028;color:#fff;padding:6px 8px;text-align:left;}
+.ctx-table td{padding:5px 8px;border:1px solid #e0c060;}
+.ctx-table tr:nth-child(even){background:#fffbe8;}
+.group-label{background:#fff3cd;border-left:4px solid var(--gold);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#5a3e00;margin-bottom:14px;}
+.section-label{background:#eef3f9;border-left:4px solid var(--blue);border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold;color:#1a3a6b;margin-bottom:14px;margin-top:4px;}
+.q-card{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:13px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.q-num{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;border-radius:50%;width:27px;height:27px;font-size:13px;font-weight:bold;margin-right:7px;flex-shrink:0;}
+.q-text{font-size:16px;font-weight:500;margin-bottom:11px;display:flex;align-items:flex-start;gap:4px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.opt-btn{display:flex;align-items:flex-start;gap:7px;background:#f4f6f8;border:2px solid #ddd;border-radius:8px;padding:8px 11px;cursor:pointer;font-size:14px;text-align:left;transition:all .12s;font-family:inherit;color:#1a1a1a;}
+.opt-btn:hover:not(:disabled){border-color:var(--red);background:#fdf0f0;}
+.opt-btn .ol{background:#ddd;color:#333;border-radius:4px;padding:1px 6px;font-size:12px;font-weight:bold;flex-shrink:0;margin-top:2px;}
+.opt-btn.correct{border-color:var(--ok);background:#e8f5ee;}
+.opt-btn.correct .ol{background:var(--ok);color:#fff;}
+.opt-btn.wrong{border-color:var(--err);background:#fde8e8;}
+.opt-btn.wrong .ol{background:var(--err);color:#fff;}
+.opt-btn.reveal{border-color:var(--ok);background:#e8f5ee;opacity:.8;}
+.opt-btn.reveal .ol{background:var(--ok);color:#fff;}
+.exp-box{margin-top:9px;background:#f0f7f3;border-left:3px solid var(--ok);border-radius:6px;padding:7px 11px;font-size:13px;color:#1a4a2c;display:none;}
+.exp-box.show{display:block;}
+footer{text-align:center;color:#999;font-size:14px;margin-top:30px;}
+@media(max-width:560px){.opts{grid-template-columns:1fr;}header h1{font-size:20px;}.ho-item{font-size:15px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 公民下學期複習 第 06 回</h1>
+  <p>翰林版 | 社會福利制度整合應用：類型辨別、適用對象、政策目標 | 共 40 題</p>
+  <a class="back" href="mock-exam-s2.html">← 回考卷選單</a>
+</header>
+<div class="wrap">
+
+  <!-- 填充題講義 -->
+  <div class="ho-section">
+    <div class="ho-header">
+      <h2>📖 重點填充講義</h2>
+      <button class="reveal-all-btn" onclick="revealAll()">▼ 顯示所有答案</button>
+    </div>
+<div class="ho-item"><span class="ho-num">1</span><span class="ho-body">社會福利的四大主要類型：「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會保險</span></span>」、「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會救助</span></span>」、「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會津貼</span></span>」、「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會服務</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">2</span><span class="ho-body">社會保險需要先「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">繳納保費</span></span>」才能受益，代表制度有台灣的「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">全民健保</span></span>」和「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">勞保</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">3</span><span class="ho-body">社會救助針對「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">低收入</span></span>」弱勢族群，不需繳費，由政府直接補助，代表措施有「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">低收入戶補助</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">4</span><span class="ho-body">社會津貼針對特定條件（如老年、育兒）發給，不需審查是否貧困，代表措施有「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">老農津貼</span></span>」和「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">育兒補助</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">5</span><span class="ho-body">社會服務提供直接的「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">專業服務</span></span>」而非現金，例如「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">居家照顧</span></span>」和「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">山地巡迴醫療</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">6</span><span class="ho-body">當個人面臨生活風險時，社會福利制度提供基本保護，這種保護機制稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會安全網</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">7</span><span class="ho-body">台灣「全民健康保險」透過「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">強制全民參加</span></span>」的方式，實現大規模「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">風險分攤</span></span>」，讓保費維持在可負擔範圍。</span></div>
+<div class="ho-item"><span class="ho-num">8</span><span class="ho-body">協助具工作能力的失業者重返就業市場的服務稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">就業服務</span></span>」；失業期間的臨時收入補助屬於社會「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">保險</span></span>」給付。</span></div>
+<div class="ho-item"><span class="ho-num">9</span><span class="ho-body">政府提供低於市場租金的住宅，讓弱勢族群也有適合居所，稱為「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會住宅</span></span>」。</span></div>
+<div class="ho-item"><span class="ho-num">10</span><span class="ho-body">社會福利制度的最終目標是維護人的「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">基本尊嚴</span></span>」，促進「<span class="blank-wrap">
+><button class="qm-btn" onclick="revealBlank(this)">？</button
+><span class="blank-ans">社會公平</span></span>」，增進整體社會的穩定發展。</span></div>
+  </div>
+
+  <!-- 互動選擇題 -->
+  <div id="quiz-wrap"></div>
+  <footer>全民補習班線上教學 | teaching.efetl.com</footer>
+</div>
+<script>
+
+function revealBlank(btn){
+  var wrap=btn.parentNode;
+  btn.style.display='none';
+  wrap.querySelector('.blank-ans').style.display='inline';
+}
+function revealAll(){
+  document.querySelectorAll('.qm-btn').forEach(b=>revealBlank(b));
+}
+
+var QS=[];
+function buildQuiz(qs,ctxHtml){
+  QS=qs;
+  var wrap=document.getElementById('quiz-wrap');
+  if(!wrap)return;
+  var html='<div class="score-bar">得分：<b id="sc">0</b> / '+qs.length+'　　已作答：<span id="done">0</span>题</div>';
+  if(ctxHtml){
+    html+='<div class="ctx-box">'+ctxHtml+'</div>';
+    html+='<div class="group-label">【題組】根據上方資料，回答第 1～5 題。</div>';
+  }
+  qs.forEach(function(q,i){
+    var num=i+1;
+    if(i===5 && ctxHtml){
+      html+='<div class="section-label">以下為一般選擇題（第 6～'+qs.length+' 題）</div>';
+    }
+    html+='<div class="q-card" id="qc'+i+'">';
+    html+='<div class="q-text"><span class="q-num">'+num+'</span>'+q[0]+'</div>';
+    html+='<div class="opts">';
+    var keys=['Ａ','Ｂ','Ｃ','Ｄ'];
+    q[1].forEach(function(opt,j){
+      html+='<button class="opt-btn" onclick="pick('+i+','+j+')" id="opt'+i+'_'+j+'">'
+           +'<span class="ol">'+keys[j]+'</span>'+opt+'</button>';
+    });
+    html+='</div>';
+    html+='<div class="exp-box" id="exp'+i+'">'+q[3]+'</div>';
+    html+='</div>';
+  });
+  wrap.innerHTML=html;
+}
+
+var answered={}, score=0;
+function pick(qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  var q=QS[qi];
+  var correct='ABCD'.indexOf(q[2]);
+  var allBtns=document.querySelectorAll('#qc'+qi+' .opt-btn');
+  allBtns.forEach(function(b,j){
+    b.disabled=true;
+    if(j===correct)b.classList.add(oi===correct?'correct':'reveal');
+  });
+  if(oi!==correct){
+    document.getElementById('opt'+qi+'_'+oi).classList.add('wrong');
+  } else {
+    score++;
+    document.getElementById('sc').textContent=score;
+  }
+  document.getElementById('exp'+qi).classList.add('show');
+  document.getElementById('done').textContent=Object.keys(answered).length;
+}
+
+var QS_DATA=[
+  ["甲家庭（65 歲以上低收入獨居老人）最適合申請哪類社會福利措施？",["社會保險（社會保險需繳納保費，低收入獨居老人未必有能力投保）","社會救助（針對低收入、無法自立的弱勢族群提供生活補助，甲家庭最符合）","就業服務（甲為高齡老人，非求職者）","社會住宅（雖有居住需求，但不是最主要的福利類型）"],"B","社會救助針對低收入、無固定收入來源、生活困難的弱勢群體，提供基本生活補助（如低收入戶補助、急難救助）。甲家庭的老人無固定收入又行動不便，符合社會救助的對象條件，選B最正確。"],
+  ["乙家庭（單親媽媽，兩名未成年子女）領取的「育兒補助」，屬於哪一種社會福利類型？",["社會保險（需繳納保費的風險分攤機制）","社會救助（針對最貧困弱勢的嚴格審查補助）","社會津貼（針對特定條件——有未成年子女——定期發給的給付，不需嚴格審查貧困程度）","就業服務（協助失業者求職的服務）"],"C","社會津貼是針對特定人口條件（如年齡、育兒狀態、身心障礙）發給定期給付，通常不需要嚴格審查是否貧困，例如育兒補助、老農津貼、身心障礙生活補助等。乙家庭因有未成年子女而領取育兒補助，屬於社會津貼，選C。"],
+  ["丙家庭（中年失業男性，具工作能力）目前最迫切需要的是哪種福利措施？",["就業服務（媒合工作機會、提供職業技能培訓，幫助具工作能力者重返就業市場）","社會救助（適合無工作能力者長期生活補助，但丙具備工作能力）","老人津貼（丙為40歲中年人，不是老年人）","社會保險（保險在職業保障期間提供保障，丙目前需要的是重新就業而非現有保險理賠）"],"A","丙具備工作能力但因公司倒閉而失業，最需要的是就業服務——包括職業媒合、技能培訓、創業輔導等，幫助他重新找到工作。社會救助是補助無法自立的弱勢者，而非幫助具工作能力者就業，所以選A最正確。"],
+  ["丁家庭（原住民族山區部落）的「山地巡迴醫療」服務，屬於哪一種社會福利類型？",["社會保險（透過繳費共同承擔風險的制度）","社會救助（針對低收入弱勢的現金補助）","社會津貼（針對特定條件的現金給付）","社會服務（提供直接的專業服務——巡迴醫療是具體的醫療服務，而非現金）"],"D","社會服務是指政府或機構直接提供專業性的非現金服務，例如醫療照顧、社工訪視、托育服務、就業輔導等。山地巡迴醫療是政府派遣醫療人員到偏遠地區直接提供醫療服務，屬於社會服務，選D。"],
+  ["綜合四個家庭的情況，下列哪項說法最能說明社會福利制度的重要特性？",["只有最貧窮的家庭才需要接受社會福利服務","不同家庭因狀況不同，需要不同類型的社會福利措施，因此完善的社會福利制度應具多元性與針對性","社會福利只有「社會救助」一種類型，其他分類只是名稱的不同而已","只要政府提供足夠的現金補助，所有家庭的問題都能迎刃而解"],"B","四個家庭分別需要不同類型的福利（救助、津貼、就業服務、社會服務），說明完善的社會福利制度必須是多元的——針對不同對象的不同需求，提供不同類型的支持，才能真正達到保障人民基本生活的目標。"],
+  ["「社會保險」與「社會救助」最主要的差異，下列哪項描述最正確？",["社會保險只適用於老年人，社會救助適用於所有年齡層","社會救助需要繳納保費才能申請，社會保險不需要","社會保險需要繳納保費，透過風險分攤提供保障；社會救助針對低收入弱勢提供基本生活補助，不需繳費","兩者都是由個人自由決定是否參加的自願性制度"],"C","社會保險（如全民健保、勞保）需要受益者事先繳納保費，以集體風險分攤的方式提供保障；社會救助（如低收入戶補助）則針對已陷入生活困難的弱勢者，由政府直接提供補助，不需先行繳費。兩者的設計邏輯根本不同。"],
+  ["台灣的「全民健康保險」，屬於哪一種社會福利類型？",["社會救助","社會津貼","社會服務","社會保險"],"D","全民健康保險是典型的社會保險：全民強制參加、由個人、雇主和政府共同繳納保費，透過大規模風險分攤降低每人的醫療費用負擔。這是以「繳費」換取「醫療保障」的保險機制，屬於社會保險。"],
+  ["「低收入戶生活補助」屬於哪一種社會福利類型？",["社會救助","社會津貼","社會保險","社會服務"],"A","社會救助針對生活困難、缺乏足夠收入的低收入弱勢家庭，由政府提供基本生活補助。低收入戶生活補助是在嚴格審查家庭收入和資產後才核發，是典型的社會救助措施。"],
+  ["「老農津貼」屬於哪一種社會福利類型？",["社會保險","社會津貼","社會救助","就業服務"],"B","老農津貼針對65歲以上農民，符合年齡和農業身分條件即可申請，不需要嚴格審查是否貧困。這是針對特定人口條件（農民老年）發給的定期現金給付，屬於社會津貼。"],
+  ["社工定期到府協助行動不便的獨居老人洗澡、備餐，這屬於哪種社會福利類型？",["社會保險","社會救助","社會服務","社會津貼"],"C","社會服務是政府或機構提供直接的專業服務（而非現金），例如居家照顧服務、社工訪視、托育服務等。定期到府協助老人生活起居是直接提供照顧服務，屬於社會服務，而非發放現金的救助或津貼。"],
+  ["政府推行「社會福利」政策的最主要目的是？",["讓所有人的財富完全相同","懲罰賺錢較多的人，強制分配財富","限制人民的自由選擇以維持社會秩序","協助弱勢群體滿足基本需求，維護人的尊嚴，促進社會公平與穩定"],"D","社會福利的核心目的在於：當個人或家庭面臨疾病、失業、老年、貧困等生活風險時，社會透過制度性保障提供基本支持，讓每個人都能維持起碼的生活尊嚴，同時促進社會整體的公平與穩定。"],
+  ["「社會安全網」（social safety net）最能用下列哪個比喻說明？",["當個人面臨失業、疾病、貧困等生活風險時，社會福利制度提供基本保護，使人不至於跌落無底深淵","政府建立圍牆阻止人民流動，以維持社會秩序","企業為員工建立的福利制度，以保障員工的工作安全","金融機構提供的商業保險產品，以賺取利潤為目的"],"A","社會安全網比喻社會福利制度就像高空作業時的安全網：當個人面臨生活風險（失業、重病、貧窮）而「墜落」時，安全網（社會福利）提供緩衝，防止人跌落至完全無法自立的谷底。"],
+  ["下列哪一個例子，最能說明「社會保險」制度的運作方式？",["政府每月直接發給低收入戶現金補助，讓他們維持基本生活","員工與雇主共同繳納勞工保險費，當員工失業或生病時，由保險基金支付給付","政府補助特定年齡長者的交通費用","社工每週到府為獨居老人提供陪伴和日常協助服務"],"B","社會保險的核心機制是「先繳費、出事再領」：雇主和員工共同繳納保費，形成保險基金，當保險事故（失業、傷病、老年、死亡）發生時，由基金提供給付。選A是救助，選C是津貼，選D是服務。"],
+  ["下列哪一個群體，最可能是「社會救助」的主要對象？",["有穩定工作、收入中等的一般上班族","擁有多棟房產的房東","無工作能力、缺乏收入來源、生活困難的低收入弱勢家庭","已繳納充足保費、即將退休領取老年給付的工作者"],"C","社會救助的對象是已陷入生活困境、無力自立的弱勢群體，主要條件包括低收入（或低財產）和生活困難。有穩定工作者（A）、有財產者（B）或已繳保費者（D）均不是社會救助的主要對象。"],
+  ["「社會津貼」的特點，下列哪項描述最正確？",["社會津貼只發給已繳納保費的投保人","社會津貼只針對最貧困的人，需嚴格審查收入才能申請","社會津貼需要受惠者以勞動服務換取才能領取","社會津貼針對特定身分條件（如老年、育兒、身心障礙），不需嚴格審查貧困程度即可申請"],"D","社會津貼的特色是「條件式給付」：符合特定人口條件（年齡、育兒、障礙身分等）就可申請，不需證明貧困，也不需繳費。例如老農津貼、育兒補助、身障生活補助等，這與需要嚴格審查貧困的社會救助不同。"],
+  ["政府設立「公共就業服務站」，提供求職履歷指導、職業媒合及免費職業訓練課程，這屬於？",["就業服務（直接協助具工作能力者尋找工作、提升就業競爭力的服務）","社會保險（需要繳費的風險分攤機制）","社會救助（針對無力自立弱勢者的生活補助）","社會津貼（針對特定條件的現金給付）"],"A","就業服務是協助具工作能力的求職者透過媒合、訓練、輔導等方式回到就業市場。公共就業服務站提供的職業媒合和培訓是典型的就業服務，目標是讓有能力工作的人能夠順利就業。"],
+  ["台灣的「勞工保險老年給付」，屬於哪一種社會福利類型？",["社會救助","社會保險","社會服務","社會津貼"],"B","勞工保險老年給付是勞工在職期間繳納勞保費、退休後按年資請領的給付，是典型的社會保險。這種「先繳費、退休後領」的設計，與不需繳費的津貼或救助完全不同。"],
+  ["政府為弱勢家庭兒童提供「課後照顧補助」，主要目的是？",["讓弱勢家庭的孩子不需要接受一般正規教育","要求弱勢家庭的父母以勞動服務換取補助","減輕弱勢家庭的育兒負擔，確保孩子在安全環境中獲得良好的照顧與學習機會","完全代替父母的教養責任，由政府負起所有育兒工作"],"C","課後照顧補助的目的是降低弱勢家庭在兒童照顧方面的經濟負擔，讓父母能安心工作，同時讓孩子在課後能接受安全的照顧和輔導，縮小因家庭條件差異造成的教育機會不平等。"],
+  ["「社會服務」與「社會津貼」最主要的差異是？",["社會服務由民間企業提供，社會津貼由政府提供","社會服務只針對老年人，社會津貼針對所有人","社會服務需要受益者自費，社會津貼完全免費","社會服務提供直接的專業服務（如照顧、輔導、訓練），社會津貼提供的是定期現金給付"],"D","社會服務的核心是「提供服務而非現金」——由專業人員直接執行照顧、諮詢、輔導等工作；社會津貼的核心是「定期現金給付」——讓受益者自行決定如何運用。兩者都可以由政府或機構提供，都可以針對各種年齡層。"],
+  ["政府為解決「少子化」問題，採取哪種社會福利措施最直接有效？",["提供育兒津貼補助、增設公共托育設施，降低養育子女的經濟與時間成本","強制要求所有育齡女性必須生育子女","提高未育子女的個人稅率以增加生育誘因","禁止企業提供育嬰假以保持生產力"],"A","解決少子化的有效政策方向是降低生育和養育的負擔：育兒津貼減輕經濟壓力，公共托育解決家長的照顧困難，友善工作環境讓父母不需要在工作和育兒之間選擇。強制、稅罰等方式不是有效或可行的政策。"],
+  ["「社會住宅」（social housing）的主要目的是？",["讓所有人不管收入多少都搬進政府興建的住宅","專門解決原住民族的居住問題","提供弱勢族群可負擔的優質居所，讓無力購買或租用一般市場住宅的人也有適合的居住環境","供政府官員居住的特殊行政住宅"],"C","社會住宅是政府以低於市場租金出租的住宅，主要服務對象是無力在市場上購屋或租屋的弱勢群體，如低收入戶、青年、身心障礙者、受家暴者等。目的是解決貧富差距在居住方面造成的不公平。"],
+  ["台灣的「國民年金保險」，主要是為了保障哪類人群？",["在大型企業工作、已投保勞保的受雇員工","已退休的政府公務員（公務員有自己的公保系統）","在學學生的就學費用補助","未參加職業保險（如勞保、公保）的一般國民，讓他們也有基本的老年退休與其他保障"],"D","國民年金保險的設計對象是「制度縫隙」中的人——那些不在勞保（受雇勞工）或公保（公務員）保障範圍內的一般民眾，例如家庭主婦、自由業者、農民外的一般民眾，讓他們也有基本的老年、身障、死亡等保障。"],
+  ["下列哪一種現象，最能說明社會福利制度的「預防功能」？",["政府在颱風災後提供受災戶的緊急急難救助金","政府提供免費定期健康檢查，早期發現疾病，避免病情惡化造成更大的個人與社會負擔","政府在企業倒閉後協助失業員工尋找新工作","政府在老人生活困難後提供緊急的急難救助"],"B","社會福利的「預防功能」是在問題尚未發生前採取行動，降低未來的社會成本。定期健康檢查幫助早期發現疾病，可以避免疾病惡化造成更高的醫療費用和社會負擔，是預防性福利的典型例子。選A、C、D都是事後補救，不是預防。"],
+  ["下列哪種社會福利措施，最能直接幫助「中高齡失業者」回到就業市場？",["提供職業技能再培訓課程，並媒合適合中高齡者能力與經驗的工作機會","發給長期現金補助，讓失業者不需要再工作","強制要求失業者必須先做義工服務才能領取任何補助","鼓勵中高齡失業者直接申請老年退休給付，提早退出就業市場"],"A","中高齡失業者通常面臨技能老化和求職困難的雙重問題，最有效的幫助是提供技能更新（職業再培訓）和就業媒合，讓他們的能力與市場需求接軌，重新找到適合的工作。長期現金補助或直接退休不是幫助具工作能力者重返職場的最好方式。"],
+  ["「社會福利」的整體目標，下列哪項說法最為完整？",["讓所有人的財富完全平均分配，消除所有差異","協助人民維持基本生活尊嚴、預防社會風險、促進社會公平，增進整體社會福祉","懲罰高收入者，以強制方式縮小貧富差距","完全消除所有社會不公平問題，使社會達到完全平等"],"B","社會福利的目標是多元的：保障基本生活（解決貧困）、預防風險（保險機制）、促進公平（弱勢扶助）、增進福祉（社會服務）。它不是要完全消除差異或強制平均，而是確保每個人都有基本的生活保障和發展機會。"],
+  ["下列哪一種情況，最適合申請「急難救助」？",["一名退休老師每月固定領取月退俸，生活無虞","一名大企業高管因股市波動導致投資虧損","一名大學生因個人消費過度陷入財務困難","一個家庭因突發火災失去所有財物和住所，急需緊急的基本生活支援"],"D","急難救助是社會救助中針對「突發性危機」的緊急支援，對象是突然遭遇重大意外（如火災、家庭變故）而陷入生活困境的家庭，幫助他們度過緊急難關。選A生活穩定、選B是投資問題、選C是個人財務管理問題，均不符合急難救助的對象條件。"],
+  ["政府為身心障礙者提供電動輪椅或助聽器的補助，這屬於哪種社會福利類型？",["社會服務（提供協助身心障礙者生活的具體輔助服務或器材，讓其能獨立生活）","社會保險（需要繳費的風險分攤機制）","社會救助（針對低收入弱勢的現金補助）","社會津貼（針對特定條件發放的現金給付）"],"A","輔助科技器材補助（如電動輪椅、助聽器）是為了讓身心障礙者能夠獨立生活、參與社會，提供的是具體的輔助工具（服務性質），屬於社會服務範疇。雖然形式上是補助（部分費用），但本質上是幫助障礙者取得生活所需的器材。"],
+  ["台灣「全民健康保險」最重要的成功因素是？",["讓所有醫療服務完全免費，不需任何自費","採強制全民參加方式，透過大規模風險分攤，讓多數人能以可負擔費用獲得基本醫療","由私人保險公司統一管理，以追求利潤最大化為目標","只保障高收入者的醫療費用，低收入者不需繳費"],"B","全民健保的核心設計是「強制全民納保」——所有人共同分攤醫療風險，保費費率相對較低，各種所得者都能負擔，同時實現高覆蓋率。這種大規模的集體風險分攤是健保得以提供廣泛保障同時維持財務可行性的關鍵。"],
+  ["「兒童保護服務」（如社工介入遭受虐待的兒童案件）屬於社會福利的哪個類型？",["社會保險，因為孩子也需要保障","社會救助，因為受虐兒童是弱勢群體","社會服務，包含由專業社工直接提供的保護性介入、個案輔導等服務","社會津貼，因為政府對受虐兒童的家庭發放補助金"],"C","兒童保護服務是由受訓社工提供直接的專業服務——調查評估、緊急安置、個案輔導等，這是典型的社會服務。它提供的是「專業服務的介入」而非「現金給付」，因此屬於社會服務而非救助或津貼。"],
+  ["台灣社會福利制度目前最需要持續改善的方向，下列哪項說法最符合現況？",["台灣的社會保險已達100%覆蓋，所有人均獲完整保障","台灣的社會救助金額非常充裕，足夠弱勢家庭維持舒適生活","台灣的社會服務資源非常充足，所有需要的人都能即時取得服務","部分弱勢族群（如非典型就業者、長照需求者、偏鄉居民）仍面臨制度覆蓋不足的問題"],"D","台灣社會福利制度仍有待改善的地方包括：非典型就業者（如接案工作者）缺乏穩定保險保障、長期照顧資源不足以應對快速老化社會的需求、偏鄉地區服務輸送困難等，需要持續進行制度改革。"],
+  ["「社區關懷站的志工定期訪視獨居老人，協助備餐和陪伴」，最能說明社會服務在社區中的哪種功能？",["在地老化支持功能——讓老人不必離開熟悉的社區，也能在社區中得到所需的照顧和支持","就業媒合功能——幫助老人找到適合的工作機會","保險理賠功能——協助老人申請醫療費用理賠","現金補助功能——定期發放生活補助給獨居老人"],"A","在地老化（aging in place）是讓老人盡量在熟悉的社區環境中生活，而非強制入住機構。社區關懷站提供的訪視、備餐、陪伴等服務，正是支持在地老化的具體社區型社會服務，幫助老人維持自立又有支持的生活方式。"],
+  ["下列哪一種現象，說明「社會救助」制度在執行上可能面臨的挑戰？",["社會救助提供過多現金，讓所有人都搶著申請","如何準確認定真正需要幫助的人，同時避免資源浪費（假冒申請）和漏網之魚（真正需要者未得到幫助）","社會救助讓富人也能大量取得福利資源","社會救助制度過於簡單，不需任何行政管理就能有效執行"],"B","社會救助在執行上面臨的核心挑戰是「準確認定」：如何確保真正需要幫助的人能夠申請到，同時避免資源被不符合條件者佔用（假冒或誤判）。這個「不漏網、不浪費」的雙重目標是社會救助制度設計的核心難題。"],
+  ["「社會福利」與「慈善捐贈」最主要的差異是？",["社會福利由富人捐助提供，慈善捐贈由政府提供","慈善捐贈的規模更大，效益遠優於社會福利","社會福利是政府透過法定制度提供穩定且有保障的服務；慈善捐贈是個人或組織的自願行為，缺乏制度性穩定保障","兩者完全相同，只是名稱有所不同"],"C","社會福利的核心優勢是「制度性保障」——由法律規定，受保障者有申請的「權利」，服務穩定且可預期；而慈善捐贈雖然重要，但屬於自願行為，受捐者無法「請求」，且資源多寡不穩定，無法取代制度性的社會福利。"],
+  ["台灣「就業保險」（失業給付）的主要功能是？",["讓被解僱的員工可以永遠不需要再工作","懲罰無故離職的員工","補助主動辭職的員工重新尋職","在員工「非自願失業」時，提供短期收入補助，讓失業者有時間和資源尋找新工作"],"D","就業保險失業給付的對象是「非自願失業者」（如被裁員、公司倒閉），目的是在失業期間提供臨時性的收入替代，讓失業者不至於立即陷入生活困難，同時有足夠時間尋找合適的新工作。主動辭職者通常不符合申請資格。"],
+  ["「長期照顧服務」（長照）最主要的目標是？",["讓因失能（如老年失智、中風）而需要長期照顧的人，能在妥善的照顧環境中維持生活品質和尊嚴","讓所有老人在65歲後都必須進入安養機構接受照顧","取代家庭照顧功能，讓家人完全不需參與長輩的照顧","讓照顧服務業完全由私人市場提供，政府不需介入"],"A","長期照顧服務針對因身心功能障礙而需要長期協助的人（如失能老人、重度身障者），提供居家照顧、日間照顧、機構照顧等服務，目標是讓他們在需要協助的情況下仍能維持生活品質和人的尊嚴。"],
+  ["下列哪一項社會福利措施，最能說明政府的「積極性就業促進」策略？",["長期發放高額失業救濟金，讓失業者無須積極找工作","強制所有失業者在限定期間內找到工作，否則停止一切補助","提供職業訓練、技能認證、創業輔導及就業媒合，幫助失業者強化就業競爭力","直接補貼企業僱用失業者，企業不需進行任何訓練"],"C","積極性就業促進政策的目標不只是給失業者錢（消極補助），而是主動幫助他們「提升就業能力」——透過職業培訓讓技能跟上市場需求，透過媒合服務縮短求職時間，透過創業輔導拓展就業可能性，最終目的是讓人重回就業市場。"],
+  ["社會福利制度對「社會凝聚力」（social cohesion）的貢獻，最能用哪項說法說明？",["社會福利讓富人支付更多稅金，因此可能引發富人對社會的不滿，反而降低凝聚力","社會福利讓所有人的生活水準完全相同，消除了所有差異，因此提高凝聚力","社會福利只服務最弱勢的少數人口，對整體社會凝聚力幾乎沒有影響","社會福利讓更多人感受到社會的支持與歸屬感，降低弱勢者對社會的疏離，增進整體凝聚力"],"D","當人們感受到社會制度在自己需要時會伸出援手，會增強對社會的信任和歸屬感；反之，若弱勢者長期被排除在保障之外，容易產生疏離感和對社會制度的不信任。因此，社會福利制度的存在本身就有助於增進社會的整體凝聚力。"],
+  ["台灣《長期照顧服務法》的主要目的是？",["強制規定子女必須親自照顧年邁父母，不得委託他人","建立完善的長期照顧服務體系，讓需要長期照顧的人能夠獲得適當的支持服務","讓私人企業獨佔長照市場以賺取最大利潤","規定所有老人達特定年齡後必須進入養老機構"],"B","《長期照顧服務法》的立法目的是建立長照服務的法制架構，規範服務品質、機構管理、人員訓練等，確保需要長期照顧的人（如失能老人、重度身障者）能夠在安全有保障的環境中獲得適當服務。"],
+  ["「福利國家」（welfare state）的核心理念，下列哪項說法最正確？",["政府有責任透過制度性社會福利政策，確保所有公民的基本生活水準，實現社會公平與人的尊嚴","政府不應介入市場，個人應完全自我負責，不需要社會福利制度","社會福利應完全由私人慈善機構提供，政府不應有任何角色","只有最富裕的國家才有資格建立社會福利制度"],"A","福利國家的核心理念是：政府不只負責維持秩序和安全，也有責任主動保障公民在教育、醫療、就業、老年、貧困等各方面的基本生活需求，透過制度性的社會福利政策實現更公平的社會。這不是只有富國才能做到的目標。"],
+  ["完善社會福利制度對社會最重要的長期意義是？",["讓所有人不需要工作就能過著充裕的生活","在個人面對生命風險時提供基本保障，維護人的尊嚴，促進社會整體的穩定發展","完全消除所有的貧富差距和社會不公平","讓政府取得控制所有資源分配的絕對權力"],"B","社會福利制度的長遠意義在於：當個人面對無法預期的風險（失業、重病、老年、意外）時，不會因此完全喪失生活尊嚴；社會整體的穩定來自於多數人都能感受到基本的生活保障，而非讓每個人都在風險中自生自滅。"],
+];
+
+var CTX_HTML=`<p class="ctx-intro">某縣市社工服務中心整理了四個家庭的福利需求評估，請閱讀後回答第 1～5 題。</p>
+<table class="ctx-table">
+<thead><tr><th>案號</th><th>家庭基本狀況</th><th>主要需求</th></tr></thead>
+<tbody>
+<tr><td>甲</td><td>65 歲以上低收入獨居老人，無固定收入，行動不便</td><td>生活費用補助、日常照顧服務</td></tr>
+<tr><td>乙</td><td>單親媽媽帶兩名國小兒童，有打零工但收入不穩定</td><td>育兒托育、生活補助</td></tr>
+<tr><td>丙</td><td>40 歲中年男性，原為工廠員工，公司倒閉後失業，具備工作能力</td><td>就業媒合、職業技能再培訓</td></tr>
+<tr><td>丁</td><td>原住民族家庭，居住於山區偏遠部落，就醫需長途交通</td><td>山地巡迴醫療、文化保存支持</td></tr>
+</tbody></table>
+`;
+buildQuiz(QS_DATA, CTX_HTML);
+</script>
+</body>
+</html>
