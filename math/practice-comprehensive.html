@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國一數學 暑期先修 · 綜合練習題（互動版）</title>
+<style>
+  :root { --main:#2b6cb0; --accent:#e6a800; --ok:#1d8a4c; --bad:#c0392b; --bg:#eef3f9; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.8; font-size:18px; padding:0 0 90px; }
+  header { background:linear-gradient(135deg,var(--main),#3d8bd4); color:#fff; padding:26px 20px 22px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+  header .tag { display:inline-block; background:rgba(255,255,255,.22); border-radius:20px; padding:4px 16px; font-size:16px; margin-bottom:8px; }
+  header h1 { font-size:27px; margin-bottom:6px; }
+  header p { font-size:16px; opacity:.95; }
+  .wrap { max-width:920px; margin:0 auto; padding:22px 16px; }
+  .toolbar { position:sticky; top:0; z-index:40; background:#fff; border:1px solid #d9e2ec; border-radius:12px; padding:12px 16px; margin-bottom:20px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+  .toolbar .score { font-weight:bold; font-size:18px; color:var(--main); }
+  .btns { display:flex; gap:10px; flex-wrap:wrap; }
+  button.act { font-family:inherit; font-size:15px; font-weight:bold; border:none; border-radius:10px; padding:9px 16px; cursor:pointer; }
+  button.grade { background:var(--accent); color:#3a2c00; }
+  button.exp { background:var(--main); color:#fff; }
+  button.col { background:#7b8a9a; color:#fff; }
+  .group-h { font-size:20px; font-weight:bold; color:#fff; background:var(--main); border-radius:8px; padding:9px 16px; margin:26px 0 14px; }
+  .group-h.fill { background:#1d8a4c; } .group-h.calc { background:#b06a00; }
+  .prob { background:#fff; border-radius:14px; padding:16px 20px; margin-bottom:14px; box-shadow:0 1px 6px rgba(0,0,0,.08); }
+  .q-line { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+  .q-badge { flex-shrink:0; background:#e8f0fb; color:var(--main); font-weight:bold; border-radius:8px; padding:2px 12px; font-size:16px; white-space:nowrap; }
+  .q-text { font-size:18px; }
+  .opts { display:flex; flex-direction:column; gap:8px; margin-left:6px; }
+  .opt { display:flex; gap:10px; align-items:center; padding:9px 14px; border:1.5px solid #d9e2ec; border-radius:10px; cursor:pointer; transition:.12s; background:#fafcff; }
+  .opt:hover { border-color:var(--main); background:#f0f6ff; }
+  .opt .mk { flex-shrink:0; width:28px; height:28px; border-radius:50%; background:#e8f0fb; color:var(--main); font-weight:bold; display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .opt.correct { border-color:var(--ok); background:#e7f6ee; }
+  .opt.correct .mk { background:var(--ok); color:#fff; }
+  .opt.wrong { border-color:var(--bad); background:#fdecea; }
+  .opt.wrong .mk { background:var(--bad); color:#fff; }
+  .opt.sel { border-color:var(--main); background:#e1edfb; }
+  .fill-in { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-left:6px; }
+  .fill-in input { font-family:inherit; font-size:18px; padding:8px 12px; border:1.5px solid #c2cfdd; border-radius:9px; width:200px; }
+  .fill-in input.correct { border-color:var(--ok); background:#e7f6ee; }
+  .fill-in input.wrong { border-color:var(--bad); background:#fdecea; }
+  .hint { font-size:15px; color:#789; }
+  .sol { display:none; margin-top:12px; padding:11px 16px; background:#f5f9fe; border-left:4px solid var(--main); border-radius:0 10px 10px 0; font-size:17px; }
+  .sol.show { display:block; animation:fade .25s ease; }
+  .sol b { color:#b3007a; }
+  .sol .ans { color:#13633a; font-weight:bold; }
+  @keyframes fade { from{opacity:0; transform:translateX(-6px);} to{opacity:1;} }
+  footer { text-align:center; color:#789; font-size:15px; margin-top:26px; }
+  @media print {
+    .toolbar, .btns { display:none!important; }
+    .sol { display:block!important; }
+    body { background:#fff; font-size:15px; }
+    .prob { break-inside:avoid; box-shadow:none; border:1px solid #ddd; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">國一數學 · 暑期先修 · 互動練習</div>
+  <h1>綜合練習題　25 題（進階版）</h1>
+  <p>範圍：正負數與整數 · 數線與有理數 · 相反數與絕對值 · 整數加減法 · 全民補習班 線上教學</p>
+</header>
+<div class="wrap">
+  <div class="toolbar">
+    <span class="score" id="score">點選作答，完成後按「批改計分」</span>
+    <div class="btns">
+      <button class="act grade" onclick="grade()">批改計分</button>
+      <button class="act exp" onclick="showAll()">顯示全部解析</button>
+      <button class="act col" onclick="resetAll()">重做</button>
+    </div>
+  </div>
+
+  <div class="group-h">第一大題　選擇題（每題 4 分，共 40 分）</div>
+  <div id="mc"></div>
+
+  <div class="group-h fill">第二大題　填充題（每題 4 分，共 40 分）</div>
+  <div id="fill"></div>
+
+  <div class="group-h calc">第三大題　計算題（每題 4 分，共 20 分，須寫出計算過程）</div>
+  <div id="calc"></div>
+
+  <footer>滿分 100 分 · 共 25 題 · 每題 4 分</footer>
+</div>
+
+<script>
+const LET = ["A","B","C","D"];
+const MC = [
+  {q:"將 −1.49、0、3⅓、−2⅓ 四個數<b>由大到小</b>排列，下列何者正確？",
+   o:["3⅓ ＞ 0 ＞ −1.49 ＞ −2⅓","3⅓ ＞ 0 ＞ −2⅓ ＞ −1.49","−2⅓ ＞ −1.49 ＞ 0 ＞ 3⅓","3⅓ ＞ −1.49 ＞ 0 ＞ −2⅓"], a:0,
+   s:"正數最大、負數最小；負數中絕對值大者較小，−1.49 ＞ −2⅓（−2.33）。故 3⅓＞0＞−1.49＞−2⅓。"},
+  {q:"已知某數 a 的絕對值是 5，且 a 是負數，則 a＋3＝？",
+   o:["8","−2","2","−8"], a:1,
+   s:"｜a｜＝5 且 a 為負 → a＝−5，故 a＋3＝−5＋3＝−2。"},
+  {q:"大於 −5 且小於 4 的所有<b>整數</b>，它們的總和是多少？",
+   o:["−4","0","−7","＋4"], a:0,
+   s:"整數：−4、−3、−2、−1、0、1、2、3；和＝−10＋6＝−4。"},
+  {q:"計算　｜−9｜−｜−4｜＋(−10)＝？",
+   o:["5","−5","3","−15"], a:1,
+   s:"先去絕對值：9−4＋(−10)＝5−10＝−5。"},
+  {q:"計算　(−3)＋15−[(−11)＋3]＝？",
+   o:["20","4","−4","26"], a:0,
+   s:"先算中括號：(−11)＋3＝−8；(−3)＋15−(−8)＝12＋8＝20。"},
+  {q:"以北為正方向。某人從原地先向北走 15 公尺，再向南走 20 公尺，最後他位於原地的哪一邊、幾公尺處？",
+   o:["北方 5 公尺","南方 5 公尺","南方 35 公尺","北方 35 公尺"], a:1,
+   s:"北正南負：15＋(−20)＝−5，即在南方 5 公尺。"},
+  {q:"關於相反數與絕對值，下列敘述何者<b>正確</b>？",
+   o:["絕對值相等的兩數一定相等","一個數的絕對值一定大於這個數本身","互為相反數的兩數，絕對值一定相等","0 沒有相反數"], a:2,
+   s:"(A) 如 5 與 −5；(B) 正數的絕對值等於本身；(D) 0 的相反數是 0。只有 (C) 正確。"},
+  {q:"某日全球最低氣溫為 −25 度，當天臺北為 12 度，則臺北比最低氣溫高出幾度？",
+   o:["13 度","−37 度","37 度","−13 度"], a:2,
+   s:"12−(−25)＝12＋25＝37（度）。"},
+  {q:"計算　48＋(−15)＋(−48)＝？",
+   o:["−15","＋15","−111","＋81"], a:0,
+   s:"利用交換律：48＋(−48)＝0，再加 −15，得 −15。"},
+  {q:"將 ｜−6｜、｜＋1｜、｜−4｜、｜＋3｜ <b>由大到小</b>排列，下列何者正確？",
+   o:["｜−6｜＞｜−4｜＞｜＋3｜＞｜＋1｜","｜＋1｜＞｜＋3｜＞｜−4｜＞｜−6｜","｜−6｜＞｜＋3｜＞｜−4｜＞｜＋1｜","｜−4｜＞｜−6｜＞｜＋3｜＞｜＋1｜"], a:0,
+   s:"絕對值為 6、1、4、3，由大到小 6＞4＞3＞1。"},
+];
+// 填充題：blanks 為每格可接受答案陣列
+const FILL = [
+  {q:"一位商人第一週賺 4520 元、第二週賺 3540 元、第三週賠 1500 元，三週合計賺（　）元。",
+   blanks:[["6560","+6560","＋6560"]], s:"4520＋3540＋(−1500)＝<span class='ans'>6560</span>（元）。"},
+  {q:"韋韋比平均低 13 分（記 −13），康康比平均高 8 分（記 ＋8），則康康比韋韋高（　）分。",
+   blanks:[["21","+21","＋21"]], s:"8−(−13)＝8＋13＝<span class='ans'>21</span>（分）。"},
+  {q:"大於 −3 且小於 5 的所有整數，它們的總和是（　）。",
+   blanks:[["7","+7","＋7"]], s:"−2、−1、0、1、2、3、4 之和＝<span class='ans'>7</span>。"},
+  {q:"一個人從甲地西方 75 公尺處，沿直線走到甲地東方 32 公尺處，他總共走了（　）公尺。",
+   blanks:[["107"]], s:"走的是總距離：75＋32＝<span class='ans'>107</span>（公尺）。"},
+  {q:"冰箱原本是 8 度，先調降 7 度，再調降 6 度，最後溫度是（　）度。",
+   blanks:[["-5","−5"]], s:"8−7−6＝<span class='ans'>−5</span>（度）。"},
+  {q:"計算　｜＋8｜＋｜−2｜−｜−5｜＝（　）。",
+   blanks:[["5","+5","＋5"]], s:"8＋2−5＝<span class='ans'>5</span>。"},
+  {q:"已知某數的絕對值是 9，且它是負數，則這個數是（　）；它的相反數是（　）。",
+   blanks:[["-9","−9"],["9","+9","＋9"]], s:"絕對值 9 且為負 → 這個數是 <span class='ans'>−9</span>；其相反數是 <span class='ans'>＋9</span>。"},
+  {q:"計算　(−8)＋5＋(−2)＋5＝（　）。",
+   blanks:[["0"]], s:"(−8−2)＋(5＋5)＝−10＋10＝<span class='ans'>0</span>。"},
+  {q:"計算　｜(−3)＋15｜−｜(−11)＋3｜＝（　）。",
+   blanks:[["4","+4","＋4"]], s:"｜12｜−｜−8｜＝12−8＝<span class='ans'>4</span>。"},
+  {q:"大於 −5 且小於 0 的整數共有（　）個，它們的總和是（　）。",
+   blanks:[["4","4個","4個"],["-10","−10"]], s:"−4、−3、−2、−1 共 <span class='ans'>4</span> 個；和＝<span class='ans'>−10</span>。"},
+];
+const CALC = [
+  {q:"計算　(−52)−[(−3)＋(−5)]", s:"(−52)−[(−3)＋(−5)]＝(−52)−(−8)＝−52＋8＝<span class='ans'>−44</span>"},
+  {q:"計算　25＋(−18)＋(−26)＋24", s:"(25＋24)＋[(−18)＋(−26)]＝49＋(−44)＝<span class='ans'>5</span>"},
+  {q:"計算　｜43−(−29)＋7｜−｜(−55)−(−12)＋33｜", s:"｜43＋29＋7｜＝｜79｜＝79；｜−55＋12＋33｜＝｜−10｜＝10；79−10＝<span class='ans'>69</span>"},
+  {q:"計算　｜6＋(−14)＋2｜−｜(−11)−4＋25｜＋(−3)", s:"｜−6｜＝6；｜10｜＝10；6−10＋(−3)＝−4＋(−3)＝<span class='ans'>−7</span>"},
+  {q:"一艘潛水艇原本停在海平面（記為 0 公尺）。它先下潛 13 公尺，接著上升 6 公尺，再下潛 9 公尺，最後上升 4 公尺。(1) 列式計算最後所在位置。(2) 它在海平面上方還是下方？距海平面幾公尺？",
+   s:"以下潛為負、上升為正：0＋(−13)＋6＋(−9)＋4＝−12。結果為負 → 在海平面<span class='ans'>下方 12 公尺</span>。"},
+];
+
+let answers = new Array(MC.length).fill(-1);
+function norm(s){ return (s||"").replace(/\s|　/g,"").replace(/，/g,",").replace(/個/g,"").toLowerCase(); }
+
+const mcBox = document.getElementById("mc");
+MC.forEach((it,i)=>{
+  const d=document.createElement("div"); d.className="prob";
+  let opts = it.o.map((t,j)=>`<div class="opt" data-i="${i}" data-j="${j}" onclick="pick(${i},${j})"><span class="mk">${LET[j]}</span><span>${t}</span></div>`).join("");
+  d.innerHTML = `<div class="q-line"><span class="q-badge">${i+1}</span><span class="q-text">${it.q}</span></div>
+    <div class="opts">${opts}</div>
+    <div class="sol" id="sol-mc-${i}"><b>解析：</b>${it.s}　正解：(${LET[it.a]})</div>`;
+  mcBox.appendChild(d);
+});
+
+const fillBox = document.getElementById("fill");
+FILL.forEach((it,i)=>{
+  const d=document.createElement("div"); d.className="prob";
+  const inputs = it.blanks.map((b,k)=>`<input id="fin-${i}-${k}" placeholder="第 ${k+1} 格">`).join(" ");
+  d.innerHTML = `<div class="q-line"><span class="q-badge">${i+11}</span><span class="q-text">${it.q}</span></div>
+    <div class="fill-in">${inputs}<span class="hint">${it.blanks.length>1?"共 "+it.blanks.length+" 格":"填入答案"}</span></div>
+    <div class="sol" id="sol-fill-${i}"><b>解析：</b>${it.s}</div>`;
+  fillBox.appendChild(d);
+});
+
+const calcBox = document.getElementById("calc");
+CALC.forEach((it,i)=>{
+  const d=document.createElement("div"); d.className="prob";
+  d.innerHTML = `<div class="q-line"><span class="q-badge">${i+21}</span><span class="q-text">${it.q}</span></div>
+    <div class="fill-in"><span class="hint">在紙上計算，點「顯示解析」核對</span></div>
+    <div class="sol" id="sol-calc-${i}"><b>詳解：</b>${it.s}</div>`;
+  calcBox.appendChild(d);
+});
+
+function pick(i,j){
+  answers[i]=j;
+  document.querySelectorAll(`.opt[data-i="${i}"]`).forEach(el=>el.classList.remove("sel"));
+  document.querySelector(`.opt[data-i="${i}"][data-j="${j}"]`).classList.add("sel");
+}
+
+function grade(){
+  let score=0;
+  MC.forEach((it,i)=>{
+    document.querySelectorAll(`.opt[data-i="${i}"]`).forEach(el=>el.classList.remove("correct","wrong"));
+    document.querySelector(`.opt[data-i="${i}"][data-j="${it.a}"]`).classList.add("correct");
+    if(answers[i]===it.a){ score+=4; }
+    else if(answers[i]>=0){ document.querySelector(`.opt[data-i="${i}"][data-j="${answers[i]}"]`).classList.add("wrong"); }
+    document.getElementById(`sol-mc-${i}`).classList.add("show");
+  });
+  FILL.forEach((it,i)=>{
+    let allOk=true;
+    it.blanks.forEach((b,k)=>{
+      const inp=document.getElementById(`fin-${i}-${k}`);
+      const val=norm(inp.value);
+      const ok = b.some(a=>norm(a)===val) && val!=="";
+      inp.classList.remove("correct","wrong");
+      inp.classList.add(ok?"correct":"wrong");
+      if(!ok) allOk=false;
+    });
+    if(allOk) score+=4;
+    document.getElementById(`sol-fill-${i}`).classList.add("show");
+  });
+  CALC.forEach((it,i)=>{ document.getElementById(`sol-calc-${i}`).classList.add("show"); });
+  document.getElementById("score").innerHTML = `選擇＋填充自動計分：<b style="color:var(--accent)">${score}</b> 分（計算題請自行對照詳解，每題 4 分）`;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function showAll(){ document.querySelectorAll(".sol").forEach(s=>s.classList.add("show")); }
+function resetAll(){
+  answers = new Array(MC.length).fill(-1);
+  document.querySelectorAll(".opt").forEach(el=>el.classList.remove("sel","correct","wrong"));
+  document.querySelectorAll(".fill-in input").forEach(el=>{el.value="";el.classList.remove("correct","wrong");});
+  document.querySelectorAll(".sol").forEach(s=>s.classList.remove("show"));
+  document.getElementById("score").textContent="點選作答，完成後按「批改計分」";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
