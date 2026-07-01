@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二章 生物的養分｜教學互動講義</title>
+<style>
+  :root{
+    --main:#1c7a5e;
+    --main-dark:#125e47;
+    --accent:#e8845a;
+    --bg:#f6f8f7;
+    --card:#ffffff;
+    --ink:#2b2b2b;
+    --sub:#5a6b64;
+    --line:#e1e8e4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,"PingFang TC","Microsoft JhengHei","Helvetica Neue",Arial,sans-serif;
+    font-size:17px;
+    line-height:1.75;
+    color:var(--ink);
+    background:var(--bg);
+  }
+  header.hero{
+    background:linear-gradient(135deg,var(--main) 0%,var(--main-dark) 100%);
+    color:#fff;
+    padding:40px 24px 32px;
+    text-align:center;
+  }
+  header.hero h1{
+    margin:0 0 8px;
+    font-size:clamp(24px,4vw,34px);
+    letter-spacing:2px;
+  }
+  header.hero p{
+    margin:0;
+    font-size:16px;
+    opacity:.9;
+  }
+  nav.toc{
+    max-width:960px;
+    margin:-22px auto 30px;
+    background:var(--card);
+    border-radius:16px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    padding:20px 24px;
+  }
+  nav.toc h2{
+    margin:0 0 12px;
+    font-size:18px;
+    color:var(--main-dark);
+  }
+  nav.toc ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:10px;
+  }
+  nav.toc a{
+    display:block;
+    padding:12px 14px;
+    background:#eef6f2;
+    border-radius:10px;
+    color:var(--main-dark);
+    text-decoration:none;
+    font-weight:600;
+    transition:background .15s;
+  }
+  nav.toc a:hover{background:#dcefe5;}
+  main{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 20px 60px;
+  }
+  section.chapter{
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:0 4px 16px rgba(0,0,0,.06);
+    margin-bottom:36px;
+    overflow:hidden;
+    scroll-margin-top:16px;
+  }
+  section.chapter > .head{
+    background:linear-gradient(90deg,var(--main),var(--main-dark));
+    color:#fff;
+    padding:20px 26px;
+  }
+  section.chapter > .head h2{
+    margin:0;
+    font-size:18px;
+  }
+  section.chapter > .head p{
+    margin:6px 0 0;
+    font-size:16px;
+    opacity:.9;
+  }
+  .body-pad{padding:26px 28px 30px;}
+  h3.sub{
+    color:var(--main-dark);
+    border-left:6px solid var(--accent);
+    padding-left:10px;
+    margin:28px 0 12px;
+    font-size:18px;
+  }
+  h3.sub:first-of-type{margin-top:6px;}
+  p{margin:10px 0;}
+  table.tbl{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0 20px;
+    font-size:16px;
+  }
+  table.tbl caption{
+    text-align:left;
+    font-weight:600;
+    color:var(--main-dark);
+    margin-bottom:6px;
+  }
+  table.tbl th, table.tbl td{
+    border:1px solid var(--line);
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.tbl th{
+    background:#eef6f2;
+    color:var(--main-dark);
+  }
+  table.tbl tr:nth-child(even) td{background:#fafcfb;}
+  .eg{
+    background:#fff6ee;
+    border:1px solid #f2d9c2;
+    border-left:6px solid var(--accent);
+    border-radius:10px;
+    padding:14px 18px;
+    margin:16px 0;
+  }
+  .eg b{color:#c0602f;}
+  .figure{
+    margin:18px 0;
+    text-align:center;
+  }
+  .figure img{
+    max-width:100%;
+    border-radius:12px;
+    border:1px solid var(--line);
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+  }
+  .figure figcaption{
+    font-size:16px;
+    color:var(--sub);
+    margin-top:8px;
+  }
+  .fig-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    justify-content:center;
+  }
+  .fig-row .figure{flex:1 1 300px;max-width:420px;}
+  .quiz-block{
+    background:#f4f9f6;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px 22px;
+    margin-top:26px;
+  }
+  .quiz-block > h4{
+    margin:0 0 14px;
+    color:var(--main-dark);
+    font-size:18px;
+  }
+  .q{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+  .q .stem{font-weight:600;margin:0 0 8px;}
+  .q ul.opts{
+    list-style:none;
+    margin:0 0 10px;
+    padding:0;
+  }
+  .q ul.opts li{
+    padding:6px 4px 6px 0;
+    border-bottom:1px dashed #eee;
+  }
+  .q ul.opts li:last-child{border-bottom:none;}
+  .toggle-btn{
+    background:var(--main);
+    color:#fff;
+    border:none;
+    border-radius:20px;
+    padding:8px 16px;
+    font-size:16px;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  .toggle-btn:hover{background:var(--main-dark);}
+  .answer{
+    display:none;
+    margin-top:12px;
+    background:#eef8f1;
+    border-left:5px solid var(--main);
+    border-radius:8px;
+    padding:12px 16px;
+    font-size:16px;
+  }
+  .answer.show{display:block;}
+  .answer .ans-line{font-weight:700;color:var(--main-dark);margin-bottom:6px;}
+  footer{
+    text-align:center;
+    color:var(--sub);
+    font-size:16px;
+    padding:20px;
+  }
+  @media (max-width:600px){
+    body{font-size:16px;}
+    .body-pad{padding:20px 16px 24px;}
+    header.hero{padding:30px 14px 26px;}
+    nav.toc{margin:-16px 12px 24px;padding:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>第二章　生物的養分</h1>
+  <p>教學互動講義（融合康軒・翰林・南一三版內容）｜教師用・含解析</p>
+</header>
+
+<nav class="toc">
+  <h2>小節目錄</h2>
+  <ul>
+    <li><a href="#s1">2-1　食物中的養分與能量</a></li>
+    <li><a href="#s2">2-2　酵素</a></li>
+    <li><a href="#s3">2-3　植物如何製造養分</a></li>
+    <li><a href="#s4">2-4　動物與人體如何獲得養分</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ======================= 2-1 ======================= -->
+<section class="chapter" id="s1">
+  <div class="head">
+    <h2>2-1　食物中的養分與能量</h2>
+    <p>六大類養分・熱量單位・食物養分的檢測</p>
+  </div>
+  <div class="body-pad">
+
+    <h3 class="sub">重點筆記：六大類養分</h3>
+    <p>食物中的養分依「能不能產生熱量」分成兩大類。三個版本的課本都用同一套六大類養分，只是舉例略有不同，整理如下表：</p>
+
+    <table class="tbl">
+      <caption>六大類養分整理（融合三版重點）</caption>
+      <thead>
+        <tr><th>分類</th><th>養分</th><th>主要功能／組成</th><th>常見食物來源</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="3">可產生能量</td><td>醣類（碳水化合物）</td><td>提供能量；澱粉、肝糖為儲存形式；纖維素組成植物細胞壁（人體無法消化，但可促進腸胃蠕動）</td><td>米飯、麵食、地瓜</td></tr>
+        <tr><td>蛋白質</td><td>構成肌肉、頭髮、皮膚等身體構造；也是酵素的主要成分</td><td>魚、肉、蛋、豆類</td></tr>
+        <tr><td>脂質</td><td>分布於皮膚下層，可防止熱量散失、幫助保溫；也是細胞膜的成分</td><td>食用油、堅果、奶油</td></tr>
+        <tr><td rowspan="3">不能產生能量</td><td>水</td><td>體內含量最多的物質，多數代謝反應須溶於水中才能進行，也負責運送養分</td><td>飲水、湯、蔬果</td></tr>
+        <tr><td>礦物質</td><td>構成骨骼、牙齒（鈣、磷）；參與造血（鐵）等生理機能</td><td>乳品、深綠色蔬菜</td></tr>
+        <tr><td>維生素</td><td>調節生理機能。缺維生素A易致夜盲症；缺維生素C易致壞血病（牙齦出血、復原力差）</td><td>蔬菜、水果</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub">重點筆記：食物中的熱量</h3>
+    <p>測量食物所含熱量的常見方法，是燃燒食物加熱容器中的水，由水溫上升的幅度推估食物所含的熱量。熱量的常用單位是「卡」與「大卡（千卡）」：</p>
+    <div class="eg">
+      <b>換算重點：</b>1000 卡＝1 大卡；<br>
+      每 1 公克「醣類」或「蛋白質」可產生約 <b>4 大卡</b>熱量；<br>
+      每 1 公克「脂質」可產生約 <b>9 大卡</b>熱量（脂質是同重量下產熱量最高的養分）；<br>
+      水、礦物質、維生素則<b>不能</b>提供熱量。
+    </div>
+
+    <h3 class="sub">重點筆記：食物中養分的檢測</h3>
+    <p>要判斷食物中是否含有澱粉或葡萄糖，可利用碘液與本氏液這兩種試劑：</p>
+    <table class="tbl">
+      <caption>碘液與本氏液的比較</caption>
+      <thead><tr><th>試劑</th><th>檢測對象</th><th>是否需要加熱</th><th>呈色變化</th></tr></thead>
+      <tbody>
+        <tr><td>碘液</td><td>澱粉</td><td>不需加熱</td><td>原為黃褐色，遇澱粉變成藍黑色（或紫紅色）</td></tr>
+        <tr><td>本氏液</td><td>葡萄糖（醣類）</td><td>需隔水加熱</td><td>原為淡藍色，加熱後隨葡萄糖濃度升高由綠、黃、橙漸變為磚紅色，顏色愈紅代表濃度愈高</td></tr>
+      </tbody>
+    </table>
+
+    <div class="eg">
+      <b>生活例子：</b>「我的餐盤」飲食建議把六大類食物分成全穀雜糧、豆魚蛋肉、蔬菜、水果、乳品、堅果種子，提醒大家每天早晚各喝一杯奶、每餐蔬菜比水果多一點、豆魚蛋肉類攝取順序依序為「豆＞魚＞蛋＞肉」，就是六大類養分概念在生活中的實際應用。
+    </div>
+
+    <div class="fig-row">
+      <figure class="figure">
+        <img src="assets/2-1_可產生能量的養分_醣類蛋白質脂質.png" alt="可產生能量的養分：醣類、蛋白質、脂質">
+        <figcaption>圖2-1a　可產生能量的養分：醣類、蛋白質、脂質（康軒課本 p.72）</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="assets/2-1_不產生能量的養分_水礦物質維生素.png" alt="不能產生能量的養分：水、礦物質、維生素">
+        <figcaption>圖2-1b　不能產生能量的養分：水、礦物質、維生素（康軒課本 p.73）</figcaption>
+      </figure>
+    </div>
+
+    <div class="quiz-block">
+      <h4>小節練習　2-1　食物中的養分與能量</h4>
+
+      <div class="q">
+        <p class="stem">1. 下列六大類養分中，何者無法提供人體熱量？</p>
+        <ul class="opts">
+          <li>(A) 礦物質</li>
+          <li>(B) 醣類</li>
+          <li>(C) 蛋白質</li>
+          <li>(D) 脂質</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(A) 礦物質</p>
+          <p>六大類養分中，醣類、蛋白質、脂質皆可經代謝產生熱量；水、礦物質、維生素則不能產生熱量，只負責調節生理機能或協助反應進行。(B)(C)(D) 皆屬於可產能的養分，故錯誤。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. 某包裝食品的營養標示為：蛋白質 5 公克、脂質 25 公克、醣類 30 公克、鈉 50 毫克。此食品每份大約可產生多少大卡的熱量？</p>
+        <ul class="opts">
+          <li>(A) 335 大卡</li>
+          <li>(B) 365 大卡</li>
+          <li>(C) 270 大卡</li>
+          <li>(D) 470 大卡</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(B) 365 大卡</p>
+          <p>蛋白質與醣類每公克產生4大卡，脂質每公克產生9大卡：5×4 + 25×9 + 30×4 = 20 + 225 + 120 = 365大卡。鈉屬於礦物質，不能產生熱量，不列入計算。其餘選項若代入不同養分的熱量係數計算則不吻合，故錯誤。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. 小明想檢測白飯和果汁中分別含有哪些醣類，應該使用下列哪兩種試劑進行檢測？</p>
+        <ul class="opts">
+          <li>(A) 本氏液及酒精</li>
+          <li>(B) 碘液及酒精</li>
+          <li>(C) 碘液及本氏液</li>
+          <li>(D) 本氏液及氫氧化鈉</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(C) 碘液及本氏液</p>
+          <p>碘液可檢測澱粉（白飯的主要成分），本氏液（需加熱）可檢測葡萄糖等醣類（果汁中常見）。酒精是光合作用實驗中用來去除葉綠素的溶劑，氫氧化鈉並非用來測定醣類，故 (A)(B)(D) 皆錯誤。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">4. 長期缺乏維生素A，容易導致下列何種病症？</p>
+        <ul class="opts">
+          <li>(A) 壞血病</li>
+          <li>(B) 貧血</li>
+          <li>(C) 骨質疏鬆</li>
+          <li>(D) 夜盲症</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(D) 夜盲症</p>
+          <p>維生素A與眼睛的感光機能有關，長期缺乏容易導致夜盲症。壞血病與缺乏維生素C有關(A)；貧血多與缺鐵有關(B)；骨質疏鬆與缺鈣有關(C)，皆非維生素A缺乏的典型病症。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">5. 關於六大類養分的敘述，下列何者正確？</p>
+        <ul class="opts">
+          <li>(A) 纖維素屬於醣類，雖不能被人體消化吸收，但可促進腸胃蠕動</li>
+          <li>(B) 水分無法溶解任何養分，只能用於調節體溫</li>
+          <li>(C) 脂質完全無法產生熱量，只能用於保溫</li>
+          <li>(D) 礦物質是六大類養分中，同重量可產生熱量最高者</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(A)</p>
+          <p>纖維素是醣類的一種，組成植物細胞壁，人體雖無法分解利用其產生能量，但可促進腸胃蠕動、有益腸道健康。水其實是很好的溶劑，許多養分須溶於水中才能被人體利用，故(B)錯誤；脂質每公克可產生9大卡熱量，是六大類養分中熱量密度最高者，故(C)(D)皆錯誤（礦物質完全不能產生熱量）。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 2-2 ======================= -->
+<section class="chapter" id="s2">
+  <div class="head">
+    <h2>2-2　酵素</h2>
+    <p>代謝作用・酵素的四大特性：專一性、可重複使用、適溫、適pH</p>
+  </div>
+  <div class="body-pad">
+
+    <h3 class="sub">重點筆記：代謝作用與酵素</h3>
+    <p>生物體內物質「分解」與「合成」的反應統稱為<b>代謝作用</b>：大分子分解成小分子稱為分解作用（如澱粉分解成葡萄糖）；小分子合成大分子稱為合成作用（如胺基酸合成蛋白質）。這些反應大多需要<b>酵素（又稱酶）</b>的參與才能順利進行。</p>
+    <p>酵素是一種能加速代謝反應進行的物質，主要成分是<b>蛋白質</b>；在代謝反應中，與酵素結合而被作用的物質稱為<b>受質</b>。</p>
+
+    <h3 class="sub">重點筆記：酵素的四大特性</h3>
+    <table class="tbl">
+      <caption>三版共同強調的酵素特性</caption>
+      <thead><tr><th>特性</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>① 專一性</td><td>一種酵素通常只能與特定的受質結合、進行特定反應。例如唾液中的澱粉酶只能與澱粉結合並分解澱粉，無法分解纖維素。</td></tr>
+        <tr><td>② 可重複使用</td><td>酵素在反應前後，本質不會改變，只要環境條件（溫度、酸鹼值）沒有劇烈改變，同一個酵素分子可以反覆與新的受質作用。</td></tr>
+        <tr><td>③ 受溫度影響（有最適溫度）</td><td>在一定範圍內，溫度愈高，酵素活性愈大、反應愈快；但超過最適溫度後，酵素活性會迅速下降，甚至永久失去活性（變性）。人體內大多數酵素約在37℃左右活性最好。</td></tr>
+        <tr><td>④ 受酸鹼值（pH）影響</td><td>不同酵素有各自偏好的酸鹼環境：唾液中的酵素偏好中性、胃中的酵素偏好酸性、小腸中的酵素偏好鹼性；一旦超出可忍受的酸鹼範圍，活性會下降或喪失。</td></tr>
+      </tbody>
+    </table>
+
+    <div class="eg">
+      <b>生活例子：</b>①食物放在冰箱外比放在冰箱內容易腐敗，是因為冰箱外溫度較高，使細菌體內用來分解食物的酵素活性較大、代謝較快，並非冰箱內完全沒有細菌。②鳳梨中含有能分解蛋白質的酵素（俗稱鳳梨酵素），這也是吃鳳梨會「咬舌頭」的原因；冷藏後酵素活性降低，咬舌感會減輕。③坊間標榜「吃酵素保健」的食品，因酵素本身是蛋白質，吞下後會被消化道中的酵素分解成胺基酸，並不能直接補充細胞內原本的酵素。
+    </div>
+
+    <div class="fig-row">
+      <figure class="figure">
+        <img src="assets/2-2_酵素的作用示意圖_專一性可重複使用.png" alt="酵素的專一性與可重複使用示意圖">
+        <figcaption>圖2-2a　酵素的專一性與可重複使用（翰林課本 p.63）</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="assets/2-2_溫度與酸鹼度對酵素活性的影響.png" alt="溫度與酸鹼度對酵素活性的影響曲線圖">
+        <figcaption>圖2-2b　溫度、酸鹼度與酵素活性的關係圖（翰林課本 p.64）</figcaption>
+      </figure>
+    </div>
+
+    <div class="quiz-block">
+      <h4>小節練習　2-2　酵素</h4>
+
+      <div class="q">
+        <p class="stem">1. 酵素的主要成分是下列何者？</p>
+        <ul class="opts">
+          <li>(A) 醣類</li>
+          <li>(B) 蛋白質</li>
+          <li>(C) 脂質</li>
+          <li>(D) 維生素</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(B) 蛋白質</p>
+          <p>大部分酵素的主要成分是蛋白質，因此凡是能影響蛋白質特性的因素（如高溫、極端酸鹼），都可能改變酵素的活性。(A)(C)(D) 皆非酵素的主要組成。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. 關於酵素特性的敘述，下列何者正確？</p>
+        <ul class="opts">
+          <li>(A) 酵素反應後會被分解，需要不斷合成補充</li>
+          <li>(B) 一種酵素可以和多種不同的受質結合</li>
+          <li>(C) 酵素和受質的結合具有專一性</li>
+          <li>(D) 酵素只能在生物體外的實驗中發揮作用</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(C)</p>
+          <p>酵素和受質的結合具有專一性，一種酵素通常只能與特定的受質結合、進行特定反應，故(B)錯誤。酵素反應後本質不會改變，可以重複使用，並不會被分解掉，故(A)錯誤。酵素在生物體內、外都能發揮作用（例如消化道中及許多生技應用），故(D)錯誤。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. 食物放在冰箱外比放在冰箱內容易腐敗，最主要的原因是什麼？</p>
+        <ul class="opts">
+          <li>(A) 冰箱內完全沒有細菌</li>
+          <li>(B) 低溫會直接殺死細菌</li>
+          <li>(C) 冰箱內沒有氧氣</li>
+          <li>(D) 低溫使細菌體內酵素活性降低，代謝變慢</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(D)</p>
+          <p>低溫只是降低細菌體內酵素的活性，使代謝變慢，並不會殺死細菌，也不代表冰箱內完全沒有細菌，故(A)(B)錯誤；一般冰箱冷藏並非真空環境，(C)也不正確。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">4. 關於胃與小腸中酵素所偏好的酸鹼環境，下列敘述何者正確？</p>
+        <ul class="opts">
+          <li>(A) 胃中酵素適合在酸性環境作用，小腸中酵素適合在鹼性環境作用</li>
+          <li>(B) 胃中酵素適合在鹼性環境作用，小腸中酵素適合在酸性環境作用</li>
+          <li>(C) 兩者都只適合在中性環境作用</li>
+          <li>(D) 溫度是唯一會影響兩者活性的因素，酸鹼值並不影響</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(A)</p>
+          <p>胃液呈酸性，胃中的酵素在酸性環境中活性最佳；小腸中的酵素則在鹼性環境（由膽汁、胰液、腸液中和胃酸後形成）中活性最佳。酵素活性同時受溫度與酸鹼值影響，故(D)錯誤；(B)(C)與課本內容相反或不符。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">5. 市面上標榜「吃酵素保健食品，可以補充人體細胞內的酵素」，這樣的說法是否適當？為什麼？</p>
+        <ul class="opts">
+          <li>(A) 適當，酵素能直接穿透腸壁進入細胞發揮作用</li>
+          <li>(B) 不適當，吃進去的酵素會被消化道中的酵素分解成胺基酸</li>
+          <li>(C) 適當，因為酵素不會被消化液分解</li>
+          <li>(D) 不適當，因為酵素進入人體後會轉變成醣類</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(B)</p>
+          <p>酵素的主要成分是蛋白質，吞食後會如同其他蛋白質食物一樣，經消化道中的酵素分解成胺基酸吸收利用，並不能完整地進入細胞、補充細胞原本的酵素，故(A)(C)錯誤；酵素不會轉變成醣類，故(D)錯誤。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 2-3 ======================= -->
+<section class="chapter" id="s3">
+  <div class="head">
+    <h2>2-3　植物如何製造養分</h2>
+    <p>葉的構造・光合作用的原料與產物・光合作用的實驗證明</p>
+  </div>
+  <div class="body-pad">
+
+    <h3 class="sub">重點筆記：葉的構造與功能</h3>
+    <table class="tbl">
+      <caption>葉片主要構造（融合三版用語）</caption>
+      <thead><tr><th>構造</th><th>功能</th></tr></thead>
+      <tbody>
+        <tr><td>上表皮／下表皮</td><td>由排列緊密、透明的表皮細胞組成，具保護作用；外側具角質層，可防止水分過度散失</td></tr>
+        <tr><td>保衛細胞與氣孔</td><td>兩個半月形的保衛細胞成對圍成氣孔，可調節氣孔開閉，是氣體（如二氧化碳、氧氣）與水氣進出葉片的主要通道；保衛細胞本身也含有葉綠體</td></tr>
+        <tr><td>葉肉</td><td>含大量葉綠體，是植物行光合作用的主要場所</td></tr>
+        <tr><td>葉脈</td><td>屬於輸導組織，負責運送水分與光合作用產生的養分</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub">重點筆記：光合作用</h3>
+    <p>植物利用葉綠體中的葉綠素吸收光能，驅動一連串反應，將根部吸收的水與由氣孔進入的二氧化碳轉變成氧氣、葡萄糖和水，這個過程稱為<b>光合作用</b>。</p>
+    <div class="eg">
+      <b>光合作用反應式：</b><br>
+      水 ＋ 二氧化碳　—〔光、葉綠體〕→　氧氣 ＋ 葡萄糖 ＋ 水
+    </div>
+    <table class="tbl">
+      <caption>光合作用的原料、產物、場所與條件</caption>
+      <thead><tr><th>項目</th><th>內容</th></tr></thead>
+      <tbody>
+        <tr><td>原料</td><td>水（由根部吸收）、二氧化碳（由氣孔進入）</td></tr>
+        <tr><td>產物</td><td>氧氣、葡萄糖、水</td></tr>
+        <tr><td>場所</td><td>葉綠體（主要位於葉肉細胞、保衛細胞內）</td></tr>
+        <tr><td>必要條件</td><td>光（光能）</td></tr>
+      </tbody>
+    </table>
+    <p>光合作用所產生的葡萄糖，除了可供細胞直接利用外，也可轉變成澱粉等形式儲存在植物體內，因此可以利用「檢測葉片中是否有澱粉」來證明光合作用是否發生過。</p>
+
+    <h3 class="sub">重點筆記：光合作用的實驗證明</h3>
+    <p>三個版本課本都設計了類似的實驗來證明「光是植物進行光合作用的必要條件」，步驟大致如下：</p>
+    <div class="eg">
+      <b>實驗流程：</b><br>
+      ① 先用鋁箔將葉片的一部分遮光數天，使該部位原有的澱粉被消耗、分解殆盡 →
+      ② 將葉片移到陽光下照光一段時間 →
+      ③ 摘下葉片，放入沸水中軟化，破壞角質層 →
+      ④ 將葉片放入酒精中隔水加熱，去除葉綠素（方便觀察呈色結果）→
+      ⑤ 以熱水漂洗葉片 →
+      ⑥ 滴加碘液觀察呈色：未遮光、有照光的部位因含澱粉而呈藍黑色；遮光未照光的部位則仍呈黃褐色（無澱粉反應）。
+    </div>
+    <p>由於「照光的部位有澱粉、未照光的部位沒有澱粉」，可以證明：<b>光是植物進行光合作用的必要條件之一</b>。</p>
+
+    <div class="fig-row">
+      <figure class="figure">
+        <img src="assets/2-3_光合作用示意圖.png" alt="光合作用示意圖：根吸水、氣孔進出氣體、葉綠體反應">
+        <figcaption>圖2-3a　光合作用示意圖（南一課本 p.78）</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="assets/2-3_碘液測試葉片澱粉實驗步驟.png" alt="碘液測試葉片澱粉的實驗步驟圖">
+        <figcaption>圖2-3b　光合作用變因探討實驗步驟（南一課本 p.79）</figcaption>
+      </figure>
+    </div>
+
+    <div class="quiz-block">
+      <h4>小節練習　2-3　植物如何製造養分</h4>
+
+      <div class="q">
+        <p class="stem">1. 光合作用主要是在葉片中的哪一種構造進行？</p>
+        <ul class="opts">
+          <li>(A) 表皮細胞</li>
+          <li>(B) 葉脈</li>
+          <li>(C) 含有葉綠體的葉肉細胞</li>
+          <li>(D) 角質層</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(C)</p>
+          <p>光合作用需要葉綠體參與，葉肉細胞含有大量葉綠體，是進行光合作用的主要場所（保衛細胞雖也含葉綠體、能少量進行光合作用，但主要場所仍是葉肉）。表皮細胞不含葉綠體、僅負責保護（A）；葉脈負責運輸水分與養分（B）；角質層只負責防止水分散失（D），三者皆不能直接進行光合作用。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. 光合作用所需的二氧化碳，主要是經由葉片的哪個構造進入？</p>
+        <ul class="opts">
+          <li>(A) 氣孔</li>
+          <li>(B) 葉脈</li>
+          <li>(C) 根部</li>
+          <li>(D) 表皮細胞</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(A) 氣孔</p>
+          <p>氣孔是氣體（包括二氧化碳、氧氣）進出植物體的主要通道。葉脈負責運輸水分與養分，並非氣體交換的主要構造(B)；根部負責吸收水分，不吸收二氧化碳(C)；表皮細胞主要功能是保護，不負責氣體交換(D)。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. 下列何者不是光合作用的產物？</p>
+        <ul class="opts">
+          <li>(A) 氧氣</li>
+          <li>(B) 葡萄糖</li>
+          <li>(C) 水</li>
+          <li>(D) 二氧化碳</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(D) 二氧化碳</p>
+          <p>光合作用的反應式為：水＋二氧化碳（原料）—〔光、葉綠體〕→ 氧氣＋葡萄糖＋水（產物）。二氧化碳是光合作用的原料而非產物，故選(D)；(A)(B)(C)皆是光合作用的產物。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">4. 光合作用實驗中，為什麼要先用鋁箔把葉片的一部分包裹遮光數天，再進行照光處理？</p>
+        <ul class="opts">
+          <li>(A) 避免蟲害啃食葉片</li>
+          <li>(B) 使葉片原本已有的澱粉先被消耗，才能確認照光後是否重新產生澱粉</li>
+          <li>(C) 使葉片提前老化，方便撕除表皮</li>
+          <li>(D) 防止葉片進行呼吸作用</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(B)</p>
+          <p>若不先消耗掉葉片原有的澱粉，之後即使照光部位測到澱粉，也無法確定是原本就有的、還是照光後新產生的，因此必須先遮光數天讓原有澱粉被分解殆盡，才能透過對照，確認澱粉是否為光合作用新產生。(A)(C)(D)皆非此步驟的主要目的。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">5. 承上題，實驗中將葉片放入酒精中隔水加熱，其主要目的為何？</p>
+        <ul class="opts">
+          <li>(A) 殺死葉片細胞，方便後續操作</li>
+          <li>(B) 使葉片變得比較柔軟</li>
+          <li>(C) 去除葉片中的葉綠素，方便觀察滴加碘液後的呈色結果</li>
+          <li>(D) 增加葉片的重量，方便秤重比較</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(C)</p>
+          <p>葉片中的葉綠素是綠色的，若不先去除，會影響之後滴加碘液時判斷藍黑色（有澱粉）或黃褐色（無澱粉）的呈色結果。使葉片變軟、破壞角質層的步驟是先前放入沸水中軟化的目的(B)，並非酒精加熱的主要目的；(A)(D)皆非本步驟目的。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 2-4 ======================= -->
+<section class="chapter" id="s4">
+  <div class="head">
+    <h2>2-4　動物與人體如何獲得養分</h2>
+    <p>消化系統的組成・各器官的功能・消化與吸收的過程</p>
+  </div>
+  <div class="body-pad">
+
+    <h3 class="sub">重點筆記：消化作用與消化系統</h3>
+    <p>食物中的大分子養分必須先分解成小分子，才能被人體吸收利用，這個過程稱為<b>消化作用</b>：</p>
+    <div class="eg">
+      澱粉　→　葡萄糖　　　　蛋白質　→　胺基酸　　　　脂質　→　脂肪酸＋甘油
+    </div>
+    <p>人體的<b>消化系統</b>由「消化道」與「消化腺」兩部分組成：</p>
+    <ul>
+      <li><b>消化道</b>：具有肌肉可以蠕動推送食物，依序為口腔→咽→食道→胃→小腸→大腸→肛門。</li>
+      <li><b>消化腺</b>：負責分泌消化液（多含酵素），包括唾腺、胃腺、肝臟、胰臟、腸腺。</li>
+    </ul>
+
+    <table class="tbl">
+      <caption>消化系統各器官（腺）的功能整理</caption>
+      <thead><tr><th>器官／腺體</th><th>分泌物</th><th>主要功能</th></tr></thead>
+      <tbody>
+        <tr><td>口腔（唾腺）</td><td>唾液（含酵素）</td><td>牙齒切碎、舌頭攪拌食物；唾液中的酵素初步分解澱粉</td></tr>
+        <tr><td>咽、食道</td><td>無（食道不分泌消化液）</td><td>依靠管壁肌肉的蠕動，將食物推送到胃</td></tr>
+        <tr><td>胃（胃腺）</td><td>胃液（含鹽酸與酵素）</td><td>暫存並攪拌食物；鹽酸可殺菌並促進胃中酵素作用；酵素初步分解蛋白質</td></tr>
+        <tr><td>肝臟</td><td>膽汁（不含酵素）</td><td>先儲存於膽囊，經導管送入小腸；可乳化脂質，幫助脂質被分解</td></tr>
+        <tr><td>胰臟</td><td>胰液（含酵素）</td><td>經導管送入小腸；可分解醣類、蛋白質、脂質</td></tr>
+        <tr><td>小腸（腸腺）</td><td>腸液（含酵素）</td><td>協助分解醣類與蛋白質；小腸內壁有大量絨毛，可增加吸收養分與水分的表面積，是主要的吸收器官</td></tr>
+        <tr><td>大腸</td><td>無（不分泌消化液）</td><td>吸收食物殘渣中剩餘的水分，形成糞便由肛門排出（此排出過程稱為排遺）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="eg">
+      <b>生活例子：</b>①膽汁不含酵素，只負責把大顆脂肪球「乳化」成許多小顆粒，增加胰液分解脂質的效率；若切除膽囊，醫師通常會建議減少油膩（高脂質）食物的攝取，因為脂質乳化的效率會下降。②胃黏膜表面覆有黏液層（含大量水分且偏鹼性），可保護胃壁不被胃液中的鹽酸與酵素侵蝕；若黏膜受幽門螺旋桿菌等因素破壞，可能導致胃潰瘍。③乳糖不耐症者體內缺乏分解乳糖的酵素，喝牛奶後乳糖無法完全分解、吸收，容易腹脹不適；但優酪乳中的乳酸菌已預先分解部分乳糖，因此不耐症者飲用優酪乳的不適感通常較輕。
+    </div>
+
+    <div class="figure">
+      <img src="assets/2-4_人體消化系統消化道與消化腺.png" alt="人體消化系統：消化道與消化腺完整圖">
+      <figcaption>圖2-4　人體的消化系統：消化道（左）與消化腺（右）（南一課本 p.83）</figcaption>
+    </div>
+
+    <div class="quiz-block">
+      <h4>小節練習　2-4　動物與人體如何獲得養分</h4>
+
+      <div class="q">
+        <p class="stem">1. 下列何者屬於消化道的一部分，但本身並不具有分泌消化液的消化腺？</p>
+        <ul class="opts">
+          <li>(A) 食道</li>
+          <li>(B) 胃</li>
+          <li>(C) 小腸</li>
+          <li>(D) 肝臟</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(A) 食道</p>
+          <p>食道屬於消化道，僅靠肌肉蠕動推送食物，本身不分泌消化液。胃有胃腺分泌胃液(B)；小腸有腸腺分泌腸液，並接受肝臟、胰臟的分泌物(C)；肝臟本身就是消化腺，分泌膽汁(D)，皆與食道情況不同。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">2. 關於膽汁的敘述，下列何者正確？</p>
+        <ul class="opts">
+          <li>(A) 由胰臟分泌</li>
+          <li>(B) 可以乳化脂質，幫助脂質的消化分解</li>
+          <li>(C) 含有豐富的消化酵素</li>
+          <li>(D) 主要在胃中發揮作用</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(B)</p>
+          <p>膽汁由肝臟分泌、儲存於膽囊，經導管送入小腸，功能是把脂質乳化成小顆粒，提高胰液分解脂質的效率；膽汁本身並不含消化酵素，故(C)錯誤。膽汁由肝臟而非胰臟分泌，故(A)錯誤；膽汁作用的位置是小腸而非胃，故(D)錯誤。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">3. 食物中的蛋白質經過消化作用後，最終會分解成哪一種小分子，才能被人體吸收利用？</p>
+        <ul class="opts">
+          <li>(A) 葡萄糖</li>
+          <li>(B) 脂肪酸</li>
+          <li>(C) 胺基酸</li>
+          <li>(D) 甘油</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(C) 胺基酸</p>
+          <p>蛋白質經消化作用分解後的小分子為胺基酸。葡萄糖是澱粉（醣類）消化後的小分子(A)；脂肪酸與甘油則是脂質消化後的小分子(B)(D)，皆與蛋白質的消化產物不同。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">4. 小腸內壁具有大量的絨毛構造，其主要功能為何？</p>
+        <ul class="opts">
+          <li>(A) 分泌胃液</li>
+          <li>(B) 儲存膽汁</li>
+          <li>(C) 磨碎食物</li>
+          <li>(D) 增加小腸吸收養分與水分的表面積</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(D)</p>
+          <p>小腸絨毛是指狀突起構造，可以大幅增加小腸內壁與食物接觸的表面積，提高養分與水分吸收的效率，絨毛內還有微血管負責運送吸收到的養分。分泌胃液是胃腺的功能(A)；儲存膽汁是膽囊的功能(B)；磨碎食物主要靠牙齒與胃的攪拌(C)，皆非絨毛的主要功能。</p>
+        </div>
+      </div>
+
+      <div class="q">
+        <p class="stem">5. 食物在人體消化系統中依序經過的消化道器官，下列何者排列正確？</p>
+        <ul class="opts">
+          <li>(A) 口腔→胃→食道→小腸→大腸→肛門</li>
+          <li>(B) 口腔→食道→胃→大腸→小腸→肛門</li>
+          <li>(C) 口腔→咽→胃→食道→小腸→大腸</li>
+          <li>(D) 口腔→食道→胃→小腸→大腸→肛門</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAns(this)">▼查看解答與解析</button>
+        <div class="answer">
+          <p class="ans-line">正確答案：(D)</p>
+          <p>消化道的正確順序為：口腔→咽→食道→胃→小腸→大腸→肛門。(A)將胃與食道順序對調，錯誤；(B)將小腸與大腸順序對調，錯誤；(C)將食道與胃的順序對調，且未列出肛門，錯誤。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  第二章　生物的養分｜教學互動講義（融合康軒・翰林・南一三版）｜教師用，含解析
+</footer>
+
+<script>
+function toggleAns(btn){
+  var ans = btn.nextElementSibling;
+  var isShown = ans.classList.toggle('show');
+  btn.textContent = isShown ? '▲收合解答與解析' : '▼查看解答與解析';
+}
+</script>
+
+</body>
+</html>
