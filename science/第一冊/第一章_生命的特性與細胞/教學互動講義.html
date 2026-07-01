@@ -55,12 +55,27 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
   section.chapter{padding:22px 16px 26px;}
   section.chapter h2{margin:-22px -16px 18px; font-size:18px;}
 }
+
+.ctrl{position:sticky;top:0;z-index:5;background:#fffaf2;border:1px solid #f0d9b8;border-radius:12px;
+  padding:10px 16px;margin:0 0 20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.ctrl .tip{color:#8a6d3b;}.ctrl .tip b{color:var(--accent);}
+.ctrl button{background:var(--main);color:#fff;border:none;border-radius:18px;padding:6px 14px;font-size:16px;cursor:pointer;}
+.ctrl button.ghost{background:#fff;color:var(--main-dark);border:1.5px solid var(--main);}
+.ctrl button:hover{opacity:.9;}
+.blank{cursor:pointer;border-bottom:2px dashed var(--accent);border-radius:4px;padding:0 5px;
+  transition:background .15s,border-color .15s;white-space:nowrap;}
+.blank .q{color:var(--accent);font-weight:800;letter-spacing:2px;}
+.blank .a{display:none;color:var(--main-dark);font-weight:700;}
+.blank.show{background:#eaf5f0;border-bottom-color:var(--main);}
+.blank.show .q{display:none;}
+.blank.show .a{display:inline;}
+@media print{.ctrl{display:none;}.blank .a{display:inline;}.blank .q{display:none;}}
 </style>
 </head>
 <body>
 <header class="top">
   <h1>第一章 生命的特性與細胞</h1>
-  <p>教學互動講義(教師用,含解析) — 整合康軒、翰林、南一三版內容</p>
+  <p>教學互動填空講義 — 點一下空格（？）顯示答案・點題目查看解析（整合康軒、翰林、南一三版）</p>
 </header>
 <nav class="toc">
   <h2>小節目錄</h2>
@@ -69,13 +84,15 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
   </ol>
 </nav>
 <main>
+
+<div class="ctrl"><span class="tip">📝 這是<b>填空版</b>：點一下空格（<b>？</b>）就會顯示答案，再點一下可收合。</span><button onclick="allBlanks(true)">顯示全部答案</button><button class="ghost" onclick="allBlanks(false)">隱藏全部答案</button></div>
   
 <section class="chapter" id="sec1">
   <h2>1-1 科學的探索方法</h2>
   <div class="notes">
     <h3>科學方法的流程</h3>
-<p>科學家遇到生活中的疑問(例如「為什麼吐司容易發霉？」「饅頭切面為什麼有小洞？」)時,會依循一套有邏輯的步驟尋找答案,稱為<b>科學方法</b>:觀察 → 提出問題 → 參考文獻資料 → 形成假說 → 設計並進行實驗 → 分析實驗結果 → 提出結論。若假說通過許多科學家多次重複驗證且被接受,就可能發展成<b>學說</b>;但學說並非永遠不變,只要出現新技術或新證據,仍可能被修正或推翻。</p>
-<p>設計實驗時,要把觀察對象分成<b>實驗組</b>(接受操作處理的一組,例如放進冰箱的吐司)與<b>對照組</b>(作為比較基準的一組,例如放在室溫的吐司)。影響結果的因素稱為<b>變因</b>,分成三種:</p>
+<p>科學家遇到生活中的疑問(例如「為什麼吐司容易發霉？」「饅頭切面為什麼有小洞？」)時,會依循一套有邏輯的步驟尋找答案,稱為<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">科學方法</span></span>:觀察 → 提出問題 → 參考文獻資料 → 形成假說 → 設計並進行實驗 → 分析實驗結果 → 提出結論。若假說通過許多科學家多次重複驗證且被接受,就可能發展成<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">學說</span></span>;但學說並非永遠不變,只要出現新技術或新證據,仍可能被修正或推翻。</p>
+<p>設計實驗時,要把觀察對象分成<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">實驗組</span></span>(接受操作處理的一組,例如放進冰箱的吐司)與<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">對照組</span></span>(作為比較基準的一組,例如放在室溫的吐司)。影響結果的因素稱為<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">變因</span></span>,分成三種:</p>
 <table>
 <tr><td><b>變因種類</b></td><td><b>意義</b></td><td><b>吐司發霉實驗中的例子</b></td></tr>
 <tr><td>操作變因</td><td>實驗組與對照組之間刻意設定不同的那項因素(每次實驗只能設定1項)</td><td>溫度(冰箱4℃ vs 室溫25℃)</td></tr>
@@ -93,7 +110,7 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
 </ul>
 <div class="example">生活例子:量筒不可拿來加熱或配藥;溫度計量測液體時應放在液體中間,不可貼底;滴管吸取藥液時絕不可倒拿,以免藥液腐蝕橡皮頭。酒精燈內酒精應維持在燈身的1/3~2/3,以打火機點燃、用燈罩蓋熄,絕不能拿另一支點燃的酒精燈互相引火。</div>
 <h3>顯微鏡的使用</h3>
-<p>光學顯微鏡是觀察細胞等微小構造最常用的工具,依用途主要分成複式顯微鏡與解剖顯微鏡兩種;放大倍率的計算方式都是「<b>總放大倍率＝目鏡倍率 × 物鏡倍率</b>」。除了光學顯微鏡,還有放大倍率更高的電子顯微鏡(可達百萬倍),用來觀察比細菌更微小的病毒等構造。</p>
+<p>光學顯微鏡是觀察細胞等微小構造最常用的工具,依用途主要分成複式顯微鏡與解剖顯微鏡兩種;放大倍率的計算方式都是「<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">總放大倍率＝目鏡倍率 × 物鏡倍率</span></span>」。除了光學顯微鏡,還有放大倍率更高的電子顯微鏡(可達百萬倍),用來觀察比細菌更微小的病毒等構造。</p>
 <table>
 <tr><td><b>比較項目</b></td><td><b>複式顯微鏡</b></td><td><b>解剖顯微鏡</b></td></tr>
 <tr><td>適合觀察的標本</td><td>製成薄片、可透光的玻片標本</td><td>玻片標本或立體實物皆可(不需透光)</td></tr>
@@ -159,7 +176,7 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
   <h2>1-2 生命現象</h2>
   <div class="notes">
     <h3>生物與非生物</h3>
-<p>能夠表現出<b>生命現象</b>的個體稱為<b>生物</b>,例如松鼠、豆苗;不能表現生命現象的物體稱為<b>非生物</b>,例如石頭、空氣、水。生物大多需要陽光、空氣、水與養分才能維持生命現象,其中陽光提供生物所需能量的最終來源——即使是生活在無光深海的魚類,牠們攝食的能量也大多間接來自陽光(透過食物鏈傳遞)。</p>
+<p>能夠表現出<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">生命現象</span></span>的個體稱為<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">生物</span></span>,例如松鼠、豆苗;不能表現生命現象的物體稱為<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">非生物</span></span>,例如石頭、空氣、水。生物大多需要陽光、空氣、水與養分才能維持生命現象,其中陽光提供生物所需能量的最終來源——即使是生活在無光深海的魚類,牠們攝食的能量也大多間接來自陽光(透過食物鏈傳遞)。</p>
 <h3>生命現象有哪些</h3>
 <table>
 <tr><td><b>生命現象</b></td><td><b>說明</b></td><td><b>例子</b></td></tr>
@@ -170,7 +187,7 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
 </table>
 <p>具備以上四類生命現象的個體才是生物;只要少了任一項持續且完整的表現,就不能算是生物(例如鐘乳石、石筍雖然會「長大」,卻不具備代謝、感應等其他生命現象,屬於非生物)。</p>
 <h3>生物圈</h3>
-<p>地球上所有生物和牠們賴以生存的環境,合稱<b>生物圈</b>。生物圈的範圍以海平面為基準,大約包含上、下各一萬公尺的範圍,相對於地球半徑(約6371公里)來說,只佔薄薄一層,而且範圍會隨著生物的發現與滅絕而變動。多數生物集中生活在溫暖、水分充足的地表與淺水環境(如熱帶雨林、珊瑚礁);而在沙漠、深海、極地等嚴苛環境中,生物種類與數量較少,但這些生物往往演化出特殊構造來適應,例如仙人掌以肥厚的莖儲水、針狀葉減少水分散失;蝙蝠用回聲定位在黑暗洞穴中活動;有些深海魚類能發光以利辨識與獵食。</p>
+<p>地球上所有生物和牠們賴以生存的環境,合稱<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">生物圈</span></span>。生物圈的範圍以海平面為基準,大約包含上、下各一萬公尺的範圍,相對於地球半徑(約6371公里)來說,只佔薄薄一層,而且範圍會隨著生物的發現與滅絕而變動。多數生物集中生活在溫暖、水分充足的地表與淺水環境(如熱帶雨林、珊瑚礁);而在沙漠、深海、極地等嚴苛環境中,生物種類與數量較少,但這些生物往往演化出特殊構造來適應,例如仙人掌以肥厚的莖儲水、針狀葉減少水分散失;蝙蝠用回聲定位在黑暗洞穴中活動;有些深海魚類能發光以利辨識與獵食。</p>
 <div class="example">生活化例子:去水族館觀察魚類、水草和岩石時,能表現代謝、生長、感應與生殖的魚和水草是生物;而岩石、水只是提供生物生存的環境資源,屬於非生物。</div>
   </div>
   <figure class="fig"><img src="assets/sec2_life_phenomena.png" alt="生物與非生物、生命現象總覽(資料來源:康軒課本)"><figcaption>生物與非生物、生命現象總覽(資料來源:康軒課本)</figcaption></figure>
@@ -226,11 +243,11 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
   <h2>1-3 細胞的發現與構造</h2>
   <div class="notes">
     <h3>細胞的發現與細胞學說</h3>
-<p>約350多年前,英國科學家<b>虎克(Robert Hooke)</b>利用自製的複式顯微鏡觀察軟木栓薄片,發現許多蜂窩狀的小格子,將它們命名為「細胞(cell)」——他是史上第一位描述細胞的科學家,但實際上他看到的只是植物細胞死亡後留下的細胞壁空腔,並非完整的細胞。之後歷經<b>雷文霍克</b>(改良顯微鏡、發現細菌)、<b>布朗</b>(發現植物細胞內的核)、<b>許萊登</b>(提出植物體由細胞組成)、<b>許旺</b>(提出動物體由細胞組成)等科學家接力研究,終於歸納出<b>細胞學說</b>:「細胞是組成生物體構造與功能的基本單位」。後來科學家菲爾紹更提出「每一個細胞都來自另一個細胞」的觀念,使細胞學說更加完整。</p>
+<p>約350多年前,英國科學家<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">虎克(Robert Hooke)</span></span>利用自製的複式顯微鏡觀察軟木栓薄片,發現許多蜂窩狀的小格子,將它們命名為「細胞(cell)」——他是史上第一位描述細胞的科學家,但實際上他看到的只是植物細胞死亡後留下的細胞壁空腔,並非完整的細胞。之後歷經<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">雷文霍克</span></span>(改良顯微鏡、發現細菌)、<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">布朗</span></span>(發現植物細胞內的核)、<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">許萊登</span></span>(提出植物體由細胞組成)、<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">許旺</span></span>(提出動物體由細胞組成)等科學家接力研究,終於歸納出<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">細胞學說</span></span>:「細胞是組成生物體構造與功能的基本單位」。後來科學家菲爾紹更提出「每一個細胞都來自另一個細胞」的觀念,使細胞學說更加完整。</p>
 <h3>細胞的形態與功能</h3>
 <p>不同細胞因為功能不同,常有不同的形態。例如動物的神經細胞有細長突起以傳遞訊息;口腔皮膜細胞呈扁平狀以保護內部;紅血球呈雙凹圓盤狀以利運送氧氣;肌肉細胞細長,能收縮以引起運動。植物的表皮細胞扁平且排列緊密,具保護功能;保衛細胞呈半月形、兩兩成對圍成氣孔,能控制氣體進出。</p>
 <h3>動物細胞與植物細胞的構造比較</h3>
-<p>大多數細胞都具有細胞核(內含遺傳物質,是細胞的「生命中樞」,控制細胞代謝;若失去細胞核,細胞會逐漸死亡)、細胞質(內含粒線體、液泡等胞器,是代謝作用進行的場所;<b>粒線體</b>能把養分轉換成能量,<b>液泡</b>可儲存水分、養分與廢物)、細胞膜(區隔細胞內外環境,控制物質進出)。植物細胞在細胞膜外側還多了一層由纖維素構成的<b>細胞壁</b>,能保護並維持細胞形狀;部分植物細胞含有<b>葉綠體</b>,可行光合作用製造養分。</p>
+<p>大多數細胞都具有細胞核(內含遺傳物質,是細胞的「生命中樞」,控制細胞代謝;若失去細胞核,細胞會逐漸死亡)、細胞質(內含粒線體、液泡等胞器,是代謝作用進行的場所;<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">粒線體</span></span>能把養分轉換成能量,<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">液泡</span></span>可儲存水分、養分與廢物)、細胞膜(區隔細胞內外環境,控制物質進出)。植物細胞在細胞膜外側還多了一層由纖維素構成的<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">細胞壁</span></span>,能保護並維持細胞形狀;部分植物細胞含有<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">葉綠體</span></span>,可行光合作用製造養分。</p>
 <table>
 <tr><td><b>構造</b></td><td><b>功能</b></td><td><b>動物細胞</b></td><td><b>植物細胞</b></td></tr>
 <tr><td>細胞核</td><td>控制細胞代謝,含遺傳物質</td><td>有</td><td>有</td></tr>
@@ -296,9 +313,9 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
   <h2>1-4 細胞所需的物質與物質進出方式</h2>
   <div class="notes">
     <h3>細胞是由更小的物質組成</h3>
-<p>細胞雖然微小,但仍是由更小的<b>分子</b>(如水、葡萄糖、蛋白質)組成,而這些分子又是由更基本的<b>原子</b>(碳C、氫H、氧O、氮N等)依特定方式排列而成。原子是構成物質的最小單位;多個葡萄糖分子相連可形成澱粉或纖維素,多個胺基酸分子相連則形成蛋白質——「原子 → 分子 → 細胞」是理解生命物質組成的重要層次。</p>
+<p>細胞雖然微小,但仍是由更小的<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">分子</span></span>(如水、葡萄糖、蛋白質)組成,而這些分子又是由更基本的<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">原子</span></span>(碳C、氫H、氧O、氮N等)依特定方式排列而成。原子是構成物質的最小單位;多個葡萄糖分子相連可形成澱粉或纖維素,多個胺基酸分子相連則形成蛋白質——「原子 → 分子 → 細胞」是理解生命物質組成的重要層次。</p>
 <h3>擴散作用</h3>
-<p><b>擴散作用</b>是指物質由高濃度區域往低濃度區域移動,最後均勻分布的現象,是物質進出細胞最常見的方式。細胞膜上物質通過的方式可分成三種情形:</p>
+<p><span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">擴散作用</span></span>是指物質由高濃度區域往低濃度區域移動,最後均勻分布的現象,是物質進出細胞最常見的方式。細胞膜上物質通過的方式可分成三種情形:</p>
 <table>
 <tr><td><b>通過方式</b></td><td><b>物質舉例</b></td></tr>
 <tr><td>可直接通過細胞膜</td><td>氧氣、二氧化碳</td></tr>
@@ -307,15 +324,15 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
 <tr><td>無法通過細胞膜(需先分解成小分子)</td><td>澱粉、蛋白質等大分子</td></tr>
 </table>
 <h3>滲透作用</h3>
-<p><b>滲透作用</b>特指水分子以擴散方式通過細胞膜的現象。細胞會依所在溶液的濃度不同,發生失水或吸水,進而改變形狀:</p>
+<p><span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">滲透作用</span></span>特指水分子以擴散方式通過細胞膜的現象。細胞會依所在溶液的濃度不同,發生失水或吸水,進而改變形狀:</p>
 <table>
 <tr><td><b>溶液環境</b></td><td><b>動物細胞(如紅血球)</b></td><td><b>植物細胞</b></td></tr>
 <tr><td>純水(濃度低於細胞內)</td><td>進水量大於出水量,細胞膨脹,最後可能破裂</td><td>因有細胞壁保護,只會略微膨脹,不會破裂</td></tr>
 <tr><td>生理食鹽水(濃度與細胞質相近)</td><td>進出水量大致相同,細胞形狀不變</td><td>細胞形狀不變</td></tr>
 <tr><td>濃食鹽水(濃度高於細胞內)</td><td>出水量大於進水量,細胞脫水萎縮</td><td>細胞萎縮,細胞膜與細胞壁分離</td></tr>
 </table>
-<p>擴散和滲透的差別在於:<b>擴散作用</b>可以是任何物質由高濃度往低濃度移動;<b>滲透作用</b>則專指「水」通過細胞膜的擴散現象。</p>
-<div class="example">生活化例子:眼睛不慎進了異物或受傷時,應優先用<b>生理食鹽水</b>沖洗,而不是用一般的水沖洗——因為生理食鹽水的濃度與細胞質相近,不會讓細胞因滲透作用而過度吸水膨脹受損。另外,乾燥的海帶芽或茶葉泡水後會膨脹變大,也是因為滲透作用讓細胞吸水。</div>
+<p>擴散和滲透的差別在於:<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">擴散作用</span></span>可以是任何物質由高濃度往低濃度移動;<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">滲透作用</span></span>則專指「水」通過細胞膜的擴散現象。</p>
+<div class="example">生活化例子:眼睛不慎進了異物或受傷時,應優先用<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">生理食鹽水</span></span>沖洗,而不是用一般的水沖洗——因為生理食鹽水的濃度與細胞質相近,不會讓細胞因滲透作用而過度吸水膨脹受損。另外,乾燥的海帶芽或茶葉泡水後會膨脹變大,也是因為滲透作用讓細胞吸水。</div>
   </div>
   <figure class="fig"><img src="assets/sec4_diffusion.png" alt="擴散作用示意圖(資料來源:南一課本)"><figcaption>擴散作用示意圖(資料來源:南一課本)</figcaption></figure>
 <figure class="fig"><img src="assets/sec4_osmosis.png" alt="滲透作用—動物細胞與植物細胞比較(資料來源:南一課本)"><figcaption>滲透作用—動物細胞與植物細胞比較(資料來源:南一課本)</figcaption></figure>
@@ -371,9 +388,9 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
   <h2>1-5 從細胞到個體</h2>
   <div class="notes">
     <h3>單細胞生物與多細胞生物</h3>
-<p>有些生物僅由一個細胞構成,這一個細胞就能表現出完整的生命現象,稱為<b>單細胞生物</b>,例如草履蟲、變形蟲、新月藻、眼蟲等。有些生物則由許多細胞組成,需要靠不同功能的細胞分工合作才能表現完整的生命現象,稱為<b>多細胞生物</b>,例如人類、榕樹、蝴蝶等。</p>
+<p>有些生物僅由一個細胞構成,這一個細胞就能表現出完整的生命現象,稱為<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">單細胞生物</span></span>,例如草履蟲、變形蟲、新月藻、眼蟲等。有些生物則由許多細胞組成,需要靠不同功能的細胞分工合作才能表現完整的生命現象,稱為<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">多細胞生物</span></span>,例如人類、榕樹、蝴蝶等。</p>
 <h3>多細胞生物的組成層次</h3>
-<p>多細胞生物體內,構造與功能相似的細胞會集合成<b>組織</b>;不同的組織再組合成具有特定功能的<b>器官</b>;動物體內,功能相關的器官還會進一步組成<b>器官系統</b>,各器官系統分工合作,才形成一個完整的<b>個體</b>。植物體則沒有器官系統這個層次,由器官直接組成個體。</p>
+<p>多細胞生物體內,構造與功能相似的細胞會集合成<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">組織</span></span>;不同的組織再組合成具有特定功能的<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">器官</span></span>;動物體內,功能相關的器官還會進一步組成<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">器官系統</span></span>,各器官系統分工合作,才形成一個完整的<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">個體</span></span>。植物體則沒有器官系統這個層次,由器官直接組成個體。</p>
 <table>
 <tr><td><b>組成層次</b></td><td><b>動物(以人體為例)</b></td><td><b>植物(以植株為例)</b></td></tr>
 <tr><td>細胞</td><td>皮膜細胞、肌肉細胞</td><td>表皮細胞、保衛細胞、輸導組織細胞</td></tr>
@@ -382,7 +399,7 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
 <tr><td>器官系統</td><td>消化系統、呼吸系統、循環系統(植物沒有這個層次)</td><td>—(無此層次)</td></tr>
 <tr><td>個體</td><td>完整的人體</td><td>完整的植株</td></tr>
 </table>
-<p>植物的器官依功能可分成兩大類:<b>營養器官</b>(根、莖、葉)負責養分的吸收、運輸與製造;<b>生殖器官</b>(花、果實、種子)則負責繁衍下一代。</p>
+<p>植物的器官依功能可分成兩大類:<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">營養器官</span></span>(根、莖、葉)負責養分的吸收、運輸與製造;<span class="blank" onclick="tb(this)"><span class="q">？</span><span class="a">生殖器官</span></span>(花、果實、種子)則負責繁衍下一代。</p>
 <div class="example">生活化例子:人體的消化系統由口腔、食道、胃、小腸、大腸、肝臟等器官分工合作組成,一起完成養分的消化與吸收;而一株番茄植株則是由根、莖、葉(營養器官)和花、果實、種子(生殖器官)共同組成完整的個體,沒有像動物一樣的「器官系統」。</div>
   </div>
   <figure class="fig"><img src="assets/sec5_tissue.png" alt="細胞→組織(資料來源:南一課本)"><figcaption>細胞→組織(資料來源:南一課本)</figcaption></figure>
@@ -438,6 +455,8 @@ footer.site{text-align:center; color:var(--muted); padding:26px; font-size:16px;
 </main>
 <footer class="site">第一章 生命的特性與細胞・教學互動講義（教師用）</footer>
 <script>
+function tb(el){el.classList.toggle('show');}
+function allBlanks(s){document.querySelectorAll('.blank').forEach(function(b){b.classList.toggle('show',s);});}
 function toggleAns(id){
   var el = document.getElementById(id);
   var btn = document.getElementById('btn-'+id);
