@@ -13,19 +13,36 @@
   header p { font-size:18px; opacity:.95; }
   .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
   .back:hover { background:#eef6ff; }
-  .wrap { max-width:900px; margin:0 auto; padding:22px 16px; }
+  .wrap { max-width:960px; margin:0 auto; padding:22px 16px; }
   .intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
   .intro b { color:var(--main); }
-  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  .vcard { display:block; background:#fff; border-radius:16px; overflow:hidden; text-decoration:none; color:#1a1a1a; box-shadow:0 3px 14px rgba(0,0,0,.12); transition:transform .14s, box-shadow .14s; }
-  .vcard:hover { transform:translateY(-4px); box-shadow:0 10px 26px rgba(0,0,0,.18); }
-  .thumb { line-height:0; }
-  .vmeta { padding:14px 18px 18px; }
-  .vmeta h2 { font-size:21px; color:var(--main); margin-bottom:4px; }
-  .vmeta p { font-size:15px; color:#445; line-height:1.55; }
-  .go { display:inline-block; margin-top:10px; color:#fff; background:#2c5f8a; border-radius:18px; padding:5px 16px; font-size:14px; font-weight:bold; }
+
+  .vgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:20px; }
+  .vol { position:relative; display:flex; flex-direction:column; text-decoration:none; color:#1a1a1a; background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 3px 14px rgba(0,0,0,.12); transition:transform .15s, box-shadow .15s; }
+  .vol.active:hover { transform:translateY(-5px); box-shadow:0 12px 28px rgba(0,0,0,.20); }
+  .vol-top { position:relative; height:132px; background:linear-gradient(150deg,var(--c1),var(--c2)); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .vol-tag { position:absolute; top:12px; left:14px; z-index:3; color:#fff; font-size:18px; font-weight:800; letter-spacing:1px; text-shadow:0 1px 4px rgba(0,0,0,.28); }
+  .vol-badge { position:absolute; top:14px; right:13px; z-index:3; background:rgba(255,255,255,.30); color:#fff; border-radius:20px; padding:3px 10px; font-size:11px; font-weight:bold; backdrop-filter:blur(2px); }
+  .vol-emoji { position:relative; z-index:2; font-size:52px; line-height:1; filter:drop-shadow(0 3px 5px rgba(0,0,0,.22)); animation:bob 3s ease-in-out infinite; }
+  .vol:nth-child(even) .vol-emoji { animation-delay:.6s; }
+  @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .vol-halo { position:absolute; z-index:1; width:92px; height:92px; border-radius:50%; background:rgba(255,255,255,.22); }
+  .deco { position:absolute; border-radius:50%; background:rgba(255,255,255,.16); z-index:0; }
+  .d1 { width:70px; height:70px; top:-24px; right:-14px; }
+  .d2 { width:38px; height:38px; bottom:-10px; left:20px; background:rgba(255,255,255,.20); }
+  .d3 { width:15px; height:15px; top:24px; right:40px; background:rgba(255,255,255,.28); }
+  .vol-corner { position:absolute; right:0; bottom:0; z-index:1; width:0; height:0; border-style:solid; border-width:0 0 40px 40px; border-color:transparent transparent rgba(255,255,255,.36) transparent; }
+  .vol-body { padding:14px 18px 18px; flex:1; display:flex; flex-direction:column; }
+  .vol-body h2 { font-size:20px; margin-bottom:4px; }
+  .vol-body p { font-size:13.5px; color:#556; line-height:1.5; }
+  .go { display:inline-block; margin-top:11px; align-self:flex-start; color:#fff; border-radius:18px; padding:5px 16px; font-size:14px; font-weight:bold; transition:filter .15s; }
+  .vol.active:hover .go { filter:brightness(1.08); }
+  .go.soon { background:#cbd3dc; color:#fff; }
+  .soon-card { cursor:default; }
+  .soon-card .vol-top { filter:saturate(.55) brightness(1.04); }
+  .soon-card::after { content:""; position:absolute; inset:0; background:rgba(255,255,255,.34); pointer-events:none; }
   footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-  @media (max-width:620px) { .grid { grid-template-columns:1fr; } header h1 { font-size:24px; } }
+  @media (max-width:520px) { .vgrid { grid-template-columns:1fr 1fr; } header h1 { font-size:24px; } .vol-emoji{font-size:44px} }
 </style>
 </head>
 <body>
@@ -35,136 +52,113 @@
   <a class="back" href="../">← 回主選單</a>
 </header>
 <div class="wrap">
-  <div class="intro">依<b>冊別</b>選擇教材，每冊均含<b>互動講義</b>與<b>練習卷</b>：點選任一選項即<b>顯示解析</b>、<b>即時計分</b>。</div>
-  <div class="grid">
-
-    <!-- ── 第一冊含先修 ── -->
-    <a class="vcard" href="book1.html">
-      <div class="thumb">
-        <svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0"   stop-color="#0a1a2e"/>
-              <stop offset="0.5" stop-color="#14366a"/>
-              <stop offset="1"   stop-color="#2c5f8a"/>
-            </linearGradient>
-          </defs>
-          <rect width="420" height="250" rx="18" fill="url(#g1)"/>
-
-          <!-- Ocean -->
-          <rect x="0" y="192" width="420" height="58" rx="0" fill="#0a1e38" opacity="0.7"/>
-          <path d="M0,194 Q52,182 105,194 Q158,206 210,194 Q263,182 315,194 Q368,206 420,194" fill="none" stroke="#4a9fd4" stroke-width="2.2" opacity="0.75"/>
-          <path d="M0,210 Q52,198 105,210 Q158,222 210,210 Q263,198 315,210 Q368,222 420,210" fill="none" stroke="#4a9fd4" stroke-width="1.5" opacity="0.45"/>
-
-          <!-- Sailing ship -->
-          <!-- Hull -->
-          <path d="M98,178 L218,178 L206,198 L110,198 Z" fill="#c8a05a" stroke="#f0d898" stroke-width="1.5"/>
-          <!-- Mast -->
-          <line x1="155" y1="96" x2="155" y2="178" stroke="#f0e0b0" stroke-width="3.5" stroke-linecap="round"/>
-          <!-- Main sail -->
-          <path d="M155,104 L155,170 L205,155 Z" fill="#f5efd8" opacity="0.92"/>
-          <!-- Front sail -->
-          <path d="M155,112 L155,165 L112,162 Z" fill="#ede5cc" opacity="0.82"/>
-          <!-- Top cross yard -->
-          <line x1="132" y1="118" x2="200" y2="122" stroke="#f0e0b0" stroke-width="2.2" stroke-linecap="round"/>
-          <!-- Flag -->
-          <path d="M155,96 L178,101 L155,107 Z" fill="#e63946"/>
-
-          <!-- Taiwan island silhouette (simple teardrop) -->
-          <path d="M305,72 Q320,62 336,76 Q354,96 350,132 Q344,162 326,174 Q310,180 298,164 Q284,142 288,108 Q291,86 305,72 Z"
-                fill="#1b5e20" opacity="0.72" stroke="#4caf50" stroke-width="1.8"/>
-          <!-- mountain peak -->
-          <path d="M298,148 L316,108 L334,148 Z" fill="#0d3321" opacity="0.85"/>
-          <!-- small white peak line -->
-          <line x1="316" y1="108" x2="316" y2="120" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
-
-          <!-- Badge top-left: 第一冊 + 含先修 -->
-          <rect x="12" y="14" width="190" height="58" rx="13" fill="#0e2d52" stroke="#4a9fd4" stroke-width="1.8" opacity="0.95"/>
-          <text x="107" y="41" text-anchor="middle" font-size="25" font-weight="800" fill="#ffffff" font-family="sans-serif">第一冊</text>
-          <text x="107" y="63" text-anchor="middle" font-size="14" fill="#90c8f0" font-family="sans-serif">含先修教材</text>
-
-          <!-- Bottom title -->
-          <text x="186" y="210" text-anchor="middle" font-size="21" font-weight="800" fill="#ffffff" font-family="sans-serif">臺灣早期歷史</text>
-          <text x="186" y="232" text-anchor="middle" font-size="13" fill="#90c8f0" font-family="sans-serif">原住民・荷據・明鄭・清代</text>
-        </svg>
+  <div class="intro">依<b>冊別</b>選擇教材。每冊均含<b>互動講義</b>與<b>練習</b>：點「？」即時看答案、按「🖨️ 列印作答版」印出<b>空格底線</b>供同學手寫。</div>
+  <div class="vgrid">
+    <a class="vol active" href="book1.html#prep" style="--c1:#e29a2e;--c2:#f2b350">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">先修</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">📚</span>
+        <span class="vol-corner"></span>
       </div>
-      <div class="vmeta">
-        <h2>第一冊 ‧ 先修教材</h2>
-        <p>臺灣早期歷史：原住民族・荷蘭時期・明鄭・清代（說故事教材＋單元 7–10 互動練習）</p>
-        <span class="go">進入 →</span>
+      <div class="vol-body">
+        <h2 style="color:#e29a2e">先修教材</h2>
+        <p>暑期先修 · 說故事＋單元7–10</p>
+        <span class="go" style="background:#e29a2e">進入 →</span>
       </div>
     </a>
-
-    <!-- ── 第二冊期末複習 ── -->
-    <a class="vcard" href="國一歷史第二冊期末複習.html">
-      <div class="thumb">
-        <svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-          <defs>
-            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0"   stop-color="#0d3321"/>
-              <stop offset="0.5" stop-color="#1a5c38"/>
-              <stop offset="1"   stop-color="#2e7d32"/>
-            </linearGradient>
-          </defs>
-          <rect width="420" height="250" rx="18" fill="url(#g2)"/>
-
-          <!-- Chart background grid -->
-          <line x1="72" y1="165" x2="265" y2="165" stroke="#4caf50" stroke-width="1"   opacity="0.35"/>
-          <line x1="72" y1="138" x2="265" y2="138" stroke="#4caf50" stroke-width="1"   opacity="0.35"/>
-          <line x1="72" y1="111" x2="265" y2="111" stroke="#4caf50" stroke-width="1"   opacity="0.35"/>
-          <line x1="72" y1="84"  x2="265" y2="84"  stroke="#4caf50" stroke-width="1"   opacity="0.35"/>
-
-          <!-- Axes -->
-          <line x1="72" y1="72"  x2="72"  y2="172" stroke="#a5d6a7" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="64" y1="165" x2="274" y2="165" stroke="#a5d6a7" stroke-width="2.5" stroke-linecap="round"/>
-
-          <!-- Area fill -->
-          <path d="M72,163 L112,156 L152,147 L192,131 L232,112 L262,88 L262,165 L72,165 Z"
-                fill="#2e7d32" opacity="0.38"/>
-          <!-- Growth line -->
-          <polyline points="72,163 112,156 152,147 192,131 232,112 262,88"
-                    fill="none" stroke="#81c784" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Dots -->
-          <circle cx="72"  cy="163" r="5"   fill="#c8e6c9"/>
-          <circle cx="152" cy="147" r="5"   fill="#c8e6c9"/>
-          <circle cx="232" cy="112" r="5"   fill="#c8e6c9"/>
-          <circle cx="262" cy="88"  r="6.5" fill="#66bb6a" stroke="#fff" stroke-width="1.5"/>
-
-          <!-- X-axis labels -->
-          <text x="72"  y="184" text-anchor="middle" font-size="11" fill="#c8e6c9" font-family="sans-serif">40s</text>
-          <text x="152" y="184" text-anchor="middle" font-size="11" fill="#c8e6c9" font-family="sans-serif">50s</text>
-          <text x="232" y="184" text-anchor="middle" font-size="11" fill="#c8e6c9" font-family="sans-serif">60s</text>
-          <text x="262" y="184" text-anchor="middle" font-size="11" fill="#c8e6c9" font-family="sans-serif">70s</text>
-
-          <!-- Factory silhouettes (right) -->
-          <rect x="305" y="118" width="13" height="60" rx="3" fill="#66bb6a" opacity="0.65"/>
-          <rect x="328" y="100" width="13" height="78" rx="3" fill="#81c784" opacity="0.65"/>
-          <rect x="351" y="110" width="13" height="68" rx="3" fill="#66bb6a" opacity="0.65"/>
-          <rect x="374" y="125" width="13" height="53" rx="3" fill="#4caf50" opacity="0.65"/>
-          <!-- Smoke -->
-          <circle cx="311" cy="112" r="6.5" fill="#a5d6a7" opacity="0.42"/>
-          <circle cx="334" cy="93"  r="7.5" fill="#a5d6a7" opacity="0.42"/>
-          <circle cx="357" cy="103" r="6.5" fill="#a5d6a7" opacity="0.42"/>
-          <!-- Ground -->
-          <line x1="298" y1="180" x2="395" y2="180" stroke="#66bb6a" stroke-width="2" opacity="0.55"/>
-
-          <!-- Badge top-right: 第二冊 -->
-          <rect x="250" y="14" width="158" height="58" rx="13" fill="#e6a800"/>
-          <text x="329" y="41" text-anchor="middle" font-size="27" font-weight="800" fill="#3a2c00" font-family="sans-serif">第二冊</text>
-          <text x="329" y="63" text-anchor="middle" font-size="13.5" fill="#7a5a00" font-family="sans-serif">期末複習</text>
-
-          <!-- Bottom title -->
-          <text x="172" y="208" text-anchor="middle" font-size="20" font-weight="800" fill="#ffffff" font-family="sans-serif">戰後台灣・政治・經濟</text>
-          <text x="172" y="230" text-anchor="middle" font-size="13" fill="#c8e6c9" font-family="sans-serif">講義×3・模擬考卷×6・即時解析</text>
-        </svg>
+    <a class="vol active" href="book1.html" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第一冊</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">🏝️</span>
+        <span class="vol-corner"></span>
       </div>
-      <div class="vmeta">
-        <h2 style="color:#2e7d32;">第二冊 ‧ 期末複習</h2>
-        <p>戰後台灣政治外交・經濟發展・社會文化（填空講義×3＋40 題模擬考卷×3，即時解析）</p>
-        <span class="go" style="background:#2e7d32;">進入 →</span>
+      <div class="vol-body">
+        <h2 style="color:#10908c">七年級上</h2>
+        <p>三版整合講義6課＋先修</p>
+        <span class="go" style="background:#10908c">進入 →</span>
       </div>
     </a>
-
+    <a class="vol active" href="國一歷史第二冊期末複習.html" style="--c1:#2f6fb3;--c2:#4a97da">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第二冊</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">📊</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#2f6fb3">七年級下</h2>
+        <p>期末複習 · 講義×3＋模擬考×3</p>
+        <span class="go" style="background:#2f6fb3">進入 →</span>
+      </div>
+    </a>
+    <div class="vol soon-card" style="--c1:#479d63;--c2:#62c07d">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第三冊</span>
+        <span class="vol-badge">敬請期待</span>
+        <span class="vol-emoji">🏙️</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#8a94a2">八年級上</h2>
+        <p>敬請期待</p>
+        <span class="go soon">準備中</span>
+      </div>
+    </div>
+    <div class="vol soon-card" style="--c1:#9257c4;--c2:#ac74dd">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第四冊</span>
+        <span class="vol-badge">敬請期待</span>
+        <span class="vol-emoji">🎏</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#8a94a2">八年級下</h2>
+        <p>敬請期待</p>
+        <span class="go soon">準備中</span>
+      </div>
+    </div>
+    <div class="vol soon-card" style="--c1:#cf4436;--c2:#e75d4b">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第五冊</span>
+        <span class="vol-badge">敬請期待</span>
+        <span class="vol-emoji">🌐</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#8a94a2">九年級上</h2>
+        <p>敬請期待</p>
+        <span class="go soon">準備中</span>
+      </div>
+    </div>
+    <div class="vol soon-card" style="--c1:#6b7684;--c2:#8a94a2">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第六冊</span>
+        <span class="vol-badge">敬請期待</span>
+        <span class="vol-emoji">🕊️</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#8a94a2">九年級下</h2>
+        <p>敬請期待</p>
+        <span class="go soon">準備中</span>
+      </div>
+    </div>
   </div>
   <footer>歷史科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
