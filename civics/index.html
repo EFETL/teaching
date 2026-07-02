@@ -5,40 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公民科 互動學習</title>
 <style>
-  :root { --main:#2c5f8a; --accent:#e6a800; --subject:#1abc9c; --bg:#eef3f9; }
+  :root { --main:#2c5f8a; }
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:#eef3f9; line-height:1.7; padding:0 0 60px; }
   header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
   header h1 { font-size:30px; margin-bottom:8px; }
   header p { font-size:18px; opacity:.95; }
-  .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
-  .back:hover { background:#eef6ff; }
-  .wrap { max-width:960px; margin:0 auto; padding:28px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:28px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
+  .back { display:inline-block; margin:16px auto 0; color:var(--main); background:#fff; border:2px solid rgba(0,0,0,.08); border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
+  .wrap { max-width:960px; margin:0 auto; padding:22px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
   .intro b { color:var(--main); }
 
-  /* ── 縮圖卡片格 ─────────────────── */
-  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;}
+  .vol{position:relative;display:flex;flex-direction:column;text-decoration:none;color:#1a1a1a;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.12);transition:transform .15s,box-shadow .15s;}
+  .vol.active:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,.20);}
+  .vol-top{position:relative;height:132px;background:linear-gradient(150deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .vol-tag{position:absolute;top:12px;left:14px;z-index:3;color:#fff;font-size:18px;font-weight:800;letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,.28);}
+  .vol-badge{position:absolute;top:14px;right:13px;z-index:3;background:rgba(255,255,255,.30);color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:bold;backdrop-filter:blur(2px);}
+  .vol-emoji{position:relative;z-index:2;font-size:52px;line-height:1;filter:drop-shadow(0 3px 5px rgba(0,0,0,.22));animation:bob 3s ease-in-out infinite;}
+  .vol:nth-child(even) .vol-emoji{animation-delay:.6s;}
+  .vol-halo{position:absolute;z-index:1;width:92px;height:92px;border-radius:50%;background:rgba(255,255,255,.22);}
+  .vol-corner{position:absolute;right:0;bottom:0;z-index:1;width:0;height:0;border-style:solid;border-width:0 0 40px 40px;border-color:transparent transparent rgba(255,255,255,.36) transparent;}
+  .vol-body{padding:14px 18px 18px;flex:1;display:flex;flex-direction:column;}
+  .vol-body h2{font-size:20px;margin-bottom:4px;}
+  .vol-body p{font-size:13.5px;color:#556;line-height:1.5;}
+  .go{display:inline-block;margin-top:11px;align-self:flex-start;color:#fff;border-radius:18px;padding:5px 16px;font-size:14px;font-weight:bold;transition:filter .15s;}
+  .vol.active:hover .go{filter:brightness(1.08);}
+  .go.soon{background:#cbd3dc;color:#fff;}
+  .soon-card{cursor:default;}
+  .soon-card .vol-top{filter:saturate(.55) brightness(1.04);}
+  .soon-card::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.34);pointer-events:none;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.16);z-index:0;}
+  .d1{width:70px;height:70px;top:-24px;right:-14px;}
+  .d2{width:38px;height:38px;bottom:-10px;left:20px;background:rgba(255,255,255,.20);}
+  .d3{width:15px;height:15px;top:24px;right:40px;background:rgba(255,255,255,.28);}
+  @media(max-width:520px){.vgrid{grid-template-columns:1fr 1fr;}.vol-emoji{font-size:44px;}}
 
-  .book-card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,.10); transition:transform .18s,box-shadow .18s; }
-  .book-card:hover { transform:translateY(-5px); box-shadow:0 8px 28px rgba(0,0,0,.16); }
-  .book-card.coming { opacity:.88; }
-  .book-card.coming:hover { transform:none; box-shadow:0 2px 14px rgba(0,0,0,.10); }
-
-  .thumb-link { display:block; text-decoration:none; }
-  .thumb { width:100%; aspect-ratio:3/2; overflow:hidden; display:block; }
-  .thumb svg { width:100%; height:100%; display:block; }
-
-  .card-body { padding:16px 20px 22px; }
-  .card-body h3 { font-size:20px; font-weight:bold; color:#1a1a1a; margin-bottom:6px; }
-  .card-body p { font-size:15px; color:#556; margin-bottom:14px; min-height:2.2em; }
-
-  .btn-enter { display:inline-block; background:var(--main); color:#fff; text-decoration:none; padding:9px 22px; border-radius:22px; font-size:16px; font-weight:bold; transition:background .15s; }
-  .btn-enter:hover { background:#3d7cb0; }
-  .btn-wait { display:inline-block; background:#ccc; color:#888; border:none; padding:9px 22px; border-radius:22px; font-size:16px; font-weight:bold; cursor:not-allowed; font-family:inherit; }
-
-  footer { text-align:center; color:#789; font-size:15px; margin-top:36px; }
-  @media (max-width:560px){ header h1{ font-size:24px; } .card-grid{ grid-template-columns:1fr; } }
+  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
 </style>
 </head>
 <body>
@@ -49,206 +53,70 @@
 </header>
 <div class="wrap">
   <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
-
-  <div class="card-grid">
-
-    <!-- 公民第一冊・第1課 三版本綜合 -->
-    <div class="book-card">
-      <a href="civics-v1-l1.html" class="thumb-link">
-        <div class="thumb">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="gV1L1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#8b2326"/>
-                <stop offset="100%" stop-color="#c5a028"/>
-              </linearGradient>
-            </defs>
-            <rect width="300" height="200" fill="url(#gV1L1)"/>
-            <circle cx="262" cy="32" r="48" fill="rgba(255,255,255,.07)"/>
-            <circle cx="36" cy="172" r="40" fill="rgba(255,255,255,.06)"/>
-            <!-- 天秤 -->
-            <line x1="150" y1="48" x2="150" y2="120" stroke="rgba(255,255,255,.85)" stroke-width="3"/>
-            <line x1="104" y1="70" x2="196" y2="70" stroke="rgba(255,255,255,.85)" stroke-width="3"/>
-            <circle cx="150" cy="46" r="6" fill="rgba(255,255,255,.9)"/>
-            <line x1="104" y1="70" x2="92" y2="104" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
-            <line x1="104" y1="70" x2="116" y2="104" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
-            <path d="M88 104 a16 8 0 0 0 32 0 z" fill="rgba(255,255,255,.32)" stroke="rgba(255,255,255,.8)" stroke-width="1.2"/>
-            <line x1="196" y1="70" x2="184" y2="104" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
-            <line x1="196" y1="70" x2="208" y2="104" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
-            <path d="M180 104 a16 8 0 0 0 32 0 z" fill="rgba(255,255,255,.32)" stroke="rgba(255,255,255,.8)" stroke-width="1.2"/>
-            <rect x="128" y="120" width="44" height="10" rx="3" fill="rgba(255,255,255,.6)"/>
-            <!-- 三版標籤 -->
-            <rect x="14" y="160" width="118" height="26" rx="13" fill="rgba(0,0,0,.3)"/>
-            <text x="73" y="177" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" font-weight="bold">康・翰・南 三版</text>
-          </svg>
-        </div>
-      </a>
-      <div class="card-body">
-        <h3>公民第一冊・第1課</h3>
-        <p>人性尊嚴與人權保障｜三版本綜合互動講義＋列印版 PDF</p>
-        <a href="civics-v1-l1.html" class="btn-enter">進入 →</a>
+  <div class="vgrid">
+    <a class="vol active" href="civics-v1-l1.html" style="--c1:#e29a2e;--c2:#f2b350">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第一冊 L1</span>
+        <span class="vol-badge">康・翰・南 三版</span>
+        <span class="vol-emoji">⚖️</span>
+        <span class="vol-corner"></span>
       </div>
-    </div>
-
-    <!-- 先修（第一冊 L11–L17）-->
-    <div class="book-card">
-      <a href="civics-pre.html" class="thumb-link">
-        <div class="thumb">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="gPre" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#2c5f8a"/>
-                <stop offset="100%" stop-color="#1abc9c"/>
-              </linearGradient>
-            </defs>
-            <rect width="300" height="200" fill="url(#gPre)"/>
-            <!-- 裝飾圓 -->
-            <circle cx="260" cy="30" r="50" fill="rgba(255,255,255,.07)"/>
-            <circle cx="40" cy="170" r="40" fill="rgba(255,255,255,.06)"/>
-            <!-- 建築 -->
-            <rect x="110" y="100" width="80" height="72" rx="3" fill="rgba(255,255,255,.22)"/>
-            <!-- 屋頂 -->
-            <polygon points="100,100 150,58 200,100" fill="rgba(255,255,255,.32)"/>
-            <!-- 旗杆 -->
-            <line x1="150" y1="58" x2="150" y2="38" stroke="rgba(255,255,255,.6)" stroke-width="3"/>
-            <rect x="150" y="38" width="22" height="14" rx="2" fill="rgba(255,200,0,.8)"/>
-            <!-- 門 -->
-            <rect x="135" y="138" width="30" height="34" rx="3" fill="rgba(255,255,255,.55)"/>
-            <!-- 窗 -->
-            <rect x="115" y="112" width="20" height="18" rx="3" fill="rgba(255,255,255,.5)"/>
-            <rect x="165" y="112" width="20" height="18" rx="3" fill="rgba(255,255,255,.5)"/>
-            <!-- 天秤 -->
-            <line x1="46" y1="82" x2="92" y2="82" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
-            <line x1="69" y1="65" x2="69" y2="115" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
-            <circle cx="46" cy="92" r="10" fill="rgba(255,255,255,.3)" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
-            <circle cx="92" cy="90" r="10" fill="rgba(255,255,255,.3)" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
-            <polygon points="69,63 64,73 74,73" fill="rgba(255,255,255,.7)"/>
-            <!-- L11~L17 標籤 -->
-            <rect x="12" y="160" width="106" height="28" rx="14" fill="rgba(0,0,0,.3)"/>
-            <text x="65" y="179" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" font-weight="bold">L11 – L17</text>
-          </svg>
-        </div>
-      </a>
-      <div class="card-body">
-        <h3>先修・第一冊</h3>
-        <p>家庭、學校、社區與文化｜第 11–17 課</p>
-        <a href="civics-pre.html" class="btn-enter">進入 →</a>
+      <div class="vol-body">
+        <h2 style="color:#e29a2e">人性尊嚴與人權保障</h2>
+        <p>三版本綜合互動講義＋列印版 PDF</p>
+        <span class="go" style="background:#e29a2e">進入 →</span>
       </div>
-    </div>
-
-    <!-- 第二冊 翰林版期末考 -->
-    <div class="book-card">
-      <a href="mock-exam-s2.html" class="thumb-link">
-        <div class="thumb">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="gHL" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#6b1215"/>
-                <stop offset="100%" stop-color="#c44040"/>
-              </linearGradient>
-            </defs>
-            <rect width="300" height="200" fill="url(#gHL)"/>
-            <circle cx="270" cy="170" r="60" fill="rgba(255,255,255,.06)"/>
-            <circle cx="20" cy="20" r="35" fill="rgba(255,255,255,.06)"/>
-            <!-- 鉛筆 -->
-            <g transform="rotate(-38,65,155)">
-              <rect x="38" y="60" width="14" height="88" rx="2" fill="rgba(255,220,80,.85)"/>
-              <polygon points="38,148 52,148 45,170" fill="rgba(255,255,255,.9)"/>
-              <polygon points="38,148 52,148 45,162" fill="#e8c060"/>
-              <rect x="38" y="60" width="14" height="10" rx="2" fill="rgba(160,50,50,.9)"/>
-            </g>
-            <!-- 考卷 3 張 (後→前) -->
-            <g transform="rotate(10,182,108)">
-              <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.18)"/>
-            </g>
-            <g transform="rotate(4,182,108)">
-              <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.28)"/>
-            </g>
-            <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.92)"/>
-            <!-- 標題欄 -->
-            <rect x="137" y="42" width="90" height="24" rx="5" fill="#8b2326"/>
-            <text x="182" y="58" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" font-weight="bold">複習考卷 ×3</text>
-            <!-- 線條 -->
-            <line x1="150" y1="79" x2="215" y2="79" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="93" x2="215" y2="93" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="107" x2="205" y2="107" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="121" x2="210" y2="121" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="135" x2="200" y2="135" stroke="#ccc" stroke-width="1.5"/>
-            <!-- 打勾 -->
-            <text x="153" y="154" fill="#1a7a3c" font-size="14" font-family="sans-serif">✓</text>
-            <text x="171" y="154" fill="#1a7a3c" font-size="14" font-family="sans-serif">✓</text>
-            <text x="189" y="154" fill="#888" font-size="14" font-family="sans-serif">✓</text>
-            <!-- 翰林標籤 -->
-            <rect x="14" y="160" width="76" height="26" rx="13" fill="rgba(0,0,0,.3)"/>
-            <text x="52" y="177" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" font-weight="bold">翰林版</text>
-          </svg>
-        </div>
-      </a>
-      <div class="card-body">
-        <h3>第二冊翰林版期末考</h3>
-        <p>三份複習考卷・填充題講義・互動練習</p>
-        <a href="mock-exam-s2.html" class="btn-enter">進入 →</a>
+    </a>
+    <a class="vol active" href="civics-pre.html" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">先修</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">🏫</span>
+        <span class="vol-corner"></span>
       </div>
-    </div>
-
-    <!-- 第二冊 康軒版期末考 -->
-    <div class="book-card">
-      <a href="mock-exam-kx-s2.html" class="thumb-link">
-        <div class="thumb">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="gKX" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#1e8449"/>
-                <stop offset="100%" stop-color="#2ecc71"/>
-              </linearGradient>
-            </defs>
-            <rect width="300" height="200" fill="url(#gKX)"/>
-            <circle cx="270" cy="170" r="60" fill="rgba(255,255,255,.06)"/>
-            <circle cx="20" cy="20" r="35" fill="rgba(255,255,255,.06)"/>
-            <!-- 鉛筆 -->
-            <g transform="rotate(-38,65,155)">
-              <rect x="38" y="60" width="14" height="88" rx="2" fill="rgba(255,220,80,.85)"/>
-              <polygon points="38,148 52,148 45,170" fill="rgba(255,255,255,.9)"/>
-              <polygon points="38,148 52,148 45,162" fill="#e8c060"/>
-              <rect x="38" y="60" width="14" height="10" rx="2" fill="rgba(30,70,130,.9)"/>
-            </g>
-            <!-- 考卷 3 張 (後→前) -->
-            <g transform="rotate(10,182,108)">
-              <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.18)"/>
-            </g>
-            <g transform="rotate(4,182,108)">
-              <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.28)"/>
-            </g>
-            <rect x="137" y="42" width="90" height="120" rx="5" fill="rgba(255,255,255,.92)"/>
-            <!-- 標題欄 -->
-            <rect x="137" y="42" width="90" height="24" rx="5" fill="#1e8449"/>
-            <text x="182" y="58" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" font-weight="bold">複習考卷 ×6</text>
-            <!-- 線條 -->
-            <line x1="150" y1="79" x2="215" y2="79" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="93" x2="215" y2="93" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="107" x2="205" y2="107" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="121" x2="210" y2="121" stroke="#ccc" stroke-width="1.5"/>
-            <line x1="150" y1="135" x2="200" y2="135" stroke="#ccc" stroke-width="1.5"/>
-            <!-- 打勾 -->
-            <text x="153" y="154" fill="#1a7a3c" font-size="14" font-family="sans-serif">✓</text>
-            <text x="171" y="154" fill="#1a7a3c" font-size="14" font-family="sans-serif">✓</text>
-            <text x="189" y="154" fill="#1a7a3c" font-size="14" font-family="sans-serif">✓</text>
-            <!-- 康軒標籤 -->
-            <rect x="14" y="160" width="76" height="26" rx="13" fill="rgba(0,0,0,.3)"/>
-            <text x="52" y="177" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" font-weight="bold">康軒版</text>
-          </svg>
-        </div>
-      </a>
-      <div class="card-body">
-        <h3>第二冊康軒版期末考</h3>
-        <p>六份複習考卷・填充題講義・互動練習</p>
-        <a href="mock-exam-kx-s2.html" class="btn-enter">進入 →</a>
+      <div class="vol-body">
+        <h2 style="color:#10908c">家庭・學校・社區與文化</h2>
+        <p>先修 ‧ 第一冊 第 11–17 課</p>
+        <span class="go" style="background:#10908c">進入 →</span>
       </div>
-    </div>
-
-  </div><!-- /card-grid -->
-
+    </a>
+    <a class="vol active" href="mock-exam-s2.html" style="--c1:#2f6fb3;--c2:#4a97da">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第二冊</span>
+        <span class="vol-badge">翰林版</span>
+        <span class="vol-emoji">📝</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#2f6fb3">翰林版期末複習</h2>
+        <p>三份複習考卷・填充講義・互動練習</p>
+        <span class="go" style="background:#2f6fb3">進入 →</span>
+      </div>
+    </a>
+    <a class="vol active" href="mock-exam-kx-s2.html" style="--c1:#479d63;--c2:#62c07d">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第二冊</span>
+        <span class="vol-badge">康軒版</span>
+        <span class="vol-emoji">🗳️</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#479d63">康軒版期末複習</h2>
+        <p>六份複習考卷・填充講義・互動練習</p>
+        <span class="go" style="background:#479d63">進入 →</span>
+      </div>
+    </a>
+  </div>
   <footer>公民科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
 </body>
 </html>
+

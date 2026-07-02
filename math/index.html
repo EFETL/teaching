@@ -5,34 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>數學科 互動學習</title>
 <style>
-  :root { --main:#2c5f8a; --bg:#eef3f9; }
+  :root { --main:#2c5f8a; }
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:#eef3f9; line-height:1.7; padding:0 0 60px; }
   header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
   header h1 { font-size:30px; margin-bottom:8px; }
   header p { font-size:18px; opacity:.95; }
-  .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
-  .back:hover { background:#eef6ff; }
-  .wrap { max-width:900px; margin:0 auto; padding:22px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:24px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
+  .back { display:inline-block; margin:16px auto 0; color:var(--main); background:#fff; border:2px solid rgba(0,0,0,.08); border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
+  .wrap { max-width:960px; margin:0 auto; padding:22px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
   .intro b { color:var(--main); }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
-  .vcard { display:block; text-decoration:none; background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.10); border:1px solid #e2e8f0; transition:transform .12s, box-shadow .12s; position:relative; }
-  .vcard:hover { transform:translateY(-5px); box-shadow:0 10px 22px rgba(20,60,90,.20); }
-  .vthumb { height:104px; display:flex; align-items:center; justify-content:center; gap:6px; color:#fff; background:linear-gradient(135deg,var(--g1),var(--g2)); position:relative; }
-  .vthumb::after { content:"📐"; position:absolute; right:10px; bottom:6px; font-size:20px; opacity:.5; }
-  .vthumb .vn { font-size:52px; font-weight:800; line-height:1; letter-spacing:1px; text-shadow:0 2px 6px rgba(0,0,0,.18); }
-  .vthumb .vn.txt { font-size:34px; }
-  .vthumb .vc { font-size:20px; font-weight:700; align-self:flex-end; margin-bottom:18px; opacity:.92; }
-  .vbody { padding:13px 16px 15px; }
-  .vlabel { font-size:21px; font-weight:800; color:#15324a; }
-  .vsub { font-size:14.5px; color:#5a6b78; margin-top:3px; }
-  .vcard.soon { cursor:default; }
-  .vcard.soon .vthumb { filter:grayscale(.55) opacity(.75); }
-  .vcard.soon:hover { transform:none; box-shadow:0 2px 10px rgba(0,0,0,.10); }
-  .ribbon { position:absolute; top:10px; left:10px; background:rgba(255,255,255,.92); color:#7a8794; font-size:12.5px; font-weight:700; border-radius:14px; padding:2px 11px; }
-  footer { text-align:center; color:#789; font-size:15px; margin-top:34px; }
-  @media (max-width:560px){ header h1{ font-size:24px; } .grid{ grid-template-columns:1fr 1fr; gap:12px; } .vthumb .vn{ font-size:42px; } }
+
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;}
+  .vol{position:relative;display:flex;flex-direction:column;text-decoration:none;color:#1a1a1a;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.12);transition:transform .15s,box-shadow .15s;}
+  .vol.active:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,.20);}
+  .vol-top{position:relative;height:132px;background:linear-gradient(150deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .vol-tag{position:absolute;top:12px;left:14px;z-index:3;color:#fff;font-size:18px;font-weight:800;letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,.28);}
+  .vol-badge{position:absolute;top:14px;right:13px;z-index:3;background:rgba(255,255,255,.30);color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:bold;backdrop-filter:blur(2px);}
+  .vol-emoji{position:relative;z-index:2;font-size:52px;line-height:1;filter:drop-shadow(0 3px 5px rgba(0,0,0,.22));animation:bob 3s ease-in-out infinite;}
+  .vol:nth-child(even) .vol-emoji{animation-delay:.6s;}
+  .vol-halo{position:absolute;z-index:1;width:92px;height:92px;border-radius:50%;background:rgba(255,255,255,.22);}
+  .vol-corner{position:absolute;right:0;bottom:0;z-index:1;width:0;height:0;border-style:solid;border-width:0 0 40px 40px;border-color:transparent transparent rgba(255,255,255,.36) transparent;}
+  .vol-body{padding:14px 18px 18px;flex:1;display:flex;flex-direction:column;}
+  .vol-body h2{font-size:20px;margin-bottom:4px;}
+  .vol-body p{font-size:13.5px;color:#556;line-height:1.5;}
+  .go{display:inline-block;margin-top:11px;align-self:flex-start;color:#fff;border-radius:18px;padding:5px 16px;font-size:14px;font-weight:bold;transition:filter .15s;}
+  .vol.active:hover .go{filter:brightness(1.08);}
+  .go.soon{background:#cbd3dc;color:#fff;}
+  .soon-card{cursor:default;}
+  .soon-card .vol-top{filter:saturate(.55) brightness(1.04);}
+  .soon-card::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.34);pointer-events:none;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.16);z-index:0;}
+  .d1{width:70px;height:70px;top:-24px;right:-14px;}
+  .d2{width:38px;height:38px;bottom:-10px;left:20px;background:rgba(255,255,255,.20);}
+  .d3{width:15px;height:15px;top:24px;right:40px;background:rgba(255,255,255,.28);}
+  @media(max-width:520px){.vgrid{grid-template-columns:1fr 1fr;}.vol-emoji{font-size:44px;}}
+
+  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
 </style>
 </head>
 <body>
@@ -43,48 +53,115 @@
 </header>
 <div class="wrap">
   <div class="intro">選擇下方<b>冊別</b>進入，即可在線上<b>作答練習</b>，系統會<b>即時顯示對錯與解析</b>。</div>
-  <div class="grid">
-
-    <a class="vcard" href="prep.html">
-      <div class="vthumb" style="--g1:#d98b00;--g2:#f0b93a"><span class="vn txt">先修</span></div>
-      <div class="vbody"><div class="vlabel">先修</div><div class="vsub">暑期先修 ‧ 共 6 份</div></div>
+  <div class="vgrid">
+    <a class="vol active" href="prep.html" style="--c1:#e29a2e;--c2:#f2b350">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">先修</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">📚</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#e29a2e">先修教材</h2>
+        <p>暑期先修 ‧ 共 6 份</p>
+        <span class="go" style="background:#e29a2e">進入 →</span>
+      </div>
     </a>
-
-    <a class="vcard" href="book1.html">
-      <div class="vthumb" style="--g1:#006d7d;--g2:#16aec0"><span class="vn">1</span><span class="vc">冊</span></div>
-      <div class="vbody"><div class="vlabel">第一冊</div><div class="vsub">七年級上 ‧ 1 份教材</div></div>
+    <a class="vol active" href="book1.html" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第一冊</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">➕</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#10908c">七年級上</h2>
+        <p>1 份教材</p>
+        <span class="go" style="background:#10908c">進入 →</span>
+      </div>
     </a>
-
-    <a class="vcard" href="book2/">
-      <div class="vthumb" style="--g1:#1e5fa8;--g2:#4a90d6"><span class="vn">2</span><span class="vc">冊</span></div>
-      <div class="vbody"><div class="vlabel">第二冊</div><div class="vsub">七年級下 ‧ 期末模擬考</div></div>
+    <a class="vol active" href="book2/" style="--c1:#2f6fb3;--c2:#4a97da">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第二冊</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">✖️</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#2f6fb3">七年級下</h2>
+        <p>期末模擬考</p>
+        <span class="go" style="background:#2f6fb3">進入 →</span>
+      </div>
     </a>
-
-    <div class="vcard soon">
-      <span class="ribbon">敬請期待</span>
-      <div class="vthumb" style="--g1:#1f8a4c;--g2:#45b86a"><span class="vn">3</span><span class="vc">冊</span></div>
-      <div class="vbody"><div class="vlabel">第三冊</div><div class="vsub">八年級上 ‧ 準備中</div></div>
+    <div class="vol soon-card" style="--c1:#479d63;--c2:#62c07d">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第三冊</span>
+        <span class="vol-badge">敬請期待</span>
+        <span class="vol-emoji">📐</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#8a94a2">八年級上</h2>
+        <p>敬請期待</p>
+        <span class="go soon">準備中</span>
+      </div>
     </div>
-
-    <div class="vcard soon">
-      <span class="ribbon">敬請期待</span>
-      <div class="vthumb" style="--g1:#6d3fb0;--g2:#9b6fd0"><span class="vn">4</span><span class="vc">冊</span></div>
-      <div class="vbody"><div class="vlabel">第四冊</div><div class="vsub">八年級下 ‧ 準備中</div></div>
+    <div class="vol soon-card" style="--c1:#9257c4;--c2:#ac74dd">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第四冊</span>
+        <span class="vol-badge">敬請期待</span>
+        <span class="vol-emoji">📏</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#8a94a2">八年級下</h2>
+        <p>敬請期待</p>
+        <span class="go soon">準備中</span>
+      </div>
     </div>
-
-    <a class="vcard" href="book5.html">
-      <div class="vthumb" style="--g1:#c0392b;--g2:#e35d4e"><span class="vn">5</span><span class="vc">冊</span></div>
-      <div class="vbody"><div class="vlabel">第五冊</div><div class="vsub">九年級上 ‧ 2 份教材</div></div>
+    <a class="vol active" href="book5.html" style="--c1:#cf4436;--c2:#e75d4b">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第五冊</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">📊</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#cf4436">九年級上</h2>
+        <p>2 份教材</p>
+        <span class="go" style="background:#cf4436">進入 →</span>
+      </div>
     </a>
-
-    <div class="vcard soon">
-      <span class="ribbon">敬請期待</span>
-      <div class="vthumb" style="--g1:#3f4f9e;--g2:#6172c8"><span class="vn">6</span><span class="vc">冊</span></div>
-      <div class="vbody"><div class="vlabel">第六冊</div><div class="vsub">九年級下 ‧ 準備中</div></div>
+    <div class="vol soon-card" style="--c1:#6b7684;--c2:#8a94a2">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第六冊</span>
+        <span class="vol-badge">敬請期待</span>
+        <span class="vol-emoji">🧮</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#8a94a2">九年級下</h2>
+        <p>敬請期待</p>
+        <span class="go soon">準備中</span>
+      </div>
     </div>
-
   </div>
   <footer>數學科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
 </body>
 </html>
+
