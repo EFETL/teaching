@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L6: I Have a Dream ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L6: I Have a Dream ── 我有一個夢</h1>
+  <div class="sub">龍騰版高中英文 第五冊 第六課｜互動教學講義（高三適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 課文速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>課文速覽（三大重點）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🎤 歷史時刻</h4>
+        1963/8/28，<b>金恩博士</b>在林肯紀念堂前對逾 25 萬人發表演說。他描繪一個種族歧視終結、黑人被平等對待的未來——這成為<b>民權運動</b>的決定性時刻。
+      </div>
+      <div class="story-card s2">
+        <h4>✊ 百年仍不自由</h4>
+        林肯簽署《解放宣言》一百年後，黑人仍受<b>種族隔離</b>與歧視之苦、身陷貧困與流放。金恩以「<b>One hundred years later…</b>」層層排比控訴這可恥的處境，並宣告「絕不滿足」直到正義來臨。
+      </div>
+      <div class="story-card s3">
+        <h4>🕊️ 我有一個夢</h4>
+        以「<b>I have a dream…</b>」的重複與意象，金恩描繪黑白孩子攜手、以<b>品格而非膚色</b>被評價的願景。其<b>雄辯</b>喚醒無數美國人的良知，至今仍激勵人心。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析 + 重點解析」。點右側 🔊 可聽整句朗讀。演說原文為 1963 年歷史文本，中譯採現代通用譯法。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課為 Martin Luther King, Jr.〈I Have a Dream〉演說（節錄）＋前後導論賞析。演說以「排比、句首重複、意象」著稱，閱讀時可留意其修辭力量。</p>
+
+    <!-- 導論 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🎤 一｜導論：歷史性的演說</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>On August 28, 1963, Martin Luther King, Jr., marched to the Lincoln Memorial in Washington, DC, and delivered a historic speech before a crowd of over 250,000 people.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">1963 年 8 月 28 日，小馬丁·路德·金恩遊行至華盛頓特區的林肯紀念堂，在超過 25 萬人的群眾面前發表了一場歷史性的演說。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Martin Luther King, Jr.</span><span class="syn-t">S</span> <span class="syn syn-v">marched</span><span class="syn-t">V</span> <span class="syn syn-m">to the Lincoln Memorial</span><span class="syn-t">副詞</span> <span class="syn syn-v">and delivered</span><span class="syn-t">V</span> <span class="syn syn-o">a historic speech</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>march</b>（遊行）、<b>memorial</b>（紀念堂）為重點字；<b>deliver a speech</b> = 發表演說；before = 在…面前。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In that speech, King outlined his hopes for the future—a time when racism would end and African Americans would be treated by whites as equals.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在那場演說中，金恩勾勒出他對未來的期盼——一個種族主義終結、非裔美國人被白人平等對待的時代。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">King</span><span class="syn-t">S</span> <span class="syn syn-v">outlined</span><span class="syn-t">V</span> <span class="syn syn-o">his hopes for the future</span><span class="syn-t">O</span> <span class="syn syn-m">—a time when racism would end...</span><span class="syn-t">同位語（含關係副詞 when）</span></div>
+          <div class="para-note"><b>outline</b>（概述）、<b>racism</b>（種族主義）為核心字；<b>treat A as B</b> = 把 A 當作 B；when 引導關係子句修飾 time。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>That speech turned out to be a decisive moment in the civil rights movement.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">那場演說最終成為民權運動中決定性的一刻。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">That speech</span><span class="syn-t">S</span> <span class="syn syn-v">turned out to be</span><span class="syn-t">V</span> <span class="syn syn-c">a decisive moment in the civil rights movement</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>decisive</b>（決定性的）、<b>civil</b>（公民的）為核心字；<b>turn out to be</b> = 結果證明是；civil rights movement = 民權運動。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Had Dr. King not made the speech, the United States might not have introduced a series of laws to grant new rights to African Americans within just a few years.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">若金恩博士當年沒有發表這場演說，美國或許不會在短短幾年內就推出一系列法律，賦予非裔美國人新的權利。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Had Dr. King not made the speech</span><span class="syn-t">與過去相反的假設（倒裝）</span> <span class="syn syn-s">the United States</span><span class="syn-t">S</span> <span class="syn syn-v">might not have introduced</span><span class="syn-t">V（過去推測）</span> <span class="syn syn-o">a series of laws...</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>grant</b>（授予）為核心字；<b>Had + S + p.p.</b>＝If S had p.p. 的倒裝（見句型一）；主句 might not have + p.p.。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 歷史的呼喚 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">✊ 二｜演說：百年之後，仍不自由</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">今天，我很高興能與各位一同參與這場將名留青史、成為我國史上最偉大的爭自由遊行。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">am happy</span><span class="syn-t">V</span> <span class="syn syn-c">to join with you</span><span class="syn-t">不定詞</span> <span class="syn syn-m">in what will go down in history...</span><span class="syn-t">介系詞＋名詞子句</span></div>
+          <div class="para-note"><b>go down in history</b> = 名留青史（片語）；<b>demonstration</b> = 示威遊行；what 引導名詞子句作 in 的受詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Five score years ago, a great American, in whose symbolic shadow we stand today, signed the Emancipation Proclamation.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一百年前，一位偉大的美國人——今日我們正站在他象徵性的身影之下——簽署了《解放宣言》。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">a great American</span><span class="syn-t">S</span> <span class="syn syn-m">, in whose symbolic shadow we stand today,</span><span class="syn-t">介系詞＋關代（非限定）</span> <span class="syn syn-v">signed</span><span class="syn-t">V</span> <span class="syn syn-o">the Emancipation Proclamation</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>Five score</b> = 一百（score＝20）；<b>in whose shadow</b> 介系詞＋關代（見句型二）；指林肯與《解放宣言》。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This momentous decree came as a great beacon light of hope to millions of Negro slaves who had been seared in the flames of withering injustice.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這項重大的法令，對於數百萬曾在凋敝不義的烈焰中飽受煎熬的黑奴而言，宛如一座偉大的希望燈塔。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This momentous decree</span><span class="syn-t">S</span> <span class="syn syn-v">came as</span><span class="syn-t">V</span> <span class="syn syn-c">a great beacon light of hope</span><span class="syn-t">C</span> <span class="syn syn-m">to millions of Negro slaves [who had been seared...]</span><span class="syn-t">副詞（含關係子句）</span></div>
+          <div class="para-note"><b>flame</b>（火焰）、<b>wither</b>（凋敝）為重點字；<b>come as</b> = 宛如；意象：燈塔＝希望；過去完成被動 had been seared。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It came as a joyous daybreak to end the long night of their captivity.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它宛如一個歡欣的破曉，結束了他們囚禁的漫漫長夜。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">S</span> <span class="syn syn-v">came as</span><span class="syn-t">V</span> <span class="syn syn-c">a joyous daybreak</span><span class="syn-t">C</span> <span class="syn syn-m">to end the long night of their captivity</span><span class="syn-t">不定詞（目的）</span></div>
+          <div class="para-note"><b>captivity</b>（囚禁）為補充字；意象對比：daybreak（破曉）↔ night（長夜）；捕捉「自由」的希望。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>But one hundred years later, the Negro still is not free.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">但一百年後，黑人仍然沒有獲得自由。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">one hundred years later</span><span class="syn-t">時間</span> <span class="syn syn-s">the Negro</span><span class="syn-t">S</span> <span class="syn syn-v">still is not</span><span class="syn-t">V</span> <span class="syn syn-c">free</span><span class="syn-t">C</span></div>
+          <div class="para-note">此句起連用四次「<b>One hundred years later…</b>」句首重複（anaphora），層層堆疊控訴力量（見句型五）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>One hundred years later, the life of the Negro is still sadly crippled by the manacles of segregation and the chains of discrimination.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一百年後，黑人的生活仍悲哀地被種族隔離的枷鎖與歧視的鎖鏈所桎梏。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the life of the Negro</span><span class="syn-t">S</span> <span class="syn syn-v">is still crippled by</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">the manacles of segregation and the chains of discrimination</span><span class="syn-t">by 受詞</span></div>
+          <div class="para-note"><b>cripple</b>（桎梏、重創）、<b>segregation</b>（種族隔離）為核心字；意象 manacles/chains（枷鎖/鎖鏈）＝束縛。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>One hundred years later, the Negro lives on a lonely island of poverty in the midst of a vast ocean of material prosperity.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一百年後，黑人依然生活在貧困的孤島上，四周卻是物質繁榮的汪洋大海。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the Negro</span><span class="syn-t">S</span> <span class="syn syn-v">lives</span><span class="syn-t">V</span> <span class="syn syn-m">on a lonely island of poverty in the midst of a vast ocean of material prosperity</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>midst</b>（之中）為補充字；意象對比：island of poverty（貧困孤島）↔ ocean of prosperity（繁榮汪洋）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>One hundred years later, the Negro is still languishing in the corners of American society and finds himself an exile in his own land.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一百年後，黑人依然在美國社會的角落中飽受折磨，發現自己在故土上竟如同流亡者。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the Negro</span><span class="syn-t">S</span> <span class="syn syn-v">is languishing</span><span class="syn-t">V</span> <span class="syn syn-v">and finds</span><span class="syn-t">V</span> <span class="syn syn-o">himself</span><span class="syn-t">O</span> <span class="syn syn-c">an exile in his own land</span><span class="syn-t">OC</span></div>
+          <div class="para-note"><b>exile</b>（流亡者）為核心字；<b>find + O + OC</b>（發現…是…）；languish = 受煎熬。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>And so we've come here today to dramatize a shameful condition.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">因此，我們今天來到這裡，就是要凸顯這一可恥的處境。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">have come</span><span class="syn-t">V</span> <span class="syn syn-m">here today to dramatize a shameful condition</span><span class="syn-t">副詞（不定詞表目的）</span></div>
+          <div class="para-note"><b>shameful</b>（可恥的）為補充字；<b>dramatize</b> = 使戲劇化、凸顯。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 我們絕不滿足 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🔥 三｜演說：我們絕不滿足（as long as）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>...There are those who are asking..."When will you be satisfied?" We can never be satisfied as long as the Negro is the victim of the unspeakable horrors of police brutality.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有人問：「你們什麼時候才會滿足？」只要黑人仍是警察暴行那難以言喻恐怖下的受害者，我們就永遠不會滿足。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">We</span><span class="syn-t">S</span> <span class="syn syn-v">can never be satisfied</span><span class="syn-t">V</span> <span class="syn syn-m">as long as the Negro is the victim of...</span><span class="syn-t">條件副詞子句</span></div>
+          <div class="para-note">此段連用五次「<b>We can never/cannot be satisfied as long as…</b>」排比（見句型四、五）；<b>as long as</b> = 只要；brutality = 暴行。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>We can never be satisfied as long as our bodies, heavy with the fatigue of travel, cannot gain lodging in the motels of the highways and the hotels of the cities.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">只要我們拖著旅途的疲憊之軀，卻無法在公路旁的汽車旅館或城裡的旅館獲得住宿，我們就永遠不會滿足。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">our bodies</span><span class="syn-t">S</span> <span class="syn syn-m">, heavy with the fatigue of travel,</span><span class="syn-t">形容詞片語（插入）</span> <span class="syn syn-v">cannot gain</span><span class="syn-t">V</span> <span class="syn syn-o">lodging</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>fatigue</b>（疲勞）為補充字；<b>be heavy with</b> = 充滿、負載著（片語）；lodging = 住宿。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>We cannot be satisfied as long as the Negro's basic mobility is from a smaller ghetto to a larger one.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">只要黑人的基本遷徙自由只是從較小的貧民窟搬到較大的貧民窟，我們就無法滿足。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">as long as</span><span class="syn-t">連接詞</span> <span class="syn syn-s">the Negro's basic mobility</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">from a smaller ghetto to a larger one</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>mobility</b>（流動/遷徙性）為補充字；one 代替 ghetto；ghetto = 貧民窟。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>We can never be satisfied as long as our children are stripped of their self-hood and robbed of their dignity by a sign stating: "For Whites Only."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">只要我們的孩子仍被一塊寫著「僅限白人」的標誌剝奪自我認同與尊嚴，我們就永遠不會滿足。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">our children</span><span class="syn-t">S</span> <span class="syn syn-v">are stripped of ... and robbed of</span><span class="syn-t">V（被動並列）</span> <span class="syn syn-o">their self-hood ... their dignity</span><span class="syn-t">受詞</span> <span class="syn syn-m">by a sign stating...</span><span class="syn-t">by 受詞</span></div>
+          <div class="para-note"><b>rob</b>（剝奪）、<b>dignity</b>（尊嚴）為核心/補充字；<b>strip/rob sb. of sth.</b> = 剝奪某人某物；stating 現在分詞修飾 sign。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>We cannot be satisfied as long as a Negro in Mississippi cannot vote and a Negro in New York believes he has nothing for which to vote.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">只要密西西比的黑人不能投票、紐約的黑人覺得根本沒有值得他投票的對象，我們就無法滿足。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">as long as</span><span class="syn-t">連接詞</span> <span class="syn syn-s">a Negro in Mississippi</span><span class="syn-t">S</span> <span class="syn syn-v">cannot vote</span><span class="syn-t">V</span> ... <span class="syn syn-o">nothing for which to vote</span><span class="syn-t">介系詞＋關代＋不定詞</span></div>
+          <div class="para-note"><b>nothing for which to vote</b> = 沒有可為之投票的對象（介系詞＋關代＋不定詞，見句型二）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>No, no, we are not satisfied, and we will not be satisfied until justice rolls down like waters, and righteousness like a mighty stream.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">不，不，我們並不滿足；直到正義如流水般傾瀉、公理如奔騰江河般奔流，我們才會滿足。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">will not be satisfied</span><span class="syn-t">V</span> <span class="syn syn-m">until justice rolls down like waters...</span><span class="syn-t">時間副詞子句</span></div>
+          <div class="para-note"><b>until</b> = 直到；明喻 like waters / like a mighty stream；righteousness = 公義。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 我有一個夢 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🕊️ 四｜演說：我有一個夢（I have a dream）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>...Let us not wallow in the valley of despair, I say to you today, my friends. And so even though we face the difficulties of today and tomorrow, I still have a dream. It is a dream deeply rooted in the American dream.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">朋友們，今天我要對你們說：我們不要沉淪在絕望的幽谷裡。因此，即使我們面對今日與明日的種種困難，我仍然懷抱著一個夢——一個深植於美國夢之中的夢。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">even though we face the difficulties...</span><span class="syn-t">讓步子句</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">still have</span><span class="syn-t">V</span> <span class="syn syn-o">a dream</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>even though</b> = 即使；意象 valley of despair（絕望幽谷）；<b>rooted in</b> = 深植於。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I have a dream that one day this nation will rise up and live out the true meaning of its creed: "We hold these truths to be self-evident, that all men are created equal."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我有一個夢：有一天，這個國家將奮起，真正實踐它信條的真義——「我們認為這些真理不言而喻：人人生而平等。」</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">have</span><span class="syn-t">V</span> <span class="syn syn-o">a dream [that one day this nation will... live out...]</span><span class="syn-t">O（同位語子句）</span></div>
+          <div class="para-note"><b>live out</b> = 實踐（片語）；此段連用多次「<b>I have a dream that…</b>」句首重複（見句型五）；引美國《獨立宣言》。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I have a dream that one day on the red hills of Georgia, the sons of former slaves and the sons of former slave owners will be able to sit down together at the table of brotherhood.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我有一個夢：有一天，在喬治亞州的紅土丘陵上，昔日奴隸的子孫與昔日奴隸主的子孫，能夠一同坐在兄弟情誼的桌旁。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the sons of former slaves and the sons of former slave owners</span><span class="syn-t">S（並列）</span> <span class="syn syn-v">will be able to sit down</span><span class="syn-t">V</span> <span class="syn syn-m">together at the table of brotherhood</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>be able to V</b> = 能夠；意象 table of brotherhood（兄弟情誼之桌）＝和解共處。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I have a dream that one day even the state of Mississippi, a state sweltering with the heat of injustice and oppression, will be transformed into an oasis of freedom and justice.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我有一個夢：有一天，就連密西西比州——一個被不義與壓迫的熱浪蒸騰的州——都將蛻變為自由與正義的綠洲。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">even the state of Mississippi</span><span class="syn-t">S</span> <span class="syn syn-m">, a state sweltering with...,</span><span class="syn-t">同位語（含分詞）</span> <span class="syn syn-v">will be transformed</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">into an oasis of freedom and justice</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>oppression</b>（壓迫）為核心字；<b>transform A into B</b> = 使 A 轉變為 B；意象對比 heat（熱浪）↔ oasis（綠洲）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I have a dream that my four little children will one day live in a nation where they will not be judged by the color of their skin but by the content of their character.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我有一個夢：有一天，我的四個孩子將生活在一個國度裡，在那裡他們不會以膚色、而是以品格的內涵來被評斷。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">my four little children</span><span class="syn-t">S</span> <span class="syn syn-v">will live</span><span class="syn-t">V</span> <span class="syn syn-m">in a nation [where they will not be judged by A but by B]</span><span class="syn-t">關係副詞子句</span></div>
+          <div class="para-note"><b>not by A but by B</b> = 不以 A 而以 B（見句型三）——本課最著名的金句；where 關係副詞修飾 nation。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I have a dream today! I have a dream that one day, down in Alabama, little black boys and black girls will be able to join hands with little white boys and white girls as sisters and brothers.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">今天，我懷抱著一個夢！我有一個夢：有一天，在阿拉巴馬州，黑人的男孩女孩能與白人的男孩女孩像姊妹兄弟般手牽著手。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">little black boys and black girls</span><span class="syn-t">S</span> <span class="syn syn-v">will be able to join hands with</span><span class="syn-t">V</span> <span class="syn syn-o">little white boys and white girls</span><span class="syn-t">O</span> <span class="syn syn-m">as sisters and brothers</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>join hands (with)</b> = 攜手合作（片語）；「I have a dream today!」為情感高潮的短句重複。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 帶著信念 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🌄 五｜演說：帶著信念，自由響起</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I have a dream that one day every valley shall be exalted, every hill and mountain shall be made low, the rough places will be made plain, and the crooked places will be made straight; and the glory of the Lord shall be revealed and all flesh shall see it together.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我有一個夢：有一天，一切幽谷都將被高舉、一切丘陵高山都將被削平，崎嶇之地將化為坦途、彎曲之路將變得筆直；主的榮光將要顯現，凡有血肉之軀者都將一同看見。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">every valley</span><span class="syn-t">S</span> <span class="syn syn-v">shall be exalted</span><span class="syn-t">V（被動）</span>；<span class="syn syn-s">the rough places</span><span class="syn-t">S</span> <span class="syn syn-v">will be made</span><span class="syn-t">V</span> <span class="syn syn-c">plain</span><span class="syn-t">C</span></div>
+          <div class="para-note">多組被動並列排比（shall be exalted / made low / made plain / made straight）；引《聖經·以賽亞書》，莊嚴語氣。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This is our hope, and this is the faith that I go back to the South with. With this faith, we will be able to hew out of the mountain of despair a stone of hope.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這是我們的希望，這是我帶回南方的信念。懷著這份信念，我們將能從絕望之山中，鑿出一塊希望之石。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">this</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">the faith [that I go back to the South with]</span><span class="syn-t">C（關係子句，介系詞 with 在後）</span></div>
+          <div class="para-note">此段連用三次「<b>With this faith, we will be able to…</b>」句首重複；意象 mountain of despair ↔ stone of hope。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>With this faith, we will be able to transform the jangling discords of our nation into a beautiful symphony of brotherhood.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">懷著這份信念，我們將能把我國刺耳的紛擾，轉化為一曲美麗的兄弟情誼交響樂。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">will be able to transform</span><span class="syn-t">V</span> <span class="syn syn-o">the jangling discords of our nation</span><span class="syn-t">O</span> <span class="syn syn-m">into a beautiful symphony of brotherhood</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>symphony</b>（交響樂）為補充字；<b>transform A into B</b>；音樂意象：discords（不和諧音）↔ symphony（交響樂）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>With this faith, we will be able to work together, to pray together, to struggle together, to stand up for freedom together, knowing that we will be free one day.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">懷著這份信念，我們將能一同工作、一同祈禱、一同奮鬥、一同為自由挺身而出，深知有一天我們終將自由。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">will be able to work... pray... struggle... stand up</span><span class="syn-t">V（不定詞並列）</span> <span class="syn syn-m">, knowing that we will be free one day</span><span class="syn-t">分詞構句</span></div>
+          <div class="para-note">to V 排比（work / pray / struggle / stand up）；<b>stand up for</b> = 挺身捍衛；knowing... 分詞構句表附帶。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>And when we let freedom ring from every village and every city, we will be able to speed up that day when all of God's children will be able to join hands and sing: Free at last! Free at last! Thank God Almighty, we are free at last!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當我們讓自由從每個村莊、每座城市響起，我們將能加速那一天的到來——那時，上帝所有的子民都能攜手同聲高唱：終於自由了！終於自由了！感謝全能的上帝，我們終於自由了！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">when we let freedom ring...</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">will be able to speed up</span><span class="syn-t">V</span> <span class="syn syn-o">that day [when...]</span><span class="syn-t">O（含關係副詞）</span></div>
+          <div class="para-note"><b>let + O + V原形</b>（let freedom ring）；結尾以黑人靈歌「Free at last!」重複收束，情感達到頂點。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 賞析結語 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🌟 六｜賞析結語：不朽的雄辯</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Although Dr. King's dream has yet to be fully realized, his eloquence appealed to human emotions, and his rhetorical skills awoke the consciences of many Americans who had ignored or condoned racial oppression.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">儘管金恩博士的夢想尚未完全實現，他的雄辯打動了人心，他的修辭功力更喚醒了許多曾經漠視或縱容種族壓迫的美國人的良知。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Although Dr. King's dream has yet to be fully realized</span><span class="syn-t">讓步子句</span> <span class="syn syn-s">his eloquence</span><span class="syn-t">S</span> <span class="syn syn-v">appealed to</span><span class="syn-t">V</span> <span class="syn syn-o">human emotions</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>eloquence</b>（雄辯）、<b>rhetorical</b>（修辭的）、<b>conscience</b>（良知）為核心字；<b>have yet to V</b> = 尚未…（片語）；appeal to = 打動、訴諸。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>"I Have a Dream" was to civil rights supporters what a battle cry is to a warrior.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">〈我有一個夢〉之於民權運動的支持者，正如戰吼之於一名戰士。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">"I Have a Dream"</span><span class="syn-t">S</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">to A what B is to C</span><span class="syn-t">類比句型</span></div>
+          <div class="para-note"><b>warrior</b>（戰士）為補充字；<b>A is to B what C is to D</b> = A 之於 B 猶如 C 之於 D（重要類比句型）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The speech continues to inspire people to this day and will likely do so as long as inequality exists.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這場演說至今仍持續激勵著人們，而且只要不平等依然存在，它很可能將持續發揮這樣的力量。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The speech</span><span class="syn-t">S</span> <span class="syn syn-v">continues to inspire</span><span class="syn-t">V</span> <span class="syn syn-o">people</span><span class="syn-t">O</span> <span class="syn syn-m">and will likely do so as long as inequality exists</span><span class="syn-t">副詞（含條件子句）</span></div>
+          <div class="para-note"><b>as long as</b> = 只要（見句型四）；<b>do so</b> = 代替前面的動作（inspire people）；to this day = 直到今日。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">march</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">行進；遊行</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a protest march 抗議遊行</span><span>marcher (n.) 遊行者</span></div>
+        <div class="v-ex">King <b>marched</b> to the Lincoln Memorial.<span class="cn">金恩遊行至林肯紀念堂。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">outline</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">概述；輪廓</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ summarize / sketch</span><span>an outline of 一份大綱</span></div>
+        <div class="v-ex">King <b>outlined</b> his hopes for the future.<span class="cn">金恩勾勒出他對未來的期盼。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">racism</span><span class="v-pos">n.</span><div class="v-cn-mini">種族主義</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>racist (n./adj.) 種族主義者</span><span>racial (adj.) 種族的</span></div>
+        <div class="v-ex">He dreamed of a time when <b>racism</b> would end.<span class="cn">他夢想種族主義終結的時代。</span></div>
+        <span class="v-gsat">📊 racism / racial / racist 字族</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">decisive</span><span class="v-pos">adj.</span><div class="v-cn-mini">決定性的；果斷的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>decide (v.) / decision (n.)</span><span>反義 indecisive 優柔的</span></div>
+        <div class="v-ex">It was a <b>decisive</b> moment in the civil rights movement.<span class="cn">那是民權運動決定性的一刻。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">civil</span><span class="v-pos">adj.</span><div class="v-cn-mini">公民的；國內的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>civil rights 民權</span><span>civilian (n.) 平民</span></div>
+        <div class="v-ex">The speech shaped the <b>civil</b> rights movement.<span class="cn">這場演說形塑了民權運動。</span></div>
+        <span class="v-gsat">📊 civil war 內戰；civil rights 民權</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">grant</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">授予；准予；補助金</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>grant sb. sth. 授予某人某物</span><span>take...for granted 視為理所當然</span></div>
+        <div class="v-ex">New laws <b>granted</b> rights to African Americans.<span class="cn">新法律賦予非裔美國人權利。</span></div>
+        <span class="v-gsat">📊 take for granted 為學測高頻片語</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">segregation</span><span class="v-pos">n.</span><div class="v-cn-mini">隔離；種族隔離</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>segregate (v.) 隔離</span><span>反義 integration 融合</span></div>
+        <div class="v-ex">The Negro was crippled by the manacles of <b>segregation</b>.<span class="cn">黑人受種族隔離的枷鎖桎梏。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">dignity</span><span class="v-pos">n.</span><div class="v-cn-mini">尊嚴</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>dignified (adj.) 有尊嚴的</span><span>with dignity 有尊嚴地</span></div>
+        <div class="v-ex">Children were robbed of their <b>dignity</b>.<span class="cn">孩子們被剝奪了尊嚴。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">oppression</span><span class="v-pos">n.</span><div class="v-cn-mini">壓迫</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>oppress (v.) 壓迫</span><span>oppressive (adj.) 壓迫的</span></div>
+        <div class="v-ex">Mississippi sweltered with the heat of <b>oppression</b>.<span class="cn">密西西比被壓迫的熱浪蒸騰。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">vicious</span><span class="v-pos">adj.</span><div class="v-cn-mini">兇惡的；惡毒的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a vicious cycle 惡性循環</span><span>≈ cruel / brutal</span></div>
+        <div class="v-ex">Alabama was known for its <b>vicious</b> racists.<span class="cn">阿拉巴馬以兇惡的種族主義者聞名。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">eloquence</span><span class="v-pos">n.</span><div class="v-cn-mini">口才；雄辯</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>eloquent (adj.) 雄辯的</span><span>eloquently (adv.)</span></div>
+        <div class="v-ex">His <b>eloquence</b> appealed to human emotions.<span class="cn">他的雄辯打動了人心。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">rhetorical</span><span class="v-pos">adj.</span><div class="v-cn-mini">修辭的；修辭性的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>rhetoric (n.) 修辭（學）</span><span>a rhetorical question 反詰問句</span></div>
+        <div class="v-ex">His <b>rhetorical</b> skills awoke many consciences.<span class="cn">他的修辭功力喚醒許多良知。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">conscience</span><span class="v-pos">n.</span><div class="v-cn-mini">良心；良知</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>conscientious (adj.) 有良心的</span><span>a guilty conscience 愧疚感</span></div>
+        <div class="v-ex">His words awoke the <b>consciences</b> of many Americans.<span class="cn">他的話喚醒了許多美國人的良知。</span></div>
+        <span class="v-gsat">📊 conscience（良心）≠ conscious（有意識的）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">cripple</span><span class="v-pos">v.</span><div class="v-cn-mini">使殘廢；嚴重損害</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>crippling (adj.) 極嚴重的</span><span>≈ paralyze / damage</span></div>
+        <div class="v-ex">His life was <b>crippled</b> by segregation.<span class="cn">他的生活被種族隔離所桎梏。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">exile</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">流亡；放逐</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>in exile 流亡中</span><span>≈ banishment</span></div>
+        <div class="v-ex">The Negro found himself an <b>exile</b> in his own land.<span class="cn">黑人發現自己在故土上如同流亡者。</span></div></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">go down in history</span></td><td>名留青史</td><td class="pex">The march would <b>go down in history</b>.<span class="cn">這場遊行將名留青史。</span></td></tr>
+      <tr><td><span class="phr">as long as</span></td><td>只要</td><td class="pex">We can never be satisfied <b>as long as</b> injustice exists.<span class="cn">只要不義存在，我們就絕不滿足。</span></td></tr>
+      <tr><td><span class="phr">be heavy with</span></td><td>充滿著；負載著</td><td class="pex">Our bodies, <b>heavy with</b> the fatigue of travel...<span class="cn">我們拖著旅途的疲憊之軀…</span></td></tr>
+      <tr><td><span class="phr">live out</span></td><td>實現；過完（一生）</td><td class="pex">This nation will <b>live out</b> the true meaning of its creed.<span class="cn">這個國家將實踐其信條的真義。</span></td></tr>
+      <tr><td><span class="phr">join hands (with)</span></td><td>與…攜手合作</td><td class="pex">Black and white children will <b>join hands</b>.<span class="cn">黑白孩子將手牽著手。</span></td></tr>
+      <tr><td><span class="phr">have yet to V</span></td><td>尚未…</td><td class="pex">His dream <b>has yet to</b> be fully realized.<span class="cn">他的夢想尚未完全實現。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（自由、平權、演說）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">memorial</span><span class="v-pos">n. / adj.</span><div class="v-cn-mini">紀念碑；紀念的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>memory / memorable 同源</span><span>a war memorial 戰爭紀念碑</span></div>
+        <div class="v-ex">He spoke at the Lincoln <b>Memorial</b>.<span class="cn">他在林肯紀念堂發表演說。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">wither</span><span class="v-pos">v.</span><div class="v-cn-mini">凋謝；枯萎；衰退</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>withering (adj.) 使人枯萎的</span><span>≈ shrivel / fade</span></div>
+        <div class="v-ex">…the flames of <b>withering</b> injustice.<span class="cn">…凋敝不義的烈焰。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">captivity</span><span class="v-pos">n.</span><div class="v-cn-mini">囚禁；拘留</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>captive (n./adj.) 俘虜</span><span>capture (v.) 捕獲</span></div>
+        <div class="v-ex">…to end the long night of their <b>captivity</b>.<span class="cn">…結束他們囚禁的漫漫長夜。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">mobility</span><span class="v-pos">n.</span><div class="v-cn-mini">流動性；移動性</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>mobile (adj.) 可移動的</span><span>social mobility 社會流動</span></div>
+        <div class="v-ex">The Negro's basic <b>mobility</b> was limited.<span class="cn">黑人的基本遷徙自由受到限制。</span></div>
+        <span class="v-gsat">📊 social mobility 學測社會議題常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">fatigue</span><span class="v-pos">n.</span><div class="v-cn-mini">疲勞；疲倦</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ exhaustion / tiredness</span><span>fatigued (adj.) 疲憊的</span></div>
+        <div class="v-ex">…bodies heavy with the <b>fatigue</b> of travel.<span class="cn">…拖著旅途疲憊的身軀。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">rob</span><span class="v-pos">v.</span><div class="v-cn-mini">搶劫；剝奪</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>rob sb. of sth. 剝奪某人某物</span><span>robbery (n.) 搶劫</span></div>
+        <div class="v-ex">They were <b>robbed</b> of their dignity.<span class="cn">他們被剝奪了尊嚴。</span></div>
+        <span class="v-gsat">📊 rob sb. of sth. 為固定搭配</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">symphony</span><span class="v-pos">n.</span><div class="v-cn-mini">交響樂</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>symphonic (adj.) 交響樂的</span><span>sym-（一起）+ phon（聲音）</span></div>
+        <div class="v-ex">…a beautiful <b>symphony</b> of brotherhood.<span class="cn">…一曲美麗的兄弟情誼交響樂。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">warrior</span><span class="v-pos">n.</span><div class="v-cn-mini">戰士；勇士</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ fighter / soldier</span><span>war（戰爭）同源</span></div>
+        <div class="v-ex">A battle cry is to a <b>warrior</b> what the speech was to supporters.<span class="cn">戰吼之於戰士，猶如這場演說之於支持者。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語都與課文主題（自由、正義、希望）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a level playing field</span><div class="slang-cn-mini">公平的競爭環境</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">人人條件相同、機會均等的環境。</div>
+      <div class="slang-ex">Equal rights create <b>a level playing field</b> for all.<span class="cn">平權為所有人創造公平的競爭環境。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">turn a blind eye (to)</span><div class="slang-cn-mini">對…視而不見</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">故意忽視、假裝沒看到（不公不義）。</div>
+      <div class="slang-ex">Too many people <b>turned a blind eye to</b> injustice.<span class="cn">太多人對不義視而不見。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a beacon of hope</span><div class="slang-cn-mini">希望的燈塔（呼應課文）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">在黑暗中給人指引與希望的象徵。</div>
+      <div class="slang-ex">The speech became <b>a beacon of hope</b> for millions.<span class="cn">這場演說成了數百萬人希望的燈塔。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">see the light at the end of the tunnel</span><div class="slang-cn-mini">看見隧道盡頭的曙光</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">在漫長困境後看見希望、苦盡甘來。</div>
+      <div class="slang-ex">After years of struggle, they finally <b>saw the light at the end of the tunnel</b>.<span class="cn">歷經多年奮鬥，他們終於看見曙光。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">against all odds</span><div class="slang-cn-mini">排除萬難；儘管困難重重</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">在極不利的條件下仍達成目標。</div>
+      <div class="slang-ex"><b>Against all odds</b>, the movement changed a nation.<span class="cn">排除萬難，這場運動改變了一個國家。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">practice what you preach</span><div class="slang-cn-mini">言行一致；身體力行</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">自己做到所倡導的原則，而非光說不練。</div>
+      <div class="slang-ex">A nation must <b>practice what it preaches</b> about equality.<span class="cn">一個國家對平等須言行一致。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜與過去事實相反的假設（倒裝 Had + S + p.p.）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">If S had p.p., S would/might have p.p.
+→ 省略 If 倒裝：Had + S + p.p., S would/might have p.p.</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">與過去事實相反的假設；省略 If 時，把 had 提到主詞前形成倒裝。</p>
+        <div class="g-ex"><b>Had</b> Dr. King <b>not made</b> the speech, the US <b>might not have introduced</b> those laws.<div class="g-ex-cn">若金恩沒發表演說，美國或許不會推出那些法律。（課文）</div></div>
+        <div class="g-note">✗ Had Dr. King didn't make...（倒裝後不再用 did）；否定用 Had + S + not + p.p.。</div>
+        <div class="g-tip">同類倒裝：Were I you...（與現在相反）；Should you need...（未來）。學測高頻。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜介系詞＋關係代名詞（含 whose / for which to V）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞 + 介系詞 + which / whom / whose + N ...</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">關代作介系詞受詞時，介系詞可移到關代前（正式）。</p>
+        <div class="g-ex">a great American, <b>in whose</b> symbolic shadow we stand<div class="g-ex-cn">一位偉大的美國人，我們正站在他象徵性的身影下（課文）</div></div>
+        <div class="g-ex">he has nothing <b>for which</b> to vote<div class="g-ex-cn">他沒有可為之投票的對象（課文）</div></div>
+        <div class="g-note">✗ in that / for that（介系詞後不可接 that）。</div>
+        <div class="g-tip">whose ＝ 所有格關代（接名詞）；學測常考關代格位。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜not A but B（不是 A 而是 B）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">not + A but + B（A、B 對等；動詞與最近的主詞一致）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">表「不是 A，而是 B」，A、B 詞性/結構須對等。</p>
+        <div class="g-ex">…judged <b>not by</b> the color of their skin <b>but by</b> the content of their character.<div class="g-ex-cn">…不以膚色、而以品格內涵來評斷。（課文金句）</div></div>
+        <div class="g-note">✗ not by A and by B；A、B 結構須平行（by + N / by + N）。</div>
+        <div class="g-tip">延伸 not only A but also B；學測常考平行與對等。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜as long as（只要，條件副詞子句）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V ..., as long as + S + V ...（只要…就…）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">as long as 表「條件」＝只要；亦可表「長達」（時間）。</p>
+        <div class="g-ex">We can never be satisfied <b>as long as</b> injustice exists.<div class="g-ex-cn">只要不義存在，我們就絕不滿足。（課文）</div></div>
+        <div class="g-note">條件子句表未來時用現在式（exists，非 will exist）。</div>
+        <div class="g-tip">同義 so long as / provided that；學測常考條件連接詞。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜修辭：句首重複與排比（Anaphora & Parallelism）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">重複相同句首 + 對等結構，堆疊情感與節奏</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">本篇最著名的修辭：以相同句首反覆開頭（anaphora），營造氣勢。</p>
+        <div class="g-ex"><b>One hundred years later,</b> ... / <b>I have a dream that</b> ... / <b>With this faith,</b> ...<div class="g-ex-cn">「一百年後…」「我有一個夢…」「懷著這份信念…」層層排比。（課文）</div></div>
+        <div class="g-note">寫作可善用排比與句首重複增強說服力，但需保持結構對等。</div>
+        <div class="g-tip">學測寫作評分重視「連貫與修辭」；適度排比能加分。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第五冊 第六課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['On August 28, 1963, King ',' to the Lincoln Memorial with thousands of supporters.'],
+  cn:'1963 年 8 月 28 日，金恩與數千名支持者遊行至林肯紀念堂。',
+  opts:['marched','outlined','granted','robbed'],ans:0,
+  word:'march (v.) 行進；遊行',
+  exp:'「遊行至…」＝marched。(B) 概述、(C) 授予、(D) 剝奪皆不合。',
+  note:'a protest march 抗議遊行。'},
+ {q:['In his speech, King ',' his hopes for a future without racism.'],
+  cn:'在演說中，金恩勾勒出他對一個沒有種族主義之未來的期盼。',
+  opts:['outlined','crippled','robbed','withered'],ans:0,
+  word:'outline (v.) 概述',
+  exp:'「勾勒期盼」＝outline。(B) 桎梏、(C) 剝奪、(D) 枯萎皆不合。',
+  note:'≈ summarize / sketch。'},
+ {q:['The speech proved to be a ',' moment in the civil rights movement.'],
+  cn:'這場演說最終成為民權運動中決定性的一刻。',
+  opts:['decisive','tranquil','vast','prominent'],ans:0,
+  word:'decisive (adj.) 決定性的',
+  exp:'「決定性的一刻」＝decisive。(B) 寧靜、(C) 廣大、(D) 顯著皆不合。',
+  note:'decide / decision 同源。'},
+ {q:['Within a few years, new laws were passed to ',' new rights to African Americans.'],
+  cn:'短短幾年內，新法律通過，賦予非裔美國人新的權利。',
+  opts:['grant','march','cripple','wither'],ans:0,
+  word:'grant (v.) 授予；准予',
+  exp:'「賦予權利」＝grant。(B) 遊行、(C) 桎梏、(D) 枯萎皆不合。',
+  note:'take...for granted 視為理所當然。'},
+ {q:['The Negro was still bound by the manacles of ',' and the chains of discrimination.'],
+  cn:'黑人仍被種族隔離的枷鎖與歧視的鎖鏈所束縛。',
+  opts:['segregation','eloquence','dignity','commerce'],ans:0,
+  word:'segregation (n.) 種族隔離',
+  exp:'與 discrimination（歧視）並列，選 segregation（隔離）。(B) 雄辯、(C) 尊嚴、(D) 商業皆不合。',
+  note:'segregate (v.)；反義 integration 融合。'},
+ {q:['Children were robbed of their ',' by signs reading "For Whites Only."'],
+  cn:'孩子們被寫著「僅限白人」的標誌剝奪了尊嚴。',
+  opts:['dignity','memorial','fatigue','symphony'],ans:0,
+  word:'dignity (n.) 尊嚴',
+  exp:'rob sb. of dignity = 剝奪尊嚴。(B) 紀念碑、(C) 疲勞、(D) 交響樂皆不合。',
+  note:'with dignity 有尊嚴地。'},
+ {q:['King dreamed that states sweltering with ',' would become oases of justice.'],
+  cn:'金恩夢想被壓迫蒸騰的各州都能變成正義的綠洲。',
+  opts:['oppression','commerce','mobility','captivity'],ans:0,
+  word:'oppression (n.) 壓迫',
+  exp:'與 injustice 並列的負面詞＝oppression（壓迫）。(B) 商業、(C) 流動性、(D) 囚禁皆不合。',
+  note:'oppress (v.)；oppressive (adj.)。'},
+ {q:['The powerful ',' of his speech moved the entire nation.'],
+  cn:'他演說中強大的雄辯之力打動了整個國家。',
+  opts:['eloquence','fatigue','captivity','warrior'],ans:0,
+  word:'eloquence (n.) 口才；雄辯',
+  exp:'「打動整個國家」的演說之力＝eloquence（雄辯）。(B) 疲勞、(C) 囚禁、(D) 戰士皆不合。',
+  note:'eloquent (adj.) 雄辯的。'},
+ {q:['King believed the march would ',' as the greatest demonstration for freedom.'],
+  cn:'金恩相信這場遊行將名留青史，成為最偉大的爭自由行動。',
+  opts:['go down in history','turn a blind eye','stock up','follow suit'],ans:0,
+  word:'go down in history 名留青史',
+  exp:'「載入史冊」＝go down in history。(B) 視而不見、(C) 囤貨、(D) 跟進皆不合。',
+  note:'go down in history as... 以…之名留青史。'},
+ {q:['Sadly, his dream ',' be fully realized even today.'],
+  cn:'遺憾的是，即使到今天，他的夢想仍尚未完全實現。',
+  opts:['has yet to','is used to','is about to','ought to'],ans:0,
+  word:'have yet to V 尚未…',
+  exp:'has yet to be realized = 尚未實現。(B) 習慣於、(C) 即將、(D) 應該皆不合。',
+  note:'have yet to V ＝ have not yet + p.p.。'}
+];
+
+var teacherQ=[
+ {q:['',' Dr. King not delivered the speech, the civil rights movement might have stalled.'],
+  cn:'若金恩博士當年沒有發表那場演說，民權運動或許會停滯不前。',
+  opts:['If','Had','Have','Did'],ans:1,
+  word:'Had + S + p.p.（與過去相反假設的倒裝）',
+  tnote:'<b>假設倒裝</b>：與過去事實相反，省略 If 時把 had 提前：Had Dr. King not delivered...。<br>(A) 若用 If 則不倒裝且此處已省 If；(C)(D) 時態/結構不合。'},
+ {q:['He honored a great American, in ',' symbolic shadow the crowd stood that day.'],
+  cn:'他向一位偉大的美國人致敬，那天群眾正站在他象徵性的身影之下。',
+  opts:['whose','which','that','whom'],ans:0,
+  word:'in whose shadow（所有格關係代名詞）',
+  tnote:'<b>所有格關代</b>：「站在他的身影下」→ whose + 名詞 shadow，介系詞 in 置前。<br>(B) which、(D) whom 非所有格；(C) that 不接於介系詞後。'},
+ {q:['He dreamed his children would be judged not by the color of their skin ',' by the content of their character.'],
+  cn:'他夢想孩子不以膚色、而以品格內涵被評斷。',
+  opts:['and','but','or','nor'],ans:1,
+  word:'not A but B（不是 A 而是 B）',
+  tnote:'<b>not A but B</b>：A、B 須對等（by + N）。<br>(A) and、(C) or、(D) nor 皆不合此固定結構。這是本課最著名的金句。'},
+ {q:['We will not be satisfied as long as injustice ',' in our society.'],
+  cn:'只要不義仍存在於我們的社會，我們就不會滿足。',
+  opts:['will exist','exists','existed','existing'],ans:1,
+  word:'as long as + 現在式（表未來的條件）',
+  tnote:'<b>條件子句</b>：as long as 引導的條件子句表未來時用現在式：injustice exists（非 will exist）。<br>(A) 未來式錯；(C) 過去式、(D) 分詞皆不合。'},
+ {q:['A voter felt he had nothing ',' to vote.'],
+  cn:'一位選民覺得根本沒有值得他投票的對象。',
+  opts:['for which','which for','that','what'],ans:0,
+  word:'nothing for which to vote（介系詞＋關代＋不定詞）',
+  tnote:'<b>介系詞＋關代＋不定詞</b>：vote for something → nothing for which to vote。<br>(B) 語序顛倒；(C) that 不接於介系詞後；(D) what 不接先行詞。'},
+ {q:['Millions of slaves had ',' in the flames of injustice before the decree came.'],
+  cn:'在那項法令頒布之前，數百萬奴隸早已在不義的烈焰中飽受煎熬。',
+  opts:['seared','been seared','being seared','sear'],ans:1,
+  word:'had been seared（過去完成被動）',
+  tnote:'<b>過去完成被動</b>：奴隸是「被」煎熬，且早於「法令到來」，用 had been + p.p.。<br>(A) 主動缺受詞；(C) had being 錯；(D) 原形不合。'},
+ {q:['King hoped African Americans would be ',' by whites as equals.'],
+  cn:'金恩希望非裔美國人能被白人平等對待。',
+  opts:['treated','treating','treat','to treat'],ans:0,
+  word:'be treated as（被動語態）',
+  tnote:'<b>被動語態</b>：African Americans 是「被對待」，用 be treated (as equals)。<br>(B) 現在分詞、(C) 原形、(D) 不定詞皆不合被動。'},
+ {q:['We will struggle together, ',' that we will be free one day.'],
+  cn:'我們將一同奮鬥，深知有一天我們終將自由。',
+  opts:['know','knew','knowing','known'],ans:2,
+  word:'knowing（分詞構句，主動附帶）',
+  tnote:'<b>分詞構句</b>：主句後用現在分詞表附帶狀況（＝and we know that...）。<br>(B) 過去式需連接詞；(D) 過去分詞為被動，不合。'},
+ {q:['The speech was to civil rights supporters ',' a battle cry is to a warrior.'],
+  cn:'這場演說之於民權支持者，猶如戰吼之於一名戰士。',
+  opts:['as','that','what','which'],ans:2,
+  word:'A is to B what C is to D（類比句型）',
+  tnote:'<b>類比句型</b>：A is to B what C is to D（A 之於 B 猶如 C 之於 D），用 <b>what</b>。<br>(A) as、(B) that、(D) which 皆不合此固定句型。'},
+ {q:['',' we face many difficulties today and tomorrow, King still had a dream.'],
+  cn:'即使我們面對今日與明日的種種困難，金恩仍懷抱著一個夢。',
+  opts:['Despite','Even though','In spite','Because of'],ans:1,
+  word:'even though + 子句（即使）',
+  tnote:'<b>讓步連接詞</b>：空格後為完整子句 we face...，用 even though。<br>(A) Despite、(C) In spite (of) 後接名詞；(D) because of 表原因且接名詞。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>

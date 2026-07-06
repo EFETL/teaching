@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L5: Venice — A Sinking City ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L5: Venice ── 逐漸下沉的水都</h1>
+  <div class="sub">龍騰版高中英文 第五冊 第五課｜互動教學講義（高三適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 課文速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>課文速覽（三大重點）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🌊 千年水都的危機</h4>
+        威尼斯建於海上逾千年，以<b>運河、潟湖、古橋</b>聞名。但如今海水上升、淹水（<b>acqua alta</b>）愈發頻繁，正面臨<b>沉沒</b>的威脅。
+      </div>
+      <div class="story-card s2">
+        <h4>🏗️ 為何下沉？自然＋人為</h4>
+        自然因素：<b>高水位</b>（潮汐＋強風）與<b>地層下陷</b>（軟泥地基＋板塊移動）。人為因素：1930s <b>抽地下水</b>加速下陷、燃燒化石燃料致<b>氣候變遷</b>。百年已下沉約 25 公分。
+      </div>
+      <div class="story-card s3">
+        <h4>🌍 人類的試金石</h4>
+        淹水暴增（百年前每年不到 10 次→現逾 60 次），1966、2019 屢破紀錄。科學家警告：若不改變，22 世紀恐<b>消失</b>。拯救威尼斯需<b>全球共同</b>對抗氣候變遷。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點右側 🔊 可聽整句朗讀。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課為說明文，論述威尼斯下沉的自然與人為成因、淹水的衝擊，以及它作為「人類對抗氣候變遷試金石」的意義。依段落分為五部分。</p>
+
+    <!-- 千年水都與威脅 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🌊 一｜千年水都與其威脅</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Built on the sea more than a thousand years ago, Venice has long been admired for its magnificence.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">建於海上逾千年的威尼斯，長久以來因其宏偉壯麗而備受讚賞。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Built on the sea more than a thousand years ago</span><span class="syn-t">過去分詞片語（句首，被動）</span> <span class="syn syn-s">Venice</span><span class="syn-t">S</span> <span class="syn syn-v">has long been admired for</span><span class="syn-t">V（現在完成被動）</span> <span class="syn syn-o">its magnificence</span><span class="syn-t">by 受詞</span></div>
+          <div class="para-note"><b>Built on...</b> 過去分詞片語（＝Being built，見句型一）；<b>be admired for</b> = 因…受讚賞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Once a prominent center of commerce, the city is famous for its tranquil lagoons, ancient bridges, and a vast network of canals.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">威尼斯曾是重要的商業中心，如今以寧靜的潟湖、古老的橋樑，以及龐大的運河網絡聞名。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Once a prominent center of commerce</span><span class="syn-t">同位語片語（句首）</span> <span class="syn syn-s">the city</span><span class="syn-t">S</span> <span class="syn syn-v">is famous for</span><span class="syn-t">V</span> <span class="syn syn-o">its tranquil lagoons, ancient bridges, and a vast network of canals</span><span class="syn-t">O（三者並列）</span></div>
+          <div class="para-note"><b>prominent</b>（顯著的）、<b>commerce</b>（商業）、<b>tranquil</b>（寧靜的）、<b>vast</b>（龐大的）皆為核心字；be famous for = 以…聞名。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, Venice today is facing a serious threat: the water levels around the city are literally rising, and flooding has become an increasingly common occurrence.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，今日的威尼斯正面臨嚴重威脅：城市周圍的水位確實在上升，淹水已成為愈來愈常見的現象。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Venice</span><span class="syn-t">S</span> <span class="syn syn-v">is facing</span><span class="syn-t">V</span> <span class="syn syn-o">a serious threat</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">the water levels</span><span class="syn-t">S</span> <span class="syn syn-v">are rising</span><span class="syn-t">V</span>；<span class="syn syn-s">flooding</span><span class="syn-t">S</span> <span class="syn syn-v">has become</span><span class="syn-t">V</span> <span class="syn syn-c">a common occurrence</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>literally</b>（確實地、照字面地）為核心字；<b>increasingly</b> = 愈來愈；occurrence = 發生（的事）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This flooding can be attributed to two natural factors.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這種淹水可歸因於兩個自然因素。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This flooding</span><span class="syn-t">S</span> <span class="syn syn-v">can be attributed to</span><span class="syn-t">V（被動＋介系詞）</span> <span class="syn syn-o">two natural factors</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>attribute A to B</b> = 把 A 歸因於 B（被動 A be attributed to B，見句型二）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 兩大自然因素 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🌀 二｜兩大自然因素</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The first is what the locals call "acqua alta," or "high water," which occurs when winter tides, strong winds, and waves combine to push sea water into the city.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第一個是當地人所稱的「acqua alta」（高水位），也就是冬季潮汐、強風與海浪合力把海水推進城市時所發生的現象。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The first</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">what the locals call "acqua alta"</span><span class="syn-t">C（名詞子句）</span> <span class="syn syn-m">, which occurs when...</span><span class="syn-t">非限定關係子句</span></div>
+          <div class="para-note"><b>tide</b>（潮汐）為補充字；<b>what</b> 名詞子句作補語；combine to V = 合力做…。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The second factor is natural subsidence—the gradual sinking of land—which occurs because Venice was built on a foundation of weak, soft marshland that cannot fully support the weight of the city.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第二個因素是自然地層下陷——也就是土地的逐漸下沉——這是因為威尼斯建在脆弱、鬆軟、無法完全支撐城市重量的沼澤地基上。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The second factor</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">natural subsidence</span><span class="syn-t">C</span> <span class="syn syn-m">—the gradual sinking of land—</span><span class="syn-t">同位語</span> <span class="syn syn-m">which occurs because...</span><span class="syn-t">非限定關係子句＋原因</span></div>
+          <div class="para-note"><b>subsidence</b> = 地層下陷；破折號補充定義；marshland (that...) 關係子句修飾。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This subsidence is also caused by a shift in the Apennine Plate, on which Venice sits.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這種下陷也是由亞平寧板塊的移動所造成，而威尼斯正坐落在該板塊之上。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This subsidence</span><span class="syn-t">S</span> <span class="syn syn-v">is caused by</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">a shift in the Apennine Plate</span><span class="syn-t">by 受詞</span> <span class="syn syn-m">, on which Venice sits</span><span class="syn-t">介系詞＋關代（非限定）</span></div>
+          <div class="para-note"><b>shift</b>（移動、轉變）為補充字；<b>on which</b> = 介系詞＋關係代名詞（＝Venice sits on it，見句型三）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 人為因素 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🏭 三｜人為因素與氣候變遷</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In addition to these natural factors, there is also a human factor contributing to the problem.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">除了這些自然因素之外，還有一個人為因素也促成了這個問題。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In addition to these natural factors</span><span class="syn-t">介系詞片語</span> <span class="syn syn-m">there</span><span class="syn-t">引導詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-s">a human factor [contributing to the problem]</span><span class="syn-t">S（含現在分詞修飾）</span></div>
+          <div class="para-note"><b>in addition to + N</b> = 除了…之外（還有）；<b>contribute to</b> = 促成、導致；contributing... 現在分詞修飾 factor。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In the 1930s, large amounts of groundwater were pumped out from beneath the city for industrial use, which accelerated the rate of subsidence.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在 1930 年代，大量地下水為了工業用途而被從城市底下抽出，這加速了地層下陷的速度。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">large amounts of groundwater</span><span class="syn-t">S</span> <span class="syn syn-v">were pumped out</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">for industrial use</span><span class="syn-t">副詞</span> <span class="syn syn-m">, which accelerated the rate of subsidence</span><span class="syn-t">非限定關係子句</span></div>
+          <div class="para-note"><b>accelerate</b>（加速）為核心字；<b>which</b> 代前面整件事；pump out = 抽出。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Although this practice was banned in the 1970s, the damage had already been done, and Venice has sunk by about 25 centimeters over the past century.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">儘管這種做法在 1970 年代被禁止，傷害卻已然造成，威尼斯在過去一世紀已下沉了約 25 公分。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Although this practice was banned in the 1970s</span><span class="syn-t">讓步子句（被動）</span> <span class="syn syn-s">the damage</span><span class="syn-t">S</span> <span class="syn syn-v">had already been done</span><span class="syn-t">V（過去完成被動）</span><br>
+            <span class="num">②</span><span class="syn syn-s">Venice</span><span class="syn-t">S</span> <span class="syn syn-v">has sunk</span><span class="syn-t">V</span> <span class="syn syn-m">by about 25 centimeters</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>過去完成被動</b>：had been done（見句型五）；<b>ban</b> = 禁止；sink-sank-sunk。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Climate change is another major contributor. The burning of fossil fuels has released excessive amounts of carbon dioxide into the atmosphere, causing global temperatures to rise.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">氣候變遷是另一個主要肇因。燃燒化石燃料已將過量的二氧化碳排放到大氣中，導致全球氣溫上升。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The burning of fossil fuels</span><span class="syn-t">S</span> <span class="syn syn-v">has released</span><span class="syn-t">V</span> <span class="syn syn-o">excessive amounts of carbon dioxide</span><span class="syn-t">O</span> <span class="syn syn-m">, causing global temperatures to rise</span><span class="syn-t">分詞構句（結果）</span></div>
+          <div class="para-note"><b>fuel</b>（燃料）、<b>excessive</b>（過量的）為核心字；<b>cause + O + to V</b> = 導致…（見句型四）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As a result, polar ice caps are melting, and sea levels are rising overall.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">結果，極地冰帽正在融化，海平面整體上升。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">polar ice caps</span><span class="syn-t">S</span> <span class="syn syn-v">are melting</span><span class="syn-t">V</span>；<span class="syn syn-s">sea levels</span><span class="syn-t">S</span> <span class="syn syn-v">are rising</span><span class="syn-t">V</span> <span class="syn syn-m">overall</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>melt</b>（融化）、<b>polar</b>（極地的）、<b>overall</b>（整體地）為核心/補充字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Scientists confirm that sea levels could rise by as much as 53 centimeters by the year 2100.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">科學家證實，到 2100 年海平面可能上升多達 53 公分。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Scientists</span><span class="syn-t">S</span> <span class="syn syn-v">confirm</span><span class="syn-t">V</span> <span class="syn syn-o">that sea levels could rise by as much as 53 centimeters...</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>confirm</b>（證實）為核心字；<b>as much as + 數量</b> = 多達；by the year 2100 = 到 2100 年（截止）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Combined, these factors have caused the incidence of flooding to increase dramatically: a century ago, Venice experienced fewer than 10 floods a year, but now it experiences more than 60.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些因素合在一起，使淹水的發生次數急劇增加：一世紀前，威尼斯每年淹水不到 10 次，如今每年超過 60 次。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Combined</span><span class="syn-t">過去分詞（句首）</span> <span class="syn syn-s">these factors</span><span class="syn-t">S</span> <span class="syn syn-v">have caused</span><span class="syn-t">V</span> <span class="syn syn-o">the incidence of flooding</span><span class="syn-t">O</span> <span class="syn syn-c">to increase dramatically</span><span class="syn-t">OC（不定詞）</span></div>
+          <div class="para-note"><b>incidence</b>（發生率）為補充字；<b>Combined</b> 過去分詞片語（見句型一）；<b>cause + O + to V</b>；fewer than / more than 對比。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 淹水衝擊 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🌊 四｜破紀錄的淹水衝擊</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A flood that swept through the city in November 1966 reached a record height of 194 centimeters and submerged Venice for 22 hours.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">1966 年 11 月席捲全城的一場洪水，達到 194 公分的破紀錄高度，使威尼斯淹沒長達 22 小時。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">A flood [that swept through the city in November 1966]</span><span class="syn-t">S（含關係子句）</span> <span class="syn syn-v">reached</span><span class="syn-t">V</span> <span class="syn syn-o">a record height of 194 centimeters</span><span class="syn-t">O</span> <span class="syn syn-v">and submerged</span><span class="syn-t">V</span> <span class="syn syn-o">Venice</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>sweep</b>（席捲）為補充字（swept 過去式）；<b>submerge</b> = 淹沒；a record height = 破紀錄的高度。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In 2019, a flood reached 187 centimeters—the first of five extraordinary floods of over 140 centimeters that year alone.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">2019 年，一場洪水達到 187 公分——這只是那一年就發生的五場逾 140 公分的驚人洪水中的第一場。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">a flood</span><span class="syn-t">S</span> <span class="syn syn-v">reached</span><span class="syn-t">V</span> <span class="syn syn-o">187 centimeters</span><span class="syn-t">O</span> <span class="syn syn-m">—the first of five extraordinary floods...</span><span class="syn-t">同位語</span></div>
+          <div class="para-note"><b>extraordinary</b>（驚人的）為核心字；破折號引出同位補述；that year alone = 光是那一年。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Some scientists predict that, if nothing changes, Venice may cease to exist by the 22nd century.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有些科學家預測，如果一切都不改變，威尼斯可能在 22 世紀之前不復存在。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Some scientists</span><span class="syn-t">S</span> <span class="syn syn-v">predict</span><span class="syn-t">V</span> <span class="syn syn-o">that, if nothing changes, Venice may cease to exist...</span><span class="syn-t">O（含條件子句）</span></div>
+          <div class="para-note"><b>cease</b>（停止）為核心字；<b>cease to V</b> = 不再…；if nothing changes 條件子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The outlook is grim, largely because of the human factors driving sea level rise.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">前景嚴峻，主要是因為推動海平面上升的種種人為因素。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The outlook</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">grim</span><span class="syn-t">C</span> <span class="syn syn-m">largely because of the human factors [driving sea level rise]</span><span class="syn-t">原因（含分詞修飾）</span></div>
+          <div class="para-note"><b>outlook</b>（前景）、<b>grim</b>（嚴峻的）為核心字；<b>because of + N</b>（後接名詞）；driving... 現在分詞修飾 factors。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 人類的試金石 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🌍 五｜人類的試金石</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Venice has therefore become a test case for humanity, showing what can happen when nations fail to curb the effects of climate change through joint efforts.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">因此威尼斯成了人類的試金石，顯示當各國未能透過共同努力抑制氣候變遷的影響時，會發生什麼後果。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Venice</span><span class="syn-t">S</span> <span class="syn syn-v">has become</span><span class="syn-t">V</span> <span class="syn syn-c">a test case for humanity</span><span class="syn-t">C</span> <span class="syn syn-m">, showing what can happen when...</span><span class="syn-t">分詞構句</span></div>
+          <div class="para-note"><b>curb</b>（抑制）、<b>joint</b>（共同的）為核心字；<b>fail to V</b> = 未能…；showing... 分詞構句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Saving Venice cannot be achieved by one country acting alone.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">拯救威尼斯無法靠單一國家獨力達成。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Saving Venice</span><span class="syn-t">S（動名詞）</span> <span class="syn syn-v">cannot be achieved</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">by one country acting alone</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>動名詞作主詞</b>（Saving Venice…）；<b>be achieved by</b>（被動）；acting alone = 獨自行動的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Instead, they require all humans to acknowledge what is happening and to work toward the common goal of preserving our beloved Earth for future generations.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">相反地，這需要全人類承認正在發生的事，並朝著為後代子孫守護我們摯愛地球的共同目標努力。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">require</span><span class="syn-t">V</span> <span class="syn syn-o">all humans</span><span class="syn-t">O</span> <span class="syn syn-c">to acknowledge... and to work toward...</span><span class="syn-t">OC（不定詞並列）</span></div>
+          <div class="para-note"><b>acknowledge</b>（承認）、<b>generation</b>（世代）為核心字；<b>require sb. to V</b> = 要求某人…；work toward = 朝…努力。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">prominent</span><span class="v-pos">adj.</span><div class="v-cn-mini">顯著的；卓越的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>prominence (n.) 顯赫</span><span>≈ notable / eminent</span></div>
+        <div class="v-ex">Venice was once a <b>prominent</b> center of commerce.<span class="cn">威尼斯曾是重要的商業中心。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">commerce</span><span class="v-pos">n.</span><div class="v-cn-mini">商業；貿易</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>commercial (adj.) 商業的</span><span>e-commerce 電子商務</span></div>
+        <div class="v-ex">The city was a center of <b>commerce</b>.<span class="cn">這座城市曾是商業中心。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">tranquil</span><span class="v-pos">adj.</span><div class="v-cn-mini">寧靜的；平靜的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>tranquility (n.) 寧靜</span><span>≈ calm / peaceful</span></div>
+        <div class="v-ex">Venice is famous for its <b>tranquil</b> lagoons.<span class="cn">威尼斯以寧靜的潟湖聞名。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">vast</span><span class="v-pos">adj.</span><div class="v-cn-mini">廣大的；巨大的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>vastly (adv.) 極大地</span><span>≈ enormous / immense</span></div>
+        <div class="v-ex">…a <b>vast</b> network of canals.<span class="cn">…龐大的運河網絡。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">literally</span><span class="v-pos">adv.</span><div class="v-cn-mini">確實地；照字面地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>literal (adj.) 字面的</span><span>反義 figuratively 比喻地</span></div>
+        <div class="v-ex">The water levels are <b>literally</b> rising.<span class="cn">水位確實正在上升。</span></div>
+        <span class="v-gsat">📊 literal ↔ figurative 對比</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">accelerate</span><span class="v-pos">v.</span><div class="v-cn-mini">加速</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>acceleration (n.) 加速</span><span>反義 decelerate 減速</span></div>
+        <div class="v-ex">Pumping groundwater <b>accelerated</b> the subsidence.<span class="cn">抽取地下水加速了地層下陷。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">excessive</span><span class="v-pos">adj.</span><div class="v-cn-mini">過度的；過量的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>excess (n.) 過量</span><span>exceed (v.) 超過</span></div>
+        <div class="v-ex">Fossil fuels release <b>excessive</b> carbon dioxide.<span class="cn">化石燃料排放過量的二氧化碳。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">confirm</span><span class="v-pos">v.</span><div class="v-cn-mini">證實；確認</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>confirmation (n.) 確認</span><span>≈ verify</span></div>
+        <div class="v-ex">Scientists <b>confirm</b> that sea levels could rise.<span class="cn">科學家證實海平面可能上升。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">extraordinary</span><span class="v-pos">adj.</span><div class="v-cn-mini">非凡的；驚人的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>extra- + ordinary（超乎尋常）</span><span>反義 ordinary 普通的</span></div>
+        <div class="v-ex">2019 saw five <b>extraordinary</b> floods.<span class="cn">2019 年發生了五場驚人的洪水。</span></div>
+        <span class="v-gsat">📊 學測高階形容詞</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">cease</span><span class="v-pos">v.</span><div class="v-cn-mini">停止；終止</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>cease to V / cease V-ing</span><span>ceaseless (adj.) 不停的</span></div>
+        <div class="v-ex">Venice may <b>cease</b> to exist by the 22nd century.<span class="cn">威尼斯可能在 22 世紀前不復存在。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">outlook</span><span class="v-pos">n.</span><div class="v-cn-mini">展望；前景</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ prospect</span><span>outlook on life 人生觀</span></div>
+        <div class="v-ex">The <b>outlook</b> is grim.<span class="cn">前景嚴峻。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">grim</span><span class="v-pos">adj.</span><div class="v-cn-mini">嚴峻的；令人擔憂的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>grimly (adv.) 嚴酷地</span><span>≈ bleak / harsh</span></div>
+        <div class="v-ex">The <b>grim</b> outlook worries scientists.<span class="cn">嚴峻的前景令科學家憂心。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">joint</span><span class="v-pos">adj.</span><div class="v-cn-mini">聯合的；共同的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>jointly (adv.) 共同地</span><span>joint effort 共同努力</span></div>
+        <div class="v-ex">Nations must curb climate change through <b>joint</b> efforts.<span class="cn">各國須透過共同努力抑制氣候變遷。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">curb</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">抑制；約束</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ restrain / control</span><span>curb emissions 抑制排放</span></div>
+        <div class="v-ex">…when nations fail to <b>curb</b> the effects of climate change.<span class="cn">…當各國未能抑制氣候變遷的影響時。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">acknowledge</span><span class="v-pos">v.</span><div class="v-cn-mini">承認；認可</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>acknowledgement (n.) 承認；致謝</span><span>≈ admit / recognize</span></div>
+        <div class="v-ex">Humans must <b>acknowledge</b> what is happening.<span class="cn">人類必須承認正在發生的事。</span></div></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">be attributed to</span></td><td>被歸因於</td><td class="pex">The flooding <b>can be attributed to</b> two natural factors.<span class="cn">淹水可歸因於兩個自然因素。</span></td></tr>
+      <tr><td><span class="phr">in addition to</span></td><td>除…之外（還有）</td><td class="pex"><b>In addition to</b> natural factors, there is a human factor.<span class="cn">除了自然因素，還有人為因素。</span></td></tr>
+      <tr><td><span class="phr">contribute to</span></td><td>促成；導致</td><td class="pex">A human factor is <b>contributing to</b> the problem.<span class="cn">一個人為因素正促成這個問題。</span></td></tr>
+      <tr><td><span class="phr">result in</span></td><td>導致；造成</td><td class="pex">Rising temperatures <b>result in</b> melting ice caps.<span class="cn">氣溫上升導致冰帽融化。</span></td></tr>
+      <tr><td><span class="phr">owing to</span></td><td>由於；因為</td><td class="pex">Sea levels are rising <b>owing to</b> climate change.<span class="cn">海平面因氣候變遷而上升。</span></td></tr>
+      <tr><td><span class="phr">work toward</span></td><td>朝…努力</td><td class="pex">We must <b>work toward</b> the goal of preserving Earth.<span class="cn">我們須朝守護地球的目標努力。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（環境、氣候、地理）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">tide</span><span class="v-pos">n.</span><div class="v-cn-mini">潮汐</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>high / low tide 漲/退潮</span><span>tidal (adj.) 潮汐的</span></div>
+        <div class="v-ex">Winter <b>tides</b> and strong winds push sea water inland.<span class="cn">冬季潮汐與強風把海水推向內陸。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">shift</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">轉變；移動</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a shift in 在…上的轉變</span><span>≈ change / move</span></div>
+        <div class="v-ex">A <b>shift</b> in the plate caused subsidence.<span class="cn">板塊的移動造成了下陷。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sweep</span><span class="v-pos">v.</span><div class="v-cn-mini">橫掃；席捲</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>三態：sweep-swept-swept</span><span>sweep through 席捲而過</span></div>
+        <div class="v-ex">A flood <b>swept</b> through the city in 1966.<span class="cn">1966 年一場洪水席捲全城。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">surge</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">激增；湧現</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a surge in demand 需求激增</span><span>≈ soar / spike</span></div>
+        <div class="v-ex">A <b>surge</b> in sea levels threatens the city.<span class="cn">海平面激增威脅著這座城市。</span></div>
+        <span class="v-gsat">📊 學測圖表題常見「激增」</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sustain</span><span class="v-pos">v.</span><div class="v-cn-mini">維持；承受</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>sustainable (adj.) 永續的</span><span>sustainability (n.) 永續性</span></div>
+        <div class="v-ex">Weak marshland cannot <b>sustain</b> the city's weight.<span class="cn">鬆軟的沼澤地承受不了城市的重量。</span></div>
+        <span class="v-gsat">📊 sustainable 為環保主題高頻</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">contend</span><span class="v-pos">v.</span><div class="v-cn-mini">應付；主張；競爭</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>contend with 應付</span><span>contender (n.) 競爭者</span></div>
+        <div class="v-ex">Venice must <b>contend with</b> rising sea levels.<span class="cn">威尼斯必須應付上升的海平面。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">overall</span><span class="v-pos">adj. / adv.</span><div class="v-cn-mini">整體的；全面地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ in general</span><span>overall trend 整體趨勢</span></div>
+        <div class="v-ex">Sea levels are rising <b>overall</b>.<span class="cn">海平面整體上升。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">generation</span><span class="v-pos">n.</span><div class="v-cn-mini">世代；一代人</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>generate (v.) 產生</span><span>future generations 後代子孫</span></div>
+        <div class="v-ex">…preserving Earth for future <b>generations</b>.<span class="cn">…為後代子孫守護地球。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語都與課文主題（水、危機、時間）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">keep one's head above water</span><div class="slang-cn-mini">勉強維持、不被淹沒（度過難關）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">在財務或困境中勉力支撐、不致滅頂。</div>
+      <div class="slang-ex">Venice is struggling to <b>keep its head above water</b>.<span class="cn">威尼斯正努力不被海水淹沒。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a drop in the ocean</span><div class="slang-cn-mini">滄海一粟；微不足道</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">相對於龐大需求，微小到起不了作用。</div>
+      <div class="slang-ex">One country's effort is just <b>a drop in the ocean</b>.<span class="cn">單一國家的努力只是滄海一粟。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the calm before the storm</span><div class="slang-cn-mini">暴風雨前的寧靜</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">大事發生前短暫的平靜。</div>
+      <div class="slang-ex">The quiet lagoon felt like <b>the calm before the storm</b>.<span class="cn">寧靜的潟湖宛如暴風雨前的平靜。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the tip of the iceberg</span><div class="slang-cn-mini">冰山一角</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">表面所見只是問題的一小部分。</div>
+      <div class="slang-ex">Venice is just <b>the tip of the iceberg</b> of climate change.<span class="cn">威尼斯只是氣候變遷的冰山一角。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">test the waters</span><div class="slang-cn-mini">試水溫；先行試探</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">正式投入前先小規模試探情況或反應。</div>
+      <div class="slang-ex">Let us <b>test the waters</b> before launching the plan.<span class="cn">正式推行前先試試水溫。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">weather the storm</span><div class="slang-cn-mini">度過難關；挺過風暴</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">熬過困難或危機的時期。</div>
+      <div class="slang-ex">The city hopes to <b>weather the storm</b> of rising seas.<span class="cn">這座城市盼能挺過海平面上升的難關。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜句首分詞片語（過去分詞／同位語）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">p.p. / N-片語 + ..., S + V ...（分詞的邏輯主詞＝主句主詞）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">句首用過去分詞（被動）或同位語片語修飾主詞，使句子精簡。</p>
+        <div class="g-ex"><b>Built on the sea</b> more than a thousand years ago, Venice has long been admired.<div class="g-ex-cn">建於海上逾千年的威尼斯備受讚賞。（課文）</div></div>
+        <div class="g-ex"><b>Combined</b>, these factors have caused flooding to increase.<div class="g-ex-cn">這些因素合起來使淹水增加。（課文）</div></div>
+        <div class="g-note">✗ 懸垂分詞：分詞邏輯主詞須與主句主詞一致。</div>
+        <div class="g-tip">主動用 V-ing、被動用 p.p.；學測綜合測驗常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜被動語態＋介系詞（be attributed / caused to / by）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">A be attributed to B（A 歸因於 B）
+A be caused by B（A 由 B 造成）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">這類被動片語各有固定介系詞，勿混用。</p>
+        <div class="g-ex">The flooding <b>can be attributed to</b> two natural factors.<div class="g-ex-cn">淹水可歸因於兩個自然因素。（課文）</div></div>
+        <div class="g-ex">Subsidence <b>is caused by</b> a shift in the plate.<div class="g-ex-cn">下陷是由板塊移動造成。（課文）</div></div>
+        <div class="g-note">✗ attributed by / caused to（介系詞用錯）。</div>
+        <div class="g-tip">attribute A to B｜cause 的被動用 by；學測常考介系詞搭配。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜介系詞＋關係代名詞</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞 + 介系詞 + which/whom + S + V ...</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">關係子句中若關代作介系詞受詞，可將介系詞移到關代前（較正式）。</p>
+        <div class="g-ex">the Apennine Plate, <b>on which</b> Venice sits<div class="g-ex-cn">亞平寧板塊，威尼斯坐落其上（＝Venice sits on it，課文）</div></div>
+        <div class="g-note">✗ on that（介系詞後不可接 that）；✗ on which Venice sits on（介系詞重複）。</div>
+        <div class="g-tip">口語常寫成 the plate (that) Venice sits on；學測偏考正式的「介系詞+which」。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜cause / require + O + to V</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">cause / require / enable / allow + O + to V（受詞補語用不定詞）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">這類動詞後接「受詞＋不定詞」；勿漏 to。</p>
+        <div class="g-ex">…<b>causing</b> global temperatures <b>to rise</b>.<div class="g-ex-cn">…導致全球氣溫上升。（課文）</div></div>
+        <div class="g-ex">They <b>require</b> all humans <b>to acknowledge</b> what is happening.<div class="g-ex-cn">這需要全人類承認正在發生的事。（課文）</div></div>
+        <div class="g-note">✗ cause temperatures rise（漏 to）；注意與使役 make/let + 原形不同。</div>
+        <div class="g-tip">make/have/let sb. V（原形）↔ cause/require/enable sb. to V；學測必考對比。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜過去完成（被動）had (been) p.p.</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">（在過去某時之前已完成）S + had + p.p.
+（被動）S + had been + p.p.</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">表「過去的過去」——比某過去時間點更早發生/完成的動作。</p>
+        <div class="g-ex">Although the practice was banned, the damage <b>had already been done</b>.<div class="g-ex-cn">儘管做法被禁，傷害卻已造成。（課文，過去完成被動）</div></div>
+        <div class="g-note">✗ 與單純過去混用：the damage was already done（無法凸顯「更早已完成」）。</div>
+        <div class="g-tip">Although/By the time + 過去式，主句常搭配 had (been) p.p.；學測高頻。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第五冊 第五課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['Venice was once a ',' center of commerce, known throughout Europe.'],
+  cn:'威尼斯曾是重要的商業中心，聞名全歐洲。',
+  opts:['prominent','tranquil','excessive','grim'],ans:0,
+  word:'prominent (adj.) 顯著的；卓越的',
+  exp:'「重要的、聞名的」中心＝prominent。(B) 寧靜、(C) 過度、(D) 嚴峻皆不合。',
+  note:'≈ notable / eminent。'},
+ {q:['Away from the crowds, the ',' lagoons offer visitors a sense of peace.'],
+  cn:'遠離人群，這些寧靜的潟湖為遊客帶來一份平靜。',
+  opts:['tranquil','excessive','prominent','joint'],ans:0,
+  word:'tranquil (adj.) 寧靜的',
+  exp:'「一份平靜」對應 tranquil（寧靜的）。(B)(C)(D) 語意不合。',
+  note:'≈ calm / peaceful；tranquility (n.)。'},
+ {q:['Pumping out groundwater ',' the rate at which the city sinks.'],
+  cn:'抽取地下水加速了城市下沉的速度。',
+  opts:['accelerated','confirmed','curbed','ceased'],ans:0,
+  word:'accelerate (v.) 加速',
+  exp:'「加快下沉速度」＝accelerate。(C) curb 反而是抑制；(B) 證實、(D) 停止不合。',
+  note:'反義 decelerate；acceleration (n.)。'},
+ {q:['Burning fossil fuels releases ',' amounts of carbon dioxide.'],
+  cn:'燃燒化石燃料排放過量的二氧化碳。',
+  opts:['excessive','tranquil','joint','prominent'],ans:0,
+  word:'excessive (adj.) 過度的；過量的',
+  exp:'「過量的」二氧化碳＝excessive。(B)(C)(D) 語意不合。',
+  note:'excess (n.) 過量；exceed (v.) 超過。'},
+ {q:['If nothing changes, some scientists fear Venice may ',' to exist.'],
+  cn:'如果一切都不改變，有些科學家擔心威尼斯可能不復存在。',
+  opts:['cease','confirm','curb','sweep'],ans:0,
+  word:'cease (v.) 停止；終止',
+  exp:'cease to exist = 不復存在。(B) 證實、(C) 抑制、(D) 席捲皆不合。',
+  note:'cease to V / cease V-ing。'},
+ {q:['Nations must work together to ',' the effects of climate change.'],
+  cn:'各國必須共同努力抑制氣候變遷的影響。',
+  opts:['curb','accelerate','confirm','submerge'],ans:0,
+  word:'curb (v.) 抑制；約束',
+  exp:'「抑制影響」＝curb。(B) 加速為反向；(C) 證實、(D) 淹沒不合。',
+  note:'≈ restrain / control；curb emissions 抑制排放。'},
+ {q:['With sea levels rising, the ',' outlook worries many scientists.'],
+  cn:'隨著海平面上升，嚴峻的前景令許多科學家憂心。',
+  opts:['grim','tranquil','prominent','vast'],ans:0,
+  word:'grim (adj.) 嚴峻的；令人擔憂的',
+  exp:'令人憂心的前景＝grim。(B) 寧靜、(C) 顯著、(D) 廣大皆不合。',
+  note:'≈ bleak / harsh。'},
+ {q:['The first step to solving any crisis is to ',' that a problem exists.'],
+  cn:'解決任何危機的第一步，是承認問題的存在。',
+  opts:['acknowledge','submerge','accelerate','sweep'],ans:0,
+  word:'acknowledge (v.) 承認；認可',
+  exp:'「承認問題存在」＝acknowledge。(B) 淹沒、(C) 加速、(D) 席捲不合。',
+  note:'≈ admit / recognize；acknowledgement (n.)。'},
+ {q:['The flooding can be ',' to both natural and human factors.'],
+  cn:'淹水可歸因於自然與人為兩種因素。',
+  opts:['attributed','contributed','confirmed','submerged'],ans:0,
+  word:'be attributed to 被歸因於',
+  exp:'A be attributed to B＝A 歸因於 B。(B) contribute 需 contribute to（主動）；(C)(D) 不合。',
+  note:'attribute A to B（把 A 歸因於 B）。'},
+ {q:['Sea levels keep rising ',' the burning of fossil fuels.'],
+  cn:'海平面因燃燒化石燃料而持續上升。',
+  opts:['owing to','in addition to','far from','as long as'],ans:0,
+  word:'owing to 由於；因為',
+  exp:'「因為…」接名詞片語，用 owing to。(B) 除…之外、(C) 一點也不、(D) 只要皆不合。',
+  note:'owing to ≈ because of / due to（後接名詞）。'}
+];
+
+var teacherQ=[
+ {q:['',' on the sea over a thousand years ago, Venice is admired for its beauty.'],
+  cn:'建於海上逾千年的威尼斯因其美麗而備受讚賞。',
+  opts:['Build','Built','Building','To build'],ans:1,
+  word:'Built（句首過去分詞，被動）',
+  tnote:'<b>句首分詞</b>：修飾主詞 Venice，威尼斯是「被建造」，用過去分詞 Built（＝Being built）。<br>(A) 原形、(D) 不定詞不可作此修飾；(C) 現在分詞為主動，與被動語意不符。'},
+ {q:['The flooding can be attributed ',' two natural factors.'],
+  cn:'淹水可歸因於兩個自然因素。',
+  opts:['to','by','with','for'],ans:0,
+  word:'be attributed to（歸因於，介系詞 to）',
+  tnote:'<b>固定介系詞</b>：attribute A to B → 被動 A be attributed to B，介系詞用 <b>to</b>。<br>(B) by 用於 be caused by；(C)(D) 搭配錯誤。'},
+ {q:['This is the common goal ',' all humans must work.'],
+  cn:'這是全人類都必須為之努力的共同目標。',
+  opts:['toward which','which','that','where'],ans:0,
+  word:'toward which（介系詞＋關係代名詞）',
+  tnote:'<b>介系詞＋關代</b>：work toward the goal → 關代作 toward 的受詞，介系詞移到關代前：toward which。<br>(B) which 少了 toward；(C) that 不接於介系詞後；(D) where 指地點，不合抽象目標。'},
+ {q:['The excessive carbon dioxide caused global temperatures ',' rapidly.'],
+  cn:'過量的二氧化碳導致全球氣溫快速上升。',
+  opts:['rise','to rise','rising','risen'],ans:1,
+  word:'cause + O + to V',
+  tnote:'<b>cause 接法</b>：cause + 受詞 + to V（cause temperatures to rise）。<br>(A) 漏 to（與使役 make/let + 原形不同）；(C)(D) 非不定詞。'},
+ {q:['Although the practice was banned in the 1970s, the damage ',' already ',' done.'],
+  cn:'儘管這做法在 1970 年代被禁，傷害卻早已造成。',
+  opts:['has...been','had...been','was...being','had...being'],ans:1,
+  word:'had been done（過去完成被動）',
+  tnote:'<b>過去完成被動</b>：比某過去時間點更早完成，用 had been + p.p.。<br>(A) 現在完成與過去語境衝突；(C) 過去進行被動語意不符；(D) had being 為文法錯誤。'},
+ {q:['',' natural factors, human activity has worsened the flooding.'],
+  cn:'除了自然因素，人類活動也使淹水更加惡化。',
+  opts:['In addition','In addition to','Addition to','Besides to'],ans:1,
+  word:'in addition to + N（除…之外）',
+  tnote:'<b>介系詞片語</b>：in addition to 後接名詞。<br>(A) In addition 為副詞（須獨立用、加逗號）；(C) 缺 In；(D) besides 後不加 to。'},
+ {q:['',' Venice cannot be achieved by one country acting alone.'],
+  cn:'拯救威尼斯無法靠單一國家獨力達成。',
+  opts:['Save','Saved','Saving','To saving'],ans:2,
+  word:'Saving（動名詞作主詞）',
+  tnote:'<b>動名詞主詞</b>：Saving Venice（拯救威尼斯這件事）作主詞，動詞用單數。<br>(A) 原形不能當主詞；(D) To saving 錯（to 後接原形 to save）；To save 亦可，但動名詞更常見。'},
+ {q:['Scientists say sea levels could rise by ',' 53 centimeters by 2100.'],
+  cn:'科學家說到 2100 年海平面可能上升多達 53 公分。',
+  opts:['as much as','as many as','so much as','much as'],ans:0,
+  word:'as much as + 數量（多達）',
+  tnote:'<b>as much as</b>：強調數量之大「多達」，修飾程度/幅度。<br>(B) as many as 修飾可數複數名詞（如 as many as 60 floods）；此處強調上升幅度用 as much as。'},
+ {q:['There is a human factor ',' to the problem of subsidence.'],
+  cn:'有一個人為因素正促成地層下陷的問題。',
+  opts:['contribute','contributed','contributing','contributes'],ans:2,
+  word:'contributing（現在分詞後位修飾，主動）',
+  tnote:'<b>分詞後位修飾</b>：factor 主動「促成」問題，用現在分詞 contributing（＝that contributes to）。<br>(B) 過去分詞為被動，不合；(A)(D) 為限定動詞，不能作修飾語。'},
+ {q:['The outlook is grim ',' the human factors driving sea level rise.'],
+  cn:'前景嚴峻，是因為推動海平面上升的種種人為因素。',
+  opts:['because','because of','due','so'],ans:1,
+  word:'because of + N（因為）',
+  tnote:'<b>because of</b>：空格後為名詞片語 the human factors...，用 because of（後接名詞）。<br>(A) because 後接子句；(C) due 須寫成 due to；(D) so 表結果。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>
