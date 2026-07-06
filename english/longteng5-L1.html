@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1: The Road Not Taken ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L1: The Road Not Taken ── 未行之路</h1>
+  <div class="sub">龍騰版高中英文 第五冊 第一課｜互動教學講義（高三適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 課文速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>課文速覽（三大重點）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🖋️ 詩人與緣起</h4>
+        美國詩人 <b>Robert Frost</b> 以樸素語言寫深刻哲思。名作〈The Road Not Taken〉1915 年發表，靈感來自好友 Edward Thomas 在林間岔路總<b>猶豫不決</b>；此詩是對其猶豫的溫柔評論。
+      </div>
+      <div class="story-card s2">
+        <h4>🌲 詩作與意象</h4>
+        黃樹林中<b>兩條岔路</b>成為人生重大抉擇的<b>隱喻</b>。前兩節寫選擇的侷限（只能走一條），第三節寫成熟接受抉擇的<b>不可逆</b>，末節那聲「嘆息」留下多重解讀空間。
+      </div>
+      <div class="story-card s3">
+        <h4>🧭 主題與啟示</h4>
+        詩的雋永在於直探<b>抉擇的本質</b>：意義不在選到「完美」的路，而在我們日後<b>如何述說</b>自己的決定。它與每個面對難題的人<b>心有戚戚</b>，成為不朽經典。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析 + 重點解析」。點右側 🔊 可聽整段朗讀。詩作以「節」為單位呈現。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課包含「導論（介紹詩人 Robert Frost）＋詩作本文（The Road Not Taken）＋賞析（主題、雋永魅力、人生啟示）」。詩句逐字取自原詩，賞析取自課本。</p>
+
+    <!-- 導論 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🖋️ 導論｜關於 Robert Frost</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As one of America's most beloved poets, Robert Frost is known for using simple language to express deep ideas.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">身為美國最受喜愛的詩人之一，羅伯特·佛洛斯特以用簡單語言表達深刻思想而聞名。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">As one of America's most beloved poets</span><span class="syn-t">介系詞片語（身分）</span> <span class="syn syn-s">Robert Frost</span><span class="syn-t">S</span> <span class="syn syn-v">is known for</span><span class="syn-t">V（被動片語）</span> <span class="syn syn-o">using simple language to express deep ideas</span><span class="syn-t">O（動名詞）</span></div>
+          <div class="para-note"><b>be known for + N/V-ing</b> = 以…聞名；<b>beloved</b> = 深受喜愛的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Unlike many of his contemporaries, who favored complicated language, Frost wrote in a style that could be understood by readers from all walks of life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">不同於許多偏好複雜語言的同時代詩人，佛洛斯特以一種各行各業讀者都能理解的風格寫作。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Unlike many of his contemporaries [, who favored complicated language,]</span><span class="syn-t">介系詞片語（含非限定關係子句）</span> <span class="syn syn-s">Frost</span><span class="syn-t">S</span> <span class="syn syn-v">wrote</span><span class="syn-t">V</span> <span class="syn syn-m">in a style [that could be understood by readers from all walks of life]</span><span class="syn-t">副詞（含關係子句）</span></div>
+          <div class="para-note"><b>contemporary</b>（同時代的人）、<b>complicated</b>（複雜的）為核心字；<b>all walks of life</b> = 各行各業；who / that 關係子句見句型三。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>His poetry appears as plain as everyday conversation.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他的詩讀來就像日常對話一樣樸實。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">His poetry</span><span class="syn-t">S</span> <span class="syn syn-v">appears</span><span class="syn-t">V（連綴動詞）</span> <span class="syn syn-c">as plain as everyday conversation</span><span class="syn-t">C（as...as 同級比較）</span></div>
+          <div class="para-note"><b>appear + adj.</b> = 顯得…；<b>as plain as</b> = 和…一樣樸素；<b>plain</b>（樸素的、清楚的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, beneath this simplicity lie penetrating insights into life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，在這份樸實之下，蘊藏著對人生深刻的洞見。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">beneath this simplicity</span><span class="syn-t">地方副詞（置句首）</span> <span class="syn syn-v">lie</span><span class="syn-t">V</span> <span class="syn syn-s">penetrating insights into life</span><span class="syn-t">S（真主詞）</span><span class="syn-cl">— 地方副詞置首的倒裝，動詞 lie 與複數主詞一致，見句型五</span></div>
+          <div class="para-note"><b>倒裝</b>：地方副詞置句首 → 動詞在主詞前（句型五）；<b>penetrating</b>（深刻的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>One of his most renowned works, "The Road Not Taken," exemplifies his outstanding ability to draw profound meaning from ordinary experiences.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他最著名的作品之一〈未行之路〉，正體現了他從平凡經驗中汲取深刻意義的傑出能力。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">One of his most renowned works, "The Road Not Taken,"</span><span class="syn-t">S（含同位語）</span> <span class="syn syn-v">exemplifies</span><span class="syn-t">V</span> <span class="syn syn-o">his outstanding ability to draw profound meaning from ordinary experiences</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>renowned</b>（著名的）、<b>outstanding</b>（傑出的）為核心字；<b>exemplify</b>（例證）、<b>profound</b>（深刻的）為補充字；<b>draw...from</b> = 從…汲取。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The poem, first published in 1915, originated from Frost's friendship with poet Edward Thomas.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這首詩最早發表於 1915 年，源自佛洛斯特與詩人愛德華·湯瑪斯的友誼。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The poem</span><span class="syn-t">S</span> <span class="syn syn-m">, first published in 1915,</span><span class="syn-t">過去分詞片語（插入）</span> <span class="syn syn-v">originated from</span><span class="syn-t">V（片語）</span> <span class="syn syn-o">Frost's friendship with poet Edward Thomas</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>first published in 1915</b> 過去分詞片語作補充；<b>originate from</b> = 源自（片語）；<b>publish / publication</b> 為補充字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>During their woodland walks, Thomas would hesitate at every fork, wondering about unexplored routes.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在林間散步時，湯瑪斯總會在每個岔路口猶豫，想著那些沒走過的路。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">During their woodland walks</span><span class="syn-t">時間副詞</span> <span class="syn syn-s">Thomas</span><span class="syn-t">S</span> <span class="syn syn-v">would hesitate</span><span class="syn-t">V</span> <span class="syn syn-m">at every fork</span><span class="syn-t">副詞</span> <span class="syn syn-m">, wondering about unexplored routes</span><span class="syn-t">分詞構句（表附帶）</span></div>
+          <div class="para-note"><b>would</b> 表過去反覆的習慣；<b>wondering...</b> 現在分詞構句（見句型四）；<b>fork</b> = 岔路。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Frost composed the poem partly as a gentle comment on his friend's indecision.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">佛洛斯特寫這首詩，部分是對好友猶豫不決的一種溫柔評論。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Frost</span><span class="syn-t">S</span> <span class="syn syn-v">composed</span><span class="syn-t">V</span> <span class="syn syn-o">the poem</span><span class="syn-t">O</span> <span class="syn syn-m">partly as a gentle comment on his friend's indecision</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>compose</b>（創作）、<b>comment</b>（評論）、<b>indecision</b>（猶豫不決）皆為核心字；<b>comment on</b> = 對…評論。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 詩作本文 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🌲 詩作本文｜The Road Not Taken（四節）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Two roads diverged in a yellow wood, / And sorry I could not travel both / And be one traveler, long I stood / And looked down one as far as I could / To where it bent in the undergrowth;</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第一節：金黃樹林裡兩條路分岔，/ 可惜我一人無法同時走兩條，/ 身為孤獨的旅人，我佇立良久，/ 極目遠望其中一條，/ 直到它彎入樹叢深處消失。</div>
+          <div class="para-syntax"><span class="lbl">🔍 賞析重點</span>
+            <span class="num">①</span><span class="syn syn-s">Two roads</span><span class="syn-t">S</span> <span class="syn syn-v">diverged</span><span class="syn-t">V</span> <span class="syn syn-m">in a yellow wood</span><span class="syn-t">地方副詞</span><span class="syn-cl">— diverge（分岔）點題</span><br>
+            <span class="num">②</span><span class="syn syn-m">sorry (that)...</span><span class="syn-t">情緒形容詞引導</span>：形容詞 sorry 後省略 that，帶出「無法兩條都走」的遺憾。</div>
+          <div class="para-note"><b>diverge</b> = 分岔；<b>yellow wood</b> 點出秋天意象；「兩條路」即人生抉擇的核心隱喻。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Then took the other, as just as fair, / And having perhaps the better claim, / Because it was grassy and wanted wear; / Though as for that the passing there / Had worn them really about the same,</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第二節：於是我選了另一條，一樣美好，/ 也許還更值得一走，/ 因為它綠草如茵、少有人跡；/ 不過就經過的情況而言，/ 兩條路其實被踏得差不多。</div>
+          <div class="para-syntax"><span class="lbl">🔍 賞析重點</span>
+            <span class="num">①</span><span class="syn syn-v">took</span><span class="syn-t">V（主詞 I 省略）</span> <span class="syn syn-o">the other</span><span class="syn-t">O</span> <span class="syn syn-c">as just as fair</span><span class="syn-t">C（as...as）</span><br>
+            <span class="num">②</span><span class="syn syn-m">wanted wear</span>：want 此處為古義「缺少」，wanted wear＝少有人走。</div>
+          <div class="para-note"><b>as just as fair</b> = 一樣地美好；<b>wanted wear</b>（少人踏過）與末節「less traveled」呼應，卻又說兩路「about the same」，埋下反諷。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>And both that morning equally lay / In leaves no step had trodden black. / Oh, I kept the first for another day! / Yet knowing how way leads on to way, / I doubted if I should ever come back.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第三節：那天早晨兩條路一樣，/ 鋪滿無人踏黑的落葉。/ 啊，我把第一條留待他日！/ 但深知路總是接著路，/ 我懷疑自己是否還能回來。</div>
+          <div class="para-syntax"><span class="lbl">🔍 賞析重點</span>
+            <span class="num">①</span><span class="syn syn-m">no step had trodden black</span><span class="syn-t">關係子句（省略 that）</span>：leaves (that) no step had trodden black，過去完成表更早。<br>
+            <span class="num">②</span><span class="syn syn-m">knowing how way leads on to way</span><span class="syn-t">分詞構句</span>：明知「路接著路」，回不去了。</div>
+          <div class="para-note"><b>tread-trod-trodden</b>（踩踏）；<b>way leads on to way</b> = 一條路通往另一條路（抉擇的不可逆）；此節展現成熟的接受而非單純懊悔。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I shall be telling this with a sigh / Somewhere ages and ages hence: / Two roads diverged in a wood, and I— / I took the one less traveled by, / And that has made all the difference.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第四節：許久許久以後的某處，/ 我將會嘆著氣訴說這件事：/ 樹林裡兩條路分岔，而我——/ 我選了人跡較少的那一條，/ 而這造就了一切的不同。</div>
+          <div class="para-syntax"><span class="lbl">🔍 賞析重點</span>
+            <span class="num">①</span><span class="syn syn-v">shall be telling</span><span class="syn-t">未來進行式</span>：想像未來訴說此事。<br>
+            <span class="num">②</span><span class="syn syn-m">and I—</span><span class="syn-t">破折號</span>：停頓與「嘆息」，暗示欲言又止的情感複雜度。</div>
+          <div class="para-note"><b>with a sigh</b> = 帶著一聲嘆息（全詩情感核心）；<b>the one less traveled by</b> = 人跡較少的那條；末句 <b>made all the difference</b> 留下多重解讀。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主題賞析 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🧭 賞析一｜主題（Theme）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>"The Road Not Taken," which on the surface depicts a solitary traveler's journey in an autumn forest, presents a philosophical reflection on life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">〈未行之路〉表面上描寫一位孤獨旅人在秋林中的旅程，實則呈現對人生的哲學省思。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">"The Road Not Taken"</span><span class="syn-t">S</span> <span class="syn syn-m">, which on the surface depicts...,</span><span class="syn-t">非限定關係子句（插入）</span> <span class="syn syn-v">presents</span><span class="syn-t">V</span> <span class="syn syn-o">a philosophical reflection on life</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>depict</b>（描繪）、<b>solitary</b>（孤獨的）為核心字；<b>reflection</b>（省思）為補充字；<b>on the surface</b> = 表面上。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The image of two paths diverging in a yellow wood functions as a compelling metaphor for the crucial decisions we face.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">黃樹林中兩條岔路的意象，成為我們所面對的重大抉擇的絕佳隱喻。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The image of two paths diverging in a yellow wood</span><span class="syn-t">S</span> <span class="syn syn-v">functions as</span><span class="syn-t">V</span> <span class="syn syn-c">a compelling metaphor for the crucial decisions we face</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>compelling</b>（引人入勝的）為核心字；<b>function as</b> = 起…作用、充當；<b>metaphor for</b> = …的隱喻。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The first two stanzas lay out the limits of choice—we can walk only one path and choose only one option, which reflects a universal dilemma at life's crossroads.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">前兩節鋪陳出抉擇的侷限——我們只能走一條路、只能選一個選項，這反映了人生十字路口普世的兩難。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The first two stanzas</span><span class="syn-t">S</span> <span class="syn syn-v">lay out</span><span class="syn-t">V（片語）</span> <span class="syn syn-o">the limits of choice</span><span class="syn-t">O</span> <span class="syn syn-m">— ..., which reflects a universal dilemma...</span><span class="syn-t">破折號補述＋which 非限定子句</span></div>
+          <div class="para-note"><b>lay out</b> = 鋪陳、清楚陳述（片語）；<b>which</b> 代整個前句（見句型三）；<b>crossroads</b> = 十字路口。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Like the speaker, we hesitate because our predictions about the future are clouded by uncertainty.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">如同詩中說話者，我們之所以猶豫，是因為對未來的預測被不確定性所蒙蔽。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Like the speaker</span><span class="syn-t">介系詞片語</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">hesitate</span><span class="syn-t">V</span> <span class="syn syn-m">because our predictions... are clouded by uncertainty</span><span class="syn-t">原因副詞子句</span></div>
+          <div class="para-note"><b>prediction</b>（預測）為核心字；<b>be clouded by</b> = 被…蒙蔽；like（如同）為介系詞，後接名詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The third stanza demonstrates mature acceptance of choice's irreversible nature rather than simple regret: "Yet knowing how way leads on to way, / I doubted if I should ever come back."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第三節展現的是對抉擇不可逆本質的成熟接受，而非單純的懊悔：「但深知路總是接著路，/ 我懷疑自己是否還能回來。」</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The third stanza</span><span class="syn-t">S</span> <span class="syn syn-v">demonstrates</span><span class="syn-t">V</span> <span class="syn syn-o">mature acceptance of choice's irreversible nature</span><span class="syn-t">O</span> <span class="syn syn-m">rather than simple regret</span><span class="syn-t">對比</span></div>
+          <div class="para-note"><b>acceptance</b>（接受）為補充字；<b>rather than</b> = 而非；<b>irreversible</b> = 不可逆的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This awareness adds weight to our choices, since we may never learn what the alternative paths might have offered.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這份體認為我們的抉擇增添了份量，因為我們或許永遠無從得知另一條路會帶來什麼。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This awareness</span><span class="syn-t">S</span> <span class="syn syn-v">adds</span><span class="syn-t">V</span> <span class="syn syn-o">weight</span><span class="syn-t">O</span> <span class="syn syn-m">to our choices</span><span class="syn-t">副詞</span> <span class="syn syn-m">since... might have offered</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>add weight to</b> = 使…更有份量；<b>might have offered</b> = 過去可能提供（對過去的推測）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 雋永魅力 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">✨ 賞析二｜雋永的魅力（The Poem's Lasting Appeal）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The poem's lasting fascination stems from its final stanza, which invites different interpretations.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這首詩歷久不衰的魅力源自它的最後一節，那一節容許了不同的詮釋。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The poem's lasting fascination</span><span class="syn-t">S</span> <span class="syn syn-v">stems from</span><span class="syn-t">V（片語）</span> <span class="syn syn-o">its final stanza</span><span class="syn-t">O</span> <span class="syn syn-m">, which invites different interpretations</span><span class="syn-t">非限定關係子句</span></div>
+          <div class="para-note"><b>stem from</b> = 源自（片語）；<b>invite different interpretations</b> = 引發不同解讀。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Some readers celebrate the speaker's declaration, "I took the one less traveled by, / And that has made all the difference," seeing it as encouragement to choose an unconventional path.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有些讀者讚頌說話者的宣告：「我選了人跡較少的那一條，/ 而這造就了一切的不同」，把它視為鼓勵人們選擇不落俗套之路。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Some readers</span><span class="syn-t">S</span> <span class="syn syn-v">celebrate</span><span class="syn-t">V</span> <span class="syn syn-o">the speaker's declaration...</span><span class="syn-t">O</span> <span class="syn syn-m">, seeing it as encouragement...</span><span class="syn-t">分詞構句</span></div>
+          <div class="para-note"><b>declaration</b>（宣告）為補充字；<b>unconventional</b>（不落俗套的）為補充字；<b>see A as B</b> = 把 A 視為 B；seeing... 分詞構句（見句型四）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, other readers point to earlier lines—"Though as for that the passing there / Had worn them really about the same"—to argue that neither path was genuinely "less traveled."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，另一些讀者指出前面的詩句——「不過就經過的情況而言，/ 兩條路其實被踏得差不多」——主張其實沒有哪條路真的「較少人走」。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">other readers</span><span class="syn-t">S</span> <span class="syn syn-v">point to</span><span class="syn-t">V</span> <span class="syn syn-o">earlier lines</span><span class="syn-t">O</span> <span class="syn syn-m">to argue that neither path was genuinely "less traveled"</span><span class="syn-t">不定詞（表目的）</span></div>
+          <div class="para-note"><b>point to</b> = 指出；<b>neither</b> = 兩者皆非（接單數）；引號內詩句作為佐證。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>They suggest that the speaker is simply justifying his decision.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他們認為說話者只是在為自己的決定辯解罷了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">suggest</span><span class="syn-t">V</span> <span class="syn syn-o">that the speaker is simply justifying his decision</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>justify</b>（為…辯解）為核心字；<b>suggest that</b> = 認為、暗示。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>More importantly, the power of the final stanza lies not only in what the speaker claims but also in how he tells it.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">更重要的是，末節的力量不僅在於說話者「說了什麼」，也在於他「怎麼說」。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the power of the final stanza</span><span class="syn-t">S</span> <span class="syn syn-v">lies</span><span class="syn-t">V</span> <span class="syn syn-m">not only in what the speaker claims but also in how he tells it</span><span class="syn-t">not only...but also 並列副詞</span></div>
+          <div class="para-note"><b>not only A but also B</b>（句型一）；<b>lie in</b> = 在於；what / how 引導名詞子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In the final stanza, the speaker imagines telling the story in the future, and the "sigh" he anticipates displays the poem's emotional complexity.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在最後一節，說話者想像自己未來訴說這個故事，而他所預期的那聲「嘆息」，展現了全詩情感的複雜。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the speaker</span><span class="syn-t">S</span> <span class="syn syn-v">imagines</span><span class="syn-t">V</span> <span class="syn syn-o">telling the story in the future</span><span class="syn-t">O（動名詞）</span><br>
+            <span class="num">②</span><span class="syn syn-s">the "sigh" [he anticipates]</span><span class="syn-t">S（含關係子句）</span> <span class="syn syn-v">displays</span><span class="syn-t">V</span> <span class="syn syn-o">the poem's emotional complexity</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>imagine + V-ing</b>（想像做…，接動名詞）；<b>anticipate</b> = 預期；(that) he anticipates 為關係子句修飾 sigh。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The emotional weight of this sigh is already present in the pause after "and I—" in the third-to-last line.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這聲嘆息的情感份量，早已藏在倒數第三行「and I—」之後的那個停頓裡。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The emotional weight of this sigh</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">already present</span><span class="syn-t">C</span> <span class="syn syn-m">in the pause after "and I—"</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>third-to-last</b> = 倒數第三；<b>present</b>（存在的）此處為形容詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The dash suggests that the speaker is struggling to find words, making the sigh (echoing the sound of "I") that follows feel natural.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">那個破折號暗示說話者正努力尋找措辭，讓緊接而來的嘆息（呼應「I」的發音）顯得十分自然。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The dash</span><span class="syn-t">S</span> <span class="syn syn-v">suggests</span><span class="syn-t">V</span> <span class="syn syn-o">that the speaker is struggling to find words</span><span class="syn-t">O（名詞子句）</span> <span class="syn syn-m">, making... feel natural</span><span class="syn-t">分詞構句（結果）</span></div>
+          <div class="para-note"><b>struggle to V</b> = 費力做…；<b>make + O + 原形</b>（使役，making the sigh feel natural）；echoing... 插入補述。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This sigh could express different things, such as regret, gentle self-criticism, or acceptance of life's uncertainty.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這聲嘆息可能表達不同的情緒，例如懊悔、溫和的自省，或是對人生無常的接受。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This sigh</span><span class="syn-t">S</span> <span class="syn syn-v">could express</span><span class="syn-t">V</span> <span class="syn syn-o">different things</span><span class="syn-t">O</span> <span class="syn syn-m">, such as regret, ... or acceptance...</span><span class="syn-t">舉例並列</span></div>
+          <div class="para-note"><b>such as</b> = 例如；三個並列名詞（regret / self-criticism / acceptance）作舉例。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Throughout the poem, Frost mixes emotions.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">通篇全詩，佛洛斯特將各種情緒交織在一起。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Throughout the poem</span><span class="syn-t">副詞</span> <span class="syn syn-s">Frost</span><span class="syn-t">S</span> <span class="syn syn-v">mixes</span><span class="syn-t">V</span> <span class="syn syn-o">emotions</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>throughout</b> = 遍及、自始至終。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The opening conveys loss ("sorry I could not travel both"), while the speaker also weighs each path with anxious care.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">開頭傳達出失落（「可惜我無法兩條都走」），同時說話者又以焦慮而審慎的心情衡量每一條路。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The opening</span><span class="syn-t">S</span> <span class="syn syn-v">conveys</span><span class="syn-t">V</span> <span class="syn syn-o">loss</span><span class="syn-t">O</span> <span class="syn syn-m">while the speaker also weighs each path with anxious care</span><span class="syn-t">對比副詞子句</span></div>
+          <div class="para-note"><b>convey</b> = 傳達；<b>while</b> = 然而（對比）；<b>weigh</b> = 權衡。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This emotional complexity reflects how we really feel when making choices.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這種情感的複雜，正映照出我們做選擇時真實的感受。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This emotional complexity</span><span class="syn-t">S</span> <span class="syn syn-v">reflects</span><span class="syn-t">V</span> <span class="syn syn-o">how we really feel when making choices</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>reflect</b> = 反映；<b>when making choices</b> = when we make choices 的省略（分詞）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 人生啟示 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🌱 賞析三｜人生啟示（Life Lessons）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This poem offers insights for whoever is facing important decisions.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這首詩為任何正面臨重大抉擇的人提供了洞見。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This poem</span><span class="syn-t">S</span> <span class="syn syn-v">offers</span><span class="syn-t">V</span> <span class="syn syn-o">insights</span><span class="syn-t">O</span> <span class="syn syn-m">for whoever is facing important decisions</span><span class="syn-t">介系詞 + 名詞子句</span></div>
+          <div class="para-note"><b>whoever</b> = 任何…的人（複合關係代名詞，引導名詞子句，見句型五）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Throughout our lives, we encounter numerous crossroads, such as selecting a university major or deciding on a career path, where we must choose without knowing the final outcome.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">終其一生，我們會遇到無數的十字路口，例如選填大學科系或決定職涯方向，在那些時刻我們必須在不知最終結果的情況下做出選擇。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">encounter</span><span class="syn-t">V</span> <span class="syn syn-o">numerous crossroads</span><span class="syn-t">O</span> <span class="syn syn-m">, such as..., where we must choose...</span><span class="syn-t">舉例＋關係副詞 where</span></div>
+          <div class="para-note"><b>encounter</b>（遭遇）為補充字；<b>where</b> 關係副詞修飾 crossroads；<b>without knowing</b> = 在不知…的情況下。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Whatever we choose will become part of our personal story.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">無論我們選擇什麼，都將成為我們個人故事的一部分。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Whatever we choose</span><span class="syn-t">S（名詞子句）</span> <span class="syn syn-v">will become</span><span class="syn-t">V</span> <span class="syn syn-c">part of our personal story</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>Whatever</b> = 無論什麼（複合關係代名詞引導名詞子句作主詞，見句型五）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The poem suggests that significance lies not in selecting the "perfect" choice but in how we explain our decision later.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這首詩暗示：意義不在於選出「完美」的選項，而在於我們日後如何解釋自己的決定。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">significance</span><span class="syn-t">S</span> <span class="syn syn-v">lies</span><span class="syn-t">V</span> <span class="syn syn-m">not in selecting... but in how we explain...</span><span class="syn-t">not...but 並列</span></div>
+          <div class="para-note"><b>lie not in A but in B</b> = 不在於 A 而在於 B；<b>significance</b> = 意義、重要性。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Rather than emphasizing the importance of not having regrets, the poem prompts us to consider how meaning in life comes from the choices we make.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這首詩並非強調「不留遺憾」的重要，而是促使我們思考：人生的意義如何來自我們所做的抉擇。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Rather than emphasizing...</span><span class="syn-t">介系詞片語（對比）</span> <span class="syn syn-s">the poem</span><span class="syn-t">S</span> <span class="syn syn-v">prompts</span><span class="syn-t">V</span> <span class="syn syn-o">us</span><span class="syn-t">O</span> <span class="syn syn-c">to consider how...</span><span class="syn-t">OC（不定詞）</span></div>
+          <div class="para-note"><b>rather than + V-ing</b> = 而不是…；<b>prompt sb. to V</b> = 促使某人做…。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>"The Road Not Taken" has an enduring appeal because it gets at the essence of decision-making.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">〈未行之路〉之所以歷久彌新，是因為它直探抉擇的本質。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">"The Road Not Taken"</span><span class="syn-t">S</span> <span class="syn syn-v">has</span><span class="syn-t">V</span> <span class="syn syn-o">an enduring appeal</span><span class="syn-t">O</span> <span class="syn syn-m">because it gets at the essence of decision-making</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>essence</b>（本質）為核心字；<b>get at</b> = 觸及、指向（核心，片語）；<b>enduring</b> = 持久的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Instead of offering simple answers, the poem invites readers to reflect on the complexity of choice.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這首詩並不提供簡單的答案，而是邀請讀者去省思抉擇的複雜。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Instead of offering simple answers</span><span class="syn-t">介系詞片語</span> <span class="syn syn-s">the poem</span><span class="syn-t">S</span> <span class="syn syn-v">invites</span><span class="syn-t">V</span> <span class="syn syn-o">readers</span><span class="syn-t">O</span> <span class="syn syn-c">to reflect on the complexity of choice</span><span class="syn-t">OC（不定詞）</span></div>
+          <div class="para-note"><b>instead of + V-ing</b> = 而不是…；<b>invite sb. to V</b> = 邀請某人做…；<b>reflect on</b> = 省思。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It strikes a chord with anyone who has faced difficult decisions, making it a timeless classic.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它能引起每個曾面臨艱難抉擇者的共鳴，因而成為一部不朽的經典。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">S</span> <span class="syn syn-v">strikes a chord with</span><span class="syn-t">V（片語）</span> <span class="syn syn-o">anyone who has faced difficult decisions</span><span class="syn-t">O（含關係子句）</span> <span class="syn syn-m">, making it a timeless classic</span><span class="syn-t">分詞構句（結果）</span></div>
+          <div class="para-note"><b>strike a chord with sb.</b> = 引起某人共鳴（片語）；making... 分詞構句表結果；<b>timeless</b> = 不朽的。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">contemporary</span><span class="v-pos">n. / adj.</span><div class="v-cn-mini">同時代的人；當代的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>contemporary art 當代藝術</span><span>≈ present-day</span></div>
+        <div class="v-ex">Unlike his <b>contemporaries</b>, Frost wrote in plain language.<span class="cn">不同於同時代的人，佛洛斯特以樸實的語言寫作。</span></div>
+        <span class="v-gsat">📊 一字兩義（同代人／當代的）學測常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">complicated</span><span class="v-pos">adj.</span><div class="v-cn-mini">複雜的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>complicate (v.) 使複雜</span><span>complication (n.) 複雜；併發症</span></div>
+        <div class="v-ex">Many poets favored <b>complicated</b> language.<span class="cn">許多詩人偏好複雜的語言。</span></div>
+        <span class="v-gsat">📊 反義 simple / plain</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">plain</span><span class="v-pos">adj.</span><div class="v-cn-mini">樸素的；清楚的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>plainly (adv.) 明白地</span><span>in plain English 用白話</span></div>
+        <div class="v-ex">His poetry appears as <b>plain</b> as everyday conversation.<span class="cn">他的詩讀來像日常對話一樣樸實。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">penetrating</span><span class="v-pos">adj.</span><div class="v-cn-mini">深刻的；穿透的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>penetrate (v.) 穿透；看穿</span><span>penetration (n.)</span></div>
+        <div class="v-ex">Beneath the simplicity lie <b>penetrating</b> insights.<span class="cn">在樸實之下蘊藏著深刻的洞見。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">renowned</span><span class="v-pos">adj.</span><div class="v-cn-mini">著名的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>renown (n.) 名望</span><span>be renowned for 以…著稱</span></div>
+        <div class="v-ex">"The Road Not Taken" is one of his most <b>renowned</b> works.<span class="cn">〈未行之路〉是他最著名的作品之一。</span></div>
+        <span class="v-gsat">📊 ≈ famous / well-known</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">outstanding</span><span class="v-pos">adj.</span><div class="v-cn-mini">傑出的；未解決的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>stand out 突出</span><span>outstanding debt 未償債務</span></div>
+        <div class="v-ex">His <b>outstanding</b> ability draws meaning from ordinary life.<span class="cn">他傑出的能力能從平凡生活中汲取意義。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">compose</span><span class="v-pos">v.</span><div class="v-cn-mini">創作；組成</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>composition (n.) 作品；作文</span><span>be composed of 由…組成</span></div>
+        <div class="v-ex">Frost <b>composed</b> the poem as a gentle comment.<span class="cn">佛洛斯特把這首詩寫成一種溫柔的評論。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">comment</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">評論</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>commentary (n.) 評論；實況解說</span><span>comment on 對…評論</span></div>
+        <div class="v-ex">The poem is a gentle <b>comment</b> on his friend's indecision.<span class="cn">這首詩是對好友猶豫不決的溫柔評論。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">indecision</span><span class="v-pos">n.</span><div class="v-cn-mini">猶豫不決</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>indecisive (adj.) 優柔寡斷的</span><span>decision / decide 反向</span></div>
+        <div class="v-ex">The poem responds to his friend's <b>indecision</b>.<span class="cn">這首詩回應了好友的猶豫不決。</span></div>
+        <span class="v-gsat">📊 in- 否定字首（decision→indecision）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">depict</span><span class="v-pos">v.</span><div class="v-cn-mini">描繪</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>depiction (n.) 描繪</span><span>≈ portray / describe</span></div>
+        <div class="v-ex">On the surface it <b>depicts</b> a traveler's journey.<span class="cn">表面上它描繪一位旅人的旅程。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">solitary</span><span class="v-pos">adj.</span><div class="v-cn-mini">孤獨的；單獨的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>solitude (n.) 獨處</span><span>≈ lonely / lone</span></div>
+        <div class="v-ex">The poem depicts a <b>solitary</b> traveler.<span class="cn">這首詩描繪一位孤獨的旅人。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">compelling</span><span class="v-pos">adj.</span><div class="v-cn-mini">引人入勝的；有說服力的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>compel (v.) 強迫</span><span>compelling evidence 有力的證據</span></div>
+        <div class="v-ex">The two paths are a <b>compelling</b> metaphor for choice.<span class="cn">兩條路是抉擇的絕佳隱喻。</span></div>
+        <span class="v-gsat">📊 compel sb. to V 強迫某人做</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">prediction</span><span class="v-pos">n.</span><div class="v-cn-mini">預測</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>predict (v.) 預測</span><span>predictable (adj.) 可預測的</span></div>
+        <div class="v-ex">Our <b>predictions</b> about the future are clouded by uncertainty.<span class="cn">我們對未來的預測被不確定性蒙蔽。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">justify</span><span class="v-pos">v.</span><div class="v-cn-mini">為…辯解；證明…正當</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>justification (n.) 正當理由</span><span>justify V-ing</span></div>
+        <div class="v-ex">The speaker is simply <b>justifying</b> his decision.<span class="cn">說話者只是在為自己的決定辯解。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">essence</span><span class="v-pos">n.</span><div class="v-cn-mini">本質；精華</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>essential (adj.) 必要的；本質的</span><span>in essence 本質上</span></div>
+        <div class="v-ex">The poem gets at the <b>essence</b> of decision-making.<span class="cn">這首詩直探抉擇的本質。</span></div>
+        <span class="v-gsat">📊 essential 為學測高頻形容詞</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">walk of life</span></td><td>行業；社會階層</td><td class="pex">Readers from all <b>walks of life</b> understood his poetry.<span class="cn">各行各業的讀者都能理解他的詩。</span></td></tr>
+      <tr><td><span class="phr">lay out</span></td><td>鋪陳；清楚陳述</td><td class="pex">The first two stanzas <b>lay out</b> the limits of choice.<span class="cn">前兩節鋪陳出抉擇的侷限。</span></td></tr>
+      <tr><td><span class="phr">stem from</span></td><td>源自</td><td class="pex">The poem's fascination <b>stems from</b> its final stanza.<span class="cn">這首詩的魅力源自最後一節。</span></td></tr>
+      <tr><td><span class="phr">originate from</span></td><td>起源於</td><td class="pex">The poem <b>originated from</b> Frost's friendship with Thomas.<span class="cn">這首詩源自佛洛斯特與湯瑪斯的友誼。</span></td></tr>
+      <tr><td><span class="phr">get at</span></td><td>觸及；指向（核心）</td><td class="pex">It <b>gets at</b> the essence of decision-making.<span class="cn">它直探抉擇的本質。</span></td></tr>
+      <tr><td><span class="phr">strike a chord (with sb.)</span></td><td>引起（某人）共鳴</td><td class="pex">It <b>strikes a chord with</b> anyone facing hard choices.<span class="cn">它能引起每個面臨難抉擇者的共鳴。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（文學、抉擇、省思）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">publication</span><span class="v-pos">n.</span><div class="v-cn-mini">出版；出版品</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>publish (v.) 出版</span><span>publisher (n.) 出版商</span></div>
+        <div class="v-ex">The poem's first <b>publication</b> was in 1915.<span class="cn">這首詩最早出版於 1915 年。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">acceptance</span><span class="v-pos">n.</span><div class="v-cn-mini">接受；認可</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>accept (v.) 接受</span><span>acceptable (adj.) 可接受的</span></div>
+        <div class="v-ex">The third stanza shows mature <b>acceptance</b> of choice.<span class="cn">第三節展現對抉擇成熟的接受。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">declaration</span><span class="v-pos">n.</span><div class="v-cn-mini">宣告；聲明</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>declare (v.) 宣告</span><span>Declaration of Independence 獨立宣言</span></div>
+        <div class="v-ex">Some readers celebrate the speaker's <b>declaration</b>.<span class="cn">有些讀者讚頌說話者的宣告。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">conventional</span><span class="v-pos">adj.</span><div class="v-cn-mini">傳統的；因循守舊的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>convention (n.) 慣例；大會</span><span>unconventional 反義（非傳統的）</span></div>
+        <div class="v-ex">The poem encourages an <b>unconventional</b> path.<span class="cn">這首詩鼓勵走一條不落俗套的路。</span></div>
+        <span class="v-gsat">📊 un- 否定字首對比</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">encounter</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">遭遇；邂逅</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ come across / run into</span><span>a chance encounter 偶遇</span></div>
+        <div class="v-ex">We <b>encounter</b> numerous crossroads in life.<span class="cn">我們一生會遇到無數的十字路口。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">exemplify</span><span class="v-pos">v.</span><div class="v-cn-mini">是…的典型；例證</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>example (n.) 例子</span><span>exemplary (adj.) 模範的</span></div>
+        <div class="v-ex">The poem <b>exemplifies</b> his ability to draw deep meaning.<span class="cn">這首詩體現了他汲取深意的能力。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">profound</span><span class="v-pos">adj.</span><div class="v-cn-mini">深刻的；深遠的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>profoundly (adv.) 深深地</span><span>≈ deep / far-reaching</span></div>
+        <div class="v-ex">He draws <b>profound</b> meaning from ordinary experiences.<span class="cn">他從平凡經驗中汲取深刻的意義。</span></div>
+        <span class="v-gsat">📊 學測閱讀常見高階形容詞</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">reflection</span><span class="v-pos">n.</span><div class="v-cn-mini">省思；反射；倒影</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>reflect (v.) 省思；反映</span><span>reflect on 反省</span></div>
+        <div class="v-ex">The poem presents a philosophical <b>reflection</b> on life.<span class="cn">這首詩呈現對人生的哲學省思。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語都與課文主題（道路、抉擇）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">at a crossroads</span><div class="slang-cn-mini">處於人生的抉擇關頭</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">面臨重要抉擇、必須決定何去何從的時刻。</div>
+      <div class="slang-ex">After graduation, she found herself <b>at a crossroads</b>.<span class="cn">畢業後，她發現自己站在人生的抉擇關頭。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the road less traveled</span><div class="slang-cn-mini">人跡罕至的路；與眾不同的選擇（出自本詩）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">比喻不隨主流、走自己路的選擇，典出本詩。</div>
+      <div class="slang-ex">He chose <b>the road less traveled</b> and became an artist.<span class="cn">他選了人跡較少的路，成了藝術家。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">cross that bridge when you come to it</span><div class="slang-cn-mini">船到橋頭自然直；到時候再說</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">不必為還沒發生的問題提前煩惱，到時候再處理。</div>
+      <div class="slang-ex">Don't worry about the exam now—<b>cross that bridge when you come to it</b>.<span class="cn">別現在就煩惱考試，到時候再說。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a fork in the road</span><div class="slang-cn-mini">抉擇的分岔點</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">人生或計畫中必須二選一的關鍵轉折。</div>
+      <div class="slang-ex">Choosing a major felt like reaching <b>a fork in the road</b>.<span class="cn">選科系就像走到一個抉擇的岔路口。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">burn one's bridges</span><div class="slang-cn-mini">自斷後路</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">把退路都斷了，之後無法回頭。</div>
+      <div class="slang-ex">Quitting rudely can <b>burn your bridges</b> with an employer.<span class="cn">無禮地離職可能自斷與雇主的後路。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">go the extra mile</span><div class="slang-cn-mini">多付出、額外努力</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">比別人或要求做得更多、更用心。</div>
+      <div class="slang-ex">She always <b>goes the extra mile</b> for her students.<span class="cn">她總是為學生多付出一份心力。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜not only A but also B（不僅…而且…）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">not only + A but (also) + B（A、B 詞性/結構須對等）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">連接對等成分；also 可省，but 不可省。</p>
+        <div class="g-ex">The power lies <b>not only</b> in what the speaker claims <b>but also</b> in how he tells it.<div class="g-ex-cn">力量不僅在於他說什麼，也在於他怎麼說。（課文）</div></div>
+        <div class="g-note">✗ not only...and also...（連接詞用錯）。</div>
+        <div class="g-tip">句首倒裝：<b>Not only did</b> he choose, <b>but</b> he <b>also</b> reflected. 學測常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜地方副詞置句首的倒裝</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">地方副詞(片語) + 動詞 + 主詞（完全倒裝）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">地方/方位副詞置句首以強調時，主詞與動詞倒裝；動詞與「真主詞」一致。</p>
+        <div class="g-ex"><b>Beneath this simplicity lie</b> penetrating insights into life.<div class="g-ex-cn">在這份樸實之下，蘊藏著深刻的洞見。（課文；主詞 insights 為複數，故用 lie）</div></div>
+        <div class="g-ex"><b>Here comes</b> the bus. / <b>On the hill stands</b> a temple.<div class="g-ex-cn">公車來了。／山上矗立著一座廟。</div></div>
+        <div class="g-note">✗ Beneath this simplicity lies penetrating insights.（主詞複數，動詞不可用 lies）。</div>
+        <div class="g-tip">主詞為代名詞時不倒裝：Here it comes.（非 Here comes it）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜關係子句：限定 vs 非限定</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞 + who/which/that + ...（限定，無逗號）
+先行詞, who/which, ...（非限定，有逗號、補充說明）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">限定子句界定範圍；非限定子句補充說明，且 that 不可引導非限定；which 可代整個前句。</p>
+        <div class="g-ex">a style <b>that</b> could be understood by readers（限定，課文）<div class="g-ex-cn">一種讀者能理解的風格</div></div>
+        <div class="g-ex">his contemporaries, <b>who</b> favored complicated language（非限定，課文）<div class="g-ex-cn">他的同時代人，他們偏好複雜的語言</div></div>
+        <div class="g-note">✗ 非限定用 that（his contemporaries, that favored...）為錯。</div>
+        <div class="g-tip">..., which reflects a universal dilemma —which 代前面整句；學測常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜現在分詞片語／分詞構句</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">主句, V-ing ...（表附帶狀況或結果，邏輯主詞＝主句主詞）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">用 V-ing 接在主句後表「同時／附帶／結果」，邏輯主詞須與主句主詞一致。</p>
+        <div class="g-ex">Thomas would hesitate at every fork, <b>wondering</b> about unexplored routes.<div class="g-ex-cn">湯瑪斯總在每個岔路猶豫，想著沒走過的路。（課文）</div></div>
+        <div class="g-ex">It strikes a chord with readers, <b>making</b> it a timeless classic.<div class="g-ex-cn">它引起共鳴，因而成為不朽經典。（課文，表結果）</div></div>
+        <div class="g-note">✗ 懸垂分詞：分詞邏輯主詞與主句主詞不一致即錯。</div>
+        <div class="g-tip">主動用 V-ing、被動用 p.p.；學測綜合測驗常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜複合關係代名詞 whoever / whatever</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">whoever / whatever + (S) + V ...（＝anyone who / anything that，引導名詞子句）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">複合關係代名詞本身含先行詞，引導名詞子句，可當主詞或受詞。</p>
+        <div class="g-ex">The poem offers insights for <b>whoever</b> is facing important decisions.<div class="g-ex-cn">這首詩為任何面臨重大抉擇的人提供洞見。（課文，＝anyone who）</div></div>
+        <div class="g-ex"><b>Whatever</b> we choose will become part of our story.<div class="g-ex-cn">無論我們選什麼都會成為故事的一部分。（課文，作主詞）</div></div>
+        <div class="g-note">✗ 讓步用 no matter what/who 引導副詞子句，勿與名詞子句的 whatever/whoever 混淆位置。</div>
+        <div class="g-tip">whoever（主格）vs whomever（受格）；學測偶考格位判斷。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第五冊 第一課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['Robert Frost is one of the most ',' poets in American history, loved by readers everywhere.'],
+  cn:'佛洛斯特是美國史上最著名的詩人之一，廣受讀者喜愛。',
+  opts:['renowned','solitary','complicated','plain'],ans:0,
+  word:'renowned (adj.) 著名的',
+  exp:'「最…、廣受喜愛」需正面的「著名的」。(B) 孤獨、(C) 複雜、(D) 樸素語意不合。',
+  note:'renowned ≈ famous / well-known。'},
+ {q:['Frost wrote in language so ',' that it sounded like everyday conversation.'],
+  cn:'佛洛斯特用如此樸實的語言寫作，聽起來就像日常對話。',
+  opts:['plain','profound','complicated','penetrating'],ans:0,
+  word:'plain (adj.) 樸素的；清楚的',
+  exp:'「像日常對話」＝樸實易懂。(D) penetrating 深刻，修飾洞見而非語言風格。',
+  note:'課文：as plain as everyday conversation。'},
+ {q:['The poem gently comments on the way his friend showed ',', hesitating at every fork.'],
+  cn:'這首詩溫柔地評論了他朋友在每個岔路都表現出的猶豫不決。',
+  opts:['indecision','acceptance','essence','publication'],ans:0,
+  word:'indecision (n.) 猶豫不決',
+  exp:'hesitating（猶豫）對應 indecision。in- 為否定字首（decision→indecision）。',
+  note:'indecisive (adj.) 優柔寡斷的。'},
+ {q:['On the surface, the poem depicts a ',' traveler walking alone in an autumn forest.'],
+  cn:'表面上，這首詩描繪一位獨自走在秋林中的孤獨旅人。',
+  opts:['solitary','contemporary','outstanding','conventional'],ans:0,
+  word:'solitary (adj.) 孤獨的；單獨的',
+  exp:'walking alone 對應 solitary。solitude 為其名詞。',
+  note:'solitary ≈ lone / lonely。'},
+ {q:['The two diverging paths serve as a ',' metaphor for the crucial choices we face.'],
+  cn:'兩條分岔的路，是我們所面對重大抉擇的絕佳隱喻。',
+  opts:['compelling','misleading','plain','solitary'],ans:0,
+  word:'compelling (adj.) 引人入勝的；有力的',
+  exp:'好的隱喻＝compelling（有說服力、引人入勝）。compel = 強迫。',
+  note:'compelling evidence 有力的證據。'},
+ {q:['Some critics argue that the speaker is merely trying to ',' a decision he already made.'],
+  cn:'有些評論者主張，說話者只是想為自己早已做出的決定辯解。',
+  opts:['justify','depict','compose','encounter'],ans:0,
+  word:'justify (v.) 為…辯解',
+  exp:'「為決定辯解」＝justify。(B) 描繪、(C) 創作、(D) 遭遇皆不合。',
+  note:'justification (n.) 正當理由。'},
+ {q:['The poem endures because it gets at the very ',' of decision-making.'],
+  cn:'這首詩歷久不衰，因為它直探抉擇的本質。',
+  opts:['essence','comment','fork','sigh'],ans:0,
+  word:'essence (n.) 本質；精華',
+  exp:'get at the essence of = 觸及…的本質。',
+  note:'in essence 本質上；essential (adj.)。'},
+ {q:['The lasting fascination of the poem ',' its open-ended final stanza.'],
+  cn:'這首詩歷久不衰的魅力源自它開放式的最後一節。',
+  opts:['stems from','lays out','strikes a chord','goes the extra mile'],ans:0,
+  word:'stem from 源自',
+  exp:'「魅力源自…」＝stem from。(B) 鋪陳、(C) 引起共鳴、(D) 額外努力皆不合。',
+  note:'≈ originate from / result from。'},
+ {q:['His plain style could be understood by readers from every ','.'],
+  cn:'他樸實的風格能被各行各業的讀者理解。',
+  opts:['walk of life','fork in the road','piece of cake','slip of the tongue'],ans:0,
+  word:'walk of life 行業；社會階層',
+  exp:'readers from all walks of life = 各行各業的讀者（課文）。',
+  note:'from all walks of life 為固定搭配。'},
+ {q:['A poem about hard choices tends to ',' with anyone who has faced a dilemma.'],
+  cn:'一首關於艱難抉擇的詩，往往能引起每個面臨兩難者的共鳴。',
+  opts:['strike a chord','lay out','stock up','fall for'],ans:0,
+  word:'strike a chord (with sb.) 引起共鳴',
+  exp:'「引起共鳴」＝strike a chord。(D) fall for（上當/愛上）不合。',
+  note:'strike a chord with sb. 為固定搭配。'}
+];
+
+var teacherQ=[
+ {q:['The power of the poem lies not only in what the speaker says ',' in how he says it.'],
+  cn:'這首詩的力量不僅在於說話者說什麼，也在於他怎麼說。',
+  opts:['and also','but also','or also','so also'],ans:1,
+  word:'not only A but also B',
+  tnote:'<b>固定搭配</b>：not only... but (also)...。also 可省、but 不可省。<br>✗ not only...and also...<br>A、B 須對等（in what... / in how...，皆介系詞片語）。'},
+ {q:['Beneath the simplicity of the poem ',' penetrating insights into human choices.'],
+  cn:'在這首詩的樸實之下，蘊藏著對人類抉擇深刻的洞見。',
+  opts:['lies','lie','lying','to lie'],ans:1,
+  word:'地方副詞置句首 → 完全倒裝，動詞與真主詞一致',
+  tnote:'<b>完全倒裝</b>：地方副詞置句首，動詞在主詞前。真主詞 insights 為複數，故用 <b>lie</b>。<br>(A) lies 單數不合；(C)(D) 非限定動詞不能當述語。<br>對照 Here comes the bus.'},
+ {q:['We can walk only one path, ',' reflects a universal dilemma we all face.'],
+  cn:'我們只能走一條路，這反映了我們都會面對的普世兩難。',
+  opts:['that','what','which','it'],ans:2,
+  word:'which（非限定，可代前面整句）',
+  tnote:'<b>非限定子句</b>：逗號後補充說明整件事，用 which（可代整句）。<br>(A) that 不引導非限定；(B) what 不接先行詞；(D) it 造成逗號連寫。'},
+ {q:['The dash makes the speaker pause, ',' the sigh that follows feel completely natural.'],
+  cn:'破折號讓說話者停頓，使緊接的嘆息顯得完全自然。',
+  opts:['make','made','making','to make'],ans:2,
+  word:'making（分詞構句，表結果）',
+  tnote:'<b>分詞構句表結果</b>：主句後用 V-ing 表附帶結果，邏輯主詞為前句內容。<br>= ..., which makes the sigh feel natural.<br>(B) 過去式需連接詞；(D) 不定詞語意偏目的。'},
+ {q:['This poem offers insights for ',' is facing an important decision.'],
+  cn:'這首詩為任何正面臨重大抉擇的人提供洞見。',
+  opts:['whoever','whomever','whatever','no matter who'],ans:0,
+  word:'whoever（＝anyone who，作子句主詞）',
+  tnote:'<b>複合關代</b>：介系詞 for 的受詞是整個名詞子句；子句內缺主詞，用主格 whoever。<br>(B) whomever 受格不合；(C) whatever 指物；(D) no matter who 引導副詞子句，不能作受詞。'},
+ {q:['',' about unexplored routes, Thomas would hesitate at every fork.'],
+  cn:'想著那些沒走過的路，湯瑪斯總在每個岔路猶豫。',
+  opts:['Wonder','Wondered','Wondering','To wonder'],ans:2,
+  word:'Wondering（現在分詞構句，主動）',
+  tnote:'<b>句首分詞構句</b>：邏輯主詞 Thomas 主動「想」，用現在分詞 V-ing。<br>= Because he was wondering..., Thomas would hesitate.<br>(B) 過去式動詞不可作修飾語。'},
+ {q:['His poetry appears ',' plain ',' everyday conversation.'],
+  cn:'他的詩顯得和日常對話一樣樸實。',
+  opts:['so...as','as...as','as...than','more...as'],ans:1,
+  word:'as + adj. + as（同級比較）',
+  tnote:'<b>同級比較</b>：as + 原級形容詞 + as。<br>✗ as...than（than 用於比較級）；so...as 多用於否定句。<br>appears 為連綴動詞，後接形容詞 plain。'},
+ {q:['Frost wrote in a style ',' could be understood by readers from all walks of life.'],
+  cn:'佛洛斯特以一種各行各業讀者都能理解的風格寫作。',
+  opts:['it','that','what',', which'],ans:1,
+  word:'that（限定關係子句，無逗號）',
+  tnote:'<b>限定子句</b>：先行詞 style，子句缺主詞，用 that/which（無逗號）。<br>(A) it 造成連寫；(C) what 不接先行詞；(D) 加逗號變非限定，與「界定風格」語意不合。'},
+ {q:['In the final stanza, the speaker imagines ',' the story with a sigh in the future.'],
+  cn:'在最後一節，說話者想像自己未來嘆著氣訴說這個故事。',
+  opts:['tell','to tell','telling','told'],ans:2,
+  word:'imagine + V-ing（想像做…）',
+  tnote:'<b>動詞接動名詞</b>：imagine 後接 V-ing。<br>同類：enjoy / avoid / finish / consider / suggest + V-ing。<br>(B) imagine to tell 為錯；imagine 不接不定詞。'},
+ {q:['Rather than ',' the importance of having no regrets, the poem asks us to value our choices.'],
+  cn:'這首詩並非強調毫無遺憾的重要，而是要我們珍視自己的抉擇。',
+  opts:['emphasize','emphasizes','emphasizing','to emphasize'],ans:2,
+  word:'rather than + V-ing（句首分詞片語）',
+  tnote:'<b>句首片語</b>：Rather than 引導的分詞片語慣用 V-ing（emphasizing），修飾主句主詞 the poem。<br>(B) 第三人稱單數、(A) 原形皆不合此處片語結構；(D) to V 亦不搭 Rather than 句首用法。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>

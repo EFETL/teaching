@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L2: Battling Fake News ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L2: Battling Fake News ── 對抗假新聞</h1>
+  <div class="sub">龍騰版高中英文 第五冊 第二課｜互動教學講義（高三適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 課文速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>課文速覽（三大重點）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>📰 什麼是假新聞</h4>
+        假新聞＝看似真實、卻含<b>錯誤或誤導</b>訊息的新聞。問題與新聞業一樣古老，但<b>網路與社群</b>讓製造、散播更快更廣。人們常不查證來源就<b>信以為真</b>。
+      </div>
+      <div class="story-card s2">
+        <h4>🔍 兩種來源＋真實案例</h4>
+        兩大類型：(1) <b>草率新聞</b>（未查證就發）；(2) <b>蓄意造假</b>（為政治/社會目的）。案例：1998 年 <b>MMR 疫苗</b>假研究重創接種率；2018 年台灣<b>衛生紙之亂</b>引發搶購。
+      </div>
+      <div class="story-card s3">
+        <h4>🧠 如何辨識與自保</h4>
+        看報導有無<b>記者署名</b>、是否<b>引用多個一手來源</b>、發表平台是否可信（BBC/CNN）、用語是否<b>客觀</b>。以<b>批判思考＋查證</b>，才能不落入假新聞陷阱。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點右側 🔊 可聽整句朗讀。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課為說明文，論述「假新聞的定義、類型、真實案例，以及如何以批判思考加以辨識」，依段落分為六部分。</p>
+
+    <!-- 定義與現況 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📰 一｜什麼是假新聞（定義與現況）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Fake news can be defined as news containing false or misleading information that appears truthful.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">假新聞可以定義為：含有錯誤或誤導性資訊、卻看起來真實的新聞。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Fake news</span><span class="syn-t">S</span> <span class="syn syn-v">can be defined as</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">news containing false or misleading information [that appears truthful]</span><span class="syn-t">C（含分詞與關係子句）</span></div>
+          <div class="para-note"><b>define A as B</b>（被動 A be defined as B）；<b>containing...</b> 現在分詞修飾 news；<b>misleading</b>（誤導的）、<b>truthful</b>（真實的）為重點字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Although fake news has long been in existence and this issue is as old as the news industry itself, the Internet and social media have made creating and sharing fake news easier and faster than ever.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">儘管假新聞早已存在、這個問題和新聞業本身一樣古老，網路與社群媒體卻讓製造和散播假新聞比以往更容易、更快速。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Although... the news industry itself</span><span class="syn-t">讓步副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">the Internet and social media</span><span class="syn-t">S</span> <span class="syn syn-v">have made</span><span class="syn-t">V</span> <span class="syn syn-o">creating and sharing fake news</span><span class="syn-t">O（動名詞）</span> <span class="syn syn-c">easier and faster than ever</span><span class="syn-t">OC</span></div>
+          <div class="para-note"><b>make + O + OC（比較級）</b>；<b>as old as</b> = 和…一樣古老；<b>than ever</b> = 比以往。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>People may be deceived by fake news, believing the content to be genuine without questioning the sources.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">人們可能被假新聞欺騙，相信內容是真的，卻不去質疑消息來源。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">People</span><span class="syn-t">S</span> <span class="syn syn-v">may be deceived by</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">fake news</span><span class="syn-t">by 受詞</span> <span class="syn syn-m">, believing the content to be genuine without questioning the sources</span><span class="syn-t">分詞構句</span></div>
+          <div class="para-note"><b>deceive</b>（欺騙）為核心字；<b>believing...</b> 現在分詞構句（見句型五）；<b>without + V-ing</b> = 沒有…。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>With so much fake news being spread every day, it is now more important than ever to understand where such news comes from and to question the news stories we read.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">由於每天都有這麼多假新聞被散播，如今比以往更重要的是：了解這類新聞從何而來，並質疑我們所讀的新聞報導。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">With so much fake news being spread every day</span><span class="syn-t">with 附帶構句（被動）</span> <span class="syn syn-s">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">more important than ever</span><span class="syn-t">C</span> <span class="syn syn-s">to understand... and to question...</span><span class="syn-t">真主詞（不定詞）</span></div>
+          <div class="para-note"><b>虛主詞 it + to V</b>（見句型二）；<b>with + O + being p.p.</b> = 附帶狀況（被動）；the news stories (that) we read。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 兩種類型 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🔍 二｜假新聞的兩種類型</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Fake news comes in many forms, but two types are the most common.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">假新聞有很多形式，但有兩種最為常見。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Fake news</span><span class="syn-t">S</span> <span class="syn syn-v">comes in</span><span class="syn-t">V</span> <span class="syn syn-o">many forms</span><span class="syn-t">O</span> <span class="syn syn-m">but</span><span class="syn-t">連接詞</span> <span class="syn syn-s">two types</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">the most common</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>come in many forms</b> = 有多種形式；the most common（最高級）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>First, fake news can come from sloppy journalism, which occurs when journalists write stories based on unreliable information or without fact-checking their sources prior to publication.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第一，假新聞可能來自草率的新聞作業——也就是記者根據不可靠的資訊、或在發表前未查證來源就寫報導。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">fake news</span><span class="syn-t">S</span> <span class="syn syn-v">can come from</span><span class="syn-t">V</span> <span class="syn syn-o">sloppy journalism</span><span class="syn-t">O</span> <span class="syn syn-m">, which occurs when...</span><span class="syn-t">非限定關係子句</span></div>
+          <div class="para-note"><b>journalism</b>（新聞業）、<b>journalist</b>（記者）為核心字；<b>prior to</b> = 在…之前（片語）；based on = 根據。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Second, some news contains deliberately false information to achieve social or political goals; examples include attempts to influence people to vote for a certain candidate or support a particular cause.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">第二，有些新聞為了達成社會或政治目的而蓄意包含不實資訊；例如試圖影響人們投票給某位候選人，或支持某項理念。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">some news</span><span class="syn-t">S</span> <span class="syn syn-v">contains</span><span class="syn-t">V</span> <span class="syn syn-o">deliberately false information</span><span class="syn-t">O</span> <span class="syn syn-m">to achieve social or political goals</span><span class="syn-t">不定詞（目的）</span><br>
+            <span class="num">②</span><span class="syn syn-s">examples</span><span class="syn-t">S</span> <span class="syn syn-v">include</span><span class="syn-t">V</span> <span class="syn syn-o">attempts to influence...</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>attempt</b>（企圖）、<b>candidate</b>（候選人）、<b>political</b> 為重點字；<b>deliberately</b> = 蓄意地；influence sb. to V = 影響某人做…。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 案例一 MMR -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">💉 三｜案例一：MMR 疫苗假研究</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The following example illustrates the potential long-lasting consequences of spreading false information.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">以下的例子說明了散播不實資訊可能造成的長遠後果。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The following example</span><span class="syn-t">S</span> <span class="syn syn-v">illustrates</span><span class="syn-t">V</span> <span class="syn syn-o">the potential long-lasting consequences of spreading false information</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>illustrate</b>（說明、例證）為核心字；<b>consequences of + V-ing</b> = …的後果；long-lasting = 長久的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In 1998, a British researcher published a small-scale study in a respected medical journal.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">1998 年，一位英國研究者在一份受敬重的醫學期刊上發表了一篇小規模研究。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In 1998</span><span class="syn-t">時間</span> <span class="syn syn-s">a British researcher</span><span class="syn-t">S</span> <span class="syn syn-v">published</span><span class="syn-t">V</span> <span class="syn syn-o">a small-scale study</span><span class="syn-t">O</span> <span class="syn syn-m">in a respected medical journal</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>small-scale</b> = 小規模的；<b>respected</b> = 受敬重的；journal = 期刊。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The study claimed a link between the MMR vaccine and autism.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">該研究聲稱 MMR 疫苗與自閉症之間有關聯。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The study</span><span class="syn-t">S</span> <span class="syn syn-v">claimed</span><span class="syn-t">V</span> <span class="syn syn-o">a link between the MMR vaccine and autism</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>a link between A and B</b> = A 與 B 之間的關聯；claim = 聲稱。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The media provided extensive coverage of this flawed study, leading to the widespread belief that the vaccine could cause autism.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">媒體對這篇有瑕疵的研究進行大量報導，導致大眾普遍相信疫苗會造成自閉症。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The media</span><span class="syn-t">S</span> <span class="syn syn-v">provided</span><span class="syn-t">V</span> <span class="syn syn-o">extensive coverage of this flawed study</span><span class="syn-t">O</span> <span class="syn syn-m">, leading to the widespread belief that...</span><span class="syn-t">分詞構句（結果）</span></div>
+          <div class="para-note"><b>extensive</b>（廣泛的）、<b>flawed</b>（有瑕疵的）為核心字；<b>leading to...</b> 分詞構句（見句型五）；the belief that... 同位語子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As a result, public confidence in the vaccine was shattered, and vaccination rates declined.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">結果，大眾對疫苗的信心崩潰，接種率也隨之下降。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">public confidence in the vaccine</span><span class="syn-t">S</span> <span class="syn syn-v">was shattered</span><span class="syn-t">V（被動）</span><br>
+            <span class="num">②</span><span class="syn syn-s">vaccination rates</span><span class="syn-t">S</span> <span class="syn syn-v">declined</span><span class="syn-t">V</span></div>
+          <div class="para-note"><b>shatter</b>（使破滅、粉碎）為核心字，此處被動 was shattered；<b>as a result</b> = 結果；decline = 下降。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, subsequent studies with larger samples revealed different findings, and the original study was eventually proved inaccurate.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，後續以更大樣本進行的研究得出不同結果，原本那篇研究最終被證明並不正確。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">subsequent studies with larger samples</span><span class="syn-t">S</span> <span class="syn syn-v">revealed</span><span class="syn-t">V</span> <span class="syn syn-o">different findings</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">the original study</span><span class="syn-t">S</span> <span class="syn syn-v">was proved</span><span class="syn-t">V（被動）</span> <span class="syn syn-c">inaccurate</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>subsequent</b>（隨後的）為核心字；<b>reveal</b> = 揭露；<b>prove + adj.</b> = 證明是…。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Despite this, misleading details from the initial study have continued to spread for years.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">儘管如此，來自最初那篇研究的誤導性細節仍持續流傳了多年。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Despite this</span><span class="syn-t">介系詞片語（讓步）</span> <span class="syn syn-s">misleading details from the initial study</span><span class="syn-t">S</span> <span class="syn syn-v">have continued to spread</span><span class="syn-t">V</span> <span class="syn syn-m">for years</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>despite + N</b> = 儘管（後接名詞，勿接子句）；<b>misleading</b>（誤導的）為重點字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Some parents thus have refused to vaccinate their children for fear that it might do more harm than good.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">因此有些父母拒絕為孩子接種，唯恐接種弊大於利。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Some parents</span><span class="syn-t">S</span> <span class="syn syn-v">have refused</span><span class="syn-t">V</span> <span class="syn syn-o">to vaccinate their children</span><span class="syn-t">O（不定詞）</span> <span class="syn syn-m">for fear that it might do more harm than good</span><span class="syn-t">目的副詞（唯恐）</span></div>
+          <div class="para-note"><b>for fear that + S + might V</b> = 唯恐、以免（見句型三）；<b>do more harm than good</b> = 弊大於利。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>More than two decades have now passed since the original study was published, but its effects can still be observed worldwide.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">自那篇研究發表至今已超過二十年，但它的影響在世界各地仍可見到。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">More than two decades</span><span class="syn-t">S</span> <span class="syn syn-v">have passed</span><span class="syn-t">V</span> <span class="syn syn-m">since the original study was published</span><span class="syn-t">時間副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">its effects</span><span class="syn-t">S</span> <span class="syn syn-v">can still be observed</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">worldwide</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>時間 + have passed since + 過去式</b>（自…以來已過…）；decade = 十年。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 案例二 衛生紙 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🧻 四｜案例二：台灣衛生紙之亂</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Another example shows how companies manipulate the news for their own advantage.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">另一個例子顯示企業如何為了自身利益操弄新聞。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Another example</span><span class="syn-t">S</span> <span class="syn syn-v">shows</span><span class="syn-t">V</span> <span class="syn syn-o">how companies manipulate the news for their own advantage</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>manipulate</b> = 操弄；<b>for one's own advantage</b> = 為了自身利益。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>On February 23, 2018, a major hypermarket in Taiwan sent an email to several media outlets, exaggerating an upcoming increase in the price of toilet paper.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">2018 年 2 月 23 日，台灣一家大型量販店寄電子郵件給數家媒體，誇大即將到來的衛生紙漲價。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">a major hypermarket in Taiwan</span><span class="syn-t">S</span> <span class="syn syn-v">sent</span><span class="syn-t">V</span> <span class="syn syn-o">an email</span><span class="syn-t">O</span> <span class="syn syn-m">to several media outlets</span><span class="syn-t">副詞</span> <span class="syn syn-m">, exaggerating an upcoming increase...</span><span class="syn-t">分詞構句</span></div>
+          <div class="para-note"><b>exaggerating...</b> 現在分詞片語（見句型五）；<b>media outlet</b> = 媒體機構；upcoming = 即將到來的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It was later found that the retailer's true intention in doing so was merely to advertise its own toilet paper promotion, but by noon that day, the damage had already been done.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">後來人們發現，該零售商這麼做的真正意圖，只是為了宣傳自家的衛生紙促銷；但到了那天中午，傷害已然造成。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">was found</span><span class="syn-t">V（被動）</span> <span class="syn syn-s">that the retailer's true intention... was merely to advertise...</span><span class="syn-t">真主詞（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">the damage</span><span class="syn-t">S</span> <span class="syn syn-v">had already been done</span><span class="syn-t">V（過去完成被動）</span></div>
+          <div class="para-note"><b>It was found that...</b> 虛主詞句；<b>merely</b> = 僅僅；the damage had been done = 傷害已造成。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Two mainstream media outlets reported on the imminent price hike without fact-checking, and others soon followed suit.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">兩家主流媒體未經查證就報導了這即將發生的漲價，其他媒體很快也跟進。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Two mainstream media outlets</span><span class="syn-t">S</span> <span class="syn syn-v">reported on</span><span class="syn-t">V</span> <span class="syn syn-o">the imminent price hike</span><span class="syn-t">O</span> <span class="syn syn-m">without fact-checking</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-s">others</span><span class="syn-t">S</span> <span class="syn syn-v">followed suit</span><span class="syn-t">V（片語）</span></div>
+          <div class="para-note"><b>mainstream</b>（主流的）為核心字；<b>follow suit</b> = 跟進、仿效（片語）；imminent = 迫近的；price hike = 漲價。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The reporting prompted a wave of panic buying among Taiwanese people, many of whom feared that if they didn't stock up, they would run out of the precious daily necessity.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些報導在台灣民眾間引發一波搶購潮，其中許多人擔心若不囤貨，就會用光這項珍貴的民生必需品。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The reporting</span><span class="syn-t">S</span> <span class="syn syn-v">prompted</span><span class="syn-t">V</span> <span class="syn syn-o">a wave of panic buying</span><span class="syn-t">O</span> <span class="syn syn-m">, many of whom feared that...</span><span class="syn-t">介系詞 + 關代（非限定）</span></div>
+          <div class="para-note"><b>panic</b>（恐慌）、<b>necessity</b>（必需品）為重點字；<b>many of whom</b> = 其中許多人（介系詞＋關代，見句型五補充）；<b>stock up</b> = 囤貨；run out of = 用光。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Even manufacturers were negatively impacted, as their factories had to work overtime to handle the sudden increase in demand.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">連製造商也受到負面衝擊，因為工廠必須加班以應付需求突然暴增。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Even manufacturers</span><span class="syn-t">S</span> <span class="syn syn-v">were negatively impacted</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">as their factories had to work overtime...</span><span class="syn-t">原因副詞子句</span></div>
+          <div class="para-note"><b>impact</b> = 衝擊（此處被動）；<b>as</b> = 因為；work overtime = 加班；handle = 應付。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 辨識可信報導 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🧠 五｜如何辨識可信的報導</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These events remind us that we must remain alert to fake news.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些事件提醒我們，必須對假新聞保持警覺。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">These events</span><span class="syn-t">S</span> <span class="syn syn-v">remind</span><span class="syn-t">V</span> <span class="syn syn-o">us</span><span class="syn-t">O</span> <span class="syn syn-c">that we must remain alert to fake news</span><span class="syn-t">受詞子句</span></div>
+          <div class="para-note"><b>remind sb. that...</b> = 提醒某人…；<b>remain + adj.</b> = 保持…；alert to = 對…警覺。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Whenever we come across new information, it is essential to evaluate its validity so that we do not mistake fake news for the truth.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">每當我們接觸到新資訊時，評估它的可信度是很重要的，以免把假新聞當成真相。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Whenever we come across new information</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">essential</span><span class="syn-t">C</span> <span class="syn syn-s">to evaluate its validity</span><span class="syn-t">真主詞（不定詞）</span> <span class="syn syn-m">so that we do not mistake fake news for the truth</span><span class="syn-t">目的子句</span></div>
+          <div class="para-note"><b>Whenever</b> = 每當（見句型四）；<b>evaluate</b>（評估）、<b>validity</b>（可信度）為核心字；<b>mistake A for B</b> = 把 A 誤認為 B；so that = 以便。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>One notable feature of reliable reporting is the inclusion of the writer's name, which allows readers to view that writer's biography and verify his or her credibility.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">可靠報導的一個顯著特徵，是會標明作者姓名，讓讀者能查看該作者的簡介、驗證其可信度。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">One notable feature of reliable reporting</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">the inclusion of the writer's name</span><span class="syn-t">C</span> <span class="syn syn-m">, which allows readers to view... and verify...</span><span class="syn-t">非限定關係子句</span></div>
+          <div class="para-note"><b>notable</b>（顯著的）、<b>biography</b>（傳記）、<b>verify</b>（查證）、<b>credibility</b>（可信度）皆為重點字；allow sb. to V = 讓某人…。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Another important sign is whether the article cites multiple primary sources, a practice that supports its trustworthiness.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">另一個重要指標是文章是否引用多個一手來源——這種做法能支持其可信度。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Another important sign</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">whether the article cites multiple primary sources</span><span class="syn-t">C（名詞子句）</span> <span class="syn syn-m">, a practice that...</span><span class="syn-t">同位語</span></div>
+          <div class="para-note"><b>cite</b>（引用）為補充字；<b>whether...</b> 名詞子句作補語；primary source = 一手來源；a practice that... 同位語＋關係子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It is also worth considering where the article was published, since respected media platforms such as the BBC or CNN tend to provide dependable coverage.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">文章發表在哪裡也值得考量，因為像 BBC 或 CNN 這類受敬重的媒體平台，往往能提供可靠的報導。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">also worth considering where the article was published</span><span class="syn-t">C</span> <span class="syn syn-m">since... dependable coverage</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>be worth + V-ing</b> = 值得…；<b>such as</b> = 例如；tend to V = 傾向於；dependable = 可靠的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Last but not least, factual reports are usually written in an objective manner that avoids emotional manipulation and provocative language.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">最後但同樣重要的是，事實性的報導通常以客觀的方式書寫，避免情緒操弄與煽動性的語言。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Last but not least</span><span class="syn-t">轉承語</span> <span class="syn syn-s">factual reports</span><span class="syn-t">S</span> <span class="syn syn-v">are usually written</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">in an objective manner [that avoids...]</span><span class="syn-t">副詞（含關係子句）</span></div>
+          <div class="para-note"><b>objective</b>（客觀的）為補充字；<b>last but not least</b> = 最後但同樣重要（片語）；provocative = 煽動性的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>By paying attention to these features, we can reduce the risk of falling for fake news.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">只要留意這些特徵，我們就能降低上假新聞當的風險。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">By paying attention to these features</span><span class="syn-t">介系詞片語（方法）</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">can reduce</span><span class="syn-t">V</span> <span class="syn syn-o">the risk of falling for fake news</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>by + V-ing</b> = 藉由…；<b>fall for</b> = 上…的當（片語）；the risk of + V-ing = …的風險。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結語 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">✅ 六｜結語：對策與行動</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Useful strategies include thinking critically about what we are reading and conducting further research on news stories to check their content before accepting them as truth.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有用的策略包括：對所讀內容進行批判思考，並在把新聞當成真相之前，進一步查證其內容。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Useful strategies</span><span class="syn-t">S</span> <span class="syn syn-v">include</span><span class="syn-t">V</span> <span class="syn syn-o">thinking critically... and conducting further research...</span><span class="syn-t">O（動名詞並列）</span></div>
+          <div class="para-note"><b>include + V-ing</b>；<b>think critically</b> = 批判思考；<b>accept A as B</b> = 把 A 當成 B。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In the current age of news overload, we must all watch out for fake news lest we fall victim to it.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在這個資訊爆炸的時代，我們每個人都必須提防假新聞，以免成為它的受害者。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In the current age of news overload</span><span class="syn-t">副詞</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">must all watch out for</span><span class="syn-t">V</span> <span class="syn syn-o">fake news</span><span class="syn-t">O</span> <span class="syn syn-m">lest we fall victim to it</span><span class="syn-t">目的副詞（以免）</span></div>
+          <div class="para-note"><b>lest + S + (should) V</b> = 以免（見句型三）；<b>watch out for</b> = 提防；fall victim to = 成為…的受害者。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>With due diligence, we can win the war against fake news and help improve society.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">只要盡到應有的謹慎查證，我們就能打贏對抗假新聞這場仗，並協助改善社會。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">With due diligence</span><span class="syn-t">介系詞片語</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">can win</span><span class="syn-t">V</span> <span class="syn syn-o">the war against fake news</span><span class="syn-t">O</span> <span class="syn syn-v">and help improve</span><span class="syn-t">V</span> <span class="syn syn-o">society</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>due diligence</b> = 應有的審慎（查證）；<b>help (to) V</b> = 幫助…；win the war against = 打贏對抗…之戰。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">mislead</span><span class="v-pos">v.</span><div class="v-cn-mini">誤導</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>misleading (adj.) 誤導的</span><span>三態：mislead-misled-misled</span></div>
+        <div class="v-ex">Fake news contains false or <b>misleading</b> information.<span class="cn">假新聞含有錯誤或誤導的資訊。</span></div>
+        <span class="v-gsat">📊 mis- 字首＝錯誤地</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">deceive</span><span class="v-pos">v.</span><div class="v-cn-mini">欺騙</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>deception (n.) 欺騙</span><span>deceptive (adj.) 騙人的</span></div>
+        <div class="v-ex">People may be <b>deceived</b> by fake news.<span class="cn">人們可能被假新聞欺騙。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">journalism</span><span class="v-pos">n.</span><div class="v-cn-mini">新聞業；新聞工作</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>journalist (n.) 記者</span><span>journal (n.) 期刊；日誌</span></div>
+        <div class="v-ex">Fake news can come from sloppy <b>journalism</b>.<span class="cn">假新聞可能來自草率的新聞作業。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">attempt</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">企圖；嘗試</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>attempt to V 試圖做</span><span>make an attempt 嘗試</span></div>
+        <div class="v-ex">Examples include <b>attempts</b> to influence voters.<span class="cn">例子包括試圖影響選民的舉動。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">candidate</span><span class="v-pos">n.</span><div class="v-cn-mini">候選人；應徵者</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>presidential candidate 總統候選人</span><span>candidacy (n.) 候選資格</span></div>
+        <div class="v-ex">…to vote for a certain <b>candidate</b>.<span class="cn">…投票給某位候選人。</span></div>
+        <span class="v-gsat">📊 學測選舉、求職主題常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">illustrate</span><span class="v-pos">v.</span><div class="v-cn-mini">說明；圖解</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>illustration (n.) 說明；插圖</span><span>illustrator (n.) 插畫家</span></div>
+        <div class="v-ex">The example <b>illustrates</b> the consequences of fake news.<span class="cn">這個例子說明了假新聞的後果。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">extensive</span><span class="v-pos">adj.</span><div class="v-cn-mini">廣泛的；大量的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>extend (v.) 延伸</span><span>extension (n.) 延伸；分機</span></div>
+        <div class="v-ex">The media gave the study <b>extensive</b> coverage.<span class="cn">媒體對這篇研究進行大量報導。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">flawed</span><span class="v-pos">adj.</span><div class="v-cn-mini">有瑕疵的；有缺陷的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>flaw (n.) 瑕疵</span><span>flawless (adj.) 完美無瑕的</span></div>
+        <div class="v-ex">The media covered this <b>flawed</b> study widely.<span class="cn">媒體廣泛報導這篇有瑕疵的研究。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">shatter</span><span class="v-pos">v.</span><div class="v-cn-mini">粉碎；使破滅</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>shatter one's confidence 使信心崩潰</span><span>≈ destroy / smash</span></div>
+        <div class="v-ex">Public confidence in the vaccine was <b>shattered</b>.<span class="cn">大眾對疫苗的信心崩潰了。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">subsequent</span><span class="v-pos">adj.</span><div class="v-cn-mini">隨後的；接下來的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>subsequently (adv.) 隨後</span><span>反義 previous / prior</span></div>
+        <div class="v-ex"><b>Subsequent</b> studies revealed different findings.<span class="cn">後續研究得出不同的結果。</span></div>
+        <span class="v-gsat">📊 學測閱讀時序詞高頻</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">mainstream</span><span class="v-pos">n. / adj.</span><div class="v-cn-mini">主流（的）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>mainstream media 主流媒體</span><span>反義 alternative 另類的</span></div>
+        <div class="v-ex">Two <b>mainstream</b> media outlets reported the rumor.<span class="cn">兩家主流媒體報導了這個謠言。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">panic</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">恐慌</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>panic buying 恐慌性搶購</span><span>三態：panic-panicked-panicked</span></div>
+        <div class="v-ex">The report prompted a wave of <b>panic</b> buying.<span class="cn">這則報導引發一波恐慌性搶購。</span></div>
+        <span class="v-gsat">📊 動詞變化加 k（panicked）為考點</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">evaluate</span><span class="v-pos">v.</span><div class="v-cn-mini">評估</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>evaluation (n.) 評估</span><span>≈ assess</span></div>
+        <div class="v-ex">It is essential to <b>evaluate</b> the validity of information.<span class="cn">評估資訊的可信度是很重要的。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">validity</span><span class="v-pos">n.</span><div class="v-cn-mini">有效性；可信度</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>valid (adj.) 有效的；正當的</span><span>反義 invalid 無效的</span></div>
+        <div class="v-ex">We should evaluate the <b>validity</b> of what we read.<span class="cn">我們應評估所讀內容的可信度。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">verify</span><span class="v-pos">v.</span><div class="v-cn-mini">查證；證實</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>verification (n.) 查證</span><span>≈ confirm</span></div>
+        <div class="v-ex">Readers can <b>verify</b> the writer's credibility.<span class="cn">讀者可以查證作者的可信度。</span></div>
+        <span class="v-gsat">📊 資訊素養主題常考</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">prior to</span></td><td>在…之前</td><td class="pex">Journalists should fact-check <b>prior to</b> publication.<span class="cn">記者應在發表前查證。</span></td></tr>
+      <tr><td><span class="phr">stock up</span></td><td>囤積；儲備</td><td class="pex">People rushed to <b>stock up</b> on toilet paper.<span class="cn">人們急著囤積衛生紙。</span></td></tr>
+      <tr><td><span class="phr">mistake...for...</span></td><td>把…誤認為…</td><td class="pex">Do not <b>mistake</b> fake news <b>for</b> the truth.<span class="cn">別把假新聞誤認為真相。</span></td></tr>
+      <tr><td><span class="phr">last but not least</span></td><td>最後但同樣重要</td><td class="pex"><b>Last but not least</b>, reports should be objective.<span class="cn">最後但同樣重要的是，報導應客觀。</span></td></tr>
+      <tr><td><span class="phr">fall for</span></td><td>上…的當；受騙</td><td class="pex">We can reduce the risk of <b>falling for</b> fake news.<span class="cn">我們能降低上假新聞當的風險。</span></td></tr>
+      <tr><td><span class="phr">follow suit</span></td><td>跟進；仿效</td><td class="pex">Two outlets reported it, and others soon <b>followed suit</b>.<span class="cn">兩家媒體報導後，其他很快跟進。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（媒體、資訊素養、查證）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">define</span><span class="v-pos">v.</span><div class="v-cn-mini">定義</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>definition (n.) 定義</span><span>definite (adj.) 明確的</span></div>
+        <div class="v-ex">Fake news can be <b>defined</b> as misleading news.<span class="cn">假新聞可定義為誤導性的新聞。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">credibility</span><span class="v-pos">n.</span><div class="v-cn-mini">可信度</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>credible (adj.) 可信的</span><span>credit (n.) 信用</span></div>
+        <div class="v-ex">Readers can verify the writer's <b>credibility</b>.<span class="cn">讀者能查證作者的可信度。</span></div>
+        <span class="v-gsat">📊 credible ↔ incredible 難以置信的</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">cite</span><span class="v-pos">v.</span><div class="v-cn-mini">引用；引述</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>citation (n.) 引用</span><span>同音 site / sight</span></div>
+        <div class="v-ex">A good article <b>cites</b> multiple primary sources.<span class="cn">好的文章會引用多個一手來源。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">objective</span><span class="v-pos">adj. / n.</span><div class="v-cn-mini">客觀的；目標</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>objectivity (n.) 客觀</span><span>反義 subjective 主觀的</span></div>
+        <div class="v-ex">Factual reports are written in an <b>objective</b> manner.<span class="cn">事實性報導以客觀方式書寫。</span></div>
+        <span class="v-gsat">📊 objective ↔ subjective 必背對比</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">notable</span><span class="v-pos">adj.</span><div class="v-cn-mini">顯著的；值得注意的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>note (v.) 注意</span><span>notably (adv.) 尤其</span></div>
+        <div class="v-ex">One <b>notable</b> feature is the writer's name.<span class="cn">一個顯著特徵是作者署名。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">necessity</span><span class="v-pos">n.</span><div class="v-cn-mini">必需品；必要</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>necessary (adj.) 必要的</span><span>a daily necessity 民生必需品</span></div>
+        <div class="v-ex">People feared running out of the daily <b>necessity</b>.<span class="cn">人們擔心用光這項民生必需品。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">biography</span><span class="v-pos">n.</span><div class="v-cn-mini">傳記</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>autobiography (n.) 自傳</span><span>biographer (n.) 傳記作家</span></div>
+        <div class="v-ex">Readers can view the writer's <b>biography</b>.<span class="cn">讀者可查看作者的簡介。</span></div>
+        <span class="v-gsat">📊 bio-（生命）+ graphy（書寫）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">truthful</span><span class="v-pos">adj.</span><div class="v-cn-mini">真實的；誠實的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>truth (n.) 真相</span><span>truthfully (adv.) 誠實地</span></div>
+        <div class="v-ex">Fake news only appears <b>truthful</b>.<span class="cn">假新聞只是看起來真實。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語都與課文主題（新聞、真假、傳播）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">take (it) with a grain of salt</span><div class="slang-cn-mini">半信半疑；別全信</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">對某消息保持懷疑、不完全採信。</div>
+      <div class="slang-ex">Take online rumors <b>with a grain of salt</b>.<span class="cn">網路謠言要半信半疑。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">spread like wildfire</span><div class="slang-cn-mini">（消息）像野火般迅速蔓延</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">消息或謠言傳播得極快、無法控制。</div>
+      <div class="slang-ex">The false rumor <b>spread like wildfire</b> online.<span class="cn">這則假謠言在網路上迅速傳開。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">jump on the bandwagon</span><div class="slang-cn-mini">跟風；隨大流</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">看到別人做就跟著做、湊熱鬧。</div>
+      <div class="slang-ex">Other outlets <b>jumped on the bandwagon</b> and reported it too.<span class="cn">其他媒體跟風也報導了。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">blow (sth) out of proportion</span><div class="slang-cn-mini">誇大其詞；小題大作</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">把事情說得比實際嚴重得多。</div>
+      <div class="slang-ex">The email <b>blew the price hike out of proportion</b>.<span class="cn">那封信把漲價誇大其詞。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the tip of the iceberg</span><div class="slang-cn-mini">冰山一角</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">表面所見只是問題的一小部分，底下更龐大。</div>
+      <div class="slang-ex">This case is just <b>the tip of the iceberg</b> of fake news.<span class="cn">這個案例只是假新聞的冰山一角。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">see through (sb/sth)</span><div class="slang-cn-mini">看穿；識破</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">識破謊言或偽裝，看清真相。</div>
+      <div class="slang-ex">A critical reader can <b>see through</b> a misleading headline.<span class="cn">有批判力的讀者能看穿誤導性的標題。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜被動語態 be + 過去分詞</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + be + p.p. (+ by 行為者)（各時態隨 be 動詞變化）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">主詞是「動作承受者」時用被動；本課大量出現。</p>
+        <div class="g-ex">Fake news <b>can be defined</b> as misleading news.<div class="g-ex-cn">假新聞可被定義為誤導性新聞。（課文）</div></div>
+        <div class="g-ex">Public confidence <b>was shattered</b>. / Its effects <b>can be observed</b>.<div class="g-ex-cn">大眾信心崩潰。／其影響可被觀察到。（課文）</div></div>
+        <div class="g-note">✗ 及物動詞漏用 be：Public confidence shattered by...（缺 was）。</div>
+        <div class="g-tip">完成被動：the damage <b>had been done</b>；學測常考時態＋被動組合。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜虛主詞 it（it is + adj. + to V / that…）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">It is + adj. + to V ...（真主詞為不定詞）
+It is worth + V-ing ...</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">主詞太長時用 it 當虛主詞，真主詞（不定詞/子句）移到後面。</p>
+        <div class="g-ex"><b>It is</b> essential <b>to evaluate</b> the validity of information.<div class="g-ex-cn">評估資訊的可信度是很重要的。（課文）</div></div>
+        <div class="g-ex"><b>It is</b> also worth <b>considering</b> where the article was published.<div class="g-ex-cn">文章發表在哪裡也值得考量。（課文）</div></div>
+        <div class="g-note">✗ To evaluate information is essential 雖對，但長主詞英文偏好虛主詞 it。</div>
+        <div class="g-tip">be worth 後接 V-ing（非 to V）；學測常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜lest / for fear that（以免、唯恐）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V ..., lest + S + (should) + V原形 ...
+S + V ..., for fear that + S + might/should + V ...</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">表「以免、唯恐」的目的（否定意味）；lest 後接原形（should 可省）。</p>
+        <div class="g-ex">We must watch out for fake news <b>lest</b> we (should) <b>fall</b> victim to it.<div class="g-ex-cn">我們必須提防假新聞，以免成為受害者。（課文）</div></div>
+        <div class="g-ex">Parents refused to vaccinate <b>for fear that</b> it might do harm.<div class="g-ex-cn">父母拒絕接種，唯恐有害。（課文）</div></div>
+        <div class="g-note">✗ lest 後再加 not（本身已含否定）：lest we do not fall（錯）。</div>
+        <div class="g-tip">同義：so that... not / in case；學測綜合測驗曾考 lest。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜Whenever（複合關係副詞，引導副詞子句）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">Whenever + S + V ..., S + V ...（＝every time / no matter when）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">Whenever = 每當、無論何時，引導時間/讓步副詞子句。</p>
+        <div class="g-ex"><b>Whenever</b> we come across new information, we should evaluate it.<div class="g-ex-cn">每當接觸到新資訊，我們就該加以評估。（課文）</div></div>
+        <div class="g-note">✗ 與名詞子句的 whatever/whoever 混用位置；Whenever 引導的是副詞子句。</div>
+        <div class="g-tip">whenever / wherever / however 皆為複合關係副詞；學測常考語意判斷。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜現在分詞片語作修飾／分詞構句</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">名詞 + V-ing ...（主動修飾名詞）
+主句, V-ing ...（分詞構句，表附帶/結果）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">V-ing 可後位修飾名詞，或接於主句後表附帶狀況、結果。</p>
+        <div class="g-ex">news <b>containing</b> false information（修飾 news）<div class="g-ex-cn">含有不實資訊的新聞（課文）</div></div>
+        <div class="g-ex">The media gave it coverage, <b>leading to</b> a false belief.<div class="g-ex-cn">媒體加以報導，導致錯誤的認知。（課文，表結果）</div></div>
+        <div class="g-note">✗ 懸垂分詞：分詞邏輯主詞須與主句主詞一致。</div>
+        <div class="g-tip">主動 V-ing、被動 p.p.（information based on... ＝被動）；學測高頻。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第五冊 第二課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['People may be ',' by fake news, believing false content to be genuine.'],
+  cn:'人們可能被假新聞欺騙，把不實內容當成真的。',
+  opts:['deceived','illustrated','verified','evaluated'],ans:0,
+  word:'deceive (v.) 欺騙',
+  exp:'「被假新聞…」＝被欺騙 deceived。(B) 說明、(C) 查證、(D) 評估皆不合。',
+  note:'deception (n.) 欺騙；deceptive (adj.) 騙人的。'},
+ {q:['The media widely covered the ',' study, which was later proved inaccurate.'],
+  cn:'媒體廣泛報導了那篇有瑕疵的研究，它後來被證明並不正確。',
+  opts:['flawed','objective','mainstream','notable'],ans:0,
+  word:'flawed (adj.) 有瑕疵的',
+  exp:'「後來被證明不正確」→原本就有瑕疵 flawed。(B) 客觀、(C) 主流、(D) 顯著皆不合。',
+  note:'flaw (n.) 瑕疵；flawless 完美無瑕的。'},
+ {q:['Public confidence in the vaccine was ',', and vaccination rates fell.'],
+  cn:'大眾對疫苗的信心崩潰，接種率也隨之下降。',
+  opts:['shattered','cited','defined','verified'],ans:0,
+  word:'shatter (v.) 使破滅、粉碎',
+  exp:'信心「崩潰」＝be shattered。(B) 引用、(C) 定義、(D) 查證皆不合。',
+  note:'shatter one’s confidence 使信心崩潰。'},
+ {q:['The false report about toilet paper prices caused a wave of ',' buying.'],
+  cn:'那則關於衛生紙價格的假報導引發了一波恐慌性搶購。',
+  opts:['panic','objective','subsequent','valid'],ans:0,
+  word:'panic (n.) 恐慌',
+  exp:'panic buying = 恐慌性搶購（課文）。(B)(C)(D) 語意不合。',
+  note:'動詞三態 panic-panicked-panicked（加 k）。'},
+ {q:['Reliable articles let readers ',' how credible the writer is.'],
+  cn:'可靠的文章讓讀者能查證作者有多可信。',
+  opts:['verify','deceive','shatter','mislead'],ans:0,
+  word:'verify (v.) 查證；證實',
+  exp:'「查證可信度」＝verify。(B) 欺騙、(C) 粉碎、(D) 誤導皆反向。',
+  note:'verification (n.) 查證；≈ confirm。'},
+ {q:['The first study was small, but ',' studies with larger samples found different results.'],
+  cn:'第一篇研究規模很小，但後續以更大樣本進行的研究得出不同結果。',
+  opts:['subsequent','misleading','flawed','extensive'],ans:0,
+  word:'subsequent (adj.) 隨後的',
+  exp:'「第一篇…之後」＝subsequent（隨後的）。(B) 誤導、(C) 有瑕疵、(D) 廣泛皆不合。',
+  note:'subsequently (adv.)；反義 previous / prior。'},
+ {q:['Two ',' media outlets reported the rumor without checking the facts.'],
+  cn:'兩家主流媒體未查證事實就報導了這個謠言。',
+  opts:['mainstream','objective','notable','valid'],ans:0,
+  word:'mainstream (adj.) 主流的',
+  exp:'mainstream media = 主流媒體（課文）。(B) 客觀、(C) 顯著、(D) 有效皆不合。',
+  note:'反義 alternative（另類的）。'},
+ {q:['Without a critical mindset, readers can easily ',' fake news.'],
+  cn:'缺乏批判思維，讀者很容易上假新聞的當。',
+  opts:['fall for','stock up','lay out','follow suit'],ans:0,
+  word:'fall for 上…的當；受騙',
+  exp:'「上當受騙」＝fall for。(B) 囤貨、(C) 鋪陳、(D) 跟進皆不合。',
+  note:'fall for 亦有「愛上」之意，依語境判斷。'},
+ {q:['Fearing a shortage, shoppers rushed to ',' on toilet paper.'],
+  cn:'因擔心短缺，消費者急著囤積衛生紙。',
+  opts:['stock up','fall for','get at','strike a chord'],ans:0,
+  word:'stock up 囤積；儲備',
+  exp:'stock up (on N) = 囤貨（課文情境）。(B) 上當、(C) 觸及、(D) 引起共鳴皆不合。',
+  note:'stock up on + 物品。'},
+ {q:['',', factual reports avoid provocative, emotional language.'],
+  cn:'最後但同樣重要的是，事實性報導會避免煽動性、情緒化的語言。',
+  opts:['As a result','Last but not least','For instance','On the contrary'],ans:1,
+  word:'last but not least 最後但同樣重要',
+  exp:'列點收尾的轉承語，用 Last but not least。(A) 結果、(C) 舉例、(D) 相反皆不合。',
+  note:'常用於條列最後一項，強調其同樣重要。'}
+];
+
+var teacherQ=[
+ {q:['Fake news ',' as news that contains false information but appears truthful.'],
+  cn:'假新聞被定義為含有不實資訊、卻看似真實的新聞。',
+  opts:['defines','is defined','defining','has defined'],ans:1,
+  word:'be defined as（被動語態）',
+  tnote:'<b>被動語態</b>：Fake news 是被定義的對象，用 be + p.p.（define A as B → A is defined as B）。<br>(A) 主動缺受詞；(C) 分詞不能單獨當動詞；(D) 現在完成主動語意不符。'},
+ {q:['With so much fake news around, ',' essential to evaluate the validity of what we read.'],
+  cn:'在這麼多假新聞充斥下，評估所讀內容的可信度是很重要的。',
+  opts:['it is','there is','that is','being'],ans:0,
+  word:'虛主詞 it（it is + adj. + to V）',
+  tnote:'<b>虛主詞 it</b>：真主詞是不定詞 to evaluate...，用 it 引導：It is essential to V。<br>(B) there is 表「存在」；(C)(D) 不合句構。'},
+ {q:['We must watch out for fake news ',' we fall victim to it.'],
+  cn:'我們必須提防假新聞，以免成為它的受害者。',
+  opts:['unless','lest','because','so'],ans:1,
+  word:'lest（以免，後接原形）',
+  tnote:'<b>lest</b>：表否定目的「以免」，後接原形（should 可省）。<br>(A) unless＝除非；(C) because 表原因；(D) so 表結果。lest 本身含否定，勿再加 not。'},
+ {q:['Some parents refused to vaccinate their children ',' it might do more harm than good.'],
+  cn:'有些父母拒絕讓孩子接種，唯恐弊大於利。',
+  opts:['for fear that','in order that','now that','so that'],ans:0,
+  word:'for fear that（唯恐、以免）',
+  tnote:'<b>for fear that</b>：表「擔心、唯恐」，後接 S + might V。<br>(B) in order that 表正面目的；(C) now that＝既然；(D) so that 表正面目的/結果，語氣不符「擔心」。'},
+ {q:['',' we come across new information, we should question its source.'],
+  cn:'每當我們接觸到新資訊，就應該質疑它的來源。',
+  opts:['Whenever','Whatever','However','Whoever'],ans:0,
+  word:'Whenever（每當，引導副詞子句）',
+  tnote:'<b>Whenever</b>＝每當、無論何時，引導時間副詞子句。<br>(B) Whatever 指物、(D) Whoever 指人（引導名詞子句）；(C) However＝然而/無論如何，語意不合。'},
+ {q:['The media gave the study extensive coverage, ',' to the belief that the vaccine caused autism.'],
+  cn:'媒體大量報導這篇研究，導致大眾相信疫苗會造成自閉症。',
+  opts:['led','leading','to lead','leads'],ans:1,
+  word:'leading to（分詞構句，表結果）',
+  tnote:'<b>分詞構句表結果</b>：主句後用 V-ing：..., leading to...（＝which led to...）。<br>(A) 過去式需連接詞；(C) 不定詞偏目的；(D) 現在式時態不合。'},
+ {q:['A hypermarket sent an email to the media, ',' an upcoming price increase.'],
+  cn:'一家量販店寄電子郵件給媒體，誇大即將到來的漲價。',
+  opts:['exaggerate','exaggerated','exaggerating','to exaggerate'],ans:2,
+  word:'exaggerating（現在分詞，主動附帶）',
+  tnote:'<b>現在分詞片語</b>：寄件者主動「誇大」，用 V-ing 接於主句後表附帶狀況。<br>(B) 過去式需連接詞；(D) 不定詞語意偏目的。'},
+ {q:['The report caused panic among shoppers, many of ',' feared a shortage.'],
+  cn:'那則報導在消費者間引發恐慌，其中許多人擔心會短缺。',
+  opts:['them','who','whom','which'],ans:2,
+  word:'many of whom（介系詞 of + 受格關代）',
+  tnote:'<b>介系詞＋關代</b>：非限定子句「其中許多人」＝many of whom（of 後用受格 whom，指人）。<br>(A) them 造成逗號連寫；(B) who 為主格，不接於介系詞後；(D) which 指物。'},
+ {q:['Journalists should fact-check their sources ',' they do not spread false news.'],
+  cn:'記者應查證消息來源，以免散播假新聞。',
+  opts:['so that','so...that','such that','in order to'],ans:0,
+  word:'so that（表目的）',
+  tnote:'<b>so that</b>：空格後為完整子句 they do not...，表目的用 so that。<br>(B) so...that 中間須夾形容詞（結果）；(D) in order to 後接原形動詞。'},
+ {q:['If we are not careful, we may ',' fake news ',' the truth.'],
+  cn:'如果不小心，我們可能把假新聞誤認為真相。',
+  opts:['mistake...as','mistake...for','mistake...to','mistake...with'],ans:1,
+  word:'mistake A for B（把 A 誤認為 B）',
+  tnote:'<b>固定搭配</b>：mistake A for B。介系詞用 <b>for</b>，非 as/to/with。<br>同義 take A for B。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>
