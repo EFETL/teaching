@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L3: Prometheus ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L3: Prometheus ── 人類的守護者</h1>
+  <div class="sub">龍騰版高中英文 第三冊 第三課｜互動教學講義（高二適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 神話故事速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>神話故事速覽（三幕劇情）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🔥 第一幕｜造人與賜禮</h4>
+        泰坦 <b>Prometheus</b> 用黏土造人；弟弟 Epimetheus 把速度、力量、毛皮、翅膀都分給動物，輪到人類時<b>禮物已發完</b>。Prometheus 讓人類能<b>直立</b>，還慷慨賜<b>火</b>，使他們能取暖、煮食、造工具。
+      </div>
+      <div class="story-card s2">
+        <h4>🐂 第二幕｜騙宙斯的獻祭</h4>
+        在 Mecone 分配獻祭時，Prometheus 把好肉藏進<b>牛胃</b>、把骨頭裹上<b>油脂</b>，誘宙斯選了骨頭。從此人類<b>留肉、燒骨</b>獻神——這份「愛人類」讓他與宙斯結下<b>衝突</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>⛓️ 第三幕｜盜火與永恆懲罰</h4>
+        宙斯震怒<b>收回火</b>，人類挨餓受凍。Prometheus 用茴香莖藏<b>日火</b>再次盜火給人，卻被宙斯<b>放逐</b>、鎖於巨岩，任鷹每日啄食其肝、日夜受苦。他因<b>犧牲</b>被後世尊為「人類的守護者」。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點右側 🔊 可聽整句朗讀。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課取材自希臘神話，敘述泰坦神 Prometheus（普羅米修斯）造人、盜火給人類，最終甘願受罰的故事。全文以敘事體呈現，依情節分為三幕。</p>
+
+    <!-- 第一幕 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🔥 第一幕｜造人與賜禮（The Gifts to Humankind）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>At a time when there were all-powerful gods in the universe, a Titan known as Prometheus created human beings out of clay.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在宇宙間眾神全能的時代，一位名叫普羅米修斯的泰坦用黏土創造了人類。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">At a time when there were all-powerful gods in the universe</span><span class="syn-t">時間副詞（含 when 關係子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">a Titan known as Prometheus</span><span class="syn-t">S</span> <span class="syn syn-v">created</span><span class="syn-t">V</span> <span class="syn syn-o">human beings</span><span class="syn-t">O</span> <span class="syn syn-m">out of clay</span><span class="syn-t">副詞（材料）</span></div>
+          <div class="para-note"><b>known as</b> = 被稱為（過去分詞片語修飾 Titan）；<b>out of clay</b> = 用黏土（材料）；<b>universe</b> 為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>His brother Epimetheus then gave all living creatures on earth different qualities.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他的弟弟埃庇米修斯接著賦予地球上所有生物不同的特質。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">His brother Epimetheus</span><span class="syn-t">S</span> <span class="syn syn-v">gave</span><span class="syn-t">V（授與動詞）</span> <span class="syn syn-o">all living creatures on earth</span><span class="syn-t">IO 間接受詞</span> <span class="syn syn-o">different qualities</span><span class="syn-t">DO 直接受詞</span></div>
+          <div class="para-note"><b>give + 人 + 物</b>（授與動詞雙受詞）；<b>creature</b>（生物）、<b>quality</b>（特質）為補充字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Epimetheus gave animals speed, strength, fur, and wings.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">埃庇米修斯給了動物速度、力量、毛皮和翅膀。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Epimetheus</span><span class="syn-t">S</span> <span class="syn syn-v">gave</span><span class="syn-t">V</span> <span class="syn syn-o">animals</span><span class="syn-t">IO</span> <span class="syn syn-o">speed, strength, fur, and wings</span><span class="syn-t">DO（四名詞並列）</span></div>
+          <div class="para-note"><b>fur</b>（毛皮）為核心字；四個名詞以逗號並列、最後用 and 連接。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>By the time he got to human beings, however, he had run out of gifts.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，等他輪到人類時，他已經把禮物發完了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">By the time he got to human beings</span><span class="syn-t">時間副詞子句（過去式）</span><br>
+            <span class="num">②</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">had run out of</span><span class="syn-t">V（過去完成）</span> <span class="syn syn-o">gifts</span><span class="syn-t">O</span><span class="syn-cl">— By the time + 過去式，主句用過去完成，見句型三</span></div>
+          <div class="para-note"><b>run out of</b> = 用完（片語）；<b>had run out</b> 過去完成，強調更早已完成。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>To make up for their weaker state, Prometheus enabled them to stand upright like the gods.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">為了彌補他們較弱的處境，普羅米修斯讓他們能像神一樣直立行走。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">To make up for their weaker state</span><span class="syn-t">不定詞（表目的）</span> <span class="syn syn-s">Prometheus</span><span class="syn-t">S</span> <span class="syn syn-v">enabled</span><span class="syn-t">V</span> <span class="syn syn-o">them</span><span class="syn-t">O</span> <span class="syn syn-c">to stand upright</span><span class="syn-t">OC 受詞補語</span> <span class="syn syn-m">like the gods</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>make up for</b> = 彌補；<b>enable sb. to V</b> = 使某人能夠…（見句型五對照）；<b>upright</b>（直立的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Not only kind but also generous, he gave them fire too so that they could keep warm, cook food, and make tools.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他不僅仁慈而且慷慨，還給了他們火，好讓他們能取暖、煮食和製作工具。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Not only kind but also generous</span><span class="syn-t">形容詞片語（修飾 he）</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">gave</span><span class="syn-t">V</span> <span class="syn syn-o">them</span><span class="syn-t">IO</span> <span class="syn syn-o">fire</span><span class="syn-t">DO</span><br>
+            <span class="num">②</span><span class="syn syn-m">so that they could keep warm, cook food, and make tools</span><span class="syn-t">目的副詞子句</span></div>
+          <div class="para-note"><b>not only A but also B</b>（不僅…而且…，句型一）；<b>so that + 子句</b> = 以便（表目的，句型二）；<b>generous</b> 為核心字。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第二幕 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🐂 第二幕｜騙宙斯的獻祭（The Trick at Mecone）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, Prometheus's love for humankind brought him into conflict with Zeus, the king of the Olympian gods.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，普羅米修斯對人類的愛使他與奧林帕斯眾神之王宙斯起了衝突。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Prometheus's love for humankind</span><span class="syn-t">S</span> <span class="syn syn-v">brought</span><span class="syn-t">V</span> <span class="syn syn-o">him</span><span class="syn-t">O</span> <span class="syn syn-m">into conflict with Zeus</span><span class="syn-t">副詞</span> <span class="syn syn-m">, the king of the Olympian gods</span><span class="syn-t">同位語</span></div>
+          <div class="para-note"><b>bring sb. into conflict with</b> = 使某人與…衝突；<b>conflict</b>、<b>humankind</b> 為核心/補充字；the king... 為 Zeus 的同位語。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When the gods and humans met at Mecone to decide on the distribution of sacrifices that humans should make to the gods, Prometheus tricked Zeus for the benefit of humans.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當眾神與人類在梅科涅相聚、要決定人類該向神獻上哪些祭品時，普羅米修斯為了人類的利益而欺騙了宙斯。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When the gods and humans met at Mecone to decide on the distribution of sacrifices [that humans should make to the gods]</span><span class="syn-t">時間副詞子句（含限定關係子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">Prometheus</span><span class="syn-t">S</span> <span class="syn syn-v">tricked</span><span class="syn-t">V</span> <span class="syn syn-o">Zeus</span><span class="syn-t">O</span> <span class="syn syn-m">for the benefit of humans</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>decide on</b> = 決定；<b>distribution</b>（分配）、<b>benefit</b>（利益）為核心字；<b>for the benefit of</b> = 為了…的利益；that 子句見句型五（限定）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>He slaughtered a bull and created two offerings.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他宰殺了一頭公牛，做出兩份祭品。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">He</span><span class="syn-t">S</span> <span class="syn syn-v">slaughtered</span><span class="syn-t">V</span> <span class="syn syn-o">a bull</span><span class="syn-t">O</span> <span class="syn syn-m">and</span><span class="syn-t">連接詞</span> <span class="syn syn-v">created</span><span class="syn-t">V</span> <span class="syn syn-o">two offerings</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>slaughter</b>（屠宰）為核心字；<b>offering</b> = 祭品；兩個動詞共用主詞 He。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>One was a pile of beef hidden inside a bull's stomach, and the other was a pile of bones covered in shiny fat.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一份是藏在牛胃裡的一堆牛肉，另一份是裹著發亮油脂的一堆骨頭。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">One</span><span class="syn-t">S</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">a pile of beef</span><span class="syn-t">C</span> <span class="syn syn-m">hidden inside a bull's stomach</span><span class="syn-t">過去分詞片語修飾</span><br>
+            <span class="num">②</span><span class="syn syn-s">the other</span><span class="syn-t">S</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">a pile of bones</span><span class="syn-t">C</span> <span class="syn syn-m">covered in shiny fat</span><span class="syn-t">過去分詞片語修飾</span></div>
+          <div class="para-note"><b>One... the other...</b> = （兩者）一個…另一個…；<b>hidden / covered</b> 為過去分詞片語（被動）修飾名詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>He then asked Zeus to choose one.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">接著他請宙斯選一份。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">He</span><span class="syn-t">S</span> <span class="syn syn-v">then asked</span><span class="syn-t">V</span> <span class="syn syn-o">Zeus</span><span class="syn-t">O</span> <span class="syn syn-c">to choose one</span><span class="syn-t">OC（不定詞）</span></div>
+          <div class="para-note"><b>ask sb. to V</b> = 要求某人做…（受詞補語用不定詞）；one 代替前面的 offering。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The king of the gods chose the second one, believing there must be juicy meat underneath the fat, but instead he ended up with nothing but bones.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">眾神之王選了第二份，以為油脂底下一定有多汁的肉，結果卻只落得一堆骨頭。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The king of the gods</span><span class="syn-t">S</span> <span class="syn syn-v">chose</span><span class="syn-t">V</span> <span class="syn syn-o">the second one</span><span class="syn-t">O</span> <span class="syn syn-m">, believing there must be juicy meat underneath the fat</span><span class="syn-t">分詞構句（附帶狀況）</span><br>
+            <span class="num">②</span><span class="syn syn-m">but instead</span><span class="syn-t">轉折</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">ended up with</span><span class="syn-t">V</span> <span class="syn syn-o">nothing but bones</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>believing...</b> 為現在分詞構句；<b>underneath</b>（在…下方）為補充字；<b>end up with</b> = 最後落得；<b>nothing but</b> = 只不過。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As a result, from that day on, humans would keep the meat for themselves and burn animal bones as an offering to the gods.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">結果，從那天起，人類會把肉留給自己，而燒動物的骨頭作為獻給神的祭品。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">As a result</span><span class="syn-t">副詞</span> <span class="syn syn-m">from that day on</span><span class="syn-t">時間</span> <span class="syn syn-s">humans</span><span class="syn-t">S</span> <span class="syn syn-v">would keep</span><span class="syn-t">V</span> <span class="syn syn-o">the meat</span><span class="syn-t">O</span> <span class="syn syn-v">and burn</span><span class="syn-t">V</span> <span class="syn syn-o">animal bones</span><span class="syn-t">O</span> <span class="syn syn-m">as an offering</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>as a result</b> = 結果（片語）；<b>from that day on</b> = 從那天起；<b>would</b> 表過去習慣。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第三幕 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">⛓️ 第三幕｜盜火、懲罰與封號（Theft, Punishment &amp; Glory）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Angry about being tricked, Zeus took fire away from humankind.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">因為被騙而生氣，宙斯把火從人類手中奪走。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Angry about being tricked</span><span class="syn-t">形容詞片語（分詞構句，表原因）</span> <span class="syn syn-s">Zeus</span><span class="syn-t">S</span> <span class="syn syn-v">took</span><span class="syn-t">V</span> <span class="syn syn-o">fire</span><span class="syn-t">O</span> <span class="syn syn-m">away from humankind</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>Angry about...</b> = 因…而生氣（形容詞引導分詞構句，見句型四）；<b>being tricked</b> = 被騙（動名詞被動）；<b>take...away from</b> = 從…奪走。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Without it, humans began to starve and freeze.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">沒有了火，人類開始挨餓受凍。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Without it</span><span class="syn-t">條件副詞</span> <span class="syn syn-s">humans</span><span class="syn-t">S</span> <span class="syn syn-v">began</span><span class="syn-t">V</span> <span class="syn syn-o">to starve and freeze</span><span class="syn-t">O（不定詞）</span></div>
+          <div class="para-note"><b>without it</b> = 沒有它（＝火）；<b>begin to V</b>；<b>freeze</b>（受凍、結凍）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Unable to make tools or weapons, they had to live in caves and often fell victim to wild beasts.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">由於無法製作工具或武器，他們只能住在洞穴裡，還常成為野獸的犧牲品。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Unable to make tools or weapons</span><span class="syn-t">形容詞片語（表原因）</span> <span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">had to live</span><span class="syn-t">V</span> <span class="syn syn-m">in caves</span><span class="syn-t">副詞</span> <span class="syn syn-v">and often fell victim to</span><span class="syn-t">V</span> <span class="syn syn-o">wild beasts</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>Unable to...</b> = 由於無法…（形容詞引導分詞構句，句型四）；<b>fall victim to</b> = 成為…的受害者（片語）；<b>victim</b> 為核心字；<b>weapon</b> 為補充字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Prometheus saw how miserable they were and decided to help.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">普羅米修斯看見他們多麼悲慘，便決定出手相助。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Prometheus</span><span class="syn-t">S</span> <span class="syn syn-v">saw</span><span class="syn-t">V</span> <span class="syn syn-o">how miserable they were</span><span class="syn-t">O（名詞子句）</span> <span class="syn syn-v">and decided</span><span class="syn-t">V</span> <span class="syn syn-o">to help</span><span class="syn-t">O（不定詞）</span></div>
+          <div class="para-note"><b>how + adj. + S + V</b>（名詞子句作受詞）；<b>miserable</b>（悲慘的）為核心字；<b>decide to V</b>。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>He took a stalk of fennel and lit its hollow center with fire that he had stolen from the sun.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他取來一根茴香莖，用他從太陽偷來的火點燃了它中空的莖心。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">He</span><span class="syn-t">S</span> <span class="syn syn-v">took</span><span class="syn-t">V</span> <span class="syn syn-o">a stalk of fennel</span><span class="syn-t">O</span> <span class="syn syn-v">and lit</span><span class="syn-t">V</span> <span class="syn syn-o">its hollow center</span><span class="syn-t">O</span> <span class="syn syn-m">with fire [that he had stolen from the sun]</span><span class="syn-t">副詞（含限定關係子句）</span></div>
+          <div class="para-note"><b>hollow</b>（中空的）為補充字；<b>that he had stolen...</b> 關係子句修飾 fire，用過去完成（偷在點燃之前）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Then, he gave humans this stalk with the fire inside it.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然後，他把這根裡面藏著火的莖交給人類。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">gave</span><span class="syn-t">V</span> <span class="syn syn-o">humans</span><span class="syn-t">IO</span> <span class="syn syn-o">this stalk</span><span class="syn-t">DO</span> <span class="syn syn-m">with the fire inside it</span><span class="syn-t">介系詞片語修飾 stalk</span></div>
+          <div class="para-note"><b>give + 人 + 物</b>；<b>with the fire inside it</b> = 裡面有火的（附帶說明）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Furious about Prometheus's theft, Zeus punished the Titan by banishing him to a place far to the east.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">宙斯對普羅米修斯的偷竊勃然大怒，以將他放逐到遙遠東方來懲罰這位泰坦。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Furious about Prometheus's theft</span><span class="syn-t">形容詞片語（分詞構句）</span> <span class="syn syn-s">Zeus</span><span class="syn-t">S</span> <span class="syn syn-v">punished</span><span class="syn-t">V</span> <span class="syn syn-o">the Titan</span><span class="syn-t">O</span> <span class="syn syn-m">by banishing him to a place far to the east</span><span class="syn-t">副詞（表方法）</span></div>
+          <div class="para-note"><b>furious</b>（狂怒的）、<b>theft</b>（偷竊）、<b>punish</b>（懲罰）、<b>banish</b>（放逐）皆為核心字；<b>by + V-ing</b> = 藉由…。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>There, Prometheus was chained to a rock, and an eagle sent by Zeus fed on Prometheus's liver.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在那裡，普羅米修斯被鎖在一塊岩石上，而宙斯派來的一隻鷹啄食他的肝臟。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Prometheus</span><span class="syn-t">S</span> <span class="syn syn-v">was chained</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">to a rock</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-s">an eagle sent by Zeus</span><span class="syn-t">S（含過去分詞修飾）</span> <span class="syn syn-v">fed on</span><span class="syn-t">V（片語動詞）</span> <span class="syn syn-o">Prometheus's liver</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>be chained to</b> = 被鎖在…；<b>sent by Zeus</b> 過去分詞片語（被動）修飾 eagle；<b>feed on</b> = 以…為食（片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Though his liver kept growing back, the eagle would return every day to gnaw at it again, torturing Prometheus until the end of time.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">儘管他的肝不斷長回來，那隻鷹每天都會回來再次啃咬它，折磨普羅米修斯直到永遠。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Though his liver kept growing back</span><span class="syn-t">讓步副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">the eagle</span><span class="syn-t">S</span> <span class="syn syn-v">would return</span><span class="syn-t">V</span> <span class="syn syn-m">every day to gnaw at it again</span><span class="syn-t">副詞</span> <span class="syn syn-m">, torturing Prometheus until the end of time</span><span class="syn-t">分詞構句（表結果）</span></div>
+          <div class="para-note"><b>though</b> = 儘管（讓步）；<b>keep + V-ing</b> = 持續…；<b>torture</b>（折磨）為補充字；torturing... 分詞構句表接續結果。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Through his sacrifice, Prometheus, who gave humans not only the ability to stand upright but also the gift of fire, which set the stage for human civilization, came to be known in later centuries as the "Champion of Humankind."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">透過他的犧牲，普羅米修斯——這位不僅賜給人類直立能力、更給了人類火（一份為人類文明揭開序幕之禮）的神——在後世被稱為「人類的守護者」。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Through his sacrifice</span><span class="syn-t">副詞</span> <span class="syn syn-s">Prometheus</span><span class="syn-t">S</span> <span class="syn syn-m">, who gave humans not only the ability... but also the gift of fire, which set the stage for human civilization,</span><span class="syn-t">非限定關係子句（插入）</span> <span class="syn syn-v">came to be known</span><span class="syn-t">V</span> <span class="syn syn-c">as the "Champion of Humankind"</span><span class="syn-t">補語</span></div>
+          <div class="para-note"><b>who... / which...</b> 皆為非限定關係子句（見句型五）；<b>not only A but also B</b>；<b>set the stage for</b> = 為…鋪路；<b>civilization</b>（文明）為補充字；<b>come to be known as</b> = 後來被稱為。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">universe</span><span class="v-pos">n.</span><div class="v-cn-mini">宇宙</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>universal (adj.) 宇宙的；普遍的</span><span>universally (adv.)</span></div>
+        <div class="v-ex">There were all-powerful gods in the <b>universe</b>.<span class="cn">宇宙間有全能的眾神。</span></div>
+        <span class="v-gsat">📊 universe / universal 字族學測常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">enable</span><span class="v-pos">v.</span><div class="v-cn-mini">使能夠</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>enable sb. to V</span><span>able (adj.) / ability (n.)</span></div>
+        <div class="v-ex">Prometheus <b>enabled</b> humans to stand upright.<span class="cn">普羅米修斯讓人類能直立。</span></div>
+        <span class="v-gsat">📊 enable + O + to V 為高頻句型</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">upright</span><span class="v-pos">adj. / adv.</span><div class="v-cn-mini">直立的；挺直地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>stand upright 站直</span><span>≈ erect</span></div>
+        <div class="v-ex">He enabled them to stand <b>upright</b> like the gods.<span class="cn">他讓他們能像神一樣直立。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">generous</span><span class="v-pos">adj.</span><div class="v-cn-mini">慷慨的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>generosity (n.) 慷慨</span><span>generously (adv.)</span></div>
+        <div class="v-ex">Not only kind but also <b>generous</b>, he gave them fire.<span class="cn">他不僅仁慈還很慷慨，給了他們火。</span></div>
+        <span class="v-gsat">📊 反義字 mean / stingy（小氣的）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">conflict</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">衝突；牴觸</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>in conflict with 與…衝突</span><span>conflicting (adj.) 相互矛盾的</span></div>
+        <div class="v-ex">His love brought him into <b>conflict</b> with Zeus.<span class="cn">他的愛使他與宙斯起衝突。</span></div>
+        <span class="v-gsat">📊 名詞重音在前、動詞在後</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">distribution</span><span class="v-pos">n.</span><div class="v-cn-mini">分配；分佈</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>distribute (v.) 分配</span><span>distributor (n.) 經銷商</span></div>
+        <div class="v-ex">They met to decide on the <b>distribution</b> of sacrifices.<span class="cn">他們相聚決定祭品的分配。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">benefit</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">利益；有益（於）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>beneficial (adj.) 有益的</span><span>for the benefit of / benefit from</span></div>
+        <div class="v-ex">Prometheus tricked Zeus for the <b>benefit</b> of humans.<span class="cn">普羅米修斯為了人類的利益騙了宙斯。</span></div>
+        <span class="v-gsat">📊 benefit from 從…獲益</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">slaughter</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">屠宰；殺戮</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ butcher（屠宰）</span><span>slaughterhouse (n.) 屠宰場</span></div>
+        <div class="v-ex">He <b>slaughtered</b> a bull and created two offerings.<span class="cn">他宰了一頭牛，做出兩份祭品。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">freeze</span><span class="v-pos">v.</span><div class="v-cn-mini">結凍；受凍</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>三態：freeze-froze-frozen</span><span>frozen (adj.) 冰凍的</span></div>
+        <div class="v-ex">Without fire, humans began to starve and <b>freeze</b>.<span class="cn">沒有火，人類開始挨餓受凍。</span></div>
+        <span class="v-gsat">📊 不規則動詞三態必背</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">victim</span><span class="v-pos">n.</span><div class="v-cn-mini">受害者；犧牲品</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>fall victim to 成為…的受害者</span><span>victimize (v.) 使受害</span></div>
+        <div class="v-ex">They often fell <b>victim</b> to wild beasts.<span class="cn">他們常成為野獸的獵物。</span></div>
+        <span class="v-gsat">📊 victim of crime 學測閱讀常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">miserable</span><span class="v-pos">adj.</span><div class="v-cn-mini">悲慘的；痛苦的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>misery (n.) 悲慘</span><span>miserably (adv.)</span></div>
+        <div class="v-ex">Prometheus saw how <b>miserable</b> they were.<span class="cn">普羅米修斯看見他們有多悲慘。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">furious</span><span class="v-pos">adj.</span><div class="v-cn-mini">狂怒的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>fury (n.) 狂怒</span><span>furiously (adv.)</span></div>
+        <div class="v-ex"><b>Furious</b> about the theft, Zeus punished him.<span class="cn">因偷竊之事狂怒，宙斯懲罰了他。</span></div>
+        <span class="v-gsat">📊 ≈ enraged；比 angry 更強烈</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">theft</span><span class="v-pos">n.</span><div class="v-cn-mini">偷竊；竊盜</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>thief (n.) 小偷</span><span>steal (v.) 偷（stole-stolen）</span></div>
+        <div class="v-ex">Furious about Prometheus's <b>theft</b>, Zeus acted.<span class="cn">宙斯對普羅米修斯的偷竊震怒。</span></div>
+        <span class="v-gsat">📊 theft / thief / steal 字族辨析</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">punish</span><span class="v-pos">v.</span><div class="v-cn-mini">懲罰</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>punishment (n.) 懲罰</span><span>punish sb. for sth.</span></div>
+        <div class="v-ex">Zeus <b>punished</b> the Titan by banishing him.<span class="cn">宙斯以放逐懲罰這位泰坦。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">banish</span><span class="v-pos">v.</span><div class="v-cn-mini">放逐；驅逐</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>banishment (n.) 放逐</span><span>≈ exile 流放</span></div>
+        <div class="v-ex">Zeus punished him by <b>banishing</b> him to the east.<span class="cn">宙斯把他放逐到東方作為懲罰。</span></div></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">run out (of)</span></td><td>用完；耗盡</td><td class="pex">By the time he got to humans, he had <b>run out of</b> gifts.<span class="cn">輪到人類時，他已把禮物發完。</span></td></tr>
+      <tr><td><span class="phr">make up for</span></td><td>彌補</td><td class="pex">To <b>make up for</b> their weaker state, he helped them.<span class="cn">為彌補他們較弱的處境，他幫了他們。</span></td></tr>
+      <tr><td><span class="phr">as a result</span></td><td>結果；因此</td><td class="pex"><b>As a result</b>, humans kept the meat for themselves.<span class="cn">結果，人類把肉留給自己。</span></td></tr>
+      <tr><td><span class="phr">fall victim to</span></td><td>成為…的受害者</td><td class="pex">They often <b>fell victim to</b> wild beasts.<span class="cn">他們常成為野獸的獵物。</span></td></tr>
+      <tr><td><span class="phr">feed on</span></td><td>以…為食</td><td class="pex">An eagle <b>fed on</b> Prometheus's liver.<span class="cn">一隻鷹啄食普羅米修斯的肝。</span></td></tr>
+      <tr><td><span class="phr">set the stage for</span></td><td>為…鋪路；揭開序幕</td><td class="pex">The gift of fire <b>set the stage for</b> civilization.<span class="cn">火這份禮物為文明鋪了路。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（神話、犧牲、懲罰、文明）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sacrifice</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">犧牲；獻祭</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>make a sacrifice</span><span>sacrifice A for B 為 B 犧牲 A</span></div>
+        <div class="v-ex">Through his <b>sacrifice</b>, Prometheus became a hero.<span class="cn">透過犧牲，普羅米修斯成了英雄。</span></div>
+        <span class="v-gsat">📊 學測寫作高頻主題字</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">civilization</span><span class="v-pos">n.</span><div class="v-cn-mini">文明</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>civilize (v.) 使開化</span><span>civil (adj.) 公民的</span></div>
+        <div class="v-ex">The gift of fire set the stage for human <b>civilization</b>.<span class="cn">火為人類文明鋪了路。</span></div>
+        <span class="v-gsat">📊 ancient civilization 學測閱讀常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">torture</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">折磨；拷問</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ torment</span><span>torturer (n.) 施虐者</span></div>
+        <div class="v-ex">The eagle kept <b>torturing</b> Prometheus.<span class="cn">那隻鷹不斷折磨普羅米修斯。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">creature</span><span class="v-pos">n.</span><div class="v-cn-mini">生物；動物</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>create (v.) 創造</span><span>creation (n.) 創造物</span></div>
+        <div class="v-ex">Epimetheus gave all living <b>creatures</b> different qualities.<span class="cn">埃庇米修斯給所有生物不同特質。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">weapon</span><span class="v-pos">n.</span><div class="v-cn-mini">武器</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>weaponry (n.) 武器（總稱）</span><span>nuclear weapon 核武</span></div>
+        <div class="v-ex">Unable to make tools or <b>weapons</b>, they lived in caves.<span class="cn">無法製作工具或武器，他們住在洞穴。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">quality</span><span class="v-pos">n.</span><div class="v-cn-mini">特質；品質</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>qualify (v.) 使合格</span><span>qualification (n.) 資格</span></div>
+        <div class="v-ex">He gave all creatures different <b>qualities</b>.<span class="cn">他給所有生物不同的特質。</span></div>
+        <span class="v-gsat">📊 quality time 優質相處時光</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">hollow</span><span class="v-pos">adj.</span><div class="v-cn-mini">中空的；空洞的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ empty inside</span><span>a hollow promise 空洞的承諾</span></div>
+        <div class="v-ex">He lit the <b>hollow</b> center of a fennel stalk.<span class="cn">他點燃茴香莖中空的莖心。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">underneath</span><span class="v-pos">prep. / adv.</span><div class="v-cn-mini">在…下方</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ beneath / below</span><span>反義 on top of</span></div>
+        <div class="v-ex">He believed there was juicy meat <b>underneath</b> the fat.<span class="cn">他以為油脂下面有多汁的肉。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（火、偷竊、懲罰、神話）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">play with fire</span><div class="slang-cn-mini">玩火；冒險做危險的事（呼應盜火）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">明知有危險卻還去做，等於自找麻煩。</div>
+      <div class="slang-ex">Lying to your boss is really <b>playing with fire</b>.<span class="cn">對老闆說謊真的是在玩火。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">steal someone's thunder</span><div class="slang-cn-mini">搶走某人的風頭</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">搶走別人的功勞或關注，讓對方失去光彩。</div>
+      <div class="slang-ex">She <b>stole my thunder</b> by announcing the news first.<span class="cn">她搶先宣布消息，搶走了我的風頭。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">add fuel to the fire</span><div class="slang-cn-mini">火上加油</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">讓原本已經很糟的情況變得更嚴重。</div>
+      <div class="slang-ex">Shouting back just <b>added fuel to the fire</b>.<span class="cn">回嗆只是火上加油。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">an Achilles' heel</span><div class="slang-cn-mini">致命弱點（源自希臘神話）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">看似強大者身上唯一的罩門、致命的弱點。</div>
+      <div class="slang-ex">Careless spelling is his <b>Achilles' heel</b> in writing.<span class="cn">粗心拼字是他寫作的致命弱點。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a slap on the wrist</span><div class="slang-cn-mini">輕微的懲罰（對比宙斯的重罰）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">罰得太輕、不痛不癢，起不了嚇阻作用。</div>
+      <div class="slang-ex">For such a big mistake, a small fine was just <b>a slap on the wrist</b>.<span class="cn">犯這麼大的錯，小額罰款只是不痛不癢。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">bite the bullet</span><div class="slang-cn-mini">咬牙硬撐、勇敢面對</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">忍痛去做不得不做的難事或苦差事。</div>
+      <div class="slang-ex">Prometheus <b>bit the bullet</b> and accepted his punishment.<span class="cn">普羅米修斯咬牙承受了他的懲罰。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜not only A but also B（不僅…而且…）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">not only + A but (also) + B（A、B 詞性/結構須對等）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">連接兩個對等成分；also 可省略，but 不可省略。</p>
+        <div class="g-ex"><b>Not only</b> kind <b>but also</b> generous, Prometheus gave humans fire.<div class="g-ex-cn">普羅米修斯不僅仁慈而且慷慨，給了人類火。（課文）</div></div>
+        <div class="g-ex">He gave humans <b>not only</b> the ability to stand upright <b>but also</b> the gift of fire.<div class="g-ex-cn">他不僅給人類直立的能力，也給了火。（課文）</div></div>
+        <div class="g-note">✗ not only...and also...（連接詞用錯，須用 but also）。</div>
+        <div class="g-tip">句首倒裝：<b>Not only did</b> he give fire, <b>but</b> he <b>also</b> taught skills. 學測常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜so that（目的）vs so...that（結果）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V + so that + S + can/could + V（表目的）
+S + V + so + adj./adv. + that + S + V（表結果）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">so that 引導「目的」；so...that 中間夾形容詞/副詞、引導「結果」。</p>
+        <div class="g-ex">He gave them fire <b>so that</b> they could keep warm.<div class="g-ex-cn">他給他們火，好讓他們取暖。（課文，目的）</div></div>
+        <div class="g-ex">Zeus was <b>so</b> angry <b>that</b> he took the fire away.<div class="g-ex-cn">宙斯如此生氣，以至於收回了火。（結果）</div></div>
+        <div class="g-note">✗ 混用：so that 後不夾形容詞；so...that 不表目的（後不接 can 表意圖）。</div>
+        <div class="g-tip">目的亦可用 in order that / in order to V；學測常考 so that vs so...that 辨析。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜By the time + 過去式 → 主句用過去完成</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">By the time + S + 過去式, S + had + 過去分詞.</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">「等到…的時候，(更早)已經…」；先發生的動作用過去完成式。</p>
+        <div class="g-ex"><b>By the time</b> he got to humans, he <b>had run out of</b> gifts.<div class="g-ex-cn">等他輪到人類時，禮物早已發完。（課文）</div></div>
+        <div class="g-ex"><b>By the time</b> we arrived, the show <b>had</b> already <b>started</b>.<div class="g-ex-cn">我們到時，表演已經開始了。</div></div>
+        <div class="g-note">✗ By the time he got there, he ran out...（漏用過去完成，時序不清）。</div>
+        <div class="g-tip">對照未來：By the time（未來）主句用未來完成 will have + p.p.。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜分詞構句／形容詞片語當狀語（句首修飾主詞）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">V-ing / p.p. / Adj. + ..., S + V ...（主動用 V-ing，被動用 p.p.）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">句首片語修飾緊接其後的主詞；邏輯主詞須與主句主詞一致。</p>
+        <div class="g-ex"><b>Angry about being tricked</b>, Zeus took fire away.<div class="g-ex-cn">因被騙而生氣，宙斯奪走了火。（形容詞片語，課文）</div></div>
+        <div class="g-ex"><b>Unable to</b> make tools, they lived in caves.<div class="g-ex-cn">由於無法製作工具，他們住在洞穴。（課文）</div></div>
+        <div class="g-note">✗ 懸垂分詞：分詞的邏輯主詞若與主句主詞不一致即錯。</div>
+        <div class="g-tip">主動 V-ing、被動 p.p.；學測綜合測驗常考句首分詞構句。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜關係子句：限定 vs 非限定（有無逗號）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞 + who/which/that + ...（限定，無逗號）
+先行詞, who/which, ...（非限定，有逗號、補充說明）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">限定子句界定範圍；非限定子句補充說明，且 that 不可引導非限定子句。</p>
+        <div class="g-ex">the sacrifices <b>that</b> humans should make to the gods<div class="g-ex-cn">人類該獻給神的祭品（限定，課文）</div></div>
+        <div class="g-ex">Prometheus, <b>who</b> gave humans fire, <b>which</b> set the stage for civilization...<div class="g-ex-cn">普羅米修斯——他給了人類火，而火為文明鋪路…（非限定，課文）</div></div>
+        <div class="g-note">✗ 非限定子句用 that（Prometheus, that gave...）為錯。</div>
+        <div class="g-tip">which 可代替整個前句（...fire, which set the stage...）；學測常考關代選填與逗號判斷。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第三冊 第三課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['To make weaker humans equal to the gods, Prometheus ',' them to stand upright.'],
+  cn:'為了讓較弱的人類能和神平起平坐，普羅米修斯使他們能直立。',
+  opts:['enabled','punished','banished','froze'],ans:0,
+  word:'enable (v.) 使能夠',
+  exp:'enable + O + to V = 使某人能夠…。(B) 懲罰、(C) 放逐、(D) 結凍皆不符語意。',
+  note:'able → enable → ability 為同字族。'},
+ {q:['By hiding the meat and offering shiny bones, Prometheus ',' Zeus for the benefit of humans.'],
+  cn:'藉由藏起肉、獻上油亮的骨頭，普羅米修斯為了人類的利益騙了宙斯。',
+  opts:['tricked','enabled','starved','distributed'],ans:0,
+  word:'trick (v.) 欺騙',
+  exp:'for the benefit of humans 暗示他「騙」了神。trick sb. = 欺騙某人。',
+  note:'trick sb. into V-ing = 騙某人做某事。'},
+ {q:['Without fire, humans began to starve and ',' in the cold.'],
+  cn:'沒有火，人類開始在寒冷中挨餓受凍。',
+  opts:['freeze','enable','distribute','punish'],ans:0,
+  word:'freeze (v.) 受凍；結凍',
+  exp:'與 starve（挨餓）並列，需「受凍」。三態 freeze-froze-frozen。',
+  note:'starve and freeze = 又餓又凍。'},
+ {q:['Living in caves without weapons, early humans often ',' wild beasts.'],
+  cn:'住在洞穴又沒有武器，早期人類常成為野獸的獵物。',
+  opts:['fell victim to','made up for','ran out of','set the stage for'],ans:0,
+  word:'fall victim to 成為…的受害者',
+  exp:'fall victim to + N =（被動）成為…受害者。(B) 彌補、(C) 用完、(D) 鋪路皆不符。',
+  note:'victim（受害者）為核心字；fell 為 fall 的過去式。'},
+ {q:['',' about being tricked, Zeus took fire away from humankind.'],
+  cn:'因為被騙而暴怒，宙斯把火從人類手中奪走。',
+  opts:['Furious','Generous','Miserable','Upright'],ans:0,
+  word:'furious (adj.) 狂怒的',
+  exp:'被騙後的情緒＋奪火行為，選 furious（狂怒）。其名詞為 fury。',
+  note:'furious ＞ angry，語氣更強烈。'},
+ {q:['Zeus punished Prometheus for his ',' by banishing him to the east.'],
+  cn:'宙斯因普羅米修斯的偷竊而懲罰他，將他放逐到東方。',
+  opts:['theft','benefit','quality','distribution'],ans:0,
+  word:'theft (n.) 偷竊',
+  exp:'偷火→theft（偷竊）。thief（小偷）、steal（偷）為同字族。',
+  note:'呼應課文 fire that he had stolen。'},
+ {q:['Not only kind but also ',', Prometheus gave humans the gift of fire.'],
+  cn:'普羅米修斯不僅仁慈而且慷慨，把火這份禮物送給人類。',
+  opts:['generous','miserable','furious','hollow'],ans:0,
+  word:'generous (adj.) 慷慨的',
+  exp:'送禮的正面特質＝generous（慷慨）。generosity 為其名詞。',
+  note:'not only A but also B，A、B 詞性須對等（kind／generous 皆形容詞）。'},
+ {q:['As a ',', humans kept the meat and burned bones as offerings to the gods.'],
+  cn:'結果，人類把肉留下，燒骨頭獻給神。',
+  opts:['result','conflict','victim','universe'],ans:0,
+  word:'as a result 結果（片語）',
+  exp:'as a result = 因此、結果。(B) 衝突、(C) 受害者、(D) 宇宙皆不符。',
+  note:'as a result of + N = 由於…的結果。'},
+ {q:['The gift of fire ',' the stage for the rise of human civilization.'],
+  cn:'火這份禮物為人類文明的興起鋪好了路。',
+  opts:['set','ran','fell','made'],ans:0,
+  word:'set the stage for 為…鋪路／揭開序幕',
+  exp:'set the stage for + N = 為…作好準備。固定用 set。',
+  note:'呼應課文 which set the stage for human civilization。'},
+ {q:['When gifts ran ',', Epimetheus had nothing left to give human beings.'],
+  cn:'當禮物用完時，埃庇米修斯沒有東西可以再給人類了。',
+  opts:['out','up','into','over'],ans:0,
+  word:'run out (of) 用完；耗盡',
+  exp:'run out (of + N) = 用完、耗盡。had run out of gifts。',
+  note:'主詞是「物」用 run out；run out of 後接被耗盡之物。'}
+];
+
+var teacherQ=[
+ {q:['Prometheus gave humans fire ',' they could keep warm and cook food.'],
+  cn:'普羅米修斯給人類火，好讓他們能取暖、煮食。',
+  opts:['so that','so...that','such that','in order to'],ans:0,
+  word:'so that（表目的，後接 S + can/could + V）',
+  tnote:'<b>so that vs so...that</b>：空格後是完整子句 they could...，表「目的」，用 so that。<br>so...that 中間須夾形容詞/副詞（結果）：so warm that...。<br>(D) in order to 後接原形動詞，不接子句。'},
+ {q:['The king of the gods was ',' greedy ',' he chose the shiny bones instead of the meat.'],
+  cn:'眾神之王如此貪心，以至於他選了油亮的骨頭而非肉。',
+  opts:['so...that','such...that','too...to','as...as'],ans:0,
+  word:'so + adj. + that（如此…以至於）',
+  tnote:'<b>so vs such</b>：空格後是形容詞 greedy（無名詞），用 so + adj. + that。<br>接名詞片語才用 such：such a greedy king that...。<br>(C) too...to 後接原形且含否定意味，語意不同。'},
+ {q:['By the time Epimetheus reached human beings, he ',' all the gifts.'],
+  cn:'等埃庇米修斯輪到人類時，他已經把所有禮物用光了。',
+  opts:['used up','has used up','had used up','was using up'],ans:2,
+  word:'had + p.p.（過去完成，比過去更早發生）',
+  tnote:'<b>過去完成式</b>：By the time + 過去式 (reached)，更早完成的動作用 had + p.p.。<br>(B) 現在完成 has 與過去時間衝突；(D) 過去進行不表「已完成」。<br>口訣：By the time + 過去, 主句常用 had + p.p.。'},
+ {q:['',' about being tricked, Zeus took fire away from humankind.'],
+  cn:'因被騙而生氣，宙斯奪走了人類的火。',
+  opts:['Anger','Angry','To anger','Angrily'],ans:1,
+  word:'Angry（形容詞片語作狀語，修飾主詞 Zeus）',
+  tnote:'<b>形容詞片語當狀語</b>：句首修飾主詞 Zeus 的狀態，用形容詞 Angry（= Being angry 省略 Being）。<br>(A) 名詞、(C) 不定詞、(D) 副詞皆不能引導此結構。<br>類例：Furious / Unable + ..., S + V（課文多次出現）。'},
+ {q:['The eagle returned every day to gnaw at his liver, ',' Prometheus until the end of time.'],
+  cn:'那隻鷹每天回來啃他的肝，折磨普羅米修斯直到永遠。',
+  opts:['tortured','to torture','torturing','torture'],ans:2,
+  word:'torturing（現在分詞構句，表接續／結果）',
+  tnote:'<b>分詞構句表結果</b>：主詞 the eagle 主動「折磨」，用現在分詞 V-ing 接在主句後。<br>= ...and tortured Prometheus...。<br>(A) 過去式需連接詞；(B) 不定詞語意為目的，不合此處附帶結果。'},
+ {q:['Prometheus gave humans the gift of fire, ',' set the stage for human civilization.'],
+  cn:'普羅米修斯給了人類火這份禮物，而這為人類文明鋪了路。',
+  opts:['that','what','which','it'],ans:2,
+  word:'which（非限定關係代名詞，可代整個前句）',
+  tnote:'<b>非限定子句</b>：逗號後補充說明整件事，用 which（可代前面整句）。<br>(A) that 不可引導非限定子句；(B) what 不接先行詞；(D) it 會造成逗號連寫（run-on）。'},
+ {q:['They met to decide on the distribution of sacrifices ',' humans should make to the gods.'],
+  cn:'他們相聚以決定人類該獻給神的祭品該如何分配。',
+  opts:['what','that','who','where'],ans:1,
+  word:'that（限定關係代名詞，代事物、作 make 的受詞）',
+  tnote:'<b>限定子句</b>：先行詞 sacrifices（事物）在子句中作 make 的受詞，用 that/which。<br>(A) what 不接先行詞；(C) who 指人；(D) where 引導地點副詞子句。'},
+ {q:['',' give humans the ability to stand upright, but Prometheus also gave them fire.'],
+  cn:'普羅米修斯不僅給人類直立的能力，還給了他們火。',
+  opts:['Not only did he','Not only he did','He not only','Only not did he'],ans:0,
+  word:'句首 Not only + 助動詞倒裝',
+  tnote:'<b>Not only 置句首倒裝</b>：Not only 放句首，該子句須倒裝（助動詞提前）：Not only did he give...。<br>(B)(C) 未倒裝；後半用 but... also 呼應。<br>未倒裝寫法：He not only gave..., but also gave...。'},
+ {q:['Prometheus ',' human beings ',' upright like the gods.'],
+  cn:'普羅米修斯使人類能像神一樣直立。',
+  opts:['made...to stand','enabled...to stand','let...to stand','had...to stand'],ans:1,
+  word:'enable sb. to V（使某人能夠…）',
+  tnote:'<b>致使動詞接法</b>：enable sb. to V（接不定詞）。<br>(A) make sb. V（原形，不加 to）；(C) let sb. V（原形）；(D) have sb. V（原形）。<br>只有 enable 用 to V，故選 (B)。'},
+ {q:['There, Prometheus ',' to a rock, and an eagle sent by Zeus fed on his liver.'],
+  cn:'在那裡，普羅米修斯被鎖在岩石上，宙斯派來的鷹啄食他的肝。',
+  opts:['chained','was chained','chaining','has chained'],ans:1,
+  word:'be + p.p.（被動語態）',
+  tnote:'<b>被動語態</b>：Prometheus 是「被」鎖，用 be + p.p. = was chained。<br>(A) 過去式主動缺受詞；(C) 分詞不能單獨當動詞；(D) 現在完成主動與語意不符。<br>對照 an eagle... fed on（主動，鷹主動啄食）。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+</script>
+</body>
+</html>
