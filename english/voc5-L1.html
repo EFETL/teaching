@@ -202,15 +202,17 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
 .print-root{display:none}
 .pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
 @media print{
-  @page{size:A4;margin:0}
+  /* 用 @page 邊界定義可列印範圍，sheet 寬度自適應 → 瀏覽器不再整頁縮放，字級如實印出（16px 不被縮小） */
+  @page{size:A4;margin:12mm}
   body.has-print-pages .page{display:none!important}
   body.has-print-pages .print-root{display:block}
-  .print-root .sheet{width:210mm;min-height:297mm;padding:14mm 14mm 18mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
   .print-root .sheet:last-child{page-break-after:auto}
   .print-root .pa{break-inside:avoid;page-break-inside:avoid}
   .print-root .sec-head{border-radius:8px}
   .print-root .header{border-radius:8px}
-  .sheet-foot{position:absolute;left:14mm;right:14mm;bottom:9mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
   .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
 }
