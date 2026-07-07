@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1: All Aboard for Lady Liberty ── 高職英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 統測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  @page{size:A4;margin:0}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:210mm;min-height:297mm;padding:14mm 14mm 18mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:14mm;right:14mm;bottom:9mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L1: All Aboard for Lady Liberty ── 一起登船看自由女神</h1>
+  <div class="sub">龍騰版高職英文 第五冊 第一課｜互動教學講義</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依統測命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 7</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 三位人物故事速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>本課主題速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 導覽開場｜Rosa 的自由女神導覽</h4>
+        導遊 Rosa 在二十分鐘船程中介紹自由女神像：1886 年<b>法國</b>致贈美國、慶祝美國脫離英國<b>獨立</b>；總高 305 呎、雕像本身 151 呎，約 15 層樓高。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 象徵意義｜為何是綠色？</h4>
+        表面是<b>銅</b>製，接觸空氣氧化由紅棕轉綠。左手平板刻著「July 4, 1776」，右手<b>火炬</b>象徵<b>啟迪</b>世界、指引移民；皇冠七道尖芒代表陽光，<b>破鏈</b>象徵掙脫壓迫的<b>自由</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 訂票對話｜Meg &amp; Andrew 找便宜行程</h4>
+        兩人上網找划算的自由女神行程。「Lady Liberty Tour」含來回船票、導覽、午餐，卻<b>貴得嚇人（cost an arm and a leg）</b>；便宜的船不停島上。於是決定從別處<b>省錢（cut costs）</b>來湊預算。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課分兩部分：前半是導遊 <b>Rosa</b> 在前往自由女神像的船程中所做的導覽獨白，介紹雕像的由來與各部位象徵；後半是 <b>Meg 與 Andrew</b> 上網訂購自由女神導覽行程的對話。</p>
+
+    <!-- Rosa Part 1 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🟦 Rosa｜Statue of Liberty Tour（導覽 Part 1：由來與外觀）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Welcome aboard, everyone! I'm Rosa, your guide for today.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">歡迎大家登船！我是 Rosa，今天的導遊。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">Welcome</span><span class="syn-t">V（祈使句）</span> <span class="syn syn-m">aboard</span><span class="syn-t">副詞（在船／車上）</span><br>
+            <span class="num">②</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">am</span><span class="syn-t">V</span> <span class="syn syn-c">Rosa, your guide for today</span><span class="syn-t">C（主詞補語＋同位語）</span></div>
+          <div class="para-note"><b>aboard</b>（副詞）= 在船／飛機／車上；<b>All aboard!</b> 為登船（車）的招呼語，呼應課名。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>During our twenty-minute ride to the Statue of Liberty, I am going to tell you what this magnificent monument is all about.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在這趟前往自由女神像、約二十分鐘的船程中，我會告訴各位這座宏偉紀念碑的一切。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">During our twenty-minute ride to the Statue of Liberty</span><span class="syn-t">時間副詞</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">am going to tell</span><span class="syn-t">V</span> <span class="syn syn-o">you</span><span class="syn-t">O（間受）</span> <span class="syn syn-o">what this magnificent monument is all about</span><span class="syn-t">O（直受，名詞子句）</span></div>
+          <div class="para-note"><b>magnificent</b>（宏偉的）、<b>monument</b>（紀念碑）為核心字；<b>what... is all about</b> = ……是怎麼一回事。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In 1886, America was given the Statue of Liberty by France to celebrate its independence from the United Kingdom.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">1886 年，法國把自由女神像贈予美國，以慶祝美國脫離英國獨立。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In 1886</span><span class="syn-t">時間</span> <span class="syn syn-s">America</span><span class="syn-t">S</span> <span class="syn syn-v">was given</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">the Statue of Liberty</span><span class="syn-t">O</span> <span class="syn syn-m">by France</span><span class="syn-t">介副（動作者）</span> <span class="syn syn-m">to celebrate its independence...</span><span class="syn-t">不定詞（表目的）</span></div>
+          <div class="para-note"><b>被動語態</b>：give 為授與動詞，人當主詞被動＝ was given +物（見句型一）；<b>independence</b>（獨立，n.）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This gift represented the intimate ties between France and the United States.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這份禮物象徵了法國與美國之間親密的關係。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This gift</span><span class="syn-t">S</span> <span class="syn syn-v">represented</span><span class="syn-t">V</span> <span class="syn syn-o">the intimate ties between France and the United States</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>intimate</b>（親密的）為核心字；<b>ties</b> 此處作「關係、聯繫」解（常用複數）；<b>between A and B</b> = 在 A 與 B 之間。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Its total height is 305 feet, and the statue itself stands 151 feet tall, which is about the height of 15 floors. As you get closer, you will see how big the statue is.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它的總高度是 305 呎，雕像本身則高 151 呎，大約是 15 層樓的高度。當你越靠近，就會看見這座雕像有多大。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the statue itself</span><span class="syn-t">S（加反身代名詞強調）</span> <span class="syn syn-v">stands</span><span class="syn-t">V</span> <span class="syn syn-c">151 feet tall</span><span class="syn-t">C</span> <span class="syn syn-m">, which is about the height of 15 floors</span><span class="syn-t">非限定關代（補述前句）</span><br>
+            <span class="num">②</span><span class="syn syn-m">As you get closer</span><span class="syn-t">副詞子句（隨著）</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">will see</span><span class="syn-t">V</span> <span class="syn syn-o">how big the statue is</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>stand + 高度 + tall</b> = 有……高；<b>as</b> 此處 = 隨著／當……時；名詞子句 <b>how big the statue is</b> 用直述語序。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When it was first constructed, it was reddish-brown. But as you can see, the statue is green now. This is because its surface is made of copper, and it turns green with exposure to air.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它剛建成時是紅棕色的。但如你所見，雕像現在是綠色的。這是因為它的表面是銅製的，接觸空氣後就會變綠。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When it was first constructed</span><span class="syn-t">時間副詞子句（被動）</span> <span class="syn syn-s">it</span><span class="syn-t">S</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">reddish-brown</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">its surface</span><span class="syn-t">S</span> <span class="syn syn-v">is made of</span><span class="syn-t">V（被動片語）</span> <span class="syn syn-o">copper</span><span class="syn-t">材料</span> <span class="syn syn-v">turns</span><span class="syn-t">V（連綴）</span> <span class="syn syn-c">green</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>construct</b>（建造，v.）→ <b>construction</b>（n.）為核心字；<b>be made of</b> = 由……製成（看得出原料，見片語表）；<b>turn + 顏色</b> = 變成……色；<b>exposure</b>（暴露、接觸，n.）為核心字。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rosa Part 2 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🟦 Rosa｜Statue of Liberty Tour（導覽 Part 2：各部位象徵）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Okay, we're getting quite close now. If you glance to your left, you should have a very clear view of the whole statue.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">好，我們現在相當接近了。如果你往左瞥一眼，應該能清楚看見整座雕像。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">If you glance to your left</span><span class="syn-t">條件副詞子句</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">should have</span><span class="syn-t">V</span> <span class="syn syn-o">a very clear view of the whole statue</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>glance</b>（瞥一眼，v./n.）為核心字，常搭 <b>glance at / to</b>；<b>have a clear view of</b> = 清楚看見……。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>If you take note of her left hand, you'll see that Lady Liberty holds a giant tablet with the date "July 4, 1776" on it. It was on this day that the United States became independent from England.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">如果你注意看她的左手，會看到自由女神拿著一塊巨大的平板，上面刻著「1776 年 7 月 4 日」。就是在這一天，美國脫離英國獨立。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">If you take note of her left hand</span><span class="syn-t">條件子句</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">'ll see</span><span class="syn-t">V</span> <span class="syn syn-o">that Lady Liberty holds a giant tablet...</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-m">It was on this day</span><span class="syn-t">強調句</span> <span class="syn syn-m">that</span> <span class="syn syn-s">the United States</span><span class="syn-t">S</span> <span class="syn syn-v">became</span><span class="syn-t">V</span> <span class="syn syn-c">independent from England</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>take note of</b> = 注意、留意（見片語表）；<b>It was ... that ...</b> 為強調句型（此處強調時間）；<b>independent</b>（獨立的，adj.）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In her right hand is a giant torch. This torch symbolizes the idea that Lady Liberty can enlighten the world and guide immigrants to a new land.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">她的右手拿著一支巨大的火炬。這火炬象徵自由女神能啟迪世界、指引移民前往新天地。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In her right hand</span><span class="syn-t">地方副詞（置句首）</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-s">a giant torch</span><span class="syn-t">S（倒裝，真主詞）</span><span class="syn-cl">— 地方副詞置句首的倒裝</span><br>
+            <span class="num">②</span><span class="syn syn-s">This torch</span><span class="syn-t">S</span> <span class="syn syn-v">symbolizes</span><span class="syn-t">V</span> <span class="syn syn-o">the idea that...</span><span class="syn-t">O（後接同位語子句）</span></div>
+          <div class="para-note"><b>倒裝</b>：地方副詞片語置句首，主詞與動詞倒裝（見句型三）；<b>symbolize</b>（象徵）、<b>enlighten</b>（啟迪）、<b>immigrant</b>（移民，n.）皆為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Apart from the tablet and the torch, other portions of the statue that serve as symbols include Lady Liberty's crown and the broken chains.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">除了平板與火炬之外，雕像其他作為象徵的部位還包括自由女神的皇冠與斷裂的鎖鏈。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Apart from the tablet and the torch</span><span class="syn-t">介副（除了）</span> <span class="syn syn-s">other portions of the statue</span><span class="syn-t">S</span> <span class="syn syn-m">that serve as symbols</span><span class="syn-t">關係子句修飾 S</span> <span class="syn syn-v">include</span><span class="syn-t">V</span> <span class="syn syn-o">Lady Liberty's crown and the broken chains</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>apart from</b> = 除了……之外（見片語表）；<b>portion</b>（部分，n.）為核心字；<b>serve as</b> = 充當、作為；主詞是複數 portions，故動詞用 include。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Can you see how many spikes there are on her crown? That's right; from the top of the crown rise seven spikes, which represent the rays of the sun. You may also have figured out that the broken chains symbolize freedom from oppression.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">你能看出她的皇冠上有幾道尖芒嗎？沒錯，皇冠頂端伸出七道尖芒，代表太陽的光芒。你或許也已看出，斷裂的鎖鏈象徵掙脫壓迫的自由。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">from the top of the crown</span><span class="syn-t">地方副詞（置句首）</span> <span class="syn syn-v">rise</span><span class="syn-t">V</span> <span class="syn syn-s">seven spikes</span><span class="syn-t">S（倒裝）</span> <span class="syn syn-m">, which represent the rays of the sun</span><span class="syn-t">非限定關代</span><br>
+            <span class="num">②</span><span class="syn syn-s">You</span><span class="syn-t">S</span> <span class="syn syn-v">may have figured out</span><span class="syn-t">V</span> <span class="syn syn-o">that the broken chains symbolize freedom...</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>figure out</b> = 想通、看出（見片語表）；<b>freedom</b>（自由，n.）為核心字；<b>from... rise seven spikes</b> 又是地方副詞倒裝。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The sculptors who made this statue were in fact inspired by Libertas, the Roman goddess of freedom, and that is why Lady Liberty is dressed in a classical Roman robe.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">打造這座雕像的雕刻家其實是受到羅馬自由女神 Libertas 的啟發，這就是為什麼自由女神身著古典羅馬長袍。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The sculptors</span><span class="syn-t">S</span> <span class="syn syn-m">who made this statue</span><span class="syn-t">關代子句（who＝人）</span> <span class="syn syn-v">were inspired by</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">Libertas...</span><span class="syn-t">動作者</span><br>
+            <span class="num">②</span><span class="syn syn-s">that</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">why Lady Liberty is dressed in a classical Roman robe</span><span class="syn-t">C（名詞子句）</span></div>
+          <div class="para-note"><b>關係代名詞 who</b> 引導子句修飾人（見句型二）；<b>be inspired by</b> = 受……啟發；<b>classical</b>（古典的）為核心字；<b>be dressed in</b> = 穿著。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Well, here we are. Please watch your step when you get off! Oh, one piece of advice: besides admiring the statue from the outside, I would also recommend that you take the stairs right up to the crown. If you climb up there, you can enjoy the glorious view of Lower Manhattan!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">好，我們到了。下船時請小心腳步！喔，給你們一個建議：除了從外面欣賞雕像，我也建議各位走樓梯直達皇冠。爬上去的話，就能飽覽下曼哈頓的壯麗景色！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">Please watch</span><span class="syn-t">V（祈使）</span> <span class="syn syn-o">your step</span><span class="syn-t">O</span> <span class="syn syn-m">when you get off</span><span class="syn-t">時間子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">would recommend</span><span class="syn-t">V</span> <span class="syn syn-o">that you (should) take the stairs...</span><span class="syn-t">O（建議子句，接原形）</span></div>
+          <div class="para-note"><b>watch your step</b> = 小心腳步（見片語表）；<b>advice</b>（建議，n. 不可數）／<b>advise</b>（v.）；<b>recommend that S (should) + 原形</b>（見句型五）；<b>admire</b>（欣賞）、<b>glorious</b>（壯麗的）為核心字。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 對話 Meg & Andrew -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🟩 Meg &amp; Andrew｜Booking a Statue of Liberty Tour（訂購自由女神導覽行程）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Meg and Andrew are trying to find a cheap Statue of Liberty tour online.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Meg 與 Andrew 正試著在網路上找便宜的自由女神像行程。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Meg and Andrew</span><span class="syn-t">S</span> <span class="syn syn-v">are trying</span><span class="syn-t">V（現在進行）</span> <span class="syn syn-o">to find a cheap Statue of Liberty tour</span><span class="syn-t">O（不定詞）</span> <span class="syn syn-m">online</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>try to V</b> = 試圖做……；<b>online</b> 此處作副詞「在線上」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Meg: I think I found a really good tour for our Statue of Liberty visit. Come check it out! It's this one right here, called "Lady Liberty Tour."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Meg：我想我找到一個很棒的自由女神參觀行程了。過來看看！就是這裡這個，叫做「Lady Liberty Tour」。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">found</span><span class="syn-t">V</span> <span class="syn syn-o">a really good tour</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-v">Come check</span><span class="syn-t">V（祈使，come + 原形）</span> <span class="syn syn-o">it</span><span class="syn-t">O</span> <span class="syn syn-m">out</span><span class="syn-t">介副</span></div>
+          <div class="para-note"><b>check it out</b> = 看看、瞧瞧；<b>called...</b> 為過去分詞片語（＝ which is called）修飾 one。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Andrew: How exciting! Let me take a look. Let me see.... Return boat trip, guided tour, lunch included... seems perfect. How much does it cost?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Andrew：好興奮啊！讓我看看。我看看……來回船票、專人導覽、含午餐……看起來很完美。要多少錢？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">Let</span><span class="syn-t">V（使役）</span> <span class="syn syn-o">me</span><span class="syn-t">O</span> <span class="syn syn-c">take a look</span><span class="syn-t">OC（原形）</span><br>
+            <span class="num">②</span><span class="syn syn-m">How much</span><span class="syn-t">疑問詞</span> <span class="syn syn-v">does</span> <span class="syn syn-s">it</span><span class="syn-t">S</span> <span class="syn syn-v">cost</span><span class="syn-t">V</span></div>
+          <div class="para-note"><b>How exciting!</b> = 感嘆句（How + adj.）；<b>let sb. + 原形</b>；<b>guided tour</b> = 導覽行程；<b>included</b> 為過去分詞（被包含）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Meg: Take a look at the price per person at the bottom.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Meg：看一下最下面的每人價格。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">Take</span><span class="syn-t">V（祈使）</span> <span class="syn syn-o">a look</span><span class="syn-t">O</span> <span class="syn syn-m">at the price per person at the bottom</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>take a look at</b> = 看一看；<b>per person</b> = 每人；<b>at the bottom</b> = 在底部。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Andrew: Wow. That costs an arm and a leg! Can you find anything cheaper?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Andrew：哇，那貴得嚇死人！你能找到更便宜的嗎？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">That</span><span class="syn-t">S</span> <span class="syn syn-v">costs</span><span class="syn-t">V</span> <span class="syn syn-o">an arm and a leg</span><span class="syn-t">O（俚語）</span><br>
+            <span class="num">②</span><span class="syn syn-v">Can</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">find</span><span class="syn-t">V</span> <span class="syn syn-o">anything cheaper</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>cost an arm and a leg</b> = 花一大筆錢、貴得嚇人（俚語，見俚語補充）；形容詞 cheaper 置於 anything 之後（不定代名詞後位修飾）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Meg: The cheaper boat tours don't stop at Liberty Island. We would only get to see the statue from the boat.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Meg：比較便宜的船班不會停靠自由島。我們就只能從船上看雕像而已。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The cheaper boat tours</span><span class="syn-t">S</span> <span class="syn syn-v">don't stop</span><span class="syn-t">V</span> <span class="syn syn-m">at Liberty Island</span><span class="syn-t">地方副詞</span><br>
+            <span class="num">②</span><span class="syn syn-s">We</span><span class="syn-t">S</span> <span class="syn syn-v">would only get</span><span class="syn-t">V</span> <span class="syn syn-o">to see the statue from the boat</span><span class="syn-t">O（不定詞）</span></div>
+          <div class="para-note"><b>get to V</b> = 得以（有機會）做……；<b>stop at</b> = 停靠於。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Andrew: But I really wanted to climb up inside Lady Liberty!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Andrew：可是我真的很想爬進自由女神像裡面耶！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">really wanted</span><span class="syn-t">V</span> <span class="syn syn-o">to climb up inside Lady Liberty</span><span class="syn-t">O（不定詞）</span></div>
+          <div class="para-note"><b>climb up</b> = 往上爬；<b>want to V</b> 用過去式 wanted 表較委婉的語氣。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Meg: Me, too. Hey! I have an idea. How about trying to cut some other costs on our trip? Then we can fit this tour in our budget.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Meg：我也是。嘿！我有個主意。不如試著在旅程其他方面省一些錢？這樣就能把這個行程塞進我們的預算了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">How about</span><span class="syn-t">提議句型</span> <span class="syn syn-o">trying to cut some other costs on our trip</span><span class="syn-t">O（動名詞）</span><br>
+            <span class="num">②</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">can fit</span><span class="syn-t">V</span> <span class="syn syn-o">this tour</span><span class="syn-t">O</span> <span class="syn syn-m">in our budget</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>How about + V-ing?</b> = ……如何？（提議）；<b>cut costs</b> = 削減開支；<b>fit... in one's budget</b> = 符合預算。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Andrew: But how could we cut other costs?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Andrew：可是我們要怎麼省下其他開支呢？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">how</span><span class="syn-t">疑問副詞</span> <span class="syn syn-v">could</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">cut</span><span class="syn-t">V</span> <span class="syn syn-o">other costs</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>could</b> 此處表示委婉、假設的可能性。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Meg: For example, we could stay in a hostel instead of a hotel, or buy groceries instead of eating out in restaurants.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Meg：舉例來說，我們可以住青年旅館而不是飯店，或是買食材自己煮，而不是上餐廳外食。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">could stay</span><span class="syn-t">V</span> <span class="syn syn-m">in a hostel instead of a hotel</span><span class="syn-t">副詞</span> <span class="syn syn-m">or buy groceries instead of eating out</span><span class="syn-t">並列</span></div>
+          <div class="para-note"><b>instead of + N/V-ing</b> = 而不是……；<b>hostel</b>（青年旅館）≠ hotel；<b>eat out</b> = 外食。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 統測連結」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">magnificent</span><span class="v-pos">adj.</span><div class="v-cn-mini">宏偉的；壯麗的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>magnificently (adv.)</span><span>≈ grand / splendid</span></div>
+        <div class="v-ex">Rosa introduced this <b>magnificent</b> monument to the visitors.<span class="cn">Rosa 向遊客介紹這座宏偉的紀念碑。</span></div>
+        <span class="v-gsat">📊 常與 monument、statue 搭配</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">monument</span><span class="v-pos">n.</span><div class="v-cn-mini">紀念碑；紀念性建築</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>monumental (adj.) 不朽的；巨大的</span></div>
+        <div class="v-ex">The Statue of Liberty is a world-famous <b>monument</b>.<span class="cn">自由女神像是舉世聞名的紀念性建築。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">independence</span><span class="v-pos">n.</span><div class="v-cn-mini">獨立；自主</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>independent (adj.) 獨立的</span><span>depend on 依賴（反義概念）</span></div>
+        <div class="v-ex">France gave the statue to celebrate America's <b>independence</b>.<span class="cn">法國贈送這座雕像以慶祝美國獨立。</span></div>
+        <span class="v-gsat">📊 independence (n.) / independent (adj.) 詞類轉換必考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">intimate</span><span class="v-pos">adj.</span><div class="v-cn-mini">親密的；密切的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>intimacy (n.) 親密</span><span>intimate ties 親密關係</span></div>
+        <div class="v-ex">The gift represented the <b>intimate</b> ties between the two nations.<span class="cn">這份禮物象徵兩國之間親密的關係。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">construct</span><span class="v-pos">v.</span><div class="v-cn-mini">建造；構築</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>construction (n.) 建造；工程</span><span>under construction 施工中</span></div>
+        <div class="v-ex">When it was first <b>constructed</b>, the statue was reddish-brown.<span class="cn">這座雕像剛建成時是紅棕色的。</span></div>
+        <span class="v-gsat">📊 construct (v.) / construction (n.) 詞類轉換</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">exposure</span><span class="v-pos">n.</span><div class="v-cn-mini">暴露；接觸</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>expose (v.) 使暴露</span><span>be exposed to 接觸到</span></div>
+        <div class="v-ex">The copper turns green with <b>exposure</b> to air.<span class="cn">銅接觸空氣後會變綠。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">glance</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">瞥一眼；一瞥</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>glance at / to 瞥向</span><span>at a glance 一眼（就）</span></div>
+        <div class="v-ex">If you <b>glance</b> to your left, you'll see the whole statue.<span class="cn">往左瞥一眼，就能看到整座雕像。</span></div>
+        <span class="v-gsat">📊 glance（短暫看）vs. stare（盯著看）辨析</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">symbolize</span><span class="v-pos">v.</span><div class="v-cn-mini">象徵；代表</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>symbol (n.) 象徵物</span><span>symbolic (adj.) 象徵性的</span></div>
+        <div class="v-ex">The broken chains <b>symbolize</b> freedom from oppression.<span class="cn">斷裂的鎖鏈象徵掙脫壓迫的自由。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">enlighten</span><span class="v-pos">v.</span><div class="v-cn-mini">啟迪；教化</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>enlightenment (n.) 啟蒙</span><span>light (n.) 光（字根）</span></div>
+        <div class="v-ex">The torch shows that Liberty can <b>enlighten</b> the world.<span class="cn">火炬顯示自由女神能啟迪世界。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">immigrant</span><span class="v-pos">n.</span><div class="v-cn-mini">（外來）移民</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>immigrate (v.) 移入</span><span>immigration (n.) 移民（總稱）</span><span>emigrant 移出者</span></div>
+        <div class="v-ex">Lady Liberty guides <b>immigrants</b> to a new land.<span class="cn">自由女神指引移民前往新天地。</span></div>
+        <span class="v-gsat">📊 immigrant（移入）vs. emigrant（移出）辨析</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">portion</span><span class="v-pos">n.</span><div class="v-cn-mini">部分；一份</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ part / section</span><span>a portion of 一部分的</span></div>
+        <div class="v-ex">Other <b>portions</b> of the statue also serve as symbols.<span class="cn">雕像的其他部位也具有象徵意義。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">freedom</span><span class="v-pos">n.</span><div class="v-cn-mini">自由</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>free (adj.) 自由的</span><span>freedom from... 免於……的自由</span></div>
+        <div class="v-ex">The broken chains symbolize <b>freedom</b> from oppression.<span class="cn">斷裂的鎖鏈象徵免於壓迫的自由。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">classical</span><span class="v-pos">adj.</span><div class="v-cn-mini">古典的；經典的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>classic (adj./n.) 經典的；經典作品</span><span>classical music 古典樂</span></div>
+        <div class="v-ex">Lady Liberty is dressed in a <b>classical</b> Roman robe.<span class="cn">自由女神身著古典羅馬長袍。</span></div>
+        <span class="v-gsat">📊 classical（古典的）vs. classic（經典的）辨析</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">admire</span><span class="v-pos">v.</span><div class="v-cn-mini">欣賞；讚賞；欽佩</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>admiration (n.) 欽佩</span><span>admirable (adj.) 令人欽佩的</span></div>
+        <div class="v-ex">You can <b>admire</b> the statue from the outside.<span class="cn">你可以從外面欣賞這座雕像。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">glorious</span><span class="v-pos">adj.</span><div class="v-cn-mini">壯麗的；輝煌的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>glory (n.) 榮耀</span><span>gloriously (adv.)</span></div>
+        <div class="v-ex">From the crown you can enjoy the <b>glorious</b> view of Manhattan.<span class="cn">從皇冠上能飽覽曼哈頓的壯麗景色。</span></div></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">be made of</span></td><td>由……製成（看得出原料）</td><td class="pex">Its surface <b>is made of</b> copper.<span class="cn">它的表面是銅製的。</span></td></tr>
+      <tr><td><span class="phr">take note of</span></td><td>注意；留意</td><td class="pex">If you <b>take note of</b> her left hand, you'll see a tablet.<span class="cn">若你留意她的左手，會看見一塊平板。</span></td></tr>
+      <tr><td><span class="phr">apart from</span></td><td>除了……之外</td><td class="pex"><b>Apart from</b> the tablet and torch, the crown is also a symbol.<span class="cn">除了平板與火炬，皇冠也是象徵。</span></td></tr>
+      <tr><td><span class="phr">figure out</span></td><td>想通；看出；弄懂</td><td class="pex">You may have <b>figured out</b> what the chains mean.<span class="cn">你或許已看出鎖鏈的含意。</span></td></tr>
+      <tr><td><span class="phr">watch one's step</span></td><td>小心腳步；當心</td><td class="pex">Please <b>watch your step</b> when you get off.<span class="cn">下船時請小心腳步。</span></td></tr>
+      <tr><td><span class="phr">check...out</span></td><td>看看；查看</td><td class="pex">I found a good tour. Come <b>check</b> it <b>out</b>!<span class="cn">我找到不錯的行程，過來看看！</span></td></tr>
+      <tr><td><span class="phr">instead of</span></td><td>而不是；取代</td><td class="pex">We could stay in a hostel <b>instead of</b> a hotel.<span class="cn">我們可以住青年旅館，而不是飯店。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>主題補充字彙（地標・自由・旅行）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字與本課主題（紀念地標、獨立自由、觀光旅行）相關，並補齊課文的星號單字 aboard、advise。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">aboard</span><span class="v-pos">adv. / prep.</span><div class="v-cn-mini">在（船／車／飛機）上；上（船…）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>All aboard! 請上船（車）！</span><span>go aboard 登船</span></div>
+        <div class="v-ex">"Welcome <b>aboard</b>, everyone!" said the tour guide.<span class="cn">導遊說：「歡迎大家登船！」</span></div>
+        <span class="v-gsat">📊 課名 All Aboard 即用此字</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">advise</span><span class="v-pos">v.</span><div class="v-cn-mini">建議；勸告</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>advice (n.) 建議（不可數）</span><span>adviser (n.) 顧問</span></div>
+        <div class="v-ex">Rosa <b>advised</b> visitors to climb up to the crown.<span class="cn">Rosa 建議遊客爬上皇冠。</span></div>
+        <span class="v-gsat">📊 advise (v.) / advice (n.) 拼字與詞類必考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">celebrate</span><span class="v-pos">v.</span><div class="v-cn-mini">慶祝</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>celebration (n.) 慶祝活動</span><span>celebrity (n.) 名人</span></div>
+        <div class="v-ex">The statue was given to <b>celebrate</b> America's independence.<span class="cn">這座雕像是為慶祝美國獨立而贈送的。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">represent</span><span class="v-pos">v.</span><div class="v-cn-mini">代表；象徵</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>representative (n.) 代表（人）</span><span>≈ symbolize / stand for</span></div>
+        <div class="v-ex">The seven spikes <b>represent</b> the rays of the sun.<span class="cn">七道尖芒代表太陽的光芒。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sculptor</span><span class="v-pos">n.</span><div class="v-cn-mini">雕刻家</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>sculpture (n.) 雕塑品</span><span>sculpt (v.) 雕刻</span></div>
+        <div class="v-ex">The <b>sculptors</b> were inspired by the Roman goddess Libertas.<span class="cn">雕刻家們受到羅馬女神 Libertas 的啟發。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">surface</span><span class="v-pos">n.</span><div class="v-cn-mini">表面</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>on the surface 表面上</span><span>≈ outside / exterior</span></div>
+        <div class="v-ex">The statue's <b>surface</b> is made of copper.<span class="cn">雕像的表面是銅製的。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">oppression</span><span class="v-pos">n.</span><div class="v-cn-mini">壓迫；壓制</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>oppress (v.) 壓迫</span><span>freedom from oppression 免於壓迫</span></div>
+        <div class="v-ex">The broken chains stand for freedom from <b>oppression</b>.<span class="cn">斷裂的鎖鏈代表免於壓迫的自由。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">budget</span><span class="v-pos">n.</span><div class="v-cn-mini">預算</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>on a budget 精打細算</span><span>fit in one's budget 符合預算</span></div>
+        <div class="v-ex">They cut costs to fit the tour in their <b>budget</b>.<span class="cn">他們省錢好讓行程符合預算。</span></div>
+        <span class="v-gsat">📊 旅遊、理財主題常考字</span></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（第一次、犯錯、緊張）高度相關，能讓同學口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">cost an arm and a leg</span><div class="slang-cn-mini">貴得嚇人、花一大筆錢（課文出現）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「花掉一隻手臂和一條腿」，形容某物非常昂貴。</div>
+      <div class="slang-ex">That full tour <b>costs an arm and a leg</b>—let's find something cheaper.<span class="cn">那個全套行程貴得嚇人——我們找便宜一點的吧。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">in the same boat</span><div class="slang-cn-mini">處境相同、同病相憐</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「在同一條船上」，指幾個人面臨相同的（通常是困難的）處境。</div>
+      <div class="slang-ex">We're all on a tight budget, so we're <b>in the same boat</b>.<span class="cn">我們預算都很緊，所以是同病相憐。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">on a shoestring</span><div class="slang-cn-mini">用極少的錢；省吃儉用</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「靠一根鞋帶」，形容用非常有限的預算做事。</div>
+      <div class="slang-ex">They travelled around New York <b>on a shoestring</b>.<span class="cn">他們用很少的預算玩遍紐約。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">cut corners</span><div class="slang-cn-mini">為省錢/省時而便宜行事</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「切過轉角（抄近路）」，指為省錢或省時而草率、降低品質。</div>
+      <div class="slang-ex">To save money, they cut costs but didn't <b>cut corners</b> on safety.<span class="cn">為省錢他們削減開支，但在安全上不馬虎。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a stone's throw away</span><div class="slang-cn-mini">近在咫尺、很近</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「一塊石頭丟得到的距離」，形容距離非常近。</div>
+      <div class="slang-ex">Our hostel was just <b>a stone's throw away</b> from the harbor.<span class="cn">我們的青旅離港口近在咫尺。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">off the beaten path</span><div class="slang-cn-mini">人跡罕至、非主流景點</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「離開被踩踏出的路」，指不走大眾路線、探訪少有人去的地方。</div>
+      <div class="slang-ex">They found a cheap eatery <b>off the beaten path</b>.<span class="cn">他們在冷門小巷找到一家便宜餐館。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 統測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜被動語態（含授與動詞被動）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + be + 過去分詞 (p.p.) + (by 動作者)
+授與動詞：人 + be + p.p. + 物（America was given the statue）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">主詞是「動作的承受者」時用被動：be 動詞＋過去分詞。give 為授與動詞，人當主詞時後面仍保留「物」。</p>
+        <div class="g-ex">In 1886, America <b>was given</b> the Statue of Liberty by France.<div class="g-ex-cn">1886 年，法國把自由女神像贈予美國。（課文）</div></div>
+        <div class="g-ex">When it <b>was first constructed</b>, the statue was reddish-brown.<div class="g-ex-cn">雕像剛建成時是紅棕色的。（課文）</div></div>
+        <div class="g-note">✗ America was given by France the statue（物與 by 片語順序錯）；✓ was given the statue by France。</div>
+        <div class="g-tip">統測常考主動↔被動轉換，以及 be made of / be dressed in 等被動片語。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜關係代名詞 who / which / that</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞（人）+ who + V ...
+先行詞（物）+ which + V ...（非限定用逗號 , which）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">關係代名詞引導形容詞子句修飾前面的名詞：人用 who，物用 which，兩者皆可用 that（非限定子句不可用 that）。</p>
+        <div class="g-ex">The sculptors <b>who</b> made this statue were inspired by Libertas.<div class="g-ex-cn">打造這座雕像的雕刻家受到 Libertas 啟發。（課文）</div></div>
+        <div class="g-ex">Seven spikes rise from the crown, <b>which</b> represent the rays of the sun.<div class="g-ex-cn">皇冠伸出七道尖芒，代表太陽的光芒。（課文，非限定）</div></div>
+        <div class="g-note">✗ The sculptors which made...（人不可用 which）；✗ ..., that represent...（逗號後非限定不可用 that）。</div>
+        <div class="g-tip">統測常考 who／which／whose 辨別，以及關代可否省略。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜地方副詞置句首的倒裝</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">地方副詞片語 + 動詞 + 主詞（S 與 V 倒裝）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">當表「地點」的副詞片語移到句首、且主詞為名詞時，主詞與動詞要倒裝（動詞在前）。動詞須與「真主詞」一致。</p>
+        <div class="g-ex"><b>In her right hand is</b> a giant torch.<div class="g-ex-cn">她的右手拿著一支巨大的火炬。（課文，真主詞 torch 單數→ is）</div></div>
+        <div class="g-ex"><b>From the top of the crown rise</b> seven spikes.<div class="g-ex-cn">皇冠頂端伸出七道尖芒。（課文，真主詞 spikes 複數→ rise）</div></div>
+        <div class="g-note">✗ In her right hand a giant torch is（未倒裝）；動詞要與真主詞（torch/spikes）一致，不是與地方副詞。</div>
+        <div class="g-tip">若主詞是「代名詞」則不倒裝：Here it comes.（✗ Here comes it.）</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜連綴動詞 + 形容詞補語</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + 連綴動詞 + adj.（主詞補語）
+常見：be, become, turn, get, look, seem, feel, stay</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">連綴動詞後接「形容詞」說明主詞狀態，<b>不接副詞</b>。turn/become/get + 形容詞表「變成……」。</p>
+        <table class="gtab">
+          <tr><th>連綴動詞</th><th>例</th></tr>
+          <tr><td>turn + 顏色</td><td>It <b>turns green</b>. 它變綠。</td></tr>
+          <tr><td>become + adj.</td><td>became <b>independent</b> 變得獨立</td></tr>
+          <tr><td>look / seem + adj.</td><td>seems <b>perfect</b> 看起來完美</td></tr>
+        </table>
+        <div class="g-ex">The copper <b>turns green</b> with exposure to air.<div class="g-ex-cn">銅接觸空氣後變綠。（課文）</div></div>
+        <div class="g-note">✗ It turns greenly（連綴動詞後不接副詞）；✗ seems perfectly（應為 seems perfect）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜建議／要求：recommend / advise (that) S (should) + 原形</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">recommend / advise / suggest / insist (that) + S + (should) + 原形 V
+提議：How about + V-ing? / What about + V-ing?</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">表「建議、要求」的動詞後接的 that 子句用「(should) + 原形動詞」，should 常省略。提議做某事用 How about + V-ing。</p>
+        <div class="g-ex">I would <b>recommend that</b> you <b>take</b> the stairs up to the crown.<div class="g-ex-cn">我建議各位走樓梯上皇冠。（課文，take 用原形）</div></div>
+        <div class="g-ex"><b>How about trying</b> to cut some other costs?<div class="g-ex-cn">不如試著省下其他開支？（課文，How about + V-ing）</div></div>
+        <div class="g-note">✗ recommend that you take<b>s</b>（子句動詞不加 s，用原形）；✗ How about to try（How about 後接 V-ing）。</div>
+        <div class="g-tip">統測常考 suggest/advise/insist + (should) 原形，以及 advise sb. to V 的差異。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高職英文 第五冊 第一課｜互動教學講義
+</div>
+
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['The Statue of Liberty is a ',' monument that leaves every visitor in awe.'],
+  cn:'自由女神像是一座讓每位遊客都驚嘆的宏偉紀念碑。',
+  opts:['magnificent','intimate','reddish','cheaper'],ans:0,
+  word:'magnificent (adj.) 宏偉的；壯麗的',
+  exp:'空格修飾 monument，需「宏偉的」。(B) intimate 親密的、(C) reddish 偏紅的、(D) cheaper 較便宜的皆不符語意。',
+  note:'magnificent ≈ grand / splendid，常形容建築、景色。'},
+ {q:['The torch in Lady Liberty\'s right hand ',' the idea of enlightening the world.'],
+  cn:'自由女神右手的火炬象徵著啟迪世界的理念。',
+  opts:['symbolizes','admires','constructs','skips'],ans:0,
+  word:'symbolize (v.) 象徵',
+  exp:'火炬「代表」某理念，用 symbolize。(B) 欣賞、(C) 建造、(D) 略過皆不符。',
+  note:'symbolize = represent = stand for（象徵、代表）。'},
+ {q:['If you ',' her left hand, you\'ll notice a tablet with an important date.'],
+  cn:'如果你留意她的左手，會注意到一塊刻著重要日期的平板。',
+  opts:['take note of','cost','turn on','let down'],ans:0,
+  word:'take note of 注意；留意',
+  exp:'「留意某物」用 take note of。(B) 花費、(C) 打開、(D) 使失望皆不符。',
+  note:'課文：If you take note of her left hand...'},
+ {q:['The copper surface of the statue turns green with ',' to air over time.'],
+  cn:'雕像的銅表面隨時間接觸空氣而變綠。',
+  opts:['freedom','exposure','portion','advice'],ans:1,
+  word:'exposure (n.) 暴露；接觸',
+  exp:'with exposure to air = 因接觸空氣。(A) 自由、(C) 部分、(D) 建議皆不符。',
+  note:'be exposed to = 接觸到；exposure 為其名詞。'},
+ {q:['France gave the statue to celebrate America\'s ',' from the United Kingdom.'],
+  cn:'法國贈送這座雕像，以慶祝美國脫離英國的獨立。',
+  opts:['exposure','budget','independence','sculptor'],ans:2,
+  word:'independence (n.) 獨立',
+  exp:'脫離英國＝「獨立」。(A) 接觸、(B) 預算、(D) 雕刻家皆不符。',
+  note:'independence (n.) → independent (adj.) 獨立的。'},
+ {q:['She only ',' at the price tag and immediately decided it was too expensive.'],
+  cn:'她只瞥了一眼價格標籤，就立刻認定它太貴了。',
+  opts:['glanced','enlightened','admired','constructed'],ans:0,
+  word:'glance (v.) 瞥一眼',
+  exp:'「快速看一眼」用 glance（常搭 at）。(C) admire 是欣賞、久看，語氣不符「immediately」。',
+  note:'glance at（瞥）vs. stare at（盯著看）。'},
+ {q:['The all-inclusive tour was amazing, but it ',' an arm and a leg.'],
+  cn:'那個全包行程很棒，但貴得嚇人。',
+  opts:['cut','cost','made','watched'],ans:1,
+  word:'cost an arm and a leg 貴得嚇人（俚語）',
+  exp:'固定俚語 cost an arm and a leg。動詞用 cost。(A) cut costs 是省錢，語意相反。',
+  note:'課文：That costs an arm and a leg!'},
+ {q:['',' the tablet and the torch, the crown and broken chains are also symbols.'],
+  cn:'除了平板與火炬之外，皇冠與斷裂的鎖鏈也是象徵。',
+  opts:['Apart from','Instead of','Thanks to','As for'],ans:0,
+  word:'apart from 除了……之外',
+  exp:'「除了 A 之外還有 B」用 apart from（= besides）。(B) instead of 是「而非」，語意相反。',
+  note:'課文：Apart from the tablet and the torch...'},
+ {q:['The torch shows that Lady Liberty can guide ',' to a new land of hope.'],
+  cn:'火炬顯示自由女神能指引移民前往充滿希望的新天地。',
+  opts:['sculptors','immigrants','monuments','portions'],ans:1,
+  word:'immigrant (n.) （外來）移民',
+  exp:'被「指引到新土地」的是移民。(A) 雕刻家、(C) 紀念碑、(D) 部分皆不符。',
+  note:'immigrant（移入者）vs. emigrant（移出者）。'},
+ {q:['To save money, they stayed in a hostel ',' a hotel during the trip.'],
+  cn:'為了省錢，旅途中他們住青年旅館而不是飯店。',
+  opts:['instead of','apart from','because of','such as'],ans:0,
+  word:'instead of 而不是；取代',
+  exp:'「住青旅而非飯店」＝ A instead of B。(B) 除了、(C) 因為、(D) 例如皆不符。',
+  note:'instead of + N / V-ing。課文：a hostel instead of a hotel.'}
+];
+
+var teacherQ=[
+ {q:['In 1886, America ',' the Statue of Liberty by France to celebrate its independence.'],
+  cn:'1886 年，美國由法國贈予了自由女神像，以慶祝其獨立。',
+  opts:['gave','was given','was giving','has given'],ans:1,
+  word:'was given（授與動詞被動）',
+  tnote:'<b>被動語態</b>：主詞 America 是「接受者」，動作由 France 執行，用被動 was given。<br>give 為授與動詞，人當主詞被動時後面仍接「物」：America was given <b>the statue</b> by France.<br>(A) gave 為主動；(C) 進行式語意不符；(D) 需 by 前後時態一致，此處敘述過去用 was given。'},
+ {q:['The sculptors ',' made this statue were inspired by the Roman goddess Libertas.'],
+  cn:'打造這座雕像的雕刻家們受到羅馬女神 Libertas 的啟發。',
+  opts:['which','who','whose','what'],ans:1,
+  word:'who（關係代名詞，指人）',
+  tnote:'<b>關係代名詞</b>：先行詞 sculptors 是「人」且在子句中作主詞，用 who。<br>(A) which 指物；(C) whose 表所有格（後接名詞）；(D) what 不可引導形容詞子句。<br>課文原句：The sculptors who made this statue...'},
+ {q:['Seven spikes rise from the crown, ',' represent the rays of the sun.'],
+  cn:'皇冠伸出七道尖芒，代表太陽的光芒。',
+  opts:['that','which','who','it'],ans:1,
+  word:'which（非限定關代，指物）',
+  tnote:'<b>非限定子句</b>：逗號後補充說明前面的 spikes（物），用 which。<br>(A) that 不可用於逗號後的非限定子句；(C) who 指人；(D) it 為代名詞，無法引導子句。<br>課文：..., which represent the rays of the sun.'},
+ {q:['In her right hand ',' a giant torch that symbolizes enlightenment.'],
+  cn:'她的右手握著一支象徵啟迪的巨大火炬。',
+  opts:['is','are','it is','has'],ans:0,
+  word:'is（地方副詞倒裝，動詞與真主詞一致）',
+  tnote:'<b>地方副詞倒裝</b>：地方副詞片語 In her right hand 置句首，主詞 a giant torch 與動詞倒裝。<br>真主詞 torch 為單數，動詞用 <b>is</b>。<br>(B) are 主詞需複數；(C) 倒裝後不再加 it；(D) has 語意不符。課文：In her right hand is a giant torch.'},
+ {q:['From the top of the crown ',' seven spikes that stand for the sun\'s rays.'],
+  cn:'皇冠頂端伸出七道尖芒，代表太陽的光芒。',
+  opts:['rise','rises','rising','to rise'],ans:0,
+  word:'rise（倒裝句動詞與複數真主詞一致）',
+  tnote:'<b>倒裝＋主謂一致</b>：地方副詞置句首倒裝，真主詞 seven spikes 為複數，動詞用原形複數 <b>rise</b>。<br>(B) rises 用於單數主詞；(C)(D) 非限定動詞不能當句子主要動詞。<br>提醒：動詞要跟「真主詞」一致，而非句首的地方副詞。'},
+ {q:['With exposure to air, the copper surface slowly ',' green.'],
+  cn:'接觸空氣後，銅表面慢慢變成綠色。',
+  opts:['turns','turns to','turns into','becomes to'],ans:0,
+  word:'turn + 形容詞（連綴動詞）',
+  tnote:'<b>連綴動詞 turn</b>：turn + 形容詞（green）表「變成某狀態」，直接接形容詞。<br>(B) turn to、(C) turn into 後接「名詞」（turn into a butterfly）；(D) become to 無此用法。<br>課文：it turns green with exposure to air.'},
+ {q:['The guide recommended that each visitor ',' the stairs right up to the crown.'],
+  cn:'導遊建議每位遊客走樓梯直達皇冠。',
+  opts:['takes','take','took','taking'],ans:1,
+  word:'recommend that S (should) + 原形',
+  tnote:'<b>建議動詞的假設語氣</b>：recommend / suggest / advise / insist that 子句用「(should) + 原形」，should 省略。<br>主詞 each visitor 雖為單數，動詞仍用原形 <b>take</b>（不加 s）。<br>(A) takes、(C) took、(D) taking 皆不符。對照：advise <b>sb. to V</b>（advised visitors to take）。'},
+ {q:['',' trying to cut some other costs so that we can afford this tour?'],
+  cn:'不如試著省下其他一些開支，這樣我們就負擔得起這個行程？',
+  opts:['How about','Why don\'t','Let\'s','Shall we'],ans:0,
+  word:'How about + V-ing?（提議）',
+  tnote:'<b>提議句型</b>：How about / What about 後接「動名詞 V-ing」。空格後為 trying（V-ing），選 How about。<br>(B) Why don\'t + S + 原形（Why don\'t we try）；(C) Let\'s + 原形；(D) Shall we + 原形。皆需接原形，與 trying 不合。<br>課文：How about trying to cut some other costs?'},
+ {q:['The statue\'s outer surface ',' copper, which is why it later turned green.'],
+  cn:'雕像的外表面是銅製的，這就是它後來變綠的原因。',
+  opts:['is made of','is made from','makes of','is making'],ans:0,
+  word:'be made of（看得出原料）',
+  tnote:'<b>be made of vs. from</b>：成品看得出原料（銅還是銅）用 <b>be made of</b>；經化學變化看不出原料才用 be made from（Wine is made from grapes）。<br>(C) makes of 語態錯（應為被動）；(D) 進行式語意不符。課文：its surface is made of copper.'},
+ {q:['It was on July 4, 1776 ',' the United States became independent from England.'],
+  cn:'正是在 1776 年 7 月 4 日這一天，美國脫離英國獨立。',
+  opts:['that','when','which','what'],ans:0,
+  word:'It is/was ... that ...（強調句）',
+  tnote:'<b>分裂（強調）句</b>：It was + 被強調部分（時間片語）+ that + 其餘。強調時間仍用 <b>that</b>（不因強調時間就改用 when）。<br>(B) when 為關係副詞，但標準強調句一律用 that；(C) which 指物、(D) what 皆不可。<br>課文：It was on this day that the United States became independent.'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>
