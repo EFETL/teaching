@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L4: Sniffing Out More Than Just Bones ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+.s-exam .sec-head{background:#faf5ff;color:#6d28d9;border-bottom:2px solid #e9d5ff}
+.s-exam .sec-icon{background:#6d28d9;color:#fff}
+.s-exam .q-num{background:#6d28d9}
+.badge-purple{background:#6d28d9}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L4: Sniffing Out More Than Just Bones ── 嗅出的不只是骨頭</h1>
+  <div class="sub">龍騰版高中英文 第一冊 第四課｜互動教學講義（高一適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+    <span class="tag">📚 段考考古題 × 16</span>
+  </div>
+</div>
+
+<!-- 三大重點速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>本課三大重點速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 嗅探犬的超能力</h4>
+        狗的<b>嗅覺</b>遠比人類敏感，因此被訓練成「sniffer dogs（嗅探犬）」，用<b>敏銳的嗅覺</b>去<b>偵測（detect）</b>毒品等隱藏物品。牠們能做的遠不只如此。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 找病樹、救人命</h4>
+        屏東用受訓的狗找出得了<b>褐根病（brown root rot）</b>的樹。狗也能<b>預測（predict）</b>人類疾病：糖尿病婦人 Maria 的狗 Malachi 察覺她血糖過低，喚醒她並幫她拿藥，多次<b>救命</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 訓練的原理</h4>
+        疾病會使動植物與人體產生<b>化學變化</b>並散發特殊氣味。訓練員讓狗<b>反覆接觸（expose）</b>這些氣味，教牠們以坐下或吠叫等<b>行為（behavior）</b>作為警示，完成訓練後<b>分派（assign）</b>特定任務。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課介紹嗅探犬（sniffer dogs）如何運用比人類敏感許多的嗅覺，替人類偵測毒品、找出病樹、甚至預測人類疾病，並說明牠們接受訓練的原理。</p>
+
+    <!-- 第一段：引言與嗅探犬 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🟦 Part 1｜嗅探犬與牠們的超敏嗅覺</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Have you ever noticed that dogs are able to smell things that we can't? This is because a dog's sense of smell is far more sensitive than a human's.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">你是否曾注意到，狗能聞到我們聞不到的東西？這是因為狗的嗅覺遠比人類敏感許多。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">Have</span><span class="syn-t">助V</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">noticed</span><span class="syn-t">V</span> <span class="syn syn-o">that dogs are able to smell things that we can't</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">This</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">because a dog's sense of smell is far more sensitive...</span><span class="syn-t">C（原因）</span></div>
+          <div class="para-note"><b>sense of smell</b> = 嗅覺；<b>far more sensitive than</b> = 比……敏感許多（far 修飾比較級，表「遠遠地」）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>For this reason, some dogs are specially trained to become "sniffer dogs," which use their keen sense of smell to detect certain items such as hidden drugs.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">基於這個原因，有些狗被特別訓練成「嗅探犬」，牠們運用敏銳的嗅覺去偵測某些物品，例如藏匿的毒品。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">For this reason</span><span class="syn-t">副詞</span> <span class="syn syn-s">some dogs</span><span class="syn-t">S</span> <span class="syn syn-v">are specially trained</span><span class="syn-t">V（被動）</span> <span class="syn syn-c">to become "sniffer dogs"</span><span class="syn-t">補語</span><br>
+            <span class="num">②</span><span class="syn syn-m">which</span><span class="syn-t">關代（先行詞 sniffer dogs）</span> <span class="syn syn-v">use</span><span class="syn-t">V</span> <span class="syn syn-o">their keen sense of smell</span><span class="syn-t">O</span> <span class="syn syn-m">to detect certain items</span><span class="syn-t">不定詞（目的）</span></div>
+          <div class="para-note"><b>keen</b>（敏銳的）、<b>detect</b>（偵測）、<b>item</b>（物品）皆為核心字；<b>such as</b> = 例如。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>But this isn't the only task that sniffer dogs can accomplish. Here are a few more interesting ways that these amazing animals can help humans out.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">但這並不是嗅探犬唯一能完成的任務。以下是這些神奇動物幫助人類的幾種更有趣的方式。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">this</span><span class="syn-t">S</span> <span class="syn syn-v">isn't</span><span class="syn-t">V</span> <span class="syn syn-c">the only task that sniffer dogs can accomplish</span><span class="syn-t">C（含關係子句）</span><br>
+            <span class="num">②</span><span class="syn syn-m">Here</span><span class="syn-t">引導詞</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-s">a few more interesting ways...</span><span class="syn-t">S（真主詞，倒裝）</span></div>
+          <div class="para-note"><b>accomplish</b>（完成、達成）為核心字；<b>help sb. out</b> = 幫助某人（分詞助詞 out 可分開）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In Pingtung, officials in one park use trained dogs to find trees that have "brown root rot" disease. Due to their keen sense of smell, the dogs can detect infected trees.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在屏東，某座公園的官員用受過訓練的狗去找出得了「褐根病」的樹。由於敏銳的嗅覺，這些狗能偵測到受感染的樹。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In Pingtung</span><span class="syn-t">副詞</span> <span class="syn syn-s">officials in one park</span><span class="syn-t">S</span> <span class="syn syn-v">use</span><span class="syn-t">V</span> <span class="syn syn-o">trained dogs</span><span class="syn-t">O</span> <span class="syn syn-m">to find trees that...</span><span class="syn-t">不定詞</span><br>
+            <span class="num">②</span><span class="syn syn-m">Due to their keen sense of smell</span><span class="syn-t">副詞（原因）</span> <span class="syn syn-s">the dogs</span><span class="syn-t">S</span> <span class="syn syn-v">can detect</span><span class="syn-t">V</span> <span class="syn syn-o">infected trees</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>due to</b> = 由於（後接名詞片語，見句型三）；<b>infected</b>（受感染的）＜ infect（感染）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Once they locate such a tree, they sit down beside it until their trainer hands them a treat as a reward. Workers then dig out these trees before they fall and hurt people.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一旦牠們找到這樣的一棵樹，就會坐在樹旁，直到訓練員遞給牠們零食作為獎勵。工人接著在這些樹倒下傷人之前把它們挖除。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Once they locate such a tree</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">sit down</span><span class="syn-t">V</span> <span class="syn syn-m">beside it until their trainer hands them a treat</span><span class="syn-t">副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">Workers</span><span class="syn-t">S</span> <span class="syn syn-v">dig out</span><span class="syn-t">V（片語動詞）</span> <span class="syn syn-o">these trees</span><span class="syn-t">O</span> <span class="syn syn-m">before they fall...</span><span class="syn-t">副詞子句</span></div>
+          <div class="para-note"><b>locate</b>（找出……的位置）、<b>reward</b>（獎勵）為核心字；<b>until</b> = 直到；<b>dig out</b> = 挖出。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Since they have realized how useful these sniffer dogs can be, officials in parks across Taiwan are inviting them to come and help find the trees with brown root rot disease.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">由於他們已了解這些嗅探犬有多麼有用，全台各地公園的官員都正邀請牠們前來，協助找出染上褐根病的樹木。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Since they have realized how useful these sniffer dogs can be</span><span class="syn-t">原因副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">officials in parks across Taiwan</span><span class="syn-t">S</span> <span class="syn syn-v">are inviting</span><span class="syn-t">V</span> <span class="syn syn-o">them</span><span class="syn-t">O</span> <span class="syn syn-m">to come and help find...</span><span class="syn-t">受詞補語</span></div>
+          <div class="para-note"><b>Since</b> = 因為（表原因）；<b>across Taiwan</b> = 遍及全台；<b>how useful...can be</b> 為間接問句（名詞子句）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第二段：預測人類疾病 Maria 與 Malachi -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🟩 Part 2｜嗅出疾病，甚至救人一命</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Sniffer dogs' ability to detect sickness can be used for more than just locating sick trees. They have also been trained to predict the onset of certain diseases in humans.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">嗅探犬偵測疾病的能力，不只能用來找出生病的樹木。牠們也被訓練來預測人類某些疾病的發作。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Sniffer dogs' ability to detect sickness</span><span class="syn-t">S</span> <span class="syn syn-v">can be used</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">for more than just locating sick trees</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">have also been trained</span><span class="syn-t">V（現在完成被動）</span> <span class="syn syn-m">to predict the onset of certain diseases</span><span class="syn-t">不定詞</span></div>
+          <div class="para-note"><b>ability</b>（能力）、<b>predict</b>（預測）、<b>disease</b>（疾病）為核心字；<b>the onset of</b> = ……的發作/開始。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Maria Tello, who was a 58-year-old woman with diabetes, was asleep one night. All of a sudden, her dog Malachi opened its eyes and got up.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Maria Tello 是一位罹患糖尿病的 58 歲女性，某天晚上她正睡著。突然間，她的狗 Malachi 睜開眼睛並站了起來。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Maria Tello</span><span class="syn-t">S</span> <span class="syn syn-m">, who was a 58-year-old woman with diabetes,</span><span class="syn-t">關係子句（補述）</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">asleep</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-m">All of a sudden</span><span class="syn-t">副詞</span> <span class="syn syn-s">her dog Malachi</span><span class="syn-t">S</span> <span class="syn syn-v">opened...and got up</span><span class="syn-t">V</span></div>
+          <div class="para-note"><b>all of a sudden</b> = 突然（重要片語＝suddenly）；<b>with diabetes</b> = 患有糖尿病；who 引導補述用法（前有逗號）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>By using its powerful nose, it could sense that Maria's blood sugar was dropping to a dangerously low level. Malachi woke her up and then rushed to get her medicine.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">藉由使用牠強大的鼻子，牠能察覺到 Maria 的血糖正下降到危險的低水平。Malachi 把她喚醒，然後衝去拿她的藥。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">By using its powerful nose</span><span class="syn-t">副詞（方法）</span> <span class="syn syn-s">it</span><span class="syn-t">S</span> <span class="syn syn-v">could sense</span><span class="syn-t">V</span> <span class="syn syn-o">that Maria's blood sugar was dropping...</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">Malachi</span><span class="syn-t">S</span> <span class="syn syn-v">woke...up and rushed</span><span class="syn-t">V</span> <span class="syn syn-m">to get her medicine</span><span class="syn-t">不定詞</span></div>
+          <div class="para-note"><b>by + V-ing</b> = 藉由做……（表方法）；<b>level</b>（水平、程度）；<b>wake sb. up</b> = 喚醒某人。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It turned out that Malachi saved Maria's life in this way four more times that year. Dogs really are our best friends.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">結果證明，那一年 Malachi 用這種方式又救了 Maria 四次。狗真的是我們最好的朋友。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">It</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">turned out</span><span class="syn-t">V（片語動詞）</span> <span class="syn syn-o">that Malachi saved Maria's life...</span><span class="syn-t">真主詞（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">Dogs</span><span class="syn-t">S</span> <span class="syn syn-v">really are</span><span class="syn-t">V</span> <span class="syn syn-c">our best friends</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>It turned out that...</b> = 結果證明……（重要片語，見句型四）；<b>four more times</b> = 又多四次。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第三段：訓練原理與結語 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🟧 Part 3｜嗅探犬訓練的原理與展望</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>How can sniffer dogs manage to do the above-mentioned tasks? The answer is that diseases cause chemical changes in plants, animals, and even the human body.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">嗅探犬是如何設法完成上述任務的呢？答案是：疾病會在植物、動物、甚至人體內造成化學變化。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">How can</span><span class="syn-t">疑問</span> <span class="syn syn-s">sniffer dogs</span><span class="syn-t">S</span> <span class="syn syn-v">manage to do</span><span class="syn-t">V</span> <span class="syn syn-o">the above-mentioned tasks</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">The answer</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">that diseases cause chemical changes...</span><span class="syn-t">C（名詞子句）</span></div>
+          <div class="para-note"><b>manage to V</b> = 設法做到；<b>above-mentioned</b> = 上述的（複合形容詞）；<b>cause</b> = 造成。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These chemical changes usually create special odors, and trainers need to expose their dogs to these smells many times.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些化學變化通常會製造出特殊的氣味，而訓練員需要讓他們的狗多次接觸這些氣味。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">These chemical changes</span><span class="syn-t">S</span> <span class="syn syn-v">create</span><span class="syn-t">V</span> <span class="syn syn-o">special odors</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">trainers</span><span class="syn-t">S</span> <span class="syn syn-v">need to expose</span><span class="syn-t">V</span> <span class="syn syn-o">their dogs</span><span class="syn-t">O</span> <span class="syn syn-m">to these smells many times</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>create</b>（創造）、<b>expose</b>（使接觸、暴露）為核心字；<b>expose A to B</b> = 讓 A 接觸 B；<b>odor</b> = 氣味。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The dogs are then taught to perform a certain kind of behavior as an alert, such as sitting down or barking, when they come across these smells.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">接著這些狗被教導在遇到這些氣味時，執行某種行為作為警示，例如坐下或吠叫。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The dogs</span><span class="syn-t">S</span> <span class="syn syn-v">are then taught</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">to perform a certain kind of behavior as an alert</span><span class="syn-t">不定詞</span><br>
+            <span class="num">②</span><span class="syn syn-m">when they come across these smells</span><span class="syn-t">時間副詞子句</span></div>
+          <div class="para-note"><b>perform</b>（執行）、<b>behavior</b>（行為）、<b>alert</b>（警示）為核心字；<b>come across</b> = 偶然遇到（＝encounter）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Once their training is complete, sniffer dogs are assigned to carry out specific duties. As we continue to understand them better, they can help us more.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一旦訓練完成，嗅探犬便被分派去執行特定的任務。隨著我們持續更深入地了解牠們，牠們就能更加幫助我們。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Once their training is complete</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">sniffer dogs</span><span class="syn-t">S</span> <span class="syn syn-v">are assigned</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">to carry out specific duties</span><span class="syn-t">不定詞</span><br>
+            <span class="num">②</span><span class="syn syn-m">As we continue to understand them better</span><span class="syn-t">副詞子句</span> <span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">can help</span><span class="syn-t">V</span> <span class="syn syn-o">us</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>complete</b>（完成的）、<b>assign</b>（分派）、<b>specific</b>（特定的）為核心字；<b>carry out</b> = 執行；<b>as</b> = 隨著。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Who knows in what other ways their sharp sense of smell will be useful to us in the future?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">誰知道未來牠們敏銳的嗅覺還會以其他哪些方式對我們有用呢？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Who</span><span class="syn-t">S</span> <span class="syn syn-v">knows</span><span class="syn-t">V</span> <span class="syn syn-o">in what other ways their sharp sense of smell will be useful...</span><span class="syn-t">O（間接問句）</span></div>
+          <div class="para-note"><b>Who knows...?</b> = 誰知道呢（修辭問句，表未知的可能）；<b>sharp sense of smell</b> = 敏銳的嗅覺；間接問句用「疑問詞 + S + V」語序。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sensitive</span><span class="v-pos">adj.</span><div class="v-cn-mini">敏感的；靈敏的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>sense (n.) 感官</span><span>sensitivity (n.) 敏感度</span><span>be sensitive to 對……敏感</span></div>
+        <div class="v-ex">A dog's sense of smell is far more <b>sensitive</b> than a human's.<span class="cn">狗的嗅覺遠比人類敏感。</span></div>
+        <span class="v-gsat">📊 常考 be sensitive to（對……敏感）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">keen</span><span class="v-pos">adj.</span><div class="v-cn-mini">敏銳的；熱衷的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a keen sense of smell 敏銳的嗅覺</span><span>be keen on 熱衷於</span></div>
+        <div class="v-ex">The dogs use their <b>keen</b> sense of smell to detect drugs.<span class="cn">這些狗用敏銳的嗅覺偵測毒品。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">detect</span><span class="v-pos">v.</span><div class="v-cn-mini">偵測；察覺</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>detective (n.) 偵探</span><span>detection (n.) 偵測</span><span>detector (n.) 偵測器</span></div>
+        <div class="v-ex">The dogs can <b>detect</b> infected trees.<span class="cn">這些狗能偵測到受感染的樹。</span></div>
+        <span class="v-gsat">📊 detect / detective / detection 字族學測常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">item</span><span class="v-pos">n.</span><div class="v-cn-mini">物品；項目</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>an item on the list 清單上的一項</span></div>
+        <div class="v-ex">Sniffer dogs detect certain <b>items</b> such as hidden drugs.<span class="cn">嗅探犬偵測某些物品，例如藏匿的毒品。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">accomplish</span><span class="v-pos">v.</span><div class="v-cn-mini">完成；達成</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>accomplishment (n.) 成就</span><span>≈ achieve / complete</span></div>
+        <div class="v-ex">This isn't the only task that sniffer dogs can <b>accomplish</b>.<span class="cn">這並不是嗅探犬唯一能完成的任務。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">disease</span><span class="v-pos">n.</span><div class="v-cn-mini">疾病</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>heart disease 心臟病</span><span>≈ illness / sickness</span></div>
+        <div class="v-ex">Dogs can predict the onset of certain <b>diseases</b> in humans.<span class="cn">狗能預測人類某些疾病的發作。</span></div>
+        <span class="v-gsat">📊 spread of disease（疾病傳播）為高頻搭配</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">infect</span><span class="v-pos">v.</span><div class="v-cn-mini">感染；傳染</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>infected (adj.) 受感染的</span><span>infection (n.) 感染</span><span>infectious (adj.) 傳染性的</span></div>
+        <div class="v-ex">The dogs can detect <b>infected</b> trees.<span class="cn">這些狗能偵測到受感染的樹。</span></div>
+        <span class="v-gsat">📊 be infected with（感染……）常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">locate</span><span class="v-pos">v.</span><div class="v-cn-mini">找出……的位置</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>location (n.) 地點</span><span>be located in 位於</span></div>
+        <div class="v-ex">Sniffer dogs help police in <b>locating</b> dangerous items.<span class="cn">嗅探犬協助警方找出危險物品的位置。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">reward</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">獎勵；報酬</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>reward sb. with sth. 以……獎勵某人</span><span>rewarding (adj.) 值得的</span></div>
+        <div class="v-ex">The trainer hands them a treat as a <b>reward</b>.<span class="cn">訓練員遞給牠們零食作為獎勵。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">predict</span><span class="v-pos">v.</span><div class="v-cn-mini">預測；預言</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>prediction (n.) 預測</span><span>predictable (adj.) 可預測的</span></div>
+        <div class="v-ex">Dogs have been trained to <b>predict</b> certain diseases.<span class="cn">狗被訓練來預測某些疾病。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">behavior</span><span class="v-pos">n.</span><div class="v-cn-mini">行為；舉止</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>behave (v.) 行為表現</span><span>behavioral (adj.) 行為的</span></div>
+        <div class="v-ex">The dogs perform a certain <b>behavior</b> as an alert.<span class="cn">這些狗執行某種行為作為警示。</span></div>
+        <span class="v-gsat">📊 animal behavior（動物行為）常入題</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">alert</span><span class="v-pos">n. / adj.</span><div class="v-cn-mini">警示／警覺的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a bomb alert 炸彈警報</span><span>stay alert 保持警覺</span></div>
+        <div class="v-ex">The dogs perform a behavior as an <b>alert</b>.<span class="cn">這些狗以某種行為作為警示。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">expose</span><span class="v-pos">v.</span><div class="v-cn-mini">使接觸；暴露</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>exposure (n.) 暴露；接觸</span><span>expose A to B 使 A 接觸 B</span></div>
+        <div class="v-ex">Trainers <b>expose</b> their dogs <b>to</b> these smells many times.<span class="cn">訓練員讓狗多次接觸這些氣味。</span></div>
+        <span class="v-gsat">📊 expose...to... 介系詞 to 為考點</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">assign</span><span class="v-pos">v.</span><div class="v-cn-mini">分派；指派</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>assignment (n.) 作業；任務</span><span>be assigned to V 被分派去做</span></div>
+        <div class="v-ex">Sniffer dogs are <b>assigned</b> to carry out specific duties.<span class="cn">嗅探犬被分派去執行特定任務。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">specific</span><span class="v-pos">adj.</span><div class="v-cn-mini">特定的；明確的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>specifically (adv.) 明確地</span><span>a specific reason 特定的理由</span></div>
+        <div class="v-ex">Sniffer dogs carry out <b>specific</b> duties.<span class="cn">嗅探犬執行特定的任務。</span></div>
+        <span class="v-gsat">📊 specific ↔ general（籠統的）</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文重點片語</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">due to</span></td><td>由於（＋N）</td><td class="pex"><b>Due to</b> their keen sense of smell, the dogs can detect infected trees.<span class="cn">由於敏銳的嗅覺，這些狗能偵測受感染的樹。</span></td></tr>
+      <tr><td><span class="phr">all of a sudden</span></td><td>突然間</td><td class="pex"><b>All of a sudden</b>, her dog Malachi got up.<span class="cn">突然間，她的狗 Malachi 站了起來。</span></td></tr>
+      <tr><td><span class="phr">turn out</span></td><td>結果是；證明是</td><td class="pex">It <b>turned out</b> that Malachi saved Maria's life four more times.<span class="cn">結果證明 Malachi 又救了 Maria 四次。</span></td></tr>
+      <tr><td><span class="phr">come across</span></td><td>偶然遇到</td><td class="pex">The dogs alert when they <b>come across</b> these smells.<span class="cn">這些狗在遇到這些氣味時發出警示。</span></td></tr>
+      <tr><td><span class="phr">carry out</span></td><td>執行；實行</td><td class="pex">Sniffer dogs <b>carry out</b> specific duties.<span class="cn">嗅探犬執行特定的任務。</span></td></tr>
+      <tr><td><span class="phr">dig out</span></td><td>挖出；找出</td><td class="pex">Workers then <b>dig out</b> these trees before they fall.<span class="cn">工人接著在樹倒下前把它們挖除。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文相關主題（嗅覺、疾病、訓練、動物）相關，並已在近年學測出現。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">ability</span><span class="v-pos">n.</span><div class="v-cn-mini">能力</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>able (adj.) 能夠的</span><span>the ability to V 做……的能力</span></div>
+        <div class="v-ex">Sniffer dogs' <b>ability</b> to detect sickness can save lives.<span class="cn">嗅探犬偵測疾病的能力能拯救生命。</span></div>
+        <span class="v-gsat">📊 學測常考 the ability to + 原形動詞</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">perform</span><span class="v-pos">v.</span><div class="v-cn-mini">執行；表演</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>performance (n.) 表演；表現</span><span>performer (n.) 表演者</span></div>
+        <div class="v-ex">Even after his injury, Ben can still <b>perform</b> daily tasks.<span class="cn">即使受傷後，Ben 仍能執行日常任務。</span></div>
+        <span class="v-gsat">📊 perform a task / a play 皆常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">manage</span><span class="v-pos">v.</span><div class="v-cn-mini">設法；管理</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>management (n.) 管理</span><span>manage to V 設法做到</span></div>
+        <div class="v-ex">How do sniffer dogs <b>manage</b> to do these tasks?<span class="cn">嗅探犬是如何設法完成這些任務的？</span></div>
+        <span class="v-gsat">📊 manage to V vs. time management 均為考點</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">poisonous</span><span class="v-pos">adj.</span><div class="v-cn-mini">有毒的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>poison (n./v.) 毒藥；下毒</span><span>≈ toxic 有毒的</span></div>
+        <div class="v-ex">Never eat wild plants because they could be <b>poisonous</b>.<span class="cn">絕不要吃野生植物，因為它們可能有毒。</span></div>
+        <span class="v-gsat">📊 段考高頻字（劇毒的顏色鮮豔動物）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">substance</span><span class="v-pos">n.</span><div class="v-cn-mini">物質</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a chemical substance 化學物質</span><span>≈ material 材料</span></div>
+        <div class="v-ex">The police found a chemical <b>substance</b> at the scene.<span class="cn">警方在現場找到一種化學物質。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">creativity</span><span class="v-pos">n.</span><div class="v-cn-mini">創造力</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>create (v.) 創造</span><span>creative (adj.) 有創意的</span><span>creation (n.) 創造物</span></div>
+        <div class="v-ex">The students showed great <b>creativity</b> in the contest.<span class="cn">學生在比賽中展現極大的創造力。</span></div>
+        <span class="v-gsat">📊 create 字族（creation/creative/creativity）常整組考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">treatment</span><span class="v-pos">n.</span><div class="v-cn-mini">治療；對待</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>treat (v.) 治療；對待</span><span>medical treatment 醫療</span></div>
+        <div class="v-ex">Even after the <b>treatment</b>, the patient didn't improve.<span class="cn">即使經過治療，病人仍沒有好轉。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">surround</span><span class="v-pos">v.</span><div class="v-cn-mini">環繞；圍繞</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>surroundings (n.) 周遭環境</span><span>be surrounded by 被……包圍</span></div>
+        <div class="v-ex">The house is <b>surrounded</b> by tall trees.<span class="cn">這棟房子被高大的樹木環繞。</span></div>
+        <span class="v-gsat">📊 be surrounded by 為段考超高頻</span></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（狗、嗅覺、察覺、警覺）高度相關，能讓同學口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a dog's nose</span><div class="slang-cn-mini">超靈敏的鼻子／嗅覺</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">形容某人鼻子很靈、什麼味道都聞得到，如狗一般。</div>
+      <div class="slang-ex">You found the leftover pizza already? You've got <b>a dog's nose</b>!<span class="cn">你已經找到剩下的披薩了？你鼻子跟狗一樣靈！</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">sniff something out</span><div class="slang-cn-mini">查出、挖出（真相/線索）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面是「嗅出某物」，引申為「查探、發掘出隱藏的事物或真相」（呼應課名 Sniffing Out）。</div>
+      <div class="slang-ex">Good reporters can <b>sniff out</b> a great story anywhere.<span class="cn">好記者在哪都能挖出好題材。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">barking up the wrong tree</span><div class="slang-cn-mini">找錯對象、白費力氣</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">源自獵犬對著錯的樹吠叫，引申為「搞錯方向、怪錯人、白忙一場」。</div>
+      <div class="slang-ex">If you think I ate your cake, you're <b>barking up the wrong tree</b>.<span class="cn">如果你以為是我吃了你的蛋糕，那你可找錯人了。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">let sleeping dogs lie</span><div class="slang-cn-mini">別惹麻煩；別自找事</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「別吵醒睡著的狗」，意指「別去翻舊帳、別多管閒事以免生事」。</div>
+      <div class="slang-ex">Don't bring up that old argument—<b>let sleeping dogs lie</b>.<span class="cn">別再提那件舊爭執了，別自找麻煩。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">on high alert</span><div class="slang-cn-mini">高度警戒中</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">形容處於高度警覺、隨時準備應變的狀態（呼應課文 alert 一字）。</div>
+      <div class="slang-ex">Airport security was <b>on high alert</b> after the warning.<span class="cn">警訊發布後，機場安檢進入高度警戒。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the dog days</span><div class="slang-cn-mini">一年中最熱的三伏天</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">指盛夏最炎熱的日子（源自天狼星，非字面「狗的日子」）。</div>
+      <div class="slang-ex">During the <b>dog days</b> of summer, we stayed indoors all day.<span class="cn">在盛夏最熱的日子裡，我們整天待在室內。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜關係代名詞 that / which / who</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞(物) + that / which + 不完整子句
+先行詞(人) + that / who + 不完整子句
+（先行詞前有逗號 → 只能用 which / who，不可用 that）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">關係代名詞代替先行詞、引導形容詞子句，是本課高頻考點。</p>
+        <div class="g-ex">Sniffer dogs use their keen sense of smell to detect items <b>that</b> are hidden.<div class="g-ex-cn">嗅探犬用敏銳嗅覺偵測被藏起來的物品。</div></div>
+        <div class="g-ex">Maria Tello, <b>who</b> was a woman with diabetes, was asleep.<div class="g-ex-cn">患糖尿病的 Maria Tello 當時正睡著。（who 補述用法）</div></div>
+        <div class="g-note">逗號後不可用 that：✗ Maria, that was..., ✓ Maria, who was...。</div>
+        <div class="g-tip">學測常考 that / which 選擇，以及「逗號＋which/who」補述用法。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜被動語態 be + p.p.</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">主詞 + be 動詞 + 過去分詞 (p.p.) + (by ...)
+現在完成被動：have/has been + p.p.</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">當主詞是「動作的承受者」時用被動。本課大量出現。</p>
+        <div class="g-ex">Some dogs <b>are specially trained</b> to become sniffer dogs.<div class="g-ex-cn">有些狗被特別訓練成嗅探犬。</div></div>
+        <div class="g-ex">They <b>have</b> also <b>been trained</b> to predict diseases.<div class="g-ex-cn">牠們也已被訓練來預測疾病。（現在完成被動）</div></div>
+        <div class="g-note">✗ Sniffer dogs are assign to duties.（assign 要用過去分詞 assigned）。</div>
+        <div class="g-tip">學測常考主動 vs. 被動判斷；expose、assign、infect 等後常接被動。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜due to / because of vs. because</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">due to / because of + 名詞(片語)
+because + 主詞 + 動詞（子句）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">最愛被混淆的考點：後面接名詞還是子句，決定用哪個。</p>
+        <div class="g-ex"><b>Due to</b> their keen sense of smell, the dogs can detect trees.<div class="g-ex-cn">由於敏銳的嗅覺，這些狗能偵測到樹。（+名詞片語）</div></div>
+        <div class="g-ex"><b>Because</b> their sense of smell is keen, the dogs can detect trees.<div class="g-ex-cn">因為嗅覺敏銳，這些狗能偵測到樹。（+子句）</div></div>
+        <div class="g-note">✗ Due to the dogs are keen...（due to 後不可接子句）；✗ Because their keen smell（because 後要接完整子句）。</div>
+        <div class="g-tip">學測與段考皆高頻：due to / because of / owing to（+N）↔ because（+S+V）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜It turned out that... / 虛主詞 It</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">It turned out that + S + V（結果證明……）
+It + be + adj. + that / to V（虛主詞代替真主詞）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">It 當虛主詞、代替後方真正的主詞（that 子句或不定詞）。</p>
+        <div class="g-ex"><b>It turned out that</b> Malachi saved Maria's life four more times.<div class="g-ex-cn">結果證明 Malachi 又救了 Maria 四次。</div></div>
+        <div class="g-ex"><b>It</b> is amazing <b>that</b> dogs can smell diseases.<div class="g-ex-cn">狗能聞出疾病，真是驚人。</div></div>
+        <div class="g-note">✗ That Malachi saved her turned out.（別把冗長 that 子句直接當主詞，用 It 代替）。</div>
+        <div class="g-tip">turn out (to be) + adj./N 也常考：The performance turned out great.</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜時間/條件副詞子句：once / until / as</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">Once S + V, S + V.（一旦……就……）
+S + V until S + V.（直到……為止）
+As S + V, S + V.（隨著……）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">這些連接詞後接完整子句，本課三者皆出現。</p>
+        <div class="g-ex"><b>Once</b> their training is complete, sniffer dogs are assigned duties.<div class="g-ex-cn">一旦訓練完成，嗅探犬就被分派任務。</div></div>
+        <div class="g-ex">They sit down beside it <b>until</b> their trainer hands them a treat.<div class="g-ex-cn">牠們坐在樹旁，直到訓練員遞給牠們零食。</div></div>
+        <div class="g-ex"><b>As</b> we continue to understand them better, they can help us more.<div class="g-ex-cn">隨著我們更了解牠們，牠們就能更幫助我們。</div></div>
+        <div class="g-tip">學測常考 once / until / as / when / while 辨析；as 可表「隨著、當、因為」。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<!-- 歷屆段考考古題精選 -->
+<div class="section s-exam">
+  <div class="sec-head"><div class="sec-icon">📚</div>歷屆段考考古題精選（對應本課 L4）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 精選自各校高一第二次段考、落在 L4 範圍的考古題。點選項即時對錯，按「看完整解析」展開。每題末標示來源學校。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第一冊 第四課｜互動教學講義
+</div>
+
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['A dog\'s sense of smell is far more ',' than a human\'s, so it can smell things we can\'t.'],
+  cn:'狗的嗅覺遠比人類敏感，所以牠能聞到我們聞不到的東西。',
+  opts:['sensitive','specific','complete','poisonous'],ans:0,
+  word:'sensitive (adj.) 敏感的；靈敏的',
+  exp:'空格形容 sense of smell（嗅覺），需「敏銳、靈敏」之意。(B) 特定的、(C) 完整的、(D) 有毒的皆不符。',
+  note:'sense of smell 常搭配 keen / sensitive / sharp。'},
+ {q:['Sniffer dogs use their keen sense of smell to ',' hidden drugs and other dangerous items.'],
+  cn:'嗅探犬用敏銳的嗅覺去偵測藏匿的毒品和其他危險物品。',
+  opts:['reward','detect','assign','locate'],ans:1,
+  word:'detect (v.) 偵測；察覺',
+  exp:'受詞是 drugs（毒品），需「偵測、察覺」。(A) 獎勵、(C) 分派、(D) 找位置語意較窄，detect 最貼切「察覺氣味」。',
+  note:'detect 名詞 detection、偵探 detective。'},
+ {q:['',' their keen sense of smell, the dogs can find trees infected with brown root rot.'],
+  cn:'由於敏銳的嗅覺，這些狗能找到染上褐根病的樹。',
+  opts:['Because','Due to','Although','So'],ans:1,
+  word:'due to + 名詞片語（由於）',
+  exp:'空格後是名詞片語 their keen sense of smell，用 due to。(A) because 後須接子句；(C)(D) 語意不符。',
+  note:'due to / because of + N；because + S + V。'},
+ {q:['',', her dog Malachi opened its eyes and got up, sensing that something was wrong.'],
+  cn:'突然間，她的狗 Malachi 睜開眼睛站了起來，察覺到有些不對勁。',
+  opts:['All of a sudden','In person','As a result','On average'],ans:0,
+  word:'all of a sudden 突然間',
+  exp:'描述狗「突然」起身，用 all of a sudden（＝suddenly）。(B) 親自、(C) 因此、(D) 平均而言皆不符。',
+  note:'課文：All of a sudden, her dog Malachi got up.'},
+ {q:['It ',' that Malachi saved Maria\'s life four more times that same year.'],
+  cn:'結果證明，那一年 Malachi 又救了 Maria 四次。',
+  opts:['carried out','turned out','came across','dug out'],ans:1,
+  word:'turn out 結果是；證明是',
+  exp:'It turned out that... = 結果證明……（固定句型）。(A) 執行、(C) 偶遇、(D) 挖出皆不符。',
+  note:'It turned out (that) 子句 / turn out to be + adj.。'},
+ {q:['More than 70 million people have been ',' with AIDS over the last 50 years.'],
+  cn:'過去 50 年來，已有超過七千萬人感染愛滋病。',
+  opts:['detected','infected','rewarded','exposed'],ans:1,
+  word:'infect (v.) 感染（be infected with 感染……）',
+  exp:'be infected with = 感染某疾病，為固定搭配。(A) 偵測、(C) 獎勵、(D) 暴露皆不符題意。',
+  note:'infected（受感染的）、infection（感染，n.）。'},
+ {q:['Trainers ',' their dogs ',' certain smells many times so that they learn to recognize them.'],
+  cn:'訓練員讓狗多次接觸某些氣味，好讓牠們學會辨認。',
+  opts:['expose...to','carry...out','dig...out','turn...out'],ans:0,
+  word:'expose A to B 使 A 接觸/暴露於 B',
+  exp:'expose...to... = 使……接觸……（固定搭配，介系詞 to）。其餘皆為片語動詞，語意不符。',
+  note:'課文：expose their dogs to these smells。'},
+ {q:['Once their training is complete, the dogs are ',' to carry out specific duties.'],
+  cn:'一旦訓練完成，這些狗就被分派去執行特定的任務。',
+  opts:['assigned','detected','infected','surrounded'],ans:0,
+  word:'assign (v.) 分派（be assigned to V）',
+  exp:'be assigned to + V = 被分派去做，符合「被指派任務」。(B)偵測、(C)感染、(D)包圍皆不符。',
+  note:'assign 名詞 assignment（作業／任務）。'},
+ {q:['The dogs perform a certain kind of behavior as an ',', such as sitting down or barking.'],
+  cn:'這些狗執行某種行為作為警示，例如坐下或吠叫。',
+  opts:['item','alert','ability','reward'],ans:1,
+  word:'alert (n.) 警示；警報',
+  exp:'as an alert = 作為警示（訊號）。(A)物品、(C)能力、(D)獎勵皆不符「發出訊號」之意。',
+  note:'on high alert 高度警戒；a bomb alert 炸彈警報。'},
+ {q:['Eagles have the ',' to fly for over three hours without landing.'],
+  cn:'老鷹有連續飛行三小時以上而不著陸的能力。',
+  opts:['ability','location','behavior','reward'],ans:0,
+  word:'the ability to V 做……的能力',
+  exp:'the ability to + 原形動詞 = 做……的能力。(B)地點、(C)行為、(D)獎勵皆不符。',
+  note:'ability ← able（adj.）；the ability to fly。'}
+];
+
+var teacherQ=[
+ {q:['Some dogs are specially ',' to become sniffer dogs that help the police at airports.'],
+  cn:'有些狗被特別訓練成能在機場協助警方的嗅探犬。',
+  opts:['train','trained','training','to train'],ans:1,
+  word:'be trained（被動語態）',
+  tnote:'<b>被動語態</b>：主詞 dogs 是「被訓練」的對象，are 之後接過去分詞 trained。<br>(A) 原形、(C) 現在分詞、(D) 不定詞皆不能構成被動。<br>句型：be + p.p. + to V（被訓練去做……）。'},
+ {q:['These dogs can detect trees ',' have "brown root rot" disease before the trees fall.'],
+  cn:'這些狗能在樹倒下前偵測出染有「褐根病」的樹。',
+  opts:['what','who','which','whose'],ans:2,
+  word:'關係代名詞 which（先行詞為物）',
+  tnote:'<b>關係代名詞</b>：先行詞 trees（物）＋後接不完整子句（缺主詞），用 which（或 that）。<br>(A) what 不可引導形容詞子句；(B) who 用於人；(D) whose 表所有格。<br>此處無逗號，which/that 皆可。'},
+ {q:['',' their keen sense of smell, sniffer dogs can find infected trees quickly.'],
+  cn:'由於敏銳的嗅覺，嗅探犬能迅速找出受感染的樹。',
+  opts:['Because','Due to','Since','As'],ans:1,
+  word:'Due to + 名詞片語',
+  tnote:'<b>due to vs. because</b>：空格後是名詞片語 their keen sense of smell（無 S+V），用 Due to / Because of。<br>(A) Because、(C) Since、(D) As 後皆須接「主詞+動詞」的完整子句。<br>口訣：接名詞 → due to / because of；接子句 → because / since。'},
+ {q:['They have also ',' to predict the onset of certain diseases in humans.'],
+  cn:'牠們也已被訓練來預測人類某些疾病的發作。',
+  opts:['trained','been training','been trained','being trained'],ans:2,
+  word:'have been + p.p.（現在完成被動）',
+  tnote:'<b>現在完成被動</b>：have + been + 過去分詞。主詞 They（狗）是被訓練者，用被動。<br>(A) 缺 been，成主動完成；(B) been training 為主動進行；(D) being trained 不能接在 have 後。<br>正解：have been trained。'},
+ {q:['',' their training is complete, sniffer dogs are assigned to carry out specific duties.'],
+  cn:'一旦訓練完成，嗅探犬便被分派去執行特定的任務。',
+  opts:['Once','Unless','Although','Whether'],ans:0,
+  word:'Once（一旦……就……）',
+  tnote:'<b>連接詞語意</b>：前後為「完成訓練 → 被分派任務」的先後關係，用 Once（一旦）。<br>(B) Unless 除非、(C) Although 雖然、(D) Whether 是否，語意皆不符。<br>Once 引導時間/條件副詞子句，常搭配現在式表未來。'},
+ {q:['It turned ',' that Malachi saved Maria\'s life several times that year.'],
+  cn:'結果證明，那一年 Malachi 好幾次救了 Maria 的命。',
+  opts:['out','off','up','over'],ans:0,
+  word:'turn out（結果是）',
+  tnote:'<b>片語動詞</b>：It turned out that... = 結果證明……。<br>(B) turn off 關掉、(C) turn up 出現/調大、(D) turn over 翻轉，語意皆不符。<br>另可用 turn out to be + adj.：The trip turned out to be great.'},
+ {q:['The dogs are taught to give an alert when they ',' these special smells.'],
+  cn:'這些狗被教導在遇到這些特殊氣味時發出警示。',
+  opts:['carry out','come across','dig out','turn out'],ans:1,
+  word:'come across（偶然遇到）',
+  tnote:'<b>片語辨析</b>：狗「遇到」氣味，用 come across（＝encounter 偶然遇到）。<br>(A) carry out 執行、(C) dig out 挖出、(D) turn out 結果是，皆不符。<br>come across 也可指「偶然發現（東西）」。'},
+ {q:['By ',' its powerful nose, Malachi could sense that Maria\'s blood sugar was too low.'],
+  cn:'藉由使用牠強大的鼻子，Malachi 能察覺 Maria 的血糖過低。',
+  opts:['use','used','using','to use'],ans:2,
+  word:'By + V-ing（藉由做……）',
+  tnote:'<b>介系詞 + 動名詞</b>：by 為介系詞，後接動名詞 V-ing 表「方法」。<br>(A) 原形、(B) 過去式、(D) 不定詞皆不可接在介系詞 by 之後。<br>By using... = 藉由使用……。'},
+ {q:['Trainers need to expose their dogs ',' these smells many times during training.'],
+  cn:'訓練期間，訓練員需要讓狗多次接觸這些氣味。',
+  opts:['to','with','on','for'],ans:0,
+  word:'expose A to B（使 A 接觸 B）',
+  tnote:'<b>介系詞搭配</b>：expose...to... 為固定用法，介系詞用 to。<br>✗ expose...with / on / for。<br>名詞形亦同：exposure to sunlight（暴露於陽光下）。'},
+ {q:['This is not the only task ',' sniffer dogs can accomplish; they can do much more.'],
+  cn:'這並不是嗅探犬唯一能完成的任務，牠們能做的更多。',
+  opts:['what','that','where','when'],ans:1,
+  word:'關係代名詞 that（先行詞含 the only）',
+  tnote:'<b>只能用 that 的情況</b>：先行詞被 the only、序數、最高級修飾時，關代慣用 that。<br>the only task 之後接不完整子句（缺受詞），用 that。<br>(A) what 不接先行詞；(C)(D) 為關係副詞，後接完整子句。'}
+];
+
+var examQ=[
+ // 綜合測驗/克漏字（L4 嗅探犬課文改寫）
+ {q:['Dogs possess a remarkable sense ',' smell that is far more sensitive than humans\'.'],
+  cn:'狗擁有比人類敏感許多的驚人嗅覺。',
+  opts:['in','of','on','about'],ans:1,
+  word:'sense of smell（嗅覺）',
+  exp:'固定搭配 a sense of smell（嗅覺），介系詞用 of。（來源：國立基隆高中 第二次期中考）'},
+ {q:['A dog named Malachi alerted his owner to a dangerous drop in her blood sugar level ',' his keen sense of smell, saving her life.'],
+  cn:'一隻名叫 Malachi 的狗憑藉敏銳的嗅覺，警示主人血糖危險下降，救了她一命。',
+  opts:['turn out','carry out','due to','close to'],ans:2,
+  word:'due to（由於，＋名詞）',
+  exp:'空格後接名詞片語 his keen sense of smell，表原因，用 due to。（來源：國立基隆高中 第二次期中考）'},
+ {q:['Through extensive training, these dogs learn to ',' chemical changes in living beings caused by disease.'],
+  cn:'透過大量訓練，這些狗學會偵測疾病在生物體內造成的化學變化。',
+  opts:['detect','detected','detecting','detective'],ans:0,
+  word:'to + 原形 detect（偵測）',
+  exp:'learn to 之後接原形動詞 detect。detective 為名詞（偵探），詞性不符。（來源：國立基隆高中 第二次期中考）'},
+ {q:['In Pingtung, park officials use trained dogs to locate trees ',' "brown root rot" disease.'],
+  cn:'在屏東，公園官員用受訓的狗找出染上「褐根病」的樹。',
+  opts:['on','with','at','for'],ans:1,
+  word:'trees with disease（染病的樹）',
+  exp:'trees with...disease = 有……疾病的樹，介系詞用 with。（來源：國立金門高中 113 學年度第二次段考）'},
+ {q:['The dogs sit beside a diseased tree to signal their discovery ',' their trainer hands them a treat.'],
+  cn:'這些狗坐在病樹旁示意其發現，直到訓練員遞給牠們零食。',
+  opts:['for','once','since','until'],ans:3,
+  word:'until（直到……為止）',
+  exp:'表「坐著直到……」用 until。呼應課文 sit down beside it until their trainer hands them a treat。（來源：國立金門高中 113 學年度第二次段考）'},
+ {q:['Once their training is finished, sniffer dogs ',' specific duties.'],
+  cn:'一旦訓練完成，嗅探犬就被分派特定的任務。',
+  opts:['are assigning','are assigned','assigning','assign'],ans:1,
+  word:'be assigned（被分派，被動）',
+  exp:'狗是「被」分派任務的對象，用被動 are assigned。（來源：國立金門高中 113 學年度第二次段考）'},
+ {q:['For example, dogs can recognize trees with root rot disease and help to save forests and parks across Taiwan. In ',' cases, a dog\'s sense of smell can even save a person\'s life.'],
+  cn:'例如，狗能辨識染褐根病的樹並拯救全台森林公園。在某些情況下，狗的嗅覺甚至能救人一命。',
+  opts:['certain','both','any','either'],ans:0,
+  word:'in certain cases（在某些情況下）',
+  exp:'in certain cases = 在某些情況下。both/either 需搭配「兩者」，any 語意不符。（來源：國立金門高中 112 學年度第二次段考）'},
+ {q:['Maria Tello, ',' was a 58-year-old woman with diabetes, was asleep one night when her dog sensed danger.'],
+  cn:'患糖尿病的 58 歲女性 Maria Tello 某晚睡著時，她的狗察覺到危險。',
+  opts:['that','who',',that',',who'],ans:3,
+  word:'補述用法 , who（先行詞為人）',
+  exp:'先行詞 Maria Tello 為專有名詞，需用「逗號＋who」補述。that 不可用於逗號後。（來源：國立金門高中 112 學年度第二次段考）'},
+ // 明倫 綜合測驗（狗的嗅覺）
+ {q:['With more than 100 million olfactory receptors in their noses, dogs can ',' amazing tasks such as detecting hidden drugs.'],
+  cn:'狗鼻中有超過一億個嗅覺受器，能執行偵測毒品等驚人任務。',
+  opts:['produce','perform','promote','protect'],ans:1,
+  word:'perform a task（執行任務）',
+  exp:'perform tasks = 執行任務（＝carry out/accomplish）。produce 生產、promote 推廣、protect 保護皆不符。（來源：臺北市立明倫高中 第二次期中考）'},
+ {q:['When sniff dogs locate illegal drugs, they sit down beside it until their trainer hands them a treat as a ','.'],
+  cn:'嗅探犬找到毒品時，會坐在旁邊直到訓練員給零食作為獎勵。',
+  opts:['reward','behavior','disease','ability'],ans:0,
+  word:'as a reward（作為獎勵）',
+  exp:'零食是「獎勵」，as a reward。呼應課文 hands them a treat as a reward。（來源：臺北市立明倫高中 第二次期中考）'},
+ // 新店 Passage A（嗅探犬）
+ {q:['Some dogs, known as "sniffer dogs," are specially trained to ',' things like hidden drugs or sick trees.'],
+  cn:'有些被稱為「嗅探犬」的狗被特別訓練來偵測毒品或病樹等物品。',
+  opts:['detect','manage','expose','accomplish'],ans:0,
+  word:'detect（偵測）',
+  exp:'受詞是 drugs / sick trees，需「偵測、察覺」，detect 最恰當。manage 設法、expose 暴露、accomplish 完成皆不符。（來源：新北市立新店高中 第二次期中考）'},
+ {q:['When trained dogs ',' the smell of an infected tree, they sit to alert their trainer.'],
+  cn:'當受訓的狗遇到受感染樹木的氣味時，會坐下來警示訓練員。',
+  opts:['cheer up','come across','stand for','dig out'],ans:1,
+  word:'come across（偶然遇到）',
+  exp:'狗「遇到」氣味用 come across。呼應課文 when they come across these smells。（來源：新北市立新店高中 第二次期中考）'},
+ // L4 字彙單選題
+ {q:['Even though Ben lost one of his arms in the war, he can still ',' most daily life tasks.'],
+  cn:'儘管 Ben 在戰爭中失去一隻手臂，他仍能執行大部分日常任務。',
+  opts:['reward','drift','perform','celebrate'],ans:2,
+  word:'perform（執行）',
+  exp:'perform tasks = 執行任務。reward 獎勵、drift 漂流、celebrate 慶祝皆不符。（來源：國立基隆高中 第二次期中考）'},
+ {q:['Washing your hands often is a good way to stop the spread of ','.'],
+  cn:'經常洗手是阻止疾病傳播的好方法。',
+  opts:['performance','flash','disease','display'],ans:2,
+  word:'disease（疾病）',
+  exp:'the spread of disease = 疾病的傳播（固定搭配）。performance 表演、flash 閃光、display 展示皆不符。（來源：高雄市立小港高中 第二次月考）'},
+ {q:['Everybody was asked to leave the mall due to a bomb ',' in one of the stores.'],
+  cn:'由於其中一家店有炸彈警報，所有人都被要求離開商場。',
+  opts:['assistant','figure','poster','alert'],ans:3,
+  word:'alert (n.) 警報',
+  exp:'a bomb alert = 炸彈警報。assistant 助理、figure 數字、poster 海報皆不符。（來源：高雄市立小港高中 第二次月考）'},
+ {q:['There wasn\'t any ',' reason why Jason didn\'t attend the performance; he just didn\'t feel like it.'],
+  cn:'Jason 沒去看表演並沒有什麼特定的理由，他只是不想去。',
+  opts:['keen','urban','specific','tasty'],ans:2,
+  word:'specific (adj.) 特定的',
+  exp:'a specific reason = 特定的理由。keen 敏銳的、urban 都市的、tasty 美味的皆不符。（來源：高雄市立小港高中 第二次月考）'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+  var exBody=document.querySelector('.s-exam .sec-body');
+  if(exBody)buildQuestions(examQ,exBody,'E','badge-purple','#6d28d9');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>

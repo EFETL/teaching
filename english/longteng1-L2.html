@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L2: Goodbye, John ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.badge-purple{background:#6d28d9}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+/* 段考考古題 */
+.s-exam .sec-head{background:#faf5ff;color:#6d28d9;border-bottom:2px solid #e9d5ff}
+.s-exam .sec-icon{background:#6d28d9;color:#fff}
+.s-exam .q-num{background:#6d28d9}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L2: Goodbye, John ── 再見了，約翰</h1>
+  <div class="sub">龍騰版高中英文 第一冊 第二課｜互動教學講義（高一適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 7</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+    <span class="tag">📚 段考考古題</span>
+  </div>
+</div>
+
+<!-- 主題速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>本課主題速覽（一封寫給手機的分手信）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 誰是「John」？</h4>
+        本課是一封分手信。寫信人 Sally 把她的<b>智慧型手機</b>擬人化成男友「John」。整封信看似寫給情人，其實是寫給手機──一個讓她又愛又離不開的對象。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 為什麼要分手？</h4>
+        手機讓 Sally 無法<b>專心</b>讀書、成績變差；她整天滑 Facebook、Instagram、LINE，<b>忽略</b>身邊的朋友與家人，親子與友情都亮起紅燈。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 這封信的用意</h4>
+        Sally 決定<b>戒掉手機成癮</b>，重新專注課業、多陪朋友、重新成為家庭的一份子。這是一篇談「科技與人際關係」的省思文，也是幽默的擬人化寫作範例。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課是一封「分手信」。寫信人 Sally 把自己的智慧型手機擬人化成男友「John」，寫信要向他（手機成癮）告別。閱讀時請留意：信中的「你（you / John）」其實都指手機。</p>
+
+    <!-- 開頭 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">💌 開頭｜Dear John（提出分手）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Dear John, It is not easy to tell you this, but I still need to say it.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">親愛的約翰，要告訴你這件事並不容易，但我還是必須說出來。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">not easy</span><span class="syn-t">C</span> <span class="syn syn-m">to tell you this</span><span class="syn-t">真主詞（不定詞）</span><br>
+            <span class="num">②</span><span class="syn syn-m">but</span><span class="syn-t">連接詞</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">still need</span><span class="syn-t">V</span> <span class="syn syn-o">to say it</span><span class="syn-t">O（不定詞）</span></div>
+          <div class="para-note"><b>It is + adj. + to V</b> = 做某事是……（虛主詞 it 代替後面的不定詞真主詞）。<b>Dear John (letter)</b> 在英文中本身即指「分手信」，故課名一語雙關。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I'm leaving you. Our relationship has been mostly satisfying, but I'm afraid it's over.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我要離開你了。我們的關係大致上是令人滿意的，但我恐怕它已經結束了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">'m leaving</span><span class="syn-t">V（進行式表未來）</span> <span class="syn syn-o">you</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">Our relationship</span><span class="syn-t">S</span> <span class="syn syn-v">has been</span><span class="syn-t">V（現在完成式）</span> <span class="syn syn-c">mostly satisfying</span><span class="syn-t">C</span> <span class="syn syn-m">but I'm afraid it's over</span><span class="syn-t">轉折子句</span></div>
+          <div class="para-note"><b>relationship</b>（關係）、<b>satisfying</b>（令人滿意的）為核心字；<b>be leaving</b> 用現在進行式表「即將發生的未來」；<b>I'm afraid (that)...</b> = 我恐怕……（委婉語氣）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Leaving you really breaks my heart because we've had some great times together.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">離開你真的讓我心碎，因為我們曾一起度過一些美好的時光。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Leaving you</span><span class="syn-t">S（動名詞片語）</span> <span class="syn syn-v">really breaks</span><span class="syn-t">V</span> <span class="syn syn-o">my heart</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-m">because</span><span class="syn-t">連接詞</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">'ve had</span><span class="syn-t">V</span> <span class="syn syn-o">some great times together</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>Leaving you</b> 為動名詞片語當主詞，視為單數，動詞用 breaks（句型一）；<b>break one's heart</b> = 使某人心碎。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 好處 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">😊 中段一｜你的好（手機帶來的美好）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When you're around, I am never bored. There is always something to do.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有你在身邊時，我從不會無聊。總是有事情可以做。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When you're around</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">am</span><span class="syn-t">V</span> <span class="syn syn-c">never bored</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-m">There</span><span class="syn-t">引導詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-s">always something to do</span><span class="syn-t">S（真主詞）</span></div>
+          <div class="para-note"><b>around</b>（在附近）為副詞；<b>bored</b>（感到無聊，人 + -ed，句型四）；<b>something to do</b> = 可做的事（不定詞修飾不定代名詞）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>You inspire me to connect with others and to communicate better.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">你啟發我與他人建立連結，並且溝通得更好。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">You</span><span class="syn-t">S</span> <span class="syn syn-v">inspire</span><span class="syn-t">V</span> <span class="syn syn-o">me</span><span class="syn-t">O</span> <span class="syn syn-c">to connect with others and to communicate better</span><span class="syn-t">OC（受詞補語，不定詞）</span></div>
+          <div class="para-note"><b>inspire sb. to V</b> = 啟發／激勵某人做某事（核心字）；<b>connect with</b> = 與……連結；<b>communicate</b>（溝通）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I can ask you anything, and you will probably help me find the answer.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我可以問你任何事，而你大概都會幫我找到答案。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">can ask</span><span class="syn-t">V</span> <span class="syn syn-o">you anything</span><span class="syn-t">O（雙受詞）</span><br>
+            <span class="num">②</span><span class="syn syn-m">and</span><span class="syn-t">連接詞</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">will probably help</span><span class="syn-t">V</span> <span class="syn syn-o">me</span><span class="syn-t">O</span> <span class="syn syn-c">find the answer</span><span class="syn-t">OC（原形不定詞）</span></div>
+          <div class="para-note"><b>ask sb. sth.</b> = 問某人某事（雙受詞）；<b>help sb. (to) V</b> = 幫助某人做某事，help 後不定詞的 to 可省略。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>You've introduced me to so much—new music, new games, new knowledge, new friends, and more.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">你為我介紹了好多東西──新音樂、新遊戲、新知識、新朋友，還有更多。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">You</span><span class="syn-t">S</span> <span class="syn syn-v">'ve introduced</span><span class="syn-t">V（現在完成式）</span> <span class="syn syn-o">me</span><span class="syn-t">O</span> <span class="syn syn-m">to so much—new music, new games...</span><span class="syn-t">介系詞片語</span></div>
+          <div class="para-note"><b>introduce sb. to sth.</b> = 讓某人接觸／認識某事物（核心字）；破折號後為 so much 的具體列舉。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 生活 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">📱 中段二｜你如何佔據我的生活</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In fact, things have been totally different since you came into my life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">事實上，自從你進入我的生活以來，一切都變得完全不同了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In fact</span><span class="syn-t">副詞</span> <span class="syn syn-s">things</span><span class="syn-t">S</span> <span class="syn syn-v">have been</span><span class="syn-t">V（現在完成式）</span> <span class="syn syn-c">totally different</span><span class="syn-t">C</span> <span class="syn syn-m">since you came into my life</span><span class="syn-t">時間副詞子句</span></div>
+          <div class="para-note"><b>in fact</b> = 事實上（片語）；<b>since + 過去時間點</b> 常搭配主句用<b>現在完成式</b>（have been）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When I wake up, you are there to go through my friends' updates on Facebook and Instagram with me.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當我醒來時，你就在那裡，陪我瀏覽我朋友在 Facebook 和 Instagram 上的動態。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When I wake up</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">there</span><span class="syn-t">C</span> <span class="syn syn-m">to go through my friends' updates...with me</span><span class="syn-t">不定詞（表目的）</span></div>
+          <div class="para-note"><b>go through</b> = 瀏覽、逐一查看（片語）；<b>updates</b> = 動態、更新消息；friends' 為複數所有格（撇號在 s 之後）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Also, I check my LINE app again and again throughout the day.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，我一整天都一再地查看我的 LINE 應用程式。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Also</span><span class="syn-t">副詞</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">check</span><span class="syn-t">V</span> <span class="syn syn-o">my LINE app</span><span class="syn-t">O</span> <span class="syn syn-m">again and again throughout the day</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>again and again</b> = 一再地、反覆地；<b>throughout the day</b> = 一整天（throughout 為核心字）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>And when it doesn't show any new messages, I still refresh the screen, just in case I miss something.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">而當它沒有顯示任何新訊息時，我還是會重新整理畫面，以防我漏掉什麼。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">when it doesn't show any new messages</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">still refresh</span><span class="syn-t">V</span> <span class="syn syn-o">the screen</span><span class="syn-t">O</span> <span class="syn syn-m">just in case I miss something</span><span class="syn-t">副詞子句</span></div>
+          <div class="para-note"><b>message</b>（訊息）、<b>refresh</b>（重新整理）為核心字；<b>(just) in case + 子句</b> = 以防萬一……（片語，見句型三）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 壞處 -->
+    <div class="para">
+      <div class="para-speaker sp-claire" style="background:#fef2f2;color:#b91c1c;border-bottom:2px solid #fecaca">💔 轉折｜可是你也傷害了我</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>All this might sound romantic, but it is difficult for me to focus on school, and my grades are getting worse!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這一切聽起來或許很浪漫，但我很難專心在課業上，而且我的成績越來越差！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">All this</span><span class="syn-t">S</span> <span class="syn syn-v">might sound</span><span class="syn-t">V</span> <span class="syn syn-c">romantic</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">difficult</span><span class="syn-t">C</span> <span class="syn syn-m">for me</span><span class="syn-t">意義上主詞</span> <span class="syn syn-m">to focus on school</span><span class="syn-t">真主詞</span></div>
+          <div class="para-note"><b>sound + adj.</b> = 聽起來……（連綴動詞）；<b>romantic</b>（浪漫的）、<b>focus on</b>（專注於）為核心字；<b>get + 比較級</b>（getting worse）= 變得越來越……。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In addition, having you around is really hurting my relationships with my friends and family.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，有你在身邊，正嚴重傷害著我與朋友和家人的關係。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In addition</span><span class="syn-t">副詞</span> <span class="syn syn-s">having you around</span><span class="syn-t">S（動名詞片語）</span> <span class="syn syn-v">is really hurting</span><span class="syn-t">V（現在進行式）</span> <span class="syn syn-o">my relationships with my friends and family</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>in addition</b> = 此外（片語）；<b>having you around</b> 為動名詞片語當主詞，動詞用單數 is；<b>hurt one's relationship with</b> = 傷害與……的關係。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When my friends and I hang out, I turn to you for Instagram updates and ignore everyone else.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當我和朋友出去玩時，我卻只顧著滑你看 Instagram 動態，忽略其他所有人。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When my friends and I hang out</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">turn to</span><span class="syn-t">V（片語動詞）</span> <span class="syn syn-o">you</span><span class="syn-t">O</span> <span class="syn syn-m">for Instagram updates</span><span class="syn-t">副詞</span> <span class="syn syn-v">and ignore</span><span class="syn-t">V</span> <span class="syn syn-o">everyone else</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>hang out</b> = 出去玩、閒晃（片語）；<b>turn to sb./sth. for</b> = 求助於、依賴（片語）；<b>ignore</b>（忽視）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>My friends try to talk to me, but I don't even reply because I am too busy paying attention to you.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我的朋友試著跟我說話，但我甚至沒有回應，因為我太忙著注意你了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">My friends</span><span class="syn-t">S</span> <span class="syn syn-v">try</span><span class="syn-t">V</span> <span class="syn syn-o">to talk to me</span><span class="syn-t">O（不定詞）</span><br>
+            <span class="num">②</span><span class="syn syn-m">but</span><span class="syn-t">連接詞</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">don't even reply</span><span class="syn-t">V</span> <span class="syn syn-m">because I am too busy paying attention to you</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>pay attention to</b> = 注意、留心（attention 為核心字）；<b>be busy (in) V-ing</b> = 忙於做某事（busy 後接動名詞）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I'm worried that they are going to stop inviting me out!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我很擔心他們以後不會再找我出去了！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">'m worried</span><span class="syn-t">V</span> <span class="syn syn-o">that they are going to stop inviting me out</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>be worried that + 子句</b> = 擔心……；<b>stop + V-ing</b> = 停止做某事（stop 後接動名詞，與 stop to V「停下來去做」不同）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I can't deny that you are always by my side, and I love it when we play games or respond to messages together.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我無法否認你總是在我身邊，我也很喜歡我們一起玩遊戲或回覆訊息的時候。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">can't deny</span><span class="syn-t">V</span> <span class="syn syn-o">that you are always by my side</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">love</span><span class="syn-t">V</span> <span class="syn syn-o">it</span><span class="syn-t">O</span> <span class="syn syn-m">when we play games or respond to messages together</span><span class="syn-t">副詞子句</span></div>
+          <div class="para-note"><b>deny</b>（否認）為核心字，後接名詞子句或 V-ing；<b>by one's side</b> = 在某人身邊；<b>respond to</b> = 回覆、回應（respond 為核心字）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>But doing this late into the night means I seldom speak to my family!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">但是做這些做到深夜，意味著我很少和家人說話！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">doing this late into the night</span><span class="syn-t">S（動名詞片語）</span> <span class="syn syn-v">means</span><span class="syn-t">V</span> <span class="syn syn-o">I seldom speak to my family</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>doing this</b> 為動名詞主詞，動詞用單數 means；<b>seldom</b> = 很少（否定副詞）；<b>late into the night</b> = 到深夜。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>That's really not a good way to build a relationship with anybody, and my parents are both angry and disappointed with me.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這實在不是與任何人建立關係的好方法，我父母對我既生氣又失望。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">That</span><span class="syn-t">S</span> <span class="syn syn-v">'s really not</span><span class="syn-t">V</span> <span class="syn syn-c">a good way to build a relationship with anybody</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">my parents</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">both angry and disappointed with me</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>a way to V</b> = 做某事的方法；<b>disappointed</b>（感到失望，人 + -ed，核心字）；<b>be disappointed with sb.</b> = 對某人失望。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 結尾 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie" style="background:#f8fafc;color:#475569;border-bottom:2px solid #e2e8f0">🌱 結尾｜再見，為了成為更好的自己</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Please don't take any of this personally.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">請不要把這一切放在心上（別往心裡去）。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">Please don't take</span><span class="syn-t">V（祈使句）</span> <span class="syn syn-o">any of this</span><span class="syn-t">O</span> <span class="syn syn-m">personally</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>take...personally</b> = 把……當成針對自己、往心裡去（片語）；<b>personally</b>（個人地）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>You're truly wonderful, and I'll miss you terribly.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">你真的很棒，我會非常想念你。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">You</span><span class="syn-t">S</span> <span class="syn syn-v">'re</span><span class="syn-t">V</span> <span class="syn syn-c">truly wonderful</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">'ll miss</span><span class="syn-t">V</span> <span class="syn syn-o">you</span><span class="syn-t">O</span> <span class="syn syn-m">terribly</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>truly</b>（真正地）與 <b>terribly</b>（非常地）皆為強調程度的副詞；miss sb. terribly = 非常想念某人。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>But right now, I really need to focus on my studies, spend more time with my friends, and become a real part of my family again.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">但現在，我真的需要專注於課業、多花時間陪朋友，並再次成為家庭真正的一份子。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">right now</span><span class="syn-t">時間</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">really need</span><span class="syn-t">V</span> <span class="syn syn-o">to focus on my studies, spend more time..., and become...</span><span class="syn-t">O（三個並列不定詞）</span></div>
+          <div class="para-note">三個不定詞 <b>to focus / (to) spend / (to) become</b> 並列，第二、三個 to 省略（平行結構）。<b>focus on</b>（專注於）呼應主旨。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I hope you understand. For the last time, goodbye.... Best wishes, Sally</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我希望你能理解。最後一次，再見了……。祝好，莎莉</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">hope</span><span class="syn-t">V</span> <span class="syn syn-o">you understand</span><span class="syn-t">O（名詞子句，that 省略）</span><br>
+            <span class="num">②</span><span class="syn syn-m">For the last time</span><span class="syn-t">副詞</span> <span class="syn syn-v">goodbye</span><span class="syn-t">道別語</span></div>
+          <div class="para-note"><b>For the last time</b> = 最後一次；<b>Best wishes</b> 為英文書信常見的結尾敬詞（相當於「祝好」），後接署名 Sally。全信至此揭示寫信人身分。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">relationship</span><span class="v-pos">n.</span><div class="v-cn-mini">關係；戀愛關係</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>relate (v.) 有關聯</span><span>relation (n.) 關係</span><span>relative (n.) 親戚</span></div>
+        <div class="v-ex">Our <b>relationship</b> has been mostly satisfying, but it's over.<span class="cn">我們的關係大致上令人滿意，但已經結束了。</span></div>
+        <span class="v-gsat">📊 build a relationship with 為學測寫作高頻</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">satisfying</span><span class="v-pos">adj.</span><div class="v-cn-mini">令人滿意的（事物）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>satisfy (v.) 使滿意</span><span>satisfied (adj.) 感到滿意的</span><span>satisfaction (n.) 滿足</span></div>
+        <div class="v-ex">The <b>satisfying</b> results made all our effort worth it.<span class="cn">令人滿意的結果讓我們所有的努力都值得了。</span></div>
+        <span class="v-gsat">📊 satisfying(事) / satisfied(人) 為學測情感形容詞考點</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">inspire</span><span class="v-pos">v.</span><div class="v-cn-mini">激勵；啟發</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>inspiration (n.) 靈感</span><span>inspiring (adj.) 激勵人的</span><span>inspire sb. to V</span></div>
+        <div class="v-ex">You <b>inspire</b> me to connect with others.<span class="cn">你激勵我與他人建立連結。</span></div>
+        <span class="v-gsat">📊 inspire sb. to V 為學測常考搭配</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">connect</span><span class="v-pos">v.</span><div class="v-cn-mini">連結；聯繫</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>connection (n.) 連結</span><span>connect with / to</span></div>
+        <div class="v-ex">Smartphones help us <b>connect</b> with people far away.<span class="cn">智慧型手機幫助我們與遠方的人聯繫。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">communicate</span><span class="v-pos">v.</span><div class="v-cn-mini">溝通；傳達</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>communication (n.) 溝通</span><span>communicate with sb.</span></div>
+        <div class="v-ex">You inspire me to <b>communicate</b> better.<span class="cn">你激勵我溝通得更好。</span></div>
+        <span class="v-gsat">📊 communication skills 為學測作文常用</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">introduce</span><span class="v-pos">v.</span><div class="v-cn-mini">介紹；引進</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>introduction (n.) 介紹</span><span>introduce A to B</span></div>
+        <div class="v-ex">You've <b>introduced</b> me to so much new music.<span class="cn">你為我介紹了好多新音樂。</span></div>
+        <span class="v-gsat">📊 introduce sb. to sth. 介系詞用 to</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">throughout</span><span class="v-pos">prep.</span><div class="v-cn-mini">遍及；自始至終</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>throughout the day 一整天</span><span>throughout the world 全世界</span></div>
+        <div class="v-ex">I check my LINE app again and again <b>throughout</b> the day.<span class="cn">我一整天都一再地查看 LINE。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">refresh</span><span class="v-pos">v.</span><div class="v-cn-mini">重新整理；使恢復精神</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>refreshing (adj.) 提神的</span><span>refreshment (n.) 茶點</span></div>
+        <div class="v-ex">I still <b>refresh</b> the screen, just in case I miss something.<span class="cn">我還是會重新整理畫面，以防漏掉什麼。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">romantic</span><span class="v-pos">adj.</span><div class="v-cn-mini">浪漫的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>romance (n.) 浪漫；戀情</span><span>romantically (adv.)</span></div>
+        <div class="v-ex">All this might sound <b>romantic</b>, but it hurts my grades.<span class="cn">這一切聽起來或許浪漫，卻傷害了我的成績。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">focus</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">專注／焦點</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>focus on 專注於</span><span>be out of focus 失焦</span></div>
+        <div class="v-ex">It is difficult for me to <b>focus</b> on school.<span class="cn">我很難專心在課業上。</span></div>
+        <span class="v-gsat">📊 focus on = concentrate on，學測常互換</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">ignore</span><span class="v-pos">v.</span><div class="v-cn-mini">忽視；不理會</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>ignorance (n.) 無知</span><span>ignorant (adj.) 無知的</span></div>
+        <div class="v-ex">I turn to you for updates and <b>ignore</b> everyone else.<span class="cn">我只顧著滑你看動態，忽略其他所有人。</span></div>
+        <span class="v-gsat">📊 ignore(忽視) vs. neglect(疏忽) 常混考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">attention</span><span class="v-pos">n.</span><div class="v-cn-mini">注意；專注</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>pay attention to 注意</span><span>attend (v.) 出席；照料</span></div>
+        <div class="v-ex">I am too busy paying <b>attention</b> to you.<span class="cn">我太忙著注意你了。</span></div>
+        <span class="v-gsat">📊 pay attention to 的 to 是介系詞，後接名詞/V-ing</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">deny</span><span class="v-pos">v.</span><div class="v-cn-mini">否認；拒絕給予</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>denial (n.) 否認</span><span>deny + V-ing / that 子句</span></div>
+        <div class="v-ex">I can't <b>deny</b> that you are always by my side.<span class="cn">我無法否認你總是在我身邊。</span></div>
+        <span class="v-gsat">📊 deny 後接動名詞（deny doing），不接不定詞</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">respond</span><span class="v-pos">v.</span><div class="v-cn-mini">回應；回覆</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>response (n.) 回應</span><span>respond to = reply to</span></div>
+        <div class="v-ex">I love it when we <b>respond</b> to messages together.<span class="cn">我喜歡我們一起回覆訊息的時候。</span></div>
+        <span class="v-gsat">📊 respond to / reply to 皆需介系詞 to</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">disappointed</span><span class="v-pos">adj.</span><div class="v-cn-mini">（人）感到失望的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>disappointing (事)令人失望的</span><span>disappoint (v.)</span><span>disappointment (n.)</span></div>
+        <div class="v-ex">My parents are angry and <b>disappointed</b> with me.<span class="cn">我父母對我既生氣又失望。</span></div>
+        <span class="v-gsat">📊 人+ed／事+ing 為學測超高頻文法</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">in fact</span></td><td>事實上</td><td class="pex"><b>In fact</b>, things have been totally different since then.<span class="cn">事實上，自從那時起一切都變了。</span></td></tr>
+      <tr><td><span class="phr">go through</span></td><td>瀏覽；經歷</td><td class="pex">You are there to <b>go through</b> my friends' updates with me.<span class="cn">你陪我瀏覽我朋友的動態。</span></td></tr>
+      <tr><td><span class="phr">in case</span></td><td>以防；萬一</td><td class="pex">I refresh the screen, just <b>in case</b> I miss something.<span class="cn">我重新整理畫面，以防漏掉什麼。</span></td></tr>
+      <tr><td><span class="phr">in addition</span></td><td>此外；另外</td><td class="pex"><b>In addition</b>, having you around hurts my relationships.<span class="cn">此外，有你在身邊傷害了我的人際關係。</span></td></tr>
+      <tr><td><span class="phr">hang out</span></td><td>出去玩；閒晃</td><td class="pex">When my friends and I <b>hang out</b>, I ignore everyone.<span class="cn">當我和朋友出去玩時，我卻忽略了大家。</span></td></tr>
+      <tr><td><span class="phr">turn to</span></td><td>求助於；轉向</td><td class="pex">I <b>turn to</b> you for Instagram updates.<span class="cn">我依賴你來看 Instagram 動態。</span></td></tr>
+      <tr><td><span class="phr">take...personally</span></td><td>往心裡去；當成針對自己</td><td class="pex">Please don't <b>take</b> any of this <b>personally</b>.<span class="cn">請別把這一切往心裡去。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆出自課文相關主題（科技、成癮、人際、溝通、分心），並已在近年學測出現。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">addicted</span><span class="v-pos">adj.</span><div class="v-cn-mini">上癮的；入迷的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>addiction (n.) 癮</span><span>be addicted to N/V-ing</span></div>
+        <div class="v-ex">Many teenagers are <b>addicted to</b> their smartphones.<span class="cn">許多青少年對手機上癮。</span></div>
+        <span class="v-gsat">📊 be addicted to 的 to 是介系詞，後接 N/V-ing</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">distract</span><span class="v-pos">v.</span><div class="v-cn-mini">使分心</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>distraction (n.) 分心之物</span><span>distracted (adj.) 分心的</span></div>
+        <div class="v-ex">Notifications constantly <b>distract</b> her from studying.<span class="cn">通知不斷讓她無法專心讀書。</span></div>
+        <span class="v-gsat">📊 distract sb. from V-ing 為學測常考搭配</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">interact</span><span class="v-pos">v.</span><div class="v-cn-mini">互動；交流</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>interaction (n.) 互動</span><span>interact with sb.</span></div>
+        <div class="v-ex">Face-to-face <b>interaction</b> matters more than online chats.<span class="cn">面對面的互動比線上聊天更重要。</span></div>
+        <span class="v-gsat">📊 113學測閱讀談 social interaction</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">device</span><span class="v-pos">n.</span><div class="v-cn-mini">裝置；設備</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>electronic device 電子裝置</span><span>≈ gadget</span></div>
+        <div class="v-ex">She put her <b>device</b> away to focus on her homework.<span class="cn">她把裝置收起來，好專心寫作業。</span></div>
+        <span class="v-gsat">📊 114學測考 digital devices</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">virtual</span><span class="v-pos">adj.</span><div class="v-cn-mini">虛擬的；網路上的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>virtual reality (VR) 虛擬實境</span><span>virtually (adv.) 幾乎</span></div>
+        <div class="v-ex">Online friendships form a <b>virtual</b> social life.<span class="cn">網路上的友誼構成了虛擬的社交生活。</span></div>
+        <span class="v-gsat">📊 virtual world 為學測科技題常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">notification</span><span class="v-pos">n.</span><div class="v-cn-mini">通知</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>notify (v.) 通知</span><span>turn off notifications</span></div>
+        <div class="v-ex">Every <b>notification</b> made her check the phone again.<span class="cn">每則通知都讓她又拿起手機看。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">generation</span><span class="v-pos">n.</span><div class="v-cn-mini">世代；一代</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>generate (v.) 產生</span><span>the younger generation</span></div>
+        <div class="v-ex">The younger <b>generation</b> grew up with smartphones.<span class="cn">年輕世代是伴著智慧型手機長大的。</span></div>
+        <span class="v-gsat">📊 115學測閱讀出現 generation gap</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">balance</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">平衡／使平衡</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>balanced (adj.) 均衡的</span><span>balance A and B</span></div>
+        <div class="v-ex">We need to <b>balance</b> screen time and real life.<span class="cn">我們需要在螢幕時間與現實生活間取得平衡。</span></div>
+        <span class="v-gsat">📊 112學測考 a balanced diet／work-life balance</span></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（手機成癮、分心、人際關係）高度相關，能讓同學口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">Dear John letter</span><div class="slang-cn-mini">分手信（課名典故）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">英文固定用語，指「（女方寫給男方的）分手信」。本課課名 Goodbye, John 正是玩這個梗。</div>
+      <div class="slang-ex">He was shocked to get a <b>Dear John letter</b> from his girlfriend.<span class="cn">他收到女友的分手信，嚇了一跳。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">glued to the screen</span><div class="slang-cn-mini">目不轉睛盯著螢幕（黏在螢幕上）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「被膠水黏在螢幕上」，形容一直盯著手機或電視、離不開螢幕。</div>
+      <div class="slang-ex">Sally was <b>glued to the screen</b> and ignored her friends.<span class="cn">莎莉緊盯著螢幕，忽略了她的朋友。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">FOMO</span><div class="slang-cn-mini">怕錯過（fear of missing out）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">Fear Of Missing Out 的縮寫，指「深怕錯過別人的動態或活動」而不停查看社群、手機。</div>
+      <div class="slang-ex">She refreshed her feed all day because of her <b>FOMO</b>.<span class="cn">因為害怕錯過，她整天不停重新整理動態。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">phubbing</span><div class="slang-cn-mini">低頭滑手機冷落身邊的人</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">由 phone + snubbing 組成，指「只顧滑手機而冷落身邊正在互動的人」。</div>
+      <div class="slang-ex">Stop <b>phubbing</b> your family at the dinner table!<span class="cn">吃飯時別只顧滑手機冷落家人！</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">leave someone on read</span><div class="slang-cn-mini">已讀不回</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">訊息已讀卻不回覆。read 此處讀作 /rɛd/（過去分詞）。</div>
+      <div class="slang-ex">I texted him hours ago, but he <b>left me on read</b>.<span class="cn">我幾小時前傳訊息給他，但他已讀不回。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">turn over a new leaf</span><div class="slang-cn-mini">改過自新、重新開始</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「翻開新的一頁」，指下定決心改變、重新做人。呼應 Sally 決心戒手機、重新生活。</div>
+      <div class="slang-ex">Sally decided to <b>turn over a new leaf</b> and quit her phone habit.<span class="cn">莎莉決定改過自新，戒掉她的手機習慣。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜動名詞（V-ing）當主詞</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">[ V-ing + 受詞/修飾語 ] + 單數動詞 ...</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">動名詞片語當主詞時，視為「一件事」，動詞用<b>單數</b>。本課出現多次。</p>
+        <div class="g-ex"><b>Leaving</b> you really <b>breaks</b> my heart.<div class="g-ex-cn">離開你真的讓我心碎。（課文）</div></div>
+        <div class="g-ex"><b>Having</b> you around <b>is</b> hurting my relationships.<div class="g-ex-cn">有你在身邊正傷害我的人際關係。（課文）</div></div>
+        <div class="g-note">✗ Leaving you break my heart（主詞是動名詞，動詞須單數 breaks）。</div>
+        <div class="g-tip">學測常考 V-ing 主詞的動詞單複數；enjoy/avoid/deny/finish + V-ing 也是必考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜It is + adj. + (for sb.) + to V（虛主詞）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">It is + adj. + (for + 人) + to V ...
+（It 為虛主詞，代替後面的不定詞真主詞）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">不定詞當主詞太長，常用 it 放句首當虛主詞，真主詞後移。</p>
+        <div class="g-ex"><b>It is</b> not easy <b>to tell</b> you this.<div class="g-ex-cn">要告訴你這件事並不容易。（課文）</div></div>
+        <div class="g-ex"><b>It is</b> difficult <b>for me to focus</b> on school.<div class="g-ex-cn">我很難專心在課業上。（課文）</div></div>
+        <div class="g-note">✗ It is difficult of me to focus.（「人」用 for，不用 of；只有 kind/nice/rude 等評價人品德的形容詞才用 of）。</div>
+        <div class="g-tip">學測常考 for vs. of 的選擇；It is + adj. + that 子句也要會分辨。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜in case（以防、萬一）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V, (just) in case + S + V（以防……）
+in case of + N（萬一有……的情況）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">in case 引導「預防某事」的子句，子句多用現在式表未來。</p>
+        <div class="g-ex">I refresh the screen, just <b>in case</b> I miss something.<div class="g-ex-cn">我重新整理畫面，以防漏掉什麼。（課文）</div></div>
+        <div class="g-ex">Take an umbrella <b>in case</b> it rains.<div class="g-ex-cn">帶把傘以防下雨。</div></div>
+        <div class="g-note">✗ in case + of + 子句（in case of 後只接名詞）；✗ in case it will rain（in case 子句不用 will）。</div>
+        <div class="g-tip">學測常考 in case / unless / as long as / even if 等條件連接詞辨析。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜情感形容詞：-ed（人）vs. -ing（事）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">人 + feel/be + -ed 形容詞（人的感受）
+事物 + be + -ing 形容詞（事物的性質）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">口訣：<b>人 + ed，事 + ing</b>。學測最高頻文法考點之一！本課大量出現。</p>
+        <table class="gtab">
+          <tr><th>人的感受（-ed）</th><th>事物的性質（-ing）</th></tr>
+          <tr><td>satisfied 感到滿意</td><td>satisfying 令人滿意的</td></tr>
+          <tr><td>disappointed 感到失望</td><td>disappointing 令人失望的</td></tr>
+          <tr><td>bored 感到無聊</td><td>boring 令人無聊的</td></tr>
+          <tr><td>interested 感到有興趣</td><td>interesting 有趣的</td></tr>
+        </table>
+        <div class="g-ex">My parents are <b>disappointed</b>. / The result is <b>disappointing</b>.<div class="g-ex-cn">我父母感到失望。／那結果令人失望。</div></div>
+        <div class="g-note">✗ I am never boring.（人感到無聊用 bored）✗ The trip was satisfied.（事物用 satisfying）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜since + 過去時間 + 現在完成式</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + have/has + p.p. + since + 過去時間點/子句
+（自從……以來，一直……）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">since 表「自從」時，主句用<b>現在完成式</b>，since 子句用過去式。</p>
+        <div class="g-ex">Things <b>have been</b> different <b>since</b> you came into my life.<div class="g-ex-cn">自從你進入我的生活，一切都變了。（課文）</div></div>
+        <div class="g-ex">She <b>hasn't</b> slept well <b>since</b> she got the new phone.<div class="g-ex-cn">自從拿到新手機，她就沒睡好過。</div></div>
+        <table class="gtab">
+          <tr><th>時間標記</th><th>常搭配時態</th></tr>
+          <tr><td>since + 過去時間</td><td>主句現在完成式</td></tr>
+          <tr><td>for + 一段時間</td><td>現在完成式</td></tr>
+          <tr><td>ago</td><td>過去簡單式</td></tr>
+        </table>
+        <div class="g-tip">113學測綜合測驗考過 since 引導的完成式；注意 since 亦可作「因為」解。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<!-- 歷屆段考考古題精選 -->
+<div class="section s-exam">
+  <div class="sec-head"><div class="sec-icon">📚</div>歷屆段考考古題精選（對應本課 L2）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 精選自各校高一第一次段考、落在 L2 範圍的考古題。點選項即時對錯，按「看完整解析」展開。每題末標示來源學校。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第一冊 第二課｜互動教學講義
+</div>
+
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['Sally wrote a goodbye letter to end her ',' with her smartphone, which she had treated like a boyfriend.'],
+  cn:'莎莉寫了一封告別信，結束她與智慧型手機（她把它當成男友）之間的關係。',
+  opts:['attention','relationship','message','ignorance'],ans:1,
+  word:'relationship (n.) 關係',
+  exp:'空格前 end「結束」，需可搭配「與手機之間」的名詞，選 relationship。(A) 注意、(C) 訊息、(D) 無知語意不符。',
+  note:'build / end a relationship with sb.。'},
+ {q:['Our trip was mostly ',', so we all came home with a big smile on our faces.'],
+  cn:'我們的旅行大致上令人滿意，所以我們都笑著回家。',
+  opts:['satisfied','satisfying','disappointed','bored'],ans:1,
+  word:'satisfying (adj.) 令人滿意的（事物）',
+  exp:'主詞 trip 是「事物」，用 -ing 形容詞 satisfying。(A) satisfied 用於「人」感到滿意，不能形容 trip。',
+  note:'人+ed（感受）、事+ing（性質）。'},
+ {q:['My phone is always by my side; I ',' it again and again throughout the day.'],
+  cn:'我的手機總是在身邊；我一整天一再地重新整理它。',
+  opts:['ignore','deny','refresh','inspire'],ans:2,
+  word:'refresh (v.) 重新整理',
+  exp:'搭配 the screen / app，指「更新畫面」用 refresh。(A) 忽視、(B) 否認、(D) 激勵皆不符。',
+  note:'課文：I still refresh the screen.'},
+ {q:['She was so absorbed in her phone that she chose to ',' everyone else at the party.'],
+  cn:'她太專注於手機，以至於選擇忽略派對上其他所有人。',
+  opts:['ignore','introduce','connect','respond'],ans:0,
+  word:'ignore (v.) 忽視、不理會',
+  exp:'「只顧手機」→「不理會他人」，用 ignore。(B) 介紹、(C) 連結、(D) 回應皆與語意相反。',
+  note:'ignore everyone else 忽略其他所有人。'},
+ {q:['I can’t ',' that my phone is useful, but it also keeps me from talking to my family.'],
+  cn:'我無法否認手機很有用，但它也讓我無法和家人說話。',
+  opts:['deny','remind','recall','realize'],ans:0,
+  word:'deny (v.) 否認',
+  exp:'「無法否認……但」為讓步語氣，用 deny。(B) 提醒、(C) 回想、(D) 意識到皆不符。',
+  note:'deny 後接 that 子句或 V-ing，不接不定詞。'},
+ {q:['My teacher told me to pay more ',' in class instead of looking at my phone.'],
+  cn:'老師叫我上課要更專心，而不是看手機。',
+  opts:['attention','relation','response','addiction'],ans:0,
+  word:'pay attention (in / to)',
+  exp:'固定搭配 pay attention，指「專心、注意」。其餘皆無 pay + N 的搭配。',
+  note:'pay attention to + N/V-ing。'},
+ {q:['When my friends and I ',', I should put my phone away and enjoy the moment.'],
+  cn:'當我和朋友出去玩時，我應該把手機收起來，享受當下。',
+  opts:['go through','hang out','turn to','take part'],ans:1,
+  word:'hang out 出去玩、閒晃',
+  exp:'與朋友「相聚出去玩」用 hang out。(A) 瀏覽／經歷、(C) 求助於、(D) 需接 in。',
+  note:'課文：When my friends and I hang out...'},
+ {q:['Bring your umbrella just ',' it rains this afternoon.'],
+  cn:'帶把傘，以防今天下午下雨。',
+  opts:['in fact','in case','in addition','in person'],ans:1,
+  word:'in case 以防、萬一',
+  exp:'「以防某事發生」用 in case + 子句。(A) 事實上、(C) 此外、(D) 親自皆不符。',
+  note:'in case + 子句；in case of + 名詞。'},
+ {q:['Please don’t take my honest opinion ',' — I just want to help you improve.'],
+  cn:'請別把我坦白的意見往心裡去──我只是想幫你進步。',
+  opts:['seriously','personally','recently','suddenly'],ans:1,
+  word:'take...personally 往心裡去',
+  exp:'固定片語 take sth. personally「把某事當成針對自己」。(A) 認真對待意思接近但課文與語意用 personally。',
+  note:'課文：don’t take any of this personally.'},
+ {q:['A good smartphone can ',' you to people all over the world within seconds.'],
+  cn:'一支好手機能在幾秒內把你和全世界的人連結起來。',
+  opts:['ignore','deny','refresh','connect'],ans:3,
+  word:'connect A to/with B 連結',
+  exp:'「把你和世界的人連在一起」用 connect。(B) 忽視、(C) 否認、(D) 重新整理皆不符。',
+  note:'connect with / to；名詞為 connection。'}
+];
+
+var teacherQ=[
+ {q:[''," you around is really hurting my relationships with my friends and family."],
+  cn:'有你在身邊，正嚴重傷害著我與朋友和家人的關係。',
+  opts:['Have','Had','Having','To having'],ans:2,
+  word:'Having（動名詞作主詞）',
+  tnote:'<b>動名詞作主詞</b>：Having you around 是整個主詞，視為單一概念，動詞用單數 is (hurting)。<br>(A) Have 原形不能單獨當主詞；(B) Had 過去式；(D) To having 錯誤（to 後接原形）。<br>呼應課文另一句 Leaving you breaks my heart 同為動名詞主詞。'},
+ {q:['It is not easy ',' you this, but I still need to say it.'],
+  cn:'要告訴你這件事並不容易，但我還是必須說出來。',
+  opts:['tell','telling','to tell','told'],ans:2,
+  word:'It is + adj. + to V（虛主詞）',
+  tnote:'<b>虛主詞句型</b>：It 為虛主詞，真主詞是不定詞 to tell you this。<br>公式：It is + adj. + (for 人) + to V。<br>(B) telling 動名詞不接在此虛主詞句；(A)(D) 非不定詞，皆不可。'},
+ {q:['I refresh the screen again and again, just ',' I miss an important message.'],
+  cn:'我一再重新整理畫面，以防漏掉一則重要訊息。',
+  opts:['in case','in case of','because of','so that'],ans:0,
+  word:'in case + 子句（以防）',
+  tnote:'<b>in case vs. in case of</b>：空格後接完整子句 I miss...，用 in case（後接子句）。<br>in case of 後只接名詞（in case of fire）。<br>(C) because of 後接名詞且表原因；(D) so that 表目的，語意不同。'},
+ {q:['My parents are both angry and ',' with me because I seldom talk to them.'],
+  cn:'我父母對我既生氣又失望，因為我很少和他們說話。',
+  opts:['disappointing','disappointment','disappointed','disappoint'],ans:2,
+  word:'disappointed (adj.) 人感到失望',
+  tnote:'<b>-ed vs. -ing（學測超高頻）</b>：主詞 parents（人）+ be + 形容詞，描述人的感受用 -ed。<br>若主詞是事物則用 -ing：The result was disappointing.<br>(B) 名詞、(D) 動詞原形皆不可接在 be 動詞後當補語。'},
+ {q:['Things have been totally different ',' you came into my life.'],
+  cn:'自從你進入我的生活，一切都變得完全不同了。',
+  opts:['for','since','during','while'],ans:1,
+  word:'since + 過去時間（現在完成式）',
+  tnote:'<b>時態標記</b>：主句用現在完成式 have been，須搭配 since（自從）+ 過去時間點/子句。<br>(A) for 接一段時間（for two years）；(C) during 接名詞；(D) while 表「當…同時」，接進行式子句。'},
+ {q:['I am too busy ',' attention to my phone to reply to my friends.'],
+  cn:'我太忙著注意手機，以至於無法回覆朋友。',
+  opts:['pay','to pay','paying','paid'],ans:2,
+  word:'be busy (in) V-ing',
+  tnote:'<b>be busy + V-ing</b>：busy 後接動名詞（in 常省略），表「忙於做某事」。<br>句中另有 too...to 結構（太…以至於不能）。<br>(B) to pay 不定詞不接在 busy 後；(A)(D) 非 V-ing 皆錯。'},
+ {q:['You inspire me ',' with others and to communicate better.'],
+  cn:'你啟發我與他人建立連結，並溝通得更好。',
+  opts:['connect','connecting','to connect','connected'],ans:2,
+  word:'inspire sb. to V',
+  tnote:'<b>inspire sb. to V</b>：inspire 後接受詞＋不定詞作受詞補語。<br>由後面並列的 and to communicate 可判斷，前面須為 to connect（平行結構）。<br>(B)(D) 非不定詞，破壞平行；(A) 缺 to。'},
+ {q:['Doing this late into the night ',' that I seldom speak to my family.'],
+  cn:'做這些做到深夜，意味著我很少和家人說話。',
+  opts:['mean','means','meaning','to mean'],ans:1,
+  word:'動名詞主詞 + 單數動詞',
+  tnote:'<b>動名詞主詞動詞單數</b>：主詞 Doing this late into the night 是動名詞片語，視為單數，動詞用 means。<br>(A) mean 為複數/原形；(C)(D) 非限定動詞不能當主要動詞。<br>與句型一同一考點。'},
+ {q:['I love ',' when we play games or respond to messages together.'],
+  cn:'我很喜歡我們一起玩遊戲或回覆訊息的時候。',
+  opts:['it','that','this','them'],ans:0,
+  word:'love it when...（固定用法）',
+  tnote:'<b>love/hate it when 子句</b>：口語固定用法，用虛受詞 it 指代後面 when 引導的情況。<br>✓ I love it when...｜✗ I love when...（正式寫作補 it 較佳）。<br>(B)(C)(D) 皆不能引導 when 子句作此虛受詞。'},
+ {q:['The more time you spend on your phone, ',' your grades will become.'],
+  cn:'你花越多時間在手機上，你的成績就會變得越差。',
+  opts:['worse','the worst','more worse','the worse'],ans:3,
+  word:'the + 比較級...the + 比較級（越…越…）',
+  tnote:'<b>「越…越…」句型</b>：The + 比較級 + S + V, the + 比較級 + S + V。<br>第二個空格須為 the + 比較級 → the worse。<br>✗ the worst（最高級）✗ more worse（重複比較）✗ 缺 the。'}
+];
+
+var examQ=[
+ {q:['The early stages of a ',' can be both exciting and challenging, so I hope you enjoy yourself.'],
+  cn:'一段關係的早期階段可能既刺激又充滿挑戰，所以我希望你能享受其中。',
+  opts:['capital','decade','presentation','relationship'],ans:3,
+  word:'relationship (n.) 關係／戀愛關係',
+  exp:'全文在談交往初期，空格指「一段感情關係」的早期階段，故選 relationship。capital 首都、decade 十年、presentation 報告皆不合語意。（台南二中）'},
+ {q:['Pay attention to how she ','. If she replies quickly and seems interested, that’s a good sign.'],
+  cn:'注意她如何回應。如果她回覆得很快而且看起來有興趣，那就是好徵兆。',
+  opts:['recalls','embraces','responds','disappears'],ans:2,
+  word:'respond (v.) 回應、回覆',
+  exp:'下一句用 replies（回覆）呼應，空格表「她如何回應」，故選 responds。recall 回想、embrace 擁抱、disappear 消失皆不合。（台南二中）'},
+ {q:['Mr. Wang ',' giving a box of candy to his daughter, but his wife didn’t believe him.'],
+  cn:'王先生否認給了女兒一盒糖果，但他太太不相信他。',
+  opts:['focused','denied','ignored','responded'],ans:1,
+  word:'deny (v.) 否認',
+  exp:'後半句「太太不相信他」暗示他在否認某事，deny + V-ing 表否認做過某事，故選 denied。focus 專注、ignore 忽略、respond 回應皆不合。（基隆高中）'},
+ {q:'What is the main idea of this article? （閱讀測驗：餐廳如何勸阻顧客用餐時滑手機）',
+  cn:'這篇文章的主旨是什麼？（短文談餐廳用黃牌紅牌、免費甜點鼓勵顧客放下手機、多交談）',
+  opts:['Restaurants love seeing photos of food posted to social media.','People should use their smartphones in a smart way.','Some restaurants discourage customers from using phones while dining.','People enjoy having meals in restaurants offering soccer games.'],ans:2,
+  word:'smartphone / social media（本課主題）',
+  exp:'全文講餐廳如何「勸阻顧客用餐時使用手機」以鼓勵交談，故選 (C)。(A) 只是背景、(B) 未提、(D) 曲解足球比喻。呼應 L2 手機成癮／人際溝通主題。（基隆高中）'},
+ {q:['When my friends and I ',', I turn to you for Instagram updates.'],
+  cn:'當我和朋友一起出去玩時，我卻轉向你（手機）看 Instagram 的更新。',
+  opts:['dress up','put first','hang out','look out for'],ans:2,
+  word:'hang out (phr.) 出去玩、聚在一起',
+  exp:'本句出自 L2 分手信，語意為「和朋友聚在一起時」，hang out 最合適。dress up 打扮、put first 優先、look out for 當心皆不合。（金門高中）'},
+ {q:['Grace totally ',' her younger brother as he made silly faces at her.'],
+  cn:'當弟弟對葛瑞絲扮鬼臉時，她完全不理他。',
+  opts:['inspired','ignored','introduced','responded'],ans:1,
+  word:'ignore (v.) 忽視、不理會',
+  exp:'弟弟扮鬼臉而她「完全不理會」最合理，故選 ignored。inspire 激勵、introduce 介紹、respond 回應皆不合。此為 L2 核心字。（金門高中）'},
+ {q:['She stops meeting her friends ',' and instead only talks to them on her phone, missing the fun of being together.'],
+  cn:'她不再當面和朋友見面，反而只透過手機和他們聊天，錯過了相聚的樂趣。',
+  opts:['in person','on time','against all odds','for too long'],ans:0,
+  word:'in person (phr.) 親自、當面',
+  exp:'與後面 only talks to them on her phone 對比，空格需表「親自、當面」，故選 in person。呼應 L2 手機取代真實互動主題。（新店高中）'},
+ {q:['Peter and I are in a close ','; we talk every day and share our secrets with each other.'],
+  cn:'彼得和我關係很親密；我們每天聊天並彼此分享秘密。',
+  opts:['reflection','romance','relationship','response'],ans:2,
+  word:'relationship (n.) 關係',
+  exp:'每天聊天、分享秘密＝親密的「關係」，故選 relationship。reflection 反射、romance 戀情、response 回應皆不合此搭配。此為 L2 核心字。（新店高中）'},
+ {q:['Daniel doesn’t know how to make his girlfriend happy because he has never been in a romantic ',' before.'],
+  cn:'丹尼爾不知道如何讓女友開心，因為他以前從未談過戀愛。',
+  opts:['reflection','revolution','reputation','relationship'],ans:3,
+  word:'relationship (n.) 戀愛關係',
+  exp:'romantic relationship＝戀愛關係，為 L2 核心搭配，故選 relationship。reflection、revolution、reputation 皆不合。（新北高中113）'},
+ {q:['You have ',' my relationship with my family and friends.'],
+  cn:'你毀了我和家人與朋友之間的關係。',
+  opts:['replied','rewarded','ruined','relaxed'],ans:2,
+  word:'ruin (v.) 毀壞、破壞',
+  exp:'分手信中 Sally 指手機「破壞」了她的人際關係，故選 ruined。reply 回覆、reward 獎賞、relax 放鬆皆不合。（新北高中112）'},
+ {q:['I need to spend more time with my friends, and rebuild my ',' with my family.'],
+  cn:'我需要花更多時間和朋友相處，並重建我和家人之間的連結。',
+  opts:['infection','depression','reflection','connection'],ans:3,
+  word:'connection (n.) 連結、關係',
+  exp:'與 family 搭配、指重建「關係、連結」，故選 connection。infection 感染、depression 憂鬱、reflection 反射皆不合。此為 L2 核心字。（新北高中112）'},
+ {q:['I was always there to help her refresh the screen on her LINE app, just ',' she missed any message.'],
+  cn:'我總是在那裡幫她刷新 LINE 的畫面，以防她漏掉任何訊息。',
+  opts:['in short','in case','in time','in need'],ans:1,
+  word:'in case (phr.) 以防、萬一',
+  exp:'空格表「以防萬一漏訊息」，in case + 子句最合適。in short 簡言之、in time 及時、in need 需要時皆不合。此句出自 L2 手機擬人化分手信。（明倫高中）'},
+ {q:['Please don’t take my comment ','. I’m complaining about all the drivers in Taiwan, not just you.'],
+  cn:'請不要把我的話當成針對你個人。我是在抱怨全台灣的駕駛，不只是你。',
+  opts:['amazingly','distantly','personally','scientifically'],ans:2,
+  word:'take...personally (phr.) 當成針對個人',
+  exp:'take...personally＝把話往心裡去，後句「不只是你」正是提示，故選 personally。其餘副詞皆不合。此為 L2 核心片語。（明倫高中）'},
+ {q:['Wonder Woman has ',' many girls with her bravery and strength.'],
+  cn:'神力女超人以她的勇氣和力量激勵了許多女孩。',
+  opts:['connected','packed','refreshed','inspired'],ans:3,
+  word:'inspire (v.) 激勵、鼓舞',
+  exp:'以勇氣和力量「激勵」女孩，inspire sb. 表激勵某人，故選 inspired。connect 連接、pack 打包、refresh 刷新皆不合。此為 L2 核心字。（小港高中）'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+  var exBody=document.querySelector('.s-exam .sec-body');
+  if(exBody)buildQuestions(examQ,exBody,'E','badge-purple','#6d28d9');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>
