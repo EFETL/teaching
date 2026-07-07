@@ -179,6 +179,7 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
 .s-exam .sec-icon{background:#6d28d9;color:#fff}
 .s-exam .q-num{background:#6d28d9}
 .badge-purple{background:#6d28d9}
+.q-src{float:right;font-size:16px;font-weight:700;color:#6d28d9;background:#f3e8ff;border:1px solid #ddd6fe;border-radius:20px;padding:2px 12px;margin:0 0 4px 10px}
 
 @media print{
   body{background:#fff;font-size:16px}
@@ -1146,7 +1147,7 @@ var examQ=[
   exp:'描述美好的旅行且「等不及再去」，選 unforgettable（難忘的），與 memorable 同義。呼應課文 My first trip abroad...was unforgettable。（來源：臺北市立明倫高中第一次期中考，改自克漏字語境）'}
 ];
 
-function buildQuestions(data,container,prefix,badgeClass,numColor){
+function buildQuestions(data,container,prefix,badgeClass,numColor,showSrc){
   var html='';
   data.forEach(function(item,i){
     var num=prefix+(i+1);
@@ -1163,10 +1164,12 @@ function buildQuestions(data,container,prefix,badgeClass,numColor){
     }
     var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
     var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
-    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    var _exp=item.exp||'';var srcHtml='';var _s=item.src||'';
+    if(showSrc){var _m=_exp.match(/（[^（）]*）\s*$/);if(!_s&&_m){_s=_m[0].replace(/^（/,'').replace(/）\s*$/,'');}if(_m){_exp=_exp.replace(/（[^（）]*）\s*$/,'').trim();}_s=_s.replace(/^來源[:：]\s*/,'');if(_s){srcHtml='<span class="q-src">📄 出處：'+_s+'</span>';}}
+    var expHtml=_exp?'<div class="ans-cn">'+_exp+'</div>':'';
     qhtml='<div class="q-block"><div class="q-top">'
       +'<div class="q-num">'+num+'</div>'
-      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-main">'+srcHtml+'<div class="q-en">'+qhtml+'</div>'
       +'<div class="q-cn">'+item.cn+'</div>'
       +'<div class="q-choices">'+choices+'</div>'
       +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
@@ -1184,7 +1187,7 @@ document.addEventListener('DOMContentLoaded',function(){
   buildQuestions(studentQ,sBody,'',' badge-green','#166534');
   buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
   var exBody=document.querySelector('.s-exam .sec-body');
-  if(exBody)buildQuestions(examQ,exBody,'E','badge-purple','#6d28d9');
+  if(exBody)buildQuestions(examQ,exBody,'E','badge-purple','#6d28d9',true);
 
   // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
   document.querySelectorAll('.v-word').forEach(function(w){
