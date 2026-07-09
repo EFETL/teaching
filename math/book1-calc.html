@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整數的運算 ‧ 段考計算題特訓</title>
+<style>
+  :root{
+    --ink:#22323a; --muted:#6b8894;
+    --paper:#f2fbfc;
+    --a1:#ff7a59; --a2:#ffb057;      /* 加減 = 珊瑚橘 */
+    --b1:#7b61ff; --b2:#4bc0e6;      /* 乘除 = 紫藍 */
+    --ok:#12a150; --no:#e5484d;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--ink);line-height:1.7;
+    background:
+      radial-gradient(1100px 380px at 12% -6%, #d7f6fb 0, rgba(215,246,251,0) 60%),
+      radial-gradient(900px 360px at 108% 4%, #ffe6d6 0, rgba(255,230,214,0) 55%),
+      var(--paper);
+    padding-bottom:64px;}
+
+  /* Hero */
+  header{position:relative;overflow:hidden;color:#fff;text-align:center;padding:34px 20px 30px;
+    background:linear-gradient(120deg,#00b3c6 0%,#0aa0d6 45%,#6a7bff 100%);
+    box-shadow:0 10px 30px rgba(10,120,150,.28);}
+  header::before,header::after{content:"";position:absolute;border-radius:50%;opacity:.16;background:#fff;}
+  header::before{width:210px;height:210px;top:-70px;right:-40px;}
+  header::after{width:150px;height:150px;bottom:-70px;left:-30px;}
+  .emoji{font-size:44px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.18));}
+  header h1{font-size:27px;letter-spacing:1px;margin:4px 0 6px;text-shadow:0 2px 8px rgba(0,0,0,.16);}
+  header p{font-size:16px;opacity:.96;}
+  .back{display:inline-block;margin-top:16px;color:#0b6b78;background:#fff;border-radius:22px;
+    padding:7px 18px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.14);}
+  .back:hover{transform:translateY(-2px);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:20px 15px;}
+
+  /* 工具列 / 計分 */
+  .bar{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    justify-content:space-between;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);
+    border:1px solid #d8ecef;border-radius:16px;padding:11px 15px;margin:6px 0 20px;
+    box-shadow:0 6px 18px rgba(20,90,110,.10);}
+  .score{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;}
+  .score .dot{font-size:22px;}
+  .score b{color:#0a8fb0;font-size:22px;}
+  .score .pts{font-size:14px;color:var(--muted);font-weight:600;}
+  .tools{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;border-radius:999px;
+    padding:8px 15px;color:#fff;transition:transform .1s,box-shadow .1s;}
+  .btn:active{transform:scale(.96);}
+  .btn.rev{background:linear-gradient(120deg,#7b61ff,#4bc0e6);box-shadow:0 4px 12px rgba(90,80,220,.28);}
+  .btn.pr{background:linear-gradient(120deg,#ff7a59,#ffb057);box-shadow:0 4px 12px rgba(255,120,90,.3);}
+  .btn.rs{background:#eef4f6;color:#5b7883;box-shadow:none;}
+
+  /* 段落標題 */
+  .sec-h{display:flex;align-items:center;gap:12px;color:#fff;border-radius:16px;padding:13px 18px;
+    margin:26px 0 16px;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+  .sec-a .sec-h{background:linear-gradient(120deg,var(--a1),var(--a2));}
+  .sec-b .sec-h{background:linear-gradient(120deg,var(--b1),var(--b2));}
+  .sec-h .ico{font-size:30px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.2));}
+  .sec-h .tt{flex:1;}
+  .sec-h .tt b{font-size:20px;letter-spacing:.5px;}
+  .sec-h .tt small{display:block;font-size:13px;opacity:.95;margin-top:1px;}
+  .sec-h .full{font-weight:800;font-size:14px;background:rgba(255,255,255,.25);border-radius:20px;padding:5px 13px;white-space:nowrap;}
+
+  /* 題卡 */
+  .q{position:relative;background:var(--card);border-radius:15px;padding:15px 17px 15px 20px;margin-bottom:14px;
+    box-shadow:0 3px 14px rgba(30,80,95,.09);border:1px solid #ecf2f4;overflow:hidden;
+    transition:box-shadow .15s,transform .15s;}
+  .q:hover{box-shadow:0 10px 24px rgba(30,80,95,.15);transform:translateY(-2px);}
+  .q::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;}
+  .sec-a .q::before{background:linear-gradient(var(--a1),var(--a2));}
+  .sec-b .q::before{background:linear-gradient(var(--b1),var(--b2));}
+  .q.correct{border-color:#bfe9cf;}
+  .q.correct::before{background:linear-gradient(var(--ok),#4fd07f)!important;}
+
+  .qtop{display:flex;align-items:center;gap:9px;margin-bottom:9px;flex-wrap:wrap;}
+  .num{flex:none;width:30px;height:30px;border-radius:50%;color:#fff;font-weight:800;font-size:15px;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 3px 7px rgba(0,0,0,.15);}
+  .sec-a .num{background:linear-gradient(135deg,var(--a1),var(--a2));}
+  .sec-b .num{background:linear-gradient(135deg,var(--b1),var(--b2));}
+  .pts{font-weight:800;font-size:12.5px;color:#b5641f;background:#fff1e5;border-radius:20px;padding:3px 11px;}
+  .sec-b .pts{color:#5b3fd0;background:#efeaff;}
+  .src{font-size:12px;color:#93a7af;margin-left:auto;background:#f2f6f7;border-radius:20px;padding:3px 11px;}
+
+  .expr{font-size:19.5px;font-weight:700;letter-spacing:.5px;padding:2px 2px 4px;
+    font-family:"Menlo","Consolas","Noto Sans TC",monospace;}
+  .expr .eq{color:#0a8fb0;margin:0 6px;}
+
+  .ansrow{display:flex;align-items:center;gap:9px;margin-top:11px;flex-wrap:wrap;}
+  .ansrow input{width:135px;font-size:17px;font-weight:700;text-align:center;color:var(--ink);
+    border:2px solid #d5e3e7;border-radius:11px;padding:8px 10px;outline:none;font-family:inherit;
+    transition:border-color .15s,box-shadow .15s;}
+  .ansrow input:focus{border-color:#4bc0e6;box-shadow:0 0 0 4px rgba(75,192,230,.18);}
+  .ansrow input.good{border-color:var(--ok);background:#f0fbf4;}
+  .ansrow input.bad{border-color:var(--no);background:#fdf1f1;}
+  .chk{border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:14px;color:#fff;
+    border-radius:11px;padding:9px 16px;background:linear-gradient(120deg,#12b866,#0a9f8f);
+    box-shadow:0 4px 11px rgba(15,170,120,.28);transition:transform .1s;}
+  .chk:active{transform:scale(.95);}
+  .see{border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:13.5px;color:#5b7883;
+    background:#eef4f6;border-radius:11px;padding:9px 14px;}
+  .mark{font-weight:800;font-size:15px;min-width:64px;}
+  .mark.ok{color:var(--ok);}
+  .mark.no{color:var(--no);}
+
+  .sol{display:none;margin-top:11px;border-radius:12px;padding:12px 14px;background:#f6fbfc;
+    border:1px dashed #bfdfe6;font-size:14.5px;}
+  .sol.show{display:block;animation:pop .22s ease;}
+  @keyframes pop{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;}}
+  .sol .big{font-weight:800;color:#0a8fb0;font-size:16px;}
+  .sol .st{color:#53707a;margin-top:4px;}
+
+  footer{text-align:center;color:#8fb0b6;font-size:13.5px;margin-top:34px;}
+
+  /* 作答區（列印才出現） */
+  .work{display:none;}
+
+  @media(max-width:520px){
+    .expr{font-size:17px;} header h1{font-size:23px;}
+    .src{margin-left:0;}
+  }
+
+  /* ---- 列印：乾淨黑白練習卷 ---- */
+  @media print{
+    @page{size:A4;margin:14mm 12mm 15mm;}
+    body{background:#fff;padding:0;}
+    header{background:#fff;color:#111;box-shadow:none;padding:0 0 8px;border-bottom:2.5px solid #1f4f86;}
+    header::before,header::after,.emoji{display:none;}
+    header h1{color:#1f4f86;font-size:19px;text-shadow:none;}
+    header p{color:#555;font-size:12.5px;}
+    .back,.bar,.chk,.see,.ansrow input,.mark,.sol{display:none!important;}
+    .wrap{max-width:none;padding:6px 0;}
+    .sec-h{background:#1f4f86!important;color:#fff!important;box-shadow:none;border-radius:6px;padding:6px 12px;margin:14px 0 8px;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .sec-b .sec-h{background:#0b6b3a!important;}
+    .sec-h .ico{display:none;}
+    .q{box-shadow:none;border:none;transform:none;padding:4px 2px;margin:0 0 2px;break-inside:avoid;}
+    .q::before{display:none;}
+    .num{background:#e7eef7!important;color:#1f4f86!important;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .pts,.src{background:none;color:#555;padding:0 4px;}
+    .expr{font-family:inherit;font-weight:600;}
+    .work{display:block;height:2.5cm;border:1px dashed #cfd6de;border-radius:5px;margin-top:5px;}
+    footer{display:none;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="emoji">🧮</div>
+  <h1>整數的運算 ‧ 段考計算題特訓</h1>
+  <p>整數的加減　×　整數的乘除與四則運算　‧　16 題純計算 ‧ 滿分 100 分</p>
+  <a class="back" href="book1.html">← 回第一冊</a>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="score">
+      <span class="dot">🎯</span>
+      <span>答對 <b id="sc">0</b> / 16</span>
+      <span class="pts">得分 <span id="pt">0</span> / 100</span>
+    </div>
+    <div class="tools">
+      <button class="btn rev" id="revAll">👀 全部解答</button>
+      <button class="btn rs" id="reset">↺ 重做</button>
+      <button class="btn pr" onclick="window.print()">🖨 列印練習卷</button>
+    </div>
+  </div>
+
+  <div id="app"></div>
+
+  <footer>teaching.efetl.com / math　‧　題目節錄自各校段考真題　‧　💪 先自己算，再看解答！</footer>
+</div>
+
+<script>
+const DATA = [
+  {sec:'A', title:'第一大題　整數的加減', ico:'➕', sub:'1-2 整數的加減 ‧ 8 題 ‧ 50 分', qs:[
+    {p:5, s:'桃園大成 108', e:'17 ＋ (−59)', a:-42, st:'異號相減 59−17＝42，取絕對值大者（負）→ −42'},
+    {p:5, s:'屏東明正 113', e:'(−16) − 18', a:-34, st:'改加相反數 (−16)＋(−18)＝−(16＋18)＝−34'},
+    {p:5, s:'臺中五權 113', e:'(−9) − (−20)', a:11, st:'減負數＝加正數 (−9)＋20＝11'},
+    {p:6, s:'臺中大業 113', e:'(−75) ＋ 37 ＋ (−15)', a:-53, st:'負數和 (−75)＋(−15)＝−90；−90＋37＝−53'},
+    {p:7, s:'桃園中興 108', e:'(−26) ＋ (−69) ＋ 47 ＋ (−31) ＋ (−54)', a:-133, st:'負數和 26＋69＋31＋54＝180 → −180；−180＋47＝−133'},
+    {p:7, s:'新北蘆洲 113', e:'(−752) ＋ 165 − (−652)', a:65, st:'改加法後湊整 (−752)＋652＝−100；−100＋165＝65'},
+    {p:7, s:'高雄翠屏 113', e:'75 − 83 − [(−12) ＋ (−3)]', a:7, st:'先算中括號 (−12)＋(−3)＝−15；75−83−(−15)＝75−83＋15＝7'},
+    {p:8, s:'彰化溪湖 112', e:'｜25 − (−7)｜ − ｜(−18) − 24｜', a:-10, st:'括號內 25−(−7)＝32、(−18)−24＝−42；|32|−|−42|＝32−42＝−10'},
+  ]},
+  {sec:'B', title:'第二大題　整數的乘除與四則運算', ico:'✖️', sub:'1-3 整數的乘除與四則運算 ‧ 8 題 ‧ 50 分', qs:[
+    {p:5, s:'屏東明正 113', e:'36 ÷ (−3) × 2', a:-24, st:'乘除由左而右 36÷(−3)＝−12；−12×2＝−24'},
+    {p:6, s:'高雄翠屏 113', e:'(−5) × (−886) × (−2)', a:-8860, st:'負因數 3 個（奇數）→ 負；5×886×2＝8860 → −8860'},
+    {p:6, s:'屏東明正 113', e:'(−25) × (−22) × 4', a:2200, st:'負因數 2 個（偶數）→ 正；25×4＝100、100×22＝2200'},
+    {p:6, s:'高雄翠屏 113', e:'(−102) × 39 ＋ (−102) × 61', a:-10200, st:'提公因數 (−102)×(39＋61)＝(−102)×100＝−10200'},
+    {p:6, s:'彰化溪湖 112', e:'56 ÷ (−7) − (−60) ÷ (−10)', a:-14, st:'56÷(−7)＝−8、(−60)÷(−10)＝6；(−8)−6＝−14'},
+    {p:7, s:'臺中向上 113', e:'(−18) ＋ (−15) ÷ (−3) − (−5) × 2', a:-3, st:'先乘除 (−15)÷(−3)＝5、(−5)×2＝−10；−18＋5＋10＝−3'},
+    {p:7, s:'高雄翠屏 113', e:'(−8) × 6 ＋ ｜(−5) × 10 − 1｜', a:3, st:'絕對值 (−5)×10−1＝−51 → |−51|＝51；(−8)×6＝−48；−48＋51＝3'},
+    {p:7, s:'永靖國中 108', e:'5 − 3 × [(−15) × 4 ＋ (−60) ÷ (6 − 9)]', a:125, st:'中括號 (−15)×4＝−60、(−60)÷(6−9)＝20，−60＋20＝−40；3×(−40)＝−120；5−(−120)＝125'},
+  ]},
+];
+
+const disp = n => (n<0?'−':'')+Math.abs(n);            // 顯示用負號
+const norm = s => s.replace(/[−–—]/g,'-').replace(/[０-９]/g,d=>'０１２３４５６７８９'.indexOf(d))
+                   .replace(/[＋+\s。.，,]/g,'');
+const solved = new Set();
+let gi = 0;
+
+const app = document.getElementById('app');
+DATA.forEach(sec=>{
+  const wrap = document.createElement('section');
+  wrap.className = 'sec-'+sec.sec.toLowerCase();
+  wrap.innerHTML = `<div class="sec-h"><span class="ico">${sec.ico}</span>
+    <span class="tt"><b>${sec.title}</b><small>${sec.sub}</small></span>
+    <span class="full">滿分 50 分</span></div>`;
+  sec.qs.forEach((q,i)=>{
+    const id = gi++;
+    const card = document.createElement('div');
+    card.className='q'; card.dataset.id=id; card.dataset.ans=q.a; card.dataset.pts=q.p;
+    card.innerHTML = `
+      <div class="qtop">
+        <span class="num">${i+1}</span>
+        <span class="pts">${q.p} 分</span>
+        <span class="src">〔${q.s}〕</span>
+      </div>
+      <div class="expr">${q.e}<span class="eq">＝</span>?</div>
+      <div class="ansrow">
+        <input type="text" inputmode="text" placeholder="答案" aria-label="輸入答案">
+        <button class="chk">檢查</button>
+        <button class="see">看解答</button>
+        <span class="mark"></span>
+      </div>
+      <div class="sol"><span class="big">答：${disp(q.a)}</span><div class="st">${q.st}</div></div>
+      <div class="work"></div>`;
+    wrap.appendChild(card);
+  });
+  app.appendChild(wrap);
+});
+
+function refresh(){
+  document.getElementById('sc').textContent = solved.size;
+  let pts=0; solved.forEach(id=>{ pts += +document.querySelector(`.q[data-id="${id}"]`).dataset.pts; });
+  document.getElementById('pt').textContent = pts;
+}
+function check(card){
+  const inp=card.querySelector('input'), mark=card.querySelector('.mark');
+  const val=norm(inp.value); const id=+card.dataset.id;
+  if(val===''){ inp.focus(); return; }
+  if(Number(val)===Number(card.dataset.ans)){
+    inp.classList.remove('bad'); inp.classList.add('good');
+    mark.className='mark ok'; mark.textContent='✓ 正確';
+    card.classList.add('correct'); solved.add(id);
+  }else{
+    inp.classList.remove('good'); inp.classList.add('bad');
+    mark.className='mark no'; mark.textContent='✗ 再想想';
+    card.classList.remove('correct'); solved.delete(id);
+  }
+  refresh();
+}
+app.addEventListener('click',e=>{
+  const card=e.target.closest('.q'); if(!card) return;
+  if(e.target.classList.contains('chk')) check(card);
+  if(e.target.classList.contains('see')) card.querySelector('.sol').classList.toggle('show');
+});
+app.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && e.target.tagName==='INPUT'){ check(e.target.closest('.q')); }
+});
+
+let allShown=false;
+document.getElementById('revAll').addEventListener('click',()=>{
+  allShown=!allShown;
+  document.querySelectorAll('.sol').forEach(s=>s.classList.toggle('show',allShown));
+  document.getElementById('revAll').textContent = allShown?'🙈 收合解答':'👀 全部解答';
+});
+document.getElementById('reset').addEventListener('click',()=>{
+  solved.clear(); allShown=false;
+  document.querySelectorAll('.q').forEach(c=>{
+    c.classList.remove('correct');
+    c.querySelector('input').value=''; c.querySelector('input').className='';
+    c.querySelector('.mark').className='mark'; c.querySelector('.mark').textContent='';
+    c.querySelector('.sol').classList.remove('show');
+  });
+  document.getElementById('revAll').textContent='👀 全部解答';
+  refresh();
+});
+</script>
+</body>
+</html>
