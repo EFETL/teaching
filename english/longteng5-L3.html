@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L3: Formosa — One Name, Two Stories ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-exam .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L3: Formosa: One Name, Two Stories ── 福爾摩沙：一個名字，兩個故事</h1>
+  <div class="sub">龍騰版高中英文 第五冊 第三課｜互動教學講義（高三適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 課文速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>課文速覽（三大重點）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🌏 兩個 Formosa</h4>
+        「<b>Formosa</b>」是<b>台灣</b>的非官方名稱；但少有人知，在<b>阿根廷</b>巴拉圭河畔還有另一個 Formosa。本課帶你比較這兩個<b>同名之地（namesakes）</b>的異同。
+      </div>
+      <div class="story-card s2">
+        <h4>⛵ 命名由來</h4>
+        兩地都是 <b>16 世紀</b>歐洲探險家<b>無意間</b>抵達並命名的：葡萄牙水手稱台灣為「<b>Ilha Formosa</b>」（美麗之島），西班牙人也為南美這片土地取名 Formosa。他們因該地<b>絕佳的戰略位置與經濟優勢</b>而定居下來。
+      </div>
+      <div class="story-card s3">
+        <h4>📍 地理巧合</h4>
+        台灣位於<b>北緯 23°</b>、阿根廷 Formosa 位於<b>南緯 23°</b>，離赤道等距，恰好位於<b>地球兩端（antipodal）</b>。兩地雖同名、有諸多相似，地貌與經濟卻仍<b>相隔天壤（worlds apart）</b>。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析 + 重點解析」。點右側 🔊 可聽整句朗讀。英文逐字取自課本，中譯採通順現代譯法。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課介紹世界上「兩個 Formosa」——台灣與阿根廷 Formosa——的命名由來、地理巧合與異同對比。閱讀時可留意「被動語態、關係子句、比較與對比（by contrast / while）」等句構。</p>
+
+    <!-- 一｜兩個 Formosa -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🌏 一｜兩個 Formosa：不只台灣</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>"Formosa" is commonly known as an unofficial name for Taiwan.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">「Formosa（福爾摩沙）」廣為人知，是台灣的一個非官方名稱。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">"Formosa"</span><span class="syn-t">S</span> <span class="syn syn-v">is commonly known as</span><span class="syn-t">V（被動）</span> <span class="syn syn-c">an unofficial name for Taiwan</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>be known as</b> = 被稱為（見句型三）；<b>unofficial</b>（非官方的）＝ un-＋official。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, what many people don't know is that there is another Formosa located on the banks of the Paraguay River in Argentina.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，許多人不知道的是，在阿根廷巴拉圭河畔還有另一個 Formosa。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">what many people don't know</span><span class="syn-t">S（名詞子句）</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">that there is another Formosa...</span><span class="syn-t">C（名詞子句）</span></div>
+          <div class="para-note"><b>what</b> 引導名詞子句作主詞；<b>located on</b> = 位於（過去分詞修飾 Formosa）；on the banks of = 在…河畔。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>To explore this connection, we can take a closer look at these two namesakes to see how they are similar and how they differ.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">為了探究這層關聯，我們可以更仔細地看看這兩個同名之地，看看它們有何相似、又有何不同。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">To explore this connection</span><span class="syn-t">不定詞（目的）</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">can take</span><span class="syn-t">V</span> <span class="syn syn-o">a closer look</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>take a (closer) look at</b> = 看一看（片語）；<b>namesake</b> = 同名之人／物；<b>differ</b>（不同，vi.）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Interestingly, it appears that both Formosas were unintentionally reached by European explorers in the sixteenth century.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有趣的是，這兩個 Formosa 似乎都是 16 世紀時被歐洲探險家無意間抵達的。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">appears</span><span class="syn-t">V</span> <span class="syn syn-c">that both Formosas were unintentionally reached...</span><span class="syn-t">真主詞（名詞子句）</span></div>
+          <div class="para-note"><b>it appears that</b> = 似乎…；<b>were reached</b>（被動語態，見句型一）；unintentionally = 無意間地。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 二｜命名由來 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">⛵ 二｜命名由來：探險家與美麗之島</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It is believed that a crew of Portuguese sailors came across Taiwan and named it "Ilha Formosa," which means "beautiful island."</span></div>
+        <div class="para-exp">
+          <div class="para-cn">據信，一群葡萄牙水手偶然發現了台灣，並將它命名為「Ilha Formosa」，意思是「美麗之島」。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is believed</span><span class="syn-t">V（被動）</span> <span class="syn syn-c">that a crew of Portuguese sailors...</span><span class="syn-t">真主詞子句</span></div>
+          <div class="para-note"><b>It is believed that</b> = 據信…；<b>crew</b>（全體船員）、<b>sailor</b>（水手）；<b>come across</b> = 偶然發現；which 引導非限定關係子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Similarly, Formosa was the European name given to an area of land in South America by Spanish explorers around the same time.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">同樣地，Formosa 也是西班牙探險家在大約同一時期為南美洲一塊土地所取的歐洲名稱。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Formosa</span><span class="syn-t">S</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">the European name [given to... by Spanish explorers]</span><span class="syn-t">C（過去分詞片語修飾）</span></div>
+          <div class="para-note"><b>given to A by B</b> = 由 B 給 A 的（過去分詞片語，見句型一）；similarly = 同樣地。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These explorers decided to settle there mainly because the area possessed an exceptional strategic location and economic advantages.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些探險家決定在那裡定居下來，主要是因為該地擁有絕佳的戰略位置與經濟優勢。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">These explorers</span><span class="syn-t">S</span> <span class="syn syn-v">decided to settle</span><span class="syn-t">V</span> <span class="syn syn-m">there mainly because the area possessed...</span><span class="syn-t">原因副詞子句</span></div>
+          <div class="para-note"><b>settle</b>（定居）、<b>possess</b>（擁有）、<b>exceptional</b>（絕佳的）、<b>strategic</b>（戰略的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Apart from their shared name and historical similarities, there is an interesting geographical fact that connects these two locations.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">除了共有的名字與歷史上的相似之處，還有一個有趣的地理事實把這兩地連結在一起。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Apart from their shared name...</span><span class="syn-t">介系詞片語</span> <span class="syn syn-v">there is</span><span class="syn-t">V</span> <span class="syn syn-s">an interesting geographical fact [that connects...]</span><span class="syn-t">主詞（關係子句，見句型二）</span></div>
+          <div class="para-note"><b>apart from</b> = 除了…之外；<b>that connects...</b> 關係子句修飾 fact（見句型二）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 三｜地理巧合 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">📍 三｜地理巧合：地球兩端的對點</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Taiwan is located at 23° N and Argentina's Formosa at 23° S, which means both areas are roughly the same distance from the equator.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">台灣位於北緯 23 度，阿根廷的 Formosa 位於南緯 23 度，這意味著兩地離赤道的距離大致相同。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Taiwan</span><span class="syn-t">S</span> <span class="syn syn-v">is located</span><span class="syn-t">V</span> <span class="syn syn-m">at 23° N</span><span class="syn-t">副詞</span> <span class="syn syn-m">, which means...</span><span class="syn-t">非限定關係子句</span></div>
+          <div class="para-note"><b>be located at</b> = 位於；<b>which</b> 指前面整句（非限定關係子句）；equator = 赤道。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>What's more, each of them sits on the exact opposite side of the world from the other.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">更甚者，兩地各自正好位於地球上與對方相對的另一端。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">each of them</span><span class="syn-t">S</span> <span class="syn syn-v">sits</span><span class="syn-t">V</span> <span class="syn syn-m">on the exact opposite side of the world from the other</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>what's more</b> = 此外、更甚者；<b>opposite</b>（相對的）；each...from the other = 彼此相對。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>If someone in northern Taiwan dug a hole straight down into the Earth, penetrated its core, and then continued digging to the surface on the other side, he or she would end up in Formosa, Argentina!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">假如台灣北部有人筆直向下挖洞、穿過地心，再繼續往另一側的地表挖出去，他（她）最後會抵達阿根廷的 Formosa！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">If someone... dug a hole...</span><span class="syn-t">與現在相反的假設（if 子句）</span> <span class="syn syn-s">he or she</span><span class="syn-t">S</span> <span class="syn syn-v">would end up</span><span class="syn-t">V</span> <span class="syn syn-m">in Formosa, Argentina</span><span class="syn-t">副詞</span></div>
+          <div class="para-note">與現在事實相反假設：If S + 過去式, S would + 原形；<b>core</b>（地心）、<b>end up</b> = 最後落得／抵達。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Since most of the globe is covered in ocean, it is remarkable to find that the two Formosas are exactly antipodal!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">由於地球大部分被海洋覆蓋，能發現這兩個 Formosa 恰好位於地球的對點，實在非常難得！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Since most of the globe is covered in ocean</span><span class="syn-t">原因子句</span> <span class="syn syn-s">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">remarkable</span><span class="syn-t">C</span> <span class="syn syn-m">to find that...</span><span class="syn-t">真主詞</span></div>
+          <div class="para-note"><b>since</b> = 由於（表原因）；<b>be covered in</b> = 被…覆蓋；antipodal = 位於地球對點的。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 四｜相隔天壤：地貌 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🏔️ 四｜相隔天壤：迥異的地貌</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Despite these things that they have in common, the two Formosas are, in many ways, still worlds apart.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">儘管有這些共通之處，這兩個 Formosa 在許多方面仍相隔天壤。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Despite these things [that they have in common]</span><span class="syn-t">介系詞片語（含關係子句）</span> <span class="syn syn-s">the two Formosas</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">worlds apart</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>despite</b> = 儘管（後接名詞）；<b>have...in common</b> = 有共通點；<b>be worlds apart</b> = 相隔天壤（片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Their natural landscapes, for a start, differ considerably.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">首先，兩地的自然景觀就有相當大的差異。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Their natural landscapes</span><span class="syn-t">S</span> <span class="syn syn-m">, for a start,</span><span class="syn-t">插入語</span> <span class="syn syn-v">differ</span><span class="syn-t">V</span> <span class="syn syn-m">considerably</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>differ</b>（不同，vi.）、<b>considerably</b>（相當地）為核心字；for a start = 首先。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Two thirds of Taiwan's 36,000 square kilometers are covered with densely forested majestic mountains, some of which soar thousands of meters above sea level.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">台灣 3 萬 6 千平方公里中，有三分之二被林木茂密、雄偉壯麗的山脈覆蓋，其中有些高聳於海平面數千公尺之上。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Two thirds of Taiwan's 36,000 square kilometers</span><span class="syn-t">S</span> <span class="syn syn-v">are covered with</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">majestic mountains [some of which soar...]</span><span class="syn-t">by 受詞（含關係子句）</span></div>
+          <div class="para-note"><b>densely</b>（密集地）、<b>majestic</b>（雄偉的）、<b>soar</b>（高聳／翱翔）為核心字；<b>some of which</b>＝介系詞＋關代（見句型二）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Furthermore, the island's mountains, valleys, rivers, and reefs are home to hundreds of unique species found only in Taiwan.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，這座島嶼的山脈、山谷、河流與礁岩，孕育了數百種台灣獨有的物種。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the island's mountains, valleys, rivers, and reefs</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">home to hundreds of unique species [found only in Taiwan]</span><span class="syn-t">C（含過去分詞片語）</span></div>
+          <div class="para-note"><b>valley</b>（山谷）為核心字；<b>be home to</b> = 是…的家園；found only in（過去分詞修飾 species）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>By contrast, most of Argentina's Formosa, which is two times the size of Taiwan, is fairly flat and made up of trees, grassland, or marshland.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">相較之下，面積是台灣兩倍大的阿根廷 Formosa，大部分地勢相當平坦，由樹林、草原或沼澤地所組成。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">most of Argentina's Formosa</span><span class="syn-t">S</span> <span class="syn syn-m">, which is two times the size of...,</span><span class="syn-t">非限定關係子句</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">fairly flat and made up of...</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>by contrast</b> = 相較之下（見句型四）；<b>make up of</b> = 由…組成；倍數 two times the size of。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Its eastern region receives more rain than its other parts and also has more forests and streams.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它的東部地區比其他區域降雨更多，也擁有較多的森林與溪流。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Its eastern region</span><span class="syn-t">S</span> <span class="syn syn-v">receives</span><span class="syn-t">V</span> <span class="syn syn-o">more rain</span><span class="syn-t">O</span> <span class="syn syn-m">than its other parts</span><span class="syn-t">比較</span></div>
+          <div class="para-note"><b>stream</b>（溪流）為核心字；more rain than = 比…更多的雨（比較級）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 五｜相隔天壤：經濟 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">💰 五｜相隔天壤：對比的經濟</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>There is, in addition, a stark contrast between their economies.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，兩地的經濟之間也存在著鮮明的對比。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">There is</span><span class="syn-t">V</span> <span class="syn syn-m">, in addition,</span><span class="syn-t">插入語</span> <span class="syn syn-s">a stark contrast between their economies</span><span class="syn-t">S</span></div>
+          <div class="para-note"><b>stark</b>（鮮明的、明顯的）為核心字；<b>a stark contrast between</b> = …之間鮮明的對比；in addition = 此外。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Present-day Taiwan is known worldwide for its lively economy and its advanced information technology industry.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">今日的台灣以其活絡的經濟與先進的資訊科技產業而聞名於世。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Present-day Taiwan</span><span class="syn-t">S</span> <span class="syn syn-v">is known worldwide for</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">its lively economy...</span><span class="syn-t">for 受詞</span></div>
+          <div class="para-note"><b>lively</b>（活躍的）為核心字；<b>be known for</b> = 以…聞名（見句型三）；present-day = 當今的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Moreover, the Asian island is famous for its natural beauty and friendly people and thus attracts visitors from far and wide.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，這座亞洲島嶼也以其自然美景與友善的人民而著稱，因此吸引了來自四面八方的遊客。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the Asian island</span><span class="syn-t">S</span> <span class="syn syn-v">is famous for</span><span class="syn-t">V</span> <span class="syn syn-o">its natural beauty...</span><span class="syn-t">for 受詞</span> <span class="syn syn-v">and thus attracts</span><span class="syn-t">V</span> <span class="syn syn-o">visitors</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>be famous for</b> = 以…著稱；<b>from far and wide</b> = 來自四面八方（片語）；thus = 因此。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>By contrast, Formosa is one of Argentina's least developed areas.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">相較之下，Formosa 是阿根廷最不發達的地區之一。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Formosa</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">one of Argentina's least developed areas</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>by contrast</b> = 相較之下（見句型四）；one of the + 最高級 + 複數名詞 = 最…之一。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Its economy relies primarily on raising cattle and other agricultural activities such as growing cotton and fruit.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它的經濟主要仰賴養牛以及種植棉花與水果等其他農業活動。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Its economy</span><span class="syn-t">S</span> <span class="syn syn-v">relies primarily on</span><span class="syn-t">V</span> <span class="syn syn-o">raising cattle and other agricultural activities</span><span class="syn-t">O（動名詞）</span></div>
+          <div class="para-note"><b>cattle</b>（牛群）、<b>agricultural</b>（農業的）為核心字；<b>rely on</b> = 仰賴；such as = 諸如。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The number of cattle in the area exceeds 1.5 million, which is more than three times the number of people living there!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">該地區的牛隻數量超過 150 萬頭，這比當地居住的人口數還多出三倍以上！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The number of cattle in the area</span><span class="syn-t">S</span> <span class="syn syn-v">exceeds</span><span class="syn-t">V</span> <span class="syn syn-o">1.5 million</span><span class="syn-t">O</span> <span class="syn syn-m">, which is more than three times...</span><span class="syn-t">非限定關係子句</span></div>
+          <div class="para-note"><b>exceed</b>（超過）為核心字；<b>the number of + 複數</b>視為單數（exceeds）；three times the number of = 三倍的數量。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 六｜結語 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🤝 六｜結語：或許有天面對面</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Whatever differences or similarities exist between the pair, each has a beauty that makes it special.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">無論這兩地之間存在著什麼差異或相似之處，各自都有一種使它與眾不同的美。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Whatever differences or similarities exist between the pair</span><span class="syn-t">讓步子句</span> <span class="syn syn-s">each</span><span class="syn-t">S</span> <span class="syn syn-v">has</span><span class="syn-t">V</span> <span class="syn syn-o">a beauty [that makes it special]</span><span class="syn-t">O（含關係子句）</span></div>
+          <div class="para-note"><b>whatever</b> = 無論什麼（複合關係詞，見句型五）；that makes it special 關係子句修飾 beauty。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Both Argentina's Formosa, with its gorgeous green plains and lush forests, and Taiwan, with its bustling cities and mighty, mountainous landscapes, are sure to impress visitors.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">阿根廷的 Formosa 有著壯麗的綠色平原與蒼翠的森林，台灣則有熱鬧繁忙的城市與雄偉多山的地景，兩者都必定會讓遊客印象深刻。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Both Argentina's Formosa... and Taiwan...</span><span class="syn-t">S（both A and B）</span> <span class="syn syn-v">are sure to impress</span><span class="syn-t">V</span> <span class="syn syn-o">visitors</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>gorgeous</b>（華麗的）、<b>lush</b>（蒼翠的）、<b>bustling</b>（繁忙的）、<b>mighty</b>（雄偉的）、<b>mountainous</b>（多山的）為核心字；both A and B 對等並列。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Perhaps the people of these two lands on opposite sides of the world could even come face to face one day as well and get to know each other a little better!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">或許有一天，這兩片位於地球兩端的土地上的人們，也能面對面相見，並更加彼此認識！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the people of these two lands...</span><span class="syn-t">S</span> <span class="syn syn-v">could... come</span><span class="syn-t">V</span> <span class="syn syn-m">face to face one day</span><span class="syn-t">副詞</span> <span class="syn syn-v">and get to know</span><span class="syn-t">V</span> <span class="syn syn-o">each other</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>come face to face</b> = 面對面相見；<b>get to know</b> = 逐漸認識；opposite sides of the world = 地球兩端。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>That would make for a beautiful friendship!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">那將會促成一段美好的友誼！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">That</span><span class="syn-t">S</span> <span class="syn syn-v">would make for</span><span class="syn-t">V</span> <span class="syn syn-o">a beautiful friendship</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>make for</b> = 促成、有助於（片語）；would 表委婉推測。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">differ</span><span class="v-pos">vi.</span><div class="v-cn-mini">不同；相異</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>difference (n.) 差異</span><span>different (adj.) 不同的</span><span>differ from 與…不同</span></div>
+        <div class="v-ex">Their natural landscapes <b>differ</b> considerably.<span class="cn">兩地的自然景觀差異相當大。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">differentiate</span><span class="v-pos">v.</span><div class="v-cn-mini">區別；區分</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>differentiate A from B 區分</span><span>≈ distinguish</span></div>
+        <div class="v-ex">It is easy to <b>differentiate</b> the two Formosas.<span class="cn">要區分這兩個 Formosa 並不難。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">crew</span><span class="v-pos">n.</span><div class="v-cn-mini">全體船員（機組員）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a crew of 一群（船員）</span><span>集合名詞</span></div>
+        <div class="v-ex">A <b>crew</b> of Portuguese sailors came across Taiwan.<span class="cn">一群葡萄牙水手偶然發現了台灣。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sailor</span><span class="v-pos">n.</span><div class="v-cn-mini">水手；船員</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>sail (v.) 航行</span><span>sailing (n.) 航行；帆船運動</span></div>
+        <div class="v-ex">Portuguese <b>sailors</b> named it "Ilha Formosa."<span class="cn">葡萄牙水手為它取名「Ilha Formosa」。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">settle</span><span class="v-pos">v.</span><div class="v-cn-mini">定居；解決</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>settlement (n.) 聚落；解決</span><span>settler (n.) 移居者</span></div>
+        <div class="v-ex">The explorers decided to <b>settle</b> there.<span class="cn">探險家決定在那裡定居下來。</span></div>
+        <span class="v-gsat">📊 settle down 安頓；settle a dispute 解決爭端</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">possess</span><span class="v-pos">v.</span><div class="v-cn-mini">擁有；持有</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>possession (n.) 擁有；財產</span><span>≈ own / have</span></div>
+        <div class="v-ex">The area <b>possessed</b> an exceptional strategic location.<span class="cn">該地擁有絕佳的戰略位置。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">exceptional</span><span class="v-pos">adj.</span><div class="v-cn-mini">絕佳的；異常的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>exception (n.) 例外</span><span>exceptionally (adv.)</span></div>
+        <div class="v-ex">It had an <b>exceptional</b> strategic location.<span class="cn">它有絕佳的戰略位置。</span></div>
+        <span class="v-gsat">📊 without exception 無一例外</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">strategic</span><span class="v-pos">adj.</span><div class="v-cn-mini">戰略的；策略性的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>strategy (n.) 策略</span><span>strategically (adv.)</span></div>
+        <div class="v-ex">The area had a <b>strategic</b> location.<span class="cn">該地具有戰略性的位置。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">opposite</span><span class="v-pos">adj. / n. / prep.</span><div class="v-cn-mini">相對的；對面（的）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>oppose (v.) 反對</span><span>opposition (n.) 反對</span></div>
+        <div class="v-ex">Each sits on the <b>opposite</b> side of the world.<span class="cn">兩地各在地球相對的一端。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">core</span><span class="v-pos">n. / adj.</span><div class="v-cn-mini">核心；地心；核心的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>the Earth's core 地心</span><span>core values 核心價值</span></div>
+        <div class="v-ex">He penetrated the Earth's <b>core</b> and kept digging.<span class="cn">他穿過地心後繼續往下挖。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">considerably</span><span class="v-pos">adv.</span><div class="v-cn-mini">相當地；大幅地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>considerable (adj.) 相當大的</span><span>≈ significantly</span></div>
+        <div class="v-ex">Their landscapes differ <b>considerably</b>.<span class="cn">兩地的地景差異相當大。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">densely</span><span class="v-pos">adv.</span><div class="v-cn-mini">密集地；濃密地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>dense (adj.) 濃密的</span><span>density (n.) 密度</span></div>
+        <div class="v-ex">The mountains are <b>densely</b> forested.<span class="cn">這些山林木茂密。</span></div>
+        <span class="v-gsat">📊 densely populated 人口稠密的</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">majestic</span><span class="v-pos">adj.</span><div class="v-cn-mini">雄偉的；壯麗的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>majesty (n.) 雄偉；陛下</span><span>≈ magnificent / grand</span></div>
+        <div class="v-ex">Taiwan is covered with <b>majestic</b> mountains.<span class="cn">台灣被雄偉的山脈覆蓋。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">soar</span><span class="v-pos">vi.</span><div class="v-cn-mini">高聳；翱翔；飆升</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>soaring (adj.) 高聳的；急升的</span><span>prices soar 物價飆升</span></div>
+        <div class="v-ex">Some mountains <b>soar</b> thousands of meters above sea level.<span class="cn">有些山高聳於海平面數千公尺之上。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">exceed</span><span class="v-pos">v.</span><div class="v-cn-mini">超過；超越</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>excess (n.) 過量</span><span>excessive (adj.) 過度的</span></div>
+        <div class="v-ex">The number of cattle <b>exceeds</b> 1.5 million.<span class="cn">牛隻數量超過 150 萬頭。</span></div>
+        <span class="v-gsat">📊 exceed expectations 超乎預期</span></div></div>
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">take a look at</span></td><td>看一看；審視</td><td class="pex">We can <b>take a closer look at</b> these two namesakes.<span class="cn">我們可以更仔細地看看這兩個同名之地。</span></td></tr>
+      <tr><td><span class="phr">be worlds apart</span></td><td>相隔天壤；截然不同</td><td class="pex">The two Formosas are still <b>worlds apart</b>.<span class="cn">這兩個 Formosa 仍相隔天壤。</span></td></tr>
+      <tr><td><span class="phr">by contrast</span></td><td>相較之下</td><td class="pex"><b>By contrast</b>, Argentina's Formosa is fairly flat.<span class="cn">相較之下，阿根廷的 Formosa 相當平坦。</span></td></tr>
+      <tr><td><span class="phr">make up</span></td><td>組成；構成</td><td class="pex">It is <b>made up of</b> trees, grassland, or marshland.<span class="cn">它由樹林、草原或沼澤地組成。</span></td></tr>
+      <tr><td><span class="phr">from far and wide</span></td><td>來自四面八方</td><td class="pex">Taiwan attracts visitors <b>from far and wide</b>.<span class="cn">台灣吸引來自四面八方的遊客。</span></td></tr>
+      <tr><td><span class="phr">make for</span></td><td>促成；有助於</td><td class="pex">That would <b>make for</b> a beautiful friendship.<span class="cn">那將促成一段美好的友誼。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（自由、平權、演說）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">namesake</span><span class="v-pos">n.</span><div class="v-cn-mini">同名之人／物</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>name（名字）＋sake</span><span>the two namesakes 兩個同名者</span></div>
+        <div class="v-ex">We compare these two <b>namesakes</b>.<span class="cn">我們比較這兩個同名之地。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">unintentionally</span><span class="v-pos">adv.</span><div class="v-cn-mini">無意間地；非故意地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>intentional (adj.) 故意的</span><span>反義 intentionally 故意地</span></div>
+        <div class="v-ex">Both were <b>unintentionally</b> reached by explorers.<span class="cn">兩地都是被探險家無意間抵達的。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">equator</span><span class="v-pos">n.</span><div class="v-cn-mini">赤道</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>equatorial (adj.) 赤道的</span><span>latitude (n.) 緯度</span></div>
+        <div class="v-ex">Both areas are the same distance from the <b>equator</b>.<span class="cn">兩地離赤道等距。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">penetrate</span><span class="v-pos">v.</span><div class="v-cn-mini">穿過；貫穿；滲透</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>penetration (n.) 穿透</span><span>≈ pierce / go through</span></div>
+        <div class="v-ex">He dug down and <b>penetrated</b> the Earth's core.<span class="cn">他往下挖並穿過了地心。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">remarkable</span><span class="v-pos">adj.</span><div class="v-cn-mini">非凡的；值得注意的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>remark (v./n.) 評論</span><span>remarkably (adv.)</span></div>
+        <div class="v-ex">It is <b>remarkable</b> that the two are antipodal.<span class="cn">兩地互為對點，實在非凡。</span></div>
+        <span class="v-gsat">📊 remarkable ≈ extraordinary / impressive</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">landscape</span><span class="v-pos">n.</span><div class="v-cn-mini">景觀；地景</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a mountainous landscape 多山地景</span><span>≈ scenery</span></div>
+        <div class="v-ex">Their natural <b>landscapes</b> differ considerably.<span class="cn">兩地的自然地景差異很大。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">advanced</span><span class="v-pos">adj.</span><div class="v-cn-mini">先進的；高階的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>advance (v./n.) 進步</span><span>advanced technology 先進科技</span></div>
+        <div class="v-ex">Taiwan has an <b>advanced</b> information technology industry.<span class="cn">台灣擁有先進的資訊科技產業。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">agricultural</span><span class="v-pos">adj.</span><div class="v-cn-mini">農業的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>agriculture (n.) 農業</span><span>agricultural activities 農業活動</span></div>
+        <div class="v-ex">Its economy relies on <b>agricultural</b> activities.<span class="cn">它的經濟仰賴農業活動。</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語都與課文主題（自由、正義、希望）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">worlds apart</span><div class="slang-cn-mini">天差地遠；南轅北轍</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">兩者差異極大、截然不同（呼應課文 be worlds apart）。</div>
+      <div class="slang-ex">The two islands are <b>worlds apart</b> in landscape and economy.<span class="cn">這兩座島在地景與經濟上天差地遠。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a stone's throw away</span><div class="slang-cn-mini">近在咫尺</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">距離很近，一步之遙。</div>
+      <div class="slang-ex">The night market is just <b>a stone's throw away</b> from my home.<span class="cn">夜市離我家近在咫尺。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">off the beaten track</span><div class="slang-cn-mini">人跡罕至的；偏僻的</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">遠離熱門景點、鮮少人去的地方。</div>
+      <div class="slang-ex">Argentina's Formosa is a place <b>off the beaten track</b>.<span class="cn">阿根廷的 Formosa 是個人跡罕至之地。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the other side of the coin</span><div class="slang-cn-mini">事情的另一面</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">同一件事的相反或不同面向。</div>
+      <div class="slang-ex">The two Formosas show <b>the other side of the coin</b> of one name.<span class="cn">兩個 Formosa 呈現同一名字的另一面。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">from far and wide</span><div class="slang-cn-mini">從四面八方（呼應課文）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">來自各個遠近不同的地方。</div>
+      <div class="slang-ex">Tourists come <b>from far and wide</b> to see Taiwan's mountains.<span class="cn">遊客從四面八方前來欣賞台灣的山。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">poles apart</span><div class="slang-cn-mini">兩極對立；截然相反</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">意見或性質完全相反，如同南北兩極（雙關地理主題）。</div>
+      <div class="slang-ex">Their economies are <b>poles apart</b>.<span class="cn">兩地的經濟截然相反。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜被動語態與 be + p.p. 片語（was reached / is covered with）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + be + p.p. (+ by/with/in ...)　→ 主詞是動作的承受者</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">課文大量使用被動語態描述「被抵達、被命名、被覆蓋」等；注意介系詞搭配。</p>
+        <div class="g-ex">Both Formosas <b>were</b> unintentionally <b>reached</b> <b>by</b> European explorers.<div class="g-ex-cn">兩個 Formosa 都被歐洲探險家無意間抵達。（課文）</div></div>
+        <div class="g-ex">The mountains <b>are covered with</b> forests; the globe <b>is covered in</b> ocean.<div class="g-ex-cn">山被森林覆蓋；地球被海洋覆蓋。（課文）</div></div>
+        <div class="g-note">✗ were reached by（漏 by）／混用介系詞；covered with/in 皆可，avoid「covered by ocean」語感較弱。</div>
+        <div class="g-tip">學測常考「主動 vs 被動」與 be known as / for、be made up of 等固定被動片語。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜關係子句與「介系詞＋關代」（that / which / some of which）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞 + (介系詞 +) which / that + ... ；some of which + V</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">關代引導子句修飾先行詞；「數量詞 + of which」可接續補充說明。</p>
+        <div class="g-ex">an interesting geographical fact <b>that</b> connects these two locations<div class="g-ex-cn">一個把兩地連結起來的地理事實（課文，限定用法）</div></div>
+        <div class="g-ex">majestic mountains, <b>some of which</b> soar thousands of meters above sea level<div class="g-ex-cn">雄偉的山脈，其中有些高聳於海平面數千公尺之上（課文）</div></div>
+        <div class="g-note">✗ some of them soar（them 不能連接兩句）；補充說明須用 some of which。</div>
+        <div class="g-tip">非限定關係子句（前有逗號）補充說明，不可用 that；學測高頻。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜be known as / for、be famous for（以…著稱）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">be known as + 身分／名稱；be known/famous for + 特點</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">as 接「身分、名稱」；for 接「原因、特點」，兩者意義不同。</p>
+        <div class="g-ex">"Formosa" <b>is known as</b> an unofficial name for Taiwan.<div class="g-ex-cn">Formosa 被稱為台灣的非官方名稱。（as＋名稱，課文）</div></div>
+        <div class="g-ex">Taiwan <b>is known for</b> its lively economy and <b>is famous for</b> its natural beauty.<div class="g-ex-cn">台灣以活絡經濟聞名，也以自然美景著稱。（for＋特點，課文）</div></div>
+        <div class="g-note">✗ be known for a name（名稱應用 as）；✗ be famous as its beauty（特點應用 for）。</div>
+        <div class="g-tip">學測常考 as/for 的區別；亦見 be known to（為…所知）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜對比與比較（by contrast / while / 倍數表達）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">By contrast, S + V ...；A is two/three times the + N + of B</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">本課以「對比」貫穿全文；倍數常用「倍數 + the size/number of」。</p>
+        <div class="g-ex"><b>By contrast</b>, Formosa is one of Argentina's least developed areas.<div class="g-ex-cn">相較之下，Formosa 是阿根廷最不發達的地區之一。（課文）</div></div>
+        <div class="g-ex">Argentina's Formosa is <b>two times the size of</b> Taiwan.<div class="g-ex-cn">阿根廷的 Formosa 面積是台灣的兩倍。（課文）</div></div>
+        <div class="g-note">✗ two times bigger than the size（size 與 times 只擇一）；倍數用 times the size of。</div>
+        <div class="g-tip">對比連接詞：by contrast / in contrast / whereas / while；學測寫作對比常用。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜名詞子句與複合關係詞（what / that / whatever）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">what / that + 子句 作主詞或補語；whatever + N + V（無論…）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">what＝the thing that，本身含先行詞；whatever 引導讓步子句表「無論什麼」。</p>
+        <div class="g-ex"><b>What</b> many people don't know <b>is that</b> there is another Formosa.<div class="g-ex-cn">許多人不知道的是，還有另一個 Formosa。（what 作主詞、that 作補語，課文）</div></div>
+        <div class="g-ex"><b>Whatever</b> differences or similarities exist between the pair, each has a beauty.<div class="g-ex-cn">無論兩地有何異同，各自都有其美。（課文）</div></div>
+        <div class="g-note">✗ What many people don't know is there is...（省略 that 於正式補語子句較不佳）；what 前不再加先行詞。</div>
+        <div class="g-tip">what vs that：what 含先行詞、that 不含；學測常考名詞子句連接詞。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+<!-- 歷屆月考真題 -->
+<div class="section s-exam" id="examSec">
+  <div class="sec-head"><div class="sec-icon">📄</div>歷屆月考真題（各校段考／期中考精選）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 以下皆為各校高三第二次段考／期中考（第二次月考，範圍：龍騰第五冊 L3 <i>Formosa: One Name, Two Stories</i>）<b>真題</b>。點選項即時對錯，按「看完整解析」看說明與出處。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第五冊 第三課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['Their natural landscapes ',' considerably from each other.'],
+  cn:'兩地的自然景觀彼此差異相當大。',
+  opts:['differ','settle','soar','exceed'],ans:0,
+  word:'differ (vi.) 不同；相異',
+  exp:'「彼此不同」＝differ。(B) 定居、(C) 高聳、(D) 超過皆不合。',
+  note:'differ from = 與…不同；difference (n.)。'},
+ {q:['A ',' of Portuguese sailors came across Taiwan.'],
+  cn:'一群葡萄牙水手偶然發現了台灣。',
+  opts:['core','crew','valley','stream'],ans:1,
+  word:'crew (n.) 全體船員',
+  exp:'「一群船員」＝a crew of sailors。(B) 核心、(C) 山谷、(D) 溪流皆不合。',
+  note:'crew 為集合名詞，指全體機組／船員。'},
+ {q:['The explorers decided to ',' there because of its strategic location.'],
+  cn:'探險家因該地的戰略位置而決定定居下來。',
+  opts:['differ','penetrate','settle','exceed'],ans:2,
+  word:'settle (v.) 定居',
+  exp:'「定居」＝settle。(B) 相異、(C) 穿過、(D) 超過皆不合。',
+  note:'settler (n.) 移居者；settlement (n.) 聚落。'},
+ {q:['The area ',' an exceptional strategic location and economic advantages.'],
+  cn:'該地擁有絕佳的戰略位置與經濟優勢。',
+  opts:['differed','soared','exceeded','possessed'],ans:3,
+  word:'possess (v.) 擁有',
+  exp:'「擁有」＝possess。(B) 相異、(C) 高聳、(D) 超過皆不合。',
+  note:'possession (n.) 擁有；財產。'},
+ {q:['Two thirds of Taiwan is covered with ',' forested mountains.'],
+  cn:'台灣三分之二被林木茂密的山脈覆蓋。',
+  opts:['densely','considerably','unintentionally','primarily'],ans:0,
+  word:'densely (adv.) 密集地；濃密地',
+  exp:'「林木茂密地」＝densely forested。(B) 相當地、(C) 無意間、(D) 主要地皆不合。',
+  note:'dense (adj.)；densely populated 人口稠密的。'},
+ {q:['Some of Taiwan’s mountains ',' thousands of meters above sea level.'],
+  cn:'台灣有些山高聳於海平面數千公尺之上。',
+  opts:['settle','soar','differ','possess'],ans:1,
+  word:'soar (vi.) 高聳；翱翔',
+  exp:'「高聳」＝soar。(B) 定居、(C) 相異、(D) 擁有皆不合。',
+  note:'soar 亦可表「（價格）飆升」。'},
+ {q:['The mountains are ',' and beautiful, rising grandly into the sky.'],
+  cn:'這些山雄偉而美麗，壯麗地聳入天際。',
+  opts:['agricultural','unofficial','majestic','antipodal'],ans:2,
+  word:'majestic (adj.) 雄偉的；壯麗的',
+  exp:'「雄偉的」＝majestic。(B) 農業的、(C) 非官方的、(D) 對點的皆不合。',
+  note:'majesty (n.) 雄偉；≈ magnificent。'},
+ {q:['Formosa’s economy relies on raising cattle and other ',' activities.'],
+  cn:'Formosa 的經濟仰賴養牛與其他農業活動。',
+  opts:['strategic','lively','remarkable','agricultural'],ans:3,
+  word:'agricultural (adj.) 農業的',
+  exp:'養牛、種棉花水果屬「農業的」活動＝agricultural。(B) 戰略的、(C) 活躍的、(D) 非凡的皆不合。',
+  note:'agriculture (n.) 農業。'},
+ {q:['The number of cattle ',' 1.5 million in the area.'],
+  cn:'該地區的牛隻數量超過 150 萬頭。',
+  opts:['differs','exceeds','settles','soars'],ans:1,
+  word:'exceed (v.) 超過',
+  exp:'「超過」＝exceed。(B) 相異、(C) 定居、(D) 高聳皆不合。',
+  note:'exceed expectations 超乎預期。'},
+ {q:['We can take a closer ',' these two namesakes to see how they differ.'],
+  cn:'我們可以更仔細地看看這兩個同名之地，看看它們有何不同。',
+  opts:['make for','make up','look at','worlds apart'],ans:2,
+  word:'take a look at 看一看',
+  exp:'「看一看」＝take a look at。(B) 促成、(C) 組成、(D) 相隔天壤皆不合。',
+  note:'take a closer look at 更仔細地端詳。'}
+];
+
+var teacherQ=[
+ {q:['"Formosa" is commonly known ',' an unofficial name for Taiwan.'],
+  cn:'Formosa 被稱為台灣的一個非官方名稱。',
+  opts:['for','to','of','as'],ans:3,
+  word:'be known as + 名稱／身分',
+  tnote:'<b>be known as</b>：接「名稱、身分」用 as；接「特點、原因」才用 for。<br>(A) for 用於特點；(C) to、(D) of 不合此固定用法。'},
+ {q:['Both Formosas were unintentionally ',' by European explorers.'],
+  cn:'兩個 Formosa 都被歐洲探險家無意間抵達。',
+  opts:['reach','reaching','reached','to reach'],ans:2,
+  word:'be + p.p.（被動語態）',
+  tnote:'<b>被動語態</b>：Formosas 是「被」抵達，用 were + p.p. (reached)。<br>(A) 原形、(C) 現在分詞、(D) 不定詞皆不成被動。'},
+ {q:['There is an interesting fact ',' connects these two locations.'],
+  cn:'有一個把這兩地連結起來的有趣事實。',
+  opts:['what','that','it','where'],ans:1,
+  word:'關係代名詞 that（限定用法）',
+  tnote:'<b>關係代名詞</b>：先行詞 fact 為「物」且作子句主詞，用 that/which。<br>(A) what 含先行詞、(B) it 非關代、(D) where 引導地方，皆不合。'},
+ {q:['Taiwan is covered with majestic mountains, some of ',' soar thousands of meters high.'],
+  cn:'台灣被雄偉的山脈覆蓋，其中有些高聳達數千公尺。',
+  opts:['which','them','that','it'],ans:0,
+  word:'some of which（介系詞／數量詞＋關代）',
+  tnote:'<b>數量詞＋of which</b>：補充說明先行詞，用 some of which（不可用 them 連接兩句）。<br>(A) them、(D) it 非關代；(C) that 不接於 of 之後。'},
+ {q:[' ',' most of the globe is covered in ocean, the two Formosas being antipodal is remarkable.'],
+  cn:'由於地球大部分被海洋覆蓋，兩個 Formosa 互為對點實在難得。',
+  opts:['Despite','Although','Unless','Since'],ans:3,
+  word:'since（表原因的連接詞）',
+  tnote:'<b>原因連接詞</b>：空格後為完整子句、且表原因，用 Since。<br>(A) Despite 接名詞；(C) Although 表讓步；(D) Unless 表除非，皆不合語意。'},
+ {q:['Argentina’s Formosa is two times the ',' of Taiwan.'],
+  cn:'阿根廷的 Formosa 面積是台灣的兩倍。',
+  opts:['sizes','bigger','size','as big'],ans:2,
+  word:'倍數 + the size of（倍數表達）',
+  tnote:'<b>倍數表達</b>：two times the size of = …的兩倍大。<br>(B) 複數不合、(C)(D) 與 times the 結構衝突。'},
+ {q:[' ',' many people don’t know is that there is another Formosa in Argentina.'],
+  cn:'許多人不知道的是，阿根廷還有另一個 Formosa。',
+  opts:['That','What','Which','It'],ans:1,
+  word:'What 引導名詞子句作主詞',
+  tnote:'<b>名詞子句</b>：What（＝the thing that）本身含先行詞，作句子主詞。<br>(A) That 不含先行詞；(C) Which 需先行詞；(D) It 非連接詞。'},
+ {q:[' ',' differences or similarities exist between the pair, each has its own beauty.'],
+  cn:'無論兩地有何異同，各自都有其獨特之美。',
+  opts:['Whatever','However','Whenever','Wherever'],ans:0,
+  word:'Whatever + N（複合關係詞，讓步）',
+  tnote:'<b>複合關係詞</b>：Whatever + 名詞 = 無論什麼…，引導讓步子句。<br>(A) However 修飾形容詞／副詞；(C) 時間、(D) 地點，皆不合。'},
+ {q:['Present-day Taiwan is famous ',' its natural beauty and friendly people.'],
+  cn:'今日的台灣以其自然美景與友善人民而著稱。',
+  opts:['as','of','for','with'],ans:2,
+  word:'be famous for + 特點',
+  tnote:'<b>be famous for</b>：接「原因、特點」用 for。<br>(A) as 接身分名稱；(C) of、(D) with 不合此固定用法。'},
+ {q:['Most of Argentina’s Formosa is fairly flat and is made ',' of trees and grassland.'],
+  cn:'阿根廷的 Formosa 大部分平坦，由樹林與草原組成。',
+  opts:['out','up','off','over'],ans:1,
+  word:'be made up of（由…組成）',
+  tnote:'<b>be made up of</b> = 由…組成。<br>(B) make out 辨認、(C) make off 逃走、(D) make over 移交，皆不合語意。'}
+];
+
+var examQ=[{"q":["similar and __ in which they are different",""],"cn":"讓我們看看這兩個同名地方相似的面向，以及不同的面向。","opts":["that","those","one","ones"],"ans":1,"word":"文法：those (代名詞，指代前面複數 aspects)","exp":"those 代替前面的複數名詞 aspects，與 that 單數相對。","note":"出處：台南二中 113二次月考","type":"grammar"},{"q":["They thought the area possessed "," beauty that they decided to stay there."],"cn":"他們認為這片區域擁有如此的美，於是決定留下來。","opts":["so","such","too","very"],"ans":1,"word":"such (限定詞)","exp":"such + (a) + 名詞 + that 表「如此……以致於」；beauty 為名詞，故用 such。so 後面須接形容詞/副詞。呼應 L3 possess（擁有）與 exceptional beauty 主題。","note":"出處：台南二中等 3 校 二次月考（高頻）","type":"grammar"},{"q":["each of them sits on the exact opposite side of the world from __","."],"cn":"兩者各自位於世界上與對方完全相反的另一邊。","opts":["another","the other","other","the others"],"ans":1,"word":"文法：the other (兩者中的另一個)","exp":"兩地互為對方，用 the other 指兩者中的另一個。","note":"出處：台南二中 113二次月考","type":"grammar"},{"q":["If someone in northern Taiwan __ a hole straight down to the Earth, he or she __ up standing in Formosa, Argentina",""],"cn":"如果台灣北部有人向地心直直鑽一個洞，他或她就會站在阿根廷的福爾摩沙！","opts":["drilled; would end","drilled; would have ended","had drilled; would end","had drilled; would have ended"],"ans":0,"word":"文法：與現在事實相反的假設 (drilled; would end)","exp":"表與現在事實相反的假設語氣，if 子句用過去式，主要子句用 would + 原形。","note":"出處：台南二中 113二次月考","type":"grammar"},{"q":["mountains and dense forests __ most of the island","'s 36193 square kilometers"],"cn":"在台灣，山脈與茂密的森林構成了這座島大部分的三萬六千餘平方公里。","opts":["constitute","consist of","is comprised","is composed of"],"ans":0,"word":"文法：constitute (vt.) 構成","exp":"主詞複數且後接受詞，constitute 為及物動詞「構成」，符合語意與語法。","note":"出處：台南二中 113二次月考","type":"grammar"},{"q":["over __ of Argentina","'s Formosa is fairly flat"],"cn":"阿根廷福爾摩沙有超過四分之三的地區相當平坦。","opts":["two third","three fourths","one fifths","fours fifth"],"ans":1,"word":"文法：分數表達 three fourths (四分之三)","exp":"分數分子用基數、分母用序數，分子大於一時分母加 s：three fourths。","note":"出處：台南二中 113二次月考","type":"grammar"},{"q":["Formosa in Argentina, which is two times the __ of Taiwan",""],"cn":"阿根廷的福爾摩沙面積是台灣的兩倍。","opts":["number","size","amount","width"],"ans":1,"word":"考點：size (n.) 大小、面積","exp":"比較土地面積用 size；number 用於可數、amount 用於不可數量、width 為寬度。","note":"出處：台南二中 113二次月考","type":"vocab"},{"q":["__ differences and similarities exist between the pair",""],"cn":"無論這兩地之間存在什麼樣的差異與相似，兩地的人們都能面對面地更加了解彼此。","opts":["whatever","whether","wherever","no matter"],"ans":0,"word":"文法：whatever (無論什麼) 引導讓步","exp":"whatever = no matter what，後接名詞引導讓步子句；no matter 須接 what 等疑問詞。","note":"出處：台南二中 113二次月考","type":"grammar"},{"q":["That could __ a beautiful friendship!",""],"cn":"那可能促成一段美好的友誼！","opts":["compensate for","make for","attribute to","make up"],"ans":1,"word":"片語：make for 促成、有助於","exp":"make for 意為「促成、造就」，符合語意「造就美好友誼」。","note":"出處：台南二中 113二次月考","type":"vocab"},{"q":["A wise person is able to __ the important things in life from the unimportant ones.",""],"cn":"有智慧的人能夠區辨人生中重要與不重要的事物。","opts":["comprehend","majestic","differ","settle"],"ans":2,"word":"考點：differ (vi.) 區別、不同 (differ A from B)","exp":"differ ... from ... 表「與…有別」，符合「區辨重要與不重要」。differ 為 L3 單字。","note":"出處：台南二中 113二次月考","type":"vocab"},{"q":["After years of conflict and negotiation, the two nations finally __ on a peace agreement",""],"cn":"經過多年衝突與談判，兩國終於就一份和平協議達成共識。","opts":["comprehend","differ","settle","estimate"],"ans":2,"word":"考點：settle (vi.) 解決、達成 (settle on)","exp":"settle on 表「敲定、達成」；settle 為 L3 單字。","note":"出處：台南二中 113二次月考","type":"vocab"},{"q":["The child demonstrated an __ talent for music and will be a world-famous pianist one day.",""],"cn":"這孩子展現出非凡的音樂天賦，將來會成為世界知名鋼琴家。","opts":["honest","dense","exceptional","core"],"ans":2,"word":"考點：exceptional (a.) 非凡的、傑出的","exp":"exceptional 傑出的，為 L3 單字。","note":"出處：基隆高中 112二次月考","type":"vocab"},{"q":["The __ Edinburgh Castle sits atop a hill at one end of the city","'s main street."],"cn":"雄偉的愛丁堡城堡坐落在城市主街一端的山丘頂上。","opts":["majestic","dense","misleading","plain"],"ans":0,"word":"考點：majestic (a.) 雄偉的、壯麗的","exp":"majestic 雄偉壯麗，為 L3 單字。","note":"出處：基隆高中 112二次月考","type":"vocab"},{"q":["John's pursuit of fame came __ because it cost him many of his closest friendships",""],"cn":"約翰追求名聲付出了代價，因為這讓他失去許多最親密的友誼。","opts":["by contrast","make for","worlds apart","at a price"],"ans":3,"word":"片語：at a price 付出代價","exp":"come at a price 表「付出代價」，為 L3 片語。","note":"出處：基隆高中 112二次月考","type":"vocab"},{"q":["Singapore is one of the smallest countries on earth. Russia, __, is the largest one.",""],"cn":"新加坡是地球上最小的國家之一。相比之下，俄羅斯是最大的。","opts":["make for","worlds apart","from far and wide","by contrast"],"ans":3,"word":"片語：by contrast 相比之下","exp":"by contrast 表對比，為 L3 片語。","note":"出處：基隆高中 112二次月考","type":"vocab"},{"q":["The two brothers are __ in terms of their interests; one enjoys music and the other enjoys reading science textbooks",""],"cn":"這兩兄弟在興趣上天差地遠：一個喜歡音樂，另一個喜歡讀科學課本。","opts":["by contrast","make for","from far and wide","worlds apart"],"ans":3,"word":"片語：worlds apart 天差地遠","exp":"worlds apart 表「天壤之別」，為 L3 片語。","note":"出處：基隆高中 112二次月考","type":"vocab"},{"q":["Because the bride and groom are from different countries, their families will have to travel __ to attend the wedding",""],"cn":"因為新郎新娘來自不同國家，他們的家人得從四面八方遠道而來參加婚禮。","opts":["by contrast","make for","worlds apart","from far and wide"],"ans":3,"word":"片語：from far and wide 從四面八方","exp":"from far and wide 表「從遠近各地」，為 L3 片語。","note":"出處：基隆高中 112二次月考","type":"vocab"},{"q":["the group of lost hikers ... eventually came across a small river flowing through a deep __",""],"cn":"那群迷路的登山客最終偶然發現一條流經深谷的小河。","opts":["core","settler","valley","sailor"],"ans":2,"word":"考點：valley (n.) 山谷","exp":"a deep valley 深谷，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["thousands of sheep were peacefully grazing on the __ and beautiful green meadow",""],"cn":"數千隻羊平靜地在那片蒼翠茂盛、美麗的綠色草地上吃草。","opts":["plain","lively","bustling","lush"],"ans":3,"word":"考點：lush (a.) 蒼翠茂盛的","exp":"lush green meadow 茂盛翠綠草地，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["the pirates ... ordered the captain, passengers, and the __ to gather in one place",""],"cn":"海盜攻擊商船時，命令船長、乘客與船員全部集中到一處。","opts":["crew","sail","core","plain"],"ans":0,"word":"考點：crew (n.) 全體船員","exp":"crew 船員，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["The __ street market in the heart of the city was always busy",""],"cn":"市中心那條熱鬧的街市總是很繁忙。","opts":["detailed","rough","lively","extreme"],"ans":2,"word":"考點：lively (a.) 熱鬧的、生氣勃勃的","exp":"lively market 熱鬧市集，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["it is built on a much smaller __ to showcase the design in detail",""],"cn":"這艘著名歷史船的模型是完美的縮小版，但以小得多的比例打造以細膩展現設計。","opts":["concern","tissue","scale","switch"],"ans":2,"word":"考點：scale (n.) 比例、規模","exp":"on a smaller scale 較小比例，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["a dramatic reduction in the number of __ on my grandfather's farm",""],"cn":"一場傳染病造成我祖父農場上的牲畜數量急遽減少。","opts":["sails","plains","streams","cattle"],"ans":3,"word":"考點：cattle (n.) 牛、牲畜","exp":"cattle 牛群，為 L3 單字 (cattle raising)。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["my father used to be a __ before becoming a farmer",""],"cn":"我最近得知父親在成為農夫前曾是水手，這令人驚訝，因為他一向怕水又不會游泳！","opts":["settler","sailor","valley","core"],"ans":1,"word":"考點：sailor (n.) 水手","exp":"sailor 水手，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["agriculture, which is a major sector ... and one of its __ industries",""],"cn":"近來的洪水嚴重損害基礎建設與農業，農業是該國經濟的主要部門，也是其核心產業之一。","opts":["stark","dense","core","plain"],"ans":2,"word":"考點：core (a.) 核心的","exp":"core industries 核心產業，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["The culture of the company ... seems to perfectly __ Michael",""],"cn":"這家重視創意、團隊合作與支持氛圍的公司文化，似乎完美地適合麥可。","opts":["alter","compose","induce","suit"],"ans":3,"word":"考點：suit (vt.) 適合","exp":"suit 適合，為 L3 單字。","note":"出處：基隆高中 113二次月考","type":"vocab"},{"q":["Many people know that Formosa is an alternative name for Taiwan. However, there is also another place called Formosa ___ "," the banks of the Paraguay River in Argentina."],"cn":"許多人知道福爾摩沙是台灣的別稱，但阿根廷巴拉圭河畔也有一個地方叫福爾摩沙。","opts":["to locate on","located on","locating on","that locates on"],"ans":1,"word":"located on (分詞片語) 位於～","exp":"表被動且省略關代與be動詞，用過去分詞 located on 修飾 another place。","note":"出處：金門高中 112二次月考","type":"cloze"},{"q":["While ___ "," some similarities, there are also several ways they are different."],"cn":"雖然有一些相似之處，但也有幾個方面是不同的。","opts":["sharing","share","share with","shares"],"ans":0,"word":"while sharing (分詞構句) 雖然共有～","exp":"連接詞 while 後接現在分詞構句 sharing，表主動。","note":"出處：金門高中 112二次月考","type":"cloze"},{"q":["Taiwan, used to be called Formosa, is a beautiful island in Portuguese’s eyes. There is another “Formosa” in the world. It is located in the northern part of Argentina. But except the identical name, we won’t investigate the aspects __11__ they are similar.",""],"cn":"台灣（曾被稱為福爾摩沙）在葡萄牙人眼中是座美麗的島嶼。世界上還有另一個「福爾摩沙」，位於阿根廷北部。但除了名字相同外，我們不會探討它們在哪些方面相似。","opts":["to which","which","in which","that"],"ans":2,"word":"in which 關係副詞（=where，表 aspects 的面向）","exp":"(C) in which，先行詞 aspects，「在哪些面向上相似」= in the aspects。L3 兩個福爾摩沙克漏字。","note":"出處：明倫高中 113二次月考","type":"cloze"},{"q":["___ ",", both were unintentionally discovered by Europeans in the sixteenth century."],"cn":"首先，兩地都是十六世紀時被歐洲人無意間發現的。","opts":["In the long term","By contrast","On the other hand","For a start"],"ans":3,"word":"For a start (片語) 首先","exp":"後文有 Second，此處為列舉開頭，用 For a start（首先）。","note":"出處：金門高中 112二次月考","type":"cloze"},{"q":["___ ",", this geographical fact also means an interesting coincidence—the two Formosas are on the exact opposite sides of the world."],"cn":"此外，這個地理事實也意味著一個有趣的巧合——兩個福爾摩沙位於世界完全相反的兩側。","opts":["What's more","In short","Worse still","In sum"],"ans":0,"word":"What's more (片語) 此外；而且","exp":"補充前一相似點後再加一項訊息，用 What's more。","note":"出處：金門高中 112二次月考","type":"cloze"},{"q":["Besides, __14__ the fact that mountains occupy over two-thirds of Taiwan, the government has always promoted tourism since 1970s.",""],"cn":"此外，儘管山地佔台灣三分之二以上，政府自1970年代起就一直推廣觀光。","opts":["although","whereas","provided","despite"],"ans":3,"word":"despite (prep.) 儘管（+名詞）","exp":"(D) despite 為介系詞，後接 the fact 名詞片語；although/whereas 為連接詞需接子句。L3 克漏字。","note":"出處：明倫高中 113二次月考","type":"cloze"},{"q":["Most of Argentina's Formosa, which is ___ "," of Taiwan, is fairly flat."],"cn":"阿根廷福爾摩沙的大部分面積約為台灣的兩倍大，地勢相當平坦。","opts":["twice the depth","two times bigger","two times the size","twice as big"],"ans":2,"word":"twice the size of (倍數句型) ～的兩倍大","exp":"倍數+the+名詞(size)+of＋比較對象，two times the size of。","note":"出處：金門高中 112二次月考","type":"cloze"},{"q":["In Taiwan, mountains ___ "," two-thirds of the island's 36,193 square kilometers."],"cn":"在台灣，山地佔了全島36,193平方公里的三分之二。","opts":["consist of","are composed of","are comprised of","make up"],"ans":3,"word":"make up (片語) 構成；佔","exp":"「部分構成整體」用 make up（主動）；consist of/be composed of 為「整體由部分組成」，主詞須相反。","note":"出處：金門高中 112二次月考","type":"cloze"},{"q":["Formosa in Argentina is one of that nation's poorest areas, and it mainly ___ "," farming activities."],"cn":"阿根廷的福爾摩沙是該國最貧困的地區之一，主要仰賴農業活動。","opts":["relies on","leads to","results from","takes up"],"ans":0,"word":"rely on (片語) 依賴","exp":"「主要依靠農業」用 rely on。","note":"出處：金門高中 112二次月考","type":"cloze"},{"q":["While Portuguese sailors are believed to "," Taiwan the name \"Ilha Formosa,\" which means \"beautiful island,\" it was Spanish explorers who named an area in South America \"Formosa.\""],"cn":"雖然一般認為葡萄牙水手把「福爾摩沙」（美麗之島）這個名字給了台灣，但把南美洲某地命名為「Formosa」的其實是西班牙探險家。","opts":["give","giving","have given","be given"],"ans":2,"word":"have given (完成不定詞)","exp":"be believed to + 完成式不定詞 have given，表示「相信過去曾把名字給了台灣」；動作發生在主要動詞之前，用完成不定詞。","note":"出處：金門高中等 2 校 二次月考（高頻）","type":"grammar"},{"q":["The Asian and Argentinian Formosas are "," the same distance from the equator."],"cn":"亞洲和阿根廷的兩個福爾摩沙距離赤道的距離大致相同。","opts":["roughly","accidentally","periodically","initially"],"ans":0,"word":"roughly (adv.) 大致上、大約","exp":"roughly = approximately，大約、大致上。呼應 L3 課文：兩個 Formosa 距赤道大致相同距離（23°N vs 23°S）。","note":"出處：金門高中等 2 校 二次月考（高頻）","type":"vocab"},{"q":["Thanks to those "," explored the globe hundreds of years ago, people can now pay a visit to two \"beautiful\" lands."],"cn":"多虧了那些數百年前探索全球的探險家，人們現在得以造訪兩塊「美麗」的土地。","opts":["which","what","when","who"],"ans":3,"word":"who (關係代名詞)","exp":"先行詞 those（指人）作後接子句的主詞，用關係代名詞 who。呼應 L3 explorer（探險家）主題。","note":"出處：金門高中等 2 校 二次月考（高頻）","type":"grammar"},{"q":["Its economy relies mainly on cattle raising and other agricultural activities... Thus, it is considered one of the __12__ developed areas in Argentina.",""],"cn":"其經濟主要依靠養牛與其他農業活動，因此被視為阿根廷開發程度最低的地區之一。","opts":["most","few","little","least"],"ans":3,"word":"least developed 最不發達的","exp":"(D) least，one of the least developed areas「最不發達地區之一」，呼應阿根廷福爾摩沙以農牧為主、開發程度低。L3 克漏字。","note":"出處：明倫高中 113二次月考","type":"cloze"},{"q":["But Taiwan Formosa, facing the Pacific Ocean, impresses us __13__ its bustling cities and mighty mountainous landscapes.",""],"cn":"但面向太平洋的台灣福爾摩沙，以其繁華的城市與雄偉的山岳景觀令我們印象深刻。","opts":["on","in","with","at"],"ans":2,"word":"impress sb. with sth. 以…使某人印象深刻","exp":"(C) with，impress someone with something 固定用法。L3 克漏字。","note":"出處：明倫高中 113二次月考","type":"cloze"},{"q":["Beautiful mountainous landscapes can be seen everywhere, some of __15__ are exploited for the purpose of spreading tourism.",""],"cn":"美麗的山岳景觀隨處可見，其中一些被開發以推廣觀光。","opts":["them","that","what","which"],"ans":3,"word":"some of which 關係代名詞（非限定）","exp":"(D) which，先行詞 landscapes，\"some of which\" 引導非限定子句；them 會造成逗號連接兩句錯誤。L3 克漏字。","note":"出處：明倫高中 113二次月考","type":"cloze"},{"q":["Taiwan Formosa attracts many visitors from foreign countries __16__ becomes one of the most popular areas that people love to visit.",""],"cn":"台灣福爾摩沙吸引許多外國遊客，因而成為人們最愛造訪的地區之一。","opts":["therefore","and thus","thus","for"],"ans":1,"word":"and thus 因而（連接兩個動詞）","exp":"(B) and thus，attracts 與 becomes 兩動詞需 and 連接，thus 為副詞表結果。L3 克漏字。","note":"出處：明倫高中 113二次月考","type":"cloze"}];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+  buildQuestions(examQ,document.querySelector('#examSec .sec-body'),'E',' badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>
