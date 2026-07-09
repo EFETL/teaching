@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>國一歷史第二冊｜第三次段考複習（講義＋歷屆試題）</title>
+<style>
+:root{--pri:#2563eb;--prid:#1e40af;--sec:#f59e0b;--bg:#eef2f7;--card:#fff;--txt:#1f2937;--muted:#6b7280;--border:#e5e7eb;--ok:#16a34a;--err:#dc2626;--acc:#7c3aed}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif;font-size:16px;line-height:1.75;background:var(--bg);color:var(--txt)}
+.site-header{background:var(--pri);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.back-btn{background:#fff;color:var(--pri);border:none;padding:6px 13px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none}
+.site-title{font-size:17px;font-weight:700}
+.toolbar{position:sticky;top:52px;z-index:90;background:#fff;border-bottom:1px solid var(--border);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.toolbar .tt{font-size:14px;color:var(--muted);margin-right:auto}
+.tb-btn{font-family:inherit;font-size:15px;font-weight:700;border:none;border-radius:9px;padding:8px 15px;cursor:pointer;transition:.15s}
+.tb-btn:hover{filter:brightness(.95);transform:translateY(-1px)}
+.b-reveal{background:var(--sec);color:#fff}.b-hide{background:#6b7280;color:#fff}.b-print{background:var(--pri);color:#fff}
+.b-score{background:var(--acc);color:#fff}
+/* 分頁紙張 */
+#doc{padding:22px 0 60px}
+.sheet{width:210mm;height:297mm;background:#fff;margin:0 auto 18px;box-shadow:0 3px 16px rgba(0,0,0,.14);padding:15mm 16mm 8mm;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.sheet-body{flex:1;overflow:hidden}
+.sheet-foot{height:8mm;flex:0 0 auto;display:flex;align-items:flex-end;justify-content:space-between;font-size:12px;color:#9ca3af;border-top:1px solid #eef1f4;padding-top:3px}
+.blk{margin-bottom:11px}
+.cover-blk{background:linear-gradient(135deg,#eff6ff,#f8fbff);border:2px solid #bfdbfe;border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.exam-cover-blk{background:linear-gradient(135deg,#fef3e7,#fffaf3);border:2px solid #fcd9a8;border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.doc-kicker{font-size:15px;font-weight:700;color:var(--pri)}.doc-kicker.ex{color:#c2740c}
+.doc-h1{font-size:22px;font-weight:800;color:#111827;margin:4px 0 6px}
+.doc-sub{font-size:14px;color:var(--muted)}
+.doc-tip{margin-top:10px;font-size:13px;color:#4b5563;background:#fff;border-radius:8px;padding:8px 12px;border:1px dashed #cbd5e1}
+.ht-sec-title{font-size:18px;font-weight:800;color:var(--pri);border-left:5px solid var(--sec);padding:4px 0 4px 12px;margin:4px 0}
+.fill-text{font-size:16px;line-height:2.35;background:#fafcff;border:1px solid #eef2f7;border-radius:9px;padding:10px 14px}
+.note-text{font-size:14px;color:#4b5563;padding:2px 6px}
+.info-tb{width:100%;border-collapse:collapse;font-size:14px}
+.info-tb th{background:var(--pri);color:#fff;padding:8px 10px;border:1px solid #cbd5e1;text-align:center}
+.info-tb td{padding:8px 10px;border:1px solid #d1d5db;text-align:center}
+.info-tb tr:nth-child(even) td{background:#f6f9fd}
+.blank{display:inline-block;border-bottom:2px solid #9ca3af;min-width:2.6em;text-align:center;margin:0 3px;color:#fff;background:var(--pri);cursor:pointer;padding:1px 10px;border-radius:6px;font-weight:700;user-select:none;transition:.15s}
+.blank:hover{background:var(--prid)}
+.blank.show{color:#fff;background:var(--ok);border-color:var(--ok)}
+.topic-group-box{background:#eff6ff;border:2px solid #bfdbfe;border-radius:10px;padding:12px 16px;font-size:15px}
+.topic-group-box strong{color:var(--pri);display:block;font-size:16px;margin-bottom:4px}
+.q-blk{background:#fff;border:1px solid #eceff3;border-radius:11px;padding:13px 16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.q-head{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.q-num{font-size:13px;font-weight:700;color:#fff;background:var(--pri);border-radius:6px;padding:1px 9px}
+.q-src{font-size:12px;color:var(--muted);background:#f3f4f6;border-radius:5px;padding:1px 7px}
+.q-text{font-size:16px;font-weight:700;line-height:1.7;margin-bottom:9px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.opt-btn{background:#f9fafb;border:2px solid var(--border);border-radius:9px;padding:8px 11px;font-size:15px;cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:7px;font-family:inherit;transition:.12s}
+.opt-btn:hover:not(:disabled){border-color:var(--pri);background:#eff6ff}
+.opt-btn.correct{border-color:var(--ok);background:#dcfce7;color:#15803d;font-weight:700}
+.opt-btn.wrong{border-color:var(--err);background:#fee2e2;color:var(--err)}
+.opt-btn:disabled{cursor:default}
+.opt-letter{font-weight:800;min-width:20px}
+.analysis-box{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:9px;padding:10px 13px;margin-top:9px;font-size:14px;color:#5b21b6;line-height:1.7;display:none}
+.analysis-box.show{display:block}
+#scorebar{position:fixed;bottom:0;left:0;right:0;background:var(--prid);color:#fff;padding:10px;text-align:center;font-size:16px;font-weight:700;display:none;z-index:120}
+/* 螢幕外量測容器 */
+#measure{position:absolute;left:-9999px;top:0;width:calc(210mm - 32mm)}
+@page{size:A4;margin:0}
+@media print{
+  body{background:#fff}
+  .site-header,.toolbar,#scorebar{display:none!important}
+  #doc{padding:0}
+  .sheet{margin:0;box-shadow:none;page-break-after:always}
+  .sheet:last-child{page-break-after:auto}
+  /* 學生列印版：空格變底線、不顯示答案/解析 */
+  body.print-student .blank{background:none!important;color:transparent!important;border-bottom:1.6px solid #333!important;border-radius:0!important;min-width:110px!important;padding:0 6px!important}
+  body.print-student .analysis-box{display:none!important}
+  body.print-student .opt-btn{box-shadow:none}
+  /* 解答版：空格顯示答案、解析全開 */
+  body.print-answer .blank{background:#dcfce7!important;color:#15803d!important;border:1px solid #15803d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.print-answer .analysis-box{display:block!important}
+  .opt-btn,.info-tb th,.q-num,.blank,.cover-blk,.exam-cover-blk{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media screen and (max-width:820px){.sheet{width:100%;height:auto;min-height:auto;padding:18px 16px}.options{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header class="site-header">
+  <a class="back-btn" href="https://teaching.efetl.com/history/">← 返回主選單</a>
+  <span class="site-title">國一歷史第二冊｜第三次段考複習</span>
+</header>
+<div class="toolbar">
+  <span class="tt">重點整理＋歷屆試題　·　第二冊 L5~L6　戰後臺灣政治外交、經濟、社會文化</span>
+  <button class="tb-btn b-reveal" onclick="revealAll()">顯示全部答案</button>
+  <button class="tb-btn b-hide" onclick="hideAll()">隱藏答案</button>
+  <button class="tb-btn b-score" onclick="grade()">計分</button>
+  <button class="tb-btn b-print" onclick="window.print()">🖨️ 列印</button>
+</div>
+<div id="doc"></div>
+<div id="measure"></div>
+<div id="scorebar"></div>
+<script>
+
+// 原始區塊
+const RAW = `<div class="blk cover-blk">
+    <div class="doc-kicker">🌏　重點整理講義</div>
+    <div class="doc-h1">第三次段考重點複習：戰後臺灣政治經濟社會</div>
+    <div class="doc-sub">戰後臺灣政治外交、經濟發展與社會文化的完整脈絡整理　·　範圍：第二冊 L5~L6　戰後臺灣政治外交、經濟、社會文化</div>
+    <div class="doc-tip">💡 點藍色「？」看答案；老師可按「顯示全部答案」；列印時空格自動變作答底線。</div>
+  </div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">一、戰後政治與兩岸軍事對峙</div></div>
+<div class="blk"><div class="fill-text">1949年國共內戰失利，中華民國政府撤退來臺。同年古寧頭戰役中，國軍成功抵擋共軍攻勢，穩住了<span class="blank" data-ans="金門">？</span>。</div></div>
+<div class="blk"><div class="fill-text">1950年<span class="blank" data-ans="韓戰">？</span>爆發，美國為防堵共產勢力擴張，派遣<span class="blank" data-ans="第七艦隊">？</span>協防臺灣海峽，臺海局勢才穩定下來。</div></div>
+<div class="blk"><div class="fill-text">1958年爆發<span class="blank" data-ans="八二三炮戰">？</span>，中共猛烈炮擊金門，落彈量驚人；金門特產「鋼刀（菜刀）」即以此戰役廢棄的炮彈彈殼鎔鑄而成。</div></div>
+<div class="blk"><div class="fill-text">政府遷臺後長期實施<span class="blank" data-ans="戒嚴">？</span>，並以《<span class="blank" data-ans="動員戡亂時期臨時條款">？</span>》凍結憲法部分條文，形成威權統治，箝制人民言論、集會等自由。</div></div>
+<div class="blk"><div class="fill-text">1987年蔣經國宣布<span class="blank" data-ans="解嚴">？</span>，人民逐漸重獲自由，各種社會運動蓬勃發展，臺灣邁向民主化。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">二、美援與外交起點</div></div>
+<div class="blk"><div class="fill-text">民國40～54年間，美國依「共同安全法」對臺提供近15億美元的經濟與軍事援助，統稱<span class="blank" data-ans="美援">？</span>，涵蓋交通、電力、農業、教育、公共衛生等層面。</div></div>
+<div class="blk"><div class="fill-text">1954（民國43）年美國與我國簽訂《<span class="blank" data-ans="中美共同防禦條約">？</span>》，將臺灣納入西太平洋（東亞）反共防禦體系的一環。</div></div>
+<div class="blk"><div class="fill-text">美援期間，美方帶來的麵粉、小麥改變了臺灣人的飲食習慣，政府鼓勵「以<span class="blank" data-ans="麵">？</span>代米」，麵包、饅頭漸成主食，貧困百姓還把印有「中美合作」的麵粉袋縫製成內衣褲。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">三、外交三階段對照</div></div>
+<div class="blk"><div class="note-text">民國38年政府遷臺後，外交政策依時序可分為鞏固外交→彈性外交→務實外交三個階段。</div></div>
+<div class="blk"><table class="info-tb"><thead><tr><th>階段</th><th>時期與背景</th><th><span class="blank" data-ans="核心作法">？</span></th></tr></thead><tbody><tr><td>鞏固外交</td><td>遷臺後至退出聯合國前</td><td><span class="blank" data-ans="堅持中華民國是代表「中國」的唯一合法政府，漢賊不兩立，全力爭取邦交國">？</span></td></tr><tr><td>彈性外交</td><td>1971年退出聯合國、遭斷交潮後</td><td><span class="blank" data-ans="與斷交國家繼續發展「實質關係」，突破外交孤立">？</span></td></tr><tr><td>務實外交</td><td>1988年李登輝繼任總統後</td><td><span class="blank" data-ans="不再堅持是唯一合法中國，以經貿實力打破中共封鎖，發展與無邦交國的實質關係">？</span></td></tr></tbody></table></div>
+<div class="blk"><div class="fill-text">1971年第26屆聯合國大會通過第<span class="blank" data-ans="2758">？</span>號決議，由中華人民共和國取代我國席位，我國隨即退出聯合國，引發邦交國大量斷交。</div></div>
+<div class="blk"><div class="fill-text">1979（民國68）年美國與中華人民共和國建交，同時與我國<span class="blank" data-ans="斷交">？</span>，美國國務卿訪臺說明時，民眾在機場聚集抗議並向美方官員丟擲雞蛋。</div></div>
+<div class="blk"><div class="fill-text">美國斷交後隨即制定《<span class="blank" data-ans="臺灣關係法">？</span>》，承諾提供臺灣防禦性武器、維持商業與文化關係，並設立「美國在臺協會（<span class="blank" data-ans="AIT">？</span>）」維持非官方往來。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">四、兩岸關係的演變</div></div>
+<div class="blk"><div class="fill-text">早期兩岸武力對抗，我方喊「反攻大陸、反共復國」，中共喊「<span class="blank" data-ans="武力解放臺灣">？</span>」。</div></div>
+<div class="blk"><div class="fill-text">1979年中共與美國建交後，對臺改採「<span class="blank" data-ans="和平統戰">？</span>」，並由鄧小平提出「<span class="blank" data-ans="一國兩制">？</span>」，主張臺灣接受中國統治但可實行不同制度。</div></div>
+<div class="blk"><div class="fill-text">我國政府則以「三民主義統一中國」及「<span class="blank" data-ans="三不政策">？</span>」（不接觸、不談判、不妥協）回應中共的統戰。</div></div>
+<div class="blk"><div class="fill-text">1987年政府開放民眾赴大陸<span class="blank" data-ans="探親">？</span>，讓分隔兩岸近40年的老兵得以返鄉與家人團聚。</div></div>
+<div class="blk"><div class="fill-text">民國82年（1993）在新加坡舉行「<span class="blank" data-ans="辜汪會談">？</span>」，由我方海基會辜振甫與中共海協會汪道涵代表，是兩岸首度正式的民間性協商。</div></div>
+<div class="blk"><table class="info-tb"><thead><tr><th>兩岸事務單位</th><th><span class="blank" data-ans="我方">？</span></th><th><span class="blank" data-ans="中共方">？</span></th></tr></thead><tbody><tr><td>官方主管機關</td><td><span class="blank" data-ans="行政院大陸委員會（陸委會）">？</span></td><td><span class="blank" data-ans="國務院台灣事務辦公室（國臺辦）">？</span></td></tr><tr><td>受委託民間中介組織</td><td><span class="blank" data-ans="海峽交流基金會（海基會）">？</span></td><td><span class="blank" data-ans="海峽兩岸關係協會（海協會）">？</span></td></tr></tbody></table></div>
+<div class="blk"><div class="fill-text">2001年金門開出第一班往廈門的客輪，金馬與福建恢復交流，此屬「<span class="blank" data-ans="小三通">？</span>」政策的成果。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">五、土地改革三步驟</div></div>
+<div class="blk"><div class="note-text">政府遷臺後推動土地改革，提高自耕農比例、削弱地主勢力，穩固政權，也為工業發展奠基。</div></div>
+<div class="blk"><table class="info-tb"><thead><tr><th>順序</th><th>政策</th><th><span class="blank" data-ans="內容">？</span></th></tr></thead><tbody><tr><td>1</td><td>三七五減租</td><td><span class="blank" data-ans="地租不得超過佃農年（土地）總收穫量的37.5%">？</span></td></tr><tr><td>2</td><td>公地放領</td><td><span class="blank" data-ans="政府將公有耕地放領（賣）給農民承購">？</span></td></tr><tr><td>3</td><td>耕者有其田</td><td><span class="blank" data-ans="政府強制徵收地主超額土地，再轉售給實際耕作的農民">？</span></td></tr></tbody></table></div>
+<div class="blk"><div class="fill-text">改革後大量<span class="blank" data-ans="佃農">？</span>轉型為自耕農，自耕農（自耕地）比例大幅上升，部分地主則轉向<span class="blank" data-ans="工商業">？</span>發展。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">六、經濟發展四階段</div></div>
+<div class="blk"><table class="info-tb"><thead><tr><th>階段（時序）</th><th>政策</th><th><span class="blank" data-ans="重點作法">？</span></th></tr></thead><tbody><tr><td>民國40年代</td><td>進口替代</td><td><span class="blank" data-ans="以農業培養工業，發展紡織等民生輕工業，生產民生必需品以減少進口">？</span></td></tr><tr><td>民國50年代</td><td>出口導向</td><td><span class="blank" data-ans="設立加工出口區（如高雄前鎮），生產外銷商品賺取外匯，創造經濟奇蹟">？</span></td></tr><tr><td>民國60年代</td><td>十大建設</td><td><span class="blank" data-ans="石油危機下政府興建交通、重工業等大型公共工程，改善投資環境">？</span></td></tr><tr><td>民國70年代以後</td><td>產業升級</td><td><span class="blank" data-ans="發展資本、技術密集的高科技產業，設立新竹科學園區">？</span></td></tr></tbody></table></div>
+<div class="blk"><div class="fill-text">「進口替代」指的是生產民生必需品以<span class="blank" data-ans="減少進口">？</span>相關物資，扶植與民生相關的輕工業（如紡織、麵粉、食用油）。</div></div>
+<div class="blk"><div class="fill-text">民國50年代「孤女的願望」等臺語歌曲，反映女工從鄉村到都市的<span class="blank" data-ans="加工出口區">？</span>工廠工作，產品外銷賺取外匯。</div></div>
+<div class="blk"><div class="fill-text">十大建設由行政院院長<span class="blank" data-ans="蔣經國">？</span>推動，其中所占比例最高的是<span class="blank" data-ans="交通">？</span>類建設，如中山高速公路、鐵路電氣化、北迴鐵路等。</div></div>
+<div class="blk"><div class="fill-text">產業升級時期設立<span class="blank" data-ans="新竹科學園區">？</span>，孕育出台積電等半導體高科技產業，成為臺灣的「護國神山」。</div></div>
+<div class="blk"><div class="fill-text">臺灣經濟自由化、國際化：2002年（民國91年）加入<span class="blank" data-ans="WTO">？</span>（世界貿易組織），衝擊本土農業（如白米炸彈客事件）；也是目前唯一加入的政府間區域經貿組織<span class="blank" data-ans="APEC">？</span>（亞太經濟合作會議）的成員。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">七、美援與流行文化、國語運動</div></div>
+<div class="blk"><div class="fill-text">美軍駐臺與美援帶入美國流行文化，年輕人流行穿牛仔喇叭褲、彈吉他唱西洋歌曲；美軍在臺電臺即今日<span class="blank" data-ans="ICRT">？</span>的前身。</div></div>
+<div class="blk"><div class="fill-text">戰後政府為清除日本統治影響、強化國家認同，於1950年代大力推行「<span class="blank" data-ans="國語運動">？</span>」，規定學校只能說國語（北京話），不可講方言，造成本土語言（臺語、客語、族語）失傳危機。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">八、鄉土文學與臺灣新電影</div></div>
+<div class="blk"><div class="fill-text">民國60年代因退出聯合國、與美斷交等內政外交挑戰，文壇興起<span class="blank" data-ans="鄉土文學">？</span>，以寫實手法關懷農民、勞工等小人物，代表作家有黃春明、王拓、洪醒夫等。</div></div>
+<div class="blk"><div class="fill-text">民國70年代初期臺灣電影進入「<span class="blank" data-ans="臺灣新電影">？</span>」時期，融入鄉土文學題材、風格寫實；黃春明原著改編的《<span class="blank" data-ans="兒子的大玩偶">？</span>》即為代表作，並曾發生官方施壓刪片的「削蘋果事件」。</div></div>
+<div class="blk"><div class="note-text">音樂流行時序：原住民八部合音（傳統）→反共歌曲（民40年代）→英文老歌（美援時期）→校園民歌（強調鄉土，民60～70年代）。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">九、社會運動與多元文化</div></div>
+<div class="blk"><div class="fill-text">解嚴後民主開放，原住民族發起一連串社會運動，高舉「<span class="blank" data-ans="還我土地">？</span>」、「還我母語」、「正名運動」等訴求，爭取權益與復振族群文化。</div></div>
+<div class="blk"><div class="fill-text">民國83年（1994）修憲將原住民族由原本的「<span class="blank" data-ans="山地同胞（山胞）">？</span>」正名為「原住民族」；2024年更修《姓名條例》，讓原住民可使用族語文字登記姓名，屬<span class="blank" data-ans="正名">？</span>運動成果。</div></div>
+<div class="blk"><div class="fill-text">解嚴後女權團體推動兩性平權修法、環保人士反核，皆因政府解除<span class="blank" data-ans="戒嚴">？</span>、人民更能自由表達意見而蓬勃發展。</div></div>
+<div class="blk"><div class="fill-text">近年<span class="blank" data-ans="新住民">？</span>與國際移工移入，帶來如潑水節等多元文化，臺灣社會呈現「多元文化並存」的現象。</div></div>
+<div class="blk exam-cover-blk keep-next">
+    <div class="doc-kicker ex">📝　歷屆精選試題</div>
+    <div class="doc-h1">第三次段考　歷屆精選試題</div>
+    <div class="doc-sub">精選 42 題・11校段考題彙整</div>
+    <div class="doc-tip">💡 點選項即時對答＋看解析；列印時為乾淨作答卷（不顯示答案）。</div>
+  </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 1 題</span><span class="q-src">板橋</span></div>
+      <div class="q-text">老師上課時提到：「此處發生的兩次戰爭都改變了臺灣的命運，一次讓臺灣淪入異族統治，另一次則穩定了臺海局勢。」老師指的是下列哪個地方？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>朝鮮（韓國）</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>日本</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>越南</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>琉球</span></button></div>
+      <div class="analysis-box"><b>解析：</b>甲午戰爭因朝鮮問題爆發，戰後臺灣割讓給日本（淪入異族統治）；1950年韓戰爆發，美國派第七艦隊協防臺灣海峽，穩定了臺海局勢。兩次戰爭皆與朝鮮（韓）有關。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 2 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">1949年中華民國政府撤退來臺後政局不穩，共軍威脅仍大，正值危急之際，美國因某事件爆發而出手援助，兩岸局勢才穩定下來。文中所指事件應為下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>太平洋戰爭</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>第二次世界大戰</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>韓戰</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>古寧頭戰役</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1950年韓戰爆發，美國為防堵共產勢力擴張，派第七艦隊協防臺灣海峽並提供美援，臺海局勢才穩定。易錯：古寧頭戰役是國軍自己抵擋共軍，非美國援助的契機。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 3 題</span><span class="q-src">板橋</span></div>
+      <div class="q-text">「金門有三寶，貢糖、菜刀、高粱酒。」金門菜刀以炮彈的彈殼鎔鑄而成，硬度高又耐用。金門菜刀的誕生應與下列哪一事件密切相關？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>甲午戰爭</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>中日戰爭</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>古寧頭戰役</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>八二三炮戰</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1958年八二三炮戰中，中共猛烈炮擊金門，落彈量極大，戰後金門居民以廢棄彈殼打造鋼刀，成為當地名產。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 4 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">政府遷臺後長期實施某項制度，箝制人民言論、集會自由；直到1987年蔣經國宣布解除，人民才逐漸重獲自由，社會運動蓬勃發展。此制度是下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>戒嚴</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>小三通</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>動員戡亂終止</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>土地改革</span></button></div>
+      <div class="analysis-box"><b>解析：</b>政府自民國38年起實施戒嚴，限制人民自由；1987年蔣經國宣布解嚴，社會運動（女權、環保、原住民等）隨之興起。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 5 題</span><span class="q-src">鼎金</span></div>
+      <div class="q-text">民國43年，美國為進一步防止共產勢力擴張，與中華民國簽訂哪項條約，將臺灣納入西太平洋防禦體系的一環？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>《中美共同防禦條約》</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>《戒嚴令》</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>《動員戡亂時期臨時條款》</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>《馬關條約》</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1954（民國43）年簽訂《中美共同防禦條約》，使臺灣納入美國西太平洋（東亞）反共防禦體系。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 6 題</span><span class="q-src">板橋</span></div>
+      <div class="q-text">「聯合國大會第2758號決議」於1971年通過，恢復中華人民共和國在聯合國的合法權利。此決議內容對我國造成的影響，下列敘述何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>韓戰爆發，美國派第七艦隊協防臺灣</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>美援終止，中華人民共和國趁機砲擊金門</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>我國失去聯合國席位，邦交國大幅減少</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>我國堅守中國代表權，採取鞏固外交政策</span></button></div>
+      <div class="analysis-box"><b>解析：</b>2758號決議通過後，中華人民共和國取代我國聯合國席位，我國退出聯合國，各國紛紛與我斷交，邦交國大幅減少。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 7 題</span><span class="q-src">楠梓</span></div>
+      <div class="q-text">下列哪一事件發生在聯合國大會第2758號決議（1971年）通過之後？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>美國通過《臺灣關係法》</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>美國與我國簽訂《中美共同防禦條約》</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>美國派遣第七艦隊巡防臺灣海峽</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>韓戰爆發</span></button></div>
+      <div class="analysis-box"><b>解析：</b>《臺灣關係法》制定於1979年，在2758號決議（1971）之後。其餘：中美共同防禦條約1954、第七艦隊協防1950、韓戰1950，皆在其之前。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 8 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">民國68年，美國國務卿訪臺說明美國的決定，許多民眾在機場聚集抗議，甚至朝美國官員丟擲雞蛋。當時令臺灣民眾憤怒的主要原因可能是下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>中華民國退出聯合國</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>美國與我國斷交</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>美國停止軍售臺灣</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>中共搶奪我國邦交國</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1979（民國68）年美國與中共建交、與我國斷交，引發民眾激烈抗議。退出聯合國是1971年，時間不符。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 9 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">一份文件內容：「（一）任何以非和平方式解決臺灣未來的作為，美國將關切；（二）提供臺灣足夠的防禦性武器；（三）在臺灣設立美國在臺協會，維持非官方關係。」此份文件的出處為下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>《中美共同防禦條約》</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>《聯合國憲章》</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>《臺灣關係法》</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>《告臺灣同胞書》</span></button></div>
+      <div class="analysis-box"><b>解析：</b>此為1979年美國制定的《臺灣關係法》內容，設立美國在臺協會（AIT）維持與臺非官方往來，並承諾提供防禦性武器。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 10 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">民國38年中央政府遷臺後，外交政策依時序有三個階段：（甲）彈性外交（乙）務實外交（丙）鞏固外交。按先後順序排列，正確的是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>甲乙丙</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>乙丙甲</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>丙乙甲</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>丙甲乙</span></button></div>
+      <div class="analysis-box"><b>解析：</b>正確時序為：鞏固外交（丙，退出聯合國前）→彈性外交（甲，1971退出聯合國後）→務實外交（乙，1988李登輝後）。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 11 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">我國失去聯合國席位、也失去美國邦交後，面臨孤立衝擊。為突破困境所採取、強調與斷交國家繼續發展「實質關係」的外交政策是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>鞏固外交</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>彈性外交</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>金錢外交</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>務實外交</span></button></div>
+      <div class="analysis-box"><b>解析：</b>退出聯合國、遭斷交潮後，政府採「彈性外交」，與斷交國維持實質關係以突破孤立。務實外交則是1988年李登輝之後才提出。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 12 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">民國77年李登輝繼任總統後，對外關係進入新階段，此時我國政府的外交態度出現何種重大轉變？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>接受中華人民共和國提出的一國兩制</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>宣布與中華人民共和國統一</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>不再堅持中華民國代表唯一合法中國</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>正式更改國號為臺灣共和國</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1988年李登輝繼任後推行「務實外交」，最大特色是不再堅持中華民國是唯一合法中國，改以經貿實力拓展與無邦交國的實質關係。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 13 題</span><span class="q-src">板橋</span></div>
+      <div class="q-text">過往中國對2758號決議的詮釋很少受即時反駁，但近年各國態度轉變、公開反對中國扭曲該決議。這顯示我國推行的何項外交政策有所成效？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>鞏固外交，致力爭取邦交國以對抗中共</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>彈性外交，強調中華民國才能代表中國</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>務實外交，發揮經貿實力打破外交封鎖</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>熊貓外交，贈送他國大熊貓以增進友誼</span></button></div>
+      <div class="analysis-box"><b>解析：</b>臺灣憑藉晶片產業等經貿實力提升國際能見度，各國願為臺灣發聲，正是務實外交發揮實質實力打破封鎖的成效。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 14 題</span><span class="q-src">板橋</span></div>
+      <div class="q-text">鄧小平針對臺灣問題提出「一國兩制」，此主張的內涵為何？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>以一個中國為前提，兩岸各自主權獨立</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺灣接受中國統治，但可實行不同制度</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>兩岸皆實施民主政治，並放棄共產主義</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>臺灣採行共產制度，中國放棄共產制度</span></button></div>
+      <div class="analysis-box"><b>解析：</b>「一國兩制」由鄧小平提出，主張臺灣接受中華人民共和國統治（一國）、但可保有原有的制度（兩制），臺灣並不擁有主權。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 15 題</span><span class="q-src">鼎金</span></div>
+      <div class="q-text">面對中共提出的「一國兩制」與「和平統戰」，臺灣以某政策回應。下列哪一項不是當時政府所採取的對策內容？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>不接觸</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>不談判</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>不妥協</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>不建設</span></button></div>
+      <div class="analysis-box"><b>解析：</b>我方以「三不政策」回應：不接觸、不談判、不妥協。「不建設」並非三不政策內容。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 16 題</span><span class="q-src">鼎金</span></div>
+      <div class="q-text">中華人民共和國近年對臺採「和平統戰」策略。關於其對臺手法，下列敘述何者錯誤？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>提出「一國兩制」模式</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>強調中華人民共和國是代表中國的唯一合法政府</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>宣布放棄武力統一臺灣</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>倡議開放三通四流</span></button></div>
+      <div class="analysis-box"><b>解析：</b>中共至今從未放棄以武力犯臺（未放棄武力統一），(C)敘述錯誤。其餘一國兩制、唯一合法政府主張、三通四流皆為其手法。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 17 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">兩岸長期對峙下，許多隨政府來臺的老兵與家人分隔兩岸無法會面。這樣的人倫悲劇，直到發生何事後才得以改善？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>退出聯合國後</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>解嚴、政府開放赴大陸探親後</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>美援開始後</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>中美斷交後</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1987年政府解除戒嚴並開放民眾赴大陸探親，分隔近40年的老兵終得返鄉團聚。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 18 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">民國82年在新加坡展開的「辜汪會談」，由辜振甫與汪道涵代表兩岸對話，成為兩岸首度正式交流。辜、汪兩人分別代表兩岸的哪個單位？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>海協會、海基會</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>陸委會、國臺辦</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>外交部、國臺辦</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>海基會、海協會</span></button></div>
+      <div class="analysis-box"><b>解析：</b>辜振甫代表我方「海峽交流基金會（海基會）」，汪道涵代表中共「海峽兩岸關係協會（海協會）」。注意順序：辜（海基會）、汪（海協會）。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 19 題</span><span class="q-src">福和</span></div>
+      <div class="q-text">民國85年，阿緯的外公到中國探親受傷住院，中國親屬想聯繫在臺灣的阿緯。兩岸親屬要透過何種管道進行聯繫？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>陸委會──海協會</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>陸委會──國臺辦</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>海基會──國臺辦</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>海基會──海協會</span></button></div>
+      <div class="analysis-box"><b>解析：</b>兩岸民間性、事務性協商由我方海基會與中共海協會對口進行。陸委會、國臺辦則為官方主管機關。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 20 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">2001年1月，金門開出第一班往廈門的客輪，金馬與福建恢復實質交流，帶動當地餐飲、觀光及運輸業興起。此情況應與何項政策相關？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>小三通</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>南向政策</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>三不政策</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>和平統戰</span></button></div>
+      <div class="analysis-box"><b>解析：</b>2001年開放金馬與福建直接往來，即「小三通」，帶動金馬地區經濟。大三通（兩岸直接三通）則在馬英九任內（2008）。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 21 題</span><span class="q-src">板橋</span></div>
+      <div class="q-text">民國40年代，政府提出「進口替代」政策推動經濟。何謂「進口替代」？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>大量進口農產品，滿足民生日常所需</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>著重發展輕工業，取代大型重化工業</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>生產民生必需品，減少進口相關物資</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>生產民生必需品，換取國外工業產品</span></button></div>
+      <div class="analysis-box"><b>解析：</b>進口替代是以農業培養工業，發展紡織等民生輕工業、自行生產民生必需品，以減少對進口物資的依賴。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 22 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">民國50年代臺語歌曲「孤女的願望」描述少女到臺北（都市）工廠上班。該歌曲盛行時，臺灣正值下列哪一經濟發展階段？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>進口替代</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>十大建設</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>出口導向</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>產業升級</span></button></div>
+      <div class="analysis-box"><b>解析：</b>民國50年代政府設加工出口區，發展外銷輕工業，即「出口導向」時期，大量女工投入工廠，反映在此歌曲中。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 23 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">蔣經國名言：「今日不做，明天就會後悔。」背景是臺灣面臨全球第一次能源危機、油價上漲、景氣低迷。蔣經國要「做」的是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>土地改革</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>加工出口</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>十大建設</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>產業升級</span></button></div>
+      <div class="analysis-box"><b>解析：</b>民國60年代石油危機衝擊下，行政院長蔣經國推動「十大建設」，興建大型公共工程以改善投資環境、度過難關。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 24 題</span><span class="q-src">鼎金</span></div>
+      <div class="q-text">民國60年代末期，臺灣面臨工資、土地成本提高與國際競爭壓力。政府為維持出口成長轉向鼓勵高科技產業，下列何者即為此設立？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>新竹科學園區</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺南科技園區</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>南港軟體園區</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>內湖科技園區</span></button></div>
+      <div class="analysis-box"><b>解析：</b>為發展資本、技術密集的高科技產業（產業升級），政府設立新竹科學工業園區，孕育台積電等半導體業。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 25 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">臺灣經濟建設分成幾個階段：（甲）進口替代（乙）十大建設（丙）自由化、國際化（丁）出口導向。按時間先後順序排列，下列何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>甲乙丙丁</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>乙丙甲丁</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>甲丁乙丙</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>丙乙丁甲</span></button></div>
+      <div class="analysis-box"><b>解析：</b>正確時序：進口替代（甲，民40年代）→出口導向（丁，民50年代）→十大建設（乙，民60年代）→自由化國際化（丙，民80年代後）。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 26 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">台積電被稱為臺灣「護國神山」，與政府支持並主導「產業升級」密切相關。關於推動產業升級的原因，何者為是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>希望透過外銷賺外匯，升級工業原料設備</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>當時政策為出口導向，以台積電吸引外商</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>為拓展全球市場，積極加入國際貿易組織</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>因應基本工資調漲、生產成本提高，發展高附加價值的高科技產業提高利潤</span></button></div>
+      <div class="analysis-box"><b>解析：</b>民國60年代末，工資與土地成本上升、國際競爭加劇，政府推動產業升級，轉向資本技術密集、高附加價值的高科技產業。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 27 題</span><span class="q-src">鼎金</span></div>
+      <div class="q-text">民國六○年代，政府推動十大建設。十大建設中所占比例最高、也最重要的是哪一類建設？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>國防</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>交通</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>觀光</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>電子科技</span></button></div>
+      <div class="analysis-box"><b>解析：</b>十大建設以交通類為主（如中山高速公路、鐵路電氣化、北迴鐵路、蘇澳港、桃園國際機場等），比例最高。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 28 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">政府推行某系列政策：提高自耕農比例、增加農業生產，並藉剝奪地主對農民的控制以穩固中央政權。上文所述政策應是下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>貨幣改革政策</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>土地改革</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>出口導向</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>產業升級</span></button></div>
+      <div class="analysis-box"><b>解析：</b>土地改革（三七五減租、公地放領、耕者有其田）提高自耕農比例、削弱地主勢力、穩固政權。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 29 題</span><span class="q-src">台南復興</span></div>
+      <div class="q-text">政府強勢收購地主土地，再轉售給實際耕作的農民，許多農民因此開始擁有自己的耕地。這是哪一項政策的描述？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>三七五減租</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>公地放領</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>耕者有其田</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>農地重劃</span></button></div>
+      <div class="analysis-box"><b>解析：</b>「耕者有其田」是政府徵收地主超額土地、轉售給實際耕作農民。三七五減租是限制地租；公地放領是放領公有地。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 30 題</span><span class="q-src">楠梓</span></div>
+      <div class="q-text">目前臺灣唯一加入的政府間區域經貿組織是下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>亞太經濟合作會議（APEC）</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>世界衛生組織（WHO）</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>聯合國</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>北大西洋公約組織</span></button></div>
+      <div class="analysis-box"><b>解析：</b>APEC（亞太經濟合作會議）是臺灣唯一加入的政府間區域經貿組織。臺灣亦加入WTO，但WTO非「區域」組織；WHO、聯合國臺灣皆未加入。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 31 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">曾轟動一時的「白米炸彈客」楊儒門事件，導因於2002年我國加入某組織後，實施進口稻米配額、海外稻米傾銷臺灣，衝擊本土農業。此組織是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>APEC（亞太經濟合作會議）</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>WHO（世界衛生組織）</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>WTO（世界貿易組織）</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>聯合國</span></button></div>
+      <div class="analysis-box"><b>解析：</b>2002年臺灣加入WTO（世界貿易組織），須開放稻米進口、無法採關稅保護，衝擊農業，引發白米炸彈客事件。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 32 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">戰後政府為清除某語言在臺灣日常生活中的影響力，於1950年代大力推行「國語運動」，規定學校只能說國語。政府想清除的是哪一種語言的影響？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>美語</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>德語</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>法語</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>日語</span></button></div>
+      <div class="analysis-box"><b>解析：</b>戰後為消除日本殖民統治遺留的影響、強化國家認同，政府推行國語（北京話）運動，清除日語影響，禁止學校講方言。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 33 題</span><span class="q-src">獅甲</span></div>
+      <div class="q-text">民國60年代文壇興起「鄉土文學」風潮，強調寫實手法描寫在地小人物。當時「內政與外交的變化與挑戰」，不包括下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>中華民國與各國斷交</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>二二八事件</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>城鄉差距擴大</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>中華民國退出聯合國</span></button></div>
+      <div class="analysis-box"><b>解析：</b>鄉土文學興起於民國60年代，背景為退出聯合國、斷交潮、經濟發展造成城鄉差距等。二二八事件發生於1947年（民36），與鄉土文學興起無關。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 34 題</span><span class="q-src">桃園</span></div>
+      <div class="q-text">黃春明原著改編、屬「臺灣新電影」初期代表作，曾因呈現臺北違建畫面遭官方施壓刪減（削蘋果事件）的電影是？此類電影最可能以下列何者為題材？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>宣揚中華文化、培養國家認同</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>以美國流行文化為劇情主軸</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>關注一般農民、勞工等小人物生活的困頓</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>發揚原住民族音樂與神話傳說</span></button></div>
+      <div class="analysis-box"><b>解析：</b>《兒子的大玩偶》為臺灣新電影初期代表作，融入鄉土文學題材，關注農民、勞工等小人物的生活困境，並挑戰官方禁忌。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 35 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">一九六○年代以前保齡球、美式運動風行臺灣，年輕人流行西洋音樂與服飾。當年美國文化在臺灣發展的契機最可能為何？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>二戰後美國接管臺灣輸入美國文化</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>美國透過網際網路輸出文化影響臺灣</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>韓戰後美軍協防臺灣、1954年簽訂《中美共同防禦條約》後駐臺美軍引入美國事物</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>退出聯合國後美國協助臺灣輸入美式英雄文化</span></button></div>
+      <div class="analysis-box"><b>解析：</b>韓戰後美國第七艦隊協防、1954年簽中美共同防禦條約，美軍駐臺與美援引入大量美國流行文化（如ICRT前身美軍電臺）。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 36 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">現今臺灣隨處可見韓式、日式、美式餐飲與各國戲劇，這樣的生活方式反映了臺灣社會何種現象？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>強勢文化的入侵</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>反共文化的強化</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>傳統文化的衰退</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>多元文化的並存</span></button></div>
+      <div class="analysis-box"><b>解析：</b>各國文化共存於臺灣，反映解嚴、開放後臺灣社會「多元文化並存」的現象。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 37 題</span><span class="q-src">板橋</span></div>
+      <div class="q-text">《姓名條例》修正草案通過，讓原住民可使用族語文字、單列名字登記姓名。這主要展現了臺灣哪一項原住民社會運動的成果？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>母語運動</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>正名運動</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>民族自決</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>還我土地運動</span></button></div>
+      <div class="analysis-box"><b>解析：</b>爭取以族名、正確名稱被認識，屬「正名運動」；民國83年將「山胞」正名為「原住民族」亦屬此。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 38 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">民國77、78、82年，原住民族多次走上臺北街頭，為土地流失與限縮、土地正義未受正視而示威抗議。上述原住民族發起的活動指的是下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>還我土地運動</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>母語運動</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>政治運動</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>正名運動</span></button></div>
+      <div class="analysis-box"><b>解析：</b>為爭取流失的土地、土地正義而抗爭，屬「還我土地運動」。母語運動爭語言、正名運動爭稱謂，訴求不同。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 39 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">民國83年，政府將原住民的稱呼予以正名，並成立行政院原住民（族）委員會。原住民族在正名之前的官方稱呼為何？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>山地同胞</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>邊疆同胞</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>番族同胞</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>少數同胞</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1994（民83）年修憲，將原本憲法中的「山地同胞（山胞）」正名為「原住民（族）」。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 40 題</span><span class="q-src">福和</span></div>
+      <div class="q-text">20世紀末臺灣女權團體推動兩性平權修法、環保人士反核走上街頭、客家族群推廣母語，這些社會運動蓬勃發展的原因為何？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>解除戒嚴，人民重獲自由</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>美援讓臺灣社會變得開放</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>加入世界貿易組織</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>美國通過臺灣關係法</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1987年解嚴後，人民重獲言論、集會結社等自由，各種社會運動才得以蓬勃發展。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 41 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">新北市中和地區每年舉辦源自東南亞的潑水節活動。原為東南亞節慶的潑水節會在臺灣出現，與下列何者關係最密切？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>原住民族復興南島文化</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>政治上加強與東南亞聯繫</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>新住民移入帶入不同地區文化</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>推廣政府的新南向政策</span></button></div>
+      <div class="analysis-box"><b>解析：</b>潑水節在臺出現，主因來自東南亞的新住民（與移工）移入，帶入原鄉文化，形成多元文化景象。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 42 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">兩岸口號對照：（甲）「反攻大陸」對「武力解放臺灣」；（乙）「三民主義統一中國、三不政策」對「和平統戰、一國兩制」。關於口號（乙）的配對，下列敘述何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>中華民國提出「一國兩制」</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>中華民國提出「三不政策」</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>中華人民共和國提出「三民主義統一中國」</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>中華民國提出「和平統戰」</span></button></div>
+      <div class="analysis-box"><b>解析：</b>我方（中華民國）提出「三民主義統一中國」與「三不政策」；中共提出「和平統戰」與「一國兩制」。故(B)正確。</div>
+    </div>`;
+const MODE = window.__MODE__||'screen';
+
+// ── 互動 ──
+function reveal(el){if(el.classList.contains('show'))return;el.classList.add('show');el.textContent=el.dataset.ans;}
+function revealAll(){document.querySelectorAll('.blank').forEach(b=>{b.classList.add('show');b.textContent=b.dataset.ans;});
+  document.querySelectorAll('.q-blk').forEach(q=>showQ(q));}
+function hideAll(){document.querySelectorAll('.blank').forEach(b=>{b.classList.remove('show');b.textContent='？';});
+  document.querySelectorAll('.opt-btn').forEach(o=>{o.classList.remove('correct','wrong');o.disabled=false;});
+  document.querySelectorAll('.analysis-box').forEach(a=>a.classList.remove('show'));}
+function showQ(q){const ans=+q.dataset.ans;q.querySelectorAll('.opt-btn').forEach(o=>{const oi=+o.dataset.oi;o.disabled=true;if(oi===ans)o.classList.add('correct');});q.querySelector('.analysis-box').classList.add('show');}
+function pick(btn){const q=btn.closest('.q-blk');if(btn.disabled)return;const ans=+q.dataset.ans,oi=+btn.dataset.oi;
+  q.querySelectorAll('.opt-btn').forEach(o=>o.disabled=true);
+  if(oi===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');q.querySelector('[data-oi="'+ans+'"]').classList.add('correct');}
+  q.querySelector('.analysis-box').classList.add('show');q.dataset.done=oi===ans?'1':'0';}
+function grade(){const qs=[...document.querySelectorAll('.q-blk')];let done=0,ok=0;
+  qs.forEach(q=>{if(q.dataset.done!==undefined){done++;if(q.dataset.done==='1')ok++;}});
+  const bar=document.getElementById('scorebar');bar.style.display='block';
+  bar.textContent='已作答 '+done+' / '+qs.length+' 題　答對 '+ok+' 題'+(done?('　得分 '+Math.round(ok/qs.length*100)+' 分'):'');}
+
+// ── A4 分頁：像素預算法（先在 #measure 量好每塊高度，再依固定預算裝頁）──
+// srcNodes 目前位於 #measure 內（寬度與 sheet-body 相同），量測後搬入各 .sheet
+function layout(srcNodes, footLabel){
+  const doc=document.getElementById('doc');
+  // 先量每塊高度（含上下 margin）
+  const H=srcNodes.map(n=>{const st=getComputedStyle(n);
+    return n.offsetHeight+parseFloat(st.marginTop||0)+parseFloat(st.marginBottom||0);});
+  doc.innerHTML='';
+  function newSheet(){const s=document.createElement('div');s.className='sheet';
+    const b=document.createElement('div');b.className='sheet-body';
+    const f=document.createElement('div');f.className='sheet-foot';
+    s.appendChild(b);s.appendChild(f);doc.appendChild(s);return {s,b,f};}
+  let cur=newSheet();
+  // 一頁可用高度（px）；若量到異常小（窄視窗觸發 RWD）則用 A4 預設值保底
+  const cH=cur.b.clientHeight;
+  const AVAIL=cH>200?cH:1000;
+  let used=0;
+  for(let i=0;i<srcNodes.length;i++){
+    // keep-next：標題與下一塊視為一體，避免標題落在頁尾
+    if(srcNodes[i].classList.contains('keep-next') && i+1<srcNodes.length){
+      const pair=H[i]+H[i+1];
+      if(used>0 && used+pair>AVAIL){cur=newSheet();used=0;}
+      cur.b.appendChild(srcNodes[i]);cur.b.appendChild(srcNodes[i+1]);
+      used+=pair;i++;continue;
+    }
+    if(used>0 && used+H[i]>AVAIL){cur=newSheet();used=0;}
+    cur.b.appendChild(srcNodes[i]);used+=H[i];
+  }
+  const sheets=[...doc.querySelectorAll('.sheet')];const M=sheets.length;
+  sheets.forEach((s,idx)=>{s.querySelector('.sheet-foot').innerHTML=
+    '<span>'+footLabel+'</span><span>第 '+(idx+1)+' 頁　共 '+M+' 頁</span>';});
+}
+
+const FOOT='國一歷史第二冊　第三次段考複習';
+document.addEventListener('DOMContentLoaded',()=>{
+  const meas=document.getElementById('measure');
+  meas.innerHTML=RAW;
+  if(MODE==='answer'){
+    // 解答版：先在量測容器內展開答案＋解析，再依展開後高度分頁
+    document.body.classList.add('print-answer');
+    meas.querySelectorAll('.blank').forEach(b=>{b.classList.add('show');b.textContent=b.dataset.ans;});
+    meas.querySelectorAll('.analysis-box').forEach(a=>a.classList.add('show'));
+    meas.querySelectorAll('.q-blk').forEach(q=>{const ans=+q.dataset.ans;
+      q.querySelectorAll('.opt-btn').forEach(o=>{o.disabled=true;if(+o.dataset.oi===ans)o.classList.add('correct');});});
+    layout([...meas.children], FOOT+'（解答版）');
+  }else{
+    if(MODE==='student')document.body.classList.add('print-student');
+    layout([...meas.children], FOOT);
+  }
+  meas.innerHTML='';
+});
+</script>
+</body></html>

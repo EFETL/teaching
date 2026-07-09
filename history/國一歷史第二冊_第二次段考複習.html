@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>國一歷史第二冊｜第二次段考複習（講義＋歷屆試題）</title>
+<style>
+:root{--pri:#2563eb;--prid:#1e40af;--sec:#f59e0b;--bg:#eef2f7;--card:#fff;--txt:#1f2937;--muted:#6b7280;--border:#e5e7eb;--ok:#16a34a;--err:#dc2626;--acc:#7c3aed}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif;font-size:16px;line-height:1.75;background:var(--bg);color:var(--txt)}
+.site-header{background:var(--pri);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.back-btn{background:#fff;color:var(--pri);border:none;padding:6px 13px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none}
+.site-title{font-size:17px;font-weight:700}
+.toolbar{position:sticky;top:52px;z-index:90;background:#fff;border-bottom:1px solid var(--border);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.toolbar .tt{font-size:14px;color:var(--muted);margin-right:auto}
+.tb-btn{font-family:inherit;font-size:15px;font-weight:700;border:none;border-radius:9px;padding:8px 15px;cursor:pointer;transition:.15s}
+.tb-btn:hover{filter:brightness(.95);transform:translateY(-1px)}
+.b-reveal{background:var(--sec);color:#fff}.b-hide{background:#6b7280;color:#fff}.b-print{background:var(--pri);color:#fff}
+.b-score{background:var(--acc);color:#fff}
+/* 分頁紙張 */
+#doc{padding:22px 0 60px}
+.sheet{width:210mm;height:297mm;background:#fff;margin:0 auto 18px;box-shadow:0 3px 16px rgba(0,0,0,.14);padding:15mm 16mm 8mm;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.sheet-body{flex:1;overflow:hidden}
+.sheet-foot{height:8mm;flex:0 0 auto;display:flex;align-items:flex-end;justify-content:space-between;font-size:12px;color:#9ca3af;border-top:1px solid #eef1f4;padding-top:3px}
+.blk{margin-bottom:11px}
+.cover-blk{background:linear-gradient(135deg,#eff6ff,#f8fbff);border:2px solid #bfdbfe;border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.exam-cover-blk{background:linear-gradient(135deg,#fef3e7,#fffaf3);border:2px solid #fcd9a8;border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.doc-kicker{font-size:15px;font-weight:700;color:var(--pri)}.doc-kicker.ex{color:#c2740c}
+.doc-h1{font-size:22px;font-weight:800;color:#111827;margin:4px 0 6px}
+.doc-sub{font-size:14px;color:var(--muted)}
+.doc-tip{margin-top:10px;font-size:13px;color:#4b5563;background:#fff;border-radius:8px;padding:8px 12px;border:1px dashed #cbd5e1}
+.ht-sec-title{font-size:18px;font-weight:800;color:var(--pri);border-left:5px solid var(--sec);padding:4px 0 4px 12px;margin:4px 0}
+.fill-text{font-size:16px;line-height:2.35;background:#fafcff;border:1px solid #eef2f7;border-radius:9px;padding:10px 14px}
+.note-text{font-size:14px;color:#4b5563;padding:2px 6px}
+.info-tb{width:100%;border-collapse:collapse;font-size:14px}
+.info-tb th{background:var(--pri);color:#fff;padding:8px 10px;border:1px solid #cbd5e1;text-align:center}
+.info-tb td{padding:8px 10px;border:1px solid #d1d5db;text-align:center}
+.info-tb tr:nth-child(even) td{background:#f6f9fd}
+.blank{display:inline-block;border-bottom:2px solid #9ca3af;min-width:2.6em;text-align:center;margin:0 3px;color:#fff;background:var(--pri);cursor:pointer;padding:1px 10px;border-radius:6px;font-weight:700;user-select:none;transition:.15s}
+.blank:hover{background:var(--prid)}
+.blank.show{color:#fff;background:var(--ok);border-color:var(--ok)}
+.topic-group-box{background:#eff6ff;border:2px solid #bfdbfe;border-radius:10px;padding:12px 16px;font-size:15px}
+.topic-group-box strong{color:var(--pri);display:block;font-size:16px;margin-bottom:4px}
+.q-blk{background:#fff;border:1px solid #eceff3;border-radius:11px;padding:13px 16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.q-head{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.q-num{font-size:13px;font-weight:700;color:#fff;background:var(--pri);border-radius:6px;padding:1px 9px}
+.q-src{font-size:12px;color:var(--muted);background:#f3f4f6;border-radius:5px;padding:1px 7px}
+.q-text{font-size:16px;font-weight:700;line-height:1.7;margin-bottom:9px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.opt-btn{background:#f9fafb;border:2px solid var(--border);border-radius:9px;padding:8px 11px;font-size:15px;cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:7px;font-family:inherit;transition:.12s}
+.opt-btn:hover:not(:disabled){border-color:var(--pri);background:#eff6ff}
+.opt-btn.correct{border-color:var(--ok);background:#dcfce7;color:#15803d;font-weight:700}
+.opt-btn.wrong{border-color:var(--err);background:#fee2e2;color:var(--err)}
+.opt-btn:disabled{cursor:default}
+.opt-letter{font-weight:800;min-width:20px}
+.analysis-box{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:9px;padding:10px 13px;margin-top:9px;font-size:14px;color:#5b21b6;line-height:1.7;display:none}
+.analysis-box.show{display:block}
+#scorebar{position:fixed;bottom:0;left:0;right:0;background:var(--prid);color:#fff;padding:10px;text-align:center;font-size:16px;font-weight:700;display:none;z-index:120}
+/* 螢幕外量測容器 */
+#measure{position:absolute;left:-9999px;top:0;width:calc(210mm - 32mm)}
+@page{size:A4;margin:0}
+@media print{
+  body{background:#fff}
+  .site-header,.toolbar,#scorebar{display:none!important}
+  #doc{padding:0}
+  .sheet{margin:0;box-shadow:none;page-break-after:always}
+  .sheet:last-child{page-break-after:auto}
+  /* 學生列印版：空格變底線、不顯示答案/解析 */
+  body.print-student .blank{background:none!important;color:transparent!important;border-bottom:1.6px solid #333!important;border-radius:0!important;min-width:110px!important;padding:0 6px!important}
+  body.print-student .analysis-box{display:none!important}
+  body.print-student .opt-btn{box-shadow:none}
+  /* 解答版：空格顯示答案、解析全開 */
+  body.print-answer .blank{background:#dcfce7!important;color:#15803d!important;border:1px solid #15803d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.print-answer .analysis-box{display:block!important}
+  .opt-btn,.info-tb th,.q-num,.blank,.cover-blk,.exam-cover-blk{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media screen and (max-width:820px){.sheet{width:100%;height:auto;min-height:auto;padding:18px 16px}.options{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header class="site-header">
+  <a class="back-btn" href="https://teaching.efetl.com/history/">← 返回主選單</a>
+  <span class="site-title">國一歷史第二冊｜第二次段考複習</span>
+</header>
+<div class="toolbar">
+  <span class="tt">重點整理＋歷屆試題　·　第二冊 L3~L4　日治社會文化與戰後初期</span>
+  <button class="tb-btn b-reveal" onclick="revealAll()">顯示全部答案</button>
+  <button class="tb-btn b-hide" onclick="hideAll()">隱藏答案</button>
+  <button class="tb-btn b-score" onclick="grade()">計分</button>
+  <button class="tb-btn b-print" onclick="window.print()">🖨️ 列印</button>
+</div>
+<div id="doc"></div>
+<div id="measure"></div>
+<div id="scorebar"></div>
+<script>
+
+// 原始區塊
+const RAW = `<div class="blk cover-blk">
+    <div class="doc-kicker">📜　重點整理講義</div>
+    <div class="doc-h1">第二次段考重點複習：日治社會文化與戰後初期</div>
+    <div class="doc-sub">日治新式教育、社會運動、現代生活，到戰後接收、二二八、白色恐怖與民主化，一次掌握。　·　範圍：第二冊 L3~L4　日治社會文化與戰後初期</div>
+    <div class="doc-tip">💡 點藍色「？」看答案；老師可按「顯示全部答案」；列印時空格自動變作答底線。</div>
+  </div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">一、日治新式教育與差別待遇</div></div>
+<div class="blk"><div class="note-text">總督府在臺灣推行新式教育，但採「差別待遇」，對臺灣人與日本人的受教機會並不平等。</div></div>
+<div class="blk"><div class="fill-text">初等教育中，臺灣人就讀<span class="blank" data-ans="公學校">？</span>，日本人就讀<span class="blank" data-ans="小學校">？</span>，原住民則就讀<span class="blank" data-ans="蕃童教育所">？</span>。</div></div>
+<div class="blk"><div class="fill-text">中等教育主要培養<span class="blank" data-ans="初級技術">？</span>人才與公學校師資，偏重<span class="blank" data-ans="職業">？</span>教育，較少培養法律、政治等領導人才。</div></div>
+<div class="blk"><div class="fill-text">1915 年，<span class="blank" data-ans="林獻堂">？</span>等臺灣士紳集資創立第一所專收臺灣人的中學——<span class="blank" data-ans="臺中中學校">？</span>（今臺中一中）。</div></div>
+<div class="blk"><div class="fill-text">日治後期成立的最高學府是<span class="blank" data-ans="臺北帝國大學">？</span>（今臺灣大學），設立於 1928 年，並成為南洋研究中心。</div></div>
+<div class="blk"><div class="fill-text">由於臺灣升學不易、機會不足，許多臺灣人選擇<span class="blank" data-ans="赴日（留學）">？</span>接受高等教育，到 1945 年留日學生達二十萬人。</div></div>
+<div class="blk"><div class="fill-text">臺灣人學齡兒童就學率遠低於在臺日人，正反映了總督府教育政策存在<span class="blank" data-ans="差別待遇">？</span>。</div></div>
+<div class="blk"><table class="info-tb"><thead><tr><th>教育階段</th><th>對象／說明</th></tr></thead><tbody><tr><td>公學校</td><td><span class="blank" data-ans="臺灣人">？</span>就讀的初等教育學校</td></tr><tr><td>小學校</td><td><span class="blank" data-ans="日本人">？</span>就讀的初等教育學校</td></tr><tr><td>蕃童教育所</td><td><span class="blank" data-ans="原住民">？</span>就讀，貫徹教化</td></tr><tr><td>中等（職業）教育</td><td>培育<span class="blank" data-ans="初級技術">？</span>人才，偏重實用</td></tr><tr><td>臺北帝國大學</td><td>日治最高學府，今<span class="blank" data-ans="臺灣大學">？</span>前身</td></tr></tbody></table></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">二、皇民化運動與教育變革</div></div>
+<div class="blk"><div class="fill-text">1937 年中日戰爭爆發後，總督府推動<span class="blank" data-ans="皇民化">？</span>運動，要求臺灣人完全日本化，「做真正的日本人」。</div></div>
+<div class="blk"><div class="fill-text">皇民化時期起，「公學校」「小學校」一律改名為<span class="blank" data-ans="國民學校">？</span>，因此畢業證書上校名改變即是受此運動影響。</div></div>
+<div class="blk"><div class="fill-text">此時期也推動<span class="blank" data-ans="國語（日語）">？</span>運動、參拜神社，並鼓勵改日本姓名，強化對日本天皇的效忠。</div></div>
+<div class="blk"><div class="fill-text">臺灣最早的六年<span class="blank" data-ans="義務教育">？</span>制度，是在皇民化運動時期才開始推動。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">三、鴉片政策與現代生活</div></div>
+<div class="blk"><div class="fill-text">總督府視<span class="blank" data-ans="吸食鴉片">？</span>、纏足、辮髮為臺灣三大陋習，但因鴉片有利可圖，對鴉片採<span class="blank" data-ans="漸禁">？</span>政策，特許成癮者吸食。</div></div>
+<div class="blk"><div class="fill-text">1930 年，<span class="blank" data-ans="蔣渭水">？</span>曾就鴉片政策打電報向<span class="blank" data-ans="國際聯盟">？</span>抗議，指其違背人道與國際條約。</div></div>
+<div class="blk"><div class="fill-text">總督府推動纏足婦女<span class="blank" data-ans="放足">？</span>、男子<span class="blank" data-ans="斷髮">？</span>，帶動帽子店、裁縫店生意興隆，改變社會審美觀。</div></div>
+<div class="blk"><div class="fill-text">為使全臺作息一致，總督府引進<span class="blank" data-ans="標準時間">？</span>制與<span class="blank" data-ans="星期">？</span>制，火車站設時鐘養成守時習慣，人民也開始重視休閒。</div></div>
+<div class="blk"><div class="fill-text">都市建設方面，出現百貨公司（臺南<span class="blank" data-ans="林百貨">？</span>、臺北菊元百貨）、公園（臺北新公園）、博物館等現代設施。</div></div>
+<div class="blk"><div class="fill-text">在醫療衛生上，總督府興建自來水與下水道、辦理<span class="blank" data-ans="預防注射">？</span>、設立公立醫院，使熱帶傳染病獲得防治，人口顯著成長。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">四、日治社會運動（非武裝抗日）</div></div>
+<div class="blk"><div class="note-text">受第一次世界大戰後<b>民族自決</b>思潮影響，臺灣知識分子改以非武裝方式，向日本爭取較平等的待遇。</div></div>
+<div class="blk"><div class="fill-text">1921 年<span class="blank" data-ans="蔣渭水">？</span>等人成立<span class="blank" data-ans="臺灣文化協會">？</span>，以演講、讀報社、電影等方式啟迪民智，會員多為醫師、教師、留學生。</div></div>
+<div class="blk"><div class="fill-text">1921 年起，<span class="blank" data-ans="林獻堂">？</span>領導<span class="blank" data-ans="臺灣議會設置請願運動">？</span>，向日本帝國議會請願，歷時 14 年、請願 15 次。</div></div>
+<div class="blk"><div class="fill-text">臺灣人成立的第一個政黨（也是第一個合法政黨）是 1927 年的<span class="blank" data-ans="臺灣民眾黨">？</span>，宣傳民權、自治，並扶助農工運動。</div></div>
+<div class="blk"><div class="fill-text">1928 年成立的<span class="blank" data-ans="臺灣工友總聯盟">？</span>捍衛工人權益，受臺灣民眾黨支援。</div></div>
+<div class="blk"><div class="fill-text">1930 年成立的<span class="blank" data-ans="臺灣地方自治聯盟">？</span>推動地方自治，促成 1935 年臺灣首次地方議員選舉。</div></div>
+<div class="blk"><table class="info-tb"><thead><tr><th>組織／運動</th><th>領導人與主張</th></tr></thead><tbody><tr><td>臺灣文化協會</td><td><span class="blank" data-ans="蔣渭水">？</span>等，文化啟蒙、啟迪民智</td></tr><tr><td>臺灣議會設置請願運動</td><td><span class="blank" data-ans="林獻堂">？</span>領導，爭取設置議會</td></tr><tr><td>臺灣民眾黨</td><td>臺灣第一個<span class="blank" data-ans="政黨">？</span>，宣傳民權自治</td></tr><tr><td>臺灣地方自治聯盟</td><td>推動<span class="blank" data-ans="地方自治">？</span>，促成地方選舉</td></tr></tbody></table></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">五、地方自治與臺灣民報</div></div>
+<div class="blk"><div class="fill-text">1935 年臺灣舉行史上首次地方議員選舉，但只開放<span class="blank" data-ans="半數">？</span>議員民選，且選民須為年滿 25 歲、繳稅達一定金額的<span class="blank" data-ans="男子">？</span>。</div></div>
+<div class="blk"><div class="fill-text">此次選舉雖有缺陷，卻讓臺人對<span class="blank" data-ans="自治與參政">？</span>有了初步認識。</div></div>
+<div class="blk"><div class="fill-text">1923 年創刊的<span class="blank" data-ans="臺灣民報">？</span>，是當時臺灣人唯一的言論機關，被譽為「臺灣人的喉舌（靈魂）」，介紹現代思潮與觀念。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">六、戰後接收與二二八事件</div></div>
+<div class="blk"><div class="fill-text">1945 年二戰結束，臺灣脫離日本統治；當年 10 月 25 日即為<span class="blank" data-ans="臺灣光復節">？</span>。</div></div>
+<div class="blk"><div class="fill-text">戰後中華民國政府設<span class="blank" data-ans="臺灣省行政長官公署">？</span>接收臺灣，由<span class="blank" data-ans="陳儀">？</span>擔任行政長官，因施政不當引發臺人不滿。</div></div>
+<div class="blk"><div class="fill-text">長官公署徵收米糧支援大陸，加上生產下降，導致嚴重的<span class="blank" data-ans="通貨膨脹">？</span>，米價暴漲、民生困苦。</div></div>
+<div class="blk"><div class="fill-text">1947 年因查緝私菸引發衝突，爆發<span class="blank" data-ans="二二八">？</span>事件；各地知識分子組成「二二八事件處理委員會」，提出政治改革訴求。</div></div>
+<div class="blk"><div class="fill-text">政府派軍隊來臺強力鎮壓並展開<span class="blank" data-ans="清鄉">？</span>，許多臺籍菁英（如陳澄波、湯德章）罹難。直到民國 80 年代政府才公開道歉並賠償。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">七、戒嚴與白色恐怖</div></div>
+<div class="blk"><div class="fill-text">1948 年為因應<span class="blank" data-ans="國共內戰">？</span>，通過《<span class="blank" data-ans="動員戡亂時期臨時條款">？</span>》，擴大總統職權、使蔣中正得以不受憲法限制連任。</div></div>
+<div class="blk"><div class="fill-text">1949 年頒布《<span class="blank" data-ans="戒嚴令">？</span>》，人民的言論、出版、集會、結社等自由受到限制，進入<span class="blank" data-ans="白色恐怖">？</span>時期。</div></div>
+<div class="blk"><div class="fill-text">此時政府以防止<span class="blank" data-ans="共產思想（匪諜）">？</span>為由，鼓勵告密檢舉，「人人心中有個小警總」，綠島設有關押政治犯的機構。</div></div>
+<div class="blk"><div class="fill-text">中央民意代表長期不必改選，形成「<span class="blank" data-ans="萬年國會">？</span>」的現象。</div></div>
+<div class="blk"><div class="fill-text">1960 年，<span class="blank" data-ans="雷震">？</span>主辦的《<span class="blank" data-ans="自由中國">？</span>》因批評時政、意圖籌組「中國民主黨」而遭查禁，雷震被捕判刑十年。</div></div>
+<div class="blk sec-title-blk keep-next"><div class="ht-sec-title">八、黨外運動與民主化</div></div>
+<div class="blk"><div class="fill-text">1979 年美麗島雜誌社於國際人權日遊行，與軍警衝突，史稱<span class="blank" data-ans="美麗島">？</span>事件，加速黨外勢力結合。</div></div>
+<div class="blk"><div class="fill-text">1986 年臺灣第一個本土反對黨<span class="blank" data-ans="民主進步黨">？</span>成立；1987 年<span class="blank" data-ans="蔣經國">？</span>宣布<span class="blank" data-ans="解嚴">？</span>，並解除黨禁、報禁。</div></div>
+<div class="blk"><div class="fill-text">1990 年大學生於中正紀念堂發起<span class="blank" data-ans="野百合">？</span>學運，訴求廢除《動員戡亂時期臨時條款》等改革。</div></div>
+<div class="blk"><div class="fill-text"><span class="blank" data-ans="李登輝">？</span>總統終止動員戡亂、推動修憲，並於 1996 年完成首次總統<span class="blank" data-ans="直接民選">？</span>，被譽為「民主先生」。</div></div>
+<div class="blk"><table class="info-tb"><thead><tr><th>年代（民國）</th><th>民主化大事</th></tr></thead><tbody><tr><td>68 年</td><td><span class="blank" data-ans="美麗島">？</span>事件，黨外勢力集結</td></tr><tr><td>75 年</td><td><span class="blank" data-ans="民主進步黨">？</span>成立</td></tr><tr><td>76 年</td><td>蔣經國宣布<span class="blank" data-ans="解嚴">？</span>，解除黨禁報禁</td></tr><tr><td>79 年</td><td><span class="blank" data-ans="野百合">？</span>學運</td></tr><tr><td>85 年</td><td>首次總統<span class="blank" data-ans="直接民選">？</span>（李登輝當選）</td></tr></tbody></table></div>
+<div class="blk exam-cover-blk keep-next">
+    <div class="doc-kicker ex">📝　歷屆精選試題</div>
+    <div class="doc-h1">第二次段考　歷屆精選試題</div>
+    <div class="doc-sub">精選 38 題・各校段考題彙整</div>
+    <div class="doc-tip">💡 點選項即時對答＋看解析；列印時為乾淨作答卷（不顯示答案）。</div>
+  </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 1 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">日治時期，總督府在臺灣推動「中等教育」的主要目的是要培養下列哪些人才？(甲)公學校教師 (乙)法律研究人才 (丙)初級技術人才 (丁)醫師</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>甲乙丁</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>甲乙丙</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>乙丙丁</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>甲丙丁</span></button></div>
+      <div class="analysis-box"><b>解析：</b>日治中等教育偏重實用與職業教育，主要培養公學校師資（甲）、初級技術人才（丙）及醫師（丁）等，並不培養法律、政治等領導人才（乙），以免臺人產生反抗意識。故選甲丙丁。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 2 題</span><span class="q-src">中正／改寫</span></div>
+      <div class="q-text">有關日治時期「中等教育」的敘述，何者錯誤？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>總督府陸續設立普通中學，主要招收日本人</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>1915 年林獻堂爭取設立臺中中學校</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>總督府設立醫學校、師範學校與農工商等職業學校</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>臺中中學校是總督府為推動皇民化而設</span></button></div>
+      <div class="analysis-box"><b>解析：</b>臺中中學校（1915 年）是林獻堂等臺灣士紳集資創立、專收臺灣人的中學，早於皇民化運動（1937 年後），與皇民化無關，故 D 錯誤。A、B、C 皆正確。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 3 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">王育德於 1924 年出生於臺南，1942 年到日本接受大學教育。至 1945 年止，留日臺灣學生達二十萬人。造成此風潮的主要原因是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>日本教育制度較為公平</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺人在臺灣升學不容易</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>臺灣完全沒有任何高等教育學校</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>日本倡導學術研究政策</span></button></div>
+      <div class="analysis-box"><b>解析：</b>因總督府對臺人採差別待遇、升學管道有限，臺人在臺升學不易，只能赴日求學。C 過於絕對（臺灣仍設有醫學校、後有臺北帝大），故最佳答案為 B。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 4 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">1915 年《臺灣日日新報》報導：「市內帽子店、裁縫店大見好況，顧客紛至沓來，應接不暇。」這是實行哪一項措施的結果？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>放足斷髮</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>慶祝光復</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>皇民化運動</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>西化政策</span></button></div>
+      <div class="analysis-box"><b>解析：</b>總督府推動放足斷髮，男子剪辮後需買帽子、改西式服裝，帶動帽子店與裁縫店生意，時間 1915 年也早於皇民化（1937 後）與光復（1945），故選放足斷髮。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 5 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">阿美是 1900 年出生的臺灣女性，二戰後期因空襲身亡。下列何者可能是她一生的情境？(甲)受社會風氣改變影響而放足 (乙)因九年義務教育而上學 (丙)參觀博物館與公園噴水池 (丁)參加臺灣文化協會的讀報社 (戊)因政府戒嚴而不敢批評時政</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>甲乙丙</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>甲丙丁</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>乙丙丁</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>甲丁戊</span></button></div>
+      <div class="analysis-box"><b>解析：</b>她 1900 年生、二戰後期（約 1945 前）過世，故只能經歷日治事件：放足（甲）、參觀博物館公園（丙）、文協讀報社（丁）。乙的「九年義務教育」是戰後民國 57 年才有，戊「戒嚴」是 1949 年之後，她已過世，皆不符。故選甲丙丁。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 6 題</span><span class="q-src">台南復興</span></div>
+      <div class="q-text">蘇一郎在中日戰爭爆發前 2 年（約 1935 年）出生於漢人家庭，長大後家裡收到政府通知讓他必須開始上學。請問一郎最可能到哪一所學校報到？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>末廣國民學校</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>達邦蕃童教育所</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>永寧公學校</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>臺南小學校</span></button></div>
+      <div class="analysis-box"><b>解析：</b>一郎約 1935 年生，六歲入學約 1941 年，此時已是皇民化時期、公學校已改名「國民學校」並推行義務教育，故漢人子弟就讀「末廣國民學校」。蕃童教育所收原住民、小學校收日本人，公學校名稱此時已改，故選 A。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 7 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">曾聰明日治時期就讀「八芝蘭公學校」，1941 年改稱「士林國民學校」。這項校名變革是受什麼因素影響？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>內地延長主義</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>皇民化運動</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>政治社會運動</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>地方議員選舉</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1941 年公學校、小學校一律改名為「國民學校」，是皇民化運動同化政策的一環。故選皇民化運動。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 8 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">現今推動十二年國教。臺灣最早推動六年義務教育是在下列哪一個時期？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>內地延長主義時期</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>日治初期</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>皇民化運動時期</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>二戰結束後</span></button></div>
+      <div class="analysis-box"><b>解析：</b>臺灣最早的六年義務教育在日治皇民化運動時期才推行。易錯：義務教育並非日治一開始就有，而是後期才實施。故選皇民化運動時期。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 9 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">右表為日治時期臺灣與在臺日人學齡兒童就學率簡表（臺人由 13% 逐年升至 71%，日人皆逾 95%）。從表中資料可看出哪一訊息？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>臺人基礎教育較日人更為普及</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>總督府採取西式教育制度</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>學校都採用日語教學</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>學生受教育情況有差別待遇</span></button></div>
+      <div class="analysis-box"><b>解析：</b>臺人就學率始終遠低於在臺日人，反映總督府教育政策對臺、日人有差別待遇。表格本身無法看出教學語言或教育制度，故選 D。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 10 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">蔡阿信選擇赴日就讀東京女子醫科大學的原因，最可能是下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>當時臺灣女性完全無法在臺就學</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺灣當時不重視職業教育</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>臺灣教育機會不足、臺人升學不易</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>當時臺灣未設立任何醫學專科學校</span></button></div>
+      <div class="analysis-box"><b>解析：</b>總督府差別待遇下臺人升學管道有限，尤其女性高等教育機會更少，故赴日求學。A 太絕對（阿信本人即曾在臺就學），D 也不符（臺灣設有醫學校），故選 C。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 11 題</span><span class="q-src">忠孝／民德</span></div>
+      <div class="q-text">嘉義農林學校（嘉農）棒球隊 1931 年打進日本甲子園獲亞軍。嘉農在日治時期屬於哪一種類型的教育制度？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>初等教育</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>義務教育</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>職業教育</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>留學教育</span></button></div>
+      <div class="analysis-box"><b>解析：</b>嘉義農林學校以培養農林初級技術人才為主，偏重實用，屬職業教育。故選職業教育。（忠孝、民德皆有此題）</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 12 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">日治時期某學校「成立於 1928 年，配合殖民政策成為南洋研究中心，是今日臺灣大學的前身」。此校是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>臺中中學校</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺北師範學校</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>臺北帝國大學</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>艋舺公學校</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1928 年成立、為南洋研究中心、今臺灣大學前身者為「臺北帝國大學」，是日治最高學府。故選 C。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 13 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">1930 年，蔣渭水打電報向國際聯盟抗議某政策「不人道」且違背國際條約。他抗議的是下列哪一項政策？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>特許吸食鴉片</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>國語運動</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>強制斷髮</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>注射預防針</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1930 年總督府新特許鴉片吸食牌照，蔣渭水與臺灣民眾黨向國際聯盟控訴此鴉片政策不人道。故選特許吸食鴉片。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 14 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">日治時期旅行逐漸成為臺灣人休閒生活的一部分，這主要是受到哪些政策的影響？(甲)星期制 (乙)現代司法制度 (丙)標準時間制 (丁)警察與保甲制度</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>甲乙</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>甲丙</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>甲丁</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>乙丙</span></button></div>
+      <div class="analysis-box"><b>解析：</b>星期制帶來固定假日、標準時間制讓火車依時刻運行，兩者共同促成旅行與休閒風氣。司法、警察保甲與休閒旅行無直接關係，故選甲丙。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 15 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">1945 年 8 月 15 日，全臺民眾在「同一時間」從收音機聽到日本戰敗消息。臺灣人能在同一時間收到消息，與日本推動的何項制度有關？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>放足斷髮</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>現代衛生觀念</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>標準時間制</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>星期制</span></button></div>
+      <div class="analysis-box"><b>解析：</b>全臺能「同一時間」收聽廣播，仰賴日本引進的標準時間制，使各地時間一致。故選標準時間制。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 16 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">右圖描繪日治時期火車站高處設有時鐘。當時車站設立時鐘的主要目的為何？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>配合皇民化運動效忠天皇</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>以圓形時鐘裝飾車站美觀大方</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>以時鐘教導臺灣人時區劃分方式</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>方便人們知道時間，養成守時習慣</span></button></div>
+      <div class="analysis-box"><b>解析：</b>火車站設時鐘配合標準時間制，讓民眾掌握火車班次時刻、養成守時習慣。故選 D。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 17 題</span><span class="q-src">忠孝／苓雅</span></div>
+      <div class="q-text">日治時期臺灣人口成長圖顯示 1925～1930 年間人口激增，主要原因為何？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>臺大醫院設立及現代衛生觀念建立</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>中國大陸人民大量移居臺灣</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>日本政府鼓勵日本人移入臺灣</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>外商因貿易興盛投入大量人力</span></button></div>
+      <div class="analysis-box"><b>解析：</b>日治時期人口成長主因是總督府推動現代化防疫、興建自來水下水道、辦理預防注射與設立公立醫院，使死亡率下降，並非移民造成。故選 A。（忠孝、苓雅、民德皆考此觀念）</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 18 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">林獻堂 1907 年赴日旅行遇到梁啟超，梁勸他「以非武力運動對抗」。林獻堂接受建議後最可能採取的行動是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>推動臺灣議會設置請願運動</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>成立臺灣民眾黨</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>成立民主進步黨</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>發起野百合學運</span></button></div>
+      <div class="analysis-box"><b>解析：</b>林獻堂日後領導「臺灣議會設置請願運動」，以非武裝方式向日本爭取權益，正符合梁啟超的建議。臺灣民眾黨由蔣渭水主導，民進黨、野百合皆為戰後之事，故選 A。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 19 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">一份刊物內容包括「歐美世界局勢如何發展？何謂民主、經濟、科學？臺灣人的文化語言該如何振興？日本統治政策是否合理？」此刊物最可能是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>臺灣民報</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>自由中國</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>美麗島雜誌</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>臺灣新生報</span></button></div>
+      <div class="analysis-box"><b>解析：</b>討論民主科學、振興臺灣文化語言、批評日本統治，正是日治時期臺灣人喉舌《臺灣民報》的特色。《自由中國》《美麗島》屬戰後，故選 A。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 20 題</span><span class="q-src">中正／仁愛</span></div>
+      <div class="q-text">蔣渭水為臺灣社會開立診斷書，認為臺灣患了「智識營養不良」，須以文化教育醫治。為此他成立了何種組織？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>臺灣議會</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺灣民主國</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>臺灣民眾黨</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>臺灣文化協會</span></button></div>
+      <div class="analysis-box"><b>解析：</b>此診斷書是蔣渭水為推動文化啟蒙而作，他為此成立「臺灣文化協會」，以演講、讀報社等提升文化水準。故選 D。（臺灣民眾黨為其後成立的政黨，題意問文化啟蒙組織）</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 21 題</span><span class="q-src">仁愛</span></div>
+      <div class="q-text">臺灣工友總聯盟成立於 1928 年，要求制定最低工資、最高工時以保障工人權益。此聯盟的行動會受到何組織的支援？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>民主進步黨</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>中國民主黨</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>臺灣民眾黨</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>中國國民黨</span></button></div>
+      <div class="analysis-box"><b>解析：</b>臺灣工友總聯盟是由臺灣民眾黨扶助農工運動而支援成立的勞工團體。民進黨、中國民主黨皆為戰後組織，故選 C。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 22 題</span><span class="q-src">民德／仁愛</span></div>
+      <div class="q-text">臺灣人所成立的第一個政黨（也是第一個合法政黨），以「確立民本政治、建設合理經濟組織、改廢社會缺陷」為三大綱要。此政黨是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>中國民主黨</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺灣民眾黨</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>中國國民黨</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>民主進步黨</span></button></div>
+      <div class="analysis-box"><b>解析：</b>臺灣民眾黨（1927 年）是臺灣人成立的第一個政黨、也是第一個合法政黨。中國民主黨、民進黨皆為戰後，故選 B。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 23 題</span><span class="q-src">台南復興</span></div>
+      <div class="q-text">楊逵 1927 年後因參與社會運動屢遭日本當局逮捕。下列哪一事件與楊逵被抓入獄「無關」？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>參與農民運動，反抗日本糖業政策</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>發表〈和平宣言〉，呼籲停止衝突</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>參與二二八事件，組織群眾要求政治改革</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>擔任報社記者，報導雷震籌組新政黨</span></button></div>
+      <div class="analysis-box"><b>解析：</b>楊逵 1961 年即已出獄，而雷震籌組中國民主黨、被捕是 1960 年，題幹敘述其入獄與農運、和平宣言、二二八有關，唯獨「報導雷震組黨」非其入獄原因。故選 D 為無關者。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 24 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">1935 年總督府修改地方制度舉行地方議員選舉，臺灣地方自治聯盟評此改革「雖不滿足，但比舊制已有進步」。這裡的「缺陷」指的是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>臺灣人完全不得參選議員</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>臺灣人完全不得參與投票</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>議員只有半數開放民選</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>選民資格毫無限制</span></button></div>
+      <div class="analysis-box"><b>解析：</b>1935 年選舉僅開放半數議員由民選產生，另一半仍為官派，且選民資格有嚴格限制，故「缺陷」指議員只有半數民選。故選 C。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 25 題</span><span class="q-src">苓雅</span></div>
+      <div class="q-text">某次選舉「選民須事前記住候選人名字親手寫下，須年滿 25 歲、住滿 6 個月、繳稅達一定數額的男子才符合資格，全臺四百多萬人僅兩萬八千人符合」。這場選舉最可能發生在？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>1890 年代</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>1910 年代</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>1920 年代</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>1930 年代</span></button></div>
+      <div class="analysis-box"><b>解析：</b>此為日治時期首次地方議員選舉，選民資格嚴格（年滿 25 歲、繳稅男子），發生於 1935 年，屬 1930 年代。故選 D。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 26 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">陳儀是戰後臺灣具爭議性的政治人物，下列有關其事蹟的描述何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>擔任臺灣省主席，負責接收臺灣</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>為臺灣省行政長官，但施政引發臺人不滿</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>曾組『二二八事件處理委員會』積極與民間溝通</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>曾徵調中國大陸米糧運臺，支援戰後經濟</span></button></div>
+      <div class="analysis-box"><b>解析：</b>陳儀任「臺灣省行政長官」（非省主席），施政不當引發民怨。二二八事件處理委員會由民間知識分子組成（非陳儀），且他是徵臺灣米糧運往大陸（非反向），故正確為 B。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 27 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">民國 35 年臺灣「生產力下降、物價數倍高漲，米價漲 50 倍，米糖之鄉反而短缺」。上述物價暴漲應導因於何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>二戰美軍轟炸臺灣，戰後無力復甦</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>政府發行新臺幣取代舊臺幣失效</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>美國援助以美金計價使物價上升</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>國共內戰，臺灣資源多用於支援戰爭、米糧短缺</span></button></div>
+      <div class="analysis-box"><b>解析：</b>戰後行政長官公署將臺灣米糧等資源大量運往大陸支援國共內戰，造成臺灣物資短缺、通貨膨脹、物價暴漲。故選 D。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 28 題</span><span class="q-src">苓雅</span></div>
+      <div class="q-text">上海《大公報》社評〈臺灣慘案感言〉：「各級官吏對待人民驕縱專橫，民眾懷怨已久，故一觸即發。」此社評所指事件的相關敘述，何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>當時的行政長官為陳誠</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>此事件為美麗島事件</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>該事件處理過程中政府派軍隊強力鎮壓並展開清鄉</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>事件結束後政府立即解除戒嚴</span></button></div>
+      <div class="analysis-box"><b>解析：</b>此為 1947 年二二八事件。當時行政長官是陳儀（非陳誠），事件中政府派兵鎮壓並清鄉。戒嚴令 1949 年才頒布，故選 C。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 29 題</span><span class="q-src">台南復興</span></div>
+      <div class="q-text">某訴求：「1.長官公署應改為省政府制度。2.制定省自治法。3.撤銷專賣局、貿易局。5.各省處長三分之二以上須由本省居住十年以上者擔任。」由內容判斷，下列敘述何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>事件爆發時間是中華民國政府遷臺後</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>這是二二八事件處理委員會提出的訴求</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>長官公署同意聘任臺籍人士擔任要職</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>事件過後這群人的訴求立即獲得落實</span></button></div>
+      <div class="analysis-box"><b>解析：</b>此為二二八事件處理委員會（1947）提出的政治改革訴求。事件在政府遷臺（1949）前、訴求並未被接受、政府反而派兵鎮壓，故選 B。</div>
+    </div>
+<div class="blk q-blk" data-ans="0">
+      <div class="q-head"><span class="q-num">第 30 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">民國 36 年政府明令動員戡亂，37 年通過《動員戡亂時期臨時條款》，主要是為了因應當時國家的哪種緊急處境？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>國共內戰</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>二二八事件</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>美麗島事件</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>第二次世界大戰</span></button></div>
+      <div class="analysis-box"><b>解析：</b>《動員戡亂時期臨時條款》是為因應國共內戰的緊急狀態而制定，用以擴大總統職權。故選國共內戰。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 31 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">蔣中正連續擔任五任總統，但《中華民國憲法》規定總統只可連任一次。他得以連任多次的法源依據為何？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>《六三法》</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>《動員戡亂時期臨時條款》</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>《中華民國憲法》</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>《戒嚴令》</span></button></div>
+      <div class="analysis-box"><b>解析：</b>《動員戡亂時期臨時條款》凍結憲法對總統連任次數的限制，使蔣中正得以連選連任。《六三法》屬日治時期法令，故選 B。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 32 題</span><span class="q-src">苓雅</span></div>
+      <div class="q-text">有關《動員戡亂時期臨時條款》和《戒嚴令》兩者的敘述，以下何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>依據《戒嚴令》，中央民代不用改選而有「萬年國會」</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>依據《戒嚴令》，臺灣民眾沒有宗教、言論、出版、集會、結社等自由</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>《動員戡亂時期臨時條款》擴大總統職權，不受憲法限制</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>《自由中國》違反《動員戡亂時期臨時條款》而遭壓制</span></button></div>
+      <div class="analysis-box"><b>解析：</b>《臨時條款》確實擴大總統職權、凍結部分憲法規定，故 C 正確。萬年國會源自臨時條款而非戒嚴令（A 錯）；戒嚴令限制的是集會結社等自由但仍有宗教信仰（B 過度）；雷震案是以叛亂罪名查禁，非直接違反臨時條款（D 不精確）。故選 C。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 33 題</span><span class="q-src">仁愛／民德</span></div>
+      <div class="q-text">雷震主辦《自由中國》，因評論時政、想結合大陸民主人士與臺灣本土菁英籌組「中國民主黨」，最後被政府逮捕。請問此人是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>林獻堂</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>蔣渭水</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>雷震</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>陳儀</span></button></div>
+      <div class="analysis-box"><b>解析：</b>主辦《自由中國》、籌組中國民主黨而被捕者為雷震。林獻堂、蔣渭水為日治社運人士，陳儀為戰後行政長官，故選雷震。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 34 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">電影《返校》描述師生因開讀書會、閱讀禁書而被政府囚禁甚至處死。下列有關此電影背景的描述，何者完全正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>所描述時間應在民國 80 年代</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>劇中政府以防止共產主義滲透為由，鼓勵人民告密檢舉匪諜</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>當時民眾被臺灣省行政長官控制集會結社自由</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>劇情與『地方自治』規定最有關聯</span></button></div>
+      <div class="analysis-box"><b>解析：</b>《返校》描寫白色恐怖（1950 年代）氛圍：政府藉防共之名鼓勵告密檢舉匪諜。時間非 80 年代（A 錯）；控制自由的是戒嚴體制而非行政長官（C 錯）；與臨時條款、戒嚴有關而非地方自治（D 錯）。故選 B。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 35 題</span><span class="q-src">忠孝</span></div>
+      <div class="q-text">民國 68 年美麗島雜誌社於國際人權日遊行，與軍警爆發衝突，多人遭逮捕。下列對此事件的描述何者正確？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>加速黨外勢力結合，促成隔年民主進步黨的成立</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>黨外人士透過此遊行表達追求民主政治的訴求</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>多人遭逮捕顯示臺灣社會普遍無法接受遊行</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>導因於黨外企圖組織中國民主黨遭政府壓制</span></button></div>
+      <div class="analysis-box"><b>解析：</b>美麗島事件是黨外人士藉遊行表達追求民主的訴求。它加速黨外集結，但民進黨遲至民國 75 年才成立（非隔年，A 錯）；與中國民主黨（1960）無關（D 錯）。故選 B。</div>
+    </div>
+<div class="blk q-blk" data-ans="3">
+      <div class="q-head"><span class="q-num">第 36 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">民國 79 年 3 月臺灣大學生發起以「野百合」為象徵的運動。這個運動的主要訴求應為下列何者？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>為二二八事件平反</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>要求解嚴</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>廢除黨禁報禁</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>廢除《動員戡亂時期臨時條款》</span></button></div>
+      <div class="analysis-box"><b>解析：</b>野百合學運（1990）主要訴求包括廢除《動員戡亂時期臨時條款》、解散國民大會等。解嚴已於 1987 年完成，故選 D。</div>
+    </div>
+<div class="blk q-blk" data-ans="2">
+      <div class="q-head"><span class="q-num">第 37 題</span><span class="q-src">民德</span></div>
+      <div class="q-text">被外媒稱為「民主先生」，廢除動員戡亂臨時條款、確立公民直選總統、終結萬年國大代表，帶領臺灣民主轉型者是？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>蔣中正</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>蔣經國</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>李登輝</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>陳水扁</span></button></div>
+      <div class="analysis-box"><b>解析：</b>李登輝任內終止動員戡亂、推動修憲、完成 1996 年首次總統直接民選，被譽為「民主先生」。故選 C。</div>
+    </div>
+<div class="blk q-blk" data-ans="1">
+      <div class="q-head"><span class="q-num">第 38 題</span><span class="q-src">中正</span></div>
+      <div class="q-text">政府遷臺以後，民主政治的實施首先表現在哪一方面？</div>
+      <div class="options"><button class="opt-btn" data-oi="0" onclick="pick(this)"><span class="opt-letter">Ａ</span><span>取消戒嚴令</span></button><button class="opt-btn" data-oi="1" onclick="pick(this)"><span class="opt-letter">Ｂ</span><span>實施縣市地方自治</span></button><button class="opt-btn" data-oi="2" onclick="pick(this)"><span class="opt-letter">Ｃ</span><span>中央民意代表增補選</span></button><button class="opt-btn" data-oi="3" onclick="pick(this)"><span class="opt-letter">Ｄ</span><span>解除報禁與黨禁</span></button></div>
+      <div class="analysis-box"><b>解析：</b>政府遷臺後，民主政治首先從民國 39 年起實施縣市地方自治、開放地方民意代表與首長選舉。取消戒嚴、解除黨禁報禁皆為民國 76 年後之事，故選 B。</div>
+    </div>`;
+const MODE = window.__MODE__||'screen';
+
+// ── 互動 ──
+function reveal(el){if(el.classList.contains('show'))return;el.classList.add('show');el.textContent=el.dataset.ans;}
+function revealAll(){document.querySelectorAll('.blank').forEach(b=>{b.classList.add('show');b.textContent=b.dataset.ans;});
+  document.querySelectorAll('.q-blk').forEach(q=>showQ(q));}
+function hideAll(){document.querySelectorAll('.blank').forEach(b=>{b.classList.remove('show');b.textContent='？';});
+  document.querySelectorAll('.opt-btn').forEach(o=>{o.classList.remove('correct','wrong');o.disabled=false;});
+  document.querySelectorAll('.analysis-box').forEach(a=>a.classList.remove('show'));}
+function showQ(q){const ans=+q.dataset.ans;q.querySelectorAll('.opt-btn').forEach(o=>{const oi=+o.dataset.oi;o.disabled=true;if(oi===ans)o.classList.add('correct');});q.querySelector('.analysis-box').classList.add('show');}
+function pick(btn){const q=btn.closest('.q-blk');if(btn.disabled)return;const ans=+q.dataset.ans,oi=+btn.dataset.oi;
+  q.querySelectorAll('.opt-btn').forEach(o=>o.disabled=true);
+  if(oi===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');q.querySelector('[data-oi="'+ans+'"]').classList.add('correct');}
+  q.querySelector('.analysis-box').classList.add('show');q.dataset.done=oi===ans?'1':'0';}
+function grade(){const qs=[...document.querySelectorAll('.q-blk')];let done=0,ok=0;
+  qs.forEach(q=>{if(q.dataset.done!==undefined){done++;if(q.dataset.done==='1')ok++;}});
+  const bar=document.getElementById('scorebar');bar.style.display='block';
+  bar.textContent='已作答 '+done+' / '+qs.length+' 題　答對 '+ok+' 題'+(done?('　得分 '+Math.round(ok/qs.length*100)+' 分'):'');}
+
+// ── A4 分頁：像素預算法（先在 #measure 量好每塊高度，再依固定預算裝頁）──
+// srcNodes 目前位於 #measure 內（寬度與 sheet-body 相同），量測後搬入各 .sheet
+function layout(srcNodes, footLabel){
+  const doc=document.getElementById('doc');
+  // 先量每塊高度（含上下 margin）
+  const H=srcNodes.map(n=>{const st=getComputedStyle(n);
+    return n.offsetHeight+parseFloat(st.marginTop||0)+parseFloat(st.marginBottom||0);});
+  doc.innerHTML='';
+  function newSheet(){const s=document.createElement('div');s.className='sheet';
+    const b=document.createElement('div');b.className='sheet-body';
+    const f=document.createElement('div');f.className='sheet-foot';
+    s.appendChild(b);s.appendChild(f);doc.appendChild(s);return {s,b,f};}
+  let cur=newSheet();
+  // 一頁可用高度（px）；若量到異常小（窄視窗觸發 RWD）則用 A4 預設值保底
+  const cH=cur.b.clientHeight;
+  const AVAIL=cH>200?cH:1000;
+  let used=0;
+  for(let i=0;i<srcNodes.length;i++){
+    // keep-next：標題與下一塊視為一體，避免標題落在頁尾
+    if(srcNodes[i].classList.contains('keep-next') && i+1<srcNodes.length){
+      const pair=H[i]+H[i+1];
+      if(used>0 && used+pair>AVAIL){cur=newSheet();used=0;}
+      cur.b.appendChild(srcNodes[i]);cur.b.appendChild(srcNodes[i+1]);
+      used+=pair;i++;continue;
+    }
+    if(used>0 && used+H[i]>AVAIL){cur=newSheet();used=0;}
+    cur.b.appendChild(srcNodes[i]);used+=H[i];
+  }
+  const sheets=[...doc.querySelectorAll('.sheet')];const M=sheets.length;
+  sheets.forEach((s,idx)=>{s.querySelector('.sheet-foot').innerHTML=
+    '<span>'+footLabel+'</span><span>第 '+(idx+1)+' 頁　共 '+M+' 頁</span>';});
+}
+
+const FOOT='國一歷史第二冊　第二次段考複習';
+document.addEventListener('DOMContentLoaded',()=>{
+  const meas=document.getElementById('measure');
+  meas.innerHTML=RAW;
+  if(MODE==='answer'){
+    // 解答版：先在量測容器內展開答案＋解析，再依展開後高度分頁
+    document.body.classList.add('print-answer');
+    meas.querySelectorAll('.blank').forEach(b=>{b.classList.add('show');b.textContent=b.dataset.ans;});
+    meas.querySelectorAll('.analysis-box').forEach(a=>a.classList.add('show'));
+    meas.querySelectorAll('.q-blk').forEach(q=>{const ans=+q.dataset.ans;
+      q.querySelectorAll('.opt-btn').forEach(o=>{o.disabled=true;if(+o.dataset.oi===ans)o.classList.add('correct');});});
+    layout([...meas.children], FOOT+'（解答版）');
+  }else{
+    if(MODE==='student')document.body.classList.add('print-student');
+    layout([...meas.children], FOOT);
+  }
+  meas.innerHTML='';
+});
+</script>
+</body></html>
