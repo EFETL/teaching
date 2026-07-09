@@ -36,6 +36,7 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
 .s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
 .s-orange .sec-icon{background:#9a3412;color:#fff}
 .s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-exam .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
 .s-rose .sec-icon{background:#be123c;color:#fff}
 
 /* 課文逐段 */
@@ -941,6 +942,14 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
   </div>
 </div>
 
+<!-- 歷屆月考真題 -->
+<div class="section s-exam" id="examSec">
+  <div class="sec-head"><div class="sec-icon">📄</div>歷屆月考真題（各校段考／期中考精選）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 各校高三第一次段考／期中考中，直接測驗本課〈The Road Not Taken〉字彙的真題如下。<br><b>特別提醒：</b>本冊 L1 詩歌題多以另一首同主題名詩 <b>Kipling〈If—〉</b> 命題，完整歷屆真題請見 <a href="./longteng5-L1-Kipling.html" style="color:#4338ca;font-weight:700">〈If—〉互動教學講義</a>。</div>
+  </div>
+</div>
+
 <div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
   龍騰高中英文 第五冊 第一課｜互動教學講義
 </div>
@@ -1205,6 +1214,11 @@ var teacherQ=[
   tnote:'<b>句首片語</b>：Rather than 引導的分詞片語慣用 V-ing（emphasizing），修飾主句主詞 the poem。<br>(B) 第三人稱單數、(A) 原形皆不合此處片語結構；(D) to V 亦不搭 Rather than 句首用法。'}
 ];
 
+var examQ=[
+ {q:['Her design style blends ',' elements with traditional architecture.'],cn:'她的設計風格將當代元素與傳統建築融合在一起。',opts:['physical','previous','compulsory','contemporary'],ans:3,word:'contemporary (adj.) 當代的、現代的',exp:'與 traditional 對比者為 contemporary（當代的），此為本課明列補充字；physical、previous、compulsory 皆不合。',note:'出處：小港高中 113',type:'vocab'},
+ {q:['Artwork by truly great artists such as Picasso and Monet will no doubt ',' the test of time.'],cn:'像畢卡索與莫內這樣真正偉大的藝術家所創作的作品，無疑能經得起時間的考驗。',opts:['serve','stand','stay','take'],ans:1,word:'stand the test of time（經得起時間考驗）',exp:'固定片語 stand the test of time，呼應本課「詩歷久不衰、經得起時間考驗」；其餘動詞不搭配此片語。',note:'出處：基隆高中 113',type:'vocab'}
+];
+
 function buildQuestions(data,container,prefix,badgeClass,numColor){
   var html='';
   data.forEach(function(item,i){
@@ -1242,6 +1256,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
   buildQuestions(studentQ,sBody,'',' badge-green','#166534');
   buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+  buildQuestions(examQ,document.querySelector('#examSec .sec-body'),'E',' badge-orange','#9a3412');
 
   // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
   document.querySelectorAll('.v-word').forEach(function(w){
