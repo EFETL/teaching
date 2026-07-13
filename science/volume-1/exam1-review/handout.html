@@ -268,4 +268,105 @@ document.querySelectorAll('#q'+qi+' .opt').forEach((o,i)=>{o.classList.add('done
 document.getElementById('e'+qi).classList.add('show');upd();}
 function upd(){const v=Object.values(done),d=v.length;let ok=0;Object.keys(done).forEach(q=>{if(done[q]==ANS[q])ok++;});
 document.getElementById('sd').textContent=d;document.getElementById('sk').textContent=ok;document.getElementById('sn').textContent=d-ok;document.getElementById('sp').textContent=d?Math.round(ok/d*100)+'%':'—';}
-</script></body></html>
+</script><!-- ✍️ 書寫工具（可寫字、可擦拭）writing / annotation overlay -->
+<style>
+#wb-canvas{position:absolute;top:0;left:0;z-index:40;pointer-events:none;touch-action:auto;}
+#wb-canvas.on{pointer-events:auto;touch-action:none;cursor:crosshair;}
+#wb-bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;max-width:94vw;
+  background:rgba(255,255,255,.97);border:1px solid #d7e6dd;border-radius:30px;
+  padding:7px 12px;box-shadow:0 6px 22px rgba(0,0,0,.18);
+  font-family:-apple-system,"Noto Sans TC","PingFang TC",sans-serif;font-size:15px;color:#1f5c50;}
+#wb-bar button{border:none;background:#eef4f0;color:#1f5c50;border-radius:20px;
+  padding:7px 12px;font-size:15px;cursor:pointer;line-height:1;}
+#wb-bar button:hover{background:#dcebe3;}
+#wb-bar .wb-toggle{background:#2f7d6e;color:#fff;font-weight:700;}
+#wb-bar .wb-toggle.active{background:#e07a3f;}
+#wb-bar .wb-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+#wb-bar .wb-tools.dim{opacity:.35;pointer-events:none;}
+#wb-bar .wb-sw{width:26px;height:26px;border-radius:50%;border:2px solid #fff;
+  box-shadow:0 0 0 1.5px #cbd5cf;cursor:pointer;padding:0;}
+#wb-bar .wb-sw.sel{box-shadow:0 0 0 2.5px #2f7d6e;transform:scale(1.12);}
+#wb-bar .wb-sep{width:1px;height:22px;background:#d7e6dd;margin:0 2px;}
+#wb-bar button.sel{background:#2f7d6e;color:#fff;}
+@media print{#wb-canvas,#wb-bar{display:none!important;}}
+</style>
+<script>
+(function(){
+  var canvas=document.createElement('canvas');canvas.id='wb-canvas';
+  document.body.appendChild(canvas);
+  var ctx=canvas.getContext('2d'),dpr=window.devicePixelRatio||1;
+  var strokes=[],cur=null,active=false,tool='pen',color='#222222';
+  var PEN=3,ERA=28;
+  function docSize(){var d=document.documentElement,b=document.body;
+    return {w:Math.max(d.scrollWidth,b?b.scrollWidth:0,d.clientWidth),
+            h:Math.max(d.scrollHeight,b?b.scrollHeight:0,d.clientHeight)};}
+  function sizeCanvas(){var s=docSize();
+    canvas.style.width=s.w+'px';canvas.style.height=s.h+'px';
+    canvas.width=Math.round(s.w*dpr);canvas.height=Math.round(s.h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);redraw();}
+  function styleFor(st){ctx.lineCap='round';ctx.lineJoin='round';
+    if(st.tool==='eraser'){ctx.globalCompositeOperation='destination-out';ctx.lineWidth=st.size;}
+    else{ctx.globalCompositeOperation='source-over';ctx.strokeStyle=st.color;ctx.lineWidth=st.size;}}
+  function drawStroke(st){var p=st.pts;ctx.save();styleFor(st);
+    if(p.length===1){ctx.beginPath();ctx.arc(p[0].x,p[0].y,st.size/2,0,Math.PI*2);
+      ctx.fillStyle=(st.tool==='eraser')?'#000':st.color;ctx.fill();ctx.restore();return;}
+    ctx.beginPath();ctx.moveTo(p[0].x,p[0].y);
+    for(var i=1;i<p.length-1;i++){var mx=(p[i].x+p[i+1].x)/2,my=(p[i].y+p[i+1].y)/2;
+      ctx.quadraticCurveTo(p[i].x,p[i].y,mx,my);}
+    ctx.lineTo(p[p.length-1].x,p[p.length-1].y);ctx.stroke();ctx.restore();}
+  function redraw(){ctx.clearRect(0,0,canvas.width,canvas.height);strokes.forEach(drawStroke);}
+  function drawSeg(st){var p=st.pts,n=p.length;if(n<2){drawStroke(st);return;}
+    ctx.save();styleFor(st);var a=p[n-2],b=p[n-1];
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.restore();}
+  function pt(e){return {x:e.pageX,y:e.pageY};}
+  function down(e){if(!active)return;if(e.button&&e.button!==0)return;e.preventDefault();
+    cur={tool:tool,color:color,size:(tool==='eraser'?ERA:PEN),pts:[pt(e)]};
+    strokes.push(cur);try{canvas.setPointerCapture(e.pointerId);}catch(_){}drawStroke(cur);}
+  function move(e){if(!active||!cur)return;e.preventDefault();cur.pts.push(pt(e));drawSeg(cur);}
+  function up(){cur=null;}
+  canvas.addEventListener('pointerdown',down);
+  canvas.addEventListener('pointermove',move);
+  canvas.addEventListener('pointerup',up);
+  canvas.addEventListener('pointercancel',up);
+
+  var bar=document.createElement('div');bar.id='wb-bar';
+  bar.innerHTML='<button class="wb-toggle" id="wb-tg">✏️ 書寫</button>'+
+    '<div class="wb-tools dim" id="wb-tools">'+
+    '<button class="wb-sw sel" data-c="#222222" style="background:#222222" title="黑色"></button>'+
+    '<button class="wb-sw" data-c="#e03131" style="background:#e03131" title="紅色"></button>'+
+    '<button class="wb-sw" data-c="#1c7ed6" style="background:#1c7ed6" title="藍色"></button>'+
+    '<button class="wb-sw" data-c="#2f9e44" style="background:#2f9e44" title="綠色"></button>'+
+    '<span class="wb-sep"></span>'+
+    '<button id="wb-pen" class="sel">✏️ 筆</button>'+
+    '<button id="wb-era">🧽 擦子</button>'+
+    '<span class="wb-sep"></span>'+
+    '<button id="wb-undo">↶ 復原</button>'+
+    '<button id="wb-clear">🗑 清除</button>'+
+    '</div>';
+  document.body.appendChild(bar);
+  var tools=bar.querySelector('#wb-tools'),tg=bar.querySelector('#wb-tg'),
+      penB=bar.querySelector('#wb-pen'),eraB=bar.querySelector('#wb-era');
+  function setActive(on){active=on;canvas.classList.toggle('on',on);
+    tg.classList.toggle('active',on);tg.textContent=on?'✍️ 書寫中（點我結束）':'✏️ 書寫';
+    tools.classList.toggle('dim',!on);}
+  tg.onclick=function(){setActive(!active);};
+  bar.querySelectorAll('.wb-sw').forEach(function(sw){sw.onclick=function(){
+    color=sw.getAttribute('data-c');tool='pen';
+    bar.querySelectorAll('.wb-sw').forEach(function(x){x.classList.remove('sel');});
+    sw.classList.add('sel');penB.classList.add('sel');eraB.classList.remove('sel');};});
+  penB.onclick=function(){tool='pen';penB.classList.add('sel');eraB.classList.remove('sel');};
+  eraB.onclick=function(){tool='eraser';eraB.classList.add('sel');penB.classList.remove('sel');};
+  bar.querySelector('#wb-undo').onclick=function(){strokes.pop();redraw();};
+  bar.querySelector('#wb-clear').onclick=function(){
+    if(strokes.length&&confirm('清除所有書寫內容？')){strokes=[];redraw();}};
+
+  window.addEventListener('resize',sizeCanvas);
+  window.addEventListener('load',sizeCanvas);
+  if(window.ResizeObserver){var ro=new ResizeObserver(function(){
+    clearTimeout(window._wbT);window._wbT=setTimeout(sizeCanvas,150);});ro.observe(document.body);}
+  sizeCanvas();
+})();
+</script>
+
+</body></html>
