@@ -82,7 +82,8 @@ document.getElementById('sd').textContent=d;document.getElementById('sk').textCo
 (function(){
   var canvas=document.createElement('canvas');canvas.id='wb-canvas';
   document.body.appendChild(canvas);
-  var ctx=canvas.getContext('2d'),dpr=window.devicePixelRatio||1;
+  var ctx=canvas.getContext('2d');
+  var dpr=Math.min(window.devicePixelRatio||1,2);   // 上限 2，避免超長頁面過大的畫布拖慢速度
   var strokes=[],cur=null,active=false,tool='pen',color='#222222';
   var PEN=3,ERA=28;
   function docSize(){var d=document.documentElement,b=document.body;
@@ -95,23 +96,34 @@ document.getElementById('sd').textContent=d;document.getElementById('sk').textCo
   function styleFor(st){ctx.lineCap='round';ctx.lineJoin='round';
     if(st.tool==='eraser'){ctx.globalCompositeOperation='destination-out';ctx.lineWidth=st.size;}
     else{ctx.globalCompositeOperation='source-over';ctx.strokeStyle=st.color;ctx.lineWidth=st.size;}}
-  function drawStroke(st){var p=st.pts;ctx.save();styleFor(st);
+  function mid(a,b){return {x:(a.x+b.x)/2,y:(a.y+b.y)/2};}
+  // 用二次貝茲曲線把折點磨平：以每個點為控制點，端點取相鄰兩點的中點
+  function drawStroke(st){var p=st.pts;if(!p.length)return;ctx.save();styleFor(st);
     if(p.length===1){ctx.beginPath();ctx.arc(p[0].x,p[0].y,st.size/2,0,Math.PI*2);
       ctx.fillStyle=(st.tool==='eraser')?'#000':st.color;ctx.fill();ctx.restore();return;}
-    ctx.beginPath();ctx.moveTo(p[0].x,p[0].y);
-    for(var i=1;i<p.length-1;i++){var mx=(p[i].x+p[i+1].x)/2,my=(p[i].y+p[i+1].y)/2;
-      ctx.quadraticCurveTo(p[i].x,p[i].y,mx,my);}
+    ctx.beginPath();ctx.moveTo(p[0].x,p[0].y);var m=mid(p[0],p[1]);ctx.lineTo(m.x,m.y);
+    for(var i=1;i<p.length-1;i++){var mm=mid(p[i],p[i+1]);
+      ctx.quadraticCurveTo(p[i].x,p[i].y,mm.x,mm.y);}
     ctx.lineTo(p[p.length-1].x,p[p.length-1].y);ctx.stroke();ctx.restore();}
+  // 即時只畫「新增的那一小段」平滑曲線，維持 O(1) 不卡頓
+  function drawTo(st,i){var p=st.pts;ctx.save();styleFor(st);ctx.beginPath();
+    if(i===1){ctx.moveTo(p[0].x,p[0].y);var m=mid(p[0],p[1]);ctx.lineTo(m.x,m.y);}
+    else{var m0=mid(p[i-2],p[i-1]),m1=mid(p[i-1],p[i]);
+      ctx.moveTo(m0.x,m0.y);ctx.quadraticCurveTo(p[i-1].x,p[i-1].y,m1.x,m1.y);}
+    ctx.stroke();ctx.restore();}
   function redraw(){ctx.clearRect(0,0,canvas.width,canvas.height);strokes.forEach(drawStroke);}
-  function drawSeg(st){var p=st.pts,n=p.length;if(n<2){drawStroke(st);return;}
-    ctx.save();styleFor(st);var a=p[n-2],b=p[n-1];
-    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.restore();}
   function pt(e){return {x:e.pageX,y:e.pageY};}
+  function addPoint(q){var p=cur.pts,last=p[p.length-1];
+    if(last){var dx=q.x-last.x,dy=q.y-last.y;if(dx*dx+dy*dy<0.55)return;} // 過濾抖動微點
+    p.push(q);if(p.length>=2)drawTo(cur,p.length-1);}
   function down(e){if(!active)return;if(e.button&&e.button!==0)return;e.preventDefault();
     cur={tool:tool,color:color,size:(tool==='eraser'?ERA:PEN),pts:[pt(e)]};
-    strokes.push(cur);try{canvas.setPointerCapture(e.pointerId);}catch(_){}drawStroke(cur);}
-  function move(e){if(!active||!cur)return;e.preventDefault();cur.pts.push(pt(e));drawSeg(cur);}
-  function up(){cur=null;}
+    strokes.push(cur);try{canvas.setPointerCapture(e.pointerId);}catch(_){}}
+  function move(e){if(!active||!cur)return;e.preventDefault();
+    var ev=e.getCoalescedEvents?e.getCoalescedEvents():null;   // 抓取兩幀之間的所有中間點，線條更細緻
+    if(ev&&ev.length){for(var k=0;k<ev.length;k++)addPoint(pt(ev[k]));}
+    else addPoint(pt(e));}
+  function up(){if(cur&&cur.pts.length===1)drawStroke(cur);cur=null;}
   canvas.addEventListener('pointerdown',down);
   canvas.addEventListener('pointermove',move);
   canvas.addEventListener('pointerup',up);
@@ -148,10 +160,11 @@ document.getElementById('sd').textContent=d;document.getElementById('sk').textCo
   bar.querySelector('#wb-clear').onclick=function(){
     if(strokes.length&&confirm('清除所有書寫內容？')){strokes=[];redraw();}};
 
-  window.addEventListener('resize',sizeCanvas);
-  window.addEventListener('load',sizeCanvas);
+  function safeSize(){if(cur){clearTimeout(window._wbT);window._wbT=setTimeout(safeSize,250);return;}sizeCanvas();}
+  window.addEventListener('resize',safeSize);
+  window.addEventListener('load',safeSize);
   if(window.ResizeObserver){var ro=new ResizeObserver(function(){
-    clearTimeout(window._wbT);window._wbT=setTimeout(sizeCanvas,150);});ro.observe(document.body);}
+    clearTimeout(window._wbT);window._wbT=setTimeout(safeSize,180);});ro.observe(document.body);}
   sizeCanvas();
 })();
 </script>
