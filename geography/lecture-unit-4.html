@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理　單元4　臺灣的海域　互動講義</title>
+<style>
+  :root{
+    --sea:#1b6ca8;      /* 海洋藍 主色 */
+    --sea-dark:#0f4c75; /* 深藍 */
+    --sea-light:#e8f2f9;/* 淺藍底 */
+    --sand:#c98a3a;     /* 大地色 輔色 */
+    --sand-light:#fbf3e6;
+    --ink:#2b2b2b;
+    --muted:#6b7a86;
+    --ok:#2e9e6b;
+    --line:#dbe6ee;
+    --card-shadow:0 4px 18px rgba(15,76,117,.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);line-height:1.85;background:#f4f8fb;font-size:17px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 80px;}
+  /* Hero */
+  header.hero{
+    background:linear-gradient(135deg,var(--sea-dark),var(--sea) 60%,#2f8fc4);
+    color:#fff;padding:46px 20px 40px;text-align:center;
+  }
+  header.hero .kicker{font-size:15px;letter-spacing:3px;opacity:.9;margin:0 0 8px;}
+  header.hero h1{margin:0;font-size:30px;letter-spacing:1px;}
+  header.hero .en{font-size:15px;opacity:.85;margin-top:6px;font-weight:400;}
+  header.hero .ver{
+    display:inline-block;margin-top:18px;background:rgba(255,255,255,.16);
+    padding:6px 16px;border-radius:999px;font-size:13.5px;
+  }
+  .tip{
+    max-width:900px;margin:18px auto 0;padding:12px 18px;background:#fff7e6;
+    border:1px solid #f0d9a8;border-radius:12px;color:#8a6417;font-size:14.5px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  /* Section cards */
+  section.card{
+    background:#fff;border-radius:18px;box-shadow:var(--card-shadow);
+    padding:28px 30px;margin:26px 0;border:1px solid var(--line);
+  }
+  .sec-head{display:flex;align-items:center;gap:14px;margin:0 0 18px;}
+  .sec-num{
+    flex:none;width:44px;height:44px;border-radius:12px;background:var(--sea);
+    color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;
+  }
+  .sec-head h2{margin:0;font-size:22px;color:var(--sea-dark);}
+  .sec-head .sub{font-size:13px;color:var(--muted);font-weight:400;margin-top:2px;}
+  h3{font-size:18px;color:var(--sea-dark);border-left:5px solid var(--sand);
+     padding-left:12px;margin:26px 0 12px;}
+  p{margin:10px 0;}
+  ul{margin:10px 0;padding-left:22px;}
+  li{margin:7px 0;}
+  strong.k{color:var(--sea);}
+  /* fill-in blank */
+  .blank{
+    display:inline-block;min-width:70px;text-align:center;background:var(--sand-light);
+    border-bottom:2px solid var(--sand);border-radius:6px 6px 0 0;padding:0 10px;
+    color:transparent;cursor:pointer;font-weight:700;user-select:none;
+    transition:.15s;position:relative;
+  }
+  .blank::before{content:"?";color:var(--sand);}
+  .blank.show{color:var(--sea-dark);background:#e5f3ec;border-color:var(--ok);}
+  .blank.show::before{content:"";}
+  .hint{font-size:13px;color:var(--muted);}
+  /* note box */
+  .note{
+    background:var(--sea-light);border-radius:12px;padding:14px 18px;margin:16px 0;
+    border-left:4px solid var(--sea);font-size:15.5px;
+  }
+  .note b{color:var(--sea-dark);}
+  .compare{background:var(--sand-light);border-left-color:var(--sand);}
+  .compare b{color:var(--sand);}
+  /* table */
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:center;}
+  th{background:var(--sea);color:#fff;font-weight:600;}
+  tbody tr:nth-child(even){background:#f6fafc;}
+  td.lead{background:var(--sea-light);font-weight:600;color:var(--sea-dark);}
+  /* svg figure */
+  figure{margin:18px 0;text-align:center;}
+  figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;}
+  figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;}
+  /* quiz */
+  .quiz{background:#fff;border:2px solid var(--sea-light);border-radius:14px;padding:18px 20px;margin:16px 0;}
+  .quiz .q{font-weight:600;margin-bottom:10px;}
+  .opt{
+    display:block;width:100%;text-align:left;background:#f7fafc;border:1.5px solid var(--line);
+    border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer;font-size:16px;
+    font-family:inherit;color:var(--ink);transition:.15s;
+  }
+  .opt:hover{border-color:var(--sea);}
+  .opt.correct{background:#e5f3ec;border-color:var(--ok);color:#1c6e4a;font-weight:600;}
+  .opt.wrong{background:#fdeaea;border-color:#d66;color:#a33;}
+  .explain{display:none;margin-top:10px;padding:12px 14px;background:var(--sea-light);
+    border-radius:10px;font-size:14.5px;color:var(--sea-dark);}
+  .explain.show{display:block;}
+  /* toggle answer button */
+  .revealbtn{
+    background:var(--sea);color:#fff;border:none;border-radius:999px;padding:8px 18px;
+    font-size:14px;cursor:pointer;font-family:inherit;margin:6px 0 2px;
+  }
+  .revealbtn:hover{background:var(--sea-dark);}
+  /* 頁碼分隔標記（與列印版頁碼一致） */
+  .pagemark{display:flex;align-items:center;gap:12px;margin:38px 0 6px;}
+  .pagemark::before,.pagemark::after{content:"";flex:1;height:2px;border-radius:2px;}
+  .pagemark::before{background:linear-gradient(90deg,transparent,var(--sea));}
+  .pagemark::after{background:linear-gradient(90deg,var(--sea),transparent);}
+  .pagemark span{background:var(--sea);color:#fff;padding:5px 18px;border-radius:999px;
+    font-size:14px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(27,108,168,.3);}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;}
+  .goal-list{list-style:none;padding:0;}
+  .goal-list li{padding-left:28px;position:relative;}
+  .goal-list li::before{content:"✔";position:absolute;left:0;color:var(--ok);font-weight:700;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <p class="kicker">國一上地理・臺灣的自然環境</p>
+  <h1>第 4 課　臺灣的海域</h1>
+  <div class="en">Taiwan's Coasts &amp; Seas</div>
+  <div class="ver">康軒為主 ・ 翰林／南一整合補充</div>
+</header>
+
+<div class="tip">
+  <span style="font-size:18px">💡</span>
+  <span>灰底的 <span class="blank show" style="cursor:default">?</span> 是填空。點一下 <b>?</b> 就會翻出答案，再點一下收合；先自己想，再對答案，效果最好！</span>
+</div>
+
+<div class="wrap">
+
+  <div class="pagemark"><span>📄 第 1 頁 / 共 4 頁</span></div>
+
+  <!-- 學習目標 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num" style="background:var(--sand)">◎</div>
+      <div><h2 style="color:var(--sand)">學習目標</h2><div class="sub">核心問題：臺灣四面環海，海岸與海域如何被利用？</div></div>
+    </div>
+    <ul class="goal-list">
+      <li>能依構成物質區分 <strong class="k">沙岸</strong> 與 <strong class="k">岩岸</strong> 的特徵與地形。</li>
+      <li>認識 <strong class="k">沙洲與潟湖、岬角與灣澳</strong> 等常見海岸地形的形成。</li>
+      <li>理解 <strong class="k">領海（12 浬）</strong> 與 <strong class="k">專屬經濟海域（200 浬）</strong> 的範圍與意義。</li>
+      <li>認識臺灣 <strong class="k">離島</strong> 的類型與海域、離島的資源利用與環境問題。</li>
+    </ul>
+  </section>
+
+  <!-- 4-1 海岸的類型 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div><h2>4-1　海岸的類型</h2><div class="sub">海岸＝海洋與陸地的交界地帶</div></div>
+    </div>
+
+    <p>海岸是 <span class="blank" data-a="海洋">海洋</span> 與 <span class="blank" data-a="陸地">陸地</span> 的交界地帶。依構成物質不同，大致可分為 <strong class="k">沙岸</strong> 與 <strong class="k">岩岸</strong> 兩大類。</p>
+
+    <h3>一、沙岸 Sandy Coast</h3>
+    <ul>
+      <li>成因：由海水、河流的 <span class="blank" data-a="堆積">堆積</span> 作用形成的 <span class="blank" data-a="沙質">沙質</span> 海岸，多出現在 <span class="blank" data-a="平原">平原</span> 與海洋的交界處。</li>
+      <li>特點：海岸線 <span class="blank" data-a="平直">平直</span>、海灘 <span class="blank" data-a="寬闊">寬闊</span>、海底平坦、海水較 <span class="blank" data-a="淺">淺</span>。</li>
+      <li>常見地形：<span class="blank" data-a="沙灘">沙灘</span>、<span class="blank" data-a="沙洲">沙洲</span>、<span class="blank" data-a="潟湖">潟湖</span>。</li>
+    </ul>
+
+    <h3>二、岩岸 Rocky Coast</h3>
+    <ul>
+      <li>成因：<span class="blank" data-a="山地或丘陵">山地或丘陵</span> 直接與海洋相鄰，主要由 <span class="blank" data-a="岩石">岩石</span> 構成。</li>
+      <li>特點：海岸地形 <span class="blank" data-a="崎嶇">崎嶇</span>、海岸線 <span class="blank" data-a="曲折">曲折</span>、海水較 <span class="blank" data-a="深">深</span>。</li>
+      <li>常見地形：<span class="blank" data-a="岬角">岬角</span> 與 <span class="blank" data-a="灣澳">灣澳</span>。</li>
+    </ul>
+
+    <figure>
+      <svg viewBox="0 0 460 210" width="460" role="img" aria-label="沙岸與岩岸比較示意圖">
+        <!-- 沙岸 -->
+        <rect x="10" y="20" width="210" height="170" fill="#f6fafc" stroke="#dbe6ee" rx="8"/>
+        <text x="115" y="40" text-anchor="middle" font-size="14" fill="#0f4c75" font-weight="700">沙岸</text>
+        <rect x="10" y="120" width="210" height="70" fill="#eaf4fb"/>
+        <path d="M10,120 L120,120 L165,140 L220,140 L220,120 Z" fill="#fbe9c8"/>
+        <path d="M10,120 Q60,116 120,120 L165,140 Q195,138 220,140" fill="none" stroke="#c98a3a" stroke-width="2"/>
+        <text x="60" y="112" font-size="11" fill="#8a5a1a">平原</text>
+        <text x="150" y="132" font-size="10" fill="#8a5a1a">寬闊沙灘</text>
+        <text x="185" y="165" font-size="10" fill="#1b6ca8">淺海</text>
+        <text x="115" y="182" text-anchor="middle" font-size="10" fill="#6b7a86">海岸線平直、海底平坦</text>
+        <!-- 岩岸 -->
+        <rect x="240" y="20" width="210" height="170" fill="#f6fafc" stroke="#dbe6ee" rx="8"/>
+        <text x="345" y="40" text-anchor="middle" font-size="14" fill="#0f4c75" font-weight="700">岩岸</text>
+        <rect x="240" y="120" width="210" height="70" fill="#eaf4fb"/>
+        <path d="M240,120 L270,70 L300,120 L330,60 L360,120 L395,85 L420,120 L450,110 L450,120 Z" fill="#d9d2c4"/>
+        <path d="M240,120 L270,70 L300,120 L330,60 L360,120 L395,85 L420,120" fill="none" stroke="#7a6a52" stroke-width="2"/>
+        <text x="300" y="55" font-size="11" fill="#5a4a32">山地／丘陵</text>
+        <text x="405" y="160" font-size="10" fill="#1b6ca8">深海</text>
+        <text x="345" y="182" text-anchor="middle" font-size="10" fill="#6b7a86">海岸線曲折、海水較深</text>
+      </svg>
+      <figcaption>圖 1｜沙岸（堆積、平直、水淺）與岩岸（岩石、曲折、水深）比較</figcaption>
+    </figure>
+
+    <div class="note compare"><b>一句話比較：</b>沙岸是「<b>堆</b>」出來的（河海堆積、平直水淺），岩岸是「<b>硬碰硬</b>」（山海相鄰、曲折水深）。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 2 頁 / 共 4 頁</span></div>
+
+  <!-- 4-1 常見海岸地形 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div><h2>4-1　常見海岸地形與海岸利用</h2><div class="sub">沙洲潟湖、岬角灣澳，與臺灣的海岸利用</div></div>
+    </div>
+
+    <h3>一、沙洲與潟湖</h3>
+    <ul>
+      <li><b>沙洲</b>：水中的 <span class="blank" data-a="漂沙">漂沙</span> 堆積於淺水區，並露出水面的 <span class="blank" data-a="堤狀">堤狀</span> 地形。</li>
+      <li><b>潟湖</b>：<span class="blank" data-a="沙洲">沙洲</span> 與陸地之間的 <span class="blank" data-a="半封閉">半封閉</span> 海域，因沙洲的保護，風浪較 <span class="blank" data-a="小">小</span>，適合 <span class="blank" data-a="養殖">養殖</span>、<span class="blank" data-a="晒鹽">晒鹽</span>。</li>
+    </ul>
+
+    <figure>
+      <svg viewBox="0 0 380 180" width="380" role="img" aria-label="沙洲與潟湖示意圖">
+        <rect x="10" y="10" width="360" height="160" fill="#eaf4fb" stroke="#7fb4d6" rx="8"/>
+        <!-- 陸地 -->
+        <path d="M10,120 Q90,116 170,124 L170,170 L10,170 Z" fill="#e4ddcb"/>
+        <text x="70" y="150" font-size="12" fill="#5a4a32">陸地</text>
+        <!-- 潟湖 -->
+        <path d="M170,124 Q240,118 300,120 L300,150 Q240,158 170,150 Z" fill="#bfe0d2"/>
+        <text x="235" y="142" text-anchor="middle" font-size="12" fill="#1c6e4a" font-weight="700">潟湖</text>
+        <text x="235" y="156" text-anchor="middle" font-size="9" fill="#1c6e4a">風浪小・可養殖晒鹽</text>
+        <!-- 沙洲 -->
+        <path d="M300,110 Q320,100 345,108 Q360,116 345,124 Q320,130 300,124 Z" fill="#fbe9c8" stroke="#c98a3a"/>
+        <text x="326" y="98" text-anchor="middle" font-size="11" fill="#8a5a1a" font-weight="700">沙洲</text>
+        <!-- 外海 -->
+        <text x="345" y="150" text-anchor="middle" font-size="11" fill="#1b6ca8">外海（風浪大）</text>
+        <text x="190" y="30" font-size="11" fill="#0f4c75">漂沙堆積、露出水面 → 沙洲；沙洲擋住外海風浪 → 內側成潟湖</text>
+      </svg>
+      <figcaption>圖 2｜沙洲擋住外海風浪，內側半封閉海域即為潟湖</figcaption>
+    </figure>
+
+    <h3>二、岬角與灣澳</h3>
+    <p>當海岸山脈走向與海岸線接近 <span class="blank" data-a="垂直">垂直</span>、岩層 <span class="blank" data-a="軟硬相間">軟硬相間</span> 時，海浪長期侵蝕使 <b>軟岩</b> 凹入成 <span class="blank" data-a="灣澳">灣澳</span>、<b>硬岩</b> 凸出成 <span class="blank" data-a="岬角">岬角</span>，形成 <strong class="k">灣岬相間</strong> 的海岸。</p>
+    <div class="note"><b>好記法：</b>硬的擋得住浪 → 凸出成 <b>岬角</b>；軟的被浪吃掉 → 凹進成 <b>灣澳</b>。</div>
+
+    <h3>三、臺灣的海岸利用</h3>
+    <p>臺灣海岸依 <span class="blank" data-a="構成物質">構成物質</span> 與分布大致分為四類，各地依 <span class="blank" data-a="地形">地形</span>、<span class="blank" data-a="海水深度">海水深度</span> 有不同的土地利用（如漁業養殖、鹽業、港口、觀光遊憩等）。</p>
+    <table>
+      <thead><tr><th>海岸類型</th><th>特徵</th><th>常見利用</th></tr></thead>
+      <tbody>
+        <tr><td class="lead">沙岸</td><td>平直、水淺、多沙洲潟湖</td><td><span class="blank" data-a="養殖、晒鹽">養殖、晒鹽</span></td></tr>
+        <tr><td class="lead">岩岸</td><td>曲折、水深、灣澳</td><td><span class="blank" data-a="港口、觀光">港口、觀光</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="pagemark"><span>📄 第 3 頁 / 共 4 頁</span></div>
+
+  <!-- 4-2 臺灣的海域範圍 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div><h2>4-2　臺灣的海域範圍與離島</h2><div class="sub">領海、專屬經濟海域，與離島類型</div></div>
+    </div>
+
+    <p>依 <strong class="k">聯合國海洋法公約</strong>，沿海國家由 <span class="blank" data-a="領海基線">領海基線</span> 向外延伸，可劃出不同權利的海域。</p>
+
+    <h3>一、領海與專屬經濟海域</h3>
+    <ul>
+      <li><b>領海</b>：領海基線向外延伸 <span class="blank" data-a="12">12</span> 浬，屬於 <span class="blank" data-a="國土">國土</span> 的一部分。</li>
+      <li><b>專屬經濟海域</b>：領海基線向外延伸至 <span class="blank" data-a="200">200</span> 浬之間的海域，擁有 <span class="blank" data-a="漁">漁</span>、<span class="blank" data-a="礦">礦</span> 等資源的開發利用與管理權利。</li>
+    </ul>
+
+    <figure>
+      <svg viewBox="0 0 440 160" width="440" role="img" aria-label="領海12浬與專屬經濟海域200浬示意圖">
+        <rect x="10" y="20" width="420" height="120" fill="#eaf4fb" stroke="#7fb4d6" rx="8"/>
+        <!-- 陸地 -->
+        <rect x="10" y="20" width="70" height="120" fill="#e4ddcb"/>
+        <text x="45" y="85" text-anchor="middle" font-size="12" fill="#5a4a32">陸地</text>
+        <!-- 基線 -->
+        <line x1="80" y1="20" x2="80" y2="140" stroke="#0f4c75" stroke-width="2"/>
+        <text x="80" y="153" text-anchor="middle" font-size="9.5" fill="#0f4c75">領海基線</text>
+        <!-- 領海 12 -->
+        <rect x="80" y="20" width="80" height="120" fill="#bcd9ef"/>
+        <line x1="160" y1="20" x2="160" y2="140" stroke="#c98a3a" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="120" y="80" text-anchor="middle" font-size="12" fill="#0f4c75" font-weight="700">領海</text>
+        <text x="120" y="98" text-anchor="middle" font-size="10" fill="#0f4c75">12 浬・屬國土</text>
+        <!-- 經濟海域 200 -->
+        <rect x="160" y="20" width="270" height="120" fill="#d7ecf7"/>
+        <line x1="425" y1="20" x2="425" y2="140" stroke="#1c6e4a" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="290" y="80" text-anchor="middle" font-size="12" fill="#1c6e4a" font-weight="700">專屬經濟海域</text>
+        <text x="290" y="98" text-anchor="middle" font-size="10" fill="#1c6e4a">基線起算 200 浬・享漁礦開發權</text>
+        <text x="120" y="35" text-anchor="middle" font-size="9" fill="#8a5a1a">← 12 →</text>
+        <text x="290" y="35" text-anchor="middle" font-size="9" fill="#1c6e4a">←──── 200 浬（自基線起算）────→</text>
+      </svg>
+      <figcaption>圖 3｜由領海基線起算：12 浬內為領海，至 200 浬為專屬經濟海域</figcaption>
+    </figure>
+
+    <h3>二、臺灣的離島</h3>
+    <ul>
+      <li>本島之外、分布於附近海域的島嶼通稱 <span class="blank" data-a="離島">離島</span>。島嶼可享有和陸地一樣的 <span class="blank" data-a="領海與經濟海域">領海與經濟海域</span>，故離島多使我國附屬海域範圍 <span class="blank" data-a="擴大">擴大</span>。</li>
+      <li>依成因分為三類：<span class="blank" data-a="大陸島">大陸島</span>、<span class="blank" data-a="珊瑚礁島">珊瑚礁島</span>、<span class="blank" data-a="火山島">火山島</span>。</li>
+      <li>因臺灣位於 <span class="blank" data-a="板塊交界">板塊交界</span> 帶，離島以 <strong class="k">火山島</strong> 最多。</li>
+    </ul>
+    <div class="note compare"><b>觀念釐清：</b>多一個離島，就多一圈屬於它的領海與經濟海域，所以離島對擴大國家海域範圍很重要。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 4 頁 / 共 4 頁</span></div>
+
+  <!-- 4-2 資源利用與問題 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">4</div>
+      <div><h2>4-2　海域與離島的資源利用與問題</h2><div class="sub">生活、觀光，與衝突、生態危機</div></div>
+    </div>
+
+    <h3>一、資源利用</h3>
+    <ul>
+      <li><b>沿海生活</b>：<span class="blank" data-a="潟湖">潟湖</span> 區養殖、晒鹽，鄰近海域 <span class="blank" data-a="捕撈">捕撈</span>，是沿海居民世代的生活方式。</li>
+      <li><b>觀光資源</b>：離島特殊地景與島民文化成為 <span class="blank" data-a="觀光">觀光</span> 資源。例：澎湖群島的 <span class="blank" data-a="柱狀玄武岩">柱狀玄武岩</span>；蘭嶼 <span class="blank" data-a="雅美（達悟）">雅美（達悟）</span> 族的拼板舟與 <span class="blank" data-a="飛魚祭">飛魚祭</span>。</li>
+    </ul>
+
+    <h3>二、面臨的問題</h3>
+    <ul>
+      <li><b>主權與海域衝突</b>：各國重視島嶼 <span class="blank" data-a="主權">主權</span> 與經濟海域使用權，常有主權歸屬、漁民 <span class="blank" data-a="越界捕撈">越界捕撈</span> 等衝突。</li>
+      <li><b>海岸生態破壞</b>：沙灘被 <span class="blank" data-a="侵蝕">侵蝕</span> 消失，被 <span class="blank" data-a="消波塊">消波塊</span>／離岸堤取代。</li>
+      <li><b>漁業資源枯竭</b>：<span class="blank" data-a="過度">過度</span> 與不當捕撈破壞生態，威脅漁民生計。</li>
+    </ul>
+
+    <!-- 隨堂練習 -->
+    <div class="sec-head" style="margin-top:26px;">
+      <div class="sec-num" style="background:var(--ok)">✎</div>
+      <div><h2 style="color:var(--ok)">隨堂即時練習</h2><div class="sub">點選項目立即對答案、看解析</div></div>
+    </div>
+
+    <div class="quiz" data-correct="1">
+      <div class="q">Q1. 下列何者是「沙岸」的特徵？</div>
+      <button class="opt">(A) 海岸線曲折、海水較深</button>
+      <button class="opt">(B) 海岸線平直、海灘寬闊、海水較淺</button>
+      <button class="opt">(C) 主要由岩石構成、地形崎嶇</button>
+      <button class="opt">(D) 常見岬角與灣澳</button>
+      <div class="explain">✔ 沙岸由河海堆積形成，海岸線<b>平直</b>、海灘<b>寬闊</b>、海水<b>較淺</b>；(A)(C)(D) 都是岩岸特徵。</div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q2. 沙洲與陸地之間，因沙洲保護而風浪較小的半封閉海域稱為？</div>
+      <button class="opt">(A) 岬角</button>
+      <button class="opt">(B) 灣澳</button>
+      <button class="opt">(C) 潟湖</button>
+      <button class="opt">(D) 海溝</button>
+      <div class="explain">✔ 沙洲與陸地間的半封閉海域即 <b>潟湖</b>，風浪小，適合養殖、晒鹽。</div>
+    </div>
+
+    <div class="quiz" data-correct="0">
+      <div class="q">Q3. 依聯合國海洋法公約，由領海基線向外延伸幾浬為「領海」？</div>
+      <button class="opt">(A) 12 浬</button>
+      <button class="opt">(B) 24 浬</button>
+      <button class="opt">(C) 100 浬</button>
+      <button class="opt">(D) 200 浬</button>
+      <div class="explain">✔ 領海為基線向外 <b>12 浬</b>，屬國土一部分；至 <b>200 浬</b> 間為專屬經濟海域。</div>
+    </div>
+
+    <div class="quiz" data-correct="3">
+      <div class="q">Q4. 關於「專屬經濟海域」，下列敘述何者正確？</div>
+      <button class="opt">(A) 範圍為基線向外 12 浬</button>
+      <button class="opt">(B) 屬於國土的一部分</button>
+      <button class="opt">(C) 其他國家一律不得進入</button>
+      <button class="opt">(D) 沿海國享有漁、礦等資源的開發利用與管理權</button>
+      <div class="explain">✔ 專屬經濟海域為基線向外至 <b>200 浬</b>，沿海國擁有 <b>漁、礦等資源開發與管理權</b>；它不等於國土（領海才是）。</div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q5. 臺灣位於板塊交界帶，因此離島以哪一種類型最多？</div>
+      <button class="opt">(A) 大陸島</button>
+      <button class="opt">(B) 珊瑚礁島</button>
+      <button class="opt">(C) 火山島</button>
+      <button class="opt">(D) 沖積島</button>
+      <div class="explain">✔ 臺灣位於<b>板塊交界</b>，火山活動旺盛，離島以 <b>火山島</b> 最多（如澎湖玄武岩、蘭嶼、綠島）。</div>
+    </div>
+  </section>
+
+  <!-- 重點總整理 -->
+  <section class="card" style="background:linear-gradient(135deg,#0f4c75,#1b6ca8);color:#fff;border:none;">
+    <div class="sec-head">
+      <div class="sec-num" style="background:rgba(255,255,255,.2)">★</div>
+      <div><h2 style="color:#fff">一課一圖・重點總整理</h2><div class="sub" style="color:#cfe4f2">海岸類型 → 海域範圍 → 資源與問題</div></div>
+    </div>
+    <ul style="line-height:2">
+      <li><b>海岸</b>：海陸交界。沙岸（堆積、平直、水淺）｜岩岸（岩石、曲折、水深）</li>
+      <li><b>沙岸地形</b>：沙灘、沙洲、潟湖（沙洲保護、風浪小、可養殖晒鹽）</li>
+      <li><b>岩岸地形</b>：軟岩凹成灣澳、硬岩凸成岬角 → 灣岬相間</li>
+      <li><b>海域</b>：領海 12 浬（屬國土）｜專屬經濟海域 200 浬（漁礦開發權）</li>
+      <li><b>離島</b>：大陸島／珊瑚礁島／火山島；臺灣以火山島最多，可擴大海域</li>
+      <li><b>問題</b>：主權與越界衝突、海岸侵蝕（消波塊）、漁業過度捕撈</li>
+    </ul>
+  </section>
+
+  <div style="text-align:center;margin-top:24px;">
+    <button class="revealbtn" onclick="toggleAll(true)">🔍 全部顯示答案</button>
+    <button class="revealbtn" style="background:var(--sand)" onclick="toggleAll(false)">↩ 全部收合</button>
+  </div>
+
+  <footer>國一上地理・第 4 課 臺灣的海域｜互動講義　－　整合康軒(主)・翰林・南一</footer>
+</div>
+
+<script>
+  // fill-in blanks
+  document.querySelectorAll('.blank[data-a]').forEach(function(b){
+    b.textContent='';
+    b.addEventListener('click',function(){
+      if(b.classList.contains('show')){b.classList.remove('show');b.textContent='';}
+      else{b.classList.add('show');b.textContent=b.dataset.a;}
+    });
+  });
+  function toggleAll(show){
+    document.querySelectorAll('.blank[data-a]').forEach(function(b){
+      if(show){b.classList.add('show');b.textContent=b.dataset.a;}
+      else{b.classList.remove('show');b.textContent='';}
+    });
+  }
+  // quiz
+  document.querySelectorAll('.quiz').forEach(function(q){
+    var correct=+q.dataset.correct;
+    var opts=q.querySelectorAll('.opt');
+    var exp=q.querySelector('.explain');
+    opts.forEach(function(o,i){
+      o.addEventListener('click',function(){
+        opts.forEach(function(x){x.classList.remove('correct','wrong');});
+        opts[correct].classList.add('correct');
+        if(i!==correct)o.classList.add('wrong');
+        exp.classList.add('show');
+      });
+    });
+  });
+</script>
+</body>
+</html>

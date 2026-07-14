@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理　單元6　臺灣的水文　互動講義</title>
+<style>
+  :root{
+    --sea:#1b6ca8;      /* 海洋藍 主色 */
+    --sea-dark:#0f4c75; /* 深藍 */
+    --sea-light:#e8f2f9;/* 淺藍底 */
+    --sand:#c98a3a;     /* 大地色 輔色 */
+    --sand-light:#fbf3e6;
+    --ink:#2b2b2b;
+    --muted:#6b7a86;
+    --ok:#2e9e6b;
+    --line:#dbe6ee;
+    --card-shadow:0 4px 18px rgba(15,76,117,.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);line-height:1.85;background:#f4f8fb;font-size:17px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 80px;}
+  /* Hero */
+  header.hero{
+    background:linear-gradient(135deg,var(--sea-dark),var(--sea) 60%,#2f8fc4);
+    color:#fff;padding:46px 20px 40px;text-align:center;
+  }
+  header.hero .kicker{font-size:15px;letter-spacing:3px;opacity:.9;margin:0 0 8px;}
+  header.hero h1{margin:0;font-size:30px;letter-spacing:1px;}
+  header.hero .en{font-size:15px;opacity:.85;margin-top:6px;font-weight:400;}
+  header.hero .ver{
+    display:inline-block;margin-top:18px;background:rgba(255,255,255,.16);
+    padding:6px 16px;border-radius:999px;font-size:13.5px;
+  }
+  .tip{
+    max-width:900px;margin:18px auto 0;padding:12px 18px;background:#fff7e6;
+    border:1px solid #f0d9a8;border-radius:12px;color:#8a6417;font-size:14.5px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  /* Section cards */
+  section.card{
+    background:#fff;border-radius:18px;box-shadow:var(--card-shadow);
+    padding:28px 30px;margin:26px 0;border:1px solid var(--line);
+  }
+  .sec-head{display:flex;align-items:center;gap:14px;margin:0 0 18px;}
+  .sec-num{
+    flex:none;width:44px;height:44px;border-radius:12px;background:var(--sea);
+    color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;
+  }
+  .sec-head h2{margin:0;font-size:22px;color:var(--sea-dark);}
+  .sec-head .sub{font-size:13px;color:var(--muted);font-weight:400;margin-top:2px;}
+  h3{font-size:18px;color:var(--sea-dark);border-left:5px solid var(--sand);
+     padding-left:12px;margin:26px 0 12px;}
+  p{margin:10px 0;}
+  ul{margin:10px 0;padding-left:22px;}
+  li{margin:7px 0;}
+  strong.k{color:var(--sea);}
+  /* fill-in blank */
+  .blank{
+    display:inline-block;min-width:70px;text-align:center;background:var(--sand-light);
+    border-bottom:2px solid var(--sand);border-radius:6px 6px 0 0;padding:0 10px;
+    color:transparent;cursor:pointer;font-weight:700;user-select:none;
+    transition:.15s;position:relative;
+  }
+  .blank::before{content:"?";color:var(--sand);}
+  .blank.show{color:var(--sea-dark);background:#e5f3ec;border-color:var(--ok);}
+  .blank.show::before{content:"";}
+  .hint{font-size:13px;color:var(--muted);}
+  /* note box */
+  .note{
+    background:var(--sea-light);border-radius:12px;padding:14px 18px;margin:16px 0;
+    border-left:4px solid var(--sea);font-size:15.5px;
+  }
+  .note b{color:var(--sea-dark);}
+  .compare{background:var(--sand-light);border-left-color:var(--sand);}
+  .compare b{color:var(--sand);}
+  /* table */
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:center;}
+  th{background:var(--sea);color:#fff;font-weight:600;}
+  tbody tr:nth-child(even){background:#f6fafc;}
+  td.lead{background:var(--sea-light);font-weight:600;color:var(--sea-dark);}
+  /* svg figure */
+  figure{margin:18px 0;text-align:center;}
+  figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;}
+  figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;}
+  /* quiz */
+  .quiz{background:#fff;border:2px solid var(--sea-light);border-radius:14px;padding:18px 20px;margin:16px 0;}
+  .quiz .q{font-weight:600;margin-bottom:10px;}
+  .opt{
+    display:block;width:100%;text-align:left;background:#f7fafc;border:1.5px solid var(--line);
+    border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer;font-size:16px;
+    font-family:inherit;color:var(--ink);transition:.15s;
+  }
+  .opt:hover{border-color:var(--sea);}
+  .opt.correct{background:#e5f3ec;border-color:var(--ok);color:#1c6e4a;font-weight:600;}
+  .opt.wrong{background:#fdeaea;border-color:#d66;color:#a33;}
+  .explain{display:none;margin-top:10px;padding:12px 14px;background:var(--sea-light);
+    border-radius:10px;font-size:14.5px;color:var(--sea-dark);}
+  .explain.show{display:block;}
+  /* toggle answer button */
+  .revealbtn{
+    background:var(--sea);color:#fff;border:none;border-radius:999px;padding:8px 18px;
+    font-size:14px;cursor:pointer;font-family:inherit;margin:6px 0 2px;
+  }
+  .revealbtn:hover{background:var(--sea-dark);}
+  /* 頁碼分隔標記（與列印版頁碼一致） */
+  .pagemark{display:flex;align-items:center;gap:12px;margin:38px 0 6px;}
+  .pagemark::before,.pagemark::after{content:"";flex:1;height:2px;border-radius:2px;}
+  .pagemark::before{background:linear-gradient(90deg,transparent,var(--sea));}
+  .pagemark::after{background:linear-gradient(90deg,var(--sea),transparent);}
+  .pagemark span{background:var(--sea);color:#fff;padding:5px 18px;border-radius:999px;
+    font-size:14px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(27,108,168,.3);}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;}
+  .goal-list{list-style:none;padding:0;}
+  .goal-list li{padding-left:28px;position:relative;}
+  .goal-list li::before{content:"✔";position:absolute;left:0;color:var(--ok);font-weight:700;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <p class="kicker">國一上地理・基本概念與臺灣</p>
+  <h1>第 6 課　臺灣的水文</h1>
+  <div class="en">Hydrology of Taiwan</div>
+  <div class="ver">康軒為主 ・ 翰林／南一整合補充</div>
+</header>
+
+<div class="tip">
+  <span style="font-size:18px">💡</span>
+  <span>灰底的 <span class="blank show" style="cursor:default">?</span> 是填空。點一下 <b>?</b> 就會翻出答案，再點一下收合；先自己想，再對答案，效果最好！</span>
+</div>
+
+<div class="wrap">
+
+  <div class="pagemark"><span>📄 第 1 頁 / 共 4 頁</span></div>
+
+  <!-- 學習目標 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num" style="background:var(--sand)">◎</div>
+      <div><h2 style="color:var(--sand)">學習目標</h2><div class="sub">核心問題：降水那麼多，臺灣為什麼還會缺水？</div></div>
+    </div>
+    <ul class="goal-list">
+      <li>能說明 <strong class="k">水循環</strong> 的過程，理解水資源如何在地表與大氣間流動。</li>
+      <li>了解臺灣 <strong class="k">可用水資源量</strong> 偏低的原因與潛在缺水危機。</li>
+      <li>認識臺灣 <strong class="k">河川的特徵</strong>（東西分流、短小、輸砂量高、荒溪型）。</li>
+      <li>了解水資源的 <strong class="k">開發</strong>（河川、地下水）與 <strong class="k">保育</strong> 方式。</li>
+    </ul>
+  </section>
+
+  <!-- 6-1 水循環與可用水資源 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div><h2>水循環與臺灣的可用水資源</h2><div class="sub">6-1　臺灣的水資源夠用嗎？</div></div>
+    </div>
+
+    <h3>一、水循環 Water Cycle</h3>
+    <p>地球上的水藉由 <span class="blank" data-a="陽光熱能">陽光熱能</span> 產生 <span class="blank" data-a="蒸發">蒸發</span> 作用，轉換成 <span class="blank" data-a="水氣">水氣</span> 傳送到大氣層中，再經由 <span class="blank" data-a="凝結">凝結</span> 與 <span class="blank" data-a="降水">降水</span> 回到地表；部分成為 <span class="blank" data-a="地表逕流">地表逕流</span>，部分滲入地下成為 <span class="blank" data-a="地下水">地下水</span>，最終流入 <span class="blank" data-a="海洋">海洋</span>。這個過程稱為 <strong class="k">水循環</strong>。</p>
+
+    <figure>
+      <svg viewBox="0 0 420 250" width="420" role="img" aria-label="水循環示意圖">
+        <!-- 天空與海 -->
+        <rect x="0" y="0" width="420" height="250" fill="#eef7fc"/>
+        <rect x="0" y="185" width="420" height="65" fill="#cfe6f5"/>
+        <!-- 太陽 -->
+        <circle cx="60" cy="42" r="22" fill="#f6c94a" stroke="#c98a3a"/>
+        <text x="60" y="47" text-anchor="middle" font-size="11" fill="#8a5a1a" font-weight="700">陽光</text>
+        <!-- 雲 -->
+        <ellipse cx="235" cy="55" rx="46" ry="20" fill="#fff" stroke="#9cc4dd"/>
+        <ellipse cx="205" cy="60" rx="26" ry="15" fill="#fff" stroke="#9cc4dd"/>
+        <text x="235" y="59" text-anchor="middle" font-size="11" fill="#0f4c75">雲（凝結）</text>
+        <!-- 山 -->
+        <polygon points="300,185 360,95 420,185" fill="#bcd7bf" stroke="#8bb08f"/>
+        <!-- 蒸發箭頭 -->
+        <path d="M110 185 Q120 130 175 78" fill="none" stroke="#c98a3a" stroke-width="2" stroke-dasharray="5 4"/>
+        <polygon points="175,78 168,90 180,88" fill="#c98a3a"/>
+        <text x="118" y="150" font-size="11" fill="#c98a3a" font-weight="700">蒸發</text>
+        <!-- 降水箭頭 -->
+        <line x1="250" y1="80" x2="250" y2="150" stroke="#1b6ca8" stroke-width="2"/>
+        <line x1="270" y1="80" x2="270" y2="150" stroke="#1b6ca8" stroke-width="2"/>
+        <line x1="290" y1="80" x2="290" y2="150" stroke="#1b6ca8" stroke-width="2"/>
+        <text x="308" y="120" font-size="11" fill="#1b6ca8" font-weight="700">降水</text>
+        <!-- 地表逕流 -->
+        <path d="M340 150 Q300 175 130 190" fill="none" stroke="#1b6ca8" stroke-width="2.5"/>
+        <polygon points="130,190 142,185 141,196" fill="#1b6ca8"/>
+        <text x="230" y="178" font-size="10.5" fill="#0f4c75">地表逕流</text>
+        <!-- 地下水 -->
+        <text x="210" y="222" text-anchor="middle" font-size="10.5" fill="#0f4c75">部分滲入地下 → 地下水</text>
+        <text x="375" y="228" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">海洋</text>
+      </svg>
+      <figcaption>圖 1｜水循環：蒸發 → 凝結 → 降水 → 逕流／入滲 → 海洋</figcaption>
+    </figure>
+
+    <h3>二、臺灣的可用水資源量</h3>
+    <p>臺灣年降水量在世界各國 <span class="blank" data-a="名列前茅">名列前茅</span>，但扣除實際 <span class="blank" data-a="蒸發散">蒸發散</span> 量後，再分配給眾多而稠密的人口，平均每人可用水資源量卻 <span class="blank" data-a="低於">低於</span> 全球平均值。</p>
+    <div class="note"><b>潛在危機：</b>若不是 <span class="blank" data-a="颱風">颱風</span> 帶來大量降水，臺灣可能每年都會面臨 <span class="blank" data-a="缺水">缺水</span> 威脅，說明臺灣的自然環境存在水資源短缺的潛在危機。</div>
+    <div class="note compare"><b>觀念釐清：</b>「降水量多」不等於「可用水多」。降水要先扣掉蒸發散、再除以稠密人口，還要看能不能被留下來使用——這正是下一頁「河川特徵」要談的重點。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 2 頁 / 共 4 頁</span></div>
+
+  <!-- 6-1 河川特徵 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div><h2>臺灣河川的特徵</h2><div class="sub">6-1　為什麼水留不住？</div></div>
+    </div>
+    <p>臺灣河川普遍 <span class="blank" data-a="短小">短小</span>、汛期河水 <span class="blank" data-a="流速快">流速快</span>，大量降水迅速流入海洋，能被留下來使用的水資源就更加短少。臺灣河川主要有三大特徵：</p>
+
+    <h3>一、主要河川東西分流</h3>
+    <p>南北縱走的 <span class="blank" data-a="中央山脈">中央山脈</span> 是臺灣主要 <span class="blank" data-a="分水嶺">分水嶺</span>，使河川 <span class="blank" data-a="東西分流">東西分流</span>、普遍短小；再加上地形多山、坡度較 <span class="blank" data-a="陡">陡</span>，河水快速入海，能留用的水資源並不豐沛。</p>
+
+    <figure>
+      <svg viewBox="0 0 300 240" width="300" role="img" aria-label="河川東西分流示意圖">
+        <!-- 臺灣輪廓簡化 -->
+        <path d="M150 20 C120 40 105 80 100 130 C97 170 110 205 140 224 C170 210 200 175 198 130 C196 85 182 45 150 20 Z"
+              fill="#eef7ec" stroke="#8bb08f" stroke-width="1.5"/>
+        <!-- 中央山脈（分水嶺） -->
+        <line x1="150" y1="26" x2="146" y2="218" stroke="#c98a3a" stroke-width="4" stroke-dasharray="6 4"/>
+        <text x="150" y="16" text-anchor="middle" font-size="11" fill="#c98a3a" font-weight="700">中央山脈（分水嶺）</text>
+        <!-- 西側河川 -->
+        <path d="M148 70 Q120 78 100 92" fill="none" stroke="#1b6ca8" stroke-width="2"/>
+        <path d="M147 120 Q118 128 96 140" fill="none" stroke="#1b6ca8" stroke-width="2"/>
+        <path d="M148 170 Q120 178 104 190" fill="none" stroke="#1b6ca8" stroke-width="2"/>
+        <text x="92" y="70" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">西部</text>
+        <text x="70" y="115" text-anchor="middle" font-size="9.5" fill="#0f4c75">向西流</text>
+        <!-- 東側河川 -->
+        <path d="M150 90 Q172 96 188 106" fill="none" stroke="#1b6ca8" stroke-width="2"/>
+        <path d="M149 145 Q172 150 190 160" fill="none" stroke="#1b6ca8" stroke-width="2"/>
+        <text x="196" y="72" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">東部</text>
+        <text x="214" y="130" text-anchor="middle" font-size="9.5" fill="#0f4c75">向東流</text>
+      </svg>
+      <figcaption>圖 2｜中央山脈為分水嶺，河川分別向東、向西入海（短小）</figcaption>
+    </figure>
+
+    <h3>二、河川輸砂量高</h3>
+    <p>臺灣因 <span class="blank" data-a="岩層脆弱">岩層脆弱</span>，大量砂石常被暴雨沖刷入河川，因此河川 <span class="blank" data-a="輸砂量">輸砂量</span> 普遍偏高，提高乾淨水資源的取用成本。<span class="blank" data-a="濁水溪">濁水溪</span> 即因水色混濁而得名。</p>
+
+    <h3>三、乾、雨季流量變化大</h3>
+    <p>臺灣 <span class="blank" data-a="北部">北部</span> 四季有雨、河川流量較 <span class="blank" data-a="穩定">穩定</span>；<span class="blank" data-a="中南部">中南部</span> 受降雨季節分布不均影響，乾、雨季河川流量差異很大，此類型河川稱為 <strong class="k">荒溪型河川</strong>。</p>
+    <div class="note"><b>荒溪型河川：</b>雨季水量暴漲、乾季幾乎乾涸見底，流量變化極大——正是中南部河川的寫照。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 3 頁 / 共 4 頁</span></div>
+
+  <!-- 6-2 水資源開發 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div><h2>水資源的開發與問題</h2><div class="sub">6-2　如何充分利用水資源？</div></div>
+    </div>
+    <p>臺灣水資源的開發，可分為 <strong class="k">河川</strong> 與 <strong class="k">地下水</strong> 兩個面向。</p>
+
+    <h3>一、河川的開發</h3>
+    <ul>
+      <li>在河川 <span class="blank" data-a="上游">上游</span> 興建 <span class="blank" data-a="水庫">水庫</span>，中、下游設立 <span class="blank" data-a="攔河堰">攔河堰</span>，是最常見的河川水資源開發方式。</li>
+      <li>但受到河川 <span class="blank" data-a="輸砂量高">輸砂量高</span> 與 <span class="blank" data-a="人為汙染">人為汙染</span> 等因素影響，使河川水資源開發更加困難。</li>
+    </ul>
+
+    <h3>二、地下水的開發</h3>
+    <ul>
+      <li>地下水具有 <span class="blank" data-a="普遍性">普遍性</span> 及水量 <span class="blank" data-a="穩定">穩定</span> 的特性，經常用於 <span class="blank" data-a="農業灌溉">農業灌溉</span> 與 <span class="blank" data-a="養殖漁業">養殖漁業</span>。</li>
+      <li>南部乾季常長達 <span class="blank" data-a="半年">半年</span> 以上，常造成大規模抽取地下水的情形。</li>
+    </ul>
+
+    <table>
+      <thead><tr><th>開發面向</th><th>方式</th><th>問題／限制</th></tr></thead>
+      <tbody>
+        <tr><td class="lead">河川</td><td>上游水庫、中下游攔河堰</td><td>輸砂量高、人為汙染</td></tr>
+        <tr><td class="lead">地下水</td><td>抽取地下水灌溉、養殖</td><td><span class="blank" data-a="抽取過量→下陷">抽取過量→下陷</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="note"><b>地下水超抽的後果：</b>臺灣早年因地下水不易管理，部分地區抽取過量，產生 <span class="blank" data-a="地下水位下降">地下水位下降</span>、<span class="blank" data-a="地層下陷">地層下陷</span>、<span class="blank" data-a="海水入侵">海水入侵</span> 等問題。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 4 頁 / 共 4 頁</span></div>
+
+  <!-- 6-2 水資源保育 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">4</div>
+      <div><h2>水資源的保育</h2><div class="sub">6-2　讓可用水資源做最大利用</div></div>
+    </div>
+
+    <h3>一、河川的保育</h3>
+    <ul>
+      <li>水庫的 <span class="blank" data-a="集水區">集水區</span> 應做好 <span class="blank" data-a="水土保持">水土保持</span>，減少水庫 <span class="blank" data-a="淤沙">淤沙</span>。</li>
+      <li>確實執行河川 <span class="blank" data-a="汙染管制">汙染管制</span>，以維護河川水質。</li>
+    </ul>
+
+    <h3>二、地下水的保育</h3>
+    <ul>
+      <li>控制 <span class="blank" data-a="抽取量">抽取量</span>，不可超出 <span class="blank" data-a="補注量">補注量</span>。</li>
+      <li>盡量增加 <span class="blank" data-a="入滲">入滲</span>，提高地下水源的 <span class="blank" data-a="涵養">涵養</span>。</li>
+      <li>做好汙染管制，以促進地下水資源的 <span class="blank" data-a="永續利用">永續利用</span>。</li>
+    </ul>
+
+    <div class="note compare"><b>一句話記重點：</b>河川保育＝「上游做水土保持＋管制汙染」；地下水保育＝「抽取不超過補注＋增加入滲」。</div>
+  </section>
+
+  <!-- 隨堂練習 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num" style="background:var(--ok)">✎</div>
+      <div><h2 style="color:var(--ok)">隨堂即時練習</h2><div class="sub">點選項目立即對答案、看解析</div></div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q1. 關於「水循環」的過程，下列順序何者正確？</div>
+      <button class="opt">(A) 降水 → 蒸發 → 凝結 → 逕流</button>
+      <button class="opt">(B) 凝結 → 降水 → 蒸發 → 地下水</button>
+      <button class="opt">(C) 蒸發 → 凝結 → 降水 → 逕流／入滲</button>
+      <button class="opt">(D) 逕流 → 降水 → 蒸發 → 凝結</button>
+      <div class="explain">✔ 水藉陽光熱能<b>蒸發</b>成水氣，在大氣中<b>凝結</b>，再<b>降水</b>回地表，形成<b>逕流</b>或<b>入滲</b>成地下水，最終入海。</div>
+    </div>
+
+    <div class="quiz" data-correct="1">
+      <div class="q">Q2. 臺灣年降水量名列前茅，為何平均每人可用水資源量卻低於全球平均？</div>
+      <button class="opt">(A) 因為臺灣完全不下雨</button>
+      <button class="opt">(B) 扣除蒸發散後又分配給稠密人口，加上河川短小水難留住</button>
+      <button class="opt">(C) 因為臺灣沒有任何河川</button>
+      <button class="opt">(D) 因為降水全部變成地下水</button>
+      <div class="explain">✔ 降水量多 ≠ 可用水多：要扣掉<b>蒸發散</b>、除以<b>稠密人口</b>，加上河川<b>短小、流速快</b>，水迅速入海留不住。</div>
+    </div>
+
+    <div class="quiz" data-correct="3">
+      <div class="q">Q3. 「乾、雨季流量差異很大」的荒溪型河川，主要分布在臺灣哪一區？</div>
+      <button class="opt">(A) 北部（四季有雨）</button>
+      <button class="opt">(B) 東部離島</button>
+      <button class="opt">(C) 高山地區</button>
+      <button class="opt">(D) 中南部（降雨季節分布不均）</button>
+      <div class="explain">✔ 北部四季有雨、流量穩定；<b>中南部</b>降雨季節分布不均，乾雨季流量差異大，稱<b>荒溪型河川</b>。</div>
+    </div>
+
+    <div class="quiz" data-correct="0">
+      <div class="q">Q4. 下列何者是「地下水抽取過量」最可能造成的問題？</div>
+      <button class="opt">(A) 地層下陷、海水入侵</button>
+      <button class="opt">(B) 河川輸砂量降低</button>
+      <button class="opt">(C) 年降水量增加</button>
+      <button class="opt">(D) 中央山脈變高</button>
+      <div class="explain">✔ 早年地下水不易管理，部分地區抽取過量，造成<b>地下水位下降、地層下陷、海水入侵</b>。</div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q5. 下列何者屬於「地下水」的保育做法？</div>
+      <button class="opt">(A) 在河川上游多蓋水庫</button>
+      <button class="opt">(B) 大量抽取地下水養殖</button>
+      <button class="opt">(C) 控制抽取量不超過補注量、增加入滲</button>
+      <button class="opt">(D) 加速砂石沖入河川</button>
+      <div class="explain">✔ 地下水保育：<b>抽取量不可超出補注量</b>、盡量<b>增加入滲</b>提高涵養、做好汙染管制以永續利用。</div>
+    </div>
+  </section>
+
+  <!-- 重點總整理 -->
+  <section class="card" style="background:linear-gradient(135deg,#0f4c75,#1b6ca8);color:#fff;border:none;">
+    <div class="sec-head">
+      <div class="sec-num" style="background:rgba(255,255,255,.2)">★</div>
+      <div><h2 style="color:#fff">一課一圖・重點總整理</h2><div class="sub" style="color:#cfe4f2">水循環 → 缺水危機 → 開發與保育</div></div>
+    </div>
+    <ul style="line-height:2">
+      <li><b>水循環</b>：蒸發 → 凝結 → 降水 → 逕流／入滲 → 海洋</li>
+      <li><b>可用水偏低</b>：降水多但扣蒸發散、人口稠密、河川短小水難留</li>
+      <li><b>河川特徵</b>：東西分流（中央山脈分水嶺）｜輸砂量高（濁水溪）｜荒溪型（中南部）</li>
+      <li><b>開發</b>：河川（上游水庫、中下游攔河堰）｜地下水（灌溉、養殖）</li>
+      <li><b>地下水問題</b>：超抽 → 水位下降、地層下陷、海水入侵</li>
+      <li><b>保育</b>：河川（水土保持＋汙染管制）｜地下水（抽取≤補注＋增加入滲）</li>
+    </ul>
+  </section>
+
+  <div style="text-align:center;margin-top:24px;">
+    <button class="revealbtn" onclick="toggleAll(true)">🔍 全部顯示答案</button>
+    <button class="revealbtn" style="background:var(--sand)" onclick="toggleAll(false)">↩ 全部收合</button>
+  </div>
+
+  <footer>國一上地理・第 6 課 臺灣的水文｜互動講義　－　整合康軒(主)・翰林・南一</footer>
+</div>
+
+<script>
+  // fill-in blanks
+  document.querySelectorAll('.blank[data-a]').forEach(function(b){
+    b.textContent='';
+    b.addEventListener('click',function(){
+      if(b.classList.contains('show')){b.classList.remove('show');b.textContent='';}
+      else{b.classList.add('show');b.textContent=b.dataset.a;}
+    });
+  });
+  function toggleAll(show){
+    document.querySelectorAll('.blank[data-a]').forEach(function(b){
+      if(show){b.classList.add('show');b.textContent=b.dataset.a;}
+      else{b.classList.remove('show');b.textContent='';}
+    });
+  }
+  // quiz
+  document.querySelectorAll('.quiz').forEach(function(q){
+    var correct=+q.dataset.correct;
+    var opts=q.querySelectorAll('.opt');
+    var exp=q.querySelector('.explain');
+    opts.forEach(function(o,i){
+      o.addEventListener('click',function(){
+        opts.forEach(function(x){x.classList.remove('correct','wrong');});
+        opts[correct].classList.add('correct');
+        if(i!==correct)o.classList.add('wrong');
+        exp.classList.add('show');
+      });
+    });
+  });
+</script>
+</body>
+</html>

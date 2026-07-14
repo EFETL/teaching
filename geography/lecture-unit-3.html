@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理　單元3　臺灣的地形　互動講義</title>
+<style>
+  :root{
+    --sea:#1b6ca8;      /* 海洋藍 主色 */
+    --sea-dark:#0f4c75; /* 深藍 */
+    --sea-light:#e8f2f9;/* 淺藍底 */
+    --sand:#c98a3a;     /* 大地色 輔色 */
+    --sand-light:#fbf3e6;
+    --ink:#2b2b2b;
+    --muted:#6b7a86;
+    --ok:#2e9e6b;
+    --line:#dbe6ee;
+    --card-shadow:0 4px 18px rgba(15,76,117,.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);line-height:1.85;background:#f4f8fb;font-size:17px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 80px;}
+  /* Hero */
+  header.hero{
+    background:linear-gradient(135deg,var(--sea-dark),var(--sea) 60%,#2f8fc4);
+    color:#fff;padding:46px 20px 40px;text-align:center;
+  }
+  header.hero .kicker{font-size:15px;letter-spacing:3px;opacity:.9;margin:0 0 8px;}
+  header.hero h1{margin:0;font-size:30px;letter-spacing:1px;}
+  header.hero .en{font-size:15px;opacity:.85;margin-top:6px;font-weight:400;}
+  header.hero .ver{
+    display:inline-block;margin-top:18px;background:rgba(255,255,255,.16);
+    padding:6px 16px;border-radius:999px;font-size:13.5px;
+  }
+  .tip{
+    max-width:900px;margin:18px auto 0;padding:12px 18px;background:#fff7e6;
+    border:1px solid #f0d9a8;border-radius:12px;color:#8a6417;font-size:14.5px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  /* Section cards */
+  section.card{
+    background:#fff;border-radius:18px;box-shadow:var(--card-shadow);
+    padding:28px 30px;margin:26px 0;border:1px solid var(--line);
+  }
+  .sec-head{display:flex;align-items:center;gap:14px;margin:0 0 18px;}
+  .sec-num{
+    flex:none;width:44px;height:44px;border-radius:12px;background:var(--sea);
+    color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;
+  }
+  .sec-head h2{margin:0;font-size:22px;color:var(--sea-dark);}
+  .sec-head .sub{font-size:13px;color:var(--muted);font-weight:400;margin-top:2px;}
+  h3{font-size:18px;color:var(--sea-dark);border-left:5px solid var(--sand);
+     padding-left:12px;margin:26px 0 12px;}
+  p{margin:10px 0;}
+  ul{margin:10px 0;padding-left:22px;}
+  li{margin:7px 0;}
+  strong.k{color:var(--sea);}
+  /* fill-in blank */
+  .blank{
+    display:inline-block;min-width:70px;text-align:center;background:var(--sand-light);
+    border-bottom:2px solid var(--sand);border-radius:6px 6px 0 0;padding:0 10px;
+    color:transparent;cursor:pointer;font-weight:700;user-select:none;
+    transition:.15s;position:relative;
+  }
+  .blank::before{content:"?";color:var(--sand);}
+  .blank.show{color:var(--sea-dark);background:#e5f3ec;border-color:var(--ok);}
+  .blank.show::before{content:"";}
+  .hint{font-size:13px;color:var(--muted);}
+  /* note box */
+  .note{
+    background:var(--sea-light);border-radius:12px;padding:14px 18px;margin:16px 0;
+    border-left:4px solid var(--sea);font-size:15.5px;
+  }
+  .note b{color:var(--sea-dark);}
+  .compare{background:var(--sand-light);border-left-color:var(--sand);}
+  .compare b{color:var(--sand);}
+  /* table */
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:center;}
+  th{background:var(--sea);color:#fff;font-weight:600;}
+  tbody tr:nth-child(even){background:#f6fafc;}
+  td.lead{background:var(--sea-light);font-weight:600;color:var(--sea-dark);}
+  /* svg figure */
+  figure{margin:18px 0;text-align:center;}
+  figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;}
+  figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;}
+  /* quiz */
+  .quiz{background:#fff;border:2px solid var(--sea-light);border-radius:14px;padding:18px 20px;margin:16px 0;}
+  .quiz .q{font-weight:600;margin-bottom:10px;}
+  .opt{
+    display:block;width:100%;text-align:left;background:#f7fafc;border:1.5px solid var(--line);
+    border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer;font-size:16px;
+    font-family:inherit;color:var(--ink);transition:.15s;
+  }
+  .opt:hover{border-color:var(--sea);}
+  .opt.correct{background:#e5f3ec;border-color:var(--ok);color:#1c6e4a;font-weight:600;}
+  .opt.wrong{background:#fdeaea;border-color:#d66;color:#a33;}
+  .explain{display:none;margin-top:10px;padding:12px 14px;background:var(--sea-light);
+    border-radius:10px;font-size:14.5px;color:var(--sea-dark);}
+  .explain.show{display:block;}
+  /* toggle answer button */
+  .revealbtn{
+    background:var(--sea);color:#fff;border:none;border-radius:999px;padding:8px 18px;
+    font-size:14px;cursor:pointer;font-family:inherit;margin:6px 0 2px;
+  }
+  .revealbtn:hover{background:var(--sea-dark);}
+  /* 頁碼分隔標記（與列印版頁碼一致） */
+  .pagemark{display:flex;align-items:center;gap:12px;margin:38px 0 6px;}
+  .pagemark::before,.pagemark::after{content:"";flex:1;height:2px;border-radius:2px;}
+  .pagemark::before{background:linear-gradient(90deg,transparent,var(--sea));}
+  .pagemark::after{background:linear-gradient(90deg,var(--sea),transparent);}
+  .pagemark span{background:var(--sea);color:#fff;padding:5px 18px;border-radius:999px;
+    font-size:14px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(27,108,168,.3);}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;}
+  .goal-list{list-style:none;padding:0;}
+  .goal-list li{padding-left:28px;position:relative;}
+  .goal-list li::before{content:"✔";position:absolute;left:0;color:var(--ok);font-weight:700;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <p class="kicker">國一上地理・認識我們的島嶼</p>
+  <h1>第 3 課　臺灣的地形</h1>
+  <div class="en">Landforms of Taiwan</div>
+  <div class="ver">康軒為主 ・ 翰林／南一整合補充</div>
+</header>
+
+<div class="tip">
+  <span style="font-size:18px">💡</span>
+  <span>灰底的 <span class="blank show" style="cursor:default">?</span> 是填空。點一下 <b>?</b> 就會翻出答案，再點一下收合；先自己想，再對答案，效果最好！</span>
+</div>
+
+<div class="wrap">
+
+  <div class="pagemark"><span>📄 第 1 頁 / 共 4 頁</span></div>
+
+  <!-- 學習目標 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num" style="background:var(--sand)">◎</div>
+      <div><h2 style="color:var(--sand)">學習目標</h2><div class="sub">核心問題：臺灣為什麼是一座「多山」的島嶼？</div></div>
+    </div>
+    <ul class="goal-list">
+      <li>了解 <strong class="k">板塊運動</strong> 與 <strong class="k">內、外營力</strong> 如何形塑臺灣的地形。</li>
+      <li>認識臺灣的 <strong class="k">五大地形</strong> 及其 <strong class="k">東西分布</strong> 差異。</li>
+      <li>學會判讀 <strong class="k">等高線地形圖</strong>、分層設色圖與地形剖面圖。</li>
+      <li>思考如何 <strong class="k">適度利用土地資源</strong>，達成永續發展。</li>
+    </ul>
+  </section>
+
+  <!-- 一、臺灣地形的成因與特徵 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div><h2>臺灣地形的成因與特徵</h2><div class="sub">3-1　板塊推擠造就的年輕島嶼</div></div>
+    </div>
+
+    <h3>一、成因：板塊推擠 + 內外營力</h3>
+    <p>臺灣島位於 <span class="blank" data-a="歐亞板塊">歐亞板塊</span> 與 <span class="blank" data-a="菲律賓海板塊">菲律賓海板塊</span> 的接觸帶上。由於板塊的 <span class="blank" data-a="推擠">推擠</span>，使原本在 <span class="blank" data-a="海底">海底</span> 的沉積物隆起，形成數列大致呈 <span class="blank" data-a="南北">南北</span> 走向的 <strong class="k">褶曲山脈</strong>。</p>
+    <ul>
+      <li><b>內營力</b>：來自地球內部，如 <span class="blank" data-a="火山活動">火山活動</span> 與 <span class="blank" data-a="地震">地震</span>，使地表隆起、抬升。</li>
+      <li><b>外營力</b>：來自地表外部，如 <span class="blank" data-a="風力">風力</span> 與 <span class="blank" data-a="流水">流水</span>，透過 <span class="blank" data-a="侵蝕">侵蝕</span>、<span class="blank" data-a="搬運">搬運</span>、<span class="blank" data-a="堆積">堆積</span> 等作用，將地表削低、填平。</li>
+    </ul>
+    <div class="note"><b>一句話理解：</b>內營力像「把地推高」，外營力像「把地磨平」，兩股力量共同 <b>形塑臺灣地表的高低起伏</b>。</div>
+
+    <figure>
+      <svg viewBox="0 0 420 200" width="420" role="img" aria-label="板塊推擠形成褶曲山脈示意">
+        <rect x="0" y="0" width="420" height="200" fill="#f6fafc"/>
+        <!-- 海 -->
+        <rect x="0" y="120" width="420" height="80" fill="#dbeef8"/>
+        <text x="30" y="160" font-size="12" fill="#3a7ca5">海洋</text>
+        <!-- 左板塊 -->
+        <path d="M0,150 L150,150 L150,120 L0,120 Z" fill="#e6d3b3" stroke="#c98a3a"/>
+        <text x="45" y="140" font-size="12" fill="#8a5a1a">歐亞板塊</text>
+        <!-- 右板塊 -->
+        <path d="M270,150 L420,150 L420,120 L270,120 Z" fill="#cfe0d6" stroke="#4a9e7a"/>
+        <text x="300" y="140" font-size="12" fill="#2c6b4f">菲律賓海板塊</text>
+        <!-- 隆起褶曲山脈 -->
+        <path d="M150,120 Q185,55 210,80 Q235,45 270,120 Z" fill="#c9b184" stroke="#9c7a3c" stroke-width="1.5"/>
+        <text x="176" y="70" font-size="12" fill="#6b4d1a" font-weight="700">褶曲山脈</text>
+        <!-- 推擠箭頭 -->
+        <line x1="70" y1="185" x2="140" y2="185" stroke="#c0392b" stroke-width="2"/>
+        <polygon points="140,185 132,181 132,189" fill="#c0392b"/>
+        <line x1="350" y1="185" x2="280" y2="185" stroke="#c0392b" stroke-width="2"/>
+        <polygon points="280,185 288,181 288,189" fill="#c0392b"/>
+        <text x="180" y="198" font-size="11" fill="#c0392b">← 板塊互相推擠 →</text>
+      </svg>
+      <figcaption>圖 1｜板塊推擠使海底沉積物隆起，形成南北走向的褶曲山脈</figcaption>
+    </figure>
+
+    <h3>二、臺灣「年輕地形」的四大特徵</h3>
+    <p>受板塊推擠影響，臺灣地形具有 <strong class="k">年輕地形</strong> 的特徵：</p>
+    <ul>
+      <li>山地 <span class="blank" data-a="廣大">廣大</span></li>
+      <li>地勢 <span class="blank" data-a="高聳">高聳</span></li>
+      <li>坡面 <span class="blank" data-a="陡峭">陡峭</span></li>
+      <li>地質 <span class="blank" data-a="破碎">破碎</span></li>
+    </ul>
+    <div class="note compare"><b>三版比較：</b>康軒、翰林、南一都強調臺灣位於 <b>板塊接觸帶</b>，因板塊推擠而成為「年輕、多山、地震多」的島嶼——講的是同一個成因。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 2 頁 / 共 4 頁</span></div>
+
+  <!-- 二、五大地形 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div><h2>臺灣的五大地形</h2><div class="sub">3-1　依地勢高低起伏來分類</div></div>
+    </div>
+    <p>依地勢的高低與起伏差異，臺灣的地形可分為 <strong class="k">山地、丘陵、盆地、台地、平原</strong> 五大類。</p>
+
+    <table>
+      <thead><tr><th>地形</th><th>海拔／特徵</th><th>代表與利用</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="lead">山地</td>
+          <td>海拔超過 <span class="blank" data-a="1,000">1,000</span> 公尺的崎嶇起伏地形</td>
+          <td>五大山脈以 <span class="blank" data-a="中央山脈">中央山脈</span> 範圍最大；<span class="blank" data-a="玉山山脈">玉山山脈</span> 主峰為臺灣最高峰</td>
+        </tr>
+        <tr>
+          <td class="lead">丘陵</td>
+          <td>海拔低於 1,000 公尺的起伏地形，分布在 <span class="blank" data-a="山地外緣">山地外緣</span></td>
+          <td>常闢為農田，種 <span class="blank" data-a="茶樹、果樹、水稻">茶樹、果樹、水稻</span></td>
+        </tr>
+        <tr>
+          <td class="lead">盆地</td>
+          <td>四周被 <span class="blank" data-a="丘陵、山地">丘陵、山地</span> 圍繞、底部平坦</td>
+          <td>適合居住，如 <span class="blank" data-a="臺北盆地">臺北盆地</span>（全臺人口密度最高）</td>
+        </tr>
+        <tr>
+          <td class="lead">台地</td>
+          <td>地勢 <span class="blank" data-a="高而平坦">高而平坦</span>、海拔低於 1,000 公尺</td>
+          <td>分布於盆地／平原／丘陵接觸帶，多發展 <span class="blank" data-a="農業、工業">農業、工業</span></td>
+        </tr>
+        <tr>
+          <td class="lead">平原</td>
+          <td>海拔低、地勢 <span class="blank" data-a="平坦">平坦</span></td>
+          <td>主要農業生產帶，以 <span class="blank" data-a="嘉南平原">嘉南平原</span> 面積最廣</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <figure>
+      <svg viewBox="0 0 440 210" width="440" role="img" aria-label="五大地形剖面示意圖">
+        <rect x="0" y="0" width="440" height="210" fill="#f6fafc"/>
+        <!-- 基準海平面 -->
+        <line x1="0" y1="175" x2="440" y2="175" stroke="#7fb4d6" stroke-dasharray="4 3"/>
+        <text x="4" y="188" font-size="10" fill="#3a7ca5">海平面</text>
+        <!-- 由東(左)到西(右)剖面：山地→丘陵→盆地→台地→平原 -->
+        <path d="M0,175 L20,175
+                 L55,60 L90,90 L120,50 L150,120
+                 L200,130 L215,150 L245,150 L260,130
+                 L285,110 L320,110
+                 L360,140 L395,140
+                 L440,168 L440,175 Z"
+              fill="#d9c9a3" stroke="#9c7a3c" stroke-width="1.5"/>
+        <!-- 盆地凹陷底 -->
+        <path d="M215,150 L245,150 L260,130 L200,130 Z" fill="#cfe0d6" stroke="#4a9e7a"/>
+        <!-- 平原 -->
+        <path d="M360,140 L395,140 L440,168 L440,175 L360,175 Z" fill="#e7f0d9" stroke="#8aa860"/>
+        <!-- labels -->
+        <text x="95" y="45" font-size="12" fill="#6b4d1a" font-weight="700">山地</text>
+        <text x="150" y="112" font-size="11" fill="#8a5a1a">丘陵</text>
+        <text x="212" y="168" font-size="11" fill="#2c6b4f">盆地</text>
+        <text x="292" y="103" font-size="11" fill="#8a5a1a">台地</text>
+        <text x="378" y="134" font-size="11" fill="#5a7a2a">平原</text>
+        <text x="20" y="205" font-size="11" fill="#1b6ca8">← 東部（多山地）　　　　　　　西部（平原、丘陵、台地）→</text>
+      </svg>
+      <figcaption>圖 2｜五大地形剖面示意：由東向西，地勢由高山逐漸降為平原</figcaption>
+    </figure>
+
+    <h3>分布特徵：明顯的東西差異</h3>
+    <ul>
+      <li>東部：多 <span class="blank" data-a="山地">山地</span>。</li>
+      <li>西部：<span class="blank" data-a="平原">平原</span>、丘陵、台地 較多。</li>
+      <li>盆地：分布於 <span class="blank" data-a="山地、丘陵與台地之間">山地、丘陵與台地之間</span>。</li>
+    </ul>
+    <div class="note"><b>記憶要點：</b>臺灣西部從 <b>臺中以南</b> 連綿成片的平原，是主要農業生產帶；<b>嘉南平原</b> 面積最廣。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 3 頁 / 共 4 頁</span></div>
+
+  <!-- 三、如何表現一地的地形 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div><h2>如何表現一地的地形</h2><div class="sub">3-2　把立體的山谷畫到平面上</div></div>
+    </div>
+    <p>地表的高低起伏可用多種方式呈現：<span class="blank" data-a="等高線地形圖">等高線地形圖</span>、<span class="blank" data-a="分層設色圖">分層設色圖</span>、<span class="blank" data-a="地形剖面圖">地形剖面圖</span>、立體地形圖，以及衛星影像、航空照片與電子地圖。</p>
+
+    <h3>一、等高線地形圖</h3>
+    <p>把地表 <span class="blank" data-a="海拔高度相同">海拔高度相同</span> 的各點連接成的 <span class="blank" data-a="閉合曲線">閉合曲線</span>，稱為 <strong class="k">等高線</strong>。用等高線表示地表高低起伏的地圖，即等高線地形圖，可掌握地表形態、海拔高度、相對高度與 <span class="blank" data-a="坡度">坡度</span>。</p>
+    <ul>
+      <li>等高線分布 <b>愈密集</b> → 坡度 <span class="blank" data-a="愈陡（陡峭）">愈陡（陡峭）</span>。</li>
+      <li>等高線分布 <b>愈稀疏</b> → 坡度 <span class="blank" data-a="愈緩（平緩）">愈緩（平緩）</span>。</li>
+      <li>同一條等高線上各點的 <span class="blank" data-a="海拔高度">海拔高度</span> 都相同。</li>
+    </ul>
+
+    <figure>
+      <svg viewBox="0 0 300 210" width="300" role="img" aria-label="等高線疏密與坡度示意">
+        <rect x="0" y="0" width="300" height="210" fill="#f6fafc"/>
+        <!-- 密集（陡） -->
+        <g stroke="#1b6ca8" fill="none" stroke-width="1.5">
+          <path d="M20,30 Q75,20 130,30"/>
+          <path d="M22,45 Q75,37 128,45"/>
+          <path d="M24,60 Q75,53 126,60"/>
+          <path d="M26,75 Q75,69 124,75"/>
+        </g>
+        <text x="45" y="100" font-size="12" fill="#0f4c75" font-weight="700">等高線密集</text>
+        <text x="55" y="118" font-size="12" fill="#c0392b">坡度陡</text>
+        <!-- 稀疏（緩） -->
+        <g stroke="#c98a3a" fill="none" stroke-width="1.5">
+          <path d="M175,30 Q230,22 285,30"/>
+          <path d="M175,55 Q230,47 285,55"/>
+          <path d="M175,85 Q230,77 285,85"/>
+        </g>
+        <text x="192" y="118" font-size="12" fill="#8a5a1a" font-weight="700">等高線稀疏</text>
+        <text x="205" y="136" font-size="12" fill="#2e9e6b">坡度緩</text>
+        <!-- 剖面對照 -->
+        <line x1="20" y1="185" x2="130" y2="150" stroke="#c0392b" stroke-width="2"/>
+        <text x="45" y="205" font-size="11" fill="#c0392b">陡坡剖面</text>
+        <line x1="175" y1="180" x2="285" y2="168" stroke="#2e9e6b" stroke-width="2"/>
+        <text x="200" y="205" font-size="11" fill="#2e9e6b">緩坡剖面</text>
+      </svg>
+      <figcaption>圖 3｜等高線「密＝陡、疏＝緩」，是判讀地形圖的關鍵</figcaption>
+    </figure>
+
+    <h3>二、其他表現方式</h3>
+    <ul>
+      <li><b>分層設色圖</b>：把不同 <span class="blank" data-a="高度範圍">高度範圍</span> 畫成不同 <span class="blank" data-a="顏色">顏色</span>，表現地表高度分布。</li>
+      <li><b>地形剖面圖</b>：在等高線地形圖上畫一 <span class="blank" data-a="直線">直線</span>，將沿線各地高度連成曲線，呈現地面 <span class="blank" data-a="高低起伏">高低起伏</span>。</li>
+      <li><b>衛星影像與航空照片</b>：快速準確取得地面 <span class="blank" data-a="即時影像">即時影像</span>，可了解土地利用變化與 <span class="blank" data-a="災害">災害</span>。</li>
+    </ul>
+    <div class="note compare"><b>V 字判讀小技巧：</b>等高線呈 <b>V 字形、尖端朝向高處</b> → <span class="blank" data-a="河谷">河谷</span>；尖端朝向低處 → <span class="blank" data-a="山脊">山脊</span>。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 4 頁 / 共 4 頁</span></div>
+
+  <!-- 四、土地資源利用 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">4</div>
+      <div><h2>如何適度利用土地資源</h2><div class="sub">3-3　開發與永續的平衡</div></div>
+    </div>
+    <ul>
+      <li>五大地形中，<span class="blank" data-a="平原">平原</span> 和 <span class="blank" data-a="盆地">盆地</span> 底部平坦、水源豐富，土地利用限制最少，<b>最早開發</b>。</li>
+      <li>人口增加後，開發延伸到 <span class="blank" data-a="丘陵、台地、山區">丘陵、台地、山區</span>；過度開發（鋪路、過度觀光、山坡地開發）易造成 <span class="blank" data-a="土石流">土石流</span> 等災害。</li>
+      <li>應制訂規範（如山坡地開發 <span class="blank" data-a="坡度上限">坡度上限</span>、設立 <span class="blank" data-a="保護區">保護區</span>），以達 <strong class="k">永續利用</strong>。</li>
+    </ul>
+    <div class="note"><b>案例：</b>南投縣仁愛鄉南豐村加油站因位於 <b>河谷</b>、上游山區地質破碎，颱風豪雨時多次被 <b>山地</b> 沖下的土石流掩埋——提醒我們土地開發要考量地形限制。</div>
+  </section>
+
+  <!-- 隨堂練習 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num" style="background:var(--ok)">✎</div>
+      <div><h2 style="color:var(--ok)">隨堂即時練習</h2><div class="sub">點選項目立即對答案、看解析</div></div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q1. 臺灣多山、地震頻繁，主要是因為位於哪兩大板塊的接觸帶？</div>
+      <button class="opt">(A) 太平洋板塊與印度板塊</button>
+      <button class="opt">(B) 歐亞板塊與太平洋板塊</button>
+      <button class="opt">(C) 歐亞板塊與菲律賓海板塊</button>
+      <button class="opt">(D) 菲律賓海板塊與印度板塊</button>
+      <div class="explain">✔ 臺灣島位於 <b>歐亞板塊</b> 與 <b>菲律賓海板塊</b> 接觸帶，板塊推擠形成褶曲山脈，並造成火山與地震。</div>
+    </div>
+
+    <div class="quiz" data-correct="1">
+      <div class="q">Q2. 下列何者屬於形塑地表的「外營力」？</div>
+      <button class="opt">(A) 火山活動</button>
+      <button class="opt">(B) 流水的侵蝕與堆積</button>
+      <button class="opt">(C) 地震</button>
+      <button class="opt">(D) 板塊推擠</button>
+      <div class="explain">✔ 外營力來自地表外部，如 <b>風力、流水</b> 的侵蝕、搬運、堆積；火山、地震、板塊推擠屬 <b>內營力</b>。</div>
+    </div>
+
+    <div class="quiz" data-correct="3">
+      <div class="q">Q3. 「四周被丘陵或山地圍繞、底部平坦、適合居住」描述的是哪一種地形？</div>
+      <button class="opt">(A) 台地</button>
+      <button class="opt">(B) 平原</button>
+      <button class="opt">(C) 丘陵</button>
+      <button class="opt">(D) 盆地</button>
+      <div class="explain">✔ 這是 <b>盆地</b>（如臺北盆地，全臺人口密度最高）。台地是「高而平坦」，平原是「海拔低而平坦」。</div>
+    </div>
+
+    <div class="quiz" data-correct="0">
+      <div class="q">Q4. 在等高線地形圖上，某處等高線分布「非常密集」，代表當地？</div>
+      <button class="opt">(A) 坡度陡峭</button>
+      <button class="opt">(B) 坡度平緩</button>
+      <button class="opt">(C) 海拔為 0</button>
+      <button class="opt">(D) 一定是平原</button>
+      <div class="explain">✔ 等高線 <b>愈密＝坡愈陡</b>；愈疏＝坡愈緩。這是判讀坡度最重要的原則。</div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q5. 圖中800～1,000公尺之間平均分布3條等高線，則相鄰兩條等高線的高度差為多少？</div>
+      <button class="opt">(A) 100 公尺</button>
+      <button class="opt">(B) 200 公尺</button>
+      <button class="opt">(C) 50 公尺</button>
+      <button class="opt">(D) 500 公尺</button>
+      <div class="explain">✔ 800 與 1,000 之間相差 200 公尺，中間有 3 條等高線把它分成 4 段（900、950…等），每段間距 200÷4＝<b>50 公尺</b>。</div>
+    </div>
+
+    <div class="quiz" data-correct="1">
+      <div class="q">Q6. 依永續利用的觀念，下列做法何者較恰當？</div>
+      <button class="opt">(A) 山坡地不限坡度盡量開發蓋民宿</button>
+      <button class="opt">(B) 訂定山坡地開發坡度上限、設立保護區</button>
+      <button class="opt">(C) 為了觀光在河谷大量鋪路</button>
+      <button class="opt">(D) 把所有平原都改建工廠</button>
+      <div class="explain">✔ 永續利用要在開發與保育間取得平衡，應 <b>制訂規範（坡度上限、保護區）</b>，避免過度開發引發土石流等災害。</div>
+    </div>
+  </section>
+
+  <!-- 重點總整理 -->
+  <section class="card" style="background:linear-gradient(135deg,#0f4c75,#1b6ca8);color:#fff;border:none;">
+    <div class="sec-head">
+      <div class="sec-num" style="background:rgba(255,255,255,.2)">★</div>
+      <div><h2 style="color:#fff">一課一圖・重點總整理</h2><div class="sub" style="color:#cfe4f2">成因 → 地形 → 表現 → 利用</div></div>
+    </div>
+    <ul style="line-height:2">
+      <li><b>成因</b>：歐亞板塊 × 菲律賓海板塊推擠 → 褶曲山脈；內營力（火山、地震）＋外營力（風、水）</li>
+      <li><b>年輕地形</b>：山地廣大、地勢高聳、坡面陡峭、地質破碎</li>
+      <li><b>五大地形</b>：山地・丘陵・盆地・台地・平原（東多山地、西多平原丘陵台地）</li>
+      <li><b>地形表現</b>：等高線地形圖（密＝陡、疏＝緩）、分層設色圖、地形剖面圖</li>
+      <li><b>土地利用</b>：平原盆地最早開發；過度開發引土石流；規範＋保護區 → 永續</li>
+    </ul>
+  </section>
+
+  <div style="text-align:center;margin-top:24px;">
+    <button class="revealbtn" onclick="toggleAll(true)">🔍 全部顯示答案</button>
+    <button class="revealbtn" style="background:var(--sand)" onclick="toggleAll(false)">↩ 全部收合</button>
+  </div>
+
+  <footer>國一上地理・第 3 課 臺灣的地形｜互動講義　－　整合康軒(主)・翰林・南一</footer>
+</div>
+
+<script>
+  // fill-in blanks
+  document.querySelectorAll('.blank[data-a]').forEach(function(b){
+    b.textContent='';
+    b.addEventListener('click',function(){
+      if(b.classList.contains('show')){b.classList.remove('show');b.textContent='';}
+      else{b.classList.add('show');b.textContent=b.dataset.a;}
+    });
+  });
+  function toggleAll(show){
+    document.querySelectorAll('.blank[data-a]').forEach(function(b){
+      if(show){b.classList.add('show');b.textContent=b.dataset.a;}
+      else{b.classList.remove('show');b.textContent='';}
+    });
+  }
+  // quiz
+  document.querySelectorAll('.quiz').forEach(function(q){
+    var correct=+q.dataset.correct;
+    var opts=q.querySelectorAll('.opt');
+    var exp=q.querySelector('.explain');
+    opts.forEach(function(o,i){
+      o.addEventListener('click',function(){
+        opts.forEach(function(x){x.classList.remove('correct','wrong');});
+        opts[correct].classList.add('correct');
+        if(i!==correct)o.classList.add('wrong');
+        exp.classList.add('show');
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理　單元2　位置對臺灣的影響　列印講義</title>
+<style>
+  :root{--sea:#1b6ca8;--sea-dark:#0f4c75;--sand:#c98a3a;--ink:#222;--line:#bcc9d2;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",serif;
+       color:var(--ink);line-height:1.9;background:#e9eef2;font-size:15px;}
+  .toolbar{
+    position:sticky;top:0;z-index:10;background:var(--sea-dark);color:#fff;
+    padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    font-family:"PingFang TC","Noto Sans TC",sans-serif;
+  }
+  .toolbar b{font-size:15px;margin-right:6px;}
+  .toolbar button{
+    background:#fff;color:var(--sea-dark);border:none;border-radius:6px;
+    padding:7px 14px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:600;
+  }
+  .toolbar button.active{background:var(--sand);color:#fff;}
+  .toolbar .note{font-size:12.5px;opacity:.85;margin-left:auto;}
+  /* A4 sheet：一張 .sheet ＝ 一張實體頁，頁碼與互動版一致 */
+  .sheet{
+    background:#fff;width:210mm;min-height:297mm;margin:16px auto;padding:16mm 15mm 20mm;
+    box-shadow:0 3px 14px rgba(0,0,0,.15);position:relative;
+  }
+  .pageno{
+    position:absolute;bottom:8mm;right:15mm;font-size:12px;color:#888;
+    font-family:"PingFang TC","Noto Sans TC",sans-serif;
+  }
+  h1{font-size:22px;text-align:center;color:var(--sea-dark);margin:0 0 2px;letter-spacing:1px;
+     font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+  .subtitle{text-align:center;color:var(--sand);font-size:13px;margin:0 0 4px;letter-spacing:2px;}
+  .stuinfo{display:flex;justify-content:space-between;border-top:2px solid var(--sea);
+           border-bottom:1px solid var(--line);padding:6px 2px;font-size:13px;margin:10px 0 18px;color:#444;}
+  h2{font-size:16px;color:#fff;background:var(--sea);padding:5px 12px;border-radius:5px;
+     margin:16px 0 10px;font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+  h2:first-child{margin-top:0;}
+  h3{font-size:14.5px;color:var(--sea-dark);border-left:4px solid var(--sand);padding-left:9px;margin:14px 0 6px;}
+  p{margin:7px 0;}
+  ul{margin:6px 0;padding-left:22px;}
+  li{margin:4px 0;}
+  .blk{
+    display:inline-block;min-width:78px;border-bottom:1.3px solid #333;text-align:center;
+    color:#c0392b;font-weight:700;padding:0 6px;line-height:1.4;
+  }
+  body.student .blk{color:transparent;}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:center;}
+  th{background:#e8f2f9;color:var(--sea-dark);}
+  td.lead{background:#f4f8fb;font-weight:600;color:var(--sea-dark);width:22%;}
+  .fig{border:1px solid var(--line);border-radius:6px;padding:8px;margin:10px 0;text-align:center;background:#fafcfe;}
+  .fig svg{max-width:100%;height:auto;}
+  .fcap{font-size:11.5px;color:#777;margin-top:4px;}
+  .qbox{border:1px dashed var(--sand);border-radius:6px;padding:8px 12px;margin:8px 0;background:#fdf8f0;}
+  .qbox .qa{color:#c0392b;font-weight:700;}
+  body.student .qbox .qa{color:transparent;border-bottom:1px solid #999;display:inline-block;min-width:120px;}
+  .writeline{border-bottom:1px solid #bbb;height:22px;margin:6px 0;}
+  .summary{background:#f4f8fb;border:1px solid var(--line);border-radius:8px;padding:10px 16px;font-size:13.5px;}
+  @page{size:A4;margin:12mm;}
+  @media print{
+    body{background:#fff;font-size:12.5px;}
+    .toolbar{display:none;}
+    .sheet{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none;
+           page-break-after:always;}
+    .sheet:last-of-type{page-break-after:auto;}
+    .pageno{position:fixed;bottom:4mm;right:6mm;}
+    h2{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    th,td.lead,.qbox,.fig{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body class="student">
+<div class="toolbar">
+  <b>顯示模式：</b>
+  <button id="btnStu" class="active" onclick="setMode('student')">學生作答版（空白）</button>
+  <button id="btnTea" onclick="setMode('teacher')">教師解答版（紅字）</button>
+  <button onclick="window.print()">🖨 列印 / 存 PDF</button>
+  <span class="note">頁碼與互動講義一致（共 4 頁）；列印前先選好模式。</span>
+</div>
+
+<!-- 第 1 頁 -->
+<div class="sheet">
+  <div class="subtitle">國一上地理・臺灣的位置與影響</div>
+  <h1>第 2 課　位置對臺灣的影響</h1>
+  <div class="stuinfo"><span>班級：____________</span><span>座號：________</span><span>姓名：________________</span></div>
+
+  <h2>一、臺灣的範圍與行政區</h2>
+  <h3>1. 臺灣的經緯度範圍</h3>
+  <p>臺灣島大致位於東經 <span class="blk">120°~122°</span>、北緯 <span class="blk">22°~25°</span> 之間，全島總面積約 <span class="blk">36,000</span> 平方公里。</p>
+  <p>領土除本島外，還包括 <span class="blk">澎湖群島</span>、<span class="blk">金門列嶼</span>、馬祖列嶼、<span class="blk">釣魚臺列嶼</span>、<span class="blk">南海諸島</span> 及周邊島嶼。</p>
+  <h3>2. 行政區劃分</h3>
+  <p>臺灣行政區分為 <span class="blk">6</span> 個直轄市與 <span class="blk">16</span> 個縣市。</p>
+  <table>
+    <thead><tr><th>類別</th><th>數量</th><th>舉例</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">直轄市</td><td><span class="blk">6</span> 個</td><td>臺北、新北、桃園、臺中、臺南、高雄</td></tr>
+      <tr><td class="lead">縣市</td><td><span class="blk">16</span> 個</td><td>新竹市、彰化縣、屏東縣…</td></tr>
+    </tbody>
+  </table>
+  <p class="qbox">小提醒：經緯度屬於 <b>絕對位置</b>（明確唯一）；海陸、鄰國屬於 <b>相對位置</b>（在誰的旁邊）。</p>
+  <div class="pageno">第 1 頁 / 共 4 頁</div>
+</div>
+
+<!-- 第 2 頁 -->
+<div class="sheet">
+  <h2>二、臺灣的相對位置</h2>
+  <h3>1. 在地球上的位置</h3>
+  <p>地表陸地約占 <span class="blk">29</span>%（分七大洲），海洋約占 <span class="blk">71</span>%（分三大洋）。臺灣位於最大陸地 <span class="blk">亞洲</span> 的東部，瀕臨最大海洋 <span class="blk">太平洋</span> 的西部。</p>
+  <div class="fig">
+    <svg viewBox="0 0 300 120" width="300">
+      <rect x="10" y="20" width="280" height="34" rx="5" fill="#eaf4fb" stroke="#7fb4d6"/>
+      <rect x="10" y="20" width="81" height="34" rx="5" fill="#cfe6d6" stroke="#7fb4d6"/>
+      <text x="50" y="42" text-anchor="middle" font-size="12" fill="#1c6e4a" font-weight="700">陸地 29%</text>
+      <text x="195" y="42" text-anchor="middle" font-size="12" fill="#0f4c75" font-weight="700">海洋 71%</text>
+      <text x="150" y="82" text-anchor="middle" font-size="12" fill="#c98a3a" font-weight="700">臺灣＝亞洲東部・太平洋西部</text>
+      <text x="150" y="102" text-anchor="middle" font-size="10" fill="#777">最大陸與最大洋的交界</text>
+    </svg>
+    <div class="fcap">地表七分海、三分陸；臺灣位於最大陸與最大洋交界</div>
+  </div>
+  <h3>2. 海陸位置</h3>
+  <p>臺灣是亞洲大陸東側與太平洋交界的島嶼：掌控太平洋 <span class="blk">西側</span> 南北要道、是進入 <span class="blk">亞洲大陸</span> 的 <span class="blk">門戶</span>，海空交通與 <span class="blk">戰略</span> 位置重要。</p>
+  <h3>3. 鄰國位置</h3>
+  <p>周邊鄰國：中國、南韓、日本、菲律賓、越南。</p>
+  <table>
+    <thead><tr><th>以臺灣為基準</th><th>方位</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">中國</td><td>臺灣在中國的 <span class="blk">東南方</span></td></tr>
+      <tr><td class="lead">南韓、日本</td><td>臺灣在其 <span class="blk">西南方</span></td></tr>
+      <tr><td class="lead">菲律賓</td><td>臺灣在菲律賓的 <span class="blk">北方</span></td></tr>
+      <tr><td class="lead">越南</td><td>臺灣在越南的 <span class="blk">東北方</span></td></tr>
+    </tbody>
+  </table>
+  <div class="pageno">第 2 頁 / 共 4 頁</div>
+</div>
+
+<!-- 第 3 頁 -->
+<div class="sheet">
+  <h2>三、位置對臺灣帶來哪些影響</h2>
+  <h3>1. 生態環境豐富多變</h3>
+  <p>（1）<b>生物南北遷徙的中繼站</b>：臺灣兼具 <span class="blk">陸域</span>、<span class="blk">海洋</span> 及沿岸 <span class="blk">溼地</span> 生態，且位於 <span class="blk">溫帶與熱帶</span> 交界，是物種季節遷徙的重要棲地，例如南下避寒的 <span class="blk">黑面琵鷺</span>。</p>
+  <p>（2）<b>寒暖洋流交會</b>：臺灣位於 <span class="blk">黑潮（暖流）</span> 與 <span class="blk">中國沿岸流（寒流）</span> 交會處，帶來豐富海洋生物資源。</p>
+  <div class="fig">
+    <svg viewBox="0 0 280 140" width="280">
+      <rect x="8" y="8" width="264" height="124" rx="6" fill="#eaf4fb" stroke="#7fb4d6"/>
+      <ellipse cx="140" cy="70" rx="26" ry="46" fill="#cfe6d6" stroke="#1c6e4a"/>
+      <text x="140" y="74" text-anchor="middle" font-size="12" fill="#1c6e4a" font-weight="700">臺灣</text>
+      <path d="M108 126 C110 90 106 46 116 16" fill="none" stroke="#1b6ca8" stroke-width="5" marker-end="url(#p1)"/>
+      <path d="M172 16 C180 46 176 90 184 126" fill="none" stroke="#d9534f" stroke-width="5" marker-end="url(#p2)"/>
+      <defs>
+        <marker id="p1" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#1b6ca8"/></marker>
+        <marker id="p2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#d9534f"/></marker>
+      </defs>
+      <text x="70" y="72" text-anchor="middle" font-size="10" fill="#0f4c75" font-weight="700">中國沿岸流</text>
+      <text x="70" y="86" text-anchor="middle" font-size="9" fill="#777">（寒流）</text>
+      <text x="214" y="72" text-anchor="middle" font-size="10" fill="#a33" font-weight="700">黑潮</text>
+      <text x="214" y="86" text-anchor="middle" font-size="9" fill="#a33">（暖流）</text>
+    </svg>
+    <div class="fcap">寒暖洋流在臺灣附近交會，漁業與海洋生物資源豐富</div>
+  </div>
+  <h3>2. 特有生物眾多</h3>
+  <p>冰河期氣溫降、海平面 <span class="blk">下降</span>，臺灣與大陸 <span class="blk">相連</span>，寒冷動植物遷入；冰河期後海平面 <span class="blk">上升</span>，臺灣再與大陸 <span class="blk">分隔</span>。孤立島嶼＋多樣氣候，演化出特有生物，如 <span class="blk">臺灣紅檜</span>、<span class="blk">臺灣獼猴</span>、<span class="blk">櫻花鉤吻鮭</span>。</p>
+  <h3>3. 以發達國際貿易作為經濟發展基礎</h3>
+  <p><span class="blk">17</span> 世紀臺灣為 <span class="blk">荷蘭人</span> 在亞洲東部貿易據點，近四百年形成國際貿易傳統；臺灣位於聯繫亞洲東北部與東南部海空航線的 <span class="blk">樞紐</span> 位置，以不到全球 <span class="blk">1%</span> 的人口與土地創造亮眼經濟。</p>
+  <div class="pageno">第 3 頁 / 共 4 頁</div>
+</div>
+
+<!-- 第 4 頁 -->
+<div class="sheet">
+  <h2>★ 課後練習（寫在下方線上）</h2>
+  <p>1. 請寫出臺灣的經緯度範圍，並說明它屬於哪個半球。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>2. 以臺灣為中心，說明中國、日本、菲律賓、越南分別位於臺灣的哪個方位。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>3. 為什麼臺灣附近海域漁業資源豐富？請說明與洋流的關係。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>4. 臺灣為什麼會有許多「特有生物」？請從冰河期與島嶼環境說明。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>5. 臺灣「地小、人少、資源缺」為何仍有亮眼經濟表現？請從位置與貿易說明。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+
+  <h2 style="background:var(--sea-dark)">重點總整理</h2>
+  <div class="summary">
+    範圍：東經 120°~122°、北緯 22°~25°、面積約 36,000 km²、6 直轄市＋16 縣市｜
+    領土：本島＋澎湖・金門・馬祖・釣魚臺・南海諸島｜海陸位置：亞洲大陸東側＋太平洋西側、控南北要道、進亞洲門戶｜
+    鄰國：中國東南方、日韓西南方、菲律賓北方、越南東北方｜生態：溫帶熱帶交界遷徙中繼站（黑面琵鷺）＋黑潮與沿岸流交會｜
+    特有生物：冰河相連再分隔＋孤立島嶼（紅檜、獼猴、櫻花鉤吻鮭）｜國際貿易：荷蘭據點近四百年＋海空航線樞紐＝經濟基礎。
+  </div>
+  <div style="text-align:center;color:#999;font-size:11px;margin-top:14px;">
+    國一上地理・第 2 課｜整合康軒(主)・翰林・南一
+  </div>
+  <div class="pageno">第 4 頁 / 共 4 頁</div>
+</div>
+
+<script>
+  function setMode(m){
+    document.body.className=m;
+    document.getElementById('btnStu').classList.toggle('active',m==='student');
+    document.getElementById('btnTea').classList.toggle('active',m==='teacher');
+  }
+</script>
+</body>
+</html>

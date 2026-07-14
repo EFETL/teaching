@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理　單元2　位置對臺灣的影響　互動講義</title>
+<style>
+  :root{
+    --sea:#1b6ca8;      /* 海洋藍 主色 */
+    --sea-dark:#0f4c75; /* 深藍 */
+    --sea-light:#e8f2f9;/* 淺藍底 */
+    --sand:#c98a3a;     /* 大地色 輔色 */
+    --sand-light:#fbf3e6;
+    --ink:#2b2b2b;
+    --muted:#6b7a86;
+    --ok:#2e9e6b;
+    --line:#dbe6ee;
+    --card-shadow:0 4px 18px rgba(15,76,117,.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);line-height:1.85;background:#f4f8fb;font-size:17px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 80px;}
+  /* Hero */
+  header.hero{
+    background:linear-gradient(135deg,var(--sea-dark),var(--sea) 60%,#2f8fc4);
+    color:#fff;padding:46px 20px 40px;text-align:center;
+  }
+  header.hero .kicker{font-size:15px;letter-spacing:3px;opacity:.9;margin:0 0 8px;}
+  header.hero h1{margin:0;font-size:30px;letter-spacing:1px;}
+  header.hero .en{font-size:15px;opacity:.85;margin-top:6px;font-weight:400;}
+  header.hero .ver{
+    display:inline-block;margin-top:18px;background:rgba(255,255,255,.16);
+    padding:6px 16px;border-radius:999px;font-size:13.5px;
+  }
+  .tip{
+    max-width:900px;margin:18px auto 0;padding:12px 18px;background:#fff7e6;
+    border:1px solid #f0d9a8;border-radius:12px;color:#8a6417;font-size:14.5px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  /* Section cards */
+  section.card{
+    background:#fff;border-radius:18px;box-shadow:var(--card-shadow);
+    padding:28px 30px;margin:26px 0;border:1px solid var(--line);
+  }
+  .sec-head{display:flex;align-items:center;gap:14px;margin:0 0 18px;}
+  .sec-num{
+    flex:none;width:44px;height:44px;border-radius:12px;background:var(--sea);
+    color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;
+  }
+  .sec-head h2{margin:0;font-size:22px;color:var(--sea-dark);}
+  .sec-head .sub{font-size:13px;color:var(--muted);font-weight:400;margin-top:2px;}
+  h3{font-size:18px;color:var(--sea-dark);border-left:5px solid var(--sand);
+     padding-left:12px;margin:26px 0 12px;}
+  p{margin:10px 0;}
+  ul{margin:10px 0;padding-left:22px;}
+  li{margin:7px 0;}
+  strong.k{color:var(--sea);}
+  /* fill-in blank */
+  .blank{
+    display:inline-block;min-width:70px;text-align:center;background:var(--sand-light);
+    border-bottom:2px solid var(--sand);border-radius:6px 6px 0 0;padding:0 10px;
+    color:transparent;cursor:pointer;font-weight:700;user-select:none;
+    transition:.15s;position:relative;
+  }
+  .blank::before{content:"?";color:var(--sand);}
+  .blank.show{color:var(--sea-dark);background:#e5f3ec;border-color:var(--ok);}
+  .blank.show::before{content:"";}
+  .hint{font-size:13px;color:var(--muted);}
+  /* note box */
+  .note{
+    background:var(--sea-light);border-radius:12px;padding:14px 18px;margin:16px 0;
+    border-left:4px solid var(--sea);font-size:15.5px;
+  }
+  .note b{color:var(--sea-dark);}
+  .compare{background:var(--sand-light);border-left-color:var(--sand);}
+  .compare b{color:var(--sand);}
+  /* table */
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:center;}
+  th{background:var(--sea);color:#fff;font-weight:600;}
+  tbody tr:nth-child(even){background:#f6fafc;}
+  td.lead{background:var(--sea-light);font-weight:600;color:var(--sea-dark);}
+  /* svg figure */
+  figure{margin:18px 0;text-align:center;}
+  figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;}
+  figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;}
+  /* quiz */
+  .quiz{background:#fff;border:2px solid var(--sea-light);border-radius:14px;padding:18px 20px;margin:16px 0;}
+  .quiz .q{font-weight:600;margin-bottom:10px;}
+  .opt{
+    display:block;width:100%;text-align:left;background:#f7fafc;border:1.5px solid var(--line);
+    border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer;font-size:16px;
+    font-family:inherit;color:var(--ink);transition:.15s;
+  }
+  .opt:hover{border-color:var(--sea);}
+  .opt.correct{background:#e5f3ec;border-color:var(--ok);color:#1c6e4a;font-weight:600;}
+  .opt.wrong{background:#fdeaea;border-color:#d66;color:#a33;}
+  .explain{display:none;margin-top:10px;padding:12px 14px;background:var(--sea-light);
+    border-radius:10px;font-size:14.5px;color:var(--sea-dark);}
+  .explain.show{display:block;}
+  /* toggle answer button */
+  .revealbtn{
+    background:var(--sea);color:#fff;border:none;border-radius:999px;padding:8px 18px;
+    font-size:14px;cursor:pointer;font-family:inherit;margin:6px 0 2px;
+  }
+  .revealbtn:hover{background:var(--sea-dark);}
+  /* 頁碼分隔標記（與列印版頁碼一致） */
+  .pagemark{display:flex;align-items:center;gap:12px;margin:38px 0 6px;}
+  .pagemark::before,.pagemark::after{content:"";flex:1;height:2px;border-radius:2px;}
+  .pagemark::before{background:linear-gradient(90deg,transparent,var(--sea));}
+  .pagemark::after{background:linear-gradient(90deg,var(--sea),transparent);}
+  .pagemark span{background:var(--sea);color:#fff;padding:5px 18px;border-radius:999px;
+    font-size:14px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(27,108,168,.3);}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;}
+  .goal-list{list-style:none;padding:0;}
+  .goal-list li{padding-left:28px;position:relative;}
+  .goal-list li::before{content:"✔";position:absolute;left:0;color:var(--ok);font-weight:700;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <p class="kicker">國一上地理・臺灣的位置與影響</p>
+  <h1>第 2 課　位置對臺灣的影響</h1>
+  <div class="en">Taiwan's Location &amp; Its Influence</div>
+  <div class="ver">康軒為主 ・ 翰林／南一整合補充</div>
+</header>
+
+<div class="tip">
+  <span style="font-size:18px">💡</span>
+  <span>灰底的 <span class="blank show" style="cursor:default">?</span> 是填空。點一下 <b>?</b> 就會翻出答案，再點一下收合；先自己想，再對答案，效果最好！</span>
+</div>
+
+<div class="wrap">
+
+  <div class="pagemark"><span>📄 第 1 頁 / 共 4 頁</span></div>
+
+  <!-- 學習目標 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num" style="background:var(--sand)">◎</div>
+      <div><h2 style="color:var(--sand)">學習目標</h2><div class="sub">核心問題：臺灣在哪裡？位置又帶來什麼影響？</div></div>
+    </div>
+    <ul class="goal-list">
+      <li>能說出 <strong class="k">臺灣的範圍</strong> 與 <strong class="k">行政區劃分</strong>。</li>
+      <li>能用 <strong class="k">經緯度</strong> 與 <strong class="k">相對位置</strong> 描述臺灣的所在。</li>
+      <li>認識臺灣的 <strong class="k">海陸位置</strong> 與 <strong class="k">鄰國位置</strong>。</li>
+      <li>理解位置對臺灣 <strong class="k">生態環境、特有生物、國際貿易</strong> 的影響。</li>
+    </ul>
+  </section>
+
+  <!-- 一、臺灣的範圍與行政區 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div><h2>臺灣的範圍與行政區</h2><div class="sub">2-1　臺灣的位置如何表示？</div></div>
+    </div>
+
+    <h3>一、臺灣的經緯度範圍</h3>
+    <p>臺灣島大致位於東經 <span class="blank" data-a="120°~122°">120°~122°</span>、北緯 <span class="blank" data-a="22°~25°">22°~25°</span> 之間。全島總面積約 <span class="blank" data-a="36,000">36,000</span> 平方公里。</p>
+    <div class="note"><b>領土範圍：</b>除臺灣本島外，還包括 <span class="blank" data-a="澎湖群島">澎湖群島</span>、<span class="blank" data-a="金門列嶼">金門列嶼</span>、馬祖列嶼、<span class="blank" data-a="釣魚臺列嶼">釣魚臺列嶼</span>、<span class="blank" data-a="南海諸島">南海諸島</span> 及周邊島嶼。</div>
+
+    <h3>二、行政區劃分</h3>
+    <p>臺灣的行政區劃分為 <span class="blank" data-a="6">6</span> 個 <strong class="k">直轄市</strong>（臺北市、新北市、桃園市、臺中市、臺南市、高雄市）與 <span class="blank" data-a="16">16</span> 個縣市。</p>
+    <table>
+      <thead><tr><th>類別</th><th>數量</th><th>舉例</th></tr></thead>
+      <tbody>
+        <tr><td class="lead">直轄市</td><td><span class="blank" data-a="6 個">6 個</span></td><td>臺北、新北、桃園、臺中、臺南、高雄</td></tr>
+        <tr><td class="lead">縣市</td><td><span class="blank" data-a="16 個">16 個</span></td><td>如新竹市、彰化縣、屏東縣…</td></tr>
+      </tbody>
+    </table>
+    <div class="note compare"><b>小提醒：</b>經緯度屬於 <b>絕對位置</b>（明確唯一）；接下來要用 <b>相對位置</b>（海陸、鄰國）來說明臺灣「在哪裡的旁邊」。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 2 頁 / 共 4 頁</span></div>
+
+  <!-- 二、臺灣的相對位置 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div><h2>臺灣的相對位置</h2><div class="sub">海陸位置與鄰國位置</div></div>
+    </div>
+
+    <h3>一、在地球上的位置</h3>
+    <p>地球表面陸地約占 <span class="blank" data-a="29%">29%</span>（分為 <strong class="k">七大洲</strong>），海洋約占 <span class="blank" data-a="71%">71%</span>（分為 <strong class="k">三大洋</strong>）。臺灣位於最大陸地「<span class="blank" data-a="亞洲">亞洲</span>」的東部，瀕臨最大海洋「<span class="blank" data-a="太平洋">太平洋</span>」的西部。</p>
+
+    <figure>
+      <svg viewBox="0 0 360 200" width="360" role="img" aria-label="陸地與海洋比例示意">
+        <rect x="14" y="30" width="332" height="42" rx="6" fill="#eaf4fb" stroke="#7fb4d6"/>
+        <rect x="14" y="30" width="96" height="42" rx="6" fill="#cfe6d6" stroke="#7fb4d6"/>
+        <text x="62" y="56" text-anchor="middle" font-size="13" fill="#1c6e4a" font-weight="700">陸地 29%</text>
+        <text x="228" y="56" text-anchor="middle" font-size="13" fill="#0f4c75" font-weight="700">海洋 71%</text>
+        <text x="62" y="92" text-anchor="middle" font-size="11" fill="#6b7a86">七大洲</text>
+        <text x="228" y="92" text-anchor="middle" font-size="11" fill="#6b7a86">三大洋</text>
+        <text x="180" y="132" text-anchor="middle" font-size="13" fill="#c98a3a" font-weight="700">臺灣：亞洲東部・太平洋西部</text>
+        <text x="180" y="160" text-anchor="middle" font-size="11" fill="#6b7a86">最大陸地「亞洲」＋最大海洋「太平洋」交界</text>
+      </svg>
+      <figcaption>圖 1｜地表七分海、三分陸；臺灣正位於最大陸與最大洋的交界</figcaption>
+    </figure>
+
+    <h3>二、海陸位置</h3>
+    <p>臺灣是 <strong class="k">亞洲大陸東側</strong> 與 <strong class="k">太平洋</strong> 交界處的島嶼：</p>
+    <ul>
+      <li>掌控太平洋 <span class="blank" data-a="西側">西側</span> 南北往來的要道。</li>
+      <li>是進入 <span class="blank" data-a="亞洲大陸">亞洲大陸</span> 的重要 <span class="blank" data-a="門戶">門戶</span>。</li>
+      <li>海空交通與 <span class="blank" data-a="戰略">戰略</span> 位置十分重要。</li>
+    </ul>
+
+    <h3>三、鄰國位置</h3>
+    <p>臺灣周邊的鄰國有 <strong class="k">中國、南韓、日本、菲律賓、越南</strong>。</p>
+    <table>
+      <thead><tr><th>臺灣相對於鄰國</th><th>方位</th></tr></thead>
+      <tbody>
+        <tr><td class="lead">中國</td><td>臺灣在中國的 <span class="blank" data-a="東南方">東南方</span></td></tr>
+        <tr><td class="lead">南韓、日本</td><td>臺灣在其 <span class="blank" data-a="西南方">西南方</span></td></tr>
+        <tr><td class="lead">菲律賓</td><td>臺灣在菲律賓的 <span class="blank" data-a="北方">北方</span></td></tr>
+        <tr><td class="lead">越南</td><td>臺灣在越南的 <span class="blank" data-a="東北方">東北方</span></td></tr>
+      </tbody>
+    </table>
+
+    <figure>
+      <svg viewBox="0 0 300 300" width="300" role="img" aria-label="臺灣鄰國方位示意">
+        <circle cx="150" cy="150" r="120" fill="#f6fafc" stroke="#dbe6ee"/>
+        <line x1="150" y1="34" x2="150" y2="266" stroke="#c9d6df"/>
+        <line x1="34" y1="150" x2="266" y2="150" stroke="#c9d6df"/>
+        <line x1="66" y1="66" x2="234" y2="234" stroke="#eee3cf"/>
+        <line x1="234" y1="66" x2="66" y2="234" stroke="#eee3cf"/>
+        <circle cx="150" cy="150" r="8" fill="#c98a3a"/>
+        <text x="150" y="140" text-anchor="middle" font-size="13" fill="#0f4c75" font-weight="700">臺灣</text>
+        <text x="150" y="26" text-anchor="middle" font-size="12" fill="#0f4c75" font-weight="700">北 N</text>
+        <text x="74" y="70" font-size="12" fill="#1b6ca8">中國（西北方）</text>
+        <text x="192" y="60" font-size="12" fill="#1b6ca8">日本・南韓</text>
+        <text x="200" y="74" font-size="11" fill="#6b7a86">（東北方）</text>
+        <text x="150" y="288" text-anchor="middle" font-size="12" fill="#1b6ca8">菲律賓（南方）</text>
+        <text x="40" y="230" font-size="12" fill="#1b6ca8">越南（西南方）</text>
+      </svg>
+      <figcaption>圖 2｜以臺灣為中心看鄰國：日本、南韓在東北，菲律賓在南，越南在西南</figcaption>
+    </figure>
+    <div class="note compare"><b>換位思考：</b>「臺灣在日本的西南方」＝「日本在臺灣的東北方」，方位要看 <b>以誰為基準</b>。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 3 頁 / 共 4 頁</span></div>
+
+  <!-- 三、位置對臺灣的影響 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div><h2>位置對臺灣帶來哪些影響</h2><div class="sub">2-2　生態環境・特有生物・國際貿易</div></div>
+    </div>
+
+    <h3>一、生態環境豐富多變</h3>
+    <p><b>1. 生物南北遷徙的中繼站：</b>臺灣位於亞洲大陸邊緣，兼具 <span class="blank" data-a="陸域">陸域</span>、<span class="blank" data-a="海洋">海洋</span> 及沿岸 <span class="blank" data-a="溼地">溼地</span> 生態，又位於 <strong class="k">溫帶與熱帶交界</strong>，是許多物種季節遷徙路線上的重要棲地。</p>
+    <div class="note"><b>例子：</b>冬天南下避寒的 <span class="blank" data-a="黑面琵鷺">黑面琵鷺</span>，會把臺灣當作重要的過冬與休息地。</div>
+
+    <p><b>2. 寒暖洋流交會帶來豐富生物資源：</b>臺灣位於 <strong class="k">黑潮（暖流）</strong> 與 <strong class="k">中國沿岸流（寒流）</strong> 兩股冷熱不同海水的 <span class="blank" data-a="交會">交會</span> 處，帶來豐富的 <span class="blank" data-a="海洋生物">海洋生物</span> 資源。</p>
+
+    <figure>
+      <svg viewBox="0 0 300 220" width="300" role="img" aria-label="黑潮與中國沿岸流交會示意">
+        <rect x="10" y="10" width="280" height="200" rx="8" fill="#eaf4fb" stroke="#7fb4d6"/>
+        <path d="M150 40 Q130 60 140 90" fill="none" stroke="#c98a3a" stroke-width="1"/>
+        <ellipse cx="150" cy="120" rx="34" ry="60" fill="#cfe6d6" stroke="#1c6e4a"/>
+        <text x="150" y="124" text-anchor="middle" font-size="13" fill="#1c6e4a" font-weight="700">臺灣</text>
+        <path d="M120 200 C122 150 118 90 128 40" fill="none" stroke="#1b6ca8" stroke-width="6" marker-end="url(#ar1)"/>
+        <path d="M188 40 C196 90 192 150 200 200" fill="none" stroke="#d9534f" stroke-width="6" marker-end="url(#ar2)"/>
+        <defs>
+          <marker id="ar1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#1b6ca8"/></marker>
+          <marker id="ar2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#d9534f"/></marker>
+        </defs>
+        <text x="96" y="120" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">中國</text>
+        <text x="96" y="134" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">沿岸流</text>
+        <text x="96" y="148" text-anchor="middle" font-size="10" fill="#6b7a86">（寒流）</text>
+        <text x="224" y="120" text-anchor="middle" font-size="11" fill="#a33" font-weight="700">黑潮</text>
+        <text x="224" y="134" text-anchor="middle" font-size="10" fill="#a33">（暖流）</text>
+      </svg>
+      <figcaption>圖 3｜寒暖洋流在臺灣附近交會，帶來豐富漁業與海洋生物資源</figcaption>
+    </figure>
+
+    <h3>二、特有生物眾多</h3>
+    <p>冰河時期氣溫降低、海平面 <span class="blank" data-a="下降">下降</span>，臺灣與亞洲大陸 <span class="blank" data-a="相連">相連</span>，適應寒冷的動植物遷入；冰河期結束後氣溫與海平面 <span class="blank" data-a="上升">上升</span>，臺灣再與大陸 <span class="blank" data-a="分隔">分隔</span>。孤立島嶼環境加上多樣氣候，演化出許多 <strong class="k">臺灣特有生物</strong>。</p>
+    <div class="note"><b>特有生物舉例：</b><span class="blank" data-a="臺灣紅檜">臺灣紅檜</span>、<span class="blank" data-a="臺灣獼猴">臺灣獼猴</span>、<span class="blank" data-a="櫻花鉤吻鮭">櫻花鉤吻鮭</span>（臺灣鮭魚）。</div>
+
+    <h3>三、以發達國際貿易作為經濟發展基礎</h3>
+    <ul>
+      <li><span class="blank" data-a="17">17</span> 世紀時，臺灣是 <span class="blank" data-a="荷蘭人">荷蘭人</span> 在亞洲東部的貿易據點，歷經近 <span class="blank" data-a="四百">四百</span> 年經營，形成國際貿易傳統。</li>
+      <li>臺灣位於聯繫亞洲 <strong class="k">東北部與東南部</strong> 海空航線的 <span class="blank" data-a="樞紐">樞紐</span> 位置，加深與世界各地的相互依存。</li>
+      <li>以不到全球 <span class="blank" data-a="1%">1%</span> 的人口與土地、天然資源缺乏的條件，創造亮眼的經濟表現，與 <b>優越的地理位置</b> 密切相關。</li>
+    </ul>
+    <div class="note compare"><b>一句話總結：</b>臺灣「地小、人少、資源缺」卻能有好表現，靠的正是 <b>位置好 → 交通樞紐 → 貿易發達</b>。</div>
+  </section>
+
+  <div class="pagemark"><span>📄 第 4 頁 / 共 4 頁</span></div>
+
+  <!-- 隨堂練習 -->
+  <section class="card">
+    <div class="sec-head">
+      <div class="sec-num" style="background:var(--ok)">✎</div>
+      <div><h2 style="color:var(--ok)">隨堂即時練習</h2><div class="sub">點選項目立即對答案、看解析</div></div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q1. 臺灣島大致位於下列哪一組經緯度範圍之間？</div>
+      <button class="opt">(A) 東經 100°~102°、北緯 12°~15°</button>
+      <button class="opt">(B) 西經 120°~122°、南緯 22°~25°</button>
+      <button class="opt">(C) 東經 120°~122°、北緯 22°~25°</button>
+      <button class="opt">(D) 東經 122°~124°、北緯 32°~35°</button>
+      <div class="explain">✔ 臺灣島約在 <b>東經 120°~122°、北緯 22°~25°</b> 之間，屬東半球、北半球。</div>
+    </div>
+
+    <div class="quiz" data-correct="1">
+      <div class="q">Q2. 以臺灣為中心，下列鄰國方位何者正確？</div>
+      <button class="opt">(A) 臺灣在日本的東北方</button>
+      <button class="opt">(B) 臺灣在菲律賓的北方</button>
+      <button class="opt">(C) 臺灣在中國的西北方</button>
+      <button class="opt">(D) 臺灣在越南的西南方</button>
+      <div class="explain">✔ 臺灣在菲律賓的 <b>北方</b>；並在中國東南方、日本與南韓西南方、越南東北方。</div>
+    </div>
+
+    <div class="quiz" data-correct="3">
+      <div class="q">Q3. 臺灣附近海域漁業資源豐富，主要與下列何者有關？</div>
+      <button class="opt">(A) 地軸傾斜 23.5°</button>
+      <button class="opt">(B) 位於三大洋正中央</button>
+      <button class="opt">(C) 全部位於熱帶</button>
+      <button class="opt">(D) 黑潮與中國沿岸流兩股寒暖洋流交會</button>
+      <div class="explain">✔ <b>黑潮（暖流）</b>與<b>中國沿岸流（寒流）</b>在臺灣附近交會，帶來豐富海洋生物資源。</div>
+    </div>
+
+    <div class="quiz" data-correct="0">
+      <div class="q">Q4. 臺灣擁有眾多「特有生物」，最主要的成因是？</div>
+      <button class="opt">(A) 冰河期與大陸相連、冰河期後又分隔，加上島嶼孤立與多樣氣候</button>
+      <button class="opt">(B) 因為緯度最高、終年寒冷</button>
+      <button class="opt">(C) 因為完全沒有任何外來物種</button>
+      <button class="opt">(D) 因為面積是全球最大的島嶼</button>
+      <div class="explain">✔ 冰河期海平面下降與大陸相連、物種遷入，冰河期後再分隔，<b>孤立島嶼＋多樣氣候</b>演化出臺灣特有生物（如紅檜、獼猴、櫻花鉤吻鮭）。</div>
+    </div>
+
+    <div class="quiz" data-correct="2">
+      <div class="q">Q5. 臺灣「地小、人少、資源缺」卻有亮眼經濟表現，主要憑藉什麼？</div>
+      <button class="opt">(A) 天然資源全球最豐富</button>
+      <button class="opt">(B) 人口與土地占全球一半以上</button>
+      <button class="opt">(C) 位居海空航線樞紐、國際貿易發達的優越位置</button>
+      <button class="opt">(D) 完全不依賴對外貿易</button>
+      <div class="explain">✔ 臺灣位於聯繫亞洲東北部與東南部海空航線的 <b>樞紐位置</b>，國際貿易傳統加上優越地理位置，成為經濟發展的基礎。</div>
+    </div>
+  </section>
+
+  <!-- 重點總整理 -->
+  <section class="card" style="background:linear-gradient(135deg,#0f4c75,#1b6ca8);color:#fff;border:none;">
+    <div class="sec-head">
+      <div class="sec-num" style="background:rgba(255,255,255,.2)">★</div>
+      <div><h2 style="color:#fff">一課一圖・重點總整理</h2><div class="sub" style="color:#cfe4f2">範圍 → 位置 → 影響</div></div>
+    </div>
+    <ul style="line-height:2">
+      <li><b>範圍</b>：東經 120°~122°、北緯 22°~25°；面積約 36,000 km²；6 直轄市＋16 縣市</li>
+      <li><b>領土</b>：本島＋澎湖・金門・馬祖・釣魚臺・南海諸島及周邊島嶼</li>
+      <li><b>海陸位置</b>：亞洲大陸東側＋太平洋西側、控南北要道、進亞洲門戶</li>
+      <li><b>鄰國</b>：中國東南方、日韓西南方、菲律賓北方、越南東北方</li>
+      <li><b>生態</b>：溫帶熱帶交界的遷徙中繼站（黑面琵鷺）＋黑潮與沿岸流交會</li>
+      <li><b>特有生物</b>：冰河相連再分隔＋孤立島嶼（紅檜、獼猴、櫻花鉤吻鮭）</li>
+      <li><b>國際貿易</b>：荷蘭據點近四百年傳統＋海空航線樞紐＝經濟發展基礎</li>
+    </ul>
+  </section>
+
+  <div style="text-align:center;margin-top:24px;">
+    <button class="revealbtn" onclick="toggleAll(true)">🔍 全部顯示答案</button>
+    <button class="revealbtn" style="background:var(--sand)" onclick="toggleAll(false)">↩ 全部收合</button>
+  </div>
+
+  <footer>國一上地理・第 2 課 位置對臺灣的影響｜互動講義　－　整合康軒(主)・翰林・南一</footer>
+</div>
+
+<script>
+  // fill-in blanks
+  document.querySelectorAll('.blank[data-a]').forEach(function(b){
+    b.textContent='';
+    b.addEventListener('click',function(){
+      if(b.classList.contains('show')){b.classList.remove('show');b.textContent='';}
+      else{b.classList.add('show');b.textContent=b.dataset.a;}
+    });
+  });
+  function toggleAll(show){
+    document.querySelectorAll('.blank[data-a]').forEach(function(b){
+      if(show){b.classList.add('show');b.textContent=b.dataset.a;}
+      else{b.classList.remove('show');b.textContent='';}
+    });
+  }
+  // quiz
+  document.querySelectorAll('.quiz').forEach(function(q){
+    var correct=+q.dataset.correct;
+    var opts=q.querySelectorAll('.opt');
+    var exp=q.querySelector('.explain');
+    opts.forEach(function(o,i){
+      o.addEventListener('click',function(){
+        opts.forEach(function(x){x.classList.remove('correct','wrong');});
+        opts[correct].classList.add('correct');
+        if(i!==correct)o.classList.add('wrong');
+        exp.classList.add('show');
+      });
+    });
+  });
+</script>
+</body>
+</html>

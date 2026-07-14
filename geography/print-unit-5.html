@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理　單元5　臺灣的氣候　列印講義</title>
+<style>
+  :root{--sea:#1b6ca8;--sea-dark:#0f4c75;--sand:#c98a3a;--ink:#222;--line:#bcc9d2;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",serif;
+       color:var(--ink);line-height:1.9;background:#e9eef2;font-size:15px;}
+  .toolbar{
+    position:sticky;top:0;z-index:10;background:var(--sea-dark);color:#fff;
+    padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    font-family:"PingFang TC","Noto Sans TC",sans-serif;
+  }
+  .toolbar b{font-size:15px;margin-right:6px;}
+  .toolbar button{
+    background:#fff;color:var(--sea-dark);border:none;border-radius:6px;
+    padding:7px 14px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:600;
+  }
+  .toolbar button.active{background:var(--sand);color:#fff;}
+  .toolbar .note{font-size:12.5px;opacity:.85;margin-left:auto;}
+  /* A4 sheet：一張 .sheet ＝ 一張實體頁，頁碼與互動版一致 */
+  .sheet{
+    background:#fff;width:210mm;min-height:297mm;margin:16px auto;padding:16mm 15mm 20mm;
+    box-shadow:0 3px 14px rgba(0,0,0,.15);position:relative;
+  }
+  .pageno{
+    position:absolute;bottom:8mm;right:15mm;font-size:12px;color:#888;
+    font-family:"PingFang TC","Noto Sans TC",sans-serif;
+  }
+  h1{font-size:22px;text-align:center;color:var(--sea-dark);margin:0 0 2px;letter-spacing:1px;
+     font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+  .subtitle{text-align:center;color:var(--sand);font-size:13px;margin:0 0 4px;letter-spacing:2px;}
+  .stuinfo{display:flex;justify-content:space-between;border-top:2px solid var(--sea);
+           border-bottom:1px solid var(--line);padding:6px 2px;font-size:13px;margin:10px 0 18px;color:#444;}
+  h2{font-size:16px;color:#fff;background:var(--sea);padding:5px 12px;border-radius:5px;
+     margin:16px 0 10px;font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+  h2:first-child{margin-top:0;}
+  h3{font-size:14.5px;color:var(--sea-dark);border-left:4px solid var(--sand);padding-left:9px;margin:14px 0 6px;}
+  p{margin:7px 0;}
+  ul{margin:6px 0;padding-left:22px;}
+  li{margin:4px 0;}
+  .blk{
+    display:inline-block;min-width:78px;border-bottom:1.3px solid #333;text-align:center;
+    color:#c0392b;font-weight:700;padding:0 6px;line-height:1.4;
+  }
+  body.student .blk{color:transparent;}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:center;}
+  th{background:#e8f2f9;color:var(--sea-dark);}
+  td.lead{background:#f4f8fb;font-weight:600;color:var(--sea-dark);width:22%;}
+  .fig{border:1px solid var(--line);border-radius:6px;padding:8px;margin:10px 0;text-align:center;background:#fafcfe;}
+  .fig svg{max-width:100%;height:auto;}
+  .fcap{font-size:11.5px;color:#777;margin-top:4px;}
+  .qbox{border:1px dashed var(--sand);border-radius:6px;padding:8px 12px;margin:8px 0;background:#fdf8f0;}
+  .qbox .qa{color:#c0392b;font-weight:700;}
+  body.student .qbox .qa{color:transparent;border-bottom:1px solid #999;display:inline-block;min-width:120px;}
+  .writeline{border-bottom:1px solid #bbb;height:22px;margin:6px 0;}
+  .summary{background:#f4f8fb;border:1px solid var(--line);border-radius:8px;padding:10px 16px;font-size:13.5px;}
+  @page{size:A4;margin:12mm;}
+  @media print{
+    body{background:#fff;font-size:12.5px;}
+    .toolbar{display:none;}
+    .sheet{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none;
+           page-break-after:always;}
+    .sheet:last-of-type{page-break-after:auto;}
+    .pageno{position:fixed;bottom:4mm;right:6mm;}
+    h2{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    th,td.lead,.qbox,.fig{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body class="student">
+<div class="toolbar">
+  <b>顯示模式：</b>
+  <button id="btnStu" class="active" onclick="setMode('student')">學生作答版（空白）</button>
+  <button id="btnTea" onclick="setMode('teacher')">教師解答版（紅字）</button>
+  <button onclick="window.print()">🖨 列印 / 存 PDF</button>
+  <span class="note">頁碼與互動講義一致（共 4 頁）；列印前先選好模式。</span>
+</div>
+
+<!-- 第 1 頁 -->
+<div class="sheet">
+  <div class="subtitle">國一上地理・認識我們的天空</div>
+  <h1>第 5 課　臺灣的氣候</h1>
+  <div class="stuinfo"><span>班級：____________</span><span>座號：________</span><span>姓名：________________</span></div>
+
+  <h2>一、天氣與天氣四大因子（氣溫、降水）</h2>
+  <h3>1. 什麼是天氣？</h3>
+  <p>天氣：一地 <span class="blk">短時間</span> 內的大氣狀況及變化，如「晴時多雲偶陣雨」。<br>天氣四大因子：<span class="blk">氣溫</span>、<span class="blk">降水</span>、<span class="blk">氣壓</span>、<span class="blk">風</span>。</p>
+  <h3>2. 氣溫</h3>
+  <p>大氣的溫度，以攝氏（<span class="blk">℃</span>）或華氏（℉）為單位；與日照長短、角度及地勢高度有關，會因 <span class="blk">緯度</span> 或 <span class="blk">高度</span> 增加而 <span class="blk">遞減</span>。</p>
+  <h3>3. 降水</h3>
+  <p>空氣遇冷、水氣 <span class="blk">凝結</span> 成液體或固體落下（雨、雪、冰雹），以 <span class="blk">毫米(mm)</span> 為單位。依氣流上升原因分三類：</p>
+  <div class="fig">
+    <svg viewBox="0 0 440 150" width="440">
+      <rect x="0" y="120" width="440" height="30" fill="#e7ddc9"/>
+      <!-- 對流雨 -->
+      <rect x="12" y="120" width="120" height="14" fill="#f0c86a"/>
+      <path d="M72 118 C68 96 78 88 72 74" stroke="#c98a3a" stroke-width="1.5" fill="none"/>
+      <ellipse cx="72" cy="62" rx="34" ry="16" fill="#9db8cc"/>
+      <line x1="56" y1="76" x2="54" y2="88" stroke="#1b6ca8"/><line x1="72" y1="76" x2="70" y2="90" stroke="#1b6ca8"/><line x1="88" y1="76" x2="86" y2="88" stroke="#1b6ca8"/>
+      <text x="72" y="146" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">對流雨</text>
+      <!-- 地形雨 -->
+      <polygon points="160,120 220,66 280,120" fill="#cdb48a" stroke="#a98850"/>
+      <ellipse cx="205" cy="56" rx="30" ry="14" fill="#9db8cc"/>
+      <line x1="190" y1="68" x2="188" y2="80" stroke="#1b6ca8"/><line x1="205" y1="68" x2="203" y2="82" stroke="#1b6ca8"/><line x1="220" y1="68" x2="218" y2="80" stroke="#1b6ca8"/>
+      <text x="220" y="146" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">地形雨</text>
+      <!-- 鋒面雨 -->
+      <polygon points="320,120 320,74 428,98 428,120" fill="#c3d3e0" opacity="0.7"/>
+      <line x1="320" y1="72" x2="428" y2="98" stroke="#1b6ca8" stroke-dasharray="4 3"/>
+      <text x="336" y="70" font-size="9" fill="#c0392b">暖</text><text x="408" y="92" font-size="9" fill="#25507d">冷</text>
+      <line x1="345" y1="98" x2="343" y2="110" stroke="#1b6ca8"/><line x1="368" y1="103" x2="366" y2="115" stroke="#1b6ca8"/><line x1="390" y1="108" x2="388" y2="118" stroke="#1b6ca8"/>
+      <text x="375" y="146" text-anchor="middle" font-size="11" fill="#0f4c75" font-weight="700">鋒面雨</text>
+    </svg>
+    <div class="fcap">三種降水：對流雨（受熱上升）、地形雨（沿坡爬升）、鋒面雨（冷暖交會）</div>
+  </div>
+  <table>
+    <thead><tr><th>類型</th><th>形成原因</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">對流雨</td><td>地表 <span class="blk">受熱</span>，空氣上升致雨（夏季午後雷陣雨）</td></tr>
+      <tr><td class="lead">地形雨</td><td>空氣沿 <span class="blk">山坡</span> 爬升遇冷致雨（迎風坡多雨）</td></tr>
+      <tr><td class="lead">鋒面雨</td><td><span class="blk">冷、暖氣團</span> 交會，暖空氣被抬升致雨（梅雨）</td></tr>
+    </tbody>
+  </table>
+  <div class="pageno">第 1 頁 / 共 4 頁</div>
+</div>
+
+<!-- 第 2 頁 -->
+<div class="sheet">
+  <h2>二、天氣四大因子（氣壓、風）與天氣預報</h2>
+  <h3>1. 氣壓</h3>
+  <p>單位地表面積承受的 <span class="blk">空氣重量</span>，以 <span class="blk">百帕(hPa)</span> 為單位。氣溫愈高或海拔愈高，氣壓 <span class="blk">愈低</span>；反之愈高。</p>
+  <h3>2. 風</h3>
+  <p>風是空氣的 <span class="blk">水平流動</span>，由氣壓 <span class="blk">高</span> 處流向氣壓 <span class="blk">低</span> 處。</p>
+  <div class="fig">
+    <svg viewBox="0 0 380 130" width="380">
+      <circle cx="80" cy="65" r="44" fill="#eaf4fb" stroke="#1b6ca8" stroke-width="1.5"/>
+      <text x="80" y="62" text-anchor="middle" font-size="22" fill="#0f4c75" font-weight="700">H</text>
+      <text x="80" y="80" text-anchor="middle" font-size="11" fill="#0f4c75">高壓</text>
+      <circle cx="300" cy="65" r="44" fill="#fdeaea" stroke="#c0392b" stroke-width="1.5"/>
+      <text x="300" y="62" text-anchor="middle" font-size="22" fill="#a5281b" font-weight="700">L</text>
+      <text x="300" y="80" text-anchor="middle" font-size="11" fill="#a5281b">低壓</text>
+      <line x1="128" y1="65" x2="248" y2="65" stroke="#c98a3a" stroke-width="3"/>
+      <polygon points="248,58 262,65 248,72" fill="#c98a3a"/>
+      <text x="190" y="55" text-anchor="middle" font-size="11" fill="#c98a3a" font-weight="700">風：高 → 低</text>
+    </svg>
+    <div class="fcap">空氣由高壓（H）流向低壓（L），形成風</div>
+  </div>
+  <ul>
+    <li>觀測風包含 <span class="blk">風速</span> 與 <span class="blk">風向</span>；兩地氣壓差愈大，風速 <span class="blk">愈強</span>（m/sec）。</li>
+    <li>風向指風的 <span class="blk">來向</span>；從西方吹來的風稱 <span class="blk">西風</span>。</li>
+  </ul>
+  <h3>3. 天氣預報</h3>
+  <p><span class="blk">中央氣象署</span> 蒐集各測站資料繪成 <span class="blk">地面天氣圖</span>，配合電腦數據分析與 <span class="blk">衛星雲圖</span> 預報天氣。</p>
+  <p class="qbox">觀念小測：風是空氣的水平流動，由氣壓 <span class="qa">高</span> 處流向氣壓 <span class="qa">低</span> 處；氣壓差愈大風速愈 <span class="qa">強</span>。</p>
+  <div class="pageno">第 2 頁 / 共 4 頁</div>
+</div>
+
+<!-- 第 3 頁 -->
+<div class="sheet">
+  <h2>三、氣候與臺灣的氣溫、降水特徵</h2>
+  <h3>1. 天氣 vs. 氣候</h3>
+  <p>氣候：一地 <span class="blk">長時間</span> 的大氣 <span class="blk">平均</span> 狀態（如「竹風蘭雨」），以月均溫、年均溫、<span class="blk">年降水量</span> 等長期平均為指標。<br>天氣看 <b>短時間</b>、氣候看 <b>長時間平均</b>。</p>
+  <h3>2. 臺灣氣溫特徵</h3>
+  <table>
+    <thead><tr><th>項目</th><th>特徵</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">夏季</td><td>全臺平地皆 <span class="blk">高溫</span>，南北氣溫差異 <span class="blk">小</span></td></tr>
+      <tr><td class="lead">冬季</td><td>南部緯度較低，氣溫較北部 <span class="blk">溫暖</span></td></tr>
+      <tr><td class="lead">山區</td><td>氣溫 <span class="blk">低於</span> 平地；冬季高山可 <span class="blk">降雪</span>、夏季為避暑勝地</td></tr>
+    </tbody>
+  </table>
+  <h3>3. 臺灣降水特徵</h3>
+  <table>
+    <thead><tr><th>地區</th><th>降水特徵</th><th>主因</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">北部・東北部</td><td>全年有雨、冬季潮溼</td><td>冬季 <span class="blk">東北季風</span> 迎風</td></tr>
+      <tr><td class="lead">南部</td><td><span class="blk">夏雨冬乾</span></td><td>夏季 <span class="blk">西南季風</span> 帶雨</td></tr>
+      <tr><td class="lead">山區</td><td>降水 <span class="blk">多於</span> 平地</td><td>多 <span class="blk">地形雨</span></td></tr>
+    </tbody>
+  </table>
+  <p>臺灣 <span class="blk">東北部</span> 山區年降水量全臺之冠；<span class="blk">西南部</span> 平原及澎湖群島降水較少。</p>
+  <p class="qbox"><b>歸納：</b>臺灣地處 <span class="qa">低緯</span>，夏熱冬涼、高山偶見積雪；南部夏雨冬乾，北部與東北部受 <span class="qa">東北季風</span> 影響冬季也潮溼多雨。</p>
+  <div class="pageno">第 3 頁 / 共 4 頁</div>
+</div>
+
+<!-- 第 4 頁 -->
+<div class="sheet">
+  <h2>四、臺灣的氣象災害</h2>
+  <p>天氣現象造成生命財產損失即為氣象災害。常見：<span class="blk">颱風</span>、水災、寒害、旱災。</p>
+  <table>
+    <thead><tr><th>災害</th><th>成因與時機</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">水災</td><td>短時間 <span class="blk">強降水</span> 造成淹水；多在五、六月 <span class="blk">梅雨</span> 期、夏季午後雷陣雨、夏秋颱風</td></tr>
+      <tr><td class="lead">寒害</td><td>冬季北方 <span class="blk">冷氣團</span> 南下氣溫驟降（達一定程度稱 <span class="blk">寒流</span>），使 <span class="blk">農漁業</span> 受損</td></tr>
+      <tr><td class="lead">旱災</td><td>長時間連續 <span class="blk">不降水</span> 乾旱；西南部冬至到隔年春季特別易發生</td></tr>
+    </tbody>
+  </table>
+
+  <h2>★ 課後練習（寫在下方線上）</h2>
+  <p>1. 用一句話說明「天氣」和「氣候」的不同，並各舉一例。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>2. 對流雨、地形雨、鋒面雨分別怎麼形成？各舉一個臺灣的例子。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>3. 為什麼臺灣「南部夏雨冬乾、北部全年有雨」？請用季風解釋。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>4. 颱風、水災、寒害、旱災各在什麼季節或情況最容易發生？</p>
+  <div class="writeline"></div><div class="writeline"></div>
+
+  <h2 style="background:var(--sea-dark)">重點總整理</h2>
+  <div class="summary">
+    天氣：短時間大氣狀況，四因子＝氣溫・降水・氣壓・風｜降水三類：對流雨（受熱上升）／地形雨（沿坡爬升）／鋒面雨（冷暖交會）｜
+    氣壓與風：風由高壓→低壓、氣壓差大風速強、風向指來向｜氣候：長時間大氣平均狀態｜
+    臺灣：夏熱冬涼、高山積雪；南部夏雨冬乾、北部與東北部冬季潮溼｜氣象災害：颱風・水災・寒害・旱災。
+  </div>
+  <div style="text-align:center;color:#999;font-size:11px;margin-top:14px;">
+    國一上地理・第 5 課｜整合康軒(主)・翰林・南一
+  </div>
+  <div class="pageno">第 4 頁 / 共 4 頁</div>
+</div>
+
+<script>
+  function setMode(m){
+    document.body.className=m;
+    document.getElementById('btnStu').classList.toggle('active',m==='student');
+    document.getElementById('btnTea').classList.toggle('active',m==='teacher');
+  }
+</script>
+</body>
+</html>
