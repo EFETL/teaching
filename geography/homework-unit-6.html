@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>地理　單元6　認識地圖　作業卷</title>
+<style>
+:root{--main:#2c5f8a;--accent:#e6a800;--subject:#9b59b6;--ok:#1d8a4c;--no:#c0392b;--bg:#eef3f9;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1a1a1a;background:var(--bg);line-height:1.8;font-size:18px;padding:0 0 90px;}
+header{background:linear-gradient(135deg,var(--subject),#2c5f8a);color:#fff;padding:26px 20px 22px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+header .unit-tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 16px;font-size:17px;margin-bottom:8px;}
+header h1{font-size:30px;margin-bottom:6px;letter-spacing:1px;}
+header p{font-size:17px;opacity:.95;}
+.back{display:inline-block;margin-top:14px;color:var(--main);background:#fff;border:2px solid #cdddef;border-radius:20px;padding:6px 18px;font-size:16px;text-decoration:none;}
+.back:hover{background:#eef6ff;}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px;}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d9e2ec;border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.toolbar .tt{font-size:16px;color:#566;margin-right:auto;}
+button.act{font-family:inherit;font-size:17px;font-weight:bold;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;transition:transform .1s,filter .1s;}
+button.act:hover{filter:brightness(1.06);transform:translateY(-1px);}
+button.reveal{background:var(--accent);color:#3a2c00;}
+button.hide{background:#7b8a9a;color:#fff;}
+button.clear{background:#fff;color:var(--main);border:2px solid #cdddef;}
+.score{font-size:17px;font-weight:bold;color:var(--main);background:#eaf3fb;border-radius:10px;padding:8px 14px;}
+section.card{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.sec-h{font-size:21px;font-weight:bold;color:#fff;background:var(--subject);border-radius:8px;padding:8px 16px;margin:-4px 0 16px;display:inline-block;}
+/* 講義條目 */
+.note-pt{font-size:18px;margin:12px 0;padding-left:6px;border-left:4px solid #e3ebf3;}
+.note-pt .lead{font-weight:bold;color:var(--main);margin-right:4px;}
+/* 填空（「？」點擊即顯示答案） */
+span.blank{display:inline-block;min-width:70px;text-align:center;border:2px dashed var(--accent);border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer;color:var(--main);background:#fffdf3;font-weight:bold;user-select:none;transition:all .15s;}
+span.blank::before{content:"？";}
+span.blank:hover{background:#fff6d8;}
+span.blank.on{border:2px solid var(--ok);background:#e7f6ee;color:var(--ok);cursor:default;}
+span.blank.on::before{content:"";}
+/* 解析 */
+.explain{display:none;font-size:16px;background:#f4f8fc;border-left:4px solid var(--main);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;color:#33414f;}
+.explain b{color:var(--main);}
+.show-ans .explain,.q.revealed .explain,.note-pt.revealed .explain{display:block;}
+/* 題目 */
+.q{border-top:1px dashed #d9e2ec;padding:18px 2px 6px;}
+.q:first-of-type{border-top:none;}
+.q-head{display:flex;gap:10px;font-size:18px;margin-bottom:10px;}
+.q-no{flex:0 0 auto;font-weight:bold;color:#fff;background:var(--main);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.q-type{font-size:14px;font-weight:bold;border-radius:6px;padding:2px 8px;align-self:center;}
+.q-type.mc{background:#eaf3fb;color:var(--main);}
+.q-type.fill{background:#fdf0e3;color:#b9690a;}
+.q-stem{flex:1;font-size:18px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px 40px;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}}
+.opt{font-family:inherit;font-size:17px;text-align:left;border:2px solid #d9e2ec;border-radius:10px;padding:10px 14px;background:#fff;cursor:pointer;transition:all .1s;color:#1a1a1a;}
+.opt:hover{border-color:var(--main);background:#f3f8fd;}
+.opt .lab{font-weight:bold;color:var(--main);margin-right:6px;}
+.opt.picked{border-color:var(--main);background:#e8f1fb;}
+.opt.correct{border-color:var(--ok);background:#e7f6ee;}
+.opt.correct .lab{color:var(--ok);}
+.opt.wrong{border-color:var(--no);background:#fceae8;}
+.opt.wrong .lab{color:var(--no);}
+.q .explain{margin-left:40px;}
+.qbtn{margin:8px 0 0 40px;}
+.qbtn button{font-family:inherit;font-size:14px;border:1px solid #cdddef;background:#fff;color:var(--main);border-radius:8px;padding:5px 12px;cursor:pointer;}
+footer.foot{text-align:center;color:#789;font-size:15px;margin-top:26px;}
+/* 頁碼（列印） */
+.page-foot{font-size:12px;color:#667;text-align:center;margin-top:30px;}
+@media print{
+  body{background:#fff;padding:0;font-size:15px;}
+  .toolbar,.back,.qbtn,.nofprint{display:none!important;}
+  header{box-shadow:none;}
+  section.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid;}
+  .show-ans .explain,.explain{display:block;}
+  @page{margin:16mm 14mm 18mm;}
+  @page{@bottom-center{content:"全民補習班　teaching.efetl.com　—　第 " counter(page) " 頁";font-size:12px;color:#555;}}
+  .page-foot{position:fixed;bottom:4mm;left:0;right:0;font-size:12px;}
+}
+</style></head><body>
+<header><div class="unit-tag">地理　單元 6</div>
+<h1>認識地圖</h1><p>作業卷　·　全民補習班 線上教學</p>
+<a class="back" href="./">← 回地理科選單</a></header><div class="wrap"><div class="toolbar"><span class="tt">作業卷　20 題（選擇點選・填空點「？」查看）</span>
+<span class="score" id="score">作答 0/20</span>
+<button class="act reveal" onclick="revealAll()">顯示所有答案與解析</button>
+<button class="act hide" onclick="hideAll()">隱藏答案</button>
+<button class="act clear" onclick="clearAll()">清除重作</button></div><section class="card"><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">1</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於地圖的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>地圖呈現的範圍與實際地區一樣大</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>地圖是地表的縮影</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>每張地圖呈現的訊息都完全相同</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>地圖只能用文字呈現</button></div><div class="explain"><b>解析：</b>地圖是地表縮小後的影像（縮影），範圍都比實際縮小很多，且不同地圖呈現不同訊息，並以符號、線條、顏色呈現。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">2</span><span class="q-type mc">選擇</span><span class="q-stem">規畫旅遊行程、要查街道走向時，最適合選用下列何種地圖？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>世界地圖</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>街道圖</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>氣候圖</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>地質圖</button></div><div class="explain"><b>解析：</b>應依使用目的選擇適當地圖。旅遊規畫行程需要詳細的街道資訊，故選街道圖最適合。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">3</span><span class="q-type mc">選擇</span><span class="q-stem">下列何者「不是」地圖的四個基本要素之一？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>圖名</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>圖例</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>作者姓名</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>比例尺</button></div><div class="explain"><b>解析：</b>地圖的基本要素為圖名、圖例、方向標、比例尺四項，作者姓名並不屬於基本要素。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">4</span><span class="q-type mc">選擇</span><span class="q-stem">地圖上用來指出方位的要素是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>比例尺</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>圖例</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>方向標</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>圖名</button></div><div class="explain"><b>解析：</b>方向標用來指出地圖的方位；若沒有方向標，習慣以圖的上方為北方。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">5</span><span class="q-type mc">選擇</span><span class="q-stem">想知道一張地圖的主要內容是什麼，應該看地圖的哪一個要素？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>圖名</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>比例尺</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>方向標</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>圖例</button></div><div class="explain"><b>解析：</b>圖名可讓人得知地圖的主要內容；圖例說明符號意義、方向標指方位、比例尺表縮小程度。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="3" data-picked=""><div class="q-head"><span class="q-no">6</span><span class="q-type mc">選擇</span><span class="q-stem">地圖上若沒有標示方向標，通常以圖的哪一方為北方？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>下方</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>左方</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>右方</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>上方</button></div><div class="explain"><b>解析：</b>地圖無方位指標（方向標）時，習慣以圖的上方為北方。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">7</span><span class="q-type mc">選擇</span><span class="q-stem">下列關於大比例尺地圖的敘述，何者正確？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>縮小程度大、範圍大</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>內容較簡略</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>縮小程度小、內容較詳盡、範圍小</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>適合呈現整個世界</button></div><div class="explain"><b>解析：</b>大比例尺地圖（如街道圖）縮小程度小，內容詳盡但涵蓋範圍小；小比例尺地圖才是縮小程度大、內容簡略、範圍大。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">8</span><span class="q-type mc">選擇</span><span class="q-stem">呈現整個世界、涵蓋範圍最大的地圖，通常屬於下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>小比例尺地圖</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>大比例尺地圖</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>等高線地形圖</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>地形剖面圖</button></div><div class="explain"><b>解析：</b>世界地圖涵蓋範圍大、縮小程度大、內容較簡略，屬於小比例尺地圖。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">9</span><span class="q-type mc">選擇</span><span class="q-stem">在等高線地形圖上，若某地區的等高線排列十分密集，代表該地的地勢如何？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>地勢平緩</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>地勢陡峭</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>為平原</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>為海洋</button></div><div class="explain"><b>解析：</b>等高線愈密集表示地勢愈陡；愈稀疏則表示地勢愈平緩。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">10</span><span class="q-type mc">選擇</span><span class="q-stem">把地表高度相同的各點連成閉合滑順曲線，所繪成的地圖是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>地形剖面圖</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>等高線地形圖</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>分層設色圖</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>等溫線圖</button></div><div class="explain"><b>解析：</b>等高線地形圖是把高度相同的各點連成閉合滑順的曲線，用以表示地表的高低起伏。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="0" data-picked=""><div class="q-head"><span class="q-no">11</span><span class="q-type mc">選擇</span><span class="q-stem">將等高線地形圖上不同高度範圍塗上不同顏色，用以表示地表高度分布的地圖是？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>分層設色圖</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>地形剖面圖</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>等雨量線圖</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>街道圖</button></div><div class="explain"><b>解析：</b>分層設色圖是在等高線地形圖的基礎上，將不同高度範圍塗上不同顏色，呈現地表高度的分布與變化。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">12</span><span class="q-type mc">選擇</span><span class="q-stem">沿某一截線、以垂直為高度、水平為距離，畫出地表高低起伏的圖是下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>等高線地形圖</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>分層設色圖</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>地形剖面圖</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>等溫線圖</button></div><div class="explain"><b>解析：</b>地形剖面圖是沿某一截線，以垂直方向表示高度、水平方向表示距離，畫出地表的高低起伏。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="2" data-picked=""><div class="q-head"><span class="q-no">13</span><span class="q-type mc">選擇</span><span class="q-stem">「同一時間內，把氣溫相同的各點連成的線」稱為下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>等高線</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>等雨量線</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>等溫線</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>剖面線</button></div><div class="explain"><b>解析：</b>等溫線是同一時間內，連接氣溫相同各點所成的線；等雨量線則是連接年雨量相同的各點。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">14</span><span class="q-type mc">選擇</span><span class="q-stem">一地的「年雨量」是如何計算出來的？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>一年中雨量最多月份的雨量</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>一年十二個月降雨量的總和</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>一年的平均氣溫</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>一天的降雨量</button></div><div class="explain"><b>解析：</b>年雨量＝一年十二個月降雨量的總和；等雨量線即連接年雨量相同的各點。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="mc" data-ans="1" data-picked=""><div class="q-head"><span class="q-no">15</span><span class="q-type mc">選擇</span><span class="q-stem">若地圖上 5 公分代表實際 1 公里（100000 公分），則此地圖的比例尺為下列何者？</span></div><div class="opts"><button class="opt" onclick="pickMC(this.closest('.q'),0,this)"><span class="lab">(A)</span>1:5000</button><button class="opt" onclick="pickMC(this.closest('.q'),1,this)"><span class="lab">(B)</span>1:20000</button><button class="opt" onclick="pickMC(this.closest('.q'),2,this)"><span class="lab">(C)</span>1:100000</button><button class="opt" onclick="pickMC(this.closest('.q'),3,this)"><span class="lab">(D)</span>1:500000</button></div><div class="explain"><b>解析：</b>1 公里＝100000 公分，圖上 5 公分代表 100000 公分，故 1 公分代表 100000÷5＝20000 公分，比例尺為 1:20000。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="縮影"><div class="q-head"><span class="q-no">16</span><span class="q-type fill">填充</span><span class="q-stem">地圖是地表的縮小影像，這種影像稱為地表的「<span class="blank" data-ans="縮影"></span>」。</span></div><div class="explain"><b>解析：</b>地圖是地表的縮影，把地表縮小後呈現出來。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="方向標|方位標"><div class="q-head"><span class="q-no">17</span><span class="q-type fill">填充</span><span class="q-stem">地圖的四個基本要素為：圖名、圖例、<span class="blank" data-ans="方向標"></span>、比例尺。</span></div><div class="explain"><b>解析：</b>地圖基本要素為圖名、圖例、方向標、比例尺，方向標用以指出方位。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="密集"><div class="q-head"><span class="q-no">18</span><span class="q-type fill">填充</span><span class="q-stem">等高線地形圖中，地勢愈陡，等高線排列愈<span class="blank" data-ans="密集"></span>（填「密集」或「稀疏」）。</span></div><div class="explain"><b>解析：</b>地勢愈陡，等高線排列愈密集；地勢愈緩則愈稀疏。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="小"><div class="q-head"><span class="q-no">19</span><span class="q-type fill">填充</span><span class="q-stem">涵蓋範圍大、內容較簡略（如世界地圖）的地圖，屬於「<span class="blank" data-ans="小"></span>比例尺地圖」（填「大」或「小」）。</span></div><div class="explain"><b>解析：</b>小比例尺地圖縮小程度大、內容較簡略、涵蓋範圍大，世界地圖即為一例。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div><div class="q" data-type="fill" data-ans="50000|5萬"><div class="q-head"><span class="q-no">20</span><span class="q-type fill">填充</span><span class="q-stem">若地圖上 2 公分代表實際 1 公里（100000 公分），則比例尺為 1:<span class="blank" data-ans="50000"></span>。</span></div><div class="explain"><b>解析：</b>1 公里＝100000 公分，圖上 2 公分代表 100000 公分，1 公分代表 100000÷2＝50000 公分，故比例尺為 1:50000。</div><div class="qbtn"><button onclick="toggleQ(this.closest('.q'))">顯示／隱藏解析</button></div></div></section><footer class="foot">全民補習班　teaching.efetl.com　·　地理科　單元6　認識地圖</footer>
+<div class="page-foot">全民補習班　teaching.efetl.com　—　地理　單元6　認識地圖　作業卷</div>
+</div><script>
+function reveal(el){
+  if(el.classList.contains('on')) return;
+  el.classList.add('on');
+  el.textContent = el.dataset.ans;
+  const c = el.closest('.note-pt, .q');
+  if(c) c.classList.add('revealed');
+}
+document.querySelectorAll('span.blank').forEach(b=>b.addEventListener('click',()=>reveal(b)));
+
+function revealAll(){
+  document.body.classList.add('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{
+    if(!b.classList.contains('on')){b.classList.add('on');b.textContent=b.dataset.ans;}
+  });
+  document.querySelectorAll('.q').forEach(gradeQ);
+  updateScore(true);
+}
+function hideAll(){
+  document.body.classList.remove('show-ans');
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.note-pt,.q').forEach(c=>c.classList.remove('revealed'));
+}
+function clearAll(){
+  document.querySelectorAll('span.blank').forEach(b=>{b.classList.remove('on');b.textContent='';});
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  document.querySelectorAll('.note-pt,.q').forEach(c=>{c.classList.remove('revealed');if(c.dataset)c.dataset.picked='';});
+  document.body.classList.remove('show-ans');
+  updateScore(false);
+}
+function norm(s){return (s||'').trim().replace(/\s+/g,'').toLowerCase();}
+function pickMC(q,idx,btn){
+  const ans=+q.dataset.ans;q.dataset.picked=idx;
+  q.querySelectorAll('.opt').forEach(o=>o.classList.remove('picked','correct','wrong'));
+  btn.classList.add('picked');
+  if(idx===ans){btn.classList.add('correct');}else{btn.classList.add('wrong');
+    q.querySelectorAll('.opt')[ans].classList.add('correct');}
+  q.classList.add('revealed');updateScore(false);
+}
+function gradeQ(q){
+  if(q.dataset.type==='mc'){const ans=+q.dataset.ans;const opts=q.querySelectorAll('.opt');
+    opts.forEach(o=>o.classList.remove('correct','wrong'));opts[ans].classList.add('correct');
+    if(q.dataset.picked!==''&&q.dataset.picked!==undefined){const p=+q.dataset.picked;if(p!==ans)opts[p].classList.add('wrong');}
+  }
+}
+function toggleQ(q){q.classList.toggle('revealed');}
+function updateScore(force){
+  const el=document.getElementById('score');if(!el)return;
+  const qs=document.querySelectorAll('.q');let done=0,right=0;
+  qs.forEach(q=>{
+    if(q.dataset.type==='mc'){if(q.dataset.picked!==''&&q.dataset.picked!==undefined){done++;if(+q.dataset.picked===+q.dataset.ans)right++;}}
+    else{const bl=q.querySelectorAll('span.blank');if(bl.length&&bl.length===q.querySelectorAll('span.blank.on').length)done++;}
+  });
+  el.textContent='作答 '+done+'/'+qs.length+'　答對 '+right;
+}
+</script></body></html>

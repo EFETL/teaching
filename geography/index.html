@@ -5,31 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>地理科 互動學習</title>
 <style>
-  :root { --main:#2c5f8a; --accent:#e6a800; --subject:#9b59b6; --teach:#7b6000; --bg:#eef3f9; }
+  :root { --main:#2c5f8a; }
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:#eef3f9; line-height:1.7; padding:0 0 60px; }
   header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
   header h1 { font-size:30px; margin-bottom:8px; }
   header p { font-size:18px; opacity:.95; }
-  .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
-  .back:hover { background:#eef6ff; }
-  .wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
+  .back { display:inline-block; margin:16px auto 0; color:var(--main); background:#fff; border:2px solid rgba(0,0,0,.08); border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
+  .wrap { max-width:960px; margin:0 auto; padding:22px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
   .intro b { color:var(--main); }
-  .combo { display:block; text-align:center; background:var(--accent); color:#3a2c00; font-size:22px; font-weight:bold; text-decoration:none; padding:16px; border-radius:12px; margin-bottom:14px; box-shadow:0 2px 8px rgba(230,168,0,.4); transition:transform .12s; }
-  .combo:hover { transform:translateY(-2px); }
-  .unit { background:#fff; border-radius:12px; margin-bottom:18px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,.08); }
-  .unit-head { background:var(--main); color:#fff; font-size:21px; font-weight:bold; padding:12px 20px; }
-  .unit-head .n { background:#fff; color:var(--main); border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; font-size:18px; margin-right:10px; }
-  .links { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:16px 20px; }
-  .links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:14px 8px; font-size:18px; color:#1a1a1a; transition:all .12s; text-align:center; }
-  .links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
-  .links a .ic { font-size:26px; }
-  .links a.teach { border-color:#e7d9a8; }
-  .links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
-  .links a small { color:#667; font-size:14px; }
+
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;}
+  .vol{position:relative;display:flex;flex-direction:column;text-decoration:none;color:#1a1a1a;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.12);transition:transform .15s,box-shadow .15s;}
+  .vol.active:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,.20);}
+  .vol-top{position:relative;height:132px;background:linear-gradient(150deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .vol-tag{position:absolute;top:12px;left:14px;z-index:3;color:#fff;font-size:18px;font-weight:800;letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,.28);}
+  .vol-badge{position:absolute;top:14px;right:13px;z-index:3;background:rgba(255,255,255,.30);color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:bold;backdrop-filter:blur(2px);}
+  .vol-emoji{position:relative;z-index:2;font-size:52px;line-height:1;filter:drop-shadow(0 3px 5px rgba(0,0,0,.22));animation:bob 3s ease-in-out infinite;}
+  .vol:nth-child(even) .vol-emoji{animation-delay:.6s;}
+  .vol-halo{position:absolute;z-index:1;width:92px;height:92px;border-radius:50%;background:rgba(255,255,255,.22);}
+  .vol-corner{position:absolute;right:0;bottom:0;z-index:1;width:0;height:0;border-style:solid;border-width:0 0 40px 40px;border-color:transparent transparent rgba(255,255,255,.36) transparent;}
+  .vol-body{padding:14px 18px 18px;flex:1;display:flex;flex-direction:column;}
+  .vol-body h2{font-size:20px;margin-bottom:4px;}
+  .vol-body p{font-size:13.5px;color:#556;line-height:1.5;}
+  .go{display:inline-block;margin-top:11px;align-self:flex-start;color:#fff;border-radius:18px;padding:5px 16px;font-size:14px;font-weight:bold;transition:filter .15s;}
+  .vol.active:hover .go{filter:brightness(1.08);}
+  .go.soon{background:#cbd3dc;color:#fff;}
+  .soon-card{cursor:default;}
+  .soon-card .vol-top{filter:saturate(.55) brightness(1.04);}
+  .soon-card::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.34);pointer-events:none;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.16);z-index:0;}
+  .d1{width:70px;height:70px;top:-24px;right:-14px;}
+  .d2{width:38px;height:38px;bottom:-10px;left:20px;background:rgba(255,255,255,.20);}
+  .d3{width:15px;height:15px;top:24px;right:40px;background:rgba(255,255,255,.28);}
+  @media(max-width:520px){.vgrid{grid-template-columns:1fr 1fr;}.vol-emoji{font-size:44px;}}
+
   footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-  @media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:24px; } }
 </style>
 </head>
 <body>
@@ -39,15 +52,56 @@
   <a class="back" href="../">← 回主選單</a>
 </header>
 <div class="wrap">
-  <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
-  <div class="unit">
-    <div class="unit-head"><span class="n">1</span>位置、地圖與座標系統</div>
-    <div class="links">
-      <a class="teach" href="lecture-unit-1.html"><span class="ic">💻</span>互動講義<small>點問號看答案</small></a>
-      <a href="print-unit-1.html"><span class="ic">🖨️</span>列印講義<small>列印 / PDF</small></a>
-    </div>
+  <div class="intro">依<b>冊別</b>選擇教材，每冊均含<b>重點講義</b>與多份<b>互動考卷</b>：點「？」即顯示填空答案、點選項即批改並顯示解析。</div>
+  <div class="vgrid">
+    <a class="vol active" href="book1.html" style="--c1:#e29a2e;--c2:#f2b350">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第一冊</span>
+        <span class="vol-badge">含先修</span>
+        <span class="vol-emoji">🗺️</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#e29a2e">臺灣地理基礎</h2>
+        <p>位置・海岸・地形・氣候・環境・人口（含先修）</p>
+        <span class="go" style="background:#e29a2e">進入 →</span>
+      </div>
+    </a>
+    <a class="vol active" href="geo-b2-final-review.html" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第二冊</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">🚆</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#10908c">期末複習</h2>
+        <p>交通・都市化・四大區域・離島 ‧ 重點講義＋三回考卷</p>
+        <span class="go" style="background:#10908c">進入 →</span>
+      </div>
+    </a>
+    <a class="vol active" href="geo-b2-r2.html" style="--c1:#2f6fb3;--c2:#4a97da">
+      <div class="vol-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="vol-halo"></span>
+        <span class="vol-tag">第二冊</span>
+        <span class="vol-badge">可線上使用</span>
+        <span class="vol-emoji">🏝️</span>
+        <span class="vol-corner"></span>
+      </div>
+      <div class="vol-body">
+        <h2 style="color:#2f6fb3">進階複習（四～六回）</h2>
+        <p>四大區域・國家公園・離島含題組 ‧ 三份講義＋三回40題</p>
+        <span class="go" style="background:#2f6fb3">進入 →</span>
+      </div>
+    </a>
   </div>
   <footer>地理科 互動學習 ‧ teaching.efetl.com</footer>
 </div>
 </body>
 </html>
+
