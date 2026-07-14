@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理　單元1　位置、地圖與座標系統　填空測驗</title>
+<style>
+  :root{
+    --sea:#1b6ca8;--sea-dark:#0f4c75;--sea-light:#e8f2f9;
+    --sand:#c98a3a;--sand-light:#fbf3e6;--ink:#2b2b2b;--muted:#6b7a86;
+    --ok:#2e9e6b;--line:#dbe6ee;--card-shadow:0 4px 18px rgba(15,76,117,.08);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);line-height:1.9;background:#f4f8fb;font-size:17px;-webkit-text-size-adjust:100%;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 90px;}
+  header.hero{background:linear-gradient(135deg,var(--sea-dark),var(--sea) 60%,#2f8fc4);
+    color:#fff;padding:40px 20px 34px;text-align:center;}
+  header.hero .kicker{font-size:15px;letter-spacing:3px;opacity:.9;margin:0 0 8px;}
+  header.hero h1{margin:0;font-size:27px;letter-spacing:1px;}
+  header.hero .meta{margin-top:12px;font-size:14.5px;opacity:.92;}
+  header.hero .ver{display:inline-block;margin-top:14px;background:rgba(255,255,255,.16);
+    padding:6px 16px;border-radius:999px;font-size:13.5px;}
+  /* sticky toolbar */
+  .toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+    padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);}
+  .toolbar button{background:var(--sea);color:#fff;border:none;border-radius:999px;
+    padding:9px 18px;font-size:14.5px;cursor:pointer;font-family:inherit;font-weight:600;}
+  .toolbar button.ghost{background:#fff;color:var(--sea);border:1.5px solid var(--sea);}
+  .toolbar button:hover{filter:brightness(1.05);}
+  .toolbar .count{font-size:14px;color:var(--muted);margin-left:6px;}
+  .tip{max-width:900px;margin:18px auto 0;padding:12px 18px;background:#fff7e6;
+    border:1px solid #f0d9a8;border-radius:12px;color:#8a6417;font-size:14.5px;
+    display:flex;gap:10px;align-items:flex-start;}
+  /* question card */
+  .q{background:#fff;border-radius:16px;box-shadow:var(--card-shadow);border:1px solid var(--line);
+    padding:20px 22px;margin:18px 0;}
+  .q-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+  .q-num{flex:none;width:36px;height:36px;border-radius:10px;background:var(--sea);color:#fff;
+    font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px;}
+  .q-body{font-size:17px;}
+  .q-body p{margin:8px 0;}
+  .sub{margin:6px 0 6px 8px;}
+  /* fill-in: input + reveal */
+  .fb{display:inline-flex;align-items:center;gap:4px;vertical-align:middle;margin:2px 1px;}
+  .fb input{width:8.5em;max-width:52vw;border:none;border-bottom:2px solid var(--sand);
+    background:var(--sand-light);border-radius:6px 6px 0 0;padding:3px 8px;font-size:16px;
+    font-family:inherit;color:var(--sea-dark);text-align:center;}
+  .fb input:focus{outline:none;border-color:var(--sea);background:#eef6fc;}
+  .fb .key{display:none;background:#e5f3ec;color:#1c6e4a;border:1px solid var(--ok);
+    border-radius:6px;padding:2px 9px;font-size:15px;font-weight:700;white-space:nowrap;}
+  .q.show .fb .key{display:inline-block;}
+  .card-btn{margin-top:12px;background:var(--sea-light);color:var(--sea-dark);border:1px solid #bcd8ea;
+    border-radius:999px;padding:6px 16px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:600;}
+  .card-btn:hover{background:#d8ebf7;}
+  figure{margin:14px 0;text-align:center;}
+  figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;}
+  figcaption{font-size:13px;color:var(--muted);margin-top:6px;}
+  .note{background:var(--sea-light);border-left:4px solid var(--sea);border-radius:10px;
+    padding:8px 14px;margin:8px 0;font-size:14.5px;color:var(--sea-dark);}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:36px;}
+  @media (max-width:560px){ header.hero h1{font-size:21px;} .fb input{width:6.5em;} }
+</style>
+</head>
+<body>
+<header class="hero">
+  <p class="kicker">國一上地理・第 1 課 位置、地圖與座標系統</p>
+  <h1>地如何表示位置・填空測驗</h1>
+  <div class="meta">填空題　每格 2 分　共 100 分　｜　23 題</div>
+  <div class="ver">互動練習版 ・ 對應康軒第 1 課</div>
+</header>
+
+<div class="toolbar">
+  <button onclick="revealAll(true)">🔍 顯示全部答案</button>
+  <button class="ghost" onclick="revealAll(false)">↩ 隱藏全部答案</button>
+  <button class="ghost" onclick="clearAll()">🧹 清除作答</button>
+  <span class="count" id="cnt"></span>
+</div>
+
+<div class="tip">
+  <span style="font-size:18px">💡</span>
+  <span>在灰底格子裡打上你的答案，再按每題的「看答案」對照正解；或按上方「顯示全部答案」。附圖為互動重繪，實際以紙本考卷為準。</span>
+</div>
+
+<div class="wrap">
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">1</div></div>
+    <div class="q-body"><p>若要繪製可看得清楚街道名稱的鄉鎮地圖，則要使用 <span class="fb"><input><span class="key" data-a="大"></span></span> 比例尺（填大或小）。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">2</div></div>
+    <div class="q-body"><p>若地圖上的圖示比例尺為 5 公分代表 50 公里。請問：此張地圖的比例尺是 <span class="fb"><input><span class="key" data-a="百萬分之一（1：1,000,000）"></span></span>。</p>
+    <div class="note">5 公分＝50 公里＝5,000,000 公分，故 5 : 5,000,000 ＝ 1 : 1,000,000。</div></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">3</div></div>
+    <div class="q-body"><p>附圖為地球主要緯線的分布。圖中甲、乙、丙三條緯線度數分別為何？</p>
+    <figure>
+      <svg viewBox="0 0 300 210" width="300" role="img" aria-label="緯線分布圖">
+        <circle cx="150" cy="105" r="90" fill="#eaf4fb" stroke="#1b6ca8" stroke-width="2"/>
+        <clipPath id="g3"><circle cx="150" cy="105" r="90"/></clipPath>
+        <g clip-path="url(#g3)">
+          <line x1="60" y1="105" x2="240" y2="105" stroke="#c98a3a" stroke-width="2.5"/>
+          <line x1="66" y1="72" x2="234" y2="72" stroke="#1b6ca8" stroke-dasharray="5 4"/>
+          <line x1="78" y1="42" x2="222" y2="42" stroke="#1b6ca8" stroke-dasharray="5 4"/>
+        </g>
+        <text x="250" y="46" font-size="15" fill="#0f4c75" font-weight="700">甲</text>
+        <text x="250" y="76" font-size="15" fill="#0f4c75" font-weight="700">乙</text>
+        <text x="250" y="109" font-size="15" fill="#8a5a1a" font-weight="700">丙</text>
+        <text x="150" y="200" text-anchor="middle" font-size="12" fill="#6b7a86">（北半球，由赤道往北）</text>
+      </svg>
+      <figcaption>圖：地球主要緯線（丙為赤道，甲、乙往北）</figcaption>
+    </figure>
+    <p>甲 <span class="fb"><input><span class="key" data-a="66.5°"></span></span>；乙 <span class="fb"><input><span class="key" data-a="23.5°"></span></span>；丙 <span class="fb"><input><span class="key" data-a="0°"></span></span>。</p>
+    <div class="note">丙＝赤道 0°、乙＝回歸線 23.5°、甲＝極圈 66.5°。</div></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">4</div></div>
+    <div class="q-body"><p>地圖主要涵蓋圖名、圖例、方向標和比例尺等要素：<span class="fb"><input><span class="key" data-a="圖名"></span></span> 是說明一張地圖的類型或主要內容，<span class="fb"><input><span class="key" data-a="圖例"></span></span> 是代表各種地表現象的符號，<span class="fb"><input><span class="key" data-a="比例尺"></span></span> 是表示地圖與地表間的長度比例關係，<span class="fb"><input><span class="key" data-a="方向標"></span></span> 是標示方向的指標。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">5</div></div>
+    <div class="q-body"><p>國際上以每 <span class="fb"><input><span class="key" data-a="15°"></span></span> 經度為一個時區，將全球分為 <span class="fb"><input><span class="key" data-a="24"></span></span> 個時區，每一個時區相差 <span class="fb"><input><span class="key" data-a="1"></span></span> 小時。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">6</div></div>
+    <div class="q-body"><p>在比例尺兩萬分之一的地圖上，測得甲、乙兩地的距離為 10 公分，則甲、乙兩地的實際距離是 <span class="fb"><input><span class="key" data-a="200,000 公分（＝2,000 公尺＝2 公里）"></span></span>。</p>
+    <div class="note">10 公分 × 20,000 ＝ 200,000 公分 ＝ 2,000 公尺 ＝ 2 公里。</div></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">7</div></div>
+    <div class="q-body"><p>緯度越 <span class="fb"><input><span class="key" data-a="高"></span></span> 的地方，氣候越寒冷；緯度越 <span class="fb"><input><span class="key" data-a="低"></span></span> 的地方，氣候越炎熱。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">8</div></div>
+    <div class="q-body"><p>請完成圖中方位的名稱：</p>
+    <figure>
+      <svg viewBox="0 0 240 240" width="240" role="img" aria-label="八方位圖">
+        <circle cx="120" cy="120" r="92" fill="#f6fafc" stroke="#dbe6ee"/>
+        <line x1="120" y1="20" x2="120" y2="220" stroke="#c9d6df"/>
+        <line x1="20" y1="120" x2="220" y2="120" stroke="#c9d6df"/>
+        <line x1="52" y1="52" x2="188" y2="188" stroke="#eee3cf"/>
+        <line x1="188" y1="52" x2="52" y2="188" stroke="#eee3cf"/>
+        <text x="120" y="16" text-anchor="middle" font-size="14" fill="#0f4c75" font-weight="700">北</text>
+        <text x="120" y="234" text-anchor="middle" font-size="14" fill="#0f4c75">南</text>
+        <text x="230" y="125" text-anchor="middle" font-size="14" fill="#0f4c75">東</text>
+        <text x="10" y="125" text-anchor="middle" font-size="14" fill="#0f4c75">西</text>
+        <text x="182" y="46" font-size="15" fill="#c0392b" font-weight="700">甲</text>
+        <text x="182" y="200" font-size="15" fill="#c0392b" font-weight="700">乙</text>
+        <text x="48" y="200" font-size="15" fill="#c0392b" font-weight="700">丙</text>
+        <text x="48" y="46" font-size="15" fill="#c0392b" font-weight="700">丁</text>
+        <circle cx="120" cy="120" r="4" fill="#c98a3a"/>
+      </svg>
+      <figcaption>圖：八方位（甲右上、乙右下、丙左下、丁左上）</figcaption>
+    </figure>
+    <p>(1) 甲：<span class="fb"><input><span class="key" data-a="東北方"></span></span>；(2) 乙：<span class="fb"><input><span class="key" data-a="東南方"></span></span>；(3) 丙：<span class="fb"><input><span class="key" data-a="西南方"></span></span>；(4) 丁：<span class="fb"><input><span class="key" data-a="西北方"></span></span>。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">9</div></div>
+    <div class="q-body"><p>將地球分為南、北半球的緯線是 <span class="fb"><input><span class="key" data-a="赤道"></span></span>。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">10</div></div>
+    <div class="q-body"><p>一張地圖主要包含了 <span class="fb"><input><span class="key" data-a="圖名"></span></span>、<span class="fb"><input><span class="key" data-a="圖例"></span></span>、方向標和 <span class="fb"><input><span class="key" data-a="比例尺"></span></span> 等幾項要素。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">11</div></div>
+    <div class="q-body"><p>藉由經度和緯度構成的座標系統，可表達出一地的 <span class="fb"><input><span class="key" data-a="絕對"></span></span> 位置。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">12</div></div>
+    <div class="q-body"><p>與赤道平行的圓圈線，我們稱為 <span class="fb"><input><span class="key" data-a="緯線"></span></span>。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">13</div></div>
+    <div class="q-body"><p>0° 緯線稱為 <span class="fb"><input><span class="key" data-a="赤道"></span></span>。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">14</div></div>
+    <div class="q-body"><p>若甲地位在東經 15°、南緯 40°，乙地位在西經 60°、北緯 10°，則兩地時間相差 <span class="fb"><input><span class="key" data-a="5"></span></span> 小時。</p>
+    <div class="note">經度差 ＝ 15° ＋ 60° ＝ 75°，75° ÷ 15° ＝ 5 小時（時差只看經度）。</div></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">15</div></div>
+    <div class="q-body"><p>全球氣候分成熱帶、溫帶和寒帶：北回歸線到南回歸線之間屬於 <span class="fb"><input><span class="key" data-a="熱"></span></span> 帶氣候區，回歸線到極圈之間屬於 <span class="fb"><input><span class="key" data-a="溫"></span></span> 帶氣候區，極圈到極點之間屬於 <span class="fb"><input><span class="key" data-a="寒"></span></span> 帶氣候區。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">16</div></div>
+    <div class="q-body"><p>經線的方向是 <span class="fb"><input><span class="key" data-a="南北向"></span></span>，緯線的方向是 <span class="fb"><input><span class="key" data-a="東西向"></span></span>。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">17</div></div>
+    <div class="q-body"><p>地球是由 <span class="fb"><input><span class="key" data-a="西"></span></span> 向 <span class="fb"><input><span class="key" data-a="東"></span></span> 自轉，每 <span class="fb"><input><span class="key" data-a="15"></span></span> 度定為一個時區。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">18</div></div>
+    <div class="q-body"><p>北半球每年夏至時，太陽會直射 <span class="fb"><input><span class="key" data-a="北回歸"></span></span> 線；每年冬至時，太陽會直射 <span class="fb"><input><span class="key" data-a="南回歸"></span></span> 線。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">19</div></div>
+    <div class="q-body"><p>附圖為以緯度畫分的全球氣候帶。請寫出甲、乙、丙的氣候類型：</p>
+    <figure>
+      <svg viewBox="0 0 300 210" width="300" role="img" aria-label="氣候帶圖">
+        <circle cx="150" cy="105" r="90" fill="#eaf4fb" stroke="#1b6ca8" stroke-width="2"/>
+        <clipPath id="c19"><circle cx="150" cy="105" r="90"/></clipPath>
+        <g clip-path="url(#c19)">
+          <rect x="60" y="15" width="180" height="30" fill="#dbeafc"/>
+          <rect x="60" y="45" width="180" height="30" fill="#cfe6d6"/>
+          <rect x="60" y="75" width="180" height="60" fill="#fbe9c8"/>
+          <rect x="60" y="135" width="180" height="30" fill="#cfe6d6"/>
+          <rect x="60" y="165" width="180" height="30" fill="#dbeafc"/>
+          <line x1="60" y1="105" x2="240" y2="105" stroke="#c98a3a" stroke-width="2"/>
+        </g>
+        <text x="150" y="33" text-anchor="middle" font-size="15" fill="#25507d" font-weight="700">丙</text>
+        <text x="150" y="64" text-anchor="middle" font-size="15" fill="#1c6e4a" font-weight="700">乙</text>
+        <text x="150" y="99" text-anchor="middle" font-size="15" fill="#8a5a1a" font-weight="700">甲</text>
+        <text x="248" y="108" font-size="11" fill="#8a5a1a">赤道</text>
+      </svg>
+      <figcaption>圖：以緯度畫分的氣候帶（甲居中，往兩極為乙、丙）</figcaption>
+    </figure>
+    <p>甲 <span class="fb"><input><span class="key" data-a="熱帶"></span></span>；乙 <span class="fb"><input><span class="key" data-a="溫帶"></span></span>；丙 <span class="fb"><input><span class="key" data-a="寒帶"></span></span>。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">20</div></div>
+    <div class="q-body"><p>請觀察地圖，將代號（Ａ～Ｄ）填入對應的地圖要素欄位中（對照紙本考卷附圖）：</p>
+    <p class="sub">(1) 圖名 <span class="fb"><input><span class="key" data-a="（C）"></span></span>；(2) 圖例 <span class="fb"><input><span class="key" data-a="（B）"></span></span>；(3) 比例尺 <span class="fb"><input><span class="key" data-a="（A）"></span></span>；(4) 方向標 <span class="fb"><input><span class="key" data-a="（D）"></span></span>。</p>
+    <div class="note">解答卷答案：(1)(C)　(2)(B)　(3)(A)　(4)(D)。</div></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">21</div></div>
+    <div class="q-body"><p>將全球氣候分成熱帶、溫帶和寒帶的畫分依據是利用 <span class="fb"><input><span class="key" data-a="緯"></span></span> 線。（填經線或緯線）</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">22</div></div>
+    <div class="q-body"><p>附圖為快樂鎮某部分的街道圖，請回答下列問題：</p>
+    <figure>
+      <svg viewBox="0 0 360 300" width="360" role="img" aria-label="快樂鎮街道格網圖">
+        <!-- grid 5 cols (1-5) x 4 rows (A-D) -->
+        <g stroke="#ccd8e2" fill="none">
+          <rect x="40" y="30" width="300" height="240"/>
+          <line x1="100" y1="30" x2="100" y2="270"/><line x1="160" y1="30" x2="160" y2="270"/>
+          <line x1="220" y1="30" x2="220" y2="270"/><line x1="280" y1="30" x2="280" y2="270"/>
+          <line x1="40" y1="90" x2="340" y2="90"/><line x1="40" y1="150" x2="340" y2="150"/>
+          <line x1="40" y1="210" x2="340" y2="210"/>
+        </g>
+        <!-- column numbers 1-5 -->
+        <g font-size="13" fill="#6b7a86" text-anchor="middle">
+          <text x="70" y="24">1</text><text x="130" y="24">2</text><text x="190" y="24">3</text><text x="250" y="24">4</text><text x="310" y="24">5</text>
+        </g>
+        <!-- row letters A-D -->
+        <g font-size="13" fill="#6b7a86" text-anchor="middle">
+          <text x="30" y="64">A</text><text x="30" y="124">B</text><text x="30" y="184">C</text><text x="30" y="244">D</text>
+        </g>
+        <!-- N arrow -->
+        <g><polygon points="325,285 320,297 330,297" fill="#0f4c75"/><text x="325" y="283" font-size="11" fill="#0f4c75" text-anchor="middle">北</text></g>
+        <!-- landmarks: (col,row) center at x=40+60*col-30, y=30+60*rowIndex-30 ; rowIndex A=1..D=4 -->
+        <g font-size="12" text-anchor="middle" fill="#1a1a1a">
+          <text x="130" y="124">圖書館</text>            <!-- (2,B) -->
+          <text x="190" y="124">體育場</text>            <!-- (3,B) -->
+          <text x="70"  y="184">公園</text>              <!-- (1,C) -->
+          <text x="130" y="184" fill="#c0392b" font-weight="700">安平國小</text>  <!-- (2,C) -->
+          <text x="190" y="184" fill="#1b6ca8" font-weight="700">警察局</text>    <!-- (3,C) -->
+          <text x="250" y="184">家</text>                <!-- (4,C) -->
+          <text x="190" y="244">火車站</text>            <!-- (3,D) -->
+          <text x="250" y="244" fill="#c98a3a" font-weight="700">郵局</text>      <!-- (4,D) -->
+        </g>
+      </svg>
+      <figcaption>圖：快樂鎮街道格網圖（欄 1～5、列 A～D，上方為北）</figcaption>
+    </figure>
+    <p class="sub">(1) 警察局的網格位置應如何表示？ <span class="fb"><input><span class="key" data-a="（3，C）"></span></span></p>
+    <p class="sub">(2) 在警察局正西方的目標物是 <span class="fb"><input><span class="key" data-a="安平國小"></span></span>。</p>
+    <p class="sub">(3) 網格座標（4，D）的目標物是 <span class="fb"><input><span class="key" data-a="郵局"></span></span>。</p>
+    <p class="sub">(4) 圖書館位於公園的哪一個方向？ <span class="fb"><input><span class="key" data-a="東北方"></span></span></p>
+    <p class="sub">(5) 小明想從家裡出發到體育場跑步，他應朝哪一方向前進？ <span class="fb"><input><span class="key" data-a="西北方"></span></span></p>
+    <p class="sub">(6) 「火車站位於安平國小的東南方」是屬於哪一種位置的敘述方式？ <span class="fb"><input><span class="key" data-a="相對位置"></span></span></p>
+    </div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><div class="q-num">23</div></div>
+    <div class="q-body"><p>為了使全球各地的時間能有一致的表達方式，以通過經度 <span class="fb"><input><span class="key" data-a="0"></span></span> 度 <span class="fb"><input><span class="key" data-a="本初經"></span></span> 線的「格林威治時間」，當作國際標準時間。</p></div>
+    <button class="card-btn" onclick="toggleCard(this)">看答案</button>
+  </div>
+
+  <footer>國一上地理・第 1 課「地如何表示位置」填空測驗（互動版）　－　每格 2 分・共 100 分</footer>
+</div>
+
+<script>
+  // fill answers into key spans
+  document.querySelectorAll('.key[data-a]').forEach(function(k){ k.textContent = '✔ ' + k.dataset.a; });
+  var cnt = document.getElementById('cnt');
+  var totalCards = document.querySelectorAll('.q').length;
+  function updateCount(){
+    var shown = document.querySelectorAll('.q.show').length;
+    cnt.textContent = '已對答 ' + shown + ' / ' + totalCards + ' 題';
+  }
+  function toggleCard(btn){
+    var q = btn.closest('.q');
+    q.classList.toggle('show');
+    btn.textContent = q.classList.contains('show') ? '收合答案' : '看答案';
+    updateCount();
+  }
+  function revealAll(show){
+    document.querySelectorAll('.q').forEach(function(q){
+      q.classList.toggle('show', show);
+      var b = q.querySelector('.card-btn');
+      if(b) b.textContent = show ? '收合答案' : '看答案';
+    });
+    updateCount();
+  }
+  function clearAll(){
+    document.querySelectorAll('.fb input').forEach(function(i){ i.value=''; });
+  }
+  updateCount();
+</script>
+</body>
+</html>
