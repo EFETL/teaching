@@ -46,15 +46,12 @@
     background:#fff;border-radius:18px;box-shadow:var(--card-shadow);
     padding:28px 30px;margin:26px 0;border:1px solid var(--line);
   }
-  .sec-head{display:flex;align-items:center;gap:14px;margin:0 0 18px;}
-  .sec-num{
-    flex:none;width:44px;height:44px;border-radius:12px;background:var(--sea);
-    color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;
-  }
-  .sec-head h2{margin:0;font-size:22px;color:var(--sea-dark);}
-  .sec-head .sub{font-size:13px;color:var(--muted);font-weight:400;margin-top:2px;}
+  /* 主體 h2／h3（文字與列印版一致） */
+  h2{font-size:20px;color:#fff;background:var(--sea);padding:8px 16px;border-radius:8px;
+     margin:0 0 16px;}
+  h2.dark{background:var(--sea-dark);}
   h3{font-size:18px;color:var(--sea-dark);border-left:5px solid var(--sand);
-     padding-left:12px;margin:26px 0 12px;}
+     padding-left:12px;margin:24px 0 12px;}
   p{margin:10px 0;}
   ul{margin:10px 0;padding-left:22px;}
   li{margin:7px 0;}
@@ -78,16 +75,36 @@
   .note b{color:var(--sea-dark);}
   .compare{background:var(--sand-light);border-left-color:var(--sand);}
   .compare b{color:var(--sand);}
+  /* 觀念小測 qbox（列印版主體元素） */
+  .qbox{border:1.5px dashed var(--sand);border-radius:12px;padding:12px 18px;
+        margin:16px 0;background:var(--sand-light);font-size:15.5px;}
+  /* 課後練習作答線 */
+  .writeline{border-bottom:1.5px solid #c3d0d9;height:26px;margin:8px 0;}
+  /* 重點總整理 */
+  .summary{background:var(--sea-light);border:1px solid var(--line);border-radius:12px;
+           padding:14px 18px;font-size:15.5px;line-height:1.9;}
+  .credit{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px;}
   /* table */
   table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15.5px;}
   th,td{border:1px solid var(--line);padding:10px 12px;text-align:center;}
   th{background:var(--sea);color:#fff;font-weight:600;}
   tbody tr:nth-child(even){background:#f6fafc;}
-  td.lead{background:var(--sea-light);font-weight:600;color:var(--sea-dark);}
+  td.lead{background:var(--sea-light);font-weight:600;color:var(--sea-dark);width:22%;}
   /* svg figure */
   figure{margin:18px 0;text-align:center;}
   figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;}
   figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;}
+  /* 延伸補充區標頭 */
+  .extra-band{
+    background:linear-gradient(135deg,#6b4b1e,var(--sand));color:#fff;border:none;
+  }
+  .extra-band h2{background:transparent;padding:0;margin:0;font-size:22px;}
+  .extra-band .sub{color:#f3e4cf;font-size:13.5px;margin-top:4px;}
+  .sec-head{display:flex;align-items:center;gap:14px;}
+  .sec-num{
+    flex:none;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.2);
+    color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;
+  }
   /* quiz */
   .quiz{background:#fff;border:2px solid var(--sea-light);border-radius:14px;padding:18px 20px;margin:16px 0;}
   .quiz .q{font-weight:600;margin-bottom:10px;}
@@ -118,7 +135,7 @@
   footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;}
   .goal-list{list-style:none;padding:0;}
   .goal-list li{padding-left:28px;position:relative;}
-  .goal-list li::before{content:"✔";position:absolute;left:0;color:var(--ok);font-weight:700;}
+  .goal-list li::before{content:"✔";position:absolute;left:0;color:#ffe9c7;font-weight:700;}
 </style>
 </head>
 <body>
@@ -131,52 +148,28 @@
 
 <div class="tip">
   <span style="font-size:18px">💡</span>
-  <span>灰底的 <span class="blank show" style="cursor:default">?</span> 是填空。點一下 <b>?</b> 就會翻出答案，再點一下收合；先自己想，再對答案，效果最好！</span>
+  <span>灰底的 <span class="blank show" style="cursor:default">?</span> 是填空。點一下 <b>?</b> 就會翻出答案，再點一下收合；先自己想，再對答案，效果最好！本講義主體內容與紙本列印版完全一致。</span>
 </div>
 
 <div class="wrap">
 
+  <!-- ============ 第 1 頁 ============ -->
   <div class="pagemark"><span>📄 第 1 頁 / 共 4 頁</span></div>
 
-  <!-- 學習目標 -->
   <section class="card">
-    <div class="sec-head">
-      <div class="sec-num" style="background:var(--sand)">◎</div>
-      <div><h2 style="color:var(--sand)">學習目標</h2><div class="sub">核心問題：天氣和氣候有什麼不一樣？臺灣的氣候長什麼樣子？</div></div>
-    </div>
-    <ul class="goal-list">
-      <li>能區分 <strong class="k">天氣</strong> 與 <strong class="k">氣候</strong>，並說出天氣的四大因子。</li>
-      <li>認識 <strong class="k">氣溫、降水、氣壓、風</strong> 的意義與觀測方式。</li>
-      <li>了解 <strong class="k">三種降水類型</strong> 與 <strong class="k">高低壓與風</strong> 的關係。</li>
-      <li>歸納 <strong class="k">臺灣氣溫與降水</strong> 的特徵，並認識常見的 <strong class="k">氣象災害</strong>。</li>
-    </ul>
-  </section>
+    <h2>一、天氣與天氣四大因子（氣溫、降水）</h2>
 
-  <!-- 一、天氣與四大天氣因子 -->
-  <section class="card">
-    <div class="sec-head">
-      <div class="sec-num">1</div>
-      <div><h2>今天的天氣如何？</h2><div class="sub">5-1　天氣與天氣四大因子（氣溫、降水）</div></div>
-    </div>
+    <h3>1. 什麼是天氣？</h3>
+    <p>天氣：一地 <span class="blank" data-a="短時間">短時間</span> 內的大氣狀況及變化，如「晴時多雲偶陣雨」。<br>天氣四大因子：<span class="blank" data-a="氣溫">氣溫</span>、<span class="blank" data-a="降水">降水</span>、<span class="blank" data-a="氣壓">氣壓</span>、<span class="blank" data-a="風">風</span>。</p>
 
-    <h3>一、什麼是天氣？</h3>
-    <p><strong class="k">天氣</strong>：一地 <span class="blank" data-a="短時間">短時間</span> 內的大氣狀況及其變化，例如氣象報告說的「<span class="blank" data-a="晴時多雲偶陣雨">晴時多雲偶陣雨</span>」。</p>
-    <div class="note"><b>天氣四大因子：</b><span class="blank" data-a="氣溫">氣溫</span>、<span class="blank" data-a="降水">降水</span>、<span class="blank" data-a="氣壓">氣壓</span>、<span class="blank" data-a="風">風</span>。掌握這四項，就能描述一地的天氣。</div>
+    <h3>2. 氣溫</h3>
+    <p>大氣的溫度，以攝氏（<span class="blank" data-a="℃">℃</span>）或華氏（℉）為單位；與日照長短、角度及地勢高度有關，會因 <span class="blank" data-a="緯度">緯度</span> 或 <span class="blank" data-a="高度">高度</span> 增加而 <span class="blank" data-a="遞減">遞減</span>。</p>
 
-    <h3>二、氣溫 Temperature</h3>
-    <ul>
-      <li>指 <span class="blank" data-a="大氣的溫度">大氣的溫度</span>，常以攝氏（<span class="blank" data-a="℃">℃</span>）或華氏（℉）為單位。</li>
-      <li>高低與 <span class="blank" data-a="日照長短、角度">日照長短、角度</span> 及 <span class="blank" data-a="地勢高度">地勢高度</span> 有關。</li>
-      <li>一般會因 <span class="blank" data-a="緯度">緯度</span> 或 <span class="blank" data-a="高度">高度</span> 增加而 <span class="blank" data-a="遞減">遞減</span>（愈高愈冷）。</li>
-    </ul>
-
-    <h3>三、降水 Precipitation</h3>
-    <p>空氣遇冷，水氣 <span class="blank" data-a="凝結">凝結</span> 成液體或固體從空中落下，如雨、雪、冰雹，以 <span class="blank" data-a="毫米(mm)">毫米(mm)</span> 為單位。依 <b>氣流上升的原因</b> 分為三類：</p>
+    <h3>3. 降水</h3>
+    <p>空氣遇冷、水氣 <span class="blank" data-a="凝結">凝結</span> 成液體或固體落下（雨、雪、冰雹），以 <span class="blank" data-a="毫米(mm)">毫米(mm)</span> 為單位。依氣流上升原因分三類：</p>
     <figure>
       <svg viewBox="0 0 460 230" width="460" role="img" aria-label="三種降水類型示意圖">
-        <!-- ground -->
         <rect x="0" y="180" width="460" height="50" fill="#e7ddc9"/>
-        <!-- 對流雨 -->
         <g>
           <rect x="10" y="180" width="130" height="20" fill="#f0c86a"/>
           <text x="75" y="195" text-anchor="middle" font-size="11" fill="#7a5a1a">熱地表受熱</text>
@@ -187,7 +180,6 @@
           <line x1="95" y1="118" x2="92" y2="132" stroke="#1b6ca8" stroke-width="2"/>
           <text x="75" y="222" text-anchor="middle" font-size="13" fill="#0f4c75" font-weight="700">對流雨</text>
         </g>
-        <!-- 地形雨 -->
         <g>
           <polygon points="165,180 235,110 305,180" fill="#cdb48a" stroke="#a98850"/>
           <path d="M170 172 C185 150 195 135 205 122" stroke="#c98a3a" stroke-width="2" fill="none" marker-end="url(#up1)"/>
@@ -197,7 +189,6 @@
           <line x1="232" y1="120" x2="229" y2="134" stroke="#1b6ca8" stroke-width="2"/>
           <text x="235" y="222" text-anchor="middle" font-size="13" fill="#0f4c75" font-weight="700">地形雨</text>
         </g>
-        <!-- 鋒面雨 -->
         <g>
           <polygon points="335,180 335,120 445,150 445,180" fill="#c3d3e0" opacity="0.7"/>
           <line x1="335" y1="118" x2="445" y2="150" stroke="#1b6ca8" stroke-width="2" stroke-dasharray="5 3"/>
@@ -214,49 +205,40 @@
           </marker>
         </defs>
       </svg>
-      <figcaption>圖 1｜三種降水：對流雨（地表受熱上升）、地形雨（沿山坡爬升）、鋒面雨（冷暖氣團交會）</figcaption>
+      <figcaption>三種降水：對流雨（受熱上升）、地形雨（沿坡爬升）、鋒面雨（冷暖交會）</figcaption>
     </figure>
     <table>
       <thead><tr><th>類型</th><th>形成原因</th></tr></thead>
       <tbody>
-        <tr><td class="lead">對流雨</td><td>地表 <span class="blank" data-a="受熱">受熱</span>，空氣受熱上升成雲致雨（如夏季午後雷陣雨）</td></tr>
-        <tr><td class="lead">地形雨</td><td>空氣沿 <span class="blank" data-a="山坡">山坡</span> 爬升，遇冷凝結降雨（迎風坡多雨）</td></tr>
-        <tr><td class="lead">鋒面雨</td><td><span class="blank" data-a="冷、暖氣團">冷、暖氣團</span> 交會，暖空氣被抬升致雨（如梅雨）</td></tr>
+        <tr><td class="lead">對流雨</td><td>地表 <span class="blank" data-a="受熱">受熱</span>，空氣上升致雨（夏季午後雷陣雨）</td></tr>
+        <tr><td class="lead">地形雨</td><td>空氣沿 <span class="blank" data-a="山坡">山坡</span> 爬升遇冷致雨（迎風坡多雨）</td></tr>
+        <tr><td class="lead">鋒面雨</td><td><span class="blank" data-a="冷、暖氣團">冷、暖氣團</span> 交會，暖空氣被抬升致雨（梅雨）</td></tr>
       </tbody>
     </table>
   </section>
 
+  <!-- ============ 第 2 頁 ============ -->
   <div class="pagemark"><span>📄 第 2 頁 / 共 4 頁</span></div>
 
-  <!-- 二、氣壓、風與天氣預報 -->
   <section class="card">
-    <div class="sec-head">
-      <div class="sec-num">2</div>
-      <div><h2>氣壓、風與天氣預報</h2><div class="sub">5-1　天氣四大因子（氣壓、風）＋天氣預報</div></div>
-    </div>
+    <h2>二、天氣四大因子（氣壓、風）與天氣預報</h2>
 
-    <h3>一、氣壓 Air Pressure</h3>
-    <ul>
-      <li>指單位地表面積上所承受的 <span class="blank" data-a="空氣重量">空氣重量</span>，以 <span class="blank" data-a="百帕(hPa)">百帕(hPa)</span> 為單位。</li>
-      <li>氣溫 <b>愈高</b> 或海拔 <b>愈高</b>，氣壓 <span class="blank" data-a="愈低">愈低</span>；反之則愈高。</li>
-    </ul>
+    <h3>1. 氣壓</h3>
+    <p>單位地表面積承受的 <span class="blank" data-a="空氣重量">空氣重量</span>，以 <span class="blank" data-a="百帕(hPa)">百帕(hPa)</span> 為單位。氣溫愈高或海拔愈高，氣壓 <span class="blank" data-a="愈低">愈低</span>；反之愈高。</p>
 
-    <h3>二、風 Wind</h3>
-    <p><strong class="k">風</strong>是空氣的 <span class="blank" data-a="水平流動">水平流動</span>。空氣會由氣壓 <span class="blank" data-a="高">高</span> 處流向氣壓 <span class="blank" data-a="低">低</span> 處。</p>
+    <h3>2. 風</h3>
+    <p>風是空氣的 <span class="blank" data-a="水平流動">水平流動</span>，由氣壓 <span class="blank" data-a="高">高</span> 處流向氣壓 <span class="blank" data-a="低">低</span> 處。</p>
     <figure>
       <svg viewBox="0 0 420 180" width="420" role="img" aria-label="高壓低壓與風示意">
         <rect x="0" y="0" width="420" height="180" fill="#f6fafc"/>
-        <!-- High -->
         <circle cx="90" cy="90" r="55" fill="#eaf4fb" stroke="#1b6ca8" stroke-width="2"/>
         <circle cx="90" cy="90" r="34" fill="#dbeafc" stroke="#7fb4d6"/>
         <text x="90" y="86" text-anchor="middle" font-size="26" fill="#0f4c75" font-weight="700">H</text>
         <text x="90" y="106" text-anchor="middle" font-size="12" fill="#0f4c75">高壓</text>
-        <!-- Low -->
         <circle cx="330" cy="90" r="55" fill="#fdeaea" stroke="#c0392b" stroke-width="2"/>
         <circle cx="330" cy="90" r="34" fill="#f7d4d4" stroke="#dd8a8a"/>
         <text x="330" y="86" text-anchor="middle" font-size="26" fill="#a5281b" font-weight="700">L</text>
         <text x="330" y="106" text-anchor="middle" font-size="12" fill="#a5281b">低壓</text>
-        <!-- wind arrow -->
         <line x1="150" y1="90" x2="268" y2="90" stroke="#c98a3a" stroke-width="4" marker-end="url(#w1)"/>
         <text x="209" y="78" text-anchor="middle" font-size="13" fill="#c98a3a" font-weight="700">風（空氣流動）</text>
         <text x="209" y="120" text-anchor="middle" font-size="12" fill="#6b7a86">高 → 低</text>
@@ -266,78 +248,123 @@
           </marker>
         </defs>
       </svg>
-      <figcaption>圖 2｜空氣由高壓（H）流向低壓（L），就形成風</figcaption>
+      <figcaption>空氣由高壓（H）流向低壓（L），形成風</figcaption>
     </figure>
     <ul>
-      <li>觀測風包含 <span class="blank" data-a="風速">風速</span> 與 <span class="blank" data-a="風向">風向</span> 兩項。</li>
-      <li>兩地氣壓差 <b>愈大</b>，風速 <span class="blank" data-a="愈強">愈強</span>（單位 m/sec）。</li>
-      <li>風向是指風的 <span class="blank" data-a="來向">來向</span>：從西方吹來的風稱為 <span class="blank" data-a="西風">西風</span>。</li>
+      <li>觀測風包含 <span class="blank" data-a="風速">風速</span> 與 <span class="blank" data-a="風向">風向</span>；兩地氣壓差愈大，風速 <span class="blank" data-a="愈強">愈強</span>（m/sec）。</li>
+      <li>風向指風的 <span class="blank" data-a="來向">來向</span>；從西方吹來的風稱 <span class="blank" data-a="西風">西風</span>。</li>
     </ul>
 
-    <h3>三、天氣預報</h3>
-    <p><span class="blank" data-a="中央氣象署">中央氣象署</span> 蒐集各地測站資料，繪成 <span class="blank" data-a="地面天氣圖">地面天氣圖</span>，再配合電腦數據分析與 <span class="blank" data-a="衛星雲圖">衛星雲圖</span> 來預報天氣。</p>
-    <div class="note compare"><b>三版比較：</b>康軒、翰林、南一都以「看氣象報告決定要不要帶傘」情境切入，重點一致——<b>天氣＝短時間、四因子（溫、水、壓、風）＝觀測要素</b>。</div>
+    <h3>3. 天氣預報</h3>
+    <p><span class="blank" data-a="中央氣象署">中央氣象署</span> 蒐集各測站資料繪成 <span class="blank" data-a="地面天氣圖">地面天氣圖</span>，配合電腦數據分析與 <span class="blank" data-a="衛星雲圖">衛星雲圖</span> 預報天氣。</p>
+    <p class="qbox">觀念小測：風是空氣的水平流動，由氣壓 <span class="blank" data-a="高">高</span> 處流向氣壓 <span class="blank" data-a="低">低</span> 處；氣壓差愈大風速愈 <span class="blank" data-a="強">強</span>。</p>
   </section>
 
+  <!-- ============ 第 3 頁 ============ -->
   <div class="pagemark"><span>📄 第 3 頁 / 共 4 頁</span></div>
 
-  <!-- 三、氣候與臺灣的氣溫、降水 -->
   <section class="card">
-    <div class="sec-head">
-      <div class="sec-num">3</div>
-      <div><h2>臺灣的氣候特色</h2><div class="sub">5-2　氣候與臺灣的氣溫、降水特徵</div></div>
-    </div>
+    <h2>三、氣候與臺灣的氣溫、降水特徵</h2>
 
-    <h3>一、天氣 vs. 氣候</h3>
-    <p><strong class="k">氣候</strong>：一地 <span class="blank" data-a="長時間">長時間</span> 的大氣 <span class="blank" data-a="平均">平均</span> 狀態，如俗諺「<span class="blank" data-a="竹風蘭雨">竹風蘭雨</span>」。常以 <span class="blank" data-a="月均溫">月均溫</span>、年均溫、<span class="blank" data-a="年降水量">年降水量</span> 等長期平均為指標。</p>
-    <div class="note"><b>一句話分辨：</b>天氣看 <b>短時間</b>（今天會不會下雨）；氣候看 <b>長時間平均</b>（這個地方一年到頭的樣子）。</div>
+    <h3>1. 天氣 vs. 氣候</h3>
+    <p>氣候：一地 <span class="blank" data-a="長時間">長時間</span> 的大氣 <span class="blank" data-a="平均">平均</span> 狀態（如「竹風蘭雨」），以月均溫、年均溫、<span class="blank" data-a="年降水量">年降水量</span> 等長期平均為指標。<br>天氣看 <b>短時間</b>、氣候看 <b>長時間平均</b>。</p>
 
-    <h3>二、臺灣的氣溫特徵</h3>
-    <ul>
-      <li>夏季全臺平地皆 <span class="blank" data-a="高溫">高溫</span>，南北氣溫差異 <span class="blank" data-a="小">小</span>。</li>
-      <li>南部緯度較 <span class="blank" data-a="低">低</span>，冬季氣溫較北部 <span class="blank" data-a="溫暖">溫暖</span>。</li>
-      <li>山區地勢高，氣溫 <span class="blank" data-a="低於">低於</span> 平地；冬季高山可見 <span class="blank" data-a="降雪">降雪</span>，夏季則是 <span class="blank" data-a="避暑">避暑</span> 勝地。</li>
-    </ul>
+    <h3>2. 臺灣氣溫特徵</h3>
+    <table>
+      <thead><tr><th>項目</th><th>特徵</th></tr></thead>
+      <tbody>
+        <tr><td class="lead">夏季</td><td>全臺平地皆 <span class="blank" data-a="高溫">高溫</span>，南北氣溫差異 <span class="blank" data-a="小">小</span></td></tr>
+        <tr><td class="lead">冬季</td><td>南部緯度較低，氣溫較北部 <span class="blank" data-a="溫暖">溫暖</span></td></tr>
+        <tr><td class="lead">山區</td><td>氣溫 <span class="blank" data-a="低於">低於</span> 平地；冬季高山可 <span class="blank" data-a="降雪">降雪</span>、夏季為避暑勝地</td></tr>
+      </tbody>
+    </table>
 
-    <h3>三、臺灣的降水特徵</h3>
-    <ul>
-      <li><b>南北差異</b>：南部 <span class="blank" data-a="夏雨冬乾">夏雨冬乾</span>、北部 <span class="blank" data-a="全年有雨">全年有雨</span>。因為夏季盛行 <span class="blank" data-a="西南季風">西南季風</span>、冬季吹 <span class="blank" data-a="東北季風">東北季風</span>；南部降水集中夏季，北部各月較平均。</li>
-      <li><b>地勢差異</b>：山區降水 <span class="blank" data-a="多於">多於</span> 平地（多 <span class="blank" data-a="地形雨">地形雨</span>）。<span class="blank" data-a="東北部">東北部</span> 山區年降水量全臺之冠；<span class="blank" data-a="西南部">西南部</span> 平原及澎湖群島降水較少。</li>
-    </ul>
+    <h3>3. 臺灣降水特徵</h3>
     <table>
       <thead><tr><th>地區</th><th>降水特徵</th><th>主因</th></tr></thead>
       <tbody>
         <tr><td class="lead">北部・東北部</td><td>全年有雨、冬季潮溼</td><td>冬季 <span class="blank" data-a="東北季風">東北季風</span> 迎風</td></tr>
-        <tr><td class="lead">南部</td><td>夏雨冬乾</td><td>夏季 <span class="blank" data-a="西南季風">西南季風</span> 帶雨</td></tr>
-        <tr><td class="lead">山區</td><td>降水多於平地</td><td>多 <span class="blank" data-a="地形雨">地形雨</span></td></tr>
+        <tr><td class="lead">南部</td><td><span class="blank" data-a="夏雨冬乾">夏雨冬乾</span></td><td>夏季 <span class="blank" data-a="西南季風">西南季風</span> 帶雨</td></tr>
+        <tr><td class="lead">山區</td><td>降水 <span class="blank" data-a="多於">多於</span> 平地</td><td>多 <span class="blank" data-a="地形雨">地形雨</span></td></tr>
       </tbody>
     </table>
-    <div class="note compare"><b>歸納：</b>臺灣地處 <span class="blank" data-a="低緯">低緯</span>，夏季高溫炎熱、冬季略涼、高山偶見積雪；南部夏雨冬乾，北部與東北部受 <b>東北季風</b> 影響，冬季也潮溼多雨。</div>
+    <p>臺灣 <span class="blank" data-a="東北部">東北部</span> 山區年降水量全臺之冠；<span class="blank" data-a="西南部">西南部</span> 平原及澎湖群島降水較少。</p>
+    <p class="qbox"><b>歸納：</b>臺灣地處 <span class="blank" data-a="低緯">低緯</span>，夏熱冬涼、高山偶見積雪；南部夏雨冬乾，北部與東北部受 <span class="blank" data-a="東北季風">東北季風</span> 影響冬季也潮溼多雨。</p>
   </section>
 
+  <!-- ============ 第 4 頁 ============ -->
   <div class="pagemark"><span>📄 第 4 頁 / 共 4 頁</span></div>
 
-  <!-- 四、氣象災害 -->
   <section class="card">
-    <div class="sec-head">
-      <div class="sec-num">4</div>
-      <div><h2>臺灣的氣象災害</h2><div class="sub">天氣現象造成生命財產損失，即為氣象災害</div></div>
-    </div>
-    <p>常見的氣象災害包括 <span class="blank" data-a="颱風">颱風</span>、豪大雨引起的 <span class="blank" data-a="水災">水災</span>、<span class="blank" data-a="寒害">寒害</span> 與 <span class="blank" data-a="旱災">旱災</span>。</p>
+    <h2>四、臺灣的氣象災害</h2>
+    <p>天氣現象造成生命財產損失即為氣象災害。常見：<span class="blank" data-a="颱風">颱風</span>、水災、寒害、旱災。</p>
     <table>
       <thead><tr><th>災害</th><th>成因與時機</th></tr></thead>
       <tbody>
-        <tr><td class="lead">水災</td><td>短時間 <span class="blank" data-a="強降水">強降水</span> 造成低窪、沿海淹水；多在五、六月 <span class="blank" data-a="梅雨">梅雨</span> 期鋒面滯留、夏季午後雷陣雨、夏秋 <span class="blank" data-a="颱風">颱風</span>。</td></tr>
-        <tr><td class="lead">寒害</td><td>冬季亞洲北部 <span class="blank" data-a="冷氣團">冷氣團</span> 南下使氣溫驟降（降溫達一定程度稱 <span class="blank" data-a="寒流">寒流</span>），低溫影響健康並使 <span class="blank" data-a="農漁業">農漁業</span> 受損。</td></tr>
-        <tr><td class="lead">旱災</td><td>長時間連續 <span class="blank" data-a="不降水">不降水</span> 發生乾旱；臺灣 <span class="blank" data-a="西南部">西南部</span> 每年冬至到隔年春季特別易乾旱，時間太長會導致民生用水短缺。</td></tr>
+        <tr><td class="lead">水災</td><td>短時間 <span class="blank" data-a="強降水">強降水</span> 造成淹水；多在五、六月 <span class="blank" data-a="梅雨">梅雨</span> 期、夏季午後雷陣雨、夏秋颱風</td></tr>
+        <tr><td class="lead">寒害</td><td>冬季北方 <span class="blank" data-a="冷氣團">冷氣團</span> 南下氣溫驟降（達一定程度稱 <span class="blank" data-a="寒流">寒流</span>），使 <span class="blank" data-a="農漁業">農漁業</span> 受損</td></tr>
+        <tr><td class="lead">旱災</td><td>長時間連續 <span class="blank" data-a="不降水">不降水</span> 乾旱；西南部冬至到隔年春季特別易發生</td></tr>
       </tbody>
     </table>
+  </section>
 
-    <!-- 隨堂練習 -->
-    <div class="sec-head" style="margin-top:30px">
-      <div class="sec-num" style="background:var(--ok)">✎</div>
-      <div><h2 style="color:var(--ok)">隨堂即時練習</h2><div class="sub">點選項目立即對答案、看解析</div></div>
+  <section class="card">
+    <h2>★ 課後練習（寫在下方線上）</h2>
+    <p>1. 用一句話說明「天氣」和「氣候」的不同，並各舉一例。</p>
+    <div class="writeline"></div><div class="writeline"></div>
+    <p>2. 對流雨、地形雨、鋒面雨分別怎麼形成？各舉一個臺灣的例子。</p>
+    <div class="writeline"></div><div class="writeline"></div>
+    <p>3. 為什麼臺灣「南部夏雨冬乾、北部全年有雨」？請用季風解釋。</p>
+    <div class="writeline"></div><div class="writeline"></div>
+    <p>4. 颱風、水災、寒害、旱災各在什麼季節或情況最容易發生？</p>
+    <div class="writeline"></div><div class="writeline"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="dark">重點總整理</h2>
+    <div class="summary">
+      天氣：短時間大氣狀況，四因子＝氣溫・降水・氣壓・風｜降水三類：對流雨（受熱上升）／地形雨（沿坡爬升）／鋒面雨（冷暖交會）｜
+      氣壓與風：風由高壓→低壓、氣壓差大風速強、風向指來向｜氣候：長時間大氣平均狀態｜
+      臺灣：夏熱冬涼、高山積雪；南部夏雨冬乾、北部與東北部冬季潮溼｜氣象災害：颱風・水災・寒害・旱災。
     </div>
+    <div class="credit">國一上地理・第 5 課｜整合康軒(主)・翰林・南一</div>
+  </section>
+
+  <!-- ============ 延伸補充（不在紙本上） ============ -->
+  <div class="pagemark"><span>📌 延伸補充（不在紙本上）</span></div>
+
+  <section class="card extra-band">
+    <div class="sec-head">
+      <div class="sec-num">📌</div>
+      <div>
+        <h2>延伸補充（不在紙本上）</h2>
+        <div class="sub">以下為互動講義額外提供，紙本列印版沒有：學習目標、英文對照、隨堂測驗、全部顯示答案。</div>
+      </div>
+    </div>
+    <ul class="goal-list" style="margin-top:16px">
+      <li><b>學習目標</b>：能區分 <strong style="color:#ffe9c7">天氣</strong> 與 <strong style="color:#ffe9c7">氣候</strong>，並說出天氣的四大因子。</li>
+      <li>認識 <strong style="color:#ffe9c7">氣溫、降水、氣壓、風</strong> 的意義與觀測方式。</li>
+      <li>了解 <strong style="color:#ffe9c7">三種降水類型</strong> 與 <strong style="color:#ffe9c7">高低壓與風</strong> 的關係。</li>
+      <li>歸納 <strong style="color:#ffe9c7">臺灣氣溫與降水</strong> 的特徵，並認識常見的 <strong style="color:#ffe9c7">氣象災害</strong>。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h3 style="margin-top:0">補充：關鍵詞英文對照</h3>
+    <table>
+      <thead><tr><th>中文</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="lead">氣溫</td><td>Temperature</td></tr>
+        <tr><td class="lead">降水</td><td>Precipitation</td></tr>
+        <tr><td class="lead">氣壓</td><td>Air Pressure</td></tr>
+        <tr><td class="lead">風</td><td>Wind</td></tr>
+        <tr><td class="lead">氣候</td><td>Climate</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h3 style="margin-top:0">隨堂即時練習（點選項目立即對答案、看解析）</h3>
 
     <div class="quiz" data-correct="1">
       <div class="q">Q1. 氣象報告說「今天晴時多雲偶陣雨」，這是在描述什麼？</div>
@@ -383,42 +410,12 @@
       <button class="opt">(D) 颱風</button>
       <div class="explain">✔ 冷氣團南下、氣溫驟降造成低溫災害 → <b>寒害</b>（降溫達一定程度時稱寒流）。</div>
     </div>
-  </section>
 
-  <!-- 課後練習 -->
-  <section class="card">
-    <div class="sec-head">
-      <div class="sec-num" style="background:var(--sand)">✐</div>
-      <div><h2 style="color:var(--sand)">課後思考練習</h2><div class="sub">試著用完整句子寫下來</div></div>
+    <div style="text-align:center;margin-top:20px;">
+      <button class="revealbtn" onclick="toggleAll(true)">🔍 全部顯示答案</button>
+      <button class="revealbtn" style="background:var(--sand)" onclick="toggleAll(false)">↩ 全部收合</button>
     </div>
-    <ul>
-      <li>用一句話說明「天氣」和「氣候」有什麼不同，並各舉一個生活例子。</li>
-      <li>對流雨、地形雨、鋒面雨分別是怎麼形成的？各舉一個臺灣的例子。</li>
-      <li>為什麼臺灣「南部夏雨冬乾、北部全年有雨」？請用季風解釋。</li>
-      <li>颱風、水災、寒害、旱災各在什麼季節或情況下最容易發生？</li>
-    </ul>
   </section>
-
-  <!-- 重點總整理 -->
-  <section class="card" style="background:linear-gradient(135deg,#0f4c75,#1b6ca8);color:#fff;border:none;">
-    <div class="sec-head">
-      <div class="sec-num" style="background:rgba(255,255,255,.2)">★</div>
-      <div><h2 style="color:#fff">一課一圖・重點總整理</h2><div class="sub" style="color:#cfe4f2">天氣 → 氣候 → 臺灣特徵 → 災害</div></div>
-    </div>
-    <ul style="line-height:2">
-      <li><b>天氣</b>：短時間的大氣狀況；四大因子＝氣溫、降水、氣壓、風</li>
-      <li><b>降水三類</b>：對流雨（受熱上升）｜地形雨（沿坡爬升）｜鋒面雨（冷暖交會）</li>
-      <li><b>氣壓與風</b>：風由高壓→低壓；氣壓差大風速強；風向指來向</li>
-      <li><b>氣候</b>：長時間的大氣平均狀態（月均溫、年降水量）</li>
-      <li><b>臺灣</b>：夏熱冬涼、高山積雪；南部夏雨冬乾、北部與東北部冬季潮溼</li>
-      <li><b>氣象災害</b>：颱風、水災、寒害、旱災</li>
-    </ul>
-  </section>
-
-  <div style="text-align:center;margin-top:24px;">
-    <button class="revealbtn" onclick="toggleAll(true)">🔍 全部顯示答案</button>
-    <button class="revealbtn" style="background:var(--sand)" onclick="toggleAll(false)">↩ 全部收合</button>
-  </div>
 
   <footer>國一上地理・第 5 課 臺灣的氣候｜互動講義　－　整合康軒(主)・翰林・南一</footer>
 </div>
