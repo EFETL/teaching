@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1課 位置、地圖與座標系統｜列印講義</title>
+<style>
+  :root{--sea:#1b6ca8;--sea-dark:#0f4c75;--sand:#c98a3a;--ink:#222;--line:#bcc9d2;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",serif;
+       color:var(--ink);line-height:1.9;background:#e9eef2;font-size:15px;}
+  .toolbar{
+    position:sticky;top:0;z-index:10;background:var(--sea-dark);color:#fff;
+    padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    font-family:"PingFang TC","Noto Sans TC",sans-serif;
+  }
+  .toolbar b{font-size:15px;margin-right:6px;}
+  .toolbar button{
+    background:#fff;color:var(--sea-dark);border:none;border-radius:6px;
+    padding:7px 14px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:600;
+  }
+  .toolbar button.active{background:var(--sand);color:#fff;}
+  .toolbar .note{font-size:12.5px;opacity:.85;margin-left:auto;}
+  /* A4 page */
+  .page{
+    background:#fff;width:210mm;min-height:297mm;margin:16px auto;padding:16mm 15mm;
+    box-shadow:0 3px 14px rgba(0,0,0,.15);
+  }
+  h1{font-size:22px;text-align:center;color:var(--sea-dark);margin:0 0 2px;letter-spacing:1px;
+     font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+  .subtitle{text-align:center;color:var(--sand);font-size:13px;margin:0 0 4px;letter-spacing:2px;}
+  .stuinfo{display:flex;justify-content:space-between;border-top:2px solid var(--sea);
+           border-bottom:1px solid var(--line);padding:6px 2px;font-size:13px;margin:10px 0 18px;color:#444;}
+  h2{font-size:16px;color:#fff;background:var(--sea);padding:5px 12px;border-radius:5px;
+     margin:20px 0 10px;font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+  h3{font-size:14.5px;color:var(--sea-dark);border-left:4px solid var(--sand);padding-left:9px;margin:14px 0 6px;}
+  p{margin:7px 0;}
+  ul{margin:6px 0;padding-left:22px;}
+  li{margin:4px 0;}
+  .blk{
+    display:inline-block;min-width:78px;border-bottom:1.3px solid #333;text-align:center;
+    color:#c0392b;font-weight:700;padding:0 6px;line-height:1.4;
+  }
+  body.student .blk{color:transparent;}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:center;}
+  th{background:#e8f2f9;color:var(--sea-dark);}
+  td.lead{background:#f4f8fb;font-weight:600;color:var(--sea-dark);width:22%;}
+  .fig{border:1px solid var(--line);border-radius:6px;padding:8px;margin:10px 0;text-align:center;background:#fafcfe;}
+  .fig svg{max-width:100%;height:auto;}
+  .fcap{font-size:11.5px;color:#777;margin-top:4px;}
+  .qbox{border:1px dashed var(--sand);border-radius:6px;padding:8px 12px;margin:8px 0;background:#fdf8f0;}
+  .qbox .qa{color:#c0392b;font-weight:700;}
+  body.student .qbox .qa{color:transparent;border-bottom:1px solid #999;display:inline-block;min-width:120px;}
+  .writeline{border-bottom:1px solid #bbb;height:22px;margin:6px 0;}
+  .summary{background:#f4f8fb;border:1px solid var(--line);border-radius:8px;padding:10px 16px;font-size:13.5px;}
+  @page{size:A4;margin:12mm;}
+  @media print{
+    body{background:#fff;font-size:12.5px;}
+    .toolbar{display:none;}
+    .page{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none;}
+    h2{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    th,td.lead,.qbox,.fig{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .pb{page-break-before:always;}
+  }
+</style>
+</head>
+<body class="student">
+<div class="toolbar">
+  <b>顯示模式：</b>
+  <button id="btnStu" class="active" onclick="setMode('student')">學生作答版（空白）</button>
+  <button id="btnTea" onclick="setMode('teacher')">教師解答版（紅字）</button>
+  <button onclick="window.print()">🖨 列印 / 存 PDF</button>
+  <span class="note">列印前先選好模式；A4 直式，答案顯示為紅字。</span>
+</div>
+
+<div class="page">
+  <div class="subtitle">國一上地理・應用社會科的技能</div>
+  <h1>第 1 課　位置、地圖與座標系統</h1>
+  <div class="stuinfo"><span>班級：____________</span><span>座號：________</span><span>姓名：________________</span></div>
+
+  <h2>一、位置的表示方式</h2>
+  <h3>1. 相對位置</h3>
+  <p>利用目標物和某明顯 <span class="blk">地標</span> 的 <span class="blk">方位</span> 與 <span class="blk">距離</span> 關係來表示位置。<br>例：小睿坐在講桌的 <span class="blk">南方</span>。</p>
+  <h3>2. 絕對位置</h3>
+  <p>利用一組 <span class="blk">座標系統</span> 表示明確位置。例：網格座標 <span class="blk">(3，A)</span>、<span class="blk">地址</span>、道路交叉口、經緯度。</p>
+  <h3>3. 方位</h3>
+  <p>四方位：東、西、南、北；更精確可細分為 <span class="blk">八方位</span>。地圖若無方向標，通常 <span class="blk">上方</span> 為北方。</p>
+
+  <h2>二、全球經緯線座標系統</h2>
+  <p>地球自轉的假想軸為 <span class="blk">地軸</span>，兩端交於 <span class="blk">南、北極點</span>。</p>
+  <div class="fig">
+    <svg viewBox="0 0 300 180" width="300">
+      <circle cx="120" cy="90" r="74" fill="#eef6fc" stroke="#1b6ca8" stroke-width="1.5"/>
+      <clipPath id="g"><circle cx="120" cy="90" r="74"/></clipPath>
+      <g clip-path="url(#g)" stroke="#7fb4d6" fill="none">
+        <ellipse cx="120" cy="90" rx="74" ry="25"/><ellipse cx="120" cy="90" rx="74" ry="52"/>
+        <ellipse cx="120" cy="90" rx="25" ry="74"/><ellipse cx="120" cy="90" rx="52" ry="74"/>
+        <line x1="46" y1="90" x2="194" y2="90"/>
+      </g>
+      <line x1="120" y1="8" x2="120" y2="172" stroke="#c98a3a" stroke-dasharray="4 3"/>
+      <text x="120" y="6" text-anchor="middle" font-size="10" fill="#c98a3a">北極</text>
+      <text x="198" y="88" font-size="11" fill="#0f4c75">赤道</text>
+      <text x="230" y="60" font-size="11" fill="#1b6ca8">經線→南北向</text>
+      <text x="230" y="120" font-size="11" fill="#1b6ca8">緯線→東西向</text>
+    </svg>
+    <div class="fcap">經線與緯線交織成全球網格座標</div>
+  </div>
+  <table>
+    <thead><tr><th></th><th>經線（子午線）</th><th>緯線</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">方向</td><td><span class="blk">南北向</span></td><td><span class="blk">東西向</span></td></tr>
+      <tr><td class="lead">0 度基準</td><td><span class="blk">本初經線（格林威治）</span></td><td><span class="blk">赤道</span></td></tr>
+      <tr><td class="lead">度數範圍</td><td>東經、西經各 <span class="blk">180</span>°</td><td>北緯、南緯各 <span class="blk">90</span>°</td></tr>
+      <tr><td class="lead">長度</td><td><span class="blk">都相等</span></td><td>向兩極 <span class="blk">縮短</span> 成一點</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pb"></div>
+  <h2>三、經度與時區</h2>
+  <p>地球自轉一周 <span class="blk">360</span>°，一天 <span class="blk">24</span> 小時 → 每小時轉 <span class="blk">15</span>°；全球分 24 時區，每時區跨經度 <span class="blk">15</span>°。</p>
+  <p>國際標準時間以英國格林威治時間 <span class="blk">GMT</span> 為準；地球由西向東轉，<span class="blk">東</span> 邊時間較早。</p>
+  <div class="qbox">
+    <b>時差計算：</b>臺北 120°E 比倫敦 0°快幾小時？<br>
+    (120 − 0) ÷ 15 ＝ <span class="qa">8 小時</span>（GMT+8）。當倫敦 0 時，臺北為 <span class="qa">上午 8 時</span>。
+  </div>
+
+  <h2>四、緯度與氣候</h2>
+  <p>緯度愈高 → 太陽照射角度 <span class="blk">愈斜</span> → 氣溫 <span class="blk">愈低</span>；愈近赤道太陽 <span class="blk">直射</span>，氣溫愈高。</p>
+  <p>受 <span class="blk">地軸傾斜 23.5°</span> 影響，太陽直射帶在南北 <span class="blk">回歸線</span> 間移動，形成四季，且南北半球季節 <span class="blk">相反</span>。</p>
+  <table>
+    <thead><tr><th>氣候帶</th><th>緯度範圍</th><th>特徵</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">熱帶</td><td>赤道～回歸線(<span class="blk">23.5</span>°)</td><td>終年炎熱</td></tr>
+      <tr><td class="lead">溫帶</td><td>回歸線～極圈(<span class="blk">66.5</span>°)</td><td>四季分明</td></tr>
+      <tr><td class="lead">寒帶</td><td>極圈～極點</td><td>終年寒冷</td></tr>
+    </tbody>
+  </table>
+
+  <h2>五、地圖的判讀</h2>
+  <p>地圖＝地表現象依 <span class="blk">比例</span> 縮小繪在平面上。四大要素：</p>
+  <table>
+    <thead><tr><th>要素</th><th>功能</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">圖名</td><td>說明地圖的 <span class="blk">範圍或內容</span></td></tr>
+      <tr><td class="lead">圖例</td><td>代表地表現象的 <span class="blk">簡化符號</span></td></tr>
+      <tr><td class="lead">方向標</td><td>標示 <span class="blk">方向</span>（無則上方為北）</td></tr>
+      <tr><td class="lead">比例尺</td><td>圖上距離與 <span class="blk">實際距離</span> 的比例</td></tr>
+    </tbody>
+  </table>
+  <h3>比例尺</h3>
+  <p>1∶15,000 代表圖上 1 公分＝實際 <span class="blk">150 公尺</span>。</p>
+  <table>
+    <thead><tr><th></th><th>大比例尺</th><th>小比例尺</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">涵蓋範圍</td><td><span class="blk">小</span></td><td><span class="blk">大</span></td></tr>
+      <tr><td class="lead">內容</td><td><span class="blk">詳細</span></td><td><span class="blk">簡略</span></td></tr>
+    </tbody>
+  </table>
+  <div class="qbox">地圖影印放大縮小後，數字法、文字法、圖示法中哪一種仍正確？ <span class="qa">圖示法</span></div>
+
+  <div class="pb"></div>
+  <h2>★ 課後練習（寫在下方線上）</h2>
+  <p>1. 請各舉一例，說明「相對位置」與「絕對位置」的差別。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>2. 為什麼臺北和倫敦會有時差？相差幾小時？請寫出算式。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>3. 為什麼緯度愈高氣溫愈低？並說明南、北半球季節為何相反。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+  <p>4. 大比例尺與小比例尺地圖各適合用在什麼情況？各舉一例。</p>
+  <div class="writeline"></div><div class="writeline"></div>
+
+  <h2 style="background:var(--sea-dark)">重點總整理</h2>
+  <div class="summary">
+    位置：相對（地標＋方位）／絕對（座標）｜經線：南北向、連兩極、0°格林威治、長度相等｜
+    緯線：東西向、0°赤道、往兩極變短｜經度→時區（每 15°一區、GMT、東早西晚、臺北 GMT+8）｜
+    緯度→氣候（地軸斜 23.5°、四季、南北相反、熱／溫／寒帶）｜地圖：圖名・圖例・方向標・比例尺。
+  </div>
+
+  <div style="text-align:center;color:#999;font-size:11px;margin-top:14px;">
+    國一上地理・第 1 課｜整合康軒(主)・翰林・南一
+  </div>
+</div>
+
+<script>
+  function setMode(m){
+    document.body.className=m;
+    document.getElementById('btnStu').classList.toggle('active',m==='student');
+    document.getElementById('btnTea').classList.toggle('active',m==='teacher');
+  }
+</script>
+</body>
+</html>
