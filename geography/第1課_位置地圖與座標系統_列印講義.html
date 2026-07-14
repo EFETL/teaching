@@ -21,10 +21,14 @@
   }
   .toolbar button.active{background:var(--sand);color:#fff;}
   .toolbar .note{font-size:12.5px;opacity:.85;margin-left:auto;}
-  /* A4 page */
-  .page{
-    background:#fff;width:210mm;min-height:297mm;margin:16px auto;padding:16mm 15mm;
-    box-shadow:0 3px 14px rgba(0,0,0,.15);
+  /* A4 sheet：一張 .sheet ＝ 一張實體頁，頁碼與互動版一致 */
+  .sheet{
+    background:#fff;width:210mm;min-height:297mm;margin:16px auto;padding:16mm 15mm 20mm;
+    box-shadow:0 3px 14px rgba(0,0,0,.15);position:relative;
+  }
+  .pageno{
+    position:absolute;bottom:8mm;right:15mm;font-size:12px;color:#888;
+    font-family:"PingFang TC","Noto Sans TC",sans-serif;
   }
   h1{font-size:22px;text-align:center;color:var(--sea-dark);margin:0 0 2px;letter-spacing:1px;
      font-family:"PingFang TC","Noto Sans TC",sans-serif;}
@@ -32,7 +36,8 @@
   .stuinfo{display:flex;justify-content:space-between;border-top:2px solid var(--sea);
            border-bottom:1px solid var(--line);padding:6px 2px;font-size:13px;margin:10px 0 18px;color:#444;}
   h2{font-size:16px;color:#fff;background:var(--sea);padding:5px 12px;border-radius:5px;
-     margin:20px 0 10px;font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+     margin:16px 0 10px;font-family:"PingFang TC","Noto Sans TC",sans-serif;}
+  h2:first-child{margin-top:0;}
   h3{font-size:14.5px;color:var(--sea-dark);border-left:4px solid var(--sand);padding-left:9px;margin:14px 0 6px;}
   p{margin:7px 0;}
   ul{margin:6px 0;padding-left:22px;}
@@ -58,10 +63,12 @@
   @media print{
     body{background:#fff;font-size:12.5px;}
     .toolbar{display:none;}
-    .page{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none;}
+    .sheet{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none;
+           page-break-after:always;}
+    .sheet:last-of-type{page-break-after:auto;}
+    .pageno{position:fixed;bottom:4mm;right:6mm;}
     h2{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     th,td.lead,.qbox,.fig{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    .pb{page-break-before:always;}
   }
 </style>
 </head>
@@ -71,10 +78,11 @@
   <button id="btnStu" class="active" onclick="setMode('student')">學生作答版（空白）</button>
   <button id="btnTea" onclick="setMode('teacher')">教師解答版（紅字）</button>
   <button onclick="window.print()">🖨 列印 / 存 PDF</button>
-  <span class="note">列印前先選好模式；A4 直式，答案顯示為紅字。</span>
+  <span class="note">頁碼與互動講義一致（共 5 頁）；列印前先選好模式。</span>
 </div>
 
-<div class="page">
+<!-- 第 1 頁 -->
+<div class="sheet">
   <div class="subtitle">國一上地理・應用社會科的技能</div>
   <h1>第 1 課　位置、地圖與座標系統</h1>
   <div class="stuinfo"><span>班級：____________</span><span>座號：________</span><span>姓名：________________</span></div>
@@ -86,9 +94,28 @@
   <p>利用一組 <span class="blk">座標系統</span> 表示明確位置。例：網格座標 <span class="blk">(3，A)</span>、<span class="blk">地址</span>、道路交叉口、經緯度。</p>
   <h3>3. 方位</h3>
   <p>四方位：東、西、南、北；更精確可細分為 <span class="blk">八方位</span>。地圖若無方向標，通常 <span class="blk">上方</span> 為北方。</p>
+  <div class="fig">
+    <svg viewBox="0 0 240 150" width="240">
+      <circle cx="120" cy="75" r="60" fill="#f6fafc" stroke="#dbe6ee"/>
+      <line x1="120" y1="15" x2="120" y2="135" stroke="#c9d6df"/>
+      <line x1="60" y1="75" x2="180" y2="75" stroke="#c9d6df"/>
+      <line x1="78" y1="33" x2="162" y2="117" stroke="#eee3cf"/>
+      <line x1="162" y1="33" x2="78" y2="117" stroke="#eee3cf"/>
+      <text x="120" y="12" text-anchor="middle" font-size="12" fill="#0f4c75" font-weight="700">北 N</text>
+      <text x="120" y="148" text-anchor="middle" font-size="12" fill="#0f4c75">南 S</text>
+      <text x="192" y="79" text-anchor="middle" font-size="12" fill="#0f4c75">東 E</text>
+      <text x="48" y="79" text-anchor="middle" font-size="12" fill="#0f4c75">西 W</text>
+      <circle cx="120" cy="75" r="4" fill="#c98a3a"/>
+    </svg>
+    <div class="fcap">八方位（地圖上方通常為北方）</div>
+  </div>
+  <div class="pageno">第 1 頁 / 共 5 頁</div>
+</div>
 
+<!-- 第 2 頁 -->
+<div class="sheet">
   <h2>二、全球經緯線座標系統</h2>
-  <p>地球自轉的假想軸為 <span class="blk">地軸</span>，兩端交於 <span class="blk">南、北極點</span>。</p>
+  <p>地球自轉的假想軸為 <span class="blk">地軸</span>，兩端交於 <span class="blk">南、北極點</span>。由經線與緯線構成的網格，是表示絕對位置最常見的方式。</p>
   <div class="fig">
     <svg viewBox="0 0 300 180" width="300">
       <circle cx="120" cy="90" r="74" fill="#eef6fc" stroke="#1b6ca8" stroke-width="1.5"/>
@@ -101,8 +128,8 @@
       <line x1="120" y1="8" x2="120" y2="172" stroke="#c98a3a" stroke-dasharray="4 3"/>
       <text x="120" y="6" text-anchor="middle" font-size="10" fill="#c98a3a">北極</text>
       <text x="198" y="88" font-size="11" fill="#0f4c75">赤道</text>
-      <text x="230" y="60" font-size="11" fill="#1b6ca8">經線→南北向</text>
-      <text x="230" y="120" font-size="11" fill="#1b6ca8">緯線→東西向</text>
+      <text x="228" y="60" font-size="11" fill="#1b6ca8">經線→南北向</text>
+      <text x="228" y="120" font-size="11" fill="#1b6ca8">緯線→東西向</text>
     </svg>
     <div class="fcap">經線與緯線交織成全球網格座標</div>
   </div>
@@ -115,8 +142,12 @@
       <tr><td class="lead">長度</td><td><span class="blk">都相等</span></td><td>向兩極 <span class="blk">縮短</span> 成一點</td></tr>
     </tbody>
   </table>
+  <p class="qbox">記憶口訣：經線「<b>南北連兩極、長度都相等</b>」；緯線「<b>東西繞圈圈、越靠兩極越短</b>」。</p>
+  <div class="pageno">第 2 頁 / 共 5 頁</div>
+</div>
 
-  <div class="pb"></div>
+<!-- 第 3 頁 -->
+<div class="sheet">
   <h2>三、經度與時區</h2>
   <p>地球自轉一周 <span class="blk">360</span>°，一天 <span class="blk">24</span> 小時 → 每小時轉 <span class="blk">15</span>°；全球分 24 時區，每時區跨經度 <span class="blk">15</span>°。</p>
   <p>國際標準時間以英國格林威治時間 <span class="blk">GMT</span> 為準；地球由西向東轉，<span class="blk">東</span> 邊時間較早。</p>
@@ -136,7 +167,11 @@
       <tr><td class="lead">寒帶</td><td>極圈～極點</td><td>終年寒冷</td></tr>
     </tbody>
   </table>
+  <div class="pageno">第 3 頁 / 共 5 頁</div>
+</div>
 
+<!-- 第 4 頁 -->
+<div class="sheet">
   <h2>五、地圖的判讀</h2>
   <p>地圖＝地表現象依 <span class="blk">比例</span> 縮小繪在平面上。四大要素：</p>
   <table>
@@ -149,17 +184,23 @@
     </tbody>
   </table>
   <h3>比例尺</h3>
-  <p>1∶15,000 代表圖上 1 公分＝實際 <span class="blk">150 公尺</span>。</p>
+  <p>1∶15,000 代表圖上 1 公分＝實際 <span class="blk">150 公尺</span>。表示法有數字法、文字法、<b>圖示法</b>三種。</p>
   <table>
     <thead><tr><th></th><th>大比例尺</th><th>小比例尺</th></tr></thead>
     <tbody>
       <tr><td class="lead">涵蓋範圍</td><td><span class="blk">小</span></td><td><span class="blk">大</span></td></tr>
       <tr><td class="lead">內容</td><td><span class="blk">詳細</span></td><td><span class="blk">簡略</span></td></tr>
+      <tr><td class="lead">舉例</td><td>屏東縣地圖</td><td>臺灣行政區圖</td></tr>
     </tbody>
   </table>
   <div class="qbox">地圖影印放大縮小後，數字法、文字法、圖示法中哪一種仍正確？ <span class="qa">圖示法</span></div>
+  <h3>地圖種類</h3>
+  <p>分 <b>紙本地圖</b> 與 <b>電子地圖</b>；電子地圖可搜尋、彈性縮放、更新快，並結合 <span class="blk">GPS</span> 導航（如 Google 地圖）。</p>
+  <div class="pageno">第 4 頁 / 共 5 頁</div>
+</div>
 
-  <div class="pb"></div>
+<!-- 第 5 頁 -->
+<div class="sheet">
   <h2>★ 課後練習（寫在下方線上）</h2>
   <p>1. 請各舉一例，說明「相對位置」與「絕對位置」的差別。</p>
   <div class="writeline"></div><div class="writeline"></div>
@@ -176,10 +217,10 @@
     緯線：東西向、0°赤道、往兩極變短｜經度→時區（每 15°一區、GMT、東早西晚、臺北 GMT+8）｜
     緯度→氣候（地軸斜 23.5°、四季、南北相反、熱／溫／寒帶）｜地圖：圖名・圖例・方向標・比例尺。
   </div>
-
   <div style="text-align:center;color:#999;font-size:11px;margin-top:14px;">
     國一上地理・第 1 課｜整合康軒(主)・翰林・南一
   </div>
+  <div class="pageno">第 5 頁 / 共 5 頁</div>
 </div>
 
 <script>
