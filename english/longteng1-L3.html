@@ -1278,9 +1278,11 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   function enSentence(el){
     var c=el.cloneNode(true);
-    c.querySelectorAll('.cn').forEach(function(x){x.remove();});
-    c.querySelectorAll('.speak-btn').forEach(function(x){x.remove();});
-    return c.textContent.replace(/\s+/g,' ').trim();
+    c.querySelectorAll('.cn,.g-ex-cn,.speak-btn').forEach(function(x){x.remove();});
+    return c.textContent
+      .replace(/（[^）]*）/g,' ')
+      .replace(/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/g,' ')
+      .replace(/\s+/g,' ').trim();
   }
   function addSentenceBtn(ex){
     if(ex.querySelector('.speak-btn'))return;
@@ -1289,8 +1291,10 @@ document.addEventListener('DOMContentLoaded',function(){
     if(cn)ex.insertBefore(b,cn); else ex.appendChild(b);
   }
   ready(function(){
-    document.querySelectorAll('.v-ex').forEach(addSentenceBtn);   // 字彙例句
-    document.querySelectorAll('.pex').forEach(addSentenceBtn);    // 片語例句
+    document.querySelectorAll('.v-ex').forEach(addSentenceBtn);    // 字彙例句
+    document.querySelectorAll('.pex').forEach(addSentenceBtn);     // 片語例句
+    document.querySelectorAll('.slang-ex').forEach(addSentenceBtn);// 俚語生活例句
+    document.querySelectorAll('.g-ex').forEach(addSentenceBtn);    // 句型文法例句
     document.querySelectorAll('.v-fam span, .v-gsat').forEach(function(el){  // 同義字／反義字
       if(el.querySelector&&el.querySelector('.speak-btn'))return;
       var en=enFromMarker(el.textContent||'');
