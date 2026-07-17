@@ -1182,5 +1182,50 @@ document.addEventListener('DOMContentLoaded',function(){
   window.addEventListener('beforeprint',_mkPages);
 });
 </script>
+<script>
+/* 字彙區補充發音：例句、片語例句、同義字、反義字（重用既有 speak/makeSpeakBtn；列印自動隱藏 .speak-btn） */
+(function(){
+  function ready(fn){ if(document.readyState!=='loading')fn(); else document.addEventListener('DOMContentLoaded',fn); }
+  function mkBtn(text){
+    if(typeof makeSpeakBtn==='function') return makeSpeakBtn(text);
+    var b=document.createElement('button');
+    b.className='speak-btn'; b.textContent='\u{1F50A}'; b.title='點我聽發音：'+text;
+    b.setAttribute('aria-label','發音 '+text);
+    b.onclick=function(ev){ if(typeof speak==='function')speak(text,b,ev); };
+    return b;
+  }
+  function enFromMarker(raw){
+    if(!/≈|同義|反義|反向/.test(raw)) return '';
+    var en='';
+    var m=raw.match(/(?:≈|同義字?|同義詞|反義字?|反義詞|反向)\s*[:：]?\s*([A-Za-z][A-Za-z '\/\-]*)/);
+    if(m){ en=m[1]; }
+    else { var m2=raw.match(/^\s*([A-Za-z][A-Za-z '\/\-]*)/); en=m2?m2[1]:''; }
+    en=en.replace(/\s*\/\s*/g,', ').replace(/\s+/g,' ').trim().replace(/[,\s]+$/,'');
+    return (en && /[A-Za-z]/.test(en) && en.length<=60) ? en : '';
+  }
+  function enSentence(el){
+    var c=el.cloneNode(true);
+    c.querySelectorAll('.cn').forEach(function(x){x.remove();});
+    c.querySelectorAll('.speak-btn').forEach(function(x){x.remove();});
+    return c.textContent.replace(/\s+/g,' ').trim();
+  }
+  function addSentenceBtn(ex){
+    if(ex.querySelector('.speak-btn'))return;
+    var t=enSentence(ex); if(!t)return;
+    var cn=ex.querySelector('.cn'); var b=mkBtn(t);
+    if(cn)ex.insertBefore(b,cn); else ex.appendChild(b);
+  }
+  ready(function(){
+    document.querySelectorAll('.v-ex').forEach(addSentenceBtn);   // 字彙例句
+    document.querySelectorAll('.pex').forEach(addSentenceBtn);    // 片語例句
+    document.querySelectorAll('.v-fam span, .v-gsat').forEach(function(el){  // 同義字／反義字
+      if(el.querySelector&&el.querySelector('.speak-btn'))return;
+      var en=enFromMarker(el.textContent||'');
+      if(!en)return;
+      el.appendChild(mkBtn(en));
+    });
+  });
+})();
+</script>
 </body>
 </html>
