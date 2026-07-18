@@ -1072,7 +1072,10 @@ function buildPrintPages(){
   var root=document.createElement('div'); root.className='print-root';
   root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
   document.body.appendChild(root);
+  var PAGE_BREAKS=[6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,46,48,50,53,57,63,68,69,70,71,76,80,87,90,101,104,107,110,113,117,120,123];                 // 固定分頁點（atom 全域序號）；非空＝決定式分頁、跨瀏覽器一致
   var sheets=[],sheet=null,box=null,pageStart={};
+  var DET=!!(PAGE_BREAKS&&PAGE_BREAKS.length), bs={}, atomIdx=-1, captured=[];
+  if(DET){for(var _b=0;_b<PAGE_BREAKS.length;_b++)bs[PAGE_BREAKS[_b]]=1;}
   function newSheet(){
     sheet=document.createElement('div'); sheet.className='sheet';
     box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
@@ -1085,10 +1088,17 @@ function buildPrintPages(){
     if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
     if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
     if(!sheet)newSheet();
+    atomIdx++;
     var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
-    box.appendChild(w);
-    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+    if(DET){
+      if(bs[atomIdx])newSheet();
+      box.appendChild(w);
+    }else{
+      box.appendChild(w);
+      if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); captured.push(atomIdx); }
+    }
   });
+  if(!DET){try{window.__CAPTURED_BREAKS__=captured;}catch(e){}}
   var total=sheets.length;
   sheets.forEach(function(sh,i){
     sh.querySelector('.ft-title').textContent=title;
