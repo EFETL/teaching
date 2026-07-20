@@ -1,0 +1,1280 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>1-2 整數的加減 · 分節互動練習</title><style>
+:root{--primary:#1f6f8b;--primary-dark:#155263;--accent:#e76f51;--bg:#f6f4ef;--card:#fff;--ink:#2b2b2b;--line:#e5e1d8;--ok:#12a150;--no:#e5484d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-size:16px}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 70px}
+.fig{margin:8px 0;text-align:center}
+.fig svg{background:#fff;border:1px solid var(--line);border-radius:8px;width:100%;max-width:340px;height:auto;max-height:6cm}
+.opts{margin:8px 0;display:flex;flex-wrap:wrap;gap:8px 12px}
+.opt{padding:5px 15px;background:#f4f2ec;border:1.5px solid transparent;border-radius:8px;flex:0 0 auto;font:inherit;color:inherit;cursor:pointer;transition:.12s}
+.opt:hover{background:#e9f2f4}
+.opt.sel{background:#dcefff;border-color:#7ab8e0}
+.opt.ok{background:#e5f7ec;border-color:var(--ok);color:#0a6b38;font-weight:700}
+.opt.no{background:#fdeaea;border-color:var(--no);color:#a71d21}
+.ol{font-weight:700;color:var(--primary)}
+
+header.hero{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:34px 18px 28px;text-align:center;margin-bottom:14px}
+header.hero h1{margin:0 0 8px;font-size:19px}
+header.hero p{margin:3px 0;opacity:.93;font-size:15px}
+.tips{background:#fff8ec;border-left:5px solid var(--accent);border-radius:10px;padding:11px 16px;margin:14px 0;font-size:15px;color:#7a5a3a}
+.printpage{background:transparent;margin:0 0 10px}
+.pageband{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#eaf3f6;border:1px solid #cfe1e7;border-radius:10px;padding:7px 14px;margin:16px 0 6px}
+.pageband .pno{font-weight:800;color:var(--primary-dark);font-size:15px}
+.pageband .pttl{font-size:14px;color:#6b8894}
+.sechd h2{display:inline-block;background:var(--primary);color:#fff;padding:6px 20px;border-radius:26px;margin:6px 0 4px;font-size:18px}
+.sechd p{color:#6b7280;font-size:15px;margin:2px 0 8px}
+.qcard{background:var(--card);border-radius:14px;padding:15px 18px;margin:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.qhead{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.tbadge{color:#fff;font-size:15px;font-weight:700;padding:2px 12px;border-radius:12px}
+.qid{font-weight:700;color:var(--primary-dark);font-size:15px}
+.src{margin-left:auto;font-size:14px;color:#fff;background:var(--accent);padding:2px 11px;border-radius:12px;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.src{margin-left:0}}
+.work{margin-top:10px;border:1.5px dashed #b9c7cd;border-radius:8px;width:15cm;max-width:100%;padding:6px 12px;background:repeating-linear-gradient(180deg,transparent,transparent 27px,#eef1f2 27px,#eef1f2 28px)}
+.wlabel{font-size:14px;color:#8a99a0;font-weight:700}
+.qbody{font-size:16px}
+.revbtn{margin-top:10px;background:var(--accent);color:#fff;border:none;border-radius:22px;padding:7px 18px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 6px rgba(231,111,81,.35);transition:.15s}
+.revbtn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.revbtn.on{background:var(--primary)}
+.sol{display:none;margin-top:10px;padding:13px 16px;background:#eef6f8;border-left:5px solid var(--primary);border-radius:8px;font-size:15px}
+.sol.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
+.ans{font-weight:700;color:var(--primary-dark);margin-bottom:8px;font-size:16px}
+.expl{color:#333;font-size:15px}
+.top{position:fixed;right:16px;bottom:16px;background:var(--primary);color:#fff;text-decoration:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 12px rgba(0,0,0,.25);opacity:.85}
+@media print{
+  @page{size:A4;margin:1.3cm 1.2cm}
+  body{background:#fff;font-size:15px}
+  header.hero,.tips,.top{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .printpage{page-break-before:always;break-before:page}
+  .printpage:first-of-type{page-break-before:avoid;break-before:avoid}
+  .pageband{background:#eaf3f6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:6px}
+  .qcard{box-shadow:none;border:1px solid #d7d2c7;page-break-inside:avoid;break-inside:avoid;margin:7px 0;padding:9px 12px}
+  .revbtn,.sol{display:none!important}
+  .opt{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style></head><body id="top">
+<header class="hero"><h1>1-2 整數的加減 · 分節互動練習</h1>
+<p>整數加法・減法・加減混合（去括號）・數線兩點距離與中點 ‧ 90 題（選30 填30 計30）</p>
+<p>🖨 每頁上方標示頁碼；螢幕頁碼＝列印實體頁碼（全卷共 25 頁）</p><p style="margin-top:12px"><a href="book1.html" style="display:inline-block;color:#0b6b78;background:#fff;border-radius:20px;padding:6px 16px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,.14)">← 回第一冊</a></p></header>
+<div class="wrap">
+<div class="tips">💡 選擇題可直接點選項作答，按「顯示解析」會標出正解(綠)與誤選(紅)；填充／計算題請在作答格書寫後展開解析。用瀏覽器列印（⌘/Ctrl+P）即為學生練習卷，分頁與螢幕一致。</div>
+
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 1 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      <div class="sechd"><h2>1-2　整數的加減</h2><p>整數加法 ‧ 整數減法 ‧ 加減混合與去括號 ‧ 數線兩點距離與中點</p></div>
+      
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S01</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算 (−8)＋(−15) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −23</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 23</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −7</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 7</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −23</div>
+            <div class="expl"><b>解析：</b>同號相加：絕對值相加、取原來的符號。<br>−(8＋15)＝<b>−23</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="3">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S02</span><span class="src">📄 改編·桃園大成</span></div>
+          <div class="qbody">計算 26＋(−40) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 66</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −66</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 14</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −14</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(D) −14</div>
+            <div class="expl"><b>解析：</b>異號相加：絕對值大減小 40−26＝14，符號取絕對值較大的 −40 → 負。<br>＝<b>−14</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S03</span><span class="src">📄 自編</span></div>
+          <div class="qbody">下列四個運算結果，哪一個等於 0？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> (−17)＋17</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> (−17)＋(−17)</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 17＋17</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 0＋17</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) (−17)＋17</div>
+            <div class="expl"><b>解析：</b>一數與其相反數相加和為 0：(−17)＋17＝<b>0</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 2 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S04</span><span class="src">📄 改編·永靖國中</span></div>
+          <div class="qbody">計算 (−35)＋(−19) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −54</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 54</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −16</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 16</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −54</div>
+            <div class="expl"><b>解析：</b>同號（都負）相加：−(35＋19)＝<b>−54</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="3">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S05</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算 (−48)＋53 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −101</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 101</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −5</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 5</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(D) 5</div>
+            <div class="expl"><b>解析：</b>異號相加：53−48＝5，53 絕對值較大為正 → <b>5</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S06</span><span class="src">📄 改編·臺中大業</span></div>
+          <div class="qbody">計算 (−75)＋37＋(−15) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −53</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 53</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −27</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −127</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −53</div>
+            <div class="expl"><b>解析：</b>先算負數和：(−75)＋(−15)＝−90。<br>−90＋37＝<b>−53</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S07</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算 (−23)＋1205＋(−77) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 1105</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 1305</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 1205</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −1105</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 1105</div>
+            <div class="expl"><b>解析：</b>利用交換、結合律湊整：(−23)＋(−77)＝−100。<br>1205＋(−100)＝<b>1105</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 3 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S08</span><span class="src">📄 改編·臺中居仁</span></div>
+          <div class="qbody">某次比賽十位選手與基準分的差分別為 ＋20、−14、＋8、−5，其餘為 0，則這些差的總和為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 9</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −9</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 47</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −47</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 9</div>
+            <div class="expl"><b>解析：</b>正數和：20＋8＝28；負數和：(−14)＋(−5)＝−19。<br>28＋(−19)＝<b>9</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="2">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S09</span><span class="src">📄 改編·高雄翠屏</span></div>
+          <div class="qbody">計算 12－(−7) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 5</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −5</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 19</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −19</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(C) 19</div>
+            <div class="expl"><b>解析：</b>減去負數＝加上正數：12＋7＝<b>19</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="1">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S10</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算 8－20 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 12</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −12</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 28</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −28</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(B) −12</div>
+            <div class="expl"><b>解析：</b>改加相反數：8＋(−20)＝−(20−8)＝<b>−12</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="3">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S11</span><span class="src">📄 改編·屏東明正</span></div>
+          <div class="qbody">計算 (−16)－18 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 2</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −2</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 34</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −34</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(D) −34</div>
+            <div class="expl"><b>解析：</b>改加相反數：(−16)＋(−18)＝−(16＋18)＝<b>−34</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 4 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="2">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S12</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算 (−30)－(−45) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −75</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 75</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 15</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −15</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(C) 15</div>
+            <div class="expl"><b>解析：</b>減去負數＝加正數：(−30)＋45＝45−30＝<b>15</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S13</span><span class="src">📄 改編·臺中五權</span></div>
+          <div class="qbody">某數 a 的相反數為 −6，另一數 b 的相反數為 4，則 a－b 等於？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 10</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −10</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 2</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −2</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 10</div>
+            <div class="expl"><b>解析：</b>由相反數反推：a＝6、b＝−4。<br>a－b＝6－(−4)＝6＋4＝<b>10</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S14</span><span class="src">📄 自編</span></div>
+          <div class="qbody">某地清晨氣溫為 −5℃，中午升到 9℃，則溫度變化（後來−原來）為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> ＋14℃</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> ＋4℃</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −4℃</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −14℃</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) ＋14℃</div>
+            <div class="expl"><b>解析：</b>變化＝後來－原來＝9－(−5)＝9＋5＝<b>＋14℃</b>（上升 14 度）。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="2">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S15</span><span class="src">📄 改編·新北蘆洲</span></div>
+          <div class="qbody">計算 (−18)－(−27) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −45</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 45</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 9</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −9</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(C) 9</div>
+            <div class="expl"><b>解析：</b>改加相反數：(−18)＋27＝27−18＝<b>9</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 5 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S16</span><span class="src">📄 改編·新北蘆洲</span></div>
+          <div class="qbody">計算 21－(−17)＋(−10) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 28</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 48</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −6</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 14</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 28</div>
+            <div class="expl"><b>解析：</b>改加法：21＋17＋(−10)。<br>21＋17＝38；38＋(−10)＝<b>28</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S17</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算 6＋(2－5) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 3</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 9</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −1</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 13</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 3</div>
+            <div class="expl"><b>解析：</b>括號前是＋，去括號內部不變號：6＋2－5＝<b>3</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S18</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算 4－(2－5) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 7</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −3</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 1</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −7</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 7</div>
+            <div class="expl"><b>解析：</b>括號前是－，去括號內部全變號：4－2＋5＝<b>7</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S19</span><span class="src">📄 改編·新北蘆洲</span></div>
+          <div class="qbody">計算 (−752)＋165－(−652) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 65</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −265</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 265</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −65</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 65</div>
+            <div class="expl"><b>解析：</b>改加法：(−752)＋165＋652。<br>(−752)＋652＝−100；−100＋165＝<b>65</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 6 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S20</span><span class="src">📄 改編·新北土城</span></div>
+          <div class="qbody">計算 2024－(4678＋2023) 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −4677</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 4677</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −4631</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 4325</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −4677</div>
+            <div class="expl"><b>解析：</b>先算括號：4678＋2023＝6701。<br>2024－6701＝−(6701−2024)＝<b>−4677</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S21</span><span class="src">📄 改編·高雄翠屏</span></div>
+          <div class="qbody">計算 75－83－[(−12)＋(−3)] 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 7</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −23</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −37</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 23</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 7</div>
+            <div class="expl"><b>解析：</b>先算中括號：(−12)＋(−3)＝−15。<br>75－83－(−15)＝75－83＋15＝90－83＝<b>7</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S22</span><span class="src">📄 改編·彰化溪湖</span></div>
+          <div class="qbody">計算 |25－(−7)| － |(−18)－24| 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −10</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 10</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 74</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −74</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −10</div>
+            <div class="expl"><b>解析：</b>先算括號內：25－(−7)＝32；(−18)－24＝−42。<br>取絕對值：|32|＝32、|−42|＝42。<br>32－42＝<b>−10</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S23</span><span class="src">📄 改編·臺北民生</span></div>
+          <div class="qbody">計算 −30－{18＋[(−5)－(−12)]} 的值。</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −55</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −41</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −19</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −31</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −55</div>
+            <div class="expl"><b>解析：</b>由內而外：(−5)－(−12)＝(−5)＋12＝7。<br>18＋7＝25。<br>−30－25＝<b>−55</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 7 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S24</span><span class="src">📄 改編·臺中向上</span></div>
+          <div class="qbody">數線上 A 點坐標為 −5，B 點坐標為 −2，則 A、B 兩點的距離 AB 為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 3</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −7</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 7</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −3</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 3</div>
+            <div class="expl"><b>解析：</b>距離＝大數－小數＝(−2)－(−5)＝(−2)＋5＝<b>3</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S25</span><span class="src">📄 自編</span></div>
+          <div class="qbody">數線上 A 點坐標為 −9，B 點坐標為 6，則距離 AB 為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 15</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> −3</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 3</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −15</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 15</div>
+            <div class="expl"><b>解析：</b>距離＝大數－小數＝6－(−9)＝6＋9＝<b>15</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S26</span><span class="src">📄 改編·屏東中正</span></div>
+          <div class="qbody">數線上 C 點坐標為 c，D 點坐標為 5，若 CD＝7，則 c 可能為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 12 或 −2</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 12 或 2</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −12 或 2</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −12 或 −2</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 12 或 −2</div>
+            <div class="expl"><b>解析：</b>c 在 5 的右邊或左邊 7：<br>右：5＋7＝12；左：5－7＝−2。<br>∴ c＝<b>12 或 −2</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S27</span><span class="src">📄 改編·臺中五權</span></div>
+          <div class="qbody">數線上 P 點坐標為 −22，Q 點坐標為 8，則 PQ 的中點坐標為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −7</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 7</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −15</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 15</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −7</div>
+            <div class="expl"><b>解析：</b>中點＝(兩端點和)÷2＝((−22)＋8)÷2＝(−14)÷2＝<b>−7</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 8 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S28</span><span class="src">📄 自編</span></div>
+          <div class="qbody">數線上 A 點坐標為 −13，C 點坐標為 3，B 為 A、C 的中點，則 B 點坐標為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> −5</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 5</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −10</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 8</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) −5</div>
+            <div class="expl"><b>解析：</b>中點＝((−13)＋3)÷2＝(−10)÷2＝<b>−5</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S29</span><span class="src">📄 改編·臺中四育</span></div>
+          <div class="qbody">數線上 A 點坐標為 18，且 AB＝30，則 B 點坐標可能為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 48 或 −12</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 48 或 12</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> −48 或 12</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> 48 或 −48</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 48 或 −12</div>
+            <div class="expl"><b>解析：</b>B 在 A 的右邊或左邊 30：<br>右：18＋30＝48；左：18－30＝−12。<br>∴ B＝<b>48 或 −12</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="0">
+          <div class="qhead"><span class="tbadge" style="background:#457b9d">選擇</span><span class="qid">1-2-S30</span><span class="src">📄 改編·北興國中</span></div>
+          <div class="qbody">數線上 A(−17)、B(11) 兩點，若 M 為 AB 中點，則 A 到 M 的距離 AM 為何？</div>
+          
+          <div class="opts"><button type="button" class="opt" data-i="0" onclick="pick(this)"><span class="ol">(A)</span> 14</button><button type="button" class="opt" data-i="1" onclick="pick(this)"><span class="ol">(B)</span> 28</button><button type="button" class="opt" data-i="2" onclick="pick(this)"><span class="ol">(C)</span> 7</button><button type="button" class="opt" data-i="3" onclick="pick(this)"><span class="ol">(D)</span> −3</button></div>
+          
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：(A) 14</div>
+            <div class="expl"><b>解析：</b>AB＝11－(−17)＝28；M 為中點，AM＝AB÷2＝28÷2＝<b>14</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F01</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−7)＋(−11)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−18</div>
+            <div class="expl"><b>解析：</b>同號相加：−(7＋11)＝<b>−18</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 9 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F02</span><span class="src">📄 改編·桃園大成</span></div>
+          <div class="qbody">計算：34＋(−52)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−18</div>
+            <div class="expl"><b>解析：</b>異號相加：52－34＝18，取絕對值較大的 −52 → 負＝<b>−18</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F03</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−46)＋46＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：0</div>
+            <div class="expl"><b>解析：</b>互為相反數，和為 <b>0</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F04</span><span class="src">📄 改編·臺中大業</span></div>
+          <div class="qbody">計算：(−63)＋(−37)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−100</div>
+            <div class="expl"><b>解析：</b>同號相加：−(63＋37)＝<b>−100</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F05</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：58＋(−58)＋(−58)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−58</div>
+            <div class="expl"><b>解析：</b>58＋(−58)＝0；0＋(−58)＝<b>−58</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F06</span><span class="src">📄 改編·臺中居仁</span></div>
+          <div class="qbody">計算：(−26)＋(−69)＋47＋(−31)＋(−54)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−133</div>
+            <div class="expl"><b>解析：</b>負數絕對值相加：26＋69＋31＋54＝180 → −180。<br>−180＋47＝<b>−133</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 10 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F07</span><span class="src">📄 自編</span></div>
+          <div class="qbody">利用交換、結合律計算：1235＋(−21)＋(−14)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：1200</div>
+            <div class="expl"><b>解析：</b>(−21)＋(−14)＝−35；1235＋(−35)＝<b>1200</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F08</span><span class="src">📄 改編·高雄英明</span></div>
+          <div class="qbody">一電梯從 3 樓出發，先上升 9 層記為 ＋9，再下降 14 層記為 −14，此時位於第幾樓（可為地下樓）？答：____ 樓。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−2</div>
+            <div class="expl"><b>解析：</b>3＋9＋(−14)＝12＋(−14)＝<b>−2</b>（地下 2 樓）。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F09</span><span class="src">📄 改編·高雄翠屏</span></div>
+          <div class="qbody">計算：15－(−3)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：18</div>
+            <div class="expl"><b>解析：</b>減負數＝加正數：15＋3＝<b>18</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F10</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：14－23＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−9</div>
+            <div class="expl"><b>解析：</b>改加相反數：14＋(−23)＝−(23−14)＝<b>−9</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 11 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F11</span><span class="src">📄 改編·屏東明正</span></div>
+          <div class="qbody">計算：(−63)－37＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−100</div>
+            <div class="expl"><b>解析：</b>改加相反數：(−63)＋(−37)＝<b>−100</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F12</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−133)－(−13)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−120</div>
+            <div class="expl"><b>解析：</b>減負數＝加正數：(−133)＋13＝−(133−13)＝<b>−120</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F13</span><span class="src">📄 改編·新北土城</span></div>
+          <div class="qbody">甲的相反數為 −5，乙的相反數為 3，則 甲－乙＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：8</div>
+            <div class="expl"><b>解析：</b>甲＝5、乙＝−3。<br>甲－乙＝5－(−3)＝5＋3＝<b>8</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F14</span><span class="src">📄 自編</span></div>
+          <div class="qbody">冷凍庫原為零下 3 度（−3℃），調整後變成 8℃，則溫度變化為 ＋____ ℃。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：11</div>
+            <div class="expl"><b>解析：</b>變化＝後來－原來＝8－(−3)＝8＋3＝<b>＋11</b> ℃。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 12 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F15</span><span class="src">📄 改編·臺中居仁</span></div>
+          <div class="qbody">某次比賽分數與平均的差，最高為 ＋20、最低為 −7，則最高與最低相差 ____ 分。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：27</div>
+            <div class="expl"><b>解析：</b>相差＝最高－最低＝20－(−7)＝20＋7＝<b>27</b> 分。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F16</span><span class="src">📄 改編·新北土城</span></div>
+          <div class="qbody">計算：21－(−17)＋(−10)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：28</div>
+            <div class="expl"><b>解析：</b>改加法：21＋17＋(−10)＝38＋(−10)＝<b>28</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F17</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：20－(8－15)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：27</div>
+            <div class="expl"><b>解析：</b>去括號（前是−，全變號）：20－8＋15＝<b>27</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F18</span><span class="src">📄 改編·新北蘆洲</span></div>
+          <div class="qbody">計算：(−652)＋165－(−652)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：165</div>
+            <div class="expl"><b>解析：</b>(−652)＋652＝0；0＋165＝<b>165</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F19</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−60)－(−42)＋18＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：0</div>
+            <div class="expl"><b>解析：</b>改加法：(−60)＋42＋18＝(−60)＋60＝<b>0</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 13 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F20</span><span class="src">📄 改編·新北蘆洲</span></div>
+          <div class="qbody">計算：(−1654)－(86－1655)＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−85</div>
+            <div class="expl"><b>解析：</b>去括號：−1654－86＋1655；−1654＋1655＝1；1－86＝<b>−85</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F21</span><span class="src">📄 改編·彰化福興</span></div>
+          <div class="qbody">計算：|(−8)－6| ＋ |3－(−10)|＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：27</div>
+            <div class="expl"><b>解析：</b>(−8)－6＝−14，|−14|＝14；3－(−10)＝13，|13|＝13。<br>14＋13＝<b>27</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F22</span><span class="src">📄 改編·臺北民生</span></div>
+          <div class="qbody">計算：50－[30－(15－40)]＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−5</div>
+            <div class="expl"><b>解析：</b>內層：15－40＝−25；30－(−25)＝30＋25＝55。<br>50－55＝<b>−5</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F23</span><span class="src">📄 改編·臺中向上</span></div>
+          <div class="qbody">計算：−20－{(−8)＋[6－(−15)]－30}＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−3</div>
+            <div class="expl"><b>解析：</b>6－(−15)＝21；(−8)＋21－30＝13－30＝−17。<br>−20－(−17)＝−20＋17＝<b>−3</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F24</span><span class="src">📄 改編·臺中向上</span></div>
+          <div class="qbody">數線上 A(−5)、B(8) 兩點，則距離 AB＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：13</div>
+            <div class="expl"><b>解析：</b>大數－小數＝8－(−5)＝8＋5＝<b>13</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 14 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F25</span><span class="src">📄 自編</span></div>
+          <div class="qbody">數線上 P(−7)、Q(−2) 兩點，則距離 PQ＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：5</div>
+            <div class="expl"><b>解析：</b>(−2)－(−7)＝(−2)＋7＝<b>5</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F26</span><span class="src">📄 改編·屏東中正</span></div>
+          <div class="qbody">數線上 C(c)、D(4) 兩點，若 CD＝6，則 c＝____。（兩答）</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：10 或 −2</div>
+            <div class="expl"><b>解析：</b>c 在 4 的右邊或左邊 6：4＋6＝10；4－6＝−2。<br>∴ c＝<b>10 或 −2</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F27</span><span class="src">📄 改編·臺中五權</span></div>
+          <div class="qbody">數線上 P(−22)、Q(8) 兩點，則 PQ 的中點坐標為 ____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−7</div>
+            <div class="expl"><b>解析：</b>中點＝((−22)＋8)÷2＝(−14)÷2＝<b>−7</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F28</span><span class="src">📄 自編</span></div>
+          <div class="qbody">數線上 A(−13)、C(3) 兩點，B 為 A、C 中點，則 b＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−5</div>
+            <div class="expl"><b>解析：</b>b＝((−13)＋3)÷2＝(−10)÷2＝<b>−5</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 15 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F29</span><span class="src">📄 改編·臺中四育</span></div>
+          <div class="qbody">數線上 A 點坐標 18，且 AB＝30，則 A、B 的中點坐標為 ____。（兩答）</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：33 或 3</div>
+            <div class="expl"><b>解析：</b>B＝18＋30＝48 或 18－30＝−12。<br>中點＝(18＋48)÷2＝33，或 (18＋(−12))÷2＝3。<br>∴ <b>33 或 3</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">1-2-F30</span><span class="src">📄 自編</span></div>
+          <div class="qbody">數線上 A(−11)、B(19) 兩點，M 為 AB 中點，則 M 到 A 的距離 MA＝____。</div>
+          
+          
+          <div class="work" style="min-height:1.4cm"><span class="wlabel">✎ 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：15</div>
+            <div class="expl"><b>解析：</b>AB＝19－(−11)＝30；MA＝AB÷2＝30÷2＝<b>15</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C01</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−6)＋(−3)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−9</div>
+            <div class="expl"><b>解析：</b>同號相加：−(6＋3)＝<b>−9</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 16 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C02</span><span class="src">📄 改編·桃園大成</span></div>
+          <div class="qbody">計算：24＋(−11)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：13</div>
+            <div class="expl"><b>解析：</b>異號相加：24−11＝13，24 較大為正 → <b>13</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C03</span><span class="src">📄 改編·永靖國中</span></div>
+          <div class="qbody">計算：(−35)＋(−25)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−60</div>
+            <div class="expl"><b>解析：</b>同號（都負）：−(35＋25)＝<b>−60</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C04</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−22)＋6。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−16</div>
+            <div class="expl"><b>解析：</b>異號相減：22−6＝16，取絕對值較大 −22 的負號 → <b>−16</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 17 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C05</span><span class="src">📄 改編·臺中大業</span></div>
+          <div class="qbody">計算：(−75)＋37＋(−15)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−53</div>
+            <div class="expl"><b>解析：</b>負數和：(−75)＋(−15)＝−90；−90＋37＝<b>−53</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C06</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−48)＋(−52)＋73。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−27</div>
+            <div class="expl"><b>解析：</b>負數和：(−48)＋(−52)＝−100；−100＋73＝<b>−27</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C07</span><span class="src">📄 改編·臺中居仁</span></div>
+          <div class="qbody">利用交換、結合律計算：(−28)＋3080＋(−72)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：2980</div>
+            <div class="expl"><b>解析：</b>(−28)＋(−72)＝−100；3080＋(−100)＝<b>2980</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 18 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C08</span><span class="src">📄 改編·臺中居仁</span></div>
+          <div class="qbody">8 位學生分數與全班平均的差為 ＋18、−10、＋7、−3、＋12、−8、−4、＋6，求這些差的總和。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：18</div>
+            <div class="expl"><b>解析：</b>正數和：18＋7＋12＋6＝43；負數和：(−10)＋(−3)＋(−8)＋(−4)＝−25。<br>43＋(−25)＝<b>18</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C09</span><span class="src">📄 改編·高雄翠屏</span></div>
+          <div class="qbody">計算：15－(−3)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：18</div>
+            <div class="expl"><b>解析：</b>減負數＝加正數：15＋3＝<b>18</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C10</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：6－32。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−26</div>
+            <div class="expl"><b>解析：</b>改加相反數：6＋(−32)＝−(32−6)＝<b>−26</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 19 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C11</span><span class="src">📄 改編·屏東明正</span></div>
+          <div class="qbody">計算：(−16)－18。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−34</div>
+            <div class="expl"><b>解析：</b>改加相反數：(−16)＋(−18)＝<b>−34</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C12</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：(−33)－(−18)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−15</div>
+            <div class="expl"><b>解析：</b>減負數＝加正數：(−33)＋18＝−(33−18)＝<b>−15</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C13</span><span class="src">📄 改編·臺中五權</span></div>
+          <div class="qbody">計算：(−9)－(−20)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：11</div>
+            <div class="expl"><b>解析：</b>減負數＝加正數：(−9)＋20＝20−9＝<b>11</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 20 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C14</span><span class="src">📄 自編</span></div>
+          <div class="qbody">某地清晨氣溫 −5℃，中午升到 9℃，求溫度變化（後來−原來）。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：＋14℃</div>
+            <div class="expl"><b>解析：</b>變化＝9－(−5)＝9＋5＝<b>＋14℃</b>（上升 14 度）。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C15</span><span class="src">📄 改編·新北土城</span></div>
+          <div class="qbody">甲的相反數為 −5，乙的相反數為 3，求 甲－乙。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：8</div>
+            <div class="expl"><b>解析：</b>甲＝5、乙＝−3；甲－乙＝5－(−3)＝5＋3＝<b>8</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C16</span><span class="src">📄 改編·新北土城</span></div>
+          <div class="qbody">計算：21－(−17)＋(−10)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：28</div>
+            <div class="expl"><b>解析：</b>改加法：21＋17＋(−10)＝38＋(−10)＝<b>28</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 21 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C17</span><span class="src">📄 自編</span></div>
+          <div class="qbody">計算：13＋(6－5)－(8－15)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：21</div>
+            <div class="expl"><b>解析：</b>去括號：13＋6－5－8＋15。<br>(13＋6＋15)－(5＋8)＝34－13＝<b>21</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C18</span><span class="src">📄 改編·新北蘆洲</span></div>
+          <div class="qbody">計算：(−752)＋165－(−652)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：65</div>
+            <div class="expl"><b>解析：</b>改加法：(−752)＋652＋165＝−100＋165＝<b>65</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C19</span><span class="src">📄 改編·新北土城</span></div>
+          <div class="qbody">計算：2024－(4678＋2023)。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−4677</div>
+            <div class="expl"><b>解析：</b>先算括號：4678＋2023＝6701；2024－6701＝<b>−4677</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 22 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C20</span><span class="src">📄 改編·高雄翠屏</span></div>
+          <div class="qbody">計算：75－83－[(−12)＋(−3)]。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：7</div>
+            <div class="expl"><b>解析：</b>中括號：(−12)＋(−3)＝−15；75－83－(−15)＝75－83＋15＝90－83＝<b>7</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C21</span><span class="src">📄 改編·彰化溪湖</span></div>
+          <div class="qbody">計算：|25－(−7)| － |(−18)－24|。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−10</div>
+            <div class="expl"><b>解析：</b>25－(−7)＝32；(−18)－24＝−42。<br>|32|－|−42|＝32－42＝<b>−10</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C22</span><span class="src">📄 改編·臺北民生</span></div>
+          <div class="qbody">計算：−40－{25＋[(−13)－(−30)]－18}。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−64</div>
+            <div class="expl"><b>解析：</b>(−13)－(−30)＝(−13)＋30＝17；25＋17－18＝24。<br>−40－24＝<b>−64</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 23 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C23</span><span class="src">📄 改編·臺中向上</span></div>
+          <div class="qbody">計算：|−15＋8| － |6－20| ＋ |(−3)－(−7)|。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−3</div>
+            <div class="expl"><b>解析：</b>−15＋8＝−7，|−7|＝7；6－20＝−14，|−14|＝14；(−3)－(−7)＝4，|4|＝4。<br>7－14＋4＝<b>−3</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C24</span><span class="src">📄 改編·臺中向上</span></div>
+          <div class="qbody">數線上 A(−5)、B(−2) 兩點，求距離 AB。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：3</div>
+            <div class="expl"><b>解析：</b>大數－小數＝(−2)－(−5)＝(−2)＋5＝<b>3</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C25</span><span class="src">📄 自編</span></div>
+          <div class="qbody">數線上 M(−14)、N(9) 兩點，求距離 MN。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：23</div>
+            <div class="expl"><b>解析：</b>大數－小數＝9－(−14)＝9＋14＝<b>23</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 24 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C26</span><span class="src">📄 改編·屏東中正</span></div>
+          <div class="qbody">數線上 C(c)、D(5) 兩點，若 CD＝7，求 c。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：12 或 −2</div>
+            <div class="expl"><b>解析：</b>c 在 5 的右邊或左邊 7：5＋7＝12；5－7＝−2。<br>∴ c＝<b>12 或 −2</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C27</span><span class="src">📄 改編·臺中五權</span></div>
+          <div class="qbody">數線上 P(−22)、Q(8) 兩點，求 PQ 的中點坐標。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−7</div>
+            <div class="expl"><b>解析：</b>中點＝((−22)＋8)÷2＝(−14)÷2＝<b>−7</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C28</span><span class="src">📄 自編</span></div>
+          <div class="qbody">數線上 A(−13)、C(3) 兩點，B 為 A、C 中點，求 b。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：−5</div>
+            <div class="expl"><b>解析：</b>b＝((−13)＋3)÷2＝(−10)÷2＝<b>−5</b>。</div>
+          </div>
+        </div>
+    </div>
+    <div class="printpage">
+      <div class="pageband"><span class="pno">📄 第 25 頁 / 共 25 頁</span><span class="pttl">1-2 整數的加減</span></div>
+      
+      
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C29</span><span class="src">📄 改編·臺中四育</span></div>
+          <div class="qbody">數線上 A 點坐標 18，且 AB＝30，求 A、B 的中點坐標。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：33 或 3</div>
+            <div class="expl"><b>解析：</b>B＝18＋30＝48 或 18－30＝−12。<br>中點＝(18＋48)÷2＝33，或 (18＋(−12))÷2＝3。<br>∴ <b>33 或 3</b>。</div>
+          </div>
+        </div>
+        <div class="qcard" data-ans="-1">
+          <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">1-2-C30</span><span class="src">📄 改編·臺北民生</span></div>
+          <div class="qbody">數線上 A(a)、B(b) 兩點，A 在 B 左側，若 AB＝20 且中點坐標為 −3，求 a、b。</div>
+          
+          
+          <div class="work" style="min-height:3.8cm"><span class="wlabel">✎ 計算 / 作答</span></div>
+          <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+          <div class="sol">
+            <div class="ans">✅ 答案：a＝−13，b＝7</div>
+            <div class="expl"><b>解析：</b>中點到兩端各 20÷2＝10。<br>A 在左：a＝−3－10＝−13；B 在右：b＝−3＋10＝7。<br>∴ <b>a＝−13，b＝7</b>。</div>
+          </div>
+        </div>
+    </div>
+</div>
+<a href="#top" class="top">↑</a>
+<script>
+function tog(b){var c=b.closest('.qcard');var s=b.nextElementSibling;var on=s.classList.toggle('show');
+  b.classList.toggle('on',on);b.textContent=on?'收合解析 ▲':'顯示解析 ▼';
+  var ai=+c.dataset.ans;if(ai>=0){c.querySelectorAll('.opt').forEach(function(o){var i=+o.dataset.i;
+    if(on){if(i===ai)o.classList.add('ok');else if(o.classList.contains('sel'))o.classList.add('no');}
+    else{o.classList.remove('ok','no');}});}}
+function pick(btn){var box=btn.parentElement;box.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel','ok','no');});
+  btn.classList.add('sel');}
+</script></body></html>
