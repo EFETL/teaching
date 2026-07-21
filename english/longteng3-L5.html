@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L5: Kyoto ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+/* 新增大題共用色系 */
+.s-indigo .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
+.s-indigo .sec-icon{background:#4338ca;color:#fff}
+.s-amber .sec-head{background:#fffbeb;color:#b45309;border-bottom:2px solid #fde68a}
+.s-amber .sec-icon{background:#b45309;color:#fff}
+
+/* 文法手寫練習：填空 + 句子改寫 */
+.gw-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed #e2e8f0}
+.gw-item:last-child{border-bottom:none}
+.gw-num{width:30px;height:30px;border-radius:50%;background:#ede9fe;color:#6d28d9;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.gw-main{flex:1}
+.gw-en{font-size:17px;line-height:2}
+.gw-input{border:none;border-bottom:2px solid #94a3b8;background:#f8fafc;font-size:16px;font-weight:700;color:#1e293b;padding:3px 6px;width:150px;text-align:center;font-family:inherit}
+.gw-input:focus{outline:none;border-color:#6d28d9;background:#f5f3ff}
+.gw-hint{color:#6d28d9;font-weight:700;font-size:16px}
+.gw-cn{font-size:16px;color:#64748b;margin-top:4px;font-style:italic}
+.gw-given{font-size:17px;margin-bottom:6px}
+.gw-instr{font-size:16px;color:#be123c;font-weight:700;margin-bottom:8px}
+.gw-textarea{width:100%;border:1.5px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:16px;font-family:inherit;resize:vertical;margin-bottom:2px;display:block}
+.gw-textarea:focus{outline:none;border-color:#6d28d9}
+.gw-ans{display:none;margin-top:8px;font-size:16px;color:#059669;font-weight:700;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px}
+.gw-ans.open{display:block}
+
+/* 句子重組 */
+.ro-item{padding:16px 0;border-bottom:1px dashed #e2e8f0}
+.ro-item:last-child{border-bottom:none}
+.ro-top{display:flex;gap:12px;align-items:flex-start}
+.ro-num{width:30px;height:30px;border-radius:50%;background:#e0e7ff;color:#4338ca;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ro-main{flex:1}
+.ro-cn{font-size:16px;color:#64748b;font-style:italic;margin-bottom:10px}
+.ro-answer{min-height:44px;border:2px dashed #c7d2fe;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;background:#f8fafc}
+.ro-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.ro-chip{padding:7px 13px;border-radius:7px;border:2px solid #c7d2fe;background:#fff;color:#3730a3;font-weight:700;font-size:16px;cursor:pointer;transition:all .15s}
+.ro-chip:hover{background:#eef2ff}
+.ro-chip.placed{border-style:solid;background:#e0e7ff}
+.ro-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ro-btn{border:none;border-radius:7px;padding:7px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#4338ca}
+.ro-btn.secondary{background:#64748b}
+.ro-result{margin-top:8px;font-size:16px;font-weight:700;min-height:20px}
+.ro-result.correct{color:#16a34a}
+.ro-result.wrong{color:#dc2626}
+.ro-result.reveal{color:#4338ca}
+
+/* 單字配對遊戲 */
+.match-status{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-weight:800;color:#92400e;font-size:17px}
+.match-btn{border:none;border-radius:8px;padding:8px 16px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#b45309}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.match-col{display:flex;flex-direction:column;gap:9px}
+.match-chip{padding:11px 15px;border:2px solid #fde68a;border-radius:9px;cursor:pointer;font-weight:700;font-size:16px;background:#fffbeb;color:#78350f;transition:all .12s}
+.match-chip:hover{background:#fef3c7}
+.match-chip.selected{border-color:#b45309;background:#fef3c7;box-shadow:0 0 0 2px #fde68a}
+.match-chip.matched{border-color:#86efac;background:#f0fdf4;color:#16a34a;cursor:default;opacity:.65}
+.match-chip.wrong{border-color:#fca5a5;background:#fef2f2;color:#dc2626;animation:mshake .3s}
+@keyframes mshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.match-win{display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;color:#92400e;font-weight:800;text-align:center;font-size:18px}
+.match-win.show{display:block}
+@media(max-width:640px){.match-grid{grid-template-columns:1fr}}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .gw-ans{display:none!important}
+  .s-amber,.ro-actions{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L5: Kyoto ── 京都：日本的心臟</h1>
+  <div class="sub">龍騰版高中英文 第三冊 第五課｜互動教學講義（高二適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文重點摘要</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+    <span class="tag">✍️ 文法手寫練習 × 30</span>
+    <span class="tag">🔀 句子重組 × 10</span>
+    <span class="tag">🎮 單字配對遊戲</span>
+  </div>
+</div>
+
+<!-- 主題速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>主題速覽（京都三大看點）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🌸 看點一｜四季之美</h4>
+        京都像身穿<b>華麗和服</b>的女子，一年四季各有風情：春天粉紅<b>櫻花</b>如海、夏天綠葉<b>沙沙作響並閃耀</b>、秋天楓紅似火染紅<b>風景</b>、冬天白雪把全城變成<b>銀色王國</b>。
+      </div>
+      <div class="story-card s2">
+        <h4>🏯 看點二｜千年古都</h4>
+        京都曾是日本首都達<b>一千多年</b>，因此城裡<b>自豪擁有</b>大量<b>具歷史意義</b>的神社與寺廟。除了自然壯麗，更有深厚文化，讓遊客<b>盡情飽覽</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>⛩️ 看點三｜金閣寺</h4>
+        造訪京都不看<b>金閣寺</b>就不算完整：這座<b>宏偉</b>的三層樓閣覆滿<b>金箔</b>、頂上立著<b>青銅鳳凰</b>，聳立於<b>清澈池畔</b>，倒影映在水面，是<b>令人驚嘆</b>的一景。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文重點摘要 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文重點摘要（精選精講）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點右側 🔊 可聽整句朗讀。以下為改寫自課文的<b>原創摘要句</b>，用來教學句構與字彙。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課介紹日本古都京都的四季風光、千年歷史與著名地標金閣寺。以下摘要句皆為教師改寫的原創句子，依主題分為三個重點區塊，方便逐句練習句型與字彙。</p>
+
+    <!-- 區塊一 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🌸 區塊一｜四季之美（The Four Seasons）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Kyoto welcomes travelers all year round, changing its beauty with each passing season.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">京都一年到頭都歡迎旅人，隨著每個季節更替變換它的美。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Kyoto</span><span class="syn-t">S</span> <span class="syn syn-v">welcomes</span><span class="syn-t">V</span> <span class="syn syn-o">travelers</span><span class="syn-t">O</span> <span class="syn syn-m">all year round</span><span class="syn-t">時間副詞</span> <span class="syn syn-m">, changing its beauty with each passing season</span><span class="syn-t">分詞構句（附帶狀況）</span></div>
+          <div class="para-note"><b>all year round</b> = 一年到頭；<b>changing...</b> 為現在分詞構句，表同時發生的附帶狀況。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In spring, a sea of pink cherry blossoms fills the streets with a romantic feeling.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">春天時，一片粉紅櫻花的海洋讓街道充滿浪漫的氣息。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In spring</span><span class="syn-t">時間</span> <span class="syn syn-s">a sea of pink cherry blossoms</span><span class="syn-t">S</span> <span class="syn syn-v">fills</span><span class="syn-t">V</span> <span class="syn syn-o">the streets</span><span class="syn-t">O</span> <span class="syn syn-m">with a romantic feeling</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>a sea of</b> = 大量的、如海一般的；<b>fill A with B</b> = 使 A 充滿 B；<b>blossom</b>（花）、<b>romance/romantic</b> 為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>During summer, green leaves whisper in the wind and glitter brightly under the sunlight.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">夏天期間，綠葉在風中低語，並在陽光下明亮地閃耀。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">During summer</span><span class="syn-t">時間</span> <span class="syn syn-s">green leaves</span><span class="syn-t">S</span> <span class="syn syn-v">whisper</span><span class="syn-t">V</span> <span class="syn syn-m">in the wind</span><span class="syn-t">副詞</span> <span class="syn syn-v">and glitter</span><span class="syn-t">V</span> <span class="syn syn-m">brightly under the sunlight</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>whisper</b>（低語）呼應課文的 rustle（沙沙作響）；<b>glitter</b> ≈ sparkle（閃耀）；兩個動詞共用主詞 leaves。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In autumn the maple leaves turn the hills into shades of orange and red, while winter covers the city in silver snow.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">秋天時楓葉把山丘染成橙紅的色調，而冬天則用銀白的雪覆蓋整座城市。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In autumn</span><span class="syn-t">時間</span> <span class="syn syn-s">the maple leaves</span><span class="syn-t">S</span> <span class="syn syn-v">turn</span><span class="syn-t">V</span> <span class="syn syn-o">the hills</span><span class="syn-t">O</span> <span class="syn syn-m">into shades of orange and red</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-m">while</span><span class="syn-t">對比連接詞</span> <span class="syn syn-s">winter</span><span class="syn-t">S</span> <span class="syn syn-v">covers</span><span class="syn-t">V</span> <span class="syn syn-o">the city</span><span class="syn-t">O</span> <span class="syn syn-m">in silver snow</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>turn A into B</b> = 把 A 變成 B；<b>cover A in/with B</b> = 用 B 覆蓋 A；<b>while</b> 表前後對比。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 區塊二 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🏯 區塊二｜千年古都與金閣寺（The Old Capital &amp; the Golden Pavilion）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Apart from its natural splendor, Kyoto also gives visitors plenty of culture to enjoy.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">除了自然的壯麗之外，京都也給遊客大量的文化可以享受。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Apart from its natural splendor</span><span class="syn-t">副詞片語</span> <span class="syn syn-s">Kyoto</span><span class="syn-t">S</span> <span class="syn syn-v">gives</span><span class="syn-t">V</span> <span class="syn syn-o">visitors</span><span class="syn-t">IO</span> <span class="syn syn-o">plenty of culture</span><span class="syn-t">DO</span> <span class="syn syn-m">to enjoy</span><span class="syn-t">不定詞修飾</span></div>
+          <div class="para-note"><b>apart from</b> = 除了…之外（片語）；<b>splendor</b>（壯麗）為核心字；<b>give + 人 + 物</b>（授與動詞）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Having been Japan's capital for more than a thousand years, the city proudly boasts countless age-old shrines and temples.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">由於曾當日本首都超過一千年，這座城市自豪地擁有無數古老的神社與寺廟。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Having been Japan's capital for more than a thousand years</span><span class="syn-t">完成式分詞構句（表原因，見句型一）</span> <span class="syn syn-s">the city</span><span class="syn-t">S</span> <span class="syn syn-v">proudly boasts</span><span class="syn-t">V</span> <span class="syn syn-o">countless age-old shrines and temples</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>Having been...</b> 為完成式分詞構句，表比主句更早的動作；<b>capital</b>（首都）、<b>boast</b>（自豪擁有）、<b>historic</b> 字族為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>No trip to Kyoto would feel complete without seeing the Kinkaku-ji, or the Golden Pavilion.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">到京都的旅行若沒看金閣寺，就不會覺得完整。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">No trip to Kyoto</span><span class="syn-t">S</span> <span class="syn syn-v">would feel</span><span class="syn-t">V</span> <span class="syn syn-c">complete</span><span class="syn-t">C</span> <span class="syn syn-m">without seeing the Kinkaku-ji, or the Golden Pavilion</span><span class="syn-t">副詞（介系詞 + 動名詞）</span></div>
+          <div class="para-note"><b>No + N would be/feel complete without + Ving</b> = 沒有…就不算完整（見句型二）；<b>without</b> 後接動名詞 seeing。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Rising behind a crystal-clear pond, the magnificent three-story hall is covered in shining gold leaf and crowned with a bronze phoenix.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">聳立在清澈見底的池畔後方，這座宏偉的三層樓閣覆滿閃亮的金箔，頂端還立著一隻青銅鳳凰。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Rising behind a crystal-clear pond</span><span class="syn-t">現在分詞片語置句首（見句型三）</span> <span class="syn syn-s">the magnificent three-story hall</span><span class="syn-t">S</span> <span class="syn syn-v">is covered</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">in shining gold leaf</span><span class="syn-t">副詞</span> <span class="syn syn-v">and crowned</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">with a bronze phoenix</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>Rising...</b> 現在分詞修飾主詞 hall；<b>be covered in / crowned with</b> = 覆滿／頂著；<b>magnificent</b>（宏偉的）為核心字。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 區塊三 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">⛩️ 區塊三｜文化與心臟（Culture &amp; the Heart of Japan）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The pavilion's reflection on the glassy pond is truly a breathtaking sight.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">樓閣在如鏡般池面上的倒影，真是一幕令人驚嘆的景象。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The pavilion's reflection on the glassy pond</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">truly a breathtaking sight</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>reflection</b>（倒影）、<b>breathtaking</b>（令人驚嘆的）為核心字；<b>glassy</b> = 如玻璃／鏡子般平滑的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Kyoto is also famous for its geishas, graceful artists dressed in delicate silk kimonos.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">京都也以它的藝伎聞名，那是一群身穿精緻絲質和服的優雅藝術家。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Kyoto</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">also famous for its geishas</span><span class="syn-t">C</span> <span class="syn syn-m">, graceful artists dressed in delicate silk kimonos</span><span class="syn-t">同位語（含過去分詞修飾）</span></div>
+          <div class="para-note"><b>be famous for</b> = 以…聞名；graceful artists... 為 geishas 的同位語；<b>delicate</b>（精緻的）為補充字；<b>dressed in</b> = 穿著。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>With their white makeup and elegant hairpins, these performers spend years mastering music and dance.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">帶著白色的妝容與優雅的髮簪，這些表演者花費多年時間精通音樂與舞蹈。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">With their white makeup and elegant hairpins</span><span class="syn-t">介系詞片語（附帶說明）</span> <span class="syn syn-s">these performers</span><span class="syn-t">S</span> <span class="syn syn-v">spend</span><span class="syn-t">V</span> <span class="syn syn-o">years</span><span class="syn-t">O</span> <span class="syn syn-c">mastering music and dance</span><span class="syn-t">分詞（spend + 時間 + Ving）</span></div>
+          <div class="para-note"><b>spend + 時間 + Ving</b> = 花時間做…；<b>elegant</b>（優雅的）為補充字；<b>master</b>（精通）為動詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Here nature and culture blend together, making Kyoto a city that travelers easily fall in love with.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在這裡，自然與文化交融在一起，讓京都成為一座旅人輕易就愛上的城市。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Here</span><span class="syn-t">副詞</span> <span class="syn syn-s">nature and culture</span><span class="syn-t">S</span> <span class="syn syn-v">blend together</span><span class="syn-t">V</span> <span class="syn syn-m">, making Kyoto a city [that travelers easily fall in love with]</span><span class="syn-t">分詞構句（含關係子句）</span></div>
+          <div class="para-note"><b>blend together</b> = 交融；<b>making...</b> 現在分詞構句表結果；<b>fall in love with</b> = 愛上（片語，關係子句修飾 city）。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。例句皆為原創。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">delight</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">使愉悅；欣喜</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>delightful (adj.) 令人愉悅的</span><span>delighted (adj.) 高興的</span></div>
+        <div class="v-ex">The colorful gardens of Kyoto <b>delight</b> every visitor in spring.<span class="cn">京都繽紛的花園在春天使每位遊客愉悅。</span></div>
+        <span class="v-gsat">📊 take delight in 樂於做…</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">romance</span><span class="v-pos">n.</span><div class="v-cn-mini">浪漫；愛情故事</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>romantic (adj.) 浪漫的</span><span>romantically (adv.)</span></div>
+        <div class="v-ex">A quiet walk under the cherry trees is full of <b>romance</b>.<span class="cn">在櫻花樹下靜靜散步充滿浪漫。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">blossom</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">花朵；綻放</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>in blossom 盛開</span><span>blossoming (adj.) 盛開的</span></div>
+        <div class="v-ex">Pink <b>blossoms</b> cover the whole city every April.<span class="cn">每年四月粉紅的花朵覆蓋整座城市。</span></div>
+        <span class="v-gsat">📊 in full blossom 盛開中</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">rustle</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">沙沙作響</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>rustling (adj.) 沙沙作響的</span><span>a rustle of leaves 葉子的沙沙聲</span></div>
+        <div class="v-ex">The leaves <b>rustle</b> softly whenever a warm breeze passes.<span class="cn">只要暖風吹過，樹葉就輕輕沙沙作響。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sparkle</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">閃耀；閃爍</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>sparkling (adj.) 閃亮的</span><span>≈ glitter / shine</span></div>
+        <div class="v-ex">The river <b>sparkles</b> under the bright summer sun.<span class="cn">河水在夏日豔陽下閃閃發光。</span></div>
+        <span class="v-gsat">📊 sparkling water 氣泡水</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">landscape</span><span class="v-pos">n.</span><div class="v-cn-mini">風景；景色</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ scenery 風景</span><span>landscape painting 風景畫</span></div>
+        <div class="v-ex">Autumn turns the whole <b>landscape</b> into shades of red and gold.<span class="cn">秋天把整片風景染成紅色與金色。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">splendor</span><span class="v-pos">n.</span><div class="v-cn-mini">壯麗；輝煌</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>splendid (adj.) 壯麗的</span><span>splendidly (adv.)</span></div>
+        <div class="v-ex">Tourists come from afar to admire the <b>splendor</b> of the old temples.<span class="cn">遊客遠道而來欣賞古老寺廟的壯麗。</span></div>
+        <span class="v-gsat">📊 splendor / splendid 字族學測常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">capital</span><span class="v-pos">n.</span><div class="v-cn-mini">首都</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>capital city 首都</span><span>capital 亦作「資本／大寫字母」</span></div>
+        <div class="v-ex">Kyoto served as the <b>capital</b> of Japan for many centuries.<span class="cn">京都曾當了日本好幾個世紀的首都。</span></div>
+        <span class="v-gsat">📊 一字多義：首都／資本／大寫，學測常辨析</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">boast</span><span class="v-pos">v.</span><div class="v-cn-mini">自豪擁有；誇耀</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>boastful (adj.) 自誇的</span><span>boast about 誇耀…</span></div>
+        <div class="v-ex">The city <b>boasts</b> hundreds of shrines and quiet gardens.<span class="cn">這座城市自豪擁有數百座神社與寧靜庭園。</span></div>
+        <span class="v-gsat">📊 boast + N＝擁有值得自豪的事物（非貶義）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">historic</span><span class="v-pos">adj.</span><div class="v-cn-mini">有歷史意義的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>historical (adj.) 歷史的</span><span>history (n.) / historian (n.) 史學家</span></div>
+        <div class="v-ex">Many <b>historic</b> buildings in Kyoto are hundreds of years old.<span class="cn">京都許多具歷史意義的建築已有數百年歷史。</span></div>
+        <span class="v-gsat">📊 historic（重大的）≠ historical（與歷史有關的）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">magnificent</span><span class="v-pos">adj.</span><div class="v-cn-mini">宏偉的；壯麗的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>magnificence (n.) 宏偉</span><span>≈ grand / splendid</span></div>
+        <div class="v-ex">The <b>magnificent</b> golden hall leaves every visitor speechless.<span class="cn">這座宏偉的金色殿堂讓每位遊客啞口無言。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">shimmering</span><span class="v-pos">adj.</span><div class="v-cn-mini">微微發光的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>shimmer (v. / n.) 微微發光</span><span>≈ glimmering</span></div>
+        <div class="v-ex">The <b>shimmering</b> roof glows softly in the afternoon light.<span class="cn">微微發光的屋頂在午後陽光中柔和發亮。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">breathtaking</span><span class="v-pos">adj.</span><div class="v-cn-mini">令人驚嘆的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>take one's breath away 令人屏息</span><span>breath (n.) / breathe (v.)</span></div>
+        <div class="v-ex">The view of the pavilion at sunset is simply <b>breathtaking</b>.<span class="cn">夕陽下的樓閣景致令人驚嘆。</span></div>
+        <span class="v-gsat">📊 breath + taking 複合形容詞，學測常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">reflection</span><span class="v-pos">n.</span><div class="v-cn-mini">倒影；反射；反思</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>reflect (v.) 反射；反映</span><span>reflective (adj.)</span></div>
+        <div class="v-ex">The <b>reflection</b> of the temple dances on the calm pond.<span class="cn">寺廟的倒影在平靜的池面上搖曳。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">distinctive</span><span class="v-pos">adj.</span><div class="v-cn-mini">獨特的；有特色的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>distinct (adj.) 明顯的</span><span>distinction (n.) 區別</span></div>
+        <div class="v-ex">Geishas are known for their <b>distinctive</b> white makeup.<span class="cn">藝伎以其獨特的白色妝容聞名。</span></div>
+        <span class="v-gsat">📊 distinctive（有特色的）vs distinct（清楚的）</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">throughout the year</span></td><td>一年到頭</td><td class="pex">Kyoto attracts crowds of visitors <b>throughout the year</b>.<span class="cn">京都一年到頭都吸引大批遊客。</span></td></tr>
+      <tr><td><span class="phr">be filled with</span></td><td>充滿</td><td class="pex">In spring the city <b>is filled with</b> pink blossoms.<span class="cn">春天城市裡充滿粉紅花朵。</span></td></tr>
+      <tr><td><span class="phr">apart from</span></td><td>除了…之外</td><td class="pex"><b>Apart from</b> temples, Kyoto also has lovely gardens.<span class="cn">除了寺廟，京都也有美麗的庭園。</span></td></tr>
+      <tr><td><span class="phr">feast one's eyes on</span></td><td>飽覽；盡情欣賞</td><td class="pex">Travelers <b>feast their eyes on</b> the golden pavilion.<span class="cn">遊客盡情欣賞金色的樓閣。</span></td></tr>
+      <tr><td><span class="phr">lead up to</span></td><td>通往；導向</td><td class="pex">A stone path <b>leads up to</b> the temple gate.<span class="cn">一條石徑通往寺廟大門。</span></td></tr>
+      <tr><td><span class="phr">come into view</span></td><td>映入眼簾</td><td class="pex">As we turned, the shining hall <b>came into view</b>.<span class="cn">我們一轉彎，閃亮的殿堂便映入眼簾。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（旅遊、風景、文化）相關，且為學測常見字。例句皆為原創。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">destination</span><span class="v-pos">n.</span><div class="v-cn-mini">目的地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>destined (adj.) 註定的</span><span>destiny (n.) 命運</span></div>
+        <div class="v-ex">Kyoto is a top <b>destination</b> for culture lovers.<span class="cn">京都是文化愛好者的首選目的地。</span></div>
+        <span class="v-gsat">📊 tourist destination 旅遊勝地</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">elegant</span><span class="v-pos">adj.</span><div class="v-cn-mini">優雅的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>elegance (n.) 優雅</span><span>elegantly (adv.)</span></div>
+        <div class="v-ex">The geisha moved in an <b>elegant</b> and gentle way.<span class="cn">藝伎以優雅溫柔的姿態移動。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">delicate</span><span class="v-pos">adj.</span><div class="v-cn-mini">精緻的；細緻的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>delicacy (n.) 精緻；佳餚</span><span>delicately (adv.)</span></div>
+        <div class="v-ex">She wore a <b>delicate</b> silk kimono with fine patterns.<span class="cn">她穿著一件有細緻花紋的絲質和服。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">leisurely</span><span class="v-pos">adj. / adv.</span><div class="v-cn-mini">悠閒的（地）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>leisure (n.) 閒暇</span><span>at leisure 從容地</span></div>
+        <div class="v-ex">We took a <b>leisurely</b> walk through the gardens.<span class="cn">我們悠閒地漫步穿過庭園。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">appearance</span><span class="v-pos">n.</span><div class="v-cn-mini">外表；出現</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>appear (v.) 出現；顯得</span><span>反義 disappear 消失</span></div>
+        <div class="v-ex">Their unique <b>appearance</b> makes geishas easy to notice.<span class="cn">她們獨特的外表讓藝伎很容易被認出。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">deliberate</span><span class="v-pos">adj.</span><div class="v-cn-mini">從容的；刻意的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>deliberately (adv.) 故意地</span><span>deliberation (n.) 慎重考慮</span></div>
+        <div class="v-ex">The dance combines slow music with <b>deliberate</b> movements.<span class="cn">這支舞結合了緩慢的音樂與從容的動作。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">literature</span><span class="v-pos">n.</span><div class="v-cn-mini">文學</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>literary (adj.) 文學的</span><span>literacy (n.) 讀寫能力</span></div>
+        <div class="v-ex">Skilled performers study music, songs, and <b>literature</b>.<span class="cn">技藝高超的表演者研習音樂、歌曲與文學。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">entrance</span><span class="v-pos">n.</span><div class="v-cn-mini">入口</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>enter (v.) 進入</span><span>entry (n.) 進入；參賽</span></div>
+        <div class="v-ex">Tall maple trees line the path to the main <b>entrance</b>.<span class="cn">高大的楓樹沿著通往正門入口的小徑排列。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（旅遊、美景）相關，能讓口語更道地。例句皆為原創。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a feast for the eyes</span><div class="slang-cn-mini">賞心悅目的景象</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">非常美、看了很享受的東西或景色。</div>
+      <div class="slang-ex">The autumn maples in Kyoto are a real <b>feast for the eyes</b>.<span class="cn">京都秋天的楓葉真是賞心悅目。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">off the beaten path</span><div class="slang-cn-mini">人跡罕至之處</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">遠離觀光人潮、少有人知的冷門地點。</div>
+      <div class="slang-ex">This quiet shrine is a little <b>off the beaten path</b>.<span class="cn">這座安靜的神社有點遠離觀光人潮。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">take your breath away</span><div class="slang-cn-mini">令人屏息</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">美到讓人一時說不出話來。</div>
+      <div class="slang-ex">The golden temple will <b>take your breath away</b>.<span class="cn">那座金色寺廟會令你屏息。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">picture-perfect</span><div class="slang-cn-mini">完美如畫</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">美得像明信片或照片一樣完美。</div>
+      <div class="slang-ex">The garden looked <b>picture-perfect</b> after the snow.<span class="cn">雪後的庭園看起來完美如畫。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a hidden gem</span><div class="slang-cn-mini">未被發掘的寶地</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">少有人知卻很棒的地方或事物。</div>
+      <div class="slang-ex">This tea house is <b>a hidden gem</b> near the river.<span class="cn">這家茶屋是河邊一處未被發掘的寶地。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the crown jewel</span><div class="slang-cn-mini">最珍貴的部分；壓軸精華</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">一群事物中最出色、最寶貴的那一個。</div>
+      <div class="slang-ex">The Golden Pavilion is <b>the crown jewel</b> of Kyoto.<span class="cn">金閣寺是京都最珍貴的瑰寶。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。例句皆為原創。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜Having + p.p.（完成式分詞構句）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">Having + p.p. ..., S + V ...（表比主句更早發生／已完成的動作）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">分詞的邏輯主詞須與主句主詞一致；Having + p.p. 強調「更早、已完成」。</p>
+        <div class="g-ex"><b>Having served</b> as the capital for centuries, Kyoto keeps many old traditions.<div class="g-ex-cn">由於曾當首都好幾個世紀，京都保留了許多古老傳統。</div></div>
+        <div class="g-ex"><b>Having seen</b> the golden temple, the tourists could not stop taking photos.<div class="g-ex-cn">看過金色寺廟後，遊客們忍不住一直拍照。</div></div>
+        <div class="g-note">✗ 用簡單分詞 Serving as the capital... 無法表達「更早、已完成」的時間差。</div>
+        <div class="g-tip">Having + p.p. 強調動作先後；學測分詞構句常考主動 V-ing／完成式 Having p.p. 的辨析。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜No + N + would be complete without + Ving（少了…就不算完整）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">No + N + would be complete without + V-ing / N.</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">強調某事物不可或缺；介系詞 without 後須接動名詞 V-ing 或名詞。</p>
+        <div class="g-ex"><b>No trip to Kyoto would be complete without</b> tasting the local tea.<div class="g-ex-cn">到京都旅行若沒嚐當地的茶就不算完整。</div></div>
+        <div class="g-ex"><b>No visit would be complete without</b> a walk through the bamboo forest.<div class="g-ex-cn">這趟造訪少了漫步竹林就不算圓滿。</div></div>
+        <div class="g-note">✗ without 後接原形動詞（without taste）；介系詞 without 後須用動名詞 V-ing。</div>
+        <div class="g-tip">without + V-ing 為固定用法；此句型常用於推薦、旅遊寫作，語氣強烈。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜現在分詞片語置句首（修飾主詞）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">V-ing ..., S + V ...（分詞的邏輯主詞＝主句主詞）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">句首現在分詞片語主動修飾其後的主詞；主詞須能「主動」做該動作。</p>
+        <div class="g-ex"><b>Rising</b> behind a quiet pond, the pavilion shines with gold leaf.<div class="g-ex-cn">樓閣聳立在寧靜池畔後方，閃耀著金箔的光芒。</div></div>
+        <div class="g-ex"><b>Standing</b> at the gate, we could see the whole garden clearly.<div class="g-ex-cn">站在門口，我們能清楚看見整座庭園。</div></div>
+        <div class="g-note">✗ 懸垂分詞：Rising behind a pond, we saw the pavilion.（Rising 的主詞應是 pavilion，不是 we）。</div>
+        <div class="g-tip">句首現在分詞主動修飾主詞；務必檢查邏輯主詞一致，學測易考懸垂分詞。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜感官動詞被動 + 現在分詞／過去分詞</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + can be + heard / seen + V-ing / p.p.（被聽見／看見正在…）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">感官動詞（hear/see）改被動時，原受詞補語的原形動詞須改為 V-ing 或 p.p.。</p>
+        <div class="g-ex">In summer, the leaves can be <b>heard rustling</b> in the wind.<div class="g-ex-cn">夏天時，可以聽見樹葉在風中沙沙作響。</div></div>
+        <div class="g-ex">The temple can be <b>seen shining</b> across the water.<div class="g-ex-cn">可以看見寺廟在水面對岸閃閃發光。</div></div>
+        <div class="g-note">✗ 主動改被動時漏掉 be：The leaves can hear rustling（樹葉並非「聽」的主體）。</div>
+        <div class="g-tip">感官動詞被動後，動作進行用 V-ing、被動完成用 p.p.；學測綜合測驗常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜like + N（明喻）vs as + 子句</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">A + V + like + N（把 A 比喻成 N）
+S + V + as + S + V（as 引導子句，表「像／隨著」）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">like 為介系詞，後接名詞；as 為連接詞，後接完整子句。</p>
+        <div class="g-ex">Kyoto, <b>like</b> a lady in a bright kimono, changes with every season.<div class="g-ex-cn">京都就像一位身著鮮豔和服的女子，隨每個季節變換。</div></div>
+        <div class="g-ex">The snow made the city shine <b>like</b> a silver kingdom.<div class="g-ex-cn">白雪讓這座城市像銀色王國般閃耀。</div></div>
+        <div class="g-note">✗ 混用 as／like：like 後接名詞，as 後常接子句（as the sun rises）。</div>
+        <div class="g-tip">明喻用 like + 名詞或 as + 子句；學測寫作善用比喻可加分。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<!-- 文法填空練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">✍️</div>文法填空練習（20 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依中文提示，將括號中的字改為正確的文法形式，直接打在空格中；寫完按「看解答」對答案。也適合列印後手寫作答。</div>
+
+    <div class="gw-item"><div class="gw-num">1</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:130px"> <span class="gw-hint">(have)</span> served as the capital for centuries, Kyoto keeps many old customs.</div>
+      <div class="gw-cn">由於曾當首都好幾個世紀，京都保留了許多古老習俗。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Having</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">2</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:130px"> <span class="gw-hint">(see)</span> the golden temple, the tourists could not stop taking photos.</div>
+      <div class="gw-cn">看過金色寺廟後，遊客們忍不住一直拍照。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Having seen</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">3</div><div class="gw-main">
+      <div class="gw-en">No trip to Kyoto would be complete without <input class="gw-input" style="width:120px"> <span class="gw-hint">(taste)</span> the local tea.</div>
+      <div class="gw-cn">到京都旅行若沒嚐當地的茶就不算完整。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：tasting</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">4</div><div class="gw-main">
+      <div class="gw-en">No visit would be complete without <input class="gw-input" style="width:120px"> <span class="gw-hint">(walk)</span> through the bamboo forest.</div>
+      <div class="gw-cn">這趟造訪少了漫步竹林就不算圓滿。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：walking</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">5</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(rise)</span> behind a quiet pond, the pavilion shines with gold leaf.</div>
+      <div class="gw-cn">樓閣聳立在寧靜池畔後方，閃耀著金箔的光芒。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Rising</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">6</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:130px"> <span class="gw-hint">(stand)</span> at the gate, we could see the whole garden clearly.</div>
+      <div class="gw-cn">站在門口，我們能清楚看見整座庭園。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Standing</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">7</div><div class="gw-main">
+      <div class="gw-en">In summer, the leaves can be heard <input class="gw-input" style="width:120px"> <span class="gw-hint">(rustle)</span> in the wind.</div>
+      <div class="gw-cn">夏天時，可以聽見樹葉在風中沙沙作響。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：rustling</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">8</div><div class="gw-main">
+      <div class="gw-en">The temple can be seen <input class="gw-input" style="width:110px"> <span class="gw-hint">(shine)</span> across the calm water.</div>
+      <div class="gw-cn">可以看見寺廟在平靜的水面對岸閃閃發光。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：shining</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">9</div><div class="gw-main">
+      <div class="gw-en">Kyoto, <input class="gw-input" style="width:90px"> <span class="gw-hint">(like/as)</span> a lady in a bright kimono, changes with the seasons.</div>
+      <div class="gw-cn">京都就像一位身著鮮豔和服的女子，隨季節變換。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：like</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">10</div><div class="gw-main">
+      <div class="gw-en">The snow made the whole city shine <input class="gw-input" style="width:90px"> <span class="gw-hint">(like/as)</span> a silver kingdom.</div>
+      <div class="gw-cn">白雪讓整座城市像銀色王國般閃耀。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：like</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">11</div><div class="gw-main">
+      <div class="gw-en">The city <input class="gw-input" style="width:100px"> <span class="gw-hint">(boast)</span> countless shrines and temples of great beauty.</div>
+      <div class="gw-cn">這座城市自豪擁有無數美麗的神社與寺廟。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：boasts</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">12</div><div class="gw-main">
+      <div class="gw-en">The pavilion is one of the most <input class="gw-input" style="width:130px"> <span class="gw-hint">(magnificent)</span> buildings in all of Japan.</div>
+      <div class="gw-cn">這座樓閣是全日本最宏偉的建築之一。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：magnificent（原級，最高級 the most magnificent 已含在句中）</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">13</div><div class="gw-main">
+      <div class="gw-en">Its <input class="gw-input" style="width:120px"> <span class="gw-hint">(shimmer)</span> roof glows softly in the afternoon light.</div>
+      <div class="gw-cn">它微微發光的屋頂在午後陽光中柔和發亮。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：shimmering</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">14</div><div class="gw-main">
+      <div class="gw-en">The <input class="gw-input" style="width:120px"> <span class="gw-hint">(reflect)</span> of the temple on the pond is stunning.</div>
+      <div class="gw-cn">寺廟在池面上的倒影令人驚豔。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：reflection</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">15</div><div class="gw-main">
+      <div class="gw-en">Geishas are famous for their <input class="gw-input" style="width:130px"> <span class="gw-hint">(distinct)</span> white makeup and elegant hairpins.</div>
+      <div class="gw-cn">藝伎以其獨特的白妝與優雅髮簪聞名。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：distinctive</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">16</div><div class="gw-main">
+      <div class="gw-en">The dance is performed with slow and <input class="gw-input" style="width:130px"> <span class="gw-hint">(deliberate)</span> movements.</div>
+      <div class="gw-cn">這支舞以緩慢而從容的動作演出。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：deliberate</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">17</div><div class="gw-main">
+      <div class="gw-en">Visitors love the <input class="gw-input" style="width:120px"> <span class="gw-hint">(elegant)</span> of the traditional silk kimonos.</div>
+      <div class="gw-cn">遊客喜愛傳統絲質和服的優雅。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：elegance</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">18</div><div class="gw-main">
+      <div class="gw-en">Kyoto is a popular <input class="gw-input" style="width:130px"> <span class="gw-hint">(destine)</span> for travelers from around the world.</div>
+      <div class="gw-cn">京都是來自世界各地旅人的熱門目的地。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：destination</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">19</div><div class="gw-main">
+      <div class="gw-en">The gardens are so beautiful that they always <input class="gw-input" style="width:120px"> <span class="gw-hint">(delight)</span> the visitors.</div>
+      <div class="gw-cn">這些庭園如此美麗，總是使遊客愉悅。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：delight</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">20</div><div class="gw-main">
+      <div class="gw-en">In April the whole city is filled <input class="gw-input" style="width:90px"> <span class="gw-hint">(prep.)</span> pink cherry blossoms.</div>
+      <div class="gw-cn">四月時整座城市充滿粉紅色的櫻花。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：with（be filled with）</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子改寫練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">🔄</div>句子改寫練習（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依指示將兩句合併或改寫成一個正確的英文句子，寫在下方欄位中；寫完按「看參考答案」對答案。</div>
+
+    <div class="gw-item"><div class="gw-num">21</div><div class="gw-main">
+      <div class="gw-given">Kyoto was the capital of Japan for a thousand years. + The city keeps many old customs.</div>
+      <div class="gw-instr">請將第一句改為完成式分詞構句（Having + p.p.），放句首合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Having been the capital of Japan for a thousand years, the city keeps many old customs.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">22</div><div class="gw-main">
+      <div class="gw-given">The tourists saw the golden temple. + They could not stop taking photos.</div>
+      <div class="gw-instr">請用 Having + p.p. 分詞構句合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Having seen the golden temple, the tourists could not stop taking photos.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">23</div><div class="gw-main">
+      <div class="gw-given">You should see the Golden Pavilion. + Otherwise your trip to Kyoto is not complete.</div>
+      <div class="gw-instr">請用 No trip to Kyoto would be complete without... 改寫成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ No trip to Kyoto would be complete without seeing the Golden Pavilion.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">24</div><div class="gw-main">
+      <div class="gw-given">The pavilion rises behind a quiet pond. + It shines with gold leaf.</div>
+      <div class="gw-instr">請將第一句改為現在分詞片語（V-ing），放句首合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Rising behind a quiet pond, the pavilion shines with gold leaf.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">25</div><div class="gw-main">
+      <div class="gw-given">People can hear the leaves rustling in the wind.</div>
+      <div class="gw-instr">請改為被動語態（以 the leaves 為主詞）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The leaves can be heard rustling in the wind.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">26</div><div class="gw-main">
+      <div class="gw-given">People can see the temple shining across the water.</div>
+      <div class="gw-instr">請改為被動語態（以 the temple 為主詞）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The temple can be seen shining across the water.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">27</div><div class="gw-main">
+      <div class="gw-given">Kyoto changes with every season. + It is a lady in a bright kimono.</div>
+      <div class="gw-instr">請用 like + 名詞（明喻）把第二句融入第一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Kyoto, like a lady in a bright kimono, changes with every season.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">28</div><div class="gw-main">
+      <div class="gw-given">The city has natural splendor. + It also offers a rich culture.</div>
+      <div class="gw-instr">請用 Apart from... 改寫成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Apart from its natural splendor, the city also offers a rich culture.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">29</div><div class="gw-main">
+      <div class="gw-given">Travelers walk through the gardens. + They enjoy stunning views. (relative clause)</div>
+      <div class="gw-instr">請用關係代名詞 where 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Travelers walk through the gardens, where they enjoy stunning views.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">30</div><div class="gw-main">
+      <div class="gw-given">Nature and culture blend together in Kyoto. + This makes the city unforgettable.</div>
+      <div class="gw-instr">請用現在分詞構句（making...）放句尾合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Nature and culture blend together in Kyoto, making the city unforgettable.</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子重組 -->
+<div class="section s-indigo">
+  <div class="sec-head"><div class="sec-icon">🔀</div>句子重組（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依序點選下方詞組，把句子排回正確順序；點錯可再點一次移回。排好後按「檢查」看對錯，或按「看正解」直接顯示答案。</div>
+    <div id="roArea"></div>
+  </div>
+</div>
+
+<!-- 單字配對遊戲 -->
+<div class="section s-amber">
+  <div class="sec-head"><div class="sec-icon">🎮</div>單字配對遊戲（核心字彙 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 先點左邊的英文單字，再點右邊對應的中文意思；配對正確會變綠色鎖定，配對錯誤會閃紅重來。全部配對完成即過關！</div>
+    <div class="match-status"><span id="matchScore">配對成功：0 / 15</span><span id="matchTime">⏱ 00:00</span><button class="match-btn" onclick="initMatchGame()">🔄 重新開始</button></div>
+    <div class="match-grid">
+      <div class="match-col" id="matchLeft"></div>
+      <div class="match-col" id="matchRight"></div>
+    </div>
+    <div class="match-win" id="matchWin"></div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第三冊 第五課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['Kyoto ',' tourists with its natural beauty all year round.'],
+  cn:'京都以它的自然美景使遊客一年到頭都愉悅。',
+  opts:['delights','punishes','freezes','banishes'],ans:0,
+  word:'delight (v.) 使愉悅',
+  exp:'delight sb. = 使某人愉悅、欣喜。(B) 懲罰、(C) 結凍、(D) 放逐皆不符語意。',
+  note:'delightful (adj.) 令人愉悅的；take delight in 樂於。'},
+ {q:['In spring the city is ',' with a sea of pink cherry blossoms.'],
+  cn:'春天時城市裡充滿一片粉紅櫻花的海洋。',
+  opts:['filled','run','fallen','led'],ans:0,
+  word:'be filled with 充滿',
+  exp:'be filled with + N = 充滿…。與 with 搭配的固定用法。',
+  note:'≈ be full of；主詞為「被填滿」的空間。'},
+ {q:['',' its many temples, Kyoto also has beautiful gardens.'],
+  cn:'除了眾多寺廟之外，京都也有美麗的庭園。',
+  opts:['Apart from','Because of','Thanks to','Instead of'],ans:0,
+  word:'apart from 除了…之外（還有）',
+  exp:'apart from = 除了…之外（含 in addition to 之意）。(D) instead of 為「而非」，語意相反。',
+  note:'apart from ≈ aside from / besides。'},
+ {q:['Visitors love to feast their ',' on the shining golden pavilion.'],
+  cn:'遊客喜愛盡情飽覽那閃亮的金色樓閣。',
+  opts:['eyes','ears','hands','feet'],ans:0,
+  word:"feast one's eyes on 盡情欣賞",
+  exp:'feast one\'s eyes on + N = 大飽眼福、盡情欣賞。固定用 eyes。',
+  note:'feast 原意為「盛宴」，此處引申為「飽覽」。'},
+ {q:['The old city ',' hundreds of historic shrines and temples.'],
+  cn:'這座古城自豪擁有數百座具歷史意義的神社與寺廟。',
+  opts:['boasts','punishes','freezes','banishes'],ans:0,
+  word:'boast (v.) 自豪擁有',
+  exp:'boast + N =（地方）擁有值得自豪的事物，非貶義的「吹噓」。',
+  note:'boast about sth. 才是「誇耀」之意。'},
+ {q:['The ',' of the temple on the calm pond is truly stunning.'],
+  cn:'寺廟在平靜池面上的倒影真是令人驚豔。',
+  opts:['reflection','conflict','victim','theft'],ans:0,
+  word:'reflection (n.) 倒影；反射',
+  exp:'水面上的「倒影」用 reflection。其動詞為 reflect。',
+  note:'reflection 亦可指「反思」。'},
+ {q:['The view of the golden hall at sunset is simply ','.'],
+  cn:'夕陽下金色殿堂的景致簡直令人驚嘆。',
+  opts:['breathtaking','miserable','furious','hollow'],ans:0,
+  word:'breathtaking (adj.) 令人驚嘆的',
+  exp:'breathtaking = 美到令人屏息的。由 breath + taking 構成。',
+  note:'take one\'s breath away 為其對應片語。'},
+ {q:['A quiet stone path ',' up to the main gate of the temple.'],
+  cn:'一條安靜的石徑通往寺廟的正門。',
+  opts:['leads','falls','sets','makes'],ans:0,
+  word:'lead up to 通往；導向',
+  exp:'lead up to + N = 通往、導向。主詞為 path，用 leads。',
+  note:'lead up to 亦可指「為…作鋪陳」。'},
+ {q:['In summer, green leaves ',' brightly in the warm sunshine.'],
+  cn:'夏天時，綠葉在溫暖的陽光下明亮地閃耀。',
+  opts:['sparkle','punish','banish','boast'],ans:0,
+  word:'sparkle (v.) 閃耀',
+  exp:'sparkle = 閃閃發光，呼應課文的 sparkling。≈ glitter。',
+  note:'sparkling (adj.) 閃亮的；sparkling water 氣泡水。'},
+ {q:['As we turned the corner, the shining hall came into ','.'],
+  cn:'我們一轉彎，那閃亮的殿堂便映入眼簾。',
+  opts:['view','conflict','benefit','theft'],ans:0,
+  word:'come into view 映入眼簾',
+  exp:'come into view = 進入視線、映入眼簾。固定用 view。',
+  note:'≈ appear；反義 out of view 看不見。'}
+];
+
+var teacherQ=[
+ {q:['',' served as Japan\'s capital for centuries, Kyoto keeps many old customs.'],
+  cn:'由於曾當日本首都好幾個世紀，京都保留了許多古老習俗。',
+  opts:['Having','To have','Have','Had'],ans:0,
+  word:'Having + p.p.（完成式分詞構句）',
+  tnote:'<b>完成式分詞構句</b>：分詞動作（當首都）比主句（保留習俗）更早發生，用 Having + p.p.。<br>(B) 不定詞、(C)(D) 限定動詞皆不能引導此狀語。<br>邏輯主詞須＝主句主詞 Kyoto。'},
+ {q:['No trip to Kyoto would be complete without ',' the Golden Pavilion.'],
+  cn:'到京都旅行若沒看金閣寺就不算完整。',
+  opts:['see','to see','seeing','seen'],ans:2,
+  word:'without + V-ing（介系詞後接動名詞）',
+  tnote:'<b>介系詞 without + 動名詞</b>：without 為介系詞，後須接 V-ing。<br>(A) 原形、(B) 不定詞、(D) 過去分詞皆不可接在介系詞後當受詞。<br>句型：No + N + would be complete without + Ving。'},
+ {q:['',' behind a quiet pond, the pavilion shines with gold leaf.'],
+  cn:'聳立在寧靜池畔後方，那座樓閣閃耀著金箔的光芒。',
+  opts:['Rising','Risen','To rise','Rise'],ans:0,
+  word:'句首現在分詞（主動修飾主詞）',
+  tnote:'<b>現在分詞片語置句首</b>：主詞 pavilion 主動「聳立」，用現在分詞 Rising。<br>(B) 過去分詞表被動、(C) 不定詞、(D) 原形皆不合。<br>注意邏輯主詞須為 pavilion（避免懸垂分詞）。'},
+ {q:['In summer, the leaves can be ',' rustling in the wind.'],
+  cn:'夏天時，可以聽見樹葉在風中沙沙作響。',
+  opts:['hear','heard','hearing','to hear'],ans:1,
+  word:'感官動詞被動：be heard + V-ing',
+  tnote:'<b>感官動詞被動語態</b>：leaves 是「被聽見」，須用 be + p.p. = be heard。<br>其後表「正在進行」的動作用現在分詞 rustling。<br>(A) 原形、(C) 現在分詞、(D) 不定詞皆不能單獨接在情態助動詞 can 後表被動。'},
+ {q:['Kyoto, ',' a lady in a bright kimono, changes with the seasons.'],
+  cn:'京都就像一位身著鮮豔和服的女子，隨季節變換。',
+  opts:['like','as','alike','likely'],ans:0,
+  word:'like + N（明喻）',
+  tnote:'<b>like 為介系詞，後接名詞</b>：後面是名詞片語 a lady...，用 like。<br>(B) as 為連接詞，後接子句；(C) alike 為形容詞置句尾；(D) likely 為「可能的」。<br>比喻：like + N 或 as + 子句。'},
+ {q:['',' previously been the capital, the city is now full of history.'],
+  cn:'由於先前曾是首都，這座城市如今充滿歷史。',
+  opts:['Have','Having','To have','Had'],ans:1,
+  word:'Having + p.p.（表更早發生的原因）',
+  tnote:'<b>完成式分詞構句</b>：「曾是首都」發生在前，用 Having + p.p.（Having been）。<br>(A)(D) 限定動詞、(C) 不定詞皆不能引導此分詞狀語。<br>常見於敘述背景、原因的句首。'},
+ {q:['The maple trees ',' up to the gate make the path beautiful.'],
+  cn:'那些通往大門的楓樹讓小徑變得美麗。',
+  opts:['leading','led','to lead','lead'],ans:0,
+  word:'現在分詞片語後位修飾名詞',
+  tnote:'<b>分詞後位修飾</b>：trees 主動「通往」大門，用現在分詞 leading 修飾 trees（＝which lead up to）。<br>句子主要動詞是 make；若填 lead 會變成兩個動詞。<br>(B) 過去分詞表被動不合、(C) 不定詞語意不符。'},
+ {q:['The pond is ',' calm ',' the temple\'s reflection looks perfect.'],
+  cn:'池水如此平靜，以至於寺廟的倒影看起來完美無瑕。',
+  opts:['so...that','such...that','too...to','as...as'],ans:0,
+  word:'so + adj. + that（如此…以至於）',
+  tnote:'<b>so vs such</b>：空格後是形容詞 calm（無名詞），用 so + adj. + that。<br>接名詞片語才用 such：such a calm pond that...。<br>(C) too...to 含否定意味，語意不符。'},
+ {q:['Not only ',' Kyoto beautiful, but it is also rich in culture.'],
+  cn:'京都不僅美麗，還有豐富的文化。',
+  opts:['is','it is','does','being'],ans:0,
+  word:'Not only 置句首 → be 動詞倒裝',
+  tnote:'<b>Not only 句首倒裝</b>：Not only 放句首，該子句須倒裝。主要動詞為 be 時，將 be 提前：Not only is Kyoto...。<br>(B) 未倒裝；(C) does 用於一般動詞倒裝，此處為 be 動詞；(D) being 非限定動詞。'},
+ {q:['The magnificent hall is covered ',' shining gold leaf.'],
+  cn:'這座宏偉的殿堂覆滿了閃亮的金箔。',
+  opts:['in','of','for','into'],ans:0,
+  word:'be covered in / with（覆滿…）',
+  tnote:'<b>be covered in/with</b> = 覆蓋著、覆滿。表面被某物覆蓋用 in 或 with。<br>(B) of、(C) for、(D) into 皆非此固定搭配。<br>對照：be filled with（充滿）、be crowned with（頂著）。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+var _paged=false;
+function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+setTimeout(_mkPages,150);
+window.addEventListener('beforeprint',_mkPages);
+</script>
+<script>
+/* 字彙區補充發音：例句、片語例句、同義字、反義字（重用既有 speak/makeSpeakBtn；列印自動隱藏 .speak-btn） */
+(function(){
+  function ready(fn){ if(document.readyState!=='loading')fn(); else document.addEventListener('DOMContentLoaded',fn); }
+  function mkBtn(text){
+    if(typeof makeSpeakBtn==='function') return makeSpeakBtn(text);
+    var b=document.createElement('button');
+    b.className='speak-btn'; b.textContent='\u{1F50A}'; b.title='點我聽發音：'+text;
+    b.setAttribute('aria-label','發音 '+text);
+    b.onclick=function(ev){ if(typeof speak==='function')speak(text,b,ev); };
+    return b;
+  }
+  function enFromMarker(raw){
+    if(!/≈|同義|反義|反向/.test(raw)) return '';
+    var en='';
+    var m=raw.match(/(?:≈|同義字?|同義詞|反義字?|反義詞|反向)\s*[:：]?\s*([A-Za-z][A-Za-z '\/\-]*)/);
+    if(m){ en=m[1]; }
+    else { var m2=raw.match(/^\s*([A-Za-z][A-Za-z '\/\-]*)/); en=m2?m2[1]:''; }
+    en=en.replace(/\s*\/\s*/g,', ').replace(/\s+/g,' ').trim().replace(/[,\s]+$/,'');
+    return (en && /[A-Za-z]/.test(en) && en.length<=60) ? en : '';
+  }
+  function enFam(raw){
+    var s=(raw||'').replace(/\([^)]*\)/g,' ').replace(/（[^）]*）/g,' ').replace(/[≈=📊👆]/g,' ').replace(/\s*\/\s*/g,' / ');
+    var runs=s.match(/[A-Za-z][A-Za-z'’\-]*(?:\s+[A-Za-z][A-Za-z'’\-]*)*/g);
+    if(!runs) return '';
+    var en=runs.join(', ').replace(/\s+/g,' ').trim();
+    return (en && en.length<=60) ? en : '';
+  }
+  function enSentence(el){
+    var c=el.cloneNode(true);
+    c.querySelectorAll('.cn,.g-ex-cn,.speak-btn').forEach(function(x){x.remove();});
+    return c.textContent
+      .replace(/（[^）]*）/g,' ')
+      .replace(/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function addSentenceBtn(ex){
+    if(ex.querySelector('.speak-btn'))return;
+    var t=enSentence(ex); if(!t)return;
+    var cn=ex.querySelector('.cn'); var b=mkBtn(t);
+    if(cn)ex.insertBefore(b,cn); else ex.appendChild(b);
+  }
+  ready(function(){
+    document.querySelectorAll('.v-ex').forEach(addSentenceBtn);    // 字彙例句
+    document.querySelectorAll('.pex').forEach(addSentenceBtn);     // 片語例句
+    document.querySelectorAll('.slang-ex').forEach(addSentenceBtn);// 俚語生活例句
+    document.querySelectorAll('.g-ex').forEach(addSentenceBtn);    // 句型文法例句
+    document.querySelectorAll('.v-fam span').forEach(function(el){  // 字族衍生字（紫色標籤）全部發音
+      if(el.querySelector&&el.querySelector('.speak-btn'))return;
+      var en=enFam(el.textContent||'');
+      if(!en)return;
+      el.appendChild(mkBtn(en));
+    });
+    document.querySelectorAll('.v-gsat').forEach(function(el){  // 學測連結內同義/反義字
+      if(el.querySelector&&el.querySelector('.speak-btn'))return;
+      var en=enFromMarker(el.textContent||'');
+      if(!en)return;
+      el.appendChild(mkBtn(en));
+    });
+  });
+})();
+</script>
+<script>
+/* 文法手寫練習：填空/改寫「看解答」按鈕（沿用既有 show-btn 樣式與列印隱藏規則） */
+function showGW(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.toggle('open');
+  if(!btn.dataset.label){btn.dataset.label=btn.textContent;}
+  btn.textContent=isOpen?'收合':btn.dataset.label;
+}
+
+/* 句子重組：10 題，點詞組依序排列成句 */
+var reorderData=[
+ {cn:'京都一年到頭都使遊客愉悅。',
+  correct:['Kyoto delights tourists','throughout','the year.'],
+  pool:['the year.','Kyoto delights tourists','throughout']},
+ {cn:'春天，城市裡充滿粉紅的櫻花。',
+  correct:['In spring, the city','is filled with','pink cherry blossoms.'],
+  pool:['pink cherry blossoms.','In spring, the city','is filled with']},
+ {cn:'由於曾是日本的首都，京都保有許多古寺。',
+  correct:['Having been the capital of Japan,','Kyoto keeps','many old temples.'],
+  pool:['many old temples.','Having been the capital of Japan,','Kyoto keeps']},
+ {cn:'到京都旅行若沒看金閣寺就不算完整。',
+  correct:['No trip to Kyoto','would be complete','without seeing the Golden Pavilion.'],
+  pool:['without seeing the Golden Pavilion.','No trip to Kyoto','would be complete']},
+ {cn:'樓閣聳立在清澈的池畔後方，閃耀著金光。',
+  correct:['Rising behind a crystal-clear pond,','the pavilion','shines with gold leaf.'],
+  pool:['shines with gold leaf.','Rising behind a crystal-clear pond,','the pavilion']},
+ {cn:'夏天可以聽見樹葉在風中沙沙作響。',
+  correct:['In summer, the leaves','can be heard','rustling in the wind.'],
+  pool:['rustling in the wind.','In summer, the leaves','can be heard']},
+ {cn:'京都就像一位身著鮮豔和服的女子。',
+  correct:['Kyoto is','like a lady','in a bright kimono.'],
+  pool:['in a bright kimono.','Kyoto is','like a lady']},
+ {cn:'除了自然美景，京都還提供豐富的文化。',
+  correct:['Apart from its natural beauty,','Kyoto also offers','a rich culture.'],
+  pool:['a rich culture.','Apart from its natural beauty,','Kyoto also offers']},
+ {cn:'寺廟的倒影使池面成為令人驚嘆的景象。',
+  correct:["The temple's reflection",'makes the pond','a breathtaking sight.'],
+  pool:['a breathtaking sight.',"The temple's reflection",'makes the pond']},
+ {cn:'旅人很容易愛上這座美麗的城市。',
+  correct:['Travelers easily','fall in love with','this beautiful city.'],
+  pool:['this beautiful city.','Travelers easily','fall in love with']}
+];
+
+function roRender(){
+  var area=document.getElementById('roArea');
+  if(!area)return;
+  var html='';
+  reorderData.forEach(function(item,idx){
+    item.placed=[];
+    html+='<div class="ro-item"><div class="ro-top"><div class="ro-num">'+(idx+1)+'</div><div class="ro-main">'
+      +'<div class="ro-cn">'+item.cn+'</div>'
+      +'<div class="ro-answer" id="roAns'+idx+'"></div>'
+      +'<div class="ro-pool" id="roPool'+idx+'"></div>'
+      +'<div class="ro-actions">'
+      +'<button class="ro-btn secondary" onclick="roReset('+idx+')">↺ 重置</button>'
+      +'<button class="ro-btn" onclick="roCheck('+idx+')">✔ 檢查</button>'
+      +'<button class="ro-btn secondary" onclick="roReveal('+idx+')">👀 看正解</button>'
+      +'</div>'
+      +'<div class="ro-result" id="roResult'+idx+'"></div>'
+      +'</div></div></div>';
+  });
+  area.innerHTML=html;
+  reorderData.forEach(function(item,idx){roRenderPool(idx);roRenderAnswer(idx);});
+}
+function roRenderPool(idx){
+  var item=reorderData[idx];
+  var pool=document.getElementById('roPool'+idx);
+  pool.innerHTML='';
+  item.pool.forEach(function(chunk,ci){
+    if(item.placed.indexOf(ci)>=0)return;
+    var btn=document.createElement('button');
+    btn.className='ro-chip'; btn.textContent=chunk;
+    btn.onclick=function(){roPlace(idx,ci);};
+    pool.appendChild(btn);
+  });
+}
+function roRenderAnswer(idx){
+  var item=reorderData[idx];
+  var ans=document.getElementById('roAns'+idx);
+  ans.innerHTML='';
+  item.placed.forEach(function(ci){
+    var btn=document.createElement('button');
+    btn.className='ro-chip placed'; btn.textContent=item.pool[ci];
+    btn.onclick=function(){roUnplace(idx,ci);};
+    ans.appendChild(btn);
+  });
+}
+function roPlace(idx,ci){
+  var item=reorderData[idx];
+  if(item.placed.indexOf(ci)>=0)return;
+  item.placed.push(ci);
+  roRenderPool(idx); roRenderAnswer(idx);
+  document.getElementById('roResult'+idx).textContent='';
+  document.getElementById('roResult'+idx).className='ro-result';
+}
+function roUnplace(idx,ci){
+  var item=reorderData[idx];
+  var p=item.placed.indexOf(ci);
+  if(p<0)return;
+  item.placed.splice(p,1);
+  roRenderPool(idx); roRenderAnswer(idx);
+}
+function roReset(idx){
+  reorderData[idx].placed=[];
+  roRenderPool(idx); roRenderAnswer(idx);
+  var r=document.getElementById('roResult'+idx); r.textContent=''; r.className='ro-result';
+}
+function roCheck(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  var built=item.placed.map(function(ci){return item.pool[ci];}).join(' ');
+  var correct=item.correct.join(' ');
+  if(item.placed.length===item.correct.length && built===correct){
+    r.textContent='✅ 正確！'; r.className='ro-result correct';
+  }else{
+    r.textContent='❌ 順序不正確，再試試看。'; r.className='ro-result wrong';
+  }
+}
+function roReveal(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  r.textContent='👀 正解：'+item.correct.join(' ');
+  r.className='ro-result reveal';
+}
+
+/* 單字配對遊戲：核心字彙 15 字 */
+var vocabWords=[
+ {en:'delight',cn:'使愉悅；欣喜'},
+ {en:'romance',cn:'浪漫；愛情故事'},
+ {en:'blossom',cn:'花朵；綻放'},
+ {en:'rustle',cn:'沙沙作響'},
+ {en:'sparkle',cn:'閃耀；閃爍'},
+ {en:'landscape',cn:'風景；景色'},
+ {en:'splendor',cn:'壯麗；輝煌'},
+ {en:'capital',cn:'首都'},
+ {en:'boast',cn:'自豪擁有；誇耀'},
+ {en:'historic',cn:'有歷史意義的'},
+ {en:'magnificent',cn:'宏偉的；壯麗的'},
+ {en:'shimmering',cn:'微微發光的'},
+ {en:'breathtaking',cn:'令人驚嘆的'},
+ {en:'reflection',cn:'倒影；反射'},
+ {en:'distinctive',cn:'獨特的；有特色的'}
+];
+var matchState={matched:0,seconds:0,timer:null,selLeft:null,selRight:null};
+function shuffleArr(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function initMatchGame(){
+  var leftCol=document.getElementById('matchLeft'), rightCol=document.getElementById('matchRight');
+  if(!leftCol||!rightCol)return;
+  matchState.matched=0; matchState.seconds=0; matchState.selLeft=null; matchState.selRight=null;
+  document.getElementById('matchScore').textContent='配對成功：0 / '+vocabWords.length;
+  document.getElementById('matchTime').textContent='⏱ 00:00';
+  var win=document.getElementById('matchWin'); win.classList.remove('show'); win.textContent='';
+  if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+
+  var idxs=vocabWords.map(function(_,i){return i;});
+  var leftOrder=shuffleArr(idxs), rightOrder=shuffleArr(idxs);
+  leftCol.innerHTML=''; rightCol.innerHTML='';
+
+  leftOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].en; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'left');};
+    leftCol.appendChild(b);
+  });
+  rightOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].cn; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'right');};
+    rightCol.appendChild(b);
+  });
+
+  matchState.timer=setInterval(function(){
+    matchState.seconds++;
+    var m=Math.floor(matchState.seconds/60), s=matchState.seconds%60;
+    document.getElementById('matchTime').textContent='⏱ '+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+  },1000);
+}
+function matchClick(btn,side){
+  if(btn.classList.contains('matched'))return;
+  if(side==='left'){
+    if(matchState.selLeft)matchState.selLeft.classList.remove('selected');
+    matchState.selLeft=btn; btn.classList.add('selected');
+  }else{
+    if(matchState.selRight)matchState.selRight.classList.remove('selected');
+    matchState.selRight=btn; btn.classList.add('selected');
+  }
+  if(matchState.selLeft&&matchState.selRight){
+    var L=matchState.selLeft, R=matchState.selRight;
+    if(L.getAttribute('data-id')===R.getAttribute('data-id')){
+      L.classList.remove('selected'); R.classList.remove('selected');
+      L.classList.add('matched'); R.classList.add('matched');
+      matchState.matched++;
+      document.getElementById('matchScore').textContent='配對成功：'+matchState.matched+' / '+vocabWords.length;
+      matchState.selLeft=null; matchState.selRight=null;
+      if(matchState.matched===vocabWords.length){
+        if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+        var win=document.getElementById('matchWin');
+        win.textContent='🎉 全部配對成功！用時 '+document.getElementById('matchTime').textContent.replace('⏱ ','');
+        win.classList.add('show');
+      }
+    }else{
+      L.classList.add('wrong'); R.classList.add('wrong');
+      setTimeout(function(){L.classList.remove('selected','wrong');R.classList.remove('selected','wrong');},500);
+      matchState.selLeft=null; matchState.selRight=null;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  roRender();
+  initMatchGame();
+});
+</script>
+</body>
+</html>

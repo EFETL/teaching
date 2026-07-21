@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L8: Elephant Abuse ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+/* 新增大題共用色系 */
+.s-indigo .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
+.s-indigo .sec-icon{background:#4338ca;color:#fff}
+.s-amber .sec-head{background:#fffbeb;color:#b45309;border-bottom:2px solid #fde68a}
+.s-amber .sec-icon{background:#b45309;color:#fff}
+
+/* 文法手寫練習：填空 + 句子改寫 */
+.gw-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed #e2e8f0}
+.gw-item:last-child{border-bottom:none}
+.gw-num{width:30px;height:30px;border-radius:50%;background:#ede9fe;color:#6d28d9;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.gw-main{flex:1}
+.gw-en{font-size:17px;line-height:2}
+.gw-input{border:none;border-bottom:2px solid #94a3b8;background:#f8fafc;font-size:16px;font-weight:700;color:#1e293b;padding:3px 6px;width:150px;text-align:center;font-family:inherit}
+.gw-input:focus{outline:none;border-color:#6d28d9;background:#f5f3ff}
+.gw-hint{color:#6d28d9;font-weight:700;font-size:16px}
+.gw-cn{font-size:16px;color:#64748b;margin-top:4px;font-style:italic}
+.gw-given{font-size:17px;margin-bottom:6px}
+.gw-instr{font-size:16px;color:#be123c;font-weight:700;margin-bottom:8px}
+.gw-textarea{width:100%;border:1.5px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:16px;font-family:inherit;resize:vertical;margin-bottom:2px;display:block}
+.gw-textarea:focus{outline:none;border-color:#6d28d9}
+.gw-ans{display:none;margin-top:8px;font-size:16px;color:#059669;font-weight:700;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px}
+.gw-ans.open{display:block}
+
+/* 句子重組 */
+.ro-item{padding:16px 0;border-bottom:1px dashed #e2e8f0}
+.ro-item:last-child{border-bottom:none}
+.ro-top{display:flex;gap:12px;align-items:flex-start}
+.ro-num{width:30px;height:30px;border-radius:50%;background:#e0e7ff;color:#4338ca;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ro-main{flex:1}
+.ro-cn{font-size:16px;color:#64748b;font-style:italic;margin-bottom:10px}
+.ro-answer{min-height:44px;border:2px dashed #c7d2fe;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;background:#f8fafc}
+.ro-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.ro-chip{padding:7px 13px;border-radius:7px;border:2px solid #c7d2fe;background:#fff;color:#3730a3;font-weight:700;font-size:16px;cursor:pointer;transition:all .15s}
+.ro-chip:hover{background:#eef2ff}
+.ro-chip.placed{border-style:solid;background:#e0e7ff}
+.ro-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ro-btn{border:none;border-radius:7px;padding:7px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#4338ca}
+.ro-btn.secondary{background:#64748b}
+.ro-result{margin-top:8px;font-size:16px;font-weight:700;min-height:20px}
+.ro-result.correct{color:#16a34a}
+.ro-result.wrong{color:#dc2626}
+.ro-result.reveal{color:#4338ca}
+
+/* 單字配對遊戲 */
+.match-status{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-weight:800;color:#92400e;font-size:17px}
+.match-btn{border:none;border-radius:8px;padding:8px 16px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#b45309}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.match-col{display:flex;flex-direction:column;gap:9px}
+.match-chip{padding:11px 15px;border:2px solid #fde68a;border-radius:9px;cursor:pointer;font-weight:700;font-size:16px;background:#fffbeb;color:#78350f;transition:all .12s}
+.match-chip:hover{background:#fef3c7}
+.match-chip.selected{border-color:#b45309;background:#fef3c7;box-shadow:0 0 0 2px #fde68a}
+.match-chip.matched{border-color:#86efac;background:#f0fdf4;color:#16a34a;cursor:default;opacity:.65}
+.match-chip.wrong{border-color:#fca5a5;background:#fef2f2;color:#dc2626;animation:mshake .3s}
+@keyframes mshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.match-win{display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;color:#92400e;font-weight:800;text-align:center;font-size:18px}
+.match-win.show{display:block}
+@media(max-width:640px){.match-grid{grid-template-columns:1fr}}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .gw-ans{display:none!important}
+  .s-amber,.ro-actions{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L8: Elephant Abuse ── 虐象：泰國觀光業的黑暗祕密</h1>
+  <div class="sub">龍騰版高中英文 第三冊 第八課｜互動教學講義（高二適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文精選精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+    <span class="tag">✍️ 文法手寫練習 × 30</span>
+    <span class="tag">🔀 句子重組 × 10</span>
+    <span class="tag">🎮 單字配對遊戲</span>
+  </div>
+</div>
+
+<!-- 主題速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>主題速覽（三幕）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🐘 第一幕｜觀光象背後</h4>
+        泰國每年迎來數百萬遊客，許多人把<b>騎大象</b>當成旅程中最精彩的<b>highlight</b>，付出的錢也<b>流入泰國經濟</b>。然而在這歡樂景象背後，藏著一個少有旅客察覺的<b>殘酷真相</b>。
+      </div>
+      <div class="story-card s2">
+        <h4>⛓️ 第二幕｜非法捕捉</h4>
+        由於觀光業<b>需求龐大</b>，盜獵者<b>非法捕捉</b>野生幼象賣給景點。小象被<b>引誘離開母親</b>、趕入陷阱；而任何挺身<b>保護幼象</b>的母象，都可能被殘忍獵人<b>射殺</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>🩸 第三幕｜殘忍馴服</h4>
+        被賣給業者後，幼象遭<b>關進小籠</b>、無情毆打、以尖鉤刺戳，好逼牠<b>順從</b>。馴服後便被迫過著<b>奴役般</b>的生活、長時間載客。作者呼籲旅客<b>拒絕</b>這類業者，改到國家公園欣賞自由的野象。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文重點摘要（精選精講）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 以下為課文重點的英文摘要（教師改寫）。點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點右側 🔊 可聽整句朗讀。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課探討泰國大象觀光的黑暗面。以下摘要以教師自行改寫的英文呈現（非課文原句），依「觀光象背後／非法捕捉／殘忍馴服」三個重點分段。</p>
+
+    <!-- 第一幕 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🐘 第一幕｜觀光象背後（The Tourist Appeal）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Thailand welcomes a huge number of visitors every year, and quite a few of them look forward to riding an elephant for fun.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">泰國每年迎接大量遊客，其中不少人期待騎大象取樂。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Thailand</span><span class="syn-t">S</span> <span class="syn syn-v">welcomes</span><span class="syn-t">V</span> <span class="syn syn-o">a huge number of visitors</span><span class="syn-t">O</span> <span class="syn syn-m">every year</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-s">quite a few of them</span><span class="syn-t">S</span> <span class="syn syn-v">look forward to</span><span class="syn-t">V（片語）</span> <span class="syn syn-o">riding an elephant</span><span class="syn-t">O（動名詞）</span> <span class="syn syn-m">for fun</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>look forward to + V-ing</b> = 期待…；<b>a number of</b> + 複數名詞 = 許多；主題字 <b>highlight</b>、<b>economy</b> 稍後登場。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>For many travelers, such a ride becomes the best part of the trip, and the money they pay flows into the country's economy.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">對許多旅客而言，這樣的騎乘成了旅程中最精彩的部分，而他們付的錢則流入該國經濟。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">For many travelers</span><span class="syn-t">副詞</span> <span class="syn syn-s">such a ride</span><span class="syn-t">S</span> <span class="syn syn-v">becomes</span><span class="syn-t">V</span> <span class="syn syn-c">the best part of the trip</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">the money [they pay]</span><span class="syn-t">S（含關係子句）</span> <span class="syn syn-v">flows into</span><span class="syn-t">V</span> <span class="syn syn-o">the country's economy</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>the best part</b> ≈ <b>highlight</b>（最精彩處）；<b>bring / flow money into</b> = 把錢帶入…；<b>economy</b>（經濟）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Behind this cheerful scene, however, hides a cruel truth that few tourists ever notice.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，在這歡樂的景象背後，藏著一個少有遊客察覺的殘酷真相。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Behind this cheerful scene</span><span class="syn-t">地方副詞（倒裝）</span> <span class="syn syn-v">hides</span><span class="syn-t">V</span> <span class="syn syn-s">a cruel truth [that few tourists ever notice]</span><span class="syn-t">S（含限定關係子句）</span></div>
+          <div class="para-note"><b>地方副詞置首的倒裝</b>：Behind... + V + S；<b>a dark secret / cruel truth</b> 呼應標題「黑暗祕密」。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第二幕 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">⛓️ 第二幕｜非法捕捉（The Illegal Capture）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Because the tourism industry keeps demanding more elephants, poachers illegally seize wild calves and sell them to attractions.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">由於觀光業不斷需索更多大象，盜獵者非法捕捉野生幼象，並把牠們賣給景點。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Because the tourism industry keeps demanding more elephants</span><span class="syn-t">原因副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">poachers</span><span class="syn-t">S</span> <span class="syn syn-m">illegally</span><span class="syn-t">副詞</span> <span class="syn syn-v">seize</span><span class="syn-t">V</span> <span class="syn syn-o">wild calves</span><span class="syn-t">O</span> <span class="syn syn-v">and sell</span><span class="syn-t">V</span> <span class="syn syn-o">them</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>demand</b>（需求）、<b>illegally</b>（非法地）、<b>capture / seize</b>（捕捉）皆為核心字；<b>keep + V-ing</b> = 持續…。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The young elephants are lured away from their mothers and driven into hidden traps.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些幼象被引誘離開母親，並被趕入隱藏的陷阱。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The young elephants</span><span class="syn-t">S</span> <span class="syn syn-v">are lured away</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">from their mothers</span><span class="syn-t">副詞</span> <span class="syn syn-v">and (are) driven</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">into hidden traps</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>lure...away from</b> = 把…引誘離開（片語）；<b>be lured / driven</b> 為被動語態；<b>lure</b> 為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In the wild, these animals live in herds guided by females, and a mother naturally protects her baby.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在野外，這些動物生活在由母象帶領的象群中，母親天生會保護自己的孩子。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In the wild</span><span class="syn-t">副詞</span> <span class="syn syn-s">these animals</span><span class="syn-t">S</span> <span class="syn syn-v">live</span><span class="syn-t">V</span> <span class="syn syn-m">in herds [guided by females]</span><span class="syn-t">副詞（含過去分詞片語）</span><br>
+            <span class="num">②</span><span class="syn syn-s">a mother</span><span class="syn-t">S</span> <span class="syn syn-m">naturally</span><span class="syn-t">副詞</span> <span class="syn syn-v">protects</span><span class="syn-t">V</span> <span class="syn syn-o">her baby</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>herd</b>（象群、獸群）為核心字；<b>guided by females</b> 過去分詞片語（被動）修飾 herds。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Any female that steps in to defend her calf risks being shot by ruthless trappers.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">任何挺身保護幼象的母象，都有被殘忍獵人射殺的風險。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Any female [that steps in to defend her calf]</span><span class="syn-t">S（含限定關係子句）</span> <span class="syn syn-v">risks</span><span class="syn-t">V</span> <span class="syn syn-o">being shot by ruthless trappers</span><span class="syn-t">O（動名詞被動）</span></div>
+          <div class="para-note"><b>defend</b>（保護）、<b>brutal / ruthless</b>（殘忍的）為核心字；<b>risk + V-ing</b>；<b>be shot</b> 被動（見句型三）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第三幕 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🩸 第三幕｜殘忍馴服與呼籲（Taming &amp; the Call to Act）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Once a captured elephant reaches its new owners, a stretch of terrible cruelty begins.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一旦被捕的大象落入新主人手中，一段可怕的殘酷歲月便開始了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Once a captured elephant reaches its new owners</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">a stretch of terrible cruelty</span><span class="syn-t">S</span> <span class="syn syn-v">begins</span><span class="syn-t">V</span></div>
+          <div class="para-note"><b>once</b> = 一旦（連接詞）；<b>captured</b> 過去分詞修飾 elephant；<b>cruelty</b>（殘忍）為主題字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Confined in a tiny cage, the frightened animal is beaten mercilessly and even jabbed with sharp hooks so that it will finally obey.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">被關在狹小的籠子裡，這隻受驚的動物遭到無情毆打，甚至被尖鉤刺戳，好讓牠最終順從。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Confined in a tiny cage</span><span class="syn-t">分詞構句（被動，表狀況）</span> <span class="syn syn-s">the frightened animal</span><span class="syn-t">S</span> <span class="syn syn-v">is beaten</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">mercilessly</span><span class="syn-t">副詞</span> <span class="syn syn-v">and (is) jabbed</span><span class="syn-t">V（被動）</span><br>
+            <span class="num">②</span><span class="syn syn-m">so that it will finally obey</span><span class="syn-t">目的副詞子句</span></div>
+          <div class="para-note"><b>confine</b>（監禁）、<b>mercilessly</b>（無情地）、<b>obedient / obey</b>（順從）為核心字；<b>Confined...</b> 為過去分詞構句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>After its spirit is broken, the elephant is forced into a lifetime of labor, carrying tourists for hours despite the lasting harm to its spine.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在精神被摧毀後，這頭大象被迫進入一輩子的勞役，長時間載運遊客，儘管這對牠的脊椎造成持久的傷害。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">After its spirit is broken</span><span class="syn-t">時間副詞子句</span> <span class="syn syn-s">the elephant</span><span class="syn-t">S</span> <span class="syn syn-v">is forced into</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">a lifetime of labor</span><span class="syn-t">O</span> <span class="syn syn-m">, carrying tourists for hours</span><span class="syn-t">分詞構句</span> <span class="syn syn-m">despite the lasting harm to its spine</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>tame</b>（馴服）、<b>slavery</b>（奴役）為主題字；<b>be forced into + N</b>（被迫陷入，見句型三）；<b>vulnerable</b> spine 呼應補充字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Since supply always follows demand, the writer urges travelers to reject such businesses and instead enjoy watching wild elephants roam freely in national parks.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">由於供給總是跟著需求走，作者呼籲旅客拒絕這類業者，改到國家公園欣賞野生大象自由漫步。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Since supply always follows demand</span><span class="syn-t">原因副詞子句</span> <span class="syn syn-s">the writer</span><span class="syn-t">S</span> <span class="syn syn-v">urges</span><span class="syn-t">V</span> <span class="syn syn-o">travelers</span><span class="syn-t">O</span> <span class="syn syn-c">to reject such businesses ... and enjoy watching wild elephants roam freely</span><span class="syn-t">OC（不定詞）</span></div>
+          <div class="para-note"><b>urge sb. to V</b> = 力勸某人…；<b>supply and demand</b> = 供需；結尾呼籲用 <b>it is high time we dealt with...</b>（見文法補充）。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">highlight</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">最精彩的部分；強調</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>the highlight of 最精彩處</span><span>highlight A as B 把 A 標記為 B</span></div>
+        <div class="v-ex">The elephant show was the <b>highlight</b> of our whole tour.<span class="cn">大象表演是我們整趟旅程最精彩的部分。</span></div>
+        <span class="v-gsat">📊 highlight 亦作動詞「強調」</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">economy</span><span class="v-pos">n.</span><div class="v-cn-mini">經濟</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>economic (adj.) 經濟的</span><span>economical (adj.) 節省的</span></div>
+        <div class="v-ex">Tourism pours a lot of money into the local <b>economy</b>.<span class="cn">觀光業把大量金錢注入當地經濟。</span></div>
+        <span class="v-gsat">📊 economic ≠ economical 學測易混</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">demand</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">需求；要求</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>in demand 供不應求</span><span>demanding (adj.) 要求高的</span></div>
+        <div class="v-ex">The high <b>demand</b> for rides keeps this cruel trade alive.<span class="cn">對騎乘的高度需求讓這門殘忍生意得以存續。</span></div>
+        <span class="v-gsat">📊 supply and demand 供需</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">illegally</span><span class="v-pos">adv.</span><div class="v-cn-mini">非法地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>illegal (adj.) 非法的</span><span>legal (adj.) 合法的</span></div>
+        <div class="v-ex">Many baby elephants are <b>illegally</b> taken from the wild.<span class="cn">許多幼象被非法地帶離野外。</span></div>
+        <span class="v-gsat">📊 il- 為否定字首（illegal / illogical）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">capture</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">捕捉；俘虜</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>captive (n./adj.) 俘虜；被囚的</span><span>captivity (n.) 囚禁</span></div>
+        <div class="v-ex">Poachers <b>capture</b> young elephants and sell them to camps.<span class="cn">盜獵者捕捉幼象並賣給營區。</span></div>
+        <span class="v-gsat">📊 in captivity 被圈養／被囚</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">lure</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">引誘；誘餌</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>lure sb. away 把某人引開</span><span>≈ tempt / entice</span></div>
+        <div class="v-ex">The hunters <b>lure</b> the calves away with pieces of fruit.<span class="cn">獵人用一塊塊水果把幼象引開。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">herd</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">獸群；象群</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a herd of elephants 一群象</span><span>herd (v.) 放牧；聚攏</span></div>
+        <div class="v-ex">A wild <b>herd</b> is usually led by an older female.<span class="cn">野生象群通常由一頭年長的母象帶領。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">defend</span><span class="v-pos">v.</span><div class="v-cn-mini">保護；防禦</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>defense (n.) 防禦</span><span>defensive (adj.) 防禦的</span></div>
+        <div class="v-ex">A mother elephant will <b>defend</b> her baby at any cost.<span class="cn">母象會不惜代價保護自己的孩子。</span></div>
+        <span class="v-gsat">📊 defend against 抵禦；defend 反義 attack</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">brutal</span><span class="v-pos">adj.</span><div class="v-cn-mini">殘忍的；野蠻的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>brutally (adv.) 殘忍地</span><span>brutality (n.) 暴行</span></div>
+        <div class="v-ex">The <b>brutal</b> trappers show no pity for the animals.<span class="cn">殘忍的捕獵者對這些動物毫無憐憫。</span></div>
+        <span class="v-gsat">📊 ≈ cruel / savage</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">confine</span><span class="v-pos">v.</span><div class="v-cn-mini">監禁；限制</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>confined (adj.) 狹窄的</span><span>confinement (n.) 監禁</span></div>
+        <div class="v-ex">They <b>confine</b> the elephant in a cage too small to turn around.<span class="cn">他們把大象關在小到無法轉身的籠子裡。</span></div>
+        <span class="v-gsat">📊 be confined to 侷限於</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">mercilessly</span><span class="v-pos">adv.</span><div class="v-cn-mini">無情地；毫不留情地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>merciless (adj.) 無情的</span><span>mercy (n.) 慈悲</span></div>
+        <div class="v-ex">The trainers beat the frightened animal <b>mercilessly</b>.<span class="cn">訓練者無情地毆打這隻受驚的動物。</span></div>
+        <span class="v-gsat">📊 show mercy 心懷慈悲</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">obedient</span><span class="v-pos">adj.</span><div class="v-cn-mini">服從的；順從的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>obey (v.) 服從</span><span>obedience (n.) 服從</span></div>
+        <div class="v-ex">The cruel training is meant to make the elephant <b>obedient</b>.<span class="cn">這殘忍的訓練是為了讓大象變得順從。</span></div>
+        <span class="v-gsat">📊 反義 disobedient / rebellious</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">torture</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">折磨；虐待；拷問</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>torturer (n.) 施虐者</span><span>≈ torment</span></div>
+        <div class="v-ex">Such <b>torture</b> leaves the animals with deep, lasting fear.<span class="cn">這樣的折磨在動物身上留下深沉而持久的恐懼。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">tame</span><span class="v-pos">v. / adj.</span><div class="v-cn-mini">馴服；馴養的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ domesticate 馴養</span><span>tamer (n.) 馴獸師</span></div>
+        <div class="v-ex">Once workers <b>tame</b> the elephant, they force it to give rides.<span class="cn">工人一旦馴服了大象，就逼牠載客。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">slavery</span><span class="v-pos">n.</span><div class="v-cn-mini">奴役；奴隸制</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>slave (n.) 奴隸</span><span>enslave (v.) 奴役</span></div>
+        <div class="v-ex">The tamed elephants spend their whole lives in <b>slavery</b>.<span class="cn">被馴服的大象一輩子活在奴役之中。</span></div>
+        <span class="v-gsat">📊 modern slavery 現代奴役 學測閱讀常見</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">have a lot of fun (V-ing)</span></td><td>玩得很開心</td><td class="pex">Tourists <b>have a lot of fun</b> riding elephants, unaware of the cruelty.<span class="cn">遊客騎大象玩得很開心，卻不知背後的殘忍。</span></td></tr>
+      <tr><td><span class="phr">bring ... into</span></td><td>把…帶入</td><td class="pex">These rides <b>bring</b> a lot of money <b>into</b> the country.<span class="cn">這些騎乘為國家帶進大量金錢。</span></td></tr>
+      <tr><td><span class="phr">due to</span></td><td>由於</td><td class="pex"><b>Due to</b> strong demand, more wild elephants are captured.<span class="cn">由於需求強勁，更多野象被捕捉。</span></td></tr>
+      <tr><td><span class="phr">lure ... away from</span></td><td>把…引誘離開</td><td class="pex">Hunters <b>lure</b> the calves <b>away from</b> their herd.<span class="cn">獵人把幼象引誘離開象群。</span></td></tr>
+      <tr><td><span class="phr">in order to</span></td><td>為了</td><td class="pex">They abuse the elephants <b>in order to</b> control them.<span class="cn">他們虐待大象是為了控制牠們。</span></td></tr>
+      <tr><td><span class="phr">be forced into</span></td><td>被迫陷入</td><td class="pex">The animals <b>are forced into</b> a life of hard labor.<span class="cn">這些動物被迫過著苦役般的生活。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（動物福利、觀光、殘忍）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">abuse</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">虐待；濫用</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>abusive (adj.) 虐待的</span><span>abuser (n.) 施虐者</span></div>
+        <div class="v-ex">Animal <b>abuse</b> in the tourism industry is often hidden.<span class="cn">觀光業中的動物虐待往往被隱藏起來。</span></div>
+        <span class="v-gsat">📊 drug abuse 藥物濫用</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">vulnerable</span><span class="v-pos">adj.</span><div class="v-cn-mini">脆弱的；易受傷的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>vulnerability (n.) 脆弱</span><span>vulnerable to 易受…影響</span></div>
+        <div class="v-ex">An elephant's spine is <b>vulnerable</b> to heavy weight from above.<span class="cn">大象的脊椎易受上方重量的傷害。</span></div>
+        <span class="v-gsat">📊 vulnerable groups 弱勢族群</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">permanent</span><span class="v-pos">adj.</span><div class="v-cn-mini">永久的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>permanently (adv.) 永久地</span><span>反 temporary 暫時的</span></div>
+        <div class="v-ex">Years of carrying tourists cause <b>permanent</b> back injuries.<span class="cn">多年載客造成永久的背部傷害。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">adequate</span><span class="v-pos">adj.</span><div class="v-cn-mini">足夠的；適當的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>adequately (adv.) 充分地</span><span>反 inadequate 不足的</span></div>
+        <div class="v-ex">The animals are denied an <b>adequate</b> amount of food and water.<span class="cn">這些動物得不到足夠的食物和水。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">exhaustion</span><span class="v-pos">n.</span><div class="v-cn-mini">精疲力竭</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>exhaust (v.) 使精疲力竭</span><span>exhausted (adj.) 累壞的</span></div>
+        <div class="v-ex">Hunger and overwork soon lead to complete <b>exhaustion</b>.<span class="cn">飢餓與過勞很快導致完全的精疲力竭。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">complex</span><span class="v-pos">adj.</span><div class="v-cn-mini">複雜的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>complexity (n.) 複雜性</span><span>≈ complicated</span></div>
+        <div class="v-ex">Elephants are <b>complex</b>, deeply social creatures.<span class="cn">大象是複雜且極具社會性的生物。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">intelligent</span><span class="v-pos">adj.</span><div class="v-cn-mini">聰明的；有智慧的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>intelligence (n.) 智慧</span><span>intelligently (adv.) 聰明地</span></div>
+        <div class="v-ex">These <b>intelligent</b> animals can remember people for years.<span class="cn">這些聰明的動物能記住人們好幾年。</span></div>
+        <span class="v-gsat">📊 artificial intelligence 人工智慧</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">welfare</span><span class="v-pos">n.</span><div class="v-cn-mini">福利；福祉</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>animal welfare 動物福利</span><span>welfare state 福利國家</span></div>
+        <div class="v-ex">True animal <b>welfare</b> means letting elephants live free.<span class="cn">真正的動物福利，是讓大象自由地生活。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（祕密、殘忍、覺醒）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the elephant in the room</span><div class="slang-cn-mini">房間裡的大象（明顯卻沒人願談的問題）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">大家都看得到、卻刻意避而不談的大問題。</div>
+      <div class="slang-ex">Animal cruelty is <b>the elephant in the room</b> in the tourism business.<span class="cn">動物虐待是觀光業裡沒人願談的大問題。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">skeletons in the closet</span><div class="slang-cn-mini">不可告人的祕密</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">藏起來、不想被人知道的醜事或祕密。</div>
+      <div class="slang-ex">Even famous attractions may have <b>skeletons in the closet</b>.<span class="cn">連知名景點也可能有不可告人的祕密。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">let the cat out of the bag</span><div class="slang-cn-mini">不小心洩漏祕密</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">一不小心把本該保密的事講了出來。</div>
+      <div class="slang-ex">The documentary <b>let the cat out of the bag</b> about elephant abuse.<span class="cn">那部紀錄片揭露了虐象的祕密。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a wolf in sheep's clothing</span><div class="slang-cn-mini">披著羊皮的狼</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">外表和善、實則危險或惡毒的人事物。</div>
+      <div class="slang-ex">A "friendly" elephant camp can be <b>a wolf in sheep's clothing</b>.<span class="cn">看似「友善」的大象營區可能是披著羊皮的狼。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">turn a blind eye</span><div class="slang-cn-mini">視而不見</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">明知不對卻假裝沒看見、刻意忽略。</div>
+      <div class="slang-ex">Many tourists <b>turn a blind eye</b> to how the animals are treated.<span class="cn">許多遊客對動物的處境視而不見。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">vote with your wallet</span><div class="slang-cn-mini">用鈔票投票（以消費表態）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">用「買或不買」來表達你支持什麼。</div>
+      <div class="slang-ex">You can <b>vote with your wallet</b> by avoiding cruel attractions.<span class="cn">你可以拒絕殘忍景點，用消費來表態。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜..., many of whom + V（非限定關代，指人）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞(人), + many/some/most/all + of + whom + V ...</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">用「數量詞 + of + whom」引導非限定子句，補充說明前面的「人」。</p>
+        <div class="g-ex">Thailand welcomes millions of tourists, <b>many of whom</b> ride elephants.<div class="g-ex-cn">泰國迎接數百萬遊客，其中許多人騎大象。</div></div>
+        <div class="g-ex">The trappers, <b>some of whom</b> carry guns, hunt baby elephants.<div class="g-ex-cn">那些捕獵者（其中有些帶著槍）獵捕幼象。</div></div>
+        <div class="g-note">✗ ...millions of tourists, many of them ride...（用 them 造成兩句連寫 run-on）。</div>
+        <div class="g-tip">關代才能連接子句；指人用 whom，指物用 which。學測常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜due to + N（由於）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">Due to + 名詞(片語), S + V.（= Because of + N）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">due to 是介系詞片語，後面接「名詞」，不接句子。</p>
+        <div class="g-ex"><b>Due to</b> the high demand, wild elephants are captured.<div class="g-ex-cn">由於需求龐大，野生大象被捕捉。</div></div>
+        <div class="g-ex">The animal suffers <b>due to</b> years of overwork.<div class="g-ex-cn">這隻動物因多年過勞而受苦。</div></div>
+        <div class="g-note">✗ Due to the demand is high, ...（後接子句錯；due to 後只接名詞）。</div>
+        <div class="g-tip">due to / because of + N；because + 完整子句。學測綜合測驗常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜be forced to V / be forced into + N（被迫，被動）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + be forced + to V
+S + be forced into + N / V-ing</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">force sb. to V（主動）改被動即 be forced to V；接名詞用 into。</p>
+        <div class="g-ex">The elephants are <b>forced to</b> carry tourists for hours.<div class="g-ex-cn">大象被迫長時間載運遊客。</div></div>
+        <div class="g-ex">After being tamed, they are <b>forced into</b> a life of slavery.<div class="g-ex-cn">被馴服後，牠們被迫過著奴役般的生活。</div></div>
+        <div class="g-note">✗ be forced doing / be forced carry（應為 to V 或 into + N/V-ing）。</div>
+        <div class="g-tip">同類被動：be made to V、be asked to V（使役動詞被動須補 to）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜in order to + V（為了；表目的）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V ..., in order to + 原形V（= so as to V）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">in order to 後接「原形動詞」表目的；否定為 in order not to V。</p>
+        <div class="g-ex">Trainers abuse the animals <b>in order to</b> make them obedient.<div class="g-ex-cn">訓練者虐待動物是為了讓牠們順從。</div></div>
+        <div class="g-ex">Visit a national park <b>in order to</b> see elephants in the wild.<div class="g-ex-cn">去國家公園，是為了看野外的大象。</div></div>
+        <div class="g-note">✗ in order to making them...（in order to 後須接原形動詞）。</div>
+        <div class="g-tip">目的亦可用 in order that + S + can/could + V。學測常考改寫。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜..., both of which + V（非限定關代，指物、涵蓋兩者）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">先行詞(兩件事物), + both of which + V ...（which 代物；whom 代人）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">both of which 補充說明前面「兩件事物」，which 不可換成 that。</p>
+        <div class="g-ex">They suffer torture and abuse, <b>both of which</b> cause extreme suffering.<div class="g-ex-cn">牠們遭受折磨與虐待，兩者都造成極大的痛苦。</div></div>
+        <div class="g-ex">I saw two camps, <b>both of which</b> mistreated their elephants.<div class="g-ex-cn">我看到兩個營區，兩者都虐待牠們的大象。</div></div>
+        <div class="g-note">✗ both of them cause...（用 them 造成連寫）；✗ both of whom（whom 只代人）。</div>
+        <div class="g-tip">先行詞是人用 whom、是物用 which；that 不可引導非限定子句。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<!-- 文法填空練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">✍️</div>文法填空練習（20 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依中文提示，將括號中的字改為正確的文法形式，直接打在空格中；寫完按「看解答」對答案。也適合列印後手寫作答。</div>
+
+    <div class="gw-item"><div class="gw-num">1</div><div class="gw-main">
+      <div class="gw-en">Thailand welcomes millions of tourists, many of <input class="gw-input" style="width:90px"> <span class="gw-hint">(who)</span> enjoy riding elephants.</div>
+      <div class="gw-cn">泰國迎接數百萬遊客，其中許多人喜歡騎大象。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：whom</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">2</div><div class="gw-main">
+      <div class="gw-en">The elephants suffer torture and abuse, both of <input class="gw-input" style="width:90px"> <span class="gw-hint">(which)</span> cause great pain.</div>
+      <div class="gw-cn">大象遭受折磨與虐待，兩者都造成巨大痛苦。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：which</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">3</div><div class="gw-main">
+      <div class="gw-en">The brutal trappers, some of <input class="gw-input" style="width:90px"> <span class="gw-hint">(who)</span> carry guns, hunt baby elephants.</div>
+      <div class="gw-cn">殘忍的捕獵者（其中有些帶槍）獵捕幼象。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：whom</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">4</div><div class="gw-main">
+      <div class="gw-en">These rides earn huge profits, most of <input class="gw-input" style="width:90px"> <span class="gw-hint">(which)</span> go to cruel operators.</div>
+      <div class="gw-cn">這些騎乘賺取巨額利潤，大部分落入殘忍業者手中。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：which</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">5</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(due)</span> the high demand, more wild elephants are captured each year.</div>
+      <div class="gw-cn">由於需求龐大，每年有更多野象被捕捉。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Due to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">6</div><div class="gw-main">
+      <div class="gw-en">Many elephants die <input class="gw-input" style="width:100px"> <span class="gw-hint">(due)</span> the cruel taming process.</div>
+      <div class="gw-cn">許多大象死於殘忍的馴服過程。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：due to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">7</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(due)</span> their broken spines, the animals live in constant pain.</div>
+      <div class="gw-cn">由於脊椎受損，這些動物長期活在痛苦中。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Due to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">8</div><div class="gw-main">
+      <div class="gw-en">The cruel trade continues <input class="gw-input" style="width:100px"> <span class="gw-hint">(due)</span> the strong tourist demand.</div>
+      <div class="gw-cn">由於遊客需求強勁，這門殘忍生意得以延續。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：due to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">9</div><div class="gw-main">
+      <div class="gw-en">After taming, the elephants are <input class="gw-input" style="width:110px"> <span class="gw-hint">(force)</span> into a life of slavery.</div>
+      <div class="gw-cn">馴服後，大象被迫過著奴役般的生活。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：forced</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">10</div><div class="gw-main">
+      <div class="gw-en">The calves are <input class="gw-input" style="width:110px"> <span class="gw-hint">(force)</span> to carry heavy tourists for many hours.</div>
+      <div class="gw-cn">幼象被迫長時間載運沉重的遊客。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：forced</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">11</div><div class="gw-main">
+      <div class="gw-en">These gentle animals are <input class="gw-input" style="width:110px"> <span class="gw-hint">(force)</span> into hard labor every single day.</div>
+      <div class="gw-cn">這些溫馴的動物每天都被迫從事苦役。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：forced</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">12</div><div class="gw-main">
+      <div class="gw-en">A wild elephant should never be <input class="gw-input" style="width:110px"> <span class="gw-hint">(force)</span> to obey a human trainer.</div>
+      <div class="gw-cn">野生大象絕不該被迫服從人類訓練者。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：forced</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">13</div><div class="gw-main">
+      <div class="gw-en">Trainers beat the elephants <input class="gw-input" style="width:130px"> <span class="gw-hint">(order)</span> make them obedient.</div>
+      <div class="gw-cn">訓練者毆打大象是為了讓牠們順從。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：in order to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">14</div><div class="gw-main">
+      <div class="gw-en">Poachers set clever traps <input class="gw-input" style="width:130px"> <span class="gw-hint">(order)</span> catch the young elephants.</div>
+      <div class="gw-cn">盜獵者設下巧妙陷阱以捕捉幼象。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：in order to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">15</div><div class="gw-main">
+      <div class="gw-en">We should avoid these camps <input class="gw-input" style="width:130px"> <span class="gw-hint">(order)</span> stop the cruelty.</div>
+      <div class="gw-cn">我們應避開這些營區，以阻止殘忍行為。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：in order to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">16</div><div class="gw-main">
+      <div class="gw-en">Visit a national park <input class="gw-input" style="width:130px"> <span class="gw-hint">(order)</span> see elephants living freely.</div>
+      <div class="gw-cn">去國家公園，以看見自由生活的大象。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：in order to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">17</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:120px"> <span class="gw-hint">(confine)</span> in small cages, the poor creatures are beaten for days.</div>
+      <div class="gw-cn">被關在小籠子裡，這些可憐的生物被毆打好幾天。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Confined</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">18</div><div class="gw-main">
+      <div class="gw-en">The baby elephants are <input class="gw-input" style="width:110px"> <span class="gw-hint">(lure)</span> away from their mothers with food.</div>
+      <div class="gw-cn">幼象被食物引誘、離開母親。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：lured</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">19</div><div class="gw-main">
+      <div class="gw-en">Any mother that defends her calf may <input class="gw-input" style="width:110px"> <span class="gw-hint">(shoot, 被動)</span> by the trappers.</div>
+      <div class="gw-cn">任何保護幼象的母象都可能被捕獵者射殺。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：be shot</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">20</div><div class="gw-main">
+      <div class="gw-en">Carrying heavy tourists for hours can <input class="gw-input" style="width:100px"> <span class="gw-hint">(lead)</span> to permanent back injuries.</div>
+      <div class="gw-cn">長時間載運沉重遊客可能導致永久的背部傷害。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：lead</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子改寫練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">🔄</div>句子改寫練習（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依指示將兩句合併或改寫成一個正確的英文句子，寫在下方欄位中；寫完按「看參考答案」對答案。</div>
+
+    <div class="gw-item"><div class="gw-num">21</div><div class="gw-main">
+      <div class="gw-given">Thailand sees millions of tourists. + Many of them ride elephants.</div>
+      <div class="gw-instr">請用 many of whom 合併成一句（非限定）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Thailand sees millions of tourists, many of whom ride elephants.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">22</div><div class="gw-main">
+      <div class="gw-given">The elephants face torture and abuse. + Both cause extreme suffering.</div>
+      <div class="gw-instr">請用 both of which 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The elephants face torture and abuse, both of which cause extreme suffering.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">23</div><div class="gw-main">
+      <div class="gw-given">There is high demand for elephant rides. + So wild elephants are captured.</div>
+      <div class="gw-instr">請用 Due to 改寫成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Due to the high demand for elephant rides, wild elephants are captured.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">24</div><div class="gw-main">
+      <div class="gw-given">The elephants are tamed. + Then they must carry tourists all day.</div>
+      <div class="gw-instr">請用 After being tamed 開頭，合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ After being tamed, the elephants must carry tourists all day long.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">25</div><div class="gw-main">
+      <div class="gw-given">Trainers abuse the animals. + They want to make them obedient.</div>
+      <div class="gw-instr">請用 in order to 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Trainers abuse the animals in order to make them obedient.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">26</div><div class="gw-main">
+      <div class="gw-given">A mother tries to defend her calf. + She may be shot by the trappers.</div>
+      <div class="gw-instr">請用限定關代 that 合併，並保留被動。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ A mother that tries to defend her calf may be shot by the trappers.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">27</div><div class="gw-main">
+      <div class="gw-given">The elephants are confined in small cages. + They are beaten for days.</div>
+      <div class="gw-instr">請把第一句改為過去分詞片語（p.p.）放句首。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Confined in small cages, the elephants are beaten for days.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">28</div><div class="gw-main">
+      <div class="gw-given">Elephants carry heavy tourists for hours. + This leads to back injuries.</div>
+      <div class="gw-instr">請用動名詞當主詞（Carrying...）改寫成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Carrying heavy tourists for hours leads to back injuries.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">29</div><div class="gw-main">
+      <div class="gw-given">We should avoid such companies. + We want to stop the cruel trade.</div>
+      <div class="gw-instr">請用 in order to 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ We should avoid such companies in order to stop the cruel trade.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">30</div><div class="gw-main">
+      <div class="gw-given">You can visit a national park. + There wild elephants roam free.</div>
+      <div class="gw-instr">請用關係副詞 where 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ You can visit a national park where wild elephants roam free.</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子重組 -->
+<div class="section s-indigo">
+  <div class="sec-head"><div class="sec-icon">🔀</div>句子重組（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依序點選下方詞組，把句子排回正確順序；點錯可再點一次移回。排好後按「檢查」看對錯，或按「看正解」直接顯示答案。</div>
+    <div id="roArea"></div>
+  </div>
+</div>
+
+<!-- 單字配對遊戲 -->
+<div class="section s-amber">
+  <div class="sec-head"><div class="sec-icon">🎮</div>單字配對遊戲（核心字彙 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 先點左邊的英文單字，再點右邊對應的中文意思；配對正確會變綠色鎖定，配對錯誤會閃紅重來。全部配對完成即過關！</div>
+    <div class="match-status"><span id="matchScore">配對成功：0 / 15</span><span id="matchTime">⏱ 00:00</span><button class="match-btn" onclick="initMatchGame()">🔄 重新開始</button></div>
+    <div class="match-grid">
+      <div class="match-col" id="matchLeft"></div>
+      <div class="match-col" id="matchRight"></div>
+    </div>
+    <div class="match-win" id="matchWin"></div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第三冊 第八課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['For most visitors, an elephant ride is the ',' of their whole trip.'],
+  cn:'對多數遊客而言，騎大象是整趟旅程最精彩的部分。',
+  opts:['highlight','herd','demand','slavery'],ans:0,
+  word:'highlight (n.) 最精彩的部分',
+  exp:'the highlight of the trip = 旅程中最精彩處。(B) 象群、(C) 需求、(D) 奴役皆不符。',
+  note:'highlight 也可作動詞「強調」。'},
+ {q:['Because of strong demand, baby elephants are ',' captured in the wild.'],
+  cn:'由於需求強勁，小象在野外被非法捕捉。',
+  opts:['illegally','gently','legally','freely'],ans:0,
+  word:'illegally (adv.) 非法地',
+  exp:'捕捉野生小象是違法的，故選 illegally。il- 為否定字首。',
+  note:'illegal (adj.) → illegally (adv.)。'},
+ {q:['Poachers ',' the young calves away from their mothers with food.'],
+  cn:'盜獵者用食物把幼象引誘離開母親。',
+  opts:['lure','defend','obey','roam'],ans:0,
+  word:'lure (v.) 引誘',
+  exp:'lure...away from = 把…引誘離開。(B) 保護、(C) 服從、(D) 漫遊皆不符。',
+  note:'≈ tempt / entice。'},
+ {q:['Wild elephants travel in a ',' that is led by older females.'],
+  cn:'野生大象成群移動，由年長的母象帶領。',
+  opts:['herd','cage','park','ride'],ans:0,
+  word:'herd (n.) 象群；獸群',
+  exp:'a herd of elephants = 一群象。led by females 呼應「群體」。',
+  note:'herd 亦可作動詞「放牧、聚攏」。'},
+ {q:['The ',' trappers may shoot any mother that tries to protect her baby.'],
+  cn:'殘忍的捕獵者可能射殺任何試圖保護孩子的母象。',
+  opts:['brutal','gentle','obedient','adequate'],ans:0,
+  word:'brutal (adj.) 殘忍的',
+  exp:'射殺母象顯示其殘忍，選 brutal。(B) 溫和、(C) 順從、(D) 足夠皆不符。',
+  note:'≈ cruel / savage；brutality (n.)。'},
+ {q:['',' in a narrow cage, the young elephant can barely move.'],
+  cn:'被關在狹窄的籠子裡，幼象幾乎無法動彈。',
+  opts:['Confined','Released','Rewarded','Praised'],ans:0,
+  word:'confine (v.) 監禁；限制',
+  exp:'can barely move 暗示被「關住」，選 Confined（過去分詞構句）。',
+  note:'be confined to = 侷限於。'},
+ {q:['The animals are beaten until they finally become ',' to their trainers.'],
+  cn:'這些動物被毆打，直到最終對訓練者變得順從。',
+  opts:['obedient','wild','free','brave'],ans:0,
+  word:'obedient (adj.) 服從的',
+  exp:'虐待的目的是使其「順從」，選 obedient。obey (v.) / obedience (n.)。',
+  note:'反義 disobedient / rebellious。'},
+ {q:['After being tamed, the elephants are forced into a life of ','.'],
+  cn:'被馴服後，大象被迫過著奴役般的生活。',
+  opts:['slavery','freedom','comfort','safety'],ans:0,
+  word:'slavery (n.) 奴役',
+  exp:'a life of slavery = 奴役般的一生。其餘三者語意相反。',
+  note:'slave (n.) / enslave (v.)。'},
+ {q:["An elephant's spine is ",' to the heavy weight pressing down from above.'],
+  cn:'大象的脊椎易受來自上方的沉重壓力所傷。',
+  opts:['vulnerable','resistant','useless','cheap'],ans:0,
+  word:'vulnerable (adj.) 脆弱的；易受傷的',
+  exp:'vulnerable to = 易受…傷害。(B) 有抵抗力的 語意相反。',
+  note:'vulnerable groups = 弱勢族群。'},
+ {q:['Supply never appears without ',', so we must change our habits as tourists.'],
+  cn:'供給絕不會憑空出現而無需求，所以身為遊客的我們必須改變習慣。',
+  opts:['demand','mercy','herd','park'],ans:0,
+  word:'demand (n.) 需求',
+  exp:'supply and demand = 供給與需求，為固定搭配。',
+  note:'in demand = 供不應求。'}
+];
+
+var teacherQ=[
+ {q:['Thailand attracts millions of tourists, ',' enjoy riding elephants.'],
+  cn:'泰國吸引數百萬遊客，其中許多人喜歡騎大象。',
+  opts:['many of whom','many of them','many whom','many of who'],ans:0,
+  word:'many of whom（非限定關代，指人）',
+  tnote:'<b>數量詞 + of + whom</b>：先行詞是「人」，用 of whom 引導非限定子句。<br>(B) many of them 造成兩句連寫（run-on）；(C) 缺 of；(D) who 為主格，介系詞後須用受格 whom。'},
+ {q:['',' the high demand, more wild elephants are captured every year.'],
+  cn:'由於需求龐大，每年有更多野象被捕捉。',
+  opts:['Due to','Due','Because','Owing'],ans:0,
+  word:'Due to + N（由於）',
+  tnote:'<b>due to + 名詞</b>：後接名詞片語 the high demand。<br>(B) Due 少了 to；(C) Because 後須接子句；(D) Owing 須寫成 Owing to。'},
+ {q:['After being tamed, the elephants are ',' a life of hard labor.'],
+  cn:'被馴服後，大象被迫過著苦役般的生活。',
+  opts:['forced into','forcing into','forced in to','force into'],ans:0,
+  word:'be forced into + N（被迫，被動）',
+  tnote:'<b>be forced into + N</b>：被迫「陷入」某狀態用 into。<br>(B) 主動分詞語態錯；(C) in to 拆開意思不同；(D) 缺 be、語態錯。'},
+ {q:['Trainers abuse the animals ',' make them obedient.'],
+  cn:'訓練者虐待動物是為了讓牠們順從。',
+  opts:['in order to','in order that','so as','for'],ans:0,
+  word:'in order to + 原形V（為了）',
+  tnote:'<b>in order to + 原形</b>：後接原形 make。<br>(B) in order that 後須接子句 (they can...)；(C) so as 須寫 so as to；(D) for 後不接原形動詞。'},
+ {q:['They suffer psychological and physical abuse, ',' cause extreme suffering.'],
+  cn:'牠們遭受心理與身體的虐待，兩者都造成極大痛苦。',
+  opts:['both of which','both of them','both which','both of whom'],ans:0,
+  word:'both of which（非限定關代，指物）',
+  tnote:'<b>both of which</b>：先行詞是「兩件事物」，用 which。<br>(B) them 造成連寫；(C) 缺 of；(D) whom 只能代人。'},
+ {q:['Any female that tries to defend her calf may ',' by the cruel trappers.'],
+  cn:'任何試圖保護幼象的母象都可能被殘忍的捕獵者射殺。',
+  opts:['be shot','shoot','shooting','shot'],ans:0,
+  word:'may + be + p.p.（被動語態）',
+  tnote:'<b>助動詞 + 被動</b>：母象是「被」射殺，用 may be shot。<br>(B) 主動；(C) 分詞不能單獨作動詞；(D) 缺 be。'},
+ {q:['Carrying heavy tourists for hours can ',' permanent back injuries.'],
+  cn:'長時間載運沉重的遊客可能導致永久的背部傷害。',
+  opts:['lead to','lead','leading to','led'],ans:0,
+  word:'lead to + N（導致）',
+  tnote:'<b>can + 原形 + to</b>：lead to = 導致，後接名詞。<br>(B) 缺 to；(C) 助動詞後須接原形；(D) 過去式，can 後不可接。'},
+ {q:['',' in small cages, these creatures are beaten for days.'],
+  cn:'被關在小籠子裡，這些生物被毆打好幾天。',
+  opts:['Confined','Confining','To confine','Confine'],ans:0,
+  word:'Confined...（過去分詞構句，被動）',
+  tnote:'<b>過去分詞構句</b>：主詞 creatures 是「被關」，用 p.p. Confined。<br>(B) 現在分詞表主動；(C) 不定詞表目的；(D) 原形不可引導此構句。'},
+ {q:['The companies ',' profit from elephant rides should be avoided.'],
+  cn:'那些從大象騎乘中獲利的公司應該被避開。',
+  opts:['that','what','whom','whose'],ans:0,
+  word:'that（限定關代，指物作主詞）',
+  tnote:'<b>限定關代</b>：先行詞 companies（物）在子句作主詞，用 that/which。<br>(B) what 不接先行詞；(C) whom 指人且作受詞；(D) whose 表所有格。'},
+ {q:['It is high time that we ',' with the roots of this problem.'],
+  cn:'我們早該處理這個問題的根源了。',
+  opts:['dealt','deal','will deal','dealing'],ans:0,
+  word:'It is high time that + S + 過去式',
+  tnote:'<b>It is (high) time 假設語氣</b>：that 子句用「過去式」表「早該做而未做」。<br>(B) 現在式、(C) 未來式、(D) 分詞皆不符此固定句型。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+var _paged=false;
+function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+setTimeout(_mkPages,150);
+window.addEventListener('beforeprint',_mkPages);
+</script>
+<script>
+/* 字彙區補充發音：例句、片語例句、同義字、反義字（重用既有 speak/makeSpeakBtn；列印自動隱藏 .speak-btn） */
+(function(){
+  function ready(fn){ if(document.readyState!=='loading')fn(); else document.addEventListener('DOMContentLoaded',fn); }
+  function mkBtn(text){
+    if(typeof makeSpeakBtn==='function') return makeSpeakBtn(text);
+    var b=document.createElement('button');
+    b.className='speak-btn'; b.textContent='\u{1F50A}'; b.title='點我聽發音：'+text;
+    b.setAttribute('aria-label','發音 '+text);
+    b.onclick=function(ev){ if(typeof speak==='function')speak(text,b,ev); };
+    return b;
+  }
+  function enFromMarker(raw){
+    if(!/≈|同義|反義|反向/.test(raw)) return '';
+    var en='';
+    var m=raw.match(/(?:≈|同義字?|同義詞|反義字?|反義詞|反向)\s*[:：]?\s*([A-Za-z][A-Za-z '\/\-]*)/);
+    if(m){ en=m[1]; }
+    else { var m2=raw.match(/^\s*([A-Za-z][A-Za-z '\/\-]*)/); en=m2?m2[1]:''; }
+    en=en.replace(/\s*\/\s*/g,', ').replace(/\s+/g,' ').trim().replace(/[,\s]+$/,'');
+    return (en && /[A-Za-z]/.test(en) && en.length<=60) ? en : '';
+  }
+  function enFam(raw){
+    var s=(raw||'').replace(/\([^)]*\)/g,' ').replace(/（[^）]*）/g,' ').replace(/[≈=📊👆]/g,' ').replace(/\s*\/\s*/g,' / ');
+    var runs=s.match(/[A-Za-z][A-Za-z'’\-]*(?:\s+[A-Za-z][A-Za-z'’\-]*)*/g);
+    if(!runs) return '';
+    var en=runs.join(', ').replace(/\s+/g,' ').trim();
+    return (en && en.length<=60) ? en : '';
+  }
+  function enSentence(el){
+    var c=el.cloneNode(true);
+    c.querySelectorAll('.cn,.g-ex-cn,.speak-btn').forEach(function(x){x.remove();});
+    return c.textContent
+      .replace(/（[^）]*）/g,' ')
+      .replace(/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function addSentenceBtn(ex){
+    if(ex.querySelector('.speak-btn'))return;
+    var t=enSentence(ex); if(!t)return;
+    var cn=ex.querySelector('.cn'); var b=mkBtn(t);
+    if(cn)ex.insertBefore(b,cn); else ex.appendChild(b);
+  }
+  ready(function(){
+    document.querySelectorAll('.v-ex').forEach(addSentenceBtn);    // 字彙例句
+    document.querySelectorAll('.pex').forEach(addSentenceBtn);     // 片語例句
+    document.querySelectorAll('.slang-ex').forEach(addSentenceBtn);// 俚語生活例句
+    document.querySelectorAll('.g-ex').forEach(addSentenceBtn);    // 句型文法例句
+    document.querySelectorAll('.v-fam span').forEach(function(el){  // 字族衍生字（紫色標籤）全部發音
+      if(el.querySelector&&el.querySelector('.speak-btn'))return;
+      var en=enFam(el.textContent||'');
+      if(!en)return;
+      el.appendChild(mkBtn(en));
+    });
+    document.querySelectorAll('.v-gsat').forEach(function(el){  // 學測連結內同義/反義字
+      if(el.querySelector&&el.querySelector('.speak-btn'))return;
+      var en=enFromMarker(el.textContent||'');
+      if(!en)return;
+      el.appendChild(mkBtn(en));
+    });
+  });
+})();
+</script>
+<script>
+/* 文法手寫練習：填空/改寫「看解答」按鈕（沿用既有 show-btn 樣式與列印隱藏規則） */
+function showGW(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.toggle('open');
+  if(!btn.dataset.label){btn.dataset.label=btn.textContent;}
+  btn.textContent=isOpen?'收合':btn.dataset.label;
+}
+
+/* 句子重組：10 題，點詞組依序排列成句 */
+var reorderData=[
+ {cn:'泰國每年迎來數百萬遊客，其中許多人喜歡騎大象。',
+  correct:['Thailand sees millions of tourists,','many of whom','enjoy riding elephants.'],
+  pool:['enjoy riding elephants.','Thailand sees millions of tourists,','many of whom']},
+ {cn:'由於需求龐大，野生小象被非法捕捉。',
+  correct:['Due to the high demand,','young wild elephants','are illegally captured.'],
+  pool:['are illegally captured.','Due to the high demand,','young wild elephants']},
+ {cn:'這些小象被引誘離開母親、落入陷阱。',
+  correct:['These young elephants','are lured away','from their mothers.'],
+  pool:['from their mothers.','These young elephants','are lured away']},
+ {cn:'任何試圖保護幼象的母象都可能被殘忍的獵人射殺。',
+  correct:['Any female that defends her calf','may be shot','by brutal trappers.'],
+  pool:['by brutal trappers.','Any female that defends her calf','may be shot']},
+ {cn:'被關在狹小的籠子裡，這些大象遭到無情毆打。',
+  correct:['Confined in small cages,','these elephants','are beaten mercilessly.'],
+  pool:['are beaten mercilessly.','Confined in small cages,','these elephants']},
+ {cn:'施虐是為了讓牠們服從訓練者。',
+  correct:['The animals are abused','in order to','make them obedient.'],
+  pool:['make them obedient.','The animals are abused','in order to']},
+ {cn:'被馴服後，大象被迫過著奴役般的生活。',
+  correct:['After being tamed,','the elephants are forced','into a life of slavery.'],
+  pool:['into a life of slavery.','After being tamed,','the elephants are forced']},
+ {cn:'長時間載運遊客會導致永久的背部傷害。',
+  correct:['Carrying tourists for hours','can lead to','permanent back injuries.'],
+  pool:['permanent back injuries.','Carrying tourists for hours','can lead to']},
+ {cn:'牠們遭受身心兩種虐待，兩者都造成極大痛苦。',
+  correct:['They suffer physical and mental abuse,','both of which','cause extreme suffering.'],
+  pool:['cause extreme suffering.','They suffer physical and mental abuse,','both of which']},
+ {cn:'去國家公園吧，在那裡野生大象自由漫步。',
+  correct:['Visit a national park','where wild elephants','roam free.'],
+  pool:['roam free.','Visit a national park','where wild elephants']}
+];
+
+function roRender(){
+  var area=document.getElementById('roArea');
+  if(!area)return;
+  var html='';
+  reorderData.forEach(function(item,idx){
+    item.placed=[];
+    html+='<div class="ro-item"><div class="ro-top"><div class="ro-num">'+(idx+1)+'</div><div class="ro-main">'
+      +'<div class="ro-cn">'+item.cn+'</div>'
+      +'<div class="ro-answer" id="roAns'+idx+'"></div>'
+      +'<div class="ro-pool" id="roPool'+idx+'"></div>'
+      +'<div class="ro-actions">'
+      +'<button class="ro-btn secondary" onclick="roReset('+idx+')">↺ 重置</button>'
+      +'<button class="ro-btn" onclick="roCheck('+idx+')">✔ 檢查</button>'
+      +'<button class="ro-btn secondary" onclick="roReveal('+idx+')">👀 看正解</button>'
+      +'</div>'
+      +'<div class="ro-result" id="roResult'+idx+'"></div>'
+      +'</div></div></div>';
+  });
+  area.innerHTML=html;
+  reorderData.forEach(function(item,idx){roRenderPool(idx);roRenderAnswer(idx);});
+}
+function roRenderPool(idx){
+  var item=reorderData[idx];
+  var pool=document.getElementById('roPool'+idx);
+  pool.innerHTML='';
+  item.pool.forEach(function(chunk,ci){
+    if(item.placed.indexOf(ci)>=0)return;
+    var btn=document.createElement('button');
+    btn.className='ro-chip'; btn.textContent=chunk;
+    btn.onclick=function(){roPlace(idx,ci);};
+    pool.appendChild(btn);
+  });
+}
+function roRenderAnswer(idx){
+  var item=reorderData[idx];
+  var ans=document.getElementById('roAns'+idx);
+  ans.innerHTML='';
+  item.placed.forEach(function(ci){
+    var btn=document.createElement('button');
+    btn.className='ro-chip placed'; btn.textContent=item.pool[ci];
+    btn.onclick=function(){roUnplace(idx,ci);};
+    ans.appendChild(btn);
+  });
+}
+function roPlace(idx,ci){
+  var item=reorderData[idx];
+  if(item.placed.indexOf(ci)>=0)return;
+  item.placed.push(ci);
+  roRenderPool(idx); roRenderAnswer(idx);
+  document.getElementById('roResult'+idx).textContent='';
+  document.getElementById('roResult'+idx).className='ro-result';
+}
+function roUnplace(idx,ci){
+  var item=reorderData[idx];
+  var p=item.placed.indexOf(ci);
+  if(p<0)return;
+  item.placed.splice(p,1);
+  roRenderPool(idx); roRenderAnswer(idx);
+}
+function roReset(idx){
+  reorderData[idx].placed=[];
+  roRenderPool(idx); roRenderAnswer(idx);
+  var r=document.getElementById('roResult'+idx); r.textContent=''; r.className='ro-result';
+}
+function roCheck(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  var built=item.placed.map(function(ci){return item.pool[ci];}).join(' ');
+  var correct=item.correct.join(' ');
+  if(item.placed.length===item.correct.length && built===correct){
+    r.textContent='✅ 正確！'; r.className='ro-result correct';
+  }else{
+    r.textContent='❌ 順序不正確，再試試看。'; r.className='ro-result wrong';
+  }
+}
+function roReveal(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  r.textContent='👀 正解：'+item.correct.join(' ');
+  r.className='ro-result reveal';
+}
+
+/* 單字配對遊戲：核心字彙 15 字 */
+var vocabWords=[
+ {en:'highlight',cn:'最精彩的部分'},
+ {en:'economy',cn:'經濟'},
+ {en:'demand',cn:'需求；要求'},
+ {en:'illegally',cn:'非法地'},
+ {en:'capture',cn:'捕捉；俘虜'},
+ {en:'lure',cn:'引誘；誘餌'},
+ {en:'herd',cn:'獸群；象群'},
+ {en:'defend',cn:'保護；防禦'},
+ {en:'brutal',cn:'殘忍的'},
+ {en:'confine',cn:'監禁；限制'},
+ {en:'mercilessly',cn:'無情地'},
+ {en:'obedient',cn:'服從的'},
+ {en:'torture',cn:'折磨；虐待'},
+ {en:'tame',cn:'馴服'},
+ {en:'slavery',cn:'奴役'}
+];
+var matchState={matched:0,seconds:0,timer:null,selLeft:null,selRight:null};
+function shuffleArr(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function initMatchGame(){
+  var leftCol=document.getElementById('matchLeft'), rightCol=document.getElementById('matchRight');
+  if(!leftCol||!rightCol)return;
+  matchState.matched=0; matchState.seconds=0; matchState.selLeft=null; matchState.selRight=null;
+  document.getElementById('matchScore').textContent='配對成功：0 / '+vocabWords.length;
+  document.getElementById('matchTime').textContent='⏱ 00:00';
+  var win=document.getElementById('matchWin'); win.classList.remove('show'); win.textContent='';
+  if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+
+  var idxs=vocabWords.map(function(_,i){return i;});
+  var leftOrder=shuffleArr(idxs), rightOrder=shuffleArr(idxs);
+  leftCol.innerHTML=''; rightCol.innerHTML='';
+
+  leftOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].en; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'left');};
+    leftCol.appendChild(b);
+  });
+  rightOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].cn; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'right');};
+    rightCol.appendChild(b);
+  });
+
+  matchState.timer=setInterval(function(){
+    matchState.seconds++;
+    var m=Math.floor(matchState.seconds/60), s=matchState.seconds%60;
+    document.getElementById('matchTime').textContent='⏱ '+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+  },1000);
+}
+function matchClick(btn,side){
+  if(btn.classList.contains('matched'))return;
+  if(side==='left'){
+    if(matchState.selLeft)matchState.selLeft.classList.remove('selected');
+    matchState.selLeft=btn; btn.classList.add('selected');
+  }else{
+    if(matchState.selRight)matchState.selRight.classList.remove('selected');
+    matchState.selRight=btn; btn.classList.add('selected');
+  }
+  if(matchState.selLeft&&matchState.selRight){
+    var L=matchState.selLeft, R=matchState.selRight;
+    if(L.getAttribute('data-id')===R.getAttribute('data-id')){
+      L.classList.remove('selected'); R.classList.remove('selected');
+      L.classList.add('matched'); R.classList.add('matched');
+      matchState.matched++;
+      document.getElementById('matchScore').textContent='配對成功：'+matchState.matched+' / '+vocabWords.length;
+      matchState.selLeft=null; matchState.selRight=null;
+      if(matchState.matched===vocabWords.length){
+        if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+        var win=document.getElementById('matchWin');
+        win.textContent='🎉 全部配對成功！用時 '+document.getElementById('matchTime').textContent.replace('⏱ ','');
+        win.classList.add('show');
+      }
+    }else{
+      L.classList.add('wrong'); R.classList.add('wrong');
+      setTimeout(function(){L.classList.remove('selected','wrong');R.classList.remove('selected','wrong');},500);
+      matchState.selLeft=null; matchState.selRight=null;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  roRender();
+  initMatchGame();
+});
+</script>
+</body>
+</html>
