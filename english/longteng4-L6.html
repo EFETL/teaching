@@ -139,6 +139,64 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
 .hib{color:#2563eb;font-weight:700}
 .hig{color:#166534;font-weight:700}
 
+/* 新增大題共用色系 */
+.s-indigo .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
+.s-indigo .sec-icon{background:#4338ca;color:#fff}
+.s-amber .sec-head{background:#fffbeb;color:#b45309;border-bottom:2px solid #fde68a}
+.s-amber .sec-icon{background:#b45309;color:#fff}
+
+/* 文法手寫練習：填空 + 句子改寫 */
+.gw-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed #e2e8f0}
+.gw-item:last-child{border-bottom:none}
+.gw-num{width:30px;height:30px;border-radius:50%;background:#ede9fe;color:#6d28d9;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.gw-main{flex:1}
+.gw-en{font-size:17px;line-height:2}
+.gw-input{border:none;border-bottom:2px solid #94a3b8;background:#f8fafc;font-size:16px;font-weight:700;color:#1e293b;padding:3px 6px;width:150px;text-align:center;font-family:inherit}
+.gw-input:focus{outline:none;border-color:#6d28d9;background:#f5f3ff}
+.gw-hint{color:#6d28d9;font-weight:700;font-size:16px}
+.gw-cn{font-size:16px;color:#64748b;margin-top:4px;font-style:italic}
+.gw-given{font-size:17px;margin-bottom:6px}
+.gw-instr{font-size:16px;color:#be123c;font-weight:700;margin-bottom:8px}
+.gw-textarea{width:100%;border:1.5px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:16px;font-family:inherit;resize:vertical;margin-bottom:2px;display:block}
+.gw-textarea:focus{outline:none;border-color:#6d28d9}
+.gw-ans{display:none;margin-top:8px;font-size:16px;color:#059669;font-weight:700;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px}
+.gw-ans.open{display:block}
+
+/* 句子重組 */
+.ro-item{padding:16px 0;border-bottom:1px dashed #e2e8f0}
+.ro-item:last-child{border-bottom:none}
+.ro-top{display:flex;gap:12px;align-items:flex-start}
+.ro-num{width:30px;height:30px;border-radius:50%;background:#e0e7ff;color:#4338ca;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ro-main{flex:1}
+.ro-cn{font-size:16px;color:#64748b;font-style:italic;margin-bottom:10px}
+.ro-answer{min-height:44px;border:2px dashed #c7d2fe;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;background:#f8fafc}
+.ro-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.ro-chip{padding:7px 13px;border-radius:7px;border:2px solid #c7d2fe;background:#fff;color:#3730a3;font-weight:700;font-size:16px;cursor:pointer;transition:all .15s}
+.ro-chip:hover{background:#eef2ff}
+.ro-chip.placed{border-style:solid;background:#e0e7ff}
+.ro-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ro-btn{border:none;border-radius:7px;padding:7px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#4338ca}
+.ro-btn.secondary{background:#64748b}
+.ro-result{margin-top:8px;font-size:16px;font-weight:700;min-height:20px}
+.ro-result.correct{color:#16a34a}
+.ro-result.wrong{color:#dc2626}
+.ro-result.reveal{color:#4338ca}
+
+/* 單字配對遊戲 */
+.match-status{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-weight:800;color:#92400e;font-size:17px}
+.match-btn{border:none;border-radius:8px;padding:8px 16px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#b45309}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.match-col{display:flex;flex-direction:column;gap:9px}
+.match-chip{padding:11px 15px;border:2px solid #fde68a;border-radius:9px;cursor:pointer;font-weight:700;font-size:16px;background:#fffbeb;color:#78350f;transition:all .12s}
+.match-chip:hover{background:#fef3c7}
+.match-chip.selected{border-color:#b45309;background:#fef3c7;box-shadow:0 0 0 2px #fde68a}
+.match-chip.matched{border-color:#86efac;background:#f0fdf4;color:#16a34a;cursor:default;opacity:.65}
+.match-chip.wrong{border-color:#fca5a5;background:#fef2f2;color:#dc2626;animation:mshake .3s}
+@keyframes mshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.match-win{display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;color:#92400e;font-weight:800;text-align:center;font-size:18px}
+.match-win.show{display:block}
+@media(max-width:640px){.match-grid{grid-template-columns:1fr}}
+
 @media print{
   body{background:#fff;font-size:16px}
   .page{max-width:100%;padding:8px}
@@ -146,6 +204,8 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
   .section{box-shadow:none;page-break-inside:avoid}
   .g-body,.v-body,.para-exp{display:block!important}
   .v-ic,.g-arrow,.para-en .ic,.show-btn,.sec-hint,.header-nav{display:none!important}
+  .gw-ans{display:none!important}
+  .s-amber,.ro-actions{display:none!important}
   .vocab-grid{grid-template-columns:1fr 1fr}
   a{text-decoration:none}
 }
@@ -194,6 +254,9 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
     <span class="tag">🔗 片語 × 7</span>
     <span class="tag">📐 文法句型 × 3</span>
     <span class="tag">✏️ 練習題 × 8</span>
+    <span class="tag">✍️ 文法手寫練習 × 30</span>
+    <span class="tag">🔀 句子重組 × 10</span>
+    <span class="tag">🎮 單字配對遊戲</span>
   </div>
 </div>
 
@@ -998,6 +1061,237 @@ because    + S + V       （引導完整副詞子句）</div>
   </div>
 </div>
 
+<!-- 文法填空練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">✍️</div>文法填空練習（20 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依中文提示，將括號中的字改為正確的文法形式，直接打在空格中；寫完按「看解答」對答案。也適合列印後手寫作答。</div>
+
+    <div class="gw-item"><div class="gw-num">1</div><div class="gw-main">
+      <div class="gw-en">Not until the manager approved the new route <input class="gw-input" style="width:190px"> <span class="gw-hint">(start)</span> their morning deliveries.</div>
+      <div class="gw-cn">直到經理核准了新路線，司機們才開始他們的早晨配送。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did the drivers start</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">2</div><div class="gw-main">
+      <div class="gw-en">Not until every tiffin box had been labeled correctly <input class="gw-input" style="width:210px"> <span class="gw-hint">(allow)</span> to load them onto the train.</div>
+      <div class="gw-cn">直到每個便當盒都被正確貼上標籤，工人們才被允許把它們裝上火車。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：were the workers allowed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">3</div><div class="gw-main">
+      <div class="gw-en">Not until the rain stopped completely <input class="gw-input" style="width:190px"> <span class="gw-hint">(resume)</span> their afternoon rounds.</div>
+      <div class="gw-cn">直到雨完全停了，快遞員們才恢復他們下午的巡送路線。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did the couriers resume</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">4</div><div class="gw-main">
+      <div class="gw-en">Not until she had checked the delivery record twice <input class="gw-input" style="width:160px"> <span class="gw-hint">(feel)</span> confident about the accuracy of her count.</div>
+      <div class="gw-cn">直到她把配送紀錄核對了兩次，Priya 才對自己統計的準確性感到有信心。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did Priya feel</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">5</div><div class="gw-main">
+      <div class="gw-en">Not until the last box was safely handed over <input class="gw-input" style="width:190px"> <span class="gw-hint">(consider)</span> the job finished.</div>
+      <div class="gw-cn">直到最後一個便當盒被安全交付，這名 dabbawala 才認為這份工作完成了。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did the dabbawala consider</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">6</div><div class="gw-main">
+      <div class="gw-en">Not until customers began complaining about late lunches <input class="gw-input" style="width:190px"> <span class="gw-hint">(realize)</span> that its old system needed improvement.</div>
+      <div class="gw-cn">直到顧客開始抱怨午餐送晚了，公司才意識到舊系統需要改進。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did the company realize</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">7</div><div class="gw-main">
+      <div class="gw-en">Not until the second inspection is finished <input class="gw-input" style="width:170px"> <span class="gw-hint">(leave)</span> the loading dock.</div>
+      <div class="gw-cn">直到第二次檢查完成，卡車才能離開裝卸場。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：can the trucks leave</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">8</div><div class="gw-main">
+      <div class="gw-en">The dabbawalas rely on a numbering system <input class="gw-input" style="width:100px"> <span class="gw-hint">(base)</span> on colors, numbers, and letters painted on each lid.</div>
+      <div class="gw-cn">dabbawala 們依賴一套建立在蓋子上所繪顏色、數字與字母基礎上的編號系統。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：based</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">9</div><div class="gw-main">
+      <div class="gw-en">A courier <input class="gw-input" style="width:110px"> <span class="gw-hint">(carry)</span> three heavy boxes at once still managed to arrive on time.</div>
+      <div class="gw-cn">一名同時搬著三個沉重箱子的快遞員仍設法準時抵達。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：carrying</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">10</div><div class="gw-main">
+      <div class="gw-en">Workers <input class="gw-input" style="width:100px"> <span class="gw-hint">(train)</span> to sort boxes quickly rarely make mistakes during rush hour.</div>
+      <div class="gw-cn">受過快速分類箱子訓練的工人在尖峰時段很少犯錯。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：trained</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">11</div><div class="gw-main">
+      <div class="gw-en">This delivery method, <input class="gw-input" style="width:120px"> <span class="gw-hint">(develop)</span> more than a century ago, still works remarkably well today.</div>
+      <div class="gw-cn">這套配送方法，是一個多世紀前發展出來的，至今仍運作得極好。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：developed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">12</div><div class="gw-main">
+      <div class="gw-en">Before <input class="gw-input" style="width:130px"> <span class="gw-hint">(place)</span> on the train, every box is checked against the day's route sheet.</div>
+      <div class="gw-cn">在被放上火車之前，每個箱子都會依照當天的路線表核對。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：being placed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">13</div><div class="gw-main">
+      <div class="gw-en">A network <input class="gw-input" style="width:110px"> <span class="gw-hint">(link)</span> thousands of homes to hundreds of offices depends entirely on precise timing.</div>
+      <div class="gw-cn">一個連結數千個家庭與數百間辦公室的網絡，完全仰賴精準的時間安排。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：linking</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">14</div><div class="gw-main">
+      <div class="gw-en">After <input class="gw-input" style="width:130px"> <span class="gw-hint">(sort)</span> at the central station, the boxes are sent out on their final routes.</div>
+      <div class="gw-cn">在中央車站完成分類後，箱子便被送往最終的配送路線。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：being sorted</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">15</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:120px"> <span class="gw-hint">(because)</span> a sudden storm, the afternoon deliveries were delayed by nearly an hour.</div>
+      <div class="gw-cn">由於一場突如其來的暴風雨，下午的配送延誤了將近一小時。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Because of</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">16</div><div class="gw-main">
+      <div class="gw-en">The new sorting method succeeded <input class="gw-input" style="width:100px"> <span class="gw-hint">(because of)</span> every worker followed the same simple rules.</div>
+      <div class="gw-cn">這套新的分類方法之所以成功，是因為每位工人都遵循相同的簡單規則。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：because</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">17</div><div class="gw-main">
+      <div class="gw-en">The whole system's reliability is <input class="gw-input" style="width:100px"> <span class="gw-hint">(because)</span> the workers' strict daily routine.</div>
+      <div class="gw-cn">整個系統的可靠性歸因於工人們嚴格的每日例行程序。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：due to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">18</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:100px"> <span class="gw-hint">(due to)</span> the tracks were flooded, the morning trains had to take a longer route.</div>
+      <div class="gw-cn">因為鐵軌淹水，早班列車必須繞行較長的路線。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Because</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">19</div><div class="gw-main">
+      <div class="gw-en">The delay was <input class="gw-input" style="width:100px"> <span class="gw-hint">(because)</span> a mix-up at the central sorting station, not a mistake by any single dabbawala.</div>
+      <div class="gw-cn">這次延誤是由於中央分揀站的一次混亂，而不是任何一位 dabbawala 的失誤。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：due to</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">20</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:100px"> <span class="gw-hint">(because of)</span> the coordinator double-checked every list, no box was ever sent to the wrong building.</div>
+      <div class="gw-cn">因為協調員仔細核對了每一份清單，從來沒有箱子被送錯建築物。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Because</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子改寫練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">🔄</div>句子改寫練習（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依指示將兩句合併或改寫成一個正確的英文句子，寫在下方欄位中；寫完按「看參考答案」對答案。</div>
+
+    <div class="gw-item"><div class="gw-num">21</div><div class="gw-main">
+      <div class="gw-given">The supervisor did not trust the new hire completely. This changed only after she saw him handle a difficult complaint calmly.</div>
+      <div class="gw-instr">請將兩句合併，並用 Not until 開頭的倒裝句改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Not until she saw him handle a difficult complaint calmly did the supervisor trust the new hire completely.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">22</div><div class="gw-main">
+      <div class="gw-given">The trucks did not leave the depot. They left only after the last box had been scanned.</div>
+      <div class="gw-instr">請用 Not until 開頭的倒裝句改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Not until the last box had been scanned did the trucks leave the depot.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">23</div><div class="gw-main">
+      <div class="gw-given">Investigators could not explain the delay. They finally could only after they reviewed the full delivery log.</div>
+      <div class="gw-instr">請用 Not until 開頭的倒裝句改寫，注意助動詞須與原句一致（could）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Not until they reviewed the full delivery log could investigators explain the delay.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">24</div><div class="gw-main">
+      <div class="gw-given">The staff did not feel relieved. They felt relieved only when the final shipment had safely arrived.</div>
+      <div class="gw-instr">請用 Not until 開頭的倒裝句改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Not until the final shipment had safely arrived did the staff feel relieved.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">25</div><div class="gw-main">
+      <div class="gw-given">The workers who are trained to read the color codes rarely misplace a box.</div>
+      <div class="gw-instr">請將 who 引導的形容詞子句改寫為分詞片語。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Workers trained to read the color codes rarely misplace a box.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">26</div><div class="gw-main">
+      <div class="gw-given">A system that connects hundreds of small delivery routes keeps the whole city fed on time.</div>
+      <div class="gw-instr">請將 that 引導的形容詞子句改寫為分詞片語。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ A system connecting hundreds of small delivery routes keeps the whole city fed on time.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">27</div><div class="gw-main">
+      <div class="gw-given">After the boxes are checked one final time, they are handed directly to the customers.</div>
+      <div class="gw-instr">請將 after 引導的副詞子句改寫為分詞構句（保留 after，省略主詞，動詞改為 being + p.p.）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ After being checked one final time, the boxes are handed directly to the customers.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">28</div><div class="gw-main">
+      <div class="gw-given">The route was changed. The reason was heavy construction on the main road.</div>
+      <div class="gw-instr">請用 due to 或 because of 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The route was changed due to (because of) heavy construction on the main road.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">29</div><div class="gw-main">
+      <div class="gw-given">Deliveries slowed down last week. The reason was several dabbawalas were sick.</div>
+      <div class="gw-instr">請用 because 合併成一句（因為後面是完整子句）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Deliveries slowed down last week because several dabbawalas were sick.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">30</div><div class="gw-main">
+      <div class="gw-given">The company earned nationwide respect. The reason was its outstanding record of punctuality.</div>
+      <div class="gw-instr">請用 due to 或 because of 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The company earned nationwide respect due to (because of) its outstanding record of punctuality.</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子重組 -->
+<div class="section s-indigo">
+  <div class="sec-head"><div class="sec-icon">🔀</div>句子重組（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依序點選下方詞組，把句子排回正確順序；點錯可再點一次移回。排好後按「檢查」看對錯，或按「看正解」直接顯示答案。</div>
+    <div id="roArea"></div>
+  </div>
+</div>
+
+<!-- 單字配對遊戲 -->
+<div class="section s-amber">
+  <div class="sec-head"><div class="sec-icon">🎮</div>單字配對遊戲（核心字彙 12 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 先點左邊的英文單字，再點右邊對應的中文意思；配對正確會變綠色鎖定，配對錯誤會閃紅重來。全部配對完成即過關！</div>
+    <div class="match-status"><span id="matchScore">配對成功：0 / 12</span><span id="matchTime">⏱ 00:00</span><button class="match-btn" onclick="initMatchGame()">🔄 重新開始</button></div>
+    <div class="match-grid">
+      <div class="match-col" id="matchLeft"></div>
+      <div class="match-col" id="matchRight"></div>
+    </div>
+    <div class="match-win" id="matchWin"></div>
+  </div>
+</div>
+
 </div><!-- end .page -->
 
 <script>
@@ -1285,6 +1579,220 @@ window.addEventListener('beforeprint',_mkPages);
     });
   });
 })();
+</script>
+<script>
+/* 文法手寫練習：填空/改寫「看解答」按鈕（沿用既有 show-btn 樣式與列印隱藏規則） */
+function showGW(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.toggle('open');
+  if(!btn.dataset.label){btn.dataset.label=btn.textContent;}
+  btn.textContent=isOpen?'收合':btn.dataset.label;
+}
+
+/* 句子重組：10 題，點詞組依序排列成句 */
+var reorderData=[
+ {cn:'直到郵局關門，包裹才被正式登記。',
+  correct:['Not until the post office closed','was the package','officially registered.'],
+  pool:['officially registered.','Not until the post office closed','was the package']},
+ {cn:'直到所有貨車都檢查完畢，經理才簽署了最終報告。',
+  correct:['Not until all the trucks had been checked','did the manager','sign the final report.'],
+  pool:['sign the final report.','did the manager','Not until all the trucks had been checked']},
+ {cn:'直到氣象局發布警報，配送員才停止外送。',
+  correct:['Not until the weather bureau issued a warning','did the couriers','stop delivering.'],
+  pool:['stop delivering.','Not until the weather bureau issued a warning','did the couriers']},
+ {cn:'直到第二次確認完成，貨物才能被送出倉庫。',
+  correct:['Not until the second confirmation is completed','can the goods','be sent out of the warehouse.'],
+  pool:['be sent out of the warehouse.','can the goods','Not until the second confirmation is completed']},
+ {cn:'一名帶著三個沉重箱子的快遞員仍準時抵達了辦公室。',
+  correct:['A courier carrying three heavy boxes','still arrived at the office','on time.'],
+  pool:['on time.','A courier carrying three heavy boxes','still arrived at the office']},
+ {cn:'建立在簡單顏色代碼上的系統幾乎從未出過差錯。',
+  correct:['A system based on simple color codes','has almost never','made a mistake.'],
+  pool:['made a mistake.','A system based on simple color codes','has almost never']},
+ {cn:'在被裝上火車之前，每個箱子都會被再次確認。',
+  correct:['Before being loaded onto the train,','every box is checked','once again.'],
+  pool:['once again.','Before being loaded onto the train,','every box is checked']},
+ {cn:'由於突然停電，整個分揀過程被迫暫停。',
+  correct:['Because of a sudden power outage,','the entire sorting process','had to stop.'],
+  pool:['had to stop.','Because of a sudden power outage,','the entire sorting process']},
+ {cn:'這次延誤發生是因為列車臨時被取消了。',
+  correct:['The delay happened','because the train','was suddenly canceled.'],
+  pool:['was suddenly canceled.','The delay happened','because the train']},
+ {cn:'這家公司因其準時的優良記錄而贏得了全國的信任。',
+  correct:['The company earned nationwide trust','because of its excellent record','of punctuality.'],
+  pool:['of punctuality.','The company earned nationwide trust','because of its excellent record']}
+];
+
+function roRender(){
+  var area=document.getElementById('roArea');
+  if(!area)return;
+  var html='';
+  reorderData.forEach(function(item,idx){
+    item.placed=[];
+    html+='<div class="ro-item"><div class="ro-top"><div class="ro-num">'+(idx+1)+'</div><div class="ro-main">'
+      +'<div class="ro-cn">'+item.cn+'</div>'
+      +'<div class="ro-answer" id="roAns'+idx+'"></div>'
+      +'<div class="ro-pool" id="roPool'+idx+'"></div>'
+      +'<div class="ro-actions">'
+      +'<button class="ro-btn secondary" onclick="roReset('+idx+')">↺ 重置</button>'
+      +'<button class="ro-btn" onclick="roCheck('+idx+')">✔ 檢查</button>'
+      +'<button class="ro-btn secondary" onclick="roReveal('+idx+')">👀 看正解</button>'
+      +'</div>'
+      +'<div class="ro-result" id="roResult'+idx+'"></div>'
+      +'</div></div></div>';
+  });
+  area.innerHTML=html;
+  reorderData.forEach(function(item,idx){roRenderPool(idx);roRenderAnswer(idx);});
+}
+function roRenderPool(idx){
+  var item=reorderData[idx];
+  var pool=document.getElementById('roPool'+idx);
+  pool.innerHTML='';
+  item.pool.forEach(function(chunk,ci){
+    if(item.placed.indexOf(ci)>=0)return;
+    var btn=document.createElement('button');
+    btn.className='ro-chip'; btn.textContent=chunk;
+    btn.onclick=function(){roPlace(idx,ci);};
+    pool.appendChild(btn);
+  });
+}
+function roRenderAnswer(idx){
+  var item=reorderData[idx];
+  var ans=document.getElementById('roAns'+idx);
+  ans.innerHTML='';
+  item.placed.forEach(function(ci){
+    var btn=document.createElement('button');
+    btn.className='ro-chip placed'; btn.textContent=item.pool[ci];
+    btn.onclick=function(){roUnplace(idx,ci);};
+    ans.appendChild(btn);
+  });
+}
+function roPlace(idx,ci){
+  var item=reorderData[idx];
+  if(item.placed.indexOf(ci)>=0)return;
+  item.placed.push(ci);
+  roRenderPool(idx); roRenderAnswer(idx);
+  document.getElementById('roResult'+idx).textContent='';
+  document.getElementById('roResult'+idx).className='ro-result';
+}
+function roUnplace(idx,ci){
+  var item=reorderData[idx];
+  var p=item.placed.indexOf(ci);
+  if(p<0)return;
+  item.placed.splice(p,1);
+  roRenderPool(idx); roRenderAnswer(idx);
+}
+function roReset(idx){
+  reorderData[idx].placed=[];
+  roRenderPool(idx); roRenderAnswer(idx);
+  var r=document.getElementById('roResult'+idx); r.textContent=''; r.className='ro-result';
+}
+function roCheck(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  var built=item.placed.map(function(ci){return item.pool[ci];}).join(' ');
+  var correct=item.correct.join(' ');
+  if(item.placed.length===item.correct.length && built===correct){
+    r.textContent='✅ 正確！'; r.className='ro-result correct';
+  }else{
+    r.textContent='❌ 順序不正確，再試試看。'; r.className='ro-result wrong';
+  }
+}
+function roReveal(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  r.textContent='👀 正解：'+item.correct.join(' ');
+  r.className='ro-result reveal';
+}
+
+/* 單字配對遊戲：核心字彙 12 字 */
+var vocabWords=[
+ {en:'enterprise',cn:'企業；事業（心）'},
+ {en:'transaction',cn:'交易；業務往來'},
+ {en:'accuracy',cn:'準確性；精確度'},
+ {en:'efficiency',cn:'效率；效能'},
+ {en:'commute',cn:'通勤（動詞/名詞）'},
+ {en:'suburb',cn:'郊區；市郊'},
+ {en:'network',cn:'網絡；建立人際關係'},
+ {en:'swiftly',cn:'迅速地；敏捷地'},
+ {en:'massive',cn:'巨大的；大規模的'},
+ {en:'handle',cn:'處理；應對'},
+ {en:'flawless',cn:'完美無瑕的；無缺陷的'},
+ {en:'excellence',cn:'卓越；優秀'}
+];
+var matchState={matched:0,seconds:0,timer:null,selLeft:null,selRight:null};
+function shuffleArr(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function initMatchGame(){
+  var leftCol=document.getElementById('matchLeft'), rightCol=document.getElementById('matchRight');
+  if(!leftCol||!rightCol)return;
+  matchState.matched=0; matchState.seconds=0; matchState.selLeft=null; matchState.selRight=null;
+  document.getElementById('matchScore').textContent='配對成功：0 / '+vocabWords.length;
+  document.getElementById('matchTime').textContent='⏱ 00:00';
+  var win=document.getElementById('matchWin'); win.classList.remove('show'); win.textContent='';
+  if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+
+  var idxs=vocabWords.map(function(_,i){return i;});
+  var leftOrder=shuffleArr(idxs), rightOrder=shuffleArr(idxs);
+  leftCol.innerHTML=''; rightCol.innerHTML='';
+
+  leftOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].en; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'left');};
+    leftCol.appendChild(b);
+  });
+  rightOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].cn; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'right');};
+    rightCol.appendChild(b);
+  });
+
+  matchState.timer=setInterval(function(){
+    matchState.seconds++;
+    var m=Math.floor(matchState.seconds/60), s=matchState.seconds%60;
+    document.getElementById('matchTime').textContent='⏱ '+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+  },1000);
+}
+function matchClick(btn,side){
+  if(btn.classList.contains('matched'))return;
+  if(side==='left'){
+    if(matchState.selLeft)matchState.selLeft.classList.remove('selected');
+    matchState.selLeft=btn; btn.classList.add('selected');
+  }else{
+    if(matchState.selRight)matchState.selRight.classList.remove('selected');
+    matchState.selRight=btn; btn.classList.add('selected');
+  }
+  if(matchState.selLeft&&matchState.selRight){
+    var L=matchState.selLeft, R=matchState.selRight;
+    if(L.getAttribute('data-id')===R.getAttribute('data-id')){
+      L.classList.remove('selected'); R.classList.remove('selected');
+      L.classList.add('matched'); R.classList.add('matched');
+      matchState.matched++;
+      document.getElementById('matchScore').textContent='配對成功：'+matchState.matched+' / '+vocabWords.length;
+      matchState.selLeft=null; matchState.selRight=null;
+      if(matchState.matched===vocabWords.length){
+        if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+        var win=document.getElementById('matchWin');
+        win.textContent='🎉 全部配對成功！用時 '+document.getElementById('matchTime').textContent.replace('⏱ ','');
+        win.classList.add('show');
+      }
+    }else{
+      L.classList.add('wrong'); R.classList.add('wrong');
+      setTimeout(function(){L.classList.remove('selected','wrong');R.classList.remove('selected','wrong');},500);
+      matchState.selLeft=null; matchState.selRight=null;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  roRender();
+  initMatchGame();
+});
 </script>
 </body>
 </html>

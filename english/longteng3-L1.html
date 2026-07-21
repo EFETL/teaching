@@ -172,12 +172,72 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
 .hib{color:#2563eb;font-weight:700}
 .hig{color:#166534;font-weight:700}
 
+/* 新增大題共用色系 */
+.s-indigo .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
+.s-indigo .sec-icon{background:#4338ca;color:#fff}
+.s-amber .sec-head{background:#fffbeb;color:#b45309;border-bottom:2px solid #fde68a}
+.s-amber .sec-icon{background:#b45309;color:#fff}
+
+/* 文法手寫練習：填空 + 句子改寫 */
+.gw-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed #e2e8f0}
+.gw-item:last-child{border-bottom:none}
+.gw-num{width:30px;height:30px;border-radius:50%;background:#ede9fe;color:#6d28d9;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.gw-main{flex:1}
+.gw-en{font-size:17px;line-height:2}
+.gw-input{border:none;border-bottom:2px solid #94a3b8;background:#f8fafc;font-size:16px;font-weight:700;color:#1e293b;padding:3px 6px;width:150px;text-align:center;font-family:inherit}
+.gw-input:focus{outline:none;border-color:#6d28d9;background:#f5f3ff}
+.gw-hint{color:#6d28d9;font-weight:700;font-size:16px}
+.gw-cn{font-size:16px;color:#64748b;margin-top:4px;font-style:italic}
+.gw-given{font-size:17px;margin-bottom:6px}
+.gw-instr{font-size:16px;color:#be123c;font-weight:700;margin-bottom:8px}
+.gw-textarea{width:100%;border:1.5px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:16px;font-family:inherit;resize:vertical;margin-bottom:2px;display:block}
+.gw-textarea:focus{outline:none;border-color:#6d28d9}
+.gw-ans{display:none;margin-top:8px;font-size:16px;color:#059669;font-weight:700;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px}
+.gw-ans.open{display:block}
+
+/* 句子重組 */
+.ro-item{padding:16px 0;border-bottom:1px dashed #e2e8f0}
+.ro-item:last-child{border-bottom:none}
+.ro-top{display:flex;gap:12px;align-items:flex-start}
+.ro-num{width:30px;height:30px;border-radius:50%;background:#e0e7ff;color:#4338ca;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ro-main{flex:1}
+.ro-cn{font-size:16px;color:#64748b;font-style:italic;margin-bottom:10px}
+.ro-answer{min-height:44px;border:2px dashed #c7d2fe;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;background:#f8fafc}
+.ro-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.ro-chip{padding:7px 13px;border-radius:7px;border:2px solid #c7d2fe;background:#fff;color:#3730a3;font-weight:700;font-size:16px;cursor:pointer;transition:all .15s}
+.ro-chip:hover{background:#eef2ff}
+.ro-chip.placed{border-style:solid;background:#e0e7ff}
+.ro-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ro-btn{border:none;border-radius:7px;padding:7px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#4338ca}
+.ro-btn.secondary{background:#64748b}
+.ro-result{margin-top:8px;font-size:16px;font-weight:700;min-height:20px}
+.ro-result.correct{color:#16a34a}
+.ro-result.wrong{color:#dc2626}
+.ro-result.reveal{color:#4338ca}
+
+/* 單字配對遊戲 */
+.match-status{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-weight:800;color:#92400e;font-size:17px}
+.match-btn{border:none;border-radius:8px;padding:8px 16px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#b45309}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.match-col{display:flex;flex-direction:column;gap:9px}
+.match-chip{padding:11px 15px;border:2px solid #fde68a;border-radius:9px;cursor:pointer;font-weight:700;font-size:16px;background:#fffbeb;color:#78350f;transition:all .12s}
+.match-chip:hover{background:#fef3c7}
+.match-chip.selected{border-color:#b45309;background:#fef3c7;box-shadow:0 0 0 2px #fde68a}
+.match-chip.matched{border-color:#86efac;background:#f0fdf4;color:#16a34a;cursor:default;opacity:.65}
+.match-chip.wrong{border-color:#fca5a5;background:#fef2f2;color:#dc2626;animation:mshake .3s}
+@keyframes mshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.match-win{display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;color:#92400e;font-weight:800;text-align:center;font-size:18px}
+.match-win.show{display:block}
+@media(max-width:640px){.match-grid{grid-template-columns:1fr}}
+
 @media print{
   body{background:#fff;font-size:16px}
   .page{max-width:100%;padding:8px}
   .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
   .section{box-shadow:none;page-break-inside:avoid}
   .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  .gw-ans{display:none!important}
+  .s-amber,.ro-actions{display:none!important}
   .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav{display:none!important}
   .vocab-grid{grid-template-columns:1fr 1fr}
   .story-grid{flex-wrap:nowrap}
@@ -230,6 +290,9 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
     <span class="tag">🔗 片語 × 7</span>
     <span class="tag">📐 文法句型 × 3</span>
     <span class="tag">✏️ 練習題 × 8</span>
+    <span class="tag">✍️ 文法手寫練習 × 30</span>
+    <span class="tag">🔀 句子重組 × 10</span>
+    <span class="tag">🎮 單字配對遊戲</span>
   </div>
 </div>
 
@@ -1152,6 +1215,237 @@ although / though / even though + S + V   → 連接詞，後接完整子句</di
   </div>
 </div>
 
+<!-- 文法填空練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">✍️</div>文法填空練習（20 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依中文提示，將括號中的字改為正確的文法形式，直接打在空格中；寫完按「看解答」對答案。也適合列印後手寫作答。</div>
+
+    <div class="gw-item"><div class="gw-num">1</div><div class="gw-main">
+      <div class="gw-en">When the nurse opened the door, she found Billy <input class="gw-input" style="width:100px"> <span class="gw-hint">(lie)</span> quietly in bed.</div>
+      <div class="gw-cn">護理師打開門時，發現比利安靜地躺在床上。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：lying</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">2</div><div class="gw-main">
+      <div class="gw-en">I found it truly <input class="gw-input" style="width:120px"> <span class="gw-hint">(reward)</span> to bring a little joy to children who were seriously ill.</div>
+      <div class="gw-cn">我發現能為重病的孩子們帶來一點快樂真的很有意義。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：rewarding</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">3</div><div class="gw-main">
+      <div class="gw-en">The doctor found the boy's breathing <input class="gw-input" style="width:120px"> <span class="gw-hint">(worry)</span>, so he called for help at once.</div>
+      <div class="gw-cn">醫生發現那男孩的呼吸令人擔憂，於是立刻找人幫忙。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：worrying</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">4</div><div class="gw-main">
+      <div class="gw-en">Billy's mother found her son <input class="gw-input" style="width:110px"> <span class="gw-hint">(smile)</span> weakly when she walked into the room.</div>
+      <div class="gw-cn">比利的媽媽走進房間時，發現兒子正虛弱地微笑著。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：smiling</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">5</div><div class="gw-main">
+      <div class="gw-en">Many children find hospitals <input class="gw-input" style="width:140px"> <span class="gw-hint">(frighten)</span> because of the strange smells and sounds.</div>
+      <div class="gw-cn">許多孩子覺得醫院很可怕，因為那些陌生的氣味和聲音。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：frightening</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">6</div><div class="gw-main">
+      <div class="gw-en">I found it hard <input class="gw-input" style="width:110px"> <span class="gw-hint">(believe)</span> that such a small boy could be so brave.</div>
+      <div class="gw-cn">我發現很難相信這麼小的男孩竟然如此勇敢。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：to believe</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">7</div><div class="gw-main">
+      <div class="gw-en">The staff found the new volunteer <input class="gw-input" style="width:110px"> <span class="gw-hint">(promise)</span>, so they gave her more responsibilities.</div>
+      <div class="gw-cn">工作人員發現這位新志工很有潛力，因此給了她更多責任。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：promising</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">8</div><div class="gw-main">
+      <div class="gw-en">Not until Billy stretched out his arms <input class="gw-input" style="width:150px"> <span class="gw-hint">(I, realize)</span> how much he needed comfort.</div>
+      <div class="gw-cn">直到比利伸出雙臂，我才意識到他有多麼需要安慰。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did I realize</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">9</div><div class="gw-main">
+      <div class="gw-en">He <input class="gw-input" style="width:170px"> <span class="gw-hint">(not, understand)</span> the importance of the rules until he broke one himself.</div>
+      <div class="gw-cn">直到他自己違反了規定，他才理解這些規定的重要性。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did not understand</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">10</div><div class="gw-main">
+      <div class="gw-en">It was not until Billy fell asleep <input class="gw-input" style="width:110px"> <span class="gw-hint">(I, leave)</span> the room.</div>
+      <div class="gw-cn">直到比利睡著，我才離開房間。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：that I left</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">11</div><div class="gw-main">
+      <div class="gw-en">Not until the phone rang two days later <input class="gw-input" style="width:120px"> <span class="gw-hint">(I, learn)</span> that Billy had passed away.</div>
+      <div class="gw-cn">直到兩天後電話響起，我才得知比利已經過世了。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did I learn</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">12</div><div class="gw-main">
+      <div class="gw-en">The hospital staff <input class="gw-input" style="width:150px"> <span class="gw-hint">(not, allow)</span> visitors to have physical contact with patients until the rule was changed.</div>
+      <div class="gw-cn">在規定改變之前，醫院員工都不允許訪客與病患有身體接觸。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did not allow</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">13</div><div class="gw-main">
+      <div class="gw-en">It was not until she heard Billy's last words <input class="gw-input" style="width:170px"> <span class="gw-hint">(she, understand)</span> how much the visit had mattered.</div>
+      <div class="gw-cn">直到她聽到比利最後說的話，她才明白這次探訪有多麼重要。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：that she understood</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">14</div><div class="gw-main">
+      <div class="gw-en">Not until I saw the hope in his eyes <input class="gw-input" style="width:120px"> <span class="gw-hint">(I, decide)</span> to break the rule.</div>
+      <div class="gw-cn">直到我看見他眼中的希望，我才決定打破規定。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：did I decide</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">15</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:100px"> <span class="gw-hint">(despite)</span> the strict hospital rules, Ronald decided to hug the dying boy.</div>
+      <div class="gw-cn">儘管醫院的規定很嚴格，羅納德還是決定擁抱那個垂死的男孩。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Despite</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">16</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(although)</span> he understood the reasoning behind the rules, he still felt they were sometimes too strict.</div>
+      <div class="gw-cn">雖然他理解這些規定背後的道理，他仍然覺得它們有時太過嚴格。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Although</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">17</div><div class="gw-main">
+      <div class="gw-en">Despite <input class="gw-input" style="width:100px"> <span class="gw-hint">(know)</span> the risk of catching germs, Ronald held Billy in his arms.</div>
+      <div class="gw-cn">儘管知道感染細菌的風險，羅納德仍然將比利抱在懷裡。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：knowing</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">18</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:90px"> <span class="gw-hint">(though)</span> Billy was very weak, he still smiled when he saw Ronald.</div>
+      <div class="gw-cn">雖然比利非常虛弱，他看到羅納德時仍然露出微笑。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Though</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">19</div><div class="gw-main">
+      <div class="gw-en">In spite of <input class="gw-input" style="width:90px"> <span class="gw-hint">(be)</span> terminally ill, Billy always thought of others before himself.</div>
+      <div class="gw-cn">儘管身患末期疾病，比利總是先想到別人再想到自己。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：being</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">20</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:100px"> <span class="gw-hint">(despite)</span> the fact that physical contact was against the rules, he could not resist hugging the boy.</div>
+      <div class="gw-cn">儘管身體接觸是違反規定的，他還是忍不住擁抱了那男孩。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Despite</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子改寫練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">🔄</div>句子改寫練習（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依指示將兩句合併或改寫成一個正確的英文句子，寫在下方欄位中；寫完按「看參考答案」對答案。</div>
+
+    <div class="gw-item"><div class="gw-num">21</div><div class="gw-main">
+      <div class="gw-given">Ronald visited the sick children every week. He found this very meaningful.</div>
+      <div class="gw-instr">請用「find it + 形容詞 + to V」的句型，將兩句合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Ronald found it very meaningful to visit the sick children every week.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">22</div><div class="gw-main">
+      <div class="gw-given">I opened the door. Billy was lying quietly in bed.</div>
+      <div class="gw-instr">請用「find + O + V-ing」的句型，將兩句合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ When I opened the door, I found Billy lying quietly in bed.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">23</div><div class="gw-main">
+      <div class="gw-given">Many children are afraid of hospitals. The strange smells and machines frighten them.</div>
+      <div class="gw-instr">請用「find + O + 形容詞（-ing）」的句型，將兩句改寫合併成一句，描述「醫院令人感到害怕」。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Many children find hospitals frightening because of the strange smells and machines.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">24</div><div class="gw-main">
+      <div class="gw-given">It was hard for the doctors to say no to the dying boy's wish.</div>
+      <div class="gw-instr">請將此句改寫為「find it + 形容詞 + to V」的句型（不使用 It is... for...to V）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The doctors found it hard to say no to the dying boy's wish.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">25</div><div class="gw-main">
+      <div class="gw-given">I did not realize the importance of the rule until I broke it.</div>
+      <div class="gw-instr">請將此句改寫為 Not until 開頭的否定倒裝句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Not until I broke the rule did I realize its importance.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">26</div><div class="gw-main">
+      <div class="gw-given">Billy's mother did not call the narrator until two days after Billy had passed away.</div>
+      <div class="gw-instr">請將此句改寫為「It was not until...that...」的強調句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ It was not until two days after Billy had passed away that his mother called the narrator.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">27</div><div class="gw-main">
+      <div class="gw-given">The narrator did not decide to hug Billy until he saw the hope in the boy's eyes.</div>
+      <div class="gw-instr">請將此句改寫為 Not until 開頭的否定倒裝句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Not until he saw the hope in the boy's eyes did the narrator decide to hug Billy.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">28</div><div class="gw-main">
+      <div class="gw-given">Although the rules were strict, Ronald chose to break one for Billy.</div>
+      <div class="gw-instr">請用「despite / in spite of + 名詞」的句型改寫此句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Despite the strict rules, Ronald chose to break one for Billy.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">29</div><div class="gw-main">
+      <div class="gw-given">Despite knowing he might get in trouble, he hugged the boy anyway.</div>
+      <div class="gw-instr">請用「although / though + 完整子句」的句型改寫此句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Although he knew he might get in trouble, he hugged the boy anyway.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">30</div><div class="gw-main">
+      <div class="gw-given">In spite of his serious illness, Billy never stopped caring about his little brother and his dog.</div>
+      <div class="gw-instr">請用「although / though + 完整子句」的句型改寫此句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Although he was seriously ill, Billy never stopped caring about his little brother and his dog.</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子重組 -->
+<div class="section s-indigo">
+  <div class="sec-head"><div class="sec-icon">🔀</div>句子重組（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依序點選下方詞組，把句子排回正確順序；點錯可再點一次移回。排好後按「檢查」看對錯，或按「看正解」直接顯示答案。</div>
+    <div id="roArea"></div>
+  </div>
+</div>
+
+<!-- 單字配對遊戲 -->
+<div class="section s-amber">
+  <div class="sec-head"><div class="sec-icon">🎮</div>單字配對遊戲（核心字彙 12 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 先點左邊的英文單字，再點右邊對應的中文意思；配對正確會變綠色鎖定，配對錯誤會閃紅重來。全部配對完成即過關！</div>
+    <div class="match-status"><span id="matchScore">配對成功：0 / 12</span><span id="matchTime">⏱ 00:00</span><button class="match-btn" onclick="initMatchGame()">🔄 重新開始</button></div>
+    <div class="match-grid">
+      <div class="match-col" id="matchLeft"></div>
+      <div class="match-col" id="matchRight"></div>
+    </div>
+    <div class="match-win" id="matchWin"></div>
+  </div>
+</div>
+
 </div><!-- end .page -->
 
 <script>
@@ -1424,6 +1718,220 @@ window.addEventListener('beforeprint',_mkPages);
     });
   });
 })();
+</script>
+<script>
+/* 文法手寫練習：填空/改寫「看解答」按鈕（沿用既有 show-btn 樣式與列印隱藏規則） */
+function showGW(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.toggle('open');
+  if(!btn.dataset.label){btn.dataset.label=btn.textContent;}
+  btn.textContent=isOpen?'收合':btn.dataset.label;
+}
+
+/* 句子重組：10 題，點詞組依序排列成句 */
+var reorderData=[
+ {cn:'我發現那男孩正躺在床上，一動也不動。',
+  correct:['I found the boy','lying in bed,','not moving at all.'],
+  pool:['not moving at all.','lying in bed,','I found the boy']},
+ {cn:'他發現要讓那個男孩振作起來極其困難。',
+  correct:['He found it','extremely difficult','to cheer the boy up.'],
+  pool:['to cheer the boy up.','He found it','extremely difficult']},
+ {cn:'護理師發現這孩子的病情令人擔憂。',
+  correct:['The nurse found',"the child's condition",'worrying.'],
+  pool:['worrying.','The nurse found',"the child's condition"]},
+ {cn:'我發現能為孩子們帶來笑容真的很有意義。',
+  correct:['I found it','truly rewarding','to bring smiles to the children.'],
+  pool:['truly rewarding','to bring smiles to the children.','I found it']},
+ {cn:'直到比利伸出雙臂，敘述者才決定擁抱他。',
+  correct:['Not until Billy stretched out his arms','did the narrator','decide to hug him.'],
+  pool:['decide to hug him.','Not until Billy stretched out his arms','did the narrator']},
+ {cn:'直到兩天後，我才得知比利已經過世的消息。',
+  correct:['Not until two days later','did I learn','that Billy had passed away.'],
+  pool:['that Billy had passed away.','did I learn','Not until two days later']},
+ {cn:'直到看見孩子眼中的希望，他才明白規定不是最重要的事。',
+  correct:["Not until he saw the hope in the boy's eyes",'did he realize','that rules were not the most important thing.'],
+  pool:['that rules were not the most important thing.',"Not until he saw the hope in the boy's eyes",'did he realize']},
+ {cn:'儘管規定很嚴格，羅納德還是決定擁抱那個男孩。',
+  correct:['Despite the strict rules,','Ronald decided','to hug the boy.'],
+  pool:['to hug the boy.','Despite the strict rules,','Ronald decided']},
+ {cn:'雖然他知道會有風險，他還是選擇打破規定。',
+  correct:['Although he knew','there was a risk,','he chose to break the rule.'],
+  pool:['he chose to break the rule.','Although he knew','there was a risk,']},
+ {cn:'儘管身患重病，比利依然想著別人。',
+  correct:['In spite of','his serious illness,','Billy still thought of others.'],
+  pool:['Billy still thought of others.','In spite of','his serious illness,']}
+];
+
+function roRender(){
+  var area=document.getElementById('roArea');
+  if(!area)return;
+  var html='';
+  reorderData.forEach(function(item,idx){
+    item.placed=[];
+    html+='<div class="ro-item"><div class="ro-top"><div class="ro-num">'+(idx+1)+'</div><div class="ro-main">'
+      +'<div class="ro-cn">'+item.cn+'</div>'
+      +'<div class="ro-answer" id="roAns'+idx+'"></div>'
+      +'<div class="ro-pool" id="roPool'+idx+'"></div>'
+      +'<div class="ro-actions">'
+      +'<button class="ro-btn secondary" onclick="roReset('+idx+')">↺ 重置</button>'
+      +'<button class="ro-btn" onclick="roCheck('+idx+')">✔ 檢查</button>'
+      +'<button class="ro-btn secondary" onclick="roReveal('+idx+')">👀 看正解</button>'
+      +'</div>'
+      +'<div class="ro-result" id="roResult'+idx+'"></div>'
+      +'</div></div></div>';
+  });
+  area.innerHTML=html;
+  reorderData.forEach(function(item,idx){roRenderPool(idx);roRenderAnswer(idx);});
+}
+function roRenderPool(idx){
+  var item=reorderData[idx];
+  var pool=document.getElementById('roPool'+idx);
+  pool.innerHTML='';
+  item.pool.forEach(function(chunk,ci){
+    if(item.placed.indexOf(ci)>=0)return;
+    var btn=document.createElement('button');
+    btn.className='ro-chip'; btn.textContent=chunk;
+    btn.onclick=function(){roPlace(idx,ci);};
+    pool.appendChild(btn);
+  });
+}
+function roRenderAnswer(idx){
+  var item=reorderData[idx];
+  var ans=document.getElementById('roAns'+idx);
+  ans.innerHTML='';
+  item.placed.forEach(function(ci){
+    var btn=document.createElement('button');
+    btn.className='ro-chip placed'; btn.textContent=item.pool[ci];
+    btn.onclick=function(){roUnplace(idx,ci);};
+    ans.appendChild(btn);
+  });
+}
+function roPlace(idx,ci){
+  var item=reorderData[idx];
+  if(item.placed.indexOf(ci)>=0)return;
+  item.placed.push(ci);
+  roRenderPool(idx); roRenderAnswer(idx);
+  document.getElementById('roResult'+idx).textContent='';
+  document.getElementById('roResult'+idx).className='ro-result';
+}
+function roUnplace(idx,ci){
+  var item=reorderData[idx];
+  var p=item.placed.indexOf(ci);
+  if(p<0)return;
+  item.placed.splice(p,1);
+  roRenderPool(idx); roRenderAnswer(idx);
+}
+function roReset(idx){
+  reorderData[idx].placed=[];
+  roRenderPool(idx); roRenderAnswer(idx);
+  var r=document.getElementById('roResult'+idx); r.textContent=''; r.className='ro-result';
+}
+function roCheck(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  var built=item.placed.map(function(ci){return item.pool[ci];}).join(' ');
+  var correct=item.correct.join(' ');
+  if(item.placed.length===item.correct.length && built===correct){
+    r.textContent='✅ 正確！'; r.className='ro-result correct';
+  }else{
+    r.textContent='❌ 順序不正確，再試試看。'; r.className='ro-result wrong';
+  }
+}
+function roReveal(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  r.textContent='👀 正解：'+item.correct.join(' ');
+  r.className='ro-result reveal';
+}
+
+/* 單字配對遊戲：核心字彙 12 字 */
+var vocabWords=[
+ {en:'employ',cn:'雇用'},
+ {en:'corporation',cn:'企業；公司（大型）'},
+ {en:'terminal',cn:'末期的；致命的'},
+ {en:'tremendously',cn:'極大地；非常地'},
+ {en:'frighten',cn:'使害怕；嚇到'},
+ {en:'contact',cn:'接觸；聯絡'},
+ {en:'frail',cn:'虛弱的；脆弱的'},
+ {en:'prompt',cn:'促使；迅速的'},
+ {en:'confine',cn:'限制；使局限於'},
+ {en:'sparkle',cn:'閃光；閃爍'},
+ {en:'drowsy',cn:'昏昏欲睡的'},
+ {en:'hesitate',cn:'猶豫；遲疑'}
+];
+var matchState={matched:0,seconds:0,timer:null,selLeft:null,selRight:null};
+function shuffleArr(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function initMatchGame(){
+  var leftCol=document.getElementById('matchLeft'), rightCol=document.getElementById('matchRight');
+  if(!leftCol||!rightCol)return;
+  matchState.matched=0; matchState.seconds=0; matchState.selLeft=null; matchState.selRight=null;
+  document.getElementById('matchScore').textContent='配對成功：0 / '+vocabWords.length;
+  document.getElementById('matchTime').textContent='⏱ 00:00';
+  var win=document.getElementById('matchWin'); win.classList.remove('show'); win.textContent='';
+  if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+
+  var idxs=vocabWords.map(function(_,i){return i;});
+  var leftOrder=shuffleArr(idxs), rightOrder=shuffleArr(idxs);
+  leftCol.innerHTML=''; rightCol.innerHTML='';
+
+  leftOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].en; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'left');};
+    leftCol.appendChild(b);
+  });
+  rightOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].cn; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'right');};
+    rightCol.appendChild(b);
+  });
+
+  matchState.timer=setInterval(function(){
+    matchState.seconds++;
+    var m=Math.floor(matchState.seconds/60), s=matchState.seconds%60;
+    document.getElementById('matchTime').textContent='⏱ '+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+  },1000);
+}
+function matchClick(btn,side){
+  if(btn.classList.contains('matched'))return;
+  if(side==='left'){
+    if(matchState.selLeft)matchState.selLeft.classList.remove('selected');
+    matchState.selLeft=btn; btn.classList.add('selected');
+  }else{
+    if(matchState.selRight)matchState.selRight.classList.remove('selected');
+    matchState.selRight=btn; btn.classList.add('selected');
+  }
+  if(matchState.selLeft&&matchState.selRight){
+    var L=matchState.selLeft, R=matchState.selRight;
+    if(L.getAttribute('data-id')===R.getAttribute('data-id')){
+      L.classList.remove('selected'); R.classList.remove('selected');
+      L.classList.add('matched'); R.classList.add('matched');
+      matchState.matched++;
+      document.getElementById('matchScore').textContent='配對成功：'+matchState.matched+' / '+vocabWords.length;
+      matchState.selLeft=null; matchState.selRight=null;
+      if(matchState.matched===vocabWords.length){
+        if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+        var win=document.getElementById('matchWin');
+        win.textContent='🎉 全部配對成功！用時 '+document.getElementById('matchTime').textContent.replace('⏱ ','');
+        win.classList.add('show');
+      }
+    }else{
+      L.classList.add('wrong'); R.classList.add('wrong');
+      setTimeout(function(){L.classList.remove('selected','wrong');R.classList.remove('selected','wrong');},500);
+      matchState.selLeft=null; matchState.selRight=null;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  roRender();
+  initMatchGame();
+});
 </script>
 </body>
 </html>

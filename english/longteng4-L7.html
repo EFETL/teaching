@@ -136,6 +136,64 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
 .speak-btn:active{transform:scale(.9)}
 .word-row{display:flex;align-items:center}
 
+/* 新增大題共用色系 */
+.s-indigo .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
+.s-indigo .sec-icon{background:#4338ca;color:#fff}
+.s-amber .sec-head{background:#fffbeb;color:#b45309;border-bottom:2px solid #fde68a}
+.s-amber .sec-icon{background:#b45309;color:#fff}
+
+/* 文法手寫練習：填空 + 句子改寫 */
+.gw-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed #e2e8f0}
+.gw-item:last-child{border-bottom:none}
+.gw-num{width:30px;height:30px;border-radius:50%;background:#ede9fe;color:#6d28d9;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.gw-main{flex:1}
+.gw-en{font-size:17px;line-height:2}
+.gw-input{border:none;border-bottom:2px solid #94a3b8;background:#f8fafc;font-size:16px;font-weight:700;color:#1e293b;padding:3px 6px;width:150px;text-align:center;font-family:inherit}
+.gw-input:focus{outline:none;border-color:#6d28d9;background:#f5f3ff}
+.gw-hint{color:#6d28d9;font-weight:700;font-size:16px}
+.gw-cn{font-size:16px;color:#64748b;margin-top:4px;font-style:italic}
+.gw-given{font-size:17px;margin-bottom:6px}
+.gw-instr{font-size:16px;color:#be123c;font-weight:700;margin-bottom:8px}
+.gw-textarea{width:100%;border:1.5px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:16px;font-family:inherit;resize:vertical;margin-bottom:2px;display:block}
+.gw-textarea:focus{outline:none;border-color:#6d28d9}
+.gw-ans{display:none;margin-top:8px;font-size:16px;color:#059669;font-weight:700;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px}
+.gw-ans.open{display:block}
+
+/* 句子重組 */
+.ro-item{padding:16px 0;border-bottom:1px dashed #e2e8f0}
+.ro-item:last-child{border-bottom:none}
+.ro-top{display:flex;gap:12px;align-items:flex-start}
+.ro-num{width:30px;height:30px;border-radius:50%;background:#e0e7ff;color:#4338ca;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ro-main{flex:1}
+.ro-cn{font-size:16px;color:#64748b;font-style:italic;margin-bottom:10px}
+.ro-answer{min-height:44px;border:2px dashed #c7d2fe;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;background:#f8fafc}
+.ro-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.ro-chip{padding:7px 13px;border-radius:7px;border:2px solid #c7d2fe;background:#fff;color:#3730a3;font-weight:700;font-size:16px;cursor:pointer;transition:all .15s}
+.ro-chip:hover{background:#eef2ff}
+.ro-chip.placed{border-style:solid;background:#e0e7ff}
+.ro-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ro-btn{border:none;border-radius:7px;padding:7px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#4338ca}
+.ro-btn.secondary{background:#64748b}
+.ro-result{margin-top:8px;font-size:16px;font-weight:700;min-height:20px}
+.ro-result.correct{color:#16a34a}
+.ro-result.wrong{color:#dc2626}
+.ro-result.reveal{color:#4338ca}
+
+/* 單字配對遊戲 */
+.match-status{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-weight:800;color:#92400e;font-size:17px}
+.match-btn{border:none;border-radius:8px;padding:8px 16px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#b45309}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.match-col{display:flex;flex-direction:column;gap:9px}
+.match-chip{padding:11px 15px;border:2px solid #fde68a;border-radius:9px;cursor:pointer;font-weight:700;font-size:16px;background:#fffbeb;color:#78350f;transition:all .12s}
+.match-chip:hover{background:#fef3c7}
+.match-chip.selected{border-color:#b45309;background:#fef3c7;box-shadow:0 0 0 2px #fde68a}
+.match-chip.matched{border-color:#86efac;background:#f0fdf4;color:#16a34a;cursor:default;opacity:.65}
+.match-chip.wrong{border-color:#fca5a5;background:#fef2f2;color:#dc2626;animation:mshake .3s}
+@keyframes mshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.match-win{display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;color:#92400e;font-weight:800;text-align:center;font-size:18px}
+.match-win.show{display:block}
+@media(max-width:640px){.match-grid{grid-template-columns:1fr}}
+
 @media print{
   body{background:#fff;font-size:16px}
   .page{max-width:100%;padding:8px}
@@ -145,6 +203,8 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
   .v-ic,.g-arrow,.para-en .ic,.show-btn,.sec-hint,.header-nav{display:none!important}
   .vocab-grid{grid-template-columns:1fr 1fr}
   a{text-decoration:none}
+  .gw-ans{display:none!important}
+  .s-amber,.ro-actions{display:none!important}
 }
 @media(max-width:640px){
   body{font-size:16px}
@@ -191,6 +251,9 @@ body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1
     <span class="tag">🔗 片語 × 8</span>
     <span class="tag">📐 文法句型 × 3</span>
     <span class="tag">✏️ 練習題 × 8</span>
+    <span class="tag">✍️ 文法手寫練習 × 30</span>
+    <span class="tag">🔀 句子重組 × 10</span>
+    <span class="tag">🎮 單字配對遊戲</span>
   </div>
 </div>
 
@@ -1001,6 +1064,237 @@ although / even though / though + 完整子句（連接詞）</div>
   </div>
 </div>
 
+<!-- 文法填空練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">✍️</div>文法填空練習（20 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依中文提示，將括號中的字改為正確的文法形式，直接打在空格中；寫完按「看解答」對答案。也適合列印後手寫作答。</div>
+
+    <div class="gw-item"><div class="gw-num">1</div><div class="gw-main">
+      <div class="gw-en">If it had not been for the strike, the Icelandic government might not have <input class="gw-input" style="width:90px"> <span class="gw-hint">(pass)</span> the Gender Equality Act.</div>
+      <div class="gw-cn">若不是那場罷工，冰島政府可能不會通過《性別平等法》。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：passed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">2</div><div class="gw-main">
+      <div class="gw-en">If it had not been for this protest, public attitudes would not have <input class="gw-input" style="width:100px"> <span class="gw-hint">(change)</span>.</div>
+      <div class="gw-cn">若不是這場抗議，民眾的態度就不會改變。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：changed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">3</div><div class="gw-main">
+      <div class="gw-en">But for their courage, the movement would not have <input class="gw-input" style="width:130px"> <span class="gw-hint">(succeed)</span>.</div>
+      <div class="gw-cn">若非她們的勇氣，這場運動就不會成功。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：succeeded</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">4</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:70px"> <span class="gw-hint">(have)</span> it not been for Iceland's laws, other Nordic countries might not have followed.</div>
+      <div class="gw-cn">若非冰島的法律，其他北歐國家可能不會跟進。（倒裝句）</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Had</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">5</div><div class="gw-main">
+      <div class="gw-en">If it had not been for government intervention, the salary gap might not have <input class="gw-input" style="width:120px"> <span class="gw-hint">(narrow)</span>.</div>
+      <div class="gw-cn">若不是政府的介入，薪資差距可能不會縮小。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：narrowed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">6</div><div class="gw-main">
+      <div class="gw-en">If it had not been for women's persistence, people might not have <input class="gw-input" style="width:150px"> <span class="gw-hint">(eliminate)</span> gender discrimination yet.</div>
+      <div class="gw-cn">若非婦女們的堅持，人們可能還沒有消除性別歧視。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：eliminated</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">7</div><div class="gw-main">
+      <div class="gw-en">If it had not been for this law, many companies might not have <input class="gw-input" style="width:120px"> <span class="gw-hint">(follow)</span> equal pay policies.</div>
+      <div class="gw-cn">若不是這項法律，許多公司可能不會遵守同工同酬政策。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：followed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">8</div><div class="gw-main">
+      <div class="gw-en">With more and more women <input class="gw-input" style="width:120px"> <span class="gw-hint">(enter)</span> the workforce, the gender gap is gradually narrowing.</div>
+      <div class="gw-cn">隨著愈來愈多女性投入職場，性別差距逐漸縮小。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：entering</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">9</div><div class="gw-main">
+      <div class="gw-en">With the government <input class="gw-input" style="width:110px"> <span class="gw-hint">(pass)</span> a new law, workplace discrimination has been greatly reduced.</div>
+      <div class="gw-cn">隨著政府通過一項新法律，職場歧視大幅減少。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：passing</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">10</div><div class="gw-main">
+      <div class="gw-en">With the majority of workers <input class="gw-input" style="width:90px"> <span class="gw-hint">(go)</span> on strike, the factory came to a standstill.</div>
+      <div class="gw-cn">隨著多數員工參與罷工，工廠陷入停頓。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：going</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">11</div><div class="gw-main">
+      <div class="gw-en">With the salary gap gradually <input class="gw-input" style="width:130px"> <span class="gw-hint">(narrow)</span>, more and more women feel satisfied.</div>
+      <div class="gw-cn">隨著薪資差距逐漸縮小，越來越多女性感到滿意。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：narrowing</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">12</div><div class="gw-main">
+      <div class="gw-en">With the population continuously <input class="gw-input" style="width:150px"> <span class="gw-hint">(increase)</span>, the government must provide more resources.</div>
+      <div class="gw-cn">隨著人口持續增加，政府必須提供更多資源。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：increasing</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">13</div><div class="gw-main">
+      <div class="gw-en">With more companies <input class="gw-input" style="width:130px"> <span class="gw-hint">(follow)</span> equal pay policies, gender discrimination is gradually being eliminated.</div>
+      <div class="gw-cn">隨著愈來愈多公司遵守同工同酬政策，性別歧視正逐漸消除。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：following</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">14</div><div class="gw-main">
+      <div class="gw-en">With this law just <input class="gw-input" style="width:90px"> <span class="gw-hint">(pass)</span>, the whole country was thrown into chaos.</div>
+      <div class="gw-cn">隨著這項法律剛通過，全國陷入了一片混亂。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：passed</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">15</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(despite / although)</span> all the progress that has been made, the fight for gender equality is not yet over.</div>
+      <div class="gw-cn">儘管已取得許多進展，這場性別平等的戰鬥尚未結束。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Despite</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">16</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:120px"> <span class="gw-hint">(despite / although)</span> Iceland has achieved gender equality, other countries are still struggling.</div>
+      <div class="gw-cn">儘管冰島已經達成性別平等，其他國家仍在努力。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Although</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">17</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(despite / although)</span> many difficulties, the movement continues to grow.</div>
+      <div class="gw-cn">儘管遭遇許多困難，這場運動仍持續成長。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Despite</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">18</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(despite / although)</span> having achieved so much, the country continues to take action against discrimination.</div>
+      <div class="gw-cn">儘管已經取得如此多成就，這個國家仍持續採取行動消除歧視。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Despite</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">19</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:120px"> <span class="gw-hint">(despite / although)</span> the law has been passed, some companies still do not comply.</div>
+      <div class="gw-cn">儘管法律已經通過，仍有一些公司未遵守。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Although</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">20</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(despite / although)</span> its small population, Iceland leads the world in gender equality.</div>
+      <div class="gw-cn">儘管人口不多，冰島在性別平等方面卻領先全球。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Despite</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子改寫練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">🔄</div>句子改寫練習（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依指示將兩句合併或改寫成一個正確的英文句子，寫在下方欄位中；寫完按「看參考答案」對答案。</div>
+
+    <div class="gw-item"><div class="gw-num">21</div><div class="gw-main">
+      <div class="gw-given">A. There was a strike in 1975.<br>B. Iceland's gender equality movement did not grow so quickly.</div>
+      <div class="gw-instr">請用 If it had not been for 合併成一句（過去事實相反假設）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ If it had not been for the strike in 1975, Iceland's gender equality movement would not have grown so quickly.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">22</div><div class="gw-main">
+      <div class="gw-given">A. Icelandic women did not protest.<br>B. The Gender Equality Act was not passed.</div>
+      <div class="gw-instr">請用 Had it not been for（倒裝句）合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Had it not been for the protest of Icelandic women, the Gender Equality Act would not have been passed.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">23</div><div class="gw-main">
+      <div class="gw-given">A. Icelandic women's determination did not exist.<br>B. This law did not pass so quickly.</div>
+      <div class="gw-instr">請用 But for 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ But for Icelandic women's determination, this law would not have passed so quickly.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">24</div><div class="gw-main">
+      <div class="gw-given">A. The government did not intervene.<br>B. The wage gap did not narrow so fast.</div>
+      <div class="gw-instr">請用 If it had not been for 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ If it had not been for the government's intervention, the wage gap would not have narrowed so fast.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">25</div><div class="gw-main">
+      <div class="gw-given">A. The majority of women went on strike.<br>B. Banks and schools came to a standstill.</div>
+      <div class="gw-instr">請用 With + 名詞 + V-ing 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ With the majority of women going on strike, banks and schools came to a standstill.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">26</div><div class="gw-main">
+      <div class="gw-given">A. More companies are following equal pay policies.<br>B. The gender pay gap is narrowing.</div>
+      <div class="gw-instr">請用 With + 名詞 + V-ing 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ With more companies following equal pay policies, the gender pay gap is narrowing.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">27</div><div class="gw-main">
+      <div class="gw-given">A. The new law was just passed.<br>B. Many citizens felt hopeful about the future.</div>
+      <div class="gw-instr">請用 With + 名詞 + p.p. 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ With the new law just passed, many citizens felt hopeful about the future.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">28</div><div class="gw-main">
+      <div class="gw-given">A. Iceland made a lot of progress.<br>B. The fight for equality was not over.</div>
+      <div class="gw-instr">請用 despite + 名詞 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Despite all the progress Iceland had made, the fight for equality was not over.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">29</div><div class="gw-main">
+      <div class="gw-given">A. Iceland has achieved gender equality in many areas.<br>B. Some gaps still remain.</div>
+      <div class="gw-instr">請用 although + 子句合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Although Iceland has achieved gender equality in many areas, some gaps still remain.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">30</div><div class="gw-main">
+      <div class="gw-given">A. The country has a small population.<br>B. It leads the world in gender equality.</div>
+      <div class="gw-instr">請用 despite + 名詞 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Despite its small population, the country leads the world in gender equality.</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子重組 -->
+<div class="section s-indigo">
+  <div class="sec-head"><div class="sec-icon">🔀</div>句子重組（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依序點選下方詞組，把句子排回正確順序；點錯可再點一次移回。排好後按「檢查」看對錯，或按「看正解」直接顯示答案。</div>
+    <div id="roArea"></div>
+  </div>
+</div>
+
+<!-- 單字配對遊戲 -->
+<div class="section s-amber">
+  <div class="sec-head"><div class="sec-icon">🎮</div>單字配對遊戲（核心字彙 12 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 先點左邊的英文單字，再點右邊對應的中文意思；配對正確會變綠色鎖定，配對錯誤會閃紅重來。全部配對完成即過關！</div>
+    <div class="match-status"><span id="matchScore">配對成功：0 / 12</span><span id="matchTime">⏱ 00:00</span><button class="match-btn" onclick="initMatchGame()">🔄 重新開始</button></div>
+    <div class="match-grid">
+      <div class="match-col" id="matchLeft"></div>
+      <div class="match-col" id="matchRight"></div>
+    </div>
+    <div class="match-win" id="matchWin"></div>
+  </div>
+</div>
+
 </div><!-- end .page -->
 
 <script>
@@ -1285,6 +1579,220 @@ window.addEventListener('beforeprint',_mkPages);
     });
   });
 })();
+</script>
+<script>
+/* 文法手寫練習：填空/改寫「看解答」按鈕（沿用既有 show-btn 樣式與列印隱藏規則） */
+function showGW(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.toggle('open');
+  if(!btn.dataset.label){btn.dataset.label=btn.textContent;}
+  btn.textContent=isOpen?'收合':btn.dataset.label;
+}
+
+/* 句子重組：10 題，點詞組依序排列成句 */
+var reorderData=[
+ {cn:'若不是這場抗議，社會大眾的態度就不會改變。',
+  correct:['If it had not been for this protest,','public attitudes','would not have changed.'],
+  pool:['public attitudes','would not have changed.','If it had not been for this protest,']},
+ {cn:'若非冰島的法律，其他國家可能不會跟進。',
+  correct:["Had it not been for Iceland's laws,",'other countries','might not have followed.'],
+  pool:['might not have followed.',"Had it not been for Iceland's laws,",'other countries']},
+ {cn:'若非她們的堅持，這場運動就不會成功。',
+  correct:['But for their persistence,','the movement','would not have succeeded.'],
+  pool:['the movement','would not have succeeded.','But for their persistence,']},
+ {cn:'若不是這項新法律，許多公司可能不會提高薪資。',
+  correct:['If it had not been for this new law,','many companies','might not have raised salaries.'],
+  pool:['many companies','If it had not been for this new law,','might not have raised salaries.']},
+ {cn:'隨著多數女性參與罷工，全國陷入混亂。',
+  correct:['With the majority of women','going on strike,','the country fell into chaos.'],
+  pool:['the country fell into chaos.','going on strike,','With the majority of women']},
+ {cn:'隨著性別差距逐漸縮小，社會變得更加平等。',
+  correct:['With the gender gap','gradually narrowing,','society is becoming more equal.'],
+  pool:['society is becoming more equal.','With the gender gap','gradually narrowing,']},
+ {cn:'隨著這項法律剛通過，人民感到充滿希望。',
+  correct:['With this law','just passed,','people felt full of hope.'],
+  pool:['just passed,','people felt full of hope.','With this law']},
+ {cn:'儘管取得許多進步，這場戰鬥尚未結束。',
+  correct:['Despite all the progress that had been made,','the fight','was not yet over.'],
+  pool:['the fight','was not yet over.','Despite all the progress that had been made,']},
+ {cn:'儘管冰島已達成性別平等，其他國家仍在努力。',
+  correct:['Although Iceland has achieved gender equality,','other countries','are still struggling.'],
+  pool:['other countries','Although Iceland has achieved gender equality,','are still struggling.']},
+ {cn:'儘管人口稀少，這個國家在性別平等方面卻領先全球。',
+  correct:['Despite its small population,','this country','leads the world in gender equality.'],
+  pool:['leads the world in gender equality.','this country','Despite its small population,']}
+];
+
+function roRender(){
+  var area=document.getElementById('roArea');
+  if(!area)return;
+  var html='';
+  reorderData.forEach(function(item,idx){
+    item.placed=[];
+    html+='<div class="ro-item"><div class="ro-top"><div class="ro-num">'+(idx+1)+'</div><div class="ro-main">'
+      +'<div class="ro-cn">'+item.cn+'</div>'
+      +'<div class="ro-answer" id="roAns'+idx+'"></div>'
+      +'<div class="ro-pool" id="roPool'+idx+'"></div>'
+      +'<div class="ro-actions">'
+      +'<button class="ro-btn secondary" onclick="roReset('+idx+')">↺ 重置</button>'
+      +'<button class="ro-btn" onclick="roCheck('+idx+')">✔ 檢查</button>'
+      +'<button class="ro-btn secondary" onclick="roReveal('+idx+')">👀 看正解</button>'
+      +'</div>'
+      +'<div class="ro-result" id="roResult'+idx+'"></div>'
+      +'</div></div></div>';
+  });
+  area.innerHTML=html;
+  reorderData.forEach(function(item,idx){roRenderPool(idx);roRenderAnswer(idx);});
+}
+function roRenderPool(idx){
+  var item=reorderData[idx];
+  var pool=document.getElementById('roPool'+idx);
+  pool.innerHTML='';
+  item.pool.forEach(function(chunk,ci){
+    if(item.placed.indexOf(ci)>=0)return;
+    var btn=document.createElement('button');
+    btn.className='ro-chip'; btn.textContent=chunk;
+    btn.onclick=function(){roPlace(idx,ci);};
+    pool.appendChild(btn);
+  });
+}
+function roRenderAnswer(idx){
+  var item=reorderData[idx];
+  var ans=document.getElementById('roAns'+idx);
+  ans.innerHTML='';
+  item.placed.forEach(function(ci){
+    var btn=document.createElement('button');
+    btn.className='ro-chip placed'; btn.textContent=item.pool[ci];
+    btn.onclick=function(){roUnplace(idx,ci);};
+    ans.appendChild(btn);
+  });
+}
+function roPlace(idx,ci){
+  var item=reorderData[idx];
+  if(item.placed.indexOf(ci)>=0)return;
+  item.placed.push(ci);
+  roRenderPool(idx); roRenderAnswer(idx);
+  document.getElementById('roResult'+idx).textContent='';
+  document.getElementById('roResult'+idx).className='ro-result';
+}
+function roUnplace(idx,ci){
+  var item=reorderData[idx];
+  var p=item.placed.indexOf(ci);
+  if(p<0)return;
+  item.placed.splice(p,1);
+  roRenderPool(idx); roRenderAnswer(idx);
+}
+function roReset(idx){
+  reorderData[idx].placed=[];
+  roRenderPool(idx); roRenderAnswer(idx);
+  var r=document.getElementById('roResult'+idx); r.textContent=''; r.className='ro-result';
+}
+function roCheck(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  var built=item.placed.map(function(ci){return item.pool[ci];}).join(' ');
+  var correct=item.correct.join(' ');
+  if(item.placed.length===item.correct.length && built===correct){
+    r.textContent='✅ 正確！'; r.className='ro-result correct';
+  }else{
+    r.textContent='❌ 順序不正確，再試試看。'; r.className='ro-result wrong';
+  }
+}
+function roReveal(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  r.textContent='👀 正解：'+item.correct.join(' ');
+  r.className='ro-result reveal';
+}
+
+/* 單字配對遊戲：核心字彙 12 字 */
+var vocabWords=[
+ {en:'gender',cn:'性別'},
+ {en:'population',cn:'人口；族群'},
+ {en:'protest',cn:'抗議'},
+ {en:'domestic',cn:'國內的；家務的'},
+ {en:'majority',cn:'多數；大多數'},
+ {en:'chaos',cn:'混亂；無秩序'},
+ {en:'paralyze',cn:'使麻痺；使癱瘓'},
+ {en:'discrimination',cn:'歧視；差別待遇'},
+ {en:'democratic',cn:'民主的'},
+ {en:'anniversary',cn:'週年紀念日'},
+ {en:'salary',cn:'薪水；薪酬'},
+ {en:'eliminate',cn:'消除；根除'}
+];
+var matchState={matched:0,seconds:0,timer:null,selLeft:null,selRight:null};
+function shuffleArr(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function initMatchGame(){
+  var leftCol=document.getElementById('matchLeft'), rightCol=document.getElementById('matchRight');
+  if(!leftCol||!rightCol)return;
+  matchState.matched=0; matchState.seconds=0; matchState.selLeft=null; matchState.selRight=null;
+  document.getElementById('matchScore').textContent='配對成功：0 / '+vocabWords.length;
+  document.getElementById('matchTime').textContent='⏱ 00:00';
+  var win=document.getElementById('matchWin'); win.classList.remove('show'); win.textContent='';
+  if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+
+  var idxs=vocabWords.map(function(_,i){return i;});
+  var leftOrder=shuffleArr(idxs), rightOrder=shuffleArr(idxs);
+  leftCol.innerHTML=''; rightCol.innerHTML='';
+
+  leftOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].en; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'left');};
+    leftCol.appendChild(b);
+  });
+  rightOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].cn; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'right');};
+    rightCol.appendChild(b);
+  });
+
+  matchState.timer=setInterval(function(){
+    matchState.seconds++;
+    var m=Math.floor(matchState.seconds/60), s=matchState.seconds%60;
+    document.getElementById('matchTime').textContent='⏱ '+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+  },1000);
+}
+function matchClick(btn,side){
+  if(btn.classList.contains('matched'))return;
+  if(side==='left'){
+    if(matchState.selLeft)matchState.selLeft.classList.remove('selected');
+    matchState.selLeft=btn; btn.classList.add('selected');
+  }else{
+    if(matchState.selRight)matchState.selRight.classList.remove('selected');
+    matchState.selRight=btn; btn.classList.add('selected');
+  }
+  if(matchState.selLeft&&matchState.selRight){
+    var L=matchState.selLeft, R=matchState.selRight;
+    if(L.getAttribute('data-id')===R.getAttribute('data-id')){
+      L.classList.remove('selected'); R.classList.remove('selected');
+      L.classList.add('matched'); R.classList.add('matched');
+      matchState.matched++;
+      document.getElementById('matchScore').textContent='配對成功：'+matchState.matched+' / '+vocabWords.length;
+      matchState.selLeft=null; matchState.selRight=null;
+      if(matchState.matched===vocabWords.length){
+        if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+        var win=document.getElementById('matchWin');
+        win.textContent='🎉 全部配對成功！用時 '+document.getElementById('matchTime').textContent.replace('⏱ ','');
+        win.classList.add('show');
+      }
+    }else{
+      L.classList.add('wrong'); R.classList.add('wrong');
+      setTimeout(function(){L.classList.remove('selected','wrong');R.classList.remove('selected','wrong');},500);
+      matchState.selLeft=null; matchState.selRight=null;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  roRender();
+  initMatchGame();
+});
 </script>
 </body>
 </html>
