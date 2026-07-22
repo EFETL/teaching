@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L4: Mystery of the Disappearing Bees ── 高職英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 統測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L4: Mystery of the Disappearing Bees ── 消失的蜜蜂之謎</h1>
+  <div class="sub">龍騰版高職英文 第五冊 第四課｜互動教學講義</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依統測命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 5</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 本課主題速覽 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>本課主題速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 消失之謎（2006 起）</h4>
+        2006 年起，整群蜜蜂一夜之間<b>離奇消失</b>，蜂巢空空、卻找不到屍體或疾病證據。科學家稱之為<b>蜂群崩壞症候群（CCD）</b>，可能與空汙、暖化、水資源縮減有關。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 元凶：農藥</h4>
+        主因是<b>農藥（pesticides）</b>：噴過農藥的植物把毒素傳給蜜蜂，蜜蜂<b>腦部受損</b>、找不到食物或回不了家而餓死；帶毒回巢的還會污染蜂巢。五十年間全球蜜蜂數量<b>減少近一半</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 蜜蜂與食物鏈</h4>
+        蜜蜂替花朵<b>授粉</b>，攸關人類一半的<b>食物供給</b>。沒有蜜蜂，蔬果、乳肉都將消失。牠們雖小，卻<b>值得</b>我們的感謝與保護。附對話：Sophie 在蜂蜜店試吃各種口味蜂蜜。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點 🔊 只朗讀、不展開解析。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課探討蜜蜂大量消失（蜂群崩壞症候群 CCD）的原因與對人類食物鏈的衝擊。文後附一段對話〈Fresh Honey Tasting〉。</p>
+
+    <!-- 敘述本文 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📖 Reading｜Mystery of the Disappearing Bees（消失的蜜蜂之謎）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It all started in the US in 2006. Overnight, entire bee colonies simply went missing.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這一切始於 2006 年的美國。一夜之間，整群整群的蜜蜂就這麼消失了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">S</span> <span class="syn syn-v">all started</span><span class="syn-t">V</span> <span class="syn syn-m">in the US in 2006</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-m">Overnight</span><span class="syn-t">副詞</span> <span class="syn syn-s">entire bee colonies</span><span class="syn-t">S</span> <span class="syn syn-v">went missing</span><span class="syn-t">V</span></div>
+          <div class="para-note"><b>overnight</b>（一夜之間）為核心字；<b>go missing</b> = 失蹤（go + 形容詞表變化）；colony = 群體、聚落。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Beekeepers discovered their hives empty of worker bees. Strangely, though, no dead bee bodies were found, and there was no evidence of disease, either.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">養蜂人發現蜂巢裡的工蜂全空了。奇怪的是，卻找不到任何死掉的蜜蜂屍體，也沒有疾病的證據。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Beekeepers</span><span class="syn-t">S</span> <span class="syn syn-v">discovered</span><span class="syn-t">V</span> <span class="syn syn-o">their hives</span><span class="syn-t">O</span> <span class="syn syn-c">empty of worker bees</span><span class="syn-t">OC</span><br>
+            <span class="num">②</span><span class="syn syn-s">no dead bee bodies</span><span class="syn-t">S</span> <span class="syn syn-v">were found</span><span class="syn-t">V（被動）</span></div>
+          <div class="para-note"><b>discover</b>（發現）為核心字；<b>evidence</b>（證據，不可數）為核心字；否定句後的「也不」用 <b>either</b>（肯定用 too）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The worker bees had simply disappeared and left their queens behind.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">工蜂就這麼消失了，留下牠們的蜂后。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The worker bees</span><span class="syn-t">S</span> <span class="syn syn-v">had disappeared</span><span class="syn-t">V（過去完成）</span> <span class="syn syn-m">and</span> <span class="syn syn-v">left</span><span class="syn-t">V</span> <span class="syn syn-o">their queens</span><span class="syn-t">O</span> <span class="syn syn-v">behind</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>leave...behind</b> = 留下、遺留（片語）；had disappeared 為過去完成式，表在敘述時間點之前已發生。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Unfortunately, this wasn't just some miserable nightmare. On the contrary, it is a sad reality affecting over a million bee colonies every year, and beekeepers have no idea what to do.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">不幸的是，這不只是一場悲慘的惡夢。相反地，它是每年影響超過一百萬個蜂群的悲傷現實，而養蜂人卻束手無策。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">it</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">a sad reality affecting over a million colonies</span><span class="syn-t">C（＋現在分詞）</span></div>
+          <div class="para-note"><b>miserable</b>（悲慘的）、<b>nightmare</b>（惡夢）為核心字；<b>on the contrary</b> = 相反地；affecting 現在分詞修飾 reality；have no idea what to do = 不知如何是好。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>According to scientists, this situation is referred to as Colony Collapse Disorder (CCD) and may result from factors including air pollution, global warming, and shrinking water resources.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">根據科學家的說法，這種情況被稱為「蜂群崩壞症候群（CCD）」，可能起因於空氣污染、全球暖化與日益減少的水資源等因素。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">this situation</span><span class="syn-t">S</span> <span class="syn syn-v">is referred to as</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">CCD</span> <span class="syn syn-m">and</span> <span class="syn syn-v">may result from</span><span class="syn-t">V</span> <span class="syn syn-o">factors</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>be referred to as</b> = 被稱為（見句型五）；<b>result from</b> = 起因於（見句型一）；<b>factor</b>（因素）、<b>pollution</b>（污染）、<b>resource</b>（資源）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, the main factor appears to be the use of pesticides. Plants treated with pesticides pass poisonous artificial chemicals on to bees.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，最主要的因素似乎是農藥的使用。噴灑過農藥的植物會把有毒的人造化學物質傳給蜜蜂。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Plants treated with pesticides</span><span class="syn-t">S（＋過去分詞修飾）</span> <span class="syn syn-v">pass</span><span class="syn-t">V</span> <span class="syn syn-o">poisonous artificial chemicals</span><span class="syn-t">O</span> <span class="syn syn-m">on to bees</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>appear to be</b> = 似乎是；<b>treated with</b> 過去分詞修飾 Plants（見句型二）；<b>artificial</b>（人造的）為核心字；pass sth. on to sb. = 把……傳給。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When bees touch or eat these pesticides, they suffer brain damage. As a result, they may not know how to find food or return home. Sadly, most of these bees starve to death.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當蜜蜂接觸或吃下這些農藥時，牠們的腦部會受損。結果，牠們可能不知道如何找食物或返家。可悲的是，大多數這樣的蜜蜂都活活餓死。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When bees touch or eat these pesticides</span><span class="syn-t">時間子句</span> <span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">suffer</span><span class="syn-t">V</span> <span class="syn syn-o">brain damage</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>suffer damage</b> = 受損；<b>as a result</b> = 結果；<b>how to V</b> = 如何……；<b>starve to death</b> = 餓死。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Although some of the poisoned bees do make it back home, they carry the poison with them, and thus they pollute their hives and kill the rest of the colony.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">雖然有些中毒的蜜蜂確實能回到家，但牠們身上帶著毒素，因此污染了蜂巢，殺死了其餘的蜂群。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Although some of the poisoned bees do make it back home</span><span class="syn-t">讓步子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">carry</span><span class="syn-t">V</span> <span class="syn syn-o">the poison</span><span class="syn-t">O</span> <span class="syn syn-m">and thus</span> <span class="syn syn-v">pollute</span><span class="syn-t">V</span> <span class="syn syn-o">their hives</span></div>
+          <div class="para-note"><b>do make</b> = 確實回到（do 加強語氣）；<b>make it back</b> = 成功返回；<b>pollute</b>（污染）為核心字；the rest of = 其餘的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Shocking reports demonstrate that pesticides have, in just fifty years, reduced the total number of bees worldwide by almost half!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">令人震驚的報告顯示，短短五十年間，農藥已讓全球蜜蜂總數減少了將近一半！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Shocking reports</span><span class="syn-t">S</span> <span class="syn syn-v">demonstrate</span><span class="syn-t">V</span> <span class="syn syn-o">that pesticides have reduced the total number by almost half</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>demonstrate</b>（顯示、證明）、<b>reduce</b>（減少）為核心字；<b>reduce ... by + 數量</b> = 減少了（多少）；in just fifty years 為插入語。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>For humans, losing bees wouldn't just mean a world without honey. In fact, these precious insects are essential to our entire food supply.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">對人類而言，失去蜜蜂不只意味著一個沒有蜂蜜的世界。事實上，這些珍貴的昆蟲對我們整個食物供給至關重要。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">losing bees</span><span class="syn-t">S（動名詞）</span> <span class="syn syn-v">wouldn't mean</span><span class="syn-t">V</span> <span class="syn syn-o">a world without honey</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">these precious insects</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">essential to our food supply</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>losing bees</b> 動名詞當主詞；<b>precious</b>（珍貴的）、<b>supply</b>（供給）為核心字；<b>be essential to</b> = 對……不可或缺。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When bees collect nectar from various blossoms, tiny parts of the plant stick to their bodies. By flying around, they carry this fine powder from flower to flower to help flowers produce new plants.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當蜜蜂從各式各樣的花朵採集花蜜時，植物的微小部分會沾附在牠們身上。藉由四處飛行，牠們把這些細小的粉末從一朵花帶到另一朵花，幫助花朵繁殖出新的植物。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When bees collect nectar from various blossoms</span><span class="syn-t">時間子句</span> <span class="syn syn-s">tiny parts</span><span class="syn-t">S</span> <span class="syn syn-v">stick to</span><span class="syn-t">V</span> <span class="syn syn-o">their bodies</span></div>
+          <div class="para-note"><b>various</b>（各式各樣的）為核心字；<b>stick to</b> = 黏附於；<b>By + V-ing</b> = 藉由……；help + O + (to) V = 幫助……做。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Without bees, about half of our food supply would soon disappear. This means that we would no longer see apples, kiwis, cabbage, or pumpkin on our tables.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">沒有蜜蜂，我們大約一半的食物供給很快就會消失。這意味著我們的餐桌上將不再看到蘋果、奇異果、高麗菜或南瓜。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Without bees</span><span class="syn-t">假設條件</span> <span class="syn syn-s">about half of our food supply</span><span class="syn-t">S</span> <span class="syn syn-v">would disappear</span><span class="syn-t">V（假設語氣）</span></div>
+          <div class="para-note"><b>Without + N</b> = 如果沒有……（= If it were not for，見句型三），主句用 would + 原形；<b>no longer</b> = 不再。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Moreover, dairy and meat products would eventually become a thing of the past, since the crops that feed farm animals also rely on bees.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，乳製品和肉類產品最終也將成為過去式，因為餵養農場動物的作物同樣仰賴蜜蜂。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">dairy and meat products</span><span class="syn-t">S</span> <span class="syn syn-v">would become</span><span class="syn-t">V</span> <span class="syn syn-c">a thing of the past</span><span class="syn-t">C</span> <span class="syn syn-m">since the crops... rely on bees</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>a thing of the past</b> = 過去式、不復存在的事物（片語）；<b>rely on</b> = 依賴（片語）；the crops that feed... 關係子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Without bees, in other words, we'd find it very difficult to produce enough food in the long run.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">換句話說，沒有蜜蜂，長遠來看，我們將很難生產出足夠的食物。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">'d find</span><span class="syn-t">V</span> <span class="syn syn-o">it</span><span class="syn-t">虛受詞</span> <span class="syn syn-c">very difficult</span><span class="syn-t">OC</span> <span class="syn syn-m">to produce enough food</span><span class="syn-t">真受詞</span></div>
+          <div class="para-note"><b>find it + adj. + to V</b>（it 為虛受詞，真受詞為不定詞）；<b>in the long run</b> = 從長遠來看（片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Bees may be very small, but we should recognize the huge role they play in maintaining the fine balance of the web of life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">蜜蜂也許非常渺小，但我們應該正視牠們在維繫生命之網微妙平衡中所扮演的重要角色。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">should recognize</span><span class="syn-t">V</span> <span class="syn syn-o">the huge role they play</span><span class="syn-t">O（省略關代）</span></div>
+          <div class="para-note"><b>recognize</b>（正視、承認）為核心字；<b>balance</b>（平衡）為核心字；play a role in = 在……中扮演角色；the web of life = 生命之網。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>If all of these busy little creatures disappear, our entire food chain will be affected.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">如果所有這些忙碌的小生物都消失了，我們整個食物鏈都將受到影響。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">If all of these creatures disappear</span><span class="syn-t">條件子句</span> <span class="syn syn-s">our entire food chain</span><span class="syn-t">S</span> <span class="syn syn-v">will be affected</span><span class="syn-t">V（被動）</span></div>
+          <div class="para-note"><b>if 條件句（真實）</b>：if + 現在式，主句 will + 原形；<b>food chain</b> = 食物鏈；affect（v.）影響 vs. effect（n.）效果。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Being tiny but important, bees deserve credit for allowing life to exist on this planet. Truly, they also deserve our protection!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">身形雖小卻舉足輕重，蜜蜂值得因讓生命得以在地球存續而受到肯定。的確，牠們也值得我們的保護！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Being tiny but important</span><span class="syn-t">分詞構句</span> <span class="syn syn-s">bees</span><span class="syn-t">S</span> <span class="syn syn-v">deserve</span><span class="syn-t">V</span> <span class="syn syn-o">credit for allowing life to exist</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>Being + adj.</b> 分詞構句（= Although they are...，見句型四）；<b>deserve</b>（值得）、<b>credit</b>（讚揚、肯定）為核心字；deserve credit for = 因……而值得肯定。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 對話 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">💬 Dialogue｜Fresh Honey Tasting（新鮮蜂蜜試吃）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Sophie tries different flavors of honey given to her by a clerk in a honey shop.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Sophie 在一間蜂蜜店試吃店員給她的各種口味蜂蜜。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Sophie</span><span class="syn-t">S</span> <span class="syn syn-v">tries</span><span class="syn-t">V</span> <span class="syn syn-o">different flavors of honey given to her</span><span class="syn-t">O（＋過去分詞修飾）</span></div>
+          <div class="para-note"><b>given to her</b> 過去分詞修飾 honey（被給的蜂蜜）；<b>clerk</b> = 店員；flavor = 口味。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: Please help yourself to a free sample! B: Thanks. What are these? A: These are different flavored honeys, all locally made.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：請自行取用免費試吃品！ B：謝謝。這些是什麼？ A：這些是不同口味的蜂蜜，全都是在地製作的。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">help</span><span class="syn-t">V（祈使）</span> <span class="syn syn-o">yourself</span><span class="syn-t">O</span> <span class="syn syn-m">to a free sample</span><span class="syn-t">介片</span></div>
+          <div class="para-note"><b>help yourself to sth.</b> = 自行取用（招待客人用語）；<b>locally made</b> = 在地製作的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>B: Wow! They look delicious! A: Please have a taste of this one. It's longan flavor. B: Oh, my goodness! That's good.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">B：哇！它們看起來好好吃！ A：請嚐嚐這一種，是龍眼口味。 B：喔，我的天啊！真好吃。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">look</span><span class="syn-t">V</span> <span class="syn syn-c">delicious</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>look + 形容詞</b>（連綴動詞）；<b>have a taste of</b> = 嚐一口；longan = 龍眼。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: Here are two more. This one's lemon, and this one's lychee. B: Hmm... I'm not a fan of the lychee one. The lemon is my favorite so far. How much is this jar?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：這裡還有兩種。這罐是檸檬，這罐是荔枝。 B：嗯……我不太喜歡荔枝那款。到目前為止檸檬是我的最愛。這一罐多少錢？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">am</span><span class="syn-t">V</span> <span class="syn syn-c">not a fan of the lychee one</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>be a fan of</b> = 喜歡、是……的愛好者；<b>so far</b> = 到目前為止；<b>jar</b> = 罐子；lychee = 荔枝。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: The lemon honey comes in 380-gram jars, and costs NT$380. B: That sounds very reasonable. I'll take it.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：檸檬蜂蜜是 380 公克裝，售價 380 元台幣。 B：聽起來很划算。我買了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The lemon honey</span><span class="syn-t">S</span> <span class="syn syn-v">comes</span><span class="syn-t">V</span> <span class="syn syn-m">in 380-gram jars</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>come in</b> = 以（某規格）供應；<b>reasonable</b> = 合理的、價格公道的；<b>I'll take it.</b> = 我買了（購物用語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>B: Oh, I don't need a bag. Thanks! A: Great. Here you are. Enjoy!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">B：喔，我不需要袋子。謝謝！ A：好的。這給你，享用愉快！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">don't need</span><span class="syn-t">V</span> <span class="syn syn-o">a bag</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>Here you are.</b> = 這給你（遞東西時說）；Enjoy! = 好好享用！</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 統測連結」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">mystery</span><span class="v-pos">n.</span><div class="v-cn-mini">謎；神秘的事物</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>mysterious (adj.) 神秘的</span><span>solve a mystery 解謎</span></div>
+        <div class="v-ex">The disappearance of bees is a real <b>mystery</b>.<span class="cn">蜜蜂消失是個真正的謎。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">overnight</span><span class="v-pos">adv. / adj.</span><div class="v-cn-mini">一夜之間；突然</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>overnight success 一夕成名</span><span>stay overnight 過夜</span></div>
+        <div class="v-ex"><b>Overnight</b>, entire bee colonies went missing.<span class="cn">一夜之間，整群蜜蜂消失了。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">discover</span><span class="v-pos">v.</span><div class="v-cn-mini">發現</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>discovery (n.) 發現</span><span>≈ find out</span></div>
+        <div class="v-ex">Beekeepers <b>discovered</b> their hives empty.<span class="cn">養蜂人發現蜂巢空了。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">evidence</span><span class="v-pos">n.</span><div class="v-cn-mini">證據（不可數）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>evident (adj.) 明顯的</span><span>a piece of evidence</span></div>
+        <div class="v-ex">There was no <b>evidence</b> of disease.<span class="cn">沒有任何疾病的證據。</span></div>
+        <span class="v-gsat">📊 evidence 不可數，不加 s</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">miserable</span><span class="v-pos">adj.</span><div class="v-cn-mini">悲慘的；痛苦的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>misery (n.) 痛苦</span><span>≈ terrible / awful</span></div>
+        <div class="v-ex">This wasn't just some <b>miserable</b> nightmare.<span class="cn">這不只是一場悲慘的惡夢。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">nightmare</span><span class="v-pos">n.</span><div class="v-cn-mini">惡夢；可怕的經歷</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>↔ sweet dream</span><span>a total nightmare 一場惡夢</span></div>
+        <div class="v-ex">Losing all the bees felt like a <b>nightmare</b>.<span class="cn">失去所有蜜蜂就像一場惡夢。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">factor</span><span class="v-pos">n.</span><div class="v-cn-mini">因素</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a key factor 關鍵因素</span><span>the main factor 主因</span></div>
+        <div class="v-ex">The main <b>factor</b> is the use of pesticides.<span class="cn">主要因素是農藥的使用。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">pollution</span><span class="v-pos">n.</span><div class="v-cn-mini">污染</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>pollute (v.) 污染</span><span>air / water pollution</span></div>
+        <div class="v-ex">Air <b>pollution</b> may be one of the causes.<span class="cn">空氣污染可能是原因之一。</span></div>
+        <span class="v-gsat">📊 pollute (v.) / pollution (n.) 字族</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">artificial</span><span class="v-pos">adj.</span><div class="v-cn-mini">人造的；人工的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>↔ natural 天然的</span><span>artificial intelligence (AI)</span></div>
+        <div class="v-ex">Plants pass poisonous <b>artificial</b> chemicals to bees.<span class="cn">植物把有毒的人造化學物質傳給蜜蜂。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">demonstrate</span><span class="v-pos">v.</span><div class="v-cn-mini">顯示；證明；示範</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>demonstration (n.) 示範；示威</span><span>≈ show / prove</span></div>
+        <div class="v-ex">Reports <b>demonstrate</b> that bees have declined sharply.<span class="cn">報告顯示蜜蜂已急遽減少。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">reduce</span><span class="v-pos">v.</span><div class="v-cn-mini">減少；降低</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>reduction (n.) 減少</span><span>reduce ... by 減少了……</span></div>
+        <div class="v-ex">Pesticides have <b>reduced</b> bee numbers by half.<span class="cn">農藥已使蜜蜂數量減少一半。</span></div>
+        <span class="v-gsat">📊 reduce...by + 數量（減少的幅度）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">supply</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">供給；供應</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>supply and demand 供需</span><span>supply A with B 供應</span></div>
+        <div class="v-ex">Bees are essential to our food <b>supply</b>.<span class="cn">蜜蜂對我們的食物供給至關重要。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">various</span><span class="v-pos">adj.</span><div class="v-cn-mini">各式各樣的；不同的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>variety (n.) 多樣性</span><span>vary (v.) 變化</span></div>
+        <div class="v-ex">Bees collect nectar from <b>various</b> blossoms.<span class="cn">蜜蜂從各式各樣的花朵採蜜。</span></div>
+        <span class="v-gsat">📊 various / variety / vary 字族常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">balance</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">平衡</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>keep / strike a balance 保持平衡</span><span>↔ imbalance 失衡</span></div>
+        <div class="v-ex">Bees help maintain the fine <b>balance</b> of nature.<span class="cn">蜜蜂幫助維持大自然的微妙平衡。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">deserve</span><span class="v-pos">v.</span><div class="v-cn-mini">應得；值得</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>deserve to V 值得做</span><span>deserve credit 值得肯定</span></div>
+        <div class="v-ex">Bees <b>deserve</b> our protection.<span class="cn">蜜蜂值得我們的保護。</span></div></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">leave...behind</span></td><td>留下；遺留</td><td class="pex">The worker bees <b>left</b> their queens <b>behind</b>.<span class="cn">工蜂留下了牠們的蜂后。</span></td></tr>
+      <tr><td><span class="phr">result from</span></td><td>起因於</td><td class="pex">CCD may <b>result from</b> air pollution.<span class="cn">CCD 可能起因於空氣污染。</span></td></tr>
+      <tr><td><span class="phr">a thing of the past</span></td><td>過去式；不復存在</td><td class="pex">Meat products could become <b>a thing of the past</b>.<span class="cn">肉類產品可能成為過去式。</span></td></tr>
+      <tr><td><span class="phr">rely on</span></td><td>依賴；仰賴</td><td class="pex">Many crops <b>rely on</b> bees for pollination.<span class="cn">許多作物仰賴蜜蜂授粉。</span></td></tr>
+      <tr><td><span class="phr">in the long run</span></td><td>從長遠來看</td><td class="pex"><b>In the long run</b>, we couldn't produce enough food.<span class="cn">長遠來看，我們無法生產足夠食物。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>統測補充字彙（主題延伸關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（生態、環境、農業）相關，為統測高頻延伸字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">colony</span><span class="v-pos">n.</span><div class="v-cn-mini">群體；殖民地</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a bee colony 蜂群</span><span>colonial (adj.) 殖民的</span></div>
+        <div class="v-ex">Entire bee <b>colonies</b> went missing overnight.<span class="cn">整群蜜蜂一夜之間消失。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">pesticide</span><span class="v-pos">n.</span><div class="v-cn-mini">農藥；殺蟲劑</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>pest (n.) 害蟲</span><span>-cide 表「殺」</span></div>
+        <div class="v-ex">The main factor is the use of <b>pesticides</b>.<span class="cn">主因是農藥的使用。</span></div>
+        <span class="v-gsat">📊 環境議題常見字</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">poisonous</span><span class="v-pos">adj.</span><div class="v-cn-mini">有毒的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>poison (n./v.) 毒；下毒</span><span>≈ toxic</span></div>
+        <div class="v-ex">Plants pass <b>poisonous</b> chemicals to bees.<span class="cn">植物把有毒化學物質傳給蜜蜂。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">chemical</span><span class="v-pos">n. / adj.</span><div class="v-cn-mini">化學物質；化學的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>chemistry (n.) 化學</span><span>chemist (n.) 化學家</span></div>
+        <div class="v-ex">Artificial <b>chemicals</b> can harm bees' brains.<span class="cn">人造化學物質會傷害蜜蜂的腦。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">precious</span><span class="v-pos">adj.</span><div class="v-cn-mini">珍貴的；寶貴的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ valuable</span><span>precious time 寶貴時間</span></div>
+        <div class="v-ex">These <b>precious</b> insects are vital to our food.<span class="cn">這些珍貴的昆蟲對我們的食物至關重要。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">insect</span><span class="v-pos">n.</span><div class="v-cn-mini">昆蟲</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>insecticide (n.) 殺蟲劑</span><span>bees, ants, flies 皆為 insects</span></div>
+        <div class="v-ex">Bees are tiny but important <b>insects</b>.<span class="cn">蜜蜂是渺小卻重要的昆蟲。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">recognize</span><span class="v-pos">v.</span><div class="v-cn-mini">認出；承認；正視</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>recognition (n.) 認可</span><span>recognize the role 正視角色</span></div>
+        <div class="v-ex">We should <b>recognize</b> the huge role bees play.<span class="cn">我們應正視蜜蜂扮演的重要角色。</span></div>
+        <span class="v-gsat">📊 recognize 兼「認出」與「承認」雙義</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">resource</span><span class="v-pos">n.</span><div class="v-cn-mini">資源</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>natural resources 天然資源</span><span>water resources 水資源</span></div>
+        <div class="v-ex">Shrinking water <b>resources</b> may cause CCD.<span class="cn">日益減少的水資源可能導致 CCD。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（蜜蜂、忙碌、環境）相關。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">as busy as a bee</span><div class="slang-cn-mini">忙得像蜜蜂一樣</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">形容人非常忙碌、勤奮不停歇。</div>
+      <div class="slang-ex">During harvest season, farmers are <b>as busy as bees</b>.<span class="cn">收穫季時，農夫忙得像蜜蜂一樣。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the birds and the bees</span><div class="slang-cn-mini">大自然的生命循環</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">婉轉指自然界繁衍、生生不息的道理。</div>
+      <div class="slang-ex">Pollination is part of <b>the birds and the bees</b> of nature.<span class="cn">授粉是大自然生命循環的一環。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a drop in the bucket</span><div class="slang-cn-mini">杯水車薪；微不足道</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「水桶裡的一滴水」，指相對於整體而言微不足道。</div>
+      <div class="slang-ex">Saving one hive is just <b>a drop in the bucket</b>.<span class="cn">拯救一個蜂巢只是杯水車薪。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a wake-up call</span><div class="slang-cn-mini">警訊；當頭棒喝</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「叫醒的電話」，指讓人警醒、意識到問題嚴重的事件。</div>
+      <div class="slang-ex">The disappearing bees are <b>a wake-up call</b> for humans.<span class="cn">消失的蜜蜂是給人類的警訊。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">go green</span><div class="slang-cn-mini">響應環保、過環保生活</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">指採取對環境友善的作法、走向環保。</div>
+      <div class="slang-ex">Using fewer pesticides is one way to <b>go green</b>.<span class="cn">少用農藥是響應環保的方式之一。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">the tip of the iceberg</span><div class="slang-cn-mini">冰山一角</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「冰山的尖端」，指顯露出來的只是問題的一小部分。</div>
+      <div class="slang-ex">The dying bees may be just <b>the tip of the iceberg</b>.<span class="cn">死去的蜜蜂或許只是冰山一角。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 統測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜result from vs. result in（因 vs. 果）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">結果 + result from + 原因（起因於）
+原因 + result in + 結果（導致）</div>
+      <div class="g-body">
+        <div class="g-ex">CCD may <b>result from</b> air pollution.<div class="g-ex-cn">CCD 可能起因於空氣污染。（課文；CCD 是果）</div></div>
+        <div class="g-ex">Pesticides <b>result in</b> the death of bees.<div class="g-ex-cn">農藥導致蜜蜂死亡。（農藥是因）</div></div>
+        <div class="g-note">✗ 弄反方向：result from 後接「原因」，result in 後接「結果」。</div>
+        <div class="g-tip">同義：be caused by（起因於）= result from；lead to / cause（導致）= result in。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜過去分詞（p.p.）當形容詞修飾名詞</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">名詞 + p.p. + 修飾語（＝ 名詞 which/that is/are + p.p.，被動）</div>
+      <div class="g-body">
+        <div class="g-ex">Plants <b>treated</b> with pesticides pass chemicals to bees.<div class="g-ex-cn">噴過農藥的植物把化學物質傳給蜜蜂。（課文）</div></div>
+        <div class="g-ex">= Plants <b>which are treated</b> with pesticides...<div class="g-ex-cn">還原成關係子句（被動）。</div></div>
+        <div class="g-note">主動關係用現在分詞 V-ing；被動關係（被……）用過去分詞 p.p.。</div>
+        <div class="g-tip">對照：the honey <b>given</b> to her（被給的蜂蜜）、the poisoned bees（中毒的蜜蜂）皆為 p.p. 修飾。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜Without + N（＝ If it were not for，假設語氣）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">Without + N, S + would / could + 原形V（與現在事實相反）</div>
+      <div class="g-body">
+        <div class="g-ex"><b>Without bees</b>, about half of our food supply <b>would</b> disappear.<div class="g-ex-cn">沒有蜜蜂，我們一半的食物供給會消失。（課文）</div></div>
+        <div class="g-ex">= <b>If it were not for</b> bees, ... would disappear.<div class="g-ex-cn">同義改寫。</div></div>
+        <div class="g-note">Without 引導假設時，主句用 would/could + 原形（✗ will）。</div>
+        <div class="g-tip">Without = If it were not for = But for（與現在相反）；與過去相反則 would have + p.p.。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜分詞構句 Being + adj.（表原因／讓步）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">Being + adj./N ..., S + V ...（＝ Because/Although + S + be ...）</div>
+      <div class="g-body">
+        <div class="g-ex"><b>Being tiny but important</b>, bees deserve our protection.<div class="g-ex-cn">身形雖小卻重要，蜜蜂值得我們保護。（課文，表讓步）</div></div>
+        <div class="g-ex">= <b>Although they are</b> tiny but important, bees...<div class="g-ex-cn">還原副詞子句。</div></div>
+        <div class="g-note">分詞的邏輯主詞須與主句主詞（bees）一致；Being 常可省略。</div>
+        <div class="g-tip">分詞構句可表時間、原因、條件、讓步、伴隨，須依語意判斷。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜be referred to as（被稱為）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">refer to A as B（把 A 稱為 B）
+A + be referred to as + B（A 被稱為 B）</div>
+      <div class="g-body">
+        <div class="g-ex">This situation <b>is referred to as</b> Colony Collapse Disorder.<div class="g-ex-cn">這種情況被稱為蜂群崩壞症候群。（課文）</div></div>
+        <div class="g-note">被動時 to 與 as 都要保留：be referred <b>to as</b>（✗ be referred as）。</div>
+        <div class="g-tip">同義：be known as / be called。refer to（提及、指的是）也是常考片語。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高職英文 第五冊 第四課｜互動教學講義
+</div>
+
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);
+  var CONTENT_H=940;
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['<b>Overnight</b>, entire bee ',' simply went missing from their hives.'],
+  cn:'一夜之間，整群整群的蜜蜂就這麼從蜂巢中消失了。',
+  opts:['colonies','factors','resources','nightmares'],ans:0,
+  word:'colony (n.) 群體（複數 colonies）',
+  exp:'bee colonies = 蜂群。(B) 因素、(C) 資源、(D) 惡夢皆不符。',
+  note:'a bee colony 一個蜂群。'},
+ {q:['There was no ',' of disease, so scientists were puzzled by the bees\' disappearance.'],
+  cn:'沒有任何疾病的證據，所以科學家對蜜蜂的消失感到困惑。',
+  opts:['evidence','mystery','balance','supply'],ans:0,
+  word:'evidence (n.) 證據（不可數）',
+  exp:'「疾病的證據」= evidence of disease。(B) 謎、(C) 平衡、(D) 供給皆不符。',
+  note:'evidence 不可數，a piece of evidence。'},
+ {q:['Colony Collapse Disorder may ',' several factors, such as air pollution.'],
+  cn:'蜂群崩壞症候群可能起因於幾個因素，例如空氣污染。',
+  opts:['result in','result from','lead to','cause'],ans:1,
+  word:'result from 起因於',
+  exp:'CCD 是「結果」，後接「原因」用 result from。(A)(C)(D) 皆為「導致」，方向相反。',
+  note:'果 result from 因；因 result in 果。'},
+ {q:['Plants ',' with pesticides pass poisonous chemicals on to bees.'],
+  cn:'噴灑過農藥的植物會把有毒的化學物質傳給蜜蜂。',
+  opts:['treat','treating','treated','to treat'],ans:2,
+  word:'treated（過去分詞當形容詞，被動）',
+  exp:'植物「被」農藥處理，用過去分詞 treated 修飾 Plants。(B) treating 為主動。',
+  note:'= Plants which are treated with pesticides。'},
+ {q:['Reports ',' that the number of bees has dropped by almost half in fifty years.'],
+  cn:'報告顯示五十年間蜜蜂數量已減少了將近一半。',
+  opts:['demonstrate','deserve','discover','disappear'],ans:0,
+  word:'demonstrate (v.) 顯示；證明',
+  exp:'「報告顯示（某事）」= demonstrate that。(B) 值得、(C) 發現、(D) 消失皆不符。',
+  note:'demonstrate ≈ show / prove。'},
+ {q:[' ',' bees, about half of our food supply would soon disappear.'],
+  cn:'沒有蜜蜂，我們大約一半的食物供給很快就會消失。',
+  opts:['Without','With','Within','Throughout'],ans:0,
+  word:'Without + N（假設：如果沒有）',
+  exp:'主句 would disappear 為假設語氣，需 Without（如果沒有）。(B) 有、(C) 在……之內、(D) 遍及皆不符。',
+  note:'Without = If it were not for。'},
+ {q:['Many crops ',' bees for pollination, so losing bees threatens our food.'],
+  cn:'許多作物仰賴蜜蜂授粉，所以失去蜜蜂會威脅我們的食物。',
+  opts:['rely on','result in','leave behind','take down'],ans:0,
+  word:'rely on 依賴',
+  exp:'語意「仰賴蜜蜂」= rely on。(B) 導致、(C) 留下、(D) 拆下皆不符。',
+  note:'rely on = depend on = count on。'},
+ {q:['Being tiny but important, bees ',' our protection.'],
+  cn:'蜜蜂雖小卻重要，值得我們的保護。',
+  opts:['deserve','demonstrate','reduce','pollute'],ans:0,
+  word:'deserve (v.) 值得',
+  exp:'語意「值得保護」= deserve。(B) 證明、(C) 減少、(D) 污染皆不符。',
+  note:'deserve to V / deserve credit。'},
+ {q:['This situation is ',' as Colony Collapse Disorder by scientists.'],
+  cn:'這種情況被科學家稱為蜂群崩壞症候群。',
+  opts:['referred to','resulted in','made up','looked through'],ans:0,
+  word:'be referred to as 被稱為',
+  exp:'「被稱為」= be referred to as。(B) 導致、(C) 編造、(D) 翻閱皆不符。',
+  note:'be referred to as = be known as。'},
+ {q:['Please help ',' to a free sample of our locally made honey!'],
+  cn:'請自行取用我們在地製作的免費蜂蜜試吃品！',
+  opts:['yourself','you','your','yours'],ans:0,
+  word:'help yourself to sth. 自行取用',
+  exp:'固定用法 help yourself to sth.，用反身代名詞 yourself。(B)(C)(D) 皆錯。',
+  note:'招待客人：Help yourself to the food.'}
+];
+
+var teacherQ=[
+ {q:['The main factor ',' the disappearance of bees appears to be the use of pesticides.'],
+  cn:'蜜蜂消失的主要因素似乎是農藥的使用。',
+  opts:['result from','resulting from','results from','resulted in'],ans:1,
+  word:'resulting from（分詞修飾，起因於）',
+  tnote:'<b>分詞修飾＋result from</b>：句子主動詞是 appears，空格處為修飾 factor 的分詞。<br>factor 主動「起因於」→ 用現在分詞 resulting from（= the factor which results from）。<br>(C) results from 會造成兩個主動詞；(D) result in 方向相反（導致）。'},
+ {q:['The honey ',' to Sophie by the clerk came in 380-gram jars.'],
+  cn:'店員給蘇菲的蜂蜜是 380 公克裝。',
+  opts:['gives','giving','given','gave'],ans:2,
+  word:'given（過去分詞，被動修飾）',
+  tnote:'<b>過去分詞修飾</b>：honey 是「被給」的，用過去分詞 given 修飾。<br>= The honey which was given to Sophie...<br>(B) giving 為主動（正在給）；(A)(D) 為限定動詞，會與主要動詞 came 衝突。'},
+ {q:['If all these little creatures disappear, our entire food chain ',' affected.'],
+  cn:'如果所有這些小生物都消失，我們整個食物鏈都會受影響。',
+  opts:['is','was','will be','would be'],ans:2,
+  word:'if 條件句（真實）：if + 現在式, will + 原形',
+  tnote:'<b>真實條件句</b>：if 子句用現在式 disappear（表可能發生的未來），主句用 <b>will + 原形</b>。<br>food chain 被影響 → will be affected（被動）。<br>(D) would be 用於「與現在事實相反」的假設語氣，此處語氣是可能發生的警告。'},
+ {q:['',' tiny but important, bees deserve credit for keeping life on Earth.'],
+  cn:'雖然渺小卻重要，蜜蜂值得因守護地球生命而受肯定。',
+  opts:['Be','Been','Being','To be'],ans:2,
+  word:'Being（分詞構句，表讓步）',
+  tnote:'<b>分詞構句</b>：句首修飾主詞 bees，還原為 Although they are tiny but important。<br>用現在分詞 Being。<br>(A) Be 原形、(B) Been 過去分詞、(D) To be 不定詞皆不能作此構句開頭。'},
+ {q:['Pesticides have, in just fifty years, reduced the bee population ',' almost half.'],
+  cn:'短短五十年間，農藥已使蜜蜂數量減少了將近一半。',
+  opts:['in','by','to','with'],ans:1,
+  word:'reduce ... by + 幅度',
+  tnote:'<b>reduce 的介系詞</b>：reduce ... <b>by</b> + 減少的「幅度」（減少了多少）；reduce ... <b>to</b> + 減至的「結果」（剩下多少）。<br>「減少一半（幅度）」用 by half。<br>比較：reduced to half = 減到只剩一半。'},
+ {q:['Bees collect nectar from ',' blossoms, picking up pollen on their bodies.'],
+  cn:'蜜蜂從各式各樣的花朵採集花蜜，把花粉沾在身上。',
+  opts:['a variety','various','variety','vary'],ans:1,
+  word:'various (adj.) + 複數名詞',
+  tnote:'<b>various vs. a variety of</b>：various 是形容詞，直接接複數名詞 blossoms。<br>= a variety of blossoms（a variety of + 複數名詞）。<br>(A) a variety 少了 of；(C) variety 是名詞；(D) vary 是動詞。'},
+ {q:['Without bees, dairy and meat products would eventually ',' a thing of the past.'],
+  cn:'沒有蜜蜂，乳製品和肉類產品最終會成為過去式。',
+  opts:['become','became','have become','becoming'],ans:0,
+  word:'would + 原形（假設語氣主句）',
+  tnote:'<b>假設語氣主句</b>：Without bees（＝ If it were not for bees）為與現在相反的假設，主句用 <b>would + 原形V</b>。<br>故用 become。<br>(B) 過去式、(C) 完成式、(D) 分詞皆不可接在 would 之後。'},
+ {q:['No dead bodies were found, and there was no sign of disease, ','.'],
+  cn:'找不到屍體，也沒有疾病的跡象。',
+  opts:['too','either','also','neither'],ans:1,
+  word:'否定句句尾用 either（也不）',
+  tnote:'<b>too vs. either</b>：肯定句句尾「也」用 too；<b>否定句</b>句尾「也不」用 <b>either</b>。<br>前句為否定（no sign），故用 either。<br>(D) neither 用於句首倒裝：Neither was there any sign of disease.'},
+ {q:['Shocking reports demonstrate ',' pesticides have harmed bees worldwide.'],
+  cn:'令人震驚的報告顯示農藥已在全球傷害蜜蜂。',
+  opts:['what','that','which','whether'],ans:1,
+  word:'demonstrate that + 完整子句',
+  tnote:'<b>名詞子句連接詞</b>：demonstrate 後接完整、不缺成分的敘述句，用 <b>that</b>（不譯，僅引導）。<br>(A) what 引導的子句須缺主詞/受詞；(C) which 需有先行詞；(D) whether 表「是否」語意不符。'},
+ {q:['We would find ',' very difficult to produce enough food without bees.'],
+  cn:'沒有蜜蜂，我們會發現要生產足夠的食物非常困難。',
+  opts:['that','it','this','what'],ans:1,
+  word:'find it + adj. + to V（虛受詞 it）',
+  tnote:'<b>虛受詞 it</b>：find/think/make + <b>it</b> + 形容詞 + to V，it 為虛受詞，真受詞是後面的不定詞 to produce...。<br>✗ find that very difficult to V；✗ 直接把不定詞放動詞後。<br>= We would find <b>it</b> difficult <b>to produce</b> food.'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your').replace(/someone's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>

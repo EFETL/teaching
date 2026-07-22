@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L5: Boat Schools ── 高職英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 統測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L5: Boat Schools: Making Waves in Education ── 船上學校：教育的浪潮</h1>
+  <div class="sub">龍騰版高職英文 第五冊 第五課｜互動教學講義</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依統測命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 5</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 本課主題速覽 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>本課主題速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 問題：洪水停課</h4>
+        南亞的<b>孟加拉</b>每年雨季嚴重淹水，數千所學校被迫<b>停課</b>數月，許多孩子因此無法<b>接受</b>正常教育。「與其學生去學校，不如學校來找學生。」
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 解方：船上學校</h4>
+        建築師 <b>Mohammed Rezwan</b> 於 2002 年推出「船上學校」：船身約 15 公尺長，備有桌椅、黑板、<b>電子設施</b>與太陽能板，最多可容 30 名學生，提供到四年級的基礎教育。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 效益與推廣</h4>
+        船校也在夜間放教育影片，教導成人健康、人權、農耕與<b>理財</b>。此<b>概念</b>已被柬埔寨、奈及利亞、菲律賓等易淹水國家<b>採用</b>，是有效的教育解方。附對話：Albert 在家上線上英文課。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點 🔊 只朗讀、不展開解析。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課介紹孟加拉建築師 Mohammed Rezwan 為對抗雨季淹水停課而設計的「船上學校」。文後附一段對話〈Having Class at Home〉。</p>
+
+    <!-- 敘述本文 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📖 Reading｜Boat Schools: Making Waves in Education（船上學校）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>"Instead of the students going to school, the school reaches them." — Mohammed Rezwan</span></div>
+        <div class="para-exp">
+          <div class="para-cn">「與其讓學生去上學，不如讓學校來到他們身邊。」——Mohammed Rezwan</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Instead of the students going to school</span><span class="syn-t">介片</span> <span class="syn syn-s">the school</span><span class="syn-t">S</span> <span class="syn syn-v">reaches</span><span class="syn-t">V</span> <span class="syn syn-o">them</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>instead of + V-ing</b> = 而不是（後接動名詞）；the students 為動名詞 going 的意義主詞；reach = 到達、觸及。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Bangladesh, a country in South Asia, suffers from a terrible rainy season resulting in severe flooding every year.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">位於南亞的孟加拉，每年都飽受可怕雨季之苦，導致嚴重的水患。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Bangladesh</span><span class="syn-t">S</span> <span class="syn syn-m">, a country in South Asia,</span><span class="syn-t">同位語</span> <span class="syn syn-v">suffers from</span><span class="syn-t">V</span> <span class="syn syn-o">a terrible rainy season resulting in severe flooding</span><span class="syn-t">O（＋分詞）</span></div>
+          <div class="para-note"><b>suffer from</b> = 受……之苦；<b>result in</b> = 導致（見句型，果在後）；<b>severe</b>（嚴重的）為核心字；resulting 現在分詞修飾 season。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These floods cause thousands of schools to shut down for months at a time. With no classes available, many children thus have no access to proper schooling.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些洪水造成數千所學校一次停課好幾個月。由於沒有課可上，許多孩子因此無法接受正常的教育。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">These floods</span><span class="syn-t">S</span> <span class="syn syn-v">cause</span><span class="syn-t">V</span> <span class="syn syn-o">thousands of schools</span><span class="syn-t">O</span> <span class="syn syn-c">to shut down</span><span class="syn-t">OC（不定詞）</span></div>
+          <div class="para-note"><b>cause sb./sth. to V</b> = 造成……做；<b>shut down</b> = 關閉、停課（片語）；<b>at a time</b> = 一次；<b>available</b>（可得的）、<b>access</b>（管道、接觸）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Fortunately, an architect named Mohammed Rezwan came up with an appropriate and promising solution: boat schools!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">幸運的是，一位名叫 Mohammed Rezwan 的建築師想出了一個合適又前景看好的解決方案：船上學校！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">an architect named Mohammed Rezwan</span><span class="syn-t">S（＋過去分詞）</span> <span class="syn syn-v">came up with</span><span class="syn-t">V</span> <span class="syn syn-o">an appropriate and promising solution</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>architect</b>（建築師）、<b>appropriate</b>（合適的）、<b>promising</b>（有前景的）為核心字；<b>come up with</b> = 想出（片語）；named... 過去分詞修飾 architect。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Rezwan felt that it was important that elementary school children in Bangladesh have access to year-round education.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Rezwan 認為，讓孟加拉的小學孩童能全年都受教育，是很重要的事。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Rezwan</span><span class="syn-t">S</span> <span class="syn syn-v">felt</span><span class="syn-t">V</span> <span class="syn syn-o">that it was important that children... have access...</span><span class="syn-t">O（含虛主詞 that 子句）</span></div>
+          <div class="para-note"><b>It is important that + S + (should) 原形V</b>：故用原形 <b>have</b>（見句型三）；<b>have access to</b> = 有……的管道；year-round = 全年的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Therefore, in 2002, he established the boat school program, which brought schools to children during the rainy season.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">因此，他在 2002 年創立了船上學校計畫，在雨季把學校帶到孩子身邊。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">established</span><span class="syn-t">V</span> <span class="syn syn-o">the boat school program</span><span class="syn-t">O</span> <span class="syn syn-m">, which brought schools to children</span><span class="syn-t">關係子句（補述）</span></div>
+          <div class="para-note"><b>establish</b> = 建立、創立；<b>, which</b> 補述用法（補充說明 program，逗號後不可用 that）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Each boat school is about fifteen meters long and three meters wide.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">每一所船上學校大約十五公尺長、三公尺寬。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Each boat school</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">about fifteen meters long and three meters wide</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>數字 + 單位 + long/wide/tall</b> = 長/寬/高（形容詞放度量之後）；<b>Each + 單數名詞 + 單數動詞</b>（is）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>With tables, chairs, a blackboard, electronic facilities, and digital resources, each boat school looks just like a regular school.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有桌椅、黑板、電子設施與數位資源，每一所船上學校看起來就跟普通學校一模一樣。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">With tables, chairs...and digital resources</span><span class="syn-t">附帶狀況（with + N）</span> <span class="syn syn-s">each boat school</span><span class="syn-t">S</span> <span class="syn syn-v">looks</span><span class="syn-t">V</span> <span class="syn syn-c">just like a regular school</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>facility</b>（設施）為核心字；<b>look like + N</b> = 看起來像；With + N 表「具備、附帶」（見句型一）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In addition, with solar panels installed on its roof, the boat uses solar power to run its lights and computers.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，由於屋頂上裝了太陽能板，這艘船用太陽能來運轉燈光與電腦。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">with solar panels installed on its roof</span><span class="syn-t">附帶狀況（with + O + p.p.）</span> <span class="syn syn-s">the boat</span><span class="syn-t">S</span> <span class="syn syn-v">uses</span><span class="syn-t">V</span> <span class="syn syn-o">solar power</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>with + 受詞 + 過去分詞</b>（太陽能板被裝上，被動）＝ 附帶狀況構句（見句型一）；<b>install</b>（安裝）為核心字；run = 運轉。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Each boat school has space for up to 30 students and can provide basic education up to the fourth grade.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">每一所船上學校可容納多達 30 名學生，並能提供到四年級的基礎教育。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Each boat school</span><span class="syn-t">S</span> <span class="syn syn-v">has</span><span class="syn-t">V</span> <span class="syn syn-o">space for up to 30 students</span><span class="syn-t">O</span> <span class="syn syn-m">and</span> <span class="syn syn-v">can provide</span><span class="syn-t">V</span> <span class="syn syn-o">basic education</span></div>
+          <div class="para-note"><b>up to</b> = 多達、最多（片語）；provide = 提供；space for = 容納……的空間。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Every morning, six days a week, students wait at the docks near their villages for boat schools to pick them up.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">每天早上，一週六天，學生們在村莊附近的碼頭等候船上學校來接他們。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">students</span><span class="syn-t">S</span> <span class="syn syn-v">wait</span><span class="syn-t">V</span> <span class="syn syn-m">at the docks</span><span class="syn-t">地方</span> <span class="syn syn-m">for boat schools to pick them up</span><span class="syn-t">for + O + 不定詞</span></div>
+          <div class="para-note"><b>wait for sb./sth. to V</b> = 等候……做；<b>pick sb. up</b> = 接某人；dock = 碼頭；six days a week = 一週六天。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Each learning session lasts three hours. When a session is over, the boat takes that group of students back to their village and then sails to the next village, where 30 more students are waiting for the next learning session.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">每一堂學習課程持續三小時。課程結束後，這艘船把那組學生載回村莊，接著駛向下一個村莊，那裡有另外 30 名學生正等著下一堂課。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the boat</span><span class="syn-t">S</span> <span class="syn syn-v">takes</span><span class="syn-t">V</span> <span class="syn syn-o">that group of students</span><span class="syn-t">O</span> <span class="syn syn-m">back...and sails to the next village, where 30 more students are waiting</span><span class="syn-t">關係副詞 where</span></div>
+          <div class="para-note"><b>last</b>（v.）= 持續；<b>be over</b> = 結束；<b>where</b> 為關係副詞（見句型二），引導修飾 village 的子句（＝ in which）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The boat schools are also used in the evenings, when educational films are displayed on their sails for nearby villagers to enjoy.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些船上學校在傍晚也會被使用，那時教育影片會投影在船帆上，供附近的村民觀賞。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The boat schools</span><span class="syn-t">S</span> <span class="syn syn-v">are used</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">in the evenings, when educational films are displayed</span><span class="syn-t">關係副詞 when</span></div>
+          <div class="para-note"><b>display</b>（展示、投影）為核心字；<b>when</b> 為關係副詞（＝ at which），補述說明 the evenings；for sb. to V 表對象。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These floating classrooms benefit not only children but also adults. They offer education in subjects like health, human rights, and even farming techniques.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些漂浮的教室不僅嘉惠孩童，也惠及成人。它們提供健康、人權，甚至農耕技術等科目的教育。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">These floating classrooms</span><span class="syn-t">S</span> <span class="syn syn-v">benefit</span><span class="syn-t">V</span> <span class="syn syn-m">not only</span> <span class="syn syn-o">children</span> <span class="syn syn-m">but also</span> <span class="syn syn-o">adults</span></div>
+          <div class="para-note"><b>benefit</b>（使受益）、<b>offer</b>（提供）、<b>technique</b>（技術）為核心字；<b>not only A but also B</b>（對等連接）；floating = 漂浮的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As villagers receive more education, they become better able to grow food and earn money all year round. Boat schools even provide lessons on financial management.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">隨著村民接受更多教育，他們變得更有能力全年種植糧食、賺取金錢。船上學校甚至提供理財課程。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">As villagers receive more education</span><span class="syn-t">副詞子句（隨著）</span> <span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">become</span><span class="syn-t">V</span> <span class="syn syn-c">better able to grow food...</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>As</b> = 隨著（表同時進行）；<b>be able to V</b> = 有能力做；<b>financial</b>（財務的）為核心字；management = 管理、理財。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The boat school concept has now been adopted by other countries that are at regular risk of flooding, including Cambodia, Nigeria, and the Philippines.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">船上學校的概念現在已被其他經常面臨淹水風險的國家採用，包括柬埔寨、奈及利亞和菲律賓。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The boat school concept</span><span class="syn-t">S</span> <span class="syn syn-v">has been adopted</span><span class="syn-t">V（現在完成被動）</span> <span class="syn syn-m">by other countries that are at regular risk of flooding</span><span class="syn-t">by＋關係子句</span></div>
+          <div class="para-note"><b>concept</b>（概念）為核心字；<b>has been adopted</b> 現在完成式被動（見句型五）；<b>at risk of</b> = 有……的風險；adopt = 採用。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The boat school program has made it possible for many people to overcome weather-related hardships. In other words, this program is providing an effective solution for education in countries that suffer from severe flooding.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">船上學校計畫讓許多人得以克服與天氣相關的困境。換句話說，這個計畫為飽受嚴重水患之苦的國家，提供了一個有效的教育解決方案。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The program</span><span class="syn-t">S</span> <span class="syn syn-v">has made</span><span class="syn-t">V</span> <span class="syn syn-o">it</span><span class="syn-t">虛受詞</span> <span class="syn syn-c">possible</span><span class="syn-t">OC</span> <span class="syn syn-m">for many people to overcome hardships</span><span class="syn-t">真受詞（for + 不定詞）</span></div>
+          <div class="para-note"><b>make it possible for sb. to V</b>（it 虛受詞，見句型四）；<b>effective</b>（有效的）為核心字；overcome = 克服；hardship = 困境。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 對話 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">💬 Dialogue｜Having Class at Home（在家上課）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Albert has just finished an online class at home when his roommate Todd comes in and wonders what he is doing.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Albert 剛在家上完一堂線上課，這時他的室友 Todd 走進來，好奇他在做什麼。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Albert</span><span class="syn-t">S</span> <span class="syn syn-v">has just finished</span><span class="syn-t">V（現在完成）</span> <span class="syn syn-o">an online class</span><span class="syn-t">O</span> <span class="syn syn-m">when his roommate comes in</span><span class="syn-t">時間子句</span></div>
+          <div class="para-note"><b>have just + p.p.</b> = 剛剛……；<b>wonder + wh- 子句</b> = 想知道……；roommate = 室友。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: OK, I'll finish the homework before the next class. See you on Thursday! B: Hey Albert! Who were you just talking to?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：好，我會在下堂課前寫完作業。週四見！ B：嘿 Albert！你剛剛在跟誰講話？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Who</span><span class="syn-t">受詞疑問</span> <span class="syn syn-v">were</span> <span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">talking to</span><span class="syn-t">V</span></div>
+          <div class="para-note"><b>talk to sb.</b> = 和某人講話；疑問句中 to 留在句尾（Who...talking to?）；See you on + 星期。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: That was my English tutor. I'm taking an online class to improve my speaking skills. B: Oh! Why don't you just meet in person?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：那是我的英文家教。我在上線上課，為了增進我的口說能力。 B：喔！你為什麼不乾脆當面見面就好？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">am taking</span><span class="syn-t">V</span> <span class="syn syn-o">an online class</span><span class="syn-t">O</span> <span class="syn syn-m">to improve my speaking skills</span><span class="syn-t">不定詞（目的）</span></div>
+          <div class="para-note"><b>tutor</b> = 家教；<b>Why don't you...?</b> = 你何不……？（建議）；<b>in person</b> = 親自、當面。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: First of all, my tutor lives in England. Second, it's so convenient for me to have class at home. I don't have to get off the couch! B: Smart!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：首先，我的家教住在英國。第二，在家上課對我來說非常方便，我連沙發都不用起身！ B：聰明！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">is</span> <span class="syn syn-c">so convenient</span><span class="syn-t">C</span> <span class="syn syn-m">for me to have class at home</span><span class="syn-t">真主詞（for + 不定詞）</span></div>
+          <div class="para-note"><b>It is + adj. + for sb. to V</b>（虛主詞 it）；<b>get off the couch</b> = 從沙發起身；First of all... Second... 條列。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>B: I wonder if I could find a guitar class online.... A: You can find classes for almost anything online.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">B：我在想我能不能在線上找到吉他課……。 A：幾乎任何東西你都能在線上找到課程。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">wonder</span><span class="syn-t">V</span> <span class="syn syn-o">if I could find a guitar class</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>wonder if</b> = 想知道是否；<b>classes for almost anything</b> = 幾乎任何東西的課程。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: See, I just googled online guitar classes in our city, and there are several results here. B: The one that says "Private Guitar Lessons" looks good. Can you send me the link?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：你看，我剛剛 google 了我們城市裡的線上吉他課，這裡有好幾個搜尋結果。 B：那個寫「私人吉他課」的看起來不錯。你可以把連結傳給我嗎？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The one that says "Private Guitar Lessons"</span><span class="syn-t">S（＋關係子句）</span> <span class="syn syn-v">looks</span><span class="syn-t">V</span> <span class="syn syn-c">good</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>google</b> 已轉作動詞「用 Google 搜尋」；<b>the one that...</b> = 那個……的；send sb. sth. = 傳給某人。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: Done! I've sent it to you by email. B: Thanks!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：搞定！我已經用電子郵件寄給你了。 B：謝謝！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">have sent</span><span class="syn-t">V（現在完成）</span> <span class="syn syn-o">it</span><span class="syn-t">O</span> <span class="syn syn-m">to you by email</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>Done!</b> = 搞定！（口語）；<b>by email</b> = 用電子郵件（by + 交通/通訊方式，中間不加冠詞）。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 統測連結」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">severe</span><span class="v-pos">adj.</span><div class="v-cn-mini">嚴重的；嚴厲的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>severely (adv.) 嚴重地</span><span>≈ serious / harsh</span></div>
+        <div class="v-ex">The rainy season causes <b>severe</b> flooding.<span class="cn">雨季造成嚴重的水患。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">available</span><span class="v-pos">adj.</span><div class="v-cn-mini">可得的；可用的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>availability (n.) 可得性</span><span>be available to sb. 可供……使用</span></div>
+        <div class="v-ex">With no classes <b>available</b>, children can't study.<span class="cn">沒有課可上，孩子無法讀書。</span></div>
+        <span class="v-gsat">📊 available 統測高頻形容詞</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">access</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">接觸/使用的管道；進入</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>have access to 有……的管道</span><span>accessible (adj.) 可接觸的</span></div>
+        <div class="v-ex">Children have no <b>access</b> to proper schooling.<span class="cn">孩子沒有正常受教的管道。</span></div>
+        <span class="v-gsat">📊 have access to + N 為統測必背搭配</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">architect</span><span class="v-pos">n.</span><div class="v-cn-mini">建築師</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>architecture (n.) 建築（學）</span><span>-tect 讀 /tɛkt/</span></div>
+        <div class="v-ex">An <b>architect</b> named Rezwan designed boat schools.<span class="cn">一位名叫 Rezwan 的建築師設計了船上學校。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">appropriate</span><span class="v-pos">adj.</span><div class="v-cn-mini">合適的；恰當的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>appropriately (adv.)</span><span>↔ inappropriate 不恰當的</span></div>
+        <div class="v-ex">He came up with an <b>appropriate</b> solution.<span class="cn">他想出了一個合適的解決方案。</span></div>
+        <span class="v-gsat">📊 appropriate ≈ suitable / proper</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">promising</span><span class="v-pos">adj.</span><div class="v-cn-mini">有前途的；有希望的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>promise (n./v.) 承諾</span><span>a promising future 光明的前途</span></div>
+        <div class="v-ex">Boat schools were a <b>promising</b> solution.<span class="cn">船上學校是個前景看好的解方。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">facility</span><span class="v-pos">n.</span><div class="v-cn-mini">設施；設備</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>facilities（常用複數）</span><span>facilitate (v.) 促進</span></div>
+        <div class="v-ex">Each boat has electronic <b>facilities</b>.<span class="cn">每艘船都有電子設施。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">install</span><span class="v-pos">v.</span><div class="v-cn-mini">安裝</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>installation (n.) 安裝</span><span>install an app 安裝 App</span></div>
+        <div class="v-ex">Solar panels are <b>installed</b> on the roof.<span class="cn">屋頂上裝了太陽能板。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">display</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">展示；投影；陳列</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>on display 展示中</span><span>≈ show / exhibit</span></div>
+        <div class="v-ex">Films are <b>displayed</b> on the boat's sails.<span class="cn">影片投影在船帆上。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">benefit</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">使受益；益處</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>beneficial (adj.) 有益的</span><span>benefit from 從……受益</span></div>
+        <div class="v-ex">Boat schools <b>benefit</b> both children and adults.<span class="cn">船上學校嘉惠孩童與成人。</span></div>
+        <span class="v-gsat">📊 benefit sb.（及物）vs. benefit from（受益於）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">offer</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">提供；提議</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>offer sb. sth. 提供某人某物</span><span>≈ provide / give</span></div>
+        <div class="v-ex">They <b>offer</b> education in many subjects.<span class="cn">他們提供許多科目的教育。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">technique</span><span class="v-pos">n.</span><div class="v-cn-mini">技術；技巧</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>technical (adj.) 技術的</span><span>farming techniques 農耕技術</span></div>
+        <div class="v-ex">Villagers learn farming <b>techniques</b>.<span class="cn">村民學習農耕技術。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">financial</span><span class="v-pos">adj.</span><div class="v-cn-mini">財務的；金融的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>finance (n.) 財務</span><span>financially (adv.)</span></div>
+        <div class="v-ex">Boat schools provide <b>financial</b> management lessons.<span class="cn">船上學校提供理財課程。</span></div>
+        <span class="v-gsat">📊 financial management 理財，統測常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">concept</span><span class="v-pos">n.</span><div class="v-cn-mini">概念；觀念</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>conceptual (adj.) 概念的</span><span>≈ idea / notion</span></div>
+        <div class="v-ex">The boat school <b>concept</b> spread to other countries.<span class="cn">船上學校的概念傳到了其他國家。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">effective</span><span class="v-pos">adj.</span><div class="v-cn-mini">有效的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>effect (n.) 效果</span><span>effectively (adv.) 有效地</span></div>
+        <div class="v-ex">It provides an <b>effective</b> solution for education.<span class="cn">它提供了有效的教育解方。</span></div>
+        <span class="v-gsat">📊 effective (有效) vs. efficient (有效率) 辨析</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">result in</span></td><td>導致</td><td class="pex">The rainy season <b>results in</b> severe flooding.<span class="cn">雨季導致嚴重水患。</span></td></tr>
+      <tr><td><span class="phr">shut down</span></td><td>關閉；停課</td><td class="pex">Floods cause schools to <b>shut down</b> for months.<span class="cn">洪水使學校停課數月。</span></td></tr>
+      <tr><td><span class="phr">at a time</span></td><td>一次</td><td class="pex">Schools closed for months <b>at a time</b>.<span class="cn">學校一次停課好幾個月。</span></td></tr>
+      <tr><td><span class="phr">up to</span></td><td>多達；最多</td><td class="pex">Each boat holds <b>up to</b> 30 students.<span class="cn">每艘船最多容納 30 名學生。</span></td></tr>
+      <tr><td><span class="phr">come up with</span></td><td>想出（點子）</td><td class="pex">Rezwan <b>came up with</b> a great solution.<span class="cn">Rezwan 想出了一個很棒的解方。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>統測補充字彙（主題延伸關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（教育、天災、解決方案）相關，為統測高頻延伸字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">accessible</span><span class="v-pos">adj.</span><div class="v-cn-mini">可接觸的；易得到的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>access (n./v.) 管道</span><span>be accessible to 對……開放</span></div>
+        <div class="v-ex">Boat schools make education more <b>accessible</b>.<span class="cn">船上學校讓教育更容易取得。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">management</span><span class="v-pos">n.</span><div class="v-cn-mini">管理；經營</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>manage (v.) 管理</span><span>manager (n.) 經理</span></div>
+        <div class="v-ex">They teach financial <b>management</b>.<span class="cn">他們教理財管理。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">manage</span><span class="v-pos">v.</span><div class="v-cn-mini">設法做到；管理</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>manage to V 設法做到</span><span>≈ handle / run</span></div>
+        <div class="v-ex">Villagers <b>manage</b> to earn money all year round.<span class="cn">村民設法全年賺錢。</span></div>
+        <span class="v-gsat">📊 manage to V（成功做到）常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">risk</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">風險；冒險</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>at risk of 有……風險</span><span>risky (adj.) 冒險的</span></div>
+        <div class="v-ex">Many countries are at <b>risk</b> of flooding.<span class="cn">許多國家有淹水的風險。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">hardship</span><span class="v-pos">n.</span><div class="v-cn-mini">困境；艱難</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>overcome hardships 克服困境</span><span>≈ difficulty</span></div>
+        <div class="v-ex">The program helps people overcome <b>hardships</b>.<span class="cn">這計畫幫助人們克服困境。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">effect</span><span class="v-pos">n.</span><div class="v-cn-mini">效果；影響</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>have an effect on 對……有影響</span><span>≠ affect (v.) 影響</span></div>
+        <div class="v-ex">The program has had a positive <b>effect</b>.<span class="cn">這計畫產生了正面的效果。</span></div>
+        <span class="v-gsat">📊 effect (n.) vs. affect (v.) 超高頻考點</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">adopt</span><span class="v-pos">v.</span><div class="v-cn-mini">採用；收養</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>adoption (n.) 採用；收養</span><span>≠ adapt 適應</span></div>
+        <div class="v-ex">The concept was <b>adopted</b> by other countries.<span class="cn">這概念被其他國家採用。</span></div>
+        <span class="v-gsat">📊 adopt（採用）vs. adapt（適應）易混淆</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">overcome</span><span class="v-pos">v.</span><div class="v-cn-mini">克服；戰勝</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>overcome-overcame-overcome</span><span>≈ conquer / get over</span></div>
+        <div class="v-ex">People <b>overcame</b> weather-related hardships.<span class="cn">人們克服了與天氣相關的困境。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（教育、克服困難、學習）相關。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">make waves</span><div class="slang-cn-mini">造成轟動、帶來改變（標題出現）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「製造波浪」，指引起關注、造成影響或帶來改變。</div>
+      <div class="slang-ex">Boat schools are <b>making waves</b> in education.<span class="cn">船上學校正在教育界掀起波瀾。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">go with the flow</span><div class="slang-cn-mini">隨遇而安、順其自然</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「隨著水流走」，指不強求、順應情勢。</div>
+      <div class="slang-ex">When plans change, sometimes you just have to <b>go with the flow</b>.<span class="cn">計畫有變時，有時只能順其自然。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">where there's a will, there's a way</span><div class="slang-cn-mini">有志者事竟成</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">諺語：只要有決心，就一定能找到辦法。</div>
+      <div class="slang-ex">Rezwan proved that <b>where there's a will, there's a way</b>.<span class="cn">Rezwan 證明了有志者事竟成。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">learn the ropes</span><div class="slang-cn-mini">熟悉門路、上手</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">源自水手學操帆索，引申為「學會做某事的方法、上手」。</div>
+      <div class="slang-ex">It takes time for villagers to <b>learn the ropes</b> of farming.<span class="cn">村民要花時間才能摸熟農耕的門路。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">rain or shine</span><div class="slang-cn-mini">風雨無阻</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「下雨或晴天」，指無論如何、不管天氣好壞都照做。</div>
+      <div class="slang-ex">The boat schools keep teaching, <b>rain or shine</b>.<span class="cn">船上學校風雨無阻地持續教學。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">think outside the box</span><div class="slang-cn-mini">跳脫框架思考</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">指打破慣例、以創新的方式思考問題。</div>
+      <div class="slang-ex">Rezwan <b>thought outside the box</b> to solve the flooding problem.<span class="cn">Rezwan 跳脫框架思考，解決淹水問題。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 統測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜with + 受詞 + 補語（附帶狀況構句）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">with + O + p.p.（被動）／V-ing（主動）／adj./介片
+（表「在……的情況下」附帶狀況）</div>
+      <div class="g-body">
+        <div class="g-ex"><b>With</b> solar panels <b>installed</b> on its roof, the boat uses solar power.<div class="g-ex-cn">屋頂裝了太陽能板，船便用太陽能。（課文，太陽能板被裝→p.p.）</div></div>
+        <div class="g-ex"><b>With</b> the sun <b>shining</b>, we set off happily.<div class="g-ex-cn">陽光普照，我們開心出發。（太陽主動照→V-ing）</div></div>
+        <div class="g-note">受詞與補語是被動關係用 p.p.，主動關係用 V-ing；勿混用。</div>
+        <div class="g-tip">統測常考 with + O + p.p./V-ing 的主被動判斷。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜關係副詞 where / when</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">地方先行詞 + where + 完整子句（＝ in/at which）
+時間先行詞 + when + 完整子句（＝ at/on which）</div>
+      <div class="g-body">
+        <div class="g-ex">...sails to the next village, <b>where</b> 30 more students are waiting.<div class="g-ex-cn">駛向下一村，那裡有 30 名學生在等。（課文）</div></div>
+        <div class="g-ex">...in the evenings, <b>when</b> educational films are displayed.<div class="g-ex-cn">在傍晚，那時會播放教育影片。（課文）</div></div>
+        <div class="g-note">where/when 後接「完整子句」（不缺主詞受詞）；若子句缺成分則改用 which/that。</div>
+        <div class="g-tip">關係副詞 where=in which、when=at which、why=for which。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜It is important that + S + (should) 原形V</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">It is important / necessary / essential + that + S + (should) 原形V</div>
+      <div class="g-body">
+        <div class="g-ex">It was important that children <b>have</b> access to education.<div class="g-ex-cn">讓孩子能受教育很重要。（課文，原形 have）</div></div>
+        <div class="g-note">✗ It is important that children has access...（不可用 has）；should 常省略，動詞用原形。</div>
+        <div class="g-tip">同型：suggest / insist / demand / require + that + S + 原形V。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜make/find it + 補語 + (for sb.) to V（虛受詞 it）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">make / find / think + it + adj./possible + (for sb.) + to V</div>
+      <div class="g-body">
+        <div class="g-ex">The program has made <b>it</b> possible for many people <b>to overcome</b> hardships.<div class="g-ex-cn">此計畫讓許多人得以克服困境。（課文）</div></div>
+        <div class="g-note">it 為<b>虛受詞</b>，真受詞是後面的不定詞；✗ 直接 make possible to overcome（漏 it）。</div>
+        <div class="g-tip">for sb. 為不定詞的意義主詞：make it possible <b>for sb.</b> to V。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜現在完成式被動（has / have been + p.p.）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + has / have + been + p.p. + (by ...)</div>
+      <div class="g-body">
+        <div class="g-ex">The concept <b>has been adopted</b> by other countries.<div class="g-ex-cn">這概念已被其他國家採用。（課文）</div></div>
+        <div class="g-note">現在完成被動＝ have + been + p.p.；✗ has adopted（那是主動）、✗ has been adopt。</div>
+        <div class="g-tip">主動：Other countries <b>have adopted</b> the concept.（比較主被動轉換）</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高職英文 第五冊 第五課｜互動教學講義
+</div>
+
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);
+  var CONTENT_H=940;
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['Every year, the rainy season in Bangladesh results in ',' flooding.'],
+  cn:'每年孟加拉的雨季都導致嚴重的水患。',
+  opts:['severe','available','financial','promising'],ans:0,
+  word:'severe (adj.) 嚴重的',
+  exp:'修飾 flooding（水患），語意「嚴重的」= severe。(B) 可得的、(C) 財務的、(D) 有前景的皆不符。',
+  note:'severe ≈ serious。'},
+ {q:['With no classes ',', many children had no way to keep studying.'],
+  cn:'由於沒有課可上，許多孩子無法繼續讀書。',
+  opts:['available','financial','digital','regular'],ans:0,
+  word:'available (adj.) 可得的',
+  exp:'「沒有課可上」= no classes available。(B) 財務的、(C) 數位的、(D) 規律的皆不符。',
+  note:'available 常後位修飾名詞。'},
+ {q:['Boat schools give poor children ',' to year-round education.'],
+  cn:'船上學校讓貧困孩童能全年接受教育。',
+  opts:['access','concept','risk','effect'],ans:0,
+  word:'have/give access to 有/給予……的管道',
+  exp:'固定搭配 access to。(B) 概念、(C) 風險、(D) 效果皆不符搭配。',
+  note:'have access to + N。'},
+ {q:['An ',' named Rezwan designed the floating classrooms.'],
+  cn:'一位名叫 Rezwan 的建築師設計了這些漂浮教室。',
+  opts:['athlete','architect','employee','insect'],ans:1,
+  word:'architect (n.) 建築師',
+  exp:'「設計建築」的人是 architect。(A) 運動員、(C) 員工、(D) 昆蟲皆不符。',
+  note:'architect → architecture（建築）。'},
+ {q:['Rezwan ',' an appropriate solution: boat schools!'],
+  cn:'Rezwan 想出了一個合適的解決方案：船上學校！',
+  opts:['came up with','shut down','resulted in','gave up'],ans:0,
+  word:'come up with 想出',
+  exp:'「想出點子」= come up with。(B) 關閉、(C) 導致、(D) 放棄皆不符。',
+  note:'come up with a solution / an idea。'},
+ {q:['Solar panels were ',' on the roof so the boat could use solar power.'],
+  cn:'太陽能板被裝在屋頂上，這樣船就能使用太陽能。',
+  opts:['installed','displayed','offered','reduced'],ans:0,
+  word:'install (v.) 安裝',
+  exp:'太陽能板被「安裝」= installed。(B) 展示、(C) 提供、(D) 減少皆不符。',
+  note:'install solar panels / an app。'},
+ {q:['Each boat school can hold ',' 30 students.'],
+  cn:'每一所船上學校最多可容納 30 名學生。',
+  opts:['up to','result in','at once','a thing of'],ans:0,
+  word:'up to 多達；最多',
+  exp:'「最多 30 名」= up to 30。(B) 導致、(C) 立刻、(D) 皆不符。',
+  note:'up to = 多達、最多。'},
+ {q:['The boat school concept has been ',' by Cambodia, Nigeria, and the Philippines.'],
+  cn:'船上學校的概念已被柬埔寨、奈及利亞和菲律賓採用。',
+  opts:['adapted','adopted','adjusted','admitted'],ans:1,
+  word:'adopt (v.) 採用',
+  exp:'「採用概念」= adopt。(A) adapt 是「適應/改編」，拼字近但意思不同。',
+  note:'adopt（採用）≠ adapt（適應）。'},
+ {q:['These floating classrooms benefit not only children ',' also adults.'],
+  cn:'這些漂浮教室不僅嘉惠孩童，也惠及成人。',
+  opts:['and','but','or','so'],ans:1,
+  word:'not only A but also B',
+  exp:'固定搭配 not only...but also...。(A)(C)(D) 皆不符。',
+  note:'but also 的 but 不可省略。'},
+ {q:['I\'m taking an online class ',' my speaking skills.'],
+  cn:'我在上線上課，為了增進我的口說能力。',
+  opts:['improve','improving','to improve','improved'],ans:2,
+  word:'to V（不定詞表目的）',
+  exp:'表「為了」用不定詞 to improve。(A) 原形、(B) 動名詞、(D) 過去式皆不符表目的用法。',
+  note:'to V = in order to V（目的）。'}
+];
+
+var teacherQ=[
+ {q:['',' solar panels installed on its roof, the boat runs on solar power.'],
+  cn:'屋頂裝了太陽能板，這艘船靠太陽能運轉。',
+  opts:['With','Because','Although','While'],ans:0,
+  word:'With + O + p.p.（附帶狀況）',
+  tnote:'<b>附帶狀況構句</b>：With + 受詞 + p.p./V-ing。太陽能板「被裝上」→ 用過去分詞 installed（被動）。<br>With solar panels installed = 因為/在裝了太陽能板的情況下。<br>(B)(C)(D) 為連接詞，後面須接「主詞+動詞」的完整子句，不能直接接 O + p.p.。'},
+ {q:['The boat sails to the next village, ',' 30 more students are waiting.'],
+  cn:'船駛向下一個村莊，那裡有另外 30 名學生在等候。',
+  opts:['which','where','that','what'],ans:1,
+  word:'關係副詞 where',
+  tnote:'<b>where vs. which</b>：後面 "30 more students are waiting" 是完整子句（主詞受詞都不缺），先行詞為地方 village，用<b>關係副詞 where</b>（= in which）。<br>若子句缺主詞/受詞才用 which/that。<br>where = in which。'},
+ {q:['It was important that every child in the village ',' access to education.'],
+  cn:'讓村裡每個孩子都能受教育，是很重要的事。',
+  opts:['has','had','have','having'],ans:2,
+  word:'It is important that + S + (should) 原形V',
+  tnote:'<b>虛主詞 + important that</b>：important/necessary/essential 後的 that 子句用<b>原形動詞</b>（should 省略）。<br>主詞 every child 雖為第三人稱單數，仍用原形 have。<br>✗ has / had（不隨時態與人稱變化）。'},
+ {q:['The program has made ',' possible for many people to overcome hardships.'],
+  cn:'這個計畫讓許多人得以克服困境。',
+  opts:['that','it','this','them'],ans:1,
+  word:'make it + adj. + (for sb.) to V（虛受詞）',
+  tnote:'<b>虛受詞 it</b>：make + <b>it</b> + possible + for sb. + <b>to V</b>。it 是虛受詞，真受詞是不定詞 to overcome...。<br>✗ make possible to overcome（漏 it）；✗ make that/this possible to V。<br>句型：make/find/think it + adj. + to V。'},
+ {q:['The boat school concept ',' by several flood-prone countries in recent years.'],
+  cn:'近年來，船上學校的概念已被幾個易淹水的國家採用。',
+  opts:['has adopted','has been adopted','adopted','is adopting'],ans:1,
+  word:'現在完成式被動 has been + p.p.',
+  tnote:'<b>現在完成被動</b>：concept 是「被」採用，且 "in recent years" 表持續到現在 → has <b>been adopted</b>。<br>(A) has adopted 是主動（概念自己採用，語意錯）；(C) 缺被動；(D) 進行式語意不符。'},
+ {q:['These floods cause thousands of schools ',' down for months at a time.'],
+  cn:'這些洪水造成數千所學校一次停課好幾個月。',
+  opts:['shut','to shut','shutting','shuts'],ans:1,
+  word:'cause + O + to V',
+  tnote:'<b>cause sb./sth. to V</b>：cause 的受詞補語用<b>不定詞</b> to shut。<br>✗ cause schools shut / shutting。<br>同型使役：cause/force/get/enable + O + to V（注意 make/have/let + O + 原形）。'},
+ {q:['As villagers ',' more education, they gradually earn more money.'],
+  cn:'隨著村民接受更多教育，他們逐漸賺到更多錢。',
+  opts:['receive','received','will receive','have received'],ans:0,
+  word:'As + 現在式（表隨著、同時）',
+  tnote:'<b>As（隨著）</b>：引導表「隨著……」的副詞子句，與主句 earn（現在式敘述普遍事實）時態一致，用現在式 receive。<br>此句描述普遍現象，用現在簡單式最恰當。'},
+ {q:['Boat schools provide an effective solution, ',' means many children can keep learning.'],
+  cn:'船上學校提供了有效的解方，這意味著許多孩子能持續學習。',
+  opts:['that','it','which','what'],ans:2,
+  word:', which 代替整個前句（補述）',
+  tnote:'<b>, which 補述用法</b>：逗號後的 which 可代替<b>前面整個句子</b>，作後句主詞。<br>= ...an effective solution, and this means...<br>✗ that（補述不可用 that）；✗ it（會變兩個獨立句，缺連接詞）。'},
+ {q:['It is convenient ',' me to have class at home without going out.'],
+  cn:'不用出門就能在家上課，對我來說很方便。',
+  opts:['of','to','for','with'],ans:2,
+  word:'It is + adj. + for sb. + to V',
+  tnote:'<b>for vs. of</b>：一般形容詞（convenient, important, easy...）用 <b>for sb.</b>；表人格特質的形容詞（kind, nice, careless...）才用 of sb.。<br>convenient 用 for。<br>It is convenient <b>for</b> me to...。'},
+ {q:['Who ',' you talking to on your computer just now?'],
+  cn:'你剛剛在電腦上跟誰講話？',
+  opts:['was','were','are','did'],ans:1,
+  word:'were（過去進行式，主詞 you）',
+  tnote:'<b>過去進行式</b>：just now（剛剛）表過去，talking 為進行式 → be 動詞用過去式。<br>主詞 you 搭配 <b>were</b>（you 不論單複數都用 were/are）。<br>Who were you talking to? 介系詞 to 留句尾。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your').replace(/someone's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>

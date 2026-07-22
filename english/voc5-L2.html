@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L2: The Day I Broke the Rules ── 高職英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 統測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L2: The Day I Broke the Rules ── 我打破規定的那一天</h1>
+  <div class="sub">龍騰版高職英文 第五冊 第二課｜互動教學講義</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依統測命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 8</span>
+    <span class="tag">🔗 片語 × 5</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 5</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 10</span>
+  </div>
+</div>
+
+<!-- 本課主題速覽 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>本課主題速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 規定 vs. 溫情</h4>
+        「我」在麥當勞扮演 <b>Ronald McDonald</b> 到醫院陪伴孩子。公司有明確規定：不能單獨行動、<b>絕不能碰觸</b>孩子，以免傳染細菌。違反規定可能被<b>解雇</b>。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 Billy 的擁抱</h4>
+        癌症病童 <b>Billy</b> 一再要求一個擁抱。「我」在「保住工作」與「不留遺憾」之間掙扎，最後決定<b>打破規定</b>，把 Billy 抱在懷裡，聽他說出心底的擔憂。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 一個改變的差別</h4>
+        兩天後 Billy 過世，媽媽卻來電道謝：Billy 說今年不在乎見不見得到聖誕老人，因為他<b>被 Ronald 抱過了</b>。一個擁抱，<b>made a difference</b>。附對話：Eric 分享暑假當志工。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（Reading + 翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點 🔊 只朗讀、不展開解析。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;font-size:16px;color:#475569">本課為第一人稱敘事：一位曾在麥當勞扮演 Ronald McDonald 的員工，回憶自己為了病童 Billy 而「打破規定」的那一天。文後附一段對話〈Good Deeds during Summer Vacation〉。</p>
+
+    <!-- 敘述本文 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">📖 Reading｜The Day I Broke the Rules（我打破規定的那一天）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A few years ago, I was employed by McDonald's.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">幾年前，我受雇於麥當勞。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">A few years ago</span><span class="syn-t">時間</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">was employed</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">by McDonald's</span><span class="syn-t">by + 動作者</span></div>
+          <div class="para-note"><b>be employed by</b> = 受雇於（被動語態，employ 為核心字）。主動：McDonald's employed me.</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>On "Ronald Day," I would dress up as Ronald McDonald and visit children in community hospitals.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在「Ronald 日」那天，我會打扮成 Ronald McDonald，到社區醫院探望孩子們。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">On "Ronald Day"</span><span class="syn-t">時間</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">would dress up</span><span class="syn-t">V（過去習慣）</span> <span class="syn syn-m">as Ronald McDonald</span><span class="syn-t">副詞</span> <span class="syn syn-m">and</span> <span class="syn syn-v">visit</span><span class="syn-t">V</span> <span class="syn syn-o">children</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>would + V</b> = 過去經常（習慣性）；<b>dress up as</b> = 打扮成（某角色）；<b>community</b>（社區）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I really enjoyed the opportunity to make these children's day a little more joyful.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我真的很享受這個能讓這些孩子的一天更加快樂一點的機會。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">enjoyed</span><span class="syn-t">V</span> <span class="syn syn-o">the opportunity to make these children's day more joyful</span><span class="syn-t">O（＋不定詞修飾）</span></div>
+          <div class="para-note"><b>the opportunity to V</b> = 做……的機會；<b>make + 受詞 + 形容詞</b>（使役）= 使……變得……；<b>joyful</b>（快樂的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, although I loved my job, it could be emotionally draining occasionally.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，雖然我熱愛我的工作，它偶爾也會令人身心俱疲。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">although I loved my job</span><span class="syn-t">讓步子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">it</span><span class="syn-t">S</span> <span class="syn syn-v">could be</span><span class="syn-t">V</span> <span class="syn syn-c">emotionally draining</span><span class="syn-t">C</span> <span class="syn syn-m">occasionally</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>although</b>（雖然）引導讓步子句，不與 but 連用；<b>draining</b> = 令人耗盡精力的；<b>occasionally</b>（偶爾）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>There were clear rules that I was required to follow.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有一些我必須遵守的明確規定。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">There</span> <span class="syn syn-v">were</span><span class="syn-t">V</span> <span class="syn syn-s">clear rules</span><span class="syn-t">S（真主詞）</span> <span class="syn syn-m">that I was required to follow</span><span class="syn-t">關係子句</span></div>
+          <div class="para-note"><b>be required to V</b> = 被要求做……（require 為核心字）；that 為關係代名詞，引導修飾 rules 的形容詞子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>First, it was important that I never go anywhere alone while on duty because my costume might surprise or scare little kids.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">首先，我值勤時絕不能獨自到任何地方，這一點很重要，因為我的服裝可能會嚇到小孩。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">important</span><span class="syn-t">C</span> <span class="syn syn-s">that I never go anywhere alone...</span><span class="syn-t">真主詞（名詞子句）</span></div>
+          <div class="para-note">important 等「重要／必要」形容詞後的 that 子句用<b>原形動詞</b>（should 省略）：that I never <b>go</b>；<b>while (I was) on duty</b> = 值勤時（on duty 為片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Also, it was essential that I never touch the kids since I might give them my germs.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，我絕不能碰觸孩子，這也很必要，因為我可能會把細菌傳給他們。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">it</span><span class="syn-t">虛主詞</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">essential</span><span class="syn-t">C</span> <span class="syn syn-s">that I never touch the kids</span><span class="syn-t">真主詞</span> <span class="syn syn-m">since I might give them my germs</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>essential</b>（必要的）為核心字，後接 that 子句同樣用原形 touch；<b>since</b> = 因為；<b>germ</b>（細菌）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I didn't like this regulation because I often wanted to hold their hands or hug them, but I could be fired for violating the rule.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我不喜歡這條規定，因為我常想牽他們的手或抱抱他們，但違反規定可能會讓我被解雇。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">didn't like</span><span class="syn-t">V</span> <span class="syn syn-o">this regulation</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-m">but</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">could be fired</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">for violating the rule</span><span class="syn-t">原因</span></div>
+          <div class="para-note"><b>regulation</b>（規定）、<b>violate</b>（違反）皆為核心字；<b>be fired</b> = 被解雇；<b>for + V-ing</b> = 因為做……。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>One day, when I had finished my job and was about to leave, I heard a little boy calling, "Ronald, Ronald!"</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有一天，當我做完工作正要離開時，我聽到一個小男孩在叫：「Ronald！Ronald！」</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">when I had finished my job and was about to leave</span><span class="syn-t">時間子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">heard</span><span class="syn-t">V</span> <span class="syn syn-o">a little boy</span><span class="syn-t">O</span> <span class="syn syn-c">calling</span><span class="syn-t">OC（現在分詞）</span></div>
+          <div class="para-note"><b>be about to V</b> = 正要、即將（片語）；感官動詞 <b>hear + O + V-ing</b> = 聽到某人正在……；had finished 為過去完成式（比 heard 更早）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>He looked only about six, but he was hooked up to more electronic equipment than I had ever seen.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他看起來只有大約六歲，但他身上接的電子儀器比我見過的都還要多。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">He</span><span class="syn-t">S</span> <span class="syn syn-v">looked</span><span class="syn-t">V</span> <span class="syn syn-c">only about six</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">was hooked up to</span><span class="syn-t">V（被動）</span> <span class="syn syn-o">more electronic equipment</span><span class="syn-t">O</span> <span class="syn syn-m">than I had ever seen</span><span class="syn-t">比較子句</span></div>
+          <div class="para-note"><b>be hooked up to sth.</b> = 連接到（儀器）；<b>electronic</b>（電子的）、<b>equipment</b>（設備，不可數）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>His parents told me that his name was Billy and that he was a cancer victim.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他的父母告訴我，他叫 Billy，是一位癌症患者。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">His parents</span><span class="syn-t">S</span> <span class="syn syn-v">told</span><span class="syn-t">V</span> <span class="syn syn-o">me</span><span class="syn-t">O（人）</span> <span class="syn syn-o">that... and that...</span><span class="syn-t">O（兩個名詞子句）</span></div>
+          <div class="para-note"><b>tell sb. that + 子句</b>；兩個受詞子句並列時第二個 that 不可省略；<b>victim</b>（受害者、患者）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I wanted to cheer him up, so I sat down to do some magic tricks for him.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我想讓他開心一點，所以坐下來為他變了一些魔術。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">wanted</span><span class="syn-t">V</span> <span class="syn syn-o">to cheer him up</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-m">so</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">sat down</span><span class="syn-t">V</span> <span class="syn syn-m">to do some magic tricks</span><span class="syn-t">不定詞（目的）</span></div>
+          <div class="para-note"><b>cheer sb. up</b> = 使某人振作、開心；<b>trick</b>（把戲、魔術）為核心字；do magic tricks = 變魔術。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>When I got up to say goodbye, he asked, "Ronald, would you hug me?"</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當我起身道別時，他問：「Ronald，你可以抱抱我嗎？」</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">When I got up to say goodbye</span><span class="syn-t">時間子句</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">asked</span><span class="syn-t">V</span> <span class="syn syn-o">"Ronald, would you hug me?"</span><span class="syn-t">O（引述）</span></div>
+          <div class="para-note"><b>get up to V</b> = 起身去做……；<b>would you...?</b> 為客氣的請求。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I really wanted to hug him, but a voice in my head reminded me that I couldn't—I'd lose my job.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我真的很想抱他，但腦中有個聲音提醒我不行——我會丟掉工作。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">a voice in my head</span><span class="syn-t">S</span> <span class="syn syn-v">reminded</span><span class="syn-t">V</span> <span class="syn syn-o">me</span><span class="syn-t">O</span> <span class="syn syn-o">that I couldn't</span><span class="syn-t">O（子句）</span></div>
+          <div class="para-note"><b>remind sb. that + 子句</b> = 提醒某人……（remind 為核心字）；破折號後補充說明結果；I'd = I would。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I told Billy that I wasn't allowed to and suggested that we color a picture instead.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我告訴 Billy 我不被允許這麼做，並建議我們改成一起著色一張畫。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">told</span><span class="syn-t">V</span> <span class="syn syn-o">Billy that I wasn't allowed to</span><span class="syn-t">O</span> <span class="syn syn-m">and</span> <span class="syn syn-v">suggested</span><span class="syn-t">V</span> <span class="syn syn-o">that we color a picture</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>be allowed to V</b> = 被允許（後省略 hug him）；<b>suggest that + S + (should) 原形 V</b>：suggest 後的 that 子句用原形 color；<b>instead</b> = 作為替代。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Upon completing our picture, he again asked for a hug.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一畫完我們的圖，他又再次要求一個擁抱。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Upon completing our picture</span><span class="syn-t">介系詞片語（一……就）</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">asked for</span><span class="syn-t">V</span> <span class="syn syn-o">a hug</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>Upon / On + V-ing</b> = 一……就……（= As soon as）；<b>ask for</b> = 要求、請求。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Looking into his hopeful eyes, I didn't know what I could say.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">望著他充滿期待的眼睛，我不知道該說什麼。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Looking into his hopeful eyes</span><span class="syn-t">分詞構句</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">didn't know</span><span class="syn-t">V</span> <span class="syn syn-o">what I could say</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note">句首 <b>V-ing 分詞構句</b>（= While I was looking...）修飾主詞 I；<b>hopeful</b>（充滿希望的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>I didn't want to lose my job, but deep down, I knew that I would regret it if I turned down his request.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">我不想丟掉工作，但在內心深處，我知道如果我拒絕他的請求，我一定會後悔。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">knew</span><span class="syn-t">V</span> <span class="syn syn-o">that I would regret it</span><span class="syn-t">O</span> <span class="syn syn-m">if I turned down his request</span><span class="syn-t">條件子句</span></div>
+          <div class="para-note"><b>deep down</b> = 內心深處；<b>regret</b>（後悔）為核心字；<b>turn down</b> = 拒絕（片語，= reject）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>After a hard struggle, I decided to ignore the rule. I picked Billy up and held him in my arms.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">經過一番天人交戰後，我決定無視這條規定。我把 Billy 抱起來，緊緊摟在懷裡。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">After a hard struggle</span><span class="syn-t">時間</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">decided</span><span class="syn-t">V</span> <span class="syn syn-o">to ignore the rule</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">picked</span> <span class="syn syn-o">Billy</span> <span class="syn syn-v">up</span><span class="syn-t">V（片語動詞）</span> <span class="syn syn-m">and</span> <span class="syn syn-v">held</span> <span class="syn syn-o">him</span></div>
+          <div class="para-note"><b>struggle</b> = 掙扎；<b>decide to V</b> = 決定；<b>pick up</b> = 抱起；代名詞受詞 Billy/him 夾在 pick 與 up 之間。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>For the next hour, I listened to him talking about all his concerns.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">接下來的一個小時，我聽著他訴說所有的擔憂。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">For the next hour</span><span class="syn-t">時間</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">listened to</span><span class="syn-t">V</span> <span class="syn syn-o">him</span><span class="syn-t">O</span> <span class="syn syn-c">talking about all his concerns</span><span class="syn-t">OC（現在分詞）</span></div>
+          <div class="para-note"><b>listen to sb. V-ing</b> = 聽某人正在……；<b>concern</b>（擔憂）為核心字，此處為名詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>He was afraid that if he died, his little brother might get lost while walking home from school alone.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他害怕如果自己死了，弟弟獨自走路放學回家時可能會迷路。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">He</span><span class="syn-t">S</span> <span class="syn syn-v">was afraid</span><span class="syn-t">V</span> <span class="syn syn-o">that... his little brother might get lost</span><span class="syn-t">O（子句）</span></div>
+          <div class="para-note"><b>be afraid that + 子句</b> = 害怕……；<b>get lost</b> = 迷路；<b>while walking</b> = while (he was) walking（副詞子句省略主詞與 be）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Also, he was scared that his dog might go hungry because he had hidden all its bones.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">此外，他也擔心他的狗會餓肚子，因為他把所有的骨頭都藏起來了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">was scared</span><span class="syn-t">V</span> <span class="syn syn-o">that his dog might go hungry</span><span class="syn-t">O</span> <span class="syn syn-m">because he had hidden all its bones</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>go + 形容詞</b>（go hungry 餓肚子）表「變成某狀態」；had hidden 為過去完成式（藏在「擔心」之前）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Before leaving the hospital that day, I gave Billy's parents my phone number and told them to call me if there was anything I could do.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">那天離開醫院前，我把電話號碼給了 Billy 的父母，並告訴他們若有任何我能幫忙的事就打給我。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Before leaving the hospital</span><span class="syn-t">介片</span> <span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">gave</span><span class="syn-t">V</span> <span class="syn syn-o">Billy's parents my phone number</span><span class="syn-t">O+O</span> <span class="syn syn-m">and</span> <span class="syn syn-v">told</span><span class="syn-t">V</span> <span class="syn syn-o">them to call me</span><span class="syn-t">O+OC</span></div>
+          <div class="para-note"><b>give sb. sth.</b>（雙受詞）；<b>tell sb. to V</b> = 叫某人做……；<b>if there was anything (that) I could do</b>。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Two days later, I received a call from Billy's mom, but it was bad news—Billy had passed away.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">兩天後，我接到 Billy 媽媽的電話，但那是壞消息——Billy 已經過世了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">received</span><span class="syn-t">V</span> <span class="syn syn-o">a call from Billy's mom</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-m">but</span> <span class="syn syn-s">it</span> <span class="syn syn-v">was</span> <span class="syn syn-c">bad news</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>receive</b>（收到）為核心字；<b>pass away</b> = 過世（die 的委婉說法）；had passed away 為過去完成式。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>She wanted to thank me for making a difference in his life because Billy had said to her, "Mommy, I don't care anymore about seeing Santa this year because I was held by Ronald McDonald!"</span></div>
+        <div class="para-exp">
+          <div class="para-cn">她想謝謝我為他的生命帶來改變，因為 Billy 曾對她說：「媽咪，我今年不再在意能不能見到聖誕老人了，因為我被 Ronald McDonald 抱過了！」</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">She</span><span class="syn-t">S</span> <span class="syn syn-v">wanted</span><span class="syn-t">V</span> <span class="syn syn-o">to thank me for making a difference</span><span class="syn-t">O</span> <span class="syn syn-m">because Billy had said...</span><span class="syn-t">原因子句</span></div>
+          <div class="para-note"><b>thank sb. for + V-ing</b> = 為……感謝某人；<b>make a difference</b> = 帶來改變、有影響（片語）；<b>I was held</b> = 被動（我被抱）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 對話 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">💬 Dialogue｜Good Deeds during Summer Vacation（暑假的善行）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Eric and Albert are talking about their summer plans. Eric shares a meaningful way to pass the time.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">Eric 和 Albert 正在討論暑假計畫。Eric 分享了一種有意義的消磨時間方式。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Eric and Albert</span><span class="syn-t">S</span> <span class="syn syn-v">are talking</span><span class="syn-t">V</span> <span class="syn syn-m">about their summer plans</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>a meaningful way to V</b> = 做……的有意義方式；<b>pass the time</b> = 消磨時間。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: Summer is right around the corner. What are you going to do this vacation? B: I have no idea. And you? What are your plans?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：夏天快到了。這個假期你打算做什麼？ B：我毫無頭緒。你呢？你有什麼計畫？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Summer</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">right around the corner</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>right around the corner</b> = 近在眼前、即將到來；<b>have no idea</b> = 毫無頭緒。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: I'm going to be a volunteer at Ronald McDonald House Charities. I did it last summer too! B: You mean Ronald the clown from McDonald's?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：我要去麥當勞叔叔之家慈善基金會當志工。去年暑假我也做過！ B：你是說麥當勞那個小丑 Ronald 嗎？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">am going to be</span><span class="syn-t">V（未來）</span> <span class="syn syn-c">a volunteer</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>be going to V</b> = 打算（計畫中的未來）；<b>volunteer</b> = 志工；You mean...? = 你是說……？</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: Yes! It's actually a non-profit organization that helps needy children. B: Sounds interesting! So, what do you do as a volunteer?</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：對！它其實是個幫助貧困兒童的非營利組織。 B：聽起來很有趣！那你當志工都做些什麼？</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">a non-profit organization</span><span class="syn-t">C</span> <span class="syn syn-m">that helps needy children</span><span class="syn-t">關係子句</span></div>
+          <div class="para-note"><b>non-profit</b> = 非營利的；<b>needy</b> = 貧困的；<b>Sounds interesting</b>（主詞 It 省略，口語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: Usually I dress up in a clown suit and entertain kids by telling jokes or reading stories. B: Cool! Can you put on the costume right now? I want to see!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：通常我會穿上小丑裝，用講笑話或說故事來娛樂孩子。 B：酷！你現在可以穿上那套服裝嗎？我想看！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">I</span><span class="syn-t">S</span> <span class="syn syn-v">dress up</span><span class="syn-t">V</span> <span class="syn syn-m">and</span> <span class="syn syn-v">entertain</span><span class="syn-t">V</span> <span class="syn syn-o">kids</span><span class="syn-t">O</span> <span class="syn syn-m">by telling jokes...</span><span class="syn-t">方法</span></div>
+          <div class="para-note"><b>by + V-ing</b> = 藉由做……；<b>put on</b> = 穿上（動作）；<b>costume</b> = 服裝。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: Here it is! What do you think? B: That's hilarious! I'm sure the kids love it!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：在這裡！你覺得如何？ B：太好笑了！我相信孩子們一定很愛！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">That</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">hilarious</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>Here it is</b> = 在這裡（介紹物品時用）；<b>hilarious</b> = 非常好笑的；<b>I'm sure (that)...</b> = 我確定……。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A: You know—and I'm not joking—you would make a great clown, too. B: I think you're right. Maybe I should also sign up to be a volunteer at McDonald's!</span></div>
+        <div class="para-exp">
+          <div class="para-cn">A：你知道嗎——我不是在開玩笑——你也會是個很棒的小丑。 B：我想你說得對。也許我也該報名去麥當勞當志工！</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">you</span><span class="syn-t">S</span> <span class="syn syn-v">would make</span><span class="syn-t">V</span> <span class="syn syn-o">a great clown</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>make a great clown</b> = 會成為很棒的小丑（make = 成為）；<b>sign up</b> = 報名。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 統測連結」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">employ</span><span class="v-pos">v.</span><div class="v-cn-mini">雇用</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>employee (n.) 員工</span><span>employer (n.) 雇主</span><span>employment (n.) 就業</span></div>
+        <div class="v-ex">A few years ago, I was <b>employed</b> by McDonald's.<span class="cn">幾年前，我受雇於麥當勞。</span></div>
+        <span class="v-gsat">📊 employ / employee / employer 字族統測常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">community</span><span class="v-pos">n.</span><div class="v-cn-mini">社區；社群</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>community service 社區服務</span><span>communicate (v.) 溝通</span></div>
+        <div class="v-ex">I would visit children in <b>community</b> hospitals.<span class="cn">我會探望社區醫院裡的孩子。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">joyful</span><span class="v-pos">adj.</span><div class="v-cn-mini">快樂的；充滿喜悅的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>joy (n.) 喜悅</span><span>enjoy (v.) 享受</span><span>joyfully (adv.)</span></div>
+        <div class="v-ex">I made these children's day more <b>joyful</b>.<span class="cn">我讓這些孩子的一天更加快樂。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">occasionally</span><span class="v-pos">adv.</span><div class="v-cn-mini">偶爾</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>occasion (n.) 場合</span><span>occasional (adj.) 偶爾的</span></div>
+        <div class="v-ex">The job could be draining <b>occasionally</b>.<span class="cn">這份工作偶爾會令人身心俱疲。</span></div>
+        <span class="v-gsat">📊 頻率副詞 occasionally ≈ sometimes</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">require</span><span class="v-pos">v.</span><div class="v-cn-mini">要求；需要</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>requirement (n.) 要求；必要條件</span><span>be required to V 被要求做</span></div>
+        <div class="v-ex">There were rules that I was <b>required</b> to follow.<span class="cn">有一些我必須遵守的規定。</span></div>
+        <span class="v-gsat">📊 be required to V 為統測高頻句型</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">essential</span><span class="v-pos">adj.</span><div class="v-cn-mini">必要的；不可或缺的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>essence (n.) 本質</span><span>≈ necessary / vital</span></div>
+        <div class="v-ex">It was <b>essential</b> that I never touch the kids.<span class="cn">我絕不能碰觸孩子，這很必要。</span></div>
+        <span class="v-gsat">📊 essential/important + that + 原形 V</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">germ</span><span class="v-pos">n.</span><div class="v-cn-mini">細菌；病菌</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>≈ bacteria</span><span>spread germs 散播細菌</span></div>
+        <div class="v-ex">I might give them my <b>germs</b>.<span class="cn">我可能會把細菌傳給他們。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">regulation</span><span class="v-pos">n.</span><div class="v-cn-mini">規定；規章</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>regulate (v.) 管制</span><span>≈ rule</span></div>
+        <div class="v-ex">I didn't like this <b>regulation</b>.<span class="cn">我不喜歡這條規定。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">violate</span><span class="v-pos">v.</span><div class="v-cn-mini">違反；侵犯</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>violation (n.) 違反</span><span>violate the rule / the law</span></div>
+        <div class="v-ex">I could be fired for <b>violating</b> the rule.<span class="cn">違反規定可能讓我被解雇。</span></div>
+        <span class="v-gsat">📊 violate ↔ obey（遵守）反義</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">electronic</span><span class="v-pos">adj.</span><div class="v-cn-mini">電子的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>electronics (n.) 電子產品</span><span>electricity (n.) 電</span></div>
+        <div class="v-ex">He was hooked up to <b>electronic</b> equipment.<span class="cn">他身上接著電子儀器。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">equipment</span><span class="v-pos">n.</span><div class="v-cn-mini">設備；裝備（不可數）</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>equip (v.) 裝備</span><span>a piece of equipment 一件設備</span></div>
+        <div class="v-ex">He was hooked up to more electronic <b>equipment</b> than I'd seen.<span class="cn">他接的儀器比我見過的都多。</span></div>
+        <span class="v-gsat">📊 equipment 不可數！不加 s、不用 an</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">victim</span><span class="v-pos">n.</span><div class="v-cn-mini">受害者；患者</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a cancer victim 癌症患者</span><span>fall victim to 成為……受害者</span></div>
+        <div class="v-ex">He was a cancer <b>victim</b>.<span class="cn">他是一位癌症患者。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">remind</span><span class="v-pos">v.</span><div class="v-cn-mini">提醒；使想起</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>reminder (n.) 提醒物</span><span>remind sb. of / to V / that</span></div>
+        <div class="v-ex">A voice in my head <b>reminded</b> me that I couldn't.<span class="cn">腦中一個聲音提醒我不行。</span></div>
+        <span class="v-gsat">📊 統測常考 of / to 介系詞辨別</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">regret</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">後悔；遺憾</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>regret V-ing 後悔做過</span><span>regret to V 遺憾要（告知）</span></div>
+        <div class="v-ex">I knew I would <b>regret</b> it if I turned down his request.<span class="cn">我知道拒絕他我一定會後悔。</span></div>
+        <span class="v-gsat">📊 regret V-ing（後悔已做）vs. regret to V（遺憾將做）</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">concern</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">擔憂；關切</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>concerned (adj.) 擔心的</span><span>be concerned about 擔心</span></div>
+        <div class="v-ex">I listened to him talking about all his <b>concerns</b>.<span class="cn">我聽他訴說所有的擔憂。</span></div></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語動詞</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">on duty</span></td><td>值勤中</td><td class="pex">I never went anywhere alone while <b>on duty</b>.<span class="cn">我值勤時絕不獨自到任何地方。</span></td></tr>
+      <tr><td><span class="phr">be about to</span></td><td>正要；即將</td><td class="pex">I <b>was about to</b> leave when I heard a boy calling.<span class="cn">我正要離開時聽到男孩在叫。</span></td></tr>
+      <tr><td><span class="phr">be hooked up to</span></td><td>連接到（儀器）</td><td class="pex">He <b>was hooked up to</b> electronic equipment.<span class="cn">他身上接著電子儀器。</span></td></tr>
+      <tr><td><span class="phr">turn down</span></td><td>拒絕</td><td class="pex">I would regret it if I <b>turned down</b> his request.<span class="cn">拒絕他的請求我一定會後悔。</span></td></tr>
+      <tr><td><span class="phr">make a difference</span></td><td>帶來改變；有影響</td><td class="pex">She thanked me for <b>making a difference</b> in his life.<span class="cn">她謝謝我為他的生命帶來改變。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>統測補充字彙（主題延伸關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（規定、志工、醫院、情感）相關，為統測高頻延伸字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">charity</span><span class="v-pos">n.</span><div class="v-cn-mini">慈善；慈善機構</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>charitable (adj.) 慈善的</span><span>Ronald McDonald House Charities</span></div>
+        <div class="v-ex">Eric works for a <b>charity</b> that helps needy children.<span class="cn">艾瑞克為一個幫助貧困兒童的慈善機構工作。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">volunteer</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">志工；自願</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>voluntary (adj.) 自願的</span><span>volunteer to V 自願做</span></div>
+        <div class="v-ex">I'm going to be a <b>volunteer</b> this summer.<span class="cn">今年暑假我要去當志工。</span></div>
+        <span class="v-gsat">📊 志工/公益主題統測閱讀常見</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">entertain</span><span class="v-pos">v.</span><div class="v-cn-mini">娛樂；使歡樂</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>entertainment (n.) 娛樂</span><span>entertaining (adj.) 有趣的</span></div>
+        <div class="v-ex">I <b>entertain</b> kids by telling jokes.<span class="cn">我藉由講笑話娛樂孩子。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">costume</span><span class="v-pos">n.</span><div class="v-cn-mini">服裝；戲服</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>a clown costume 小丑裝</span><span>≠ custom (習俗)</span></div>
+        <div class="v-ex">Can you put on the <b>costume</b> right now?<span class="cn">你現在可以穿上那套服裝嗎？</span></div>
+        <span class="v-gsat">📊 costume（服裝）vs. custom（習俗）易混淆</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">ignore</span><span class="v-pos">v.</span><div class="v-cn-mini">忽視；不理會</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>ignorance (n.) 無知</span><span>≈ overlook / neglect</span></div>
+        <div class="v-ex">I decided to <b>ignore</b> the rule.<span class="cn">我決定無視這條規定。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">struggle</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">掙扎；努力奮鬥</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>struggle with 與……搏鬥</span><span>struggle to V 努力做</span></div>
+        <div class="v-ex">After a hard <b>struggle</b>, I made my decision.<span class="cn">經過一番掙扎後，我下了決定。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">scare</span><span class="v-pos">v.</span><div class="v-cn-mini">使害怕；驚嚇</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>scared (adj.) 感到害怕的</span><span>scary (adj.) 嚇人的</span></div>
+        <div class="v-ex">My costume might <b>scare</b> little kids.<span class="cn">我的服裝可能會嚇到小孩。</span></div>
+        <span class="v-gsat">📊 scared（人）vs. scary（事物）為考點</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">meaningful</span><span class="v-pos">adj.</span><div class="v-cn-mini">有意義的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>meaning (n.) 意義</span><span>meaningless (反義) 無意義的</span></div>
+        <div class="v-ex">Volunteering is a <b>meaningful</b> way to pass the time.<span class="cn">當志工是有意義的消磨時間方式。</span></div></div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（幫助、善心、抉擇）相關。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">around the corner</span><div class="slang-cn-mini">即將到來（課文出現）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「在轉角」，引申為「近在眼前、即將發生」。</div>
+      <div class="slang-ex">Don't worry—better days are just <b>around the corner</b>.<span class="cn">別擔心，好日子近在眼前。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">go the extra mile</span><div class="slang-cn-mini">多付出、超乎期待</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「多走一哩路」，指願意多付出、做得比要求更多。</div>
+      <div class="slang-ex">Ronald <b>went the extra mile</b> and hugged the sick boy.<span class="cn">Ronald 多付出了一點，抱了那個生病的男孩。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">a heart of gold</span><div class="slang-cn-mini">心地善良</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「一顆金子做的心」，形容人非常善良、慷慨。</div>
+      <div class="slang-ex">Anyone who volunteers at a hospital has <b>a heart of gold</b>.<span class="cn">會到醫院當志工的人都有一顆善良的心。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">bend the rules</span><div class="slang-cn-mini">通融、變通規定</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「把規則折彎」，指在特殊情況下稍微變通、不完全照規定走。</div>
+      <div class="slang-ex">He <b>bent the rules</b> just once to make a dying boy happy.<span class="cn">他只破例通融一次，只為讓一個垂危的男孩開心。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">put a smile on someone's face</span><div class="slang-cn-mini">讓某人展露笑容</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">字面「在某人臉上放一個微笑」，指使人開心、逗人笑。</div>
+      <div class="slang-ex">The magic tricks <b>put a smile on Billy's face</b>.<span class="cn">那些魔術讓 Billy 露出了笑容。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">no big deal</span><div class="slang-cn-mini">沒什麼大不了</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">口語常用，表示「沒什麼、小事一樁」。</div>
+      <div class="slang-ex">"Thanks for helping!" "It's <b>no big deal</b>."<span class="cn">「謝謝你幫忙！」「沒什麼大不了的。」</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 統測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜It is + 形容詞 + that + S + (should) 原形 V</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">It is essential / important / necessary + that + S + (should) 原形V</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">表「必要、重要、建議」的形容詞後，that 子句用<b>原形動詞</b>（should 可省略）。</p>
+        <div class="g-ex">It was <b>essential that</b> I never <b>touch</b> the kids.<div class="g-ex-cn">我絕不能碰觸孩子，這很必要。（原形 touch）</div></div>
+        <div class="g-ex">It is <b>important that</b> everyone <b>be</b> on time.<div class="g-ex-cn">每個人準時很重要。（be 為原形）</div></div>
+        <div class="g-note">✗ It is essential that he touches...（不可用 touches）；主詞第三人稱也用原形。</div>
+        <div class="g-tip">同類形容詞：important, necessary, vital。同理 suggest / insist / demand + that + 原形。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜used to vs. would（過去習慣）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">would + V原形（過去經常做的動作）
+used to + V原形（過去的習慣或狀態，現已不再）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">課文 "I <b>would</b> dress up as Ronald" 用 would 表過去反覆的動作。</p>
+        <div class="g-ex">On "Ronald Day," I <b>would</b> dress up and visit children.<div class="g-ex-cn">在「Ronald 日」我總會打扮並探望孩子。</div></div>
+        <div class="g-ex">I <b>used to</b> be shy, but now I love the stage.<div class="g-ex-cn">我以前很害羞，但現在我愛上舞台。</div></div>
+        <div class="g-note">would 只能表「動作」；表過去「狀態」（如 used to be tall）只能用 used to，不可用 would。</div>
+        <div class="g-tip">注意區分 be used to + V-ing（習慣於）與 used to + 原形（過去習慣）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜Upon / On + V-ing（一……就……）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">Upon / On + V-ing, S + V ...（＝ As soon as S + V）</div>
+      <div class="g-body">
+        <div class="g-ex"><b>Upon completing</b> our picture, he again asked for a hug.<div class="g-ex-cn">一畫完圖，他又要求一個擁抱。（課文）</div></div>
+        <div class="g-ex">= <b>As soon as</b> he completed the picture, he asked for a hug.<div class="g-ex-cn">同義改寫。</div></div>
+        <div class="g-note">Upon 後接<b>動名詞 V-ing</b>，不接原形；主詞須與主句相同。</div>
+        <div class="g-tip">統測綜合測驗常考 Upon / On + V-ing 與 As soon as 的互換。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜感官／使役動詞 + O + V-ing / 原形</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">hear / see / listen to + O + V-ing（正在進行）
+hear / see + O + 原形V（全程、完整動作）</div>
+      <div class="g-body">
+        <div class="g-ex">I <b>heard</b> a little boy <b>calling</b>, "Ronald!"<div class="g-ex-cn">我聽到一個小男孩正在叫。（強調進行）</div></div>
+        <div class="g-ex">I <b>listened to</b> him <b>talking</b> about his concerns.<div class="g-ex-cn">我聽他訴說擔憂。（課文）</div></div>
+        <div class="g-note">✗ I heard him to call.（感官動詞後不加 to）；用 V-ing 或原形，不用不定詞。</div>
+        <div class="g-tip">被動時要還原 to：He was heard <b>to call</b>...（主動無 to，被動加 to）。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜分詞構句（V-ing 置句首修飾主詞）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">V-ing ..., S + V ...（＝ When/Because/While + S + V）</div>
+      <div class="g-body">
+        <div class="g-ex"><b>Looking</b> into his hopeful eyes, I didn't know what to say.<div class="g-ex-cn">望著他期待的眼神，我不知道該說什麼。（課文）</div></div>
+        <div class="g-ex">= <b>While I was looking</b> into his eyes, I didn't know what to say.<div class="g-ex-cn">還原成副詞子句。</div></div>
+        <div class="g-note">分詞的邏輯主詞須與主句主詞相同；主動用 V-ing、被動用 p.p.（過去分詞）。</div>
+        <div class="g-tip">統測常考分詞構句與 Felt/Feeling 的辨析（主動用 V-ing）。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（10 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  龍騰高職英文 第五冊 第二課｜互動教學講義
+</div>
+
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);
+  var CONTENT_H=940;
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['A few years ago, I was ',' by McDonald\'s to play Ronald the clown.'],
+  cn:'幾年前，我受雇於麥當勞扮演小丑 Ronald。',
+  opts:['employed','required','violated','reminded'],ans:0,
+  word:'employ (v.) 雇用（此處被動 be employed by）',
+  exp:'「受雇於」= be employed by。(B) 要求、(C) 違反、(D) 提醒皆不符。',
+  note:'employ → employee（員工）、employer（雇主）。'},
+ {q:['It was ',' that I never touch the kids because I might spread germs to them.'],
+  cn:'我絕不能碰觸孩子，這很必要，因為我可能會把細菌傳給他們。',
+  opts:['essential','joyful','electronic','hopeful'],ans:0,
+  word:'essential (adj.) 必要的',
+  exp:'語意需「必要的」，且 It is + adj. + that 句型常用 essential。(B) 快樂的、(C) 電子的、(D) 有希望的皆不符。',
+  note:'essential/important/necessary + that + 原形V。'},
+ {q:['I could be fired for ',' the company\'s rules.'],
+  cn:'違反公司規定可能會讓我被解雇。',
+  opts:['reminding','receiving','violating','employing'],ans:2,
+  word:'violate (v.) 違反',
+  exp:'受詞是 rules，需「違反」。for + V-ing。(A) 提醒、(B) 收到、(D) 雇用皆不符。',
+  note:'violate the rule / law；反義 obey（遵守）。'},
+ {q:['The boy was hooked up to more electronic ',' than I had ever seen.'],
+  cn:'那男孩身上接的電子儀器比我見過的都多。',
+  opts:['equipments','equipment','equip','equips'],ans:1,
+  word:'equipment (n.) 設備（不可數）',
+  exp:'equipment 為不可數名詞，不加 s。(A) equipments 錯；(C)(D) 為動詞。',
+  note:'一件設備說 a piece of equipment。'},
+ {q:['I knew I would ',' it if I turned down the dying boy\'s request for a hug.'],
+  cn:'我知道如果拒絕這個垂危男孩要抱抱的請求，我一定會後悔。',
+  opts:['ignore','regret','entertain','scare'],ans:1,
+  word:'regret (v.) 後悔',
+  exp:'「拒絕→後悔」語意連貫。(A) 忽視、(C) 娛樂、(D) 嚇唬皆不符。',
+  note:'regret V-ing（後悔已做）；regret to V（遺憾將告知）。'},
+ {q:['I didn\'t want to lose my job, so at first I ',' Billy\'s request for a hug.'],
+  cn:'我不想丟掉工作，所以起初我拒絕了 Billy 要抱抱的請求。',
+  opts:['turned down','made up','put on','signed up'],ans:0,
+  word:'turn down 拒絕',
+  exp:'語意需「拒絕請求」= turn down。(B) 編造、(C) 穿上、(D) 報名皆不符。',
+  note:'turn down = reject / refuse。'},
+ {q:['She wanted to thank me for ',' in her son\'s life.'],
+  cn:'她想謝謝我為她兒子的生命帶來改變。',
+  opts:['making a difference','making sure','breaking a leg','passing the time'],ans:0,
+  word:'make a difference 帶來改變、有影響',
+  exp:'thank sb. for + V-ing；語意「帶來改變」。(B) 確保、(D) 消磨時間皆不符。',
+  note:'make a difference in / to sth.。'},
+ {q:['On "Ronald Day," I ',' dress up as a clown and visit sick children in hospitals.'],
+  cn:'在「Ronald 日」，我總會打扮成小丑，探望醫院裡生病的孩子。',
+  opts:['am used to','would','was about to','have to'],ans:1,
+  word:'would（過去經常做的動作）',
+  exp:'描述過去反覆的習慣動作用 would。全句為過去時態，(A)(D) 語意時態不符。',
+  note:'would 表過去動作習慣；狀態用 used to。'},
+ {q:[' ',' completing the picture, Billy asked for a hug once again.'],
+  cn:'一畫完圖，Billy 又再次要求一個擁抱。',
+  opts:['Upon','During','While','Since'],ans:0,
+  word:'Upon + V-ing（一……就……）',
+  exp:'Upon + V-ing = As soon as。(B) During 後接名詞、(C) While 後接子句、(D) Since 語意不符。',
+  note:'Upon/On completing = As soon as he completed。'},
+ {q:['I\'m going to be a ',' at a charity that helps needy children this summer.'],
+  cn:'今年暑假我要去一個幫助貧困兒童的慈善機構當志工。',
+  opts:['victim','germ','volunteer','regulation'],ans:2,
+  word:'volunteer (n.) 志工',
+  exp:'在慈善機構「當」的角色是 volunteer。(A) 受害者、(B) 細菌、(D) 規定皆不符。',
+  note:'volunteer to V 自願做某事。'}
+];
+
+var teacherQ=[
+ {q:['It was important that everyone ',' the safety rules while on duty.'],
+  cn:'值勤時每個人都遵守安全規定，這一點很重要。',
+  opts:['follows','followed','follow','following'],ans:2,
+  word:'follow（原形，虛主詞 that 子句）',
+  tnote:'<b>It is + important/essential + that + 原形V</b>：這類「重要、必要、建議」形容詞後的 that 子句，動詞用<b>原形</b>（should 省略）。<br>故第三人稱主詞 everyone 後仍用原形 follow，不可用 follows / followed。<br>同型：suggest / insist / demand + that + S + 原形V。'},
+ {q:['',' into the boy\'s hopeful eyes, Ronald didn\'t know what to say.'],
+  cn:'望著男孩充滿期待的眼睛，Ronald 不知道該說什麼。',
+  opts:['Look','Looked','Looking','To looking'],ans:2,
+  word:'Looking（現在分詞構句，主動）',
+  tnote:'<b>分詞構句</b>：句首修飾主詞 Ronald，因 Ronald 主動「看」，用現在分詞 V-ing。<br>= While he was looking into..., Ronald didn\'t know...<br>(B) Looked 過去式動詞最易誤選，但不可作修飾語；被動才用 p.p.。'},
+ {q:['The nurse heard the little boy ',' "Ronald, Ronald!" from down the hall.'],
+  cn:'護士聽到那小男孩從走廊那頭叫著「Ronald！Ronald！」。',
+  opts:['called','to call','calling','call to'],ans:2,
+  word:'hear + O + V-ing（正在進行）',
+  tnote:'<b>感官動詞</b>：hear/see/listen to + O + V-ing（強調動作正在進行）或 + 原形（全程）。<br>此處強調「正在叫」用 calling。<br>✗ heard him to call（感官動詞主動後不加 to）；被動才還原 to：was heard to call。'},
+ {q:['Robbie ',' go to the hospital every week, but he stopped after he moved away.'],
+  cn:'Robbie 以前每週都去醫院，但搬走後就不再去了。',
+  opts:['is used to','used to','was used to','uses to'],ans:1,
+  word:'used to + V原形（過去習慣，現已不再）',
+  tnote:'<b>used to vs. be used to</b>：後接原形 go，且語意「以前……現在不再」，用 used to。<br>(A)(C) be used to 後需接 V-ing/N（習慣於）；(D) uses to 無此用法。<br>I used to be shy, but now I am used to speaking in public.'},
+ {q:['Ronald was about ',' the hospital when he heard a boy calling his name.'],
+  cn:'Ronald 正要離開醫院時，聽到一個男孩叫他的名字。',
+  opts:['to leave','leaving','left','leave'],ans:0,
+  word:'be about to V（正要、即將）',
+  tnote:'<b>be about to + 原形V</b> = 正要、即將做某事。<br>故填 to leave。<br>✗ be about leaving / be about leave。常與 when（突然）連用：was about to leave when...。'},
+ {q:['The parents told me that his name ',' Billy and that he was a cancer victim.'],
+  cn:'父母告訴我他叫 Billy，而且他是癌症患者。',
+  opts:['is','was','be','being'],ans:1,
+  word:'was（時態一致）',
+  tnote:'<b>時態一致（sequence of tenses）</b>：主要子句 told 為過去式，受詞子句也用過去式 was。<br>兩個 that 子句並列，第二個 that <b>不可省略</b>（保持結構平行、避免誤解）。'},
+ {q:['He was afraid ',' his little brother might get lost on the way home.'],
+  cn:'他害怕弟弟回家路上可能會迷路。',
+  opts:['of','that','with','for'],ans:1,
+  word:'be afraid that + 子句',
+  tnote:'<b>be afraid 的兩種用法</b>：be afraid <b>of</b> + N/V-ing（怕某物）；be afraid <b>that</b> + 子句（擔心某事會發生）。<br>後接完整子句，故用 that。<br>be afraid of dogs / be afraid that it will rain。'},
+ {q:['I suggested that we ',' a picture together instead of hugging.'],
+  cn:'我建議我們一起畫張圖，而不是擁抱。',
+  opts:['colored','colors','color','coloring'],ans:2,
+  word:'suggest that + S + (should) 原形V',
+  tnote:'<b>建議動詞</b>：suggest / recommend / insist / demand + that + S + (should) <b>原形V</b>。<br>故用原形 color，不可用 colored / colors。<br>注意：suggest 不可接 sb. to V（✗ suggest me to go）。'},
+ {q:['The boy was hooked up to ',' equipment than the nurse had ever seen before.'],
+  cn:'那男孩接的儀器比護士以前見過的都多。',
+  opts:['much','more','many','the most'],ans:1,
+  word:'more（比較級，接 than）',
+  tnote:'<b>比較級</b>：句中有 than，需用比較級 more。<br>equipment 為不可數，用 more（不可用 many）。<br>(D) the most 為最高級，與 than 不搭配。more electronic equipment than...。'},
+ {q:['Ronald decided to ',' the rule and hold the dying boy in his arms.'],
+  cn:'Ronald 決定無視規定，把垂危的男孩抱在懷裡。',
+  opts:['ignore','ignoring','ignored','to ignore'],ans:0,
+  word:'decide to + 原形V',
+  tnote:'<b>decide to V</b>：decide 後接不定詞，但此處 to 已在題幹「decided to」中，空格填<b>原形</b> ignore。<br>並列動作 "to ignore... and (to) hold..." 第二個 to 可省略。<br>✗ decide ignoring（decide 不接 V-ing）。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your').replace(/someone's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')
+      .replace(/\([^)]*\)/g,'')
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>
