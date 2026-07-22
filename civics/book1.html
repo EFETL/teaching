@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公民第一冊 · 互動學習</title>
+<style>
+  :root { --main:#2c5f8a; --accent:#e6a800; --bg:#eef3f9; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
+  header { background:linear-gradient(135deg,#2c5f8a,#3d7cb0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+  header h1 { font-size:30px; margin-bottom:8px; }
+  header p  { font-size:18px; opacity:.95; }
+  .back { display:inline-block; margin:16px auto 0; color:#2c5f8a; background:#fff; border:2px solid #cdddef; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
+  .back:hover { background:#eef6ff; }
+  .wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:18px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:18px; }
+  .intro b { color:var(--main); }
+  .intro.small { font-size:16px; }
+
+  .section-label { font-size:13px; font-weight:bold; color:#5a7a9a; letter-spacing:.8px; margin-bottom:10px; padding-left:2px; }
+
+  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
+
+  /* === 繽紛插畫卡片（沿用歷史科 book1 版型） === */
+  .lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:6px 0 26px;}
+  .lcard{position:relative;display:flex;flex-direction:column;text-decoration:none;color:#1a1a1a;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.10);transition:transform .16s,box-shadow .16s;}
+  .lcard:hover{transform:translateY(-5px);box-shadow:0 12px 26px rgba(0,0,0,.20);}
+  .lcard-top{position:relative;height:150px;background:linear-gradient(150deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .lcard-no{position:absolute;top:12px;left:15px;z-index:3;color:#fff;font-size:17px;font-weight:bold;letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,.28);}
+  .lcard-no b{font-size:27px;margin:0 2px;}
+  .lcard-badge{position:absolute;top:13px;right:14px;z-index:3;background:rgba(255,255,255,.30);color:#fff;border-radius:20px;padding:3px 11px;font-size:12px;font-weight:bold;backdrop-filter:blur(2px);}
+  .lcard-emoji{position:relative;z-index:2;font-size:56px;line-height:1;filter:drop-shadow(0 3px 5px rgba(0,0,0,.22));animation:bob 3s ease-in-out infinite;}
+  .lcard:nth-child(even) .lcard-emoji{animation-delay:.6s;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .lcard-halo{position:absolute;z-index:1;width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.22);}
+  .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.16);z-index:0;}
+  .d1{width:70px;height:70px;top:-24px;right:-14px;}
+  .d2{width:38px;height:38px;bottom:-10px;left:22px;background:rgba(255,255,255,.20);}
+  .d3{width:16px;height:16px;top:26px;right:42px;background:rgba(255,255,255,.28);}
+  .lcard-corner{position:absolute;right:0;bottom:0;z-index:1;width:0;height:0;border-style:solid;border-width:0 0 42px 42px;border-color:transparent transparent rgba(255,255,255,.38) transparent;}
+  .lcard-body{padding:14px 16px 15px;flex:1;display:flex;flex-direction:column;gap:5px;}
+  .lcard-title{font-size:18px;font-weight:bold;color:#22364a;line-height:1.35;}
+  .lcard-sub{font-size:12.5px;color:#77879a;}
+  .lcard-go{margin-top:8px;align-self:flex-start;background:var(--c1);color:#fff;font-size:13px;font-weight:bold;padding:5px 14px;border-radius:16px;transition:filter .15s;}
+  .lcard:hover .lcard-go{filter:brightness(1.08);}
+  .lcard.soon{cursor:default;}
+  .lcard.soon .lcard-top{filter:saturate(.5) brightness(1.03);}
+  .lcard.soon::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.34);pointer-events:none;}
+  .lcard.soon .lcard-go{background:#c2ccd6;}
+  @media(max-width:820px){.lgrid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.lgrid{grid-template-columns:1fr;}}
+  @media (max-width:560px){ header h1{font-size:24px;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>⚖️ 公民第一冊 · 互動學習</h1>
+  <p>teaching.efetl.com / 公民 / 第一冊</p>
+  <a class="back" href="index.html">← 返回公民科</a>
+</header>
+<div class="wrap">
+  <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
+
+  <div class="section-label">✦ 115 課綱 · 第一冊 三版整合互動講義（康軒為主 · 南一/翰林為輔）</div>
+  <div class="intro small">每課整合 <b>康軒（主）</b>、<b>翰林</b>、<b>南一</b> 三個版本。點各段「<b>？</b>」空格<b>即時看答案</b>，並附<b>老師講解</b>與<b>學生練習</b>題、<b>會考歷屆真題</b>，點選即對答案、附解析。</div>
+  <div class="lgrid">
+    <a class="lcard" href="civics-v1-l1.html" style="--c1:#e29a2e;--c2:#f2b350">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>1</b>課</span>
+        <span class="lcard-badge">三版整合</span>
+        <span class="lcard-emoji">⚖️</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="lcard-body">
+        <div class="lcard-title">人性尊嚴與人權保障</div>
+        <div class="lcard-sub">康軒為主 · 翰林/南一為輔</div>
+        <span class="lcard-go">進入講義 →</span>
+      </div>
+    </a>
+    <a class="lcard" href="civics-v1-l2.html" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>2</b>課</span>
+        <span class="lcard-badge">三版整合</span>
+        <span class="lcard-emoji">🚻</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="lcard-body">
+        <div class="lcard-title">性別平等</div>
+        <div class="lcard-sub">康軒為主 · 翰林/南一為輔</div>
+        <span class="lcard-go">進入講義 →</span>
+      </div>
+    </a>
+    <div class="lcard soon" style="--c1:#2f6fb3;--c2:#4a97da">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>3</b>課</span>
+        <span class="lcard-badge">敬請期待</span>
+        <span class="lcard-emoji">🌏</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="lcard-body">
+        <div class="lcard-title">我們都是一家人</div>
+        <div class="lcard-sub">康軒為主 · 翰林/南一為輔</div>
+        <span class="lcard-go">敬請期待</span>
+      </div>
+    </div>
+    <div class="lcard soon" style="--c1:#479d63;--c2:#62c07d">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>4</b>課</span>
+        <span class="lcard-badge">敬請期待</span>
+        <span class="lcard-emoji">👨‍👩‍👧‍👦</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="lcard-body">
+        <div class="lcard-title">平權家庭</div>
+        <div class="lcard-sub">康軒為主 · 翰林/南一為輔</div>
+        <span class="lcard-go">敬請期待</span>
+      </div>
+    </div>
+    <div class="lcard soon" style="--c1:#9257c4;--c2:#ac74dd">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>5</b>課</span>
+        <span class="lcard-badge">敬請期待</span>
+        <span class="lcard-emoji">🏫</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="lcard-body">
+        <div class="lcard-title">校園生活中的公共參與</div>
+        <div class="lcard-sub">康軒為主 · 翰林/南一為輔</div>
+        <span class="lcard-go">敬請期待</span>
+      </div>
+    </div>
+    <div class="lcard soon" style="--c1:#cf4436;--c2:#e75d4b">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>6</b>課</span>
+        <span class="lcard-badge">敬請期待</span>
+        <span class="lcard-emoji">🏘️</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="lcard-body">
+        <div class="lcard-title">社區與部落</div>
+        <div class="lcard-sub">康軒為主 · 翰林/南一為輔</div>
+        <span class="lcard-go">敬請期待</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">✦ 第一冊 先修教材</div>
+  <div class="lgrid">
+    <a class="lcard" href="civics-pre.html" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">先修</span>
+        <span class="lcard-badge">L11–17</span>
+        <span class="lcard-emoji">🏫</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="lcard-body">
+        <div class="lcard-title">家庭・學校・社區與文化</div>
+        <div class="lcard-sub">先修 · 第一冊 第 11–17 課</div>
+        <span class="lcard-go">進入練習 →</span>
+      </div>
+    </a>
+  </div>
+
+  <footer>公民科 互動學習 ‧ teaching.efetl.com</footer>
+</div>
+</body>
+</html>
