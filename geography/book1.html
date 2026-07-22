@@ -6,134 +6,282 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>地理 第一冊（含先修）</title>
 <style>
-  :root { --main:#2c5f8a; --teach:#7b6000; }
+  :root { --main:#1a6ea8; --accent:#1f8f72; --teach:#7b6000; --bg:#eef3f9; }
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:#eef3f9; line-height:1.7; padding:0 0 60px; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:var(--bg); line-height:1.7; padding:0 0 60px; }
   header { background:linear-gradient(135deg,#1a6ea8,#1f8f72); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
-  header h1 { font-size:28px; margin-bottom:6px; }
-  header p  { font-size:17px; opacity:.95; }
-  .back { display:inline-block; margin:14px auto 0; color:#1a6ea8; background:#fff; border:2px solid #b8d8f0; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
-  .back:hover { background:#eef6ff; }
-  .wrap { max-width:860px; margin:0 auto; padding:20px 16px; }
-  .intro { background:#fff; border-radius:12px; padding:14px 20px; margin-bottom:20px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
+  header h1 { font-size:30px; margin-bottom:8px; }
+  header p  { font-size:18px; opacity:.95; }
+  .back { display:inline-block; margin:16px auto 0; color:#1a6ea8; background:#fff; border:2px solid #cde6f0; border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
+  .back:hover { background:#eef8ff; }
+  .wrap { max-width:880px; margin:0 auto; padding:20px 16px; }
+  .intro { background:#fff; border-radius:12px; padding:16px 22px; margin-bottom:22px; box-shadow:0 1px 6px rgba(0,0,0,.07); font-size:17px; }
   .intro b { color:var(--main); }
-  .unit { background:#fff; border-radius:12px; margin-bottom:16px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,.08); }
-  .unit-head { background:linear-gradient(90deg,#1a6ea8,#2c5f8a); color:#fff; font-size:20px; font-weight:700; padding:12px 20px; display:flex; align-items:center; gap:10px; }
-  .unit-num { background:#fff; color:#1a6ea8; border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
-  .links { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:14px 18px; }
-  .links a { display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; border:2px solid #d9e2ec; border-radius:10px; padding:12px 8px; font-size:17px; color:#1a1a1a; transition:all .12s; text-align:center; }
-  .links a:hover { border-color:var(--main); background:#f0f6fc; transform:translateY(-2px); }
-  .links a .ic { font-size:24px; }
-  .links a.teach { border-color:#e7d9a8; }
-  .links a.teach:hover { border-color:var(--teach); background:#fffbe9; }
-  .links a small { color:#667; font-size:14px; }
-  footer { text-align:center; color:#789; font-size:15px; margin-top:30px; }
-  @media (max-width:540px){ .links{ grid-template-columns:1fr; } header h1{ font-size:22px; } }
+
+  .section-label { font-size:14px; font-weight:bold; color:#4a7a96; letter-spacing:.8px; margin:26px 0 12px; padding-left:2px; }
+
+  /* 繽紛插畫卡片頂部（互動講義與練習共用） */
+  .lcard-top{position:relative;height:130px;background:linear-gradient(150deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .lcard-no{position:absolute;top:12px;left:15px;z-index:3;color:#fff;font-size:17px;font-weight:bold;letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,.28);}
+  .lcard-no b{font-size:26px;margin:0 2px;}
+  .lcard-badge{position:absolute;top:13px;right:14px;z-index:3;background:rgba(255,255,255,.30);color:#fff;border-radius:20px;padding:3px 11px;font-size:12px;font-weight:bold;backdrop-filter:blur(2px);}
+  .lcard-emoji{position:relative;z-index:2;font-size:54px;line-height:1;filter:drop-shadow(0 3px 5px rgba(0,0,0,.22));animation:bob 3s ease-in-out infinite;}
+  .lcard-halo{position:absolute;z-index:1;width:94px;height:94px;border-radius:50%;background:rgba(255,255,255,.22);}
+  .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.16);z-index:0;}
+  .d1{width:70px;height:70px;top:-24px;right:-14px;}
+  .d2{width:38px;height:38px;bottom:-10px;left:22px;background:rgba(255,255,255,.20);}
+  .d3{width:16px;height:16px;top:26px;right:42px;background:rgba(255,255,255,.28);}
+  .lcard-corner{position:absolute;right:0;bottom:0;z-index:1;width:0;height:0;border-style:solid;border-width:0 0 42px 42px;border-color:transparent transparent rgba(255,255,255,.38) transparent;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+  /* 卡片＋多連結 */
+  .ugrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:6px 0 8px;}
+  .ucard{position:relative;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.10);transition:transform .16s,box-shadow .16s;}
+  .ucard:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(0,0,0,.18);}
+  .ucard .lcard-top{height:118px;}
+  .ucard:nth-child(even) .lcard-emoji{animation-delay:.6s;}
+  .ucard-body{padding:14px 16px 16px;}
+  .ucard-title{font-size:18px;font-weight:bold;color:#22364a;margin-bottom:12px;line-height:1.35;}
+  .ulinks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+  .ulinks.two{grid-template-columns:1fr 1fr;}
+  .ulinks a{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;border:2px solid #e1e8f0;border-radius:12px;padding:11px 5px;font-size:15px;font-weight:bold;color:#33414f;text-align:center;transition:all .13s;}
+  .ulinks a .uic{font-size:22px;line-height:1;}
+  .ulinks a small{font-size:11px;color:#8b98a6;font-weight:normal;}
+  .ulinks a:hover{border-color:var(--c1);background:#f6faff;transform:translateY(-2px);}
+  .ulinks a.teach{border-color:#e7d9a8;}
+  .ulinks a.teach:hover{border-color:#d4a628;background:#fffbe9;}
+
+  footer { text-align:center; color:#789; font-size:15px; margin-top:34px; }
+  @media(max-width:820px){.ugrid{grid-template-columns:1fr;}}
+  @media(max-width:560px){ header h1{font-size:24px;} }
 </style>
 </head>
 <body>
 <header>
-  <h1>🗺 地理 第一冊（含先修）</h1>
-  <p>教師講義 ・ 練習卷 ・ 作業卷</p>
+  <h1>🗺️ 地理 第一冊 ‧ 臺灣地理基礎</h1>
+  <p>teaching.efetl.com / 地理 / 第一冊</p>
   <a class="back" href="index.html">← 返回地理主選單</a>
 </header>
 <div class="wrap">
-  <div class="intro">點選下方連結即可在線上<b>互動作答</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
+  <div class="intro">點選下方項目即可在線上<b>作答練習</b>，系統會<b>即時告訴你對錯</b>並<b>顯示解析</b>。</div>
 
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">1</span>臺灣在哪裡</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-1.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-1.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-1.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+  <div class="section-label">✦ 康軒版 · 互動＋列印講義（第 1～6 課）</div>
+  <div class="intro" style="font-size:16px;">💻 <b>互動講義</b>點問號即時看答案、每課附 <b>15 題隨堂練習</b>（含 110–113 會考真題＋自編仿題）；🖨️ <b>列印講義</b>留空格可手寫、可切換教師解答版，兩版頁碼一致。</div>
+  <div class="ugrid">
+    <div class="ucard" style="--c1:#e29a2e;--c2:#f2b350">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>1</b>課</span>
+        <span class="lcard-badge">互動＋列印</span>
+        <span class="lcard-emoji">🧭</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">位置、地圖與座標系統</div>
+        <div class="ulinks">
+          <a class="teach" href="lecture-unit-1.html"><span class="uic">💻</span>互動講義<small>點問號看答案</small></a>
+          <a href="print-unit-1.html"><span class="uic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+          <a href="exam-unit-1.html"><span class="uic">✏️</span>填空測驗<small>互動作答</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">2</span>海岸與島嶼</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-2.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-2.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-2.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+    <div class="ucard" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>2</b>課</span>
+        <span class="lcard-badge">互動＋列印</span>
+        <span class="lcard-emoji">🌏</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">位置對臺灣的影響</div>
+        <div class="ulinks two">
+          <a class="teach" href="lecture-unit-2.html"><span class="uic">💻</span>互動講義<small>點問號看答案</small></a>
+          <a href="print-unit-2.html"><span class="uic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">3</span>地形與河川</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-3.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-3.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-3.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+    <div class="ucard" style="--c1:#7a5a3a;--c2:#a3794c">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>3</b>課</span>
+        <span class="lcard-badge">互動＋列印</span>
+        <span class="lcard-emoji">⛰️</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">臺灣的地形</div>
+        <div class="ulinks two">
+          <a class="teach" href="lecture-unit-3.html"><span class="uic">💻</span>互動講義<small>點問號看答案</small></a>
+          <a href="print-unit-3.html"><span class="uic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">4</span>天氣與氣候</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-4.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-4.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-4.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+    <div class="ucard" style="--c1:#2f8fb3;--c2:#45b0d0">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>4</b>課</span>
+        <span class="lcard-badge">互動＋列印</span>
+        <span class="lcard-emoji">🌊</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">臺灣的海域</div>
+        <div class="ulinks two">
+          <a class="teach" href="lecture-unit-4.html"><span class="uic">💻</span>互動講義<small>點問號看答案</small></a>
+          <a href="print-unit-4.html"><span class="uic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">5</span>家鄉的環境變遷</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-5.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-5.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-5.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+    <div class="ucard" style="--c1:#9257c4;--c2:#ac74dd">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>5</b>課</span>
+        <span class="lcard-badge">互動＋列印</span>
+        <span class="lcard-emoji">🌦️</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">臺灣的氣候</div>
+        <div class="ulinks two">
+          <a class="teach" href="lecture-unit-5.html"><span class="uic">💻</span>互動講義<small>點問號看答案</small></a>
+          <a href="print-unit-5.html"><span class="uic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">6</span>臺灣的人口</div>
-    <div class="links">
-      <a class="teach" href="notes-unit-6.html"><span class="ic">📘</span>教師講義<small>點「？」看答案</small></a>
-      <a href="practice-unit-6.html"><span class="ic">✏️</span>練習卷<small>練習用</small></a>
-      <a href="homework-unit-6.html"><span class="ic">📝</span>作業卷<small>作業用</small></a>
+    <div class="ucard" style="--c1:#2f6fb3;--c2:#4a97da">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">第<b>6</b>課</span>
+        <span class="lcard-badge">互動＋列印</span>
+        <span class="lcard-emoji">💧</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">臺灣的水文</div>
+        <div class="ulinks two">
+          <a class="teach" href="lecture-unit-6.html"><span class="uic">💻</span>互動講義<small>點問號看答案</small></a>
+          <a href="print-unit-6.html"><span class="uic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div style="margin:30px 0 16px;padding:14px 20px;background:linear-gradient(135deg,#0f4c75,#1b6ca8);color:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(15,76,117,.25);">
-    <div style="font-size:20px;font-weight:700;">🗺️ 應用社會科的技能・互動＋列印講義</div>
-    <div style="font-size:15px;opacity:.92;margin-top:4px;">康軒版 第 1～6 課｜💻 互動版點問號看答案　🖨️ 列印版留空格（可切換教師解答版），兩版頁碼一致</div>
   </div>
 
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">1</span>第1課　位置、地圖與座標系統</div>
-    <div class="links">
-      <a class="teach" href="lecture-unit-1.html"><span class="ic">💻</span>互動講義<small>點問號看答案</small></a>
-      <a href="print-unit-1.html"><span class="ic">🖨️</span>列印講義<small>列印 / PDF</small></a>
-      <a href="exam-unit-1.html"><span class="ic">✏️</span>填空測驗<small>互動作答</small></a>
+  <div class="section-label">✦ 先修教材（教師講義 · 練習卷 · 作業卷）</div>
+  <div class="ugrid">
+    <div class="ucard" style="--c1:#e29a2e;--c2:#f2b350">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">單元<b>1</b></span>
+        <span class="lcard-badge">先修</span>
+        <span class="lcard-emoji">📍</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">臺灣在哪裡</div>
+        <div class="ulinks">
+          <a class="teach" href="notes-unit-1.html"><span class="uic">📘</span>教師講義<small>看答案</small></a>
+          <a href="practice-unit-1.html"><span class="uic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-1.html"><span class="uic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">2</span>第2課　位置對臺灣的影響</div>
-    <div class="links">
-      <a class="teach" href="lecture-unit-2.html"><span class="ic">💻</span>互動講義<small>點問號看答案</small></a>
-      <a href="print-unit-2.html"><span class="ic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+    <div class="ucard" style="--c1:#10908c;--c2:#1cb3a4">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">單元<b>2</b></span>
+        <span class="lcard-badge">先修</span>
+        <span class="lcard-emoji">🏝️</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">海岸與島嶼</div>
+        <div class="ulinks">
+          <a class="teach" href="notes-unit-2.html"><span class="uic">📘</span>教師講義<small>看答案</small></a>
+          <a href="practice-unit-2.html"><span class="uic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-2.html"><span class="uic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">3</span>第3課　臺灣的地形</div>
-    <div class="links">
-      <a class="teach" href="lecture-unit-3.html"><span class="ic">💻</span>互動講義<small>點問號看答案</small></a>
-      <a href="print-unit-3.html"><span class="ic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+    <div class="ucard" style="--c1:#7a5a3a;--c2:#a3794c">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">單元<b>3</b></span>
+        <span class="lcard-badge">先修</span>
+        <span class="lcard-emoji">🏞️</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">地形與河川</div>
+        <div class="ulinks">
+          <a class="teach" href="notes-unit-3.html"><span class="uic">📘</span>教師講義<small>看答案</small></a>
+          <a href="practice-unit-3.html"><span class="uic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-3.html"><span class="uic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">4</span>第4課　臺灣的海域</div>
-    <div class="links">
-      <a class="teach" href="lecture-unit-4.html"><span class="ic">💻</span>互動講義<small>點問號看答案</small></a>
-      <a href="print-unit-4.html"><span class="ic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+    <div class="ucard" style="--c1:#2f8fb3;--c2:#45b0d0">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">單元<b>4</b></span>
+        <span class="lcard-badge">先修</span>
+        <span class="lcard-emoji">⛅</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">天氣與氣候</div>
+        <div class="ulinks">
+          <a class="teach" href="notes-unit-4.html"><span class="uic">📘</span>教師講義<small>看答案</small></a>
+          <a href="practice-unit-4.html"><span class="uic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-4.html"><span class="uic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">5</span>第5課　臺灣的氣候</div>
-    <div class="links">
-      <a class="teach" href="lecture-unit-5.html"><span class="ic">💻</span>互動講義<small>點問號看答案</small></a>
-      <a href="print-unit-5.html"><span class="ic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+    <div class="ucard" style="--c1:#9257c4;--c2:#ac74dd">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">單元<b>5</b></span>
+        <span class="lcard-badge">先修</span>
+        <span class="lcard-emoji">🏘️</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">家鄉的環境變遷</div>
+        <div class="ulinks">
+          <a class="teach" href="notes-unit-5.html"><span class="uic">📘</span>教師講義<small>看答案</small></a>
+          <a href="practice-unit-5.html"><span class="uic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-5.html"><span class="uic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="unit">
-    <div class="unit-head"><span class="unit-num">6</span>第6課　臺灣的水文</div>
-    <div class="links">
-      <a class="teach" href="lecture-unit-6.html"><span class="ic">💻</span>互動講義<small>點問號看答案</small></a>
-      <a href="print-unit-6.html"><span class="ic">🖨️</span>列印講義<small>列印 / PDF</small></a>
+    <div class="ucard" style="--c1:#2f6fb3;--c2:#4a97da">
+      <div class="lcard-top">
+        <span class="deco d1"></span><span class="deco d2"></span><span class="deco d3"></span>
+        <span class="lcard-halo"></span>
+        <span class="lcard-no">單元<b>6</b></span>
+        <span class="lcard-badge">先修</span>
+        <span class="lcard-emoji">👥</span>
+        <span class="lcard-corner"></span>
+      </div>
+      <div class="ucard-body">
+        <div class="ucard-title">臺灣的人口</div>
+        <div class="ulinks">
+          <a class="teach" href="notes-unit-6.html"><span class="uic">📘</span>教師講義<small>看答案</small></a>
+          <a href="practice-unit-6.html"><span class="uic">✏️</span>練習卷<small>練習用</small></a>
+          <a href="homework-unit-6.html"><span class="uic">📝</span>作業卷<small>作業用</small></a>
+        </div>
+      </div>
     </div>
   </div>
 
