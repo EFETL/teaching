@@ -1,0 +1,816 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>七天的秘密：英文星期由來</title>
+<style>
+  :root{
+    --bg: #0e0f26;
+    --bg-deep: #08091a;
+    --panel: #171a3d;
+    --panel-edge: rgba(244,241,232,0.09);
+    --ink: #f3efe3;
+    --ink-dim: #aeb0d6;
+    --ink-faint: #7577a3;
+    --gold: #f0b429;
+
+    --sun: #f0b429;
+    --moon: #9fb8e8;
+    --mars: #d1495b;
+    --mercury: #6fd8c4;
+    --jupiter: #9b8cf2;
+    --venus: #f28fb0;
+    --saturn: #cf9a5c;
+
+    --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Noto Sans Mono", monospace;
+    --symbol: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols", var(--sans);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; min-height: 100%; }
+  html{
+    background: var(--bg-deep);
+    font-size: 16px;
+  }
+  body{
+    background: radial-gradient(ellipse at 50% -10%, #1b1e46 0%, var(--bg) 45%, var(--bg-deep) 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a{ color: var(--gold); }
+
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  ::selection{ background: var(--gold); color: #1a1a1a; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position: relative;
+    padding: 88px 0 64px;
+    text-align: center;
+    overflow: hidden;
+  }
+  #sky{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .hero-content{ position: relative; z-index: 2; }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 18px;
+  }
+  h1{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    margin: 0 0 6px;
+    text-wrap: balance;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: 1.05rem;
+    margin: 0 0 28px;
+  }
+  .hero-copy{
+    max-width: 620px;
+    margin: 0 auto;
+    color: var(--ink-dim);
+    font-size: 1.02rem;
+  }
+  .hero-copy b{ color: var(--ink); font-weight: 600; }
+
+  /* ---------- LEGEND STRIP ---------- */
+  .legend{
+    margin: 56px 0 8px;
+  }
+  .legend-title{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-align: center;
+    margin: 0 0 20px;
+  }
+  .legend-row{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 14px;
+    padding: 18px 10px;
+  }
+  .legend-cell{
+    text-align: center;
+    padding: 6px 4px;
+    border-radius: 10px;
+  }
+  .legend-sym{
+    font-family: var(--symbol);
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .legend-day{
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .legend-zh{
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+  @media (max-width: 720px){
+    .legend-row{ grid-template-columns: repeat(4, 1fr); }
+    .legend-cell:last-child{ grid-column: 2 / span 2; }
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    text-align: center;
+    margin: 84px 0 40px;
+  }
+  .section-head h2{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .section-head p{
+    color: var(--ink-dim);
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 1rem;
+  }
+
+  /* ---------- DAY CARDS ---------- */
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+  }
+
+  .card{
+    --accent: var(--gold);
+    position: relative;
+    height: 320px;
+    border-radius: 16px;
+    cursor: pointer;
+    outline: none;
+  }
+  .card:focus-visible .card-face{ box-shadow: 0 0 0 2px var(--accent), 0 18px 40px -20px rgba(0,0,0,0.6); }
+
+  .card-face{
+    position: absolute; inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(165deg, var(--panel), var(--bg-deep));
+    border: 1px solid var(--panel-edge);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 18px 40px -24px rgba(0,0,0,0.7);
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .card-front{ z-index: 2; }
+  .card-back{
+    z-index: 1;
+    opacity: 0;
+    transform: scale(0.96);
+    pointer-events: none;
+    overflow-y: auto;
+  }
+  .card.flipped .card-front{
+    opacity: 0;
+    transform: scale(1.04);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .card.flipped .card-back{
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .card-icon{
+    font-family: var(--symbol);
+    font-size: 2.6rem;
+    color: var(--accent);
+    text-shadow: 0 0 22px color-mix(in srgb, var(--accent) 65%, transparent);
+    line-height: 1;
+  }
+  .card-icon{ display: inline-block; animation-play-state: paused; }
+  .card-icon.spin-slow{ animation: spin-slow 12s linear infinite; }
+  .card-icon.pulse{ animation: glow-pulse 3.2s ease-in-out infinite; }
+  .card-icon.bob{ animation: bob 4s ease-in-out infinite; }
+  .card-icon.shimmer{ animation: shimmer-rotate 5s ease-in-out infinite; }
+  .card-icon.jolt{ animation: jolt 2.6s ease-in-out infinite; }
+  .card-icon.sway{ animation: sway 3.4s ease-in-out infinite; }
+  .card-icon.ring{ animation: spin-slow 9s linear infinite; }
+  .card:hover .card-icon,
+  .card:focus-visible .card-icon,
+  .card.flipped .card-icon{ animation-play-state: running; }
+
+  .card-en{
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    margin: 14px 0 2px;
+    color: var(--ink);
+  }
+  .card-zh{
+    font-size: 1rem;
+    color: var(--ink-faint);
+    margin: 0 0 auto;
+  }
+  .card-hook{
+    font-size: 1rem;
+    color: var(--ink-dim);
+    margin-top: 14px;
+  }
+  .card-flip-hint{
+    margin-top: auto;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 12px;
+  }
+
+  .root-tag{
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+    align-self: flex-start;
+  }
+  .card-story{
+    font-size: 1rem;
+    color: var(--ink-dim);
+    margin: 0 0 12px;
+  }
+  .card-mnemonic{
+    font-size: 1rem;
+    color: var(--ink);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    border-left: 2px solid var(--accent);
+    padding: 8px 10px;
+    border-radius: 0 8px 8px 0;
+    margin-top: auto;
+  }
+  .card-mnemonic b{ color: var(--accent); }
+
+  /* per-day accent binding */
+  .card.c-sun{ --accent: var(--sun); }
+  .card.c-moon{ --accent: var(--moon); }
+  .card.c-mars{ --accent: var(--mars); }
+  .card.c-mercury{ --accent: var(--mercury); }
+  .card.c-jupiter{ --accent: var(--jupiter); }
+  .card.c-venus{ --accent: var(--venus); }
+  .card.c-saturn{ --accent: var(--saturn); }
+
+  @keyframes spin-slow{ to{ transform: rotate(360deg); } }
+  @keyframes glow-pulse{
+    0%,100%{ opacity: 0.75; filter: drop-shadow(0 0 4px currentColor); }
+    50%{ opacity: 1; filter: drop-shadow(0 0 14px currentColor); }
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-6px); }
+  }
+  @keyframes shimmer-rotate{
+    0%,100%{ transform: rotate(-6deg) scale(1); }
+    50%{ transform: rotate(6deg) scale(1.08); }
+  }
+  @keyframes jolt{
+    0%,84%,100%{ transform: translateX(0) rotate(0); opacity: 1; }
+    86%{ transform: translateX(-3px) rotate(-8deg); opacity: 0.6; }
+    88%{ transform: translateX(3px) rotate(8deg); opacity: 1; }
+    90%{ transform: translateX(-2px) rotate(-4deg); }
+    92%{ transform: translateX(0) rotate(0); }
+  }
+  @keyframes sway{
+    0%,100%{ transform: rotate(-5deg); }
+    50%{ transform: rotate(5deg); }
+  }
+
+  /* ---------- RECAP ---------- */
+  .recap{
+    margin: 90px 0 0;
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 18px;
+    padding: 36px 34px;
+  }
+  .recap h2{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin: 0 0 14px;
+  }
+  .recap p{
+    color: var(--ink-dim);
+    font-size: 1rem;
+    max-width: 700px;
+  }
+  .chain{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin-top: 20px;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+  }
+  .chain span.g{
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--bg-deep);
+    border: 1px solid var(--panel-edge);
+  }
+  .chain .arrow{ color: var(--ink-faint); }
+  .chain .g.sun{ color: var(--sun); }
+  .chain .g.moon{ color: var(--moon); }
+  .chain .g.mars{ color: var(--mars); }
+  .chain .g.mercury{ color: var(--mercury); }
+  .chain .g.jupiter{ color: var(--jupiter); }
+  .chain .g.venus{ color: var(--venus); }
+  .chain .g.saturn{ color: var(--saturn); }
+
+  /* ---------- MATCH GAME ---------- */
+  .game{
+    margin: 90px 0 100px;
+  }
+  .game-status{
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    margin-bottom: 22px;
+  }
+  .game-status b{ color: var(--gold); }
+  .game-board{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .game-col-label{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .game-col{ display: flex; flex-direction: column; gap: 10px; }
+  .pick{
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color .2s, transform .15s, background .2s;
+  }
+  .pick .pick-sym{ font-family: var(--symbol); font-size: 1.1rem; width: 1.2em; }
+  .pick:hover{ border-color: var(--ink-faint); }
+  .pick.selected{ border-color: var(--gold); background: color-mix(in srgb, var(--gold) 12%, var(--panel)); transform: translateX(2px); }
+  .pick.matched{ opacity: 0.45; border-color: #5fbf7a; cursor: default; }
+  .pick.matched:hover{ transform: none; }
+  .pick.wrong{ animation: shake 0.4s; border-color: var(--mars); }
+  .pick:disabled{ cursor: default; }
+  @keyframes shake{
+    0%,100%{ transform: translateX(0); }
+    25%{ transform: translateX(-5px); }
+    75%{ transform: translateX(5px); }
+  }
+  .game-reset{
+    display: block;
+    margin: 26px auto 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    background: transparent;
+    border: 1px solid var(--panel-edge);
+    border-radius: 999px;
+    padding: 9px 20px;
+    cursor: pointer;
+  }
+  .game-reset:hover{ color: var(--ink); border-color: var(--ink-faint); }
+
+  .win-banner{
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold);
+    margin-top: 22px;
+    opacity: 0;
+    transition: opacity .5s;
+  }
+  .win-banner.show{ opacity: 1; }
+
+  footer{
+    text-align: center;
+    padding: 30px 0 50px;
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .card-face{ transition: none; }
+    .card-icon{ animation: none !important; }
+  }
+</style>
+
+<div class="hero">
+  <canvas id="sky"></canvas>
+  <div class="hero-content wrap">
+    <p class="eyebrow">Word Origins · 英文小知識</p>
+    <h1>七天的<em>秘密</em></h1>
+    <p class="hero-sub">Where the Days of the Week Come From</p>
+    <p class="hero-copy">
+      兩千多年前，古人抬頭觀察夜空，找出七個肉眼可見、會移動的天體：<b>太陽、月亮</b>，以及五顆行星。
+      羅馬人用掌管這七個天體的神祇，為一週的七天命名；後來英語繼承了這套系統，
+      卻把其中五天的羅馬神名，換成了<b>北歐神話</b>裡對應的神祇。點開下面每張卡片，看看你天天說的
+      Monday、Friday 背後，其實都是一則神話故事。
+    </p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="legend">
+    <p class="legend-title">七個天體 · 七位守護神</p>
+    <div class="legend-row" id="legendRow"></div>
+  </div>
+
+  <div class="section-head">
+    <h2>點卡片，翻出每一天的身世</h2>
+    <p>每張卡片正面是英文名字，點一下翻到背面，看古英文原形、神話故事和記憶小技巧。</p>
+  </div>
+
+  <div class="grid" id="cardGrid"></div>
+
+  <div class="recap">
+    <h2>用一句故事，記住一整週</h2>
+    <p>
+      太陽升起、月亮緊隨其後；戰神提爾（Tiw）率先出征，智慧之神奧丁（Woden）指引方向，
+      雷神索爾（Thor）轟隆降臨，愛神弗麗嘉（Frigg）溫柔相伴，最後農神薩圖爾努斯（Saturn）
+      迎接豐收——七位神祇，排成了一整週。
+    </p>
+    <div class="chain" id="chainRow"></div>
+  </div>
+
+  <div class="section-head game-head" style="margin-bottom:8px;">
+    <h2>小測驗：神祇對對碰</h2>
+    <p>左邊是守護神與天體符號，右邊是星期名稱，點一個再點一個試試看能不能配對成功。</p>
+  </div>
+  <div class="game">
+    <p class="game-status">已配對 <b id="scoreNum">0</b> / 7</p>
+    <div class="game-board">
+      <div class="game-col">
+        <p class="game-col-label">守護神</p>
+        <div id="godCol"></div>
+      </div>
+      <div class="game-col">
+        <p class="game-col-label">星期</p>
+        <div id="dayCol"></div>
+      </div>
+    </div>
+    <p class="win-banner" id="winBanner">全部配對成功！你已經記住七天的由來了 ✦</p>
+    <button class="game-reset" id="resetGame">重新開始</button>
+  </div>
+
+  <footer>七天的秘密 · 為了更好記住英文星期而做的小教材</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var DATA = [
+    {
+      key:"sun", en:"Sunday", zh:"星期日", sym:"☉", iconClass:"pulse", god:"太陽神 Sol",
+      root:"Sunnandæg → Sunday", hook:"太陽的日子",
+      story:"古英文 Sunnandæg，字面就是「太陽的日子」，源自羅馬人對太陽神 Sol 的崇拜。它是一週的起點，也是七天之中少數幾乎沒被北歐神話取代的名字。",
+      mnemonic:"看到 <b>Sun</b> 就想到星期日：想像旭日東升，一週最先亮起的一天。"
+    },
+    {
+      key:"moon", en:"Monday", zh:"星期一", sym:"☽", iconClass:"bob", god:"月神 Luna",
+      root:"Mōnandæg → Monday", hook:"月亮的日子",
+      story:"古英文 Mōnandæg 意為「月亮的日子」，源自羅馬人對月神 Luna 的崇拜。太陽之後緊接著月亮，日月相繼，是最古老、最直覺的命名邏輯。",
+      mnemonic:"<b>Mon-</b> 聽起來像 Moon，星期一就像昨晚的月亮還捨不得下山。"
+    },
+    {
+      key:"mars", en:"Tuesday", zh:"星期二", sym:"♂", iconClass:"jolt", god:"戰神提爾 Tiw",
+      root:"Tiwesdæg → Tuesday", hook:"戰神的日子",
+      story:"羅馬人稱這天為 Martis dies，獻給戰神瑪爾斯（Mars）。盎格魯薩克遜人卻換成了自己文化裡對應的戰神提爾（Tiw／Týr）——那位為了換取和平而獻出一隻手的勇敢神祇，於是 Tiwesdæg 演變成 Tuesday。",
+      mnemonic:"<b>T</b> 開頭想到 <b>T</b>iw 戰神，拿劍出征——星期二就是一週作戰的開始。"
+    },
+    {
+      key:"mercury", en:"Wednesday", zh:"星期三", sym:"☿", iconClass:"shimmer", god:"智慧之神奧丁 Woden",
+      root:"Wōdnesdæg → Wednesday", hook:"眾神之王的日子",
+      story:"羅馬人獻給信使之神墨丘利（Mercury），英語卻改用北歐眾神之王奧丁（Woden，即 Odin）的名字，因為奧丁同樣象徵智慧、旅行與言語。Wōdnesdæg 就這樣變成了拼字古怪的 Wednesday。",
+      mnemonic:"唸法訣竅：讀成「<b>WENZ</b>-day」，中間的 d 是啞巴字母，別被拼字騙了。"
+    },
+    {
+      key:"jupiter", en:"Thursday", zh:"星期四", sym:"♃", iconClass:"jolt", god:"雷神索爾 Thor",
+      root:"Þūnresdæg → Thursday", hook:"雷神的日子",
+      story:"羅馬人獻給眾神之王朱庇特（Jupiter，掌管雷電），北歐版本則是家喻戶曉的雷神索爾（Thor）與他的雷神之槌。Þūnresdæg 原意是「雷聲的日子」，後來演變成 Thursday。",
+      mnemonic:"<b>Thor</b> + day = Thursday，一聽到打雷就想到星期四。"
+    },
+    {
+      key:"venus", en:"Friday", zh:"星期五", sym:"♀", iconClass:"pulse", god:"愛神弗麗嘉 Frigg",
+      root:"Frīgedæg → Friday", hook:"愛神的日子",
+      story:"羅馬人獻給愛與美的女神維納斯（Venus），北歐對應的是奧丁之妻、掌管愛情與婚姻的女神弗麗嘉（Frigg）。Frīgedæg 演變成了 Friday——難怪忙碌一週後，星期五總讓人特別期待。",
+      mnemonic:"<b>Fri-</b> 聽起來像 Free，熬過一週終於自由，也是愛神眷顧的日子。"
+    },
+    {
+      key:"saturn", en:"Saturday", zh:"星期六", sym:"♄", iconClass:"ring", god:"農神薩圖爾努斯 Saturn",
+      root:"Saturni dies → Saturday", hook:"農神的日子",
+      story:"七天之中唯一沒被北歐神話取代、直接保留羅馬神名的一天——獻給農業與收穫之神薩圖爾努斯（Saturn）。Saturni dies 幾乎原封不動地變成了 Saturday。",
+      mnemonic:"Sa<b>turn</b>day 裡面藏著 Saturn（土星），是七天中最好認的一個。"
+    }
+  ];
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- legend ----------
+  var legendRow = document.getElementById("legendRow");
+  DATA.forEach(function(d){
+    var cell = document.createElement("div");
+    cell.className = "legend-cell";
+    cell.innerHTML =
+      '<span class="legend-sym" style="color:var(--'+d.key+')">'+d.sym+'</span>' +
+      '<span class="legend-day">'+d.en+'</span><br>' +
+      '<span class="legend-zh">'+d.zh+'</span>';
+    legendRow.appendChild(cell);
+  });
+
+  // ---------- cards ----------
+  var grid = document.getElementById("cardGrid");
+  DATA.forEach(function(d, i){
+    var card = document.createElement("div");
+    card.className = "card c-"+d.key;
+    card.tabIndex = 0;
+    card.setAttribute("role","button");
+    card.setAttribute("aria-pressed","false");
+    card.setAttribute("aria-label", d.en + " " + d.zh + "，點擊查看由來");
+    card.innerHTML =
+      '<div class="card-face card-front">' +
+        '<span class="card-icon '+d.iconClass+'">'+d.sym+'</span>' +
+        '<div class="card-en">'+d.en+'</div>' +
+        '<div class="card-zh">'+d.zh+'</div>' +
+        '<div class="card-hook">'+d.hook+'</div>' +
+        '<div class="card-flip-hint">點擊翻面 →</div>' +
+      '</div>' +
+      '<div class="card-face card-back">' +
+        '<span class="root-tag">'+d.root+'</span>' +
+        '<p class="card-story">'+d.story+'</p>' +
+        '<p class="card-mnemonic">'+d.mnemonic+'</p>' +
+      '</div>';
+    function toggle(){
+      var flipped = card.classList.toggle("flipped");
+      card.setAttribute("aria-pressed", flipped ? "true" : "false");
+    }
+    card.addEventListener("click", toggle);
+    card.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggle(); }
+    });
+    grid.appendChild(card);
+  });
+
+  // ---------- recap chain ----------
+  var GODS = [
+    {n:"太陽 Sun", c:"sun"}, {n:"月亮 Moon", c:"moon"}, {n:"提爾 Tiw", c:"mars"},
+    {n:"奧丁 Woden", c:"mercury"}, {n:"索爾 Thor", c:"jupiter"}, {n:"弗麗嘉 Frigg", c:"venus"},
+    {n:"薩圖爾努斯 Saturn", c:"saturn"}
+  ];
+  var chainRow = document.getElementById("chainRow");
+  GODS.forEach(function(g, i){
+    if(i > 0){
+      var arrow = document.createElement("span");
+      arrow.className = "arrow";
+      arrow.textContent = "→";
+      chainRow.appendChild(arrow);
+    }
+    var span = document.createElement("span");
+    span.className = "g " + g.c;
+    span.textContent = g.n;
+    chainRow.appendChild(span);
+  });
+
+  // ---------- matching game ----------
+  var godCol = document.getElementById("godCol");
+  var dayCol = document.getElementById("dayCol");
+  var scoreNum = document.getElementById("scoreNum");
+  var winBanner = document.getElementById("winBanner");
+  var resetBtn = document.getElementById("resetGame");
+
+  function realShuffle(arr){
+    var a = arr.slice();
+    for(var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i+1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  var state = { godPick: null, dayPick: null, matched: 0 };
+
+  function buildGame(){
+    state.godPick = null;
+    state.dayPick = null;
+    state.matched = 0;
+    scoreNum.textContent = "0";
+    winBanner.classList.remove("show");
+    godCol.innerHTML = "";
+    dayCol.innerHTML = "";
+
+    realShuffle(DATA).forEach(function(d){
+      var b = document.createElement("button");
+      b.className = "pick";
+      b.dataset.key = d.key;
+      b.innerHTML = '<span class="pick-sym" style="color:var(--'+d.key+')">'+d.sym+'</span>' + d.god;
+      b.addEventListener("click", function(){ handlePick("god", d.key, b); });
+      godCol.appendChild(b);
+    });
+    realShuffle(DATA).forEach(function(d){
+      var b = document.createElement("button");
+      b.className = "pick";
+      b.dataset.key = d.key;
+      b.innerHTML = d.en + '<span style="color:var(--ink-faint);"> · '+d.zh+'</span>';
+      b.addEventListener("click", function(){ handlePick("day", d.key, b); });
+      dayCol.appendChild(b);
+    });
+  }
+
+  function handlePick(side, key, el){
+    if(el.classList.contains("matched")) return;
+    if(side === "god"){
+      if(state.godPick) state.godPick.el.classList.remove("selected");
+      state.godPick = { key: key, el: el };
+      el.classList.add("selected");
+    } else {
+      if(state.dayPick) state.dayPick.el.classList.remove("selected");
+      state.dayPick = { key: key, el: el };
+      el.classList.add("selected");
+    }
+    if(state.godPick && state.dayPick){
+      if(state.godPick.key === state.dayPick.key){
+        state.godPick.el.classList.remove("selected");
+        state.dayPick.el.classList.remove("selected");
+        state.godPick.el.classList.add("matched");
+        state.dayPick.el.classList.add("matched");
+        state.godPick.el.disabled = true;
+        state.dayPick.el.disabled = true;
+        state.matched++;
+        scoreNum.textContent = String(state.matched);
+        state.godPick = null;
+        state.dayPick = null;
+        if(state.matched === DATA.length){
+          winBanner.classList.add("show");
+        }
+      } else {
+        var g = state.godPick.el, d = state.dayPick.el;
+        g.classList.add("wrong"); d.classList.add("wrong");
+        setTimeout(function(){
+          g.classList.remove("wrong","selected");
+          d.classList.remove("wrong","selected");
+        }, 420);
+        state.godPick = null;
+        state.dayPick = null;
+      }
+    }
+  }
+
+  resetBtn.addEventListener("click", buildGame);
+  buildGame();
+
+  // ---------- hero sky canvas ----------
+  var canvas = document.getElementById("sky");
+  var ctx = canvas.getContext("2d");
+  var hero = canvas.parentElement;
+  var stars = [];
+  var w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize(){
+    w = hero.clientWidth; h = hero.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + "px"; canvas.style.height = h + "px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    stars = [];
+    var n = Math.floor((w*h) / 5500);
+    for(var i=0;i<n;i++){
+      stars.push({
+        x: Math.random()*w,
+        y: Math.random()*h*0.85,
+        r: Math.random()*1.3 + 0.3,
+        phase: Math.random()*Math.PI*2,
+        speed: 0.6 + Math.random()*1.2
+      });
+    }
+  }
+
+  function draw(t){
+    ctx.clearRect(0,0,w,h);
+    // stars
+    for(var i=0;i<stars.length;i++){
+      var s = stars[i];
+      var tw = reduceMotion ? 0.7 : (0.5 + 0.5*Math.sin(t*0.0009*s.speed + s.phase));
+      ctx.globalAlpha = 0.25 + tw*0.65;
+      ctx.fillStyle = "#f3efe3";
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    var cycle = reduceMotion ? 0.22 : ((t*0.000045) % 1);
+    var arcW = w * 0.92, arcH = h * 0.9;
+    var cx = w/2, cy = h*1.02;
+
+    // sun
+    var sunAngle = Math.PI - cycle*Math.PI*2;
+    var sx = cx + Math.cos(sunAngle) * (arcW/2);
+    var sy = cy - Math.sin(sunAngle) * (arcH/1.05);
+    if(sy < h*0.92){
+      var sunGrad = ctx.createRadialGradient(sx,sy,0,sx,sy,46);
+      sunGrad.addColorStop(0, "rgba(240,180,41,0.9)");
+      sunGrad.addColorStop(1, "rgba(240,180,41,0)");
+      ctx.fillStyle = sunGrad;
+      ctx.beginPath(); ctx.arc(sx,sy,46,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = "#f6c95c";
+      ctx.beginPath(); ctx.arc(sx,sy,12,0,Math.PI*2); ctx.fill();
+    }
+
+    // moon (offset half cycle)
+    var moonAngle = sunAngle + Math.PI;
+    var mx = cx + Math.cos(moonAngle) * (arcW/2);
+    var my = cy - Math.sin(moonAngle) * (arcH/1.05);
+    if(my < h*0.92){
+      var moonGrad = ctx.createRadialGradient(mx,my,0,mx,my,34);
+      moonGrad.addColorStop(0, "rgba(159,184,232,0.75)");
+      moonGrad.addColorStop(1, "rgba(159,184,232,0)");
+      ctx.fillStyle = moonGrad;
+      ctx.beginPath(); ctx.arc(mx,my,34,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = "#dfe6f7";
+      ctx.beginPath(); ctx.arc(mx,my,9,0,Math.PI*2); ctx.fill();
+    }
+
+    if(!reduceMotion){
+      raf = requestAnimationFrame(draw);
+    }
+  }
+
+  var raf;
+  window.addEventListener("resize", function(){
+    resize();
+  });
+  resize();
+  if(reduceMotion){
+    draw(220000);
+  } else {
+    raf = requestAnimationFrame(draw);
+  }
+})();
+</script>
