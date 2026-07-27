@@ -174,7 +174,7 @@
   .card{
     --accent: var(--gold);
     position: relative;
-    height: 320px;
+    height: 360px;
     border-radius: 16px;
     cursor: pointer;
     outline: none;
@@ -234,12 +234,35 @@
   .card:focus-visible .card-icon,
   .card.flipped .card-icon{ animation-play-state: running; }
 
+  .card-en-row{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 2px;
+  }
   .card-en{
     font-family: var(--serif);
     font-size: 1.5rem;
-    margin: 14px 0 2px;
     color: var(--ink);
   }
+  .word-btn{
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    border-radius: 999px;
+    border: 1px solid var(--panel-edge);
+    background: rgba(244,241,232,0.06);
+    color: var(--accent);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .15s, transform .15s;
+  }
+  .word-btn:hover{ background: rgba(244,241,232,0.16); }
+  .word-btn:active{ transform: scale(0.92); }
+  .word-btn.is-playing{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
   .card-zh{
     font-size: 1rem;
     color: var(--ink-faint);
@@ -320,6 +343,36 @@
     0%,100%{ transform: rotate(-5deg); }
     50%{ transform: rotate(5deg); }
   }
+
+  /* ---------- STORY NARRATION PLAYER ---------- */
+  .ply{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 0 0 14px;
+  }
+  .ply__main, .ply__stop{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: var(--sans);
+    cursor: pointer;
+    padding: 7px 14px;
+    transition: background .15s;
+  }
+  .ply__main{ background: var(--accent); color: #1a1a2e; }
+  .ply.is-playing .ply__main, .ply.is-paused .ply__main{ background: var(--gold); color: #1a1a2e; }
+  .ply__stop{ background: rgba(244,241,232,0.12); color: var(--ink); }
+  .ply__stop:hover{ background: rgba(244,241,232,0.2); }
+  .ply__ic{ width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+  .ply__ic--pause{ display: none; }
+  .ply.is-playing .ply__ic--play{ display: none; }
+  .ply.is-playing .ply__ic--pause{ display: inline-block; }
 
   /* ---------- RECAP ---------- */
   .recap{
@@ -448,6 +501,57 @@
   }
   .win-banner.show{ opacity: 1; }
 
+  /* ---------- LISTEN & GUESS GAME ---------- */
+  .listen-game{ text-align: center; }
+  .listen-play{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: var(--gold);
+    border: 0;
+    border-radius: 999px;
+    padding: 14px 30px;
+    cursor: pointer;
+    margin-bottom: 28px;
+    transition: transform .15s, background .15s;
+  }
+  .listen-play:hover{ transform: translateY(-2px); }
+  .listen-play:disabled{ opacity: 0.5; cursor: default; transform: none; }
+  .listen-play.is-playing{ background: color-mix(in srgb, var(--gold) 65%, white); }
+  .listen-options{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .listen-opt{
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 10px;
+    padding: 14px 10px;
+    cursor: pointer;
+    transition: border-color .2s, transform .15s, background .2s;
+  }
+  .listen-opt:hover{ border-color: var(--ink-faint); }
+  .listen-opt.correct{ border-color: #5fbf7a; background: color-mix(in srgb, #5fbf7a 16%, var(--panel)); }
+  .listen-opt.wrong{ animation: shake .4s; border-color: var(--mars); }
+  .listen-opt:disabled{ cursor: default; opacity: .5; }
+  .listen-feedback{
+    min-height: 1.6em;
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--ink-dim);
+  }
+
   footer{
     text-align: center;
     padding: 30px 0 50px;
@@ -468,10 +572,11 @@
     <h1>七天的<em>秘密</em></h1>
     <p class="hero-sub">Where the Days of the Week Come From</p>
     <p class="hero-copy">
-      兩千多年前，古人抬頭觀察夜空，找出七個肉眼可見、會移動的天體：<b>太陽、月亮</b>，以及五顆行星。
-      羅馬人用掌管這七個天體的神祇，為一週的七天命名；後來英語繼承了這套系統，
-      卻把其中五天的羅馬神名，換成了<b>北歐神話</b>裡對應的神祇。點開下面每張卡片，看看你天天說的
-      Monday、Friday 背後，其實都是一則神話故事。
+      你有沒有想過，為什麼星期一叫 <b>Monday</b>，星期四又叫 <b>Thursday</b>？
+      其實呀，兩千多年前，古時候的人每天晚上抬頭看天空，發現有七個會動的星星——
+      <b>太陽、月亮</b>，還有五顆行星。羅馬人就用守護這七個星星的神明，幫一星期的七天取名字。
+      後來英國人覺得羅馬神明太陌生，就把其中五天偷偷換成了自己熟悉的<b>北歐神明</b>！
+      點開下面的卡片，一起來挖寶吧。
     </p>
   </div>
 </div>
@@ -485,7 +590,7 @@
 
   <div class="section-head">
     <h2>點卡片，翻出每一天的身世</h2>
-    <p>每張卡片正面是英文名字，點一下翻到背面，看古英文原形、神話故事和記憶小技巧。</p>
+    <p>卡片正面按 🔊 可以聽英文怎麼唸；點一下卡片翻到背面，按「聽故事」讓老師講給你聽！</p>
   </div>
 
   <div class="grid" id="cardGrid"></div>
@@ -493,9 +598,9 @@
   <div class="recap">
     <h2>用一句故事，記住一整週</h2>
     <p>
-      太陽升起、月亮緊隨其後；戰神提爾（Tiw）率先出征，智慧之神奧丁（Woden）指引方向，
-      雷神索爾（Thor）轟隆降臨，愛神弗麗嘉（Frigg）溫柔相伴，最後農神薩圖爾努斯（Saturn）
-      迎接豐收——七位神祇，排成了一整週。
+      來，我們把七位神明串成一個小故事：太陽公公先起床，月亮阿姨緊接著上班；
+      勇敢的提爾出門打仗，聰明的奧丁在旁邊出主意，雷神索爾轟隆轟隆地趕來，
+      溫柔的弗麗嘉陪大家談戀愛，最後農神薩圖爾努斯出來慶祝豐收——這樣一整週就湊齊了！
     </p>
     <div class="chain" id="chainRow"></div>
   </div>
@@ -520,6 +625,19 @@
     <button class="game-reset" id="resetGame">重新開始</button>
   </div>
 
+  <div class="section-head game-head" style="margin-bottom:8px;">
+    <h2>🎧 聽力小遊戲：聽聲音猜星期</h2>
+    <p>按下播放鍵，仔細聽英文怎麼唸，再點選你聽到的是星期幾！</p>
+  </div>
+  <div class="game listen-game">
+    <p class="game-status">答對 <b id="listenScoreNum">0</b> / 7</p>
+    <button class="listen-play" id="listenPlayBtn" type="button">🔊 <span id="listenPlayLabel">播放發音</span></button>
+    <div class="listen-options" id="listenOptions"></div>
+    <p class="listen-feedback" id="listenFeedback">&nbsp;</p>
+    <p class="win-banner" id="listenWinBanner">太棒了！七天的英文你都聽得出來了 ✦</p>
+    <button class="game-reset" id="listenReset">重新開始</button>
+  </div>
+
   <footer>七天的秘密 · 為了更好記住英文星期而做的小教材</footer>
 </div>
 
@@ -529,45 +647,45 @@
 
   var DATA = [
     {
-      key:"sun", en:"Sunday", zh:"星期日", sym:"☉", iconClass:"pulse", god:"太陽神 Sol",
+      key:"sun", slug:"sunday", en:"Sunday", zh:"星期日", sym:"☉", iconClass:"pulse", god:"太陽神 Sol",
       root:"Sunnandæg → Sunday", hook:"太陽的日子",
-      story:"古英文 Sunnandæg，字面就是「太陽的日子」，源自羅馬人對太陽神 Sol 的崇拜。它是一週的起點，也是七天之中少數幾乎沒被北歐神話取代的名字。",
+      story:"很久很久以前，古英文把星期日叫做 Sunnandæg，意思就是「太陽的日子」！因為羅馬人最愛太陽神索爾，覺得祂最厲害，就把一星期的第一天獻給祂。有趣的是，星期日是少數幾天沒有被北歐神明搶走名字的日子，太陽公公一直守住這一天，直到現在。",
       mnemonic:"看到 <b>Sun</b> 就想到星期日：想像旭日東升，一週最先亮起的一天。"
     },
     {
-      key:"moon", en:"Monday", zh:"星期一", sym:"☽", iconClass:"bob", god:"月神 Luna",
+      key:"moon", slug:"monday", en:"Monday", zh:"星期一", sym:"☽", iconClass:"bob", god:"月神 Luna",
       root:"Mōnandæg → Monday", hook:"月亮的日子",
-      story:"古英文 Mōnandæg 意為「月亮的日子」，源自羅馬人對月神 Luna 的崇拜。太陽之後緊接著月亮，日月相繼，是最古老、最直覺的命名邏輯。",
+      story:"太陽休息之後，換誰值班呢？答案是月亮！古英文把星期一叫做 Mōnandæg，就是「月亮的日子」，是為了紀念羅馬人心目中的月亮女神露娜。白天有太陽、晚上有月亮，古人就這樣自然而然把兩天排在一起，是不是很有邏輯？",
       mnemonic:"<b>Mon-</b> 聽起來像 Moon，星期一就像昨晚的月亮還捨不得下山。"
     },
     {
-      key:"mars", en:"Tuesday", zh:"星期二", sym:"♂", iconClass:"jolt", god:"戰神提爾 Tiw",
+      key:"mars", slug:"tuesday", en:"Tuesday", zh:"星期二", sym:"♂", iconClass:"jolt", god:"戰神提爾 Tiw",
       root:"Tiwesdæg → Tuesday", hook:"戰神的日子",
-      story:"羅馬人稱這天為 Martis dies，獻給戰神瑪爾斯（Mars）。盎格魯薩克遜人卻換成了自己文化裡對應的戰神提爾（Tiw／Týr）——那位為了換取和平而獻出一隻手的勇敢神祇，於是 Tiwesdæg 演變成 Tuesday。",
+      story:"羅馬人把星期二獻給戰神瑪爾斯。可是英國人心裡有自己的戰神，他叫提爾！提爾超級勇敢，有一次天神們想抓住一隻會吃掉全世界的大野狼，野狼不相信他們，提爾就把自己的手伸進狼嘴巴裡當保證，結果野狼一口就把他的手咬斷了！就是因為提爾這麼勇敢，星期二才會叫做 Tuesday。",
       mnemonic:"<b>T</b> 開頭想到 <b>T</b>iw 戰神，拿劍出征——星期二就是一週作戰的開始。"
     },
     {
-      key:"mercury", en:"Wednesday", zh:"星期三", sym:"☿", iconClass:"shimmer", god:"智慧之神奧丁 Woden",
+      key:"mercury", slug:"wednesday", en:"Wednesday", zh:"星期三", sym:"☿", iconClass:"shimmer", god:"智慧之神奧丁 Woden",
       root:"Wōdnesdæg → Wednesday", hook:"眾神之王的日子",
-      story:"羅馬人獻給信使之神墨丘利（Mercury），英語卻改用北歐眾神之王奧丁（Woden，即 Odin）的名字，因為奧丁同樣象徵智慧、旅行與言語。Wōdnesdæg 就這樣變成了拼字古怪的 Wednesday。",
+      story:"星期三本來是獻給羅馬的信使之神墨丘利，他負責幫神明們跑腿送信。英國人卻換成了自己的眾神之王，奧丁！奧丁跟墨丘利一樣聰明，又愛到處旅行、講故事，於是星期三就變成了奧丁的日子。這也是為什麼 Wednesday 拼起來怪怪的，中間那個 d，是不發音的喔。",
       mnemonic:"唸法訣竅：讀成「<b>WENZ</b>-day」，中間的 d 是啞巴字母，別被拼字騙了。"
     },
     {
-      key:"jupiter", en:"Thursday", zh:"星期四", sym:"♃", iconClass:"jolt", god:"雷神索爾 Thor",
+      key:"jupiter", slug:"thursday", en:"Thursday", zh:"星期四", sym:"♃", iconClass:"jolt", god:"雷神索爾 Thor",
       root:"Þūnresdæg → Thursday", hook:"雷神的日子",
-      story:"羅馬人獻給眾神之王朱庇特（Jupiter，掌管雷電），北歐版本則是家喻戶曉的雷神索爾（Thor）與他的雷神之槌。Þūnresdæg 原意是「雷聲的日子」，後來演變成 Thursday。",
+      story:"轟隆轟隆，星期四是打雷的日子！羅馬人把這天獻給掌管雷電的眾神之王朱庇特，英國人則換成了大家都認識的雷神索爾，沒錯，就是拿著雷神之槌的那一位。古英文把這天叫做 Þūnresdæg，意思就是「打雷的日子」，後來慢慢變成了 Thursday。",
       mnemonic:"<b>Thor</b> + day = Thursday，一聽到打雷就想到星期四。"
     },
     {
-      key:"venus", en:"Friday", zh:"星期五", sym:"♀", iconClass:"pulse", god:"愛神弗麗嘉 Frigg",
+      key:"venus", slug:"friday", en:"Friday", zh:"星期五", sym:"♀", iconClass:"pulse", god:"愛神弗麗嘉 Frigg",
       root:"Frīgedæg → Friday", hook:"愛神的日子",
-      story:"羅馬人獻給愛與美的女神維納斯（Venus），北歐對應的是奧丁之妻、掌管愛情與婚姻的女神弗麗嘉（Frigg）。Frīgedæg 演變成了 Friday——難怪忙碌一週後，星期五總讓人特別期待。",
+      story:"終於到了星期五！羅馬人把這天獻給愛與美的女神維納斯，英國人則換成了奧丁的妻子，弗麗嘉，她是掌管愛情與家庭的女神。所以 Friday 其實是「愛的日子」，難怪忙了一整個星期，大家一到星期五心情就特別好！",
       mnemonic:"<b>Fri-</b> 聽起來像 Free，熬過一週終於自由，也是愛神眷顧的日子。"
     },
     {
-      key:"saturn", en:"Saturday", zh:"星期六", sym:"♄", iconClass:"ring", god:"農神薩圖爾努斯 Saturn",
+      key:"saturn", slug:"saturday", en:"Saturday", zh:"星期六", sym:"♄", iconClass:"ring", god:"農神薩圖爾努斯 Saturn",
       root:"Saturni dies → Saturday", hook:"農神的日子",
-      story:"七天之中唯一沒被北歐神話取代、直接保留羅馬神名的一天——獻給農業與收穫之神薩圖爾努斯（Saturn）。Saturni dies 幾乎原封不動地變成了 Saturday。",
+      story:"星期六是七天裡唯一的特別來賓！因為英國人找不到適合的北歐神明來代替，只好直接沿用羅馬農神薩圖爾努斯的名字。Saturday 裡面就藏著 Saturn 這個字，是不是一眼就能認出來？",
       mnemonic:"Sa<b>turn</b>day 裡面藏著 Saturn（土星），是七天中最好認的一個。"
     }
   ];
@@ -598,26 +716,80 @@
     card.innerHTML =
       '<div class="card-face card-front">' +
         '<span class="card-icon '+d.iconClass+'">'+d.sym+'</span>' +
-        '<div class="card-en">'+d.en+'</div>' +
+        '<div class="card-en-row">' +
+          '<span class="card-en">'+d.en+'</span>' +
+          '<button class="word-btn" type="button" aria-label="播放 '+d.en+' 的發音" data-src="audio/'+d.slug+'-word.m4a">🔊</button>' +
+        '</div>' +
         '<div class="card-zh">'+d.zh+'</div>' +
         '<div class="card-hook">'+d.hook+'</div>' +
         '<div class="card-flip-hint">點擊翻面 →</div>' +
       '</div>' +
       '<div class="card-face card-back">' +
         '<span class="root-tag">'+d.root+'</span>' +
+        '<div class="ply" data-src="audio/'+d.slug+'-story.m4a">' +
+          '<button class="ply__main" type="button">' +
+            '<svg class="ply__ic ply__ic--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>' +
+            '<svg class="ply__ic ply__ic--pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>' +
+            '<span class="ply__txt">聽故事 Listen</span>' +
+          '</button>' +
+          '<button class="ply__stop" type="button" hidden>' +
+            '<svg class="ply__ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>' +
+            '<span>停止</span>' +
+          '</button>' +
+        '</div>' +
         '<p class="card-story">'+d.story+'</p>' +
         '<p class="card-mnemonic">'+d.mnemonic+'</p>' +
       '</div>';
-    function toggle(){
+
+    function toggle(e){
+      if(e && e.target && e.target.closest && e.target.closest(".ply, .word-btn")) return;
       var flipped = card.classList.toggle("flipped");
       card.setAttribute("aria-pressed", flipped ? "true" : "false");
     }
     card.addEventListener("click", toggle);
     card.addEventListener("keydown", function(e){
+      if(e.target && e.target.closest && e.target.closest(".ply, .word-btn")) return;
       if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggle(); }
     });
     grid.appendChild(card);
   });
+
+  // ---------- word pronunciation buttons ----------
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest && e.target.closest(".word-btn");
+    if(!btn) return;
+    var au = new Audio(btn.dataset.src);
+    btn.classList.add("is-playing");
+    au.addEventListener("ended", function(){ btn.classList.remove("is-playing"); });
+    au.play();
+  });
+
+  // ---------- story narration player (per card back) ----------
+  (function(){
+    var cur = null;
+    function txt(p, s){ var el = p.querySelector(".ply__txt"); if(el) el.textContent = s; }
+    function showStop(p, on){ var b = p.querySelector(".ply__stop"); if(b) b.hidden = !on; }
+    function reset(p){ p.classList.remove("is-playing","is-paused"); txt(p, "聽故事 Listen"); showStop(p, false); }
+    function stopCur(){ if(cur){ cur.audio.pause(); cur.audio.currentTime = 0; reset(cur.ply); cur = null; } }
+    document.addEventListener("click", function(e){
+      var st = e.target.closest && e.target.closest(".ply__stop");
+      if(st){ if(cur && cur.ply === st.parentElement) stopCur(); return; }
+      var mn = e.target.closest && e.target.closest(".ply__main");
+      if(!mn) return;
+      var p = mn.parentElement;
+      if(cur && cur.ply === p){
+        if(cur.audio.paused){ cur.audio.play(); p.classList.remove("is-paused"); p.classList.add("is-playing"); txt(p, "暫停 Pause"); }
+        else{ cur.audio.pause(); p.classList.remove("is-playing"); p.classList.add("is-paused"); txt(p, "繼續 Resume"); }
+        return;
+      }
+      stopCur();
+      var au = p._audio;
+      if(!au){ au = new Audio(p.dataset.src); p._audio = au; au.addEventListener("ended", function(){ if(cur && cur.ply === p){ reset(p); cur = null; } }); }
+      au.currentTime = 0; au.play();
+      cur = { ply: p, audio: au };
+      p.classList.add("is-playing"); txt(p, "暫停 Pause"); showStop(p, true);
+    });
+  })();
 
   // ---------- recap chain ----------
   var GODS = [
@@ -639,13 +811,6 @@
     chainRow.appendChild(span);
   });
 
-  // ---------- matching game ----------
-  var godCol = document.getElementById("godCol");
-  var dayCol = document.getElementById("dayCol");
-  var scoreNum = document.getElementById("scoreNum");
-  var winBanner = document.getElementById("winBanner");
-  var resetBtn = document.getElementById("resetGame");
-
   function realShuffle(arr){
     var a = arr.slice();
     for(var i = a.length - 1; i > 0; i--){
@@ -654,6 +819,13 @@
     }
     return a;
   }
+
+  // ---------- matching game ----------
+  var godCol = document.getElementById("godCol");
+  var dayCol = document.getElementById("dayCol");
+  var scoreNum = document.getElementById("scoreNum");
+  var winBanner = document.getElementById("winBanner");
+  var resetBtn = document.getElementById("resetGame");
 
   var state = { godPick: null, dayPick: null, matched: 0 };
 
@@ -725,6 +897,82 @@
 
   resetBtn.addEventListener("click", buildGame);
   buildGame();
+
+  // ---------- listening game ----------
+  var listenPlayBtn = document.getElementById("listenPlayBtn");
+  var listenOptions = document.getElementById("listenOptions");
+  var listenScoreNum = document.getElementById("listenScoreNum");
+  var listenFeedback = document.getElementById("listenFeedback");
+  var listenWinBanner = document.getElementById("listenWinBanner");
+  var listenResetBtn = document.getElementById("listenReset");
+
+  var listenState = { queue: [], current: null, score: 0, audio: null, solved: {} };
+
+  function buildListenGame(){
+    listenState.queue = realShuffle(DATA);
+    listenState.score = 0;
+    listenState.solved = {};
+    listenScoreNum.textContent = "0";
+    listenFeedback.innerHTML = "&nbsp;";
+    listenWinBanner.classList.remove("show");
+    listenPlayBtn.disabled = false;
+    listenOptions.innerHTML = "";
+    DATA.forEach(function(d){
+      var b = document.createElement("button");
+      b.className = "listen-opt";
+      b.textContent = d.en;
+      b.dataset.key = d.key;
+      b.addEventListener("click", function(){ handleListenGuess(d.key, b); });
+      listenOptions.appendChild(b);
+    });
+    nextListenRound();
+  }
+
+  function nextListenRound(){
+    if(listenState.queue.length === 0){
+      listenWinBanner.classList.add("show");
+      listenPlayBtn.disabled = true;
+      return;
+    }
+    listenState.current = listenState.queue.shift();
+    listenFeedback.innerHTML = "&nbsp;";
+    Array.prototype.forEach.call(listenOptions.children, function(b){
+      b.classList.remove("correct","wrong");
+      if(!listenState.solved[b.dataset.key]) b.disabled = false;
+    });
+    playListenAudio();
+  }
+
+  function playListenAudio(){
+    if(!listenState.current) return;
+    if(listenState.audio){ listenState.audio.pause(); }
+    var au = new Audio("audio/" + listenState.current.slug + "-word.m4a");
+    listenState.audio = au;
+    listenPlayBtn.classList.add("is-playing");
+    au.addEventListener("ended", function(){ listenPlayBtn.classList.remove("is-playing"); });
+    au.play();
+  }
+
+  function handleListenGuess(key, el){
+    if(!listenState.current || el.disabled) return;
+    if(key === listenState.current.key){
+      el.classList.add("correct");
+      el.disabled = true;
+      listenState.solved[key] = true;
+      listenState.score++;
+      listenScoreNum.textContent = String(listenState.score);
+      listenFeedback.textContent = "答對了！" + listenState.current.en + " 是「" + listenState.current.zh + "」";
+      setTimeout(nextListenRound, 900);
+    } else {
+      el.classList.add("wrong");
+      setTimeout(function(){ el.classList.remove("wrong"); }, 400);
+      listenFeedback.textContent = "再聽一次試試看～";
+    }
+  }
+
+  listenPlayBtn.addEventListener("click", playListenAudio);
+  listenResetBtn.addEventListener("click", buildListenGame);
+  buildListenGame();
 
   // ---------- hero sky canvas ----------
   var canvas = document.getElementById("sky");
