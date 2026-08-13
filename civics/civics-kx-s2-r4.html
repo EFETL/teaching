@@ -565,5 +565,37 @@ const QS = [
 const CTX_HTML = "<p>近年來，人工智慧（AI）與自動化技術快速發展，許多傳統製造業的工作逐漸被機器人或 AI 系統取代。某汽車零件工廠導入 AI 智慧生產線後，原本需要 500 名員工的作業，只需 50 名技術人員監控即可完成，大量中年勞工因此面臨失業困境。</p>\n<p>政府為此推出「數位轉型就業安全網計畫」：修訂相關勞動法規，要求企業裁員時需提前通知並協助員工轉職；同時提供失業工人免費的數位技能訓練課程。勞工保險也擴大給付範圍，讓轉職期間的基本生活得到保障。</p>\n<p>然而也有學者觀察到，社會大眾對 AI 的態度正在改變——從最初的恐懼排斥，逐漸轉變為接受，甚至主動學習 AI 工具。如何讓「科技紅利」公平地分配給社會各階層，仍是當前的重要課題。</p>";
 buildQuiz(QS, CTX_HTML);
 </script>
+<style>
+#pw-gate{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#1a3a5c;display:flex;align-items:center;justify-content:center;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;}
+#pw-box{background:#fff;border-radius:16px;padding:40px 36px;max-width:360px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3);}
+#pw-box h2{font-size:22px;color:#1a3a5c;margin-bottom:8px;}
+#pw-box p{font-size:15px;color:#666;margin-bottom:20px;}
+#pw-box input{width:100%;font-size:18px;padding:10px 14px;border:2px solid #cdddef;border-radius:8px;outline:none;margin-bottom:12px;box-sizing:border-box;}
+#pw-box input:focus{border-color:#1a3a5c;}
+#pw-box button{width:100%;font-size:18px;font-weight:bold;padding:12px;background:#1a3a5c;color:#fff;border:none;border-radius:8px;cursor:pointer;}
+#pw-box button:hover{background:#2a5070;}
+#pw-err{color:#c0392b;font-size:15px;margin-top:10px;display:none;}
+</style>
+<div id="pw-gate"><div id="pw-box">
+  <h2>&#128274; 全民補習班</h2>
+  <p>teaching.efetl.com<br>請輸入密碼進入教學區</p>
+  <input type="password" id="pw-in" placeholder="密碼" onkeydown="if(event.key==='Enter')tryPw()">
+  <button onclick="tryPw()">進入</button>
+  <div id="pw-err">密碼錯誤，請再試一次</div>
+</div></div>
+<script>
+(function(){
+  if(localStorage.getItem('efetl_ok')==='1'){document.getElementById('pw-gate').style.display='none';return;}
+  async function sha256(t){const d=new TextEncoder().encode(t);const h=await crypto.subtle.digest('SHA-256',d);
+    return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+  window.tryPw=async function(){
+    const v=document.getElementById('pw-in').value;
+    const h=await sha256(v);
+    if(h==='bb6dbcaef9d5ed4d6a7f5df4effdeb3b24b34ae6b1dfb52e1315f511301fb26e'){localStorage.setItem('efetl_ok','1');document.getElementById('pw-gate').style.display='none';}
+    else{document.getElementById('pw-err').style.display='block';document.getElementById('pw-in').value='';}
+  };
+  document.getElementById('pw-in').focus();
+})();
+</script>
 </body>
 </html>
