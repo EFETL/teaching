@@ -1,0 +1,958 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>2-2 最大公因數與最小公倍數 · 六份考卷（填充＋計算）</title><style>
+:root{--primary:#1f6f8b;--primary-dark:#155263;--accent:#e76f51;--bg:#f6f4ef;--card:#fff;--ink:#2b2b2b;--line:#e5e1d8;--ok:#12a150;--no:#e5484d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-size:16px}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 70px}
+header.hero{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:30px 18px 24px;text-align:center}
+header.hero h1{margin:0 0 6px;font-size:19px}
+header.hero p{margin:2px 0;opacity:.93;font-size:15px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 6px}
+.tab{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:8px 20px;font:inherit;font-weight:800;color:var(--primary-dark);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.tab.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+.dl{display:inline-block;margin:6px auto 0;background:#e76f51;color:#fff;border-radius:22px;padding:8px 20px;font-weight:800;text-decoration:none;box-shadow:0 2px 8px rgba(231,111,81,.35)}
+.dl:hover{filter:brightness(1.05)}
+.tips{background:#fff8ec;border-left:5px solid var(--accent);border-radius:10px;padding:11px 16px;margin:12px 0;font-size:15px;color:#7a5a3a}
+.paper{display:none}
+.paper.on{display:block}
+.pageband{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#eaf3f6;border:1px solid #cfe1e7;border-radius:10px;padding:7px 14px;margin:16px 0 6px}
+.pageband .pno{font-weight:800;color:var(--primary-dark);font-size:15px}
+.pageband .pttl{font-size:14px;color:#6b8894}
+.paperhd{display:inline-block;background:var(--primary);color:#fff;padding:6px 20px;border-radius:26px;margin:6px 0 4px;font-size:18px;font-weight:800}
+.paperhd small{font-weight:600;opacity:.9;font-size:13px;margin-left:6px}
+.qcard{background:var(--card);border-radius:14px;padding:15px 18px;margin:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.qhead{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.tbadge{color:#fff;font-size:15px;font-weight:700;padding:2px 12px;border-radius:12px}
+.qid{font-weight:700;color:var(--primary-dark);font-size:15px}
+.src{margin-left:auto;font-size:14px;color:#fff;background:var(--accent);padding:2px 11px;border-radius:12px;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.src{margin-left:0}}
+.qbody{font-size:16px}
+.opts{margin:8px 0;display:flex;flex-wrap:wrap;gap:8px 12px}
+.opt{padding:5px 15px;background:#f4f2ec;border:1.5px solid transparent;border-radius:8px;flex:0 0 auto;font:inherit;color:inherit;cursor:pointer;transition:.12s}
+.opt:hover{background:#e9f2f4}.opt.sel{background:#dcefff;border-color:#7ab8e0}
+.opt.ok{background:#e5f7ec;border-color:var(--ok);color:#0a6b38;font-weight:700}
+.opt.no{background:#fdeaea;border-color:var(--no);color:#a71d21}
+.ol{font-weight:700;color:var(--primary)}
+.work{margin-top:10px;border:1.5px dashed #b9c7cd;border-radius:8px;width:15cm;max-width:100%;padding:6px 12px;background:repeating-linear-gradient(180deg,transparent,transparent 27px,#eef1f2 27px,#eef1f2 28px)}
+.wlabel{font-size:14px;color:#8a99a0;font-weight:700}
+.revbtn{margin-top:10px;background:var(--accent);color:#fff;border:none;border-radius:22px;padding:7px 18px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 6px rgba(231,111,81,.35)}
+.revbtn.on{background:var(--primary)}
+.sol{display:none;margin-top:10px;padding:13px 16px;background:#eef6f8;border-left:5px solid var(--primary);border-radius:8px;font-size:15px}
+.sol.show{display:block}
+.ans{font-weight:700;color:var(--primary-dark);margin-bottom:8px;font-size:16px}
+.expl{color:#333;font-size:15px}
+@media print{
+  @page{size:A4;margin:1.3cm 1.2cm}
+  body{background:#fff;font-size:15px}
+  header.hero,.tabs,.tips,.dl{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .paper{display:none!important}
+  .paper.on{display:block!important}
+  .printpage{page-break-before:always;break-before:page}
+  .printpage:first-of-type{page-break-before:avoid;break-before:avoid}
+  .pageband{background:#eaf3f6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:6px}
+  .qcard{box-shadow:none;border:1px solid #d7d2c7;page-break-inside:avoid;break-inside:avoid;margin:7px 0;padding:9px 12px}
+  .revbtn,.sol{display:none!important}
+  .opt{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style></head><body>
+<header class="hero"><h1>2-2 最大公因數與最小公倍數 · 六份考卷（A～F 卷）</h1>
+<p>最大公因數與最小公倍數 ‧ 120 題切成 6 卷平行卷，每卷 20 題（填充10＋計算10）</p>
+<p>每卷 20 題（填充10＋計算10）‧ A～F 為平行卷（同題型、不同數字）‧ 螢幕頁碼＝列印頁碼 ‧ 列印時只印目前這一卷</p>
+<p style="margin-top:12px"><a href="book1-ch2.html" style="display:inline-block;color:#0b6b78;background:#fff;border-radius:20px;padding:6px 16px;font-weight:700;text-decoration:none">← 回第 2 章</a></p></header>
+<div class="wrap">
+<div class="tabs"><button class="tab on" data-p="A" onclick="showPaper('A')">A 卷</button><button class="tab" data-p="B" onclick="showPaper('B')">B 卷</button><button class="tab" data-p="C" onclick="showPaper('C')">C 卷</button><button class="tab" data-p="D" onclick="showPaper('D')">D 卷</button><button class="tab" data-p="E" onclick="showPaper('E')">E 卷</button><button class="tab" data-p="F" onclick="showPaper('F')">F 卷</button></div>
+<div style="text-align:center"><a class="dl" id="dlbtn" href="book1-ch2-2-A.pdf" download>⬇ 下載本卷 PDF（A 卷）</a></div>
+<div class="tips">💡 選一份卷（A～F），每題按「顯示解析」看答案與完整計算過程；可用「⬇ 下載本卷 PDF」下載該卷考卷，或用瀏覽器列印（⌘/Ctrl+P）只會印出目前這一卷，分頁與螢幕一致。</div>
+<section class="paper on" data-p="A"><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 1 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="paperhd">A 卷　2-2 最大公因數與最小公倍數<small>填充10・計算10 ‧ 共20題</small></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F01</span><span class="src">📄 改編·高雄光華 113</span></div>
+  <div class="qbody">求下列各值：<br>(1) (24 , 150)＝______　(2) [24 , 150]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 6　(2) 600</div><div class="expl"><b>解析：</b>先做質因數分解：24＝2<sup>3</sup>×3、150＝2×3×5<sup>2</sup>。<br>(1) 最大公因數取<b>共同質因數的最小次數</b> → (24 , 150)＝2×3＝<b>6</b>。<br>(2) 最小公倍數取<b>所有質因數的最大次數</b> → [24 , 150]＝2<sup>3</sup>×3×5<sup>2</sup>＝<b>600</b>。<br>（可驗算：6×600＝3600＝24×150）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F02</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">已知三數 2<sup>3</sup>×3<sup>2</sup>×7<sup>3</sup>、2<sup>2</sup>×3×7<sup>4</sup>、2<sup>4</sup>×3<sup>3</sup>×7<sup>2</sup>，求此三數的最大公因數＝______（以標準分解式表示）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>2</sup>×3×7<sup>2</sup></div><div class="expl"><b>解析：</b>最大公因數＝<b>三個數都有的質因數，取最小的次數</b>。<br>　2 的次數：3、2、4 → 取最小的 2<br>　3 的次數：2、1、3 → 取最小的 1<br>　7 的次數：3、4、2 → 取最小的 2<br>故最大公因數＝<b>2<sup>2</sup>×3×7<sup>2</sup></b>＝588。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 2 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F03</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">以標準分解式表示 [ 2<sup>2</sup>×3×7 , 2<sup>3</sup>×3×5 , 2<sup>2</sup>×5<sup>2</sup>×7 ]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>3</sup>×3×5<sup>2</sup>×7</div><div class="expl"><b>解析：</b>最小公倍數＝<b>出現過的每個質因數，都取最大的次數</b>。<br>　2 的次數：2、3、2 → 取最大的 3<br>　3 的次數：1、1、0 → 取最大的 1<br>　5 的次數：0、1、2 → 取最大的 2<br>　7 的次數：1、0、1 → 取最大的 1<br>故最小公倍數＝<b>2<sup>3</sup>×3×5<sup>2</sup>×7</b>＝4200。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F04</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b，其中 a＝84，且 (a , b)＝21、[a , b]＝252，則 b＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：63</div><div class="expl"><b>解析：</b>任兩正整數都滿足 <b>a×b＝(a , b)×[a , b]</b>。<br>84×b＝21×252＝5292<br>b＝5292÷84＝<b>63</b>。<br>（驗算：84＝2<sup>2</sup>×3×7、63＝3<sup>2</sup>×7 → (84,63)＝21 ✔、[84,63]＝252 ✔）</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 3 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F05</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">在 30 與 50 之間（含 30、50）的正整數中，將與 36 互質的數由小到大排列，則第 4 個數是 ______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：41</div><div class="expl"><b>解析：</b>「與 36 互質」＝與 36 的最大公因數為 1，也就是<b>不含 36 的任何質因數</b>。<br>36＝2<sup>2</sup>×3<sup>2</sup>，質因數為 2、3，所以要把 2、3 的倍數全部刪掉。<br>30~50 剩下的是：31、35、37、41、43、47、49。<br>第 4 個為 <b>41</b>。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F06</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">水果行要將 348 顆芒果分裝成禮盒，每盒芒果數一樣多且剛好裝完，若每盒最多裝 12 顆，則至少需要多少個禮盒？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：29 個（每盒 12 顆）</div><div class="expl"><b>解析：</b>每盒數量相同且剛好裝完 → 每盒顆數必為 348 的因數。<br>348＝2<sup>2</sup>×3×29，正因數有 1、2、3、4、6、12、29、58、87、116、174、348。<br>盒數要<b>最少</b>，每盒就要裝<b>最多</b>；在不超過 12 的因數中最大的是 12。<br>故至少需要 348÷12＝<b>29</b> 個禮盒。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 4 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F07</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">宏錩身上的現金，以 3 元、5 元、7 元去分都剛好餘 2 元。若他身上的現金在 200 元到 300 元之間，則他身上的現金可能是多少元？______（全部列出才給分）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：212 元</div><div class="expl"><b>解析：</b>設現金為 x 元。x 除以 3、5、7 都餘 2 → <b>x－2 同時是 3、5、7 的公倍數</b>。<br>[3 , 5 , 7]＝105，所以 x－2 是 105 的倍數，即 x＝105×n＋2。<br>取 200≦x≦300：105×2＋2＝212 → <b>212</b> 元。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F08</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">王先生的莊園圍牆長 60 公尺，原本每隔 30 公分安裝一個紅色燈泡（兩端都安裝）。後來覺得不夠閃亮，改為每隔 12 公分安裝一個黃色燈泡（兩端都安裝）。則施作時有幾個原先裝好的紅色燈泡位置，剛好被換成黃色燈泡？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：101 個</div><div class="expl"><b>解析：</b>把圍牆一端當作 0，紅燈泡在 30 的倍數的位置，黃燈泡在 12 的倍數的位置。<br>位置重疊 → 該位置同時是 30 與 12 的<b>公倍數</b>，最小的是 [30 , 12]＝60。<br>圍牆長 60 公尺＝6000 公分，重疊位置為 0、60、120、…、6000，共 6000÷60＋1＝<b>101</b> 個（兩端都算）。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 5 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F09</span><span class="src">📄 改編·臺中向上 113</span></div>
+  <div class="qbody">求 ( 3<sup>2</sup>×11 , [ 252 , 66 ] )＝______（化成標準分解式）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：3<sup>2</sup>×11</div><div class="expl"><b>解析：</b>先算中括號：252＝2<sup>2</sup>×3<sup>2</sup>×7、66＝2×3×11，取各質因數的最大次數 → [252 , 66]＝2<sup>2</sup>×3<sup>2</sup>×7×11＝2772。<br>再算小括號：3<sup>2</sup>×11＝99 與 2772 取共同質因數的最小次數 → <b>3<sup>2</sup>×11</b>＝99。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F10</span><span class="src">📄 改編·高雄左營 113</span></div>
+  <div class="qbody">求 ( 24 , 60 ) ＋ [ 30 , 40 , 50 ]＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：612</div><div class="expl"><b>解析：</b>(24 , 60)：24＝2<sup>3</sup>×3、60＝2<sup>2</sup>×3×5，取共同質因數的最小次數 → 2<sup>2</sup>×3＝12。<br>[30 , 40 , 50]：30＝2×3×5、40＝2<sup>3</sup>×5、50＝2×5<sup>2</sup>，取所有質因數的最大次數 → 2<sup>3</sup>×3×5<sup>2</sup>＝600。<br>相加：12＋600＝<b>612</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 6 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C01</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">小杰、芳羽和冠鑫到兒童樂園玩旋轉木馬，每次可乘坐 4 分鐘。第一層木馬每 12 秒繞一圈、第二層每 18 秒繞一圈、第三層每 24 秒繞一圈。出發時三人並排而坐（各坐一層）。<br>(1) 出發後經過幾秒，三人第一次同時回到出發的位置？<br>(2) 在這 4 分鐘內，三人共會在出發位置相會幾次？（不含出發時那一次）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 72 秒　(2) 3 次</div><div class="expl"><b>解析：</b>(1) 各層回到原位的時刻分別是 12、18、24 的倍數，三人同時回到原位 → 時間是三者的<b>公倍數</b>，第一次就是<b>最小公倍數</b>。<br>　12＝2<sup>2</sup>×3、18＝2×3<sup>2</sup>、24＝2<sup>3</sup>×3 → [12 , 18 , 24]＝2<sup>3</sup>×3<sup>2</sup>＝<b>72</b> 秒。<br>(2) 4 分鐘＝240 秒，相會時刻為 72、144、… 秒。<br>　240÷72＝3…餘 24 → 共 <b>3</b> 次。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C02</span><span class="src">📄 自編</span></div>
+  <div class="qbody">某轉運站有甲、乙、丙三條路線，分別每 12 分鐘、18 分鐘、30 分鐘發一班車。若上午 6:00 三線同時發車，試問：<br>(1) 下一次三線同時發車是幾點幾分？<br>(2) 從上午 6:00 到 12:00 之間（不含 6:00 那一次），三線共同時發車幾次？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 9:00　(2) 2 次</div><div class="expl"><b>解析：</b>(1) 三線同時發車的時刻是 12、18、30 的公倍數，下一次就是最小公倍數。<br>　12＝2<sup>2</sup>×3、18＝2×3<sup>2</sup>、30＝2×3×5 → [12 , 18 , 30]＝2<sup>2</sup>×3<sup>2</sup>×5＝180 分鐘。<br>　180 分鐘＝3 小時 0 分，故下一次為 <b>9:00</b>。<br>(2) 這段時間共 6 小時＝360 分鐘，360÷180＝2 → 共 <b>2</b> 次。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 7 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C03</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有一塊長 168 公分、寬 120 公分的長方形地板，要用<b>邊長相同的正方形磁磚</b>剛好鋪滿（磁磚不可裁切、不可重疊）。<br>(1) 正方形磁磚的邊長最長是幾公分？<br>(2) 此時共需要幾塊磁磚？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 24 公分　(2) 35 塊</div><div class="expl"><b>解析：</b>(1) 磁磚要剛好鋪滿 → 邊長必須同時整除 168 和 120，即為兩者的<b>公因數</b>；最長就是<b>最大公因數</b>。<br>　168＝2<sup>3</sup>×3×7、120＝2<sup>3</sup>×3×5 → (168 , 120)＝2<sup>3</sup>×3＝<b>24</b> 公分。<br>(2) 長邊排 168÷24＝7 塊、寬邊排 120÷24＝5 塊，共 7×5＝<b>35</b> 塊。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C04</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b 滿足 a×b＝10584，且 a、b 的最大公因數為 42。<br>(1) 求 a、b 的最小公倍數。<br>(2) 若再知道 a＜b 且 a＝84，求 b。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 252　(2) b＝126</div><div class="expl"><b>解析：</b>(1) 由 <b>a×b＝(a , b)×[a , b]</b>：<br>　10584＝42×[a , b] → [a , b]＝10584÷42＝<b>252</b>。<br>(2) b＝10584÷a＝10584÷84＝<b>126</b>。<br>　驗算：84＝2<sup>2</sup>×3×7、126＝2×3<sup>2</sup>×7，(84 , 126)＝42 ✔、[84 , 126]＝252 ✔。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 8 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C05</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">糖果 156 顆或 180 顆，都可以平分給同一群小朋友（每人分到的顆數為整數，且人數超過 1 人）。<br>(1) 這群小朋友最多可能有幾人？<br>(2) 小朋友的人數共有幾種可能？請全部列出。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 12 人　(2) 5 種：2、3、4、6、12 人</div><div class="expl"><b>解析：</b>(1) 人數要同時整除 156 與 180 → 是兩者的<b>公因數</b>，最多就是<b>最大公因數</b>。<br>　156＝2<sup>2</sup>×3×13、180＝2<sup>2</sup>×3<sup>2</sup>×5 → (156 , 180)＝2<sup>2</sup>×3＝<b>12</b> 人。<br>(2) 公因數＝最大公因數 12 的所有因數：1、2、3、4、6、12；題目要求人數超過 1 人，去掉 1 之後為 2、3、4、6、12，共 <b>5</b> 種。<br>　（補充：156 與 180 的差為 24，所以人數也一定是 24 的因數，可用來快速檢查。）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C06</span><span class="src">📄 改編·臺北仁愛 113</span></div>
+  <div class="qbody">靜香發現有一種數很特別：它被 2 除時餘 1、被 3 除時餘 2、被 4 除時餘 3、…、一直到被 6 除時餘 5（也就是除以 2~6 的每個數，餘數都比除數少 1）。<br>(1) 請說明這種數加 1 之後有什麼性質。<br>(2) 求具有此性質的最大 3 位數。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 加 1 後是 2~6 的公倍數（即 60 的倍數）　(2) 959</div><div class="expl"><b>解析：</b>(1) 設此數為 N。「除以 m 餘 m－1」表示<b>再多 1 就剛好整除</b>，所以 N＋1 同時被 2、3、…、6 整除 → N＋1 是 2~6 的<b>公倍數</b>。<br>　[2 , 3 , … , 6]＝60，故 N＋1＝60×n，即 <b>N＝60n－1</b>。<br>(2) 要最大的 3 位數：60n－1≦999 → n≦16，取 n＝16。<br>　N＝60×16－1＝<b>959</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 9 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C07</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有三條繩子，長度分別為 84 公分、126 公分、210 公分。現在要把它們剪成<b>長度相同且最長</b>的小段，且完全不浪費（不剩零頭）。<br>(1) 每小段最長是幾公分？<br>(2) 共可剪成幾小段？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 42 公分　(2) 10 段</div><div class="expl"><b>解析：</b>(1) 每段長度要能整除三條繩子 → 是三數的<b>公因數</b>，最長即<b>最大公因數</b>。<br>　84＝2<sup>2</sup>×3×7、126＝2×3<sup>2</sup>×7、210＝2×3×5×7<br>　→ (84 , 126 , 210)＝2×3×7＝<b>42</b> 公分。<br>(2) 各剪成 84÷42＝2 段、126÷42＝3 段、210÷42＝5 段，合計 2＋3＋5＝<b>10</b> 段。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C08</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">一條長 120 公尺的直線步道，原本每隔 8 公尺立一根木樁（頭尾兩端都立）。現在要改成每隔 6 公尺立一根（頭尾兩端仍都立）。<br>(1) 有幾根原有的木樁剛好在新位置上，不必移動？<br>(2) 需要新增幾根木樁？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 6 根　(2) 15 根</div><div class="expl"><b>解析：</b>以一端為 0 公尺，原木樁在 8 的倍數處，新木樁在 6 的倍數處。<br>(1) 不必移動＝位置同時是 8 與 6 的倍數，即 [8 , 6]＝24 的倍數。<br>　位置為 0、24、…、120，共 120÷24＋1＝<b>6</b> 根。<br>(2) 新的木樁全部共 120÷6＋1＝21 根，其中 6 根已經有了，<br>　需新增 21－6＝<b>15</b> 根。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 A卷 · 第 10 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C09</span><span class="src">📄 自編</span></div>
+  <div class="qbody">甲、乙兩個齒輪互相咬合轉動，甲有 24 齒、乙有 36 齒。從某個咬合位置開始轉動，試問：<br>(1) 至少要轉過幾齒，兩齒輪才會再度回到最初的咬合位置？<br>(2) 此時甲、乙各轉了幾圈？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 72 齒　(2) 甲 3 圈、乙 2 圈</div><div class="expl"><b>解析：</b>(1) 甲每轉過 24 齒回到原位、乙每轉過 36 齒回到原位，兩者同時回到原位 → 轉過的齒數是 24 與 36 的<b>公倍數</b>，最少即<b>最小公倍數</b>。<br>　24＝2<sup>3</sup>×3、36＝2<sup>2</sup>×3<sup>2</sup> → [24 , 36]＝2<sup>3</sup>×3<sup>2</sup>＝<b>72</b> 齒。<br>(2) 甲轉 72÷24＝<b>3</b> 圈、乙轉 72÷36＝<b>2</b> 圈。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C10</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b（a≦b）的最大公因數為 6、最小公倍數為 72。<br>(1) 求 a×b 的值。<br>(2) 求所有可能的 a、b 數對。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 432　(2) (a , b)＝(6 , 72)；(a , b)＝(18 , 24)</div><div class="expl"><b>解析：</b>(1) a×b＝(a , b)×[a , b]＝6×72＝<b>432</b>。<br>(2) 因為最大公因數是 6，可設 a＝6m、b＝6n，且 <b>m、n 互質</b>（m≦n）。<br>　此時 [a , b]＝6mn＝72 → mn＝72÷6＝12。<br>　把 12 拆成兩個互質的正整數相乘：1×12、3×4。<br>　乘回 6 得 <b>(6 , 72)；(18 , 24)</b>。</div></div>
+</div></div></section><section class="paper" data-p="B"><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 1 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="paperhd">B 卷　2-2 最大公因數與最小公倍數<small>填充10・計算10 ‧ 共20題</small></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F11</span><span class="src">📄 改編·高雄光華 113</span></div>
+  <div class="qbody">求下列各值：<br>(1) (36 , 84)＝______　(2) [36 , 84]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 12　(2) 252</div><div class="expl"><b>解析：</b>先做質因數分解：36＝2<sup>2</sup>×3<sup>2</sup>、84＝2<sup>2</sup>×3×7。<br>(1) 最大公因數取<b>共同質因數的最小次數</b> → (36 , 84)＝2<sup>2</sup>×3＝<b>12</b>。<br>(2) 最小公倍數取<b>所有質因數的最大次數</b> → [36 , 84]＝2<sup>2</sup>×3<sup>2</sup>×7＝<b>252</b>。<br>（可驗算：12×252＝3024＝36×84）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F12</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">已知三數 2<sup>2</sup>×3<sup>3</sup>×5<sup>2</sup>、2<sup>4</sup>×3<sup>2</sup>×5<sup>3</sup>、2<sup>3</sup>×3<sup>4</sup>×5，求此三數的最大公因數＝______（以標準分解式表示）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>2</sup>×3<sup>2</sup>×5</div><div class="expl"><b>解析：</b>最大公因數＝<b>三個數都有的質因數，取最小的次數</b>。<br>　2 的次數：2、4、3 → 取最小的 2<br>　3 的次數：3、2、4 → 取最小的 2<br>　5 的次數：2、3、1 → 取最小的 1<br>故最大公因數＝<b>2<sup>2</sup>×3<sup>2</sup>×5</b>＝180。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 2 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F13</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">以標準分解式表示 [ 2<sup>3</sup>×3<sup>2</sup> , 3×5<sup>2</sup> , 2×5×7<sup>2</sup> ]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>3</sup>×3<sup>2</sup>×5<sup>2</sup>×7<sup>2</sup></div><div class="expl"><b>解析：</b>最小公倍數＝<b>出現過的每個質因數，都取最大的次數</b>。<br>　2 的次數：3、0、1 → 取最大的 3<br>　3 的次數：2、1、0 → 取最大的 2<br>　5 的次數：0、2、1 → 取最大的 2<br>　7 的次數：0、0、2 → 取最大的 2<br>故最小公倍數＝<b>2<sup>3</sup>×3<sup>2</sup>×5<sup>2</sup>×7<sup>2</sup></b>＝88200。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F14</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b，其中 a＝90，且 (a , b)＝18、[a , b]＝540，則 b＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：108</div><div class="expl"><b>解析：</b>任兩正整數都滿足 <b>a×b＝(a , b)×[a , b]</b>。<br>90×b＝18×540＝9720<br>b＝9720÷90＝<b>108</b>。<br>（驗算：90＝2×3<sup>2</sup>×5、108＝2<sup>2</sup>×3<sup>3</sup> → (90,108)＝18 ✔、[90,108]＝540 ✔）</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 3 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F15</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">在 20 與 40 之間（含 20、40）的正整數中，將與 24 互質的數由小到大排列，則第 3 個數是 ______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：29</div><div class="expl"><b>解析：</b>「與 24 互質」＝與 24 的最大公因數為 1，也就是<b>不含 24 的任何質因數</b>。<br>24＝2<sup>3</sup>×3，質因數為 2、3，所以要把 2、3 的倍數全部刪掉。<br>20~40 剩下的是：23、25、29、31、35、37。<br>第 3 個為 <b>29</b>。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F16</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">水果行要將 252 顆芒果分裝成禮盒，每盒芒果數一樣多且剛好裝完，若每盒最多裝 15 顆，則至少需要多少個禮盒？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：18 個（每盒 14 顆）</div><div class="expl"><b>解析：</b>每盒數量相同且剛好裝完 → 每盒顆數必為 252 的因數。<br>252＝2<sup>2</sup>×3<sup>2</sup>×7，正因數有 1、2、3、4、6、7、9、12、14、18、21、28、36、42、63、84、126、252。<br>盒數要<b>最少</b>，每盒就要裝<b>最多</b>；在不超過 15 的因數中最大的是 14。<br>故至少需要 252÷14＝<b>18</b> 個禮盒。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 4 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F17</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">宏錩身上的現金，以 2 元、3 元、5 元去分都剛好餘 1 元。若他身上的現金在 100 元到 200 元之間，則他身上的現金可能是多少元？______（全部列出才給分）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：121、151、181 元</div><div class="expl"><b>解析：</b>設現金為 x 元。x 除以 2、3、5 都餘 1 → <b>x－1 同時是 2、3、5 的公倍數</b>。<br>[2 , 3 , 5]＝30，所以 x－1 是 30 的倍數，即 x＝30×n＋1。<br>取 100≦x≦200：30×4＋1＝121、30×5＋1＝151、30×6＋1＝181 → <b>121、151、181</b> 元。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F18</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">王先生的莊園圍牆長 48 公尺，原本每隔 40 公分安裝一個紅色燈泡（兩端都安裝）。後來覺得不夠閃亮，改為每隔 24 公分安裝一個黃色燈泡（兩端都安裝）。則施作時有幾個原先裝好的紅色燈泡位置，剛好被換成黃色燈泡？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：41 個</div><div class="expl"><b>解析：</b>把圍牆一端當作 0，紅燈泡在 40 的倍數的位置，黃燈泡在 24 的倍數的位置。<br>位置重疊 → 該位置同時是 40 與 24 的<b>公倍數</b>，最小的是 [40 , 24]＝120。<br>圍牆長 48 公尺＝4800 公分，重疊位置為 0、120、240、…、4800，共 4800÷120＋1＝<b>41</b> 個（兩端都算）。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 5 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F19</span><span class="src">📄 改編·臺中向上 113</span></div>
+  <div class="qbody">求 ( 2×3×5<sup>2</sup> , [ 84 , 90 ] )＝______（化成標準分解式）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2×3×5</div><div class="expl"><b>解析：</b>先算中括號：84＝2<sup>2</sup>×3×7、90＝2×3<sup>2</sup>×5，取各質因數的最大次數 → [84 , 90]＝2<sup>2</sup>×3<sup>2</sup>×5×7＝1260。<br>再算小括號：2×3×5<sup>2</sup>＝150 與 1260 取共同質因數的最小次數 → <b>2×3×5</b>＝30。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F20</span><span class="src">📄 改編·高雄左營 113</span></div>
+  <div class="qbody">求 ( 36 , 90 ) ＋ [ 12 , 18 , 24 ]＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：90</div><div class="expl"><b>解析：</b>(36 , 90)：36＝2<sup>2</sup>×3<sup>2</sup>、90＝2×3<sup>2</sup>×5，取共同質因數的最小次數 → 2×3<sup>2</sup>＝18。<br>[12 , 18 , 24]：12＝2<sup>2</sup>×3、18＝2×3<sup>2</sup>、24＝2<sup>3</sup>×3，取所有質因數的最大次數 → 2<sup>3</sup>×3<sup>2</sup>＝72。<br>相加：18＋72＝<b>90</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 6 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C11</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">小杰、芳羽和冠鑫到兒童樂園玩旋轉木馬，每次可乘坐 5 分鐘。第一層木馬每 10 秒繞一圈、第二層每 15 秒繞一圈、第三層每 20 秒繞一圈。出發時三人並排而坐（各坐一層）。<br>(1) 出發後經過幾秒，三人第一次同時回到出發的位置？<br>(2) 在這 5 分鐘內，三人共會在出發位置相會幾次？（不含出發時那一次）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 60 秒　(2) 5 次</div><div class="expl"><b>解析：</b>(1) 各層回到原位的時刻分別是 10、15、20 的倍數，三人同時回到原位 → 時間是三者的<b>公倍數</b>，第一次就是<b>最小公倍數</b>。<br>　10＝2×5、15＝3×5、20＝2<sup>2</sup>×5 → [10 , 15 , 20]＝2<sup>2</sup>×3×5＝<b>60</b> 秒。<br>(2) 5 分鐘＝300 秒，相會時刻為 60、120、… 秒。<br>　300÷60＝5 → 共 <b>5</b> 次。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C12</span><span class="src">📄 自編</span></div>
+  <div class="qbody">某轉運站有甲、乙、丙三條路線，分別每 10 分鐘、15 分鐘、25 分鐘發一班車。若上午 6:00 三線同時發車，試問：<br>(1) 下一次三線同時發車是幾點幾分？<br>(2) 從上午 6:00 到 11:00 之間（不含 6:00 那一次），三線共同時發車幾次？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 8:30　(2) 2 次</div><div class="expl"><b>解析：</b>(1) 三線同時發車的時刻是 10、15、25 的公倍數，下一次就是最小公倍數。<br>　10＝2×5、15＝3×5、25＝5<sup>2</sup> → [10 , 15 , 25]＝2×3×5<sup>2</sup>＝150 分鐘。<br>　150 分鐘＝2 小時 30 分，故下一次為 <b>8:30</b>。<br>(2) 這段時間共 5 小時＝300 分鐘，300÷150＝2 → 共 <b>2</b> 次。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 7 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C13</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有一塊長 210 公分、寬 150 公分的長方形地板，要用<b>邊長相同的正方形磁磚</b>剛好鋪滿（磁磚不可裁切、不可重疊）。<br>(1) 正方形磁磚的邊長最長是幾公分？<br>(2) 此時共需要幾塊磁磚？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 30 公分　(2) 35 塊</div><div class="expl"><b>解析：</b>(1) 磁磚要剛好鋪滿 → 邊長必須同時整除 210 和 150，即為兩者的<b>公因數</b>；最長就是<b>最大公因數</b>。<br>　210＝2×3×5×7、150＝2×3×5<sup>2</sup> → (210 , 150)＝2×3×5＝<b>30</b> 公分。<br>(2) 長邊排 210÷30＝7 塊、寬邊排 150÷30＝5 塊，共 7×5＝<b>35</b> 塊。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C14</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b 滿足 a×b＝10800，且 a、b 的最大公因數為 30。<br>(1) 求 a、b 的最小公倍數。<br>(2) 若再知道 a＜b 且 a＝90，求 b。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 360　(2) b＝120</div><div class="expl"><b>解析：</b>(1) 由 <b>a×b＝(a , b)×[a , b]</b>：<br>　10800＝30×[a , b] → [a , b]＝10800÷30＝<b>360</b>。<br>(2) b＝10800÷a＝10800÷90＝<b>120</b>。<br>　驗算：90＝2×3<sup>2</sup>×5、120＝2<sup>3</sup>×3×5，(90 , 120)＝30 ✔、[90 , 120]＝360 ✔。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 8 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C15</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">糖果 120 顆或 168 顆，都可以平分給同一群小朋友（每人分到的顆數為整數，且人數超過 1 人）。<br>(1) 這群小朋友最多可能有幾人？<br>(2) 小朋友的人數共有幾種可能？請全部列出。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 24 人　(2) 7 種：2、3、4、6、8、12、24 人</div><div class="expl"><b>解析：</b>(1) 人數要同時整除 120 與 168 → 是兩者的<b>公因數</b>，最多就是<b>最大公因數</b>。<br>　120＝2<sup>3</sup>×3×5、168＝2<sup>3</sup>×3×7 → (120 , 168)＝2<sup>3</sup>×3＝<b>24</b> 人。<br>(2) 公因數＝最大公因數 24 的所有因數：1、2、3、4、6、8、12、24；題目要求人數超過 1 人，去掉 1 之後為 2、3、4、6、8、12、24，共 <b>7</b> 種。<br>　（補充：120 與 168 的差為 48，所以人數也一定是 48 的因數，可用來快速檢查。）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C16</span><span class="src">📄 改編·臺北仁愛 113</span></div>
+  <div class="qbody">靜香發現有一種數很特別：它被 2 除時餘 1、被 3 除時餘 2、被 4 除時餘 3、…、一直到被 5 除時餘 4（也就是除以 2~5 的每個數，餘數都比除數少 1）。<br>(1) 請說明這種數加 1 之後有什麼性質。<br>(2) 求具有此性質的最大 4 位數。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 加 1 後是 2~5 的公倍數（即 60 的倍數）　(2) 9959</div><div class="expl"><b>解析：</b>(1) 設此數為 N。「除以 m 餘 m－1」表示<b>再多 1 就剛好整除</b>，所以 N＋1 同時被 2、3、…、5 整除 → N＋1 是 2~5 的<b>公倍數</b>。<br>　[2 , 3 , … , 5]＝60，故 N＋1＝60×n，即 <b>N＝60n－1</b>。<br>(2) 要最大的 4 位數：60n－1≦9999 → n≦166，取 n＝166。<br>　N＝60×166－1＝<b>9959</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 9 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C17</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有三條繩子，長度分別為 96 公分、144 公分、240 公分。現在要把它們剪成<b>長度相同且最長</b>的小段，且完全不浪費（不剩零頭）。<br>(1) 每小段最長是幾公分？<br>(2) 共可剪成幾小段？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 48 公分　(2) 10 段</div><div class="expl"><b>解析：</b>(1) 每段長度要能整除三條繩子 → 是三數的<b>公因數</b>，最長即<b>最大公因數</b>。<br>　96＝2<sup>5</sup>×3、144＝2<sup>4</sup>×3<sup>2</sup>、240＝2<sup>4</sup>×3×5<br>　→ (96 , 144 , 240)＝2<sup>4</sup>×3＝<b>48</b> 公分。<br>(2) 各剪成 96÷48＝2 段、144÷48＝3 段、240÷48＝5 段，合計 2＋3＋5＝<b>10</b> 段。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C18</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">一條長 180 公尺的直線步道，原本每隔 12 公尺立一根木樁（頭尾兩端都立）。現在要改成每隔 9 公尺立一根（頭尾兩端仍都立）。<br>(1) 有幾根原有的木樁剛好在新位置上，不必移動？<br>(2) 需要新增幾根木樁？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 6 根　(2) 15 根</div><div class="expl"><b>解析：</b>以一端為 0 公尺，原木樁在 12 的倍數處，新木樁在 9 的倍數處。<br>(1) 不必移動＝位置同時是 12 與 9 的倍數，即 [12 , 9]＝36 的倍數。<br>　位置為 0、36、…、180，共 180÷36＋1＝<b>6</b> 根。<br>(2) 新的木樁全部共 180÷9＋1＝21 根，其中 6 根已經有了，<br>　需新增 21－6＝<b>15</b> 根。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 B卷 · 第 10 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C19</span><span class="src">📄 自編</span></div>
+  <div class="qbody">甲、乙兩個齒輪互相咬合轉動，甲有 18 齒、乙有 30 齒。從某個咬合位置開始轉動，試問：<br>(1) 至少要轉過幾齒，兩齒輪才會再度回到最初的咬合位置？<br>(2) 此時甲、乙各轉了幾圈？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 90 齒　(2) 甲 5 圈、乙 3 圈</div><div class="expl"><b>解析：</b>(1) 甲每轉過 18 齒回到原位、乙每轉過 30 齒回到原位，兩者同時回到原位 → 轉過的齒數是 18 與 30 的<b>公倍數</b>，最少即<b>最小公倍數</b>。<br>　18＝2×3<sup>2</sup>、30＝2×3×5 → [18 , 30]＝2×3<sup>2</sup>×5＝<b>90</b> 齒。<br>(2) 甲轉 90÷18＝<b>5</b> 圈、乙轉 90÷30＝<b>3</b> 圈。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C20</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b（a≦b）的最大公因數為 4、最小公倍數為 60。<br>(1) 求 a×b 的值。<br>(2) 求所有可能的 a、b 數對。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 240　(2) (a , b)＝(4 , 60)；(a , b)＝(12 , 20)</div><div class="expl"><b>解析：</b>(1) a×b＝(a , b)×[a , b]＝4×60＝<b>240</b>。<br>(2) 因為最大公因數是 4，可設 a＝4m、b＝4n，且 <b>m、n 互質</b>（m≦n）。<br>　此時 [a , b]＝4mn＝60 → mn＝60÷4＝15。<br>　把 15 拆成兩個互質的正整數相乘：1×15、3×5。<br>　乘回 4 得 <b>(4 , 60)；(12 , 20)</b>。</div></div>
+</div></div></section><section class="paper" data-p="C"><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 1 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="paperhd">C 卷　2-2 最大公因數與最小公倍數<small>填充10・計算10 ‧ 共20題</small></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F21</span><span class="src">📄 改編·高雄光華 113</span></div>
+  <div class="qbody">求下列各值：<br>(1) (60 , 126)＝______　(2) [60 , 126]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 6　(2) 1260</div><div class="expl"><b>解析：</b>先做質因數分解：60＝2<sup>2</sup>×3×5、126＝2×3<sup>2</sup>×7。<br>(1) 最大公因數取<b>共同質因數的最小次數</b> → (60 , 126)＝2×3＝<b>6</b>。<br>(2) 最小公倍數取<b>所有質因數的最大次數</b> → [60 , 126]＝2<sup>2</sup>×3<sup>2</sup>×5×7＝<b>1260</b>。<br>（可驗算：6×1260＝7560＝60×126）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F22</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">已知三數 2<sup>5</sup>×3×11<sup>2</sup>、2<sup>3</sup>×3<sup>3</sup>×11、2<sup>4</sup>×3<sup>2</sup>×11<sup>3</sup>，求此三數的最大公因數＝______（以標準分解式表示）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>3</sup>×3×11</div><div class="expl"><b>解析：</b>最大公因數＝<b>三個數都有的質因數，取最小的次數</b>。<br>　2 的次數：5、3、4 → 取最小的 3<br>　3 的次數：1、3、2 → 取最小的 1<br>　11 的次數：2、1、3 → 取最小的 1<br>故最大公因數＝<b>2<sup>3</sup>×3×11</b>＝264。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 2 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F23</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">以標準分解式表示 [ 2×3<sup>3</sup>×5 , 2<sup>4</sup>×5<sup>2</sup> , 3<sup>2</sup>×5×11 ]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>4</sup>×3<sup>3</sup>×5<sup>2</sup>×11</div><div class="expl"><b>解析：</b>最小公倍數＝<b>出現過的每個質因數，都取最大的次數</b>。<br>　2 的次數：1、4、0 → 取最大的 4<br>　3 的次數：3、0、2 → 取最大的 3<br>　5 的次數：1、2、1 → 取最大的 2<br>　11 的次數：0、0、1 → 取最大的 1<br>故最小公倍數＝<b>2<sup>4</sup>×3<sup>3</sup>×5<sup>2</sup>×11</b>＝118800。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F24</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b，其中 a＝120，且 (a , b)＝15、[a , b]＝360，則 b＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：45</div><div class="expl"><b>解析：</b>任兩正整數都滿足 <b>a×b＝(a , b)×[a , b]</b>。<br>120×b＝15×360＝5400<br>b＝5400÷120＝<b>45</b>。<br>（驗算：120＝2<sup>3</sup>×3×5、45＝3<sup>2</sup>×5 → (120,45)＝15 ✔、[120,45]＝360 ✔）</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 3 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F25</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">在 40 與 60 之間（含 40、60）的正整數中，將與 30 互質的數由小到大排列，則第 5 個數是 ______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：53</div><div class="expl"><b>解析：</b>「與 30 互質」＝與 30 的最大公因數為 1，也就是<b>不含 30 的任何質因數</b>。<br>30＝2×3×5，質因數為 2、3、5，所以要把 2、3、5 的倍數全部刪掉。<br>40~60 剩下的是：41、43、47、49、53、59。<br>第 5 個為 <b>53</b>。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F26</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">水果行要將 416 顆芒果分裝成禮盒，每盒芒果數一樣多且剛好裝完，若每盒最多裝 18 顆，則至少需要多少個禮盒？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：26 個（每盒 16 顆）</div><div class="expl"><b>解析：</b>每盒數量相同且剛好裝完 → 每盒顆數必為 416 的因數。<br>416＝2<sup>5</sup>×13，正因數有 1、2、4、8、13、16、26、32、52、104、208、416。<br>盒數要<b>最少</b>，每盒就要裝<b>最多</b>；在不超過 18 的因數中最大的是 16。<br>故至少需要 416÷16＝<b>26</b> 個禮盒。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 4 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F27</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">宏錩身上的現金，以 3 元、4 元、5 元去分都剛好餘 2 元。若他身上的現金在 150 元到 250 元之間，則他身上的現金可能是多少元？______（全部列出才給分）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：182、242 元</div><div class="expl"><b>解析：</b>設現金為 x 元。x 除以 3、4、5 都餘 2 → <b>x－2 同時是 3、4、5 的公倍數</b>。<br>[3 , 4 , 5]＝60，所以 x－2 是 60 的倍數，即 x＝60×n＋2。<br>取 150≦x≦250：60×3＋2＝182、60×4＋2＝242 → <b>182、242</b> 元。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F28</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">王先生的莊園圍牆長 72 公尺，原本每隔 45 公分安裝一個紅色燈泡（兩端都安裝）。後來覺得不夠閃亮，改為每隔 30 公分安裝一個黃色燈泡（兩端都安裝）。則施作時有幾個原先裝好的紅色燈泡位置，剛好被換成黃色燈泡？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：81 個</div><div class="expl"><b>解析：</b>把圍牆一端當作 0，紅燈泡在 45 的倍數的位置，黃燈泡在 30 的倍數的位置。<br>位置重疊 → 該位置同時是 45 與 30 的<b>公倍數</b>，最小的是 [45 , 30]＝90。<br>圍牆長 72 公尺＝7200 公分，重疊位置為 0、90、180、…、7200，共 7200÷90＋1＝<b>81</b> 個（兩端都算）。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 5 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F29</span><span class="src">📄 改編·臺中向上 113</span></div>
+  <div class="qbody">求 ( 2×3<sup>2</sup>×7 , [ 60 , 45 ] )＝______（化成標準分解式）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2×3<sup>2</sup></div><div class="expl"><b>解析：</b>先算中括號：60＝2<sup>2</sup>×3×5、45＝3<sup>2</sup>×5，取各質因數的最大次數 → [60 , 45]＝2<sup>2</sup>×3<sup>2</sup>×5＝180。<br>再算小括號：2×3<sup>2</sup>×7＝126 與 180 取共同質因數的最小次數 → <b>2×3<sup>2</sup></b>＝18。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F30</span><span class="src">📄 改編·高雄左營 113</span></div>
+  <div class="qbody">求 ( 48 , 72 ) ＋ [ 15 , 20 , 25 ]＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：324</div><div class="expl"><b>解析：</b>(48 , 72)：48＝2<sup>4</sup>×3、72＝2<sup>3</sup>×3<sup>2</sup>，取共同質因數的最小次數 → 2<sup>3</sup>×3＝24。<br>[15 , 20 , 25]：15＝3×5、20＝2<sup>2</sup>×5、25＝5<sup>2</sup>，取所有質因數的最大次數 → 2<sup>2</sup>×3×5<sup>2</sup>＝300。<br>相加：24＋300＝<b>324</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 6 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C21</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">小杰、芳羽和冠鑫到兒童樂園玩旋轉木馬，每次可乘坐 4 分鐘。第一層木馬每 8 秒繞一圈、第二層每 12 秒繞一圈、第三層每 20 秒繞一圈。出發時三人並排而坐（各坐一層）。<br>(1) 出發後經過幾秒，三人第一次同時回到出發的位置？<br>(2) 在這 4 分鐘內，三人共會在出發位置相會幾次？（不含出發時那一次）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 120 秒　(2) 2 次</div><div class="expl"><b>解析：</b>(1) 各層回到原位的時刻分別是 8、12、20 的倍數，三人同時回到原位 → 時間是三者的<b>公倍數</b>，第一次就是<b>最小公倍數</b>。<br>　8＝2<sup>3</sup>、12＝2<sup>2</sup>×3、20＝2<sup>2</sup>×5 → [8 , 12 , 20]＝2<sup>3</sup>×3×5＝<b>120</b> 秒。<br>(2) 4 分鐘＝240 秒，相會時刻為 120、240、… 秒。<br>　240÷120＝2 → 共 <b>2</b> 次。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C22</span><span class="src">📄 自編</span></div>
+  <div class="qbody">某轉運站有甲、乙、丙三條路線，分別每 8 分鐘、12 分鐘、20 分鐘發一班車。若上午 6:00 三線同時發車，試問：<br>(1) 下一次三線同時發車是幾點幾分？<br>(2) 從上午 6:00 到 10:00 之間（不含 6:00 那一次），三線共同時發車幾次？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 8:00　(2) 2 次</div><div class="expl"><b>解析：</b>(1) 三線同時發車的時刻是 8、12、20 的公倍數，下一次就是最小公倍數。<br>　8＝2<sup>3</sup>、12＝2<sup>2</sup>×3、20＝2<sup>2</sup>×5 → [8 , 12 , 20]＝2<sup>3</sup>×3×5＝120 分鐘。<br>　120 分鐘＝2 小時 0 分，故下一次為 <b>8:00</b>。<br>(2) 這段時間共 4 小時＝240 分鐘，240÷120＝2 → 共 <b>2</b> 次。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 7 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C23</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有一塊長 144 公分、寬 96 公分的長方形地板，要用<b>邊長相同的正方形磁磚</b>剛好鋪滿（磁磚不可裁切、不可重疊）。<br>(1) 正方形磁磚的邊長最長是幾公分？<br>(2) 此時共需要幾塊磁磚？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 48 公分　(2) 6 塊</div><div class="expl"><b>解析：</b>(1) 磁磚要剛好鋪滿 → 邊長必須同時整除 144 和 96，即為兩者的<b>公因數</b>；最長就是<b>最大公因數</b>。<br>　144＝2<sup>4</sup>×3<sup>2</sup>、96＝2<sup>5</sup>×3 → (144 , 96)＝2<sup>4</sup>×3＝<b>48</b> 公分。<br>(2) 長邊排 144÷48＝3 塊、寬邊排 96÷48＝2 塊，共 3×2＝<b>6</b> 塊。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C24</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b 滿足 a×b＝7776，且 a、b 的最大公因數為 36。<br>(1) 求 a、b 的最小公倍數。<br>(2) 若再知道 a＜b 且 a＝72，求 b。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 216　(2) b＝108</div><div class="expl"><b>解析：</b>(1) 由 <b>a×b＝(a , b)×[a , b]</b>：<br>　7776＝36×[a , b] → [a , b]＝7776÷36＝<b>216</b>。<br>(2) b＝7776÷a＝7776÷72＝<b>108</b>。<br>　驗算：72＝2<sup>3</sup>×3<sup>2</sup>、108＝2<sup>2</sup>×3<sup>3</sup>，(72 , 108)＝36 ✔、[72 , 108]＝216 ✔。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 8 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C25</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">糖果 135 顆或 225 顆，都可以平分給同一群小朋友（每人分到的顆數為整數，且人數超過 1 人）。<br>(1) 這群小朋友最多可能有幾人？<br>(2) 小朋友的人數共有幾種可能？請全部列出。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 45 人　(2) 5 種：3、5、9、15、45 人</div><div class="expl"><b>解析：</b>(1) 人數要同時整除 135 與 225 → 是兩者的<b>公因數</b>，最多就是<b>最大公因數</b>。<br>　135＝3<sup>3</sup>×5、225＝3<sup>2</sup>×5<sup>2</sup> → (135 , 225)＝3<sup>2</sup>×5＝<b>45</b> 人。<br>(2) 公因數＝最大公因數 45 的所有因數：1、3、5、9、15、45；題目要求人數超過 1 人，去掉 1 之後為 3、5、9、15、45，共 <b>5</b> 種。<br>　（補充：135 與 225 的差為 90，所以人數也一定是 90 的因數，可用來快速檢查。）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C26</span><span class="src">📄 改編·臺北仁愛 113</span></div>
+  <div class="qbody">靜香發現有一種數很特別：它被 2 除時餘 1、被 3 除時餘 2、被 4 除時餘 3、…、一直到被 7 除時餘 6（也就是除以 2~7 的每個數，餘數都比除數少 1）。<br>(1) 請說明這種數加 1 之後有什麼性質。<br>(2) 求具有此性質的最大 4 位數。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 加 1 後是 2~7 的公倍數（即 420 的倍數）　(2) 9659</div><div class="expl"><b>解析：</b>(1) 設此數為 N。「除以 m 餘 m－1」表示<b>再多 1 就剛好整除</b>，所以 N＋1 同時被 2、3、…、7 整除 → N＋1 是 2~7 的<b>公倍數</b>。<br>　[2 , 3 , … , 7]＝420，故 N＋1＝420×n，即 <b>N＝420n－1</b>。<br>(2) 要最大的 4 位數：420n－1≦9999 → n≦23，取 n＝23。<br>　N＝420×23－1＝<b>9659</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 9 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C27</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有三條繩子，長度分別為 120 公分、180 公分、300 公分。現在要把它們剪成<b>長度相同且最長</b>的小段，且完全不浪費（不剩零頭）。<br>(1) 每小段最長是幾公分？<br>(2) 共可剪成幾小段？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 60 公分　(2) 10 段</div><div class="expl"><b>解析：</b>(1) 每段長度要能整除三條繩子 → 是三數的<b>公因數</b>，最長即<b>最大公因數</b>。<br>　120＝2<sup>3</sup>×3×5、180＝2<sup>2</sup>×3<sup>2</sup>×5、300＝2<sup>2</sup>×3×5<sup>2</sup><br>　→ (120 , 180 , 300)＝2<sup>2</sup>×3×5＝<b>60</b> 公分。<br>(2) 各剪成 120÷60＝2 段、180÷60＝3 段、300÷60＝5 段，合計 2＋3＋5＝<b>10</b> 段。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C28</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">一條長 240 公尺的直線步道，原本每隔 15 公尺立一根木樁（頭尾兩端都立）。現在要改成每隔 10 公尺立一根（頭尾兩端仍都立）。<br>(1) 有幾根原有的木樁剛好在新位置上，不必移動？<br>(2) 需要新增幾根木樁？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 9 根　(2) 16 根</div><div class="expl"><b>解析：</b>以一端為 0 公尺，原木樁在 15 的倍數處，新木樁在 10 的倍數處。<br>(1) 不必移動＝位置同時是 15 與 10 的倍數，即 [15 , 10]＝30 的倍數。<br>　位置為 0、30、…、240，共 240÷30＋1＝<b>9</b> 根。<br>(2) 新的木樁全部共 240÷10＋1＝25 根，其中 9 根已經有了，<br>　需新增 25－9＝<b>16</b> 根。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 C卷 · 第 10 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C29</span><span class="src">📄 自編</span></div>
+  <div class="qbody">甲、乙兩個齒輪互相咬合轉動，甲有 28 齒、乙有 42 齒。從某個咬合位置開始轉動，試問：<br>(1) 至少要轉過幾齒，兩齒輪才會再度回到最初的咬合位置？<br>(2) 此時甲、乙各轉了幾圈？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 84 齒　(2) 甲 3 圈、乙 2 圈</div><div class="expl"><b>解析：</b>(1) 甲每轉過 28 齒回到原位、乙每轉過 42 齒回到原位，兩者同時回到原位 → 轉過的齒數是 28 與 42 的<b>公倍數</b>，最少即<b>最小公倍數</b>。<br>　28＝2<sup>2</sup>×7、42＝2×3×7 → [28 , 42]＝2<sup>2</sup>×3×7＝<b>84</b> 齒。<br>(2) 甲轉 84÷28＝<b>3</b> 圈、乙轉 84÷42＝<b>2</b> 圈。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C30</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b（a≦b）的最大公因數為 9、最小公倍數為 90。<br>(1) 求 a×b 的值。<br>(2) 求所有可能的 a、b 數對。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 810　(2) (a , b)＝(9 , 90)；(a , b)＝(18 , 45)</div><div class="expl"><b>解析：</b>(1) a×b＝(a , b)×[a , b]＝9×90＝<b>810</b>。<br>(2) 因為最大公因數是 9，可設 a＝9m、b＝9n，且 <b>m、n 互質</b>（m≦n）。<br>　此時 [a , b]＝9mn＝90 → mn＝90÷9＝10。<br>　把 10 拆成兩個互質的正整數相乘：1×10、2×5。<br>　乘回 9 得 <b>(9 , 90)；(18 , 45)</b>。</div></div>
+</div></div></section><section class="paper" data-p="D"><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 1 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="paperhd">D 卷　2-2 最大公因數與最小公倍數<small>填充10・計算10 ‧ 共20題</small></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F31</span><span class="src">📄 改編·高雄光華 113</span></div>
+  <div class="qbody">求下列各值：<br>(1) (48 , 180)＝______　(2) [48 , 180]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 12　(2) 720</div><div class="expl"><b>解析：</b>先做質因數分解：48＝2<sup>4</sup>×3、180＝2<sup>2</sup>×3<sup>2</sup>×5。<br>(1) 最大公因數取<b>共同質因數的最小次數</b> → (48 , 180)＝2<sup>2</sup>×3＝<b>12</b>。<br>(2) 最小公倍數取<b>所有質因數的最大次數</b> → [48 , 180]＝2<sup>4</sup>×3<sup>2</sup>×5＝<b>720</b>。<br>（可驗算：12×720＝8640＝48×180）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F32</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">已知三數 3<sup>2</sup>×5<sup>3</sup>×7、3<sup>4</sup>×5×7<sup>2</sup>、3<sup>3</sup>×5<sup>2</sup>×7<sup>3</sup>，求此三數的最大公因數＝______（以標準分解式表示）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：3<sup>2</sup>×5×7</div><div class="expl"><b>解析：</b>最大公因數＝<b>三個數都有的質因數，取最小的次數</b>。<br>　3 的次數：2、4、3 → 取最小的 2<br>　5 的次數：3、1、2 → 取最小的 1<br>　7 的次數：1、2、3 → 取最小的 1<br>故最大公因數＝<b>3<sup>2</sup>×5×7</b>＝315。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 2 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F33</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">以標準分解式表示 [ 2<sup>2</sup>×3<sup>2</sup>×5 , 2×3<sup>4</sup> , 5<sup>3</sup>×7 ]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>2</sup>×3<sup>4</sup>×5<sup>3</sup>×7</div><div class="expl"><b>解析：</b>最小公倍數＝<b>出現過的每個質因數，都取最大的次數</b>。<br>　2 的次數：2、1、0 → 取最大的 2<br>　3 的次數：2、4、0 → 取最大的 4<br>　5 的次數：1、0、3 → 取最大的 3<br>　7 的次數：0、0、1 → 取最大的 1<br>故最小公倍數＝<b>2<sup>2</sup>×3<sup>4</sup>×5<sup>3</sup>×7</b>＝283500。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F34</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b，其中 a＝72，且 (a , b)＝24、[a , b]＝288，則 b＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：96</div><div class="expl"><b>解析：</b>任兩正整數都滿足 <b>a×b＝(a , b)×[a , b]</b>。<br>72×b＝24×288＝6912<br>b＝6912÷72＝<b>96</b>。<br>（驗算：72＝2<sup>3</sup>×3<sup>2</sup>、96＝2<sup>5</sup>×3 → (72,96)＝24 ✔、[72,96]＝288 ✔）</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 3 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F35</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">在 25 與 45 之間（含 25、45）的正整數中，將與 18 互質的數由小到大排列，則第 4 個數是 ______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：35</div><div class="expl"><b>解析：</b>「與 18 互質」＝與 18 的最大公因數為 1，也就是<b>不含 18 的任何質因數</b>。<br>18＝2×3<sup>2</sup>，質因數為 2、3，所以要把 2、3 的倍數全部刪掉。<br>25~45 剩下的是：25、29、31、35、37、41、43。<br>第 4 個為 <b>35</b>。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F36</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">水果行要將 315 顆芒果分裝成禮盒，每盒芒果數一樣多且剛好裝完，若每盒最多裝 20 顆，則至少需要多少個禮盒？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：21 個（每盒 15 顆）</div><div class="expl"><b>解析：</b>每盒數量相同且剛好裝完 → 每盒顆數必為 315 的因數。<br>315＝3<sup>2</sup>×5×7，正因數有 1、3、5、7、9、15、21、35、45、63、105、315。<br>盒數要<b>最少</b>，每盒就要裝<b>最多</b>；在不超過 20 的因數中最大的是 15。<br>故至少需要 315÷15＝<b>21</b> 個禮盒。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 4 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F37</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">宏錩身上的現金，以 4 元、5 元、6 元去分都剛好餘 3 元。若他身上的現金在 200 元到 350 元之間，則他身上的現金可能是多少元？______（全部列出才給分）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：243、303 元</div><div class="expl"><b>解析：</b>設現金為 x 元。x 除以 4、5、6 都餘 3 → <b>x－3 同時是 4、5、6 的公倍數</b>。<br>[4 , 5 , 6]＝60，所以 x－3 是 60 的倍數，即 x＝60×n＋3。<br>取 200≦x≦350：60×4＋3＝243、60×5＋3＝303 → <b>243、303</b> 元。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F38</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">王先生的莊園圍牆長 90 公尺，原本每隔 50 公分安裝一個紅色燈泡（兩端都安裝）。後來覺得不夠閃亮，改為每隔 20 公分安裝一個黃色燈泡（兩端都安裝）。則施作時有幾個原先裝好的紅色燈泡位置，剛好被換成黃色燈泡？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：91 個</div><div class="expl"><b>解析：</b>把圍牆一端當作 0，紅燈泡在 50 的倍數的位置，黃燈泡在 20 的倍數的位置。<br>位置重疊 → 該位置同時是 50 與 20 的<b>公倍數</b>，最小的是 [50 , 20]＝100。<br>圍牆長 90 公尺＝9000 公分，重疊位置為 0、100、200、…、9000，共 9000÷100＋1＝<b>91</b> 個（兩端都算）。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 5 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F39</span><span class="src">📄 改編·臺中向上 113</span></div>
+  <div class="qbody">求 ( 2<sup>2</sup>×5×7 , [ 88 , 132 ] )＝______（化成標準分解式）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>2</sup></div><div class="expl"><b>解析：</b>先算中括號：88＝2<sup>3</sup>×11、132＝2<sup>2</sup>×3×11，取各質因數的最大次數 → [88 , 132]＝2<sup>3</sup>×3×11＝264。<br>再算小括號：2<sup>2</sup>×5×7＝140 與 264 取共同質因數的最小次數 → <b>2<sup>2</sup></b>＝4。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F40</span><span class="src">📄 改編·高雄左營 113</span></div>
+  <div class="qbody">求 ( 54 , 126 ) ＋ [ 14 , 21 , 28 ]＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：102</div><div class="expl"><b>解析：</b>(54 , 126)：54＝2×3<sup>3</sup>、126＝2×3<sup>2</sup>×7，取共同質因數的最小次數 → 2×3<sup>2</sup>＝18。<br>[14 , 21 , 28]：14＝2×7、21＝3×7、28＝2<sup>2</sup>×7，取所有質因數的最大次數 → 2<sup>2</sup>×3×7＝84。<br>相加：18＋84＝<b>102</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 6 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C31</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">小杰、芳羽和冠鑫到兒童樂園玩旋轉木馬，每次可乘坐 5 分鐘。第一層木馬每 6 秒繞一圈、第二層每 10 秒繞一圈、第三層每 15 秒繞一圈。出發時三人並排而坐（各坐一層）。<br>(1) 出發後經過幾秒，三人第一次同時回到出發的位置？<br>(2) 在這 5 分鐘內，三人共會在出發位置相會幾次？（不含出發時那一次）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 30 秒　(2) 10 次</div><div class="expl"><b>解析：</b>(1) 各層回到原位的時刻分別是 6、10、15 的倍數，三人同時回到原位 → 時間是三者的<b>公倍數</b>，第一次就是<b>最小公倍數</b>。<br>　6＝2×3、10＝2×5、15＝3×5 → [6 , 10 , 15]＝2×3×5＝<b>30</b> 秒。<br>(2) 5 分鐘＝300 秒，相會時刻為 30、60、… 秒。<br>　300÷30＝10 → 共 <b>10</b> 次。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C32</span><span class="src">📄 自編</span></div>
+  <div class="qbody">某轉運站有甲、乙、丙三條路線，分別每 9 分鐘、15 分鐘、21 分鐘發一班車。若上午 6:00 三線同時發車，試問：<br>(1) 下一次三線同時發車是幾點幾分？<br>(2) 從上午 6:00 到 13:00 之間（不含 6:00 那一次），三線共同時發車幾次？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 11:15　(2) 1 次</div><div class="expl"><b>解析：</b>(1) 三線同時發車的時刻是 9、15、21 的公倍數，下一次就是最小公倍數。<br>　9＝3<sup>2</sup>、15＝3×5、21＝3×7 → [9 , 15 , 21]＝3<sup>2</sup>×5×7＝315 分鐘。<br>　315 分鐘＝5 小時 15 分，故下一次為 <b>11:15</b>。<br>(2) 這段時間共 7 小時＝420 分鐘，420÷315＝1…餘 105 → 共 <b>1</b> 次。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 7 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C33</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有一塊長 252 公分、寬 180 公分的長方形地板，要用<b>邊長相同的正方形磁磚</b>剛好鋪滿（磁磚不可裁切、不可重疊）。<br>(1) 正方形磁磚的邊長最長是幾公分？<br>(2) 此時共需要幾塊磁磚？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 36 公分　(2) 35 塊</div><div class="expl"><b>解析：</b>(1) 磁磚要剛好鋪滿 → 邊長必須同時整除 252 和 180，即為兩者的<b>公因數</b>；最長就是<b>最大公因數</b>。<br>　252＝2<sup>2</sup>×3<sup>2</sup>×7、180＝2<sup>2</sup>×3<sup>2</sup>×5 → (252 , 180)＝2<sup>2</sup>×3<sup>2</sup>＝<b>36</b> 公分。<br>(2) 長邊排 252÷36＝7 塊、寬邊排 180÷36＝5 塊，共 7×5＝<b>35</b> 塊。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C34</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b 滿足 a×b＝10080，且 a、b 的最大公因數為 12。<br>(1) 求 a、b 的最小公倍數。<br>(2) 若再知道 a＜b 且 a＝60，求 b。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 840　(2) b＝168</div><div class="expl"><b>解析：</b>(1) 由 <b>a×b＝(a , b)×[a , b]</b>：<br>　10080＝12×[a , b] → [a , b]＝10080÷12＝<b>840</b>。<br>(2) b＝10080÷a＝10080÷60＝<b>168</b>。<br>　驗算：60＝2<sup>2</sup>×3×5、168＝2<sup>3</sup>×3×7，(60 , 168)＝12 ✔、[60 , 168]＝840 ✔。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 8 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C35</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">糖果 144 顆或 240 顆，都可以平分給同一群小朋友（每人分到的顆數為整數，且人數超過 1 人）。<br>(1) 這群小朋友最多可能有幾人？<br>(2) 小朋友的人數共有幾種可能？請全部列出。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 48 人　(2) 9 種：2、3、4、6、8、12、16、24、48 人</div><div class="expl"><b>解析：</b>(1) 人數要同時整除 144 與 240 → 是兩者的<b>公因數</b>，最多就是<b>最大公因數</b>。<br>　144＝2<sup>4</sup>×3<sup>2</sup>、240＝2<sup>4</sup>×3×5 → (144 , 240)＝2<sup>4</sup>×3＝<b>48</b> 人。<br>(2) 公因數＝最大公因數 48 的所有因數：1、2、3、4、6、8、12、16、24、48；題目要求人數超過 1 人，去掉 1 之後為 2、3、4、6、8、12、16、24、48，共 <b>9</b> 種。<br>　（補充：144 與 240 的差為 96，所以人數也一定是 96 的因數，可用來快速檢查。）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C36</span><span class="src">📄 改編·臺北仁愛 113</span></div>
+  <div class="qbody">靜香發現有一種數很特別：它被 2 除時餘 1、被 3 除時餘 2、被 4 除時餘 3、…、一直到被 8 除時餘 7（也就是除以 2~8 的每個數，餘數都比除數少 1）。<br>(1) 請說明這種數加 1 之後有什麼性質。<br>(2) 求具有此性質的最大 4 位數。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 加 1 後是 2~8 的公倍數（即 840 的倍數）　(2) 9239</div><div class="expl"><b>解析：</b>(1) 設此數為 N。「除以 m 餘 m－1」表示<b>再多 1 就剛好整除</b>，所以 N＋1 同時被 2、3、…、8 整除 → N＋1 是 2~8 的<b>公倍數</b>。<br>　[2 , 3 , … , 8]＝840，故 N＋1＝840×n，即 <b>N＝840n－1</b>。<br>(2) 要最大的 4 位數：840n－1≦9999 → n≦11，取 n＝11。<br>　N＝840×11－1＝<b>9239</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 9 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C37</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有三條繩子，長度分別為 105 公分、165 公分、195 公分。現在要把它們剪成<b>長度相同且最長</b>的小段，且完全不浪費（不剩零頭）。<br>(1) 每小段最長是幾公分？<br>(2) 共可剪成幾小段？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 15 公分　(2) 31 段</div><div class="expl"><b>解析：</b>(1) 每段長度要能整除三條繩子 → 是三數的<b>公因數</b>，最長即<b>最大公因數</b>。<br>　105＝3×5×7、165＝3×5×11、195＝3×5×13<br>　→ (105 , 165 , 195)＝3×5＝<b>15</b> 公分。<br>(2) 各剪成 105÷15＝7 段、165÷15＝11 段、195÷15＝13 段，合計 7＋11＋13＝<b>31</b> 段。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C38</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">一條長 150 公尺的直線步道，原本每隔 10 公尺立一根木樁（頭尾兩端都立）。現在要改成每隔 6 公尺立一根（頭尾兩端仍都立）。<br>(1) 有幾根原有的木樁剛好在新位置上，不必移動？<br>(2) 需要新增幾根木樁？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 6 根　(2) 20 根</div><div class="expl"><b>解析：</b>以一端為 0 公尺，原木樁在 10 的倍數處，新木樁在 6 的倍數處。<br>(1) 不必移動＝位置同時是 10 與 6 的倍數，即 [10 , 6]＝30 的倍數。<br>　位置為 0、30、…、150，共 150÷30＋1＝<b>6</b> 根。<br>(2) 新的木樁全部共 150÷6＋1＝26 根，其中 6 根已經有了，<br>　需新增 26－6＝<b>20</b> 根。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 D卷 · 第 10 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C39</span><span class="src">📄 自編</span></div>
+  <div class="qbody">甲、乙兩個齒輪互相咬合轉動，甲有 20 齒、乙有 45 齒。從某個咬合位置開始轉動，試問：<br>(1) 至少要轉過幾齒，兩齒輪才會再度回到最初的咬合位置？<br>(2) 此時甲、乙各轉了幾圈？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 180 齒　(2) 甲 9 圈、乙 4 圈</div><div class="expl"><b>解析：</b>(1) 甲每轉過 20 齒回到原位、乙每轉過 45 齒回到原位，兩者同時回到原位 → 轉過的齒數是 20 與 45 的<b>公倍數</b>，最少即<b>最小公倍數</b>。<br>　20＝2<sup>2</sup>×5、45＝3<sup>2</sup>×5 → [20 , 45]＝2<sup>2</sup>×3<sup>2</sup>×5＝<b>180</b> 齒。<br>(2) 甲轉 180÷20＝<b>9</b> 圈、乙轉 180÷45＝<b>4</b> 圈。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C40</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b（a≦b）的最大公因數為 12、最小公倍數為 420。<br>(1) 求 a×b 的值。<br>(2) 求所有可能的 a、b 數對。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 5040　(2) (a , b)＝(12 , 420)；(a , b)＝(60 , 84)</div><div class="expl"><b>解析：</b>(1) a×b＝(a , b)×[a , b]＝12×420＝<b>5040</b>。<br>(2) 因為最大公因數是 12，可設 a＝12m、b＝12n，且 <b>m、n 互質</b>（m≦n）。<br>　此時 [a , b]＝12mn＝420 → mn＝420÷12＝35。<br>　把 35 拆成兩個互質的正整數相乘：1×35、5×7。<br>　乘回 12 得 <b>(12 , 420)；(60 , 84)</b>。</div></div>
+</div></div></section><section class="paper" data-p="E"><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 1 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="paperhd">E 卷　2-2 最大公因數與最小公倍數<small>填充10・計算10 ‧ 共20題</small></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F41</span><span class="src">📄 改編·高雄光華 113</span></div>
+  <div class="qbody">求下列各值：<br>(1) (54 , 144)＝______　(2) [54 , 144]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 18　(2) 432</div><div class="expl"><b>解析：</b>先做質因數分解：54＝2×3<sup>3</sup>、144＝2<sup>4</sup>×3<sup>2</sup>。<br>(1) 最大公因數取<b>共同質因數的最小次數</b> → (54 , 144)＝2×3<sup>2</sup>＝<b>18</b>。<br>(2) 最小公倍數取<b>所有質因數的最大次數</b> → [54 , 144]＝2<sup>4</sup>×3<sup>3</sup>＝<b>432</b>。<br>（可驗算：18×432＝7776＝54×144）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F42</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">已知三數 2<sup>4</sup>×5<sup>2</sup>×13、2<sup>2</sup>×5<sup>4</sup>×13<sup>2</sup>、2<sup>3</sup>×5<sup>3</sup>×13<sup>3</sup>，求此三數的最大公因數＝______（以標準分解式表示）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>2</sup>×5<sup>2</sup>×13</div><div class="expl"><b>解析：</b>最大公因數＝<b>三個數都有的質因數，取最小的次數</b>。<br>　2 的次數：4、2、3 → 取最小的 2<br>　5 的次數：2、4、3 → 取最小的 2<br>　13 的次數：1、2、3 → 取最小的 1<br>故最大公因數＝<b>2<sup>2</sup>×5<sup>2</sup>×13</b>＝1300。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 2 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F43</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">以標準分解式表示 [ 3<sup>3</sup>×7<sup>2</sup> , 2<sup>4</sup>×7 , 2<sup>2</sup>×3×13 ]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>4</sup>×3<sup>3</sup>×7<sup>2</sup>×13</div><div class="expl"><b>解析：</b>最小公倍數＝<b>出現過的每個質因數，都取最大的次數</b>。<br>　2 的次數：0、4、2 → 取最大的 4<br>　3 的次數：3、0、1 → 取最大的 3<br>　7 的次數：2、1、0 → 取最大的 2<br>　13 的次數：0、0、1 → 取最大的 1<br>故最小公倍數＝<b>2<sup>4</sup>×3<sup>3</sup>×7<sup>2</sup>×13</b>＝275184。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F44</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b，其中 a＝150，且 (a , b)＝15、[a , b]＝1050，則 b＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：105</div><div class="expl"><b>解析：</b>任兩正整數都滿足 <b>a×b＝(a , b)×[a , b]</b>。<br>150×b＝15×1050＝15750<br>b＝15750÷150＝<b>105</b>。<br>（驗算：150＝2×3×5<sup>2</sup>、105＝3×5×7 → (150,105)＝15 ✔、[150,105]＝1050 ✔）</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 3 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F45</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">在 50 與 70 之間（含 50、70）的正整數中，將與 42 互質的數由小到大排列，則第 3 個數是 ______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：59</div><div class="expl"><b>解析：</b>「與 42 互質」＝與 42 的最大公因數為 1，也就是<b>不含 42 的任何質因數</b>。<br>42＝2×3×7，質因數為 2、3、7，所以要把 2、3、7 的倍數全部刪掉。<br>50~70 剩下的是：53、55、59、61、65、67。<br>第 3 個為 <b>59</b>。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F46</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">水果行要將 444 顆芒果分裝成禮盒，每盒芒果數一樣多且剛好裝完，若每盒最多裝 16 顆，則至少需要多少個禮盒？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：37 個（每盒 12 顆）</div><div class="expl"><b>解析：</b>每盒數量相同且剛好裝完 → 每盒顆數必為 444 的因數。<br>444＝2<sup>2</sup>×3×37，正因數有 1、2、3、4、6、12、37、74、111、148、222、444。<br>盒數要<b>最少</b>，每盒就要裝<b>最多</b>；在不超過 16 的因數中最大的是 12。<br>故至少需要 444÷12＝<b>37</b> 個禮盒。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 4 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F47</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">宏錩身上的現金，以 5 元、7 元、9 元去分都剛好餘 3 元。若他身上的現金在 300 元到 400 元之間，則他身上的現金可能是多少元？______（全部列出才給分）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：318 元</div><div class="expl"><b>解析：</b>設現金為 x 元。x 除以 5、7、9 都餘 3 → <b>x－3 同時是 5、7、9 的公倍數</b>。<br>[5 , 7 , 9]＝315，所以 x－3 是 315 的倍數，即 x＝315×n＋3。<br>取 300≦x≦400：315×1＋3＝318 → <b>318</b> 元。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F48</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">王先生的莊園圍牆長 36 公尺，原本每隔 24 公分安裝一個紅色燈泡（兩端都安裝）。後來覺得不夠閃亮，改為每隔 18 公分安裝一個黃色燈泡（兩端都安裝）。則施作時有幾個原先裝好的紅色燈泡位置，剛好被換成黃色燈泡？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：51 個</div><div class="expl"><b>解析：</b>把圍牆一端當作 0，紅燈泡在 24 的倍數的位置，黃燈泡在 18 的倍數的位置。<br>位置重疊 → 該位置同時是 24 與 18 的<b>公倍數</b>，最小的是 [24 , 18]＝72。<br>圍牆長 36 公尺＝3600 公分，重疊位置為 0、72、144、…、3600，共 3600÷72＋1＝<b>51</b> 個（兩端都算）。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 5 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F49</span><span class="src">📄 改編·臺中向上 113</span></div>
+  <div class="qbody">求 ( 2×3<sup>2</sup>×11 , [ 120 , 210 ] )＝______（化成標準分解式）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2×3</div><div class="expl"><b>解析：</b>先算中括號：120＝2<sup>3</sup>×3×5、210＝2×3×5×7，取各質因數的最大次數 → [120 , 210]＝2<sup>3</sup>×3×5×7＝840。<br>再算小括號：2×3<sup>2</sup>×11＝198 與 840 取共同質因數的最小次數 → <b>2×3</b>＝6。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F50</span><span class="src">📄 改編·高雄左營 113</span></div>
+  <div class="qbody">求 ( 40 , 100 ) ＋ [ 18 , 27 , 45 ]＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：290</div><div class="expl"><b>解析：</b>(40 , 100)：40＝2<sup>3</sup>×5、100＝2<sup>2</sup>×5<sup>2</sup>，取共同質因數的最小次數 → 2<sup>2</sup>×5＝20。<br>[18 , 27 , 45]：18＝2×3<sup>2</sup>、27＝3<sup>3</sup>、45＝3<sup>2</sup>×5，取所有質因數的最大次數 → 2×3<sup>3</sup>×5＝270。<br>相加：20＋270＝<b>290</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 6 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C41</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">小杰、芳羽和冠鑫到兒童樂園玩旋轉木馬，每次可乘坐 6 分鐘。第一層木馬每 9 秒繞一圈、第二層每 12 秒繞一圈、第三層每 18 秒繞一圈。出發時三人並排而坐（各坐一層）。<br>(1) 出發後經過幾秒，三人第一次同時回到出發的位置？<br>(2) 在這 6 分鐘內，三人共會在出發位置相會幾次？（不含出發時那一次）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 36 秒　(2) 10 次</div><div class="expl"><b>解析：</b>(1) 各層回到原位的時刻分別是 9、12、18 的倍數，三人同時回到原位 → 時間是三者的<b>公倍數</b>，第一次就是<b>最小公倍數</b>。<br>　9＝3<sup>2</sup>、12＝2<sup>2</sup>×3、18＝2×3<sup>2</sup> → [9 , 12 , 18]＝2<sup>2</sup>×3<sup>2</sup>＝<b>36</b> 秒。<br>(2) 6 分鐘＝360 秒，相會時刻為 36、72、… 秒。<br>　360÷36＝10 → 共 <b>10</b> 次。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C42</span><span class="src">📄 自編</span></div>
+  <div class="qbody">某轉運站有甲、乙、丙三條路線，分別每 14 分鐘、20 分鐘、35 分鐘發一班車。若上午 6:00 三線同時發車，試問：<br>(1) 下一次三線同時發車是幾點幾分？<br>(2) 從上午 6:00 到 13:00 之間（不含 6:00 那一次），三線共同時發車幾次？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 8:20　(2) 3 次</div><div class="expl"><b>解析：</b>(1) 三線同時發車的時刻是 14、20、35 的公倍數，下一次就是最小公倍數。<br>　14＝2×7、20＝2<sup>2</sup>×5、35＝5×7 → [14 , 20 , 35]＝2<sup>2</sup>×5×7＝140 分鐘。<br>　140 分鐘＝2 小時 20 分，故下一次為 <b>8:20</b>。<br>(2) 這段時間共 7 小時＝420 分鐘，420÷140＝3 → 共 <b>3</b> 次。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 7 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C43</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有一塊長 198 公分、寬 132 公分的長方形地板，要用<b>邊長相同的正方形磁磚</b>剛好鋪滿（磁磚不可裁切、不可重疊）。<br>(1) 正方形磁磚的邊長最長是幾公分？<br>(2) 此時共需要幾塊磁磚？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 66 公分　(2) 6 塊</div><div class="expl"><b>解析：</b>(1) 磁磚要剛好鋪滿 → 邊長必須同時整除 198 和 132，即為兩者的<b>公因數</b>；最長就是<b>最大公因數</b>。<br>　198＝2×3<sup>2</sup>×11、132＝2<sup>2</sup>×3×11 → (198 , 132)＝2×3×11＝<b>66</b> 公分。<br>(2) 長邊排 198÷66＝3 塊、寬邊排 132÷66＝2 塊，共 3×2＝<b>6</b> 塊。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C44</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b 滿足 a×b＝14700，且 a、b 的最大公因數為 35。<br>(1) 求 a、b 的最小公倍數。<br>(2) 若再知道 a＜b 且 a＝105，求 b。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 420　(2) b＝140</div><div class="expl"><b>解析：</b>(1) 由 <b>a×b＝(a , b)×[a , b]</b>：<br>　14700＝35×[a , b] → [a , b]＝14700÷35＝<b>420</b>。<br>(2) b＝14700÷a＝14700÷105＝<b>140</b>。<br>　驗算：105＝3×5×7、140＝2<sup>2</sup>×5×7，(105 , 140)＝35 ✔、[105 , 140]＝420 ✔。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 8 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C45</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">糖果 210 顆或 294 顆，都可以平分給同一群小朋友（每人分到的顆數為整數，且人數超過 1 人）。<br>(1) 這群小朋友最多可能有幾人？<br>(2) 小朋友的人數共有幾種可能？請全部列出。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 42 人　(2) 7 種：2、3、6、7、14、21、42 人</div><div class="expl"><b>解析：</b>(1) 人數要同時整除 210 與 294 → 是兩者的<b>公因數</b>，最多就是<b>最大公因數</b>。<br>　210＝2×3×5×7、294＝2×3×7<sup>2</sup> → (210 , 294)＝2×3×7＝<b>42</b> 人。<br>(2) 公因數＝最大公因數 42 的所有因數：1、2、3、6、7、14、21、42；題目要求人數超過 1 人，去掉 1 之後為 2、3、6、7、14、21、42，共 <b>7</b> 種。<br>　（補充：210 與 294 的差為 84，所以人數也一定是 84 的因數，可用來快速檢查。）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C46</span><span class="src">📄 改編·臺北仁愛 113</span></div>
+  <div class="qbody">靜香發現有一種數很特別：它被 2 除時餘 1、被 3 除時餘 2、被 4 除時餘 3、…、一直到被 8 除時餘 7（也就是除以 2~8 的每個數，餘數都比除數少 1）。<br>(1) 請說明這種數加 1 之後有什麼性質。<br>(2) 求具有此性質的最大 3 位數。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 加 1 後是 2~8 的公倍數（即 840 的倍數）　(2) 839</div><div class="expl"><b>解析：</b>(1) 設此數為 N。「除以 m 餘 m－1」表示<b>再多 1 就剛好整除</b>，所以 N＋1 同時被 2、3、…、8 整除 → N＋1 是 2~8 的<b>公倍數</b>。<br>　[2 , 3 , … , 8]＝840，故 N＋1＝840×n，即 <b>N＝840n－1</b>。<br>(2) 要最大的 3 位數：840n－1≦999 → n≦1，取 n＝1。<br>　N＝840×1－1＝<b>839</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 9 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C47</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有三條繩子，長度分別為 156 公分、234 公分、312 公分。現在要把它們剪成<b>長度相同且最長</b>的小段，且完全不浪費（不剩零頭）。<br>(1) 每小段最長是幾公分？<br>(2) 共可剪成幾小段？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 78 公分　(2) 9 段</div><div class="expl"><b>解析：</b>(1) 每段長度要能整除三條繩子 → 是三數的<b>公因數</b>，最長即<b>最大公因數</b>。<br>　156＝2<sup>2</sup>×3×13、234＝2×3<sup>2</sup>×13、312＝2<sup>3</sup>×3×13<br>　→ (156 , 234 , 312)＝2×3×13＝<b>78</b> 公分。<br>(2) 各剪成 156÷78＝2 段、234÷78＝3 段、312÷78＝4 段，合計 2＋3＋4＝<b>9</b> 段。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C48</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">一條長 200 公尺的直線步道，原本每隔 16 公尺立一根木樁（頭尾兩端都立）。現在要改成每隔 12 公尺立一根（頭尾兩端仍都立）。<br>(1) 有幾根原有的木樁剛好在新位置上，不必移動？<br>(2) 需要新增幾根木樁？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 5 根　(2) 12 根</div><div class="expl"><b>解析：</b>以一端為 0 公尺，原木樁在 16 的倍數處，新木樁在 12 的倍數處。<br>(1) 不必移動＝位置同時是 16 與 12 的倍數，即 [16 , 12]＝48 的倍數。<br>　位置為 0、48、…、200，共 200÷48＋1＝<b>5</b> 根。<br>(2) 新的木樁全部共 200÷12＋1＝17 根，其中 5 根已經有了，<br>　需新增 17－5＝<b>12</b> 根。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 E卷 · 第 10 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C49</span><span class="src">📄 自編</span></div>
+  <div class="qbody">甲、乙兩個齒輪互相咬合轉動，甲有 32 齒、乙有 48 齒。從某個咬合位置開始轉動，試問：<br>(1) 至少要轉過幾齒，兩齒輪才會再度回到最初的咬合位置？<br>(2) 此時甲、乙各轉了幾圈？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 96 齒　(2) 甲 3 圈、乙 2 圈</div><div class="expl"><b>解析：</b>(1) 甲每轉過 32 齒回到原位、乙每轉過 48 齒回到原位，兩者同時回到原位 → 轉過的齒數是 32 與 48 的<b>公倍數</b>，最少即<b>最小公倍數</b>。<br>　32＝2<sup>5</sup>、48＝2<sup>4</sup>×3 → [32 , 48]＝2<sup>5</sup>×3＝<b>96</b> 齒。<br>(2) 甲轉 96÷32＝<b>3</b> 圈、乙轉 96÷48＝<b>2</b> 圈。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C50</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b（a≦b）的最大公因數為 5、最小公倍數為 30。<br>(1) 求 a×b 的值。<br>(2) 求所有可能的 a、b 數對。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 150　(2) (a , b)＝(5 , 30)；(a , b)＝(10 , 15)</div><div class="expl"><b>解析：</b>(1) a×b＝(a , b)×[a , b]＝5×30＝<b>150</b>。<br>(2) 因為最大公因數是 5，可設 a＝5m、b＝5n，且 <b>m、n 互質</b>（m≦n）。<br>　此時 [a , b]＝5mn＝30 → mn＝30÷5＝6。<br>　把 6 拆成兩個互質的正整數相乘：1×6、2×3。<br>　乘回 5 得 <b>(5 , 30)；(10 , 15)</b>。</div></div>
+</div></div></section><section class="paper" data-p="F"><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 1 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="paperhd">F 卷　2-2 最大公因數與最小公倍數<small>填充10・計算10 ‧ 共20題</small></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F51</span><span class="src">📄 改編·高雄光華 113</span></div>
+  <div class="qbody">求下列各值：<br>(1) (72 , 168)＝______　(2) [72 , 168]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 24　(2) 504</div><div class="expl"><b>解析：</b>先做質因數分解：72＝2<sup>3</sup>×3<sup>2</sup>、168＝2<sup>3</sup>×3×7。<br>(1) 最大公因數取<b>共同質因數的最小次數</b> → (72 , 168)＝2<sup>3</sup>×3＝<b>24</b>。<br>(2) 最小公倍數取<b>所有質因數的最大次數</b> → [72 , 168]＝2<sup>3</sup>×3<sup>2</sup>×7＝<b>504</b>。<br>（可驗算：24×504＝12096＝72×168）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F52</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">已知三數 2<sup>2</sup>×3<sup>5</sup>×5<sup>2</sup>、2<sup>5</sup>×3<sup>2</sup>×5<sup>4</sup>、2<sup>3</sup>×3<sup>3</sup>×5<sup>3</sup>，求此三數的最大公因數＝______（以標準分解式表示）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>2</sup>×3<sup>2</sup>×5<sup>2</sup></div><div class="expl"><b>解析：</b>最大公因數＝<b>三個數都有的質因數，取最小的次數</b>。<br>　2 的次數：2、5、3 → 取最小的 2<br>　3 的次數：5、2、3 → 取最小的 2<br>　5 的次數：2、4、3 → 取最小的 2<br>故最大公因數＝<b>2<sup>2</sup>×3<sup>2</sup>×5<sup>2</sup></b>＝900。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 2 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F53</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">以標準分解式表示 [ 2<sup>5</sup>×3 , 3<sup>3</sup>×5<sup>2</sup> , 2<sup>2</sup>×5×11<sup>2</sup> ]＝______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：2<sup>5</sup>×3<sup>3</sup>×5<sup>2</sup>×11<sup>2</sup></div><div class="expl"><b>解析：</b>最小公倍數＝<b>出現過的每個質因數，都取最大的次數</b>。<br>　2 的次數：5、0、2 → 取最大的 5<br>　3 的次數：1、3、0 → 取最大的 3<br>　5 的次數：0、2、1 → 取最大的 2<br>　11 的次數：0、0、2 → 取最大的 2<br>故最小公倍數＝<b>2<sup>5</sup>×3<sup>3</sup>×5<sup>2</sup>×11<sup>2</sup></b>＝2613600。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F54</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b，其中 a＝56，且 (a , b)＝28、[a , b]＝280，則 b＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：140</div><div class="expl"><b>解析：</b>任兩正整數都滿足 <b>a×b＝(a , b)×[a , b]</b>。<br>56×b＝28×280＝7840<br>b＝7840÷56＝<b>140</b>。<br>（驗算：56＝2<sup>3</sup>×7、140＝2<sup>2</sup>×5×7 → (56,140)＝28 ✔、[56,140]＝280 ✔）</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 3 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F55</span><span class="src">📄 改編·臺中大業 113</span></div>
+  <div class="qbody">在 35 與 55 之間（含 35、55）的正整數中，將與 20 互質的數由小到大排列，則第 5 個數是 ______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：47</div><div class="expl"><b>解析：</b>「與 20 互質」＝與 20 的最大公因數為 1，也就是<b>不含 20 的任何質因數</b>。<br>20＝2<sup>2</sup>×5，質因數為 2、5，所以要把 2、5 的倍數全部刪掉。<br>35~55 剩下的是：37、39、41、43、47、49、51、53。<br>第 5 個為 <b>47</b>。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F56</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">水果行要將 272 顆芒果分裝成禮盒，每盒芒果數一樣多且剛好裝完，若每盒最多裝 14 顆，則至少需要多少個禮盒？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：34 個（每盒 8 顆）</div><div class="expl"><b>解析：</b>每盒數量相同且剛好裝完 → 每盒顆數必為 272 的因數。<br>272＝2<sup>4</sup>×17，正因數有 1、2、4、8、16、17、34、68、136、272。<br>盒數要<b>最少</b>，每盒就要裝<b>最多</b>；在不超過 14 的因數中最大的是 8。<br>故至少需要 272÷8＝<b>34</b> 個禮盒。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 4 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F57</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">宏錩身上的現金，以 5 元、6 元、8 元去分都剛好餘 3 元。若他身上的現金在 250 元到 400 元之間，則他身上的現金可能是多少元？______（全部列出才給分）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：363 元</div><div class="expl"><b>解析：</b>設現金為 x 元。x 除以 5、6、8 都餘 3 → <b>x－3 同時是 5、6、8 的公倍數</b>。<br>[5 , 6 , 8]＝120，所以 x－3 是 120 的倍數，即 x＝120×n＋3。<br>取 250≦x≦400：120×3＋3＝363 → <b>363</b> 元。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F58</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">王先生的莊園圍牆長 84 公尺，原本每隔 60 公分安裝一個紅色燈泡（兩端都安裝）。後來覺得不夠閃亮，改為每隔 35 公分安裝一個黃色燈泡（兩端都安裝）。則施作時有幾個原先裝好的紅色燈泡位置，剛好被換成黃色燈泡？______</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：21 個</div><div class="expl"><b>解析：</b>把圍牆一端當作 0，紅燈泡在 60 的倍數的位置，黃燈泡在 35 的倍數的位置。<br>位置重疊 → 該位置同時是 60 與 35 的<b>公倍數</b>，最小的是 [60 , 35]＝420。<br>圍牆長 84 公尺＝8400 公分，重疊位置為 0、420、840、…、8400，共 8400÷420＋1＝<b>21</b> 個（兩端都算）。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 5 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F59</span><span class="src">📄 改編·臺中向上 113</span></div>
+  <div class="qbody">求 ( 5<sup>2</sup>×7 , [ 105 , 90 ] )＝______（化成標準分解式）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：5×7</div><div class="expl"><b>解析：</b>先算中括號：105＝3×5×7、90＝2×3<sup>2</sup>×5，取各質因數的最大次數 → [105 , 90]＝2×3<sup>2</sup>×5×7＝630。<br>再算小括號：5<sup>2</sup>×7＝175 與 630 取共同質因數的最小次數 → <b>5×7</b>＝35。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#2a9d8f">填充</span><span class="qid">2-2-F60</span><span class="src">📄 改編·高雄左營 113</span></div>
+  <div class="qbody">求 ( 56 , 84 ) ＋ [ 16 , 24 , 36 ]＝______。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：172</div><div class="expl"><b>解析：</b>(56 , 84)：56＝2<sup>3</sup>×7、84＝2<sup>2</sup>×3×7，取共同質因數的最小次數 → 2<sup>2</sup>×7＝28。<br>[16 , 24 , 36]：16＝2<sup>4</sup>、24＝2<sup>3</sup>×3、36＝2<sup>2</sup>×3<sup>2</sup>，取所有質因數的最大次數 → 2<sup>4</sup>×3<sup>2</sup>＝144。<br>相加：28＋144＝<b>172</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 6 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C51</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">小杰、芳羽和冠鑫到兒童樂園玩旋轉木馬，每次可乘坐 7 分鐘。第一層木馬每 14 秒繞一圈、第二層每 21 秒繞一圈、第三層每 28 秒繞一圈。出發時三人並排而坐（各坐一層）。<br>(1) 出發後經過幾秒，三人第一次同時回到出發的位置？<br>(2) 在這 7 分鐘內，三人共會在出發位置相會幾次？（不含出發時那一次）</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 84 秒　(2) 5 次</div><div class="expl"><b>解析：</b>(1) 各層回到原位的時刻分別是 14、21、28 的倍數，三人同時回到原位 → 時間是三者的<b>公倍數</b>，第一次就是<b>最小公倍數</b>。<br>　14＝2×7、21＝3×7、28＝2<sup>2</sup>×7 → [14 , 21 , 28]＝2<sup>2</sup>×3×7＝<b>84</b> 秒。<br>(2) 7 分鐘＝420 秒，相會時刻為 84、168、… 秒。<br>　420÷84＝5 → 共 <b>5</b> 次。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C52</span><span class="src">📄 自編</span></div>
+  <div class="qbody">某轉運站有甲、乙、丙三條路線，分別每 6 分鐘、16 分鐘、24 分鐘發一班車。若上午 6:00 三線同時發車，試問：<br>(1) 下一次三線同時發車是幾點幾分？<br>(2) 從上午 6:00 到 10:00 之間（不含 6:00 那一次），三線共同時發車幾次？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 6:48　(2) 5 次</div><div class="expl"><b>解析：</b>(1) 三線同時發車的時刻是 6、16、24 的公倍數，下一次就是最小公倍數。<br>　6＝2×3、16＝2<sup>4</sup>、24＝2<sup>3</sup>×3 → [6 , 16 , 24]＝2<sup>4</sup>×3＝48 分鐘。<br>　48 分鐘＝0 小時 48 分，故下一次為 <b>6:48</b>。<br>(2) 這段時間共 4 小時＝240 分鐘，240÷48＝5 → 共 <b>5</b> 次。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 7 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C53</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有一塊長 224 公分、寬 140 公分的長方形地板，要用<b>邊長相同的正方形磁磚</b>剛好鋪滿（磁磚不可裁切、不可重疊）。<br>(1) 正方形磁磚的邊長最長是幾公分？<br>(2) 此時共需要幾塊磁磚？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 28 公分　(2) 40 塊</div><div class="expl"><b>解析：</b>(1) 磁磚要剛好鋪滿 → 邊長必須同時整除 224 和 140，即為兩者的<b>公因數</b>；最長就是<b>最大公因數</b>。<br>　224＝2<sup>5</sup>×7、140＝2<sup>2</sup>×5×7 → (224 , 140)＝2<sup>2</sup>×7＝<b>28</b> 公分。<br>(2) 長邊排 224÷28＝8 塊、寬邊排 140÷28＝5 塊，共 8×5＝<b>40</b> 塊。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C54</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b 滿足 a×b＝13824，且 a、b 的最大公因數為 48。<br>(1) 求 a、b 的最小公倍數。<br>(2) 若再知道 a＜b 且 a＝96，求 b。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 288　(2) b＝144</div><div class="expl"><b>解析：</b>(1) 由 <b>a×b＝(a , b)×[a , b]</b>：<br>　13824＝48×[a , b] → [a , b]＝13824÷48＝<b>288</b>。<br>(2) b＝13824÷a＝13824÷96＝<b>144</b>。<br>　驗算：96＝2<sup>5</sup>×3、144＝2<sup>4</sup>×3<sup>2</sup>，(96 , 144)＝48 ✔、[96 , 144]＝288 ✔。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 8 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C55</span><span class="src">📄 改編·高雄翠屏 113</span></div>
+  <div class="qbody">糖果 108 顆或 180 顆，都可以平分給同一群小朋友（每人分到的顆數為整數，且人數超過 1 人）。<br>(1) 這群小朋友最多可能有幾人？<br>(2) 小朋友的人數共有幾種可能？請全部列出。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 36 人　(2) 8 種：2、3、4、6、9、12、18、36 人</div><div class="expl"><b>解析：</b>(1) 人數要同時整除 108 與 180 → 是兩者的<b>公因數</b>，最多就是<b>最大公因數</b>。<br>　108＝2<sup>2</sup>×3<sup>3</sup>、180＝2<sup>2</sup>×3<sup>2</sup>×5 → (108 , 180)＝2<sup>2</sup>×3<sup>2</sup>＝<b>36</b> 人。<br>(2) 公因數＝最大公因數 36 的所有因數：1、2、3、4、6、9、12、18、36；題目要求人數超過 1 人，去掉 1 之後為 2、3、4、6、9、12、18、36，共 <b>8</b> 種。<br>　（補充：108 與 180 的差為 72，所以人數也一定是 72 的因數，可用來快速檢查。）</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C56</span><span class="src">📄 改編·臺北仁愛 113</span></div>
+  <div class="qbody">靜香發現有一種數很特別：它被 2 除時餘 1、被 3 除時餘 2、被 4 除時餘 3、…、一直到被 9 除時餘 8（也就是除以 2~9 的每個數，餘數都比除數少 1）。<br>(1) 請說明這種數加 1 之後有什麼性質。<br>(2) 求具有此性質的最大 4 位數。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 加 1 後是 2~9 的公倍數（即 2520 的倍數）　(2) 7559</div><div class="expl"><b>解析：</b>(1) 設此數為 N。「除以 m 餘 m－1」表示<b>再多 1 就剛好整除</b>，所以 N＋1 同時被 2、3、…、9 整除 → N＋1 是 2~9 的<b>公倍數</b>。<br>　[2 , 3 , … , 9]＝2520，故 N＋1＝2520×n，即 <b>N＝2520n－1</b>。<br>(2) 要最大的 4 位數：2520n－1≦9999 → n≦3，取 n＝3。<br>　N＝2520×3－1＝<b>7559</b>。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 9 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C57</span><span class="src">📄 自編</span></div>
+  <div class="qbody">有三條繩子，長度分別為 168 公分、252 公分、420 公分。現在要把它們剪成<b>長度相同且最長</b>的小段，且完全不浪費（不剩零頭）。<br>(1) 每小段最長是幾公分？<br>(2) 共可剪成幾小段？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 84 公分　(2) 10 段</div><div class="expl"><b>解析：</b>(1) 每段長度要能整除三條繩子 → 是三數的<b>公因數</b>，最長即<b>最大公因數</b>。<br>　168＝2<sup>3</sup>×3×7、252＝2<sup>2</sup>×3<sup>2</sup>×7、420＝2<sup>2</sup>×3×5×7<br>　→ (168 , 252 , 420)＝2<sup>2</sup>×3×7＝<b>84</b> 公分。<br>(2) 各剪成 168÷84＝2 段、252÷84＝3 段、420÷84＝5 段，合計 2＋3＋5＝<b>10</b> 段。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C58</span><span class="src">📄 改編·臺北中山 110</span></div>
+  <div class="qbody">一條長 300 公尺的直線步道，原本每隔 20 公尺立一根木樁（頭尾兩端都立）。現在要改成每隔 15 公尺立一根（頭尾兩端仍都立）。<br>(1) 有幾根原有的木樁剛好在新位置上，不必移動？<br>(2) 需要新增幾根木樁？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 6 根　(2) 15 根</div><div class="expl"><b>解析：</b>以一端為 0 公尺，原木樁在 20 的倍數處，新木樁在 15 的倍數處。<br>(1) 不必移動＝位置同時是 20 與 15 的倍數，即 [20 , 15]＝60 的倍數。<br>　位置為 0、60、…、300，共 300÷60＋1＝<b>6</b> 根。<br>(2) 新的木樁全部共 300÷15＋1＝21 根，其中 6 根已經有了，<br>　需新增 21－6＝<b>15</b> 根。</div></div>
+</div></div><div class="printpage"><div class="pageband"><span class="pno">📄 F卷 · 第 10 頁 / 共 10 頁</span><span class="pttl">2-2 最大公因數與最小公倍數</span></div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C59</span><span class="src">📄 自編</span></div>
+  <div class="qbody">甲、乙兩個齒輪互相咬合轉動，甲有 27 齒、乙有 36 齒。從某個咬合位置開始轉動，試問：<br>(1) 至少要轉過幾齒，兩齒輪才會再度回到最初的咬合位置？<br>(2) 此時甲、乙各轉了幾圈？</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 108 齒　(2) 甲 4 圈、乙 3 圈</div><div class="expl"><b>解析：</b>(1) 甲每轉過 27 齒回到原位、乙每轉過 36 齒回到原位，兩者同時回到原位 → 轉過的齒數是 27 與 36 的<b>公倍數</b>，最少即<b>最小公倍數</b>。<br>　27＝3<sup>3</sup>、36＝2<sup>2</sup>×3<sup>2</sup> → [27 , 36]＝2<sup>2</sup>×3<sup>3</sup>＝<b>108</b> 齒。<br>(2) 甲轉 108÷27＝<b>4</b> 圈、乙轉 108÷36＝<b>3</b> 圈。</div></div>
+</div><div class="qcard" data-ans="-1">
+  <div class="qhead"><span class="tbadge" style="background:#e76f51">計算</span><span class="qid">2-2-C60</span><span class="src">📄 自編</span></div>
+  <div class="qbody">已知兩個正整數 a、b（a≦b）的最大公因數為 8、最小公倍數為 168。<br>(1) 求 a×b 的值。<br>(2) 求所有可能的 a、b 數對。</div>
+  
+  <div class="work" style="min-height:5cm"><span class="wlabel">✎ 計算 / 作答區</span></div>
+  <button class="revbtn" onclick="tog(this)">顯示解析 ▼</button>
+  <div class="sol"><div class="ans">✅ 答案：(1) 1344　(2) (a , b)＝(8 , 168)；(a , b)＝(24 , 56)</div><div class="expl"><b>解析：</b>(1) a×b＝(a , b)×[a , b]＝8×168＝<b>1344</b>。<br>(2) 因為最大公因數是 8，可設 a＝8m、b＝8n，且 <b>m、n 互質</b>（m≦n）。<br>　此時 [a , b]＝8mn＝168 → mn＝168÷8＝21。<br>　把 21 拆成兩個互質的正整數相乘：1×21、3×7。<br>　乘回 8 得 <b>(8 , 168)；(24 , 56)</b>。</div></div>
+</div></div></section>
+</div>
+<script>
+function showPaper(name){
+  document.querySelectorAll('.paper').forEach(function(p){p.classList.toggle('on',p.dataset.p===name);});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.dataset.p===name);});
+  var dl=document.getElementById('dlbtn');
+  if(dl&&PDFBASE){dl.href=PDFBASE+name+'.pdf';dl.textContent='⬇ 下載本卷 PDF（'+name+' 卷）';}
+  window.scrollTo(0,0);
+}
+function tog(b){var c=b.closest('.qcard');var s=b.nextElementSibling;var on=s.classList.toggle('show');
+  b.classList.toggle('on',on);b.textContent=on?'收合解析 ▲':'顯示解析 ▼';
+  var ai=+c.dataset.ans;if(ai>=0){c.querySelectorAll('.opt').forEach(function(o){var i=+o.dataset.i;
+    if(on){if(i===ai)o.classList.add('ok');else if(o.classList.contains('sel'))o.classList.add('no');}
+    else{o.classList.remove('ok','no');}});}}
+function pick(btn){var box=btn.parentElement;box.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel','ok','no');});btn.classList.add('sel');}
+
+const PDFBASE="book1-ch2-2-";</script><style>
+#pw-gate{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#1a3a5c;display:flex;align-items:center;justify-content:center;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;}
+#pw-box{background:#fff;border-radius:16px;padding:40px 36px;max-width:360px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3);}
+#pw-box h2{font-size:22px;color:#1a3a5c;margin-bottom:8px;}
+#pw-box p{font-size:15px;color:#666;margin-bottom:20px;}
+#pw-box input{width:100%;font-size:18px;padding:10px 14px;border:2px solid #cdddef;border-radius:8px;outline:none;margin-bottom:12px;box-sizing:border-box;}
+#pw-box input:focus{border-color:#1a3a5c;}
+#pw-box button{width:100%;font-size:18px;font-weight:bold;padding:12px;background:#1a3a5c;color:#fff;border:none;border-radius:8px;cursor:pointer;}
+#pw-box button:hover{background:#2a5070;}
+#pw-err{color:#c0392b;font-size:15px;margin-top:10px;display:none;}
+</style>
+<div id="pw-gate"><div id="pw-box">
+  <h2>&#128274; 全民補習班</h2>
+  <p>teaching.efetl.com<br>請輸入密碼進入教學區</p>
+  <input type="password" id="pw-in" placeholder="密碼" onkeydown="if(event.key==='Enter')tryPw()">
+  <button onclick="tryPw()">進入</button>
+  <div id="pw-err">密碼錯誤，請再試一次</div>
+</div></div>
+<script>
+(function(){
+  if(localStorage.getItem('efetl_ok')==='1'){document.getElementById('pw-gate').style.display='none';return;}
+  async function sha256(t){const d=new TextEncoder().encode(t);const h=await crypto.subtle.digest('SHA-256',d);
+    return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+  window.tryPw=async function(){
+    const v=document.getElementById('pw-in').value;
+    const h=await sha256(v);
+    if(h==='bb6dbcaef9d5ed4d6a7f5df4effdeb3b24b34ae6b1dfb52e1315f511301fb26e'){localStorage.setItem('efetl_ok','1');document.getElementById('pw-gate').style.display='none';}
+    else{document.getElementById('pw-err').style.display='block';document.getElementById('pw-in').value='';}
+  };
+  document.getElementById('pw-in').focus();
+})();
+</script>
+</body></html>
