@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 5 芬蘭小木屋 ── English 4U 互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 大考重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>Unit 5｜Summer at the Mökki! Finding Peace in Finland ── 芬蘭小木屋　在湖邊找回生活的寧靜</h1>
+  <div class="sub">English 4U 2026 年 7／8 月號（JUL/AUG 2026）Unit 5　克漏字 ★★｜互動教學講義</div>
+  <div class="time">⏱️ 建議授課時數：1～2 節（45～90 分鐘）｜課文、選項與字彙例句全部逐字取自雜誌原文</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講 × 12</span>
+    <span class="tag">🧩 克漏字 × 5（含原書詳解）</span>
+    <span class="tag">📝 核心字彙 × 6</span>
+    <span class="tag">➕ 字彙小補帖 × 4</span>
+    <span class="tag">🔗 Pocket Phrase × 3</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 8</span>
+  </div>
+</div>
+
+<!-- 速覽 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>本課速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 什麼是 mökki？</h4>
+        芬蘭人的<b>湖邊小木屋</b>。夏天一到，芬蘭人就往 mökki 跑——那是坐落在湖畔或森林裡的小木屋，是他們文化中很重要的一部分。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 冷熱交替的儀式</h4>
+        小木屋的核心是 <b>sauna（桑拿）</b>。用木柴加熱、蒸汽讓人放鬆，暖身之後<b>直接跳進旁邊的冷湖</b>降溫。芬蘭人相信這種冷熱儀式能讓<b>身體和心靈都煥然一新</b>。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 與世隔絕才能真正連結</h4>
+        許多 mökki 沒有自來水或電、廁所在戶外，日子就是釣魚、採莓果。<b>擺脫日常壓力</b>之後，人才能真正與大自然、也與自己連結。
+      </div>
+    </div>
+    <div class="sec-hint">📌 原書標題註：mökki 作複數時，芬蘭文寫為 mökit，但本文主要為英文，因此採用英語世界中這個字複數的常見寫法 <b>mökkis</b>。</div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（原文逐字＋翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文即可展開翻譯、句構與解析。含空格的句子會在解析裡標出<b>該格答案</b>；完整題目與原書詳解見下一大題。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-robbie">🟦 第一段｜芬蘭人的夏天</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Summer vacation is finally in full swing. Many people will travel and go on relaxing trips.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">暑假終於如火如荼地展開了。許多人會去旅行、享受放鬆的旅程。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Summer vacation</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">finally in full swing</span><span class="syn-t">C（介詞片語作補語）</span><br>
+            <span class="num">②</span><span class="syn syn-s">Many people</span><span class="syn-t">S</span> <span class="syn syn-v">will travel and go on</span><span class="syn-t">V（兩個動詞並列）</span> <span class="syn syn-o">relaxing trips</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>in full swing</b> = （進程或活動）正在如火如荼進行中，本課 Pocket Phrase；<b>relaxing</b>（令人放鬆的）修飾事物 trips，是核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>People in Finland, (1)______, often go to mökkis.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">舉例來說，芬蘭人經常去小木屋。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">People in Finland</span><span class="syn-t">S</span> <span class="syn syn-m">, (1)______,</span><span class="syn-t">插入語（前後逗號）</span> <span class="syn syn-v">often go</span><span class="syn-t">V</span> <span class="syn syn-m">to mökkis</span><span class="syn-t">副詞</span></div>
+          <div class="para-note">✅ <b>第 1 格答案：(D) for instance</b>（舉例來說）。前一句提到「許多人會去旅行」，本句用芬蘭人當<b>例子</b>，因此選轉承詞 for instance；插入語前後要有逗號。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These are small wooden cottages that sit near lakes or in the forests.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些是坐落在湖邊或森林裡的小木屋。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">These</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">small wooden cottages</span><span class="syn-t">C</span> <span class="syn syn-m">that sit near lakes or in the forests</span><span class="syn-t">關係子句</span></div>
+          <div class="para-note"><b>sit</b> 意為「坐落於…；位於（某位置）」（4U Extras 2）；<b>wooden</b>（木製的）為核心字，注意 wood 是名詞、wooden 才是形容詞。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-claire">🟩 第二段｜桑拿與冷熱交替</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>To many Finnish people, spending time at a mökki is an important part of their culture.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">對許多芬蘭人來說，在小木屋度過時光是他們文化中重要的一部分。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">To many Finnish people</span><span class="syn-t">副詞</span> <span class="syn syn-s">spending time at a mökki</span><span class="syn-t">S（動名詞片語）</span> <span class="syn syn-v">is</span><span class="syn-t">V（單數）</span> <span class="syn syn-c">an important part of their culture</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>動名詞片語當主詞，動詞用單數</b>（is）；<b>spend time + V-ing／at + 地點</b>；Finnish 是形容詞「芬蘭的」，Finn 才是「芬蘭人」（4U Extras 1）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Most Finns visit mökkis to (2)______ busy city life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">大多數芬蘭人去小木屋是為了逃離忙碌的城市生活。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Most Finns</span><span class="syn-t">S</span> <span class="syn syn-v">visit</span><span class="syn-t">V</span> <span class="syn syn-o">mökkis</span><span class="syn-t">O</span> <span class="syn syn-m">to (2)______ busy city life</span><span class="syn-t">不定詞（表目的）</span></div>
+          <div class="para-note">✅ <b>第 2 格答案：(B) escape</b>（逃離；避免）。前後文都在說小木屋讓人「遠離都市、放鬆身心」，因此空格是「避開忙碌的城市生活」。escape 可直接接受詞。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The heart of every cottage is the sauna. People heat it with wood, and the warm steam helps them feel calm and relaxed.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">每間小木屋的核心是桑拿房。人們用木柴加熱它，溫暖的蒸汽幫助他們感到平靜與放鬆。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The heart of every cottage</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">the sauna</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">the warm steam</span><span class="syn-t">S</span> <span class="syn syn-v">helps</span><span class="syn-t">V</span> <span class="syn syn-o">them</span><span class="syn-t">O</span> <span class="syn syn-c">feel calm and relaxed</span><span class="syn-t">OC（原形不定詞）</span></div>
+          <div class="para-note"><b>heart</b> 在此意為「核心；最重要的地方」，作單數名詞使用（4U Extras 3）；<b>help + O + (to) V</b>：help 後的不定詞 to 可省略；<b>relaxed</b> 形容「人感到放鬆」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>After they (3)______ their bodies, they jump into the cold lake nearby to cool down.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在他們讓自己的身體暖起來之後，他們會跳進附近冰冷的湖裡降溫。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">After they (3)______ their bodies</span><span class="syn-t">時間副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">jump</span><span class="syn-t">V</span> <span class="syn syn-m">into the cold lake nearby to cool down</span><span class="syn-t">副詞＋不定詞（目的）</span></div>
+          <div class="para-note">✅ <b>第 3 格答案：(C) warm up</b>（變暖；使變暖）。空格前介紹桑拿房的句子提到「溫暖的蒸汽」會使人體溫升高，也才會有後方「跳進冷冷的湖水中降溫」的需要。<b>cool (sb/sth) down</b> 為本課 Pocket Phrase。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Many Finns believe this hot-and-cold ritual refreshes (4)______ the body (4)______ the mind.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">許多芬蘭人相信這種冷熱交替的儀式能讓身體和心靈都煥然一新。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Many Finns</span><span class="syn-t">S</span> <span class="syn syn-v">believe</span><span class="syn-t">V</span> <span class="syn syn-o">(that) this hot-and-cold ritual refreshes both the body and the mind</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note">✅ <b>第 4 格答案：(A) both; and</b>（…和…都…；兩者都…）。冷熱儀式是有好處的：「身體」在這期間肌肉放鬆且精神抒壓；溫暖的蒸氣讓他們感到「心靈」平靜和放鬆，故兩者皆有正面影響。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="para">
+      <div class="para-speaker sp-nancy">🟧 第三段｜與世隔絕的日子</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>During their stay at a mökki, people are often completely cut off from the outside world.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在小木屋停留期間，人們常常與外面的世界完全隔絕。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">During their stay at a mökki</span><span class="syn-t">時間副詞</span> <span class="syn syn-s">people</span><span class="syn-t">S</span> <span class="syn syn-v">are cut off</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">from the outside world</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>cut sb/sth off (from sth)</b> = 使…隔絕（自…），本課 Pocket Phrase，此處為被動語態；<b>during + 名詞</b>（≠ while + 子句）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Many mökkis lack running water or power, and have outdoor toilets.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">許多小木屋沒有自來水或電力，而且廁所在戶外。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Many mökkis</span><span class="syn-t">S</span> <span class="syn syn-v">lack</span><span class="syn-t">V（及物動詞）</span> <span class="syn syn-o">running water or power</span><span class="syn-t">O</span> <span class="syn syn-m">and</span><span class="syn-t">連接詞</span> <span class="syn syn-v">have</span><span class="syn-t">V</span> <span class="syn syn-o">outdoor toilets</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>running water</b> 指的是「自來水」（4U Extras 4）；<b>lack</b> 當動詞時<b>直接接受詞</b>（✗ lack of 為名詞用法）；<b>outdoor</b>（戶外的）為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Days are spent fishing or picking berries.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">日子就在釣魚或採莓果中度過。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Days</span><span class="syn-t">S</span> <span class="syn syn-v">are spent</span><span class="syn-t">V（被動）</span> <span class="syn syn-c">fishing or picking berries</span><span class="syn-t">分詞（表方式）</span></div>
+          <div class="para-note"><b>spend + 時間 + V-ing</b> 的被動用法：Days are spent V-ing＝「時間被花在做……上」；<b>berry</b>（莓果）複數為 berries。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>(5)______ daily stress, visitors can truly connect with nature—and with themselves.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">沒有了日常壓力，訪客可以真正與大自然——以及與他們自己——連結。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">(5)______ daily stress</span><span class="syn-t">介詞片語（修飾全句）</span> <span class="syn syn-s">visitors</span><span class="syn-t">S</span> <span class="syn syn-v">can truly connect with</span><span class="syn-t">V</span> <span class="syn syn-o">nature—and with themselves</span><span class="syn-t">O</span></div>
+          <div class="para-note">✅ <b>第 5 格答案：(C) Free from</b>（沒有）。前方課文內容已提到芬蘭人去小木屋是為了輕鬆逃避城市生活，且空格後方的敘述可推斷「這是擺脫壓力後才能帶來的正面狀態」。<b>connect with sth/sb</b> 為核心字用法。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 4U Extras -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📌</div>4U Extras 課文註解（原書逐條）</div>
+  <div class="sec-body">
+    <table class="ptable">
+      <tr><th style="width:16%">對應</th><th>註解</th></tr>
+      <tr><td>標題／第 5、6 行</td><td>標題的名詞 Finland [ˈfɪnlənd] 為「芬蘭」；第 5 行的形容詞 Finnish [ˈfɪnɪʃ] 指的是「芬蘭的」；而第 6 行的名詞 Finn [fɪn] 則是指「芬蘭人」。</td></tr>
+      <tr><td>第 4 行</td><td>動詞 sit 意為「坐落於…；位於（某位置）」。</td></tr>
+      <tr><td>第 7 行</td><td>名詞 heart 意為「核心；最重要的地方」，此定義下作單數名詞使用。</td></tr>
+      <tr><td>第 15 行</td><td>複合名詞 running water 指的是「自來水」。</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（6 字・例句取自原書）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡展開「字族／用法 + 原書例句」。標示 <b>✱</b> 者為雜誌註明「近五年大考出現字彙」。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">relaxing</span><span class="v-pos">adj.</span><div class="v-cn-mini">令人放鬆的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[rɪˈlæksɪŋ]</span><span>relaxed [rɪˈlækst] adj. 感到放鬆的</span></div>
+        <div class="v-ex">When my body feels sore, I like to spend a <b>relaxing</b> hour in a hot bath.<span class="cn">當我身體痠痛時，我喜歡泡個放鬆的熱水澡一小時。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙｜事 -ing、人 -ed</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">wooden</span><span class="v-pos">adj.</span><div class="v-cn-mini">木製的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[ˈwʊdn̩]</span><span>wood n. 木材；木頭</span></div>
+        <div class="v-ex">Laura's father built a <b>wooden</b> house with the trees he had cut down in the forest.<span class="cn">蘿拉的父親用他在森林裡砍下的樹木蓋了一間木屋。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">steam</span><span class="v-pos">n.</span><div class="v-cn-mini">蒸汽；水蒸氣</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[stim]</span><span>亦可當動詞：steam vegetables 蒸蔬菜</span></div>
+        <div class="v-ex">Kenny boiled a pot of water and used the <b>steam</b> to cook the vegetables.<span class="cn">肯尼煮了一鍋水，並用蒸氣來煮蔬菜。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">outdoor</span><span class="v-pos">adj.</span><div class="v-cn-mini">戶外的；露天的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[ˈaʊtˌdɔr]</span><span>outdoors (adv.) 在戶外</span><span>反義：indoor</span></div>
+        <div class="v-ex">There's always the chance that an <b>outdoor</b> event will be canceled if there's a lot of rain.<span class="cn">如果雨下很大，戶外活動總是有被取消的可能。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">berry</span><span class="v-pos">n.</span><div class="v-cn-mini">莓果；漿果</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[ˈbɛrɪ]</span><span>複數：berries</span><span>strawberry, blueberry</span></div>
+        <div class="v-ex">This cake is made with chocolate and lots of red <b>berries</b>, which makes it both sweet and sour.<span class="cn">這個蛋糕是用巧克力和許多紅色莓果做的，這讓它既甜又酸。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">connect</span><span class="v-pos">v.</span><div class="v-cn-mini">與…建立關係／情感連結</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[kəˈnɛkt]</span><span>connect with sth/sb 與某事物／某人建立關係；情感連結</span><span>connection (n.)</span></div>
+        <div class="v-ex">Sara began to <b>connect</b> with Paul during art class because they both loved drawing animals. They became good friends soon after.<span class="cn">莎拉在美術課時開始和保羅有了交集，因為他們都喜歡畫動物。不久後他們就成了好朋友。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+    </div>
+
+    <div class="divlabel">🧩 字彙小補帖（文章中畫底線之字詞・僅供參考）</div>
+    <table class="ptable">
+      <tr><th style="width:34%">單字</th><th style="width:12%">詞性</th><th>中文</th></tr>
+      <tr><td><span class="phr">cottage</span> [ˈkɑtɪdʒ]</td><td>n.</td><td>鄉間小屋</td></tr>
+      <tr><td><span class="phr">sauna</span> [ˈsɔnə]／[ˈsaʊnə]</td><td>n.</td><td>三溫暖浴室；桑拿浴室；蒸汽浴室</td></tr>
+      <tr><td><span class="phr">ritual</span> [ˈrɪtʃuəl]</td><td>n.</td><td>儀式；習慣；老規矩</td></tr>
+      <tr><td><span class="phr">refresh</span> [rɪˈfrɛʃ]</td><td>v.</td><td>（使）恢復精神，消除疲勞</td></tr>
+    </table>
+
+    <div class="divlabel">🔗 Pocket Phrase（課文片語・例句取自原書）</div>
+    <table class="ptable">
+      <tr><th style="width:28%">片語</th><th style="width:22%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">in full swing</span></td><td>（進程或活動）正在如火如荼進行中</td><td class="pex">The Halloween season is now <b>in full swing</b>. You can see pumpkin and ghost displays everywhere.<span class="cn">萬聖節季正如火如荼地展開。你到處都看得到南瓜和鬼怪的裝飾。</span></td></tr>
+      <tr><td><span class="phr">cool (sb/sth) down</span></td><td>（使）冷卻下來，降溫</td><td class="pex">The father gently blew on the hot soup to <b>cool</b> it <b>down</b> before he let his child have it.<span class="cn">那位爸爸輕輕地吹熱湯讓它降溫，才讓孩子喝。</span></td></tr>
+      <tr><td><span class="phr">cut sb/sth off (from sth)</span></td><td>使…隔絕（自…）</td><td class="pex">The storm damaged the power lines and <b>cut</b> the small town <b>off</b> from the rest of the world.<span class="cn">暴風雨損壞了電線，使那個小鎮與外界隔絕。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 克漏字題目與原書詳解 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">🧩</div>克漏字題目與原書詳解（Key and Explanation）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每一題展開原書的解析與選項說明。答案：1.(D) 2.(B) 3.(C) 4.(A) 5.(C)</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>1.　答案：(D)　People in Finland, for instance, often go to mökkis.</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">(A) in case　(B) over time　(C) by accident　(D) for instance</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">💡 <b>說明</b>：空格前一句提到暑假時許多人會去旅行、享受放鬆的旅程，空格句緊接著說「在芬蘭的人」經常會去木屋。由空格句提到「去木屋」這個旅行情況可判斷，本句是前一句的<b>舉例說明</b>。四個選項中，僅 (D) for instance「舉例來說」適合作為轉承詞連接前後兩句。</p>
+        <div class="g-ex">(A) <b>in case</b>「以防；萬一」<div class="g-ex-cn">Take an umbrella with you in case it rains.（帶把傘以防下雨。）</div></div>
+        <div class="g-ex">(B) <b>over time</b>「隨著時間過去」<div class="g-ex-cn">The old building became more beautiful over time.（那棟老建築隨著時間變得更美了。）</div></div>
+        <div class="g-ex">(C) <b>by accident</b>「意外地；偶然地」<div class="g-ex-cn">Liv broke the glass by accident while she was cleaning the table.（麗芙在清理桌子時意外打破了玻璃杯。）</div></div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>2.　答案：(B)　Most Finns visit mökkis to escape busy city life.</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">(A) apply　(B) escape　(C) create　(D) deliver</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">💡 <b>說明</b>：空格句說明大多數芬蘭人前往木屋的目的。如前段課文所述，木屋通常位於森林或湖泊等大自然中，環境安靜且放鬆；除此之外，空格後的兩句也提到「讓人們感到平靜和放鬆」。由此可知，人們特地從城市前往木屋是為了<b>避開都市的喧囂</b>。因此本題正答為 (B) escape「逃離；避免」。</p>
+        <div class="g-ex">其餘選項：(A) apply「應用；運用」、(C) create「創造」、(D) deliver「傳達；提供」。<div class="g-ex-cn">escape 在此為及物動詞，可直接接受詞 busy city life。</div></div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>3.　答案：(C)　After they warm up their bodies, they jump into the cold lake nearby to cool down.</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">(A) turn to　(B) take on　(C) warm up　(D) carry out</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">💡 <b>說明</b>：空格句說道：「在他們讓自己的身體______之後，他們跳進附近冷冷的湖水中降溫。」由空格前介紹桑拿房的句子可知，「溫暖的蒸氣」會使桑拿房內的人體溫升高，也才會有後方「跳進冷冷的湖水中降溫」的需要。因此本題正答為 (C) <b>warm up</b>「變暖；使變暖」。</p>
+        <div class="g-ex">其餘選項：(A) turn to「求助於」、(B) take on「承擔」；「（在遭遇困境時）開始做；開始使用」、(D) carry out「執行」。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>4.　答案：(A)　Many Finns believe this hot-and-cold ritual refreshes both the body and the mind.</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">(A) both; and　(B) whether; or　(C) neither; nor　(D) rather; than</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">💡 <b>說明</b>：空格句說道：「許多芬蘭人相信這種冷熱交替的儀式能讓______身體______心靈煥然一新。」由句中的「煥然一新」可知，冷熱儀式是有好處的：「身體」在這期間肌肉放鬆且精神抒壓；溫暖的蒸氣讓他們感到「心靈」平靜和放鬆。而言之，這種儀式對<b>身心靈都有正面的影響</b>。因此本題應選 (A) both; and「…和…都…；兩者都…」。</p>
+        <div class="g-ex">(B) <b>whether; or</b>「無論…或…」<div class="g-ex-cn">You can pay whether in cash or by card.</div></div>
+        <div class="g-ex">(C) <b>neither; nor</b>「既非…也非…」<div class="g-ex-cn">Lily likes neither coffee nor tea.（莉莉咖啡和茶都不喜歡。）</div></div>
+        <div class="g-ex">(D) <b>rather; than</b>「寧可…也不要…」<div class="g-ex-cn">I would rather stay home than go out today.（我今天寧可待在家也不要出門。）</div></div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>5.　答案：(C)　Free from daily stress, visitors can truly connect with nature—and with themselves.</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">(A) Such as　(B) Used to　(C) Free from　(D) Except for</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">💡 <b>說明</b>：空格句說道：「______日常壓力，訪客可以真正與大自然及自我連結。」前方的課文內容已提到芬蘭人去木屋是為了輕鬆逃避城市生活。且由空格句後方的敘述可推斷，這連結是擺脫壓力後才能帶來的正面狀態。四個選項中，最符合語意的是 (C) <b>Free from</b>「沒有」。</p>
+        <div class="g-ex">其餘選項：(A) Such as「比如」、(B) Used to「習慣」、(D) Except for「除了…以外（不包含…）」。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（8 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  English 4U 2026 年 7／8 月號　Unit 5｜互動教學講義
+</div>
+
+<script>
+var studentQ=[
+ {q:['Summer vacation is finally in full ','. Everyone is busy planning trips.'],
+  cn:'暑假終於如火如荼地展開了。每個人都忙著計畫旅行。',
+  opts:['swing','steam','stress','sauna'],ans:0,
+  word:'in full swing 如火如荼進行中',
+  exp:'固定片語 in full swing，指活動正熱烈進行。其餘選項無此搭配。',
+  note:'課文開頭第一句就用了這個片語。'},
+ {q:['These are small ',' cottages that sit near lakes or in the forests.'],
+  cn:'這些是坐落在湖邊或森林裡的小木屋。',
+  opts:['wood','wooden','woods','woody'],ans:1,
+  word:'wooden (adj.) 木製的',
+  exp:'修飾名詞 cottages 需用形容詞。wood 是名詞「木材」，不能直接當形容詞修飾 cottages。',
+  note:'類似構詞：golden（金製的）、woolen（羊毛製的）。'},
+ {q:['After a hot sauna, Finns jump into the cold lake to cool ','.'],
+  cn:'桑拿之後，芬蘭人會跳進冷湖裡降溫。',
+  opts:['up','down','off','out'],ans:1,
+  word:'cool (sb/sth) down（使）冷卻下來，降溫',
+  exp:'與 warm up（變暖）相對，降溫用 cool down。(C) cut off 才是隔絕。',
+  note:'課文：they jump into the cold lake nearby to cool down.'},
+ {q:['The storm damaged the power lines and cut the small town ',' from the rest of the world.'],
+  cn:'暴風雨損壞了電線，使那個小鎮與外界隔絕。',
+  opts:['down','off','up','into'],ans:1,
+  word:'cut sb/sth off (from sth) 使…隔絕（自…）',
+  exp:'固定片語 cut...off from...。(A) cut down 是砍倒／削減；(C) cut up 是切碎。',
+  note:'課文：people are often completely cut off from the outside world.'},
+ {q:['Spending time at a mökki ',' an important part of Finnish culture.'],
+  cn:'在小木屋度過時光是芬蘭文化重要的一部分。',
+  opts:['is','are','were','being'],ans:0,
+  word:'動名詞片語當主詞 → 動詞用單數',
+  exp:'主詞是 Spending time at a mökki（一整件事），視為單數，動詞用 is。不要被 mökki 或複數字誤導。',
+  note:'口訣：一件事 = 單數。'},
+ {q:['Many mökkis ',' running water or power, so visitors have to live simply.'],
+  cn:'許多小木屋沒有自來水或電力，所以訪客得過簡樸的生活。',
+  opts:['lack of','lack','lacking','are lack'],ans:1,
+  word:'lack (v.) 缺少（直接接受詞）',
+  exp:'lack 當動詞時直接接受詞，不加 of。名詞用法才是 a lack of...。',
+  note:'✓ They lack water. ✓ There is a lack of water.'},
+ {q:['There is always the chance that an ',' event will be canceled if there is a lot of rain.'],
+  cn:'如果雨下很大，戶外活動總是有被取消的可能。',
+  opts:['outdoors','outdoor','indoor','outside of'],ans:1,
+  word:'outdoor (adj.) 戶外的',
+  exp:'修飾名詞 event 用形容詞 outdoor；outdoors 是副詞（在戶外），不能修飾名詞。',
+  note:'play outdoors（副詞）／an outdoor pool（形容詞）。'},
+ {q:['Sara began to connect ',' Paul during art class because they both loved drawing animals.'],
+  cn:'莎拉在美術課時開始和保羅有了交集，因為他們都喜歡畫動物。',
+  opts:['to','with','on','for'],ans:1,
+  word:'connect with sth/sb 與…建立關係／情感連結',
+  exp:'表達「人與人建立情感連結」用 connect with。connect A to B 多指「把 A 接到 B」的實體連接。',
+  note:'課文結尾：visitors can truly connect with nature.'},
+ {q:['I like to spend a ',' hour in a hot bath when my body feels sore.'],
+  cn:'當我身體痠痛時，我喜歡泡個放鬆的熱水澡一小時。',
+  opts:['relaxed','relaxing','relax','relaxation'],ans:1,
+  word:'relaxing (adj.) 令人放鬆的（形容事物）',
+  exp:'修飾 hour（事物），用 -ing；relaxed 用來形容「人感到放鬆」。',
+  note:'The hour was relaxing. → I felt relaxed.'},
+ {q:['This hot-and-cold ritual refreshes ',' the body ',' the mind.'],
+  cn:'這種冷熱交替的儀式能讓身體和心靈都煥然一新。',
+  opts:['both...and','neither...nor','whether...or','rather...than'],ans:0,
+  word:'both A and B 兩者都',
+  exp:'語意是「身心都有好處」的正面敘述。(B) 兩者皆非、(C) 無論…或、(D) 寧可…也不要，皆與語意不合。',
+  note:'both A and B 連接兩個主詞時，動詞用複數。'}
+];
+
+var teacherQ=[
+ {q:['People in Finland, ',', often go to mökkis to escape busy city life.'],
+  cn:'舉例來說，芬蘭人經常去小木屋，以逃離忙碌的城市生活。',
+  opts:['in case','over time','by accident','for instance'],ans:3,
+  word:'for instance（舉例來說）',
+  tnote:'<b>轉承詞的判斷三步驟</b>：① 看前句在說什麼（許多人去旅行）② 看本句在說什麼（芬蘭人去木屋）③ 判斷兩者關係＝<b>總述→舉例</b>。<br>for instance ＝ for example，兩側要有逗號，位置可在句首、句中或句尾。<br>(A) in case 引導條件；(B) over time 表時間推移；(C) by accident 表偶然。'},
+ {q:['These are small wooden cottages ',' near lakes or in the forests.'],
+  cn:'這些是坐落在湖邊或森林裡的小木屋。',
+  opts:['that sit','that sits','which sitting','what sit'],ans:0,
+  word:'that sit（關係子句，動詞與先行詞 cottages 一致）',
+  tnote:'<b>關係子句的動詞單複數</b>：先行詞是複數 cottages，關代 that 代替它當主詞，動詞就要用複數 sit。<br>(B) sits 錯在單數；(C) which sitting 缺動詞；(D) what 前面不可有先行詞。<br>另補充：<b>sit</b> 在此不是「坐」，而是「坐落於；位於」——建築物當主詞時常見（The house sits on a hill.）。'},
+ {q:['The warm steam helps them ',' calm and relaxed.'],
+  cn:'溫暖的蒸汽幫助他們感到平靜與放鬆。',
+  opts:['feeling','to feeling','feel','felt'],ans:2,
+  word:'help + O + (to) V（原形不定詞）',
+  tnote:'<b>help 的受詞補語</b>：help sb. <b>(to) do</b> sth，to 可有可無，但<b>不能</b>接 V-ing。<br>✓ helps them feel ／ ✓ helps them to feel ／ ✗ helps them feeling<br>同類「使役／半使役」動詞：make/let/have + O + 原形；get + O + to V（唯一要 to）。'},
+ {q:['During their stay at a mökki, people are often completely ',' from the outside world.'],
+  cn:'在小木屋停留期間，人們常常與外面的世界完全隔絕。',
+  opts:['cut off','cutting off','cut off themselves','cut'],ans:0,
+  word:'be cut off from（被動語態片語動詞）',
+  tnote:'<b>片語動詞的被動</b>：cut sb/sth off from sth → 被動為 be cut off from sth，<b>介副詞 off 與 from 都不能掉</b>。<br>cut 的三態同形（cut-cut-cut），所以 are cut 就是被動。<br>學生易錯：寫成 are cutting off（變主動進行式，語意變「正在切斷別人」）。'},
+ {q:['',' at a mökki is an important part of Finnish culture.'],
+  cn:'在小木屋度過時光是芬蘭文化重要的一部分。',
+  opts:['Spend time','Spent time','Spending time','To spending time'],ans:2,
+  word:'Spending time（動名詞片語作主詞）',
+  tnote:'<b>動名詞作主詞</b>：句首要當主詞的動詞須改為 V-ing 或 to V。<br>(A) 動詞原形不能當主詞；(B) 過去式不能當主詞；(D) to 後面要接原形（To spend time 才對）。<br>延伸：spend + 時間/金錢 + <b>V-ing</b>（✗ to V）：She spent an hour reading.'},
+ {q:['Days ',' fishing or picking berries.'],
+  cn:'日子就在釣魚或採莓果中度過。',
+  opts:['are spent','are spending','spend','have spent'],ans:0,
+  word:'are spent（被動語態）',
+  tnote:'<b>spend 的被動</b>：主動是 people spend days V-ing；把 days 提前當主詞就要用被動 <b>are spent</b> V-ing。<br>判斷法：主詞 Days 自己不會「花費」，是「被花掉的」→ 被動。<br>本課三個被動可一起整理：are cut off、are spent、（Unit 4）is served。'},
+ {q:['Many Finns believe this hot-and-cold ritual ',' both the body and the mind.'],
+  cn:'許多芬蘭人相信這種冷熱交替的儀式能讓身體和心靈都煥然一新。',
+  opts:['refresh','refreshes','refreshing','to refresh'],ans:1,
+  word:'refreshes（名詞子句中的動詞，主詞為單數 ritual）',
+  tnote:'<b>名詞子句內的主動一致</b>：believe 後接名詞子句 (that) this ritual refreshes...，子句主詞是單數 this ritual，動詞加 -s。<br>學生常被前面的 Many Finns 誤導而選 refresh——提醒他們<b>找「離動詞最近的那個主詞」</b>。<br>另注意 both A and B 是受詞，不影響動詞形式。'},
+ {q:['',' daily stress, visitors can truly connect with nature and with themselves.'],
+  cn:'沒有了日常壓力，訪客可以真正與大自然、也與自己連結。',
+  opts:['Such as','Used to','Free from','Except for'],ans:2,
+  word:'Free from（沒有；免於）',
+  tnote:'<b>句首形容詞片語</b>：Free from daily stress 相當於 Because they are free from daily stress，修飾主詞 visitors。<br>be free from/of ＝ 沒有（負面的東西）：free from stress／free of charge。<br>(D) Except for 表「除了…以外（不包含）」，會使語意變成「除了壓力之外」，與正面結論矛盾。'}
+];
+</script>
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>

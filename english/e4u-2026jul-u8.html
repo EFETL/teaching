@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 鬥牛 ── English 4U 互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 大考重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>Unit 8｜Bullfighting: From Ancient Performance to Modern Fight ── 力量與尊重的勇氣之歌：鬥牛</h1>
+  <div class="sub">English 4U 2026 年 7／8 月號（JUL/AUG 2026）Unit 8　世界觀景窗 ★★｜互動教學講義</div>
+  <div class="time">⏱️ 建議授課時數：3 節（3 天課文，每天約 45 分鐘）｜課文與字彙例句全部逐字取自雜誌原文</div>
+  <div class="tags">
+    <span class="tag">📖 課文逐句精講 × 34</span>
+    <span class="tag">📝 核心字彙 × 18</span>
+    <span class="tag">➕ 字彙小補帖 × 10</span>
+    <span class="tag">🔗 Pocket Phrase × 5</span>
+    <span class="tag">📐 Language in Focus × 3</span>
+    <span class="tag">✏️ 學生練習 × 10</span>
+    <span class="tag">🎓 老師精講 × 8</span>
+  </div>
+</div>
+
+<!-- 速覽 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>三天課文速覽</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🟦 Day 1｜從克里特島說起</h4>
+        數千年前的<b>克里特島</b>，公牛被視為<b>神聖的動物</b>。人們用「<b>跳牛</b>（bull-leaping）」表達敬意：站在衝來的牛前面，趁牠低頭衝撞時抓住牛角，借牠的<b>衝力</b>翻過牛背——展現勇氣、技巧與對動物的尊重。
+      </div>
+      <div class="story-card s2">
+        <h4>🟩 Day 2｜西班牙與鬥牛士</h4>
+        鬥牛傳到<b>西班牙</b>，起初只有貴族能騎馬持長矛鬥牛；1700 年代國王認為太危險而下令停止。<b>平民接手</b>，改成徒步、用紅布和劍，這些人叫 <b>matadors</b>，穿金銀線裝飾的<b>「光之服」</b>。其實牛是<b>色盲</b>，牠攻擊的是「會動的布」。
+      </div>
+      <div class="story-card s3">
+        <h4>🟧 Day 3｜傳統與動物權的爭辯</h4>
+        支持者說鬥牛是歷史與<b>藝術形式</b>；反對者認為殘忍、在現代<b>不可接受</b>，有些地區已<b>立法禁止</b>。爭論激烈到<b>撕裂整個國家</b>。也有鬥牛士改採<b>不用武器</b>的和平版本——不傷害牛，又讓傳統存續。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文逐句 -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文逐句精講（原文逐字＋翻譯）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點 🔊 只朗讀，不會展開解析。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🟦 Day 1｜鬥牛場的畫面與克里特島的跳牛（p. 44）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Imagine a big bullring under the bright sun. The crowd is shouting and cheering.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">想像在明亮的陽光下有一座大鬥牛場。群眾正在吶喊、歡呼。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-v">Imagine</span><span class="syn-t">V（祈使句）</span> <span class="syn syn-o">a big bullring under the bright sun</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">The crowd</span><span class="syn-t">S</span> <span class="syn syn-v">is shouting and cheering</span><span class="syn-t">V（現在進行式）</span></div>
+          <div class="para-note"><b>bright</b> 在此指的是「明亮的」；而第 2 行的 bright 則是指「（顏色）鮮亮的，鮮明的」（4U Extras 1）；<b>crowd</b> 為集合名詞，視為一個整體時動詞用單數。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In the center, a man is standing in a gold suit. He is holding a bright red cloth and waving it slowly.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在場地中央，一名男子穿著金色服裝站著。他手持一塊鮮紅色的布，緩慢地揮動著。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In the center</span><span class="syn-t">地方副詞</span> <span class="syn syn-s">a man</span><span class="syn-t">S</span> <span class="syn syn-v">is standing</span><span class="syn-t">V</span> <span class="syn syn-m">in a gold suit</span><span class="syn-t">副詞（穿著）</span><br>
+            <span class="num">②</span><span class="syn syn-s">He</span><span class="syn-t">S</span> <span class="syn syn-v">is holding</span><span class="syn-t">V₁</span> <span class="syn syn-o">a bright red cloth</span><span class="syn-t">O</span> <span class="syn syn-v">and waving</span><span class="syn-t">V₂</span> <span class="syn syn-o">it</span><span class="syn-t">O</span> <span class="syn syn-m">slowly</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>suit</b> 表示「（特殊用途的）服裝」，此處即為「鬥牛士服裝」（4U Extras 2）；<b>in + 服裝</b> 表示「穿著…」；全段用<b>現在進行式</b>營造臨場感。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>A giant bull with sharp horns is running toward him. This is the world of bullfighting.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">一頭有著尖角的巨大公牛正朝他衝過來。這就是鬥牛的世界。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">A giant bull with sharp horns</span><span class="syn-t">S</span> <span class="syn syn-v">is running</span><span class="syn-t">V</span> <span class="syn syn-m">toward him</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-s">This</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">the world of bullfighting</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>bull</b>（公牛）、<b>horn</b>（角）為核心字；bull 的家族字：<b>bullring</b>（鬥牛場）、<b>bullfighting</b>（鬥牛）、<b>bullfighter</b>（鬥牛士，第二天課文第 10 行）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In order to understand this old tradition, we must look at its history.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">為了了解這個古老的傳統，我們必須看看它的歷史。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In order to understand this old tradition</span><span class="syn-t">不定詞片語（表目的）</span> <span class="syn syn-s">we</span><span class="syn-t">S</span> <span class="syn syn-v">must look at</span><span class="syn-t">V</span> <span class="syn syn-o">its history</span><span class="syn-t">O</span></div>
+          <div class="para-note">🎯 本課 Language in Focus ①：<b>(in order) to + V</b> 指「為了…」，可置於句首或句中；<b>look at sth</b> = 檢視…；審視…，本課 Pocket Phrase。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Thousands of years ago, on the island of Crete in the Mediterranean, bulls were treated with great respect.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">數千年前，在地中海的克里特島上，公牛受到極大的尊敬。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Thousands of years ago, on the island of Crete in the Mediterranean</span><span class="syn-t">時間＋地方副詞</span> <span class="syn syn-s">bulls</span><span class="syn-t">S</span> <span class="syn syn-v">were treated</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">with great respect</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>Crete</b> 指的是「克里特島」，該島位於地中海（the Mediterranean）北部，如今是希臘的第一大島（4U Extras 3）；<b>great</b> 在此意為「很大程度的」（4U Extras 4）；<b>treat A with B</b> = 以 B 的態度對待 A。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>People there believed bulls were sacred animals. They showed respect through a practice that's called bull-leaping.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">那裡的人相信公牛是神聖的動物。他們透過一種叫做「跳牛」的慣常做法來表達敬意。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">People there</span><span class="syn-t">S</span> <span class="syn syn-v">believed</span><span class="syn-t">V</span> <span class="syn syn-o">(that) bulls were sacred animals</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">showed</span><span class="syn-t">V</span> <span class="syn syn-o">respect</span><span class="syn-t">O</span> <span class="syn syn-m">through a practice that's called bull-leaping</span><span class="syn-t">副詞＋關係子句</span></div>
+          <div class="para-note"><b>practice</b> 為名詞，意思是「慣常做法；慣例」（4U Extras 5）；<b>sacred</b> = 神聖的；<b>leap</b>（跳；跳躍）在文中為動名詞用法（leap-leaped/leapt-leaped/leapt）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>To perform this act, a person needed to stand in front of a charging bull.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">為了執行這個動作，一個人必須站在一頭猛衝而來的公牛前面。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">To perform this act</span><span class="syn-t">不定詞（表目的）</span> <span class="syn syn-s">a person</span><span class="syn-t">S</span> <span class="syn syn-v">needed</span><span class="syn-t">V</span> <span class="syn syn-o">to stand in front of a charging bull</span><span class="syn-t">O（不定詞）</span></div>
+          <div class="para-note"><b>perform</b>（執行）為核心字；<b>act</b> 表示「行動；行為」（4U Extras 6）；<b>charging</b> 為現在分詞當形容詞（牛主動猛衝），呼應 Unit 4 的分詞用法。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As the animal lowered its head to strike, the human grabbed its horns.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當那隻動物低下頭要衝撞時，那個人便抓住牠的角。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">As the animal lowered its head to strike</span><span class="syn-t">時間副詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">the human</span><span class="syn-t">S</span> <span class="syn syn-v">grabbed</span><span class="syn-t">V</span> <span class="syn syn-o">its horns</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>lower</b>（降下；放下）為核心字，是 low 的比較級同形動詞；<b>strike</b> 意思為「攻擊；衝撞」（4U Extras 7）；<b>as</b> 在此為「當……時」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>They then let the bull's momentum lift them into the air and flip them over its back.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">接著他們讓公牛的衝力把自己抬到空中，並翻越過牠的背。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">let</span><span class="syn-t">V（使役動詞）</span> <span class="syn syn-o">the bull's momentum</span><span class="syn-t">O</span> <span class="syn syn-c">lift them into the air and flip them over its back</span><span class="syn-t">OC（兩個原形動詞）</span></div>
+          <div class="para-note"><b>let + O + 原形 V</b>（使役動詞，不加 to）；<b>momentum</b> = 衝力；<b>flip</b> = 翻轉。此句是全課句構最複雜的一句，適合當課堂拆解練習。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This was a display of courage, skill, and respect for the animal.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這是一種勇氣、技巧與對動物尊重的展現。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This</span><span class="syn-t">S</span> <span class="syn syn-v">was</span><span class="syn-t">V</span> <span class="syn syn-c">a display of courage, skill, and respect for the animal</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>a display of + 抽象名詞</b>＝……的展現；三個並列名詞 courage, skill, and respect 共用一個介系詞 of。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">🟩 Day 2｜傳到西班牙與鬥牛士的誕生（p. 46）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Later, bullfighting spread to Spain and became very popular.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">後來，鬥牛傳到西班牙，並變得非常受歡迎。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Later</span><span class="syn-t">時間</span> <span class="syn syn-s">bullfighting</span><span class="syn-t">S</span> <span class="syn syn-v">spread</span><span class="syn-t">V₁</span> <span class="syn syn-m">to Spain</span><span class="syn-t">副詞</span> <span class="syn syn-v">and became</span><span class="syn-t">V₂（連綴動詞）</span> <span class="syn syn-c">very popular</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>Spain</b> 為歐洲國家「西班牙」（4U Extras 1）；<b>spread</b> 三態同形（spread-spread-spread）；<b>become + 形容詞</b> 為連綴動詞用法（Unit 7 重點）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>At first, only nobles could fight bulls, and they used long spears on horseback.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">起初，只有貴族可以鬥牛，而且他們是在馬背上使用長矛。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">At first</span><span class="syn-t">時間</span> <span class="syn syn-s">only nobles</span><span class="syn-t">S</span> <span class="syn syn-v">could fight</span><span class="syn-t">V</span> <span class="syn syn-o">bulls</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">used</span><span class="syn-t">V</span> <span class="syn syn-o">long spears</span><span class="syn-t">O</span> <span class="syn syn-m">on horseback</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>horseback</b> 指的是「馬背」（4U Extras 2），on horseback＝騎在馬上；<b>noble</b> = 貴族；<b>spear</b> = 矛。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, in the 1700s, the king of Spain thought this was too dangerous for nobles and ordered them to stop.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，在 1700 年代，西班牙國王認為這對貴族來說太危險了，於是下令要他們停止。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">the king of Spain</span><span class="syn-t">S</span> <span class="syn syn-v">thought</span><span class="syn-t">V₁</span> <span class="syn syn-o">(that) this was too dangerous for nobles</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-v">and ordered</span><span class="syn-t">V₂</span> <span class="syn syn-o">them</span><span class="syn-t">O</span> <span class="syn syn-c">to stop</span><span class="syn-t">OC（不定詞）</span></div>
+          <div class="para-note"><b>order sb. to V</b> = 命令某人做某事（受詞補語用不定詞，不可省 to）；<b>too + adj. + for sb.</b> = 對某人來說太……。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Instead, common people took over the tradition.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">取而代之的是，平民百姓接手了這項傳統。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Instead</span><span class="syn-t">副詞（句首）</span> <span class="syn syn-s">common people</span><span class="syn-t">S</span> <span class="syn syn-v">took over</span><span class="syn-t">V（片語動詞）</span> <span class="syn syn-o">the tradition</span><span class="syn-t">O</span></div>
+          <div class="para-note">🎯 本課 Language in Focus ②：副詞 <b>instead</b> 可置於句首、句中或句尾，表「取而代之的是；反而」；<b>take over sth</b> = 接手…，本課 Pocket Phrase。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>But they had to face the bull on foot instead of riding horses.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">但是他們必須徒步面對公牛，而不是騎馬。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">they</span><span class="syn-t">S</span> <span class="syn syn-v">had to face</span><span class="syn-t">V</span> <span class="syn syn-o">the bull</span><span class="syn-t">O</span> <span class="syn syn-m">on foot</span><span class="syn-t">副詞</span> <span class="syn syn-m">instead of riding horses</span><span class="syn-t">介系詞片語</span></div>
+          <div class="para-note">⚠️ <b>instead of</b> 為片語介系詞，後方接<b>名詞或動名詞</b>（riding），意思是「並非…；而不是…」——這正是與副詞 instead 的最大差別。<b>on foot</b> = 徒步。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>These people invented a new style of bullfighting that used a red cloth and a sword.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這些人發明了一種使用紅布和劍的新鬥牛方式。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">These people</span><span class="syn-t">S</span> <span class="syn syn-v">invented</span><span class="syn-t">V</span> <span class="syn syn-o">a new style of bullfighting</span><span class="syn-t">O</span> <span class="syn syn-m">that used a red cloth and a sword</span><span class="syn-t">關係子句</span></div>
+          <div class="para-note"><b>invent</b>（發明；創造）與 <b>sword</b>（劍；刀，w 不發音 [sord]）皆為核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The bullfighters in this new style are called matadors. Matadors usually wear a special outfit, the Suit of Lights.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這種新形式中的鬥牛士被稱為 matadors。鬥牛士通常會穿一套特別的服裝，叫做「光之服」。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The bullfighters in this new style</span><span class="syn-t">S</span> <span class="syn syn-v">are called</span><span class="syn-t">V（被動）</span> <span class="syn syn-c">matadors</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">Matadors</span><span class="syn-t">S</span> <span class="syn syn-v">wear</span><span class="syn-t">V</span> <span class="syn syn-o">a special outfit</span><span class="syn-t">O</span><span class="syn-cl">— the Suit of Lights 為同位語</span></div>
+          <div class="para-note"><b>be called + 名稱</b>（被稱為）；<b>outfit</b> = 全套服裝；<b>matador</b> = 鬥牛士（西班牙文借字）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It is a heavy, tight suit that is decorated with gold and silver thread.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它是一套用金線和銀線裝飾的厚重、緊身服裝。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">S</span> <span class="syn syn-v">is</span><span class="syn-t">V</span> <span class="syn syn-c">a heavy, tight suit</span><span class="syn-t">C</span> <span class="syn syn-m">that is decorated with gold and silver thread</span><span class="syn-t">關係子句（被動）</span></div>
+          <div class="para-note"><b>tight</b>（緊身的；緊貼的）與 <b>thread</b>（線）皆為核心字；<b>be decorated with</b> = 以……裝飾（被動）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>It makes the bullfighter look bright in the sun.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">它讓鬥牛士在陽光下看起來閃亮奪目。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">It</span><span class="syn-t">S</span> <span class="syn syn-v">makes</span><span class="syn-t">V（使役動詞）</span> <span class="syn syn-o">the bullfighter</span><span class="syn-t">O</span> <span class="syn syn-c">look bright in the sun</span><span class="syn-t">OC（原形動詞）</span></div>
+          <div class="para-note"><b>make + O + 原形 V</b>；此處 look 是連綴動詞後接形容詞 bright（Unit 7 Language in Focus）；<b>bright</b> 在此指的是「明亮的」（Day 1 4U Extras 1）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>As for the red cloth, many people think bulls hate the color red. In fact, bulls are color-blind.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">至於那塊紅布，許多人認為公牛討厭紅色。事實上，公牛是色盲。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">As for the red cloth</span><span class="syn-t">主題轉換語</span> <span class="syn syn-s">many people</span><span class="syn-t">S</span> <span class="syn syn-v">think</span><span class="syn-t">V</span> <span class="syn syn-o">(that) bulls hate the color red</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-m">In fact</span><span class="syn-t">轉承語</span> <span class="syn syn-s">bulls</span><span class="syn-t">S</span> <span class="syn syn-v">are</span><span class="syn-t">V</span> <span class="syn syn-c">color-blind</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>as for sth/sb</b>（至於…）與 <b>in fact</b>（事實上）皆為本課 Pocket Phrase；<b>color-blind</b> 意思是「色盲的」（4U Extras 3）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>They only charge because the matador moves the cloth.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">牠們會衝過來，只是因為鬥牛士移動了那塊布。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">only charge</span><span class="syn-t">V</span><br>
+            <span class="num">②</span><span class="syn syn-m">because the matador moves the cloth</span><span class="syn-t">原因副詞子句</span></div>
+          <div class="para-note"><b>charge</b>（猛衝）為核心字，在 Day 1 是現在分詞 charging；<b>only</b> 放在動詞前，限定「唯一的原因」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>To the bull, the moving cloth seems like a threat, so it attacks.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">對公牛來說，那塊移動的布看起來像是一種威脅，所以牠就攻擊。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">To the bull</span><span class="syn-t">副詞</span> <span class="syn syn-s">the moving cloth</span><span class="syn-t">S</span> <span class="syn syn-v">seems</span><span class="syn-t">V（連綴動詞）</span> <span class="syn syn-c">like a threat</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-m">so</span><span class="syn-t">連接詞</span> <span class="syn syn-s">it</span><span class="syn-t">S</span> <span class="syn syn-v">attacks</span><span class="syn-t">V</span></div>
+          <div class="para-note"><b>seem like + 名詞</b>（連綴動詞＋like＋N，Unit 7 Language in Focus）；<b>seem</b>（看來；似乎）與 <b>threat</b>（威脅；危害）皆為核心字；<b>moving</b> 為現在分詞當形容詞。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">🟧 Day 3｜傳統與動物權的爭辯（p. 48）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Today, many people are debating the future of bullfighting.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">今天，許多人正在辯論鬥牛的未來。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Today</span><span class="syn-t">時間</span> <span class="syn syn-s">many people</span><span class="syn-t">S</span> <span class="syn syn-v">are debating</span><span class="syn-t">V（現在進行式）</span> <span class="syn syn-o">the future of bullfighting</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>debate</b> 在此為<b>及物</b>動詞，直接接受詞（✗ debate about the future 在正式用法中較不佳）；現在進行式表示「當前正在發生的社會現象」。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Those who support it say bullfighting is an important part of their history.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">支持它的人說，鬥牛是他們歷史中重要的一部分。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Those</span><span class="syn-t">S</span> <span class="syn syn-m">who support it</span><span class="syn-t">關係子句</span> <span class="syn syn-v">say</span><span class="syn-t">V</span> <span class="syn syn-o">(that) bullfighting is an important part of their history</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>Those who + V</b> = ……的人們（複數，動詞用複數 support／say）；與下一段的 those who are against it 形成正反對照。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>They believe it is an art form that shows the power and beauty of the animal.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他們相信它是一種展現這種動物力量與美感的藝術形式。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">believe</span><span class="syn-t">V</span> <span class="syn syn-o">(that) it is an art form</span><span class="syn-t">O（名詞子句）</span> <span class="syn syn-m">that shows the power and beauty of the animal</span><span class="syn-t">關係子句</span></div>
+          <div class="para-note"><b>form</b>（形式；種類）為核心字，<b>art form</b> = 藝術形式；一個句子裡同時有名詞子句與關係子句，可請學生標出兩個 that 的功能差異。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>To them, bullfighting helps people remember the respect for bulls that began centuries ago.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">對他們來說，鬥牛幫助人們記住幾世紀以前就開始的、對公牛的尊敬。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">To them</span><span class="syn-t">副詞</span> <span class="syn syn-s">bullfighting</span><span class="syn-t">S</span> <span class="syn syn-v">helps</span><span class="syn-t">V</span> <span class="syn syn-o">people</span><span class="syn-t">O</span> <span class="syn syn-c">remember the respect for bulls</span><span class="syn-t">OC（原形動詞）</span> <span class="syn syn-m">that began centuries ago</span><span class="syn-t">關係子句</span></div>
+          <div class="para-note"><b>help + O + (to) V</b>；關係子句 that began centuries ago 修飾的是 the respect（那份敬意），不是 bulls——這是閱讀測驗常設的陷阱。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>However, those who are against it believe the tradition is cruel.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">然而，反對它的人認為這個傳統很殘忍。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">However</span><span class="syn-t">轉折</span> <span class="syn syn-s">those</span><span class="syn-t">S</span> <span class="syn syn-m">who are against it</span><span class="syn-t">關係子句</span> <span class="syn syn-v">believe</span><span class="syn-t">V</span> <span class="syn syn-o">(that) the tradition is cruel</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>be against sth</b> = 反對……（against 為介系詞），反義為 support／be for sth；<b>cruel</b> = 殘忍的。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>They argue that hurting animals for a show isn't acceptable in the modern world.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">他們主張，為了表演而傷害動物在現代世界中是不可接受的。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">They</span><span class="syn-t">S</span> <span class="syn syn-v">argue</span><span class="syn-t">V</span> <span class="syn syn-o">that hurting animals for a show isn't acceptable in the modern world</span><span class="syn-t">O（名詞子句）</span><span class="syn-cl">— 子句主詞 hurting animals for a show 為動名詞片語，動詞用單數 isn't</span></div>
+          <div class="para-note"><b>acceptable</b>（可以允許的；可以接受的）為核心字；<b>argue that + 子句</b> = 主張……；動名詞片語當主詞用單數動詞（本刊 Unit 5、Unit 6 皆出現過）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In some regions, governments have prohibited the practice to protect the animals.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在某些地區，政府已經禁止這項慣例以保護這些動物。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In some regions</span><span class="syn-t">地方副詞</span> <span class="syn syn-s">governments</span><span class="syn-t">S</span> <span class="syn syn-v">have prohibited</span><span class="syn-t">V（現在完成式）</span> <span class="syn syn-o">the practice</span><span class="syn-t">O</span> <span class="syn syn-m">to protect the animals</span><span class="syn-t">不定詞（表目的）</span></div>
+          <div class="para-note"><b>region</b>（區域；地區）為核心字；<b>prohibit</b>（尤指以法令）禁止；<b>to protect</b>＝ (in order) to protect（本課 Language in Focus ①）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The debate between tradition and animal rights has become so intense that it has even divided people across the country.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">傳統與動物權之間的爭論已經變得如此激烈，以至於它甚至讓全國的人們產生分歧。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The debate between tradition and animal rights</span><span class="syn-t">S</span> <span class="syn syn-v">has become</span><span class="syn-t">V</span> <span class="syn syn-c">so intense</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-m">that it has even divided people across the country</span><span class="syn-t">表結果的副詞子句</span></div>
+          <div class="para-note">🎯 本課 Language in Focus ③：<b>S + beV/V + so + adj./adv. + that + S + V ...</b>（如此…以致於…）；<b>intense</b> = 激烈的；<b>divide</b> = 使分裂。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Some bullfighters are now trying a more peaceful version of bullfighting.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">有些鬥牛士現在正在嘗試一種更和平的鬥牛版本。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Some bullfighters</span><span class="syn-t">S</span> <span class="syn syn-v">are now trying</span><span class="syn-t">V（現在進行式）</span> <span class="syn syn-o">a more peaceful version of bullfighting</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>version</b> = 版本（Unit 4 第一天課文也出現過）；<b>more + 多音節形容詞</b>構成比較級（peaceful → more peaceful）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In this new style, the matador still uses a red cloth and moves with skill.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">在這種新形式中，鬥牛士仍然使用紅布，並以技巧移動。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In this new style</span><span class="syn-t">副詞</span> <span class="syn syn-s">the matador</span><span class="syn-t">S</span> <span class="syn syn-v">still uses</span><span class="syn-t">V₁</span> <span class="syn syn-o">a red cloth</span><span class="syn-t">O</span> <span class="syn syn-v">and moves</span><span class="syn-t">V₂</span> <span class="syn syn-m">with skill</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>with + 抽象名詞</b>＝副詞（with skill ＝ skillfully），是很好用的寫作變化，如 with care ＝ carefully。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The bull, though, is never touched by any weapon.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">不過，公牛絕不會被任何武器碰到。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The bull</span><span class="syn-t">S</span> <span class="syn syn-m">, though,</span><span class="syn-t">插入語（然而）</span> <span class="syn syn-v">is never touched</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">by any weapon</span><span class="syn-t">動作者</span></div>
+          <div class="para-note"><b>though</b> 當<b>副詞</b>時可放句中或句尾，意思接近 however（前後加逗號）；<b>weapon</b>（武器）為核心字；否定句中用 any（✗ no weapon 與 never 併用會變雙重否定）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>This prevents any harm to the bull but still keeps the tradition alive.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">這防止了對公牛的任何傷害，卻仍讓這個傳統繼續存在。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">This</span><span class="syn-t">S</span> <span class="syn syn-v">prevents</span><span class="syn-t">V₁</span> <span class="syn syn-o">any harm to the bull</span><span class="syn-t">O</span> <span class="syn syn-m">but</span><span class="syn-t">連接詞</span> <span class="syn syn-v">still keeps</span><span class="syn-t">V₂</span> <span class="syn syn-o">the tradition</span><span class="syn-t">O</span> <span class="syn syn-c">alive</span><span class="syn-t">OC（形容詞）</span></div>
+          <div class="para-note"><b>prevent</b>（防止；預防）與 <b>harm to sth/sb</b>（對…的傷害／危害）皆為核心字；<b>keep sth alive</b> = 使…繼續存在，本課 Pocket Phrase；<b>keep + O + adj.</b> 句型。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 4U Extras -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📌</div>4U Extras 課文註解（原書逐條）</div>
+  <div class="sec-body">
+    <div class="divlabel">Day 1（p. 44）</div>
+    <table class="ptable">
+      <tr><th style="width:16%">對應</th><th>註解</th></tr>
+      <tr><td>第 1、2 行</td><td>第 1 行和第二天第 12 行的形容詞 bright 指的是「明亮的」；而第 2 行的形容詞 bright 則是指「（顏色）鮮亮的，鮮明的」。</td></tr>
+      <tr><td>第 2 行</td><td>名詞 suit 表示「（特殊用途的）服裝」，此處即為「鬥牛士服裝」。</td></tr>
+      <tr><td>第 5 行</td><td>Crete [krit] 指的是「克里特島」，該島位於地中海（the Mediterranean [ˌmɛdətəˈreniən]）北部，如今是希臘的第一大島。</td></tr>
+      <tr><td>第 6 行</td><td>形容詞 great 在此意為「很大程度的」。</td></tr>
+      <tr><td>第 7 行</td><td>practice 為名詞，意思是「慣常做法；慣例」。</td></tr>
+      <tr><td>第 7 行</td><td>名詞 act 表示「行動；行為」。</td></tr>
+      <tr><td>第 8 行</td><td>動詞 strike 意思為「攻擊；衝撞」。</td></tr>
+    </table>
+    <div class="divlabel">Day 2（p. 46）</div>
+    <table class="ptable">
+      <tr><th style="width:16%">對應</th><th>註解</th></tr>
+      <tr><td>第 1 行</td><td>Spain [spen] 為歐洲國家「西班牙」。</td></tr>
+      <tr><td>第 4 行</td><td>名詞 horseback [ˈhɔrsˌbæk] 指的是「馬背」。</td></tr>
+      <tr><td>第 13~14 行</td><td>複合形容詞 color-blind 意思是「色盲的」。</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（三天共 18 字・例句取自原書）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡展開「字族／用法 + 原書例句」。標示 <b>✱</b> 者為雜誌註明「近五年大考出現字彙」。</div>
+
+    <div class="divlabel">Day 1（p. 45）</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">bull</span><span class="v-pos">n.</span><div class="v-cn-mini">公牛</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[bʊl]</span><span>bullring [ˈbʊlˌrɪŋ] n. 鬥牛場</span><span>bullfighting [ˈbʊlˌfaɪtɪŋ] n. 鬥牛</span><span>bullfighter [ˈbʊlˌfaɪtə] n. 鬥牛士（第二天課文第 10 行）</span></div>
+        <div class="v-ex">During the farm visit, Emma saw a big, strong <b>bull</b> eating grass in the field.<span class="cn">農場參觀時，艾瑪看到一頭又大又強壯的公牛在田裡吃草。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">horn</span><span class="v-pos">n.</span><div class="v-cn-mini">（牛、羊等動物的）角</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[hɔrn]</span><span>亦可指樂器「號角」或車子「喇叭」</span></div>
+        <div class="v-ex">Some goats have two <b>horns</b> on top of their heads. They grow longer as the goat gets older.<span class="cn">有些山羊頭頂上有兩隻角。隨著羊長大，角會變得更長。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">leap</span><span class="v-pos">v.</span><div class="v-cn-mini">跳；跳躍</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[lip]</span><span>（文中為動名詞用法 bull-leaping）</span><span>leap-leaped/leapt-leaped/leapt</span></div>
+        <div class="v-ex">Ben saw a frog <b>leap</b> from the rock into the pond with a big splash.<span class="cn">班看到一隻青蛙從石頭上跳進池塘，濺起一大片水花。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">perform</span><span class="v-pos">v.</span><div class="v-cn-mini">執行</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[pəˈfɔrm]</span><span>performance [pəˈfɔrməns] n. 表演（課文標題處）</span></div>
+        <div class="v-ex">Shirley tried to <b>perform</b> every task well during her first day at work.<span class="cn">雪莉在上班第一天努力把每項任務都做好。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">charge</span><span class="v-pos">v.</span><div class="v-cn-mini">猛衝</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[tʃɑrdʒ]</span><span>（文中為現在分詞當形容詞用 charging）</span><span>另有「收費；充電」之意</span></div>
+        <div class="v-ex">The angry dog <b>charged</b> at the mailman and tried to attack him.<span class="cn">那隻生氣的狗朝郵差衝過去，想要攻擊他。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">lower</span><span class="v-pos">v.</span><div class="v-cn-mini">降下；放下</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[ˈloə]</span><span>low (adj.) 低的</span><span>反義：raise 提高</span></div>
+        <div class="v-ex">The firefighter gently <b>lowered</b> the scared cat from the tall tree to safety.<span class="cn">消防員輕輕地把受驚的貓從高樹上放下來，帶到安全的地方。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+    </div>
+
+    <div class="divlabel">Day 2（p. 47）</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">invent</span><span class="v-pos">v.</span><div class="v-cn-mini">發明；創造</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[ɪnˈvɛnt]</span><span>invention (n.) 發明</span><span>inventor (n.) 發明家</span></div>
+        <div class="v-ex">Before Alexander Graham Bell <b>invented</b> the phone, people had to contact each other by writing letters.<span class="cn">在貝爾發明電話之前，人們必須靠寫信互相聯絡。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">sword</span><span class="v-pos">n.</span><div class="v-cn-mini">劍；刀</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[sord]</span><span>⚠️ w 不發音</span></div>
+        <div class="v-ex">Long ago, soldiers used <b>swords</b> to protect themselves and attack their enemies.<span class="cn">很久以前，士兵用劍來保護自己、攻擊敵人。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">tight</span><span class="v-pos">adj.</span><div class="v-cn-mini">緊身的；緊貼的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[taɪt]</span><span>tightly (adv.) 緊緊地</span><span>反義：loose 寬鬆的</span></div>
+        <div class="v-ex">After I washed my pants, they became too <b>tight</b> and pressed uncomfortably around my waist.<span class="cn">褲子洗過之後變得太緊，在我腰間壓得不舒服。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">thread</span><span class="v-pos">n.</span><div class="v-cn-mini">線</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[θrɛd]</span><span>注意 th 發 [θ]</span></div>
+        <div class="v-ex">Linda used <b>thread</b> to fix a hole in her sock. Now, she can wear it again.<span class="cn">琳達用線把襪子的破洞補好。現在她又可以穿它了。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">seem</span><span class="v-pos">v.</span><div class="v-cn-mini">看來；似乎；好像</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[sim]</span><span>連綴動詞：seem + adj.／seem like + N</span></div>
+        <div class="v-ex">I can't say for sure, but Edward <b>seems</b> more independent after he moved out to live by himself.<span class="cn">我不敢肯定，但愛德華搬出去自己住之後好像變得更獨立了。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">threat</span><span class="v-pos">n.</span><div class="v-cn-mini">威脅；危害</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[θrɛt]</span><span>threaten (v.) 威脅</span></div>
+        <div class="v-ex">The typhoon that is developing off the coast is a <b>threat</b> this small village can't ignore!<span class="cn">在外海形成的颱風，是這個小村莊無法忽視的威脅！</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+    </div>
+
+    <div class="divlabel">Day 3（p. 49）</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">form</span><span class="v-pos">n.</span><div class="v-cn-mini">形式；種類</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[fɔrm]</span><span>art form n. 藝術形式</span></div>
+        <div class="v-ex">Jogging is a popular <b>form</b> of exercise because it helps improve health.<span class="cn">慢跑是一種很受歡迎的運動形式，因為它有助於改善健康。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">acceptable</span><span class="v-pos">adj.</span><div class="v-cn-mini">可以允許的；可以接受的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[əkˈsɛptəbl̩]</span><span>accept (v.) 接受</span><span>反義：unacceptable</span></div>
+        <div class="v-ex">Wendy must talk to people in a more <b>acceptable</b> way if she wants them to listen to her.<span class="cn">如果溫蒂希望別人聽她說話，她必須用比較能被接受的方式和人交談。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">region</span><span class="v-pos">n.</span><div class="v-cn-mini">區域；地區</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[ˈridʒən]</span><span>regional (adj.) 區域的</span></div>
+        <div class="v-ex">This <b>region</b> manages itself with a special government system and makes its own trade agreements with nearby countries.<span class="cn">這個地區以特殊的政府體制自治，並與鄰近國家簽訂自己的貿易協定。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">weapon</span><span class="v-pos">n.</span><div class="v-cn-mini">武器</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[ˈwɛpən]</span><span>ea 發 [ɛ]</span></div>
+        <div class="v-ex">Joyce felt scared when she saw someone swinging a sharp <b>weapon</b> near the school gate.<span class="cn">當喬伊絲看到有人在校門口附近揮舞著鋒利的武器時，她感到很害怕。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">prevent</span><span class="v-pos">v.</span><div class="v-cn-mini">防止；預防</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[prɪˈvɛnt]</span><span>prevent sb. from V-ing 阻止某人做…</span></div>
+        <div class="v-ex">Drinking water regularly can help <b>prevent</b> headaches, especially on hot and sunny days.<span class="cn">規律喝水有助於預防頭痛，尤其是在炎熱晴朗的日子。</span></div>
+        <span class="v-gsat">✱ 近五年大考出現字彙</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">harm</span><span class="v-pos">n.</span><div class="v-cn-mini">傷害；危害</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>[hɑrm]</span><span>harm to sth/sb 對…的傷害／危害</span><span>harmful (adj.) 有害的</span></div>
+        <div class="v-ex">The oil spill caused serious <b>harm</b> to the local fish and birds. Many of them died, and their feeding areas were destroyed.<span class="cn">漏油對當地的魚類和鳥類造成嚴重危害。許多動物死亡，牠們的覓食區也被破壞了。</span></div></div></div>
+    </div>
+
+    <div class="divlabel">🧩 字彙小補帖（文章中畫底線之字詞・僅供參考）</div>
+    <table class="ptable">
+      <tr><th style="width:34%">單字</th><th style="width:12%">詞性</th><th>中文</th></tr>
+      <tr><td><span class="phr">sacred</span> [ˈsekrɪd]</td><td>adj.</td><td>神聖的</td></tr>
+      <tr><td><span class="phr">momentum</span> [moˈmɛntəm]</td><td>n.</td><td>衝力</td></tr>
+      <tr><td><span class="phr">flip</span> [flɪp]</td><td>v.</td><td>翻轉</td></tr>
+      <tr><td><span class="phr">noble</span> [ˈnobl̩]</td><td>n.</td><td>貴族</td></tr>
+      <tr><td><span class="phr">spear</span> [spɪr]</td><td>n.</td><td>矛</td></tr>
+      <tr><td><span class="phr">matador</span> [ˈmætəˌdɔr]</td><td>n.</td><td>鬥牛士</td></tr>
+      <tr><td><span class="phr">outfit</span> [ˈaʊtˌfɪt]</td><td>n.</td><td>全套服裝</td></tr>
+      <tr><td><span class="phr">prohibit</span> [proˈhɪbɪt]</td><td>v.</td><td>（尤指以法令）禁止</td></tr>
+      <tr><td><span class="phr">intense</span> [ɪnˈtɛns]</td><td>adj.</td><td>激烈的</td></tr>
+      <tr><td><span class="phr">version</span> [ˈvɝʒən]／[ˈvɝʃən]</td><td>n.</td><td>版本</td></tr>
+    </table>
+
+    <div class="divlabel">🔗 Pocket Phrase（課文片語・例句取自原書）</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">look at sth</span></td><td>檢視…；審視…</td><td class="pex">We need to <b>look at</b> the prices carefully before we choose a new product supplier.<span class="cn">在選擇新的產品供應商之前，我們必須仔細檢視價格。</span></td></tr>
+      <tr><td><span class="phr">take over sth</span></td><td>接手…</td><td class="pex">The new boss is going to <b>take over</b> the company next month.<span class="cn">新老闆下個月要接手這間公司。</span></td></tr>
+      <tr><td><span class="phr">as for sth/sb</span></td><td>至於…</td><td class="pex">The garden looks lovely; <b>as for</b> the kitchen, it still needs cleaning.<span class="cn">花園看起來很漂亮；至於廚房，還需要打掃。</span></td></tr>
+      <tr><td><span class="phr">in fact</span></td><td>事實上</td><td class="pex">I didn't like reading this book at all. <b>In fact</b>, I didn't even finish it.<span class="cn">我一點也不喜歡讀這本書。事實上，我連讀完都沒有。</span></td></tr>
+      <tr><td><span class="phr">keep sth alive</span></td><td>使…繼續存在</td><td class="pex">Even after many years, the couple <b>kept</b> their love <b>alive</b> by spending time together every day.<span class="cn">即使過了許多年，這對伴侶靠著每天相處讓愛延續下去。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Language in Focus -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>Language in Focus 句型文法解析（三天共 3 個重點）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 大考重點」。例句均取自原書。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>Day 1｜in order to 的用法</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V₁ ... (+ in order) to + V₂ ...
+= (In order) to + V₂ ..., S + V₁ ...
+否定：in order not to + V（in order 不可省略）</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">❶ <b>(in order) to + V</b> 指「為了…」，可置於句首或句中。</p>
+        <div class="g-ex"><b>In order to</b> understand this old tradition (bullfighting), we must look at its history.<div class="g-ex-cn">（課文第 4 行）</div></div>
+        <div class="g-ex"><b>(In order) to</b> perform this act (bull-leaping), a person needed to stand in front of a charging bull.<div class="g-ex-cn">（課文第 7~8 行）</div></div>
+        <div class="g-ex">As the animal lowered its head <b>(in order) to</b> strike, the human grabbed its horns.<div class="g-ex-cn">（課文第 8~9 行）</div></div>
+        <div class="g-ex">In some regions, governments have prohibited the practice (bullfighting) <b>(in order) to</b> protect the animals.<div class="g-ex-cn">（第三天課文第 6~7 行）</div></div>
+        <div class="g-ex">You need to get a good grade on this test <b>(in order) to</b> pass this class.<br>= <b>(In order) to</b> pass this class, you need to get a good grade on this test.<div class="g-ex-cn">為了通過這門課，你這項考試要取得好成績。</div></div>
+        <p style="font-size:16px;margin:8px 0;color:#374151">❷ 若想表達否定，可以使用 <b>in order not to + V</b>，指「為了不要…；以免…」，請注意這裡的 in order <b>不可省略</b>。</p>
+        <div class="g-ex">I walked softly across the room <b>in order not to</b> wake up the baby.<div class="g-ex-cn">我悄悄穿越這間房間，以免吵醒小寶寶。</div></div>
+        <div class="g-ex"><b>In order not to</b> forget about his job interview, Jack set several alarms on his phone.<div class="g-ex-cn">為了不要忘記工作面試，傑克在他的手機上設了好幾個鬧鐘。</div></div>
+        <div class="g-note">✗ not to wake up the baby（單獨用 not to 表目的不夠清楚）→ 一定要寫 <b>in order not to</b> 或 <b>so as not to</b>。</div>
+        <div class="g-tip">大考常考「表目的」的三種寫法：to V／in order to V／so that + S + can V。三者可互換，但 so that 後面要接<b>完整子句</b>。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>Day 2｜instead vs. instead of</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">instead（副詞）：可置於句首、句中或句尾
+instead of（介系詞片語）：+ N／V-ing
+
+S + V ... + instead of + N/V-ing ...
+= S (+ not) + V ... + Instead, S + V ...
+= S (+ not) + V ...; instead, S + V ...
+= S (+ not) + V ... . S + V ... + instead.</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">❶ 副詞 <b>instead</b> 可置於句首、句中或句尾，表「取而代之的是；反而」。</p>
+        <div class="g-ex">However, in the 1700s, the king of Spain thought this (bullfighting) was too dangerous for nobles and ordered them to stop. <b>Instead</b>, common people took over the tradition.<div class="g-ex-cn">（課文第 4~8 行）</div></div>
+        <div class="g-ex">Tessa didn't go home immediately last night. <b>Instead</b>, she went to the movie theater.<br>= Tessa didn't go home immediately last night; <b>instead</b>, she went to the movie theater.<br>= Tessa didn't go home immediately last night. She went to the movie theater <b>instead</b>.<div class="g-ex-cn">泰莎昨晚沒有馬上回家，而是去看電影。</div></div>
+        <p style="font-size:16px;margin:8px 0;color:#374151">❷ 片語 <b>instead of</b> 當介系詞用，表示「並非…；而不是…」，可置於句首或句中，後接動名詞或名詞。</p>
+        <div class="g-ex">But they (common people) had to face the bull on foot <b>instead of</b> riding horses.<div class="g-ex-cn">（課文第 8~9 行）</div></div>
+        <div class="g-ex"><b>Instead of</b> soda, I'm going to drink water because it's healthier.<div class="g-ex-cn">與其喝汽水，我要喝水，因為喝水比較健康。</div></div>
+        <div class="g-ex">Jennie chose to play basketball outside <b>instead of</b> playing video games.<div class="g-ex-cn">珍妮選擇在外打籃球而不是打電動。</div></div>
+        <p style="font-size:16px;margin:8px 0;color:#374151">💡 instead 和 instead of 常可互換：</p>
+        <div class="g-ex">Tom took the bus <b>instead of</b> (taking) a taxi.<br>= Tom didn't take a taxi. <b>Instead</b>, he took the bus.<br>= Tom didn't take a taxi; <b>instead</b>, he took the bus.<br>= Tom didn't take a taxi. He took the bus <b>instead</b>.<div class="g-ex-cn">湯姆選擇搭公車而不是搭計程車。</div></div>
+        <div class="g-note">✗ Instead riding horses（instead 是副詞，後面不能直接接名詞／動名詞）✗ Instead of, he took the bus.（instead of 後面一定要有受詞）。</div>
+        <div class="g-tip">判斷法：空格後<b>有名詞或 V-ing</b> → instead of；空格後是<b>完整句子或空無一物</b> → instead。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>Day 3｜S + beV/V + so + adj./adv. + that + S + V ...</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + beV/V + so + adj./adv. + that + S + V ...
+　　　　　　　　　　　　　　└ that 引導表結果的副詞子句</div>
+      <div class="g-body">
+        <p style="font-size:16px;margin-bottom:8px;color:#374151">本句型用來表示結果，意為「如此…以致於…」。so 在此是副詞，後接形容詞或副詞；that 則用以引導表示結果的副詞子句。</p>
+        <div class="g-ex">The debate between tradition and animal rights has become <b>so</b> intense <b>that</b> it has even divided people across the country.<div class="g-ex-cn">（課文第 7~10 行）</div></div>
+        <div class="g-ex">The cat was <b>so</b> thin <b>that</b> you could see its bones through its skin.<div class="g-ex-cn">這隻貓太瘦了，以致於你可以從牠的皮膚就看到骨頭。</div></div>
+        <div class="g-ex">The mouse ran <b>so</b> quickly <b>that</b> the cat couldn't catch it.<div class="g-ex-cn">那隻老鼠跑得飛快，以致於貓咪抓不到牠。</div></div>
+        <div class="g-note">💡 勿與另一個長得很像的連接詞 <b>so that</b> 搞混，so that 後接的子句用來<b>表達目的</b>：Will lied about being sick <b>so that</b> he wouldn't have to go to work.（威爾謊稱他生病了，這樣他就能不去上班。）</div>
+        <div class="g-tip">辨析三兄弟：<b>so + adj. + that</b>（如此…以致…）／<b>such + a + adj. + N + that</b>（接名詞片語）／<b>so that + S + can/will V</b>（為了）。大考三者常一起出現當誘答。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Give It a Shot -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">✍️</div>Give It a Shot（原書隨堂練習）</div>
+  <div class="sec-body">
+    <div class="sec-hint">題目逐字取自原書；下列<b>參考解答</b>為本講義提供，原書解答請見雜誌 p. 75。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">Day 1｜請選出正確的選項（可複選）</span><div class="slang-cn-mini">❶ Gina is wearing a coat ______ stay warm in the cold wind.　❷ Sandy wrote down the bus schedule on her phone ______ miss the last bus home.</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">❶ Gina is wearing a coat ______ stay warm in the cold wind.<br>　(A) to　(B) not to　(C) in order to　(D) in order not to<br><br>❷ Sandy wrote down the bus schedule on her phone ______ miss the last bus home.<br>　(A) to　(B) not　(C) in order to　(D) in order not to</div>
+      <div class="slang-ex">參考解答 ❶ <b>(A) to／(C) in order to</b>（可複選）<span class="cn">語意是肯定的目的「為了保暖」，to V 與 in order to V 皆可。</span></div>
+      <div class="slang-ex">參考解答 ❷ <b>(D) in order not to</b><span class="cn">語意是否定的目的「為了不要錯過末班車」；否定時 in order 不可省略。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">Day 2｜綜合練習</span><div class="slang-cn-mini">❶ 請用 instead of 的句型完成以下翻譯練習　❷ 請用 instead 的句型改寫以下句子</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">❶ 丹尼爾（Daniel）傳了一則訊息給他媽媽，而不是打電話給她。<br>　______________________________<br><br>❷ Maya took the train to Taipei instead of driving there.<br>　______________________________</div>
+      <div class="slang-ex">參考解答 ❶ <b>Daniel sent a text message to his mother instead of calling her.</b><span class="cn">instead of 後接動名詞 calling。</span></div>
+      <div class="slang-ex">參考解答 ❷ <b>Maya didn't drive to Taipei. Instead, she took the train (there).</b><span class="cn">也可寫成：Maya didn't drive to Taipei; instead, she took the train there.／Maya didn't drive to Taipei. She took the train there instead.</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">Day 3｜Reading Comprehension</span><div class="slang-cn-mini">❶ Which of the following is true?　❷ 排出下列做法發生的先後順序　❸ Which picture best shows a matador?</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">❶ Which of the following is true?<br>　(A) Bulls charge at the red cloth because they hate the color red.<br>　(B) The Suit of Lights is light and thin so bullfighters can move easily.<br>　(C) Bullfighting started in Spain and then spread to the island of Crete.<br>　(D) Some governments have stopped bullfighting to protect the animals.<br><br>❷ According to the article, put the following practices in the correct order of when they happened.<br>　① Fighting the bull with a sword and a red cloth.　② Jumping over the bull as a sign of respect.<br>　③ Performing without using weapons on the bull.　④ Using a spear to attack the bull on horseback.<br>　(A) ①→②→④→③　(B) ②→④→①→③　(C) ①→④→③→②　(D) ②→③→④→①<br><br>❸ Which picture best shows a matador?</div>
+      <div class="slang-ex">參考解答 ❶ <b>(D)</b><span class="cn">依據第三天課文：In some regions, governments have prohibited the practice to protect the animals.　(A) 錯：bulls are color-blind，牠們是因為布在動才衝；(B) 錯：It is a heavy, tight suit；(C) 錯：起源於克里特島，後來才傳到西班牙。</span></div>
+      <div class="slang-ex">參考解答 ❷ <b>(B) ②→④→①→③</b><span class="cn">② 克里特島的跳牛（數千年前）→ ④ 西班牙貴族騎馬持長矛 → ① 平民徒步用紅布與劍 → ③ 現代不使用武器的和平版本。</span></div>
+      <div class="slang-ex">參考解答 ❸ <b>(D)</b><span class="cn">matador 的定義是「徒步、手持紅布」的鬥牛士（The bullfighters in this new style are called matadors.），故選徒步揮舞紅布的那張圖；騎馬持矛的是早期貴族，不是 matador。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（8 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;font-size:16px;margin-top:24px;padding-bottom:16px">
+  English 4U 2026 年 7／8 月號　Unit 8｜互動教學講義
+</div>
+
+<script>
+var studentQ=[
+ {q:['',' understand this old tradition, we must look at its history.'],
+  cn:'為了了解這個古老的傳統，我們必須看看它的歷史。',
+  opts:['In order to','In order not to','Instead of','So that'],ans:0,
+  word:'in order to + V 為了…',
+  exp:'語意為肯定的目的。(B) 為否定目的；(C) 後接名詞/動名詞；(D) so that 後須接完整子句。',
+  note:'課文開頭第 4 行原句。'},
+ {q:['Sandy wrote down the bus schedule on her phone ',' miss the last bus home.'],
+  cn:'珊蒂把公車時刻表記在手機上，以免錯過回家的末班車。',
+  opts:['to','not to','in order to','in order not to'],ans:3,
+  word:'in order not to + V 為了不要…；以免…',
+  exp:'語意是「以免錯過」＝否定的目的，且否定時 in order 不可省略。',
+  note:'✓ in order not to V／✓ so as not to V。'},
+ {q:['But they had to face the bull on foot ',' riding horses.'],
+  cn:'但是他們必須徒步面對公牛，而不是騎馬。',
+  opts:['instead','instead of','however','besides'],ans:1,
+  word:'instead of + N／V-ing',
+  exp:'空格後有動名詞 riding，須用介系詞片語 instead of。instead 是副詞，不能直接接動名詞。',
+  note:'口訣：後面有東西接 → instead of；後面沒東西 → instead。'},
+ {q:['Tessa didn’t go home immediately last night. ',', she went to the movie theater.'],
+  cn:'泰莎昨晚沒有馬上回家，而是去看電影。',
+  opts:['Instead','Instead of','In fact','As for'],ans:0,
+  word:'Instead（副詞，置於句首）',
+  exp:'後面是完整句子，故用副詞 instead。(B) 後面必須接名詞或動名詞。',
+  note:'也可放句尾：She went to the movie theater instead.'},
+ {q:['The debate has become so intense ',' it has even divided people across the country.'],
+  cn:'這場爭論已經變得如此激烈，以至於它甚至讓全國的人們產生分歧。',
+  opts:['what','that','which','so'],ans:1,
+  word:'so + adj. + that + S + V（如此…以致於…）',
+  exp:'so 與 that 為固定搭配，that 引導表結果的副詞子句。',
+  note:'注意別和表目的的 so that 混淆。'},
+ {q:['To the bull, the moving cloth seems ',' a threat, so it attacks.'],
+  cn:'對公牛來說，那塊移動的布看起來像是一種威脅，所以牠就攻擊。',
+  opts:['like','as','to be like a','—（不填）'],ans:0,
+  word:'seem like + 名詞',
+  exp:'連綴動詞 seem 後接名詞（a threat）時要加 like；接形容詞則不加。',
+  note:'✓ seems dangerous（adj.）／✓ seems like a threat（N）'},
+ {q:['This prevents any harm ',' the bull but still keeps the tradition alive.'],
+  cn:'這防止了對公牛的任何傷害，卻仍讓這個傳統繼續存在。',
+  opts:['for','to','of','with'],ans:1,
+  word:'harm to sth/sb 對…的傷害／危害',
+  exp:'harm 後面固定搭配介系詞 to。例：cause serious harm to the local fish and birds。',
+  note:'動詞 harm 則直接接受詞：harm the bull。'},
+ {q:['Even after many years, the couple kept their love ',' by spending time together every day.'],
+  cn:'即使過了許多年，這對伴侶靠著每天相處讓愛延續下去。',
+  opts:['alive','lively','live','living'],ans:0,
+  word:'keep sth alive 使…繼續存在',
+  exp:'固定搭配 keep + O + alive。(B) lively 是「活潑的」；(C) live 當形容詞是「現場的」。',
+  note:'課文結尾：still keeps the tradition alive.'},
+ {q:['The new boss is going to ',' the company next month.'],
+  cn:'新老闆下個月要接手這間公司。',
+  opts:['take over','look at','keep alive','charge at'],ans:0,
+  word:'take over sth 接手…',
+  exp:'接手公司的經營用 take over。(B) 檢視、(C) 使存續、(D) 朝…衝過去皆不合。',
+  note:'課文：Instead, common people took over the tradition.'},
+ {q:['',' the red cloth, many people think bulls hate the color red. In fact, bulls are color-blind.'],
+  cn:'至於那塊紅布，許多人認為公牛討厭紅色。事實上，公牛是色盲。',
+  opts:['As for','In fact','Instead','Such as'],ans:0,
+  word:'as for sth/sb 至於…',
+  exp:'句首用來轉換話題到「紅布」這個主題，用 As for。(B) in fact 是「事實上」，本句後半已用過。',
+  note:'as for＝談到…；at 開頭的 as to 也有類似用法。'}
+];
+
+var teacherQ=[
+ {q:['They then let the bull’s momentum ',' them into the air and flip them over its back.'],
+  cn:'接著他們讓公牛的衝力把自己抬到空中，並翻越過牠的背。',
+  opts:['to lift','lifting','lift','lifted'],ans:2,
+  word:'let + O + 原形 V（使役動詞）',
+  tnote:'<b>使役動詞三兄弟</b>：make／let／have + O + <b>原形動詞</b>（不加 to）。<br>本句 and 後的 flip 也是原形，與 lift 並列共用同一個結構——學生常只改前面忘了後面。<br>對照：get + O + <b>to</b> V（唯一要 to 的使役）、help + O + (to) V（to 可有可無）。'},
+ {q:['They showed respect through a practice ',' bull-leaping.'],
+  cn:'他們透過一種叫做「跳牛」的慣常做法來表達敬意。',
+  opts:['that calls','that’s called','calling','which calling'],ans:1,
+  word:'that’s called（關係子句＋被動）',
+  tnote:'<b>兩層考點</b>：① 先行詞 a practice 是事物 → that/which；② 這個做法是「被稱作」跳牛 → be called（被動）。<br>(A) that calls 變成「這個做法呼叫別人」，主動被動顛倒。<br>省略式寫法也很常見：a practice <b>called</b> bull-leaping（省略 that is）——可順便教「關代＋be 動詞可一起省略」。'},
+ {q:['However, in the 1700s, the king of Spain thought this was too dangerous for nobles and ordered them ','.'],
+  cn:'然而，在 1700 年代，西班牙國王認為這對貴族來說太危險了，於是下令要他們停止。',
+  opts:['stop','stopping','to stop','stopped'],ans:2,
+  word:'order sb. to V（命令某人做某事）',
+  tnote:'<b>受詞補語用不定詞的動詞群</b>：order／tell／ask／want／advise／allow + O + <b>to V</b>。<br>易與使役動詞混淆：make/let/have + O + 原形（無 to）。本句 order 不是使役動詞，一定要有 to。<br>另補充 stop 的兩種用法：stop <b>to</b> V（停下來去做）／stop <b>V-ing</b>（停止做）。'},
+ {q:['They argue that ',' animals for a show isn’t acceptable in the modern world.'],
+  cn:'他們主張，為了表演而傷害動物在現代世界中是不可接受的。',
+  opts:['hurt','hurts','hurting','to hurting'],ans:2,
+  word:'hurting（動名詞片語當名詞子句的主詞）',
+  tnote:'<b>子句裡也要有主詞</b>：that 後面是一個完整子句，其主詞是動名詞片語 hurting animals for a show，動詞用單數 isn’t。<br>(A)(B) 原形/三單動詞不能當主詞；(D) to 後接原形。<br>👉 這是本刊第三次出現「動名詞當主詞用單數動詞」（Unit 5 spending、Unit 6 showering），值得整理成一張表。'},
+ {q:['The bull, though, ',' by any weapon in this new style.'],
+  cn:'不過在這種新形式中，公牛絕不會被任何武器碰到。',
+  opts:['never touches','is never touched','never touching','has never touched'],ans:1,
+  word:'is never touched（被動語態＋頻率副詞位置）',
+  tnote:'<b>兩個考點</b>：① 牛是「被碰」→ be + p.p.；② 頻率副詞 never 要放在 <b>be 動詞之後、p.p. 之前</b>。<br>✓ is never touched　✗ never is touched<br>另注意 <b>though</b> 在此當<b>副詞</b>（前後加逗號，≒ however），不是連接詞——當連接詞時要接子句：Though it is heavy, ...'},
+ {q:['Those ',' support it say bullfighting is an important part of their history.'],
+  cn:'支持它的人說，鬥牛是他們歷史中重要的一部分。',
+  opts:['who','which','whom','whose'],ans:0,
+  word:'Those who + 複數動詞（…的人們）',
+  tnote:'<b>Those who 句型</b>：those 指「人們」，關代用 who，且子句動詞與 those 一致用<b>複數</b>（support）。<br>(C) whom 是受格，但此處關代在子句中當<b>主詞</b>，故用 who。<br>延伸：本段用 Those who support it ↔ those who are against it 做正反並列，是議論文很標準的寫法，可讓學生模仿寫作。'},
+ {q:['Bullfighting helps people ',' the respect for bulls that began centuries ago.'],
+  cn:'鬥牛幫助人們記住幾世紀以前就開始的、對公牛的尊敬。',
+  opts:['remembering','to remembering','remember','remembered'],ans:2,
+  word:'help + O + (to) V',
+  tnote:'<b>help 的補語</b>：後接原形或 to V 皆可，<b>不可</b>接 V-ing。<br>進階提醒：關係子句 that began centuries ago 修飾的是 <b>the respect</b>（那份敬意），不是 bulls——判斷依據是動詞 began 的語意（敬意才會「開始」）。<br>這種「修飾對象容易看錯」的句子，正是閱讀測驗的命題點。'},
+ {q:['The Suit of Lights is a heavy, tight suit that ',' with gold and silver thread.'],
+  cn:'「光之服」是一套用金線和銀線裝飾的厚重、緊身服裝。',
+  opts:['decorates','is decorated','decorating','has decorated'],ans:1,
+  word:'is decorated with（被動＋介系詞 with）',
+  tnote:'<b>被動＋介系詞</b>：衣服是「被裝飾」的 → be decorated；表「用什麼材料裝飾」用 <b>with</b>（不是 by，by 用來帶出「動作者」）。<br>同組用法：be made <b>with/of/from</b>、be filled <b>with</b>、be covered <b>with</b>——這幾個都是大考愛考的「被動＋非 by 介系詞」。'}
+];
+</script>
+</div>
+
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// ===== 題庫資料 =====
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+  var _paged=false;
+  function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+  setTimeout(_mkPages,150);
+  window.addEventListener('beforeprint',_mkPages);
+});
+</script>
+</body>
+</html>
