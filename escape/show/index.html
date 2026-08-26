@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>倒數｜投影控制台</title>
+<style>
+:root{--bg:#0a0c11;--panel:#131720;--panel2:#1a1f2a;--line:#28303e;
+--txt:#e9ecf3;--dim:#8a93a6;--accent:#8b5cf6;--ok:#22c55e;--bad:#ef4444;--warn:#fbbf24}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+background:var(--bg);color:var(--txt);line-height:1.7;padding-bottom:50px}
+.container{max-width:1080px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#2b1055,#7c3aed);padding:18px 0;margin-bottom:18px}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand h1{font-size:21px;letter-spacing:.3em;color:#fff}
+.brand small{color:rgba(255,255,255,.8);font-size:12px;letter-spacing:.08em}
+.projbtn{background:#fff;color:#4c1d95;border:0;padding:11px 22px;border-radius:10px;
+font-size:15px;font-weight:800;cursor:pointer;font-family:inherit}
+.projbtn.on{background:#22c55e;color:#04240f}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.card h2{font-size:15px;letter-spacing:.1em;color:var(--accent);margin-bottom:13px;display:flex;
+align-items:center;gap:9px;flex-wrap:wrap}
+.card h2 .tag{background:var(--panel2);color:var(--dim);font-size:11px;padding:3px 9px;border-radius:20px}
+
+/* 計時 */
+.tbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.tdisp{font-size:52px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1;min-width:150px}
+.tdisp.warn{color:var(--warn)} .tdisp.danger{color:var(--bad)}
+.tinfo{flex:1;min-width:160px;font-size:13px;color:var(--dim);line-height:1.8}
+.btn{background:var(--panel2);color:var(--txt);border:1px solid var(--line);padding:10px 18px;
+border-radius:9px;cursor:pointer;font-family:inherit;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.btn.p{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700}
+.btn.sm{padding:6px 12px;font-size:12.5px}
+.btn.ok{background:#14532d;border-color:#22c55e;color:#86efac}
+
+/* 關卡 tabs */
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tabs button{flex:1;min-width:110px;background:var(--panel);border:1px solid var(--line);
+color:var(--dim);padding:12px 8px;border-radius:11px;cursor:pointer;font-family:inherit;font-size:13px}
+.tabs button.on{background:var(--panel2);border-color:var(--accent);color:var(--txt)}
+.tabs button.done{border-color:var(--ok)}
+.tabs button b{display:block;font-size:17px;color:var(--accent);margin-bottom:2px}
+.tabs button.done b{color:var(--ok)}
+
+/* 信封列 */
+.env{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:11px}
+.env.live{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.env.done{border-color:var(--ok)}
+.ehd{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.etag{background:var(--panel);color:var(--dim);font-weight:800;font-size:13px;padding:5px 13px;
+border-radius:7px;min-width:74px;text-align:center}
+.env.done .etag{background:#14532d;color:#86efac}
+.env.live .etag{background:var(--accent);color:#fff}
+.etitle{flex:1;font-size:15px;font-weight:600;min-width:130px}
+.etitle small{display:block;color:var(--dim);font-size:12px;font-weight:400}
+.eans{margin-top:11px;padding:10px 13px;background:#2a1216;border:1px dashed var(--bad);
+border-radius:8px;font-size:13.5px;color:#fca5a5;line-height:1.8}
+.eans .code{color:#fff;font-family:"SF Mono",Menlo,monospace;font-weight:800;letter-spacing:.15em;
+font-size:17px;background:#4a1420;padding:2px 10px;border-radius:5px}
+.hidden-ans{filter:blur(7px);transition:filter .15s;cursor:pointer}
+.hidden-ans:hover,.hidden-ans.show{filter:none}
+
+/* 計分 */
+table.sc{width:100%;border-collapse:collapse;font-size:13.5px}
+table.sc th,table.sc td{border:1px solid var(--line);padding:7px 8px;text-align:center}
+table.sc th{background:var(--panel2);color:var(--dim);font-size:12px}
+table.sc td:first-child{text-align:left}
+table.sc input{width:100%;background:transparent;border:0;color:var(--txt);font-family:inherit;
+font-size:13.5px;text-align:center}
+table.sc input:focus{outline:1px solid var(--accent);border-radius:4px}
+.gbtns{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+.gbtns button{background:var(--panel);border:1px solid var(--line);color:var(--dim);
+padding:5px 11px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit}
+.gbtns button.hit{background:#14532d;border-color:#22c55e;color:#86efac}
+
+/* 陷阱 */
+.traps{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:9px}
+.trap{background:var(--panel2);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:10px 13px}
+.trap .s{color:var(--warn);font-size:11.5px;font-weight:700}
+.trap .q{font-size:13.5px;margin:3px 0 2px}
+.trap .a{font-size:12.5px;color:var(--dim)}
+.note{color:var(--dim);font-size:13px;line-height:1.95}
+.note b{color:var(--txt)}
+.warnbox{background:#2a2208;border:1px dashed var(--warn);border-radius:9px;padding:12px 15px;
+font-size:13px;color:#fcd34d;line-height:1.85;margin-bottom:14px}
+#gate{position:fixed;inset:0;background:#0a0c11;z-index:200;display:flex;flex-direction:column;
+align-items:center;justify-content:center;text-align:center;padding:30px}
+#gate h2{font-size:21px;letter-spacing:.3em;margin-bottom:8px}
+#gate p{color:var(--dim);font-size:13.5px;margin-bottom:20px;line-height:1.9}
+#gate input{background:#151a24;color:var(--txt);border:2px solid var(--line);border-radius:11px;
+padding:13px 18px;font-size:17px;text-align:center;font-family:inherit;width:240px;max-width:80vw}
+#gate input:focus{outline:none;border-color:var(--accent)}
+#gate input.shake{animation:sh .35s;border-color:var(--bad)}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+#gate button{background:var(--accent);color:#fff;border:0;border-radius:11px;padding:13px 26px;
+font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;margin-top:13px}
+body.lk{overflow:hidden}
+@media(max-width:640px){.tdisp{font-size:38px}}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <h2>🔒 老師專區</h2>
+  <p>這一頁有<b>全部答案</b>與投影控制。<br>請輸入教師密碼。</p>
+  <input type="password" id="gpw" autocomplete="off" placeholder="教師密碼">
+  <button onclick="gchk()">進入</button>
+</div>
+
+<header><div class="container hdr">
+  <div class="brand"><h1>倒 數</h1><small>投影控制台　│　一間教室・四關接力</small></div>
+  <button class="projbtn" id="pbtn" onclick="openScreen()">📺 開啟投影視窗</button>
+</div></header>
+
+<div class="container">
+
+  <div class="warnbox" id="setupTip">
+    <b>第一次使用：</b>按右上角「開啟投影視窗」→ 把新視窗<b>拖到投影螢幕</b>→ 按 <b>F11</b> 全螢幕。<br>
+    這一頁（含答案）留在你自己的筆電螢幕上，<b>不會投出去</b>。<br>
+    <span style="color:#8a93a6">只有一個螢幕（投影是鏡像）？答案預設是模糊的，滑鼠移過去才看得到。</span>
+  </div>
+
+  <!-- 計時 -->
+  <div class="card">
+    <h2>⏱ 計時 <span class="tag" id="modeTag"></span></h2>
+    <div class="tbar">
+      <div class="tdisp" id="tD">15:00</div>
+      <div class="tinfo" id="tI"></div>
+      <button class="btn p" id="tBtn" onclick="tog()">▶ 開始</button>
+      <button class="btn" onclick="rst()">↺ 重設</button>
+      <button class="btn sm" onclick="setMode('A')" id="mA">每關 15 分</button>
+      <button class="btn sm" onclick="setMode('B')" id="mB">每關 11 分</button>
+    </div>
+  </div>
+
+  <!-- 關卡 -->
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card">
+    <h2>📽 這一關要投影什麼 <span class="tag">點「投影」把該信封投到螢幕上</span></h2>
+    <div id="envs"></div>
+    <div id="atts" style="margin-top:14px"></div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn" onclick="showIt('idle')">🎬 投開場畫面</button>
+      <button class="btn" onclick="showIt('msg')">🔑 投「本關訊息＋碎片」</button>
+      <button class="btn" onclick="showIt('final')">🏆 投最終合體</button>
+      <button class="btn" id="foBtn" onclick="toggleFinal()">✅ 公布最終答案</button>
+      <button class="btn sm" onclick="fs(-.1)">A－ 字縮小</button>
+      <button class="btn sm" onclick="fs(.1)">A＋ 字放大</button>
+      <button class="btn sm" onclick="fs(0)">字級重設</button>
+    </div>
+  </div>
+
+  <!-- 計分 -->
+  <div class="card">
+    <h2>📊 搶答計分 <span class="tag">哪一組先解出，就點那一組</span></h2>
+    <div id="race"></div>
+    <table class="sc" style="margin-top:14px">
+      <thead><tr><th style="text-align:left">組別</th><th>第1關</th><th>第2關</th><th>第3關</th><th>第4關</th><th>總分</th></tr></thead>
+      <tbody id="scb"></tbody>
+    </table>
+    <div style="margin-top:11px">
+      <button class="btn sm" onclick="addTeam()">＋ 新增組別</button>
+      <button class="btn sm" onclick="clearAll()" style="border-color:#5a2027;color:#fca5a5">清除所有紀錄</button>
+    </div>
+    <p class="note" style="margin-top:9px">
+      每個信封：第 1 個解出 ＋3、第 2 個 ＋2、其他答對 ＋1。點組別按鈕自動累加。</p>
+  </div>
+
+  <!-- 陷阱 -->
+  <div class="card">
+    <h2>⚠️ 六個陷阱 <span class="tag">回饋講解一定要收</span></h2>
+    <div class="traps" id="traps"></div>
+  </div>
+
+  <!-- 流程 -->
+  <div class="card">
+    <h2>📖 怎麼跑這一場</h2>
+    <p class="note">
+      <b>學生手上只要有筆記本和筆。什麼都不用印。</b><br><br>
+      <b>1.</b> 投開場畫面，念劇情，分組（3–4 人）。<br>
+      <b>2.</b> 切到第 1 關，點「信封 A ・投影」→ 全班看同一題，各組在紙上算。<br>
+      <b>3.</b> 有組算出來就舉手，<b>小聲</b>報密碼給你。對了就在「搶答計分」點那一組。<br>
+      <b>4.</b> 多數組解出後，點「信封 B ・投影」。<b>A 還可以隨時切回去</b>給落後的組看。<br>
+      <b>5.</b> C 解完 → 點「投本關訊息＋碎片」→ 學生把碎片字和數字<b>抄在筆記本上</b>。<br>
+      <b>6.</b> 四關跑完 → 點「投最終合體」→ 學生排出句子，報最終密碼。<br><br>
+      <span style="color:#fcd34d">⚠️ 每一關的<b>信封 C 要用該關信封 A 的答案</b>。
+      開場就要提醒學生：信封 A 的答案不要擦掉。</span>
+    </p>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script>
+/* ═════ 密碼門 ═════ */
+function gh(s){var x=5381;s=s+'|EFETL';for(var i=0;i<s.length;i++){x=((x*33)^s.charCodeAt(i))>>>0;}return x.toString(16);}
+var GH='efa350bf';
+function gopen(){document.getElementById('gate').style.display='none';document.body.classList.remove('lk');
+  try{sessionStorage.setItem('cd_teacher','1');}catch(e){}}
+function gchk(){var el=document.getElementById('gpw');
+  if(gh((el.value||'').trim())!==GH){el.classList.add('shake');
+    setTimeout(function(){el.classList.remove('shake');},400);return;}
+  gopen();}
+document.getElementById('gpw').addEventListener('keydown',function(e){if(e.key==='Enter')gchk();});
+document.body.classList.add('lk');
+try{if(sessionStorage.getItem('cd_teacher')==='1')gopen();}catch(e){}
+
+/* ═════ 狀態 ═════ */
+var MODES={A:{m:15,label:'每關 15 分（破解 60 分）'},B:{m:11,label:'每關 11 分（破解 44 分）'}};
+var MODE='A';
+var S={stage:0,show:'idle',unlocked:{},remain:15*60,running:false,fs:1,finalOpen:false};
+var timer=null, win=null, bc=null;
+try{bc=new BroadcastChannel('cd_show');bc.onmessage=function(e){if(e.data&&e.data.__hello)push();};}catch(e){}
+
+function ldS(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function svS(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function push(){
+  svS('cd_show_state',S);
+  if(bc){try{bc.postMessage(S);}catch(e){}}
+}
+function save(){svS('cd_ctrl',{unlocked:S.unlocked,scores:SC,teams:TEAMS,mode:MODE});}
+
+var saved=ldS('cd_ctrl',{});
+if(saved.unlocked)S.unlocked=saved.unlocked;
+if(saved.mode)MODE=saved.mode;
+var SC=saved.scores||{}, TEAMS=saved.teams||['第一組','第二組','第三組','第四組'];
+S.remain=MODES[MODE].m*60;
+
+/* ═════ 音效 ═════ */
+function beep(f,d,t){try{var A=window._ac||(window._ac=new (window.AudioContext||window.webkitAudioContext)());
+var o=A.createOscillator(),g=A.createGain();o.type=t||'sine';o.frequency.value=f;o.connect(g);g.connect(A.destination);
+g.gain.setValueAtTime(.15,A.currentTime);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+d);
+o.start();o.stop(A.currentTime+d);}catch(e){}}
+function bell(){[880,880,660].forEach(function(f,i){setTimeout(function(){beep(f,.45);},i*250);});}
+function ok(){beep(660,.13);setTimeout(function(){beep(880,.22);},110);}
+
+/* ═════ 投影視窗 ═════ */
+function openScreen(){
+  win=window.open('screen/','cdscreen','width=1280,height=800');
+  var b=document.getElementById('pbtn');
+  if(!win){alert('瀏覽器擋掉了彈出視窗。\n請允許此網站開啟彈出視窗，或直接開新分頁前往：\nteaching.efetl.com/escape/show/screen/');return;}
+  b.textContent='📺 投影視窗已開啟';b.classList.add('on');
+  setTimeout(push,600);
+}
+
+/* ═════ 計時 ═════ */
+function fmt(s){s=Math.max(0,s|0);return String((s/60)|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function paintT(){
+  var d=document.getElementById('tD');
+  d.textContent=fmt(S.remain);
+  d.className='tdisp'+(S.remain<=60?' danger':S.remain<=300?' warn':'');
+  document.getElementById('tI').innerHTML=
+    '第 '+(S.stage+1)+' 關的倒數<br><span style="color:#8a93a6">切換關卡會自動重設計時</span>';
+  document.getElementById('modeTag').textContent=MODES[MODE].label;
+  document.getElementById('mA').className='btn sm'+(MODE==='A'?' ok':'');
+  document.getElementById('mB').className='btn sm'+(MODE==='B'?' ok':'');
+}
+function tick(){S.remain--;if(S.remain===300||S.remain===60)beep(880,.2);
+  if(S.remain<=0){S.remain=0;bell();stop();}paintT();push();}
+function tog(){if(S.running)stop();else{S.running=true;
+  document.getElementById('tBtn').textContent='⏸ 暫停';timer=setInterval(tick,1000);}}
+function stop(){clearInterval(timer);S.running=false;
+  var b=document.getElementById('tBtn');if(b)b.textContent='▶ 繼續';}
+function rst(){stop();S.remain=MODES[MODE].m*60;
+  document.getElementById('tBtn').textContent='▶ 開始';paintT();push();}
+function setMode(m){MODE=m;save();rst();}
+
+/* ═════ 渲染 ═════ */
+function stageDone(i){return S.unlocked['s'+i+'C'];}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=CD.stages.map(function(st,i){
+    return '<button class="'+(i===S.stage?'on':'')+(stageDone(i)?' done':'')+'" onclick="goStage('+i+')">'+
+      '<b>第 '+st.n+' 關</b>'+st.emoji+' '+st.name+'</button>';}).join('');
+}
+function goStage(i){S.stage=i;S.show='A';rst();renderAll();push();}
+function renderEnvs(){
+  var st=CD.stages[S.stage], A=CD.ans[st.n];
+  document.getElementById('envs').innerHTML=['A','B','C'].map(function(k){
+    var done=!!S.unlocked['s'+S.stage+k], live=(S.show===k);
+    var nm={A:'找出線索',B:'主謎題',C:'回溯（要用信封 A 的答案）'}[k];
+    return '<div class="env'+(live?' live':'')+(done?' done':'')+'">'+
+      '<div class="ehd"><span class="etag">信封 '+k+'</span>'+
+      '<div class="etitle">'+st[k].title+'<small>'+nm+' ・ 建議 '+st[k].min+' 分鐘</small></div>'+
+      '<button class="btn sm p" onclick="showIt(\''+k+'\')">📽 投影</button>'+
+      '<button class="btn sm'+(done?' ok':'')+'" onclick="mark(\''+k+'\')">'+(done?'✓ 已解出':'標記解出')+'</button>'+
+      '</div>'+
+      '<div class="eans"><span class="hidden-ans" onclick="this.classList.toggle(\'show\')">'+
+      '密碼 <span class="code">'+st[k].code+'</span>　'+(A&&A[k]?A[k]:'')+'</span></div>'+
+      '</div>';
+  }).join('');
+}
+function showIt(k){S.show=k;renderEnvs();renderAtts();push();}
+var ATTUSE={
+ '1-0':'信封 B 要用（判斷頷聯／頸聯）','1-1':'信封 B 要用（查筆畫）',
+ '2-0':'信封 B 要用（算年代差）','2-1':'信封 C 要用（算時差）',
+ '3-0':'信封 B 加分題要用（查密度）',
+ '4-0':'信封 C 要用（查五院的字）','4-1':'信封 B 要用（算 23 歲符合幾項）'};
+function renderAtts(){
+  var st=CD.stages[S.stage];
+  if(!st.att||!st.att.length){document.getElementById('atts').innerHTML='';return;}
+  document.getElementById('atts').innerHTML=
+   '<div style="font-size:13px;color:#8a93a6;margin-bottom:7px">📎 附件（學生需要查表時，投這個給他們抄）</div>'+
+   '<div style="display:flex;gap:9px;flex-wrap:wrap">'+
+   st.att.map(function(a,i){
+     var live=(S.show==='att:'+i);
+     return '<button class="btn sm'+(live?' p':'')+'" onclick="showIt(\'att:'+i+'\')">📎 '+a.t+
+       '<span style="color:#8a93a6;font-weight:400"> ・'+(ATTUSE[st.n+'-'+i]||'')+'</span></button>';
+   }).join('')+'</div>';
+}
+function mark(k){
+  S.unlocked['s'+S.stage+k]=!S.unlocked['s'+S.stage+k];
+  if(S.unlocked['s'+S.stage+k])ok();
+  save();renderTabs();renderEnvs();renderRace();push();
+}
+function toggleFinal(){
+  S.finalOpen=!S.finalOpen;
+  document.getElementById('foBtn').className='btn'+(S.finalOpen?' ok':'');
+  document.getElementById('foBtn').textContent=S.finalOpen?'↩ 收回答案':'✅ 公布最終答案';
+  push();
+}
+function fs(d){S.fs=(d===0)?1:Math.max(.6,Math.min(1.8,S.fs+d));push();}
+
+/* ═════ 搶答 ═════ */
+function renderRace(){
+  var st=CD.stages[S.stage];
+  document.getElementById('race').innerHTML=['A','B','C'].map(function(k){
+    var key='s'+S.stage+k;
+    var hits=(SC.race&&SC.race[key])||[];
+    return '<div style="margin-bottom:9px"><span style="font-size:13px;color:#8a93a6">信封 '+k+
+      '　先後：'+(hits.length?hits.map(function(t,i){return (i+1)+'. '+TEAMS[t];}).join('　'):'—')+'</span>'+
+      '<div class="gbtns">'+TEAMS.map(function(t,ti){
+        var p=hits.indexOf(ti);
+        return '<button class="'+(p>=0?'hit':'')+'" onclick="hit(\''+key+'\','+ti+')">'+t+
+          (p>=0?(' +'+(p===0?3:p===1?2:1)):'')+'</button>';}).join('')+'</div></div>';
+  }).join('');
+}
+function hit(key,ti){
+  SC.race=SC.race||{}; SC.race[key]=SC.race[key]||[];
+  var a=SC.race[key], p=a.indexOf(ti);
+  if(p>=0)a.splice(p,1); else a.push(ti);
+  save();renderRace();renderScore();
+}
+function renderScore(){
+  document.getElementById('scb').innerHTML=TEAMS.map(function(t,ti){
+    var tot=0, cells=[0,1,2,3].map(function(si){
+      var s=0;
+      ['A','B','C'].forEach(function(k){
+        var a=(SC.race&&SC.race['s'+si+k])||[];
+        var p=a.indexOf(ti);
+        if(p===0)s+=3; else if(p===1)s+=2; else if(p>1)s+=1;
+      });
+      tot+=s; return '<td>'+(s||'')+'</td>';
+    }).join('');
+    return '<tr><td><input value="'+t+'" style="text-align:left" onchange="setTeam('+ti+',this.value)"></td>'+
+      cells+'<td style="color:var(--accent);font-weight:700">'+(tot||'')+'</td></tr>';
+  }).join('');
+}
+function setTeam(i,v){TEAMS[i]=v;save();renderRace();renderScore();}
+function addTeam(){TEAMS.push('第 '+(TEAMS.length+1)+' 組');save();renderRace();renderScore();}
+function clearAll(){
+  if(!confirm('確定清除所有解出紀錄與分數嗎？'))return;
+  S.unlocked={};SC={};TEAMS=['第一組','第二組','第三組','第四組'];
+  save();renderAll();push();
+}
+function renderTraps(){
+  document.getElementById('traps').innerHTML=CD.traps.map(function(t){
+    return '<div class="trap"><div class="s">'+t.s+'</div><div class="q">'+t.q+'</div>'+
+      '<div class="a">✓ '+t.a+'</div></div>';}).join('');
+}
+function renderAll(){renderTabs();renderEnvs();renderAtts();renderRace();renderScore();renderTraps();paintT();}
+renderAll();push();
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT')return;
+  if(e.key===' '){e.preventDefault();tog();}
+  if(e.key==='1')showIt('A'); if(e.key==='2')showIt('B'); if(e.key==='3')showIt('C');
+});
+</script>
+</body>
+</html>
