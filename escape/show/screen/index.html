@@ -7,7 +7,7 @@
 <title>倒數｜投影畫面</title>
 <style>
 :root{--bg:#0a0c11;--panel:#141924;--line:#2b3446;--txt:#f2f4f9;--dim:#9aa4b8;
---ok:#22c55e;--warn:#fbbf24;--c1:#7c3aed;--c2:#a78bfa;--fs:1}
+--ok:#22c55e;--warn:#fbbf24;--c1:#7c3aed;--c2:#a78bfa;--fs:1;--u:min(1vw,1.62vh)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
 body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
@@ -17,97 +17,100 @@ background:var(--bg);color:var(--txt);display:flex;flex-direction:column}
 /* ── 頂部 ── */
 .top{display:flex;align-items:center;gap:2vw;padding:1.4vh 2.2vw;
 background:linear-gradient(120deg,var(--c1),var(--c2));flex-shrink:0}
-.top .em{font-size:calc(3.4vw * var(--fs));line-height:1}
+.top .em{font-size:calc(3.4 * var(--u) * var(--fs));line-height:1}
 .top .ti{flex:1;min-width:0}
-.top h1{font-size:calc(2.5vw * var(--fs));letter-spacing:.1em;color:#fff;
+.top h1{font-size:calc(2.5 * var(--u) * var(--fs));letter-spacing:.1em;color:#fff;
 text-shadow:0 2px 8px rgba(0,0,0,.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.top .sb{font-size:calc(1.25vw * var(--fs));color:rgba(255,255,255,.9);margin-top:.2vh}
-.clock{font-size:calc(4.2vw * var(--fs));font-weight:800;font-variant-numeric:tabular-nums;
+.top .sb{font-size:calc(1.25 * var(--u) * var(--fs));color:rgba(255,255,255,.9);margin-top:.2vh}
+.clock{font-size:calc(4.2 * var(--u) * var(--fs));font-weight:800;font-variant-numeric:tabular-nums;
 color:#fff;letter-spacing:.03em;text-shadow:0 2px 10px rgba(0,0,0,.35);line-height:1}
 .clock.warn{color:#fde047}
 .clock.danger{color:#fecaca;animation:pl 1s infinite}
 @keyframes pl{0%,100%{opacity:1}50%{opacity:.45}}
 
 /* ── 主體 ── */
-.main{flex:1;overflow-y:auto;padding:2.2vh 3vw 2vh;scrollbar-width:thin}
+.main{flex:1;overflow-y:auto;padding:1.3vh 2.6vw 1.2vh;scrollbar-width:thin}
 .main::-webkit-scrollbar{width:1.1vw}
 .main::-webkit-scrollbar-track{background:#161c28}
 .main::-webkit-scrollbar-thumb{background:var(--c2);border-radius:1vw;border:.15vw solid #161c28}
 .morehint{position:absolute;left:0;right:0;bottom:0;height:9vh;pointer-events:none;
 background:linear-gradient(to bottom,rgba(10,12,17,0),rgba(10,12,17,.96));
 display:flex;align-items:flex-end;justify-content:center;padding-bottom:1vh;
-font-size:calc(1.4vw * var(--fs));color:var(--c2);font-weight:700;letter-spacing:.1em}
+font-size:calc(1.4 * var(--u) * var(--fs));color:var(--c2);font-weight:700;letter-spacing:.1em}
 .mainwrap{flex:1;position:relative;min-height:0;display:flex;flex-direction:column}
-.envlabel{display:inline-flex;align-items:center;gap:1vw;margin-bottom:1.6vh}
-.envlabel .bg{background:var(--c1);color:#fff;font-size:calc(1.5vw * var(--fs));
+.envlabel{display:inline-flex;align-items:center;gap:1vw;margin-bottom:.9vh}
+.envlabel .bg{background:var(--c1);color:#fff;font-size:calc(1.5 * var(--u) * var(--fs));
 font-weight:800;padding:.5vh 1.4vw;border-radius:.8vw;letter-spacing:.06em}
-.envlabel h2{font-size:calc(2.2vw * var(--fs));letter-spacing:.05em}
-.lead{font-size:calc(1.6vw * var(--fs));color:var(--dim);margin-bottom:1.4vh}
+.envlabel h2{font-size:calc(2.2 * var(--u) * var(--fs));letter-spacing:.05em}
+.lead{font-size:calc(1.5 * var(--u) * var(--fs));color:var(--dim);margin-bottom:.8vh}
 .rule{background:#16233d;border-left:.5vw solid var(--c2);border-radius:0 1vw 1vw 0;
-padding:1.5vh 1.8vw;font-size:calc(1.75vw * var(--fs));line-height:1.85;margin-bottom:2vh}
+padding:1vh 1.6vw;font-size:calc(1.7 * var(--u) * var(--fs));line-height:1.7;margin-bottom:1.1vh}
 .keep{background:#2c2409;border:.22vw dashed #d97706;border-radius:1vw;
-padding:1.4vh 1.8vw;font-size:calc(1.6vw * var(--fs));color:#fcd34d;margin-bottom:2vh;line-height:1.8}
-.q{font-size:calc(1.85vw * var(--fs));margin-bottom:1.6vh;line-height:1.9}
-.opt{font-size:calc(1.7vw * var(--fs));color:#ccd4e6;padding-left:2vw;line-height:2.05;margin-top:.4vh}
+padding:.9vh 1.6vw;font-size:calc(1.55 * var(--u) * var(--fs));color:#fcd34d;margin-bottom:1.1vh;line-height:1.7}
+.q{font-size:calc(1.85 * var(--u) * var(--fs));margin-bottom:1vh;line-height:1.72}
+.qcols{column-count:2;column-gap:2.6vw}
+.qcols .q{break-inside:avoid;-webkit-column-break-inside:avoid}
+@media(max-aspect-ratio:5/4){.qcols{column-count:1}}
+.opt{font-size:calc(1.7 * var(--u) * var(--fs));color:#ccd4e6;padding-left:2vw;line-height:1.8;margin-top:.3vh}
 .q.bonus{background:#1b1430;border:.2vw dashed #7c3aed;border-radius:1vw;
-padding:1.3vh 1.8vw;color:#c4b5fd;font-size:calc(1.55vw * var(--fs))}
+padding:1.3vh 1.8vw;color:#c4b5fd;font-size:calc(1.55 * var(--u) * var(--fs))}
 .poem{background:#111722;border:.15vw solid var(--line);border-radius:1vw;
-padding:1.8vh 2.4vw;margin:1.6vh 0;font-size:calc(2vw * var(--fs));line-height:2.3;letter-spacing:.12em}
-.poem span{color:var(--dim);font-size:calc(1.2vw * var(--fs));margin-right:1.2vw}
-.formula{text-align:center;font-size:calc(2.1vw * var(--fs));line-height:2;margin:1.6vh 0;
+padding:1.1vh 2vw;margin:1vh 0;font-size:calc(1.85 * var(--u) * var(--fs));line-height:1.72;letter-spacing:.1em}
+.poem span{color:var(--dim);font-size:calc(1.2 * var(--u) * var(--fs));margin-right:1.2vw}
+.formula{text-align:center;font-size:calc(2.1 * var(--u) * var(--fs));line-height:2;margin:1.6vh 0;
 font-family:"Times New Roman",serif;background:#111722;border-radius:1vw;padding:1.4vh}
-table{width:100%;border-collapse:collapse;font-size:calc(1.5vw * var(--fs));margin:1.4vh 0}
-table td,table th{border:.12vw solid var(--line);padding:.9vh 1.1vw}
-table th{background:#1c2230;color:var(--dim);font-size:calc(1.3vw * var(--fs))}
+table{width:100%;border-collapse:collapse;font-size:calc(1.5 * var(--u) * var(--fs));margin:.9vh 0}
+table td,table th{border:.12vw solid var(--line);padding:.55vh 1vw}
+table th{background:#1c2230;color:var(--dim);font-size:calc(1.3 * var(--u) * var(--fs))}
 table .n{background:#1c2230;text-align:center;font-weight:700;width:9%}
-table .w{text-align:center;font-size:calc(2.1vw * var(--fs));font-weight:800;width:12%;color:var(--c2)}
+table .w{text-align:center;font-size:calc(2.1 * var(--u) * var(--fs));font-weight:800;width:12%;color:var(--c2)}
 table .c{background:#1c2230;text-align:center;font-weight:700}
 table.bh td{text-align:center;padding:.7vh .4vw}
 table.yr .y{text-align:center}
-.att{border:.15vw solid #b45309;background:#1d1608;border-radius:1vw;padding:1.5vh 1.9vw;margin-bottom:1.6vh}
-.att h4{font-size:calc(1.6vw * var(--fs));color:#fbbf24;margin-bottom:.9vh}
-.att p{font-size:calc(1.5vw * var(--fs));margin-bottom:.6vh;line-height:1.85}
-.small{font-size:calc(1.3vw * var(--fs));color:var(--dim);margin-top:.7vh}
-.attbig{font-size:calc(1.9vw * var(--fs));line-height:2}
+.att{border:.15vw solid #b45309;background:#1d1608;border-radius:1vw;padding:.9vh 1.6vw;margin-bottom:1vh}
+.att h4{font-size:calc(1.6 * var(--u) * var(--fs));color:#fbbf24;margin-bottom:.9vh}
+.att p{font-size:calc(1.5 * var(--u) * var(--fs));margin-bottom:.6vh;line-height:1.85}
+.small{font-size:calc(1.3 * var(--u) * var(--fs));color:var(--dim);margin-top:.7vh}
+.attbig{font-size:calc(1.9 * var(--u) * var(--fs));line-height:2}
 .attbig p{margin-bottom:1vh}
-.attbig table{font-size:calc(1.75vw * var(--fs))}
-.attbig table .w{font-size:calc(2.4vw * var(--fs))}
+.attbig table{font-size:calc(1.75 * var(--u) * var(--fs))}
+.attbig table .w{font-size:calc(2.4 * var(--u) * var(--fs))}
 .attbig table td,.attbig table th{padding:1.1vh 1.3vw}
 
 /* ── 訊息／碎片 ── */
 .reveal{text-align:center;padding:4vh 2vw;display:flex;flex-direction:column;justify-content:center;min-height:100%}
-.reveal .mg{font-size:calc(7vw * var(--fs));font-weight:800;letter-spacing:.35em;
+.reveal .mg{font-size:calc(7 * var(--u) * var(--fs));font-weight:800;letter-spacing:.35em;
 color:var(--ok);margin-bottom:2.5vh;text-shadow:0 0 4vw rgba(34,197,94,.25)}
-.reveal .fr{width:calc(15vw * var(--fs));height:calc(15vw * var(--fs));background:#fff;color:#111;
+.reveal .fr{width:calc(15 * var(--u) * var(--fs));height:calc(15 * var(--u) * var(--fs));background:#fff;color:#111;
 border-radius:2vw;display:flex;align-items:center;justify-content:center;
-font-size:calc(9vw * var(--fs));font-weight:800;margin:0 auto 2vh;box-shadow:0 2vh 6vh rgba(0,0,0,.5)}
-.reveal .fn{font-size:calc(1.9vw * var(--fs));color:var(--dim);line-height:1.9}
+font-size:calc(9 * var(--u) * var(--fs));font-weight:800;margin:0 auto 2vh;box-shadow:0 2vh 6vh rgba(0,0,0,.5)}
+.reveal .fn{font-size:calc(1.9 * var(--u) * var(--fs));color:var(--dim);line-height:1.9}
 .reveal .fn b{color:var(--txt)}
 
 /* ── 最終合體 ── */
 .fin{text-align:center;padding:3vh 2vw;display:flex;flex-direction:column;justify-content:center;min-height:100%}
-.fin h3{font-size:calc(2.6vw * var(--fs));letter-spacing:.15em;margin-bottom:2.5vh;color:var(--c2)}
+.fin h3{font-size:calc(2.6 * var(--u) * var(--fs));letter-spacing:.15em;margin-bottom:2.5vh;color:var(--c2)}
 .fincards{display:flex;gap:2vw;justify-content:center;flex-wrap:wrap;margin-bottom:3vh}
-.fincards div{width:calc(11vw * var(--fs));height:calc(11vw * var(--fs));background:#fff;color:#111;
+.fincards div{width:calc(11 * var(--u) * var(--fs));height:calc(11 * var(--u) * var(--fs));background:#fff;color:#111;
 border-radius:1.6vw;display:flex;align-items:center;justify-content:center;
-font-size:calc(6.5vw * var(--fs));font-weight:800;box-shadow:0 1.5vh 4vh rgba(0,0,0,.45)}
-.fin p{font-size:calc(1.9vw * var(--fs));color:var(--dim);line-height:2}
-.fin .done{font-size:calc(6vw * var(--fs));font-weight:800;letter-spacing:.35em;color:var(--ok);margin:2vh 0}
+font-size:calc(6.5 * var(--u) * var(--fs));font-weight:800;box-shadow:0 1.5vh 4vh rgba(0,0,0,.45)}
+.fin p{font-size:calc(1.9 * var(--u) * var(--fs));color:var(--dim);line-height:2}
+.fin .done{font-size:calc(6 * var(--u) * var(--fs));font-weight:800;letter-spacing:.35em;color:var(--ok);margin:2vh 0}
 
 /* ── 待機 ── */
 .idle{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4vw}
-.idle .t{font-size:calc(9vw * var(--fs));font-weight:800;letter-spacing:.5em;margin-bottom:2vh}
-.idle .s{font-size:calc(2vw * var(--fs));color:var(--dim);line-height:2.1}
-.idle .story{font-size:calc(1.85vw * var(--fs));color:#ccd4e6;line-height:2.2;max-width:60vw;margin-top:3vh;text-align:left}
+.idle .t{font-size:calc(9 * var(--u) * var(--fs));font-weight:800;letter-spacing:.5em;margin-bottom:2vh}
+.idle .s{font-size:calc(2 * var(--u) * var(--fs));color:var(--dim);line-height:2.1}
+.idle .story{font-size:calc(1.85 * var(--u) * var(--fs));color:#ccd4e6;line-height:2.2;max-width:60vw;margin-top:3vh;text-align:left}
 .idle .story em{color:var(--c2);font-style:normal;font-weight:700}
 
 /* ── 底部進度 ── */
 .bot{display:flex;gap:1vw;padding:1.2vh 2.2vw;background:#111722;border-top:.12vw solid var(--line);flex-shrink:0}
 .pill{flex:1;text-align:center;padding:.9vh;border-radius:.8vw;background:#1c2230;
-border:.14vw solid var(--line);font-size:calc(1.3vw * var(--fs));color:var(--dim)}
+border:.14vw solid var(--line);font-size:calc(1.3 * var(--u) * var(--fs));color:var(--dim)}
 .pill.on{border-color:var(--c2);color:var(--txt);background:#22203a}
 .pill.done{background:#0f2318;border-color:var(--ok);color:#86efac}
-.pill b{font-size:calc(1.7vw * var(--fs));margin-right:.5vw}
+.pill b{font-size:calc(1.7 * var(--u) * var(--fs));margin-right:.5vw}
 .hint{position:fixed;bottom:1vh;right:1.2vw;font-size:11px;color:#39425a}
 </style>
 </head>
@@ -129,7 +132,7 @@ function envHtml(k){
   h+='<div class="lead">'+e.lead+'</div>';
   h+='<div class="rule">'+e.rule+'</div>';
   if(k==='A'&&e.keep) h+='<div class="keep">✍️ '+e.keep+'</div>';
-  h+=e.body;
+  h+=(k==='A')?('<div class="qcols">'+e.body+'</div>'):e.body;
   if(k==='A'&&st.att&&st.att.length){
     h+='<div class="att"><h4>📎 這一關有附件</h4><p>'+
        st.att.map(function(a){return '・'+a.t;}).join('　')+
@@ -241,12 +244,12 @@ function doCmd(){
 }
 /* 自動縮到剛好一頁 */
 function autofit(){
-  var f=1.4, keep=(mainEl()?mainEl().scrollTop:0);
+  var f=1.5, keep=(mainEl()?mainEl().scrollTop:0);
   for(var i=0;i<20;i++){
     document.documentElement.style.setProperty('--fs',f);
     var m=mainEl(); if(!m)break;
     if(m.scrollHeight<=m.clientHeight+2) break;
-    f-=0.05; if(f<0.7){f=0.7;break;}
+    f-=0.04; if(f<0.6){f=0.6;break;}
   }
   S.fs=Math.round(f*100)/100;
   lastSig=sig();
