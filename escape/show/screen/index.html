@@ -30,8 +30,14 @@ color:#fff;letter-spacing:.03em;text-shadow:0 2px 10px rgba(0,0,0,.35);line-heig
 
 /* ── 主體 ── */
 .main{flex:1;overflow-y:auto;padding:2.2vh 3vw 2vh;scrollbar-width:thin}
-.main::-webkit-scrollbar{width:10px}
-.main::-webkit-scrollbar-thumb{background:#334;border-radius:5px}
+.main::-webkit-scrollbar{width:1.1vw}
+.main::-webkit-scrollbar-track{background:#161c28}
+.main::-webkit-scrollbar-thumb{background:var(--c2);border-radius:1vw;border:.15vw solid #161c28}
+.morehint{position:absolute;left:0;right:0;bottom:0;height:9vh;pointer-events:none;
+background:linear-gradient(to bottom,rgba(10,12,17,0),rgba(10,12,17,.96));
+display:flex;align-items:flex-end;justify-content:center;padding-bottom:1vh;
+font-size:calc(1.4vw * var(--fs));color:var(--c2);font-weight:700;letter-spacing:.1em}
+.mainwrap{flex:1;position:relative;min-height:0;display:flex;flex-direction:column}
 .envlabel{display:inline-flex;align-items:center;gap:1vw;margin-bottom:1.6vh}
 .envlabel .bg{background:var(--c1);color:#fff;font-size:calc(1.5vw * var(--fs));
 font-weight:800;padding:.5vh 1.4vw;border-radius:.8vw;letter-spacing:.06em}
@@ -125,9 +131,9 @@ function envHtml(k){
   if(k==='A'&&e.keep) h+='<div class="keep">✍️ '+e.keep+'</div>';
   h+=e.body;
   if(k==='A'&&st.att&&st.att.length){
-    st.att.forEach(function(a){
-      h+='<div class="att"><h4>📎 附件｜'+a.t+'</h4>'+a.h+'</div>';
-    });
+    h+='<div class="att"><h4>📎 這一關有附件</h4><p>'+
+       st.att.map(function(a){return '・'+a.t;}).join('　')+
+       '<br><span class="small">需要查表時，老師會單獨投出來。</span></p></div>';
   }
   return h;
 }
@@ -171,10 +177,12 @@ function render(){
     body+='</div>';
   } else if(S.show.indexOf('att:')===0){
     var ai=parseInt(S.show.split(':')[1],10), a=st.att[ai];
-    body='<div class="main"><div class="envlabel"><span class="bg">附件</span><h2>'+a.t+'</h2></div>'+
-      '<div class="attbig">'+a.h+'</div></div>';
+    body='<div class="mainwrap"><div class="main"><div class="envlabel"><span class="bg">附件</span><h2>'+a.t+'</h2></div>'+
+      '<div class="attbig">'+a.h+'</div></div>'+
+      '<div class="morehint" id="mh" style="display:none">▼ 下面還有內容 ▼</div></div>';
   } else {
-    body='<div class="main">'+envHtml(S.show)+'</div>';
+    body='<div class="mainwrap"><div class="main">'+envHtml(S.show)+'</div>'+
+         '<div class="morehint" id="mh" style="display:none">▼ 下面還有內容 ▼</div></div>';
   }
 
   var cl='clock'+(S.remain<=60?' danger':S.remain<=300?' warn':'');
@@ -194,18 +202,67 @@ function render(){
     '<div class="bot">'+pills+'</div>';
 }
 
+function mainEl(){return document.querySelector('.main');}
+function updHint(){
+  var m=mainEl(), h=document.getElementById('mh');
+  if(!m||!h)return;
+  h.style.display=(m.scrollHeight-m.scrollTop-m.clientHeight>8)?'flex':'none';
+}
+function bindScroll(){
+  var m=mainEl(); if(!m)return;
+  m.addEventListener('scroll',updHint);
+  setTimeout(updHint,30);
+}
+/* 遙控捲動 */
+var lastCmd=0;
+function doCmd(){
+  var m=mainEl(); if(!m||!S.cmd)return;
+  var c=S.cmd;
+  if(c.id===lastCmd)return; lastCmd=c.id;
+  var step=Math.round(m.clientHeight*0.75);
+  if(c.k==='down') m.scrollBy({top:step,behavior:'smooth'});
+  else if(c.k==='up') m.scrollBy({top:-step,behavior:'smooth'});
+  else if(c.k==='top') m.scrollTo({top:0,behavior:'smooth'});
+  else if(c.k==='end') m.scrollTo({top:m.scrollHeight,behavior:'smooth'});
+  else if(c.k==='fit') autofit();
+  setTimeout(updHint,420);
+}
+/* 自動縮到剛好一頁 */
+function autofit(){
+  var f=1.4;
+  for(var i=0;i<20;i++){
+    document.documentElement.style.setProperty('--fs',f);
+    var m=mainEl(); if(!m)break;
+    if(m.scrollHeight<=m.clientHeight+2) break;
+    f-=0.05; if(f<0.7){f=0.7;break;}
+  }
+  S.fs=Math.round(f*100)/100;
+  try{ if(window._bc) window._bc.postMessage({__fs:S.fs}); }catch(e){}
+  setTimeout(updHint,30);
+}
 /* ── 接收控制台的狀態 ── */
-function apply(d){ S=Object.assign(S,d); render(); }
+function apply(d){ S=Object.assign(S,d); render(); bindScroll(); updHint(); doCmd(); }
 try{
   var bc=new BroadcastChannel('cd_show');
-  bc.onmessage=function(e){ apply(e.data); };
+  window._bc=bc;
+  bc.onmessage=function(e){ if(e.data&&e.data.__fs)return; apply(e.data); };
   bc.postMessage({__hello:1});
 }catch(e){}
+/* 投影視窗自己也能用鍵盤捲 */
+document.addEventListener('keydown',function(e){
+  var m=mainEl(); if(!m)return;
+  var step=Math.round(m.clientHeight*0.75);
+  if(e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();m.scrollBy({top:step,behavior:'smooth'});}
+  if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();m.scrollBy({top:-step,behavior:'smooth'});}
+  if(e.key==='Home'){e.preventDefault();m.scrollTo({top:0,behavior:'smooth'});}
+  if(e.key==='End'){e.preventDefault();m.scrollTo({top:m.scrollHeight,behavior:'smooth'});}
+  setTimeout(updHint,420);
+});
 window.addEventListener('storage',function(e){
   if(e.key==='cd_show_state'&&e.newValue){ try{apply(JSON.parse(e.newValue));}catch(x){} }
 });
 try{ var v=localStorage.getItem('cd_show_state'); if(v) S=Object.assign(S,JSON.parse(v)); }catch(e){}
-render();
+render();bindScroll();
 </script>
 </body>
 </html>
