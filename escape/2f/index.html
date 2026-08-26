@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0891b2">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>2F 時空層｜倒數</title>
+<style>
+:root{--bg:#0b0e14;--panel:#151a24;--panel2:#1c2230;--line:#2b3446;
+--txt:#e9ecf3;--dim:#8b95a9;--ok:#22c55e;--bad:#ef4444;--c1:#0891b2;--c2:#67e8f9}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+background:var(--bg);color:var(--txt);line-height:1.85;padding-bottom:70px;
+-webkit-text-size-adjust:100%}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(140deg,var(--c1),var(--c2));padding:26px 16px 22px;text-align:center;position:relative;overflow:hidden}
+header .em{font-size:44px;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+header h1{font-size:25px;letter-spacing:.14em;margin-top:6px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+header p{font-size:13px;color:rgba(255,255,255,.9);letter-spacing:.06em;margin-top:3px}
+.steps{display:flex;gap:8px;justify-content:center;margin:18px 0 4px}
+.step{flex:1;max-width:96px;text-align:center;padding:9px 4px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:12px;color:var(--dim)}
+.step.on{border-color:var(--c2);color:var(--txt)}
+.step.done{background:#0f2318;border-color:var(--ok);color:#86efac}
+.step b{display:block;font-size:16px;margin-bottom:1px}
+.env{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin:16px 0;overflow:hidden}
+.env.locked{opacity:.55}
+.envhd{display:flex;align-items:center;gap:11px;padding:15px 18px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.envhd .tag{background:var(--c1);color:#fff;font-size:13px;font-weight:800;padding:3px 11px;border-radius:7px;white-space:nowrap}
+.env.locked .envhd .tag{background:#39425a}
+.env.solved .envhd .tag{background:var(--ok);color:#04240f}
+.envhd h2{font-size:16px;flex:1;letter-spacing:.04em}
+.envhd h2 small{display:block;font-size:11.5px;color:var(--dim);font-weight:400;margin-top:1px}
+.envbody{padding:16px 18px 20px}
+.lead{font-size:14px;color:var(--dim);margin-bottom:12px}
+.rule{background:#12203a;border-left:3px solid var(--c2);border-radius:0 9px 9px 0;padding:11px 14px;font-size:14px;margin-bottom:14px;line-height:1.85}
+.keep{background:#2a2208;border:1px dashed #d97706;border-radius:9px;padding:11px 14px;font-size:13.5px;margin-bottom:14px;color:#fcd34d;line-height:1.8}
+.q{font-size:15px;margin-bottom:13px}
+.opt{font-size:14px;color:#c3cadb;padding-left:14px;line-height:2;margin-top:3px}
+.q.bonus{background:#1a1428;border:1px dashed #7c3aed;border-radius:9px;padding:11px 14px;font-size:13.5px;color:#c4b5fd}
+.poem{background:#101520;border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:12px 0;font-size:16px;line-height:2.4;letter-spacing:.1em}
+.poem span{color:var(--dim);font-size:12px;margin-right:9px}
+.formula{text-align:center;font-size:16px;line-height:2;margin:10px 0;font-family:"Times New Roman",serif;background:#101520;border-radius:9px;padding:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+table td,table th{border:1px solid var(--line);padding:6px 8px}
+table th{background:var(--panel2);color:var(--dim);font-size:12px}
+table .n{background:var(--panel2);text-align:center;font-weight:700;width:13%}
+table .w{text-align:center;font-size:17px;font-weight:800;width:15%;color:var(--c2)}
+table .c{background:var(--panel2);text-align:center;font-weight:700}
+table.bh td{text-align:center;padding:5px 3px}
+table.yr .y{text-align:center}
+.acc{border:1px solid var(--line);border-radius:11px;margin-bottom:10px;overflow:hidden;background:#101520}
+.acc summary{padding:12px 15px;font-size:14px;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::before{content:"\25B8";color:var(--c2);transition:transform .2s;display:inline-block}
+.acc[open] summary::before{transform:rotate(90deg)}
+.acc .ab{padding:0 15px 15px;font-size:14px}
+.acc .ab p{margin-bottom:7px}
+.small{font-size:12.5px;color:var(--dim);margin-top:6px}
+.pw{display:flex;gap:9px;margin-top:16px}
+.pw input{flex:1;background:#0b0e14;color:var(--txt);border:2px solid var(--line);border-radius:11px;
+padding:14px 12px;font-size:21px;letter-spacing:.18em;text-align:center;font-family:inherit;min-width:0}
+.pw input:focus{outline:none;border-color:var(--c2)}
+.pw input.shake{animation:sh .35s;border-color:var(--bad)}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.pw button{background:var(--c1);color:#fff;border:0;border-radius:11px;padding:14px 22px;font-size:16px;font-weight:800;font-family:inherit;cursor:pointer;white-space:nowrap}
+.pw button:active{transform:scale(.97)}
+.lockmsg{text-align:center;padding:26px 18px;color:var(--dim);font-size:14px}
+.lockmsg .lk{font-size:32px;display:block;margin-bottom:8px;opacity:.5}
+.done{text-align:center;padding:8px 0 4px}
+.frag{width:118px;height:118px;background:#fff;color:#111;border-radius:15px;display:flex;align-items:center;
+justify-content:center;font-size:56px;font-weight:800;margin:16px auto 8px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.fragn{color:var(--dim);font-size:13.5px}
+.msgbig{font-size:27px;font-weight:800;letter-spacing:.28em;color:var(--ok);margin:14px 0 6px}
+.nav{display:flex;gap:10px;margin:22px 0 8px}
+.nav a{flex:1;text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:11px;
+padding:13px 8px;color:var(--txt);text-decoration:none;font-size:14px}
+.nav a:active{background:var(--panel)}
+.honor{background:#1a0f12;border:1px solid #5a2027;border-radius:12px;padding:14px 16px;margin:20px 0;font-size:13px;color:#fca5a5;line-height:1.9}
+.honor b{color:#fff}
+footer{text-align:center;color:#4a5568;font-size:12px;margin-top:26px;padding:12px}
+.reset{background:none;border:0;color:#4a5568;font-size:12px;text-decoration:underline;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <span class="em">🗺</span>
+  <h1>2F　時空層</h1>
+  <p>中國史＋臺灣史＋世界地理</p>
+</header>
+
+<div class="wrap">
+  <div class="steps">
+    <div class="step" id="sA"><b>A</b>找出線索</div>
+    <div class="step" id="sB"><b>B</b>主謎題</div>
+    <div class="step" id="sC"><b>C</b>回溯</div>
+  </div>
+
+  <!-- 信封 A -->
+  <div class="env" id="eA">
+    <div class="envhd"><span class="tag">信封 A</span>
+      <h2>找出錯的三句<small>建議 4 分鐘</small></h2></div>
+    <div class="envbody">
+      <div class="lead">下面六句話，其中<b>剛好有三句是錯的</b>。</div>
+      <div class="rule">把那<b>三句的題號</b>由小到大寫出來，就是信封 B 的密碼。</div>
+      <div class="keep">✍️ 這三個題號等一下<b>信封 C 還要用</b>，一定要寫在紙上。</div>
+      
+<div class="q"><b>①</b> 秦始皇廢封建、行郡縣，並統一文字與度量衡。</div>
+<div class="q"><b>②</b> 漢武帝在位期間，蔡倫改良了造紙術。</div>
+<div class="q"><b>③</b> 科舉制度創立於隋朝，唐朝加以發揚。</div>
+<div class="q"><b>④</b> 鄭成功驅逐荷蘭人之後，臺灣隨即進入清領時期。</div>
+<div class="q"><b>⑤</b> 中國地勢西高東低，由西向東分為三級階梯。</div>
+<div class="q"><b>⑥</b> 南京條約是清廷在甲午戰爭戰敗後簽訂的。</div>
+      <details class="acc"><summary>📎 附件｜中外大事年表</summary><div class="ab">
+<table class="yr">
+<tr><th>編號</th><th>年代</th><th>事件</th></tr>
+<tr><td class="n">01</td><td class="y">前 221</td><td>秦統一六國</td></tr>
+<tr><td class="n">02</td><td class="y">前 138</td><td>張騫首次出使西域</td></tr>
+<tr><td class="n">03</td><td class="y">105</td><td>蔡倫改良造紙術</td></tr>
+<tr><td class="n">04</td><td class="y">605</td><td>隋煬帝開鑿大運河</td></tr>
+<tr><td class="n">05</td><td class="y">626</td><td>唐太宗即位</td></tr>
+<tr><td class="n">06</td><td class="y">1069</td><td>王安石變法</td></tr>
+<tr><td class="n">07</td><td class="y">1405</td><td>鄭和首次下西洋</td></tr>
+<tr><td class="n">08</td><td class="y">1624</td><td>荷蘭人佔領大員</td></tr>
+<tr><td class="n">09</td><td class="y">1662</td><td>鄭成功驅逐荷蘭人</td></tr>
+<tr><td class="n">10</td><td class="y">1683</td><td>施琅攻臺，鄭氏結束</td></tr>
+<tr><td class="n">11</td><td class="y">1842</td><td>鴉片戰爭・南京條約</td></tr>
+<tr><td class="n">12</td><td class="y">1874</td><td>牡丹社事件</td></tr>
+<tr><td class="n">13</td><td class="y">1894</td><td>甲午戰爭</td></tr>
+<tr><td class="n">14</td><td class="y">1895</td><td>馬關條約・臺灣割日</td></tr>
+<tr><td class="n">15</td><td class="y">1911</td><td>辛亥革命</td></tr>
+<tr><td class="n">16</td><td class="y">1945</td><td>二次大戰結束</td></tr>
+</table></div></details>
+<details class="acc"><summary>📎 附件｜世界時區表</summary><div class="ab">
+<table class="yr">
+<tr><th>城市</th><th>時區</th><th>城市</th><th>時區</th></tr>
+<tr><td>臺北</td><td>UTC ＋8</td><td>倫敦</td><td>UTC ＋0</td></tr>
+<tr><td>東京</td><td>UTC ＋9</td><td>紐約</td><td>UTC －5</td></tr>
+<tr><td>雪梨</td><td>UTC ＋10</td><td>洛杉磯</td><td>UTC －8</td></tr>
+</table></div></details>
+      <div class="pw">
+        <input type="text" id="iA" inputmode="text" autocomplete="off" placeholder="三位數">
+        <button onclick="chk('A')">解鎖 B</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 信封 B -->
+  <div class="env locked" id="eB">
+    <div class="envhd"><span class="tag">信封 B</span>
+      <h2>年代計算 ＋ 數字和<small>建議 5 分鐘</small></h2></div>
+    <div class="envbody" id="bB">
+      <div class="lockmsg"><span class="lk">🔒</span>算出<b>信封 A</b> 的答案才能打開</div>
+    </div>
+    <script type="text/plain" id="pB">dZvjVw+jvyVH7/VHapdunda5FX25jwtODXI97LMP59G0Yua75QaszLg+38PhK/Jb9xoFQA6a2X6gYaJF16f7u5csuS2dOTnJoGs2o86VijpUPHbDg1uPHCc/qwiTDUl0YKmrFsvwUlk8JoqPUUnXl7PpzJhUFgd8wVBGM9/qxu/AdaMxCRjw2tnNIi4em9EIvL0IwOt3FRaYnIr2QuuvTNke4n7K4XKK3I6Eh+clMfO1OauuhZFdB5OMgXUxFzRRXfhhz+Yu21vERg1UOkM8OqWFjbYg2/+V6UrIlAm6QU57Y62wBmGNw8Zw++4+m6tugeDRpVy/ecUC5Q0YJnvq1GUirKSos+CkBBP7lOV5XQvu7xx8lXrQJwvjT6I7pHSc6Xk5ySw5du/FWAhDE/sIZ3vr90k+y5FrNfob8IHDnV6E4pnkKU28UZO2pjcQLzlP+ko64RxAMuFRABpR+emq2dcGyVAr75AKm2FAr9U6Un9i0nNbh7Fx0pyRtDcQt4Akv0BcQyrDSVqqPqLu5tfwDVAVBXhG8cbsv3hH12O7ccFNSXEYtowWtAEL94uUflsTfE47o2P+S/6ODaPDFUd4spQ6cuDx/NjqbfpuZK1SArLd0qzIMvwxh0fY9P7Gvn73CDwMzjOpAbokoy7HXtZRpCO4cSqvL4Q3+nywruJAvUqT7r6OJcB6LUse6AFemqRQfyc8EIFrAf2OeskOIu8N3X71F9/RxvzrVsFxRM51fgzhYAtiSSinLQdM0ysWwCNC6YZmx5pc2FRDvl9l6rJ1st0TehxT8Uk0e5NsP36QH6cg45DSywMP4LI0tV1jAa6p/VgeZOtX96wEs7RWcVMWMBAaqozmNUeJXklXCH4sJJbusmhT3PAvBjawqPHW2HGOvld/d/hVMurIswgGf1MuWpYkyn/Z36Ob57bRlppPg2Ru+a0GAJ0oZyT/oTKI4CUq/wmuyv7ul9uZyXo4ThV+oxkWWuRiAaAwsFvOG77t+HWdUHowdaYq0dT5kPlJqt2SiM5H9BzMA+jzEx17v0CgzOBAuutOLyhyqSaCdRDH/Z3gaJFIjcd6AnRRL+Ke6f+dFBButpGivQcY0BfBM3hBynRy8kOWdlQYGWut4ZBrOViCpXQnWcx3TdA0UhEEv0ivTr28rBvagi2D1BkqNsfB</script>
+  </div>
+
+  <!-- 信封 C -->
+  <div class="env locked" id="eC">
+    <div class="envhd"><span class="tag">信封 C</span>
+      <h2>%C_TITLE%<small>建議 5 分鐘</small></h2></div>
+    <div class="envbody" id="bC">
+      <div class="lockmsg"><span class="lk">🔒</span>算出<b>信封 B</b> 的答案才能打開</div>
+    </div>
+    <script type="text/plain" id="pC">rNDxiBbxsmfLpBInPGjMMWiKb4mLbNy1H7bpFo39J21CXALrCbxTyYLBF6RSE3UI1roiZYmS/deNS98YCxT6foc6M3e3DtdIq2yc7e7Yf6NhCCTlOIW5Z4C255yFZJ5VcpyLOYRnXfvAVAH5Fqmq5oSSaXZqu1t+XCU64D698fwFzrOUAS/KzDrXEBDN4Z8JwEryRWC8pdJP+qopmY5dPeeQsA+wcdnKkeUhgvaECMVjFjXvrYqo7SkyGWFx4q9dLj6ISTd4VHKlbP8fkcG1x64S+Zjf13GeUsSmHpoCaILWuWDwtF4xTk/TNmD8TtyK8bk7XxFsfat4f0hnPHzTnDumDpAuRBW234qv2yFObNBqWViAOzvG0wtzUTtuqmS6JSrtAILfZkBUV4cmufKGqxki5Op+nA1VEdaawJcEi6xcX3cmB3DmxwK/OUgm8G9aQmP3MurXgsi3Nf4D6s6RghVMpISKyQKjDu2VIpoACPPilBfDUdzxChW73t1QbkpRhwHD1Tu4wOvAv//C3MNpSbCXNFwLOFyXIZ0R2TvG50wZ9FhgMlU8AV0gzIuk+0v0Rowdhb76EDZVMm++7e/R6R/g7Rph/YBZfm+vs+GIjW6j0qM22Df0raVKvFNfmP5Xs6OgtIiRESMc5rTp11d8N5keALPb4OxZDE1HMiCkZit1z/z9MgIxuy1QV7BFPDjD4yR+PtO5VPjf1nCUzRgN8baXgM4HCobAt+NGfU2jmZpGye3jdAAIokymM63n/KVxaZeuzJHx0j7bLjcrOvdeuabjHctl0JDvl/z2yYX02aqd9rX0haIi1l84zUsrNpiJP6WeEz/Jfr794EbRI3xuTfocpRCiavvpcCXCBiZ2Y/Kt6DFLWyvdbch43QUFluBHUPa97a2EdatZiX4dK0+eNf7Yqd3CAR30faJtzQAmtGDLbfakSYBvxcg/2nXYSdwPGzaMHSJJARCADsVq8lwyC3jvELlk2lwrTL0QIclJNU529F9W35nhADx+Y0UWf/7cITHq4+hkdNgHR342w1qvwE+c+6ye0i+RIOTjg9l9O5FwOLCzHAqOavq5ZWfhFkz9VyhkjceD9TBNhz9CTT7zIk+v8L8IasbO+ol3oGM2l/HxpDsFDOQGDVP4nvPxS2+qQH0v/kTu2FMrztkihv2LEHiBGQ+NBCOHYlAofkHcHhKLNxdnHvbb+zU87llaMvE+IcdEWXj9PtoVbXyyLpkhFVMTY53Mt6Lu3o7pXmgQTTNWaSGqI7R/G+oLKl5raGXf6SHGtyGlA154p1zTv+h9fOMX9edFtKXMQ3Chj8WjomQ11dU1qewuSPotBIjj5DsQhMrlkJWSOkSLjfBSkyIEdJZ4PQG+5QPUz2TUmqRRnmA71XGhgcewXumyJUAJVKEEOVfoU5d5h93Yc7r3jE3jgfljMOz4mxzD1kLIIgEHF2GqWIgK2AuUvx7VbINpRjtmDKfQZAfQ5lpoyDIAi2IPbwPNeQ7jsvI89jpgS8/SV1Of7t9tXaAIDL8=</script>
+    <script type="text/plain" id="pD">2Hrowu32AMzNoT0sosVGxF3QCN3hgeMEyaDDHuSeczWoPqtj/8xDriHFbmJJ9DMwBmD+HNTGtkKlwtVxtvwKjkCWQqHzcVrIbTcAgSDLCSMIErEtMG7YQHD8TluFVnP5h9nJX9/X7I/7awZEuWQT2ketCHM12mpdr6YJC8w/rRqBC25Hf2ZHeWPLoLrJAMVU8y7L0Z/ljh2hBf2W72uFX0pFWLo50v78nWdQY5wWJct9ku4MjRYY40K0HJvBBys10TgcP/naC50O74fgI/bwOzA88wKdy3n/ZRb4GHC2H82zWp0BRCRrs6hr9dBIrngVc8aZIbBbU5qTi/If53x1XjIcL7sQCoIDAMpuZjI9Cxs6/3LHgZ8Jh4+U+y6kd6DzmiE8fUDTgRjXuMy5qQUhUPQfmPTYHHL9eHy1bqmogRMa8UZeA/GhKgb/r/3LpWvOADV2kxxc0gT3+I7v/5tfuefFwoBXi7nfHUydaYf6/ZyJoPa3AgZ+UpU8kNMhPqqESZvZhG+uqszJPFmVrvqsb302IquJh/66Yj/jHW15dGde73NPxOK5d0Lsaw7AVp7wPri4NIQq7LSVHsRvelu47XmwGjQN3rywuR/PYvvdoa5U0qzcejoD</script>
+  </div>
+
+  <div class="nav">
+    <a href="../">← 回入口</a>
+    <a href="#" onclick="rst();return false;">↺ 重做這一層</a>
+  </div>
+
+  <div class="honor">
+    <b>榮譽規則</b><br>
+    這一頁只是「信封」，不是計算機。<br>
+    <b>所有計算請用紙筆。</b>不要用這支手機查答案——<br>
+    信封 C 要用信封 A 的答案，查得到題目也解不出來。
+  </div>
+
+  <footer>倒數・國三強化版　│　teaching.efetl.com</footer>
+</div>
+
+<script>
+var F='2f';
+function h(s){var x=5381;s=s+'|EFETL';for(var i=0;i<s.length;i++){x=((x*33)^s.charCodeAt(i))>>>0;}return x.toString(16);}
+var H={A:'8aba4037',B:'4aa22845',C:'1e51c37b'};
+function ld(){try{return JSON.parse(localStorage.getItem('cd_'+F)||'{}');}catch(e){return {};}}
+function sv(o){try{localStorage.setItem('cd_'+F,JSON.stringify(o));}catch(e){}}
+function beep(f,d,t){try{var A=window._ac||(window._ac=new (window.AudioContext||window.webkitAudioContext)());
+var o=A.createOscillator(),g=A.createGain();o.type=t||'sine';o.frequency.value=f;o.connect(g);g.connect(A.destination);
+g.gain.setValueAtTime(.15,A.currentTime);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+d);
+o.start();o.stop(A.currentTime+d);}catch(e){}}
+function ok(){beep(660,.13);setTimeout(function(){beep(880,.22);},110);}
+function bad(){beep(180,.28,'square');}
+function fanfare(){[523,659,784,1047].forEach(function(f,i){setTimeout(function(){beep(f,.3);},i*130);});}
+
+function ks(pw,n){var x=parseInt(h(pw),16)>>>0;if(!x)x=1;var o=[];
+for(var i=0;i<n;i++){x^=(x<<13);x>>>=0;x^=(x>>>17);x>>>=0;x^=(x<<5);x>>>=0;o.push(x&255);}return o;}
+function dec(pw,id){
+  var b64=document.getElementById(id).textContent.trim();
+  var s=atob(b64),n=s.length,k=ks(pw,n),a=new Uint8Array(n);
+  for(var i=0;i<n;i++)a[i]=(s.charCodeAt(i)^k[i])&255;
+  return new TextDecoder('utf-8').decode(a);
+}
+function open(k,pw){
+  var e=document.getElementById('e'+k), b=document.getElementById('b'+k);
+  e.classList.remove('locked');
+  b.innerHTML=dec(pw,'p'+k);
+  var inp=b.querySelector('input');
+  if(inp) inp.addEventListener('keydown',function(ev){if(ev.key==='Enter')chk(k);});
+}
+function finish(pw){
+  var e=document.getElementById('eC'), b=document.getElementById('bC');
+  e.classList.remove('locked'); e.classList.add('solved');
+  b.innerHTML=dec(pw,'pD');
+}
+function paint(){
+  var s=ld();
+  ['A','B','C'].forEach(function(k){
+    var el=document.getElementById('s'+k);
+    el.className='step'+(s[k]?' done':'');
+  });
+  if(s.A){document.getElementById('eA').classList.add('solved');
+    var ia=document.getElementById('iA'); if(ia){ia.value='✓ 已解開';ia.disabled=true;}
+    open('B',s.A);}
+  if(s.B){document.getElementById('eB').classList.add('solved');
+    var ib=document.getElementById('iB'); if(ib){ib.value='✓ 已解開';ib.disabled=true;}
+    open('C',s.B);}
+  if(s.C){finish(s.C);}
+  if(!s.A) document.getElementById('sA').className='step on';
+  else if(!s.B) document.getElementById('sB').className='step on';
+  else if(!s.C) document.getElementById('sC').className='step on';
+}
+function chk(k){
+  var el=document.getElementById('i'+k);
+  var v=(el.value||'').trim().replace(/[\s,，、]/g,'');
+  if(h(v)!==H[k]){
+    el.classList.add('shake'); bad();
+    setTimeout(function(){el.classList.remove('shake');},400);
+    return;
+  }
+  var s=ld(); s[k]=v; sv(s);
+  if(k==='C'){fanfare();}else{ok();}
+  paint();
+  var t=document.getElementById(k==='C'?'eC':'e'+(k==='A'?'B':'C'));
+  if(t) setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},150);
+}
+function rst(){
+  if(!confirm('確定要重做這一層嗎？進度會清除。')) return;
+  try{localStorage.removeItem('cd_'+F);}catch(e){}
+  location.reload();
+}
+paint();
+</script>
+</body>
+</html>

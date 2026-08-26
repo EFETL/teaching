@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>倒數｜老師主控台</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#0a0c11;--panel:#131720;--panel2:#1a1f2a;--line:#28303e;
+ --txt:#e9ebf1;--dim:#8a93a6;--accent:#8b5cf6;--ok:#22c55e;--bad:#ef4444;--warn:#fbbf24}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+ background:var(--bg);color:var(--txt);line-height:1.7;padding-bottom:60px}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+header{background:linear-gradient(135deg,#131720,#0a0c11);border-bottom:1px solid var(--line);padding:20px 0;margin-bottom:22px}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand h1{font-size:24px;letter-spacing:.35em;font-weight:800}
+.brand small{color:var(--dim);font-size:12px;letter-spacing:.1em}
+.modebtns{display:flex;gap:8px}
+.modebtns button{background:var(--panel2);color:var(--dim);border:1px solid var(--line);padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;transition:.15s}
+.modebtns button:hover{border-color:var(--accent);color:var(--txt)}
+.modebtns button.on{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700}
+.tmode{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);background:var(--panel2);padding:7px 14px;border-radius:8px;border:1px solid var(--line);cursor:pointer}
+.tmode.on{color:var(--bad);border-color:var(--bad)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:18px}
+.card h2{font-size:16px;letter-spacing:.12em;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card h2 .tag{background:var(--panel2);color:var(--dim);font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.05em}
+.runbox{text-align:center;padding:26px}
+.phase{font-size:14px;letter-spacing:.25em;color:var(--dim);margin-bottom:4px}
+.phasename{font-size:30px;font-weight:800;letter-spacing:.1em;margin-bottom:10px}
+.phasename.move{color:var(--warn)}
+.tdisplay{font-size:86px;font-weight:800;letter-spacing:.05em;line-height:1;font-variant-numeric:tabular-nums;margin:2px 0 8px}
+.tdisplay.warn{color:var(--warn)}
+.tdisplay.danger{color:var(--bad);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.total{color:var(--dim);font-size:13px;margin-bottom:16px}
+.progress{height:8px;background:var(--panel2);border-radius:4px;overflow:hidden;margin:0 auto 18px;max-width:640px}
+.progress i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.tctrl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tctrl button{background:var(--panel2);color:var(--txt);border:1px solid var(--line);padding:11px 24px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:15px;transition:.15s}
+.tctrl button:hover{border-color:var(--accent)}
+.tctrl button.primary{background:var(--accent);color:#fff;font-weight:700;border-color:var(--accent)}
+table.rot{width:100%;border-collapse:collapse;font-size:14px}
+table.rot th,table.rot td{border:1px solid var(--line);padding:10px 8px;text-align:center}
+table.rot th{background:var(--panel2);color:var(--dim);font-size:12px;font-weight:600}
+table.rot td:first-child,table.rot th:first-child{text-align:left;color:var(--dim)}
+table.rot th.now{background:var(--accent);color:#fff;font-weight:800}
+table.rot td.now{background:#2a1d4d;color:#c4b5fd;font-weight:800;font-size:17px}
+.floor{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;transition:.2s}
+.floor.done{border-color:var(--ok);background:#0f1f16}
+.flhd{display:flex;align-items:center;gap:13px;margin-bottom:10px;flex-wrap:wrap}
+.flno{width:46px;height:38px;border-radius:8px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0}
+.floor.done .flno{background:var(--ok);color:#052e16}
+.flname{font-size:15px;font-weight:600;flex:1}
+.flname small{display:block;color:var(--dim);font-size:12px;font-weight:400;margin-top:1px}
+.envrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.envrow:first-of-type{border-top:0}
+.envtag{background:var(--panel);color:var(--dim);font-size:12px;padding:4px 12px;border-radius:6px;white-space:nowrap;font-weight:700;min-width:88px;text-align:center}
+.envtag.ok{background:#14532d;color:#86efac}
+.envrow input{background:#0a0c11;color:var(--txt);border:1.5px solid var(--line);padding:9px 12px;border-radius:8px;font-family:"SF Mono",Menlo,monospace;font-size:17px;letter-spacing:.18em;width:150px;text-align:center}
+.envrow input:focus{outline:none;border-color:var(--accent)}
+.envrow input.shake{animation:shake .35s;border-color:var(--bad)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.envrow button{background:var(--accent);color:#fff;border:0;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700}
+.envrow button.ghost{background:var(--panel);color:var(--dim);border:1px solid var(--line);font-weight:400;padding:6px 12px;font-size:12px}
+.envrow .okmark{color:var(--ok);font-size:15px;font-weight:700}
+.ans{font-size:12px;color:#fca5a5;background:#2a1216;border:1px dashed var(--bad);padding:5px 11px;border-radius:6px;line-height:1.6}
+.ans b{color:#fff;font-family:"SF Mono",Menlo,monospace;letter-spacing:.1em}
+.linkback{font-size:12px;color:var(--warn);background:#2a2208;border:1px dashed var(--warn);padding:5px 11px;border-radius:6px;margin-top:8px;display:block;line-height:1.6}
+.msgline{margin-top:12px;padding:12px 16px;background:#0f1f16;border-left:3px solid var(--ok);border-radius:0 8px 8px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.fragmini{width:50px;height:50px;background:#fff;color:#111;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:800;flex-shrink:0}
+.msgline .mt{font-size:14px;line-height:1.6;flex:1}
+.msgline .mt b{color:var(--ok)}
+.hintrow{display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;margin-bottom:9px}
+.hintrow .lv{background:#0369a1;color:#fff;font-size:12px;padding:3px 11px;border-radius:20px;white-space:nowrap;font-weight:700}
+.hintrow .txt{flex:1;font-size:14px;color:var(--dim)}
+.hintrow.open .txt{color:var(--txt)}
+.hintrow button{background:var(--panel);color:var(--txt);border:1px solid var(--line);padding:7px 16px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:13px;white-space:nowrap}
+.hintcount{color:var(--dim);font-size:13px;margin-bottom:12px}
+.hintcount b{color:var(--bad)}
+.final{text-align:center;padding:32px 26px;background:linear-gradient(135deg,#1a1030,#0a0c11)}
+.finalfrags{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.finalfrags .fc{width:84px;height:84px;background:#fff;color:#111;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800}
+.finalfrags .fc.q{background:var(--panel2);color:var(--dim);font-size:28px}
+.bigin{background:#0a0c11;color:var(--txt);border:1.5px solid var(--line);padding:14px 20px;border-radius:9px;font-size:24px;letter-spacing:.3em;text-align:center;width:220px;font-family:"SF Mono",Menlo,monospace}
+.bigin:focus{outline:none;border-color:var(--accent)}
+table.score{width:100%;border-collapse:collapse;font-size:14px}
+table.score th,table.score td{border:1px solid var(--line);padding:8px 9px;text-align:center}
+table.score th{background:var(--panel2);color:var(--dim);font-weight:600;font-size:12px}
+table.score td:first-child{text-align:left}
+table.score input{width:100%;background:transparent;border:0;color:var(--txt);font-family:inherit;font-size:14px;text-align:center;padding:2px}
+table.score input:focus{outline:1px solid var(--accent);border-radius:4px}
+.mini-btn{background:var(--panel2);color:var(--dim);border:1px solid var(--line);padding:7px 15px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:13px;margin-top:12px;margin-right:8px}
+.mini-btn:hover{border-color:var(--accent);color:var(--txt)}
+#proj{position:fixed;inset:0;background:#000;z-index:99;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+#proj.on{display:flex}
+#proj .ps{font-size:clamp(20px,4vw,44px);color:var(--accent);letter-spacing:.2em;margin-bottom:18px;font-weight:800}
+#proj .pt{font-size:clamp(80px,17vw,210px);font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+#proj .pn{font-size:clamp(15px,2.2vw,24px);color:#777;margin-top:26px;line-height:1.9}
+#proj .close{position:absolute;top:24px;right:28px;background:#222;color:#888;border:0;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px}
+.note{color:var(--dim);font-size:13px;line-height:1.95}
+.note b{color:var(--txt)}
+.story{background:linear-gradient(135deg,#171c26,#12161e);border-left:4px solid var(--accent);padding:20px 24px;border-radius:0 12px 12px 0;font-size:16px;line-height:2.1;white-space:pre-line}
+.story em{color:var(--accent);font-style:normal;font-weight:700}
+.traps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.trap{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:12px 15px}
+.trap .tf{color:var(--warn);font-size:12px;font-weight:700;letter-spacing:.05em}
+.trap .tq{font-size:14px;margin:4px 0 3px}
+.trap .ta{font-size:13px;color:var(--dim)}
+.trap .ta b{color:var(--ok)}
+
+#gate{position:fixed;inset:0;background:#0b0e14;z-index:200;display:flex;flex-direction:column;
+align-items:center;justify-content:center;text-align:center;padding:30px}
+#gate h2{font-size:22px;letter-spacing:.3em;margin-bottom:8px}
+#gate p{color:var(--dim);font-size:13.5px;margin-bottom:22px;line-height:1.9}
+#gate input{background:#151a24;color:var(--txt);border:2px solid var(--line);border-radius:11px;
+padding:14px 18px;font-size:18px;text-align:center;font-family:inherit;width:250px;max-width:80vw}
+#gate input:focus{outline:none;border-color:var(--accent)}
+#gate input.shake{animation:shake .35s;border-color:var(--bad)}
+#gate button{background:var(--accent);color:#fff;border:0;border-radius:11px;padding:14px 28px;
+font-size:16px;font-weight:800;font-family:inherit;cursor:pointer;margin-top:14px}
+body.locked{overflow:hidden}
+
+@media(max-width:640px){.tdisplay{font-size:58px}.phasename{font-size:22px}.envrow input{width:100%}}
+</style>
+</head>
+<body>
+
+
+<div id="gate">
+  <h2>🔒 老師專區</h2>
+  <p>這一頁有<b>全部答案</b>與計時控制。<br>請輸入教師密碼。</p>
+  <input type="password" id="gpw" autocomplete="off" placeholder="教師密碼">
+  <button onclick="gchk()">進入</button>
+  <p style="margin-top:26px;font-size:12px">
+    <a href="../" style="color:#4a5568">← 回學生入口</a></p>
+</div>
+
+<div id="proj">
+  <button class="close" onclick="toggleProj()">結束投影 (Esc)</button>
+  <div class="ps" id="pjPhase"></div>
+  <div class="pt" id="pjTime">06:00</div>
+  <div class="pn" id="pjNote"></div>
+</div>
+
+<header>
+  <div class="container hdr">
+    <div class="brand"><h1>倒 數</h1><small>國三強化版・主控台　<a href="../" style="color:#4a5568">← 學生入口</a></small></div>
+    <div class="modebtns" id="modeBtns"></div>
+    <div class="tmode" id="tmodeBtn" onclick="toggleTeacher()">🔒 教師模式：關</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="card runbox">
+    <div class="phase" id="phLabel">尚未開始</div>
+    <div class="phasename" id="phName">按「開始全場」啟動</div>
+    <div class="tdisplay" id="tDisp">06:00</div>
+    <div class="total" id="totalLeft"></div>
+    <div class="progress"><i id="prog" style="width:0%"></i></div>
+    <div class="tctrl">
+      <button class="primary" id="btnStart" onclick="toggleRun()">▶ 開始全場</button>
+      <button onclick="prevPhase()">⏮ 上一段</button>
+      <button onclick="nextPhase()">⏭ 下一段</button>
+      <button onclick="resetRun()">↺ 全部重設</button>
+      <button onclick="toggleProj()">📺 投影模式</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔄 樓層輪替表 <span class="tag">鈴響往上一層・4F 的組回 1F</span></h2>
+    <table class="rot" id="rotTable"></table>
+  </div>
+
+  <div class="card">
+    <h2>🎬 劇情開場白 <span class="tag">照念給學生聽</span></h2>
+    <div class="story" id="storyBox"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔓 四樓層・信封密碼 <span class="tag">巡場抽查與進度紀錄用</span></h2>
+    <p class="note" style="margin-bottom:14px">
+      ⚠️ 這一版的核心是<b>回溯機制</b>：每層的<b>信封 C 必須用到信封 A 的答案</b>。
+      巡場時最該確認的不是他們解到哪，而是<b>有沒有在寫紀錄本</b>——沒寫的組別到信封 C 一定會卡死。
+    </p>
+    <div id="flBox"></div>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ 六個陷阱 <span class="tag">回饋講解一定要收</span></h2>
+    <div class="traps" id="trapBox"></div>
+  </div>
+
+  <div class="card">
+    <h2>💡 提示卡 <span class="tag">整場只有 2 張・每張扣 5 分</span></h2>
+    <div class="hintcount" id="hintCount"></div>
+    <div id="hintBox"></div>
+  </div>
+
+  <div class="card final">
+    <h2 style="justify-content:center">🏆 最終合體</h2>
+    <p class="note">四片碎片排成一句通順的話，背面數字依同樣順序讀出。</p>
+    <div class="finalfrags" id="finalFrags"></div>
+    <div>
+      <input type="text" id="finalIn" class="bigin" placeholder="最終密碼">
+      <button class="mini-btn" style="padding:14px 22px;font-size:15px" onclick="checkFinal()">開箱</button>
+    </div>
+    <div id="finalResult"></div>
+  </div>
+
+  <div class="card">
+    <h2>📊 計分表 <span class="tag">100 −（提示卡×5）−（未解開樓層×15）＋（加分題×3）</span></h2>
+    <table class="score">
+      <thead><tr><th style="text-align:left">組別</th><th>1F</th><th>2F</th><th>3F</th><th>4F</th><th>提示卡</th><th>加分題</th><th>總分</th></tr></thead>
+      <tbody id="scoreBody"></tbody>
+    </table>
+    <button class="mini-btn" onclick="addTeam()">＋ 新增組別</button>
+    <button class="mini-btn" onclick="clearAll()" style="border-color:#5a2027;color:#fca5a5">清除所有紀錄</button>
+    <p class="note" style="margin-top:10px">樓層欄填「1」代表解開、留空代表沒解開；總分自動算。</p>
+  </div>
+
+  <div class="card">
+    <h2>📖 使用說明</h2>
+    <p class="note">
+      <b>1.</b> 上方切換 <b>A 模式（85 分・破解 60 分）</b> 或 <b>B 模式（60 分・破解 44 分）</b>，
+      按「開始全場」，10 段自動跑完，<b>每段結束響鈴</b>。<br>
+      <b>2.</b> 移動時段畫面轉黃、大字顯示「移　動」，喊「往上一層」即可。<br>
+      <b>3.</b> 輪替表自動標亮當前輪次。<br>
+      <b>4.</b> 信封是<b>學生自己拆</b>（誠信制）——回溯機制讓偷拆完全沒用。<br>
+      <b>5.</b> 提示卡整場只有 <b>2 張</b>。<br>
+      <b>6.</b> 空白鍵＝暫停／繼續；Esc＝結束投影模式。<br><br>
+      <b>教師模式</b>打開會顯示所有答案與回溯關係——<span style="color:#fca5a5">投影給學生看時記得關掉</span>。
+    </p>
+  </div>
+
+</div>
+
+<script>
+/* ═════ 劇情 ═════ */
+const STORY = `去年這個時候，有一個學長也在這棟樓裡。
+
+他畢業那天，沒有把東西帶走。
+他在<em>每一層的樓梯間</em>留下一個信封，然後跟導師說了一句話：
+
+「<em>我不想把它留給隨便一個人。
+　想拿走的，得先證明他真的準備好了。</em>」
+
+四層樓，四個信封。每個信封裡，還有下一個信封。
+
+但他多做了一件事——
+<em>後面的題目，會用到前面的答案。</em>
+所以什麼都不要丟。
+
+鈴響就往上一層。你們有 60 分鐘。
+
+——現在，去樓梯間。`;
+
+/* ═════ 樓層資料 ═════ */
+const FLOORS = [
+ {name:'語文層', sub:'國文（國一＋國二）',
+  A:{code:'4313', why:'① 4「給我」讀ㄍㄟˇ　② 3 汗牛充棟形容書多　③ 1（其餘三句都有語病）　④ 3 誇飾'},
+  B:{code:'7616', why:'頷聯上句(第3句)「別」7畫 → 頸聯上句(第5句)「回」6畫 → 頸聯下句(第6句)「頭」16畫'},
+  link:'信封 C 需要 A 的四個答案 a=4 b=3 c=1 d=3 → 編號 a+b=7、c+d=4、總和=11 → 別(7)、回(4)、頭(11)',
+  msg:'別回頭', frag:{c:'你', n:'8'},
+  teach:'索引第7《儒林外史》＝諷刺小說；第4〈岳陽樓記〉＝范仲淹；第11〈師說〉＝韓愈。加分題：《史記》＝紀傳體。'},
+
+ {name:'時空層', sub:'中國史＋臺灣史＋世界地理',
+  A:{code:'246', why:'② 蔡倫是東漢和帝（非漢武帝）　④ 鄭成功後是鄭氏時期（清領要到1683）　⑥ 南京條約是鴉片戰爭後'},
+  B:{code:'8875', why:'221+1911=2132→8；1895−1662=233→8；1894−1842=52→7；1945−1895=50→5'},
+  link:'信封 C 需要 A 的三個錯誤題號 a=2 b=4 c=6 → 臺北「2月4日6時」',
+  msg:'還有時間', frag:{c:'來', n:'2'},
+  teach:'紐約−13→2/3 17時【還】；倫敦−8→2/3 22時【有】；東京+1→2/4 07時【時】；雪梨+2→2/4 08時【間】。東加西減，跨日要留意。'},
+
+ {name:'數理層', sub:'數學＋理化',
+  A:{code:'1025', why:'① 根4,5差=1　② 9−9=0　③ 11−9=2　④ 1+4=5（5⁰＝1）'},
+  B:{code:'82623', why:'兩個6Ω並聯=3Ω，串聯5Ω→8Ω；2Al+6HCl→2AlCl₃+3H₂'},
+  link:'信封 C 需要 A 的四個答案 a=1 b=0 c=2 d=5 → 甲=2Ω 乙=4Ω 丙=5Ω（丁=6Ω 干擾）',
+  msg:'冷靜想', frag:{c:'得', n:'5'},
+  teach:'60V：甲2Ω→30A【想】、乙4Ω→15A【靜】、丙5Ω→12A【冷】。由小到大＝冷靜想。加分題：356÷40=8.9→銅。'},
+
+ {name:'人文層', sub:'公民（國二）＋經濟',
+  A:{code:'135', why:'① 民法成年已改18歲　③ 立法院長由立委互選　⑤ 機會成本是價值最高的那一個'},
+  B:{code:'2054', why:'(50−40)÷50=20%；監察院編號5；23歲符合14/18/20/23共4項'},
+  link:'信封 C 需要 A 的三個錯誤題號 a=1 b=3 c=5 → 1行政院【就】3司法院【現】5監察院【在】',
+  msg:'就現在', frag:{c:'及', n:'1'},
+  teach:'B①的陷阱：問的是「需求量」減少幾%，不是「價格」上升幾%——數字剛好都是20但意義不同。'}
+];
+
+const FINAL = {phrase:'你來得及', code:'8251'};
+const HINTS = [
+  '信封 C 的題目裡有「a、b、c」——那不是變數，是你們<b>信封 A 的答案</b>。翻紀錄本。',
+  '學生指定一層，直接給該層信封 B 的前兩位數字。'
+];
+const TRAPS = [
+  {f:'1F', q:'「他是班上最高的同學之一」', a:'<b>邏輯矛盾</b>，是語病。「最高」只有一個'},
+  {f:'2F', q:'蔡倫是漢武帝時期的人', a:'蔡倫是<b>東漢和帝</b>，漢武帝是<b>西漢</b>，差約 200 年'},
+  {f:'2F', q:'南京條約是甲午戰爭後簽的', a:'南京條約＝<b>鴉片戰爭</b>(1842)；甲午→<b>馬關條約</b>(1895)'},
+  {f:'3F', q:'5⁰ ＝ 0', a:'<b>任何非零數的 0 次方都等於 1</b>'},
+  {f:'3F', q:'電阻越大電流越大', a:'V 固定時 <b>I 與 R 成反比</b>——電阻越大電流越小'},
+  {f:'4F', q:'機會成本是放棄選項的總和', a:'是<b>價值最高的那一個</b>'}
+];
+
+/* ═════ 兩種時間模式 ═════ */
+const MODES = {
+  A:{ label:'A 模式・85 分', desc:'破解 60 分（4×15）',
+      p:[
+        {n:'開場・分組・規則', s:360, t:'intro', note:'念劇情 → 分組 → 宣布規則 → 發提示卡與紀錄本'},
+        {n:'第 1 輪', s:900, t:'round', r:1, note:'各組在起點樓層的樓梯間解謎'},
+        {n:'移　動', s:120, t:'move', note:'⏫ 往上一層！4F 的組往下回到 1F。信封與附件留在原位'},
+        {n:'第 2 輪', s:900, t:'round', r:2, note:''},
+        {n:'移　動', s:120, t:'move', note:'⏫ 往上一層！'},
+        {n:'第 3 輪', s:900, t:'round', r:3, note:''},
+        {n:'移　動', s:120, t:'move', note:'⏫ 往上一層！'},
+        {n:'第 4 輪', s:900, t:'round', r:4, note:'最後一輪 ・ 最後 5 分鐘廣播提醒可以用提示卡'},
+        {n:'集合・最終合體', s:300, t:'final', note:'四片碎片排句 → 背面數字 → 開最後的箱子'},
+        {n:'回饋講解', s:480, t:'debrief', note:'六個陷阱一定要收 ・ 收尾念四層訊息'}
+      ]},
+  B:{ label:'B 模式・60 分', desc:'破解 44 分（4×11）',
+      p:[
+        {n:'開場・分組・規則', s:240, t:'intro', note:'念劇情 → 分組 → 宣布規則（講快一點）'},
+        {n:'第 1 輪', s:660, t:'round', r:1, note:'各組在起點樓層解謎'},
+        {n:'移　動', s:90, t:'move', note:'⏫ 往上一層！'},
+        {n:'第 2 輪', s:660, t:'round', r:2, note:''},
+        {n:'移　動', s:90, t:'move', note:'⏫ 往上一層！'},
+        {n:'第 3 輪', s:660, t:'round', r:3, note:''},
+        {n:'移　動', s:90, t:'move', note:'⏫ 往上一層！'},
+        {n:'第 4 輪', s:660, t:'round', r:4, note:'最後一輪 ・ 最後 3 分鐘提醒可以用提示卡'},
+        {n:'集合・最終合體', s:180, t:'final', note:'四片碎片排句 → 開最後的箱子'},
+        {n:'回饋講解', s:270, t:'debrief', note:'⚠️ 時間不夠，只收六個陷阱 ・ 下一節課補完整講解'}
+      ]}
+};
+
+/* ═════ 狀態 ═════ */
+let MODE='A', teacherMode=false;
+let PHASES = MODES[MODE].p;
+let GRAND = PHASES.reduce((a,p)=>a+p.s,0);
+let pi=0, remain=PHASES[0].s, running=false, timer=null;
+const K = k => 'cd_'+k;
+const load=(k,d)=>{try{const v=localStorage.getItem(K(k));return v?JSON.parse(v):d;}catch(e){return d;}};
+const save=(k,v)=>{try{localStorage.setItem(K(k),JSON.stringify(v));}catch(e){}};
+
+/* ═════ 音效 ═════ */
+let AC=null;
+function beep(f,d,type){
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    const o=AC.createOscillator(), g=AC.createGain();
+    o.type=type||'sine'; o.frequency.value=f;
+    o.connect(g); g.connect(AC.destination);
+    g.gain.setValueAtTime(.15,AC.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);
+    o.start(); o.stop(AC.currentTime+d);
+  }catch(e){}
+}
+const sndOk=()=>{beep(660,.13);setTimeout(()=>beep(880,.22),110);};
+const sndBad=()=>beep(180,.28,'square');
+const sndDone=()=>[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.3),i*130));
+const sndBell=()=>[880,880,660].forEach((f,i)=>setTimeout(()=>beep(f,.45),i*260));
+
+/* ═════ 計時 ═════ */
+const fmt=s=>String(Math.floor(Math.max(0,s)/60)).padStart(2,'0')+':'+String(Math.max(0,s)%60).padStart(2,'0');
+const elapsedBefore=()=>PHASES.slice(0,pi).reduce((a,p)=>a+p.s,0);
+function paint(){
+  const P=PHASES[pi];
+  document.getElementById('phLabel').textContent=`第 ${pi+1} / ${PHASES.length} 段　│　${MODES[MODE].label}`;
+  const pn=document.getElementById('phName');
+  pn.textContent=P.n; pn.className='phasename'+(P.t==='move'?' move':'');
+  const d=document.getElementById('tDisp');
+  d.textContent=fmt(remain);
+  d.className='tdisplay'+(P.t==='move'?' warn':remain<=30?' danger':remain<=60?' warn':'');
+  const done=elapsedBefore()+(P.s-remain);
+  document.getElementById('totalLeft').textContent=
+    `全場總剩餘 ${fmt(GRAND-done)}　│　已進行 ${fmt(done)}　│　全場共 ${Math.round(GRAND/60)} 分鐘`;
+  document.getElementById('prog').style.width=(done/GRAND*100)+'%';
+  document.getElementById('pjPhase').textContent=P.n;
+  document.getElementById('pjTime').textContent=fmt(remain);
+  document.getElementById('pjNote').textContent=P.note||'倒數・國三強化版';
+  renderRot();
+}
+function tick(){
+  remain--;
+  if((remain===300||remain===60)&&PHASES[pi].t==='round') beep(880,.2);
+  if(remain<=0){
+    sndBell();
+    if(pi<PHASES.length-1){pi++;remain=PHASES[pi].s;}
+    else{remain=0;stopRun();}
+  }
+  paint();
+}
+function toggleRun(){
+  if(running) stopRun();
+  else{running=true;document.getElementById('btnStart').textContent='⏸ 暫停';timer=setInterval(tick,1000);}
+}
+function stopRun(){
+  clearInterval(timer);running=false;
+  const b=document.getElementById('btnStart');
+  if(b) b.textContent=(pi===0&&remain===PHASES[0].s)?'▶ 開始全場':'▶ 繼續';
+}
+function nextPhase(){if(pi<PHASES.length-1){pi++;remain=PHASES[pi].s;sndBell();paint();}}
+function prevPhase(){if(pi>0){pi--;remain=PHASES[pi].s;paint();}}
+function resetRun(){stopRun();pi=0;remain=PHASES[0].s;
+  document.getElementById('btnStart').textContent='▶ 開始全場';paint();}
+function setMode(m){
+  MODE=m; PHASES=MODES[m].p; GRAND=PHASES.reduce((a,p)=>a+p.s,0);
+  resetRun(); renderModes();
+}
+function toggleProj(){document.getElementById('proj').classList.toggle('on');paint();}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.getElementById('proj').classList.remove('on');
+  if(e.key===' '&&e.target.tagName!=='INPUT'){e.preventDefault();toggleRun();}
+});
+
+/* ═════ 渲染 ═════ */
+function renderModes(){
+  document.getElementById('modeBtns').innerHTML=Object.keys(MODES).map(m=>
+    `<button class="${m===MODE?'on':''}" onclick="setMode('${m}')" title="${MODES[m].desc}">${MODES[m].label}</button>`).join('');
+}
+function renderRot(){
+  const cur = PHASES[pi].t==='round' ? PHASES[pi].r : 0;
+  let h='<tr><th>組別</th>'+[1,2,3,4].map(r=>`<th class="${r===cur?'now':''}">第 ${r} 輪</th>`).join('')+'</tr>';
+  const cn=['一','二','三','四'];
+  for(let g=0;g<4;g++){
+    h+=`<tr><td>第${cn[g]}組</td>`;
+    for(let r=0;r<4;r++){ h+=`<td class="${r+1===cur?'now':''}">${((g+r)%4)+1}F</td>`; }
+    h+='</tr>';
+  }
+  document.getElementById('rotTable').innerHTML=h;
+}
+function renderStory(){document.getElementById('storyBox').innerHTML=STORY;}
+function renderTraps(){
+  document.getElementById('trapBox').innerHTML=TRAPS.map(t=>
+    `<div class="trap"><div class="tf">${t.f}</div><div class="tq">${t.q}</div><div class="ta">${t.a}</div></div>`).join('');
+}
+function envRow(fi,key,label,obj){
+  const ok=load(`f${fi}_${key}`,false);
+  return `<div class="envrow">
+    <span class="envtag ${ok?'ok':''}">${label}</span>
+    ${ok?`<span class="okmark">✓ 已解開</span><button class="ghost" onclick="unsolve(${fi},'${key}')">重設</button>`
+       :`<input type="text" id="i${fi}${key}" placeholder="輸入密碼"
+           onkeydown="if(event.key==='Enter')solve(${fi},'${key}')">
+         <button onclick="solve(${fi},'${key}')">驗證</button>`}
+    ${teacherMode?`<span class="ans">答案 <b>${obj.code}</b>　${obj.why}</span>`:''}
+  </div>`;
+}
+function renderFloors(){
+  document.getElementById('flBox').innerHTML=FLOORS.map((F,i)=>{
+    const done=load(`f${i}_A`,false)&&load(`f${i}_B`,false);
+    return `<div class="floor ${done?'done':''}">
+      <div class="flhd"><div class="flno">${i+1}F</div>
+        <div class="flname">${F.name}<small>${F.sub}</small></div></div>
+      ${envRow(i,'A','信封 A → B',F.A)}
+      ${envRow(i,'B','信封 B → C',F.B)}
+      ${teacherMode?`<span class="linkback">🔗 回溯：${F.link}</span>`:''}
+      ${done?`<div class="msgline">
+          <div class="fragmini">${F.frag.c}</div>
+          <div class="mt">本層訊息：<b>${F.msg}</b>　│　碎片卡 正面「<b>${F.frag.c}</b>」・背面「<b>${F.frag.n}</b>」
+            <br><span style="color:var(--dim)">${F.teach}</span></div></div>`:''}
+    </div>`;
+  }).join('');
+}
+function solve(fi,key){
+  const F=FLOORS[fi], el=document.getElementById('i'+fi+key);
+  const v=(el.value||'').trim().replace(/\s/g,'');
+  if(v!==F[key].code){el.classList.add('shake');sndBad();setTimeout(()=>el.classList.remove('shake'),400);return;}
+  save(`f${fi}_${key}`,true);sndOk();renderFloors();renderFinal();
+}
+function unsolve(fi,key){save(`f${fi}_${key}`,false);renderFloors();renderFinal();}
+
+function renderHints(){
+  const used=load('hints',[]);
+  document.getElementById('hintCount').innerHTML=
+    `本場已使用 <b>${used.length}</b> / 2 個提示　→　扣 <b>${used.length*5}</b> 分`;
+  document.getElementById('hintBox').innerHTML=HINTS.map((h,i)=>{
+    const open=used.includes(i);
+    return `<div class="hintrow ${open?'open':''}">
+      <span class="lv">第 ${i+1} 級・${i===0?'方向':'半解'}</span>
+      <span class="txt">${open?h:'（尚未使用）'}</span>
+      <button onclick="toggleHint(${i})">${open?'收回':'顯示'}</button></div>`;
+  }).join('');
+}
+function toggleHint(i){
+  let u=load('hints',[]);
+  u=u.includes(i)?u.filter(x=>x!==i):u.concat(i);
+  save('hints',u);renderHints();
+}
+function renderFinal(){
+  document.getElementById('finalFrags').innerHTML=FLOORS.map((F,i)=>{
+    const done=load(`f${i}_A`,false)&&load(`f${i}_B`,false);
+    return done?`<div class="fc">${F.frag.c}</div>`:`<div class="fc q">?</div>`;
+  }).join('');
+  const done=load('final',false);
+  document.getElementById('finalResult').innerHTML=done
+    ? `<div style="margin-top:20px;font-size:28px;color:var(--ok);letter-spacing:.25em">🎉 ${FINAL.phrase}</div>
+       <div class="note" style="margin-top:10px">別回頭 → 還有時間 → 冷靜想 → 就現在</div>`
+    : (teacherMode?`<div style="margin-top:14px"><span class="ans" style="font-size:13px;padding:6px 12px">${FINAL.phrase} → <b>${FINAL.code}</b></span></div>`:'');
+}
+function checkFinal(){
+  const el=document.getElementById('finalIn');
+  const v=(el.value||'').trim().replace(/\s/g,'');
+  if(v===FINAL.code){save('final',true);sndDone();renderFinal();}
+  else{el.classList.add('shake');sndBad();setTimeout(()=>el.classList.remove('shake'),400);}
+}
+/* ═════ 計分 ═════ */
+function renderScore(){
+  const teams=load('teams',['第一組','第二組','第三組','第四組']);
+  const sc=load('scores',{});
+  document.getElementById('scoreBody').innerHTML=teams.map((t,ti)=>{
+    const row=sc[ti]||{};
+    let cnt=0;
+    const cells=[0,1,2,3].map(fi=>{
+      const v=row['f'+fi]!=null?row['f'+fi]:'';
+      if(v===1||v==='1') cnt++;
+      return `<td><input type="text" value="${v}" placeholder="—" onchange="setCell(${ti},'f${fi}',this.value)"></td>`;
+    }).join('');
+    const hv=row.h!=null?row.h:'', bv=row.b!=null?row.b:'';
+    const total=100-(Number(hv)||0)*5-(4-cnt)*15+(Number(bv)||0)*3;
+    return `<tr>
+      <td><input type="text" value="${t}" style="text-align:left" onchange="setTeam(${ti},this.value)"></td>
+      ${cells}
+      <td><input type="text" value="${hv}" placeholder="0" onchange="setCell(${ti},'h',this.value)"></td>
+      <td><input type="text" value="${bv}" placeholder="0" onchange="setCell(${ti},'b',this.value)"></td>
+      <td style="color:var(--accent);font-weight:700">${total}</td></tr>`;
+  }).join('');
+}
+function setCell(ti,key,v){
+  const sc=load('scores',{});sc[ti]=sc[ti]||{};
+  sc[ti][key]=v===''?null:((key==='h'||key==='b')?(Number(v)||0):(v==='1'?1:null));
+  save('scores',sc);renderScore();
+}
+function setTeam(ti,v){const t=load('teams',[]);t[ti]=v;save('teams',t);}
+function addTeam(){const t=load('teams',[]);t.push('第 '+(t.length+1)+' 組');save('teams',t);renderScore();}
+function clearAll(){
+  if(!confirm('確定要清除所有進度與分數嗎？')) return;
+  Object.keys(localStorage).filter(k=>k.startsWith('cd_')).forEach(k=>localStorage.removeItem(k));
+  renderAll();
+}
+function toggleTeacher(){
+  teacherMode=!teacherMode;
+  const b=document.getElementById('tmodeBtn');
+  b.className='tmode'+(teacherMode?' on':'');
+  b.textContent=teacherMode?'🔓 教師模式：開（答案顯示中）':'🔒 教師模式：關';
+  renderFloors();renderFinal();
+}
+function renderAll(){
+  renderModes();renderStory();renderFloors();renderTraps();
+  renderHints();renderFinal();renderScore();paint();
+}
+
+/* ═════ 教師密碼門 ═════ */
+function gh(s){var x=5381;s=s+'|EFETL';for(var i=0;i<s.length;i++){x=((x*33)^s.charCodeAt(i))>>>0;}return x.toString(16);}
+var GH='efa350bf';
+function gopen(){document.getElementById('gate').style.display='none';document.body.classList.remove('locked');
+  try{sessionStorage.setItem('cd_teacher','1');}catch(e){}}
+function gchk(){var el=document.getElementById('gpw');
+  if(gh((el.value||'').trim())!==GH){el.classList.add('shake');
+    setTimeout(function(){el.classList.remove('shake');},400);return;}
+  gopen();}
+document.getElementById('gpw').addEventListener('keydown',function(e){if(e.key==='Enter')gchk();});
+document.body.classList.add('locked');
+try{if(sessionStorage.getItem('cd_teacher')==='1') gopen();}catch(e){}
+
+renderAll();
+</script>
+</body>
+</html>

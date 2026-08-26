@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#be123c">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>4F 人文層｜倒數</title>
+<style>
+:root{--bg:#0b0e14;--panel:#151a24;--panel2:#1c2230;--line:#2b3446;
+--txt:#e9ecf3;--dim:#8b95a9;--ok:#22c55e;--bad:#ef4444;--c1:#be123c;--c2:#fb7185}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+background:var(--bg);color:var(--txt);line-height:1.85;padding-bottom:70px;
+-webkit-text-size-adjust:100%}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(140deg,var(--c1),var(--c2));padding:26px 16px 22px;text-align:center;position:relative;overflow:hidden}
+header .em{font-size:44px;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}
+header h1{font-size:25px;letter-spacing:.14em;margin-top:6px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+header p{font-size:13px;color:rgba(255,255,255,.9);letter-spacing:.06em;margin-top:3px}
+.steps{display:flex;gap:8px;justify-content:center;margin:18px 0 4px}
+.step{flex:1;max-width:96px;text-align:center;padding:9px 4px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:12px;color:var(--dim)}
+.step.on{border-color:var(--c2);color:var(--txt)}
+.step.done{background:#0f2318;border-color:var(--ok);color:#86efac}
+.step b{display:block;font-size:16px;margin-bottom:1px}
+.env{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin:16px 0;overflow:hidden}
+.env.locked{opacity:.55}
+.envhd{display:flex;align-items:center;gap:11px;padding:15px 18px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.envhd .tag{background:var(--c1);color:#fff;font-size:13px;font-weight:800;padding:3px 11px;border-radius:7px;white-space:nowrap}
+.env.locked .envhd .tag{background:#39425a}
+.env.solved .envhd .tag{background:var(--ok);color:#04240f}
+.envhd h2{font-size:16px;flex:1;letter-spacing:.04em}
+.envhd h2 small{display:block;font-size:11.5px;color:var(--dim);font-weight:400;margin-top:1px}
+.envbody{padding:16px 18px 20px}
+.lead{font-size:14px;color:var(--dim);margin-bottom:12px}
+.rule{background:#12203a;border-left:3px solid var(--c2);border-radius:0 9px 9px 0;padding:11px 14px;font-size:14px;margin-bottom:14px;line-height:1.85}
+.keep{background:#2a2208;border:1px dashed #d97706;border-radius:9px;padding:11px 14px;font-size:13.5px;margin-bottom:14px;color:#fcd34d;line-height:1.8}
+.q{font-size:15px;margin-bottom:13px}
+.opt{font-size:14px;color:#c3cadb;padding-left:14px;line-height:2;margin-top:3px}
+.q.bonus{background:#1a1428;border:1px dashed #7c3aed;border-radius:9px;padding:11px 14px;font-size:13.5px;color:#c4b5fd}
+.poem{background:#101520;border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:12px 0;font-size:16px;line-height:2.4;letter-spacing:.1em}
+.poem span{color:var(--dim);font-size:12px;margin-right:9px}
+.formula{text-align:center;font-size:16px;line-height:2;margin:10px 0;font-family:"Times New Roman",serif;background:#101520;border-radius:9px;padding:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+table td,table th{border:1px solid var(--line);padding:6px 8px}
+table th{background:var(--panel2);color:var(--dim);font-size:12px}
+table .n{background:var(--panel2);text-align:center;font-weight:700;width:13%}
+table .w{text-align:center;font-size:17px;font-weight:800;width:15%;color:var(--c2)}
+table .c{background:var(--panel2);text-align:center;font-weight:700}
+table.bh td{text-align:center;padding:5px 3px}
+table.yr .y{text-align:center}
+.acc{border:1px solid var(--line);border-radius:11px;margin-bottom:10px;overflow:hidden;background:#101520}
+.acc summary{padding:12px 15px;font-size:14px;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::before{content:"\25B8";color:var(--c2);transition:transform .2s;display:inline-block}
+.acc[open] summary::before{transform:rotate(90deg)}
+.acc .ab{padding:0 15px 15px;font-size:14px}
+.acc .ab p{margin-bottom:7px}
+.small{font-size:12.5px;color:var(--dim);margin-top:6px}
+.pw{display:flex;gap:9px;margin-top:16px}
+.pw input{flex:1;background:#0b0e14;color:var(--txt);border:2px solid var(--line);border-radius:11px;
+padding:14px 12px;font-size:21px;letter-spacing:.18em;text-align:center;font-family:inherit;min-width:0}
+.pw input:focus{outline:none;border-color:var(--c2)}
+.pw input.shake{animation:sh .35s;border-color:var(--bad)}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.pw button{background:var(--c1);color:#fff;border:0;border-radius:11px;padding:14px 22px;font-size:16px;font-weight:800;font-family:inherit;cursor:pointer;white-space:nowrap}
+.pw button:active{transform:scale(.97)}
+.lockmsg{text-align:center;padding:26px 18px;color:var(--dim);font-size:14px}
+.lockmsg .lk{font-size:32px;display:block;margin-bottom:8px;opacity:.5}
+.done{text-align:center;padding:8px 0 4px}
+.frag{width:118px;height:118px;background:#fff;color:#111;border-radius:15px;display:flex;align-items:center;
+justify-content:center;font-size:56px;font-weight:800;margin:16px auto 8px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.fragn{color:var(--dim);font-size:13.5px}
+.msgbig{font-size:27px;font-weight:800;letter-spacing:.28em;color:var(--ok);margin:14px 0 6px}
+.nav{display:flex;gap:10px;margin:22px 0 8px}
+.nav a{flex:1;text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:11px;
+padding:13px 8px;color:var(--txt);text-decoration:none;font-size:14px}
+.nav a:active{background:var(--panel)}
+.honor{background:#1a0f12;border:1px solid #5a2027;border-radius:12px;padding:14px 16px;margin:20px 0;font-size:13px;color:#fca5a5;line-height:1.9}
+.honor b{color:#fff}
+footer{text-align:center;color:#4a5568;font-size:12px;margin-top:26px;padding:12px}
+.reset{background:none;border:0;color:#4a5568;font-size:12px;text-decoration:underline;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <span class="em">⚖️</span>
+  <h1>4F　人文層</h1>
+  <p>公民（國二）＋經濟</p>
+</header>
+
+<div class="wrap">
+  <div class="steps">
+    <div class="step" id="sA"><b>A</b>找出線索</div>
+    <div class="step" id="sB"><b>B</b>主謎題</div>
+    <div class="step" id="sC"><b>C</b>回溯</div>
+  </div>
+
+  <!-- 信封 A -->
+  <div class="env" id="eA">
+    <div class="envhd"><span class="tag">信封 A</span>
+      <h2>找出錯的三句<small>建議 4 分鐘</small></h2></div>
+    <div class="envbody">
+      <div class="lead">下面六句話，其中<b>剛好有三句是錯的</b>。</div>
+      <div class="rule">把那<b>三句的題號</b>由小到大寫出來，就是信封 B 的密碼。</div>
+      <div class="keep">✍️ 這三個題號等一下<b>信封 C 還要用</b>，一定要寫在紙上。</div>
+      
+<div class="q"><b>①</b> 依民法規定，年滿 20 歲為成年人。</div>
+<div class="q"><b>②</b> 我國中央政府依憲法規定，設有五院。</div>
+<div class="q"><b>③</b> 立法院院長由總統任命。</div>
+<div class="q"><b>④</b> 依刑法規定，未滿 14 歲人之行為不罰。</div>
+<div class="q"><b>⑤</b> 機會成本是指所有被放棄的選項，其價值的總和。</div>
+<div class="q"><b>⑥</b> 需求法則：其他條件不變下，價格上升則需求量減少。</div>
+      <details class="acc"><summary>📎 附件｜五院職權表</summary><div class="ab">
+<table class="yr">
+<tr><th>編號</th><th>院</th><th>主要職權</th><th>字</th></tr>
+<tr><td class="n">1</td><td>行政院</td><td>國家最高行政機關</td><td class="w">就</td></tr>
+<tr><td class="n">2</td><td>立法院</td><td>制定法律、審查預算</td><td class="w">走</td></tr>
+<tr><td class="n">3</td><td>司法院</td><td>審判、大法官釋憲</td><td class="w">現</td></tr>
+<tr><td class="n">4</td><td>考試院</td><td>公務人員考試、銓敘</td><td class="w">停</td></tr>
+<tr><td class="n">5</td><td>監察院</td><td>彈劾、糾舉、<b>審計</b></td><td class="w">在</td></tr>
+</table></div></details>
+<details class="acc"><summary>📎 附件｜法定年齡表</summary><div class="ab">
+<table class="yr">
+<tr><th>年齡</th><th>意義</th><th>依據</th></tr>
+<tr><td><b>14 歲</b></td><td>未滿此歲數，行為不罰</td><td>刑法 §18</td></tr>
+<tr><td><b>18 歲</b></td><td>民法成年、完全行為能力、公民投票權</td><td>民法 §12</td></tr>
+<tr><td><b>20 歲</b></td><td>選舉權</td><td>憲法 §130</td></tr>
+<tr><td><b>23 歲</b></td><td>被選舉權</td><td>憲法 §130</td></tr>
+</table></div></details>
+      <div class="pw">
+        <input type="text" id="iA" inputmode="text" autocomplete="off" placeholder="三位數">
+        <button onclick="chk('A')">解鎖 B</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 信封 B -->
+  <div class="env locked" id="eB">
+    <div class="envhd"><span class="tag">信封 B</span>
+      <h2>經濟 ＋ 政府組織<small>建議 5 分鐘</small></h2></div>
+    <div class="envbody" id="bB">
+      <div class="lockmsg"><span class="lk">🔒</span>算出<b>信封 A</b> 的答案才能打開</div>
+    </div>
+    <script type="text/plain" id="pB">pWL7NuotSpR71M9zaX2Ri358LcL++SIuwzPMRlPNZ0UZAVeWyrziXvJt0mPKok483vtNncwrOVK0e6W8wXfcj6YBD2XpaI7eVXo8UcbgQld1U3xJjx04PV/NHC21PeaGuhFbikwCSnYAZQu1+FMXXYgJ1M+m0DZPTJao7AM/OxMSeF8t0wDcf3kJxddnxSqSQXPDwF5GRFeb3ehTXQ6FRubKlp9MW3QYpa3HU5oiMeh9R6B4XE7PJDvoVjsrB1ncvyyPteVgpO8DK1f/+N6A6eZCXeCR6n9E/R9vb2dI4z4ldWxr3Kcg6HW/+eBQaA1OvVpPFUPLijNDpYODp5HOYf8LmmdTdg+mQLEhqToO9Xa7BcsCnkuoTTMYSiKjjnzGbhV0U18n/kjamtFGaH6JTOrLdTpz7T52AkauWry4DmhrxfOfRUnm0PpIysPR1Eq81Wef1fOGLw9VQdrY5hdjIUYY+eSzmCrD8pOjh7xiBMQZvVw1HONhesEaB1fZ4Q+E4coysgqSJA08+1cohH62GAwmSUbnDkjiob/f3WLjBj+izZ0qMOy6WZTO/cYFXmQU2ybVh6mm/VhYhzjutdChJ0NbHMaD6XqYk7M/HHemO/uMMOkTZ5EzERFVe5hMsQuR0iZ1/6io1MUPMUWWcw7SvwPtybkgvyUW9yjh1w+rqIHYikdJkn5x77/BUZbTa3ulr73XIzoHhcsGohtTB+tppMoq96yP6dSWLkHuw+rBfwVPeEnJEWJYOwo+eBwiCon1JxeMxJlhRje4QMhQWh/SAPJB1z8tVLWZu7kbmBnwkvV+U+gYcS7rLhPMrKpHN12jydvKAtQMaJiqEHgTpAVYOb944/r2rX5lMPWsLJ0II0D3EtHIW8IXaBgvbP3RJhfuOW37ASiUJ05FL7YMOpaKjjFuaxdY4oZsQpXL2Oc6x7NmxBuTgZTs3DDQC4wkwsMbKwm1yEtJHyinXkJ6tLc+CuMKABz+/1w83ac7cYUuOlRx4+r7I6mCEtJMEoPoJ/T4YkenzjxE4HtfwdfX7nufotJxtrwYFsGoe9NYQZsSxEfqWjFdHi+RaMX6rx8djUYxlnP559Co0sbM6Enl2glQDhXPng==</script>
+  </div>
+
+  <!-- 信封 C -->
+  <div class="env locked" id="eC">
+    <div class="envhd"><span class="tag">信封 C</span>
+      <h2>%C_TITLE%<small>建議 5 分鐘</small></h2></div>
+    <div class="envbody" id="bC">
+      <div class="lockmsg"><span class="lk">🔒</span>算出<b>信封 B</b> 的答案才能打開</div>
+    </div>
+    <script type="text/plain" id="pC">WKCXX+a/vM/yYPbeMd/WSxQv1q9G3Rujq8VISKjthL1aQvbwkk14wWwNdrnNv7i29s4lWOo+89IkeAIO3JYp3YoomSHmPUboWvhJIfxDwfuABYYmn2p9Id3zpwZDV+A7uK/50Y+YSg5qcJG1SfINKalEC8u3r2QkUlz2t2GTnsJUU80RGIUy1xePEJPM08ezL9XQQJiapVK4HZWcMe/uQZK6S8cKUl4YX6JuxbTF8aooLyB60ni3ImWNxIadKsLjSPqMxvhx++uY2K0GKBiZcsKyTSSbv8PVbBoXxvtRWQCT4ly9CDvAD46drXWiUEEeozwhJ0ga+SZQSL3SnLcFpbLnpuWjN27cFYUdi/PyK+p0aTYCnT36ANg/9+MZCjkTyvYBWYOG68xaKX4iz731lJKc7NsK3Rf2tcUUEZpnQ/9hyP8JBmke6Uqudru0fX5qYEuv5eTxoBxmZKoJzNBy3z/VZsxgGznaBapvUZdvAkcQ+521eRlNncBs6sJ1b/IWlXMYoVusd+sQ01mHvNUXimUcjNHE9RIgnlFZyE3O4dm7flmgoeojgUP7RVBuId0rhtt9JHD3szh1mjvwQp2J7/8eWMR3C99lZUZzaFG3rs8Gli/iLxyMYnzKPe1iVhfN4KQeDjuThkZgEgPZjhhU8+OMq9AoAcwvnU4FxwMxpAMVN5js0OV1WnJhQTYNCg==</script>
+    <script type="text/plain" id="pD">ElYMUI7n29c00tiOlDAej8IpLlavjmdtrynW9oZnIq7MUFWhLPXTFk7i2umRv1CKX6c3E0P53vgIfR/s8Ub9+rRStKbqKjwsa0zrCkc5eSKXdwoFe/7L/dXodE0TcD75nmDqhOx3bg1q+TQoFtxIw0Gt+X0Kw6rMr1CYFDVLhkt6YQFOeCcRa0d2uXqICdTC34Cl+l4byckv3dHOca40n85jrn9DYt58hqxYSmC+wRycp95mvPIJoeWbO6JhGkwCEXYLYo30zDAMtA5WbcspRf96cfj2RpkLXFQfpKLCsFDMY36Pp9wD9ZqByEl3xa6TqbsbpmqcEhe09fhsHz0KxPQA3q64afSj8jo1qwbOgNkDWz/eAn+MIDnukeuZUGpNCOBMY0ZLbkMMIJKdlZ5Ho0dSTJTQxiVJxuuVVWGXcI64T45Lzse7b2vq719i77SOvLiTI/BkEczUSaK1hCspTtqT5tsup39b20DnHLB26Xfr2hQdRBUh0gPLOy6DNVo1YG1azBD3fuo/El6SMxGkd7OUlKqFnR4EiPbQ6/MizYg1xY5K7TqPYE04gSYrZtTON9z1cYloX2XGtlQZHEg1WoKfE/6l62qhPwX3g3nmYs1Pa/wDwohLlvEnNyE59ADhOiLr03gRT3EQtvDKnDb5uRfR3fRVp/zeDdyR543gXNMTMMTPutpEIHhympeqtPl88axMf8HOspvyqdRJGnlKcqoJ2ai4UVl/hRvVsNP/vaToEIHVJzUOp1CLCnBjXCPDYiMkSc/OBIkpyviR0RyXzJnQ</script>
+  </div>
+
+  <div class="nav">
+    <a href="../">← 回入口</a>
+    <a href="#" onclick="rst();return false;">↺ 重做這一層</a>
+  </div>
+
+  <div class="honor">
+    <b>榮譽規則</b><br>
+    這一頁只是「信封」，不是計算機。<br>
+    <b>所有計算請用紙筆。</b>不要用這支手機查答案——<br>
+    信封 C 要用信封 A 的答案，查得到題目也解不出來。
+  </div>
+
+  <footer>倒數・國三強化版　│　teaching.efetl.com</footer>
+</div>
+
+<script>
+var F='4f';
+function h(s){var x=5381;s=s+'|EFETL';for(var i=0;i<s.length;i++){x=((x*33)^s.charCodeAt(i))>>>0;}return x.toString(16);}
+var H={A:'bea0a790',B:'4638c3c4',C:'64b83920'};
+function ld(){try{return JSON.parse(localStorage.getItem('cd_'+F)||'{}');}catch(e){return {};}}
+function sv(o){try{localStorage.setItem('cd_'+F,JSON.stringify(o));}catch(e){}}
+function beep(f,d,t){try{var A=window._ac||(window._ac=new (window.AudioContext||window.webkitAudioContext)());
+var o=A.createOscillator(),g=A.createGain();o.type=t||'sine';o.frequency.value=f;o.connect(g);g.connect(A.destination);
+g.gain.setValueAtTime(.15,A.currentTime);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+d);
+o.start();o.stop(A.currentTime+d);}catch(e){}}
+function ok(){beep(660,.13);setTimeout(function(){beep(880,.22);},110);}
+function bad(){beep(180,.28,'square');}
+function fanfare(){[523,659,784,1047].forEach(function(f,i){setTimeout(function(){beep(f,.3);},i*130);});}
+
+function ks(pw,n){var x=parseInt(h(pw),16)>>>0;if(!x)x=1;var o=[];
+for(var i=0;i<n;i++){x^=(x<<13);x>>>=0;x^=(x>>>17);x>>>=0;x^=(x<<5);x>>>=0;o.push(x&255);}return o;}
+function dec(pw,id){
+  var b64=document.getElementById(id).textContent.trim();
+  var s=atob(b64),n=s.length,k=ks(pw,n),a=new Uint8Array(n);
+  for(var i=0;i<n;i++)a[i]=(s.charCodeAt(i)^k[i])&255;
+  return new TextDecoder('utf-8').decode(a);
+}
+function open(k,pw){
+  var e=document.getElementById('e'+k), b=document.getElementById('b'+k);
+  e.classList.remove('locked');
+  b.innerHTML=dec(pw,'p'+k);
+  var inp=b.querySelector('input');
+  if(inp) inp.addEventListener('keydown',function(ev){if(ev.key==='Enter')chk(k);});
+}
+function finish(pw){
+  var e=document.getElementById('eC'), b=document.getElementById('bC');
+  e.classList.remove('locked'); e.classList.add('solved');
+  b.innerHTML=dec(pw,'pD');
+}
+function paint(){
+  var s=ld();
+  ['A','B','C'].forEach(function(k){
+    var el=document.getElementById('s'+k);
+    el.className='step'+(s[k]?' done':'');
+  });
+  if(s.A){document.getElementById('eA').classList.add('solved');
+    var ia=document.getElementById('iA'); if(ia){ia.value='✓ 已解開';ia.disabled=true;}
+    open('B',s.A);}
+  if(s.B){document.getElementById('eB').classList.add('solved');
+    var ib=document.getElementById('iB'); if(ib){ib.value='✓ 已解開';ib.disabled=true;}
+    open('C',s.B);}
+  if(s.C){finish(s.C);}
+  if(!s.A) document.getElementById('sA').className='step on';
+  else if(!s.B) document.getElementById('sB').className='step on';
+  else if(!s.C) document.getElementById('sC').className='step on';
+}
+function chk(k){
+  var el=document.getElementById('i'+k);
+  var v=(el.value||'').trim().replace(/[\s,，、]/g,'');
+  if(h(v)!==H[k]){
+    el.classList.add('shake'); bad();
+    setTimeout(function(){el.classList.remove('shake');},400);
+    return;
+  }
+  var s=ld(); s[k]=v; sv(s);
+  if(k==='C'){fanfare();}else{ok();}
+  paint();
+  var t=document.getElementById(k==='C'?'eC':'e'+(k==='A'?'B':'C'));
+  if(t) setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},150);
+}
+function rst(){
+  if(!confirm('確定要重做這一層嗎？進度會清除。')) return;
+  try{localStorage.removeItem('cd_'+F);}catch(e){}
+  location.reload();
+}
+paint();
+</script>
+</body>
+</html>
