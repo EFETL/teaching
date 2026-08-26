@@ -203,6 +203,18 @@ function render(){
 }
 
 function mainEl(){return document.querySelector('.main');}
+/* 只更新時鐘，不動 DOM，避免捲動位置被重設 */
+function updClock(){
+  var c=document.querySelector('.clock');
+  if(!c)return;
+  c.textContent=fmt(S.remain);
+  c.className='clock'+(S.remain<=60?' danger':S.remain<=300?' warn':'');
+}
+/* 畫面簽章：只有這些變了才需要重畫 */
+function sig(){
+  return [S.stage,S.show,S.fs,S.finalOpen?1:0,JSON.stringify(S.unlocked||{})].join('|');
+}
+var lastSig=null;
 function updHint(){
   var m=mainEl(), h=document.getElementById('mh');
   if(!m||!h)return;
@@ -229,7 +241,7 @@ function doCmd(){
 }
 /* 自動縮到剛好一頁 */
 function autofit(){
-  var f=1.4;
+  var f=1.4, keep=(mainEl()?mainEl().scrollTop:0);
   for(var i=0;i<20;i++){
     document.documentElement.style.setProperty('--fs',f);
     var m=mainEl(); if(!m)break;
@@ -237,11 +249,19 @@ function autofit(){
     f-=0.05; if(f<0.7){f=0.7;break;}
   }
   S.fs=Math.round(f*100)/100;
+  lastSig=sig();
+  if(mainEl()) mainEl().scrollTop=keep;
   try{ if(window._bc) window._bc.postMessage({__fs:S.fs}); }catch(e){}
   setTimeout(updHint,30);
 }
 /* ── 接收控制台的狀態 ── */
-function apply(d){ S=Object.assign(S,d); render(); bindScroll(); updHint(); doCmd(); }
+function apply(d){
+  S=Object.assign(S,d);
+  var g=sig();
+  if(g===lastSig){ updClock(); doCmd(); return; }
+  lastSig=g;
+  render(); bindScroll(); updHint(); doCmd();
+}
 try{
   var bc=new BroadcastChannel('cd_show');
   window._bc=bc;
@@ -262,7 +282,7 @@ window.addEventListener('storage',function(e){
   if(e.key==='cd_show_state'&&e.newValue){ try{apply(JSON.parse(e.newValue));}catch(x){} }
 });
 try{ var v=localStorage.getItem('cd_show_state'); if(v) S=Object.assign(S,JSON.parse(v)); }catch(e){}
-render();bindScroll();
+lastSig=sig();render();bindScroll();updHint();
 </script>
 </body>
 </html>
