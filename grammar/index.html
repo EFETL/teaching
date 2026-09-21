@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>國高中文法 Grammar · 全民補習班</title>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:#22303f;line-height:1.6;background:linear-gradient(180deg,#eef6ff,#fff4f7 70%);min-height:100vh;}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px;}
+  .home{display:inline-block;margin-bottom:14px;color:#2b6cb0;font-weight:800;text-decoration:none;
+    background:#fff;padding:7px 16px;border-radius:20px;box-shadow:0 3px 10px rgba(43,108,176,.18);font-size:.9rem;}
+
+  header.hero{background:linear-gradient(135deg,#667eea,#764ba2 55%,#8e6bc8);color:#fff;
+    border-radius:22px;padding:30px 26px;margin-bottom:22px;box-shadow:0 10px 26px rgba(102,126,234,.32);}
+  header.hero h1{margin:0 0 8px;font-size:1.85rem;}
+  header.hero p{margin:0;opacity:.95;font-size:.96rem;}
+  header.hero .badge{display:inline-block;margin-top:14px;background:rgba(255,255,255,.22);
+    padding:8px 14px;border-radius:12px;font-size:.85rem;}
+
+  /* ---- 搜尋 ---- */
+  .searchbox{background:#fff;border-radius:18px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 5px 18px rgba(43,140,255,.14);border:1px solid #eaf1fb;position:sticky;top:8px;z-index:20;}
+  .searchbox label{display:block;font-weight:800;font-size:.9rem;color:#33414f;margin-bottom:8px;}
+  .searchbox .row{display:flex;gap:8px;align-items:center;}
+  #q{flex:1;font-family:inherit;font-size:1.02rem;padding:12px 16px;border-radius:14px;
+    border:2px solid #dbe6f2;outline:none;background:#f8fbff;min-width:0;}
+  #q:focus{border-color:#667eea;background:#fff;}
+  #clear{border:0;background:#eef2f9;color:#7a8694;font-weight:800;cursor:pointer;
+    border-radius:12px;padding:12px 14px;font-family:inherit;font-size:.9rem;}
+  .tips{margin-top:8px;font-size:.8rem;color:#98a4b0;}
+  .tips b{color:#667eea;}
+  .cats{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;}
+  .cat{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:.83rem;
+    padding:6px 13px;border-radius:16px;background:#eef2f9;color:#5a6875;}
+  .cat.on{background:#667eea;color:#fff;}
+  .count{font-size:.83rem;color:#7a8694;margin:0 0 12px;font-weight:700;}
+
+  /* ---- 卡片 ---- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
+  .card{background:#fff;border-radius:16px;padding:16px 18px;text-decoration:none;color:inherit;
+    box-shadow:0 4px 14px rgba(43,140,255,.12);border:1px solid #eaf1fb;display:block;
+    transition:transform .14s,box-shadow .14s;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(43,140,255,.2);}
+  .card .top{display:flex;align-items:center;gap:9px;margin-bottom:5px;}
+  .card .ico{font-size:1.5rem;line-height:1;}
+  .card .zh{font-weight:800;font-size:1.06rem;}
+  .card .en{font-size:.78rem;color:#98a4b0;margin-bottom:8px;}
+  .card .fx{font-family:Georgia,serif;font-size:.88rem;background:#f4f8ff;color:#2b6cb0;
+    border-radius:9px;padding:7px 10px;margin-bottom:8px;border-left:3px solid #9cc0ea;word-break:break-word;}
+  .card .desc{font-size:.84rem;color:#5a6875;margin-bottom:9px;}
+  .card .kws{display:flex;flex-wrap:wrap;gap:5px;}
+  .card .kw{font-size:.72rem;background:#f0f3f8;color:#7a8694;border-radius:10px;padding:2px 8px;}
+  .card .kw.hit{background:#ffe3ef;color:#d6336c;font-weight:700;}
+  .card .tagcat{margin-left:auto;font-size:.72rem;background:#ede9fb;color:#6b4bb8;
+    border-radius:10px;padding:3px 9px;font-weight:700;white-space:nowrap;}
+
+  /* ---- 索引表 ---- */
+  .idx{background:#fff;border-radius:18px;padding:18px 20px;margin-top:26px;
+    box-shadow:0 5px 16px rgba(43,140,255,.12);border:1px solid #eaf1fb;}
+  .idx h2{margin:0 0 3px;font-size:1.12rem;color:#33414f;}
+  .idx .sub{margin:0 0 12px;font-size:.84rem;color:#7a8694;}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;}
+  th{text-align:left;padding:8px 6px;border-bottom:2px solid #dbe6f2;color:#5a6875;font-size:.82rem;white-space:nowrap;}
+  td{padding:8px 6px;border-bottom:1px solid #f0f3f8;vertical-align:top;}
+  td.p{font-family:Georgia,serif;color:#2b6cb0;font-size:.85rem;}
+  td a{color:#667eea;font-weight:800;text-decoration:none;white-space:nowrap;}
+  td a:hover{text-decoration:underline;}
+  .none{text-align:center;color:#98a4b0;padding:36px 10px;font-size:.95rem;}
+  .none b{color:#667eea;}
+  footer{text-align:center;color:#7a8694;font-size:.82rem;margin-top:36px;}
+  @media(max-width:600px){ header.hero h1{font-size:1.45rem;} .searchbox{position:static;} th.hidem,td.hidem{display:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="/">← 回主選單</a>
+
+  <header class="hero">
+    <h1>📚 國高中文法　Grammar</h1>
+    <p>國中到高中的文法單元總索引。每個單元都是「示範說明 → 填空練習 → 即時批改」的互動頁，可直接投影上課或指派給學生。</p>
+    <span class="badge" id="hbadge"></span>
+  </header>
+
+  <div class="searchbox">
+    <label for="q">🔍 搜尋文法：打中文、英文、公式或關鍵字都可以</label>
+    <div class="row">
+      <input id="q" type="search" placeholder="例如：被動、passive、by、until、才、完成式、whose、我也不…" autocomplete="off">
+      <button id="clear">清除</button>
+    </div>
+    <div class="tips">試試看：<b>被</b>　<b>until</b>　<b>才</b>　<b>p.p.</b>　<b>whose</b>　<b>要不是</b>　<b>倒裝</b>　<b>學測</b></div>
+    <div class="cats" id="cats"></div>
+  </div>
+
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+  <div class="none" id="none" style="display:none">
+    找不到「<b id="noneq"></b>」相關的文法單元。<br>換個說法試試，例如用公式（<b>have been</b>）、中文語意（<b>被…</b>）或文法名稱（<b>假設語氣</b>）。
+  </div>
+
+  <div class="idx">
+    <h2>📑 完整索引表</h2>
+    <p class="sub">依分類排列，會跟著上面的搜尋一起過濾。</p>
+    <table>
+      <thead><tr><th>分類</th><th>文法單元</th><th class="hidem">核心公式</th><th>前往</th></tr></thead>
+      <tbody id="tb"></tbody>
+    </table>
+  </div>
+
+  <footer>全民補習班　線上教學　·　teaching.efetl.com　|　國高中文法</footer>
+</div>
+
+<script>
+const U=[
+{f:"grammar-be-tenses.html",ico:"⏰",zh:"be 動詞三態變身",en:"Be Verb · Three Tenses",cat:"時態",
+ fx:"am/is/are → was/were → will be",desc:"同一句話在現在／過去／未來，be 動詞怎麼換。",
+ kw:["be動詞","am","is","are","was","were","will be","三態","現在式","過去式","未來式","國一","基礎","時態"]},
+
+{f:"grammar-perfect.html",ico:"⏱️",zh:"現在完成式",en:"Present Perfect",cat:"時態",
+ fx:"have / has + p.p.",desc:"從過去持續到現在：已經、曾經、還沒。搭配 since、for、already、yet。",
+ kw:["現在完成式","have","has","p.p.","過去分詞","already","yet","since","for","ever","never","have been","has been","已經","曾經","還沒","國二","時態"]},
+
+{f:"grammar-pastperfect.html",ico:"⏮️",zh:"過去完成式",en:"Past Perfect",cat:"時態",
+ fx:"had + p.p.",desc:"比過去更早發生的事：兩件過去的事誰先誰後。",
+ kw:["過去完成式","had","p.p.","過去分詞","before","after","by the time","had been","更早","先發生","國三","時態"]},
+
+{f:"grammar-futureperfect.html",ico:"⏭️",zh:"未來完成式",en:"Future Perfect",cat:"時態",
+ fx:"will have + p.p.",desc:"到未來某個時間點就已經完成了。常搭配 by + 未來時間。",
+ kw:["未來完成式","will have","p.p.","by next","by the time","will have been","到…就已經","高中","學測","時態"]},
+
+{f:"grammar-passive.html",ico:"🔄",zh:"被動式",en:"Passive Voice",cat:"語態",
+ fx:"be + p.p. (+ by …)",desc:"主動變被動：受詞搬到句首，動詞改 be + 過去分詞。十種時態全收。",
+ kw:["被動","被動式","passive","be","p.p.","過去分詞","by","is done","was done","has been","have been","will be","主動變被動","語態","被動語態","受詞","被…","國三","學測"]},
+
+{f:"grammar-passive-50.html",ico:"✍️",zh:"被動式改寫 50 題",en:"Passive Voice · 50 Drills",cat:"語態",
+ fx:"The car ___ washed by Mom.",desc:"主詞受詞全程不變，一次只改一個地方。含否定疑問、雙受詞、使役動詞、片語動詞，附列印版 PDF。",
+ kw:["被動","被動式","passive","p.p.","過去分詞","be","by","改寫","句子改寫","50題","練習卷","考卷","列印","PDF","雙受詞","使役","感官動詞","片語動詞","take care of","get","be made to","語態","考卷","作業"]},
+
+{f:"grammar-relative.html",ico:"🔗",zh:"形容詞子句",en:"Relative Clause",cat:"子句",
+ fx:"先行詞 + who / which / that / whose …",desc:"用一個子句去修飾前面的名詞，把兩句合併成一句。十種用法。",
+ kw:["形容詞子句","關係代名詞","關係子句","relative","who","whom","which","that","whose","where","when","先行詞","合併","兩句合併","修飾","子句","國三","學測"]},
+
+{f:"grammar-subjunctive.html",ico:"🧩",zh:"假設語氣",en:"Subjunctive Mood",cat:"句型轉換",
+ fx:"If + 過去式, would + 原形",desc:"與現在／過去事實相反、與未來的假設。要不是…就…。",
+ kw:["假設語氣","subjunctive","if","were","would","could","had","would have","與事實相反","要不是","假如","萬一","wish","句型","高中","學測"]},
+
+{f:"grammar-negative.html",ico:"🚫",zh:"否定敘述的附和",en:"Negative Agreement",cat:"句型轉換",
+ fx:"Neither / Nor + 助動詞 + 主詞",desc:"「我也不…」怎麼說。肯定附和 so do I 與否定附和的十種類型。",
+ kw:["附和","否定","neither","nor","either","so do I","me neither","我也不","我也是","附和句","助動詞","句型"]},
+
+{f:"grammar-never-inversion.html",ico:"🔃",zh:"Never 句首倒裝",en:"Negative Inversion",cat:"倒裝",
+ fx:"Never + 助動詞 + 主詞 + 原形",desc:"否定副詞放句首，後面主詞助動詞要倒裝。",
+ kw:["倒裝","倒裝句","inversion","never","seldom","hardly","rarely","not only","little","否定副詞","句首","高中","學測"]},
+
+{f:"grammar-suggest-that.html",ico:"💡",zh:"suggest that + 原形",en:"suggest / insist that + (should) V",cat:"句型轉換",
+ fx:"suggest that + 主詞 + (should) + 原形",desc:"建議、堅持、要求後面的 that 子句，動詞一律用原形。",
+ kw:["suggest","insist","demand","require","request","recommend","that","should","原形動詞","原形","建議","堅持","要求","兩句合併","高中","學測"]},
+
+{f:"grammar-different-from.html",ico:"🔀",zh:"和…不一樣",en:"different from / not the same as",cat:"同義改寫",
+ fx:"A is different from B ＝ A is not the same as B",desc:"同一個意思的兩種寫法，句型互換。",
+ kw:["different from","not the same as","similar to","一樣","不一樣","相同","同義","改寫","句型轉換","比較"]},
+
+{f:"grammar-until-not-until.html",ico:"⏳",zh:"until / not until（第 1 回）",en:"until / not until",cat:"連接詞",
+ fx:"not … until ＝ 直到…才…",desc:"until 是「一直到」，not until 是「直到…才」。兩者差在主要子句的肯定否定。",
+ kw:["until","not until","till","直到","才","一直到","連接詞","時間連接詞","倒裝","It was not until","國三","學測"]},
+
+{f:"grammar-until-not-until-2.html",ico:"⏳",zh:"until / not until（第 2 回）",en:"until / not until · Part 2",cat:"連接詞",
+ fx:"It was not until … that …",desc:"第一回的進階練習，含 It was not until … that … 強調句與倒裝。",
+ kw:["until","not until","till","直到","才","強調句","It was not until","that","倒裝","連接詞","進階","第二回","學測"]}
+];
+
+const CATS=["全部","時態","語態","子句","句型轉換","倒裝","連接詞","同義改寫"];
+let cur="全部", kwq="";
+const grid=document.getElementById('grid'), tb=document.getElementById('tb'),
+      cnt=document.getElementById('count'), none=document.getElementById('none');
+
+document.getElementById('hbadge').textContent=
+  '目前收錄 '+U.length+' 個單元：'+[...new Set(U.map(u=>u.cat))].join(' · ');
+
+const cats=document.getElementById('cats');
+CATS.forEach(c=>{
+  const b=document.createElement('button');
+  b.className='cat'+(c==="全部"?' on':''); b.textContent=c==="全部"?c:c+'（'+U.filter(u=>u.cat===c).length+'）';
+  b.onclick=()=>{cur=c;[...cats.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');render();};
+  cats.appendChild(b);
+});
+
+function hit(u,t){
+  if(!t) return true;
+  return (u.zh+' '+u.en+' '+u.fx+' '+u.desc+' '+u.cat+' '+u.kw.join(' ')).toLowerCase().includes(t);
+}
+function render(){
+  const t=kwq.trim().toLowerCase();
+  const list=U.filter(u=>(cur==="全部"||u.cat===cur)&&hit(u,t));
+  grid.innerHTML=list.map(u=>{
+    const kws=u.kw.filter(k=>t&&k.toLowerCase().includes(t));
+    const show=(kws.length?kws:u.kw).slice(0,6);
+    return `<a class="card" href="${u.f}">
+      <div class="top"><span class="ico">${u.ico}</span><span class="zh">${u.zh}</span>
+      <span class="tagcat">${u.cat}</span></div>
+      <div class="en">${u.en}</div>
+      <div class="fx">${u.fx}</div>
+      <div class="desc">${u.desc}</div>
+      <div class="kws">${show.map(k=>`<span class="kw${kws.includes(k)?' hit':''}">${k}</span>`).join('')}</div>
+    </a>`;}).join('');
+  tb.innerHTML=list.map(u=>`<tr><td>${u.cat}</td><td><b>${u.zh}</b><br><span style="color:#98a4b0;font-size:.8rem">${u.en}</span></td>
+    <td class="p hidem">${u.fx}</td><td><a href="${u.f}">開啟 →</a></td></tr>`).join('');
+  cnt.textContent=t||cur!=="全部" ? `符合條件：${list.length} 個單元` : `共 ${U.length} 個文法單元`;
+  none.style.display=list.length?'none':'block';
+  document.getElementById('noneq').textContent=kwq;
+}
+const q=document.getElementById('q');
+q.addEventListener('input',e=>{kwq=e.target.value;render();});
+document.getElementById('clear').onclick=()=>{q.value='';kwq='';q.focus();render();};
+document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==q){e.preventDefault();q.focus();}});
+render();
+</script>
+</body>
+</html>
