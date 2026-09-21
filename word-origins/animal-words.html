@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>動物名字的秘密 · 英文來源故事</title>
+<style>
+  :root{
+    --bg:#0e0f26; --bg-deep:#08091a; --panel:#171a3d; --panel-edge:rgba(244,241,232,0.09);
+    --ink:#f3efe3; --ink-dim:#aeb0d6; --ink-faint:#7577a3; --gold:#f0b429;
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%}
+  html{background:var(--bg-deep);font-size:16px}
+  body{
+    background:radial-gradient(ellipse at 50% -10%,#1b1e46 0%,var(--bg) 45%,var(--bg-deep) 100%);
+    background-attachment:fixed;color:var(--ink);font-family:var(--sans);
+    font-size:1rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:var(--gold)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  ::selection{background:var(--gold);color:#1a1a1a}
+
+  /* HERO */
+  .hero{position:relative;padding:76px 0 52px;text-align:center;overflow:hidden}
+  #sky{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-content{position:relative;z-index:2}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 18px}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5.6vw,3.8rem);margin:0 0 6px;text-wrap:balance;letter-spacing:.01em}
+  .hero-sub{font-family:var(--serif);font-style:italic;color:var(--ink-dim);font-size:1.05rem;margin:0 0 24px}
+  .hero-copy{max-width:640px;margin:0 auto;color:var(--ink-dim);font-size:1.02rem}
+  .hero-copy b{color:var(--ink);font-weight:600}
+  .crumbs{position:relative;z-index:2;margin:26px 0 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .crumbs a{display:inline-block;font-size:.95rem;text-decoration:none;color:var(--ink-dim);
+    border:1px solid var(--panel-edge);background:rgba(244,241,232,.05);border-radius:999px;padding:6px 16px}
+  .crumbs a:hover{background:rgba(244,241,232,.13);color:var(--ink)}
+
+  /* SECTION HEAD */
+  .section-head{text-align:center;margin:76px 0 36px}
+  .section-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.2vw,2.1rem);margin:0 0 10px;text-wrap:balance}
+  .section-head p{color:var(--ink-dim);max-width:560px;margin:0 auto;font-size:1rem}
+
+  /* CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:20px}
+  .card{--accent:var(--gold);position:relative;height:388px;border-radius:16px;cursor:pointer;outline:none}
+  .card:focus-visible .card-face{box-shadow:0 0 0 2px var(--accent),0 18px 40px -20px rgba(0,0,0,.6)}
+  .card-face{position:absolute;inset:0;border-radius:16px;
+    background:linear-gradient(165deg,var(--panel),var(--bg-deep));
+    border:1px solid var(--panel-edge);padding:22px 20px;display:flex;flex-direction:column;
+    box-shadow:0 18px 40px -24px rgba(0,0,0,.7);opacity:1;transform:scale(1);
+    transition:opacity .35s ease,transform .35s ease}
+  .card-front{z-index:2}
+  .card-back{z-index:1;opacity:0;transform:scale(.96);pointer-events:none;overflow-y:auto}
+  .card.flipped .card-front{opacity:0;transform:scale(1.04);pointer-events:none;z-index:1}
+  .card.flipped .card-back{opacity:1;transform:scale(1);pointer-events:auto;z-index:2}
+  .card-icon{font-size:2.5rem;line-height:1;display:inline-block;filter:drop-shadow(0 0 16px color-mix(in srgb,var(--accent) 55%,transparent))}
+  .card:hover .card-icon,.card:focus-visible .card-icon{animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .card-en-row{display:flex;align-items:center;gap:8px;margin:14px 0 2px}
+  .card-en{font-family:var(--serif);font-size:1.5rem;color:var(--ink);line-height:1.2}
+  .word-btn{flex-shrink:0;width:30px;height:30px;border-radius:999px;border:1px solid var(--panel-edge);
+    background:rgba(244,241,232,.06);color:var(--accent);font-size:.95rem;display:inline-flex;
+    align-items:center;justify-content:center;cursor:pointer;transition:background .15s,transform .15s}
+  .word-btn:hover{background:rgba(244,241,232,.16)}
+  .word-btn:active{transform:scale(.92)}
+  .word-btn.is-playing{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+  .card-zh{font-size:1rem;color:var(--ink-faint)}
+  .card-hook{font-size:1rem;color:var(--ink-dim);margin-top:14px}
+  .card-flip-hint{margin-top:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-faint);padding-top:12px}
+  .root-tag{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--accent);
+    border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:999px;
+    padding:3px 10px;margin-bottom:12px;align-self:flex-start;line-height:1.5}
+  .card-story{font-size:1rem;color:var(--ink-dim);margin:0 0 12px}
+  .card-say{font-family:var(--serif);font-style:italic;font-size:.97rem;color:var(--ink-faint);
+    margin:0 0 12px;padding-left:10px;border-left:1px solid var(--panel-edge)}
+  .card-mnemonic{font-size:1rem;color:var(--ink);background:color-mix(in srgb,var(--accent) 14%,transparent);
+    border-left:2px solid var(--accent);padding:8px 10px;border-radius:0 8px 8px 0;margin-top:auto}
+  .card-mnemonic b{color:var(--accent)}
+
+  /* GAME */
+  .game{background:var(--panel);border:1px solid var(--panel-edge);border-radius:16px;padding:22px 20px 26px}
+  .game-status{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);text-align:center;margin:0 0 18px}
+  .game-status b{color:var(--gold);font-size:15px}
+  .game-board{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .game-col-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);text-align:center;margin:0 0 10px}
+  .pick{display:block;width:100%;margin:0 0 8px;padding:11px 12px;border-radius:10px;
+    border:1px solid var(--panel-edge);background:rgba(244,241,232,.04);color:var(--ink);
+    font-family:var(--sans);font-size:.97rem;text-align:left;cursor:pointer;transition:background .14s,border-color .14s}
+  .pick:hover:not(:disabled){background:rgba(244,241,232,.12)}
+  .pick.sel{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 20%,transparent)}
+  .pick.done{opacity:.32;cursor:default;border-style:dashed}
+  .pick.wrong{border-color:#d1495b;background:color-mix(in srgb,#d1495b 22%,transparent)}
+  .pick .pick-en{font-family:var(--serif);font-size:1.05rem}
+  .win-banner{display:none;text-align:center;color:var(--gold);font-family:var(--serif);
+    font-size:1.1rem;margin:18px 0 0}
+  .win-banner.show{display:block}
+  .game-reset{display:block;margin:18px auto 0;padding:8px 20px;border-radius:999px;
+    border:1px solid var(--panel-edge);background:transparent;color:var(--ink-dim);
+    font-family:var(--sans);font-size:.92rem;cursor:pointer}
+  .game-reset:hover{color:var(--ink);background:rgba(244,241,232,.08)}
+
+  /* 速查表 */
+  .sheet{background:var(--panel);border:1px solid var(--panel-edge);border-radius:16px;padding:6px 4px;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.97rem}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--panel-edge);vertical-align:top}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:400}
+  tbody tr:last-child td{border-bottom:none}
+  td.w{font-family:var(--serif);font-size:1.1rem;color:var(--ink);white-space:nowrap}
+  td.w small{display:block;font-family:var(--sans);font-size:.85rem;color:var(--ink-faint)}
+  td.r{color:var(--gold);font-size:.92rem}
+  td.h{color:var(--ink-dim)}
+
+  footer{text-align:center;color:var(--ink-faint);font-size:.92rem;margin:70px 0 50px}
+  .print-btn{display:inline-block;margin-top:10px;padding:7px 18px;border-radius:999px;
+    border:1px solid var(--panel-edge);background:transparent;color:var(--ink-dim);
+    font-family:var(--sans);font-size:.92rem;cursor:pointer}
+  .print-btn:hover{color:var(--ink);background:rgba(244,241,232,.08)}
+
+  @media (max-width:640px){
+    .wrap{padding:0 16px}
+    .grid{grid-template-columns:1fr}
+    .card{height:auto;min-height:330px}
+    .card-face{position:relative;inset:auto}
+    .card-back{display:none}
+    .card.flipped .card-front{display:none}
+    .card.flipped .card-back{display:flex;opacity:1;transform:none}
+    .game-board{grid-template-columns:1fr}
+  }
+
+  /* 列印：只印課堂速查表 */
+  @media print{
+    html,body{background:#fff;color:#000}
+    .hero,.crumbs,.grid,.game,.section-head,footer,.print-btn{display:none !important}
+    .sheet{border:none;background:#fff;padding:0}
+    .sheet-head{display:block !important;margin:0 0 12px}
+    .sheet-head h2{font-size:18pt;color:#000;margin:0 0 4px}
+    .sheet-head p{color:#333;font-size:10pt;margin:0}
+    th,td{border-bottom:1px solid #ccc;color:#000;font-size:10.5pt;padding:7px 8px}
+    th{color:#555}
+    td.w{color:#000}td.r{color:#333}td.h{color:#222}
+    .wrap{max-width:none;padding:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-content wrap">
+    <p class="eyebrow">Word Origins · 動物字源</p>
+    <h1>動物名字的秘密</h1>
+    <p class="hero-sub">How Animals Got Their English Names</p>
+    <p class="hero-copy">動物的英文名字，其實是古人第一眼看到牠時說的那句話。有認真的描述，也有<b>認錯了幾百年</b>的誤會。</p>
+    <div class="crumbs">
+      <a href="./">← 英文來源故事</a>
+      <a href="/">回主選單</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section-head">
+    <h2>點卡片，翻出每個字的身世</h2>
+    <p>正面是單字與一句鉤子，背面是 30 秒的故事與記憶口訣。點 🔊 可以聽發音。</p>
+  </div>
+  <div class="grid" id="cardGrid"></div>
+
+  <div class="section-head">
+    <h2>小測驗：單字配來源</h2>
+    <p>左邊點一個單字，右邊點它的來源。一次隨機抽 8 個。</p>
+  </div>
+  <div class="game">
+    <p class="game-status">已配對 <b id="scoreNum">0</b> / 8</p>
+    <div class="game-board">
+      <div class="game-col">
+        <p class="game-col-label">單字</p>
+        <div id="colA"></div>
+      </div>
+      <div class="game-col">
+        <p class="game-col-label">來源</p>
+        <div id="colB"></div>
+      </div>
+    </div>
+    <p class="win-banner" id="winBanner">全部配對成功！這些字的身世你都記住了 ✦</p>
+    <button class="game-reset" id="resetGame">換一批</button>
+  </div>
+
+  <div class="section-head no-print">
+    <h2>課堂速查表</h2>
+    <p>老師版：一眼掃過全部 12 個字，挑今天要講的那幾個。可直接列印。</p>
+  </div>
+  <div class="sheet">
+    <div class="sheet-head" style="display:none">
+      <h2>動物名字的秘密 — 課堂速查表</h2>
+      <p>英文來源故事 ‧ teaching.efetl.com/word-origins</p>
+    </div>
+    <table>
+      <thead><tr><th>單字</th><th>來源</th><th>一句話</th></tr></thead>
+      <tbody><tr><td class="w">dinosaur<small>恐龍</small></td><td class="r">希臘 deinos（恐怖）+ sauros（蜥蜴）</td><td class="h">中文翻成「恐龍」，翻得剛剛好。</td></tr>
+<tr><td class="w">hippo<small>河馬</small></td><td class="r">希臘 hippos（馬）+ potamos（河）</td><td class="h">英文和中文想的一模一樣。</td></tr>
+<tr><td class="w">butterfly<small>蝴蝶</small></td><td class="r">butter（奶油）+ fly（飛）</td><td class="h">為什麼蝴蝶跟奶油有關？</td></tr>
+<tr><td class="w">kangaroo<small>袋鼠</small></td><td class="r">澳洲原住民語 gangurru</td><td class="h">那個「我聽不懂」的故事，是假的。</td></tr>
+<tr><td class="w">turkey<small>火雞</small></td><td class="r">土耳其 Turkey（認錯了）</td><td class="h">火雞來自美洲，卻被叫「土耳其」。</td></tr>
+<tr><td class="w">mosquito<small>蚊子</small></td><td class="r">西班牙文 mosca（蒼蠅）+ -ito（小）</td><td class="h">蚊子的本意是「小蒼蠅」。</td></tr>
+<tr><td class="w">panda<small>貓熊</small></td><td class="r">喜馬拉雅山區語言</td><td class="h">這個名字本來不是給大貓熊的。</td></tr>
+<tr><td class="w">elephant<small>大象</small></td><td class="r">希臘 elephas＝象牙</td><td class="h">古希臘人先看到象牙，才看到大象。</td></tr>
+<tr><td class="w">dolphin<small>海豚</small></td><td class="r">希臘 delphis（與「子宮」同源）</td><td class="h">希臘人早就發現海豚不是魚。</td></tr>
+<tr><td class="w">dragon<small>龍</small></td><td class="r">希臘 drakōn＝銳利地盯著看</td><td class="h">龍的原意是「眼神很利的巨蛇」。</td></tr>
+<tr><td class="w">bear<small>熊</small></td><td class="r">古日耳曼語＝「棕色的那位」</td><td class="h">熊的真名被人類弄丟了。</td></tr>
+<tr><td class="w">zoo<small>動物園</small></td><td class="r">希臘 zōion＝活的生物</td><td class="h">zoo 是一個被砍到剩三個字母的字。</td></tr></tbody>
+    </table>
+  </div>
+
+  <footer>
+    英文來源故事 ‧ teaching.efetl.com<br>
+    <button class="print-btn" onclick="window.print()">🖨 列印速查表</button>
+  </footer>
+</div>
+
+<script>
+const DATA = [{"en": "dinosaur", "zh": "恐龍", "sym": "🦖", "root": "希臘 deinos（恐怖）+ sauros（蜥蜴）", "q": "恐怖蜥蜴", "hook": "中文翻成「恐龍」，翻得剛剛好。", "story": "1842 年英國學者歐文替這批化石取名 dinosaur：deinos 是「恐怖的」，sauros 是「蜥蜴」。中文的「恐龍」幾乎是逐字對譯。", "mn": "看到 <b>-saur</b> 就是蜥蜴：暴龍、翼龍的名字都有它。", "say": "Dinosaur means “terrible lizard.”", "accent": "#8fbf6f"}, {"en": "hippo", "zh": "河馬", "sym": "🦛", "root": "希臘 hippos（馬）+ potamos（河）", "q": "河裡的馬", "hook": "英文和中文想的一模一樣。", "story": "全名 hippopotamus＝hippos（馬）＋potamos（河）＝「河裡的馬」。古希臘人和中國人隔了半個地球，卻替牠取了同一個名字。", "mn": "<b>河＋馬＝hippopotamus</b>，中英文完全對得上。", "say": "Hippopotamus means “river horse” — exactly like the Chinese name.", "accent": "#f0b429"}, {"en": "butterfly", "zh": "蝴蝶", "sym": "🦋", "root": "butter（奶油）+ fly（飛）", "q": "奶油", "hook": "為什麼蝴蝶跟奶油有關？", "story": "古英文就叫牠「奶油飛蟲」。有人說是因為常見的蝴蝶是奶油色；也有個古老傳說：蝴蝶會趁人不注意去偷奶油吃。", "mn": "butterfly＝<b>奶油小偷</b>，記住這個畫面就忘不掉。", "say": "Old folklore said butterflies stole butter.", "accent": "#6fd8c4"}, {"en": "kangaroo", "zh": "袋鼠", "sym": "🦘", "root": "澳洲原住民語 gangurru", "q": "原住民語", "hook": "那個「我聽不懂」的故事，是假的。", "story": "流傳很廣的說法是：庫克船長問這是什麼，原住民回「我聽不懂」。其實不是——gangurru 在當地語言裡本來就是某種袋鼠的名字，這個字是好好問來的。", "mn": "這是個<b>被平反</b>的字：不是誤會，是正確的原住民語。", "say": "The “I don't understand” story is a myth — gangurru really means kangaroo.", "accent": "#cf9a5c"}, {"en": "turkey", "zh": "火雞", "sym": "🦃", "root": "土耳其 Turkey（認錯了）", "q": "認錯的國家", "hook": "火雞來自美洲，卻被叫「土耳其」。", "story": "歐洲人本來就在吃一種經土耳其商人賣來的珠雞。後來美洲火雞運到歐洲，大家看牠長得像，就一起叫 turkey——一個錯了幾百年也沒改的名字。", "mn": "火雞跟土耳其<b>一點關係也沒有</b>，純粹是認錯鳥。", "say": "Turkeys are from America — Europeans just mixed them up.", "accent": "#9fb8e8"}, {"en": "mosquito", "zh": "蚊子", "sym": "🦟", "root": "西班牙文 mosca（蒼蠅）+ -ito（小）", "q": "小蒼蠅", "hook": "蚊子的本意是「小蒼蠅」。", "story": "西班牙文 mosca 是蒼蠅，字尾 -ito 表示「小小的」。所以 mosquito 就是「小蒼蠅」——取名的人顯然還沒被咬過。", "mn": "字尾 <b>-ito／-ita</b> 在西班牙文都是「小小的」。", "say": "Mosquito means “little fly” in Spanish.", "accent": "#d1495b"}, {"en": "panda", "zh": "貓熊", "sym": "🐼", "root": "喜馬拉雅山區語言", "q": "先給了小貓熊", "hook": "這個名字本來不是給大貓熊的。", "story": "panda 最早指的是紅通通的小貓熊 (red panda)，名字來自喜馬拉雅山區的語言。幾十年後大貓熊被發現，因為吃的東西一樣，就借用了同一個名字。", "mn": "<b>小貓熊先有名字</b>，大貓熊是後來借的。", "say": "The red panda had the name first — the big one borrowed it.", "accent": "#8fbf6f"}, {"en": "elephant", "zh": "大象", "sym": "🐘", "root": "希臘 elephas＝象牙", "q": "象牙", "hook": "古希臘人先看到象牙，才看到大象。", "story": "希臘文 elephas 原本和「象牙」有關。象牙先透過貿易傳到地中海，活生生的大象是很久以後才見到的——所以這隻動物是用牠的牙齒命名的。", "mn": "先有<b>象牙</b>，才有 elephant。", "say": "Greeks knew ivory long before they saw a living elephant.", "accent": "#f0b429"}, {"en": "dolphin", "zh": "海豚", "sym": "🐬", "root": "希臘 delphis（與「子宮」同源）", "q": "有子宮的魚", "hook": "希臘人早就發現海豚不是魚。", "story": "delphis 和 delphys（子宮）是親戚——因為古希臘人注意到，這種「魚」是直接生下寶寶的。他們的觀察是對的：海豚是哺乳類。", "mn": "海豚的名字就在告訴你：<b>牠會生寶寶，不是魚</b>。", "say": "The Greeks named it “the fish with a womb.”", "accent": "#6fd8c4"}, {"en": "dragon", "zh": "龍", "sym": "🐉", "root": "希臘 drakōn＝銳利地盯著看", "q": "銳利的眼神", "hook": "龍的原意是「眼神很利的巨蛇」。", "story": "drakōn 來自「注視、瞪著看」。西方的龍本來是一條眼神銳利、看守寶藏的大蛇——守著不眨眼，才是牠最初的形象。", "mn": "龍最可怕的不是火，是那雙<b>盯著你看</b>的眼睛。", "say": "A dragon was “the one that watches” — a sharp-eyed serpent.", "accent": "#cf9a5c"}, {"en": "bear", "zh": "熊", "sym": "🐻", "root": "古日耳曼語＝「棕色的那位」", "q": "棕色的那位", "hook": "熊的真名被人類弄丟了。", "story": "古代北方人怕講出熊的真名會把牠招來，就改口叫「棕色的那位 (the brown one)」。避諱太久，真正的名字反而失傳——今天的 bear 只是當年的代號。", "mn": "bear＝<b>不敢直呼其名</b>的那隻，真名已經沒人知道了。", "say": "People feared saying its real name, so they called it “the brown one.”", "accent": "#9fb8e8"}, {"en": "zoo", "zh": "動物園", "sym": "🦓", "root": "希臘 zōion＝活的生物", "q": "活的生物", "hook": "zoo 是一個被砍到剩三個字母的字。", "story": "全名是 zoological garden（動物學花園），zoo- 來自希臘文 zōion「活的生物」。大家懶得唸長的，砍成 zoo，就這樣定下來了。", "mn": "<b>zoo-＝生物</b>：zoology 動物學也是同一家。", "say": "Zoo is short for “zoological garden.”", "accent": "#d1495b"}];
+const QN = 8;
+
+/* ---------- 星空 ---------- */
+(function(){
+  const c=document.getElementById('sky'); if(!c) return;
+  const ctx=c.getContext('2d'); let stars=[];
+  function size(){
+    c.width=c.offsetWidth*devicePixelRatio; c.height=c.offsetHeight*devicePixelRatio;
+    stars=Array.from({length:Math.round(c.offsetWidth/9)},()=>({
+      x:Math.random()*c.width,y:Math.random()*c.height,
+      r:(Math.random()*1.2+.3)*devicePixelRatio,
+      a:Math.random()*.6+.2,s:Math.random()*.012+.004
+    }));
+  }
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(const st of stars){
+      const tw=st.a+Math.sin(t*st.s*60+st.x)*.22;
+      ctx.beginPath(); ctx.arc(st.x,st.y,st.r,0,6.3);
+      ctx.fillStyle='rgba(243,239,227,'+Math.max(0,tw)+')'; ctx.fill();
+    }
+    t+=1; requestAnimationFrame(draw);
+  }
+  size(); addEventListener('resize',size); draw();
+})();
+
+/* ---------- 發音 ---------- */
+let voice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  voice=vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Alex|Google US/i.test(v.name))
+      ||vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+}
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(text,btn){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=.85; if(voice) u.voice=voice;
+  if(btn){ btn.classList.add('is-playing'); u.onend=u.onerror=()=>btn.classList.remove('is-playing'); }
+  speechSynthesis.speak(u);
+}
+
+/* ---------- 卡片 ---------- */
+const grid=document.getElementById('cardGrid');
+DATA.forEach((d,i)=>{
+  const card=document.createElement('div');
+  card.className='card'; card.tabIndex=0; card.style.setProperty('--accent',d.accent);
+  card.innerHTML=
+   '<div class="card-face card-front">'+
+     '<span class="card-icon">'+d.sym+'</span>'+
+     '<div class="card-en-row"><span class="card-en">'+d.en+'</span>'+
+       '<button class="word-btn" type="button" aria-label="播放 '+d.en+' 的發音">🔊</button></div>'+
+     '<div class="card-zh">'+d.zh+'</div>'+
+     '<div class="card-hook">'+d.hook+'</div>'+
+     '<div class="card-flip-hint">點擊翻面 →</div>'+
+   '</div>'+
+   '<div class="card-face card-back">'+
+     '<span class="root-tag">'+d.root+'</span>'+
+     '<p class="card-story">'+d.story+'</p>'+
+     '<p class="card-say">'+d.say+'</p>'+
+     '<p class="card-mnemonic">'+d.mn+'</p>'+
+   '</div>';
+  card.addEventListener('click',e=>{
+    if(e.target.closest('.word-btn')) return;
+    card.classList.toggle('flipped');
+  });
+  card.addEventListener('keydown',e=>{
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+  card.querySelector('.word-btn').addEventListener('click',e=>{
+    e.stopPropagation(); speak(d.en, e.currentTarget);
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- 配對遊戲 ---------- */
+const colA=document.getElementById('colA'), colB=document.getElementById('colB');
+const scoreNum=document.getElementById('scoreNum'), winBanner=document.getElementById('winBanner');
+let selA=null, matched=0;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function build(){
+  colA.innerHTML=''; colB.innerHTML=''; selA=null; matched=0;
+  scoreNum.textContent='0'; winBanner.classList.remove('show');
+  const pool=shuffle(DATA).slice(0,QN);
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.en;
+    b.innerHTML='<span class="pick-en">'+d.en+'</span>';
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done'))return;
+      colA.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel'); selA=b;
+    });
+    colA.appendChild(b);
+  });
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.en; b.textContent=d.q;
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done')||!selA)return;
+      if(selA.dataset.en===b.dataset.en){
+        selA.classList.remove('sel'); selA.classList.add('done'); b.classList.add('done');
+        selA=null; matched++; scoreNum.textContent=matched;
+        if(matched===QN) winBanner.classList.add('show');
+      }else{
+        b.classList.add('wrong');
+        setTimeout(()=>b.classList.remove('wrong'),420);
+      }
+    });
+    colB.appendChild(b);
+  });
+}
+document.getElementById('resetGame').addEventListener('click',build);
+build();
+</script>
+</body>
+</html>

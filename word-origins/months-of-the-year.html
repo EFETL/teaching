@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>十二個月的身世 · 英文來源故事</title>
+<style>
+  :root{
+    --bg:#0e0f26; --bg-deep:#08091a; --panel:#171a3d; --panel-edge:rgba(244,241,232,0.09);
+    --ink:#f3efe3; --ink-dim:#aeb0d6; --ink-faint:#7577a3; --gold:#f0b429;
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%}
+  html{background:var(--bg-deep);font-size:16px}
+  body{
+    background:radial-gradient(ellipse at 50% -10%,#1b1e46 0%,var(--bg) 45%,var(--bg-deep) 100%);
+    background-attachment:fixed;color:var(--ink);font-family:var(--sans);
+    font-size:1rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:var(--gold)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  ::selection{background:var(--gold);color:#1a1a1a}
+
+  /* HERO */
+  .hero{position:relative;padding:76px 0 52px;text-align:center;overflow:hidden}
+  #sky{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-content{position:relative;z-index:2}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 18px}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5.6vw,3.8rem);margin:0 0 6px;text-wrap:balance;letter-spacing:.01em}
+  .hero-sub{font-family:var(--serif);font-style:italic;color:var(--ink-dim);font-size:1.05rem;margin:0 0 24px}
+  .hero-copy{max-width:640px;margin:0 auto;color:var(--ink-dim);font-size:1.02rem}
+  .hero-copy b{color:var(--ink);font-weight:600}
+  .crumbs{position:relative;z-index:2;margin:26px 0 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .crumbs a{display:inline-block;font-size:.95rem;text-decoration:none;color:var(--ink-dim);
+    border:1px solid var(--panel-edge);background:rgba(244,241,232,.05);border-radius:999px;padding:6px 16px}
+  .crumbs a:hover{background:rgba(244,241,232,.13);color:var(--ink)}
+
+  /* SECTION HEAD */
+  .section-head{text-align:center;margin:76px 0 36px}
+  .section-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.2vw,2.1rem);margin:0 0 10px;text-wrap:balance}
+  .section-head p{color:var(--ink-dim);max-width:560px;margin:0 auto;font-size:1rem}
+
+  /* CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:20px}
+  .card{--accent:var(--gold);position:relative;height:388px;border-radius:16px;cursor:pointer;outline:none}
+  .card:focus-visible .card-face{box-shadow:0 0 0 2px var(--accent),0 18px 40px -20px rgba(0,0,0,.6)}
+  .card-face{position:absolute;inset:0;border-radius:16px;
+    background:linear-gradient(165deg,var(--panel),var(--bg-deep));
+    border:1px solid var(--panel-edge);padding:22px 20px;display:flex;flex-direction:column;
+    box-shadow:0 18px 40px -24px rgba(0,0,0,.7);opacity:1;transform:scale(1);
+    transition:opacity .35s ease,transform .35s ease}
+  .card-front{z-index:2}
+  .card-back{z-index:1;opacity:0;transform:scale(.96);pointer-events:none;overflow-y:auto}
+  .card.flipped .card-front{opacity:0;transform:scale(1.04);pointer-events:none;z-index:1}
+  .card.flipped .card-back{opacity:1;transform:scale(1);pointer-events:auto;z-index:2}
+  .card-icon{font-size:2.5rem;line-height:1;display:inline-block;filter:drop-shadow(0 0 16px color-mix(in srgb,var(--accent) 55%,transparent))}
+  .card:hover .card-icon,.card:focus-visible .card-icon{animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .card-en-row{display:flex;align-items:center;gap:8px;margin:14px 0 2px}
+  .card-en{font-family:var(--serif);font-size:1.5rem;color:var(--ink);line-height:1.2}
+  .word-btn{flex-shrink:0;width:30px;height:30px;border-radius:999px;border:1px solid var(--panel-edge);
+    background:rgba(244,241,232,.06);color:var(--accent);font-size:.95rem;display:inline-flex;
+    align-items:center;justify-content:center;cursor:pointer;transition:background .15s,transform .15s}
+  .word-btn:hover{background:rgba(244,241,232,.16)}
+  .word-btn:active{transform:scale(.92)}
+  .word-btn.is-playing{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+  .card-zh{font-size:1rem;color:var(--ink-faint)}
+  .card-hook{font-size:1rem;color:var(--ink-dim);margin-top:14px}
+  .card-flip-hint{margin-top:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-faint);padding-top:12px}
+  .root-tag{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--accent);
+    border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:999px;
+    padding:3px 10px;margin-bottom:12px;align-self:flex-start;line-height:1.5}
+  .card-story{font-size:1rem;color:var(--ink-dim);margin:0 0 12px}
+  .card-say{font-family:var(--serif);font-style:italic;font-size:.97rem;color:var(--ink-faint);
+    margin:0 0 12px;padding-left:10px;border-left:1px solid var(--panel-edge)}
+  .card-mnemonic{font-size:1rem;color:var(--ink);background:color-mix(in srgb,var(--accent) 14%,transparent);
+    border-left:2px solid var(--accent);padding:8px 10px;border-radius:0 8px 8px 0;margin-top:auto}
+  .card-mnemonic b{color:var(--accent)}
+
+  /* GAME */
+  .game{background:var(--panel);border:1px solid var(--panel-edge);border-radius:16px;padding:22px 20px 26px}
+  .game-status{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);text-align:center;margin:0 0 18px}
+  .game-status b{color:var(--gold);font-size:15px}
+  .game-board{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .game-col-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);text-align:center;margin:0 0 10px}
+  .pick{display:block;width:100%;margin:0 0 8px;padding:11px 12px;border-radius:10px;
+    border:1px solid var(--panel-edge);background:rgba(244,241,232,.04);color:var(--ink);
+    font-family:var(--sans);font-size:.97rem;text-align:left;cursor:pointer;transition:background .14s,border-color .14s}
+  .pick:hover:not(:disabled){background:rgba(244,241,232,.12)}
+  .pick.sel{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 20%,transparent)}
+  .pick.done{opacity:.32;cursor:default;border-style:dashed}
+  .pick.wrong{border-color:#d1495b;background:color-mix(in srgb,#d1495b 22%,transparent)}
+  .pick .pick-en{font-family:var(--serif);font-size:1.05rem}
+  .win-banner{display:none;text-align:center;color:var(--gold);font-family:var(--serif);
+    font-size:1.1rem;margin:18px 0 0}
+  .win-banner.show{display:block}
+  .game-reset{display:block;margin:18px auto 0;padding:8px 20px;border-radius:999px;
+    border:1px solid var(--panel-edge);background:transparent;color:var(--ink-dim);
+    font-family:var(--sans);font-size:.92rem;cursor:pointer}
+  .game-reset:hover{color:var(--ink);background:rgba(244,241,232,.08)}
+
+  /* 速查表 */
+  .sheet{background:var(--panel);border:1px solid var(--panel-edge);border-radius:16px;padding:6px 4px;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.97rem}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--panel-edge);vertical-align:top}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:400}
+  tbody tr:last-child td{border-bottom:none}
+  td.w{font-family:var(--serif);font-size:1.1rem;color:var(--ink);white-space:nowrap}
+  td.w small{display:block;font-family:var(--sans);font-size:.85rem;color:var(--ink-faint)}
+  td.r{color:var(--gold);font-size:.92rem}
+  td.h{color:var(--ink-dim)}
+
+  footer{text-align:center;color:var(--ink-faint);font-size:.92rem;margin:70px 0 50px}
+  .print-btn{display:inline-block;margin-top:10px;padding:7px 18px;border-radius:999px;
+    border:1px solid var(--panel-edge);background:transparent;color:var(--ink-dim);
+    font-family:var(--sans);font-size:.92rem;cursor:pointer}
+  .print-btn:hover{color:var(--ink);background:rgba(244,241,232,.08)}
+
+  @media (max-width:640px){
+    .wrap{padding:0 16px}
+    .grid{grid-template-columns:1fr}
+    .card{height:auto;min-height:330px}
+    .card-face{position:relative;inset:auto}
+    .card-back{display:none}
+    .card.flipped .card-front{display:none}
+    .card.flipped .card-back{display:flex;opacity:1;transform:none}
+    .game-board{grid-template-columns:1fr}
+  }
+
+  /* 列印：只印課堂速查表 */
+  @media print{
+    html,body{background:#fff;color:#000}
+    .hero,.crumbs,.grid,.game,.section-head,footer,.print-btn{display:none !important}
+    .sheet{border:none;background:#fff;padding:0}
+    .sheet-head{display:block !important;margin:0 0 12px}
+    .sheet-head h2{font-size:18pt;color:#000;margin:0 0 4px}
+    .sheet-head p{color:#333;font-size:10pt;margin:0}
+    th,td{border-bottom:1px solid #ccc;color:#000;font-size:10.5pt;padding:7px 8px}
+    th{color:#555}
+    td.w{color:#000}td.r{color:#333}td.h{color:#222}
+    .wrap{max-width:none;padding:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-content wrap">
+    <p class="eyebrow">Word Origins · 月份由來</p>
+    <h1>十二個月的身世</h1>
+    <p class="hero-sub">Where the Months of the Year Come From</p>
+    <p class="hero-copy">月曆上的十二個字，藏著羅馬的神、兩位皇帝，還有一個數字對不上的大謎題。每張卡片講一個 <b>30 秒</b>的故事，翻開就能說。</p>
+    <div class="crumbs">
+      <a href="./">← 英文來源故事</a>
+      <a href="/">回主選單</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section-head">
+    <h2>點卡片，翻出每個字的身世</h2>
+    <p>正面是單字與一句鉤子，背面是 30 秒的故事與記憶口訣。點 🔊 可以聽發音。</p>
+  </div>
+  <div class="grid" id="cardGrid"></div>
+
+  <div class="section-head">
+    <h2>小測驗：單字配來源</h2>
+    <p>左邊點一個單字，右邊點它的來源。一次隨機抽 8 個。</p>
+  </div>
+  <div class="game">
+    <p class="game-status">已配對 <b id="scoreNum">0</b> / 8</p>
+    <div class="game-board">
+      <div class="game-col">
+        <p class="game-col-label">單字</p>
+        <div id="colA"></div>
+      </div>
+      <div class="game-col">
+        <p class="game-col-label">來源</p>
+        <div id="colB"></div>
+      </div>
+    </div>
+    <p class="win-banner" id="winBanner">全部配對成功！這些字的身世你都記住了 ✦</p>
+    <button class="game-reset" id="resetGame">換一批</button>
+  </div>
+
+  <div class="section-head no-print">
+    <h2>課堂速查表</h2>
+    <p>老師版：一眼掃過全部 12 個字，挑今天要講的那幾個。可直接列印。</p>
+  </div>
+  <div class="sheet">
+    <div class="sheet-head" style="display:none">
+      <h2>十二個月的身世 — 課堂速查表</h2>
+      <p>英文來源故事 ‧ teaching.efetl.com/word-origins</p>
+    </div>
+    <table>
+      <thead><tr><th>單字</th><th>來源</th><th>一句話</th></tr></thead>
+      <tbody><tr><td class="w">January<small>一月</small></td><td class="r">拉丁 Ianuarius ← 門神 Janus</td><td class="h">一個有兩張臉的神，站在年頭的門口。</td></tr>
+<tr><td class="w">February<small>二月</small></td><td class="r">拉丁 Februa＝淨化儀式</td><td class="h">羅馬版的年終大掃除月。</td></tr>
+<tr><td class="w">March<small>三月</small></td><td class="r">拉丁 Martius ← 戰神 Mars</td><td class="h">冬天結束，可以出兵了。</td></tr>
+<tr><td class="w">April<small>四月</small></td><td class="r">拉丁 aperire＝打開</td><td class="h">花苞一個一個打開的月份。</td></tr>
+<tr><td class="w">May<small>五月</small></td><td class="r">女神 Maia（掌管生長）</td><td class="h">植物長最快的月份，有專屬女神。</td></tr>
+<tr><td class="w">June<small>六月</small></td><td class="r">天后 Juno（掌管婚姻）</td><td class="h">「六月新娘」就是從這裡來的。</td></tr>
+<tr><td class="w">July<small>七月</small></td><td class="r">Julius Caesar 凱撒</td><td class="h">一個人把自己的名字寫進了月曆。</td></tr>
+<tr><td class="w">August<small>八月</small></td><td class="r">皇帝 Augustus 奧古斯都</td><td class="h">養子不能輸給養父。</td></tr>
+<tr><td class="w">September<small>九月</small></td><td class="r">拉丁 septem＝七</td><td class="h">明明是九月，名字卻寫著「七」。</td></tr>
+<tr><td class="w">October<small>十月</small></td><td class="r">拉丁 octo＝八</td><td class="h">跟八爪章魚同一個字根。</td></tr>
+<tr><td class="w">November<small>十一月</small></td><td class="r">拉丁 novem＝九</td><td class="h">第九個月，往後挪了兩格。</td></tr>
+<tr><td class="w">December<small>十二月</small></td><td class="r">拉丁 decem＝十</td><td class="h">跟「十年 decade」同一家。</td></tr></tbody>
+    </table>
+  </div>
+
+  <footer>
+    英文來源故事 ‧ teaching.efetl.com<br>
+    <button class="print-btn" onclick="window.print()">🖨 列印速查表</button>
+  </footer>
+</div>
+
+<script>
+const DATA = [{"en": "January", "zh": "一月", "sym": "🚪", "root": "拉丁 Ianuarius ← 門神 Janus", "q": "門神", "hook": "一個有兩張臉的神，站在年頭的門口。", "story": "羅馬人有個管門的神叫 Janus，他有兩張臉：一張往後看剛結束的一年，一張往前看新的一年。年頭這道「門」，就成了 January。", "mn": "January＝站在門口的<b>兩面神</b>，回頭看舊年、抬頭看新年。", "say": "Janus had two faces — one looking back, one looking forward.", "accent": "#f0b429"}, {"en": "February", "zh": "二月", "sym": "🧹", "root": "拉丁 Februa＝淨化儀式", "q": "大掃除", "hook": "羅馬版的年終大掃除月。", "story": "二月羅馬有個叫 Februa 的淨化節，全城把過去一年的霉運洗掉。所以二月的本意是「洗乾淨的月份」。", "mn": "February＝<b>除舊佈新</b>月，先洗乾淨再過新年。", "say": "February was Rome's clean-up month — wash the old year away.", "accent": "#9fb8e8"}, {"en": "March", "zh": "三月", "sym": "⚔️", "root": "拉丁 Martius ← 戰神 Mars", "q": "戰神", "hook": "冬天結束，可以出兵了。", "story": "冬天一過就能打仗，這個月便獻給戰神 Mars。古羅馬的一年其實是從三月開始的——記住這點，等一下有個謎題就解開了。", "mn": "戰神一出手，軍隊就 <b>march</b>（行軍）出門。", "say": "Mars is the god of war. When winter ends, armies march.", "accent": "#d1495b"}, {"en": "April", "zh": "四月", "sym": "🌷", "root": "拉丁 aperire＝打開", "q": "打開", "hook": "花苞一個一個打開的月份。", "story": "最通行的說法是來自拉丁文 aperire「打開」——春天到了，花苞一朵朵打開。（也有人說是獻給愛神 Aphrodite。）", "mn": "April＝花朵 <b>open</b> 的月份。", "say": "April is when buds open — from Latin aperire, “to open.”", "accent": "#6fd8c4"}, {"en": "May", "zh": "五月", "sym": "🌱", "root": "女神 Maia（掌管生長）", "q": "生長女神", "hook": "植物長最快的月份，有專屬女神。", "story": "獻給掌管「生長」的女神 Maia。五月萬物抽高，農夫最愛這個月，就把它送給了她。", "mn": "Maia 讓萬物長大 → May 是<b>長高</b>的月份。", "say": "May belongs to Maia, the goddess of growing things.", "accent": "#9b8cf2"}, {"en": "June", "zh": "六月", "sym": "💍", "root": "天后 Juno（掌管婚姻）", "q": "婚姻天后", "hook": "「六月新娘」就是從這裡來的。", "story": "獻給天后 Juno，她掌管婚姻。西方人因此相信六月結婚會幸福，「六月新娘 June bride」的說法就是這樣來的。", "mn": "Juno 管婚姻 → June 是<b>結婚月</b>。", "say": "Juno protects marriage — that's why June is the wedding month.", "accent": "#f28fb0"}, {"en": "July", "zh": "七月", "sym": "👑", "root": "Julius Caesar 凱撒", "q": "凱撒", "hook": "一個人把自己的名字寫進了月曆。", "story": "這個月本來叫 Quintilis（第五月）。凱撒 Julius Caesar 改好曆法之後，羅馬人把他出生的這個月改名叫 July 紀念他。", "mn": "<b>Julius → July</b>，凱撒把名字寫進了月曆。", "say": "Julius Caesar fixed the calendar, so July is named after him.", "accent": "#f0b429"}, {"en": "August", "zh": "八月", "sym": "🏛️", "root": "皇帝 Augustus 奧古斯都", "q": "奧古斯都", "hook": "養子不能輸給養父。", "story": "凱撒有了七月，他的繼承人奧古斯都當然也要一個，就把下個月改成 August。傳說他還硬湊到 31 天，才不會輸給七月。", "mn": "七月八月<b>都是 31 天</b>——兩位大人物誰也不讓誰。", "say": "Caesar took July, so Augustus took August — both 31 days!", "accent": "#9fb8e8"}, {"en": "September", "zh": "九月", "sym": "7️⃣", "root": "拉丁 septem＝七", "q": "七", "hook": "明明是九月，名字卻寫著「七」。", "story": "septem 是拉丁文的「七」。可是 September 是九月啊？因為古羅馬的一年從三月開始，從三月數過來，它剛好是第七個月。", "mn": "記住「<b>羅馬年從三月起算</b>」，後面四個月的名字就全部通了。", "say": "Septem means seven. The Roman year started in March.", "accent": "#d1495b"}, {"en": "October", "zh": "十月", "sym": "8️⃣", "root": "拉丁 octo＝八", "q": "八", "hook": "跟八爪章魚同一個字根。", "story": "octo 是「八」——octopus 章魚有八隻腳、octagon 是八角形。從三月數過來，October 正是第八個月。", "mn": "看到 <b>oct-</b> 就想章魚的八隻腳。", "say": "Octo means eight — like an octopus with eight legs.", "accent": "#6fd8c4"}, {"en": "November", "zh": "十一月", "sym": "9️⃣", "root": "拉丁 novem＝九", "q": "九", "hook": "第九個月，往後挪了兩格。", "story": "novem 是拉丁文的「九」。一樣從三月開始數，November 就是第九個月。全部往後挪兩格，是因為後來一月、二月被補到了年頭。", "mn": "<b>novem＝9</b>，和 nine 長得有點像，順著唸就記住。", "say": "Novem means nine — counting from March, it was month nine.", "accent": "#9b8cf2"}, {"en": "December", "zh": "十二月", "sym": "🔟", "root": "拉丁 decem＝十", "q": "十", "hook": "跟「十年 decade」同一家。", "story": "decem 是「十」——decade 就是十年。羅馬曆原本只有十個月，December 是最後一個，冬天那段乾脆不算，後來才補上一、二月。", "mn": "<b>decem＝10</b>，decade 十年、December 第十月。", "say": "Decem means ten — the same root as decade.", "accent": "#f28fb0"}];
+const QN = 8;
+
+/* ---------- 星空 ---------- */
+(function(){
+  const c=document.getElementById('sky'); if(!c) return;
+  const ctx=c.getContext('2d'); let stars=[];
+  function size(){
+    c.width=c.offsetWidth*devicePixelRatio; c.height=c.offsetHeight*devicePixelRatio;
+    stars=Array.from({length:Math.round(c.offsetWidth/9)},()=>({
+      x:Math.random()*c.width,y:Math.random()*c.height,
+      r:(Math.random()*1.2+.3)*devicePixelRatio,
+      a:Math.random()*.6+.2,s:Math.random()*.012+.004
+    }));
+  }
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(const st of stars){
+      const tw=st.a+Math.sin(t*st.s*60+st.x)*.22;
+      ctx.beginPath(); ctx.arc(st.x,st.y,st.r,0,6.3);
+      ctx.fillStyle='rgba(243,239,227,'+Math.max(0,tw)+')'; ctx.fill();
+    }
+    t+=1; requestAnimationFrame(draw);
+  }
+  size(); addEventListener('resize',size); draw();
+})();
+
+/* ---------- 發音 ---------- */
+let voice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  voice=vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Alex|Google US/i.test(v.name))
+      ||vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+}
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(text,btn){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=.85; if(voice) u.voice=voice;
+  if(btn){ btn.classList.add('is-playing'); u.onend=u.onerror=()=>btn.classList.remove('is-playing'); }
+  speechSynthesis.speak(u);
+}
+
+/* ---------- 卡片 ---------- */
+const grid=document.getElementById('cardGrid');
+DATA.forEach((d,i)=>{
+  const card=document.createElement('div');
+  card.className='card'; card.tabIndex=0; card.style.setProperty('--accent',d.accent);
+  card.innerHTML=
+   '<div class="card-face card-front">'+
+     '<span class="card-icon">'+d.sym+'</span>'+
+     '<div class="card-en-row"><span class="card-en">'+d.en+'</span>'+
+       '<button class="word-btn" type="button" aria-label="播放 '+d.en+' 的發音">🔊</button></div>'+
+     '<div class="card-zh">'+d.zh+'</div>'+
+     '<div class="card-hook">'+d.hook+'</div>'+
+     '<div class="card-flip-hint">點擊翻面 →</div>'+
+   '</div>'+
+   '<div class="card-face card-back">'+
+     '<span class="root-tag">'+d.root+'</span>'+
+     '<p class="card-story">'+d.story+'</p>'+
+     '<p class="card-say">'+d.say+'</p>'+
+     '<p class="card-mnemonic">'+d.mn+'</p>'+
+   '</div>';
+  card.addEventListener('click',e=>{
+    if(e.target.closest('.word-btn')) return;
+    card.classList.toggle('flipped');
+  });
+  card.addEventListener('keydown',e=>{
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+  card.querySelector('.word-btn').addEventListener('click',e=>{
+    e.stopPropagation(); speak(d.en, e.currentTarget);
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- 配對遊戲 ---------- */
+const colA=document.getElementById('colA'), colB=document.getElementById('colB');
+const scoreNum=document.getElementById('scoreNum'), winBanner=document.getElementById('winBanner');
+let selA=null, matched=0;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function build(){
+  colA.innerHTML=''; colB.innerHTML=''; selA=null; matched=0;
+  scoreNum.textContent='0'; winBanner.classList.remove('show');
+  const pool=shuffle(DATA).slice(0,QN);
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.en;
+    b.innerHTML='<span class="pick-en">'+d.en+'</span>';
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done'))return;
+      colA.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel'); selA=b;
+    });
+    colA.appendChild(b);
+  });
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.en; b.textContent=d.q;
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done')||!selA)return;
+      if(selA.dataset.en===b.dataset.en){
+        selA.classList.remove('sel'); selA.classList.add('done'); b.classList.add('done');
+        selA=null; matched++; scoreNum.textContent=matched;
+        if(matched===QN) winBanner.classList.add('show');
+      }else{
+        b.classList.add('wrong');
+        setTimeout(()=>b.classList.remove('wrong'),420);
+      }
+    });
+    colB.appendChild(b);
+  });
+}
+document.getElementById('resetGame').addEventListener('click',build);
+build();
+</script>
+</body>
+</html>
