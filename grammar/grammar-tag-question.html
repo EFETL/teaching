@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<title>國高中文法 · 附加問句（同一句 × 所有時態）</title>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:#22303f;line-height:1.65;background:linear-gradient(180deg,#fff3ec,#fdeef6 70%);min-height:100vh;}
+  .wrap{max-width:820px;margin:0 auto;padding:18px 16px 70px;}
+  .home{display:inline-block;margin-bottom:14px;color:#d1462f;font-weight:800;text-decoration:none;
+    background:#fff;padding:7px 16px;border-radius:20px;box-shadow:0 3px 10px rgba(255,107,74,.28);font-size:.9rem;}
+
+  header.hero{background:linear-gradient(135deg,#ffb36b,#ff7a59 55%,#ff4f81);color:#fff;
+    border-radius:22px;padding:28px 26px;margin-bottom:22px;box-shadow:0 10px 26px rgba(255,107,74,.4);}
+  header.hero h1{margin:0 0 8px;font-size:1.7rem;text-shadow:0 1px 2px rgba(0,0,0,.18);}
+  header.hero p{margin:0;font-size:.96rem;opacity:.96;}
+
+  .formula{background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:16px;
+    font-size:.86rem;color:#4a5766;border-left:5px solid #ff6b4a;box-shadow:0 3px 10px rgba(255,107,74,.10);}
+  .formula b{color:#d1462f;}
+  .formula .ft{width:100%;border-collapse:collapse;margin:8px 0 4px;}
+  .formula .ft th,.formula .ft td{border:1px solid #ffe3d8;padding:7px 9px;text-align:left;}
+  .formula .ft th{background:#fff2ec;color:#d1462f;}
+  .formula ol{margin:6px 0 0;padding-left:1.4em;}
+  .formula ol li{margin-bottom:3px;}
+
+  .note{background:#fff2ec;border:1px solid #ffd7c6;border-radius:14px;padding:12px 16px;margin-bottom:16px;
+    font-size:.86rem;color:#a0432c;}
+  .note b{color:#d1462f;}
+
+  .q{background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:14px;
+    box-shadow:0 4px 14px rgba(255,107,74,.10);border:1px solid #f8eae4;}
+  .qtop{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+  .qnum{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#d9f5ee;color:#12806a;
+    font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .qnum.d{background:#ffe3d8;color:#d1462f;}
+  .tagk{display:inline-block;font-size:.72rem;font-weight:800;color:#fff;border-radius:99px;
+    padding:2px 10px;background:linear-gradient(135deg,#ff7a59,#ff4f81);margin-left:auto;flex:0 0 auto;}
+
+  .lineLab{font-size:.7rem;font-weight:800;color:#8a94a2;background:#f0f3f8;border-radius:8px;
+    padding:1px 8px;margin:0 0 5px;display:inline-block;}
+
+  /* 說明卡：陳述句／附加問句兩行 + 移動動畫 */
+  .q.demo{background:linear-gradient(180deg,#fffaf7,#fff);border-color:#ffe3d8;}
+  .activeLine{font-size:1.05rem;padding:12px 15px;background:#fffbf9;border:1.5px dashed #ffcbb8;
+    border-radius:12px;margin-bottom:10px;line-height:2;}
+  .buildLine{font-size:1.05rem;padding:12px 15px;background:#f7fbff;border:1.5px solid #dcecff;
+    border-radius:12px;line-height:2;min-height:2em;}
+
+  .wSubj,.wAux,.wVerb,.wNeg,.wAdv{border-radius:6px;padding:1px 5px;font-weight:800;
+    transition:box-shadow .3s,opacity .3s;}
+  .wSubj{background:#e6efff;color:#2b6fd4;}
+  .wAux{background:#e6f8f0;color:#0f7a52;}
+  .wVerb{background:#e6f8f0;color:#0f7a52;border-bottom:2px solid #0f7a52;}
+  .wNeg,.wAdv{background:#ffe9f3;color:#c22f74;}
+  .wAux + .wNeg{margin-left:-4px;}
+  .wSubj.picked{box-shadow:0 0 0 3px rgba(43,111,212,.35);}
+  .wAux.picked,.wVerb.picked{box-shadow:0 0 0 3px rgba(15,122,82,.35);}
+  .wNeg.dropped,.wAdv.dropped{opacity:.4;text-decoration:line-through;}
+  .restOld{font-weight:700;color:#5a6472;}
+  .wSubj.ghost{background:transparent;border:1.5px dashed #9bb6e6;color:#7a95c4;font-style:italic;}
+  .wSubj.isneg{box-shadow:0 0 0 3px rgba(194,47,116,.4);background:#ffe9f3;color:#c22f74;}
+  .lead{font-weight:700;color:#8a94a2;background:#f2f5f9;border-radius:6px;padding:1px 6px;}
+
+  .copySent{font-weight:700;color:#7a8594;background:#eef2f7;border-radius:6px;padding:1px 6px;}
+  .slotAux,.slotNeg,.slotPron,.slotQ{font-weight:900;border-radius:6px;padding:1px 5px;
+    opacity:0;transition:opacity .25s;}
+  .slotAux.show,.slotNeg.show,.slotPron.show,.slotQ.show{opacity:1;}
+  .slotAux{background:#e6f8f0;color:#0f7a52;}
+  .slotNeg{background:#ffe9f3;color:#c22f74;margin-left:-4px;}
+  .slotPron{background:#e6efff;color:#2b6fd4;margin-left:.35em;}
+  .slotQ{background:transparent;color:#d1462f;padding:0 2px;margin-left:-6px;}
+  .pop{animation:popIn .45s cubic-bezier(.3,1.5,.5,1);}
+  @keyframes popIn{0%{transform:scale(.3);}70%{transform:scale(1.25);}100%{transform:scale(1);}}
+
+  .polar{display:none;margin-top:9px;padding:8px 13px;border-radius:12px;font-size:.86rem;
+    background:#fff0f6;border-left:4px solid #ff4f81;color:#a02359;font-weight:700;}
+  .polar.show{display:block;}
+  .polar b{color:#c22f74;}
+
+  /* 發音鈕 */
+  .spk{border:none;cursor:pointer;background:linear-gradient(135deg,#22c1c3,#43e97b);color:#fff;
+    width:34px;height:34px;border-radius:50%;line-height:1;padding:0;flex:0 0 auto;
+    box-shadow:0 2px 7px rgba(34,192,128,.35);vertical-align:middle;margin-left:8px;transition:.15s;}
+  .spk:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .spk.playing{animation:spkPulse .7s ease-in-out infinite;
+    box-shadow:0 0 0 4px rgba(67,233,123,.35),0 2px 7px rgba(34,192,128,.35);}
+  @keyframes spkPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.14);}}
+  .audiobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border-radius:14px;
+    padding:11px 16px;margin-bottom:16px;box-shadow:0 3px 10px rgba(34,193,195,.1);
+    border-left:5px solid #22c1c3;font-weight:800;color:#0e8f5e;}
+  .audiobar label{display:flex;align-items:center;gap:7px;cursor:pointer;}
+  .audiobar input{width:20px;height:20px;accent-color:#22c1c3;cursor:pointer;}
+  .audiobar .tip{color:#8a94a2;font-weight:600;}
+
+  .flyClone{position:fixed;font-weight:900;padding:1px 5px;border-radius:6px;white-space:nowrap;
+    z-index:999;pointer-events:none;will-change:left,top;}
+
+  #pathSvg{position:absolute;top:0;left:0;width:1px;height:1px;overflow:visible;pointer-events:none;z-index:997;}
+  .pathLine{fill:none;stroke-width:2.5;stroke-dasharray:7,6;opacity:0;transition:opacity .25s;}
+  .pathLine.show{opacity:.8;}
+  .pathLine.aux{stroke:#0f7a52;}
+  .pathLine.pron{stroke:#2b6fd4;}
+
+  .stepbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;}
+  .hintk{font-size:.76rem;color:#8a94a2;font-weight:800;}
+  .sbtn{border:none;cursor:pointer;font-weight:800;font-size:.82rem;padding:9px 15px;border-radius:12px;
+    color:#fff;display:inline-flex;align-items:center;gap:7px;transition:.15s;box-shadow:0 3px 9px rgba(0,0,0,.14);}
+  .sbtn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+  .sbtn:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+  .sbtn .sn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;
+    background:rgba(255,255,255,.34);color:#fff;font-size:.7rem;font-weight:900;}
+  .sbtn.b1{background:linear-gradient(135deg,#12a97a,#43e97b);}
+  .sbtn.b2{background:linear-gradient(135deg,#ff4f81,#ff8ab0);}
+  .sbtn.b3{background:linear-gradient(135deg,#2b6fd4,#6ea8ff);}
+  .sbtn.on{box-shadow:0 0 0 3px rgba(255,255,255,.85),0 5px 14px rgba(0,0,0,.22);filter:brightness(1.08);transform:translateY(-1px);}
+  .replay{border:none;cursor:pointer;font-weight:800;font-size:.76rem;padding:8px 13px;border-radius:12px;
+    color:#d1462f;background:#ffeee7;margin-left:auto;}
+
+  .reveal{display:none;margin-top:8px;padding:10px 13px;border-radius:12px;font-size:.9rem;border-left:4px solid;}
+  .reveal s{color:#d23b5e;} .reveal b{color:inherit;}
+  .reveal.r1{border-color:#22b07a;background:#effaf5;}
+  .reveal.r2{border-color:#ff4f81;background:#fff2f6;}
+  .reveal.r3{border-color:#2b6fd4;background:#eff5ff;}
+  .q.demo.st1 .r1,.q.demo.st2 .r1,.q.demo.st3 .r1{display:block;}
+  .q.demo.st2 .r2,.q.demo.st3 .r2{display:block;}
+  .q.demo.st3 .r3{display:block;}
+
+  .demoexp{margin-top:10px;padding:11px 14px;border-radius:12px;background:#fff;border-left:4px solid #ff6b4a;font-size:.9rem;}
+  .demoexp .alt{color:#33414f;}
+  .demoexp .alt b{color:#d1462f;}
+  .demoexp .zh{color:#4a5766;margin-top:5px;}
+
+  /* 練習卡 */
+  .cnq{color:#33414f;font-size:.98rem;}
+  .cnq .lab{display:inline-block;font-size:.7rem;font-weight:800;color:#8a94a2;
+    background:#f0f3f8;border-radius:8px;padding:1px 7px;margin-right:6px;vertical-align:2px;}
+  .qmark{flex:0 0 auto;border:none;cursor:pointer;width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,#ff7a59,#ff4f81);color:#fff;font-weight:900;font-size:1rem;
+    box-shadow:0 3px 9px rgba(255,107,74,.32);margin-left:auto;}
+  .qmark:hover{filter:brightness(1.07);transform:translateY(-1px);}
+  .exp .why{color:#33414f;margin-top:6px;}
+  .exp .why b{color:#0f7a52;}
+
+  .rewrite{font-size:1.02rem;line-height:2.2;color:#22303f;}
+  .rewrite input{font-family:inherit;font-size:.98rem;font-weight:700;color:#d1462f;text-align:center;
+    border:none;border-bottom:2px solid #c9d4e6;background:#fffaf8;border-radius:6px 6px 0 0;
+    padding:3px 6px;margin:0 2px;min-width:110px;outline:none;transition:.15s;}
+  .rewrite input:focus{border-bottom-color:#ff6b4a;background:#fff0ea;}
+  .rewrite input.ok{border-bottom-color:#22b07a;background:#eafaf2;color:#0f7a52;}
+  .rewrite input.no{border-bottom-color:#ff5b7f;background:#fff0f3;color:#d23b5e;}
+  .hint{font-size:.72rem;color:#a0a9b6;}
+  .exp{display:none;margin-top:12px;padding:12px 14px;border-radius:12px;
+    background:#fff2ec;border-left:4px solid #ff6b4a;font-size:.9rem;}
+  .exp.show{display:block;}
+  .exp .ans{font-weight:800;color:#d1462f;}
+  .exp .zh{color:#4a5766;margin-top:4px;}
+
+  .group-h{display:flex;align-items:center;gap:8px;margin:22px 2px 12px;font-weight:800;font-size:1rem;flex-wrap:wrap;}
+  .group-h .tag{color:#fff;border-radius:99px;padding:4px 12px;font-size:.82rem;}
+  .group-h.demo .tag{background:linear-gradient(135deg,#ffb36b,#ff7a59);}
+  .group-h.prac .tag{background:linear-gradient(135deg,#22c1c3,#43e97b);}
+  .group-h .sub{color:#8a94a2;font-weight:600;font-size:.82rem;}
+
+  .bar{position:sticky;bottom:0;margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(6px);padding:12px 14px;border-radius:16px;
+    box-shadow:0 -3px 16px rgba(255,107,74,.14);}
+  .btn{border:none;cursor:pointer;font-weight:800;font-size:.95rem;padding:12px 22px;border-radius:14px;
+    background:linear-gradient(135deg,#ff7a59,#ff4f81);color:#fff;box-shadow:0 5px 14px rgba(255,107,74,.4);}
+  .btn.ghost{background:#fff;color:#d1462f;box-shadow:0 3px 10px rgba(255,107,74,.25);}
+  .score{font-weight:800;color:#d1462f;font-size:1rem;}
+
+  .wrong{background:#fff;border-radius:16px;padding:16px 20px;margin-top:26px;
+    box-shadow:0 4px 14px rgba(255,91,127,.12);border:1px solid #ffe0e7;border-left:5px solid #ff7aa8;}
+  .wrong h2{margin:0 0 8px;font-size:1.05rem;color:#c2568f;}
+  .wrong ol{margin:0;padding-left:1.4em;}
+  .wrong li{margin-bottom:6px;font-size:.92rem;color:#4a5766;}
+  .wrong s{color:#d23b5e;}
+  .wrong b{color:#0f7a52;}
+
+  footer{text-align:center;color:#9aa4b2;font-size:.8rem;margin-top:34px;}
+
+  /* ── 全站內文統一字級 ── */
+  .wrap *{font-size:20px;}
+  header.hero h1{font-size:30px;}
+  .lineLab,.tagk,.lab{font-size:14px;}
+  .qmark{font-size:19px;}
+  .qnum,.qnum.d{width:30px;height:30px;font-size:15px;}
+  .sbtn .sn{width:22px;height:22px;font-size:14px;}
+  .spk{font-size:17px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="index.html">← 回國高中文法</a>
+
+  <header class="hero">
+    <h1>❓ 國高中文法 · 附加問句 Tag Questions</h1>
+    <p>全部只用<b>同一句</b>：<b>Tom … the car.</b> 主詞永遠是 Tom、受詞永遠是 the car，<b>只換時態與助動詞</b>，把附加問句的 28 種變化一次看完；後面再加<b>特殊句型 13 句</b>（I am…／Let's／祈使句／There is／Nobody／I think…／口語 right?）。三步驟：① 找助動詞（沒有就借 do／does／did） ② 前肯後否、前否後肯 ③ 主詞換成代名詞＋問號。電腦／平板寬螢幕會看到助動詞與主詞<b>真的飛到句尾</b>並留下虛線路徑；每一句原句與附加問句都附 🔊 真人發音（微軟 Neural），最後 12 題換你填。</p>
+  </header>
+
+  <div class="formula">
+    📐 <b>公式：陳述句 ,　助動詞（肯否相反）＋ 代名詞主詞 ?</b>
+    <table class="ft">
+      <tbody><tr><th>原句的助動詞</th><th>陳述句（同一句）</th><th>附加問句</th></tr>
+      <tr><td>沒有助動詞（現在式）</td><td>Tom <b>washes</b> the car,</td><td><b>doesn't he?</b></td></tr>
+      <tr><td>沒有助動詞（過去式）</td><td>Tom <b>washed</b> the car,</td><td><b>didn't he?</b></td></tr>
+      <tr><td>be 動詞 is／was</td><td>Tom <b>is</b> washing the car,</td><td><b>isn't he?</b></td></tr>
+      <tr><td>have／has／had</td><td>Tom <b>has</b> washed the car,</td><td><b>hasn't he?</b></td></tr>
+      <tr><td>will／can／should…</td><td>Tom <b>will</b> wash the car,</td><td><b>won't he?</b></td></tr>
+      <tr><td>原句已經是否定</td><td>Tom <b>doesn't</b> wash the car,</td><td><b>does he?</b></td></tr>
+    </tbody></table>
+    <b>三步驟：</b>
+    <ol>
+      <li><b>找助動詞</b>：be／have／has／had／will／can／should… 直接照抄；<b>完全沒有助動詞就借 do／does／did</b>（看主詞單複數與時態）。</li>
+      <li><b>肯否顛倒</b>：前面肯定 → 後面加 <b>n't</b>；前面否定（含 never／hardly）→ 後面<b>不加 n't</b>。</li>
+      <li><b>主詞換成代名詞</b>（Tom → he）放在助動詞後面，句尾加<b>問號</b>；助動詞＋n't 要用縮寫（will not → <b>won't</b>、can not → <b>can't</b>）。</li>
+    </ol>
+  </div>
+
+  <div class="note">👆 點下面的「1／2／3」按鈕：電腦／平板寬螢幕會看到<b>綠色的助動詞</b>飛到逗號後面、<b>粉紅色的 n't</b> 彈出來（或原句的否定被劃掉）、<b>藍色的主詞</b>變成代名詞飛到句尾；手機窄螢幕直接顯示結果。</div>
+
+  <div class="audiobar">
+    <span>🔊 發音</span>
+    <label><input type="checkbox" id="autoplay" checked>按 ①③ 時自動念出來</label>
+    <span class="tip">每一句旁邊的 🔊 都可以重聽（微軟 Neural 真人發音）</span>
+  </div>
+
+  <div id="app"></div>
+
+  <div class="bar">
+    <button class="btn" id="submit">送出批改</button>
+    <button class="btn ghost" id="reset">重作</button>
+    <span class="score" id="score"></span>
+  </div>
+
+  <div class="wrong">
+    <h2>⚠️ 學生最常錯的五點</h2>
+    <ol>
+      <li><b>忘了肯否顛倒</b>：<s>Tom washes the car, does he?</s> → Tom washes the car, <b>doesn't he?</b>（前肯後否）</li>
+      <li><b>沒有助動詞卻不借 does／did</b>：<s>Tom washes the car, washesn't he?</s> → <b>doesn't he?</b>；<s>Tom washed the car, didn't he washed?</s> → <b>didn't he?</b>（附加問句只留助動詞＋代名詞）</li>
+      <li><b>has to／have to 被當成助動詞</b>：<s>Tom has to wash the car, hasn't he?</s> → Tom has to wash the car, <b>doesn't he?</b>（have to 是一般動詞，要借 does）</li>
+      <li><b>主詞沒換成代名詞</b>：<s>Tom washes the car, doesn't Tom?</s> → <b>doesn't he?</b>（名詞一定要換成 he／she／it／they）</li>
+      <li><b>never／hardly 沒被當成否定</b>：<s>Tom never washes the car, doesn't he?</s> → Tom never washes the car, <b>does he?</b>（never、hardly、seldom、rarely 都算否定）</li>
+    </ol>
+  </div>
+
+  <div class="formula" style="margin-top:20px;">
+    📎 <b>速查表：特殊句型附加問句</b>（就是上面「特殊句型 13 句」動畫的整理，複習時看這張就好）
+    <table class="ft">
+      <tbody><tr><th>句型</th><th>例句</th><th>附加問句</th></tr>
+      <tr><td>I am …</td><td>I am late,</td><td><b>aren't I?</b>（不用 amn't）</td></tr>
+      <tr><td>Let's …（提議，包含對方）</td><td>Let's wash the car,</td><td><b>shall we?</b></td></tr>
+      <tr><td>Let us …（祈使：請你讓我們…）</td><td>Let us wash the car,</td><td><b>will you?</b></td></tr>
+      <tr><td>祈使句（肯定）</td><td>Wash the car,</td><td><b>will you?</b> / won't you?</td></tr>
+      <tr><td>祈使句（否定）</td><td>Don't wash the car,</td><td><b>will you?</b></td></tr>
+      <tr><td>There is／are …</td><td>There is a car outside,</td><td><b>isn't there?</b></td></tr>
+      <tr><td>This／That is …</td><td>That is Tom's car,</td><td><b>isn't it?</b></td></tr>
+      <tr><td>everyone／somebody</td><td>Everyone washed the car,</td><td><b>didn't they?</b></td></tr>
+      <tr><td>nobody／no one（否定）</td><td>Nobody washed the car,</td><td><b>did they?</b></td></tr>
+      <tr><td>nothing（否定）</td><td>Nothing happened,</td><td><b>did it?</b></td></tr>
+      <tr><td>I think／I believe …</td><td>I think Tom washes the car,</td><td><b>doesn't he?</b>（看 that 子句，不看 I think）</td></tr>
+      <tr><td>have 當「擁有」（美式）</td><td>Tom has a nice car,</td><td><b>doesn't he?</b></td></tr>
+    </tbody></table>
+    🗣️ <b>口語裡的 right? / OK?</b>：Tom washes the car, <b>right?</b>／Tom doesn't wash the car, <b>right?</b>
+    —— 這叫「不變化附加問句」，不管前面用什麼助動詞、是肯定還是否定，通通只講 right?（或 OK?、yeah?、huh?）。
+    語氣是「我猜是這樣，跟你確認一下」，<b>只用在說話</b>；英檢、學測與正式寫作一律要用上面「助動詞（肯否相反）＋代名詞」的形式。
+  </div>
+
+  <footer>EFETL © 2025　‧　GEPT 初級英檢 · 文法練習</footer>
+</div>
+
+<svg id="pathSvg" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrAux" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f7a52"/>
+    </marker>
+    <marker id="arrPron" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b6fd4"/>
+    </marker>
+  </defs>
+</svg>
+
+<script>
+const WIDE = window.matchMedia('(min-width:900px)').matches;
+
+/* ── 示範說明 28 句（同一句 Tom … the car，只換時態／助動詞）──
+   subj 主詞／adv 半否定副詞／aux 原句助動詞（沒有就 ""）／neg 原句的 n't／
+   verb 帶時態的主要動詞（只有沒助動詞時才填）／rest 其餘
+   tA 附加問句的助動詞（步驟①飛過去的字）／t2 步驟②縮寫後改成的樣子（will→wo）／
+   tN 附加問句要不要加 n't／pron 代名詞 */
+const DEMO = [
+ {tag:"① 現在簡單式", subj:"Tom", verb:"washes", rest:"the car.", tA:"does", tN:"n't", pron:"he",
+  n1:"句子裡<b>沒有</b> be 動詞也沒有助動詞，只好<b>借一個</b>。主詞 Tom 是單數、時態是現在式 → 借 <b>does</b>。（washes 的 -es 就是時態的來源）",
+  n2:"前面是<b>肯定</b>句，後面就要<b>否定</b> → does 加上 <b>n't</b> 變成 doesn't。",
+  n3:"主詞 Tom 換成代名詞 <b>he</b>，放在 doesn't 後面，句尾加 <b>?</b>。",
+  alt:"回答：Yes, he does. / No, he doesn't.",
+  zh:"湯姆會洗車，不是嗎？"},
+
+ {tag:"② 過去簡單式", subj:"Tom", verb:"washed", rest:"the car.", tA:"did", tN:"n't", pron:"he",
+  n1:"一樣沒有助動詞，動詞 washed 是<b>過去式</b> → 借 <b>did</b>。",
+  n2:"前肯後否 → did ＋ <b>n't</b> ＝ didn't。",
+  n3:"Tom → <b>he</b>，句尾加問號。注意附加問句裡<b>不再出現動詞</b>，只留 didn't he。",
+  alt:"回答：Yes, he did. / No, he didn't.",
+  zh:"湯姆洗了車，不是嗎？"},
+
+ {tag:"③ 未來式 will", subj:"Tom", aux:"will", rest:"wash the car.", tA:"will", t2:"wo", tN:"n't", pron:"he",
+  n1:"句子裡已經有助動詞 <b>will</b>，直接把它搬到逗號後面，不必借 do。",
+  n2:"前肯後否要加 n't，但 <b>will + not 的縮寫很特別</b>：不是 willn't，而是 <b>won't</b>（will 變成 wo）。",
+  n3:"Tom → <b>he</b>，變成 won't he?",
+  alt:"回答：Yes, he will. / No, he won't.",
+  zh:"湯姆會去洗車，不是嗎？"},
+
+ {tag:"④ be going to", subj:"Tom", aux:"is", rest:"going to wash the car.", tA:"is", tN:"n't", pron:"he",
+  n1:"be going to 的助動詞就是<b>前面那個 be 動詞 is</b>，把 is 搬過去。",
+  n2:"前肯後否 → is ＋ n't ＝ isn't。",
+  n3:"Tom → <b>he</b>：isn't he?　（不要寫成 doesn't he）",
+  alt:"回答：Yes, he is. / No, he isn't.",
+  zh:"湯姆打算要洗車，不是嗎？"},
+
+ {tag:"⑤ 現在進行式", subj:"Tom", aux:"is", rest:"washing the car.", tA:"is", tN:"n't", pron:"he",
+  n1:"進行式的 <b>is</b> 就是助動詞，直接搬過去。",
+  n2:"前肯後否 → <b>isn't</b>。",
+  n3:"Tom → <b>he</b>：isn't he?",
+  alt:"回答：Yes, he is. / No, he isn't.",
+  zh:"湯姆正在洗車，不是嗎？"},
+
+ {tag:"⑥ 過去進行式", subj:"Tom", aux:"was", rest:"washing the car.", tA:"was", tN:"n't", pron:"he",
+  n1:"助動詞是 <b>was</b>（過去進行式），搬過去。",
+  n2:"前肯後否 → <b>wasn't</b>。",
+  n3:"Tom → <b>he</b>：wasn't he?",
+  alt:"回答：Yes, he was. / No, he wasn't.",
+  zh:"湯姆當時正在洗車，不是嗎？"},
+
+ {tag:"⑦ 未來進行式", subj:"Tom", aux:"will", rest:"be washing the car.", tA:"will", t2:"wo", tN:"n't", pron:"he",
+  n1:"助動詞有兩個（will be），<b>只搬最前面那一個 will</b>。",
+  n2:"will ＋ not → <b>won't</b>。",
+  n3:"Tom → <b>he</b>：won't he?　（不是 won't be he）",
+  alt:"回答：Yes, he will. / No, he won't.",
+  zh:"湯姆到時候會正在洗車，不是嗎？"},
+
+ {tag:"⑧ 現在完成式", subj:"Tom", aux:"has", rest:"washed the car.", tA:"has", tN:"n't", pron:"he",
+  n1:"完成式的 <b>has</b> 就是助動詞，搬過去。",
+  n2:"前肯後否 → <b>hasn't</b>。",
+  n3:"Tom → <b>he</b>：hasn't he?",
+  alt:"回答：Yes, he has. / No, he hasn't.",
+  zh:"湯姆已經洗過車了，不是嗎？"},
+
+ {tag:"⑨ 過去完成式", subj:"Tom", aux:"had", rest:"washed the car.", tA:"had", tN:"n't", pron:"he",
+  n1:"助動詞是 <b>had</b>，搬過去。",
+  n2:"前肯後否 → <b>hadn't</b>。",
+  n3:"Tom → <b>he</b>：hadn't he?",
+  alt:"回答：Yes, he had. / No, he hadn't.",
+  zh:"湯姆在那之前已經洗過車了，不是嗎？"},
+
+ {tag:"⑩ 未來完成式", subj:"Tom", aux:"will", rest:"have washed the car.", tA:"will", t2:"wo", tN:"n't", pron:"he",
+  n1:"will have 有兩個助動詞，<b>只搬第一個 will</b>（不是 have）。",
+  n2:"will ＋ not → <b>won't</b>。",
+  n3:"Tom → <b>he</b>：won't he?",
+  alt:"❌ 常錯：won't have he? ✔ 正確：<b>won't he?</b>",
+  zh:"到時候湯姆就已經洗好車了，不是嗎？"},
+
+ {tag:"⑪ 現在完成進行式", subj:"Tom", aux:"has", rest:"been washing the car.", tA:"has", tN:"n't", pron:"he",
+  n1:"has been 也是兩個助動詞，<b>只搬第一個 has</b>。",
+  n2:"前肯後否 → <b>hasn't</b>。",
+  n3:"Tom → <b>he</b>：hasn't he?",
+  alt:"回答：Yes, he has. / No, he hasn't.",
+  zh:"湯姆一直在洗車，不是嗎？"},
+
+ {tag:"⑫ 過去完成進行式", subj:"Tom", aux:"had", rest:"been washing the car.", tA:"had", tN:"n't", pron:"he",
+  n1:"had been 只搬<b>第一個 had</b>。",
+  n2:"前肯後否 → <b>hadn't</b>。",
+  n3:"Tom → <b>he</b>：hadn't he?",
+  alt:"回答：Yes, he had. / No, he hadn't.",
+  zh:"湯姆之前一直在洗車，不是嗎？"},
+
+ {tag:"⑬ 情態 can", subj:"Tom", aux:"can", rest:"wash the car.", tA:"can", t2:"ca", tN:"n't", pron:"he",
+  n1:"情態助動詞 <b>can</b> 直接搬過去。",
+  n2:"can ＋ not 的縮寫也很特別：<b>can't</b>（can 變成 ca ＋ n't）。",
+  n3:"Tom → <b>he</b>：can't he?",
+  alt:"回答：Yes, he can. / No, he can't.",
+  zh:"湯姆會洗車（有能力），不是嗎？"},
+
+ {tag:"⑭ 情態 could", subj:"Tom", aux:"could", rest:"wash the car.", tA:"could", tN:"n't", pron:"he",
+  n1:"情態助動詞 <b>could</b> 搬過去。",
+  n2:"前肯後否 → <b>couldn't</b>。",
+  n3:"Tom → <b>he</b>：couldn't he?",
+  alt:"回答：Yes, he could. / No, he couldn't.",
+  zh:"湯姆可以洗車，不是嗎？"},
+
+ {tag:"⑮ 情態 should", subj:"Tom", aux:"should", rest:"wash the car.", tA:"should", tN:"n't", pron:"he",
+  n1:"情態助動詞 <b>should</b> 搬過去。",
+  n2:"前肯後否 → <b>shouldn't</b>。",
+  n3:"Tom → <b>he</b>：shouldn't he?",
+  alt:"回答：Yes, he should. / No, he shouldn't.",
+  zh:"湯姆應該洗車，不是嗎？"},
+
+ {tag:"⑯ 情態 must", subj:"Tom", aux:"must", rest:"wash the car.", tA:"must", tN:"n't", pron:"he",
+  n1:"情態助動詞 <b>must</b> 搬過去。",
+  n2:"前肯後否 → <b>mustn't</b>（t 不發音，念 /ˈmʌsnt/）。",
+  n3:"Tom → <b>he</b>：mustn't he?",
+  alt:"若 must 是「推測」（Tom must be tired），附加問句改看 be：<b>isn't he?</b>",
+  zh:"湯姆必須洗車，不是嗎？"},
+
+ {tag:"⑰ has to（一般動詞）", subj:"Tom", verb:"has to", rest:"wash the car.", tA:"does", tN:"n't", pron:"he",
+  n1:"⚠️ <b>has to／have to 不是助動詞</b>，它是一般動詞片語，所以句子裡等於沒有助動詞 → 借 <b>does</b>。",
+  n2:"前肯後否 → <b>doesn't</b>。",
+  n3:"Tom → <b>he</b>：doesn't he?",
+  alt:"❌ 常錯：hasn't he? ✔ 正確：<b>doesn't he?</b>（但 must 就用 mustn't he?）",
+  zh:"湯姆得洗車，不是嗎？"},
+
+ {tag:"⑱ used to", subj:"Tom", verb:"used to", rest:"wash the car.", tA:"did", tN:"n't", pron:"he",
+  n1:"used to（以前都～）當作<b>過去式的一般動詞</b>看 → 借 <b>did</b>。",
+  n2:"前肯後否 → <b>didn't</b>。",
+  n3:"Tom → <b>he</b>：didn't he?",
+  alt:"英式英文偶爾會寫 usedn't he?，但考試一律用 <b>didn't he?</b>",
+  zh:"湯姆以前都會洗車，不是嗎？"},
+
+ {tag:"⑲ had better", subj:"Tom", aux:"had", rest:"better wash the car.", tA:"had", tN:"n't", pron:"he",
+  n1:"had better 的 <b>had</b> 當助動詞用，搬過去。",
+  n2:"前肯後否 → <b>hadn't</b>。",
+  n3:"Tom → <b>he</b>：hadn't he?",
+  alt:"口語常縮寫成 Tom'd better…，附加問句一樣是 <b>hadn't he?</b>",
+  zh:"湯姆最好去洗車，不是嗎？"},
+
+ {tag:"⑳ ought to", subj:"Tom", aux:"ought", rest:"to wash the car.", tA:"ought", tN:"n't", pron:"he",
+  n1:"ought to 的 <b>ought</b> 當助動詞，搬過去。",
+  n2:"前肯後否 → <b>oughtn't</b>。",
+  n3:"Tom → <b>he</b>：oughtn't he?",
+  alt:"現代英文更常直接說 <b>shouldn't he?</b> 兩個都對。",
+  zh:"湯姆應該洗車，不是嗎？"},
+
+ {tag:"㉑ 現在簡單式（否定）", subj:"Tom", aux:"does", neg:"n't", rest:"wash the car.", tA:"does", tN:"", pron:"he",
+  n1:"doesn't ＝ does ＋ not，所以助動詞是 <b>does</b>，把 does 搬過去。",
+  n2:"前面已經是<b>否定</b>，後面就要<b>肯定</b> → n't <b>不跟著搬</b>，只留 does。",
+  n3:"Tom → <b>he</b>：does he?",
+  alt:"回答：Yes, he does.（其實有洗） / No, he doesn't.（真的沒洗）",
+  zh:"湯姆不洗車，對吧？"},
+
+ {tag:"㉒ 過去簡單式（否定）", subj:"Tom", aux:"did", neg:"n't", rest:"wash the car.", tA:"did", tN:"", pron:"he",
+  n1:"didn't ＝ did ＋ not → 助動詞是 <b>did</b>。",
+  n2:"前否後肯 → 只留 <b>did</b>，不加 n't。",
+  n3:"Tom → <b>he</b>：did he?",
+  alt:"回答：Yes, he did. / No, he didn't.",
+  zh:"湯姆沒洗車，對吧？"},
+
+ {tag:"㉓ 未來式（否定）", subj:"Tom", aux:"wo", neg:"n't", rest:"wash the car.", tA:"will", tN:"", pron:"he",
+  n1:"won't ＝ <b>will</b> ＋ not，把否定拿掉就變回 <b>will</b>。",
+  n2:"前否後肯 → 用<b>肯定的 will</b>，不加 n't。",
+  n3:"Tom → <b>he</b>：will he?",
+  alt:"回答：Yes, he will. / No, he won't.",
+  zh:"湯姆不會去洗車，對吧？"},
+
+ {tag:"㉔ 現在進行式（否定）", subj:"Tom", aux:"is", neg:"n't", rest:"washing the car.", tA:"is", tN:"", pron:"he",
+  n1:"isn't ＝ is ＋ not → 助動詞是 <b>is</b>。",
+  n2:"前否後肯 → 只留 <b>is</b>。",
+  n3:"Tom → <b>he</b>：is he?",
+  alt:"回答：Yes, he is. / No, he isn't.",
+  zh:"湯姆沒在洗車，對吧？"},
+
+ {tag:"㉕ 現在完成式（否定）", subj:"Tom", aux:"has", neg:"n't", rest:"washed the car.", tA:"has", tN:"", pron:"he",
+  n1:"hasn't ＝ has ＋ not → 助動詞是 <b>has</b>。",
+  n2:"前否後肯 → 只留 <b>has</b>。",
+  n3:"Tom → <b>he</b>：has he?",
+  alt:"回答：Yes, he has. / No, he hasn't.",
+  zh:"湯姆還沒洗車，對吧？"},
+
+ {tag:"㉖ 情態（否定）can't", subj:"Tom", aux:"ca", neg:"n't", rest:"wash the car.", tA:"can", tN:"", pron:"he",
+  n1:"can't ＝ <b>can</b> ＋ not，拿掉否定就變回 <b>can</b>。",
+  n2:"前否後肯 → 用肯定的 <b>can</b>。",
+  n3:"Tom → <b>he</b>：can he?",
+  alt:"回答：Yes, he can. / No, he can't.",
+  zh:"湯姆不會洗車，對吧？"},
+
+ {tag:"㉗ never（半否定字）", subj:"Tom", adv:"never", verb:"washes", rest:"the car.", tA:"does", tN:"", pron:"he",
+  n1:"句子裡沒有助動詞，動詞 washes 是現在式單數 → 借 <b>does</b>。",
+  n2:"⚠️ 句子裡有 <b>never</b>，整句<b>已經是否定</b>了（雖然沒有 n't）→ 後面要用<b>肯定</b>，不加 n't。",
+  n3:"Tom → <b>he</b>：does he?",
+  alt:"同類的否定字：never、seldom、rarely、hardly、scarcely、few、little、no。",
+  zh:"湯姆從來不洗車，對吧？"},
+
+ {tag:"㉘ hardly ever（半否定）", subj:"Tom", adv:"hardly ever", verb:"washes", rest:"the car.", tA:"does", tN:"", pron:"he",
+  n1:"沒有助動詞 → 借 <b>does</b>。",
+  n2:"<b>hardly</b> ＝ 幾乎不，也算否定字 → 後面用<b>肯定</b>，不加 n't。",
+  n3:"Tom → <b>he</b>：does he?",
+  alt:"❌ 常錯：hardly ever… , doesn't he? ✔ 正確：<b>does he?</b>",
+  zh:"湯姆幾乎從來不洗車，對吧？"}
+];
+
+/* ── 特殊句型 13 句（換了主詞或句型才會出現的附加問句）──
+   lead 主句前綴／ghost 主詞是祈使句省略的 you／fixed 固定尾巴（不從句子裡搬助動詞）／
+   negSubj 主詞本身就是否定字／b1 b2 b3 按鈕文字／polarTxt 極性說明 */
+const DEMO2 = [
+ {tag:"① I am …（沒有 amn't）", subj:"I", aux:"am", rest:"late.", tA:"are", tN:"n't", pron:"I",
+  b1:"助動詞 am 搬過去 ➜ 改成 are",
+  n1:"助動詞是 <b>am</b>，但英文<b>沒有 amn't 這個字</b>，所以附加問句一律改用 <b>are</b>。",
+  n2:"前肯後否 → are ＋ n't ＝ <b>aren't</b>。",
+  n3:"主詞 I 本來就是代名詞，不用換：<b>aren't I?</b>",
+  alt:"⚠️ 反過來就正常了：I'm not late, <b>am I?</b>（否定句時就可以用 am）",
+  zh:"我遲到了，不是嗎？"},
+
+ {tag:"② Let's …（提議）", subj:"Let's", rest:"wash the car.", fixed:true, tA:"shall", tN:"", pron:"we",
+  b1:"固定用 shall", b2:"固定用法 ➜ 不顛倒", b3:"Let's = Let us ➜ we",
+  polarTxt:"極性：提議句型<b>固定</b>是 shall we?，<b>不做</b>肯否顛倒",
+  n1:"Let's 是「提議」，句子裡<b>沒有助動詞可以搬</b>，這種句型<b>固定配 shall</b>。",
+  n2:"提議句<b>不做肯否顛倒</b>：連否定的 Let's not talk about it 也一樣是 shall we?",
+  n3:"Let's ＝ Let <b>us</b>，所以代名詞用 <b>we</b>（包含你和我）：shall we?",
+  alt:"正式書面語把 Let us 當提議用（Let us pray）時，一樣是 <b>shall we?</b>",
+  zh:"我們一起來洗車吧，好嗎？"},
+
+ {tag:"③ Let us …（祈使：讓我們）", subj:"(You)", ghost:true, rest:"Let us wash the car.",
+  fixed:true, tA:"will", tN:"", pron:"you",
+  b1:"祈使句固定用 will", b2:"固定用法 ➜ 不顛倒", b3:"省略的主詞 you",
+  polarTxt:"極性：祈使句<b>固定</b>是 will you?，<b>不做</b>肯否顛倒",
+  n1:"沒有縮寫的 Let us 是<b>祈使句</b>（＝請你讓我們…），祈使句<b>固定配 will</b>。",
+  n2:"祈使句不做肯否顛倒，一律 will you?",
+  n3:"祈使句的主詞是<b>被省略的 you</b>（虛線框），所以代名詞用 <b>you</b>：will you?",
+  alt:"對照：Let's wash the car, <b>shall we?</b>（提議，含你我）／Let us wash the car, <b>will you?</b>（請求對方）",
+  zh:"請讓我們洗車，好嗎？"},
+
+ {tag:"④ 祈使句（肯定）", subj:"(You)", ghost:true, rest:"Wash the car.",
+  fixed:true, tA:"will", tN:"", pron:"you",
+  b1:"祈使句固定用 will", b2:"固定用法 ➜ 不顛倒", b3:"省略的主詞 you",
+  polarTxt:"極性：祈使句<b>固定</b>是 will you?，<b>不做</b>肯否顛倒",
+  n1:"祈使句沒有主詞也沒有助動詞 → <b>固定配 will</b>。",
+  n2:"不做肯否顛倒。",
+  n3:"主詞是省略的 <b>you</b>：will you?",
+  alt:"語氣更客氣可換成 <b>won't you? / would you? / could you?</b>；very 不耐煩時說 can't you?",
+  zh:"去洗車，好嗎？"},
+
+ {tag:"⑤ 祈使句（否定）", subj:"(You)", ghost:true, rest:"Don't wash the car.",
+  fixed:true, tA:"will", tN:"", pron:"you",
+  b1:"祈使句固定用 will", b2:"⚠️ 否定也不變 ➜ will", b3:"省略的主詞 you",
+  polarTxt:"極性：祈使句<b>固定</b>是 will you?，前面否定也<b>不會</b>變成別的",
+  n1:"一樣是祈使句 → <b>固定配 will</b>。",
+  n2:"⚠️ 雖然前面是 Don't（否定），祈使句<b>還是 will you?</b>，不要照「前否後肯」去改。",
+  n3:"主詞是省略的 <b>you</b>：will you?",
+  alt:"❌ 常錯：Don't wash the car, do you? ✔ 正確：<b>will you?</b>",
+  zh:"別洗車，好嗎？"},
+
+ {tag:"⑥ There is …（虛主詞）", subj:"There", aux:"is", rest:"a car outside.", tA:"is", tN:"n't", pron:"there",
+  n1:"助動詞就是 <b>is</b>，直接搬過去。",
+  n2:"前肯後否 → <b>isn't</b>。",
+  n3:"There 是<b>虛主詞</b>，附加問句照樣用 <b>there</b>（改小寫），<b>不是 it</b>。",
+  alt:"複數：There are two cars outside, <b>aren't there?</b>",
+  zh:"外面有一台車，不是嗎？"},
+
+ {tag:"⑦ This／That is …", subj:"That", aux:"is", rest:"Tom's car.", tA:"is", tN:"n't", pron:"it",
+  n1:"助動詞是 <b>is</b>，搬過去。",
+  n2:"前肯後否 → <b>isn't</b>。",
+  n3:"This／That 的代名詞是 <b>it</b>（These／Those 則用 <b>they</b>）。",
+  alt:"複數：Those are Tom's cars, <b>aren't they?</b>",
+  zh:"那是湯姆的車，不是嗎？"},
+
+ {tag:"⑧ Everyone（單數動詞・複數代名詞）", subj:"Everyone", verb:"washed", rest:"the car.", tA:"did", tN:"n't", pron:"they",
+  n1:"沒有助動詞，washed 是<b>過去式</b> → 借 <b>did</b>。",
+  n2:"前肯後否 → <b>didn't</b>。",
+  n3:"⚠️ everyone／everybody／someone 動詞雖然用<b>單數</b>，代名詞卻要用 <b>they</b>。",
+  alt:"現在式：Everyone likes the car, <b>don't they?</b>（借 do 不是 does）",
+  zh:"大家都洗過車了，不是嗎？"},
+
+ {tag:"⑨ Nobody（否定主詞）", subj:"Nobody", negSubj:true, verb:"washed", rest:"the car.", tA:"did", tN:"", pron:"they",
+  b2:"主詞是否定 ➜ 不加 n't",
+  n1:"沒有助動詞，washed 是過去式 → 借 <b>did</b>。",
+  n2:"⚠️ <b>Nobody</b> 本身就是否定（沒有人），整句算<b>否定句</b> → 後面要用<b>肯定</b>，不加 n't。",
+  n3:"nobody／no one 指人，代名詞用 <b>they</b>：did they?",
+  alt:"同類：No one、None of them 也都當否定看。",
+  zh:"沒有人洗車，對吧？"},
+
+ {tag:"⑩ Nothing（否定主詞・指物）", subj:"Nothing", negSubj:true, verb:"happened", rest:"to the car.", tA:"did", tN:"", pron:"it",
+  b2:"主詞是否定 ➜ 不加 n't",
+  n1:"沒有助動詞，happened 是過去式 → 借 <b>did</b>。",
+  n2:"<b>Nothing</b> 是否定字 → 整句否定 → 後面用<b>肯定</b>。",
+  n3:"nothing 指「事物」，代名詞用 <b>it</b>（nobody 指人才用 they）。",
+  alt:"對照：Nobody came, <b>did they?</b>／Nothing happened, <b>did it?</b>",
+  zh:"車子沒發生什麼事，對吧？"},
+
+ {tag:"⑪ I think …（看子句）", lead:"I think", subj:"Tom", verb:"washes", rest:"the car.", tA:"does", tN:"n't", pron:"he",
+  b3:"用子句的主詞 Tom ➜ he",
+  n1:"⚠️ 主句是 I think，但附加問句要看<b>後面的子句</b>（Tom washes the car）→ 子句沒有助動詞 → 借 <b>does</b>。",
+  n2:"看<b>子句</b>的肯否：子句是肯定 → 後面加 n't。",
+  n3:"代名詞也取<b>子句的主詞</b> Tom → <b>he</b>，不是 I：doesn't he?",
+  alt:"⚠️ 主句否定時極性跟著主句翻：I <b>don't</b> think Tom washes the car, <b>does he?</b>",
+  zh:"我想湯姆有洗車，不是嗎？"},
+
+ {tag:"⑫ have 當「擁有」", subj:"Tom", verb:"has", rest:"a nice car.", tA:"does", tN:"n't", pron:"he",
+  n1:"這個 has 是「擁有」的<b>一般動詞</b>（美式用法），不是助動詞 → 借 <b>does</b>。",
+  n2:"前肯後否 → <b>doesn't</b>。",
+  n3:"Tom → <b>he</b>：doesn't he?",
+  alt:"英式英文可以說 hasn't he?；但完成式 Tom <b>has washed</b> the car 的 has 是助動詞 → <b>hasn't he?</b>",
+  zh:"湯姆有一台好車，不是嗎？"},
+
+ {tag:"⑬ 口語 right?（不變化）", subj:"Tom", rest:"washes the car.", fixed:true, tA:"right", tN:"", pron:"",
+  b1:"固定用 right", b2:"不做肯否顛倒", b3:"沒有代名詞，直接加 ?",
+  polarTxt:"極性：right? 是<b>不變化附加問句</b>，肯定否定都用同一個字",
+  n1:"口語的 <b>right?</b> 不用找助動詞、也不用借 do／does／did，直接貼在句尾。",
+  n2:"完全不顛倒：Tom washes the car, right?／Tom <b>doesn't</b> wash the car, right? 兩句都一樣。",
+  n3:"後面<b>沒有代名詞</b>，直接加問號。同類還有 OK?、yeah?、huh?。",
+  alt:"⚠️ 只用在說話。英檢、學測與正式寫作一律要寫 <b>doesn't he?</b>",
+  zh:"湯姆有洗車，對吧？"}
+];
+
+/* ── 換你練習 12 題（填出附加問句）── */
+const PRAC = [
+ {src:"Tom has to wash the car,", a1:"doesn't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"has to 是一般動詞片語、不是助動詞，所以要借 does；前肯後否 → doesn't he?（不是 hasn't he?）"},
+ {src:"Tom used to wash the car,", a1:"didn't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"used to 當過去式的一般動詞看 → 借 did；前肯後否 → didn't he?"},
+ {src:"Tom had better wash the car,", a1:"hadn't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"had better 的 had 當助動詞；前肯後否 → hadn't he?"},
+ {src:"Tom ought to wash the car,", a1:"oughtn't|shouldn't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"ought 當助動詞 → oughtn't he?；現代英文也常說 shouldn't he?"},
+ {src:"Tom never washes the car,", a1:"does", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"never 本身就是否定字，整句已經是否定 → 後面用肯定 does he?"},
+ {src:"Tom hardly ever washes the car,", a1:"does", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"hardly（幾乎不）也算否定 → 前否後肯 → does he?"},
+ {src:"Tom won't wash the car,", a1:"will", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"won't = will not，前面已經否定 → 後面用肯定的 will he?"},
+ {src:"Tom will have washed the car,", a1:"won't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"will have 只搬第一個助動詞 will；will + not 縮寫成 won't → won't he?"},
+ {src:"Tom has been washing the car,", a1:"hasn't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"has been 只搬第一個 has；前肯後否 → hasn't he?"},
+ {src:"Tom must wash the car,", a1:"mustn't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"must 是情態助動詞，直接搬過去加 n't → mustn't he?"},
+ {src:"Tom didn't wash the car,", a1:"did", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"didn't = did + not，前否後肯 → did he?"},
+ {src:"Tom is going to wash the car,", a1:"isn't", h1:"助動詞", a2:"he", h2:"代名詞",
+  exp:"be going to 的助動詞是前面的 is；前肯後否 → isn't he?（不是 doesn't he?）"}
+];
+
+/* ── 批改用 ── */
+function norm(s){
+  return (s||"").toLowerCase().trim()
+    .replace(/[.,!?]/g,"")
+    .replace(/[‘’]/g,"'")
+    .replace(/\s+/g," ").trim();
+}
+function accepts(ans, val){
+  return ans.split("|").map(norm).includes(norm(val));
+}
+function firstAns(a){ return a.split("|")[0]; }
+
+/* ── 發音：優先播 mp3（微軟 edge-tts Neural），失敗時退回瀏覽器內建朗讀 ── */
+const AUDIO_DIR = "grammar-tag-audio/";
+let curAudio=null, curBtn=null;
+function stopSpk(){
+  if(curAudio){curAudio.pause();curAudio=null;}
+  if(curBtn){curBtn.classList.remove("playing");curBtn=null;}
+  if(window.speechSynthesis) speechSynthesis.cancel();
+}
+function fallbackSpeak(text){
+  if(!text||!window.speechSynthesis) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=.85;
+  u.onend=()=>{if(curBtn){curBtn.classList.remove("playing");curBtn=null;}};
+  speechSynthesis.speak(u);
+}
+function playId(id,btn,text){
+  const same = (curBtn && curBtn===btn);
+  stopSpk();
+  if(same) return;               // 再按一次＝停止
+  curBtn = btn||null;
+  if(curBtn) curBtn.classList.add("playing");
+  if(!id){ fallbackSpeak(text); return; }
+  const a=new Audio(AUDIO_DIR+id+".mp3");
+  curAudio=a;
+  a.onended=()=>{if(curBtn){curBtn.classList.remove("playing");curBtn=null;}curAudio=null;};
+  a.onerror=()=>{curAudio=null;fallbackSpeak(text);};
+  a.play().catch(()=>{curAudio=null;fallbackSpeak(text);});
+}
+function spk(id,text,cls){
+  return '<button class="spk'+(cls?' '+cls:'')+'" type="button" title="聽發音" aria-label="聽發音"'+
+    ' data-a="'+id+'" data-t="'+text.replace(/"/g,'&quot;')+'">🔊</button>';
+}
+
+/* 純文字（給發音與 fallback 用） */
+function origText(d){
+  return [d.lead, (d.ghost? "" : d.subj), d.adv, (d.aux? d.aux+(d.neg||"") : ""), d.verb, d.rest]
+    .filter(Boolean).join(' ');
+}
+function stmt(d){ return origText(d).replace(/\.$/,''); }
+function tagWord(d){ return (d.t2||d.tA)+(d.tN||""); }
+function tagText(d){ return stmt(d)+', '+[tagWord(d), d.pron].filter(Boolean).join(' ')+'?'; }
+function pracText(p){ return p.src+' '+firstAns(p.a1)+' '+p.a2+'?'; }
+
+const app = document.getElementById("app");
+let html = '';
+
+function demoCard(d,i,idp){
+  const polar = d.polarTxt ? d.polarTxt : (d.tN
+    ? '極性：前面<b>肯定</b> ➜ 後面<b>否定</b>（助動詞要加 n\'t）'
+    : '極性：前面<b>否定</b> ➜ 後面<b>肯定</b>（助動詞<b>不加</b> n\'t）');
+  return '<div class="q demo st0" data-i="'+i+'" data-idp="'+idp+'">'+
+    '<div class="qtop"><span class="qnum d">'+(i+1)+'</span><span class="tagk">'+d.tag+'</span></div>'+
+    '<div class="lineLab">陳述句</div>'+
+    '<div class="activeLine">'+
+      (d.lead ? '<span class="lead">'+d.lead+'</span> ' : '')+
+      '<span class="wSubj'+(d.ghost?' ghost':'')+'" data-role="subj">'+d.subj+'</span> '+
+      (d.adv ? '<span class="wAdv" data-role="adv">'+d.adv+'</span> ' : '')+
+      (d.aux ? '<span class="wAux" data-role="aux">'+d.aux+'</span>' : '')+
+      (d.neg ? '<span class="wNeg" data-role="neg">'+d.neg+'</span>' : '')+
+      (d.aux ? ' ' : '')+
+      (d.verb ? '<span class="wVerb" data-role="verb">'+d.verb+'</span> ' : '')+
+      '<span class="restOld" data-role="rest">'+d.rest+'</span>'+
+      spk(idp+(i+1)+'-1', origText(d))+
+    '</div>'+
+    '<div class="lineLab">加上附加問句</div>'+
+    '<div class="buildLine">'+
+      '<span class="copySent">'+stmt(d)+',</span> '+
+      '<span class="slotAux" data-slot="aux" data-base="'+d.tA+'">'+d.tA+'</span>'+
+      '<span class="slotNeg" data-slot="neg">'+(d.tN||'')+'</span>'+
+      (d.pron ? '<span class="slotPron" data-slot="pron">'+d.pron+'</span>' : '')+
+      '<span class="slotQ" data-slot="q">?</span>'+
+      spk(idp+(i+1)+'-2', tagText(d))+
+    '</div>'+
+    '<div class="polar">🔀 '+polar+'</div>'+
+    '<div class="stepbtns"><span class="hintk">一步一步點：</span>'+
+      '<button class="sbtn b1" type="button" data-s="1"><span class="sn">1</span>'+(d.b1 || (d.aux?'助動詞 '+d.tA+' 搬過去':'借 '+d.tA+' 當助動詞'))+'</button>'+
+      '<button class="sbtn b2" type="button" data-s="2" disabled><span class="sn">2</span>'+(d.b2 || (d.tN?"肯定 ➜ 加 n't":"否定 ➜ 不加 n't"))+'</button>'+
+      '<button class="sbtn b3" type="button" data-s="3" disabled><span class="sn">3</span>'+(d.b3 || '主詞換代名詞＋?')+'</button>'+
+      '<button class="replay" type="button" data-replay="'+i+'">↺ 重播</button>'+
+    '</div>'+
+    '<div class="reveal r1"><b>① </b>'+d.n1+'</div>'+
+    '<div class="reveal r2"><b>② </b>'+d.n2+'</div>'+
+    '<div class="reveal r3"><b>③ </b>'+d.n3+'</div>'+
+    '<div class="demoexp"><div class="alt">🔁 '+d.alt+'</div>'+
+      '<div class="zh">💬 '+d.zh+'</div></div>'+
+  '</div>';
+}
+
+html += '<div class="group-h demo"><span class="tag">📖 示範說明 28 句</span><span class="sub">同一句 Tom … the car，只換時態（按 1／2／3）</span></div>';
+DEMO.forEach((d,i)=>{ html += demoCard(d,i,'d'); });
+
+html += '<div class="group-h demo"><span class="tag">🎁 特殊句型 13 句</span><span class="sub">換了主詞或句型才會出現的附加問句，一樣按 1／2／3 看它怎麼變</span></div>';
+DEMO2.forEach((d,i)=>{ html += demoCard(d,i,'e'); });
+
+html += '<div class="group-h prac"><span class="tag">✏️ 換你練習</span><span class="sub">填出附加問句：兩格都填 → 按「送出批改」；卡關就點右上角 ❓ 看答案與解析</span></div>';
+PRAC.forEach((p,i)=>{
+  html +=
+  '<div class="q practice" data-i="'+i+'">'+
+    '<div class="qtop"><span class="qnum">'+(i+1)+'</span>'+
+      '<div class="cnq"><span class="lab">陳述句</span>'+p.src+'</div>'+
+      '<button class="qmark" type="button" title="看答案與解析">？</button></div>'+
+    '<div class="rewrite">'+p.src+' '+
+      '<input data-b="1" size="10" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="?"> '+
+      '<span class="hint">('+p.h1+')</span> '+
+      '<input data-b="2" size="6" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="?"> '+
+      '<span class="hint">('+p.h2+')</span> ?'+
+    '</div>'+
+    '<div class="exp"><div class="ans">✔ '+p.src+' <u>'+firstAns(p.a1)+'</u> <u>'+p.a2+'</u>?'+spk('p'+(i+1), pracText(p))+'</div>'+
+      '<div class="why">📝 '+p.exp+'</div></div>'+
+  '</div>';
+});
+app.innerHTML = html;
+
+/* ── 飛行動畫（電腦/平板寬螢幕）── */
+const pathSvg = document.getElementById('pathSvg');
+const MARKER = {aux:'url(#arrAux)', pron:'url(#arrPron)'};
+
+function drawPath(x1,y1,x2,y2,kind,cardIdx){
+  const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('d', 'M'+x1+','+y1+' L'+x2+','+y2);
+  path.setAttribute('class', 'pathLine '+kind);
+  path.setAttribute('marker-end', MARKER[kind]);
+  path.dataset.card = cardIdx;
+  pathSvg.appendChild(path);
+  requestAnimationFrame(()=> requestAnimationFrame(()=> path.classList.add('show')));
+  return path;
+}
+
+function flyText(sourceEl, destEl, colorClass, kind, cardIdx){
+  const startRect = sourceEl.getBoundingClientRect();
+  const endRect = destEl.getBoundingClientRect();
+  const sx = startRect.left + startRect.width/2 + window.scrollX, sy = startRect.top + startRect.height/2 + window.scrollY;
+  const ex = endRect.left + endRect.width/2 + window.scrollX, ey = endRect.top + endRect.height/2 + window.scrollY;
+  drawPath(sx, sy, ex, ey, kind, cardIdx);
+
+  const clone = document.createElement('span');
+  clone.className = 'flyClone ' + colorClass;
+  clone.dataset.card = cardIdx;
+  clone.textContent = destEl.textContent;
+  clone.style.left = startRect.left + 'px';
+  clone.style.top = startRect.top + 'px';
+  clone.style.fontSize = getComputedStyle(sourceEl).fontSize;
+  document.body.appendChild(clone);
+  requestAnimationFrame(()=>{
+    clone.style.transition = 'left .65s cubic-bezier(.22,.85,.3,1), top .65s cubic-bezier(.22,.85,.3,1)';
+    clone.style.left = endRect.left + 'px';
+    clone.style.top = endRect.top + 'px';
+  });
+  const done = ()=>{
+    clone.remove();
+    destEl.classList.add('show');
+    // 虛線保留不淡出，讓學生可以回頭看整個移動路徑（按重播才清除）
+  };
+  clone.addEventListener('transitionend', done, {once:true});
+  setTimeout(done, 800);
+}
+
+function resetDemoCard(card){
+  card.classList.remove('st1','st2','st3');
+  card.classList.add('st0');
+  card.dataset.step = '0';
+  card.querySelectorAll('.sbtn').forEach(b=>{
+    b.classList.remove('on');
+    b.disabled = (b.dataset.s !== '1');
+  });
+  const sa = card.querySelector('[data-slot="aux"]');
+  sa.textContent = sa.dataset.base;
+  card.querySelectorAll('.slotAux,.slotNeg,.slotPron,.slotQ').forEach(s=>s.classList.remove('show','pop'));
+  card.querySelectorAll('.wSubj,.wAux,.wVerb,.wNeg,.wAdv').forEach(s=>s.classList.remove('picked','dropped','isneg'));
+  card.querySelector('.polar').classList.remove('show');
+}
+
+function autoSpeak(card, id, text, delay){
+  const cb = document.getElementById('autoplay');
+  if(!cb || !cb.checked) return;
+  setTimeout(()=>{
+    const btn = card.querySelector('.spk[data-a="'+id+'"]');
+    playId(id, btn, text);
+  }, delay);
+}
+
+/* 逐步顯示 + 動畫 */
+app.addEventListener("click",(ev)=>{
+  const sp = ev.target.closest(".spk");
+  if(sp){ playId(sp.dataset.a, sp, sp.dataset.t); return; }
+  const qm = ev.target.closest(".qmark");
+  if(qm){
+    const card = qm.closest(".q.practice");
+    const exp = card.querySelector(".exp");
+    const on = exp.classList.toggle("show");
+    if(on){
+      const p = PRAC[+card.dataset.i];
+      const ins = card.querySelectorAll("input");
+      ins[0].value = ins[0].value || firstAns(p.a1);
+      ins[1].value = ins[1].value || p.a2;
+    }
+    return;
+  }
+  const rp = ev.target.closest('.replay');
+  if(rp){
+    const card = rp.closest('.q.demo');
+    const cardIdx = card.dataset.idp + card.dataset.i;
+    // 重播：只清掉「這張卡片」自己的虛線／飛行殘留，不影響其他卡片已完成的動畫
+    pathSvg.querySelectorAll('.pathLine[data-card="'+cardIdx+'"]').forEach(p=>p.remove());
+    document.querySelectorAll('.flyClone[data-card="'+cardIdx+'"]').forEach(c=>c.remove());
+    resetDemoCard(card);
+    return;
+  }
+  const b = ev.target.closest(".sbtn");
+  if(!b || b.disabled) return;
+  const card = b.closest(".q.demo");
+  const s = +b.dataset.s;
+  const cur = +(card.dataset.step || 0);
+  if(s !== cur+1) return; // 強制照順序 1→2→3
+  card.dataset.step = s;
+  card.classList.remove("st0","st1","st2","st3");
+  card.classList.add("st"+s);
+  b.classList.add("on");
+  b.disabled = true;
+  const nextBtn = card.querySelector('.sbtn[data-s="'+(s+1)+'"]');
+  if(nextBtn) nextBtn.disabled = false;
+
+  const cardIdx = +card.dataset.i;
+  const idp = card.dataset.idp;
+  const d = (idp==='e' ? DEMO2 : DEMO)[cardIdx];
+  if(s===1){
+    // ① 助動詞（或從動詞借來的 do/does/did）飛到逗號後面
+    const slot = card.querySelector('[data-slot="aux"]');
+    if(d.fixed){
+      // 固定尾巴（shall we? / will you? / right?）：不是從句子裡搬出來的，直接彈出
+      slot.classList.add('show','pop');
+    } else {
+      const src = d.aux ? card.querySelector('[data-role="aux"]') : card.querySelector('[data-role="verb"]');
+      if(WIDE){ flyText(src, slot, 'wAux', 'aux', idp+cardIdx); }
+      else { slot.classList.add('show'); }
+      src.classList.add('picked');
+    }
+    autoSpeak(card, idp+(cardIdx+1)+'-1', origText(d), 0);
+  } else if(s===2){
+    // ② 肯否顛倒
+    const slotN = card.querySelector('[data-slot="neg"]');
+    const slotA = card.querySelector('[data-slot="aux"]');
+    if(d.t2) slotA.textContent = d.t2;          // will → wo（won't）、can → ca（can't）
+    if(d.tN){ slotN.classList.add('show','pop'); }
+    const dropped = card.querySelector('[data-role="neg"]') || card.querySelector('[data-role="adv"]');
+    if(dropped) dropped.classList.add('dropped');
+    if(d.negSubj) card.querySelector('[data-role="subj"]').classList.add('isneg');
+    card.querySelector('.polar').classList.add('show');
+  } else if(s===3){
+    // ③ 主詞換成代名詞 + 問號
+    const subj = card.querySelector('[data-role="subj"]');
+    const slotP = card.querySelector('[data-slot="pron"]');   // right? 這類沒有代名詞的卡會是 null
+    const slotQ = card.querySelector('[data-slot="q"]');
+    if(d.pron){
+      if(WIDE){ flyText(subj, slotP, 'wSubj', 'pron', idp+cardIdx); }
+      else { slotP.classList.add('show'); }
+      subj.classList.add('picked');
+    }
+    setTimeout(()=> slotQ.classList.add('show','pop'), (WIDE && d.pron) ? 500 : 0);
+    autoSpeak(card, idp+(cardIdx+1)+'-2', tagText(d), (WIDE && d.pron) ? 900 : 200);
+  }
+});
+
+/* 批改 */
+document.getElementById("submit").addEventListener("click",()=>{
+  let correct=0;
+  const cards = app.querySelectorAll(".q.practice");
+  cards.forEach(q=>{
+    const p = PRAC[+q.dataset.i];
+    const ins = q.querySelectorAll("input");
+    let ok=true;
+    [p.a1,p.a2].forEach((ans,idx)=>{
+      const el=ins[idx];
+      if(accepts(ans, el.value)){ el.classList.add("ok"); el.classList.remove("no"); }
+      else { el.classList.add("no"); el.classList.remove("ok"); ok=false; }
+    });
+    q.querySelector(".exp").classList.add("show");
+    if(ok) correct++;
+  });
+  document.getElementById("score").textContent = "練習答對 "+correct+" / "+cards.length+" 題";
+  window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+});
+
+document.getElementById("reset").addEventListener("click",()=>{
+  app.querySelectorAll(".q.practice input").forEach(i=>{i.value="";i.classList.remove("ok","no");});
+  app.querySelectorAll(".q.practice .exp").forEach(e=>e.classList.remove("show"));
+  document.getElementById("score").textContent="";
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+</script>
+</body>
+</html>
