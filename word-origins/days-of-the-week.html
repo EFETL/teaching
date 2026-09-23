@@ -741,7 +741,7 @@
         '<span class="card-icon '+d.iconClass+'">'+d.sym+'</span>' +
         '<div class="card-en-row">' +
           '<span class="card-en">'+d.en+'</span>' +
-          '<button class="word-btn" type="button" aria-label="播放 '+d.en+' 的發音" data-src="audio/'+d.slug+'-word.m4a">🔊</button>' +
+          '<button class="word-btn" type="button" aria-label="播放 '+d.en+' 的發音" data-en="'+d.en+'">🔊</button>' +
         '</div>' +
         '<div class="card-zh">'+d.zh+'</div>' +
         '<div class="card-hook">'+d.hook+'</div>' +
@@ -777,14 +777,35 @@
     grid.appendChild(card);
   });
 
-  // ---------- word pronunciation buttons ----------
+  // ---------- 單字發音：微軟語音 ----------
+  var enVoice = null;
+  function pickVoice(){
+    if(!("speechSynthesis" in window)) return;
+    var vs = speechSynthesis.getVoices();
+    var ms = vs.filter(function(v){ return /^Microsoft/i.test(v.name); });   // 微軟語音優先
+    enVoice = ms.filter(function(v){ return /en[-_]US/i.test(v.lang) && /Natural/i.test(v.name); })[0]
+           || ms.filter(function(v){ return /en[-_]US/i.test(v.lang); })[0]
+           || ms.filter(function(v){ return /^en/i.test(v.lang); })[0]
+           || vs.filter(function(v){ return /en[-_]US/i.test(v.lang); })[0]   // 沒有微軟語音時（如 Mac）才退回
+           || vs.filter(function(v){ return /^en/i.test(v.lang); })[0] || null;
+  }
+  if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function speakEN(text, btn){
+    if(!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US"; u.rate = 0.85; if(enVoice) u.voice = enVoice;
+    if(btn){
+      btn.classList.add("is-playing");
+      u.onend = u.onerror = function(){ btn.classList.remove("is-playing"); };
+    }
+    speechSynthesis.speak(u);
+  }
+
   document.addEventListener("click", function(e){
     var btn = e.target.closest && e.target.closest(".word-btn");
     if(!btn) return;
-    var au = new Audio(btn.dataset.src);
-    btn.classList.add("is-playing");
-    au.addEventListener("ended", function(){ btn.classList.remove("is-playing"); });
-    au.play();
+    speakEN(btn.dataset.en, btn);
   });
 
   // ---------- story narration player (per card back) ----------
@@ -968,12 +989,7 @@
 
   function playListenAudio(){
     if(!listenState.current) return;
-    if(listenState.audio){ listenState.audio.pause(); }
-    var au = new Audio("audio/" + listenState.current.slug + "-word.m4a");
-    listenState.audio = au;
-    listenPlayBtn.classList.add("is-playing");
-    au.addEventListener("ended", function(){ listenPlayBtn.classList.remove("is-playing"); });
-    au.play();
+    speakEN(listenState.current.en, listenPlayBtn);
   }
 
   function handleListenGuess(key, el){
