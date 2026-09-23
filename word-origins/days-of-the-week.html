@@ -3,22 +3,22 @@
 <title>七天的秘密：英文星期由來</title>
 <style>
   :root{
-    --bg: #0e0f26;
-    --bg-deep: #08091a;
-    --panel: #171a3d;
-    --panel-edge: rgba(244,241,232,0.09);
-    --ink: #f3efe3;
-    --ink-dim: #aeb0d6;
-    --ink-faint: #7577a3;
-    --gold: #f0b429;
+    --bg: #f4f6fb;
+    --bg-deep: #eef1f8;
+    --panel: #ffffff;
+    --panel-edge: #e3e7f3;
+    --ink: #1b1f31;
+    --ink-dim: #464d66;
+    --ink-faint: #5f6780;
+    --gold: #b45309;
 
-    --sun: #f0b429;
-    --moon: #9fb8e8;
-    --mars: #d1495b;
-    --mercury: #6fd8c4;
-    --jupiter: #9b8cf2;
-    --venus: #f28fb0;
-    --saturn: #cf9a5c;
+    --sun: #b45309;
+    --moon: #1d4ed8;
+    --mars: #be123c;
+    --mercury: #0f766e;
+    --jupiter: #6d28d9;
+    --venus: #be185d;
+    --saturn: #a16207;
 
     --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
     --sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
@@ -29,12 +29,11 @@
   *{ box-sizing: border-box; }
   html,body{ margin:0; padding:0; min-height: 100%; }
   html{
-    background: var(--bg-deep);
-    font-size: 16px;
+    background: var(--bg);
+    font-size: 20px;
   }
   body{
-    background: radial-gradient(ellipse at 50% -10%, #1b1e46 0%, var(--bg) 45%, var(--bg-deep) 100%);
-    background-attachment: fixed;
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
     font-size: 1rem;
@@ -47,15 +46,30 @@
 
   .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-  ::selection{ background: var(--gold); color: #1a1a1a; }
+  ::selection{ background: #fde68a; color: #1a1a1a; }
 
   /* ---------- HERO ---------- */
   .hero{
     position: relative;
-    padding: 88px 0 64px;
+    padding: 72px 0 60px;
     text-align: center;
     overflow: hidden;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
   }
+  .hero .eyebrow{ color: rgba(255,255,255,.85); }
+  .hero h1{ color: #fff; }
+  .hero h1 em{ color: #fde68a; }
+  .hero .hero-sub{ color: rgba(255,255,255,.9); }
+  .hero .hero-copy{ color: rgba(255,255,255,.95); }
+  .hero .hero-copy b{ color: #fff; background: rgba(255,255,255,.18);
+    border-radius: 6px; padding: 1px 6px; }
+  .crumbs{ position: relative; z-index: 2; margin: 26px 0 0; display: flex;
+    gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .crumbs a{ display: inline-block; font-size: 1rem; text-decoration: none; color: #fff;
+    font-weight: 600; border: 2px solid rgba(255,255,255,.55);
+    background: rgba(255,255,255,.14); border-radius: 999px; padding: 8px 20px; }
+  .crumbs a:hover{ background: #fff; color: #6d28d9; border-color: #fff; }
   #sky{
     position: absolute; inset: 0;
     width: 100%; height: 100%;
@@ -64,7 +78,7 @@
   .hero-content{ position: relative; z-index: 2; }
   .eyebrow{
     font-family: var(--mono);
-    font-size: 12.5px;
+    font-size: 1rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ink-faint);
@@ -104,7 +118,7 @@
   }
   .legend-title{
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 1rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-faint);
@@ -141,8 +155,13 @@
     color: var(--ink-faint);
   }
   @media (max-width: 720px){
-    .legend-row{ grid-template-columns: repeat(4, 1fr); }
-    .legend-cell:last-child{ grid-column: 2 / span 2; }
+    /* 20px 字級下，四欄會被 Wednesday 撐破，改兩欄 */
+    .legend-row{ grid-template-columns: repeat(2, 1fr); }
+    .legend-cell:last-child{ grid-column: auto; }
+    .wrap{ padding: 0 16px; }
+    .grid{ grid-template-columns: 1fr; }
+    .recap{ padding: 26px 20px; }
+    .game-board{ grid-template-columns: 1fr; gap: 18px; }
   }
 
   /* ---------- SECTION HEADERS ---------- */
@@ -167,14 +186,14 @@
   /* ---------- DAY CARDS ---------- */
   .grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 20px;
   }
 
   .card{
     --accent: var(--gold);
     position: relative;
-    height: 360px;
+    height: 652px;
     border-radius: 16px;
     cursor: pointer;
     outline: none;
@@ -184,12 +203,13 @@
   .card-face{
     position: absolute; inset: 0;
     border-radius: 16px;
-    background: linear-gradient(165deg, var(--panel), var(--bg-deep));
+    background: #fff;
     border: 1px solid var(--panel-edge);
+    border-top: 5px solid var(--accent);
     padding: 22px 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 18px 40px -24px rgba(0,0,0,0.7);
+    box-shadow: 0 4px 18px -10px rgba(27,31,49,0.28);
     opacity: 1;
     transform: scale(1);
     transition: opacity 0.35s ease, transform 0.35s ease;
@@ -219,7 +239,6 @@
     font-family: var(--symbol);
     font-size: 2.6rem;
     color: var(--accent);
-    text-shadow: 0 0 22px color-mix(in srgb, var(--accent) 65%, transparent);
     line-height: 1;
   }
   .card-icon{ display: inline-block; animation-play-state: paused; }
@@ -247,19 +266,19 @@
   }
   .word-btn{
     flex-shrink: 0;
-    width: 30px; height: 30px;
+    width: 42px; height: 42px;
     border-radius: 999px;
     border: 1px solid var(--panel-edge);
-    background: rgba(244,241,232,0.06);
+    background: #fff;
     color: var(--accent);
-    font-size: 0.95rem;
+    font-size: 1rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: background .15s, transform .15s;
   }
-  .word-btn:hover{ background: rgba(244,241,232,0.16); }
+  .word-btn:hover{ background: color-mix(in srgb, var(--accent) 12%, #fff); }
   .word-btn:active{ transform: scale(0.92); }
   .word-btn.is-playing{ background: color-mix(in srgb, var(--accent) 30%, transparent); }
 
@@ -276,7 +295,7 @@
   .card-flip-hint{
     margin-top: auto;
     font-family: var(--mono);
-    font-size: 10.5px;
+    font-size: 1rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-faint);
@@ -286,7 +305,7 @@
   .root-tag{
     display: inline-block;
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 1rem;
     color: var(--accent);
     border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
     border-radius: 999px;
@@ -358,18 +377,18 @@
     gap: 6px;
     border: 0;
     border-radius: 999px;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 700;
     font-family: var(--sans);
     cursor: pointer;
     padding: 7px 14px;
     transition: background .15s;
   }
-  .ply__main{ background: var(--accent); color: #1a1a2e; }
-  .ply.is-playing .ply__main, .ply.is-paused .ply__main{ background: var(--gold); color: #1a1a2e; }
-  .ply__stop{ background: rgba(244,241,232,0.12); color: var(--ink); }
-  .ply__stop:hover{ background: rgba(244,241,232,0.2); }
-  .ply__ic{ width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+  .ply__main{ background: var(--accent); color: #fff; }
+  .ply.is-playing .ply__main, .ply.is-paused .ply__main{ background: var(--gold); color: #fff; }
+  .ply__stop{ background: #eef1fa; border: 1px solid var(--panel-edge); color: var(--ink); }
+  .ply__stop:hover{ background: #dfe5f5; }
+  .ply__ic{ width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
   .ply__ic--pause{ display: none; }
   .ply.is-playing .ply__ic--play{ display: none; }
   .ply.is-playing .ply__ic--pause{ display: inline-block; }
@@ -400,7 +419,7 @@
     align-items: center;
     margin-top: 20px;
     font-family: var(--mono);
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .chain span.g{
     padding: 5px 11px;
@@ -424,7 +443,7 @@
   .game-status{
     text-align: center;
     font-family: var(--mono);
-    font-size: 12.5px;
+    font-size: 1rem;
     letter-spacing: 0.08em;
     color: var(--ink-dim);
     margin-bottom: 22px;
@@ -439,7 +458,7 @@
   }
   .game-col-label{
     font-family: var(--mono);
-    font-size: 10.5px;
+    font-size: 1rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink-faint);
@@ -478,7 +497,7 @@
     display: block;
     margin: 26px auto 0;
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: 1rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-dim);
@@ -510,7 +529,7 @@
     font-family: var(--sans);
     font-size: 1.05rem;
     font-weight: 700;
-    color: #1a1a2e;
+    color: #fff;
     background: var(--gold);
     border: 0;
     border-radius: 999px;
@@ -521,7 +540,7 @@
   }
   .listen-play:hover{ transform: translateY(-2px); }
   .listen-play:disabled{ opacity: 0.5; cursor: default; transform: none; }
-  .listen-play.is-playing{ background: color-mix(in srgb, var(--gold) 65%, white); }
+  .listen-play.is-playing{ background: color-mix(in srgb, var(--gold) 78%, #000); }
   .listen-options{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -548,7 +567,7 @@
     min-height: 1.6em;
     margin-top: 18px;
     font-family: var(--mono);
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--ink-dim);
   }
 
@@ -556,7 +575,7 @@
     text-align: center;
     padding: 30px 0 50px;
     color: var(--ink-faint);
-    font-size: 0.78rem;
+    font-size: 1rem;
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -578,6 +597,10 @@
       後來英國人覺得羅馬神明太陌生，就把其中五天偷偷換成了自己熟悉的<b>北歐神明</b>！
       點開下面的卡片，一起來挖寶吧。
     </p>
+    <div class="crumbs">
+      <a href="./">← 英文來源故事</a>
+      <a href="/">回主選單</a>
+    </div>
   </div>
 </div>
 
