@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>字首家族 · 英文來源故事</title>
+<style>
+  :root{
+    --h1:#f59e0b; --h2:#0891b2;
+    --bg:#f4f6fb; --card:#ffffff; --edge:#e3e7f3;
+    --ink:#1b1f31; --ink-dim:#464d66; --ink-faint:#5f6780;
+    --brand:#3730a3;
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%}
+  html{background:var(--bg);font-size:20px}       /* 全站基準字級 20px */
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:1rem;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--brand)}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:64px 0 56px;text-align:center;overflow:hidden;
+    background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff}
+  #sky{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.75}
+  .hero-content{position:relative;z-index:2}
+  .eyebrow{font-size:1rem;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.85);margin:0 0 16px;font-weight:600}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,6vw,3.6rem);
+    margin:0 0 10px;text-wrap:balance;letter-spacing:.01em;line-height:1.25}
+  .hero-sub{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.9);
+    font-size:1.15rem;margin:0 0 22px}
+  .hero-copy{max-width:720px;margin:0 auto;color:rgba(255,255,255,.95);font-size:1.05rem}
+  .hero-copy b{color:#fff;font-weight:700;background:rgba(255,255,255,.18);
+    border-radius:6px;padding:1px 6px}
+  .crumbs{position:relative;z-index:2;margin:26px 0 0;display:flex;gap:12px;
+    justify-content:center;flex-wrap:wrap}
+  .crumbs a{display:inline-block;font-size:1rem;text-decoration:none;color:#fff;font-weight:600;
+    border:2px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);
+    border-radius:999px;padding:8px 20px}
+  .crumbs a:hover{background:#fff;color:var(--h2);border-color:#fff}
+
+  /* ---------- SECTION HEAD ---------- */
+  .section-head{text-align:center;margin:64px 0 32px}
+  .section-head h2{font-family:var(--serif);font-weight:700;color:var(--ink);
+    font-size:clamp(1.6rem,3.4vw,2.2rem);margin:0 0 10px;text-wrap:balance}
+  .section-head p{color:var(--ink-dim);max-width:640px;margin:0 auto;font-size:1rem}
+
+  /* ---------- CARDS ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:24px}
+  .card{--accent:var(--brand);position:relative;height:726px;border-radius:18px;
+    cursor:pointer;outline:none}
+  .card:focus-visible .card-face{box-shadow:0 0 0 3px var(--accent),0 10px 26px -14px rgba(27,31,49,.4)}
+  .card-face{position:absolute;inset:0;border-radius:18px;background:var(--card);
+    border:1px solid var(--edge);border-top:5px solid var(--accent);
+    padding:24px 24px 22px;display:flex;flex-direction:column;
+    box-shadow:0 4px 18px -10px rgba(27,31,49,.28);
+    opacity:1;transform:scale(1);transition:opacity .32s ease,transform .32s ease}
+  .card:hover .card-face{box-shadow:0 12px 28px -14px rgba(27,31,49,.38)}
+  .card-front{z-index:2}
+  .card-back{z-index:1;opacity:0;transform:scale(.97);pointer-events:none;overflow-y:auto}
+  .card.flipped .card-front{opacity:0;transform:scale(1.03);pointer-events:none;z-index:1}
+  .card.flipped .card-back{opacity:1;transform:scale(1);pointer-events:auto;z-index:2}
+  .card-icon{width:74px;height:74px;border-radius:18px;display:flex;align-items:center;
+    justify-content:center;font-size:2.4rem;line-height:1;
+    background:color-mix(in srgb,var(--accent) 13%,#fff)}
+  .card:hover .card-icon{animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .card-en-row{display:flex;align-items:center;gap:10px;margin:18px 0 2px;flex-wrap:wrap}
+  .card-en{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1.2}
+  .word-btn{flex-shrink:0;width:42px;height:42px;border-radius:999px;border:2px solid var(--edge);
+    background:#fff;color:var(--accent);font-size:1rem;display:inline-flex;align-items:center;
+    justify-content:center;cursor:pointer;transition:background .15s,transform .15s}
+  .word-btn:hover{background:color-mix(in srgb,var(--accent) 12%,#fff)}
+  .word-btn:active{transform:scale(.92)}
+  .word-btn.is-playing{background:color-mix(in srgb,var(--accent) 24%,#fff);border-color:var(--accent)}
+  .card-zh{font-size:1rem;color:var(--ink-faint)}
+  .card-hook{font-size:1.05rem;color:var(--ink-dim);margin-top:16px}
+  .card-flip-hint{margin-top:auto;font-size:1rem;color:var(--accent);font-weight:600;padding-top:14px}
+  .root-tag{display:inline-block;font-size:1rem;font-weight:600;color:#fff;background:var(--accent);
+    border-radius:999px;padding:5px 16px;margin-bottom:14px;align-self:flex-start;line-height:1.5}
+  .card-story{font-size:1rem;color:var(--ink);margin:0 0 14px}
+  .card-say{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink-faint);
+    margin:0 0 14px;padding-left:12px;border-left:3px solid var(--edge)}
+  .card-mnemonic{font-size:1rem;color:var(--ink);background:color-mix(in srgb,var(--accent) 11%,#fff);
+    border-left:4px solid var(--accent);padding:12px 14px;border-radius:0 10px 10px 0;margin-top:auto}
+  .card-mnemonic b{color:var(--accent)}
+
+  /* ---------- GAME ---------- */
+  .game{background:var(--card);border:1px solid var(--edge);border-radius:18px;
+    padding:26px 24px 30px;box-shadow:0 4px 18px -10px rgba(27,31,49,.22)}
+  .game-status{font-size:1rem;color:var(--ink-dim);text-align:center;margin:0 0 20px;font-weight:600}
+  .game-status b{color:var(--h2);font-size:1.25rem}
+  .game-board{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .game-col-label{font-size:1rem;font-weight:700;color:var(--ink-faint);text-align:center;margin:0 0 12px}
+  .pick{display:block;width:100%;margin:0 0 10px;padding:14px 16px;border-radius:12px;
+    border:2px solid var(--edge);background:#fbfcfe;color:var(--ink);font-family:var(--sans);
+    font-size:1rem;text-align:left;cursor:pointer;transition:background .14s,border-color .14s}
+  .pick:hover:not(.done){background:#eef1fa;border-color:#c7cee6}
+  .pick.sel{border-color:var(--h2);background:color-mix(in srgb,var(--h2) 14%,#fff)}
+  .pick.done{opacity:.4;cursor:default;border-style:dashed}
+  .pick.wrong{border-color:#dc2626;background:#fee2e2}
+  .pick .pick-en{font-family:var(--serif);font-size:1.15rem;font-weight:700}
+  .win-banner{display:none;text-align:center;color:var(--h2);font-family:var(--serif);
+    font-weight:700;font-size:1.2rem;margin:20px 0 0}
+  .win-banner.show{display:block}
+  .game-reset{display:block;margin:20px auto 0;padding:11px 26px;border-radius:999px;
+    border:2px solid var(--edge);background:#fff;color:var(--ink-dim);
+    font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer}
+  .game-reset:hover{color:var(--ink);background:#eef1fa}
+
+  /* ---------- 課堂速查表 ---------- */
+  .sheet{background:var(--card);border:1px solid var(--edge);border-radius:18px;
+    padding:8px 6px;overflow-x:auto;box-shadow:0 4px 18px -10px rgba(27,31,49,.22)}
+  table{width:100%;border-collapse:collapse;font-size:1rem}
+  th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--edge);vertical-align:top}
+  th{font-size:1rem;color:var(--ink-faint);font-weight:700;background:#f7f9fd}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:nth-child(even){background:#fbfcfe}
+  td.w{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);white-space:nowrap}
+  td.w small{display:block;font-family:var(--sans);font-size:1rem;font-weight:400;color:var(--ink-faint)}
+  td.r{color:var(--accent-col);font-size:1rem;font-weight:600}
+  td.h{color:var(--ink-dim)}
+
+  footer{text-align:center;color:var(--ink-faint);font-size:1rem;margin:64px 0 54px}
+  .print-btn{display:inline-block;margin-top:12px;padding:11px 26px;border-radius:999px;
+    border:2px solid var(--edge);background:#fff;color:var(--ink-dim);
+    font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer}
+  .print-btn:hover{color:var(--ink);background:#eef1fa}
+
+  @media (max-width:700px){
+    .wrap{padding:0 16px}
+    .grid{grid-template-columns:1fr}
+    .card{height:auto;min-height:0}
+    .card-face{position:relative;inset:auto}
+    .card-back{display:none}
+    .card.flipped .card-front{display:none}
+    .card.flipped .card-back{display:flex;opacity:1;transform:none}
+    .game-board{grid-template-columns:1fr}
+  }
+
+  /* ---------- 列印：只印課堂速查表 ---------- */
+  @media print{
+    html,body{background:#fff}
+    .hero,.crumbs,.grid,.game,.section-head,footer,.print-btn{display:none !important}
+    .sheet{border:none;box-shadow:none;padding:0}
+    .sheet-head{display:block !important;margin:0 0 14px}
+    .sheet-head h2{font-size:20pt;margin:0 0 4px;color:#000}
+    .sheet-head p{font-size:11pt;margin:0;color:#444}
+    th,td{border-bottom:1px solid #ccc;font-size:12pt;padding:8px 10px}
+    th{background:#eee;color:#333}
+    tbody tr:nth-child(even){background:#fff}
+    td.w{font-size:13pt}
+    td.w small{font-size:11pt}
+    .wrap{max-width:none;padding:0}
+  }
+
+  /* 字根頁：課本例字清單 */
+  .card-icon.af{width:auto;min-width:74px;padding:0 20px;font-family:var(--serif);
+    font-weight:700;font-size:1.7rem;color:var(--accent);letter-spacing:.01em}
+  .wordlist{font-size:1rem;color:var(--ink-dim);margin:0 0 14px;line-height:1.95}
+  .wordlist b{color:var(--accent);font-family:var(--serif);font-size:1.05rem}
+  .wordlist .sep{color:#c3c9dc;padding:0 2px}
+  .af-count{font-size:1rem;color:var(--ink-faint)}
+  td.r b{font-family:var(--serif)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-content wrap">
+    <p class="eyebrow">Word Origins · 字首家族</p>
+    <h1>字首家族</h1>
+    <p class="hero-sub">One Prefix, a Dozen Words</p>
+    <p class="hero-copy">長單字不用一個一個背。認得<b>前面那幾個字母</b>，一次就能猜到課本裡十幾個字的意思。</p>
+    <div class="crumbs">
+      <a href="./">← 英文來源故事</a>
+      <a href="/">回主選單</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section-head">
+    <h2>點卡片，看這個字首管到哪些字</h2>
+    <p>正面是字首與它的意思，背面是 30 秒的說明，以及<b>課本裡真的會出現的例字</b>。</p>
+  </div>
+  <div class="grid" id="cardGrid"></div>
+
+  <div class="section-head">
+    <h2>小測驗：字首配意思</h2>
+    <p>左邊點一個字首，右邊點它的意思。一次隨機抽 8 個。</p>
+  </div>
+  <div class="game">
+    <p class="game-status">已配對 <b id="scoreNum">0</b> / 8</p>
+    <div class="game-board">
+      <div class="game-col">
+        <p class="game-col-label">字首</p>
+        <div id="colA"></div>
+      </div>
+      <div class="game-col">
+        <p class="game-col-label">意思</p>
+        <div id="colB"></div>
+      </div>
+    </div>
+    <p class="win-banner" id="winBanner">全部配對成功！這些字首你都認得了 ✦</p>
+    <button class="game-reset" id="resetGame">換一批</button>
+  </div>
+
+  <div class="section-head">
+    <h2>課堂速查表</h2>
+    <p>老師版：一眼掃過全部 14 個字首，挑今天要講的那幾個。可直接列印。</p>
+  </div>
+  <div class="sheet">
+    <div class="sheet-head" style="display:none">
+      <h2>字首家族 — 課堂速查表</h2>
+      <p>英文來源故事 ‧ teaching.efetl.com/word-origins</p>
+    </div>
+    <table>
+      <thead><tr><th>字首</th><th>一句話</th><th>課本例字</th></tr></thead>
+      <tbody><tr><td class="w">re-<small>再一次／往回</small></td><td class="r" style="color:#b45309">看到 re-，先想「再來一次」。</td><td class="h">12 個字：return、repeat、review、recycle、remind、remember…</td></tr>
+<tr><td class="w">un- im- in- dis-<small>不；相反</small></td><td class="r" style="color:#1d4ed8">四個字首，做同一件事：把意思翻過來。</td><td class="h">7 個字：unhappy、impolite、impossible、independent、dishonest、disagree…</td></tr>
+<tr><td class="w">in- im-<small>進去；裡面</small></td><td class="r" style="color:#0f766e">同樣是 in-，這個是「進去」不是「不」。</td><td class="h">12 個字：include、income、increase、inside、invite、invitation…</td></tr>
+<tr><td class="w">dis-<small>分開；拿掉</small></td><td class="r" style="color:#6d28d9">discover 是「把蓋子拿掉」。</td><td class="h">5 個字：discover、discuss、discussion、distance、distant…</td></tr>
+<tr><td class="w">pre-<small>在前面；事先</small></td><td class="r" style="color:#be185d">總統是「坐在最前面的人」。</td><td class="h">5 個字：prepare、present、president、prefer、presence…</td></tr>
+<tr><td class="w">ex-<small>向外；出來</small></td><td class="r" style="color:#c2410c">exit 的 ex，就是「出去」。</td><td class="h">10 個字：express、explain、expect、exercise、except、excuse…</td></tr>
+<tr><td class="w">com- con-<small>一起；共同</small></td><td class="r" style="color:#b45309">company 是「一起吃麵包的人」。</td><td class="h">11 個字：company、common、compare、complete、connect、contact…</td></tr>
+<tr><td class="w">de-<small>往下；去掉</small></td><td class="r" style="color:#1d4ed8">decide 的本意是「把別的選項切掉」。</td><td class="h">10 個字：decide、decrease、depend、describe、deliver、design…</td></tr>
+<tr><td class="w">pro-<small>向前</small></td><td class="r" style="color:#0f766e">problem 是「丟到你前面」的東西。</td><td class="h">10 個字：problem、produce、progress、project、promise、protect…</td></tr>
+<tr><td class="w">inter-<small>在…之間</small></td><td class="r" style="color:#6d28d9">internet 是「網與網之間」。</td><td class="h">6 個字：interest、international、internet、interrupt、interview、introduce…</td></tr>
+<tr><td class="w">sub- super-<small>下面／上面</small></td><td class="r" style="color:#be185d">地鐵是「走在下面的路」。</td><td class="h">4 個字：subway、subject、super、supermarket…</td></tr>
+<tr><td class="w">uni- bi- tri-<small>一、二、三</small></td><td class="r" style="color:#c2410c">數字藏在字首裡。</td><td class="h">7 個字：uniform、unique、universe、university、bicycle、bike…</td></tr>
+<tr><td class="w">under-<small>在下面</small></td><td class="r" style="color:#b45309">understand 為什麼是「站在下面」？</td><td class="h">4 個字：under、underline、underwear、understand…</td></tr>
+<tr><td class="w">tele-<small>遠</small></td><td class="r" style="color:#1d4ed8">一個字首，三台機器。</td><td class="h">2 個字：telephone、television…</td></tr></tbody>
+    </table>
+  </div>
+
+  <footer>
+    英文來源故事 ‧ teaching.efetl.com<br>
+    <button class="print-btn" onclick="window.print()">🖨 列印速查表</button>
+  </footer>
+</div>
+
+<script>
+const DATA = [{"af": "re-", "zh": "再一次／往回", "q": "再一次", "root": "拉丁 re-＝back, again", "hook": "看到 re-，先想「再來一次」。", "story": "re- 有兩個意思：<b>再一次</b>（repeat 再說一遍、review 再看一遍）和<b>往回</b>（return 走回去、reply 把話回過去）。兩個意思其實是同一個動作：回到原點再做。", "mn": "<b>re-＝倒帶</b>。不確定時就想「再一次」，八成猜得中。", "say": "Re- means back or again — rewind and do it once more.", "words": ["return", "repeat", "review", "recycle", "remind", "remember", "repair", "reply", "report", "recover", "reject", "receive"], "accent": "#b45309", "pairs": [["return", "歸來"], ["repeat", "重複"], ["review", "複習"], ["recycle", "回收"], ["remind", "提醒"], ["remember", "記得"], ["repair", "修理"], ["reply", "回應"], ["report", "報告"], ["recover", "康復"], ["reject", "拒絕"], ["receive", "收到"]], "n": 12}, {"af": "un- im- in- dis-", "zh": "不；相反", "q": "否定", "root": "拉丁與古英文的否定字首", "hook": "四個字首，做同一件事：把意思翻過來。", "story": "它們都是<b>否定</b>。用哪一個要看後面的字：m、p 前面用 im-（impolite），一般用 in-／un-，動詞前常用 dis-（disagree）。意思完全一樣，只是唸起來順不順。", "mn": "看到這四個開頭，先把原字的意思<b>加一個「不」</b>。", "say": "Un-, im-, in- and dis- all just mean “not.”", "words": ["unhappy", "impolite", "impossible", "independent", "dishonest", "disagree", "disappear"], "accent": "#1d4ed8", "pairs": [["unhappy", "不快樂的"], ["impolite", "不禮貌的"], ["impossible", "不可能的"], ["independent", "獨立的"], ["dishonest", "不誠實的"], ["disagree", "不同意"], ["disappear", "消失"]], "n": 7}, {"af": "in- im-", "zh": "進去；裡面", "q": "進去", "root": "拉丁 in＝into", "hook": "同樣是 in-，這個是「進去」不是「不」。", "story": "in- 有兩張臉：一個是「不」，一個是<b>「進去」</b>。include 是把東西關進來、income 是進來的錢、invite 是叫人進來、insect 是身體被「切進去」分成三節。", "mn": "分辨法：<b>後面像不像形容詞</b>。impossible 是不，income 是進來。", "say": "The other in- means “into” — income is money coming in.", "words": ["include", "income", "increase", "inside", "invite", "invitation", "invent", "insect", "influence", "information", "insist", "inspire"], "accent": "#0f766e", "pairs": [["include", "包括"], ["income", "收入"], ["increase", "增加"], ["inside", "在內部地"], ["invite", "邀請"], ["invitation", "邀請"], ["invent", "發明"], ["insect", "昆蟲"], ["influence", "影響"], ["information", "資訊"], ["insist", "堅持"], ["inspire", "激勵"]], "n": 12}, {"af": "dis-", "zh": "分開；拿掉", "q": "分開", "root": "拉丁 dis＝apart", "hook": "discover 是「把蓋子拿掉」。", "story": "dis- 除了「不」，還有<b>分開、拿掉</b>的意思。discover＝dis（拿掉）＋cover（蓋子）——發現不是創造，是<b>把遮住的東西掀開</b>。distance 則是 dis＋stand＝站開的距離。", "mn": "discover＝<b>掀蓋子</b>。這個畫面記住就忘不掉。", "say": "Discover is to take the cover off.", "words": ["discover", "discuss", "discussion", "distance", "distant"], "accent": "#6d28d9", "pairs": [["discover", "發現"], ["discuss", "討論"], ["discussion", "討論"], ["distance", "距離"], ["distant", "遠的"]], "n": 5}, {"af": "pre-", "zh": "在前面；事先", "q": "在前面", "root": "拉丁 prae＝before", "hook": "總統是「坐在最前面的人」。", "story": "pre- 是「在前面、事先」。prepare＝事先準備好；present＝在你面前（所以是「現在」也是「禮物」）；president＝pre（前面）＋sid（坐）＝<b>坐在最前面的那個人</b>。", "mn": "<b>pre-＝先</b>。preview（預習）、prepare（預備）都是先做。", "say": "A president is the one who sits in front.", "words": ["prepare", "present", "president", "prefer", "presence"], "accent": "#be185d", "pairs": [["prepare", "準備"], ["present", "現在的"], ["president", "總統；校長"], ["prefer", "較喜歡"], ["presence", "存在"]], "n": 5}, {"af": "ex-", "zh": "向外；出來", "q": "向外", "root": "拉丁 ex＝out", "hook": "exit 的 ex，就是「出去」。", "story": "ex- 是<b>往外</b>。express＝把心裡的話<b>壓出來</b>；explain＝攤平了說出來；expect＝向外看著等；exercise＝把自己趕出去動一動。", "mn": "<b>ex-＝出口</b>。想到緊急出口 EXIT 的那個 ex。", "say": "Ex- means out — express is pressing your thoughts out.", "words": ["express", "explain", "expect", "exercise", "except", "excuse", "exist", "expensive", "example", "experience"], "accent": "#c2410c", "pairs": [["express", "表達"], ["explain", "說明"], ["expect", "期望"], ["exercise", "運動"], ["except", "除…之外"], ["excuse", "原諒"], ["exist", "存在"], ["expensive", "昂貴的"], ["example", "例子"], ["experience", "經驗"]], "n": 10}, {"af": "com- con-", "zh": "一起；共同", "q": "一起", "root": "拉丁 com／con＝together", "hook": "company 是「一起吃麵包的人」。", "story": "com-／con- 都是<b>一起</b>。company＝com（一起）＋panis（麵包）；common＝大家共有的；connect＝綁在一起；conversation＝一群人<b>一起轉</b>來轉去地聊。", "mn": "<b>com-＝together</b>。看到它就想「不只一個人」。", "say": "Com- means together — company shares bread.", "words": ["company", "common", "compare", "complete", "connect", "contact", "continue", "conversation", "congratulation", "computer", "comfortable"], "accent": "#b45309", "pairs": [["company", "公司"], ["common", "共同的"], ["compare", "比較"], ["complete", "完整的"], ["connect", "連接"], ["contact", "聯絡"], ["continue", "使繼續"], ["conversation", "對話"], ["congratulation", "道賀"], ["computer", "電腦"], ["comfortable", "舒服的"]], "n": 11}, {"af": "de-", "zh": "往下；去掉", "q": "往下", "root": "拉丁 de＝down, away", "hook": "decide 的本意是「把別的選項切掉」。", "story": "de- 是<b>往下、去掉</b>。decide＝de（切掉）＋cide（切）——做決定就是把其他選項砍掉；depend＝de（下面）＋pend（掛）＝<b>掛在別人下面</b>，所以叫依賴；decrease 是往下減。", "mn": "<b>de-＝往下</b>。decide 是砍掉選項，depend 是掛在下面。", "say": "To decide is to cut the other options away.", "words": ["decide", "decrease", "depend", "describe", "deliver", "design", "develop", "detect", "decorate", "degree"], "accent": "#1d4ed8", "pairs": [["decide", "決定"], ["decrease", "減少"], ["depend", "依賴"], ["describe", "描述"], ["deliver", "投遞"], ["design", "設計"], ["develop", "發展"], ["detect", "查出"], ["decorate", "裝飾"], ["degree", "程度"]], "n": 10}, {"af": "pro-", "zh": "向前", "q": "向前", "root": "拉丁 pro＝forward", "hook": "problem 是「丟到你前面」的東西。", "story": "pro- 是<b>向前</b>。problem＝丟到你面前擋路的東西；progress＝往前走；project＝向前丟出去的計畫；protect＝擋在前面保護；promise＝把話送到對方面前。", "mn": "<b>pro-＝往前</b>。前進、前方、往前送。", "say": "Pro- means forward — progress is stepping ahead.", "words": ["problem", "produce", "progress", "project", "promise", "protect", "provide", "professor", "program", "pronounce"], "accent": "#0f766e", "pairs": [["problem", "問題"], ["produce", "製造"], ["progress", "進步"], ["project", "方案"], ["promise", "承諾"], ["protect", "保護"], ["provide", "提供"], ["professor", "教授"], ["program", "節目"], ["pronounce", "發音"]], "n": 10}, {"af": "inter-", "zh": "在…之間", "q": "之間", "root": "拉丁 inter＝between", "hook": "internet 是「網與網之間」。", "story": "inter- 是<b>在兩者之間</b>。international＝國與國之間；internet＝網路與網路之間；interview＝兩個人<b>互相看</b>；interrupt＝闖進別人中間打斷。", "mn": "<b>inter-＝中間</b>。國際、網際、面試都靠它。", "say": "Inter- means between — the internet links net to net.", "words": ["interest", "international", "internet", "interrupt", "interview", "introduce"], "accent": "#6d28d9", "pairs": [["interest", "興趣"], ["international", "國際的"], ["internet", "網路"], ["interrupt", "打擾"], ["interview", "訪問"], ["introduce", "介紹"]], "n": 6}, {"af": "sub- super-", "zh": "下面／上面", "q": "下與上", "root": "拉丁 sub＝under；super＝above", "hook": "地鐵是「走在下面的路」。", "story": "sub- 是下面：subway＝<b>地底下的路</b>、subject＝被放在底下的題目。super- 是上面：supermarket＝<b>比市場更上一層</b>的大市場、super＝超級。一組相反的字首。", "mn": "<b>sub＝在下（潛水艇 submarine）</b>，<b>super＝在上（超人 superman）</b>。", "say": "Sub- is under, super- is above — subway and supermarket.", "words": ["subway", "subject", "super", "supermarket"], "accent": "#be185d", "pairs": [["subway", "地鐵"], ["subject", "科目"], ["super", "極好的"], ["supermarket", "超市"]], "n": 4}, {"af": "uni- bi- tri-", "zh": "一、二、三", "q": "數字字首", "root": "拉丁數字 unus／bis／tres", "hook": "數字藏在字首裡。", "story": "uni-＝一：uniform（同一個樣子）、unique（獨一無二）、universe（合而為一的整體）。bi-＝二：bicycle（兩個輪子）。tri-＝三：triangle（三個角）。<b>把數字換掉，字就換一個</b>。", "mn": "<b>uni 1／bi 2／tri 3</b>：unicycle、bicycle、tricycle 一次記三台車。", "say": "Uni- one, bi- two, tri- three — count the wheels.", "words": ["uniform", "unique", "universe", "university", "bicycle", "bike", "triangle"], "accent": "#c2410c", "pairs": [["uniform", "制服"], ["unique", "獨一無二的"], ["universe", "宇宙"], ["university", "大學"], ["bicycle", "腳踏車"], ["bike", "腳踏車"], ["triangle", "三角形"]], "n": 7}, {"af": "under-", "zh": "在下面", "q": "在下面", "root": "古英文 under", "hook": "understand 為什麼是「站在下面」？", "story": "under- 就是<b>在下面</b>：underline（在下面畫線）、underwear（穿在裡面的衣服）。understand 最有趣——古人認為要真正懂一件事，得<b>站到它下面去撐住它</b>。", "mn": "understand＝<b>站到下面去</b>，撐得起來才叫懂。", "say": "To understand is to stand under — and hold it up.", "words": ["under", "underline", "underwear", "understand"], "accent": "#b45309", "pairs": [["under", "在…下面"], ["underline", "強調"], ["underwear", "內衣褲"], ["understand", "了解"]], "n": 4}, {"af": "tele-", "zh": "遠", "q": "遠", "root": "希臘 tēle＝far", "hook": "一個字首，三台機器。", "story": "tele- 是<b>遠</b>。telephone＝遠＋聲音（遠遠地聽）；television＝遠＋看（遠遠地看）；telescope＝遠＋看（望遠鏡）。同一個字首做出三台改變世界的機器。", "mn": "<b>tele-＝遠</b>。看到它，後面接的就是「怎麼跨過距離」。", "say": "Tele- means far — phone, vision, scope.", "words": ["telephone", "television"], "accent": "#1d4ed8", "pairs": [["telephone", "電話"], ["television", "電視"]], "n": 2}];
+const QN = 8;
+
+/* ---------- Hero 的小星點 ---------- */
+(function(){
+  const c=document.getElementById('sky'); if(!c) return;
+  const ctx=c.getContext('2d'); let stars=[];
+  function size(){
+    c.width=c.offsetWidth*devicePixelRatio; c.height=c.offsetHeight*devicePixelRatio;
+    stars=Array.from({length:Math.round(c.offsetWidth/14)},()=>({
+      x:Math.random()*c.width,y:Math.random()*c.height,
+      r:(Math.random()*1.6+.5)*devicePixelRatio,
+      a:Math.random()*.5+.2,s:Math.random()*.012+.004
+    }));
+  }
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(const st of stars){
+      const tw=st.a+Math.sin(t*st.s*60+st.x)*.2;
+      ctx.beginPath(); ctx.arc(st.x,st.y,st.r,0,6.3);
+      ctx.fillStyle='rgba(255,255,255,'+Math.max(0,tw)+')'; ctx.fill();
+    }
+    t+=1; requestAnimationFrame(draw);
+  }
+  size(); addEventListener('resize',size); draw();
+})();
+
+/* ---------- 發音 ---------- */
+let voice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  const ms=vs.filter(v=>/^Microsoft/i.test(v.name));   // 微軟語音優先
+  voice= ms.find(v=>/en[-_]US/i.test(v.lang)&&/Natural/i.test(v.name))  // 微軟自然語音最好聽
+      || ms.find(v=>/en[-_]US/i.test(v.lang))
+      || ms.find(v=>/^en/i.test(v.lang))
+      || vs.find(v=>/en[-_]US/i.test(v.lang))          // 沒有微軟語音時（如 Mac）才退回
+      || vs.find(v=>/^en/i.test(v.lang)) || null;
+}
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(text,btn){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=.85; if(voice) u.voice=voice;
+  if(btn){ btn.classList.add('is-playing'); u.onend=u.onerror=()=>btn.classList.remove('is-playing'); }
+  speechSynthesis.speak(u);
+}
+
+/* ---------- 卡片 ---------- */
+const grid=document.getElementById('cardGrid');
+DATA.forEach(d=>{
+  const card=document.createElement('div');
+  card.className='card'; card.tabIndex=0; card.style.setProperty('--accent',d.accent);
+  const list=d.pairs.map(p=>'<b>'+p[0]+'</b> '+p[1]).join('<span class="sep">｜</span>');
+  card.innerHTML=
+   '<div class="card-face card-front">'+
+     '<span class="card-icon af">'+d.af+'</span>'+
+     '<div class="card-en-row"><span class="card-en">'+d.zh+'</span></div>'+
+     '<div class="card-zh af-count">課本裡有 '+d.n+' 個字用到它</div>'+
+     '<div class="card-hook">'+d.hook+'</div>'+
+     '<div class="card-flip-hint">點擊翻面 →</div>'+
+   '</div>'+
+   '<div class="card-face card-back">'+
+     '<span class="root-tag">'+d.root+'</span>'+
+     '<p class="card-story">'+d.story+'</p>'+
+     '<p class="wordlist">'+list+'</p>'+
+     '<p class="card-say">'+d.say+'</p>'+
+     '<p class="card-mnemonic">'+d.mn+'</p>'+
+   '</div>';
+  card.addEventListener('click',e=>{
+    card.classList.toggle('flipped');
+  });
+  card.addEventListener('keydown',e=>{
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- 配對遊戲 ---------- */
+const colA=document.getElementById('colA'), colB=document.getElementById('colB');
+const scoreNum=document.getElementById('scoreNum'), winBanner=document.getElementById('winBanner');
+let selA=null, matched=0;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function build(){
+  colA.innerHTML=''; colB.innerHTML=''; selA=null; matched=0;
+  scoreNum.textContent='0'; winBanner.classList.remove('show');
+  const pool=shuffle(DATA).slice(0,QN);
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.af;
+    b.innerHTML='<span class="pick-en">'+d.af+'</span>';
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done'))return;
+      colA.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel'); selA=b;
+    });
+    colA.appendChild(b);
+  });
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.af; b.textContent=d.q;
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done')||!selA)return;
+      if(selA.dataset.en===b.dataset.en){
+        selA.classList.remove('sel'); selA.classList.add('done'); b.classList.add('done');
+        selA=null; matched++; scoreNum.textContent=matched;
+        if(matched===QN) winBanner.classList.add('show');
+      }else{
+        b.classList.add('wrong');
+        setTimeout(()=>b.classList.remove('wrong'),420);
+      }
+    });
+    colB.appendChild(b);
+  });
+}
+document.getElementById('resetGame').addEventListener('click',build);
+build();
+</script>
+</body>
+</html>

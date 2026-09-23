@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>字尾家族 · 英文來源故事</title>
+<style>
+  :root{
+    --h1:#8b5cf6; --h2:#0d9488;
+    --bg:#f4f6fb; --card:#ffffff; --edge:#e3e7f3;
+    --ink:#1b1f31; --ink-dim:#464d66; --ink-faint:#5f6780;
+    --brand:#3730a3;
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%}
+  html{background:var(--bg);font-size:20px}       /* 全站基準字級 20px */
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:1rem;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--brand)}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:64px 0 56px;text-align:center;overflow:hidden;
+    background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff}
+  #sky{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.75}
+  .hero-content{position:relative;z-index:2}
+  .eyebrow{font-size:1rem;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.85);margin:0 0 16px;font-weight:600}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,6vw,3.6rem);
+    margin:0 0 10px;text-wrap:balance;letter-spacing:.01em;line-height:1.25}
+  .hero-sub{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.9);
+    font-size:1.15rem;margin:0 0 22px}
+  .hero-copy{max-width:720px;margin:0 auto;color:rgba(255,255,255,.95);font-size:1.05rem}
+  .hero-copy b{color:#fff;font-weight:700;background:rgba(255,255,255,.18);
+    border-radius:6px;padding:1px 6px}
+  .crumbs{position:relative;z-index:2;margin:26px 0 0;display:flex;gap:12px;
+    justify-content:center;flex-wrap:wrap}
+  .crumbs a{display:inline-block;font-size:1rem;text-decoration:none;color:#fff;font-weight:600;
+    border:2px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);
+    border-radius:999px;padding:8px 20px}
+  .crumbs a:hover{background:#fff;color:var(--h2);border-color:#fff}
+
+  /* ---------- SECTION HEAD ---------- */
+  .section-head{text-align:center;margin:64px 0 32px}
+  .section-head h2{font-family:var(--serif);font-weight:700;color:var(--ink);
+    font-size:clamp(1.6rem,3.4vw,2.2rem);margin:0 0 10px;text-wrap:balance}
+  .section-head p{color:var(--ink-dim);max-width:640px;margin:0 auto;font-size:1rem}
+
+  /* ---------- CARDS ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:24px}
+  .card{--accent:var(--brand);position:relative;height:726px;border-radius:18px;
+    cursor:pointer;outline:none}
+  .card:focus-visible .card-face{box-shadow:0 0 0 3px var(--accent),0 10px 26px -14px rgba(27,31,49,.4)}
+  .card-face{position:absolute;inset:0;border-radius:18px;background:var(--card);
+    border:1px solid var(--edge);border-top:5px solid var(--accent);
+    padding:24px 24px 22px;display:flex;flex-direction:column;
+    box-shadow:0 4px 18px -10px rgba(27,31,49,.28);
+    opacity:1;transform:scale(1);transition:opacity .32s ease,transform .32s ease}
+  .card:hover .card-face{box-shadow:0 12px 28px -14px rgba(27,31,49,.38)}
+  .card-front{z-index:2}
+  .card-back{z-index:1;opacity:0;transform:scale(.97);pointer-events:none;overflow-y:auto}
+  .card.flipped .card-front{opacity:0;transform:scale(1.03);pointer-events:none;z-index:1}
+  .card.flipped .card-back{opacity:1;transform:scale(1);pointer-events:auto;z-index:2}
+  .card-icon{width:74px;height:74px;border-radius:18px;display:flex;align-items:center;
+    justify-content:center;font-size:2.4rem;line-height:1;
+    background:color-mix(in srgb,var(--accent) 13%,#fff)}
+  .card:hover .card-icon{animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .card-en-row{display:flex;align-items:center;gap:10px;margin:18px 0 2px;flex-wrap:wrap}
+  .card-en{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1.2}
+  .word-btn{flex-shrink:0;width:42px;height:42px;border-radius:999px;border:2px solid var(--edge);
+    background:#fff;color:var(--accent);font-size:1rem;display:inline-flex;align-items:center;
+    justify-content:center;cursor:pointer;transition:background .15s,transform .15s}
+  .word-btn:hover{background:color-mix(in srgb,var(--accent) 12%,#fff)}
+  .word-btn:active{transform:scale(.92)}
+  .word-btn.is-playing{background:color-mix(in srgb,var(--accent) 24%,#fff);border-color:var(--accent)}
+  .card-zh{font-size:1rem;color:var(--ink-faint)}
+  .card-hook{font-size:1.05rem;color:var(--ink-dim);margin-top:16px}
+  .card-flip-hint{margin-top:auto;font-size:1rem;color:var(--accent);font-weight:600;padding-top:14px}
+  .root-tag{display:inline-block;font-size:1rem;font-weight:600;color:#fff;background:var(--accent);
+    border-radius:999px;padding:5px 16px;margin-bottom:14px;align-self:flex-start;line-height:1.5}
+  .card-story{font-size:1rem;color:var(--ink);margin:0 0 14px}
+  .card-say{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink-faint);
+    margin:0 0 14px;padding-left:12px;border-left:3px solid var(--edge)}
+  .card-mnemonic{font-size:1rem;color:var(--ink);background:color-mix(in srgb,var(--accent) 11%,#fff);
+    border-left:4px solid var(--accent);padding:12px 14px;border-radius:0 10px 10px 0;margin-top:auto}
+  .card-mnemonic b{color:var(--accent)}
+
+  /* ---------- GAME ---------- */
+  .game{background:var(--card);border:1px solid var(--edge);border-radius:18px;
+    padding:26px 24px 30px;box-shadow:0 4px 18px -10px rgba(27,31,49,.22)}
+  .game-status{font-size:1rem;color:var(--ink-dim);text-align:center;margin:0 0 20px;font-weight:600}
+  .game-status b{color:var(--h2);font-size:1.25rem}
+  .game-board{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .game-col-label{font-size:1rem;font-weight:700;color:var(--ink-faint);text-align:center;margin:0 0 12px}
+  .pick{display:block;width:100%;margin:0 0 10px;padding:14px 16px;border-radius:12px;
+    border:2px solid var(--edge);background:#fbfcfe;color:var(--ink);font-family:var(--sans);
+    font-size:1rem;text-align:left;cursor:pointer;transition:background .14s,border-color .14s}
+  .pick:hover:not(.done){background:#eef1fa;border-color:#c7cee6}
+  .pick.sel{border-color:var(--h2);background:color-mix(in srgb,var(--h2) 14%,#fff)}
+  .pick.done{opacity:.4;cursor:default;border-style:dashed}
+  .pick.wrong{border-color:#dc2626;background:#fee2e2}
+  .pick .pick-en{font-family:var(--serif);font-size:1.15rem;font-weight:700}
+  .win-banner{display:none;text-align:center;color:var(--h2);font-family:var(--serif);
+    font-weight:700;font-size:1.2rem;margin:20px 0 0}
+  .win-banner.show{display:block}
+  .game-reset{display:block;margin:20px auto 0;padding:11px 26px;border-radius:999px;
+    border:2px solid var(--edge);background:#fff;color:var(--ink-dim);
+    font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer}
+  .game-reset:hover{color:var(--ink);background:#eef1fa}
+
+  /* ---------- 課堂速查表 ---------- */
+  .sheet{background:var(--card);border:1px solid var(--edge);border-radius:18px;
+    padding:8px 6px;overflow-x:auto;box-shadow:0 4px 18px -10px rgba(27,31,49,.22)}
+  table{width:100%;border-collapse:collapse;font-size:1rem}
+  th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--edge);vertical-align:top}
+  th{font-size:1rem;color:var(--ink-faint);font-weight:700;background:#f7f9fd}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:nth-child(even){background:#fbfcfe}
+  td.w{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);white-space:nowrap}
+  td.w small{display:block;font-family:var(--sans);font-size:1rem;font-weight:400;color:var(--ink-faint)}
+  td.r{color:var(--accent-col);font-size:1rem;font-weight:600}
+  td.h{color:var(--ink-dim)}
+
+  footer{text-align:center;color:var(--ink-faint);font-size:1rem;margin:64px 0 54px}
+  .print-btn{display:inline-block;margin-top:12px;padding:11px 26px;border-radius:999px;
+    border:2px solid var(--edge);background:#fff;color:var(--ink-dim);
+    font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer}
+  .print-btn:hover{color:var(--ink);background:#eef1fa}
+
+  @media (max-width:700px){
+    .wrap{padding:0 16px}
+    .grid{grid-template-columns:1fr}
+    .card{height:auto;min-height:0}
+    .card-face{position:relative;inset:auto}
+    .card-back{display:none}
+    .card.flipped .card-front{display:none}
+    .card.flipped .card-back{display:flex;opacity:1;transform:none}
+    .game-board{grid-template-columns:1fr}
+  }
+
+  /* ---------- 列印：只印課堂速查表 ---------- */
+  @media print{
+    html,body{background:#fff}
+    .hero,.crumbs,.grid,.game,.section-head,footer,.print-btn{display:none !important}
+    .sheet{border:none;box-shadow:none;padding:0}
+    .sheet-head{display:block !important;margin:0 0 14px}
+    .sheet-head h2{font-size:20pt;margin:0 0 4px;color:#000}
+    .sheet-head p{font-size:11pt;margin:0;color:#444}
+    th,td{border-bottom:1px solid #ccc;font-size:12pt;padding:8px 10px}
+    th{background:#eee;color:#333}
+    tbody tr:nth-child(even){background:#fff}
+    td.w{font-size:13pt}
+    td.w small{font-size:11pt}
+    .wrap{max-width:none;padding:0}
+  }
+
+  /* 字根頁：課本例字清單 */
+  .card-icon.af{width:auto;min-width:74px;padding:0 20px;font-family:var(--serif);
+    font-weight:700;font-size:1.7rem;color:var(--accent);letter-spacing:.01em}
+  .wordlist{font-size:1rem;color:var(--ink-dim);margin:0 0 14px;line-height:1.95}
+  .wordlist b{color:var(--accent);font-family:var(--serif);font-size:1.05rem}
+  .wordlist .sep{color:#c3c9dc;padding:0 2px}
+  .af-count{font-size:1rem;color:var(--ink-faint)}
+  td.r b{font-family:var(--serif)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-content wrap">
+    <p class="eyebrow">Word Origins · 字尾家族</p>
+    <h1>字尾家族</h1>
+    <p class="hero-sub">The Endings That Change a Word's Job</p>
+    <p class="hero-copy">字首決定<b>意思</b>，字尾決定<b>詞性</b>。看到字尾就知道它是名詞、形容詞還是副詞——考試時特別好用。</p>
+    <div class="crumbs">
+      <a href="./">← 英文來源故事</a>
+      <a href="/">回主選單</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section-head">
+    <h2>點卡片，看這個字尾管到哪些字</h2>
+    <p>正面是字尾與它的意思，背面是 30 秒的說明，以及<b>課本裡真的會出現的例字</b>。</p>
+  </div>
+  <div class="grid" id="cardGrid"></div>
+
+  <div class="section-head">
+    <h2>小測驗：字尾配意思</h2>
+    <p>左邊點一個字尾，右邊點它的意思。一次隨機抽 8 個。</p>
+  </div>
+  <div class="game">
+    <p class="game-status">已配對 <b id="scoreNum">0</b> / 8</p>
+    <div class="game-board">
+      <div class="game-col">
+        <p class="game-col-label">字尾</p>
+        <div id="colA"></div>
+      </div>
+      <div class="game-col">
+        <p class="game-col-label">意思</p>
+        <div id="colB"></div>
+      </div>
+    </div>
+    <p class="win-banner" id="winBanner">全部配對成功！這些字尾你都認得了 ✦</p>
+    <button class="game-reset" id="resetGame">換一批</button>
+  </div>
+
+  <div class="section-head">
+    <h2>課堂速查表</h2>
+    <p>老師版：一眼掃過全部 14 個字尾，挑今天要講的那幾個。可直接列印。</p>
+  </div>
+  <div class="sheet">
+    <div class="sheet-head" style="display:none">
+      <h2>字尾家族 — 課堂速查表</h2>
+      <p>英文來源故事 ‧ teaching.efetl.com/word-origins</p>
+    </div>
+    <table>
+      <thead><tr><th>字尾</th><th>一句話</th><th>課本例字</th></tr></thead>
+      <tbody><tr><td class="w">-er -or<small>做這件事的人或東西</small></td><td class="r" style="color:#6d28d9">加在動詞後面，變成「做這個的」。</td><td class="h">14 個字：driver、farmer、doctor、actor、leader、hunter…</td></tr>
+<tr><td class="w">-tion -sion<small>變成一件事（名詞）</small></td><td class="r" style="color:#0f766e">動詞加上它，就變成一件「事」。</td><td class="h">14 個字：action、decision、discussion、education、information、invitation…</td></tr>
+<tr><td class="w">-ment<small>做完之後留下的東西</small></td><td class="r" style="color:#b45309">move 加上它，就變成「動作」。</td><td class="h">10 個字：government、movement、apartment、basement、department、environment…</td></tr>
+<tr><td class="w">-able -ible<small>可以被…的</small></td><td class="r" style="color:#1d4ed8">這個字尾本身就是一個單字。</td><td class="h">8 個字：comfortable、possible、impossible、terrible、horrible、valuable…</td></tr>
+<tr><td class="w">-ful<small>充滿…的</small></td><td class="r" style="color:#be185d">careful 是「滿滿的小心」。</td><td class="h">11 個字：beautiful、careful、colorful、helpful、painful、peaceful…</td></tr>
+<tr><td class="w">-y<small>多…的；像…的</small></td><td class="r" style="color:#4d7c0f">名詞加一個 y，就變天氣。</td><td class="h">14 個字：rainy、sunny、cloudy、windy、snowy、foggy…</td></tr>
+<tr><td class="w">-ous<small>有…性質的</small></td><td class="r" style="color:#6d28d9">danger 加上它，就變成「危險的」。</td><td class="h">11 個字：dangerous、famous、delicious、curious、generous、humorous…</td></tr>
+<tr><td class="w">-ive<small>有…傾向的</small></td><td class="r" style="color:#0f766e">act 加上它，就變成「主動的」。</td><td class="h">6 個字：active、positive、negative、talkative、expensive、relative…</td></tr>
+<tr><td class="w">-ist<small>從事…的人</small></td><td class="r" style="color:#b45309">art 加上它，就變成藝術家。</td><td class="h">4 個字：artist、dentist、scientist、journalist…</td></tr>
+<tr><td class="w">-ity<small>…的狀態（名詞）</small></td><td class="r" style="color:#1d4ed8">形容詞加上它，就變成名詞。</td><td class="h">5 個字：activity、quality、quantity、university、city…</td></tr>
+<tr><td class="w">-ize -ise<small>使變成…</small></td><td class="r" style="color:#be185d">加上它，形容詞就變成動詞。</td><td class="h">5 個字：realize、apologize、emphasize、advise、revise…</td></tr>
+<tr><td class="w">-ness<small>…的狀態</small></td><td class="r" style="color:#4d7c0f">business 的本意是「忙碌的狀態」。</td><td class="h">2 個字：business、goodness…</td></tr>
+<tr><td class="w">-ly<small>…地；像…一樣</small></td><td class="r" style="color:#6d28d9">-ly 就是 like 磨短的。</td><td class="h">12 個字：really、finally、friendly、lovely、early、nearly…</td></tr>
+<tr><td class="w">假字尾<small>長得像字尾，其實不是</small></td><td class="r" style="color:#0f766e">不是每個 -er 都是「做這件事的人」。</td><td class="h">12 個字：butter、brother、finger、flower、table、vegetable…</td></tr></tbody>
+    </table>
+  </div>
+
+  <footer>
+    英文來源故事 ‧ teaching.efetl.com<br>
+    <button class="print-btn" onclick="window.print()">🖨 列印速查表</button>
+  </footer>
+</div>
+
+<script>
+const DATA = [{"af": "-er -or", "zh": "做這件事的人或東西", "q": "做的人/物", "root": "古英文 -ere／拉丁 -or", "hook": "加在動詞後面，變成「做這個的」。", "story": "動詞加 -er／-or，就變成<b>做這件事的人</b>（drive→driver）或<b>做這件事的東西</b>（compute→computer、erase→eraser）。是英文裡最好用的一個字尾。", "mn": "<b>動詞＋er＝做這個的</b>。teach→teacher，drive→driver。", "say": "Add -er and you get the one who does it.", "words": ["driver", "farmer", "doctor", "actor", "leader", "hunter", "customer", "manager", "reporter", "beginner", "computer", "eraser", "heater", "marker"], "accent": "#6d28d9", "pairs": [["driver", "駕駛人"], ["farmer", "農夫"], ["doctor", "醫生"], ["actor", "男演員"], ["leader", "領袖"], ["hunter", "獵人"], ["customer", "顧客"], ["manager", "經理"], ["reporter", "記者"], ["beginner", "初學者"], ["computer", "電腦"], ["eraser", "橡皮擦"], ["heater", "熱水器"], ["marker", "簽字筆"]], "n": 14}, {"af": "-tion -sion", "zh": "變成一件事（名詞）", "q": "動作變名詞", "root": "拉丁 -tio＝動作的結果", "hook": "動詞加上它，就變成一件「事」。", "story": "這是把<b>動作變成名詞</b>的字尾：act→action、decide→decision、invite→invitation、discuss→discussion。看到 -tion 結尾，幾乎一定是名詞。", "mn": "<b>-tion 結尾＝名詞</b>，句子裡當主詞或受詞。", "say": "-tion turns an action into a thing.", "words": ["action", "decision", "discussion", "education", "information", "invitation", "question", "station", "vacation", "pollution", "population", "tradition", "conversation", "direction"], "accent": "#0f766e", "pairs": [["action", "活動"], ["decision", "決定"], ["discussion", "討論"], ["education", "教育"], ["information", "資訊"], ["invitation", "邀請"], ["question", "問題"], ["station", "車站"], ["vacation", "假期"], ["pollution", "汙染"], ["population", "人口"], ["tradition", "傳統"], ["conversation", "對話"], ["direction", "方向"]], "n": 14}, {"af": "-ment", "zh": "做完之後留下的東西", "q": "留下的東西", "root": "拉丁 -mentum＝工具或結果", "hook": "move 加上它，就變成「動作」。", "story": "-mentum 本來指<b>做完一件事之後留下的東西或工具</b>。move→movement（動作）、govern→government（政府）、instrument（樂器＝用來做事的工具）。也是名詞字尾。", "mn": "<b>-ment＝做完留下的那個東西</b>，一樣是名詞。", "say": "-ment is what's left after the doing.", "words": ["government", "movement", "apartment", "basement", "department", "environment", "instrument", "moment", "comment", "advertisement"], "accent": "#b45309", "pairs": [["government", "政府"], ["movement", "動作"], ["apartment", "公寓"], ["basement", "地下室"], ["department", "部門"], ["environment", "自然環境"], ["instrument", "樂器"], ["moment", "片刻"], ["comment", "意見"], ["advertisement", "廣告"]], "n": 10}, {"af": "-able -ible", "zh": "可以被…的", "q": "可以被…", "root": "拉丁 habilis＝能夠（就是 able）", "hook": "這個字尾本身就是一個單字。", "story": "-able 就是 <b>able（能夠）</b>本人。加在動詞後面＝<b>「可以被…的」</b>：comfort→comfortable、value→valuable。小心陷阱：table、vegetable、cable 的 -able 不是字尾。", "mn": "<b>-able＝able</b>。可以被做到的，就是形容詞。", "say": "-able is just “able” — it can be done.", "words": ["comfortable", "possible", "impossible", "terrible", "horrible", "valuable", "available", "responsible"], "accent": "#1d4ed8", "pairs": [["comfortable", "舒服的"], ["possible", "有可能的"], ["impossible", "不可能的"], ["terrible", "可怕的"], ["horrible", "恐怖的"], ["valuable", "有價值的"], ["available", "可獲得的"], ["responsible", "有責任的"]], "n": 8}, {"af": "-ful", "zh": "充滿…的", "q": "充滿", "root": "就是 full（滿的）", "hook": "careful 是「滿滿的小心」。", "story": "-ful 就是 <b>full</b>（滿的），只是拼的時候<b>只留一個 l</b>。careful＝滿是小心、colorful＝滿是顏色、useful＝滿是用處。相反的字尾是 -less（沒有）：careless＝沒有小心。", "mn": "<b>-ful 只有一個 l</b>——最常見的拼字失分點。", "say": "-ful is full — but with only one l.", "words": ["beautiful", "careful", "colorful", "helpful", "painful", "peaceful", "skillful", "successful", "useful", "wonderful", "careless"], "accent": "#be185d", "pairs": [["beautiful", "美麗的"], ["careful", "小心的"], ["colorful", "多采多姿的"], ["helpful", "有助益的"], ["painful", "痛苦的"], ["peaceful", "和平的"], ["skillful", "熟練的"], ["successful", "成功的"], ["useful", "有用的"], ["wonderful", "極好的"], ["careless", "粗心的"]], "n": 11}, {"af": "-y", "zh": "多…的；像…的", "q": "多…的", "root": "古英文 -ig", "hook": "名詞加一個 y，就變天氣。", "story": "名詞加 -y 就變形容詞，意思是<b>「多的、有那個感覺的」</b>：rain→rainy、sun→sunny、cloud→cloudy、noise→noisy。講天氣和心情最常用。", "mn": "<b>名詞＋y＝形容詞</b>。天氣幾乎全靠它。", "say": "Add -y and the noun becomes a feeling: rain, rainy.", "words": ["rainy", "sunny", "cloudy", "windy", "snowy", "foggy", "noisy", "sleepy", "hungry", "thirsty", "dirty", "lucky", "funny", "healthy"], "accent": "#4d7c0f", "pairs": [["rainy", "多雨的"], ["sunny", "陽光充足的"], ["cloudy", "多雲的"], ["windy", "風大的"], ["snowy", "下雪多的"], ["foggy", "濃霧的"], ["noisy", "吵雜的"], ["sleepy", "想睡的"], ["hungry", "飢餓的"], ["thirsty", "口渴的"], ["dirty", "骯髒的"], ["lucky", "幸運的"], ["funny", "好笑的"], ["healthy", "健康的"]], "n": 14}, {"af": "-ous", "zh": "有…性質的", "q": "有…性質", "root": "拉丁 -osus＝充滿", "hook": "danger 加上它，就變成「危險的」。", "story": "-osus 的意思也是<b>充滿</b>，和 -ful 很像，但走拉丁路線、接在拉丁字後面：danger→dangerous、fame→famous、humor→humorous。結尾是 -ous 的，一律是形容詞。", "mn": "<b>-ous 結尾＝形容詞</b>，沒有例外。", "say": "-ous also means full of — the Latin way.", "words": ["dangerous", "famous", "delicious", "curious", "generous", "humorous", "jealous", "nervous", "precious", "serious", "marvelous"], "accent": "#6d28d9", "pairs": [["dangerous", "危險的"], ["famous", "著名的"], ["delicious", "美味的"], ["curious", "好奇的"], ["generous", "慷慨的"], ["humorous", "幽默的"], ["jealous", "妒忌的"], ["nervous", "緊張的"], ["precious", "珍貴的"], ["serious", "嚴重的"], ["marvelous", "非凡的"]], "n": 11}, {"af": "-ive", "zh": "有…傾向的", "q": "有…傾向", "root": "拉丁 -ivus", "hook": "act 加上它，就變成「主動的」。", "story": "-ive 表示<b>有那種傾向、性質</b>：act→active（主動的）、talk→talkative（多話的）。陷阱來了：five、give、live、drive、arrive 的 -ive <b>不是</b>字尾，只是剛好長這樣。", "mn": "判斷法：<b>拿掉 -ive 還是不是一個字</b>？act 是，f 不是。", "say": "-ive means having that tendency — active, talkative.", "words": ["active", "positive", "negative", "talkative", "expensive", "relative"], "accent": "#0f766e", "pairs": [["active", "積極的"], ["positive", "肯定的"], ["negative", "負面的"], ["talkative", "多話的"], ["expensive", "昂貴的"], ["relative", "親戚"]], "n": 6}, {"af": "-ist", "zh": "從事…的人", "q": "從事…的人", "root": "希臘 -istēs", "hook": "art 加上它，就變成藝術家。", "story": "-ist 指<b>專門做某件事的人</b>：art→artist、science→scientist、journal→journalist。陷阱：exist、insist、list、waist、wrist 的 -ist 不是字尾。", "mn": "<b>-ist＝專業人士</b>；-er 比較口語，-ist 比較專業。", "say": "-ist is a specialist: artist, scientist, dentist.", "words": ["artist", "dentist", "scientist", "journalist"], "accent": "#b45309", "pairs": [["artist", "藝術家"], ["dentist", "牙醫"], ["scientist", "科學家"], ["journalist", "新聞記者"]], "n": 4}, {"af": "-ity", "zh": "…的狀態（名詞）", "q": "狀態名詞", "root": "拉丁 -itas", "hook": "形容詞加上它，就變成名詞。", "story": "-ity 把形容詞變成<b>抽象名詞</b>：active→activity（活動）、real→reality（現實）。連 city 都是這樣來的——拉丁 civitas（市民的狀態）。", "mn": "<b>-ity 結尾＝名詞</b>，而且多半是抽象的。", "say": "-ity turns a quality into a thing.", "words": ["activity", "quality", "quantity", "university", "city"], "accent": "#1d4ed8", "pairs": [["activity", "活動"], ["quality", "品質"], ["quantity", "量"], ["university", "大學"], ["city", "城市"]], "n": 5}, {"af": "-ize -ise", "zh": "使變成…", "q": "使變成", "root": "希臘 -izein＝使之成為", "hook": "加上它，形容詞就變成動詞。", "story": "-ize／-ise 把名詞或形容詞<b>變成動詞</b>：real→realize（使變真＝明白）、apology→apologize（道歉）。美式多用 -ize，英式常用 -ise，兩種都對。", "mn": "<b>美式 -ize／英式 -ise</b>，考試兩種都算對。", "say": "-ize makes it happen: real becomes realize.", "words": ["realize", "apologize", "emphasize", "advise", "revise"], "accent": "#be185d", "pairs": [["realize", "瞭解"], ["apologize", "道歉"], ["emphasize", "強調"], ["advise", "勸告"], ["revise", "改變"]], "n": 5}, {"af": "-ness", "zh": "…的狀態", "q": "狀態", "root": "古英文 -nes", "hook": "business 的本意是「忙碌的狀態」。", "story": "-ness 把形容詞變成<b>狀態名詞</b>：good→goodness、happy→happiness。最有趣的是 business＝busy＋ness＝<b>「忙碌的狀態」</b>——做生意這個字，講的其實是「很忙」。", "mn": "business＝<b>busy＋ness</b>，忙到變成一門生意。", "say": "Business is literally “busy-ness.”", "words": ["business", "goodness"], "accent": "#4d7c0f", "pairs": [["business", "商業"], ["goodness", "善良"]], "n": 2}, {"af": "-ly", "zh": "…地；像…一樣", "q": "像…一樣", "root": "來自 like（像）", "hook": "-ly 就是 like 磨短的。", "story": "-ly 來自 <b>like（像）</b>：friendly＝像朋友一樣、lovely＝像被愛一樣。加在形容詞後面就變副詞：real→really、final→finally。陷阱：butterfly、family、reply、supply 的 ly 不是字尾。", "mn": "<b>-ly＝like</b>。像那樣，就是那樣地。", "say": "-ly comes from like — friendly is “like a friend.”", "words": ["really", "finally", "friendly", "lovely", "early", "nearly", "especially", "actually", "hardly", "likely", "lonely", "usually"], "accent": "#6d28d9", "pairs": [["really", "真實地"], ["finally", "最後"], ["friendly", "友好的"], ["lovely", "可愛的"], ["early", "早的"], ["nearly", "幾乎"], ["especially", "特別地"], ["actually", "確實"], ["hardly", "幾乎不"], ["likely", "可能"], ["lonely", "寂寞的"], ["usually", "通常"]], "n": 12}, {"af": "假字尾", "zh": "長得像字尾，其實不是", "q": "陷阱", "root": "拆錯位置的常見字", "hook": "不是每個 -er 都是「做這件事的人」。", "story": "這些字結尾很像字尾，其實<b>拆開就不成字了</b>：butter 不是「奶的人」、brother 不是「兄的人」、table 不是「可以桌的」、five 不是「有五傾向的」。<b>判斷法：拿掉字尾，剩下的還是一個字嗎？</b>", "mn": "拿掉字尾<b>剩下的要是個字</b>才算數：drive→driver ✓，butt→butter ✗。", "say": "Test it: remove the ending — is what's left a real word?", "words": ["butter", "brother", "finger", "flower", "table", "vegetable", "five", "give", "list", "waist", "family", "butterfly"], "accent": "#0f766e", "pairs": [["butter", "奶油"], ["brother", "兄弟"], ["finger", "指頭"], ["flower", "花"], ["table", "桌子"], ["vegetable", "蔬菜"], ["five", "五"], ["give", "給予"], ["list", "把…列表"], ["waist", "腰"], ["family", "家"], ["butterfly", "蝴蝶"]], "n": 12}];
+const QN = 8;
+
+/* ---------- Hero 的小星點 ---------- */
+(function(){
+  const c=document.getElementById('sky'); if(!c) return;
+  const ctx=c.getContext('2d'); let stars=[];
+  function size(){
+    c.width=c.offsetWidth*devicePixelRatio; c.height=c.offsetHeight*devicePixelRatio;
+    stars=Array.from({length:Math.round(c.offsetWidth/14)},()=>({
+      x:Math.random()*c.width,y:Math.random()*c.height,
+      r:(Math.random()*1.6+.5)*devicePixelRatio,
+      a:Math.random()*.5+.2,s:Math.random()*.012+.004
+    }));
+  }
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(const st of stars){
+      const tw=st.a+Math.sin(t*st.s*60+st.x)*.2;
+      ctx.beginPath(); ctx.arc(st.x,st.y,st.r,0,6.3);
+      ctx.fillStyle='rgba(255,255,255,'+Math.max(0,tw)+')'; ctx.fill();
+    }
+    t+=1; requestAnimationFrame(draw);
+  }
+  size(); addEventListener('resize',size); draw();
+})();
+
+/* ---------- 發音 ---------- */
+let voice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  const ms=vs.filter(v=>/^Microsoft/i.test(v.name));   // 微軟語音優先
+  voice= ms.find(v=>/en[-_]US/i.test(v.lang)&&/Natural/i.test(v.name))  // 微軟自然語音最好聽
+      || ms.find(v=>/en[-_]US/i.test(v.lang))
+      || ms.find(v=>/^en/i.test(v.lang))
+      || vs.find(v=>/en[-_]US/i.test(v.lang))          // 沒有微軟語音時（如 Mac）才退回
+      || vs.find(v=>/^en/i.test(v.lang)) || null;
+}
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(text,btn){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=.85; if(voice) u.voice=voice;
+  if(btn){ btn.classList.add('is-playing'); u.onend=u.onerror=()=>btn.classList.remove('is-playing'); }
+  speechSynthesis.speak(u);
+}
+
+/* ---------- 卡片 ---------- */
+const grid=document.getElementById('cardGrid');
+DATA.forEach(d=>{
+  const card=document.createElement('div');
+  card.className='card'; card.tabIndex=0; card.style.setProperty('--accent',d.accent);
+  const list=d.pairs.map(p=>'<b>'+p[0]+'</b> '+p[1]).join('<span class="sep">｜</span>');
+  card.innerHTML=
+   '<div class="card-face card-front">'+
+     '<span class="card-icon af">'+d.af+'</span>'+
+     '<div class="card-en-row"><span class="card-en">'+d.zh+'</span></div>'+
+     '<div class="card-zh af-count">課本裡有 '+d.n+' 個字用到它</div>'+
+     '<div class="card-hook">'+d.hook+'</div>'+
+     '<div class="card-flip-hint">點擊翻面 →</div>'+
+   '</div>'+
+   '<div class="card-face card-back">'+
+     '<span class="root-tag">'+d.root+'</span>'+
+     '<p class="card-story">'+d.story+'</p>'+
+     '<p class="wordlist">'+list+'</p>'+
+     '<p class="card-say">'+d.say+'</p>'+
+     '<p class="card-mnemonic">'+d.mn+'</p>'+
+   '</div>';
+  card.addEventListener('click',e=>{
+    card.classList.toggle('flipped');
+  });
+  card.addEventListener('keydown',e=>{
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- 配對遊戲 ---------- */
+const colA=document.getElementById('colA'), colB=document.getElementById('colB');
+const scoreNum=document.getElementById('scoreNum'), winBanner=document.getElementById('winBanner');
+let selA=null, matched=0;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function build(){
+  colA.innerHTML=''; colB.innerHTML=''; selA=null; matched=0;
+  scoreNum.textContent='0'; winBanner.classList.remove('show');
+  const pool=shuffle(DATA).slice(0,QN);
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.af;
+    b.innerHTML='<span class="pick-en">'+d.af+'</span>';
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done'))return;
+      colA.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel'); selA=b;
+    });
+    colA.appendChild(b);
+  });
+  shuffle(pool).forEach(d=>{
+    const b=document.createElement('button');
+    b.className='pick'; b.type='button'; b.dataset.en=d.af; b.textContent=d.q;
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('done')||!selA)return;
+      if(selA.dataset.en===b.dataset.en){
+        selA.classList.remove('sel'); selA.classList.add('done'); b.classList.add('done');
+        selA=null; matched++; scoreNum.textContent=matched;
+        if(matched===QN) winBanner.classList.add('show');
+      }else{
+        b.classList.add('wrong');
+        setTimeout(()=>b.classList.remove('wrong'),420);
+      }
+    });
+    colB.appendChild(b);
+  });
+}
+document.getElementById('resetGame').addEventListener('click',build);
+build();
+</script>
+</body>
+</html>
