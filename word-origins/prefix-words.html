@@ -50,11 +50,11 @@
   .section-head p{color:var(--ink-dim);max-width:640px;margin:0 auto;font-size:1rem}
 
   /* ---------- CARDS ---------- */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:24px}
-  .card{--accent:var(--brand);position:relative;height:726px;border-radius:18px;
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:24px;grid-auto-rows:1fr}
+  .card{--accent:var(--brand);display:grid;border-radius:18px;
     cursor:pointer;outline:none}
   .card:focus-visible .card-face{box-shadow:0 0 0 3px var(--accent),0 10px 26px -14px rgba(27,31,49,.4)}
-  .card-face{position:absolute;inset:0;border-radius:18px;background:var(--card);
+  .card-face{grid-area:1/1;min-width:0;border-radius:18px;background:var(--card);
     border:1px solid var(--edge);border-top:5px solid var(--accent);
     padding:24px 24px 22px;display:flex;flex-direction:column;
     box-shadow:0 4px 18px -10px rgba(27,31,49,.28);
@@ -134,8 +134,6 @@
   @media (max-width:700px){
     .wrap{padding:0 16px}
     .grid{grid-template-columns:1fr}
-    .card{height:auto;min-height:0}
-    .card-face{position:relative;inset:auto}
     .card-back{display:none}
     .card.flipped .card-front{display:none}
     .card.flipped .card-back{display:flex;opacity:1;transform:none}
@@ -165,7 +163,6 @@
   .wordlist b{color:var(--accent);font-family:var(--serif);font-size:1.05rem}
   .wordlist .sep{color:#c3c9dc;padding:0 2px}
   .af-count{font-size:1rem;color:var(--ink-faint)}
-  td.r b{font-family:var(--serif)}
 </style>
 </head>
 <body>
@@ -318,11 +315,14 @@ DATA.forEach(d=>{
      '<p class="card-mnemonic">'+d.mn+'</p>'+
    '</div>';
   card.addEventListener('click',e=>{
+    if(e.target.closest('.word-btn')) return;
     card.classList.toggle('flipped');
   });
   card.addEventListener('keydown',e=>{
     if(e.key===' '||e.key==='Enter'){ e.preventDefault(); card.classList.toggle('flipped'); }
   });
+  const wb=card.querySelector('.word-btn');
+  if(wb) wb.addEventListener('click',e=>{ e.stopPropagation(); speak(d.en, e.currentTarget); });
   grid.appendChild(card);
 });
 
@@ -337,8 +337,8 @@ function build(){
   const pool=shuffle(DATA).slice(0,QN);
   shuffle(pool).forEach(d=>{
     const b=document.createElement('button');
-    b.className='pick'; b.type='button'; b.dataset.en=d.af;
-    b.innerHTML='<span class="pick-en">'+d.af+'</span>';
+    b.className='pick'; b.type='button'; b.dataset.en=d.en;
+    b.innerHTML='<span class="pick-en">'+d.en+'</span>';
     b.addEventListener('click',()=>{
       if(b.classList.contains('done'))return;
       colA.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
@@ -348,7 +348,7 @@ function build(){
   });
   shuffle(pool).forEach(d=>{
     const b=document.createElement('button');
-    b.className='pick'; b.type='button'; b.dataset.en=d.af; b.textContent=d.q;
+    b.className='pick'; b.type='button'; b.dataset.en=d.en; b.textContent=d.q;
     b.addEventListener('click',()=>{
       if(b.classList.contains('done')||!selA)return;
       if(selA.dataset.en===b.dataset.en){
