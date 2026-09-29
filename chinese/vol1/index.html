@@ -160,6 +160,18 @@ h3{font-size:1.15rem;margin:0 0 10px;color:var(--main)}
 .flip .bk2{background:var(--main);color:#fff;transform:rotateY(180deg);font-size:1rem;line-height:1.5}
 
 
+/* 照片舞台 */
+.pstage{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#111}
+.ph{position:absolute;inset:0;background-position:center;background-repeat:no-repeat;background-size:cover;opacity:0;transition:opacity 1.2s ease}
+.ph.kb{animation:kb 9s ease-out forwards}
+@keyframes kb{0%{transform:scale(1.0)}100%{transform:scale(1.08)}}
+.split{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:4px;opacity:0;transition:opacity 1s}
+.split .half{background-size:cover;background-position:center;position:relative}
+.split .half span,.ptag{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.62);color:#fff;border-radius:10px;padding:6px 12px;font-size:1rem;line-height:1.5;max-width:calc(100% - 24px)}
+.ptag{transition:opacity .6s}
+.pai{position:absolute;right:10px;top:10px;background:rgba(255,255,255,.85);color:#555;border-radius:8px;padding:2px 10px;font-size:1rem;opacity:0;transition:opacity .6s}
+@media(max-width:560px){.pstage{aspect-ratio:4/3}}
+.bgm{position:fixed;right:14px;bottom:14px;z-index:30;border:none;background:#fff;color:var(--main);border-radius:99px;padding:8px 16px;box-shadow:var(--shadow);font-weight:700}
 /* 自學一 */
 .tstage{background:linear-gradient(135deg,#eef6e8,#fdf6e3);border-radius:16px;min-height:260px;display:flex;align-items:center;justify-content:center;padding:20px}
 .qcard{text-align:center;max-width:640px}
@@ -186,7 +198,12 @@ footer a{color:#ffd48a}
 <main><div class="wrap" id="app"></div></main>
 <footer><div class="wrap">
   <b>全民補習班 國文科</b>｜考點依據：四育、福興、自強、向上國中第一次段考試卷整理。模擬題皆為原創改寫。<br>
-  字音依康軒課本注釋。練習時可以開聲音，答對、答錯都有音效。
+  字音依康軒課本注釋。練習時可以開聲音，答對、答錯都有音效。背景音樂只在「動畫導覽」播放，可按右下角按鈕關閉。<br>
+  <details style="margin-top:8px"><summary>圖片來源與授權</summary>
+  標示「AI 示意圖」者為 Canva AI 生成之示意圖片。其餘照片來自 Wikimedia Commons：
+  螢火蟲 Tyler Savitski（CC BY-SA 4.0）；硨磲貝 Charles J. Sharp（CC BY-SA 4.0）；珍珠貝 Wmpearl（CC0）；點字 Stefan Malmesjö（CC BY 2.0）；
+  〈祈禱的手〉Albrecht Dürer（公有領域）；冰棒 Lablascovegmenu（CC BY 2.0）；紅豆牛奶冰 Andy Tsai（CC BY-SA 2.0）；芒果冰 KQuhen（CC BY-SA 4.0）；
+  冰淇淋 Andy Li（CC0）；沙漏 John Morgan（CC BY 2.0）。</details>
 </div></footer>
 
 <script>
@@ -533,10 +550,16 @@ function drawTabs(){
   $('#tabs').innerHTML=TABS.map(([k,t])=>`<button class="tab ${k===cur?'on':''}" data-k="${k}">${t}</button>`).join('');
   $('#tabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.k));
 }
-function go(k,sub){cur=k;if(sub)curSub[k]=sub;drawTabs();render();window.scrollTo({top:document.querySelector('nav.tabs').offsetTop,behavior:'smooth'})}
+function go(k,sub){cur=k;if(sub)curSub[k]=sub;document.body.insertAdjacentHTML('beforeend','<button class="bgm" id="bgmBtn"></button>');
+$('#bgmBtn').onclick=()=>{BGM.on=!BGM.on;if(BGM.on&&isAnim())BGM.start();else BGM.stop();BGM.btn()};
+BGM.btn();
+drawTabs();render();window.scrollTo({top:document.querySelector('nav.tabs').offsetTop,behavior:'smooth'})}
 
+function isAnim(){return cur in L && (curSub[cur]||'anim')==='anim'}
 function render(){
   const app=$('#app');
+  clearInterval(__cyc);
+  if(isAnim()) BGM.start(); else BGM.stop();
   if(cur==='home') return renderHome(app);
   if(cur==='rhet'){app.innerHTML=`<h2>🎭 修辭＋綜合題型</h2><p class="muted">12 校統計：以動襯靜 9 校、擬人／摹寫／新詩詠物 8 校、映襯 7 校、量詞 6 校。</p>
     <div class="card" id="rz"></div><div class="card" id="mx0"></div><div class="card" id="mx1"></div><h2>🐛 新詩詠物：猜猜詩在寫什麼？</h2><p class="muted">8 校都考「依詩句判斷描寫對象」。找出詩裡的線索！</p><div id="rd"></div>`;
@@ -742,185 +765,136 @@ function stepper(el,steps,apply,autoMs=5200){
   set(0);
 }
 
+/* ================= 照片舞台（共用） ================= */
+const AI_IMG=f=>f.startsWith('ai_');
+function photoStage(){
+  return `<div class="pstage"><div class="ph" id="phA"></div><div class="ph" id="phB"></div>
+    <div class="split" id="phS"></div><div class="ptag" id="phT"></div><div class="pai" id="phAI">AI 示意圖</div></div>`;
+}
+let __cyc=null,__front='A';
+function showPhoto(step){
+  clearInterval(__cyc);
+  const S=$('#phS'),T=$('#phT'),AI=$('#phAI');
+  if(step.split){
+    $('#phA').style.opacity=0;$('#phB').style.opacity=0;
+    S.innerHTML=step.split.map(s=>`<div class="half" style="background-image:url(img/${s.img}.jpg)"><span>${s.tag}</span></div>`).join('');
+    S.style.opacity=1;T.style.opacity=0;AI.style.opacity=step.split.some(s=>AI_IMG(s.img))?1:0;return;
+  }
+  S.style.opacity=0;
+  const imgs=step.imgs;let k=0;
+  const put=()=>{
+    const it=imgs[k%imgs.length];
+    const next=__front==='A'?'B':'A',el=$('#ph'+next),old=$('#ph'+__front);
+    el.style.backgroundImage=`url(img/${it.img}.jpg)`;
+    el.style.backgroundSize=it.fit||'cover';el.style.backgroundColor=it.bg||'#111';
+    el.classList.remove('kb');void el.offsetWidth;el.classList.add('kb');
+    el.style.opacity=1;old.style.opacity=0;__front=next;
+    T.textContent=it.tag;T.style.opacity=1;AI.style.opacity=AI_IMG(it.img)?1:0;k++;
+  };
+  put();if(imgs.length>1)__cyc=setInterval(put,3400);
+}
+
+/* ================= 背景音樂（瀏覽器即時合成，只在動畫頁播放） ================= */
+const BGM={ctx:null,master:null,timer:null,playing:false,
+  get on(){try{return localStorage.getItem('bgm')!=='off'}catch(e){return true}},
+  set on(v){try{localStorage.setItem('bgm',v?'on':'off')}catch(e){}},
+  start(){
+    if(!this.on||this.playing)return;
+    try{
+      this.ctx=this.ctx||new (window.AudioContext||window.webkitAudioContext)();
+      if(this.ctx.state==='suspended')this.ctx.resume();
+      const c=this.ctx;this.master=c.createGain();this.master.gain.value=0;
+      const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1200;
+      this.master.connect(lp);lp.connect(c.destination);
+      this.master.gain.linearRampToValueAtTime(0.045,c.currentTime+3);
+      const chords=[[261.6,329.6,392,493.9],[220,261.6,329.6,392],[174.6,220,261.6,329.6],[196,246.9,293.7,392]];
+      const bells=[523.3,587.3,659.3,784,880];
+      let n=0;const play=()=>{
+        const t=c.currentTime,ch=chords[n%chords.length];
+        ch.forEach(f=>{[0,1].forEach(d=>{const o=c.createOscillator(),g=c.createGain();o.type=d?'triangle':'sine';o.frequency.value=f*(d?1.003:1);
+          g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.18,t+2);g.gain.linearRampToValueAtTime(0.12,t+5);g.gain.linearRampToValueAtTime(0,t+8);
+          o.connect(g);g.connect(this.master);o.start(t);o.stop(t+8.2)})});
+        [1.5,4.2].forEach(dt=>{if(Math.random()<.7){const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=bells[Math.floor(Math.random()*bells.length)];
+          g.gain.setValueAtTime(0,t+dt);g.gain.linearRampToValueAtTime(0.10,t+dt+.05);g.gain.exponentialRampToValueAtTime(0.001,t+dt+2.5);
+          o.connect(g);g.connect(this.master);o.start(t+dt);o.stop(t+dt+2.6)}});
+        n++;
+      };
+      play();this.timer=setInterval(play,6500);this.playing=true;
+    }catch(e){}
+    this.btn();
+  },
+  stop(){
+    clearInterval(this.timer);this.timer=null;
+    if(this.playing&&this.master&&this.ctx){const m=this.master,t=this.ctx.currentTime;m.gain.cancelScheduledValues(t);m.gain.setValueAtTime(m.gain.value,t);m.gain.linearRampToValueAtTime(0,t+1.2);setTimeout(()=>{try{m.disconnect()}catch(e){}},1500)}
+    this.playing=false;this.btn();
+  },
+  btn(){const b=document.getElementById('bgmBtn');if(b)b.textContent=this.on?'🎵 音樂：開':'🔇 音樂：關'}
+};
+
 /* ================= L1 夏夜 動畫 ================= */
 function animL1(p){
-  const stars=Array.from({length:40},()=>`<circle class="twk" cx="${Math.random()*800}" cy="${Math.random()*170}" r="${Math.random()*1.8+0.8}" fill="#fff" style="animation-delay:${Math.random()*2}s"/>`).join('');
-  const flies=Array.from({length:7},(_,i)=>`<circle class="fly" cx="${470+i*38}" cy="${280+Math.sin(i)*25}" r="4" fill="#fff59a" style="animation-delay:${i*.3}s"/>`).join('');
-  p.innerHTML=`<div class="card"><div class="stage"><svg id="l1svg" viewBox="0 0 800 400">
-    <rect class="sky" width="800" height="400" fill="#f7a35c"/>
-    <g class="fade" id="stars" opacity="0">${stars}<circle cx="640" cy="70" r="30" fill="#fdf6d8"/><circle cx="640" cy="70" r="40" fill="#fdf6d8" opacity=".2"/></g>
-    <g class="sun" id="sun" transform="translate(620,120)"><g class="sunspin">${Array.from({length:12},(_,i)=>`<rect x="-3" y="-62" width="6" height="16" rx="3" fill="#ffdd66" transform="rotate(${i*30})"/>`).join('')}</g><circle r="40" fill="#ff7a2f"/></g>
-    <path d="M0 250 Q120 170 260 240 T520 230 T800 220 V400 H0Z" fill="#4c7a4c" id="hill"/>
-    <path d="M0 300 Q200 270 400 300 T800 290 V400 H0Z" fill="#3a6a3a"/>
-    <path class="river" d="M-10 360 Q200 330 400 360 T820 350" stroke="#7ec8e3" stroke-width="10" fill="none"/>
-    <g id="house" transform="translate(120,245)"><rect width="90" height="60" fill="#e8d5b0"/><path d="M-10 0 L45 -40 L100 0Z" fill="#a0522d"/><rect x="34" y="25" width="22" height="35" fill="#6b3e1e"/>
-      <rect id="win" x="8" y="12" width="18" height="16" fill="#555" class="fade"/></g>
-    <path class="vine" d="M235 305 C230 270 250 260 240 230 C232 205 215 205 205 245" stroke="#6fbf4b" stroke-width="5" fill="none"/>
-    <text x="226" y="318" font-size="26">🎃</text>
-    <g id="lamp" transform="translate(330,190)"><rect x="-3" width="6" height="110" fill="#444"/><circle id="bulb" cy="0" r="9" fill="#666" class="fade"/><circle id="glow" cy="0" r="38" fill="#ffe9a0" opacity="0" class="fade"/></g>
-    <g class="walker" id="w1"><text x="700" y="265" font-size="30">🐑</text><text x="745" y="270" font-size="30">🐄</text></g>
-    <g class="walker" id="w2"><text x="600" y="150" font-size="24">🦋</text><text x="640" y="170" font-size="22">🐝</text></g>
-    <g class="fade" id="sleep" opacity="0"><text x="150" y="235" font-size="22" class="zz">💤</text><text x="420" y="215" font-size="22" class="zz" style="animation-delay:.8s">💤</text><text x="80" y="330" font-size="20">🐤🦆</text><text x="112" y="310" class="zz" font-size="16">z</text></g>
-    <g class="fade" id="awake" opacity="0">${flies}<text x="560" y="250" font-size="16" fill="#fff">夜風～</text></g>
-  </svg></div>
-  <div class="steps"></div><div class="caption"></div></div>
+  p.innerHTML=`<div class="card">${photoStage()}<div class="steps"></div><div class="caption"></div></div>
   <div class="card"><h3>🗺️ 結構一張圖</h3>
   <p><span class="pill">第一節</span>黃昏：萬物<b>回家</b>（溫馨熱鬧）→ 入夜：夜<b>爬下來</b>、珍珠＋銀幣（<b>星月交輝</b>的富麗）</p>
   <p><span class="pill">第二節</span>深夜：萬物<b>睡了</b>（沉靜）→ 只有南瓜、小河、夜風、螢火蟲<b>還醒著</b>（<b>靜中有動</b>、增添生機）</p>
   <p class="muted">反覆出現的詞語：「回家了」「來了」「睡了」「還醒著」→ 用結構相近的句式營造節奏感，整齊又富變化。</p></div>`;
-  const svg=$('#l1svg'),sky=svg.querySelector('.sky'),sun=$('#sun'),w1=$('#w1'),w2=$('#w2');
   const steps=[
-    {label:'① 黃昏：回家了',poem:'蝴蝶和蜜蜂們帶著花朵的蜜糖<b>回來</b>了，<br>羊隊和牛群<b>告別</b>了田野<b>回家</b>了，<br>火紅的太陽也滾著火輪子<b>回家</b>了，',key:'萬物「回家」都是<b>擬人</b>，營造黃昏<b>溫馨熱鬧</b>的畫面；「滾著火輪子」寫<b>夕陽西下</b>。'},
-    {label:'② 入夜：夜來了',poem:'當街燈亮起來向村莊<b>道過晚安</b>，<br>夏天的夜就<b>輕輕地</b>來了。<br>來了！來了！從山坡上輕輕地<b>爬下來</b>了。',key:'街燈「道晚安」是<b>擬人</b>，揭開夜晚序幕；兩次「輕輕地」表示夜<b>悄悄降臨</b>。'},
-    {label:'③ 星月交輝',poem:'撒了滿天的<b>珍珠</b>和一枚又大又亮的<b>銀幣</b>。<br>美麗的夏夜呀！涼爽的夏夜呀！',key:'珍珠＝星星，銀幣＝月亮 → <b>星月交輝的富麗之美</b>（不是「月明星稀」！）。「美麗」是視覺，「涼爽」是觸覺。'},
-    {label:'④ 深夜：睡了',poem:'小雞和小鴨們關在欄裡睡了。……<br>睡了，都睡了！<br>朦朧地，山巒靜靜地<b>睡</b>了！朦朧地，田野靜靜地<b>睡</b>了！',key:'萬物沉睡，呈現深夜的<b>沉靜之美</b>。「朦朧」＝模糊不清的樣子（四校必考注釋）。'},
-    {label:'⑤ 還醒著',poem:'只有窗外瓜架上的南瓜還<b>醒</b>著，伸長了藤蔓輕輕地往屋頂上<b>爬</b>。<br>只有綠色的小河還醒著，<b>低聲地歌唱</b>著溜過彎彎的小橋。<br>只有夜風還醒著，從竹林裡<b>跑出來</b>，跟著<b>提燈</b>的螢火蟲，在美麗的夏夜裡<b>愉快地旅行</b>。',key:'在一片寧靜中寫「還醒著」的事物，是<b>靜中有動</b>，為夏夜增添<b>蓬勃的生機</b>；小河的歌聲是<b>以動襯靜</b>。'},
+    {label:'① 黃昏：回家了',imgs:[{img:'ai_l1_dusk',tag:'黃昏：牛群告別田野、太陽滾著火輪子回家'}],poem:'蝴蝶和蜜蜂們帶著花朵的蜜糖<b>回來</b>了，<br>羊隊和牛群<b>告別</b>了田野<b>回家</b>了，<br>火紅的太陽也滾著火輪子<b>回家</b>了，',key:'萬物「回家」都是<b>擬人</b>，營造黃昏<b>溫馨熱鬧</b>的畫面；「滾著火輪子」寫<b>夕陽西下</b>。'},
+    {label:'② 入夜：夜來了',imgs:[{img:'ai_l1_lamp',tag:'入夜：街燈亮起來，向村莊道晚安'}],poem:'當街燈亮起來向村莊<b>道過晚安</b>，<br>夏天的夜就<b>輕輕地</b>來了。<br>來了！來了！從山坡上輕輕地<b>爬下來</b>了。',key:'街燈「道晚安」是<b>擬人</b>，時間是<b>傍晚入夜</b>（不是深夜）；「來了！來了！」表示<b>期待歡喜</b>，「輕輕地」表示夜<b>悄悄降臨</b>。'},
+    {label:'③ 星月交輝',imgs:[{img:'ai_l1_stars',tag:'滿天的珍珠（星星）＋又大又亮的銀幣（月亮）'}],poem:'撒了滿天的<b>珍珠</b>和一枚又大又亮的<b>銀幣</b>。<br>美麗的夏夜呀！涼爽的夏夜呀！',key:'珍珠＝星星，銀幣＝月亮 → <b>星月交輝的富麗之美</b>（不是「月明星稀」！）。這句用的是<b>譬喻</b>。'},
+    {label:'④ 深夜：睡了',imgs:[{img:'ai_l1_chicks',tag:'深夜：小雞和小鴨們關在欄裡睡了'}],poem:'小雞和小鴨們關在欄裡睡了。……<br>睡了，都睡了！<br>朦朧地，山巒靜靜地<b>睡</b>了！朦朧地，田野靜靜地<b>睡</b>了！',key:'萬物沉睡，呈現深夜的<b>沉靜之美</b>。「朦朧」＝模糊不清的樣子（11 校考過注釋）。'},
+    {label:'⑤ 還醒著',imgs:[{img:'ai_l1_awake',tag:'南瓜爬上屋頂、小河溜過小橋，都還醒著'},{img:'l1_fireflies',tag:'夜風跟著提燈的螢火蟲去旅行'}],poem:'只有窗外瓜架上的南瓜還<b>醒</b>著，伸長了藤蔓輕輕地往屋頂上<b>爬</b>。<br>只有綠色的小河還醒著，<b>低聲地歌唱</b>著溜過彎彎的小橋。<br>只有夜風還醒著，從竹林裡<b>跑出來</b>，跟著<b>提燈</b>的螢火蟲，在美麗的夏夜裡<b>愉快地旅行</b>。',key:'在一片寧靜中寫「還醒著」的事物，是<b>靜中有動</b>，為夏夜增添<b>蓬勃的生機</b>；小河的歌聲是<b>以動襯靜</b>（9 校考過）。'},
   ];
-  stepper(p,steps,i=>{
-    svg.setAttribute('class','s'+i);
-    sky.setAttribute('fill',['#f7a35c','#3b4f86','#1b2a55','#0f1a38','#0f1a38'][i]);
-    sun.setAttribute('transform',i===0?'translate(620,250)':'translate(620,470)');
-    sun.style.transition='transform 3s ease-in';
-    w1.style.transform=i===0?'translateX(-520px)':'translateX(-520px)';w1.style.opacity=i===0?1:0;
-    w2.style.transform=i===0?'translate(-440px,90px)':'translate(-440px,90px)';w2.style.opacity=i===0?1:0;
-    $('#stars').setAttribute('opacity',i>=2?1:(i===1?.35:0));
-    $('#bulb').setAttribute('fill',i>=1?'#ffe066':'#666');$('#glow').setAttribute('opacity',i>=1?.35:0);
-    $('#win').setAttribute('fill',i===1||i===2?'#ffd966':'#333');
-    $('#sleep').setAttribute('opacity',i>=3?1:0);$('#awake').setAttribute('opacity',i>=4?1:0);
-    if(i>=4)svg.classList.add('s3');
-    if(i===0){w1.style.transition='none';w2.style.transition='none';w1.style.transform='none';w2.style.transform='none';w1.getBoundingClientRect();w1.style.transition='';w2.style.transition='';
-      setTimeout(()=>{w1.style.transform='translateX(-520px)';w2.style.transform='translate(-440px,90px)';sun.setAttribute('transform','translate(620,250)')},80);
-      sun.style.transition='none';sun.setAttribute('transform','translate(620,120)');sun.getBoundingClientRect();sun.style.transition='transform 3s ease-in';}
-  });
+  stepper(p,steps,i=>showPhoto(steps[i]),7000);
 }
 
 /* ================= L2 生之歌選 動畫 ================= */
 function animL2(p){
-  p.innerHTML=`<div class="card"><div class="stage" style="background:#0c3550"><svg id="l2svg" viewBox="0 0 800 400">
-    <defs><radialGradient id="pg" cx=".35" cy=".35"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f3e9f5"/><stop offset="1" stop-color="#cdbbd6"/></radialGradient>
-    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f6f9a"/><stop offset="1" stop-color="#0a2c45"/></linearGradient></defs>
-    <rect width="800" height="400" fill="url(#sea)"/>
-    <path d="M0 340 Q200 320 400 340 T800 335 V400 H0Z" fill="#c9b27c"/>
-    <g id="clam">
-      <ellipse cx="400" cy="265" rx="130" ry="38" fill="#8f7fa8"/>
-      <ellipse cx="400" cy="258" rx="110" ry="26" fill="#f0c6c6"/>
-      <g id="layers">${[46,40,34,28,22,16].map((r,i)=>`<circle class="layer" cx="400" cy="252" r="${r/2.3}" fill="${['#efe4f3','#e6d8ec','#f5eef8','#e9dff0','#f7f2fa','#fff'][i]}" opacity="0" data-r="${r/2.3}"/>`).join('')}</g>
-      <polygon id="grain" class="grain" points="394,245 404,242 409,250 402,258 392,255" fill="#7a5b35" transform="translate(0,-240)"/>
-      <circle id="pearl" cx="400" cy="250" r="22" fill="url(#pg)" opacity="0" class="fade"/>
-      <circle class="shine fade" id="spark" cx="392" cy="242" r="5" fill="#fff" opacity="0"/>
-      <g class="top" id="top"><path d="M270 262 Q400 120 530 262 Z" fill="#a898c2" stroke="#6d5f88" stroke-width="3"/>
-        ${[0,1,2,3,4].map(i=>`<path d="M400 262 L${300+i*50} ${200-Math.abs(2-i)*-10}" stroke="#6d5f88" stroke-width="2" opacity=".5"/>`).join('')}</g>
-    </g>
-    <text id="pain" x="545" y="200" font-size="22" fill="#ffb3b3" class="fade" opacity="0">好痛……</text>
-    <g id="braille" class="fade" opacity="0"><rect x="560" y="60" width="200" height="120" rx="12" fill="#f5efe0"/>
-      ${[[0,0],[0,1],[1,0],[0,2],[1,1],[1,2],[0,0],[1,0],[1,2]].map((d,i)=>`<circle cx="${590+Math.floor(i/3)*60+d[0]*18}" cy="${95+d[1]*22}" r="6" fill="#444"/>`).join('')}
-      <text x="660" y="170" font-size="15" text-anchor="middle" fill="#6b5a3a">點字法</text></g>
-    <text id="needle" x="80" y="120" font-size="46" class="fade" opacity="0">🪡</text>
-    <g id="hands" class="fade" opacity="0"><text x="70" y="330" font-size="60">🙏</text><text x="60" y="360" font-size="14" fill="#fff">祈禱的手</text></g>
-  </svg></div><div class="steps"></div><div class="caption"></div></div>
+  p.innerHTML=`<div class="card">${photoStage()}<div class="steps"></div><div class="caption"></div></div>
   <div class="grid2">
     <div class="card"><h3>🦪〈一顆珍珠〉三段結構</h3><p><span class="pill">一</span>朋友送珠鍊 → 聯想蚌把沙礫變珍珠</p><p><span class="pill">二</span>事例：勃萊爾被針刺瞎 → 用針發明點字法</p><p><span class="pill">三</span>結論：苦難的試煉能提升生命價值（呼應首段）</p></div>
     <div class="card"><h3>🙏〈手的故事〉四段結構</h3><p><span class="pill">一</span>自己曾有美麗的手 → 因病變醜，黯然神傷</p><p><span class="pill">二</span>事例：杜瑞與好友〈祈禱的手〉</p><p><span class="pill">三</span>事例：蔣公訓示「掌心向下」</p><p><span class="pill">四</span>結論：懂得付出的手，外表醜也無妨（呼應首段）</p></div>
   </div>`;
-  const top=$('#top'),grain=$('#grain'),layers=[...document.querySelectorAll('#layers .layer')];
   const steps=[
-    {label:'① 蚌安詳憩歇',poem:'當小小的蚌安詳地<b>憩歇</b>在海底……',key:'「憩歇」＝休息，憩音ㄑㄧˋ（高頻字形：別寫成「棄」）。'},
-    {label:'② 苦難來臨',poem:'突然一個打擊臨到牠，一粒沙子<b>嵌</b>進肉中，痛得牠昏天黑地……',key:'沙礫＝人生的<b>苦難</b>。「嵌」音ㄑㄧㄢ；「礫」音ㄌㄧˋ，小石子。'},
-    {label:'③ 層層包容',poem:'只有強忍著撕裂一般的痛苦……一點點分泌出光滑的真珠質來<b>層層包容</b>這個侵入牠生命中的「苦難」。',key:'不是抗拒，而是<b>忍耐、包容</b>。「苦難」加引號，是用來<b>特別強調</b>（引號用法）。'},
-    {label:'④ 沙礫變珍珠',poem:'那一粒<b>醜陋的沙礫</b>已變成<b>美麗的珍珠</b>。<b>眼淚</b>化作<b>歡笑</b>，<b>痛苦</b>的代價成就了<b>榮耀</b>的光彩。',key:'醜陋／美麗、眼淚／歡笑、痛苦／榮耀 → <b>映襯</b>。主旨：通過苦難試煉，生命發出不朽光輝。'},
-    {label:'⑤ 一根針的轉變',poem:'<b>同樣是一根針</b>，曾經使他失去光明，卻也因此帶給億萬盲人光明和希望，多麼奇妙的轉變！',key:'勃萊爾：針刺失明 → 用針刺出<b>點字法</b>。<b>藉事說理</b>：把苦難化為造福他人的力量。'},
-    {label:'⑥ 祈禱的手',poem:'杜瑞捧著這雙為他犧牲的手，感動得流下淚來。……做人不要<b>掌心向上</b>，向人乞憐，要隨時不忘<b>掌心向下</b>，給人幫助救援。',key:'〈手的故事〉＝<b>為人付出</b>、犧牲奉獻（燃燒自己，照亮別人）。掌心向上／向下也是<b>映襯</b>。'},
+    {label:'① 蚌安詳憩歇',imgs:[{img:'l2_clam',tag:'海底的蚌（硨磲貝）'}],poem:'當小小的蚌安詳地<b>憩歇</b>在海底……',key:'「憩歇」＝休息，憩音ㄑㄧˋ（7 校考過，別寫成「棄」）。'},
+    {label:'② 苦難來臨',imgs:[{img:'ai_l2_sand',tag:'一粒沙子嵌進蚌肉中'}],poem:'突然一個打擊臨到牠，一粒沙子<b>嵌</b>進肉中，痛得牠昏天黑地……',key:'沙礫＝人生的<b>苦難</b>。「嵌」音ㄑㄧㄢ；「礫」音ㄌㄧˋ，小石子。'},
+    {label:'③ 層層包容',imgs:[{img:'ai_l2_sand',tag:'強忍痛苦，分泌真珠質層層包住沙粒'}],poem:'只有強忍著撕裂一般的痛苦……一點點分泌出光滑的真珠質來<b>層層包容</b>這個侵入牠生命中的「苦難」。',key:'不是抗拒，而是<b>忍耐、包容</b>。「苦難」加引號，是用來<b>特別強調</b>（引號用法）。'},
+    {label:'④ 沙礫變珍珠',imgs:[{img:'l2_pearl',tag:'真實的蚌殼與天然珍珠',fit:'contain',bg:'#0d0d0d'}],poem:'那一粒<b>醜陋的沙礫</b>已變成<b>美麗的珍珠</b>。<b>眼淚</b>化作<b>歡笑</b>，<b>痛苦</b>的代價成就了<b>榮耀</b>的光彩。',key:'醜陋／美麗、眼淚／歡笑、痛苦／榮耀 → <b>映襯</b>。主旨：忍受苦難、主動成長，生命發出不朽光輝（不是「醜的東西放久了自然變美」）。'},
+    {label:'⑤ 一根針的轉變',imgs:[{img:'l2_braille',tag:'用手指摸讀點字'}],poem:'<b>同樣是一根針</b>，曾經使他失去光明，卻也因此帶給億萬盲人光明和希望，多麼奇妙的轉變！',key:'勃萊爾：針刺失明 → 用針刺出<b>點字法</b>。<b>藉事說理</b>：把苦難化為造福他人的力量。'},
+    {label:'⑥ 祈禱的手',imgs:[{img:'l2_hands',tag:'杜勒（杜瑞）〈祈禱的手〉，1508 年',fit:'contain',bg:'#1c2733'}],poem:'杜瑞捧著這雙為他犧牲的手，感動得流下淚來。……做人不要<b>掌心向上</b>，向人乞憐，要隨時不忘<b>掌心向下</b>，給人幫助救援。',key:'〈手的故事〉＝<b>為人付出</b>、犧牲奉獻（燃燒自己，照亮別人）。掌心向上／向下也是<b>映襯</b>。'},
   ];
-  stepper(p,steps,i=>{
-    top.style.transform=(i===1)?'rotate(28deg)':(i>=3?'rotate(35deg)':'rotate(0deg)');
-    if(i===0)top.style.transform='rotate(10deg)';
-    grain.style.transform=i>=1?'translate(0,0)':'translate(0,-240px)';grain.setAttribute('transform','');
-    if(i===2){top.style.transform='rotate(0deg)';layers.forEach((l,k)=>setTimeout(()=>{l.setAttribute('opacity',1);l.setAttribute('r',+l.dataset.r+k*1.6)},400+k*550))}
-    else layers.forEach(l=>{l.setAttribute('opacity',i>=3?1:0)});
-    $('#pain').setAttribute('opacity',i===1||i===2?1:0);
-    $('#pearl').setAttribute('opacity',i>=3?1:0);$('#spark').setAttribute('opacity',i>=3?1:0);
-    grain.style.opacity=i>=3?0:1;
-    $('#needle').setAttribute('opacity',i===4?1:0);$('#braille').setAttribute('opacity',i===4?1:0);
-    $('#hands').setAttribute('opacity',i===5?1:0);
-  },5600);
+  stepper(p,steps,i=>showPhoto(steps[i]),7000);
 }
 
 /* ================= L3 吃冰 動畫 ================= */
 function animL3(p){
-  const flakes=Array.from({length:14},(_,i)=>`<text class="flake" x="${355+Math.random()*90}" y="150" font-size="${10+Math.random()*8}" fill="#fff" style="animation-delay:${Math.random()*1.4}s">❄</text>`).join('');
-  p.innerHTML=`<div class="card"><div class="stage" style="background:#fdf1dc"><svg id="l3svg" viewBox="0 0 800 400">
-    <rect width="800" height="400" fill="#fdf1dc"/>
-    <!-- 冰棒 -->
-    <g id="g0" class="fade">
-      <rect x="120" y="80" width="200" height="120" rx="10" fill="#fff" stroke="#c8a36b" stroke-width="3"/><text x="220" y="125" text-anchor="middle" font-size="22" font-weight="900" fill="#8a5a00">臺糖福利社</text>
-      <text x="220" y="160" text-anchor="middle" font-size="16" fill="#8a5a00">花生冰・紅豆冰　一枝一毛</text>
-      ${[0,1,2].map(i=>`<g transform="translate(${420+i*80},110)"><rect width="46" height="90" rx="20" fill="${['#e9c46a','#c1666b','#f4a261'][i]}"/><rect x="18" y="86" width="10" height="60" fill="#d9b77e"/></g>`).join('')}
-      <g transform="translate(650,250)">${Array.from({length:9},(_,i)=>`<rect x="${i*6}" y="0" width="5" height="70" fill="#d9b77e"/>`).join('')}<rect x="-4" y="30" width="62" height="6" fill="#c1666b"/></g>
-      <text x="610" y="345" font-size="15" fill="#6b4a1e">竹桿蒐集成捆＝受尊敬</text>
-      <text x="120" y="260" font-size="18" fill="#6b4a1e">道地砂糖・絕不含糖精</text><text x="120" y="290" font-size="18" fill="#c0392b" font-weight="700">→ 貨真價實，童叟無欺</text>
-    </g>
-    <!-- 刨冰 -->
-    <g id="g1" class="fade" opacity="0">
-      <rect x="330" y="40" width="140" height="80" rx="8" fill="#9aa9b5"/><rect x="350" y="55" width="100" height="45" fill="#dff4ff"/>
-      <circle class="crank" cx="500" cy="80" r="26" fill="none" stroke="#555" stroke-width="6" stroke-dasharray="20 8"/>
-      ${flakes}
-      <path class="pile" d="M340 290 Q400 180 460 290Z" fill="#fff" stroke="#e3eef5"/>
-      <path d="M320 290 H480 L460 325 H340Z" fill="#6aa9d8"/>
-      <text x="120" y="220" font-size="18" fill="#1d4e6f">冰屑就像雪花一般</text><text x="120" y="250" font-size="18" fill="#1d4e6f">俄頃堆成小冰山</text>
-      <text x="120" y="285" font-size="18" fill="#c0392b" font-weight="700">→ 視覺摹寫</text>
-      <text x="560" y="220" font-size="17" fill="#1d4e6f">四果・粉圓・仙草・愛玉</text><text x="560" y="250" font-size="17" fill="#1d4e6f">色彩鮮豔、澄澈剔透</text><text x="560" y="280" font-size="17" fill="#1d4e6f">→ 奪人眼目</text>
-    </g>
-    <!-- 芋冰 -->
-    <g id="g2" class="fade" opacity="0">
-      <path d="M0 330 H800" stroke="#b9a47a" stroke-width="4"/>
-      <g class="bike"><text x="0" y="320" font-size="70">🚲</text><rect x="12" y="232" width="40" height="36" rx="6" fill="#b48ad6"/><text x="16" y="256" font-size="13" fill="#fff">芋冰</text><text class="ring" x="60" y="228" font-size="26">🔔</text><text class="ring" x="92" y="215" font-size="18" fill="#c0392b" font-weight="900">叮鈴鈴～</text></g>
-      <text x="400" y="80" font-size="20" text-anchor="middle" fill="#6b4a1e">串串鈴鐺聲響徹街頭巷尾 → <tspan fill="#c0392b" font-weight="900">聽覺摹寫</tspan></text>
-      <circle cx="660" cy="170" r="55" fill="#fff" stroke="#8a5a00" stroke-width="3"/>${Array.from({length:8},(_,i)=>`<line x1="660" y1="170" x2="${660+55*Math.cos(i*Math.PI/4)}" y2="${170+55*Math.sin(i*Math.PI/4)}" stroke="#8a5a00"/>`).join('')}
-      <text x="660" y="250" font-size="15" text-anchor="middle" fill="#6b4a1e">射芋冰</text>
-      <text x="80" y="150" font-size="17" fill="#6b4a1e">小孩一哄而上</text><text x="80" y="178" font-size="17" fill="#6b4a1e">五毛錢一瓢</text>
-    </g>
-    <!-- 今昔 -->
-    <g id="g3" class="fade" opacity="0">
-      <rect x="60" y="50" width="300" height="270" rx="16" fill="#e6f1fb"/><text x="210" y="90" text-anchor="middle" font-size="22" font-weight="900" fill="#2b4c7e">現代冰品</text>
-      ${['五花八門、應有盡有','尖端食品科技','色彩繽紛、花樣百出','講究包裝、重外表'].map((t,i)=>`<text x="210" y="${135+i*38}" text-anchor="middle" font-size="17" fill="#2b4c7e">${t}</text>`).join('')}
-      <text x="400" y="200" text-anchor="middle" font-size="40">⚖️</text>
-      <rect x="440" y="50" width="300" height="270" rx="16" fill="#fdecd8"/><text x="590" y="90" text-anchor="middle" font-size="22" font-weight="900" fill="#a0522d">早年冰品</text>
-      ${['講信用','貨真價實、童叟無欺','口味勝過現代','甜美的童年記憶'].map((t,i)=>`<text x="590" y="${135+i*38}" text-anchor="middle" font-size="17" fill="#a0522d">${t}</text>`).join('')}
-      <text x="400" y="360" text-anchor="middle" font-size="19" font-weight="900" fill="#c0392b">現代口味「遜色」＝比不上早年 → 今不如昔、懷舊之情</text>
-    </g>
-  </svg></div><div class="steps"></div><div class="caption"></div></div>
+  p.innerHTML=`<div class="card">${photoStage()}<div class="steps"></div><div class="caption"></div></div>
   <div class="card"><h3>🗺️ 全文十段結構</h3>
     <p><span class="pill">一～二段</span>點題：夏日吃冰是人生一大享受（<b>開門見山</b>）</p>
     <p><span class="pill">三～四段</span>總述：<b>先寫現代</b>冰品，再比較早年 → 今不如昔</p>
     <p><span class="pill">五～九段</span>分述：冰棒（五、六）→ 刨冰（七、八）→ 芋冰（九）</p>
     <p><span class="pill">十段</span>作結：童年記憶消失殆盡，像鄉愁般 → <b>懷舊之情</b></p>
-    <p class="muted">⚠️ 陷阱：「全文先寫早年再寫現代」是<b>錯的</b>。本文先寫現代，再回憶早年。</p></div>`;
+    <p class="muted">⚠️ 陷阱：「全文順敘，先寫早年再寫現代」是<b>錯的</b>。本文先寫現代，再回憶早年。</p></div>`;
   const steps=[
-    {label:'① 冰棒',poem:'臺糖產製的冰棒和冰水，使用的都是道地的砂糖，絕不含糖精……一根冰棒含在嘴裡，總要舔上半天，才捨得吃完。看得旁邊圍觀的小孩<b>垂涎三尺</b>，卻只有<b>乾</b>瞪眼的分。',key:'道地砂糖＝<b>貨真價實，童叟無欺</b>；「垂涎三尺」是<b>誇飾</b>；「乾」＝徒然、白白的。'},
-    {label:'② 刨冰',poem:'看老闆……飛快的搖轉起來時，那冰屑就像<b>雪花</b>一般，一片一片飛落盤中，<b>俄頃</b>堆積成一座小冰山。',key:'<b>視覺摹寫</b>＋譬喻（冰屑像雪花）。「俄頃」＝很短的時間，不能換成「良久」。「沁涼」是觸覺。'},
-    {label:'③ 芋冰',poem:'小販手上還持有鈴鐺，一路騎來，串串<b>鈴鐺聲</b>響徹街頭巷尾，人人便知是賣芋冰的小販來了，便<b>一哄而上</b>……',key:'<b>聽覺摹寫</b>。「兜售」兜音ㄉㄡ；「一哄而上」哄音ㄏㄨㄥ。'},
-    {label:'④ 今昔對比',poem:'現代的冰品，拜科學昌明之賜，固然色彩繽紛，花樣百出，但單就口味而言，比起臺灣早年的冰製品，恐怕就<b>遜色</b>了。',key:'<b>對比手法</b>凸顯今不如昔；「遜色」＝比不上。主旨：<b>抒發懷舊之情</b>。'},
+    {label:'① 冰棒',imgs:[{img:'ai_l3_taisugar',tag:'臺糖福利社前，孩子排隊買冰棒'},{img:'l3_popsicle',tag:'一根冰棒總要舔上半天才捨得吃完'}],poem:'臺糖產製的冰棒和冰水，使用的都是道地的砂糖，絕不含糖精……一根冰棒含在嘴裡，總要舔上半天，才捨得吃完。看得旁邊圍觀的小孩<b>垂涎三尺</b>，卻只有<b>乾</b>瞪眼的分。',key:'道地砂糖＝<b>貨真價實，童叟無欺</b>；「垂涎三尺」是<b>誇飾</b>；「乾」＝徒然、白白的。'},
+    {label:'② 刨冰',imgs:[{img:'ai_l3_machine',tag:'手搖刨冰機：冰屑像雪花般飛落'},{img:'l3_redbean',tag:'俄頃堆成一座小冰山，淋上配料'}],poem:'看老闆……飛快的搖轉起來時，那冰屑就像<b>雪花</b>一般，一片一片飛落盤中，<b>俄頃</b>堆積成一座小冰山。',key:'<b>視覺摹寫</b>＋譬喻（冰屑像雪花）。「俄頃」＝很短的時間，不能換成「良久」。「沁涼」是觸覺。'},
+    {label:'③ 芋冰',imgs:[{img:'ai_l3_bike',tag:'小販騎腳踏車、搖鈴鐺，孩子一哄而上'}],poem:'小販手上還持有鈴鐺，一路騎來，串串<b>鈴鐺聲</b>響徹街頭巷尾，人人便知是賣芋冰的小販來了，便<b>一哄而上</b>……',key:'<b>聽覺摹寫</b>。「兜售」兜音ㄉㄡ；「一哄而上」哄音ㄏㄨㄥ，是很多人一起行動。'},
+    {label:'④ 今昔對比',split:[{img:'l3_mango',tag:'現代：花樣百出'},{img:'l3_redbean',tag:'早年：貨真價實'}],poem:'現代的冰品，拜科學昌明之賜，固然色彩繽紛，花樣百出，但單就口味而言，比起臺灣早年的冰製品，恐怕就<b>遜色</b>了。',key:'<b>對比手法</b>凸顯今不如昔；「遜色」＝比不上，所以是<b>早年勝過現代</b>。主旨：<b>抒發懷舊之情</b>。'},
   ];
-  stepper(p,steps,i=>{[0,1,2,3].forEach(k=>$('#g'+k).setAttribute('opacity',k===i?1:0));if(i===2)sBELL()},6000);
+  stepper(p,steps,i=>{showPhoto(steps[i]);if(i===2)sBELL()},7000);
 }
-
 
 /* ================= 自學一 善用時間 動畫 ================= */
 function animS1(p){
-  p.innerHTML=`<div class="card"><div class="tstage" id="ts"></div><div class="steps"></div><div class="caption"></div></div>
+  p.innerHTML=`<div class="card"><div id="s1photo">${photoStage()}</div><div class="tstage" id="ts" style="display:none"></div><div class="steps"></div><div class="caption"></div></div>
   <div class="card"><h3>🗺️ 文章脈絡一張圖</h3>
     <p><span class="pill">開頭</span>引用魯迅「海綿裡的水」→ 只要願意，總能擠出零碎時間</p>
     <p><span class="pill">例證</span>魯迅「謀財害命、慢性自殺」＋作者隨身帶書 → 時間就是生命，不容浪費</p>
     <p><span class="pill">論點</span>不是「管理時間」，而是「管理自己要做的事」；不是「節省時間」，而是「節省工作」</p>
     <p><span class="pill">方法</span>看清輕重緩急、決定捨棄什麼（金蘭都的建議）→ 用完整集中的時間做重要的事</p>
     <p><span class="pill">結論</span>威廉．考柏：把時間花在看重的意義上，才是真正的快樂</p></div>`;
-  const quotes=[
-    {who:'魯迅',emoji:'🧽',q:'時間就像海綿裡的水一樣，如果你願意擠，總還是有的。'},
-    {who:'魯迅',emoji:'⏳',q:'浪費別人的時間，等於謀財害命；浪費自己的時間，等於慢性自殺。'},
-    {who:'李偉文（作者）',emoji:'💡',q:'真正的問題不在於「管理時間」，而是「管理自己要做的事」。'},
-    {who:'',emoji:'',q:''},
-    {who:'威廉．考柏',emoji:'🌟',q:'真正快樂的唯一來源，是為了某種我們看重的意義而花費我們的時間、我們的生命。'},
-  ];
+  const quotes={2:{who:'李偉文（作者）',q:'真正的問題不在於「管理時間」，而是「管理自己要做的事」。'},4:{who:'威廉．考柏',q:'真正快樂的唯一來源，是為了某種我們看重的意義而花費我們的時間、我們的生命。'}};
+  const photos={0:{imgs:[{img:'ai_s1_sponge',tag:'擠一擠海綿，總還有水'}]},1:{imgs:[{img:'s1_hourglass',tag:'時間一分一秒流逝，就是生命',fit:'contain',bg:'#1a1a1a'}]}};
   const steps=[
     {label:'① 海綿裡的水',poem:'時間就像海綿裡的水一樣，如果你願意擠，總還是有的。——魯迅',key:'意思是：覺得沒時間，是因為沒把<b>零碎時間</b>找出來。常考「這句話的含義」。'},
     {label:'② 時間就是生命',poem:'生命是以時間為單位的，浪費別人的時間，等於謀財害命；浪費自己的時間，等於慢性自殺。',key:'時間＝生命，浪費時間就是浪費生命。作者等人時<b>隨身帶書</b>，利用零碎時間。'},
@@ -934,10 +908,12 @@ function animS1(p){
     <div class="mxc c"><b>緊急不重要</b><span>集中快速處理</span></div>
     <div class="mxc d"><b>不重要也不緊急</b><span>能不做就不做</span></div></div>`;
   stepper(p,steps,i=>{
-    const ts=$('#ts');const q=quotes[i];
-    ts.innerHTML = i===3 ? matrix : `<div class="qcard"><div class="qe">${q.emoji}</div><div class="qq">「${q.q}」</div><div class="qw">── ${q.who}</div></div>`;
+    const ts=$('#ts'),ph=$('#s1photo');
+    if(photos[i]){ts.style.display='none';ph.style.display='';showPhoto(photos[i]);return}
+    clearInterval(__cyc);ph.style.display='none';ts.style.display='';
+    ts.innerHTML = i===3 ? matrix : `<div class="qcard"><div class="qe">💡</div><div class="qq">「${quotes[i].q}」</div><div class="qw">── ${quotes[i].who}</div></div>`;
     ts.firstElementChild.classList.add('pop');
-  },6000);
+  },7000);
 }
 
 /* ================= 語一 斷句魔術 ================= */
