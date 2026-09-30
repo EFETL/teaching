@@ -47,6 +47,10 @@ input,select{padding:8px 12px;border:2px solid var(--line);border-radius:10px;ba
 .pill{display:inline-block;padding:0 10px;border-radius:99px;background:var(--hi);color:#8a5a00;font-weight:700;margin-right:6px}
 .err{color:var(--bad);font-weight:700}
 .scroll{overflow-x:auto}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+select{max-width:100%}
+.wq li{font-size:1.1rem;line-height:1.75}
+.rk{font-size:1.1rem}
 @media(max-width:640px){.tbl .hide-s{display:none}.rk{grid-template-columns:36px 1fr}.rk .cnt{grid-column:2}}
 </style>
 </head>
@@ -107,7 +111,7 @@ function load(){
 function fmt(d){return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}
 function scls(s){return s>=85?'g':s>=60?'m':'b'}
 function draw(){
-  const units=[...new Set(ROWS.map(r=>r.unit))];
+  const lesson=u=>String(u).split(' ／ ')[0].replace(/（只練錯題）$/,'');const units=[...new Set(ROWS.map(r=>lesson(r.unit)))];
   $('#out').innerHTML=`
   <div class="card"><div class="row">
     <span>篩選：</span>
@@ -123,7 +127,7 @@ function draw(){
 }
 function filtered(){
   const u=$('#fu').value,k=$('#fk').value,dd=$('#fd').value,now=new Date();
-  return ROWS.filter(r=>(!u||r.unit===u)&&(!k||r.kind===k)&&(!dd||(dd==='today'?r.date.toDateString()===now.toDateString():(now-r.date)<7*864e5)));
+  return ROWS.filter(r=>(!u||String(r.unit).split(' ／ ')[0].replace(/（只練錯題）$/,'')===u)&&(!k||r.kind===k)&&(!dd||(dd==='today'?r.date.toDateString()===now.toDateString():(now-r.date)<7*864e5)));
 }
 function body(){
   const rs=filtered();
