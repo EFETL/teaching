@@ -10,7 +10,7 @@
 :root{--main:#2b4c7e;--main-2:#3f6aa8;--accent:#f2a541;--accent-2:#e07a2f;--bg:#f6f4ef;--card:#fff;--ink:#23303f;--muted:#6b7686;--line:#e3e0d8;
   --ok:#2e9e6b;--ok-bg:#e3f5ec;--bad:#d9534f;--bad-bg:#fbe7e6;--hi:#fff4d6;--shadow:0 4px 18px rgba(30,45,70,.08)}
 *{box-sizing:border-box}
-html{font-size:18px}
+html{font-size:20px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;line-height:1.7}
 button,input,select{font-family:inherit;font-size:1rem}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
@@ -58,7 +58,7 @@ select{max-width:100%}
 <header><div class="wrap"><h1>📊 國二國文段考闖關｜老師端</h1><p>翰林 國二上 第一次段考：學生交卷的姓名、分數與錯題（開啟即自動讀取）</p></div></header>
 <main class="wrap">
   <div class="card"><div class="row"><button class="btn" id="load">🔄 讀取最新成績</button></div>
-    <p class="muted" id="msg" style="margin:10px 0 0">讀取中…</p></div>
+    <p class="muted" id="msg" style="margin:10px 0 0">讀取中…（約需 5～10 秒）</p></div>
   <div id="out"></div>
 </main>
 <script>
@@ -100,7 +100,7 @@ function parse(r){
 }
 $('#load').onclick=load;
 function load(){
-  $('#msg').textContent='讀取中…';
+  $('#msg').textContent='讀取中…（約需 5～10 秒）';
   fetchRows(CLS,KEY,d=>{
     if(!d||!d.ok){$('#msg').innerHTML=`<span class="err">❌ ${esc(d&&d.err||'讀取失敗')}</span>${d&&/班級碼|密鑰/.test(d.err||'')?'（試算表 classes 工作表需有一列：chinese8｜c8-da3835048775）':''}`;return}
     ROWS=d.rows.map(parse).sort((a,b)=>b.date-a.date);
@@ -195,7 +195,7 @@ load();
   body.pen-on #penCv{display:block}
   body.pen-on.pen-draw #penHit{display:block}
   body.pen-board #penBoard{display:block}
-  #penBar{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:61;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;
+  #penBar{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;bottom:12px;z-index:61;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;
     background:rgba(255,255,255,.97);border-radius:16px;padding:8px 10px;box-shadow:0 6px 24px rgba(30,45,70,.22);max-width:calc(100vw - 24px)}
   body.pen-top #penBar{bottom:auto;top:12px}
   body.pen-on #penBar{display:flex}
@@ -205,7 +205,8 @@ load();
   #penBar .dot{width:44px;padding:0}
   #penBar .dot i{display:block;width:22px;height:22px;border-radius:50%;margin:auto}
   #penBar .sep{width:1px;height:30px;background:#e3e0d8;margin:0 2px}
-  body.pen-on #penBtn{display:none}`;
+  body.pen-on #penBtn{display:none}
+  @media(max-width:640px){#penBar .t,#penBar .sep{display:none}#penBar{gap:4px;padding:6px}#penBar button{min-width:40px;height:40px;padding:0 6px}#penBar .dot{width:40px}}`;
   const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
   const COLORS=['#d9342b','#1f5fbf','#1d1d1d','#1f9a55'];
   const SIZES=[[3,'細'],[6,'中'],[12,'粗']];
@@ -213,14 +214,14 @@ load();
   document.body.insertAdjacentHTML('beforeend',`<button id="penBtn" title="老師手寫">✏️ 手寫</button>
     <div id="penBoard"></div><canvas id="penCv"></canvas><div id="penHit"></div>
     <div id="penBar">
-      <button class="mode" data-a="mode">✋ 捲動</button>
+      <button class="mode" data-a="mode">✋<span class="t"> 捲動</span></button>
       <span class="sep"></span>
       ${COLORS.map((c,i)=>`<button class="dot${i?'':' on'}" data-c="${c}" title="顏色"><i style="background:${c}"></i></button>`).join('')}
       <span class="sep"></span>
       ${SIZES.map(([s,n])=>`<button data-s="${s}" class="${s===6?'on':''}">${n}</button>`).join('')}
       <span class="sep"></span>
-      <button data-a="erase">🧽 橡皮擦</button><button data-a="undo">↩️ 復原</button><button data-a="clear">🗑️ 清除</button>
-      <button data-a="board">⬜ 白板</button><button data-a="move">⇅ 移位</button><button data-a="close">✖ 關閉</button>
+      <button data-a="erase" title="橡皮擦">🧽<span class="t"> 橡皮擦</span></button><button data-a="undo" title="復原">↩️<span class="t"> 復原</span></button><button data-a="clear" title="清除">🗑️<span class="t"> 清除</span></button>
+      <button data-a="board" title="白板">⬜<span class="t"> 白板</span></button><button data-a="move" title="移位">⇅<span class="t"> 移位</span></button><button data-a="close" title="關閉">✖<span class="t"> 關閉</span></button>
     </div>`);
   const B=document.body,cv=document.getElementById('penCv'),hit=document.getElementById('penHit'),bar=document.getElementById('penBar'),ctx=cv.getContext('2d');
   const list=()=>boardOn?board:page;
@@ -256,7 +257,7 @@ load();
   /* 滑鼠滾輪／觸控板在書寫層上也能捲動 */
   hit.addEventListener('wheel',e=>{e.preventDefault();window.scrollBy(e.deltaX,e.deltaY)},{passive:false});
   const modeBtn=bar.querySelector('[data-a="mode"]');
-  function setDraw(on){B.classList.toggle('pen-draw',on);modeBtn.textContent=on?'✋ 捲動':'✏️ 書寫';modeBtn.title=on?'切換成捲動畫面（筆跡保留）':'切換回寫字'}
+  function setDraw(on){B.classList.toggle('pen-draw',on);modeBtn.innerHTML=on?'✋<span class="t"> 捲動</span>':'✏️<span class="t"> 書寫</span>';modeBtn.title=on?'切換成捲動畫面（筆跡保留）':'切換回寫字'}
   /* 依工具列實際高度在頁面上／下留白，最後一題不會被擋住 */
   function pad(){const on=B.classList.contains('pen-on'),top=B.classList.contains('pen-top'),h=on?bar.offsetHeight+24+'px':'';
     B.style.paddingBottom=on&&!top?h:'';B.style.paddingTop=on&&top?h:''}
