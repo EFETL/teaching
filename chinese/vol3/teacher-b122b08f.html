@@ -75,11 +75,18 @@ function jsonp(cls,key,cb){
 }
 function parse(r){
   const ans=Array.isArray(r.ans)?r.ans:[];
-  const meta=ans.find(a=>a&&a.meta)||{};
+  let meta={};const wrong=[];
+  ans.forEach(a=>{
+    if(a&&typeof a==='object'){if(a.meta)meta=a;else wrong.push(a);return}
+    const t=String(a);
+    if(t.startsWith('【交卷】')){const p=t.slice(4).split('｜');meta={unit:p[0],type:p[1]};return}
+    const m=t.match(/^✗ 題目：(.*?)｜學生答：(.*?)｜正解：(.*?)(?:｜單元：(.*))?$/);
+    if(m)wrong.push({q:m[1],my:m[2],a:m[3],u:m[4]});else wrong.push({q:t,my:'',a:''});
+  });
   const code=Math.floor(r.round/10),type=r.round%10;
-  return {date:new Date(r.date),name:String(r.name||''),seat:String(r.seat||''),code,type,
+  return {date:new Date(r.date),name:String(r.name||''),code,type,
     unit:meta.unit||UNIT[code]||('單元'+code),kind:meta.type||(type?'快問快答':'段考模擬題'),
-    score:r.score,total:r.total,correct:r.correct,blank:r.blank,wrong:ans.filter(a=>a&&!a.meta)};
+    score:r.score,total:r.total,correct:r.correct,blank:r.blank,wrong};
 }
 $('#load').onclick=load;
 function load(){
@@ -129,6 +136,11 @@ function body(){
   <div class="card"><div class="stats">
     <div class="stat"><b>${stus.length}</b>交卷人數</div><div class="stat"><b>${rs.length}</b>交卷次數</div>
     <div class="stat"><b>${avg}</b>平均分數</div><div class="stat"><b>${rs.filter(r=>r.score<60).length}</b>不及格次數</div></div></div>
+  <div class="card"><h2>📋 每次交卷的錯題（最新在上）</h2>
+    ${rs.map(r=>`<div class="att"><b style="font-size:1.1rem">${esc(r.name)}</b>　${esc(r.unit)}　<span class="pill">${esc(r.kind)}</span><span class="sc ${scls(r.score)}">${r.score} 分</span>
+      <span class="muted">（答對 ${r.correct}/${r.total}${r.blank?`，空白 ${r.blank}`:''}）${fmt(r.date)}</span>
+      ${r.wrong.length?`<ol class="wq" style="padding-left:1.4em;list-style:decimal">${r.wrong.map(w=>`<li>${w.u?`<span class="pill">${esc(w.u)}</span>`:''}${esc(w.q)}<br><span class="my">✗ 學生答：${esc(w.my)}</span>　<span class="an">✓ 正解：${esc(w.a)}</span></li>`).join('')}</ol>`:'<p class="muted" style="margin:6px 0 0">🏆 全對</p>'}</div>`).join('')}
+  </div>
   <div class="card"><h2>👩‍🎓 學生名單（點一下看每次的錯題）</h2><div class="scroll"><table class="tbl">
     <tr><th>姓名</th><th>次數</th><th>最近一次</th><th>分數</th><th class="hide-s">平均</th></tr>
     ${stus.map((s,i)=>{const last=s.list[0],a=Math.round(s.list.reduce((x,r)=>x+(+r.score||0),0)/s.list.length);
