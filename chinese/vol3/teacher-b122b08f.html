@@ -66,12 +66,18 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 let ROWS=[];
 
-function jsonp(cls,key,cb){
-  const fn='t_'+Math.random().toString(36).slice(2),s=document.createElement('script');
-  window[fn]=d=>{delete window[fn];s.remove();cb(d)};
-  s.onerror=()=>{delete window[fn];s.remove();cb({ok:false,err:'讀取失敗（網路或網址問題）'})};
-  s.src=`${ENDPOINT}?callback=${fn}&class=${encodeURIComponent(cls)}&key=${encodeURIComponent(key)}&subject=${SUBJECT}&t=${Date.now()}`;
-  document.body.appendChild(s);
+/* 讀取：先用 fetch（平板、手機較穩），失敗再改用 JSONP；兩種都有逾時，不會一直卡在「讀取中」 */
+function jsonp(url,cb){
+  const fn='t_'+Math.random().toString(36).slice(2),s=document.createElement('script');let done=false;
+  const end=d=>{if(done)return;done=true;try{delete window[fn]}catch(e){}s.remove();cb(d)};
+  window[fn]=end;s.onerror=()=>end(null);s.src=url+'&callback='+fn;
+  document.body.appendChild(s);setTimeout(()=>end(null),15000);
+}
+function fetchRows(cls,key,cb){
+  const url=`${ENDPOINT}?class=${encodeURIComponent(cls)}&key=${encodeURIComponent(key)}&subject=${SUBJECT}&t=${Date.now()}`;
+  const ctl=window.AbortController?new AbortController():null,tm=setTimeout(()=>ctl&&ctl.abort(),15000);
+  fetch(url,{cache:'no-store',signal:ctl&&ctl.signal}).then(r=>r.json()).then(d=>{clearTimeout(tm);cb(d)})
+    .catch(()=>{clearTimeout(tm);jsonp(url,d=>cb(d||{ok:false,err:'連不上成績資料庫。請確認網路，或換用 Chrome／Safari 開啟後按「讀取最新成績」。'}))});
 }
 function parse(r){
   const ans=Array.isArray(r.ans)?r.ans:[];
@@ -91,7 +97,7 @@ function parse(r){
 $('#load').onclick=load;
 function load(){
   $('#msg').textContent='讀取中…';
-  jsonp(CLS,KEY,d=>{
+  fetchRows(CLS,KEY,d=>{
     if(!d||!d.ok){$('#msg').innerHTML=`<span class="err">❌ ${esc(d&&d.err||'讀取失敗')}</span>${d&&/班級碼|密鑰/.test(d.err||'')?'（試算表 classes 工作表需有一列：chinese8｜c8-da3835048775）':''}`;return}
     ROWS=d.rows.map(parse).sort((a,b)=>b.date-a.date);
     $('#msg').textContent=`✅ 共 ${ROWS.length} 筆交卷紀錄（更新時間 ${new Date().toLocaleTimeString()}）`;
