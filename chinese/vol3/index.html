@@ -845,7 +845,8 @@ function enroll(then){
 function submitToTeacher(rec,btn){
   const go=()=>{
     const ok=CLOUD.upload({round:rec.code*10+rec.type,score:Math.round(rec.correct/rec.total*100),total:rec.total,correct:rec.correct,blank:rec.blank||0,
-      ans:[{meta:1,unit:rec.title,type:rec.type?'快問快答':'段考模擬題'},...rec.wrong]});
+      ans:[`【交卷】${rec.title}｜${rec.type?'快問快答':'段考模擬題'}｜答對 ${rec.correct}/${rec.total}`,
+        ...rec.wrong.map(w=>`✗ 題目：${String(w.q).replace(/｜/g,'/')}｜學生答：${w.my}｜正解：${w.a}${w.u?'｜單元：'+w.u:''}`)]});
     if(btn){btn.disabled=true;btn.textContent=ok?'✅ 已交給老師':'⚠️ 送出失敗，請再試一次';if(!ok)btn.disabled=false}
   };
   if(!CLOUD.me)return enroll(go);
