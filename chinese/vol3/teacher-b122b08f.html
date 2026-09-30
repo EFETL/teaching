@@ -85,7 +85,7 @@ function parse(r){
   });
   const code=Math.floor(r.round/10),type=r.round%10;
   return {date:new Date(r.date),name:String(r.name||''),code,type,
-    unit:meta.unit||UNIT[code]||('單元'+code),kind:meta.type||(['段考模擬題','快問快答','分類挑戰'][type]||'練習'),
+    unit:meta.unit||UNIT[code]||('單元'+code),kind:meta.type||(['段考模擬題','快問快答','分類挑戰','配對'][type]||'練習'),
     score:r.score,total:r.total,correct:r.correct,blank:r.blank,wrong};
 }
 $('#load').onclick=load;
@@ -106,7 +106,7 @@ function draw(){
   <div class="card"><div class="row">
     <span>篩選：</span>
     <select id="fu"><option value="">全部單元</option>${units.map(u=>`<option>${esc(u)}</option>`).join('')}</select>
-    <select id="fk"><option value="">全部題型</option><option>段考模擬題</option><option>快問快答</option><option>分類挑戰</option></select>
+    <select id="fk"><option value="">全部題型</option><option>段考模擬題</option><option>快問快答</option><option>分類挑戰</option><option>配對</option></select>
     <select id="fd"><option value="">全部日期</option><option value="today">只看今天</option><option value="7">最近 7 天</option></select>
     <button class="btn ghost" id="rf">🔄 重新整理</button><button class="btn alt" id="csv">⬇️ 匯出 CSV</button>
   </div></div>
