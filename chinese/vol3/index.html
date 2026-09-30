@@ -1155,6 +1155,68 @@ function animL10(p){
 meChip();drawTabs();render();
 if(!CLOUD.me)enroll(()=>{},true);
 
+/* ================= ✏️ 老師手寫（覆蓋整個畫面的畫筆層，支援手指、觸控筆壓力） ================= */
+(function(){
+  const css=`
+  #penBtn{position:fixed;left:14px;bottom:14px;z-index:60;border:none;background:#fff;color:#2b4c7e;border-radius:99px;padding:8px 16px;box-shadow:0 4px 18px rgba(30,45,70,.18);font-weight:700;font-size:1rem;font-family:inherit;cursor:pointer}
+  #penLayer{position:fixed;inset:0;z-index:58;display:none;touch-action:none;cursor:crosshair}
+  #penLayer.on{display:block}
+  #penLayer.board{background:#fff}
+  #penLayer canvas{position:absolute;inset:0;width:100%;height:100%}
+  #penBar{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:61;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;
+    background:rgba(255,255,255,.97);border-radius:16px;padding:8px 10px;box-shadow:0 6px 24px rgba(30,45,70,.22);max-width:calc(100vw - 24px)}
+  #penBar.on{display:flex}
+  #penBar button{border:2px solid #e3e0d8;background:#fff;border-radius:10px;min-width:44px;height:44px;font-size:1rem;font-family:inherit;font-weight:700;cursor:pointer;color:#23303f;padding:0 10px}
+  #penBar button.on{border-color:#2b4c7e;background:#e8effa}
+  #penBar .dot{width:44px;padding:0}
+  #penBar .dot i{display:block;width:22px;height:22px;border-radius:50%;margin:auto}
+  #penBar .sep{width:1px;height:30px;background:#e3e0d8;margin:0 2px}
+  body.pen-on #penBtn{display:none}`;
+  const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  const COLORS=['#d9342b','#1f5fbf','#1d1d1d','#1f9a55'];
+  const SIZES=[[3,'細'],[6,'中'],[12,'粗']];
+  let color=COLORS[0],size=6,erase=false,strokes=[],cur=null;
+  document.body.insertAdjacentHTML('beforeend',`<button id="penBtn" title="老師手寫">✏️ 手寫</button>
+    <div id="penLayer"><canvas id="penCv"></canvas></div>
+    <div id="penBar">
+      ${COLORS.map((c,i)=>`<button class="dot${i?'':' on'}" data-c="${c}" title="顏色"><i style="background:${c}"></i></button>`).join('')}
+      <span class="sep"></span>
+      ${SIZES.map(([s,n])=>`<button data-s="${s}" class="${s===6?'on':''}">${n}</button>`).join('')}
+      <span class="sep"></span>
+      <button data-a="erase">🧽 橡皮擦</button><button data-a="undo">↩️ 復原</button><button data-a="clear">🗑️ 清除</button>
+      <button data-a="board">⬜ 白板</button><button data-a="close">✖ 關閉</button>
+    </div>`);
+  const L=document.getElementById('penLayer'),cv=document.getElementById('penCv'),bar=document.getElementById('penBar'),ctx=cv.getContext('2d');
+  function fit(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;ctx.setTransform(r,0,0,r,0,0);redraw()}
+  function seg(s,a,b){
+    ctx.globalCompositeOperation=s.erase?'destination-out':'source-over';
+    ctx.strokeStyle=s.color;ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineWidth=s.erase?s.size*4:s.size*(0.55+(b.p||0.5)*0.9);
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+  }
+  function draw(s){if(s.pts.length===1)seg(s,s.pts[0],{...s.pts[0],x:s.pts[0].x+.01});for(let i=1;i<s.pts.length;i++)seg(s,s.pts[i-1],s.pts[i])}
+  function redraw(){ctx.clearRect(0,0,innerWidth,innerHeight);strokes.forEach(draw);ctx.globalCompositeOperation='source-over'}
+  const pt=e=>({x:e.clientX,y:e.clientY,p:e.pressure&&e.pointerType==='pen'?e.pressure:0.5});
+  L.addEventListener('pointerdown',e=>{e.preventDefault();L.setPointerCapture(e.pointerId);cur={color,size,erase,pts:[pt(e)]};strokes.push(cur);draw(cur)});
+  L.addEventListener('pointermove',e=>{if(!cur)return;e.preventDefault();
+    const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+    evs.forEach(ev=>{const p=pt(ev),q=cur.pts[cur.pts.length-1];cur.pts.push(p);seg(cur,q,p)});ctx.globalCompositeOperation='source-over'});
+  const up=()=>{cur=null};L.addEventListener('pointerup',up);L.addEventListener('pointercancel',up);
+  function open(){L.classList.add('on');bar.classList.add('on');document.body.classList.add('pen-on');document.documentElement.style.overflow='hidden';fit()}
+  function close(){L.classList.remove('on','board');bar.classList.remove('on');document.body.classList.remove('pen-on');document.documentElement.style.overflow='';
+    bar.querySelector('[data-a="board"]').classList.remove('on')}
+  document.getElementById('penBtn').onclick=open;
+  addEventListener('resize',()=>{if(L.classList.contains('on'))fit()});
+  bar.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{color=b.dataset.c;erase=false;
+    bar.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x===b));bar.querySelector('[data-a="erase"]').classList.remove('on')});
+  bar.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{size=+b.dataset.s;bar.querySelectorAll('[data-s]').forEach(x=>x.classList.toggle('on',x===b))});
+  bar.querySelector('[data-a="erase"]').onclick=function(){erase=!erase;this.classList.toggle('on',erase)};
+  bar.querySelector('[data-a="undo"]').onclick=()=>{strokes.pop();redraw()};
+  bar.querySelector('[data-a="clear"]').onclick=()=>{strokes=[];redraw()};
+  bar.querySelector('[data-a="board"]').onclick=function(){this.classList.toggle('on',L.classList.toggle('board'))};
+  bar.querySelector('[data-a="close"]').onclick=close;
+})();
+
 </script>
 </body>
 </html>
