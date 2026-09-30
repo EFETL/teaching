@@ -668,27 +668,6 @@ const RADAR={n:5,schools:'崇明（臺南）、四育（臺中）、中正（屏
   zy:[['懾ㄓㄜˊ',5],['星宿ㄒㄧㄡˋ',4],['扎／札',4],['肆虐',3],['癖',3],['鞠',3],['讖',3],['殲',3],['霹',2],['攫',2],['霎',2],['麴',2],['熹',2],['擢',2],['皎',2],['嗟',2]],
   wd:[['氣脫委頓',5],['相去的「去」',4],['滂沱',4],['迢迢',4],['啟蒙',4],['盡向的「盡」',4],['故林的「故」',4],['魂牽夢縈',3],['盈盈',3],['霎時',3],['熹微',3],['反哺',2],['素手的「素」',2],['零如雨的「零」',2]]};
 
-/* ================= 注釋配對 ================= */
-function renderMatch(el,pairs){
-  const rounds=[];const sp=shuf(pairs);for(let k=0;k<sp.length;k+=5)rounds.push(sp.slice(k,k+5));
-  let r=0,miss=0;
-  function draw(){
-    const set=rounds[r];const rights=shuf(set);let sel=null,done=0;
-    el.innerHTML=`<div class="card"><div class="qz-top"><h3 style="margin:0">🔗 注釋配對　第 ${r+1} / ${rounds.length} 回</h3><span class="muted">先點左邊的詞，再點右邊的解釋</span></div>
-      <div class="mcols" style="margin-top:14px"><div>${set.map((p,k)=>`<button class="mi w" data-w="${k}">${esc(p[0])}</button>`).join('')}</div>
-      <div>${rights.map(p=>`<button class="mi" data-m="${set.indexOf(p)}">${esc(p[1])}</button>`).join('')}</div></div></div>`;
-    el.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{if(b.classList.contains('done'))return;el.querySelectorAll('[data-w]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=b});
-    el.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{
-      if(!sel||b.classList.contains('done'))return;
-      if(sel.dataset.w===b.dataset.m){sOK();sel.classList.remove('sel');sel.classList.add('done');b.classList.add('done');sel=null;done++;
-        if(done===set.length)setTimeout(()=>{r++;if(r<rounds.length)draw();else fin()},600)}
-      else{sBAD();miss++;b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),400)}
-    });
-  }
-  function fin(){el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:3rem">${miss<=2?'🏆':'👍'}</div><h3>全部配對完成！</h3><p>配錯 ${miss} 次</p><button class="btn" id="ag">再玩一次（題目重新洗牌）</button></div>`;$('#ag',el).onclick=()=>renderMatch(el,pairs)}
-  draw();
-}
-
 /* ================= 動畫共用 ================= */
 function stepper(el,steps,apply,autoMs=5200){
   let k=0,auto=null;
@@ -812,7 +791,7 @@ function enroll(then){
     CLOUD.me={name};close();meChip();then();
   };
 }
-const KINDS=['段考模擬題','快問快答','分類挑戰'];
+const KINDS=['段考模擬題','快問快答','分類挑戰','配對'];
 /* 交卷：rec={code,type,title,total,correct,blank,wrong:[{q,my,a}]} */
 function submitToTeacher(rec,btn){
   const go=()=>{
@@ -855,7 +834,7 @@ function renderQuick(el,items,d,code,title){
     }
   }
   function end(){
-    const n=order.length,acc=Math.round((n-wrong.length)/n*100),full=round===1||order.length===items.length;
+    const n=order.length,acc=Math.round((n-wrong.length)/n*100),full=true,retry=order.length!==items.length;
     el.innerHTML=`<div class="card" style="text-align:center">
       <div style="font-size:3rem">${acc>=90?'🏆':acc>=70?'👍':'💪'}</div>
       <h3>完成！正確率 ${acc}%</h3><p>總分 <b>${score}</b>　最高連對 <b>${best}</b></p>
@@ -866,7 +845,7 @@ function renderQuick(el,items,d,code,title){
       ${full?'<p class="muted" style="margin-top:8px">交卷會把你的姓名、分數和錯的題目傳給老師。</p>':''}</div>`;
     $('#ra',el).onclick=()=>start();
     const rw=$('#rw',el); if(rw) rw.onclick=()=>start(wrong.map(w=>w.item));
-    const sb=$('#sub',el); if(sb) sb.onclick=()=>submitToTeacher({code,type:1,title,total:n,correct:n-wrong.length,
+    const sb=$('#sub',el); if(sb) sb.onclick=()=>submitToTeacher({code,type:1,title:title+(retry?'（只練錯題）':''),total:n,correct:n-wrong.length,
       wrong:wrong.map(w=>({q:w.item[0],my:w.my,a:w.item[1]}))},sb);
   }
   el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:3rem">⚡</div><h3>${d&&d.quickAsk?'詞性＋量詞快問快答':'字音字形快問快答'}</h3>
@@ -940,6 +919,39 @@ function renderSort(el,so){
   draw();
 }
 
+
+/* ================= 配對（交卷版，覆蓋模板版本） ================= */
+function renderMatch(el,pairs,code,title){
+  const rounds=[];const sp=shuf(pairs);for(let k=0;k<sp.length;k+=5)rounds.push(sp.slice(k,k+5));
+  let r=0;const missed=new Map();   /* 詞 → {a:正解, my:[配錯的解釋]} */
+  function draw(){
+    const set=rounds[r];const rights=shuf(set);let sel=null,done=0;
+    el.innerHTML=`<div class="card"><div class="qz-top"><h3 style="margin:0">🔗 配對　第 ${r+1} / ${rounds.length} 回</h3><span class="muted">先點左邊的詞，再點右邊的解釋</span></div>
+      <div class="mcols" style="margin-top:14px"><div>${set.map((p,k)=>`<button class="mi w" data-w="${k}">${esc(p[0])}</button>`).join('')}</div>
+      <div>${rights.map(p=>`<button class="mi" data-m="${set.indexOf(p)}">${esc(p[1])}</button>`).join('')}</div></div></div>`;
+    el.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{if(b.classList.contains('done'))return;el.querySelectorAll('[data-w]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=b});
+    el.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{
+      if(!sel||b.classList.contains('done'))return;
+      if(sel.dataset.w===b.dataset.m){sOK();sel.classList.remove('sel');sel.classList.add('done');b.classList.add('done');sel=null;done++;
+        if(done===set.length)setTimeout(()=>{r++;if(r<rounds.length)draw();else fin()},600)}
+      else{sBAD();const w=set[+sel.dataset.w],m=missed.get(w[0])||{a:w[1],my:[]};m.my.push(set[+b.dataset.m][1]);missed.set(w[0],m);
+        b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),400)}
+    });
+  }
+  function fin(){
+    const n=pairs.length,bad=[...missed.entries()];
+    el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:3rem">${bad.length<=2?'🏆':'👍'}</div><h3>全部配對完成！</h3>
+      <p>一次就配對成功 <b>${n-bad.length} / ${n}</b> 個</p>
+      ${bad.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:12px 16px;margin:12px 0"><b>曾經配錯的：</b><br>${bad.map(([w,m])=>`${esc(w)} → <b>${esc(m.a)}</b>`).join('<br>')}</div>`:''}
+      <div class="row" style="justify-content:center">${code!=null?'<button class="btn alt" id="msub">📤 交卷給老師</button>':''}<button class="btn" id="ag">再玩一次（題目重新洗牌）</button></div></div>`;
+    $('#ag',el).onclick=()=>renderMatch(el,pairs,code,title);
+    const sb=$('#msub',el);
+    if(sb) sb.onclick=()=>submitToTeacher({code,type:3,title,total:n,correct:n-bad.length,
+      wrong:bad.map(([w,m])=>({q:`「${w}」的意思`,my:[...new Set(m.my)].join(' / '),a:m.a}))},sb);
+  }
+  draw();
+}
+
 /* ================= 導覽 ================= */
 const UNITS=['l1','l2','l3','g1','s1','l10'];
 const TABS=[['home','🏠 考點雷達'],['l1','⛈️ 田園之秋選'],['l2','🌌 古詩選'],['l3','☔ 下雨天，真好'],['g1','🔤 詞類'],['s1','📜 世說新語選'],['l10','🎨 畫的哀傷'],['mix','🎭 修辭＋綜合'],['final','📝 總測驗']];
@@ -970,7 +982,7 @@ function render(){
   const p=$('#panel'),title=`${d.no} ${d.title}`;
   if(s==='anim') ({l1:animL1,l2:animL2,l3:animL3,g1:animG1,s1:animS1,l10:animL10})[cur](p);
   if(s==='quick') renderQuick(p,d.quick,d,d.code,title);
-  if(s==='match') renderMatch(p,d.words);
+  if(s==='match') renderMatch(p,d.words,d.code,title);
   if(s==='sort'){p.innerHTML=d.sorts.map((_,i)=>`<div class="card" id="so${i}"></div>`).join('');d.sorts.forEach((so,i)=>{SORTCTX={code:d.code,title};renderSort($('#so'+i),so)})}
   if(s==='mcq') renderMCQ(p,d.mcq,d.code,title);
 }
