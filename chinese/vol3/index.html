@@ -806,20 +806,12 @@ $('#bgmBtn').onclick=()=>{BGM.on=!BGM.on;if(BGM.on&&isAnim())BGM.start();else BG
 const CLOUD={
   endpoint:'https://script.google.com/macros/s/AKfycbyr1JovSqvYEXjlLbTVoqhkAHTUbB0gDGz0UY_P30d77D6oJuYYTfxebbTadFZB46iO/exec',
   subject:'chinese8-1',
-  get me(){try{return JSON.parse(localStorage.getItem('efetl_student')||'null')}catch(e){return null}},
-  set me(o){try{localStorage.setItem('efetl_student',JSON.stringify(o))}catch(e){}},
-  /* 用「沒有密鑰」去讀，看後端回「查無此班級碼」還是「密鑰錯誤」，藉此確認班級碼存在 */
-  checkClass(cls,cb){
-    const fn='cq_'+Math.random().toString(36).slice(2),s=document.createElement('script');
-    const done=r=>{try{delete window[fn]}catch(e){}s.remove();cb(r)};
-    window[fn]=d=>done(d&&d.err==='查無此班級碼'?'no':'ok');
-    s.onerror=()=>done('net');
-    s.src=this.endpoint+'?callback='+fn+'&class='+encodeURIComponent(cls)+'&key=__probe__&subject='+this.subject+'&t='+Date.now();
-    document.body.appendChild(s);setTimeout(()=>{if(window[fn])done('net')},9000);
-  },
+  cls:'chinese8',   /* 班級碼固定，學生不用填 */
+  get me(){try{const o=JSON.parse(localStorage.getItem('cq8_student')||'null');return o&&o.name?o:null}catch(e){return null}},
+  set me(o){try{localStorage.setItem('cq8_student',JSON.stringify(o))}catch(e){}},
   upload(rec){
     const m=this.me;if(!m)return false;
-    const body=Object.assign({cls:m.cls,name:m.name,seat:m.seat,subject:this.subject},rec);
+    const body=Object.assign({cls:this.cls,name:m.name,seat:'',subject:this.subject},rec);
     try{fetch(this.endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)})}catch(e){return false}
     try{const h=JSON.parse(localStorage.getItem('cq8_history')||'[]');h.push({...rec,date:new Date().toISOString()});localStorage.setItem('cq8_history',JSON.stringify(h.slice(-200)))}catch(e){}
     return true;
@@ -827,32 +819,26 @@ const CLOUD={
 };
 function meChip(){
   const m=CLOUD.me,el=$('#me');if(!el)return;
-  el.innerHTML=m?`👤 ${esc(m.seat)} 號 ${esc(m.name)}（${esc(m.cls)}）<button class="linkbtn" id="meEdit">修改</button>`:`👤 尚未登記姓名 <button class="linkbtn" id="meEdit">登記</button>`;
+  el.innerHTML=m?`👤 ${esc(m.name)}<button class="linkbtn" id="meEdit">修改</button>`:`👤 尚未填寫姓名 <button class="linkbtn" id="meEdit">填寫</button>`;
   $('#meEdit').onclick=()=>enroll(()=>{});
 }
-/* 登記姓名視窗；成功後呼叫 then() */
+/* 填寫姓名視窗（只要中文姓名）；成功後呼叫 then() */
 function enroll(then){
   const m=CLOUD.me||{};
   document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="enr"><div class="mbox">
-    <h3>📝 交卷前先登記</h3><p class="muted">老師會用這些資料收到你的成績和錯題。</p>
-    <label>班級碼（老師給的）<input id="eCls" value="${esc(m.cls||'')}" autocomplete="off" style="text-transform:uppercase"></label>
+    <h3>📝 交卷前先填姓名</h3><p class="muted">老師會用你的姓名收到成績和錯題。</p>
     <label>中文姓名<input id="eName" value="${esc(m.name||'')}" autocomplete="off"></label>
-    <label>座號<input id="eSeat" value="${esc(m.seat||'')}" inputmode="numeric" autocomplete="off"></label>
     <div class="fb" id="eMsg"></div>
     <div class="row" style="justify-content:flex-end"><button class="btn ghost" id="eNo">取消</button><button class="btn" id="eOk">確定</button></div></div></div>`);
   const close=()=>$('#enr').remove();
   $('#eNo').onclick=close;
+  $('#eName').focus();
+  $('#eName').onkeydown=e=>{if(e.key==='Enter')$('#eOk').click()};
   $('#eOk').onclick=()=>{
-    const cls=$('#eCls').value.trim().toUpperCase(),name=$('#eName').value.trim(),seat=$('#eSeat').value.trim();
-    if(!cls||!name||!seat){$('#eMsg').textContent='三個欄位都要填喔！';return}
-    if(!/[一-鿿]/.test(name)){$('#eMsg').textContent='請填中文姓名，老師才認得出你。';return}
-    $('#eMsg').textContent='確認班級碼中…';$('#eOk').disabled=true;
-    CLOUD.checkClass(cls,r=>{
-      $('#eOk').disabled=false;
-      if(r==='no'){$('#eMsg').textContent='❌ 查無這個班級碼，請再問老師一次。';return}
-      if(r==='net'){$('#eMsg').textContent='⚠️ 連不上網路，請確認網路後再按一次。';return}
-      CLOUD.me={cls,name,seat};close();meChip();then();
-    });
+    const name=$('#eName').value.trim();
+    if(!name){$('#eMsg').textContent='請填入你的中文姓名喔！';return}
+    if(!/^[\u4e00-\u9fff·．]{2,6}$/.test(name)){$('#eMsg').textContent='請填中文姓名（2～6 個字），老師才認得出你。';return}
+    CLOUD.me={name};close();meChip();then();
   };
 }
 /* 交卷：rec={code,type,title,total,correct,blank,wrong:[{q,my,a}]} */
