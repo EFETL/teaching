@@ -1185,7 +1185,8 @@ if(!CLOUD.me)enroll(()=>{},true);
   #penBar .sep{width:1px;height:30px;background:#e3e0d8;margin:0 2px}
   body.pen-on #penBtn{display:none}
   #penZoom{transform-origin:0 0}
-  html.pen-lock,html.pen-lock body{touch-action:pan-x pan-y}
+  html.pen-lock,html.pen-lock body{touch-action:manipulation;touch-action:pan-x pan-y}
+  #penBar,#penBar *,#penBtn{touch-action:manipulation;-webkit-user-select:none;user-select:none}
   @media(max-width:640px){#penBar .t,#penBar .sep{display:none}#penBar{gap:4px;padding:6px}#penBar button{min-width:40px;height:40px;padding:0 6px}#penBar .dot{width:40px}}`;
   const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
   const COLORS=['#d9342b','#1f5fbf','#1d1d1d','#1f9a55'];
@@ -1201,7 +1202,7 @@ if(!CLOUD.me)enroll(()=>{},true);
       ${SIZES.map(([s,n])=>`<button data-s="${s}" class="${s===6?'on':''}">${n}</button>`).join('')}
       <span class="sep"></span>
       <button data-a="erase" title="橡皮擦">🧽<span class="t"> 橡皮擦</span></button><button data-a="undo" title="復原">↩️<span class="t"> 復原</span></button><button data-a="clear" title="清除">🗑️<span class="t"> 清除</span></button>
-      <button data-a="zoom" title="縮放（點一下回到 1 倍）">🔍<span class="z">1.0×</span></button><button data-a="board" title="白板">⬜<span class="t"> 白板</span></button><button data-a="move" title="移位">⇅<span class="t"> 移位</span></button><button data-a="close" title="關閉">✖<span class="t"> 關閉</span></button>
+      <button data-a="zout" title="縮小">－</button><button data-a="zoom" title="回到 1 倍">🔍<span class="z">1.0×</span></button><button data-a="zin" title="放大">＋</button><button data-a="board" title="白板">⬜<span class="t"> 白板</span></button><button data-a="move" title="移位">⇅<span class="t"> 移位</span></button><button data-a="close" title="關閉">✖<span class="t"> 關閉</span></button>
     </div>`);
   const Z=document.createElement('div');Z.id='penZoom';
   const flow=[...document.body.children].filter(e=>/^(HEADER|NAV|MAIN|FOOTER)$/.test(e.tagName));
@@ -1261,8 +1262,12 @@ if(!CLOUD.me)enroll(()=>{},true);
   /* 依工具列實際高度在頁面上／下留白，最後一題不會被擋住 */
   function pad(){const on=B.classList.contains('pen-on'),top=B.classList.contains('pen-top'),h=on?bar.offsetHeight+24+'px':'';
     B.style.paddingBottom=on&&!top?h:'';B.style.paddingTop=on&&top?h:''}
-  function open(){document.documentElement.classList.add('pen-lock');B.classList.add('pen-on');setDraw(true);fit();pad()}
-  function close(){if(zoom!==1)setZoom(1,{x:innerWidth/2,y:innerHeight/2});document.documentElement.classList.remove('pen-lock');bar.style.transform='';B.classList.remove('pen-on','pen-draw','pen-board');B.style.paddingBottom=B.style.paddingTop='';boardOn=false;bar.querySelector('[data-a="board"]').classList.remove('on')}
+  const VP=document.querySelector('meta[name=viewport]'),VP0=VP?VP.content:'';
+  function lockVP(on){if(VP)VP.content=on?'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no':VP0}
+  function resetNative(){if(!VP||!window.visualViewport||visualViewport.scale<=1.01)return;lockVP(true);setTimeout(()=>{VP.content='width=device-width, initial-scale=1, maximum-scale=1';setTimeout(()=>lockVP(B.classList.contains('pen-on')),300)},50)}
+  let kb=0;
+  function open(){lockVP(true);clearInterval(kb);kb=setInterval(keepBar,250);document.documentElement.classList.add('pen-lock');B.classList.add('pen-on');setDraw(true);fit();pad()}
+  function close(){clearInterval(kb);lockVP(false);if(zoom!==1)setZoom(1,{x:innerWidth/2,y:innerHeight/2});document.documentElement.classList.remove('pen-lock');bar.style.transform='';B.classList.remove('pen-on','pen-draw','pen-board');B.style.paddingBottom=B.style.paddingTop='';boardOn=false;bar.querySelector('[data-a="board"]').classList.remove('on')}
   document.getElementById('penBtn').onclick=open;
   modeBtn.onclick=()=>setDraw(!B.classList.contains('pen-draw'));
   bar.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{color=b.dataset.c;erase=false;setDraw(true);
@@ -1288,7 +1293,10 @@ if(!CLOUD.me)enroll(()=>{},true);
     const dx=v.offsetLeft+v.width/2-innerWidth/2,dy=top?v.offsetTop:v.offsetTop+v.height-innerHeight;
     bar.style.transform=`translate(${dx}px,${dy}px) scale(${1/v.scale})`}
   if(window.visualViewport){visualViewport.addEventListener('resize',keepBar);visualViewport.addEventListener('scroll',keepBar)}
-  bar.querySelector('[data-a="zoom"]').onclick=()=>setZoom(1,{x:innerWidth/2,y:innerHeight/2});
+  const ctr=()=>({x:innerWidth/2,y:innerHeight/2});
+  bar.querySelector('[data-a="zoom"]').onclick=()=>{setZoom(1,ctr());resetNative();keepBar()};
+  bar.querySelector('[data-a="zin"]').onclick=()=>{if(!boardOn)setZoom(zoom*1.25,ctr())};
+  bar.querySelector('[data-a="zout"]').onclick=()=>{if(!boardOn)setZoom(zoom/1.25,ctr())};
   bar.querySelector('[data-a="move"]').onclick=()=>{B.classList.toggle('pen-top');pad()};
   bar.querySelector('[data-a="close"]').onclick=close;
 })();
