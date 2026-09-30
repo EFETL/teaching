@@ -51,28 +51,20 @@ input,select{padding:8px 12px;border:2px solid var(--line);border-radius:10px;ba
 </style>
 </head>
 <body>
-<header><div class="wrap"><h1>📊 國二國文段考闖關｜老師端</h1><p>翰林 國二上 第一次段考：收集學生交卷的姓名、分數與錯題</p></div></header>
+<header><div class="wrap"><h1>📊 國二國文段考闖關｜老師端</h1><p>翰林 國二上 第一次段考：學生交卷的姓名、分數與錯題（開啟即自動讀取）</p></div></header>
 <main class="wrap">
-  <div class="card">
-    <h2>🔑 登入班級</h2>
-    <div class="row">
-      <input id="cls" placeholder="班級碼" style="width:140px;text-transform:uppercase" autocomplete="off">
-      <input id="key" placeholder="檢視密鑰" type="password" style="width:200px" autocomplete="off">
-      <button class="btn" id="load">讀取成績</button>
-      <label class="muted"><input type="checkbox" id="remember" checked> 記住這台電腦</label>
-    </div>
-    <p class="muted" id="msg" style="margin:10px 0 0">班級碼與密鑰和「初級聽力」老師端相同（記在 Google 試算表的 classes 工作表）。</p>
-  </div>
+  <div class="card"><div class="row"><button class="btn" id="load">🔄 讀取最新成績</button></div>
+    <p class="muted" id="msg" style="margin:10px 0 0">讀取中…</p></div>
   <div id="out"></div>
 </main>
 <script>
 const ENDPOINT='https://script.google.com/macros/s/AKfycbyr1JovSqvYEXjlLbTVoqhkAHTUbB0gDGz0UY_P30d77D6oJuYYTfxebbTadFZB46iO/exec';
 const SUBJECT='chinese8-1';
+const CLS='chinese8', KEY='c8-da3835048775';  /* 班級碼與檢視密鑰固定（須與試算表 classes 工作表一致） */
 const UNIT={1:'第一課 田園之秋選',2:'第二課 古詩選',3:'第三課 下雨天，真好',4:'語文常識一 詞類',5:'自學一 世說新語選',6:'第十課 畫的哀傷',7:'修辭＋綜合',9:'總測驗'};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 let ROWS=[];
-try{const s=JSON.parse(localStorage.getItem('cq8_teacher')||'null');if(s){$('#cls').value=s.cls;$('#key').value=s.key}}catch(e){}
 
 function jsonp(cls,key,cb){
   const fn='t_'+Math.random().toString(36).slice(2),s=document.createElement('script');
@@ -90,16 +82,12 @@ function parse(r){
     score:r.score,total:r.total,correct:r.correct,blank:r.blank,wrong:ans.filter(a=>a&&!a.meta)};
 }
 $('#load').onclick=load;
-$('#key').onkeydown=e=>{if(e.key==='Enter')load()};
 function load(){
-  const cls=$('#cls').value.trim().toUpperCase(),key=$('#key').value.trim();
-  if(!cls||!key){$('#msg').innerHTML='<span class="err">請輸入班級碼和密鑰</span>';return}
   $('#msg').textContent='讀取中…';
-  jsonp(cls,key,d=>{
-    if(!d||!d.ok){$('#msg').innerHTML=`<span class="err">❌ ${esc(d&&d.err||'讀取失敗')}</span>`;return}
-    try{if($('#remember').checked)localStorage.setItem('cq8_teacher',JSON.stringify({cls,key}));else localStorage.removeItem('cq8_teacher')}catch(e){}
+  jsonp(CLS,KEY,d=>{
+    if(!d||!d.ok){$('#msg').innerHTML=`<span class="err">❌ ${esc(d&&d.err||'讀取失敗')}</span>${d&&/班級碼|密鑰/.test(d.err||'')?'（試算表 classes 工作表需有一列：chinese8｜c8-da3835048775）':''}`;return}
     ROWS=d.rows.map(parse).sort((a,b)=>b.date-a.date);
-    $('#msg').textContent=`✅ 已讀取 ${cls} 班，共 ${ROWS.length} 筆交卷紀錄（${new Date().toLocaleTimeString()}）`;
+    $('#msg').textContent=`✅ 共 ${ROWS.length} 筆交卷紀錄（更新時間 ${new Date().toLocaleTimeString()}）`;
     draw();
   });
 }
@@ -128,8 +116,8 @@ function body(){
   const rs=filtered();
   if(!rs.length){$('#body').innerHTML='<div class="card"><p class="muted">目前沒有符合條件的交卷紀錄。</p></div>';return}
   const byStu={};
-  rs.forEach(r=>{const k=r.seat+'|'+r.name;(byStu[k]=byStu[k]||{seat:r.seat,name:r.name,list:[]}).list.push(r)});
-  const stus=Object.values(byStu).sort((a,b)=>(+a.seat||999)-(+b.seat||999));
+  rs.forEach(r=>{const k=r.name;(byStu[k]=byStu[k]||{name:r.name,list:[]}).list.push(r)});
+  const stus=Object.values(byStu).sort((a,b)=>a.name.localeCompare(b.name,'zh-Hant'));
   const avg=Math.round(rs.reduce((s,r)=>s+(+r.score||0),0)/rs.length);
   /* 錯題排行：同單元同題目合併 */
   const miss={};
@@ -142,12 +130,12 @@ function body(){
     <div class="stat"><b>${stus.length}</b>交卷人數</div><div class="stat"><b>${rs.length}</b>交卷次數</div>
     <div class="stat"><b>${avg}</b>平均分數</div><div class="stat"><b>${rs.filter(r=>r.score<60).length}</b>不及格次數</div></div></div>
   <div class="card"><h2>👩‍🎓 學生名單（點一下看每次的錯題）</h2><div class="scroll"><table class="tbl">
-    <tr><th>座號</th><th>姓名</th><th>次數</th><th>最近一次</th><th>分數</th><th class="hide-s">平均</th></tr>
+    <tr><th>姓名</th><th>次數</th><th>最近一次</th><th>分數</th><th class="hide-s">平均</th></tr>
     ${stus.map((s,i)=>{const last=s.list[0],a=Math.round(s.list.reduce((x,r)=>x+(+r.score||0),0)/s.list.length);
-      return `<tr class="stu" data-i="${i}"><td>${esc(s.seat)}</td><td><b>${esc(s.name)}</b></td><td>${s.list.length}</td>
+      return `<tr class="stu" data-i="${i}"><td><b>${esc(s.name)}</b></td><td>${s.list.length}</td>
       <td>${esc(last.unit)}<br><span class="muted">${esc(last.kind)}｜${fmt(last.date)}</span></td>
       <td class="sc ${scls(last.score)}">${last.score}</td><td class="hide-s">${a}</td></tr>
-      <tr class="detail" id="d${i}" style="display:none"><td colspan="6">${s.list.map(r=>`
+      <tr class="detail" id="d${i}" style="display:none"><td colspan="5">${s.list.map(r=>`
         <div class="att"><b>${esc(r.unit)}</b>　<span class="pill">${esc(r.kind)}</span><span class="sc ${scls(r.score)}">${r.score} 分</span>
         <span class="muted">（${r.correct}/${r.total}${r.blank?`，空白 ${r.blank}`:''}）${fmt(r.date)}</span>
         ${r.wrong.length?`<ul class="wq">${r.wrong.map(w=>`<li>${w.u?`<span class="pill">${esc(w.u)}</span>`:''}${esc(w.q)}<br><span class="my">✗ ${esc(w.my)}</span>　<span class="an">✓ ${esc(w.a)}</span></li>`).join('')}</ul>`:'<p class="muted" style="margin:6px 0 0">🏆 全對</p>'}</div>`).join('')}</td></tr>`}).join('')}
@@ -162,12 +150,13 @@ function body(){
 }
 function csv(){
   const rs=filtered(),q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
-  const lines=[['時間','座號','姓名','單元','題型','分數','答對','總題數','空白','錯題（題目｜學生答案｜正解）'].map(q).join(',')];
-  rs.forEach(r=>lines.push([r.date.toLocaleString(),r.seat,r.name,r.unit,r.kind,r.score,r.correct,r.total,r.blank,
+  const lines=[['時間','姓名','單元','題型','分數','答對','總題數','空白','錯題（題目｜學生答案｜正解）'].map(q).join(',')];
+  rs.forEach(r=>lines.push([r.date.toLocaleString(),r.name,r.unit,r.kind,r.score,r.correct,r.total,r.blank,
     r.wrong.map(w=>`${w.q}｜${w.my}｜${w.a}`).join('\n')].map(q).join(',')));
   const blob=new Blob(['﻿'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`段考闖關成績_${$('#cls').value.trim().toUpperCase()}.csv`;a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`段考闖關成績_國二國文.csv`;a.click();
 }
+load();
 </script>
 </body>
 </html>
