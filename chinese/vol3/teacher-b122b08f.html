@@ -180,7 +180,7 @@ load();
 <script>/* PEN */
 /* ================= ✏️ 老師手寫 =================
    畫在網頁上的筆跡記在「整頁座標」，會跟著畫面捲動；白板的筆跡另外存、不捲動。
-   ✋ 捲動模式：筆跡照樣顯示，但手指可以捲動、點題目；再按 ✏️ 書寫 回來寫字。
+   書寫時：一指／觸控筆寫字、兩指捲動（不鎖畫面）。✋ 捲動模式：筆跡照樣顯示，可以點題目。
    用固定大小的畫布＋捲動時重畫（平板瀏覽器對超大畫布有尺寸限制）。 */
 (function(){
   const css=`
@@ -235,10 +235,22 @@ load();
   let raf=0;addEventListener('scroll',()=>{if(!B.classList.contains('pen-on')||boardOn||raf)return;raf=requestAnimationFrame(()=>{raf=0;redraw()})},{passive:true});
   addEventListener('resize',()=>{if(B.classList.contains('pen-on')){fit();pad()}});
   const pt=e=>{const o=off();return{x:e.clientX+o.x,y:e.clientY+o.y,p:e.pressure&&e.pointerType==='pen'?e.pressure:0.5}};
-  hit.addEventListener('pointerdown',e=>{e.preventDefault();hit.setPointerCapture(e.pointerId);cur={color,size,erase,pts:[pt(e)]};list().push(cur);draw(cur,off());ctx.globalCompositeOperation='source-over'});
-  hit.addEventListener('pointermove',e=>{if(!cur)return;e.preventDefault();const o=off();
+  /* 一指／觸控筆＝寫字；兩指＝捲動畫面（書寫中不鎖畫面） */
+  const ptrs=new Map();let pan=null,hold=false;
+  const mid=()=>{const v=[...ptrs.values()];return{x:(v[0].x+v[1].x)/2,y:(v[0].y+v[1].y)/2}};
+  hit.addEventListener('pointerdown',e=>{e.preventDefault();hit.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(ptrs.size>=2){if(cur){const L=list(),i=L.indexOf(cur);if(i>=0)L.splice(i,1);cur=null;redraw()}pan=mid();hold=true;return}
+    if(hold)return;
+    cur={color,size,erase,pts:[pt(e)]};list().push(cur);draw(cur,off());ctx.globalCompositeOperation='source-over'});
+  hit.addEventListener('pointermove',e=>{
+    if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pan&&ptrs.size>=2){e.preventDefault();const m=mid();window.scrollBy(pan.x-m.x,pan.y-m.y);pan=m;return}
+    if(!cur)return;e.preventDefault();const o=off();
     (e.getCoalescedEvents?e.getCoalescedEvents():[e]).forEach(ev=>{const p=pt(ev),q=cur.pts[cur.pts.length-1];cur.pts.push(p);seg(cur,q,p,o)});ctx.globalCompositeOperation='source-over'});
-  const up=()=>{cur=null};hit.addEventListener('pointerup',up);hit.addEventListener('pointercancel',up);
+  const up=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pan=null;if(ptrs.size===0)hold=false;cur=null};
+  hit.addEventListener('pointerup',up);hit.addEventListener('pointercancel',up);
+  /* 滑鼠滾輪／觸控板在書寫層上也能捲動 */
+  hit.addEventListener('wheel',e=>{e.preventDefault();window.scrollBy(e.deltaX,e.deltaY)},{passive:false});
   const modeBtn=bar.querySelector('[data-a="mode"]');
   function setDraw(on){B.classList.toggle('pen-draw',on);modeBtn.textContent=on?'✋ 捲動':'✏️ 書寫';modeBtn.title=on?'切換成捲動畫面（筆跡保留）':'切換回寫字'}
   /* 依工具列實際高度在頁面上／下留白，最後一題不會被擋住 */
