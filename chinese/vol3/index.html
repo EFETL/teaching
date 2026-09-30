@@ -773,15 +773,16 @@ function meChip(){
   $('#meEdit').onclick=()=>enroll(()=>{});
 }
 /* 填寫姓名視窗（只要中文姓名）；成功後呼叫 then() */
-function enroll(then){
+function enroll(then,force){
+  if(document.getElementById('enr'))return;
   const m=CLOUD.me||{};
   document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="enr"><div class="mbox">
-    <h3>📝 交卷前先填姓名</h3><p class="muted">老師會用你的姓名收到成績和錯題。</p>
+    <h3>${force?'👋 歡迎！請先填姓名':'📝 交卷前先填姓名'}</h3><p class="muted">老師會用你的姓名收到成績和錯題。</p>
     <label>中文姓名<input id="eName" value="${esc(m.name||'')}" autocomplete="off"></label>
     <div class="fb" id="eMsg"></div>
-    <div class="row" style="justify-content:flex-end"><button class="btn ghost" id="eNo">取消</button><button class="btn" id="eOk">確定</button></div></div></div>`);
+    <div class="row" style="justify-content:flex-end">${force?'':'<button class="btn ghost" id="eNo">取消</button>'}<button class="btn" id="eOk">確定</button></div></div></div>`);
   const close=()=>$('#enr').remove();
-  $('#eNo').onclick=close;
+  if($('#eNo'))$('#eNo').onclick=close;
   $('#eName').focus();
   $('#eName').onkeydown=e=>{if(e.key==='Enter')$('#eOk').click()};
   $('#eOk').onclick=()=>{
@@ -1152,6 +1153,7 @@ function animL10(p){
 }
 
 meChip();drawTabs();render();
+if(!CLOUD.me)enroll(()=>{},true);
 
 </script>
 </body>
