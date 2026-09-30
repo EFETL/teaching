@@ -689,35 +689,6 @@ function renderMatch(el,pairs){
   draw();
 }
 
-/* ================= 分類 ================= */
-function renderSort(el,so){
-  let order=shuf(so.items),i=0,ok=0,wrongs=[];
-  function draw(){
-    if(i>=order.length){
-      el.innerHTML=`<h3>${so.title}</h3><div style="text-align:center"><div style="font-size:2.6rem">${ok===order.length?'🏆':'👍'}</div><p><b>${ok} / ${order.length}</b> 題正確</p>
-      ${wrongs.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:10px 14px">${wrongs.map(w=>`「${esc(w[0])}」→ <b>${so.buckets[w[1]]}</b>${w[2]?'：'+esc(w[2]):''}`).join('<br>')}</div>`:''}
-      <button class="btn" style="margin-top:12px">再玩一次</button></div>`;
-      el.querySelector('.btn').onclick=()=>renderSort(el,so);return;
-    }
-    const it=order[i];
-    el.innerHTML=`<div class="qz-top"><h3 style="margin:0">${so.title}</h3><span class="muted">${i+1} / ${order.length}</span></div>
-      <p class="muted" style="margin:4px 0 0">💡 ${so.tip}</p>
-      <div class="sortcard">${esc(it[0])}</div>
-      <div class="buckets" style="grid-template-columns:repeat(${Math.min(so.buckets.length,5)},1fr)">${so.buckets.map((b,k)=>`<button class="bk" data-k="${k}">${b}</button>`).join('')}</div>
-      <div class="fb"></div>`;
-    if(window.innerWidth<560&&so.buckets.length>3) el.querySelector('.buckets').style.gridTemplateColumns='1fr 1fr';
-    el.querySelectorAll('.bk').forEach(b=>b.onclick=()=>{
-      el.querySelectorAll('.bk').forEach(x=>x.onclick=null);
-      const right=+b.dataset.k===it[1];
-      el.querySelector(`.bk[data-k="${it[1]}"]`).classList.add('ok');
-      if(right){sOK();ok++}else{sBAD();b.classList.add('bad');wrongs.push(it)}
-      el.querySelector('.fb').innerHTML=(right?'✅ 正確！':'❌ 應該是「'+so.buckets[it[1]]+'」')+(it[2]?'　'+esc(it[2]):'');
-      i++;setTimeout(draw,right?800:1900);
-    });
-  }
-  draw();
-}
-
 /* ================= 動畫共用 ================= */
 function stepper(el,steps,apply,autoMs=5200){
   let k=0,auto=null;
@@ -841,11 +812,12 @@ function enroll(then){
     CLOUD.me={name};close();meChip();then();
   };
 }
+const KINDS=['段考模擬題','快問快答','分類挑戰'];
 /* 交卷：rec={code,type,title,total,correct,blank,wrong:[{q,my,a}]} */
 function submitToTeacher(rec,btn){
   const go=()=>{
     const ok=CLOUD.upload({round:rec.code*10+rec.type,score:Math.round(rec.correct/rec.total*100),total:rec.total,correct:rec.correct,blank:rec.blank||0,
-      ans:[`【交卷】${rec.title}｜${rec.type?'快問快答':'段考模擬題'}｜答對 ${rec.correct}/${rec.total}`,
+      ans:[`【交卷】${rec.title}｜${KINDS[rec.type]}｜答對 ${rec.correct}/${rec.total}`,
         ...rec.wrong.map(w=>`✗ 題目：${String(w.q).replace(/｜/g,'/')}｜學生答：${w.my}｜正解：${w.a}${w.u?'｜單元：'+w.u:''}`)]});
     if(btn){btn.disabled=true;btn.textContent=ok?'✅ 已交給老師':'⚠️ 送出失敗，請再試一次';if(!ok)btn.disabled=false}
   };
@@ -932,6 +904,42 @@ function renderMCQ(el,qs,code,title,opt={}){
   };
 }
 
+
+/* ================= 分類挑戰（交卷版，覆蓋模板版本） ================= */
+let SORTCTX=null;   /* {code,title}：由 render() 在單元分類頁設定 */
+function renderSort(el,so){
+  const ctx=SORTCTX;
+  let order=shuf(so.items),i=0,ok=0,wrongs=[];
+  function draw(){
+    if(i>=order.length){
+      el.innerHTML=`<h3>${so.title}</h3><div style="text-align:center"><div style="font-size:2.6rem">${ok===order.length?'🏆':'👍'}</div><p><b>${ok} / ${order.length}</b> 題正確</p>
+      ${wrongs.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:10px 14px">${wrongs.map(w=>`「${esc(w.it[0])}」→ <b>${so.buckets[w.it[1]]}</b>（你選：${esc(so.buckets[w.my])}）${w.it[2]?'：'+esc(w.it[2]):''}`).join('<br>')}</div>`:''}
+      <div class="row" style="justify-content:center;margin-top:12px">${ctx?'<button class="btn alt" data-sub>📤 交卷給老師</button>':''}<button class="btn" data-again>再玩一次</button></div></div>`;
+      el.querySelector('[data-again]').onclick=()=>{SORTCTX=ctx;renderSort(el,so)};
+      const sb=el.querySelector('[data-sub]');
+      if(sb) sb.onclick=()=>submitToTeacher({code:ctx.code,type:2,title:`${ctx.title}｜${so.title}`.replace(/｜/g,' ／ '),total:order.length,correct:ok,
+        wrong:wrongs.map(w=>({q:`「${w.it[0]}」屬於哪一類？`,my:so.buckets[w.my],a:so.buckets[w.it[1]]}))},sb);
+      return;
+    }
+    const it=order[i];
+    el.innerHTML=`<div class="qz-top"><h3 style="margin:0">${so.title}</h3><span class="muted">${i+1} / ${order.length}</span></div>
+      <p class="muted" style="margin:4px 0 0">💡 ${so.tip}</p>
+      <div class="sortcard">${esc(it[0])}</div>
+      <div class="buckets" style="grid-template-columns:repeat(${Math.min(so.buckets.length,5)},1fr)">${so.buckets.map((b,k)=>`<button class="bk" data-k="${k}">${b}</button>`).join('')}</div>
+      <div class="fb"></div>`;
+    if(window.innerWidth<560&&so.buckets.length>3) el.querySelector('.buckets').style.gridTemplateColumns='1fr 1fr';
+    el.querySelectorAll('.bk').forEach(b=>b.onclick=()=>{
+      el.querySelectorAll('.bk').forEach(x=>x.onclick=null);
+      const right=+b.dataset.k===it[1];
+      el.querySelector(`.bk[data-k="${it[1]}"]`).classList.add('ok');
+      if(right){sOK();ok++}else{sBAD();b.classList.add('bad');wrongs.push({it,my:+b.dataset.k})}
+      el.querySelector('.fb').innerHTML=(right?'✅ 正確！':'❌ 應該是「'+so.buckets[it[1]]+'」')+(it[2]?'　'+esc(it[2]):'');
+      i++;setTimeout(draw,right?800:1900);
+    });
+  }
+  draw();
+}
+
 /* ================= 導覽 ================= */
 const UNITS=['l1','l2','l3','g1','s1','l10'];
 const TABS=[['home','🏠 考點雷達'],['l1','⛈️ 田園之秋選'],['l2','🌌 古詩選'],['l3','☔ 下雨天，真好'],['g1','🔤 詞類'],['s1','📜 世說新語選'],['l10','🎨 畫的哀傷'],['mix','🎭 修辭＋綜合'],['final','📝 總測驗']];
@@ -950,7 +958,7 @@ function render(){
   if(cur==='mix'){app.innerHTML=`<h2>🎭 修辭＋綜合題型</h2><p class="muted">跨課整理：修辭、雨的俗諺、疊字、天候成語。</p>
     <h2>⚡ 各校課外高頻字音字形</h2><p class="muted">不在課文裡，但 2～3 校都考過的字。</p><div id="xq"></div>
     <div class="card" id="rz"></div><div class="card" id="mx0"></div><div class="card" id="mx1"></div><h2>🌦️ 天候成語選擇題</h2><div id="rd"></div>`;
-    renderQuick($('#xq'),EXTRAQ,null,7,'課外高頻字');renderSort($('#rz'),RHET);renderSort($('#mx0'),MIX[0]);renderSort($('#mx1'),MIX[1]);return renderMCQ($('#rd'),RIDDLE,7,'修辭＋綜合')}
+    renderQuick($('#xq'),EXTRAQ,null,7,'課外高頻字');SORTCTX={code:7,title:'修辭＋綜合'};renderSort($('#rz'),RHET);renderSort($('#mx0'),MIX[0]);renderSort($('#mx1'),MIX[1]);SORTCTX=null;return renderMCQ($('#rd'),RIDDLE,7,'修辭＋綜合')}
   if(cur==='final') return renderFinal(app);
   const d=L[cur];
   const subs=[['anim','🎬 動畫導覽'],['quick',d.quickAsk?'⚡ 詞性快問快答':'⚡ 字音字形快問快答'],['match',d.quickAsk?'🔗 詞類配對':'🔗 注釋配對'],['sort','🎯 分類挑戰'],['mcq','📝 段考模擬題']];
@@ -963,7 +971,7 @@ function render(){
   if(s==='anim') ({l1:animL1,l2:animL2,l3:animL3,g1:animG1,s1:animS1,l10:animL10})[cur](p);
   if(s==='quick') renderQuick(p,d.quick,d,d.code,title);
   if(s==='match') renderMatch(p,d.words);
-  if(s==='sort'){p.innerHTML=d.sorts.map((_,i)=>`<div class="card" id="so${i}"></div>`).join('');d.sorts.forEach((so,i)=>renderSort($('#so'+i),so))}
+  if(s==='sort'){p.innerHTML=d.sorts.map((_,i)=>`<div class="card" id="so${i}"></div>`).join('');d.sorts.forEach((so,i)=>{SORTCTX={code:d.code,title};renderSort($('#so'+i),so)})}
   if(s==='mcq') renderMCQ(p,d.mcq,d.code,title);
 }
 
