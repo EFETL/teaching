@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>植物大發現｜三年級自然第一單元</title>
+<style>
+:root{
+  --g:#2f8f5b; --g-d:#1f6b43; --g-l:#e7f4ec;
+  --earth:#b97a33; --earth-l:#f8eedf;
+  --water:#2f80ed; --sun:#f2b705; --food:#f2792b; --air:#8fa3b8; --red:#e5484d;
+  --bg:#f6f8f3; --card:#fff; --ink:#24302a; --muted:#5d6b63;
+  --r:22px; --sh:0 6px 20px rgba(30,60,40,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:30px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;font-size:30px;line-height:1.55;color:var(--ink);background:var(--bg);overflow-x:hidden}
+h1,h2,h3,h4,p,li,button,span,div,label,small,b,strong{font-size:30px}
+button{font-family:inherit;cursor:pointer;border:none;-webkit-tap-highlight-color:transparent;color:inherit}
+img{max-width:100%;display:block}
+
+.topbar{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;padding:10px 16px}
+.topbar .home{background:var(--g);color:#fff;border-radius:16px;padding:6px 18px;font-weight:700;white-space:nowrap}
+.topbar .now{flex:1;font-weight:700;color:var(--g-d);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .pen-btn{background:var(--earth-l);color:var(--earth);border-radius:16px;padding:6px 16px;font-weight:700;white-space:nowrap;margin-left:auto}
+
+.page{display:none;max-width:1200px;margin:0 auto;padding:24px 16px 120px}
+.page.show{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.hero img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.hero .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 28px 22px;background:linear-gradient(transparent,rgba(15,50,30,.8));color:#fff}
+.hero .cap b{display:block;font-weight:800}
+.intro{margin:40px 0 20px;color:var(--muted)}
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.lcard{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;text-align:left;display:flex;flex-direction:column;transition:transform .2s}
+.lcard:hover{transform:translateY(-4px)}
+.lcard .pic{aspect-ratio:4/3;background:var(--g-l) center/cover no-repeat}
+.lcard .t{padding:16px 20px 20px}
+.lcard .no{display:inline-block;background:var(--g);color:#fff;border-radius:999px;padding:0 16px;margin-bottom:6px}
+.lcard .nm{display:block;font-weight:800}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:36px 0 0}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:4px 18px;box-shadow:var(--sh)}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;flex:none}
+
+.lhead{display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.lhead .badge{background:var(--earth);color:#fff;border-radius:999px;padding:2px 20px;font-weight:700}
+.lhead h2{font-weight:800;color:var(--g-d)}
+.stepbar{position:sticky;top:64px;z-index:40;background:var(--bg);padding:10px 0 14px;display:flex;gap:12px;flex-wrap:wrap}
+.stepbar button{width:72px;height:72px;border-radius:50%;background:#fff;color:var(--g-d);font-weight:800;box-shadow:var(--sh);border:4px solid var(--g-l);transition:.2s}
+.stepbar button.seen{background:var(--g-l)}
+.stepbar button.on{background:var(--g);color:#fff;border-color:var(--g-d);transform:scale(1.08)}
+.step{display:none}
+.step.on{display:block;animation:fade .35s}
+.step > h3{font-weight:800;margin:6px 0 16px;display:flex;gap:12px;align-items:center}
+.step > h3 .n{background:var(--g);color:#fff;border-radius:50%;width:56px;height:56px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:24px;margin-bottom:24px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stepnav{display:flex;justify-content:space-between;gap:16px;margin-top:30px}
+.stepnav button{background:var(--g);color:#fff;border-radius:999px;padding:12px 30px;font-weight:700;box-shadow:var(--sh)}
+.stepnav button.prev{background:#fff;color:var(--g-d)}
+.stepnav button:disabled{opacity:.3}
+.tip{background:#fff8dc;border-left:10px solid var(--sun);border-radius:16px;padding:14px 20px;margin:18px 0}
+.tip::before{content:"🎨 老師提示：";font-weight:800}
+.key{font-weight:800;color:var(--g-d);background:linear-gradient(transparent 60%,#cdeed9 60%)}
+.k-water{color:var(--water);font-weight:800}.k-sun{color:#c48f00;font-weight:800}.k-food{color:var(--food);font-weight:800}.k-air{color:#61778d;font-weight:800}.k-red{color:var(--red);font-weight:800}
+.big-btns{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0}
+.bb{background:#fff;border:4px solid var(--g-l);color:var(--g-d);border-radius:18px;padding:8px 20px;font-weight:700;box-shadow:var(--sh);transition:.2s}
+.bb.on{background:var(--g);color:#fff;border-color:var(--g-d)}
+.bb .num{display:inline-flex;width:44px;height:44px;border-radius:50%;background:var(--g-l);color:var(--g-d);align-items:center;justify-content:center;margin-right:8px}
+.bb.on .num{background:#fff}
+.reveal{opacity:0;transform:translateY(12px);transition:.4s;pointer-events:none}
+.reveal.show{opacity:1;transform:none;pointer-events:auto}
+.photo{border-radius:18px;overflow:hidden;background:#fff;position:relative}
+.photo img{width:100%}
+.caption{text-align:center;color:var(--muted);margin-top:8px}
+.pline{display:flex;gap:14px;align-items:center;margin:10px 0}
+.pline img{width:120px;height:120px;object-fit:cover;border-radius:14px;flex:none}
+
+/* 放大鏡 */
+.zoombox{position:relative;overflow:hidden;border-radius:18px;background:#fff;touch-action:manipulation}
+.zoombox .zin{position:absolute;inset:0;transform-origin:0 0;transition:transform .8s cubic-bezier(.3,.8,.3,1)}
+.zoombox .zin img{width:100%;height:100%;object-fit:cover}
+.hot{position:absolute;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;border:5px solid #fff;animation:pulse 1.8s infinite;z-index:3;transition:opacity .3s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,143,91,.55)}70%{box-shadow:0 0 0 22px rgba(47,143,91,0)}100%{box-shadow:0 0 0 0 rgba(47,143,91,0)}}
+.zoombox.zoomed .hot{opacity:0;pointer-events:none}
+.zoombox .ring{position:absolute;left:50%;top:50%;width:44%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.6);border-radius:50%;border:8px dashed var(--sun);opacity:0;transition:.5s;pointer-events:none;z-index:2}
+.zoombox.zoomed .ring{opacity:1;transform:translate(-50%,-50%) scale(1);animation:spin 12s linear infinite}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.zoombox .zlabel{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);border-radius:14px;padding:4px 18px;font-weight:800;color:var(--g-d);opacity:0;transition:.3s;z-index:4}
+.zoombox.zoomed .zlabel{opacity:1}
+.zoombox .back{position:absolute;right:14px;bottom:14px;background:var(--earth);color:#fff;border-radius:999px;padding:6px 20px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:4}
+.zoombox.zoomed .back{opacity:1;pointer-events:auto}
+.zinfo{min-height:120px}
+.zinfo .ph{color:var(--muted)}
+.zinfo h4{font-weight:800;color:var(--g-d);margin-bottom:6px}
+
+/* 圖鑑 */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.gcard{background:#fff;border-radius:20px;box-shadow:var(--sh);overflow:hidden;text-align:left;position:relative;transition:transform .2s;border:4px solid transparent}
+.gcard:hover{transform:translateY(-4px)}
+.gcard.seen{border-color:var(--g-l)}
+.gcard img{width:100%;aspect-ratio:1;object-fit:cover}
+.gcard .gno{position:absolute;left:10px;top:10px;width:54px;height:54px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;border:4px solid #fff}
+.gcard .gt{padding:10px 16px 14px}
+.gcard .gt b{display:block;color:var(--g-d)}
+.gcard .tag{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:999px;padding:0 14px;margin-top:4px;font-weight:700}
+.gsec{font-weight:800;color:var(--earth);margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.gsec::before{content:"";width:14px;height:40px;border-radius:8px;background:var(--earth)}
+
+/* 燈箱 */
+#lb{position:fixed;inset:0;z-index:150;background:rgba(10,25,15,.88);display:none;align-items:center;justify-content:center;padding:12px}
+#lb.on{display:flex;animation:fade .3s}
+#lb .box{background:#fff;border-radius:24px;max-width:1100px;width:100%;max-height:100%;overflow:auto;display:grid;grid-template-columns:1.2fr 1fr;gap:20px;padding:18px}
+#lb .zoombox{width:100%}
+#lb .txt h4{font-weight:800;color:var(--g-d);margin-bottom:8px}
+#lb .txt .tag{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:999px;padding:0 16px;margin-bottom:10px;font-weight:700}
+#lb .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+#lb .nav button{background:var(--g);color:#fff;border-radius:999px;padding:8px 22px;font-weight:700}
+#lb .nav button.x{background:var(--earth)}
+#lb .nums{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#lb .nums button{width:52px;height:52px;border-radius:50%;background:var(--g-l);color:var(--g-d);font-weight:800}
+#lb .nums button.on{background:var(--g);color:#fff}
+
+/* 翻牌 */
+.flip{perspective:900px;cursor:pointer}
+.flip .in{position:relative;transition:transform .6s;transform-style:preserve-3d;aspect-ratio:4/3.6}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.flip .f img{width:100%;height:100%;object-fit:cover}
+.flip .f b{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;padding:30px 16px 12px}
+.flip .b{background:var(--g-l);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;padding:20px;text-align:center}
+
+/* 分類 */
+.sort-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.sort-item{background:#fff;border-radius:18px;box-shadow:var(--sh);overflow:hidden;text-align:center;border:6px solid transparent;transition:.3s;cursor:pointer}
+.sort-item img{width:100%;aspect-ratio:1;object-fit:cover}
+.sort-item .ans{display:block;font-weight:800;opacity:0;transition:.3s}
+.sort-item.done .ans{opacity:1}
+.sort-item.done.animal{border-color:var(--food)}.sort-item.done.animal .ans{color:var(--food)}
+.sort-item.done.plant{border-color:var(--g)}.sort-item.done.plant .ans{color:var(--g)}
+.sort-item.done.non{border-color:var(--air)}.sort-item.done.non .ans{color:#61778d}
+
+/* 照片上的動畫 */
+.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.flowline{fill:none;stroke-linecap:round;stroke-dasharray:6 34;animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-40}}
+.grp{opacity:0;transition:opacity .6s}
+.lab{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:12px;padding:0 12px;font-weight:800;box-shadow:var(--sh);opacity:0;transition:.5s;white-space:nowrap;pointer-events:none;z-index:3}
+.lab.show{opacity:1}
+#flow.s1 .g-w1,#flow.s2 .g-w1,#flow.s2 .g-w2,#flow.s3 .g-w2,#flow.s3 .g-sun,#flow.s3 .g-air,#flow.s4 .g-sun,#flow.s4 .g-air,#flow.s4 .g-make,#flow.s5 .g-food,#flow.s5 .g-make,#flow.all .grp{opacity:1}
+.glow{animation:glow 1.3s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.15}to{opacity:.65}}
+.sunbeam{position:absolute;inset:0;background:radial-gradient(circle at 10% 0%,rgba(255,230,120,.85),rgba(255,230,120,.25) 40%,transparent 70%);opacity:0;transition:opacity .8s;pointer-events:none}
+.sunbeam.on{opacity:1;animation:beam 2.2s ease-in-out infinite alternate}
+@keyframes beam{from{filter:brightness(1)}to{filter:brightness(1.25)}}
+.lit img{transition:filter 1s}
+.lit.on img{filter:brightness(1.15) saturate(1.25)}
+.drop{position:absolute;width:30px;height:40px;background:radial-gradient(circle at 35% 35%,#fff,#6fb6ff 45%,#2f80ed);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform:translate(-50%,0);opacity:0}
+.drop.go{animation:drip 1.8s ease-in infinite}
+@keyframes drip{0%{opacity:0;transform:translate(-50%,-40px) scale(.5)}20%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,160px) scale(1)}}
+.pollen{position:absolute;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle,#fff59d,#f9a825);box-shadow:0 0 8px #ffd54f;pointer-events:none}
+.seq{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1;background:#000}
+.seq img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s, transform 4s ease-out;transform:scale(1.08)}
+.seq img.on{opacity:1;transform:scale(1)}
+.seq .slab{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);border-radius:14px;padding:4px 18px;font-weight:800;color:var(--g-d);z-index:2}
+.fade2{position:relative}
+.fade2 img.after{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 2.5s}
+.fade2.on img.after{opacity:1}
+
+/* 測驗 */
+.q{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;margin-bottom:22px;display:flex;gap:20px;align-items:flex-start}
+.q img{width:200px;height:200px;object-fit:cover;border-radius:16px;flex:none}
+.q .qt{font-weight:800;margin-bottom:12px}
+.q .opts{display:flex;flex-wrap:wrap;gap:12px}
+.q .opts button{background:var(--bg);border:4px solid #dfe7e1;border-radius:16px;padding:6px 22px}
+.q .opts button.right{background:#dff5e7;border-color:var(--g);color:var(--g-d);font-weight:800}
+.q .opts button.wrong{background:#fde7e7;border-color:var(--red);color:var(--red);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.q .why{margin-top:10px;color:var(--g-d);display:none}
+.q.done .why{display:block}
+.score{position:sticky;bottom:16px;background:var(--g);color:#fff;border-radius:999px;padding:10px 26px;display:inline-block;font-weight:800;box-shadow:var(--sh)}
+
+#penLayer{position:fixed;inset:0;z-index:200;display:none;touch-action:none}
+#penLayer.on{display:block}
+#penCanvas{width:100%;height:100%;display:block;cursor:crosshair}
+#penBar{position:fixed;z-index:201;left:50%;bottom:16px;transform:translateX(-50%);background:#fff;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.25);display:none;gap:10px;padding:10px 16px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100% - 24px)}
+#penBar.on{display:flex}
+#penBar button{border-radius:999px;padding:4px 16px;font-weight:700;background:var(--bg);border:4px solid transparent}
+#penBar button.c{width:60px;height:60px;padding:0}
+#penBar button.sel{border-color:#333}
+
+footer{background:var(--g-d);color:#e8f5ec;padding:40px 16px;text-align:center}
+footer p{max-width:900px;margin:0 auto 8px}
+
+@media (max-width:900px){
+  .two,.three{grid-template-columns:1fr}
+  .four{grid-template-columns:repeat(2,1fr)}
+  #lb .box{grid-template-columns:1fr}
+  .topbar .now{display:none}
+}
+@media (max-width:520px){
+  .page{padding:16px 12px 120px}
+  .card{padding:16px}
+  .lesson-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;gap:12px}
+  .sort-grid{grid-template-columns:1fr 1fr}
+  .stepbar{gap:6px;top:56px}
+  .stepbar button{width:50px;height:50px;border-width:3px}
+  .hot{width:54px;height:54px;margin:-27px 0 0 -27px}
+  .gcard .gno{width:46px;height:46px}
+  .q{flex-direction:column}
+  .q img{width:100%;height:auto;aspect-ratio:1}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="home" onclick="go('home')">🏠 首頁</button>
+  <span class="now" id="nowTitle">植物大發現</span>
+  <button class="pen-btn" onclick="togglePen()">🖍️ 畫筆</button>
+</div>
+
+<main class="page show" id="home">
+  <div class="hero">
+    <img src="images/hero2.jpg" alt="小朋友在校園觀察植物">
+    <div class="cap"><b>🌱 植物大發現</b>三年級自然 第一單元 ｜ 認識植物</div>
+  </div>
+  <p class="intro">每一課上方都有 ① ② ③ … 圓形按鈕，照順序點就能上課。照片上的<span class="key">數字</span>點下去會<b>放大</b>植物的特徵。</p>
+  <div class="lesson-grid" id="lessonGrid"></div>
+  <div class="legend">
+    <span class="chip"><i class="dot" style="background:var(--water)"></i>藍色＝水分</span>
+    <span class="chip"><i class="dot" style="background:var(--sun)"></i>黃色＝陽光</span>
+    <span class="chip"><i class="dot" style="background:var(--food)"></i>橘色＝養分</span>
+    <span class="chip"><i class="dot" style="background:var(--air)"></i>灰藍＝空氣</span>
+  </div>
+</main>
+
+<!-- ===== 第1課 ===== -->
+<section class="page lesson" id="l1" data-no="第1課" data-title="認識植物" data-pic="images/hero2.jpg">
+  <div class="step" data-label="觀察方法">
+    <div class="card">
+      <p>我們用哪些方法觀察植物？<b>點照片</b>翻過來看！</p>
+      <div class="three" style="margin-top:18px">
+        <div class="flip" onclick="this.classList.toggle('on')"><div class="in">
+          <div class="f"><img src="images/obs_look.jpg" alt=""><b>① 用眼睛看</b></div>
+          <div class="b"><b>看形狀、顏色、大小</b><p>用放大鏡看，葉子上的紋路更清楚！</p></div></div></div>
+        <div class="flip" onclick="this.classList.toggle('on')"><div class="in">
+          <div class="f"><img src="images/obs_smell.jpg" alt=""><b>② 用鼻子聞</b></div>
+          <div class="b"><b>聞氣味</b><p>薄荷葉搓一搓，有特殊的氣味。</p></div></div></div>
+        <div class="flip" onclick="this.classList.toggle('on')"><div class="in">
+          <div class="f"><img src="images/obs_touch.jpg" alt=""><b>③ 用手來摸</b></div>
+          <div class="b"><b>摸摸看</b><p>大樹的樹幹摸起來粗粗硬硬的。</p></div></div></div>
+      </div>
+      <p style="margin-top:20px">也可以<span class="key">查書籍或網路</span>，知道植物的相關資料。</p>
+    </div>
+  </div>
+
+  <div class="step" data-label="注意安全">
+    <div class="card"><p>觀察植物之前，也要注意安全！點照片看清楚：</p>
+      <div class="gallery" data-g="safe"></div></div>
+  </div>
+
+  <div class="step" data-label="生物與非生物">
+    <div class="card">
+      <p>校園裡哪些東西有生命？<b>點照片</b>就會出現答案。</p>
+      <div class="tip">用顏色分：<span class="k-food">橘框＝動物</span>、<span style="color:var(--g);font-weight:800">綠框＝植物</span>、<span class="k-air">灰框＝非生物</span>。</div>
+      <div class="sort-grid" id="sortGrid"></div>
+      <p style="margin-top:20px">✅ 植物是<span class="key">有生命</span>的，會慢慢長大，但是<span class="key">不會移動</span>。</p>
+    </div>
+  </div>
+
+  <div class="step" data-label="植物需要什麼">
+    <div class="card"><p>植物生長需要什麼？依序點 1～4：</p>
+      <div class="gallery" data-g="need"></div></div>
+  </div>
+
+  <div class="step" data-label="校園植物外形">
+    <div class="card"><p>校園裡的植物外形都不一樣，和<span class="k-sun">陽光</span>、<span class="k-water">水</span>等環境有關。點照片放大看特徵：</p>
+      <div class="gallery" data-g="env"></div>
+      <div class="tip">每張照片點開後，請學生先說「我看到…」，老師再按「下一張」。</div></div>
+  </div>
+</section>
+
+<!-- ===== 第2課 ===== -->
+<section class="page lesson" id="l2" data-no="第2課" data-title="植物的身體" data-pic="images/longkui.jpg">
+  <div class="step" data-label="龍葵">
+    <div class="card two">
+      <div class="zoombox" id="zLongkui" style="aspect-ratio:1046/1400" data-img="images/longkui.jpg"></div>
+      <div><p>這是從土裡挖出來的<span class="key">龍葵</span>。</p>
+        <div class="big-btns" data-zoom="zLongkui"></div>
+        <div class="zinfo" id="zLongkui-info"><p class="ph">👆 點數字，放大看每個部位。</p></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="日日春">
+    <div class="card two">
+      <div class="zoombox" id="zPeri" style="aspect-ratio:1046/1400" data-img="images/periwinkle.jpg"></div>
+      <div><p><span class="key">日日春</span>（長春花）也有這些部位嗎？</p>
+        <div class="big-btns" data-zoom="zPeri"></div>
+        <div class="zinfo" id="zPeri-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="金桔">
+    <div class="card two">
+      <div class="zoombox" id="zKum" style="aspect-ratio:1046/1400" data-img="images/kumquat.jpg"></div>
+      <div><p><span class="key">金桔</span>同時有花、也有果實！</p>
+        <div class="big-btns" data-zoom="zKum"></div>
+        <div class="zinfo" id="zKum-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="六大部位">
+    <div class="card"><p>植物的身體通常可以分成<span class="key">六個部位</span>，依序點 1～6：</p>
+      <div class="gallery" data-g="parts"></div>
+      <p style="margin-top:18px">🌟 不是每種植物都看得到全部六個部位，有的還沒開花，有的不會開花。</p></div>
+  </div>
+</section>
+
+<!-- ===== 第3課 ===== -->
+<section class="page lesson" id="l3" data-no="第3課" data-title="植物的葉" data-pic="images/leaf.jpg">
+  <div class="step" data-label="葉的構造">
+    <div class="card two">
+      <div class="zoombox" id="zLeaf" style="aspect-ratio:1/1" data-img="images/leaf.jpg"></div>
+      <div><div class="big-btns" data-zoom="zLeaf"></div>
+        <div class="zinfo" id="zLeaf-info"><p class="ph">👆 葉子的構造包括<span class="key">葉片</span>和<span class="key">葉柄</span>。點按放大！</p></div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="葉形・葉緣・葉脈">
+    <div class="card">
+      <p>比一比三種葉子，依序點 1、2、3，三張照片會<b>一起放大</b>：</p>
+      <div class="big-btns" id="ltBtns">
+        <button class="bb" onclick="leafTable(0,this)"><span class="num">1</span>葉形（形狀）</button>
+        <button class="bb" onclick="leafTable(1,this)"><span class="num">2</span>葉緣（邊緣）</button>
+        <button class="bb" onclick="leafTable(2,this)"><span class="num">3</span>葉脈（紋路）</button>
+        <button class="bb" onclick="leafTable(-1,this)">🔍 全圖</button>
+      </div>
+      <div class="three">
+        <div><div class="zoombox" id="zHib" style="aspect-ratio:1" data-img="images/hibiscus_leaf.jpg" data-nohot="1"></div><p class="caption"><b>朱槿</b><br><span id="lt0">—</span></p></div>
+        <div><div class="zoombox" id="zSwp" style="aspect-ratio:1" data-img="images/sweetpotato_leaf.jpg" data-nohot="1"></div><p class="caption"><b>紫甘藷</b><br><span id="lt1">—</span></p></div>
+        <div><div class="zoombox" id="zLily" style="aspect-ratio:1" data-img="images/lily_leaf.jpg" data-nohot="1"></div><p class="caption"><b>百合</b><br><span id="lt2">—</span></p></div>
+      </div>
+      <div class="tip">用<span class="k-red">紅色</span>畫筆描外框（葉形）和邊緣（葉緣），用<span style="color:var(--g);font-weight:800">綠色</span>描葉脈。</div>
+    </div>
+  </div>
+
+  <div class="step" data-label="葉的特徵圖鑑">
+    <div class="card"><p>每種植物的葉子都不一樣！點照片看特徵：</p><div class="gallery" data-g="leaves"></div></div>
+  </div>
+
+  <div class="step" data-label="葉脈運送">
+    <div class="card two">
+      <div class="photo"><img src="images/leaf.jpg" alt="桑葉">
+        <svg class="ov" viewBox="0 0 1400 1400" id="veinSvg">
+          <g class="grp" id="vW"><path class="flowline" d="M90 1300 L500 840 L1240 120" stroke="#2f80ed" stroke-width="26"/><path class="flowline" d="M600 740 L520 300" stroke="#2f80ed" stroke-width="18"/><path class="flowline" d="M780 560 L1250 600" stroke="#2f80ed" stroke-width="18"/><path class="flowline" d="M560 830 L1100 1020" stroke="#2f80ed" stroke-width="18"/></g>
+          <g class="grp" id="vF"><path class="flowline" d="M1180 180 L540 820 L130 1270" stroke="#f2792b" stroke-width="26" style="animation-direction:normal"/></g>
+        </svg></div>
+      <div>
+        <div class="big-btns">
+          <button class="bb" onclick="this.classList.add('on');vW.style.opacity=1"><span class="num">1</span>水分進來</button>
+          <button class="bb" onclick="this.classList.add('on');vF.style.opacity=1"><span class="num">2</span>養分出去</button>
+        </div>
+        <p>葉子上一條一條的紋路叫做<span class="key">葉脈</span>，可以<span class="k-water">輸送水分</span>和<span class="k-food">養分</span>，就像葉子的「小水管」。</p>
+        <div class="tip"><span class="k-water">藍色</span>＝水分從葉柄流進葉子；<span class="k-food">橘色</span>＝葉子做好的養分送出去。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-label="特別的葉子">
+    <div class="card">
+      <div class="big-btns">
+        <button class="bb" data-show="sp1"><span class="num">1</span>落地生根</button>
+        <button class="bb" data-show="sp2" onclick="bodhiDrop.classList.add('go')"><span class="num">2</span>菩提樹</button>
+      </div>
+      <div class="two">
+        <div class="reveal" id="sp1"><div class="photo"><img src="images/kalanchoe.jpg" alt="落地生根"></div>
+          <p style="margin-top:10px">落地生根的葉子<span class="key">特別厚</span>。原本生長在<b>雨水少</b>的地方，葉子可以<span class="k-water">儲存水分</span>，減少水分散失。</p></div>
+        <div class="reveal" id="sp2"><div class="photo"><img src="images/bodhi.jpg" alt="菩提葉"><span class="drop" id="bodhiDrop" style="left:53%;top:86%"></span></div>
+          <p style="margin-top:10px">菩提葉有長長的<span class="key">尾尖</span>。生長在<b>多雨</b>的地方，尾尖讓<span class="k-water">雨水滑落</span>，避免積水。</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-label="葉子與陽光">
+    <div class="card">
+      <p>從<b>上面往下看</b>植物：葉子在莖上<span class="key">互相錯開</span>，上下不會完全重疊。按「陽光照下來」看看！</p>
+      <div class="big-btns"><button class="bb" onclick="sunAll(this)"><span class="num">1</span>☀️ 陽光照下來</button></div>
+      <div class="three">
+        <div class="photo lit"><img src="images/mint.jpg" alt="薄荷"><div class="sunbeam"></div></div>
+        <div class="photo lit"><img src="images/plectranthus.jpg" alt="到手香"><div class="sunbeam"></div></div>
+        <div class="photo lit"><img src="images/impatiens.jpg" alt="非洲鳳仙花"><div class="sunbeam"></div></div>
+      </div>
+      <p class="caption">薄荷 ｜ 到手香 ｜ 非洲鳳仙花</p>
+      <p id="sunTxt" style="margin-top:12px;color:var(--muted)">👆 點按鈕。</p>
+    </div>
+  </div>
+
+  <div class="step" data-label="葉序">
+    <div class="card"><p>葉子長在莖上的位置叫<span class="key">節</span>，葉子在節上的排列方式叫<span class="key">葉序</span>。點照片放大看：</p>
+      <div id="phylloBox"></div></div>
+  </div>
+</section>
+
+<!-- ===== 第4課 ===== -->
+<section class="page lesson" id="l4" data-no="第4課" data-title="植物的莖" data-pic="images/tree.jpg">
+  <div class="step" data-label="莖的工作">
+    <div class="card two">
+      <div class="photo"><img src="images/tree.jpg" alt="樟樹">
+        <svg class="ov" viewBox="0 0 1046 1400">
+          <g class="grp" id="trunkS"><path d="M150 1300 L150 250" stroke="#fff" stroke-width="16" stroke-dasharray="34 20"/><path d="M110 300 L150 230 L190 300" fill="none" stroke="#fff" stroke-width="16"/></g>
+          <g class="grp" id="trunkW"><path class="flowline" d="M505 1250 L510 900 L380 520" stroke="#2f80ed" stroke-width="24"/><path class="flowline" d="M530 1250 L530 900 L700 520" stroke="#2f80ed" stroke-width="24"/></g>
+          <g class="grp" id="trunkF"><path class="flowline" d="M640 560 L560 900 L560 1250" stroke="#f2792b" stroke-width="24"/></g>
+        </svg></div>
+      <div>
+        <p>莖的下面連著根，上面連著葉子。莖有什麼工作？</p>
+        <div class="big-btns">
+          <button class="bb" onclick="trunk('S',this)"><span class="num">1</span>支撐身體</button>
+          <button class="bb" onclick="trunk('W',this)"><span class="num">2</span>運送水分</button>
+          <button class="bb" onclick="trunk('F',this)"><span class="num">3</span>運送養分</button>
+        </div>
+        <p id="trunkTxt" style="color:var(--muted)">👆 依序點 1、2、3。</p>
+      </div>
+    </div>
+  </div>
+  <div class="step" data-label="三種莖圖鑑">
+    <div class="card"><p>依照莖的特徵，分成<b style="color:var(--earth)">木本莖</b>、<b style="color:var(--g)">草本莖</b>、<b style="color:#7b4bb7">藤本莖</b>：</p>
+      <div id="stemBox"></div></div>
+  </div>
+  <div class="step" data-label="藤本莖攀爬">
+    <div class="card two">
+      <div class="photo"><img src="images/vine.jpg" alt="牽牛花">
+        <svg class="ov" viewBox="0 0 1046 1400"><path id="vinePath" d="M560 1380 C430 1300 430 1230 560 1180 C690 1130 690 1060 560 1010 C430 960 430 890 560 840 C690 790 690 720 560 670 C430 620 430 550 560 500 C690 450 690 380 560 330 C430 280 430 210 560 160 C640 130 650 80 600 40" fill="none" stroke="#ffeb3b" stroke-width="18" stroke-linecap="round" stroke-dasharray="4000" stroke-dashoffset="4000"/></svg></div>
+      <div>
+        <p>牽牛花的莖<span class="key">不能自己站直</span>，怎麼爭取陽光？</p>
+        <div class="big-btns"><button class="bb" onclick="growVine(this)"><span class="num">1</span>▶ 看它往上爬</button></div>
+        <p>它會<b>纏繞</b>在竹竿上，一圈一圈往上爬，爬到<span class="k-sun">陽光</span>多的地方！絲瓜則是用<b>卷鬚</b>纏住東西。</p>
+        <div class="tip">播放時請學生用手指跟著<span class="k-sun">黃色線</span>一起「繞圈圈」往上。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 第5課 ===== -->
+<section class="page lesson" id="l5" data-no="第5課" data-title="植物的根" data-pic="images/plantbox.jpg">
+  <div class="step" data-label="軸根">
+    <div class="card two"><div class="zoombox" id="zBok" style="aspect-ratio:1046/1400" data-img="images/bokchoy.jpg"></div>
+      <div><div class="big-btns" data-zoom="zBok"></div><div class="zinfo" id="zBok-info"><p class="ph">👆 點「根」放大看小白菜的根。</p></div></div></div>
+  </div>
+  <div class="step" data-label="鬚根">
+    <div class="card two"><div class="zoombox" id="zOnion" style="aspect-ratio:1046/1400" data-img="images/onion.jpg"></div>
+      <div><div class="big-btns" data-zoom="zOnion"></div><div class="zinfo" id="zOnion-info"><p class="ph">👆 點「根」放大看蔥的根。</p></div></div></div>
+  </div>
+  <div class="step" data-label="根的圖鑑">
+    <div class="card"><p>比一比：<b style="color:var(--earth)">軸根</b>有一條明顯的主根；<b style="color:var(--earth)">鬚根</b>像鬍鬚，每條粗細差不多。</p><div class="gallery" data-g="roots"></div></div>
+  </div>
+  <div class="step" data-label="根的工作">
+    <div class="card two">
+      <div class="photo" id="rootPhoto"><img src="images/plantbox.jpg" alt="根">
+        <svg class="ov" viewBox="0 0 1046 1400">
+          <g class="grp" id="rootHold"><path d="M240 760 C300 1000 380 1150 420 1240 M806 760 C740 1000 660 1150 620 1240" fill="none" stroke="#fff" stroke-width="14" stroke-dasharray="26 16"/><circle cx="523" cy="1000" r="300" fill="none" stroke="#ffeb3b" stroke-width="12" stroke-dasharray="30 20"/></g>
+          <g class="grp" id="rootW">
+            <g fill="#2f80ed"><circle cx="300" cy="1150" r="16"/><circle cx="760" cy="1180" r="16"/><circle cx="420" cy="1260" r="16"/><circle cx="650" cy="960" r="16"/></g>
+            <path class="flowline" d="M300 1150 L520 850 L500 600" stroke="#2f80ed" stroke-width="20"/>
+            <path class="flowline" d="M760 1180 L530 860 L500 600" stroke="#2f80ed" stroke-width="20"/>
+            <path class="flowline" d="M523 1240 L523 860 L500 600" stroke="#2f80ed" stroke-width="20"/>
+          </g>
+        </svg></div>
+      <div>
+        <div class="big-btns">
+          <button class="bb" onclick="rootJob('hold',this)"><span class="num">1</span>抓住土壤</button>
+          <button class="bb" onclick="rootJob('water',this)"><span class="num">2</span>吸收水分</button>
+        </div>
+        <p id="rootTxt" style="color:var(--muted)">👆 依序點 1、2。玻璃杯裡可以看到真正的根！</p>
+      </div>
+    </div>
+  </div>
+  <div class="step" data-label="根會吸水實驗">
+    <div class="card two">
+      <div class="photo fade2" id="expBox"><img src="images/exp_before.jpg" alt="實驗開始"><img class="after" src="images/exp_after.jpg" alt="幾天後">
+        <svg class="ov" viewBox="0 0 1400 1046">
+          <g class="grp" id="expClay"><ellipse cx="438" cy="345" rx="150" ry="40" fill="none" stroke="#ffeb3b" stroke-width="10" stroke-dasharray="20 12"/><ellipse cx="982" cy="345" rx="150" ry="40" fill="none" stroke="#ffeb3b" stroke-width="10" stroke-dasharray="20 12"/></g>
+          <g class="grp" id="expMark"><line x1="290" y1="545" x2="590" y2="545" stroke="#e5484d" stroke-width="10" stroke-dasharray="26 12"/><line x1="830" y1="590" x2="1130" y2="590" stroke="#e5484d" stroke-width="10" stroke-dasharray="26 12"/></g>
+          <g class="grp" id="expArrow"><path d="M440 560 L440 690" stroke="#2f80ed" stroke-width="16"/><path d="M405 650 L440 700 L475 650" fill="none" stroke="#2f80ed" stroke-width="16"/></g>
+        </svg>
+        <span class="lab" id="expLab" style="left:50%;top:8%">⏰ 過了幾天…</span>
+      </div>
+      <div>
+        <p>植物需要的水，是不是由<span class="key">根</span>吸收的？</p>
+        <div class="big-btns">
+          <button class="bb" onclick="exp(1,this)"><span class="num">1</span>根放進水裡</button>
+          <button class="bb" onclick="exp(2,this)"><span class="num">2</span>膠泥封瓶口</button>
+          <button class="bb" onclick="exp(3,this)"><span class="num">3</span>畫水位記號</button>
+          <button class="bb" onclick="exp(4,this)"><span class="num">4</span>過了幾天…</button>
+          <button class="bb" onclick="exp(5,this)"><span class="num">5</span>結論</button>
+        </div>
+        <p id="expTxt" style="color:var(--muted)">👆 依序點 1～5。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 第6課 ===== -->
+<section class="page lesson" id="l6" data-no="第6課" data-title="植物的花" data-pic="images/azalea.jpg">
+  <div class="step" data-label="杜鵑花構造">
+    <div class="card two"><div class="zoombox" id="zFlower" style="aspect-ratio:1" data-img="images/azalea.jpg"></div>
+      <div><div class="big-btns" data-zoom="zFlower"></div><div class="zinfo" id="zFlower-info"><p class="ph">👆 大部分的花由外而內有<span class="key">花萼、花瓣、雄蕊、雌蕊</span>。點按放大！</p></div></div></div>
+  </div>
+  <div class="step" data-label="洋桔梗構造">
+    <div class="card two"><div class="zoombox" id="zLis" style="aspect-ratio:1" data-img="images/lisianthus.jpg"></div>
+      <div><div class="big-btns" data-zoom="zLis"></div><div class="zinfo" id="zLis-info"><p class="ph">👆 洋桔梗也有四個構造，找找看！</p></div></div></div>
+  </div>
+  <div class="step" data-label="花的圖鑑">
+    <div class="card"><p>一年四季都有植物開花。點照片看特徵：</p><div id="flowerBox"></div></div>
+  </div>
+  <div class="step" data-label="蜜蜂傳花粉">
+    <div class="card two">
+      <div class="photo" id="beeBox"><img src="images/bee.jpg" alt="蜜蜂"></div>
+      <div>
+        <p>花怎麼吸引小動物？依序點：</p>
+        <div class="big-btns">
+          <button class="bb" data-show="fl1"><span class="num">1</span>鮮豔顏色</button>
+          <button class="bb" data-show="fl2"><span class="num">2</span>香香氣味</button>
+          <button class="bb" data-show="fl3"><span class="num">3</span>甜甜花蜜</button>
+          <button class="bb" data-show="fl4" onclick="pollenGo()"><span class="num">4</span>傳花粉</button>
+        </div>
+        <p class="reveal" id="fl1">🌺 花瓣<b>顏色鮮豔</b>，很遠就看得到。</p>
+        <p class="reveal" id="fl2">🌼 月橘的花有<b>香味</b>。</p>
+        <p class="reveal" id="fl3">🍯 有些花有<b>花蜜</b>，蜜蜂最喜歡。</p>
+        <p class="reveal" id="fl4">🐝 蜜蜂身上沾滿<span class="k-sun">花粉</span>（黃色小點），飛到別的花，把花粉傳到<span class="k-red">雌蕊</span>上，植物才能結果實！</p>
+      </div>
+    </div>
+  </div>
+  <div class="step" data-label="完全花與不完全花">
+    <div class="card two">
+      <div class="zoombox" id="zLoofah" style="aspect-ratio:1400/1046" data-img="images/loofah_flowers.jpg"></div>
+      <div>
+        <div class="big-btns" data-zoom="zLoofah"></div>
+        <div class="zinfo" id="zLoofah-info"><p><b>完全花</b>：花萼、花瓣、雄蕊、雌蕊四個都有（月橘、杜鵑）。</p><p style="margin-top:8px"><b>不完全花</b>：少了其中一部分，例如<span class="key">絲瓜</span>👆 點數字看看。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 第7課 ===== -->
+<section class="page lesson" id="l7" data-no="第7課" data-title="果實與種子" data-pic="images/guava4.jpg">
+  <div class="step" data-label="花變果實">
+    <div class="card two"><div class="zoombox" id="zMurraya" style="aspect-ratio:1400/1046" data-img="images/murraya.jpg"></div>
+      <div><div class="big-btns" data-zoom="zMurraya"></div><div class="zinfo" id="zMurraya-info"><p class="ph">👆 月橘同一枝上有<span class="key">花</span>，也有<span class="key">果實</span>！</p></div></div></div>
+  </div>
+  <div class="step" data-label="番石榴結果過程">
+    <div class="card two">
+      <div class="seq" id="guavaSeq">
+        <img src="images/guava1.jpg" class="on" alt=""><img src="images/guava2.jpg" alt=""><img src="images/guava3.jpg" alt=""><img src="images/guava4.jpg" alt="">
+        <span class="slab" id="guavaLab">1. 開花</span>
+      </div>
+      <div>
+        <div class="big-btns" id="guavaBtns">
+          <button class="bb on" onclick="guava(0)"><span class="num">1</span>開花</button>
+          <button class="bb" onclick="guava(1)"><span class="num">2</span>花謝了</button>
+          <button class="bb" onclick="guava(2)"><span class="num">3</span>長成果實</button>
+          <button class="bb" onclick="guava(3)"><span class="num">4</span>裡面有種子</button>
+          <button class="bb" onclick="guavaPlay()">▶ 自動播放</button>
+        </div>
+        <p id="guavaTxt">🌼 番石榴開出白色的花，有很多<b>雄蕊</b>。</p>
+      </div>
+    </div>
+  </div>
+  <div class="step" data-label="果實圖鑑">
+    <div class="card"><p>果實可以<b>保護種子</b>，還會用顏色、香氣、甜味吸引動物。點照片看：</p><div class="gallery" data-g="fruits"></div></div>
+  </div>
+  <div class="step" data-label="動物傳播種子">
+    <div class="card two">
+      <div class="photo"><img src="images/bird.jpg" alt="鳥吃果實"></div>
+      <div>
+        <div class="big-btns">
+          <button class="bb" data-show="bd1"><span class="num">1</span>鳥吃果實</button>
+          <button class="bb" data-show="bd2"><span class="num">2</span>飛到別處</button>
+          <button class="bb" data-show="bd3"><span class="num">3</span>種子發芽</button>
+        </div>
+        <p class="reveal" id="bd1">🐦 雀榕的果實<span class="k-red">顏色鮮豔</span>，吸引五色鳥來吃。</p>
+        <p class="reveal" id="bd2">✈️ 種子跟著鳥的<b>糞便</b>排出來，掉在別的地方。</p>
+        <div class="reveal pline" id="bd3"><img src="images/need_soil.jpg" alt=""><p>🌱 種子在適當的環境<span class="key">發芽</span>，長成新植物！</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="step" data-label="風力傳播種子">
+    <div class="card two">
+      <div class="photo" style="overflow:hidden"><img src="images/goldenrain.jpg" alt="臺灣欒樹果實"><div id="balloons" style="position:absolute;inset:0;pointer-events:none"></div></div>
+      <div>
+        <p><span class="key">臺灣欒樹</span>的果實像一個個小<b>氣球</b>。</p>
+        <div class="big-btns"><button class="bb" onclick="windGo(this)"><span class="num">1</span>🌬️ 風吹過來</button></div>
+        <p>果實又輕又薄，風一吹就<b>飄到遠方</b>，把種子帶出去。</p>
+        <div class="tip">比一比：鳥幫忙＝<span class="k-food">動物傳播</span>；風吹＝<span class="k-air">風力傳播</span>。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 第8課 ===== -->
+<section class="page lesson" id="l8" data-no="第8課" data-title="植物運輸站：水分・養分・陽光" data-pic="images/plantbox.jpg">
+  <div class="step" data-label="看懂植物工廠">
+    <div class="card two">
+      <div class="photo" id="flowWrap"><img src="images/plantbox.jpg" alt="玻璃杯裡的植物">
+        <svg class="ov" viewBox="0 0 1046 1400" id="flow">
+          <defs>
+            <marker id="arW" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#2f80ed"/></marker>
+            <marker id="arF" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#f2792b"/></marker>
+            <marker id="arS" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#ffc107"/></marker>
+            <marker id="arA" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#90a4ae"/></marker>
+          </defs>
+          <g class="grp g-w1">
+            <g fill="#2f80ed"><circle cx="300" cy="1150" r="18"/><circle cx="760" cy="1180" r="18"/><circle cx="430" cy="1260" r="18"/><circle cx="660" cy="950" r="18"/></g>
+            <path class="flowline" d="M300 1150 L515 860" stroke="#2f80ed" stroke-width="20"/>
+            <path class="flowline" d="M760 1180 L530 870" stroke="#2f80ed" stroke-width="20"/>
+            <path class="flowline" d="M430 1260 L520 880" stroke="#2f80ed" stroke-width="20"/>
+          </g>
+          <g class="grp g-w2">
+            <path class="flowline" d="M520 820 L505 520 L330 300" stroke="#2f80ed" stroke-width="20" marker-end="url(#arW)"/>
+            <path class="flowline" d="M520 820 L515 560 L780 420" stroke="#2f80ed" stroke-width="20" marker-end="url(#arW)"/>
+            <path class="flowline" d="M520 820 L470 150" stroke="#2f80ed" stroke-width="20" marker-end="url(#arW)"/>
+            <circle r="16" fill="#2f80ed"><animateMotion dur="2.4s" repeatCount="indefinite" path="M520 820 L505 520 L330 300"/></circle>
+            <circle r="16" fill="#2f80ed"><animateMotion dur="2.4s" begin=".8s" repeatCount="indefinite" path="M520 820 L515 560 L780 420"/></circle>
+            <circle r="16" fill="#2f80ed"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite" path="M520 820 L470 150"/></circle>
+          </g>
+          <g class="grp g-sun">
+            <path class="flowline" d="M20 20 L270 250" stroke="#ffc107" stroke-width="22" marker-end="url(#arS)"/>
+            <path class="flowline" d="M180 0 L700 380" stroke="#ffc107" stroke-width="22" marker-end="url(#arS)"/>
+            <path class="flowline" d="M0 220 L300 480" stroke="#ffc107" stroke-width="22" marker-end="url(#arS)"/>
+          </g>
+          <g class="grp g-air">
+            <path class="flowline" d="M1040 280 C960 250 920 330 850 360" stroke="#90a4ae" stroke-width="16" marker-end="url(#arA)"/>
+            <path class="flowline" d="M1040 520 C980 480 930 520 880 470" stroke="#90a4ae" stroke-width="16" marker-end="url(#arA)"/>
+          </g>
+          <g class="grp g-make">
+            <ellipse class="glow" cx="300" cy="300" rx="200" ry="130" fill="#ffe066"/>
+            <ellipse class="glow" cx="780" cy="440" rx="220" ry="150" fill="#ffe066"/>
+            <ellipse class="glow" cx="300" cy="510" rx="140" ry="90" fill="#ffe066"/>
+            <g fill="#f2792b"><circle cx="300" cy="300" r="16"><animate attributeName="r" values="8;20;8" dur="1.2s" repeatCount="indefinite"/></circle><circle cx="780" cy="440" r="16"><animate attributeName="r" values="20;8;20" dur="1.2s" repeatCount="indefinite"/></circle><circle cx="300" cy="510" r="16"><animate attributeName="r" values="8;20;8" dur="1.2s" repeatCount="indefinite"/></circle></g>
+          </g>
+          <g class="grp g-food">
+            <path class="flowline" d="M300 300 L540 540 L545 1180" stroke="#f2792b" stroke-width="20" marker-end="url(#arF)"/>
+            <path class="flowline" d="M780 440 L545 600 L545 1180" stroke="#f2792b" stroke-width="20" marker-end="url(#arF)"/>
+            <circle r="16" fill="#f2792b"><animateMotion dur="2.6s" repeatCount="indefinite" path="M300 300 L540 540 L545 1180"/></circle>
+            <circle r="16" fill="#f2792b"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M780 440 L545 600 L545 1180"/></circle>
+          </g>
+        </svg>
+        <span class="lab" data-s="1" style="left:50%;top:94%;color:var(--water)">💧 根吸水</span>
+        <span class="lab" data-s="2" style="left:70%;top:52%;color:var(--water)">⬆ 水往上</span>
+        <span class="lab" data-s="3" style="left:22%;top:6%;color:#b38600">☀ 陽光</span>
+        <span class="lab" data-s="3" style="left:85%;top:16%;color:#61778d">🌬 空氣</span>
+        <span class="lab" data-s="4" style="left:30%;top:28%;color:var(--g-d)">🏭 做養分</span>
+        <span class="lab" data-s="5" style="left:72%;top:76%;color:var(--food)">⬇ 養分送全身</span>
+      </div>
+      <div>
+        <div class="big-btns" id="flowBtns">
+          <button class="bb" onclick="flowStep(1,this)"><span class="num">1</span>根吸收水分</button>
+          <button class="bb" onclick="flowStep(2,this)"><span class="num">2</span>水分往上送</button>
+          <button class="bb" onclick="flowStep(3,this)"><span class="num">3</span>陽光照葉子</button>
+          <button class="bb" onclick="flowStep(4,this)"><span class="num">4</span>葉子做養分</button>
+          <button class="bb" onclick="flowStep(5,this)"><span class="num">5</span>養分送全身</button>
+          <button class="bb" onclick="flowStep('all',this)">▶ 全部一起看</button>
+        </div>
+        <div class="card" style="background:var(--bg);box-shadow:none" id="flowTxt"><p style="color:var(--muted)">👆 依序點 1～5，看看植物身體裡的「運輸站」。</p></div>
+        <div class="tip"><span class="k-water">藍色＝水分（往上）</span>、<span class="k-sun">黃色＝陽光</span>、<span class="k-air">灰藍＝空氣</span>、<span class="k-food">橘色＝養分（送全身）</span>。</div>
+      </div>
+    </div>
+  </div>
+  <div class="step" data-label="光合作用口訣">
+    <div class="card">
+      <p style="font-weight:800;color:var(--g-d)">🏭 葉子是植物的「食物工廠」（光合作用）</p>
+      <div class="big-btns">
+        <button class="bb" data-show="ps1"><span class="num">1</span>原料</button>
+        <button class="bb" data-show="ps2"><span class="num">2</span>工廠</button>
+        <button class="bb" data-show="ps3"><span class="num">3</span>產品</button>
+      </div>
+      <div class="three">
+        <div class="reveal card" id="ps1" style="background:#eef5ff"><div class="four" style="grid-template-columns:repeat(3,1fr);gap:8px"><img src="images/need_water.jpg" style="border-radius:10px"><img src="images/need_air.jpg" style="border-radius:10px"><img src="images/need_sun.jpg" style="border-radius:10px"></div><p><b>原料</b>：<span class="k-water">水</span>、<span class="k-air">空氣</span>、<span class="k-sun">陽光</span></p></div>
+        <div class="reveal card" id="ps2" style="background:#e7f4ec"><img src="images/leaf.jpg" style="border-radius:12px;aspect-ratio:2/1;object-fit:cover"><p><b>工廠</b>：綠色扁平的<span class="key">葉子</span></p></div>
+        <div class="reveal card" id="ps3" style="background:#fff1e6"><img src="images/guava3.jpg" style="border-radius:12px;aspect-ratio:2/1;object-fit:cover"><p><b>產品</b>：<span class="k-food">養分</span>，送到根、莖、花、果實</p></div>
+      </div>
+      <div class="tip">口訣：「<span class="k-water">水</span>從下往上，<span class="k-food">養分</span>從葉子送全身」。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 第9課 ===== -->
+<section class="page lesson" id="l9" data-no="第9課" data-title="植物與生活" data-pic="images/gr_autumn.jpg">
+  <div class="step" data-label="食衣住行育樂">
+    <div class="card"><p>植物和我們的生活息息相關，依序點：</p><div class="gallery" data-g="life"></div></div>
+  </div>
+  <div class="step" data-label="臺灣欒樹四季">
+    <div class="card two">
+      <div class="seq" id="grSeq">
+        <img src="images/gr_spring.jpg" class="on" alt=""><img src="images/gr_summer.jpg" alt=""><img src="images/gr_autumn.jpg" alt=""><img src="images/gr_winter.jpg" alt="">
+        <span class="slab" id="grLab">春</span>
+      </div>
+      <div>
+        <p>同一棵<span class="key">臺灣欒樹</span>，一年四季會變顏色！</p>
+        <div class="big-btns" id="grBtns">
+          <button class="bb on" onclick="grSeason(0)"><span class="num">1</span>春</button>
+          <button class="bb" onclick="grSeason(1)"><span class="num">2</span>夏末</button>
+          <button class="bb" onclick="grSeason(2)"><span class="num">3</span>初秋</button>
+          <button class="bb" onclick="grSeason(3)"><span class="num">4</span>冬</button>
+          <button class="bb" onclick="[0,1,2,3].forEach(i=>setTimeout(()=>grSeason(i),i*2200))">▶ 自動播放</button>
+        </div>
+        <p id="grTxt">🌱 <b>春</b>：長出新的<b>綠色葉子</b>。</p>
+      </div>
+    </div>
+  </div>
+  <div class="step" data-label="四季的花">
+    <div class="card"><p>一年四季都有不同植物開花：</p><div class="gallery" data-g="seasons"></div></div>
+  </div>
+  <div class="step" data-label="珍惜植物">
+    <div class="card"><p>植物是大自然中珍貴的資源：</p><div class="gallery" data-g="care"></div>
+      <p style="margin-top:16px">💚 植物需要你我一起保護，資源才能<span class="key">永續利用</span>。</p></div>
+  </div>
+</section>
+
+<!-- ===== 科學閱讀 ===== -->
+<section class="page lesson" id="l11" data-no="科學閱讀" data-title="植物的顏色與氣味" data-pic="images/antho.jpg">
+  <div class="step" data-label="植物顏色變變變">
+    <div class="card"><p>植物體內有一種色素叫<span class="key">花青素</span>，會讓葉子、花、果實出現紅、紫、藍等顏色。點照片看：</p><div class="gallery" data-g="antho"></div>
+      <div class="tip">花青素能溶在水裡：蝶豆花泡水變藍紫色；煮水餃加紫色高麗菜葉會變紫色，沾醋又變粉紅色！</div></div>
+  </div>
+  <div class="step" data-label="像石頭的生石花">
+    <div class="card two">
+      <div class="zoombox" id="zLith" style="aspect-ratio:1" data-img="images/lithops.jpg"></div>
+      <div><div class="big-btns" data-zoom="zLith"></div>
+        <div class="zinfo" id="zLith-info"><p>我不是石頭啦！我是<span class="key">生石花</span>，一種植物。👆 點數字看看。</p></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="竹子變竹炭">
+    <div class="card"><p>竹子長得很快，還能變身成「神奇竹炭」：</p><div class="gallery" data-g="charcoal"></div></div>
+  </div>
+  <div class="step" data-label="植物的氣味魔法">
+    <div class="card"><p>有些植物的葉子有<b>特殊氣味</b>，是植物保護自己的「祕密武器」，讓昆蟲不敢靠近：</p><div class="gallery" data-g="smell"></div></div>
+  </div>
+</section>
+
+<!-- ===== 第10課 ===== -->
+<section class="page lesson" id="l10" data-no="複習" data-title="快問快答" data-pic="images/obs_look.jpg">
+  <div class="step" data-label="快問快答">
+    <div id="quiz"></div>
+    <span class="score" id="score"></span>
+  </div>
+</section>
+
+<footer>
+  <p>🌱 植物大發現｜三年級自然 第一單元 互動教學</p>
+  <p>整合三個版本課本：認識植物、植物的身體（根、莖、葉、花、果實、種子）、植物與生活</p>
+  <p>照片：Canva 製作｜適用手機・平板・電腦</p>
+  <p><a href="../" style="color:#fff">← 回自然科</a>　<a href="/" style="color:#fff">← 回主選單</a></p>
+</footer>
+
+<div id="lb"><div class="box">
+  <div><div class="zoombox" id="lbZoom" data-nohot="1"></div></div>
+  <div class="txt"><span class="tag" id="lbTag"></span><h4 id="lbName"></h4><p id="lbText"></p>
+    <div class="nav"><button onclick="lbMove(-1)">◀ 上一張</button><button onclick="lbMove(1)">下一張 ▶</button><button onclick="lbZoomToggle()">🔍 放大/全圖</button><button class="x" onclick="lbClose()">✖ 關閉</button></div>
+    <div class="nums" id="lbNums"></div></div>
+</div></div>
+
+<div id="penLayer"><canvas id="penCanvas"></canvas></div>
+<div id="penBar">
+  <button class="c sel" style="background:#2f80ed" data-c="#2f80ed" aria-label="藍色水分"></button>
+  <button class="c" style="background:#f2792b" data-c="#f2792b" aria-label="橘色養分"></button>
+  <button class="c" style="background:#f2b705" data-c="#f2b705" aria-label="黃色陽光"></button>
+  <button class="c" style="background:#2f8f5b" data-c="#2f8f5b" aria-label="綠色"></button>
+  <button class="c" style="background:#e5484d" data-c="#e5484d" aria-label="紅色重點"></button>
+  <button onclick="penClear()">🧽 清除</button>
+  <button onclick="togglePen()">✖ 關閉</button>
+</div>
+
+<script>
+/* ===== 放大鏡資料：[名稱, x%, y%, 倍數, 說明] ===== */
+const ZOOM={
+ zLongkui:[['花',46,5,4,'龍葵的花是<b>白色</b>小花，花瓣像星星，可以吸引小動物傳<span class="k-sun">花粉</span>。'],
+  ['果實',58,39,3.2,'果實圓圓的，<b>成熟時從綠色變成紫黑色</b>，吸引小動物來吃，把種子傳出去。'],
+  ['種子',70,37,5,'種子藏在<span class="key">果實裡面</span>。果實在適當的環境會發芽，長成新植物。'],
+  ['葉',30,48,3,'葉子綠綠扁扁的，是<b>網狀脈</b>，葉緣有點鋸齒。照<span class="k-sun">陽光</span>製造<span class="k-food">養分</span>。'],
+  ['莖',48,58,3.2,'<b>草本莖</b>，有細毛。支撐植物向上生長，爭取更多陽光。'],
+  ['根',48,82,2.6,'有一條明顯的<b>主根</b>（軸根），穩固植物、<span class="k-water">吸收水分</span>和養分。']],
+ zPeri:[['花',48,6,4,'日日春的花是<b>粉紅色</b>，有5片花瓣，幾乎天天都在開花。'],
+  ['果實',76,16,3.5,'細細長長的<b>果實</b>（蓇葖果），裡面有種子。'],
+  ['葉',40,35,3,'葉子<b>長橢圓形</b>，表面亮亮的，<b>對生</b>。'],
+  ['莖',52,57,3.2,'<b>綠色的莖</b>，柔軟、可以直立，是<b>草本莖</b>。'],
+  ['根',50,80,2.6,'根長在土裡，有主根和許多側根，緊緊<b>抓住土壤</b>。']],
+ zKum:[['果實',63,30,3.2,'<b>橘色圓圓的果實</b>，成熟時顏色鮮豔，可以吃。'],
+  ['花',47,13,3.6,'<b>白色小花</b>，有香味。花謝了之後會結成果實。'],
+  ['葉',15,42,3,'<b>綠色亮亮的葉子</b>，照陽光製造養分。'],
+  ['莖',50,66,3,'<b>木本莖</b>，硬硬的，支撐整棵植物。'],
+  ['根',50,84,2.4,'根種在<b>盆子的土</b>裡，看不到，但會吸收水分。']],
+ zLeaf:[['葉片',74,58,1.8,'<b>葉片</b>通常扁扁平平的，可以增加被<span class="k-sun">陽光照射</span>的範圍。'],
+  ['葉柄',22,76,2.8,'<b>葉柄</b>是連接葉片和莖的部位。'],
+  ['葉脈',46,51,3,'一條一條的紋路是<b>葉脈</b>，可以輸送<span class="k-water">水分</span>和<span class="k-food">養分</span>。這是<b>網狀脈</b>。'],
+  ['葉緣',88,30,3.6,'葉片的邊緣叫<b>葉緣</b>。這片葉子像鋸子，是<b>鋸齒狀</b>。']],
+ zBok:[['葉',50,22,1.8,'小白菜的葉子大大的。'],['根',48,74,2.6,'有一條<span class="k-red">比較粗的主根</span>往下長，旁邊長出細細的小根，叫做<span class="key">軸根</span>。']],
+ zOnion:[['葉',47,25,1.8,'蔥的葉子細細長長、中間是空的。'],['根',47,84,2.6,'每一條根<span class="k-red">粗細都差不多</span>，像鬍鬚一樣，叫做<span class="key">鬚根</span>。']],
+ zFlower:[['花瓣',16,38,2.4,'<b>花瓣</b>通常最醒目，<span class="k-red">顏色鮮豔</span>，可以吸引小動物。'],
+  ['雄蕊',44,42,2.8,'<b>雄蕊</b>數量多，頂端有<span class="k-sun">花粉</span>（紅褐色小點）。'],
+  ['雌蕊',57,18,3.2,'<b>雌蕊</b>在花的中心，數量少（只有1根），下面會發育成<b>果實</b>。'],
+  ['花萼',46,86,3,'<b>花萼</b>在最外層、最下面，綠綠的，<b>保護</b>花瓣和花蕊。']],
+ zLis:[['花瓣',22,55,2.2,'紫色的<b>花瓣</b>又大又薄，包成杯子的形狀。'],
+  ['雄蕊',57,52,3.2,'黃色的是<b>雄蕊</b>，上面有花粉。'],
+  ['雌蕊',50,46,3.6,'中間淡綠色、比較高的是<b>雌蕊</b>。'],
+  ['花萼',50,84,3,'花下面綠色尖尖的是<b>花萼</b>，保護花。']],
+ zLoofah:[['雄花',21,27,2.4,'<b>雄花</b>：有花萼、花瓣、雄蕊，<span class="k-red">沒有雌蕊</span>。不會結果實。'],
+  ['雌花',72,33,2.4,'<b>雌花</b>：有花萼、花瓣、雌蕊，<span class="k-red">沒有雄蕊</span>。'],
+  ['小絲瓜',65,63,2.6,'雌花後面已經有一條<b>小小的絲瓜</b>，以後會長成果實！所以絲瓜花是<span class="key">不完全花</span>。']],
+ zLith:[['像石頭的葉子',60,60,2.4,'生石花「像石頭的部分」其實是<b>葉子</b>！厚厚的葉子可以<span class="k-water">保持水分</span>，不會一下子被晒乾。'],
+  ['偽裝',30,30,2.2,'長得像石頭，可以<b>避免被動物吃掉</b>。'],
+  ['開花',20,35,3,'開花的時候，是生石花最美的時候！']],
+ zMurraya:[['花',22,40,2.4,'月橘的<b>白色小花</b>，有香香的氣味。'],['果實',76,72,2.2,'花謝了之後，結出<span class="k-red">紅橘色的果實</span>，裡面有種子。']]
+};
+
+/* ===== 圖鑑資料：[圖片, 名稱, 標籤, 說明, x%, y%, 倍數] ===== */
+const G={
+ safe:[['sap','小心乳汁','乳汁','有些植物折斷會流出<b>白色乳汁</b>，碰到可能引起<span class="k-red">皮膚過敏</span>。',50,45,1.8],
+  ['thorns','小心尖刺','刺','有些植物的莖有<b>尖尖的刺</b>，不要用手去抓。',50,50,1.6],
+  ['ixora','不要亂摘','用看的','觀察時<b>用看的就好</b>，不要隨便採摘花和葉子。',50,50,1.4],
+  ['longkui','不要亂吃','不亂吃','龍葵<b>沒成熟的綠色果實</b>不能吃！不認識的植物不可以放進嘴巴。',58,39,3]],
+ need:[['need_sun','陽光','☀️','陽光充足的地方，植物長得更好。葉子要照陽光才能做養分。',60,30,1.5],
+  ['need_water','水','💧','灑水器定時幫植物<span class="k-water">澆水</span>，根會把水吸進去。',65,55,1.6],
+  ['need_air','空氣','🌬️','風吹過葉子，植物也需要<span class="k-air">空氣</span>。',40,40,1.4],
+  ['need_soil','土壤','🟫','大部分植物生長在<b>泥土</b>裡，根抓住土壤。',50,70,1.6]],
+ env:[['tree','樟樹（大樹）','高大','大樹長得又高又壯，<span class="k-sun">爭取陽光</span>，不會被擋住。',50,40,1.4],
+  ['herb','大花咸豐草（小草）','矮小','小草的莖細細的，長得比我們還矮。',50,40,1.5],
+  ['cairica','槭葉牽牛','攀爬','莖長長的，會<b>攀爬</b>在牆壁、圍籬上。',50,50,1.5],
+  ['banyan_roots','榕樹','根突出地面','根會<b>突出地面</b>，樹枝上還垂下像鬍鬚的<b>氣生根</b>。',50,80,1.8],
+  ['bottlepalm','酒瓶椰子','樹幹像酒瓶','樹幹下面<b>胖胖的</b>，像一個酒瓶。',50,70,1.8],
+  ['coleus','彩葉草','葉子多顏色','葉子有紅、紫、黃、綠好多顏色，生長在<span class="k-sun">陽光充足</span>的地方。',50,50,1.6],
+  ['bamboo','竹子','細長葉','細細長長的竹葉，生長在<b>陽光比較不強</b>的地方。',50,50,1.6],
+  ['bodhi','菩提樹','尾尖','葉子像愛心，前端<b>又尖又長</b>，水會順著前端滴落。',53,85,2.2],
+  ['turnera','黃時鐘花','黃色花','校園常見的黃色花，花開在陽光下。',50,50,1.6],
+  ['periwinkle','日日春','天天開花','幾乎<b>一年四季</b>都在開花，很好照顧。',48,15,2.4],
+  ['ixora','仙丹花','一團團紅花','很多紅色小花聚成<b>一團一團</b>。',40,40,1.8]],
+ parts:[['bokchoy','根','1','<b>根</b>：長在土裡，抓住土壤、<span class="k-water">吸收水分</span>和養分。',48,74,2.4],
+  ['tree','莖','2','<b>莖</b>：支撐植物，運送水分和養分，讓植物往陽光生長。',50,80,2.4],
+  ['leaf','葉','3','<b>葉</b>：照<span class="k-sun">陽光</span>，製造<span class="k-food">養分</span>。',60,45,1.6],
+  ['azalea','花','4','<b>花</b>：吸引小動物，幫忙傳花粉，以後結成果實。',50,45,1.6],
+  ['guava3','果實','5','<b>果實</b>：保護種子，幫忙傳播種子。',50,50,1.5],
+  ['guava4','種子','6','<b>種子</b>：藏在果實裡，在適當的環境會發芽。',50,50,2]],
+ leaves:[['fukugi','福木','厚厚滑滑','福木的葉子摸起來<b>厚厚的、滑滑的</b>。',55,40,1.8],
+  ['coleus','彩葉草','不同顏色','葉子有<b>好多種顏色</b>。',45,50,1.7],
+  ['mint','薄荷','特殊氣味','薄荷葉<b>搓揉後有特殊氣味</b>，清清涼涼。',50,50,1.8],
+  ['lily_leaf','百合','一條一條紋路','葉子上有<b>一條一條直直的紋路</b>（平行脈）。',48,55,2.6],
+  ['camphor_hand','樟樹','比手小','樟樹的葉子<b>比手掌小</b>。',45,57,2.4],
+  ['bodhi_hand','菩提樹','比手大','菩提的葉子<b>比手掌還要大</b>！',65,45,1.6],
+  ['bamboo','竹子','細長','竹子的葉子<b>細細長長</b>。',50,50,1.7],
+  ['hibiscus_leaf','朱槿','鋸齒狀','葉子像雞蛋（卵形），邊緣<b>鋸齒狀</b>，網狀脈。',85,40,2.8],
+  ['sweetpotato_leaf','紫甘藷','像愛心','葉子像<b>愛心</b>（心形），邊緣平滑，網狀脈。',50,50,1.5],
+  ['kalanchoe','落地生根','特別厚','葉子<b>特別厚</b>，可以<span class="k-water">儲存水分</span>。',50,45,1.8],
+  ['leaf','桑葉','葉片扁平','葉片扁扁平平，可以照到更多陽光。',60,45,1.6]],
+ roots:[['taproot2','莖菜和菠菜','軸根','莧菜（左）和菠菜（右）都有一條<b>明顯的主根</b>，是<span class="key">軸根</span>。',30,75,2.4],
+  ['longkui','龍葵','軸根','龍葵也是<b>軸根</b>，主根又粗又長。',48,82,2.6],
+  ['fibrous2','蒜和水稻','鬚根','蒜（左）和水稻（右）的根<b>粗細差不多</b>，是<span class="key">鬚根</span>。',30,75,2.2],
+  ['goosegrass','牛筋草','鬚根・淺','牛筋草的鬚根長在<b>淺淺的土裡</b>，密密麻麻抓住土，所以長得矮矮的。',45,65,1.8],
+  ['coconut_roots','椰子','鬚根','椰子的根<b>一條一條</b>，粗細差不多，從樹幹底部長出來。',50,70,1.6],
+  ['banyan_roots','榕樹','根很深','榕樹的根長在<b>很深的土裡</b>，所以可以長得很高大。',50,80,1.8]],
+ fruits:[['murraya','月橘','紅橘色','成熟的果實是<span class="k-red">紅橘色</span>，顏色鮮豔吸引鳥。',76,72,2.2],
+  ['longkui','龍葵','紫黑色','成熟時從綠色變成<b>紫黑色</b>。',58,39,3.2],
+  ['kumquat','金桔','橘色','金桔果實圓圓的，成熟變<b>橘色</b>。',63,30,3],
+  ['bird','雀榕','吸引鳥','雀榕的果實<span class="k-red">顏色鮮豔</span>，吸引鳥來吃。',60,50,1.5],
+  ['guava3','番石榴','香甜','番石榴成熟有<b>香氣</b>，又甜又好吃。',50,50,1.4],
+  ['guava4','番石榴（切開）','種子','切開果實，裡面有很多<b>種子</b>。',50,50,1.8],
+  ['goldenrain','臺灣欒樹','像氣球','果實像<b>小氣球</b>，又輕又薄，靠<span class="k-air">風</span>傳播。',45,45,1.8],
+  ['loofah_flowers','絲瓜','長長的','雌花後面的小絲瓜會慢慢<b>長大成果實</b>。',65,63,2.4],
+  ['fruits6','葡萄','香甜多汁','葡萄<b>香又多汁</b>，可以吸引動物來吃。',17,25,2.6],
+  ['fruits6','水蜜桃','香氣','水蜜桃會<b>散發香氣</b>。',50,25,2.6],
+  ['fruits6','木瓜','顏色變橘','木瓜成熟會變成<b>橘色</b>，切開有很多黑色<b>種子</b>。',83,25,2.6],
+  ['fruits6','百香果','暗紅色','百香果成熟是<b>暗紅色</b>，裡面有很多種子。',17,75,2.6],
+  ['fruits6','龍眼','芳香甜美','龍眼<b>芳香甜美</b>，吸引動物採食傳播。',50,75,2.6],
+  ['fruits6','梅子','綠色果實','梅子是梅花結成的果實。',83,75,2.6]],
+ life:[['rice','食・稻子','食','我們吃的<b>米飯</b>來自稻子。',50,65,1.6],
+  ['fruits6','食・水果','食','水果是植物的<b>果實</b>，是重要的食物來源。',50,50,1.3],
+  ['cotton','衣・棉花','衣','<b>棉花</b>可以紡成線，做成衣服。',30,40,1.6],
+  ['woodhouse','住・木屋','住','<b>木材</b>可以蓋房子、做桌椅和家具。',50,50,1.4],
+  ['boardwalk','行・木棧道','行','木材可以搭<b>木橋</b>、鋪<b>步道</b>。',50,45,1.6],
+  ['hero2','育・自然教室','育','校園和植物園是觀察植物的<b>自然教室</b>。',50,50,1.3],
+  ['cherry','樂・賞花','樂','<b>賞花</b>是一種休閒活動，讓人心情愉快。',50,50,1.4],
+  ['flowerclock','樂・花鐘','樂','用植物開花規律設計的<b>花鐘</b>，能美化環境。',50,50,1.5]],
+ seasons:[['cherry','山櫻花','春','<b>春天</b>開的粉紅色花，一串一串垂下來。',50,45,1.6],
+  ['azalea','杜鵑','春','<b>春天</b>校園常見，花瓣顏色鮮豔。',50,45,1.6],
+  ['lotus','荷花（蓮花）','夏','<b>夏天</b>在水池裡開花，葉子大大圓圓的。',55,40,1.6],
+  ['daylily','金針花','夏','<b>夏天</b>山上開滿橘色的金針花。',50,60,1.6],
+  ['goldenrain','臺灣欒樹','秋','<b>秋天</b>先開黃花，再結出紅色氣球般的果實。',45,45,1.6],
+  ['plum','梅花','冬','<b>冬天</b>開的白色梅花，有5片圓圓的花瓣。',50,45,1.8]],
+ antho:[['antho','楓葉','轉紅','臺灣的秋冬，<b>楓葉</b>會變紅色。',25,25,2],
+  ['antho','朱蕉','紅紫色葉','<b>朱蕉</b>的葉子含有大量花青素，是紅紫色的。',75,28,2],
+  ['antho','蝶豆花','藍紫色花','<b>蝶豆花</b>是藍紫色的花。',25,75,2],
+  ['antho','蝶豆花茶','溶在水裡','把蝶豆花泡在熱水裡，花青素<b>溶在水中</b>，水變成藍紫色。',75,75,2],
+  ['fruits6','紫葡萄','果皮','<b>紫葡萄的果皮</b>也含有花青素。',17,25,2.6],
+  ['dumplings','紫色水餃','會變色','煮水餃時加紫色高麗菜葉，水餃染成<b>紫色</b>；沾一點醋，又變成<b>粉紅色</b>！',40,65,1.8]],
+ smell:[['mint','薄荷','清涼','薄荷葉聞起來<b>清新</b>，常加在冰淇淋、糖果裡。',50,50,1.8],
+  ['herbs','九層塔','料理香料','九層塔常加在三杯雞、麵和湯裡，增添香氣。',20,50,2.4],
+  ['herbs','香茅','長長的莖葉','香茅有檸檬般的香味。',50,50,2.4],
+  ['herbs','迷迭香','針狀葉','迷迭香的葉子細細尖尖，像針一樣，有濃濃的香味。',80,50,2.4],
+  ['obs_smell','聞一聞','用鼻子','搓一搓葉子再聞，氣味更明顯。',60,45,1.6]],
+ charcoal:[['charcoal','竹子','長得快','竹子是一種<b>生長很快</b>的植物，可以做竹筷、竹椅、存錢筒。',25,50,2],
+  ['charcoal','竹炭','又黑又亮','竹子放進密閉的窯裡高溫加熱，變成<b>又黑又亮的竹炭</b>。竹炭有很多小孔洞，可以吸收水分、調節溼度。',70,55,2],
+  ['bamboo','竹葉','細長','竹子的葉子細細長長。',50,50,1.6]],
+ care:[['treehome','松鼠住樹洞','動物的家','<b>松鼠</b>棲息在樹洞裡。',22,72,2.6],
+  ['treehome','鳥在樹上築巢','動物的家','<b>鳥</b>在樹上築巢。',72,28,2.4],
+  ['cow','牛吃草','動物的食物','<b>牛</b>在牧場上吃草，植物是動物的食物來源。',40,55,1.6],
+  ['bird','鳥吃果實','動物的食物','鳥吃果實，也幫植物傳播種子。',60,50,1.5],
+  ['need_water','照顧植物','愛護','幫植物澆水，不亂摘，大家一起保護植物。',60,55,1.5]]
+};
+const PHYLLO=[['互生（1個節長1片）',[['banyan','榕樹','互生','每個節只長<b>1片</b>葉子，左右交互排列。',50,50,1.6],['sweetgum','楓香','互生','楓香的葉子像手掌，一個節長<b>1片</b>。',60,50,1.6]]],
+ ['對生（1個節長2片）',[['guava','番石榴','對生','每個節長<b>2片</b>葉子，面對面成對生長。',50,45,1.6],['osmanthus','桂花','對生','桂花的葉子<b>成對</b>，節上還開白色小花。',50,50,1.8],['wedelia','南美蟛蜞菊','對生','葉子兩兩相對，開黃色小花。',40,60,1.8],['ixora','大王仙丹花','對生','仙丹花的葉子也是<b>對生</b>。',30,60,1.8]]],
+ ['輪生（1個節長3片以上）',[['whorl','黑板樹','輪生','一個節長<b>好多片</b>葉子，排成一圈，像雨傘。',50,45,1.8],['allamanda','軟枝黃蟬','輪生','3～4片葉子圍成一圈。',30,40,1.8]]],
+ ['叢生（節很靠近）',[['plumeria','緬梔','叢生','節和節很近，葉子<b>集中</b>長在枝條頂端。',50,55,1.6],['qingjiang','青江菜','叢生','葉子從底部<b>集中</b>長出來。',50,55,1.5]]],
+ ['芽',[['buds','頂芽和側芽','芽','長在枝條頂端的叫<b>頂芽</b>；長在葉子和莖中間的叫<b>側芽</b>。',50,15,2.6]]]];
+const STEMS=[['木本莖：粗壯、高大、直立',[['tree','樟樹','木本莖','莖<b>粗壯</b>，可以長得很高，獲得更多陽光。',50,82,2.4],['terminalia','小葉欖仁','木本莖','樹幹直直的，樹枝一層一層像寶塔。',50,50,1.4],['kapok','木棉','瘤刺','木棉的樹幹上有尖尖的<b>瘤刺</b>。',50,50,1.6],['bark','樹皮','縱紋・皮孔','樹皮上有直直的<b>縱紋</b>和一點一點的<b>皮孔</b>。',50,50,2]]],
+ ['草本莖：細小、柔軟、矮小',[['herb','大花咸豐草','草本莖','莖細細的、綠綠的，可以直立，往四面八方長枝條。',50,60,1.6],['fireweed','昭和草','草本莖','柔軟的綠色莖，直直往上長。',50,60,1.6],['periwinkle','長春花','綠色的莖','長春花（日日春）的莖是<b>綠色</b>的。',52,57,3],['coleus','彩葉草','草本莖','彩葉草的莖矮小柔軟，可以直立。',50,50,1.5]]],
+ ['藤本莖：柔軟、要攀爬',[['vine','牽牛花','纏繞','莖會<b>纏繞</b>在竹竿上往上長。',53,50,2],['cairica','槭葉牽牛','攀爬','攀爬在牆壁和圍籬上。',50,50,1.5],['tendril','絲瓜','卷鬚','絲瓜的莖會長出<b>卷鬚</b>，捲住東西往上爬。',22,40,2.4]]]];
+const FLOWERS=[['校園常見的花',[['murraya','月橘','香味','白色小花，有<b>香香的氣味</b>。',22,40,2.4],['bauhinia','豔紫荊','花瓣大','5片大大的粉紫色花瓣，雄蕊長長彎彎的。',50,50,1.6],['azalea','杜鵑','顏色鮮豔','花瓣顏色鮮豔，吸引蜜蜂。',50,45,1.6],['lisianthus','洋桔梗','杯子形','紫色花瓣包成杯子形。',50,50,1.6],['balloonflower','桔梗','像氣球','花苞<b>鼓鼓的像氣球</b>，開花像星星。',85,55,2.2],['rose','玫瑰','莖有刺','紅色花瓣一層一層，莖上有<b>刺</b>。',50,40,1.6],['guava1','番石榴花','雄蕊多','白色的花有<b>很多雄蕊</b>。',50,45,1.8],['ixora','仙丹花','一團團','很多小花聚成一團。',40,40,1.8]]],
+ ['四季的花',[['cherry','山櫻花','春','春天開花。',50,45,1.6],['lotus','荷花','夏','夏天在水中開花。',55,40,1.6],['daylily','金針花','夏','夏天山上開滿橘色金針花。',50,60,1.6],['goldenrain','臺灣欒樹','秋','秋天開黃花、結紅果。',45,45,1.6],['plum','梅花','冬','冬天開白色梅花。',50,45,1.8]]]];
+
+/* ===== 首頁卡片 / 課程架構 ===== */
+const lessons=[...document.querySelectorAll('.lesson')];
+const grid=document.getElementById('lessonGrid');
+lessons.forEach(sec=>{
+  const b=document.createElement('button');b.className='lcard';b.onclick=()=>go(sec.id);
+  b.innerHTML=`<div class="pic" style="background-image:url('${sec.dataset.pic}')"></div><div class="t"><span class="no">${sec.dataset.no}</span><span class="nm">${sec.dataset.title}</span></div>`;
+  grid.appendChild(b);
+  const head=document.createElement('div');head.className='lhead';
+  head.innerHTML=`<span class="badge">${sec.dataset.no}</span><h2>${sec.dataset.title}</h2>`;
+  const steps=[...sec.querySelectorAll(':scope > .step')];
+  const bar=document.createElement('nav');bar.className='stepbar';
+  steps.forEach((st,i)=>{
+    const h=document.createElement('h3');h.innerHTML=`<span class="n">${i+1}</span>${st.dataset.label}`;st.prepend(h);
+    const c=document.createElement('button');c.textContent=i+1;c.title=st.dataset.label;c.onclick=()=>setStep(sec,i);bar.appendChild(c);
+  });
+  const nav=document.createElement('div');nav.className='stepnav';
+  nav.innerHTML='<button class="prev">◀ 上一步</button><button class="next">下一步 ▶</button>';
+  nav.querySelector('.prev').onclick=()=>setStep(sec,sec._i-1);
+  nav.querySelector('.next').onclick=()=>{ if(sec._i<steps.length-1) setStep(sec,sec._i+1); else nextLesson(sec); };
+  sec.prepend(bar);sec.prepend(head);sec.appendChild(nav);
+  sec._steps=steps;sec._bar=bar;sec._nav=nav;sec._i=0;
+});
+function setStep(sec,i){
+  if(i<0||i>=sec._steps.length)return;
+  sec._i=i;
+  sec._steps.forEach((s,k)=>s.classList.toggle('on',k===i));
+  [...sec._bar.children].forEach((c,k)=>{c.classList.toggle('on',k===i);if(k===i)c.classList.add('seen')});
+  sec._nav.querySelector('.prev').disabled=i===0;
+  const last=i===sec._steps.length-1, idx=lessons.indexOf(sec);
+  sec._nav.querySelector('.next').textContent= last ? (idx<lessons.length-1?'下一課 ▶':'回首頁 🏠') : '下一步 ▶';
+  const top=sec.getBoundingClientRect().top+scrollY-70; if(scrollY>top) scrollTo({top,behavior:'smooth'});
+  sec._steps[i].querySelectorAll('.zoombox').forEach(z=>z._reset&&z._reset());
+}
+function nextLesson(sec){const i=lessons.indexOf(sec);go(i<lessons.length-1?lessons[i+1].id:'home');}
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('show',p.id===id));
+  const sec=document.getElementById(id);
+  document.getElementById('nowTitle').textContent= id==='home'?'植物大發現':`${sec.dataset.no}｜${sec.dataset.title}`;
+  if(sec.classList.contains('lesson'))setStep(sec,sec._i||0);
+  if(location.hash!=='#'+id)history.pushState(null,'','#'+id);
+  scrollTo(0,0);
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-show]');if(!b)return;
+  b.classList.add('on');const t=document.getElementById(b.dataset.show);if(t)t.classList.add('show');
+});
+
+/* ===== 放大鏡 ===== */
+function makeZoom(box,img){
+  box.innerHTML=`<div class="zin"><img src="${img}" alt=""></div><div class="ring"></div><span class="zlabel"></span><button class="back">↩ 全圖</button>`;
+  const zin=box.querySelector('.zin'),ring=box.querySelector('.ring');
+  box._zoom=(x,y,s,label)=>{
+    const W=box.clientWidth,H=box.clientHeight;
+    let tx=W/2-x/100*W*s, ty=H/2-y/100*H*s;
+    tx=Math.min(0,Math.max(W-W*s,tx)); ty=Math.min(0,Math.max(H-H*s,ty));
+    zin.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;
+    ring.style.left=(x/100*W*s+tx)+'px'; ring.style.top=(y/100*H*s+ty)+'px';
+    box.classList.add('zoomed'); box.querySelector('.zlabel').textContent=label||'';
+  };
+  box._reset=()=>{zin.style.transform='';box.classList.remove('zoomed');ring.style.left='50%';ring.style.top='50%';box._onreset&&box._onreset();};
+  box.querySelector('.back').onclick=()=>box._reset();
+}
+document.querySelectorAll('.zoombox[data-img]').forEach(box=>{
+  makeZoom(box,box.dataset.img);
+  const parts=ZOOM[box.id]; if(!parts)return;
+  const info=document.getElementById(box.id+'-info'), wrap=document.querySelector(`[data-zoom="${box.id}"]`), btns=[];
+  const pick=i=>{const p=parts[i];box._zoom(p[1],p[2],p[3],`${i+1}. ${p[0]}`);btns.forEach((b,k)=>b.classList.toggle('on',k===i));info.innerHTML=`<h4>🔍 ${i+1}. ${p[0]}</h4><p>${p[4]}</p>`;};
+  parts.forEach((p,i)=>{
+    if(!box.dataset.nohot){const h=document.createElement('button');h.className='hot';h.textContent=i+1;h.style.left=p[1]+'%';h.style.top=p[2]+'%';h.onclick=()=>pick(i);box.appendChild(h);}
+    if(wrap){const b=document.createElement('button');b.className='bb';b.innerHTML=`<span class="num">${i+1}</span>${p[0]}`;b.onclick=()=>pick(i);wrap.appendChild(b);btns.push(b);}
+  });
+  if(wrap){const a=document.createElement('button');a.className='bb';a.textContent='🔍 全圖';a.onclick=()=>box._reset();wrap.appendChild(a);}
+  box._onreset=()=>btns.forEach(b=>b.classList.remove('on'));
+});
+addEventListener('resize',()=>document.querySelectorAll('.zoombox').forEach(z=>z._reset&&z._reset()));
+
+/* ===== 圖鑑 + 燈箱 ===== */
+let LB={list:[],i:0,zoomed:false};
+const lbBox=document.getElementById('lbZoom');
+function renderGallery(el,list){
+  el.classList.add('gallery');
+  list.forEach((it,i)=>{
+    const c=document.createElement('button');c.className='gcard';
+    c.innerHTML=`<span class="gno">${i+1}</span><img src="images/${it[0]}.jpg" alt="${it[1]}" loading="lazy"><span class="gt"><b>${it[1]}</b><span class="tag">${it[2]}</span></span>`;
+    c.onclick=()=>{c.classList.add('seen');lbOpen(list,i,el);};
+    el.appendChild(c);
+  });
+}
+document.querySelectorAll('[data-g]').forEach(el=>renderGallery(el,G[el.dataset.g]));
+function groups(boxId,data){const box=document.getElementById(boxId);data.forEach(([t,list])=>{const h=document.createElement('div');h.className='gsec';h.textContent=t;box.appendChild(h);const g=document.createElement('div');box.appendChild(g);renderGallery(g,list);});}
+groups('phylloBox',PHYLLO);groups('stemBox',STEMS);groups('flowerBox',FLOWERS);
+function lbOpen(list,i,el){LB.list=list;LB.el=el;document.getElementById('lb').classList.add('on');lbShow(i);}
+function lbShow(i){
+  LB.i=(i+LB.list.length)%LB.list.length;const it=LB.list[LB.i];
+  const im=new Image();im.src=`images/${it[0]}.jpg`;
+  im.onload=()=>{lbBox.style.aspectRatio=`${im.naturalWidth}/${im.naturalHeight}`;makeZoom(lbBox,im.src);
+    setTimeout(()=>{lbBox._zoom(it[4],it[5],it[6],it[1]);LB.zoomed=true;},450);};
+  document.getElementById('lbTag').textContent=it[2];
+  document.getElementById('lbName').textContent=`${LB.i+1}. ${it[1]}`;
+  document.getElementById('lbText').innerHTML=it[3];
+  const nums=document.getElementById('lbNums');nums.innerHTML='';
+  LB.list.forEach((_,k)=>{const b=document.createElement('button');b.textContent=k+1;if(k===LB.i)b.classList.add('on');b.onclick=()=>lbShow(k);nums.appendChild(b);});
+  if(LB.el)LB.el.querySelectorAll('.gcard')[LB.i]?.classList.add('seen');
+}
+function lbMove(d){lbShow(LB.i+d);}
+function lbZoomToggle(){const it=LB.list[LB.i];if(LB.zoomed){lbBox._reset();LB.zoomed=false;}else{lbBox._zoom(it[4],it[5],it[6],it[1]);LB.zoomed=true;}}
+function lbClose(){document.getElementById('lb').classList.remove('on');}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')lbClose();});
+addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('on'))return;if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);if(e.key==='Escape')lbClose();});
+
+/* ===== 生物分類 ===== */
+[['butterfly','蝴蝶','animal','動物'],['banyan_roots','榕樹','plant','植物'],['stones','石頭','non','非生物'],['bird','五色鳥','animal','動物'],['ixora','仙丹花','plant','植物'],['bench','鐵椅','non','非生物'],['goldfish','魚','animal','動物'],['herb','小草','plant','植物']]
+.forEach(([img,n,c,a])=>{const d=document.createElement('div');d.className='sort-item '+c;d.innerHTML=`<img src="images/${img}.jpg" alt="${n}"><b>${n}</b><span class="ans">${a}</span>`;d.onclick=()=>d.classList.add('done');sortGrid.appendChild(d);});
+
+/* ===== 葉形葉緣葉脈 ===== */
+const LT=[['zHib',[[50,52,1,'卵形（像雞蛋）'],[87,40,3,'鋸齒狀'],[40,53,2.6,'網狀脈']]],
+          ['zSwp',[[50,50,1,'心形（像愛心）'],[16,50,3,'平滑狀'],[48,53,2.6,'網狀脈']]],
+          ['zLily',[[50,50,1,'披針形（細長形）'],[65,40,3,'平滑狀'],[48,55,3,'平行脈']]]];
+function leafTable(k,b){document.querySelectorAll('#ltBtns .bb').forEach(x=>x.classList.toggle('on',x===b));
+  LT.forEach(([id,arr],j)=>{const z=document.getElementById(id);
+    if(k<0){z._reset();document.getElementById('lt'+j).textContent='—';return;}
+    const p=arr[k]; if(p[2]===1){z._reset();z.classList.add('zoomed');z.querySelector('.zlabel').textContent=p[3];} else z._zoom(p[0],p[1],p[2],p[3]);
+    document.getElementById('lt'+j).innerHTML=`<span class="key">${p[3]}</span>`;});}
+
+/* ===== 各種動畫 ===== */
+function sunAll(b){b.classList.add('on');document.querySelectorAll('#l3 .lit').forEach((p,i)=>setTimeout(()=>{p.classList.add('on');p.querySelector('.sunbeam').classList.add('on');},i*400));
+  sunTxt.innerHTML='✅ 葉子<span class="key">互相錯開</span>，大部分葉子都照得到<span class="k-sun">陽光</span>，可以做更多養分！';}
+function trunk(k,b){b.classList.add('on');document.getElementById('trunk'+k).style.opacity=1;
+  trunkTxt.innerHTML={S:'💪 莖可以<span class="key">支撐</span>植物的身體，讓植物往上長、爭取陽光（白色箭頭）。',W:'💧 根吸收的<span class="k-water">水分</span>，經過莖<b>往上</b>送到葉子（藍色）。',F:'🍬 葉子做好的<span class="k-food">養分</span>，經過莖<b>往下</b>送到全身（橘色）。'}[k];}
+function growVine(b){b.classList.add('on');const p=document.getElementById('vinePath');p.style.transition='none';p.style.strokeDashoffset=4000;p.getBoundingClientRect();p.style.transition='stroke-dashoffset 5s ease-in-out';p.style.strokeDashoffset=0;}
+function rootJob(k,b){b.classList.add('on');
+  if(k==='hold'){rootHold.style.opacity=1;rootPhoto.animate([{transform:'rotate(0)'},{transform:'rotate(2deg)'},{transform:'rotate(-2deg)'},{transform:'rotate(1deg)'},{transform:'rotate(0)'}],{duration:1800,iterations:2});
+    rootTxt.innerHTML='🌬️ 風吹過來，植物搖一搖，但是<span class="key">根緊緊抓住土壤</span>，植物不會倒！';}
+  else{rootW.style.opacity=1;rootHold.style.opacity=0;rootTxt.innerHTML='💧 土裡的<span class="k-water">水分</span>被根吸進來，再經過莖往上送（藍色箭頭）。';}}
+function exp(n,b){b.classList.add('on');
+  if(n===1)expTxt.innerHTML='🌿 把植物的<b>根</b>放進裝水的瓶子裡（左瓶）；右瓶<b>只裝水</b>，用來比較。';
+  if(n===2){expClay.style.opacity=1;expTxt.innerHTML='🟫 用<b>膠泥</b>封住瓶口（黃圈），水就不會從瓶口跑掉。';}
+  if(n===3){expMark.style.opacity=1;expTxt.innerHTML='🖍️ 在水面的位置畫上<span class="k-red">紅色記號</span>。';}
+  if(n===4){expBox.classList.add('on');expLab.classList.add('show');setTimeout(()=>expArrow.style.opacity=1,2500);
+    expTxt.innerHTML='⏰ 過了幾天，有植物的瓶子<span class="k-water">水位下降</span>，比紅線低了！只有水的瓶子水位不變。';}
+  if(n===5)expTxt.innerHTML='✅ <b>結論</b>：植物生長需要的水，是由<span class="key">根</span>吸收的！';}
+function pollenGo(){const box=document.getElementById('beeBox');for(let i=0;i<18;i++){const p=document.createElement('span');p.className='pollen';
+  p.style.left=(35+Math.random()*20)+'%';p.style.top=(45+Math.random()*15)+'%';box.appendChild(p);
+  p.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${200+Math.random()*250}px,${-150+Math.random()*120}px) scale(.6)`,opacity:0}],{duration:2000+Math.random()*1200,delay:i*120,fill:'forwards',easing:'ease-out'});}}
+const GTXT=['🌼 番石榴開出白色的花，有很多<b>雄蕊</b>。','🥀 <b>花瓣掉落</b>，花謝的地方開始長出小小的綠色果實。','🍐 果實慢慢<b>長大</b>，成熟時有香味。','🌰 切開果實，裡面有很多<span class="key">種子</span>！果實可以保護種子。'];
+function guava(i){document.querySelectorAll('#guavaSeq img').forEach((im,k)=>im.classList.toggle('on',k===i));
+  document.querySelectorAll('#guavaBtns .bb').forEach((b,k)=>b.classList.toggle('on',k===i));
+  guavaLab.textContent=['1. 開花','2. 花謝了','3. 長成果實','4. 裡面有種子'][i];guavaTxt.innerHTML=GTXT[i];}
+const GRT=['🌱 <b>春</b>：長出新的<b>綠色葉子</b>。','🌼 <b>夏末</b>：樹頂開出滿滿的<b style="color:#c49000">黃色小花</b>。','🎈 <b>初秋</b>：結出<b style="color:#d84343">紅色氣球般的果實</b>。','🍂 <b>冬</b>：葉子掉落，果實變成<b style="color:#8d6e63">褐色</b>，種子隨風飄走。'];
+function grSeason(i){document.querySelectorAll('#grSeq img').forEach((im,k)=>im.classList.toggle('on',k===i));document.querySelectorAll('#grBtns .bb').forEach((b,k)=>b.classList.toggle('on',k===i));grLab.textContent=['春','夏末','初秋','冬'][i];grTxt.innerHTML=GRT[i];}
+function guavaPlay(){[0,1,2,3].forEach(i=>setTimeout(()=>guava(i),i*2200));}
+function windGo(b){b.classList.add('on');const box=document.getElementById('balloons');box.innerHTML='';
+  for(let i=0;i<8;i++){const s=document.createElement('img');s.src='images/seedpod.png';
+    s.style.cssText=`position:absolute;left:${15+Math.random()*40}%;top:${15+Math.random()*55}%;width:${60+Math.random()*30}px`;box.appendChild(s);
+    s.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${350+Math.random()*350}px,${-100+Math.random()*200}px) rotate(${200+Math.random()*300}deg)`,opacity:0}],{duration:2800+Math.random()*1500,delay:i*250,fill:'forwards',easing:'ease-in'});}}
+const FLOWTXT={1:'💧 <b>第1步</b>：<span class="k-water">根</span>從土裡<span class="k-water">吸收水分</span>。',
+  2:'⬆️ <b>第2步</b>：水分經過<span class="key">莖</span>，<span class="k-water">往上</span>送到每一片葉子。',
+  3:'☀️ <b>第3步</b>：<span class="k-sun">陽光</span>照在葉子上，葉子也接觸到<span class="k-air">空氣</span>。',
+  4:'🏭 <b>第4步</b>：葉子用<span class="k-water">水</span>、<span class="k-air">空氣</span>和<span class="k-sun">陽光</span>，<span class="key">製造養分</span>（光合作用）。',
+  5:'⬇️ <b>第5步</b>：<span class="k-food">養分</span>經過葉脈和莖，<span class="k-food">送到全身</span>：根、莖、花和果實。',
+  all:'🌱 全部一起看：<span class="k-water">藍色水分往上</span>，<span class="k-food">橘色養分送全身</span>，植物就這樣長大！'};
+function flowStep(n,b){flow.setAttribute('class','ov '+(n==='all'?'all':'s'+n));
+  document.querySelectorAll('#flowBtns .bb').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('#flowWrap .lab').forEach(l=>l.classList.toggle('show',n==='all'||l.dataset.s==n));
+  flowTxt.innerHTML='<p>'+FLOWTXT[n]+'</p>';}
+
+/* ===== 快問快答 ===== */
+const QUIZ=[
+ ['bokchoy','植物哪個部位長在土裡、會吸收水分？',['葉','根','花'],1,'根會抓住土壤、吸收水分和養分。'],
+ ['leaf','葉子主要的工作是什麼？',['照陽光製造養分','吸引蜜蜂','固定植物'],0,'葉子照陽光，製造養分。'],
+ ['lily_leaf','百合葉子一條一條直直的紋路是哪種葉脈？',['網狀脈','平行脈'],1,'百合是平行脈。'],
+ ['guava','一個節長兩片葉子、面對面，是哪種葉序？',['互生','對生','輪生'],1,'對生：1個節長2片葉子。'],
+ ['whorl','黑板樹一個節長很多片葉子排成一圈，是哪種葉序？',['互生','對生','輪生'],2,'輪生：1個節長3片以上。'],
+ ['vine','牽牛花的莖要攀爬，是哪一種莖？',['木本莖','草本莖','藤本莖'],2,'藤本莖柔軟，要攀附別的東西。'],
+ ['kapok','木棉粗壯高大，是哪一種莖？',['木本莖','草本莖','藤本莖'],0,'木本莖粗壯高大。'],
+ ['onion','蔥的根粗細都差不多，是哪一種根？',['鬚根','軸根'],0,'像鬍鬚一樣的是鬚根。'],
+ ['azalea','花的哪個部位會發育成果實？',['花萼','雄蕊','雌蕊'],2,'雌蕊下面會發育成果實。'],
+ ['loofah_flowers','絲瓜的雄花沒有雌蕊，是什麼花？',['完全花','不完全花'],1,'少了一部分構造就是不完全花。'],
+ ['guava4','種子長在哪裡？',['果實裡面','葉子上','根裡面'],0,'果實裡面有種子。'],
+ ['plantbox','水分在植物身體裡往哪裡走？',['從葉子往下到根','從根往上到葉子'],1,'藍色箭頭：根吸水，經過莖往上送。'],
+ ['bodhi','菩提葉的尾尖有什麼功能？',['儲存水分','讓雨水滑落','吸引鳥'],1,'菩提生長在多雨的地方。'],
+ ['goldenrain','臺灣欒樹的果實怎麼傳播種子？',['靠風','靠鳥','靠水'],0,'像氣球一樣又輕又薄，靠風傳播。']];
+(function(){let right=0,done=0;
+  QUIZ.forEach((it,i)=>{const d=document.createElement('div');d.className='q';
+    d.innerHTML=`<img src="images/${it[0]}.jpg" alt=""><div><div class="qt">${i+1}. ${it[1]}</div><div class="opts">${it[2].map((o,k)=>`<button data-k="${k}">${o}</button>`).join('')}</div><div class="why">💡 ${it[4]}</div></div>`;
+    d.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{if(d.classList.contains('done'))return;const k=+btn.dataset.k;
+      if(k===it[3]){btn.classList.add('right');d.classList.add('done');done++;if(!d._miss)right++;}else{btn.classList.add('wrong');d._miss=true;}
+      score.textContent=`答對 ${right} / ${done}　（共 ${QUIZ.length} 題）`;});
+    quiz.appendChild(d);});
+  score.textContent=`答對 0 / 0　（共 ${QUIZ.length} 題）`;})();
+
+/* ===== 畫筆 ===== */
+const cv=document.getElementById('penCanvas'),ctx=cv.getContext('2d');let penColor='#2f80ed',drawing=false,last=null;
+function sizeCanvas(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;ctx.setTransform(r,0,0,r,0,0);ctx.lineCap='round';ctx.lineJoin='round';}
+function togglePen(){const on=!penLayer.classList.contains('on');penLayer.classList.toggle('on',on);penBar.classList.toggle('on',on);if(on&&!cv._s){sizeCanvas();cv._s=1;}}
+function penClear(){ctx.clearRect(0,0,cv.width,cv.height);}
+document.querySelectorAll('#penBar .c').forEach(b=>b.onclick=()=>{penColor=b.dataset.c;document.querySelectorAll('#penBar .c').forEach(x=>x.classList.toggle('sel',x===b));});
+cv.addEventListener('pointerdown',e=>{drawing=true;last=[e.clientX,e.clientY];cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{if(!drawing)return;ctx.strokeStyle=penColor;ctx.globalAlpha=.85;ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(...last);ctx.lineTo(e.clientX,e.clientY);ctx.stroke();last=[e.clientX,e.clientY];});
+['pointerup','pointercancel'].forEach(t=>cv.addEventListener(t,()=>drawing=false));
+addEventListener('resize',()=>{if(cv._s)sizeCanvas();});
+
+const start=location.hash.slice(1);go(document.getElementById(start)?start:'home');
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(document.getElementById(h))go(h);});
+</script>
+</body>
+</html>
