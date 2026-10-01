@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>感恩節解謎任務｜全民補習班</title>
+<meta name="description" content="感恩節單字密碼與小偵探推理卡，分低、中、高年級，低年級附注音。">
+<meta property="og:title" content="感恩節解謎任務">
+<meta property="og:description" content="感恩節單字密碼與小偵探推理卡，分低、中、高年級，低年級附注音。">
+<meta property="og:url" content="https://teaching.efetl.com/thanksgiving/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#fbfaf7; --sheet:#ffffff; --ink:#2a2622; --muted:#5f574e; --line:#ddd5ca;
+  --c:#b5561c; --soft:#f8e6d6; --c2:#5f7a2a; --soft2:#e9eed9;
+  --display:"LXGW WenKai TC","Kaiti TC","STKaiti",serif;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#1c1a17; --sheet:#25221e; --ink:#f1ece4; --muted:#bdb3a6; --line:#403a33;
+  --c:#e8925a; --soft:#3a2618; --c2:#a9c46a; --soft2:#262d1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1c1a17; --sheet:#25221e; --ink:#f1ece4; --muted:#bdb3a6; --line:#403a33;
+  --c:#e8925a; --soft:#3a2618; --c2:#a9c46a; --soft2:#262d1a; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:20px;line-height:1.75;margin:0}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 60px}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.35;text-wrap:balance;margin:0}
+p{margin:0}
+
+header.top{padding-block:44px 20px}
+.eyebrow{font-size:18px;letter-spacing:.12em;color:var(--muted)}
+h1{font-size:clamp(38px,6vw,56px);margin-top:6px}
+.lead{max-width:40em;margin-top:14px;color:var(--muted)}
+
+/* level switch */
+.levels{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);margin-inline:-16px;padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.levels button{font:inherit;font-family:var(--display);font-size:22px;padding:6px 20px;border-radius:999px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer;min-height:44px}
+.levels button[aria-selected="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.levels button:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+.levels .note{font-size:17px;color:var(--muted);margin-left:auto}
+.levels .jump{display:flex;gap:6px;width:100%}
+.levels .jump a{font-size:17px;color:var(--muted);text-decoration:none;border-bottom:1px dashed var(--muted)}
+.levels .jump a + a{margin-left:12px}
+
+section{padding-top:40px;scroll-margin-top:110px}
+.sec{--k:var(--c);--ks:var(--soft)}
+.sec.det{--k:var(--c2);--ks:var(--soft2)}
+.sec-head{border-top:6px solid var(--k);padding-top:18px}
+.sec-head h2{font-size:clamp(30px,5vw,42px);color:var(--k)}
+.intro{margin-top:8px;max-width:42em;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px;margin-top:18px}
+.sheet{background:var(--sheet);border:2px dashed var(--line);border-radius:6px;padding:22px 22px 24px;min-width:0}
+.tag{display:inline-block;font-size:18px;color:var(--k);border:1px solid var(--k);border-radius:4px;padding:0 8px}
+.stars{font-size:18px;color:var(--k);margin-left:6px;letter-spacing:.1em}
+.sheet h4{font-size:26px;margin-top:10px}
+.sub{color:var(--muted);font-size:18px;margin-top:2px}
+.sheet ol,.sheet ul{margin:10px 0 0;padding-left:1.4em}
+.sheet li{margin-top:4px}
+.blank{display:inline-block;min-width:5em;border-bottom:2px solid var(--muted);margin:0 4px}
+.code{font-family:var(--display);font-size:24px;letter-spacing:.06em;margin-top:10px;word-break:break-word;background:var(--ks);border-radius:6px;padding:6px 12px}
+.hint{margin-top:10px;font-size:18px;color:var(--muted);border-left:3px solid var(--k);padding-left:10px}
+.ans{margin-top:14px}
+.ans summary{cursor:pointer;color:var(--k);font-size:18px}
+.ans div{margin-top:6px;font-size:18px;color:var(--muted)}
+.table-wrap{overflow-x:auto;margin-top:12px}
+table{border-collapse:collapse;font-size:18px;min-width:100%}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:center}
+th{background:var(--ks);font-weight:500}
+td.key{font-family:var(--display);font-size:17px;padding:4px 6px}
+td.w{height:2.2em}
+.slots{display:grid;gap:8px;margin-top:12px}
+.slots span{aspect-ratio:1;border:1.5px solid var(--muted);border-radius:50%;display:flex;align-items:flex-end;justify-content:center;font-size:16px;color:var(--muted);padding-bottom:4px}
+.lines{margin-top:12px;display:flex;flex-direction:column;gap:24px}
+.lines span{border-bottom:1.5px solid var(--line);height:1px}
+.exprs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.exprs span{font-family:var(--display);font-size:20px;background:var(--ks);border-radius:6px;padding:2px 10px;text-align:center;min-width:4.2em}
+.exprs span i{display:block;font-style:normal;border-top:1.5px solid var(--muted);margin-top:4px;height:1.4em}
+.exprs .gap{background:none;min-width:1em}
+
+/* 注音（低年級）：直式注音放在字的右邊 */
+.zy{font-size:24px;line-height:2.1}
+.zy .sub,.zy .hint,.zy .ans div,.zy table{font-size:22px}
+.zc{display:inline-flex;align-items:center;vertical-align:middle;margin-right:.24em;line-height:1}
+.zc .b{display:inline-flex;flex-direction:column;align-items:center;font-family:var(--body);font-size:max(.46em,12px);line-height:1.02;font-weight:400;color:var(--muted);margin-left:.06em;min-width:1.05em}
+.zc .b i{font-style:normal;position:relative}
+.zc .b i.n{line-height:.6}
+.zc .b u{text-decoration:none;position:absolute;left:92%;top:-.45em}
+.zy h2 .zc .b,.zy h4 .zc .b{font-size:max(.34em,12px)}
+
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:18px}
+@media (max-width:560px){body{font-size:19px}.code{font-size:21px}.levels button{font-size:20px;padding:6px 14px}.levels .note{margin-left:0;width:100%}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.levels,.ans,header.top .lead{display:none}.sheet{break-inside:avoid}}
+</style>
+
+<style>
+body{margin:0}
+.home{position:fixed;top:12px;right:12px;z-index:9;background:#2b4c8c;color:#fff;padding:6px 14px;border-radius:8px;text-decoration:none;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+@media print{.home{display:none}}
+</style>
+</head>
+<body>
+<a class="home" href="/">← 回首頁</a>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">感恩節・動腦任務卡</div>
+  <h1>感恩節解謎任務</h1>
+  <p class="lead">先選年級。每個年級都有單字密碼和小偵探推理卡，星星越多越難。答案要寫「因為」，說出你是怎麼想的。列印時只會印出目前選的年級，答案會自動隱藏。</p>
+  <p class="lead" style="margin-top:12px"><a href="escape.html" style="display:inline-block;background:var(--c);color:#fff;text-decoration:none;border-radius:999px;padding:6px 20px;font-size:18px">🌽 紙本農場闖關版：分隊闖關玩法 →</a></p>
+</header>
+
+<div class="levels" role="tablist" aria-label="選擇年級">
+  <button role="tab" id="t-low" aria-controls="p-low" aria-selected="true" data-lv="low">低年級</button>
+  <button role="tab" id="t-mid" aria-controls="p-mid" aria-selected="false" data-lv="mid">中年級</button>
+  <button role="tab" id="t-high" aria-controls="p-high" aria-selected="false" data-lv="high">高年級</button>
+  <span class="note" id="lvnote">一、二年級・有注音</span>
+  <div class="jump"><a href="#" data-to="cipher">單字密碼</a><a href="#" data-to="detective">小偵探推理卡</a></div>
+</div>
+<div id="p-low" role="tabpanel" aria-labelledby="t-low" class="zy">
+<section class="sec" data-sec="cipher">
+  <div class="sec-head"><h2><span class="zc">感<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄢ<u>ˇ</u></i></span></span><span class="zc">恩<span class="b" aria-hidden="true"><i>ㄣ</i></span></span><span class="zc">節<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄝ<u>ˊ</u></i></span></span><span class="zc">單<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄢ</i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">密<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄧ<u>ˋ</u></i></span></span><span class="zc">碼<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄚ<u>ˇ</u></i></span></span></h2></div>
+  <p class="intro"><span class="zc">先<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄢ</i></span></span><span class="zc">算<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">數<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">學<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄩ</i><i>ㄝ<u>ˊ</u></i></span></span>，<span class="zc">再<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">把<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˇ</u></i></span></span><span class="zc">數<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">變<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">成<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">母<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄨ<u>ˇ</u></i></span></span>。</p>
+  <div class="grid">
+    <div class="sheet">
+      <span class="tag"><span class="zc">第<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄧ<u>ˋ</u></i></span></span>1<span class="zc">關<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄨ</i><i>ㄢ</i></span></span></span><span class="stars">★★</span>
+      <h4><span class="zc">算<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">算<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄢ<u>ˋ</u></i></span></span>，<span class="zc">變<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">出<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄨ</i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">母<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄨ<u>ˇ</u></i></span></span></h4>
+      <p class="sub"><span class="zc">先<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄢ</i></span></span><span class="zc">算<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">出<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄨ</i></span></span><span class="zc">答<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">寫<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄝ<u>ˇ</u></i></span></span><span class="zc">在<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">線<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">上<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄤ<u>ˋ</u></i></span></span>，<span class="zc">再<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">密<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄧ<u>ˋ</u></i></span></span><span class="zc">碼<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄚ<u>ˇ</u></i></span></span><span class="zc">表<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">找<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">母<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄨ<u>ˇ</u></i></span></span>。</p><div class="table-wrap"><table><tr><td class="key">A 1</td><td class="key">B 2</td><td class="key">C 3</td><td class="key">D 4</td><td class="key">E 5</td><td class="key">F 6</td><td class="key">G 7</td><td class="key">H 8</td><td class="key">I 9</td></tr><tr><td class="key">J 10</td><td class="key">K 11</td><td class="key">L 12</td><td class="key">M 13</td><td class="key">N 14</td><td class="key">O 15</td><td class="key">P 16</td><td class="key">Q 17</td><td class="key">R 18</td></tr><tr><td class="key">S 19</td><td class="key">T 20</td><td class="key">U 21</td><td class="key">V 22</td><td class="key">W 23</td><td class="key">X 24</td><td class="key">Y 25</td><td class="key">Z 26</td><td class="key"></td></tr></table></div><div class="exprs"><span>12+8<i></i></span><span>10+11<i></i></span><span>9+9<i></i></span><span>5+6<i></i></span><span>2+3<i></i></span><span>15+10<i></i></span></div><p style="margin-top:10px"><span class="zc">英<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄥ</i></span></span><span class="zc">文<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄣ<u>ˊ</u></i></span></span>：<span class="blank" style="min-width:6em"></span>　<span class="zc">中<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i><i>ㄥ</i></span></span><span class="zc">文<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄣ<u>ˊ</u></i></span></span>：<span class="blank" style="min-width:5em"></span></p>
+      <details class="ans"><summary><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">答<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span></summary><div>20、21、18、11、5、25 → TURKEY（<span class="zc">火<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span><span class="zc">雞<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i></span></span>）</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag"><span class="zc">第<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄧ<u>ˋ</u></i></span></span>2<span class="zc">關<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄨ</i><i>ㄢ</i></span></span></span><span class="stars">★★★</span>
+      <h4><span class="zc">不<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">見<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">母<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄨ<u>ˇ</u></i></span></span></h4>
+      <p class="sub"><span class="zc">每<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄟ<u>ˇ</u></i></span></span><span class="zc">個<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄜ<u>ˋ</u></i></span></span><span class="zc">單<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄢ</i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">都<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄡ</i></span></span><span class="zc">少<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">了<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄌ</i><i>ㄜ</i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">個<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄜ<u>ˋ</u></i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">母<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄨ<u>ˇ</u></i></span></span>。<span class="zc">找<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">出<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄨ</i></span></span><span class="zc">來<span class="b" aria-hidden="true"><i>ㄌ</i><i>ㄞ<u>ˊ</u></i></span></span>，<span class="zc">再<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">把<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˇ</u></i></span></span><span class="zc">三<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄢ</i></span></span><span class="zc">個<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄜ<u>ˋ</u></i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">母<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄨ<u>ˇ</u></i></span></span><span class="zc">照<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄠ<u>ˋ</u></i></span></span><span class="zc">順<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ</i><i>ㄣ<u>ˋ</u></i></span></span><span class="zc">序<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄩ<u>ˋ</u></i></span></span><span class="zc">排<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˊ</u></i></span></span><span class="zc">好<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄠ<u>ˇ</u></i></span></span>，<span class="zc">會<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">變<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">成<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">個<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄜ<u>ˋ</u></i></span></span><span class="zc">英<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄥ</i></span></span><span class="zc">文<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄣ<u>ˊ</u></i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span>！</p><ol><li><span class="code" style="display:inline-block;margin:0">l _ a f</span>　<span class="zc">葉<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄝ<u>ˋ</u></i></span></span><span class="zc">子<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄗ</i></span></span>　→ <span class="blank" style="min-width:2em"></span></li><li><span class="code" style="display:inline-block;margin:0">h _ t</span>　<span class="zc">帽<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄠ<u>ˋ</u></i></span></span><span class="zc">子<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄗ</i></span></span>　→ <span class="blank" style="min-width:2em"></span></li><li><span class="code" style="display:inline-block;margin:0">_ u r k e y</span>　<span class="zc">火<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span><span class="zc">雞<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i></span></span>　→ <span class="blank" style="min-width:2em"></span></li></ol><p style="margin-top:10px"><span class="zc">變<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">成<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span>：<span class="blank" style="min-width:5em"></span>　<span class="zc">意<span class="b" aria-hidden="true"><i>ㄧ<u>ˋ</u></i></span></span><span class="zc">思<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄙ</i></span></span>：<span class="blank" style="min-width:3em"></span></p>
+      <details class="ans"><summary><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">答<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span></summary><div>leaf、hat、turkey，<span class="zc">少<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">了<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄌ</i><i>ㄜ</i></span></span> E、A、T → EAT（<span class="zc">吃<span class="b" aria-hidden="true"><i>ㄔ</i></span></span>）！</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag"><span class="zc">第<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄧ<u>ˋ</u></i></span></span>3<span class="zc">關<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄨ</i><i>ㄢ</i></span></span></span><span class="stars">★★</span>
+      <h4><span class="zc">單<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄢ</i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span><span class="zc">配<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">對<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span></h4>
+      <p class="sub"><span class="zc">把<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˇ</u></i></span></span><span class="zc">英<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄥ</i></span></span><span class="zc">文<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄣ<u>ˊ</u></i></span></span><span class="zc">和<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄜ<u>ˊ</u></i></span></span><span class="zc">中<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i><i>ㄥ</i></span></span><span class="zc">文<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄣ<u>ˊ</u></i></span></span><span class="zc">連<span class="b" aria-hidden="true"><i>ㄌ</i><i>ㄧ</i><i>ㄢ<u>ˊ</u></i></span></span><span class="zc">起<span class="b" aria-hidden="true"><i>ㄑ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">來<span class="b" aria-hidden="true"><i>ㄌ</i><i>ㄞ<u>ˊ</u></i></span></span>。</p><div class="table-wrap"><table><tr><th><span class="zc">英<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄥ</i></span></span><span class="zc">文<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄣ<u>ˊ</u></i></span></span></th><td>turkey</td><td>corn</td><td>pie</td><td>leaf</td></tr><tr><th><span class="zc">中<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i><i>ㄥ</i></span></span><span class="zc">文<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄣ<u>ˊ</u></i></span></span></th><td><span class="zc">派<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˋ</u></i></span></span></td><td><span class="zc">葉<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄝ<u>ˋ</u></i></span></span><span class="zc">子<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄗ</i></span></span></td><td><span class="zc">火<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span><span class="zc">雞<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i></span></span></td><td><span class="zc">玉<span class="b" aria-hidden="true"><i>ㄩ<u>ˋ</u></i></span></span><span class="zc">米<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄧ<u>ˇ</u></i></span></span></td></tr></table></div><p style="margin-top:12px"><span class="zc">用<span class="b" aria-hidden="true"><i>ㄩ</i><i>ㄥ<u>ˋ</u></i></span></span><span class="zc">第<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄧ<u>ˋ</u></i></span></span>1<span class="zc">關<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄨ</i><i>ㄢ</i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">密<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄧ<u>ˋ</u></i></span></span><span class="zc">碼<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄚ<u>ˇ</u></i></span></span><span class="zc">表<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span>，<span class="zc">把<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˇ</u></i></span></span> pie <span class="zc">寫<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄝ<u>ˇ</u></i></span></span><span class="zc">成<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">數<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">字<span class="b" aria-hidden="true"><i>ㄗ<u>ˋ</u></i></span></span>：<span class="blank" style="min-width:2em"></span>-<span class="blank" style="min-width:2em"></span>-<span class="blank" style="min-width:2em"></span></p>
+      <details class="ans"><summary><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">答<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span></summary><div>turkey <span class="zc">火<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span><span class="zc">雞<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i></span></span>、corn <span class="zc">玉<span class="b" aria-hidden="true"><i>ㄩ<u>ˋ</u></i></span></span><span class="zc">米<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄧ<u>ˇ</u></i></span></span>、pie <span class="zc">派<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˋ</u></i></span></span>、leaf <span class="zc">葉<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄝ<u>ˋ</u></i></span></span><span class="zc">子<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄗ</i></span></span>。pie ＝ 16-9-5</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec det" data-sec="detective">
+  <div class="sec-head"><h2><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">偵<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄣ</i></span></span><span class="zc">探<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">推<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄨ</i><i>ㄟ</i></span></span><span class="zc">理<span class="b" aria-hidden="true"><i>ㄌ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">卡<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄚ<u>ˇ</u></i></span></span></h2></div>
+  <p class="intro"><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">條<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄧ</i><i>ㄠ<u>ˊ</u></i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">條<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄧ</i><i>ㄠ<u>ˊ</u></i></span></span><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">線<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">索<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span>，<span class="zc">把<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˇ</u></i></span></span><span class="zc">不<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">可<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄜ<u>ˇ</u></i></span></span><span class="zc">能<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">劃<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄨ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">掉<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄧ</i><i>ㄠ<u>ˋ</u></i></span></span>。</p>
+  <div class="grid">
+    <div class="sheet">
+      <span class="tag"><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">件<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span>1</span><span class="stars">★★</span>
+      <h4><span class="zc">誰<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄟ<u>ˊ</u></i></span></span><span class="zc">吃<span class="b" aria-hidden="true"><i>ㄔ</i></span></span><span class="zc">了<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄌ</i><i>ㄜ</i></span></span><span class="zc">最<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">後<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄡ<u>ˋ</u></i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">塊<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄨ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">派<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˋ</u></i></span></span>？</h4>
+      <p class="sub"><span class="zc">桌<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i><i>ㄛ</i></span></span><span class="zc">上<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄤ<u>ˋ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">派<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">不<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">見<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">了<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄌ</i><i>ㄜ</i></span></span>！<span class="zc">可<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄜ<u>ˇ</u></i></span></span><span class="zc">能<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">是<span class="b" aria-hidden="true"><i>ㄕ<u>ˋ</u></i></span></span><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鳥<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span>、<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">松<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄥ</i></span></span><span class="zc">鼠<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ<u>ˇ</u></i></span></span>、<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">熊<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄩ</i><i>ㄥ<u>ˊ</u></i></span></span>、<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">兔<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄨ<u>ˋ</u></i></span></span>。</p><ol><li><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鳥<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">那<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">時<span class="b" aria-hidden="true"><i>ㄕ<u>ˊ</u></i></span></span><span class="zc">候<span class="b" aria-hidden="true"><i>ㄏ</i><i>ㄡ<u>ˋ</u></i></span></span><span class="zc">在<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">天<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄧ</i><i>ㄢ</i></span></span><span class="zc">上<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄤ<u>ˋ</u></i></span></span><span class="zc">飛<span class="b" aria-hidden="true"><i>ㄈ</i><i>ㄟ</i></span></span>，<span class="zc">不<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">在<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">家<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄚ</i></span></span>。</li><li><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">熊<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄩ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">直<span class="b" aria-hidden="true"><i>ㄓ<u>ˊ</u></i></span></span><span class="zc">在<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">睡<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">覺<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄠ<u>ˋ</u></i></span></span>。</li><li><span class="zc">偷<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄡ</i></span></span><span class="zc">吃<span class="b" aria-hidden="true"><i>ㄔ</i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">動<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄨ</i><i>ㄥ<u>ˋ</u></i></span></span><span class="zc">物<span class="b" aria-hidden="true"><i>ㄨ<u>ˋ</u></i></span></span>，<span class="zc">有<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˇ</u></i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">條<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄧ</i><i>ㄠ<u>ˊ</u></i></span></span><span class="zc">大<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">大<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span>、<span class="zc">蓬<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">蓬<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">尾<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄟ<u>ˇ</u></i></span></span><span class="zc">巴<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄅ</i><i>ㄚ</i></span></span>。</li></ol><div class="table-wrap"><table><tr><th></th><th><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鳥<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span></th><th><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">松<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄥ</i></span></span><span class="zc">鼠<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ<u>ˇ</u></i></span></span></th><th><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">熊<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄩ</i><i>ㄥ<u>ˊ</u></i></span></span></th><th><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">兔<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄨ<u>ˋ</u></i></span></span></th></tr><tr><th><span class="zc">是<span class="b" aria-hidden="true"><i>ㄕ<u>ˋ</u></i></span></span><span class="zc">不<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">是<span class="b" aria-hidden="true"><i>ㄕ<u>ˋ</u></i></span></span></th><td></td><td></td><td></td><td></td></tr></table></div><p style="margin-top:10px"><span class="zc">是<span class="b" aria-hidden="true"><i>ㄕ<u>ˋ</u></i></span></span>：<span class="blank" style="min-width:5em"></span>　<span class="zc">因<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄣ</i></span></span><span class="zc">為<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span>：<span class="blank" style="min-width:8em"></span></p>
+      <details class="ans"><summary><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">答<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span></summary><div><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">松<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄥ</i></span></span><span class="zc">鼠<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ<u>ˇ</u></i></span></span>。<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鳥<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">在<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">飛<span class="b" aria-hidden="true"><i>ㄈ</i><i>ㄟ</i></span></span>、<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">熊<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄩ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">在<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">睡<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">覺<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄠ<u>ˋ</u></i></span></span>，<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">兔<span class="b" aria-hidden="true"><i>ㄊ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span><span class="zc">尾<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄟ<u>ˇ</u></i></span></span><span class="zc">巴<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄅ</i><i>ㄚ</i></span></span><span class="zc">短<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄨ</i><i>ㄢ<u>ˇ</u></i></span></span><span class="zc">短<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄨ</i><i>ㄢ<u>ˇ</u></i></span></span><span class="zc">的<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄉ</i><i>ㄜ</i></span></span>，<span class="zc">只<span class="b" aria-hidden="true"><i>ㄓ<u>ˇ</u></i></span></span><span class="zc">有<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˇ</u></i></span></span><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">松<span class="b" aria-hidden="true"><i>ㄙ</i><i>ㄨ</i><i>ㄥ</i></span></span><span class="zc">鼠<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄨ<u>ˇ</u></i></span></span><span class="zc">有<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˇ</u></i></span></span><span class="zc">大<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">尾<span class="b" aria-hidden="true"><i>ㄨ</i><i>ㄟ<u>ˇ</u></i></span></span><span class="zc">巴<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄅ</i><i>ㄚ</i></span></span>。</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag"><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">件<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span>2</span><span class="stars">★★★</span>
+      <h4><span class="zc">餐<span class="b" aria-hidden="true"><i>ㄘ</i><i>ㄢ</i></span></span><span class="zc">桌<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i><i>ㄛ</i></span></span><span class="zc">排<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˊ</u></i></span></span><span class="zc">排<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˊ</u></i></span></span><span class="zc">坐<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˋ</u></i></span></span></h4>
+      <p class="sub"><span class="zc">爸<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">爸<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄅ</i><i>ㄚ</i></span></span>、<span class="zc">媽<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄚ</i></span></span><span class="zc">媽<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄇ</i><i>ㄚ</i></span></span>、<span class="zc">哥<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄜ</i></span></span><span class="zc">哥<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄍ</i><i>ㄜ</i></span></span>、<span class="zc">妹<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">妹<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄇ</i><i>ㄟ</i></span></span><span class="zc">坐<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˋ</u></i></span></span><span class="zc">成<span class="b" aria-hidden="true"><i>ㄔ</i><i>ㄥ<u>ˊ</u></i></span></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">排<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄞ<u>ˊ</u></i></span></span>，<span class="zc">由<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˊ</u></i></span></span><span class="zc">左<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span><span class="zc">到<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄠ<u>ˋ</u></i></span></span><span class="zc">右<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˋ</u></i></span></span><span class="zc">是<span class="b" aria-hidden="true"><i>ㄕ<u>ˋ</u></i></span></span> 1、2、3、4。</p><ol><li><span class="zc">妹<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">妹<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄇ</i><i>ㄟ</i></span></span><span class="zc">坐<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˋ</u></i></span></span><span class="zc">最<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">左<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span><span class="zc">邊<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄢ</i></span></span>。</li><li><span class="zc">哥<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄜ</i></span></span><span class="zc">哥<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄍ</i><i>ㄜ</i></span></span><span class="zc">坐<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˋ</u></i></span></span><span class="zc">在<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄞ<u>ˋ</u></i></span></span><span class="zc">妹<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">妹<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄇ</i><i>ㄟ</i></span></span><span class="zc">旁<span class="b" aria-hidden="true"><i>ㄆ</i><i>ㄤ<u>ˊ</u></i></span></span><span class="zc">邊<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄢ</i></span></span>。</li><li><span class="zc">爸<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">爸<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄅ</i><i>ㄚ</i></span></span><span class="zc">不<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄨ<u>ˋ</u></i></span></span><span class="zc">坐<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˋ</u></i></span></span><span class="zc">最<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">右<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˋ</u></i></span></span><span class="zc">邊<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ</i><i>ㄢ</i></span></span>。</li></ol><div class="slots" style="grid-template-columns:repeat(4,1fr)"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <details class="ans"><summary><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">答<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span></summary><div><span class="zc">由<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˊ</u></i></span></span><span class="zc">左<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄛ<u>ˇ</u></i></span></span><span class="zc">到<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄠ<u>ˋ</u></i></span></span><span class="zc">右<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˋ</u></i></span></span>：<span class="zc">妹<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">妹<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄇ</i><i>ㄟ</i></span></span>、<span class="zc">哥<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄜ</i></span></span><span class="zc">哥<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄍ</i><i>ㄜ</i></span></span>、<span class="zc">爸<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄚ<u>ˋ</u></i></span></span><span class="zc">爸<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄅ</i><i>ㄚ</i></span></span>、<span class="zc">媽<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄚ</i></span></span><span class="zc">媽<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄇ</i><i>ㄚ</i></span></span>。</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag"><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">件<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i><i>ㄢ<u>ˋ</u></i></span></span>3</span><span class="stars">★★★</span>
+      <h4><span class="zc">玉<span class="b" aria-hidden="true"><i>ㄩ<u>ˋ</u></i></span></span><span class="zc">米<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">有<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˇ</u></i></span></span><span class="zc">幾<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>？</h4>
+      <p class="sub"><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">雞<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i></span></span><span class="zc">拿<span class="b" aria-hidden="true"><i>ㄋ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">了<span class="b" aria-hidden="true"><i class="n">˙</i><i>ㄌ</i><i>ㄜ</i></span></span> 3 <span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span><span class="zc">玉<span class="b" aria-hidden="true"><i>ㄩ<u>ˋ</u></i></span></span><span class="zc">米<span class="b" aria-hidden="true"><i>ㄇ</i><i>ㄧ<u>ˇ</u></i></span></span>。<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鴨<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄚ</i></span></span><span class="zc">比<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">雞<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ</i></span></span><span class="zc">多<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄨ</i><i>ㄛ</i></span></span> 2 <span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>。<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">豬<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i></span></span><span class="zc">比<span class="b" aria-hidden="true"><i>ㄅ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鴨<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄚ</i></span></span><span class="zc">少<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄠ<u>ˇ</u></i></span></span> 1 <span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>。</p><ol><li><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鴨<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄚ</i></span></span><span class="zc">有<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˇ</u></i></span></span><span class="zc">幾<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>？<span class="blank" style="min-width:3em"></span></li><li><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">豬<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i></span></span><span class="zc">有<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄡ<u>ˇ</u></i></span></span><span class="zc">幾<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>？<span class="blank" style="min-width:3em"></span></li><li><span class="zc">誰<span class="b" aria-hidden="true"><i>ㄕ</i><i>ㄟ<u>ˊ</u></i></span></span><span class="zc">最<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">多<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄨ</i><i>ㄛ</i></span></span>？<span class="blank" style="min-width:3em"></span><span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">共<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄨ</i><i>ㄥ<u>ˋ</u></i></span></span><span class="zc">幾<span class="b" aria-hidden="true"><i>ㄐ</i><i>ㄧ<u>ˇ</u></i></span></span><span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>？<span class="blank" style="min-width:3em"></span></li></ol>
+      <details class="ans"><summary><span class="zc">看<span class="b" aria-hidden="true"><i>ㄎ</i><i>ㄢ<u>ˋ</u></i></span></span><span class="zc">答<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄚ<u>ˊ</u></i></span></span><span class="zc">案<span class="b" aria-hidden="true"><i>ㄢ<u>ˋ</u></i></span></span></summary><div><span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鴨<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄚ</i></span></span> 5 <span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>、<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">豬<span class="b" aria-hidden="true"><i>ㄓ</i><i>ㄨ</i></span></span> 4 <span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>。<span class="zc">小<span class="b" aria-hidden="true"><i>ㄒ</i><i>ㄧ</i><i>ㄠ<u>ˇ</u></i></span></span><span class="zc">鴨<span class="b" aria-hidden="true"><i>ㄧ</i><i>ㄚ</i></span></span><span class="zc">最<span class="b" aria-hidden="true"><i>ㄗ</i><i>ㄨ</i><i>ㄟ<u>ˋ</u></i></span></span><span class="zc">多<span class="b" aria-hidden="true"><i>ㄉ</i><i>ㄨ</i><i>ㄛ</i></span></span>，<span class="zc">一<span class="b" aria-hidden="true"><i>ㄧ</i></span></span><span class="zc">共<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄨ</i><i>ㄥ<u>ˋ</u></i></span></span> 12 <span class="zc">根<span class="b" aria-hidden="true"><i>ㄍ</i><i>ㄣ</i></span></span>。</div></details>
+    </div>
+  </div>
+</section>
+</div>
+<div id="p-mid" role="tabpanel" aria-labelledby="t-mid" hidden>
+<section class="sec" data-sec="cipher">
+  <div class="sec-head"><h2>感恩節單字密碼</h2></div>
+  <p class="intro">解完一關才能領下一關。第 3 關沒有密碼表，要自己找規則。</p>
+  <div class="grid">
+    <div class="sheet">
+      <span class="tag">第 1 關</span><span class="stars">★★</span>
+      <h4>乘法密碼信</h4>
+      <p class="sub">先算出每一格，再用 A=1、B=2……Z=26 換成字母。</p><div class="table-wrap"><table><tr><td class="key">A 1</td><td class="key">B 2</td><td class="key">C 3</td><td class="key">D 4</td><td class="key">E 5</td><td class="key">F 6</td><td class="key">G 7</td><td class="key">H 8</td><td class="key">I 9</td></tr><tr><td class="key">J 10</td><td class="key">K 11</td><td class="key">L 12</td><td class="key">M 13</td><td class="key">N 14</td><td class="key">O 15</td><td class="key">P 16</td><td class="key">Q 17</td><td class="key">R 18</td></tr><tr><td class="key">S 19</td><td class="key">T 20</td><td class="key">U 21</td><td class="key">V 22</td><td class="key">W 23</td><td class="key">X 24</td><td class="key">Y 25</td><td class="key">Z 26</td><td class="key"></td></tr></table></div><div class="exprs"><span>2×4<i></i></span><span>1×1<i></i></span><span>4×4<i></i></span><span>2×8<i></i></span><span>5×5<i></i></span></div><div class="exprs"><span>4×5<i></i></span><span>2×4<i></i></span><span>1×1<i></i></span><span>7×2<i></i></span><span>3×3+2<i></i></span><span>4×4+3<i></i></span><span>7×1<i></i></span><span>3×3<i></i></span><span>4×5+2<i></i></span><span>9×1<i></i></span><span>2×7<i></i></span><span>1×7<i></i></span></div><p style="margin-top:10px">答案：<span class="blank" style="min-width:12em"></span></p>
+      <details class="ans"><summary>看答案</summary><div>8-1-16-16-25　20-8-1-14-11-19-7-9-22-9-14-7 → HAPPY THANKSGIVING</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">第 2 關</span><span class="stars">★★★</span>
+      <h4>偷跑兩格的字母</h4>
+      <p class="sub">每個字母都往後偷跑了<b>兩格</b>（A 變 C、B 變 D……Y 變 A、Z 變 B）。把它們抓回來！</p><div class="code">VJCPM　AQW</div><p style="margin-top:8px">答案：<span class="blank" style="min-width:9em"></span>　中文：<span class="blank" style="min-width:5em"></span></p><p class="hint">小提示：感恩節最常說的一句話。</p>
+      <details class="ans"><summary>看答案</summary><div>THANK YOU（謝謝你）。每個字母往前退兩格：V→T、J→H、C→A……</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">第 3 關</span><span class="stars">★★★★</span>
+      <h4>農夫的新規則</h4>
+      <p class="sub">這次沒有密碼表，只有一個例子：</p><div class="code">PIE = 32-18-10</div><p style="margin-top:10px">P 為什麼是 32？找出規則，再解開：</p><div class="code">6-30-36-28</div><p style="margin-top:8px">規則：<span class="blank" style="min-width:9em"></span></p><p>答案：<span class="blank" style="min-width:7em"></span>　中文：<span class="blank" style="min-width:5em"></span></p>
+      <details class="ans"><summary>看答案</summary><div>每個字母的號碼乘以 2（P=16 → 32）。6÷2=3=C……答案 CORN（玉米）</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">第 4 關</span><span class="stars">★★</span>
+      <h4>單字配對＋造句</h4>
+      <div class="table-wrap"><table><tr><th>英文</th><td>turkey</td><td>corn</td><td>pie</td><td>family</td></tr><tr><th>中文</th><td>派</td><td>家人</td><td>火雞</td><td>玉米</td></tr><tr><th>英文</th><td>thankful</td><td>harvest</td><td>leaf</td><td>dinner</td></tr><tr><th>中文</th><td>晚餐</td><td>葉子</td><td>感謝的</td><td>收穫</td></tr></table></div><p style="margin-top:12px">挑兩個單字，寫一句英文：</p><p class="sub">例：I am thankful for my family.</p><div class="lines"><span></span></div>
+      <details class="ans"><summary>看答案</summary><div>turkey 火雞、corn 玉米、pie 派、family 家人、thankful 感謝的、harvest 收穫、leaf 葉子、dinner 晚餐</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec det" data-sec="detective">
+  <div class="sec-head"><h2>小偵探推理卡</h2></div>
+  <p class="intro">每一條線索都要用到。用表格打 ✗ 和 ○，會比較好想。</p>
+  <div class="grid">
+    <div class="sheet">
+      <span class="tag">案件 1</span><span class="stars">★★★</span>
+      <h4>誰帶了什麼菜？</h4>
+      <p class="sub">小明、小華是男生，阿美、小芳是女生。四人各帶一道菜：火雞、玉米、南瓜派、馬鈴薯泥，每人都不一樣。</p><ol><li>帶火雞的是男生。</li><li>帶南瓜派的是女生。</li><li>小華對玉米過敏，也搬不動大火雞。</li><li>阿美不會烤派。</li></ol><div class="table-wrap"><table><tr><th></th><th>火雞</th><th>玉米</th><th>南瓜派</th><th>馬鈴薯泥</th></tr><tr><th>小明</th><td></td><td></td><td></td><td></td></tr><tr><th>小華</th><td></td><td></td><td></td><td></td></tr><tr><th>阿美</th><td></td><td></td><td></td><td></td></tr><tr><th>小芳</th><td></td><td></td><td></td><td></td></tr></table></div><p class="hint">每一行、每一列都只會有一個 ○。</p>
+      <details class="ans"><summary>看答案</summary><div>小明火雞、小華馬鈴薯泥、阿美玉米、小芳南瓜派。<br>小華不帶玉米、不帶火雞，男生又不能帶南瓜派 → 馬鈴薯泥。火雞是男生帶的 → 小明。南瓜派是女生帶的、阿美不會烤 → 小芳，阿美就是玉米。</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">案件 2</span><span class="stars">★★★★</span>
+      <h4>感恩節晚餐座位</h4>
+      <p class="sub">爺爺、奶奶、爸爸、媽媽、小明坐成一排，由左到右是 1～5。</p><ol><li>爺爺坐正中間。</li><li>奶奶坐在爺爺旁邊。</li><li>小明坐第 1 個。</li><li>爸爸和媽媽沒有坐在一起。</li><li>媽媽坐在小明旁邊。</li></ol><div class="slots" style="grid-template-columns:repeat(5,1fr)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <details class="ans"><summary>看答案</summary><div>小明、媽媽、爺爺、奶奶、爸爸。<br>爺爺第 3、小明第 1。如果奶奶在第 2，爸爸媽媽就要坐 4、5，會挨在一起 ✗。所以奶奶第 4，爸爸媽媽坐 2 和 5；媽媽挨著小明 → 媽媽第 2，爸爸第 5。</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">案件 3・大魔王</span><span class="stars">★★★★★</span>
+      <h4>誰打翻了肉汁？</h4>
+      <p class="sub">肉汁灑了一地！三隻小動物之中，只有一個打翻。牠們各說了一句話，但<b>只有一個說真話</b>。</p><ul><li><b>小火雞</b>：「不是我打翻的。」</li><li><b>小松鼠</b>：「是小火雞打翻的。」</li><li><b>小浣熊</b>：「不是小松鼠打翻的。」</li></ul><p class="hint">方法：假設是某一個打翻的，把三句話判斷成「真」或「假」，數數看有幾個說真話。</p><div class="table-wrap"><table><tr><th>假設是誰打翻</th><th>小火雞</th><th>小松鼠</th><th>小浣熊</th><th>說真話人數</th></tr><tr><th>小火雞</th><td></td><td></td><td></td><td></td></tr><tr><th>小松鼠</th><td></td><td></td><td></td><td></td></tr><tr><th>小浣熊</th><td></td><td></td><td></td><td></td></tr></table></div><p style="margin-top:10px">打翻的是：<span class="blank" style="min-width:5em"></span>　說真話的是：<span class="blank" style="min-width:5em"></span></p>
+      <details class="ans"><summary>看答案</summary><div>小松鼠打翻的，說真話的是小火雞。<br>假設小火雞打翻：小松鼠、小浣熊說真話（2 人）✗<br>假設小松鼠打翻：只有小火雞說真話（1 人）✓<br>假設小浣熊打翻：小火雞、小浣熊說真話（2 人）✗</div></details>
+    </div>
+  </div>
+</section>
+</div>
+<div id="p-high" role="tabpanel" aria-labelledby="t-high" hidden>
+<section class="sec" data-sec="cipher">
+  <div class="sec-head"><h2>感恩節單字密碼</h2></div>
+  <p class="intro">這一組是真正的密碼學。每一關都要先弄懂規則，再動手解。</p>
+  <div class="grid">
+    <div class="sheet">
+      <span class="tag">第 1 關</span><span class="stars">★★★</span>
+      <h4>手機鍵盤密碼</h4>
+      <p class="sub">老式手機一個按鍵有好幾個字母。「8-1」代表按 8 號鍵的第 1 個字母，也就是 T。</p><div class="table-wrap"><table><tr><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr><tr><td class="key">ABC</td><td class="key">DEF</td><td class="key">GHI</td><td class="key">JKL</td><td class="key">MNO</td><td class="key">PQRS</td><td class="key">TUV</td><td class="key">WXYZ</td></tr></table></div><div class="code">4-1　7-3　2-1　8-1　3-2　3-3　8-2　5-3</div><p style="margin-top:8px">答案：<span class="blank" style="min-width:7em"></span>　意思：<span class="blank" style="min-width:5em"></span></p>
+      <details class="ans"><summary>看答案</summary><div>GRATEFUL（心懷感激的）</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">第 2 關</span><span class="stars">★★★★</span>
+      <h4>倒著走的句子</h4>
+      <p class="sub">這句話整個倒過來寫，而且空格被亂分成三個字母一組。</p><div class="code">YLI　MAF　RUO　YHT　IWE　MIT</div><p class="hint">偵探線索：先把字母全部倒過來抄一次，再找出單字在哪裡斷開。這句話有 4 個英文字，跟家人有關。</p><p style="margin-top:8px">答案：<span class="blank" style="min-width:12em"></span></p>
+      <details class="ans"><summary>看答案</summary><div>倒過來是 TIMEWITHYOURFAMILY → TIME WITH YOUR FAMILY（和家人在一起的時光）</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">第 3 關</span><span class="stars">★★★★★</span>
+      <h4>藏在詩裡的密碼</h4>
+      <p class="sub">密碼藏在一首英文小詩裡。每一行都有用，但只有某個位置的字母才是密碼。</p><div class="code" style="font-size:20px;line-height:1.7">Turkey on the table,<br>Happy faces all around,<br>Apple pie is waiting,<br>Nana gives us hugs,<br>Kids play on the ground,<br>Sunset says goodnight.</div><p class="hint">讀不懂整首詩也沒關係，看看每一行的開頭。</p><p style="margin-top:8px">密碼：<span class="blank" style="min-width:7em"></span>　意思：<span class="blank" style="min-width:5em"></span></p>
+      <details class="ans"><summary>看答案</summary><div>每一行的第一個字母：T-H-A-N-K-S → THANKS（謝謝）</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">加分挑戰</span><span class="stars">★★★★★</span>
+      <h4>換你當密碼師</h4>
+      <p class="sub">寫一句感恩節英文（至少 3 個字），用第 1 關或第 2 關的方法加密，交給同學破解。</p>
+      <p style="margin-top:10px">原文（摺起來藏好）：</p><div class="lines"><span></span></div>
+      <p style="margin-top:14px">密碼：</p><div class="lines"><span></span></div>
+      <p style="margin-top:14px">破解的同學：<span class="blank" style="min-width:5em"></span>　花了 <span class="blank" style="min-width:2em"></span> 分鐘</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec det" data-sec="detective">
+  <div class="sec-head"><h2>小偵探推理卡</h2></div>
+  <p class="intro">這一組要用「假設」和「排除」。卡住的時候，試著假設一種情況，看看會不會出現矛盾。</p>
+  <div class="grid">
+    <div class="sheet">
+      <span class="tag">案件 1</span><span class="stars">★★★★</span>
+      <h4>四家人的感恩節</h4>
+      <p class="sub">小明、小華、阿美、小芳四家各帶一道菜：火雞、南瓜派、玉米麵包、蔓越莓醬；四家來的人數是 3、4、5、6 人。菜和人數都不重複。</p><ol><li>帶火雞的那家，人數最多。</li><li>帶蔓越莓醬的那家，人數最少。</li><li>帶南瓜派的那家，比帶玉米麵包的那家多 1 人。</li><li>小明家比阿美家多 2 人。</li><li>小芳家不是 6 人，也沒有帶蔓越莓醬。</li><li>小華家不是人數最少的。</li></ol><div class="table-wrap"><table><tr><th></th><th>火雞</th><th>南瓜派</th><th>玉米麵包</th><th>蔓越莓醬</th><th>3</th><th>4</th><th>5</th><th>6</th></tr><tr><th>小明</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>小華</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>阿美</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>小芳</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div>
+      <details class="ans"><summary>看答案</summary><div>小明＝南瓜派 5 人；小華＝火雞 6 人；阿美＝蔓越莓醬 3 人；小芳＝玉米麵包 4 人。<br>先用第 1、2、3 條配好菜和人數：火雞 6、蔓越莓醬 3、南瓜派 5、玉米麵包 4。第 4 條：小明和阿美是 5 和 3，或 6 和 4。如果是 6 和 4，小芳不是 6、也不是 3 → 小芳 5，小華只剩 3，違反第 6 條 ✗。所以小明 5、阿美 3；小芳不是 6 → 小芳 4，小華 6。</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">案件 2</span><span class="stars">★★★★</span>
+      <h4>貼錯的標籤</h4>
+      <p class="sub">倉庫有三個籃子，標籤寫著「蘋果」「橘子」「混合」。可是<b>三張標籤全部貼錯了</b>！你只能從<b>一個</b>籃子裡拿出<b>一顆</b>水果看，不能偷看裡面。</p><ol><li>要從哪一個籃子拿？<span class="blank" style="min-width:5em"></span></li><li>如果拿出來是蘋果，三個籃子真正裝的是什麼？</li></ol><div class="table-wrap"><table><tr><th>標籤</th><td>蘋果</td><td>橘子</td><td>混合</td></tr><tr><th>真正裝的</th><td class="w"></td><td></td><td></td></tr></table></div><p class="hint">想一想：哪個籃子拿出一顆，就能確定它整籃是什麼？</p>
+      <details class="ans"><summary>看答案</summary><div>從標「混合」的籃子拿。它一定不是混合，所以拿到蘋果，整籃就是蘋果。<br>標「橘子」的籃子不能是橘子，蘋果也被用掉了 → 是混合。<br>標「蘋果」的籃子 → 橘子。</div></details>
+    </div>
+
+    <div class="sheet">
+      <span class="tag">案件 3・大魔王</span><span class="stars">★★★★★</span>
+      <h4>天平上的感恩節</h4>
+      <p class="sub">農場主人用天平秤東西，天平平衡代表兩邊一樣重。</p><ol><li>1 隻火雞 ＝ 2 顆南瓜</li><li>1 顆南瓜 ＝ 3 根玉米</li><li>1 隻火雞 ＋ 1 顆南瓜 ＝ 18 公斤</li></ol><p style="margin-top:10px">火雞 <span class="blank" style="min-width:3em"></span> 公斤，南瓜 <span class="blank" style="min-width:3em"></span> 公斤，玉米 <span class="blank" style="min-width:3em"></span> 公斤</p><p>幾根玉米和一隻火雞一樣重？<span class="blank" style="min-width:3em"></span> 根</p>
+      <details class="ans"><summary>看答案</summary><div>火雞 12、南瓜 6、玉米 2 公斤；6 根玉米。<br>火雞＝2 顆南瓜，所以火雞＋南瓜＝3 顆南瓜＝18 公斤 → 南瓜 6 公斤、火雞 12 公斤、玉米 6÷3＝2 公斤。12÷2＝6 根玉米。</div></details>
+    </div>
+  </div>
+</section>
+</div>
+
+</div>
+<script>
+(function(){
+  var notes={low:'一、二年級・有注音',mid:'三、四年級',high:'五、六年級'};
+  var tabs=[].slice.call(document.querySelectorAll('.levels [role=tab]'));
+  function show(lv,focus){
+    tabs.forEach(function(t){
+      var on=t.dataset.lv===lv;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+      document.getElementById('p-'+t.dataset.lv).hidden=!on;
+      if(on&&focus)t.focus();
+    });
+    document.getElementById('lvnote').textContent=notes[lv];
+    try{localStorage.setItem('tg-level',lv);}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(t.dataset.lv);});
+    t.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(d){e.preventDefault();show(tabs[(i+d+tabs.length)%tabs.length].dataset.lv,true);}
+    });
+  });
+  document.querySelectorAll('.jump a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var p=document.querySelector('[role=tabpanel]:not([hidden])');
+      var s=p&&p.querySelector('[data-sec="'+a.dataset.to+'"]');
+      if(s)s.scrollIntoView();
+    });
+  });
+  var saved=null;
+  try{saved=localStorage.getItem('tg-level');}catch(e){}
+  show(notes[saved]?saved:'low');
+})();
+</script>
+</body>
+</html>
