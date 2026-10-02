@@ -185,6 +185,19 @@ h3{font-size:1.15rem;margin:0 0 10px;color:var(--main)}
 footer{background:#163f45;color:#dfe7f3;padding:28px 0;font-size:1rem}
 footer a{color:#ffd48a}
 
+.hero .me{margin-top:12px;display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.16);padding:4px 12px;border-radius:99px;font-size:1rem}
+.linkbtn{border:none;background:#fff;color:var(--main);border-radius:99px;padding:1px 12px;font-weight:700;font-size:1rem}
+.modal{position:fixed;inset:0;background:rgba(20,30,45,.55);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px}
+.mbox{background:#fff;border-radius:18px;padding:22px;width:100%;max-width:420px;box-shadow:var(--shadow)}
+.mbox label{display:block;margin:10px 0;font-weight:500}
+.mbox input{display:block;width:100%;font-size:1.1rem;padding:9px 12px;border:2px solid var(--line);border-radius:10px;margin-top:4px;font-family:inherit}
+.mbox input:focus{outline:none;border-color:var(--main-2)}
+.btn:disabled{opacity:.7}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;font-size:20px}
+.mq .ex{font-size:1.12rem;line-height:1.75}
+.caption .key,.caption .poem{font-size:1.12rem}
+.fb{font-size:1.05rem}
+
 .qword.en{font-size:1.9rem;letter-spacing:0;word-break:break-word;font-family:"Nunito","Noto Sans TC",sans-serif}
 .say{border:0;background:#e6f3f1;border-radius:99px;width:48px;height:48px;font-size:1.3rem;vertical-align:middle;margin-left:6px}
 .opt{font-size:1.15rem;word-break:break-word}
@@ -207,14 +220,16 @@ footer a{color:#ffd48a}
   <div class="wrap">
     <a href="../" style="color:#fff;opacity:.85;text-decoration:none;font-size:1rem;display:block;margin-bottom:8px">← 回英文選單</a><span class="tag">南一版 國二上 ｜ 第一次段考</span>
     <h1>英文段考闖關｜Lesson 1～2＋Review 1</h1>
-    <p>先看動畫弄懂課文，再用遊戲練熟單字與過去式，最後做段考模擬題。</p>
+    <p>先看動畫弄懂課文，再用遊戲練熟單字與過去式，最後做段考模擬題、交卷給老師。</p>
+    <div class="me" id="me"></div>
   </div>
 </header>
 <nav class="tabs"><div class="wrap" id="tabs"></div></nav>
 <main><div class="wrap" id="app"></div></main>
 <footer><div class="wrap">
-  <b>全民補習班 英文科</b>｜考點依據：臺中五權國中（114）、彰化福興國中（113）、新北桃子腳國中（113）第一次段考試卷整理。模擬題與閱讀文章皆為原創改寫。<br>
+  <b>全民補習班 英文科</b>｜考點依據：臺中五權（114）、新北中正（114）、彰化福興（113）、新北桃子腳（113）四校南一版第一次段考試卷，另比對全臺 32 校 114 上八年級英文段考的共通文法。模擬題與閱讀文章皆為原創改寫。<br>
   單字與課文依南一版 B3 課本。發音使用瀏覽器內建語音。練習時可以開聲音，答對、答錯都有音效。背景音樂只在「動畫導覽」播放，可按右下角按鈕關閉。<br>
+  交卷時會把你的姓名、分數與錯題傳給老師，只有老師看得到。左下角 ✏️ 可以手寫、兩指縮放。<br>
   <details style="margin-top:8px"><summary>圖片來源與授權</summary>
   照片皆來自 Wikimedia Commons：Ofrenda or Day of the Dead Altar at Mission Marquee Plaza. (586908b4-40dd-4be5-bc53-ababb89291f1)：NPS Photo（公有領域）；Day of the Dead (Dia de los Muertos) procession in San Francisco, 2006：Al83tito（CC0）；Emerald Playground td (2021-03-31) 23 - Basketball Courts：Tdorante10（CC BY-SA 4.0）；Grandfather and grandson at the table：Marie-Sophie Mejan（CC BY 4.0）；Jogger in morning mist 7th Brigade Park Chermside P1060534：John Robert McPherson（CC BY-SA 4.0）；Tagetes erecta 30012013：Joydeep（CC BY-SA 3.0）；Girl dressed up as death in the parade in the Historic Center of Mexico City：AngieRomo27（CC BY-SA 4.0）；Studying：Gnarlycraig（公有領域）；Burning joss paper on the Tomb Sweeping Day：chia ying Yang（CC BY 2.0）；Taiwanese young woman reading in the bookstore：BoChengChou（CC BY 2.0）；Man harvesting and opening cocoa pods in vibrant tropical plantation：Abdulazeezabz（CC BY-SA 4.0）；Woman writing on a notebook with a pen：Kristin Hardwick（CC0）；Niger, Tillabéri, 2008 47：Lars Rosendahl Appelquist（CC BY-SA 4.0）；Ripe Cocoa Pods Ready for Harvesting：Unknown authorUnknown author（CC BY 4.0）；Niger school 040830：Tech. Sgt. Chance Babin（公有領域）。</details>
 </div></footer>
@@ -248,20 +263,20 @@ const isZY=s=>/[ㄅ-ㄩ]/.test(s);
 const ASK={e:'選出正確的中文意思',c:'選出正確的英文',s:'選出正確的拼字',p:'選出正確的過去式'};
 const L = {
 l1:{
-  no:'Lesson 1', title:'We Visited Our Relatives Yesterday', short:'亡靈節', color:'linear-gradient(135deg,#1d5c63,#2f8f83)',
+  no:'Lesson 1', code:1, title:'We Visited Our Relatives Yesterday', short:'亡靈節', color:'linear-gradient(135deg,#1d5c63,#2f8f83)',
   desc:'Coco｜亡靈節 vs 清明節｜was / were｜規則動詞過去式',
   quick:[
-    ['remember','記得',['提醒','分享','準備'],0,'e'],
+    ['remember','記得',['提醒','分享','準備'],1,'e'],
     ['relative','親戚',['父母親','鬼魂','回憶'],0,'e'],
     ['memory','回憶',['死亡','故事','餐點'],0,'e'],
     ['death','死亡',['死亡的','害怕','墳墓'],0,'e'],
-    ['sweet','貼心的；甜的',['感人的','充滿活力的','一起'],0,'e'],
+    ['sweet','貼心的；甜的',['感人的','充滿活力的','一起'],1,'e'],
     ['touching','感人的',['碰觸的','貼心的','活潑的'],0,'e'],
     ['lively','充滿活力的',['可愛的','活著的','孤單的'],0,'e'],
     ['fear','害怕',['喜悅','死亡','糖果'],0,'e'],
     ['tomb','墳墓',['蠟燭','花','圓圈'],0,'e'],
-    ['candle','蠟燭',['糖果','墳墓','餐'],0,'e'],
-    ['父母親','parents',['relatives','grandparents','children'],0,'c'],
+    ['candle','蠟燭',['糖果','墳墓','餐'],1,'e'],
+    ['父母親','parents',['relatives','grandparents','children'],1,'c'],
     ['過世','pass away',['look after','dress up','run away'],1,'c'],
     ['照顧','look after',['after all','look at','pass away'],1,'c'],
     ['畢竟','after all',['a few','look after','all the time'],0,'c'],
@@ -272,7 +287,7 @@ l1:{
     ['使想起（remind…of…）','remind',['remember','reply','repeat'],1,'c'],
     ['分享','share',['shape','sure','sweep'],0,'c'],
     ['清掃（掃墓的「掃」）','sweep',['sweet','sleep','swim'],0,'c'],
-    ['r _ _ _ _ _ er（記得）','remember',['remenber','rember','remembor'],0,'s'],
+    ['r _ _ _ _ _ er（記得）','remember',['remenber','rember','remembor'],1,'s'],
     ['r _ l _ t _ v e（親戚）','relative',['relitive','relatve','relateve'],0,'s'],
     ['y _ _ t _ _ d _ y（昨天）','yesterday',['yestoday','yesterdey','yeasterday'],0,'s'],
     ['t _ g _ t h _ r（一起）','together',['togather','togeter','togerther'],0,'s'],
@@ -330,18 +345,18 @@ l1:{
   ]
 },
 l2:{
-  no:'Lesson 2', title:'I Read a Special Book Last Week', short:'特別的書', color:'linear-gradient(135deg,#7a3e65,#c0607a)',
+  no:'Lesson 2', code:2, title:'I Read a Special Book Last Week', short:'特別的書', color:'linear-gradient(135deg,#7a3e65,#c0607a)',
   desc:'童婚議題｜不規則動詞過去式｜Why…? Because… / so',
   quick:[
     ['curious','好奇的',['可怕的','貧窮的','害怕的'],1,'e'],
     ['terrible','糟糕的',['好奇的','特別的','害怕的'],0,'e'],
     ['scared','害怕的',['神聖的','驚訝的','生氣的'],0,'e'],
     ['poor','貧窮的；可憐的',['純粹的','倒；灌','豐富的'],0,'e'],
-    ['happen','發生',['快樂','結束','完成'],0,'e'],
+    ['happen','發生',['快樂','結束','完成'],1,'e'],
     ['nightmare','惡夢',['夜晚','婚姻','結局'],0,'e'],
     ['ending','結局',['開始','結婚','故事'],0,'e'],
     ['marriage','婚姻',['結婚','丈夫','嬰兒'],0,'e'],
-    ['without','沒有',['和…一起','在…之內','關於'],0,'e'],
+    ['without','沒有',['和…一起','在…之內','關於'],1,'e'],
     ['nobody','沒有人',['每個人','有些人','任何人'],0,'e'],
     ['結婚','get married',['take action','run away','give up'],1,'c'],
     ['採取行動','take action',['take a bus','get married','look after'],1,'c'],
@@ -352,8 +367,8 @@ l2:{
     ['猜','guess',['guest','goose','glass'],0,'c'],
     ['完成','finish',['fish','fix','find'],0,'c'],
     ['為什麼','why',['what','which','who'],0,'c'],
-    ['c _ _ l d r _ n（小孩，複數）','children',['childs','childrens','chilren'],0,'s'],
-    ['h _ p p _ n（發生）','happen',['hapen','happan','heppen'],0,'s'],
+    ['c _ _ l d r _ n（小孩，複數）','children',['childs','childrens','chilren'],1,'s'],
+    ['h _ p p _ n（發生）','happen',['hapen','happan','heppen'],1,'s'],
     ['c _ r _ _ u s（好奇的）','curious',['curous','curiuos','courious'],1,'s'],
     ['s c _ r _ d（害怕的）','scared',['scard','scaerd','sacred'],0,'s'],
     ['b _ c _ _ s e（因為）','because',['becuase','becouse','beacuse'],0,'s'],
@@ -412,19 +427,19 @@ l2:{
   ]
 },
 gram:{
-  no:'文法特訓', title:'過去式大魔王', short:'過去式特訓', color:'linear-gradient(135deg,#b85c1e,#f2a541)',
+  no:'文法特訓', code:3, title:'過去式大魔王', short:'過去式特訓', color:'linear-gradient(135deg,#b85c1e,#f2a541)',
   desc:'規則／不規則變化｜did / didn\'t｜was / were',
   subs:[['anim','🎬 句型變身秀'],['quick','⚡ 過去式快問快答'],['sort','🎯 分類挑戰'],['mcq','📝 文法模擬題']],
   quick:[
     ['study','studied',['studyed','studid','studded'],0,'p'],
-    ['jog','jogged',['joged','jogd','jogget'],0,'p'],
+    ['jog','jogged',['joged','jogd','jogget'],1,'p'],
     ['plan','planned',['planed','plant','planted'],0,'p'],
     ['carry','carried',['carryed','caried','carred'],0,'p'],
     ['cry','cried',['cryed','cride','crid'],0,'p'],
     ['stop','stopped',['stoped','stopt','stopted'],0,'p'],
     ['sell','sold',['selled','sale','seld'],0,'p'],
     ['buy','bought',['buyed','brought','boughted'],0,'p'],
-    ['break','broke',['breaked','broken','brake'],0,'p'],
+    ['break','broke',['breaked','broken','brake'],1,'p'],
     ['choose','chose',['choosed','chosed','choice'],1,'p'],
     ['become','became',['becomed','becamed','become'],0,'p'],
     ['hit','hit',['hitted','hat','hited'],1,'p'],
@@ -439,7 +454,7 @@ gram:{
     ['say','said',['sayed','sad','sayd'],0,'p'],
     ['win','won',['winned','wan','wined'],0,'p'],
     ['drink','drank',['drinked','drunk','dranked'],0,'p'],
-    ['fight','fought',['fighted','fighten','faught'],0,'p'],
+    ['fight','fought',['fighted','fighten','faught'],1,'p'],
     ['sweep','swept',['sweeped','swepted','swap'],0,'p'],
     ['feed','fed',['feeded','fedd','food'],0,'p'],
     ['put','put',['putted','puted','pat'],0,'p'],
@@ -475,6 +490,10 @@ gram:{
       ['Why did she ran away?',1,'did 後接原形：Why did she run away?']]},
   ],
   mcq:[
+    {q:'Nobody thought the old man would come to the party. So when he ___, everyone was surprised.',o:['did','had','was','would'],a:0,src:'新北中正（會考改編）',ex:'did 代替前面的動詞 come（came），避免重複；這是會考常見的「代動詞」用法。'},
+    {q:'A: ___ you feed the dog this morning? B: No, I didn\'t, but my sister ___.',o:['Did; did','Were; was','Do; don\'t','Did; didn\'t'],a:0,src:'新北中正、五權',ex:'Did 問句用 did/didn\'t 回答；but my sister did＝我妹妹有餵（代替 fed the dog）。'},
+    {q:'A: Jason, why ___ you come to school yesterday? B: Sorry, I ___ sick.',o:['didn\'t; was','don\'t; was','did; am','wasn\'t; didn\'t'],a:0,src:'新北中正、福興',ex:'yesterday → 過去；一般動詞 come 用 didn\'t；「生病」是形容詞，用 be 動詞 was。'},
+    {q:'A: What ___ to Amy? Why did she ___ in class? B: She lost her phone.',o:['happened; cry','happen; crying','happened; cried','happens; cry'],a:0,src:'新北中正',ex:'What happened…? What 是主詞，直接用過去式；did 後面接原形 cry。'},
     {q:'The weather ___ cloudy an hour ago, but it is sunny now.',o:['was','were','is','are'],a:0,src:'五權',ex:'an hour ago → 過去；the weather 是單數 → was。'},
     {q:'The man didn\'t ___ to work today because his parents ___ sick.',o:['go; were','went; was','go; was','went; were'],a:0,src:'五權',ex:'didn\'t 後接原形 go；parents 複數 → were。'},
     {q:'My mom cooked dinner and then ___ a song for us.',o:['sang','sing','singing','to sing'],a:0,src:'五權',ex:'and 連接兩個動作，時態要一致：cooked … and then sang。'},
@@ -525,6 +544,12 @@ const READ=[
     {q:'Why didn\'t Ben cry today?',o:['Because he remembered his grandpa\'s big smile.','Because he played basketball.','Because his grandpa is still alive.','Because he was too busy.'],a:0,ex:'I didn\'t cry today because I remembered his big smile.'},
     {q:'Which is true?',o:['Ben\'s grandpa died two years ago.','Ben\'s aunt swept the tomb.','Ben went to the park with his grandpa today.','Ben visited his relatives before the tomb.'],a:0,ex:'passed away two years ago＝兩年前過世。拜訪親戚是 After lunch（掃墓之後）。'},
    ]},
+  {title:'閱讀 C｜Paper Money for the Dead',text:'On Tomb Sweeping Day, many families in Taiwan burn paper money for their dead relatives. People believe the money goes to the other world. Last year, Mr. Lin\'s family shop made a change. They stopped using common paper and started to use bamboo paper. "Burning too much paper is bad for the air," Mr. Lin said. "So we made the money smaller, and we told people to burn less." At first, some old customers were not happy. But now many young people buy his paper money because they want to remember their relatives and protect the earth at the same time.',
+   qs:[
+    {q:'Why do people burn paper money on Tomb Sweeping Day?',o:['They want to send money to their dead relatives.','They want to clean the air.','They want to buy bamboo.','They want to make the shop smaller.'],a:0,ex:'People believe the money goes to the other world（給過世的親人）。'},
+    {q:'What did Mr. Lin\'s shop do to help the environment?',o:['It used bamboo paper and made the money smaller.','It stopped selling paper money.','It burned more paper.','It grew bamboo.'],a:0,ex:'started to use bamboo paper … made the money smaller, and told people to burn less。'},
+    {q:'What does "they" in the last sentence mean?',o:['Young people.','Old customers.','Dead relatives.','Mr. Lin\'s family.'],a:0,ex:'many young people buy his paper money because they want to… → they＝young people。'},
+   ]},
   {title:'閱讀 B｜Chocolate Kids',text:'Many people love chocolate, but do you know where it comes from? Chocolate comes from cacao fruit. In some countries in West Africa, many children work on cacao farms. Kofi is one of them. He started to work at nine because his family needed money. Every day, he picks cacao fruit for ten hours. Last year, he broke his arm at work, but he couldn\'t see a doctor. The funny thing is, Kofi never tasted chocolate. "What is chocolate like?" he asked. Next time you eat chocolate, remember the children behind it.',
    qs:[
     {q:'Why did Kofi start to work at nine?',o:['His family needed money.','He loved chocolate.','He wanted to see a doctor.','He didn\'t like school.'],a:0,ex:'He started to work at nine because his family needed money.'},
@@ -545,12 +570,13 @@ const TRANS=[
 
 /* 考點雷達（依各校段考卷統計，stats.json 產出後填入） */
 const RADAR={
-  n:3,
-  schools:'臺中五權國中（114 學年）、彰化福興國中（113 學年）、新北桃子腳國中（113 學年）',
-  topics:[['課外閱讀（15 題）',3],['did / didn\'t 簡答與省略句',3],['依時間線索判斷時態',3],['Why…? Because…',3],['主題延伸克漏字（童婚／可可童工）',2],['because / so（不可並用）',2],['was / were',2],['過去式時間副詞',2],['不規則動詞過去式',2],['didn\'t＋原形動詞',2],['片語意思',2],['there was / were',2],['What / Who 過去式問句',2],['-ed 字尾發音',0]],
-  basics:[['was / were',3],['did / didn\'t',3],['yesterday / ago / last / then',3],['Why / Because',3],['規則動詞 -ed',3],['because / so',2],['不規則過去式',2],['hit → hit',2],['didn\'t＋原形',2]],
-  words:[['choose',2],['remind … of',2],['pass away',2],['get married to',2],['curious',2],['take action',2],['look after',2],['hit',2],['test',2],['children',1],['happen',1],['scared',1],['nightmare',1],['memory',1],['without',1],['anymore',1]],
-  nonmcq:[['文意字彙（首字母提示）',2],['翻譯（課文原句）',2],['依畫線部分造問句',2],['because / so 合併改寫',2],['填入過去式',1]],
+  n:4,
+  schools:'臺中五權國中（114）、新北中正國中（114）、彰化福興國中（113）、新北桃子腳國中（113）',
+  topics:[['課外閱讀（25 題）',4],['did / didn\'t 簡答與省略句',4],['Why…? Because…',4],['主題延伸克漏字／閱讀（童婚、可可、紙錢）',3],['because / so（不可並用）',3],['was / were',3],['依時間線索判斷時態',3],['didn\'t＋原形動詞',3],['片語意思',3],['What / Who 過去式問句',3],['課文改寫克漏字',2],['過去式時間副詞',2],['不規則動詞過去式',2],['there was / were',2],['-ed 字尾發音',0]],
+  basics:[['was / were',4],['did / didn\'t',4],['yesterday / ago / last / then',4],['Why / Because',4],['規則動詞 -ed',4],['because / so',3],['不規則過去式',3],['didn\'t＋原形',3],['What / Who 問句',3],['hit → hit',2]],
+  words:[['remind … of',3],['get married to',3],['look after',3],['choose',2],['pass away',2],['curious',2],['take action',2],['children',2],['happen',2],['remember',2],['sweet',2],['parents',2],['without',2],['candle',2],['break → broke',2],['fight → fought',2],['read → read',2]],
+  nonmcq:[['翻譯（課文原句）',3],['文意字彙（首字母提示）',3],['填入過去式',2],['依畫線部分造問句',2],['because / so 合併改寫',2],['看中文寫單字',2]],
+  cross:{n:32,items:[['過去式動詞變化（規則／不規則）',31],['時間副詞決定時態',23],['was / were',21],['because / so',20],['依提示合併／改寫句',14],['did / didn\'t 問句與簡答',13],['Why…? 問句',12]]},
 };
 
 /* ================= 導覽 ================= */
@@ -716,6 +742,214 @@ const BGM={ctx:null,master:null,timer:null,playing:false,
 };
 
 
+/* 交卷給老師引擎（段考模擬題／快問快答／分類挑戰／配對 都可交卷）。
+   接在 template.html 的「音效＋工具」與 data.js 之後、app.js（導覽、首頁、動畫）之前。
+   換科時只改三個佔位：english8-1（例 chinese8-1）、english8（例 chinese8，須在試算表 classes 工作表註冊）。
+   render() 要把 d.code、`${d.no} ${d.title}` 傳給 renderQuick/renderMCQ/renderMatch，並在畫分類前設定 SORTCTX={code,title}。 */
+/* ================= 交卷給老師（雲端） =================
+   後端：老師既有的 Google Apps Script（班級碼＋檢視密鑰）。subject 固定 chinese8-1，和聽力／閱讀分開。
+   round 編碼：單元代碼×10＋題型（0＝段考模擬題、1＝快問快答）；總測驗＝90。 */
+const CLOUD={
+  endpoint:'https://script.google.com/macros/s/AKfycbyr1JovSqvYEXjlLbTVoqhkAHTUbB0gDGz0UY_P30d77D6oJuYYTfxebbTadFZB46iO/exec',
+  subject:'english8-1',
+  cls:'english8',   /* 班級碼固定，學生不用填 */
+  get me(){try{const o=JSON.parse(localStorage.getItem('english8-1_student')||'null');return o&&o.name?o:null}catch(e){return null}},
+  set me(o){try{localStorage.setItem('english8-1_student',JSON.stringify(o))}catch(e){}},
+  upload(rec){
+    const m=this.me;if(!m)return false;
+    const body=Object.assign({cls:this.cls,name:m.name,seat:'',subject:this.subject},rec);
+    try{fetch(this.endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)})}catch(e){return false}
+    try{const h=JSON.parse(localStorage.getItem('english8-1_history')||'[]');h.push({...rec,date:new Date().toISOString()});localStorage.setItem('english8-1_history',JSON.stringify(h.slice(-200)))}catch(e){}
+    return true;
+  }
+};
+function meChip(){
+  const m=CLOUD.me,el=$('#me');if(!el)return;
+  el.innerHTML=m?`👤 ${esc(m.name)}<button class="linkbtn" id="meEdit">修改</button>`:`👤 尚未填寫姓名 <button class="linkbtn" id="meEdit">填寫</button>`;
+  $('#meEdit').onclick=()=>enroll(()=>{});
+}
+/* 填寫姓名視窗（只要中文姓名）；成功後呼叫 then() */
+function enroll(then,force){
+  if(document.getElementById('enr'))return;
+  const m=CLOUD.me||{};
+  document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="enr"><div class="mbox">
+    <h3>${force?'👋 歡迎！請先填姓名':'📝 交卷前先填姓名'}</h3><p class="muted">老師會用你的姓名收到成績和錯題。</p>
+    <label>中文姓名<input id="eName" value="${esc(m.name||'')}" autocomplete="off"></label>
+    <div class="fb" id="eMsg"></div>
+    <div class="row" style="justify-content:flex-end">${force?'':'<button class="btn ghost" id="eNo">取消</button>'}<button class="btn" id="eOk">確定</button></div></div></div>`);
+  const close=()=>$('#enr').remove();
+  if($('#eNo'))$('#eNo').onclick=close;
+  $('#eName').focus();
+  $('#eName').onkeydown=e=>{if(e.key==='Enter')$('#eOk').click()};
+  $('#eOk').onclick=()=>{
+    const name=$('#eName').value.trim();
+    if(!name){$('#eMsg').textContent='請填入你的中文姓名喔！';return}
+    if(!/^[\u4e00-\u9fff·．]{2,6}$/.test(name)){$('#eMsg').textContent='請填中文姓名（2～6 個字），老師才認得出你。';return}
+    CLOUD.me={name};close();meChip();then();
+  };
+}
+const KINDS=['段考模擬題','快問快答','分類挑戰','配對'];
+/* 交卷：rec={code,type,title,total,correct,blank,wrong:[{q,my,a}]} */
+function submitToTeacher(rec,btn){
+  const go=()=>{
+    const ok=CLOUD.upload({round:rec.code*10+rec.type,score:Math.round(rec.correct/rec.total*100),total:rec.total,correct:rec.correct,blank:rec.blank||0,
+      ans:[`【交卷】${rec.title}｜${KINDS[rec.type]}｜答對 ${rec.correct}/${rec.total}`,
+        ...rec.wrong.map(w=>`✗ 題目：${String(w.q).replace(/｜/g,'/')}｜學生答：${w.my}｜正解：${w.a}${w.u?'｜單元：'+w.u:''}`)]});
+    if(btn){btn.disabled=true;btn.textContent=ok?'✅ 已交給老師':'⚠️ 送出失敗，請再試一次';if(!ok)btn.disabled=false}
+  };
+  if(!CLOUD.me)return enroll(go);
+  go();
+}
+
+/* ================= 快問快答（交卷版） ================= */
+function renderQuick(el,items,d,code,title){
+  let order,i,score,combo,best,wrong,timer,left,round=0;
+  const TIME=10;
+  function start(list){order=shuf(list||items);i=0;score=0;combo=0;best=0;wrong=[];round++;next()}
+  function next(){
+    clearInterval(timer);
+    if(i>=order.length) return end();
+    const [q,a,ds,hot,ask0]=order[i];
+    const opts=shuf([a,...ds]);
+    const ask=ask0||(d&&d.quickAsk)||(isZY(a)?'選出「」內字的正確讀音':'選出「」內注音的正確國字');
+    el.innerHTML=`<div class="card">
+      <div class="qz-top"><b>第 ${i+1} / ${order.length} 題</b><span>得分 <b>${score}</b>　<span class="combo">${combo>=2?'🔥 連對 '+combo:''}</span></span></div>
+      <div class="timer"><i id="tb"></i></div>
+      <p class="muted" style="text-align:center;margin:8px 0 0">${ask} ${hot?`<span class="star">★${hot} 校考過</span>`:''}</p>
+      <div class="qword">${esc(q)}</div>
+      <div class="opts">${opts.map(o=>`<button class="opt" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>
+    </div>`;
+    left=TIME;const tb=$('#tb',el);
+    timer=setInterval(()=>{left-=.1;tb.style.width=Math.max(0,left/TIME*100)+'%';if(left<=0){clearInterval(timer);pick(null)}},100);
+    el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(b));
+    function pick(b){
+      clearInterval(timer);
+      el.querySelectorAll('.opt').forEach(x=>{x.onclick=null;if(x.dataset.v===a)x.classList.add('ok')});
+      if(b&&b.dataset.v===a){sOK();combo++;best=Math.max(best,combo);score+=10+Math.round(left)+(combo>=3?5:0)}
+      else{sBAD();if(b)b.classList.add('bad');combo=0;wrong.push({item:order[i],my:b?b.dataset.v:'（超時）'})}
+      i++;setTimeout(next,b&&b.dataset.v===a?650:1400);
+    }
+  }
+  function end(){
+    const n=order.length,acc=Math.round((n-wrong.length)/n*100),full=true,retry=order.length!==items.length;
+    el.innerHTML=`<div class="card" style="text-align:center">
+      <div style="font-size:3rem">${acc>=90?'🏆':acc>=70?'👍':'💪'}</div>
+      <h3>完成！正確率 ${acc}%</h3><p>總分 <b>${score}</b>　最高連對 <b>${best}</b></p>
+      ${wrong.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:12px 16px;margin:12px 0"><b>要再加強的：</b><br>${wrong.map(w=>`${esc(w.item[0])} → <b>${esc(w.item[1])}</b>（你選：${esc(w.my)}）`).join('<br>')}</div>`:''}
+      <div class="row" style="justify-content:center">
+        ${full?'<button class="btn alt" id="sub">📤 交卷給老師</button>':''}
+        ${wrong.length?'<button class="btn ghost" id="rw">只練錯的題目</button>':''}<button class="btn" id="ra">全部重來</button></div>
+      ${full?'<p class="muted" style="margin-top:8px">交卷會把你的姓名、分數和錯的題目傳給老師。</p>':''}</div>`;
+    $('#ra',el).onclick=()=>start();
+    const rw=$('#rw',el); if(rw) rw.onclick=()=>start(wrong.map(w=>w.item));
+    const sb=$('#sub',el); if(sb) sb.onclick=()=>submitToTeacher({code,type:1,title:title+(retry?'（只練錯題）':''),total:n,correct:n-wrong.length,
+      wrong:wrong.map(w=>({q:w.item[0],my:w.my,a:w.item[1]}))},sb);
+  }
+  el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:3rem">⚡</div><h3>${d&&d.quickAsk?'詞性＋量詞快問快答':'字音字形快問快答'}</h3>
+  <p>每題 10 秒，越快答對分數越高，連對 3 題以上有加分！<br>做完可以按「交卷給老師」。</p><button class="btn alt" id="go">開始挑戰（${items.length} 題）</button></div>`;
+  $('#go',el).onclick=()=>start();
+}
+
+/* ================= 選擇題（交卷版） ================= */
+function renderMCQ(el,qs,code,title,opt={}){
+  let got=0,done=0;
+  const list=qs.map(q=>{const idx=shuf(q.o.map((_,k)=>k));return{...q,idx,my:null}});
+  el.innerHTML=`<div class="score" id="sc">已作答 0 / ${qs.length}　答對 0</div><div class="card">${list.map((q,n)=>`
+    <div class="mq" data-n="${n}"><div class="stem">${n+1}. ${esc(q.q)}${q.src?`<span class="src">${esc(q.src)}</span>`:''}</div>
+    ${q.idx.map((k,j)=>`<button class="o" data-k="${k}">(${'ABCD'[j]}) ${esc(q.o[k])}</button>`).join('')}
+    <div class="ex">💡 <b>解析：</b>${esc(q.ex)}</div></div>`).join('')}
+    <div class="row" style="margin-top:14px">${code!=null?'<button class="btn alt" id="sub">📤 交卷給老師</button>':''}<button class="btn ghost" id="rs">重新作答（選項重新洗牌）</button></div>
+    ${code!=null?'<p class="muted" id="subtip">全部作答完再交卷；沒作答的題目會算成空白。</p>':''}</div>`;
+  el.querySelectorAll('.mq').forEach(box=>{
+    const q=list[+box.dataset.n];
+    box.querySelectorAll('.o').forEach(b=>b.onclick=()=>{
+      if(box.classList.contains('done'))return;box.classList.add('done');done++;
+      q.my=+b.dataset.k;
+      box.querySelector(`.o[data-k="${q.a}"]`).classList.add('ok');
+      if(q.my===q.a){got++;sOK()}else{b.classList.add('bad');sBAD()}
+      $('#sc',el).textContent=`已作答 ${done} / ${qs.length}　答對 ${got}`+(done===qs.length?`　🎯 得分 ${Math.round(got/qs.length*100)}`:'');
+    });
+  });
+  $('#rs',el).onclick=()=>renderMCQ(el,qs,code,title,opt);
+  const sb=$('#sub',el);
+  if(sb) sb.onclick=()=>{
+    const blank=list.filter(q=>q.my===null).length;
+    if(blank&&!confirm(`還有 ${blank} 題沒作答，確定要交卷嗎？`))return;
+    submitToTeacher({code,type:0,title,total:list.length,correct:got,blank,
+      wrong:list.filter(q=>q.my!==q.a).map(q=>({q:q.q,my:q.my===null?'（空白）':q.o[q.my],a:q.o[q.a],u:q.unit||undefined}))},sb);
+  };
+}
+
+
+/* ================= 分類挑戰（交卷版，覆蓋模板版本） ================= */
+let SORTCTX=null;   /* {code,title}：由 render() 在單元分類頁設定 */
+function renderSort(el,so){
+  const ctx=SORTCTX;
+  let order=shuf(so.items),i=0,ok=0,wrongs=[];
+  function draw(){
+    if(i>=order.length){
+      el.innerHTML=`<h3>${so.title}</h3><div style="text-align:center"><div style="font-size:2.6rem">${ok===order.length?'🏆':'👍'}</div><p><b>${ok} / ${order.length}</b> 題正確</p>
+      ${wrongs.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:10px 14px">${wrongs.map(w=>`「${esc(w.it[0])}」→ <b>${so.buckets[w.it[1]]}</b>（你選：${esc(so.buckets[w.my])}）${w.it[2]?'：'+esc(w.it[2]):''}`).join('<br>')}</div>`:''}
+      <div class="row" style="justify-content:center;margin-top:12px">${ctx?'<button class="btn alt" data-sub>📤 交卷給老師</button>':''}<button class="btn" data-again>再玩一次</button></div></div>`;
+      el.querySelector('[data-again]').onclick=()=>{SORTCTX=ctx;renderSort(el,so)};
+      const sb=el.querySelector('[data-sub]');
+      if(sb) sb.onclick=()=>submitToTeacher({code:ctx.code,type:2,title:`${ctx.title}｜${so.title}`.replace(/｜/g,' ／ '),total:order.length,correct:ok,
+        wrong:wrongs.map(w=>({q:`「${w.it[0]}」屬於哪一類？`,my:so.buckets[w.my],a:so.buckets[w.it[1]]}))},sb);
+      return;
+    }
+    const it=order[i];
+    el.innerHTML=`<div class="qz-top"><h3 style="margin:0">${so.title}</h3><span class="muted">${i+1} / ${order.length}</span></div>
+      <p class="muted" style="margin:4px 0 0">💡 ${so.tip}</p>
+      <div class="sortcard">${esc(it[0])}</div>
+      <div class="buckets" style="grid-template-columns:repeat(${Math.min(so.buckets.length,5)},1fr)">${so.buckets.map((b,k)=>`<button class="bk" data-k="${k}">${b}</button>`).join('')}</div>
+      <div class="fb"></div>`;
+    if(window.innerWidth<560&&so.buckets.length>3) el.querySelector('.buckets').style.gridTemplateColumns='1fr 1fr';
+    el.querySelectorAll('.bk').forEach(b=>b.onclick=()=>{
+      el.querySelectorAll('.bk').forEach(x=>x.onclick=null);
+      const right=+b.dataset.k===it[1];
+      el.querySelector(`.bk[data-k="${it[1]}"]`).classList.add('ok');
+      if(right){sOK();ok++}else{sBAD();b.classList.add('bad');wrongs.push({it,my:+b.dataset.k})}
+      el.querySelector('.fb').innerHTML=(right?'✅ 正確！':'❌ 應該是「'+so.buckets[it[1]]+'」')+(it[2]?'　'+esc(it[2]):'');
+      i++;setTimeout(draw,right?800:1900);
+    });
+  }
+  draw();
+}
+
+
+/* ================= 配對（交卷版，覆蓋模板版本） ================= */
+function renderMatch(el,pairs,code,title){
+  const rounds=[];const sp=shuf(pairs);for(let k=0;k<sp.length;k+=5)rounds.push(sp.slice(k,k+5));
+  let r=0;const missed=new Map();   /* 詞 → {a:正解, my:[配錯的解釋]} */
+  function draw(){
+    const set=rounds[r];const rights=shuf(set);let sel=null,done=0;
+    el.innerHTML=`<div class="card"><div class="qz-top"><h3 style="margin:0">🔗 配對　第 ${r+1} / ${rounds.length} 回</h3><span class="muted">先點左邊的詞，再點右邊的解釋</span></div>
+      <div class="mcols" style="margin-top:14px"><div>${set.map((p,k)=>`<button class="mi w" data-w="${k}">${esc(p[0])}</button>`).join('')}</div>
+      <div>${rights.map(p=>`<button class="mi" data-m="${set.indexOf(p)}">${esc(p[1])}</button>`).join('')}</div></div></div>`;
+    el.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{if(b.classList.contains('done'))return;el.querySelectorAll('[data-w]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=b});
+    el.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{
+      if(!sel||b.classList.contains('done'))return;
+      if(sel.dataset.w===b.dataset.m){sOK();sel.classList.remove('sel');sel.classList.add('done');b.classList.add('done');sel=null;done++;
+        if(done===set.length)setTimeout(()=>{r++;if(r<rounds.length)draw();else fin()},600)}
+      else{sBAD();const w=set[+sel.dataset.w],m=missed.get(w[0])||{a:w[1],my:[]};m.my.push(set[+b.dataset.m][1]);missed.set(w[0],m);
+        b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),400)}
+    });
+  }
+  function fin(){
+    const n=pairs.length,bad=[...missed.entries()];
+    el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:3rem">${bad.length<=2?'🏆':'👍'}</div><h3>全部配對完成！</h3>
+      <p>一次就配對成功 <b>${n-bad.length} / ${n}</b> 個</p>
+      ${bad.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:12px 16px;margin:12px 0"><b>曾經配錯的：</b><br>${bad.map(([w,m])=>`${esc(w)} → <b>${esc(m.a)}</b>`).join('<br>')}</div>`:''}
+      <div class="row" style="justify-content:center">${code!=null?'<button class="btn alt" id="msub">📤 交卷給老師</button>':''}<button class="btn" id="ag">再玩一次（題目重新洗牌）</button></div></div>`;
+    $('#ag',el).onclick=()=>renderMatch(el,pairs,code,title);
+    const sb=$('#msub',el);
+    if(sb) sb.onclick=()=>submitToTeacher({code,type:3,title,total:n,correct:n-bad.length,
+      wrong:bad.map(([w,m])=>({q:`「${w}」的意思`,my:[...new Set(m.my)].join(' / '),a:m.a}))},sb);
+  }
+  draw();
+}
+
+
 /* ================= 發音（瀏覽器內建，iOS 需在點擊時呼叫） ================= */
 const isEN=s=>/^[A-Za-z][A-Za-z '’\-\/.…]*$/.test(s.trim());
 function say(t){try{const u=new SpeechSynthesisUtterance(t.replace(/…/g,' ').replace(/\//g,' or '));u.lang='en-US';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
@@ -746,16 +980,18 @@ function render(){
   app.querySelectorAll('.sub').forEach(b=>b.onclick=()=>{curSub[cur]=b.dataset.s;render()});
   const p=$('#panel');
   if(s==='anim') ANIM[cur](p);
-  if(s==='quick') renderQuick(p,d.quick);
-  if(s==='match') renderMatch(p,d.words);
-  if(s==='sort'){p.innerHTML=d.sorts.map((_,i)=>`<div class="card" id="so${i}"></div>`).join('');d.sorts.forEach((so,i)=>renderSort($('#so'+i),so))}
+  const title=`${d.no} ${d.short}`;
+  if(s==='quick') renderQuick(p,d.quick,d,d.code,title);
+  if(s==='match') renderMatch(p,d.words,d.code,title);
+  if(s==='sort'){p.innerHTML=d.sorts.map((_,i)=>`<div class="card" id="so${i}"></div>`).join('');d.sorts.forEach((so,i)=>{SORTCTX={code:d.code,title};renderSort($('#so'+i),so)});SORTCTX=null}
   if(s==='hunt') renderHunt(p,d.hunt);
-  if(s==='mcq') renderMCQ(p,d.mcq);
+  if(s==='mcq') renderMCQ(p,d.mcq,d.code,title);
 }
 
 /* ================= 首頁：考點雷達 ================= */
 function renderHome(app){
   const N=RADAR.n;
+  const bar2=(arr,M)=>`<div class="bars">${arr.map(([n,v])=>`<div class="b"><span>${n}</span><div class="track"><div class="fill" data-w="${v/M*100}"></div></div><b>${v}/${M}</b></div>`).join('')}</div>`;
   const bar=arr=>`<div class="bars">${arr.map(([n,v])=>`<div class="b"><span>${n}</span><div class="track"><div class="fill" data-w="${v/N*100}"></div></div><b>${v}/${N}</b></div>`).join('')}</div>`;
   app.innerHTML=`
   <h2>📡 第一次段考考點雷達</h2>
@@ -765,15 +1001,17 @@ function renderHome(app){
     <div class="lc" style="background:linear-gradient(135deg,#3a4f7a,#6b86b8)" data-k="mix"><div><div class="n">綜合</div><div class="t">克漏字＋閱讀</div></div><div class="d">課文改寫克漏字｜閱讀測驗｜翻譯翻翻卡</div></div>
   </div>
   <div class="card"><h3>選擇題最常考的主題（幾校考過）</h3>${bar(RADAR.topics)}
-  <p class="muted" style="margin-top:10px">⚠️ 課外閱讀三校都考、題數最多，但文章都借用課本主題（亡靈節、童婚、可可童工）。<br>⚠️ -ed 字尾發音三校都沒考，行有餘力再練。</p></div>
+  <p class="muted" style="margin-top:10px">⚠️ 課外閱讀四校都考、題數最多（25 題），文章常借用課本主題（亡靈節、童婚、可可童工、紙錢）。<br>⚠️ -ed 字尾發音四校都沒考，行有餘力再練。</p></div>
   <div class="grid2">
     <div class="card"><h3>文法必考點</h3><div class="chips">${RADAR.basics.map(([w,n])=>`<span>${w} <b>×${n}</b></span>`).join('')}</div>
-    <p class="muted" style="margin-top:12px">三校都考：<b>did / didn't 簡答</b>（…, but Kathy <b>didn't</b>.）、<b>was / were</b>、<b>時間副詞</b>、<b>Why…? Because…</b>。</p></div>
+    <p class="muted" style="margin-top:12px">四校都考：<b>did / didn't 簡答</b>（…, but Kathy <b>didn't</b>.）、<b>was / were</b>、<b>時間副詞</b>、<b>Why…? Because…</b>。</p></div>
     <div class="card"><h3>高頻單字片語</h3><div class="chips">${RADAR.words.map(([w,n])=>`<span>${w} <b>×${n}</b></span>`).join('')}</div>
     <p class="muted" style="margin-top:12px">文意字彙會給首字母：c____e（choose）、r____d（reminded）。拼字一定要會！</p></div>
   </div>
+  <div class="card"><h3>🌏 不分版本都考！（${RADAR.cross.n} 校八上第一次段考，含翰林、康軒）</h3>${bar2(RADAR.cross.items,RADAR.cross.n)}
+  <p class="muted" style="margin-top:10px">翻遍全臺 ${RADAR.cross.n} 校 114 上八年級第一次段考：<b>過去式</b>幾乎每校都考，was / were、because / so 也超過一半學校考。把「⏰ 過去式特訓」練熟最划算！</p></div>
   <div class="card"><h3>✍️ 非選題考什麼？</h3><div class="chips">${RADAR.nonmcq.map(([w,n])=>`<span>${w} <b>×${n}</b></span>`).join('')}</div>
-  <p class="muted" style="margin-top:12px">翻譯題幾乎都是<b>課文原句</b>：He passed away last year. I was very sad then.／She couldn't stand it, so she ran away. → 到「🧩 克漏字＋閱讀」用翻譯翻翻卡練。</p></div>
+  <p class="muted" style="margin-top:12px">三校的翻譯題都是<b>課文原句</b>：He passed away last year. I was very sad then.／She couldn't stand it, so she ran away. → 到「🧩 克漏字＋閱讀」用翻譯翻翻卡練。</p></div>
   <div class="card"><h3>🧭 建議闖關順序</h3>
   <p>① 每課先看 <b>🎬 動畫導覽</b>，弄懂課文在說什麼 → ② <b>⚡ 單字快問快答</b>、<b>🔗 片語配對</b>，練熟基本分 → ③ <b>⏰ 過去式特訓</b>，把文法練到反射 → ④ <b>📝 段考模擬題</b>與 <b>🧩 克漏字＋閱讀</b>，檢查自己的程度。</p>
   <p class="muted">段考範圍各校略有不同：有的學校加考 Reading Corner 1 或 2000 單字，請依自己學校的公告準備。</p></div>`;
@@ -781,11 +1019,11 @@ function renderHome(app){
   requestAnimationFrame(()=>setTimeout(()=>app.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'),60));
 }
 
-/* ================= 快問快答 ================= */
-function renderQuick(el,items){
+/* ================= 快問快答（英文版＋交卷） ================= */
+function renderQuick(el,items,d,code,title){
   let order,i,score,combo,best,wrong,timer,left;
   const TIME=10;
-  function start(){order=shuf(items);i=0;score=0;combo=0;best=0;wrong=[];next()}
+  function start(list){order=shuf(list||items);i=0;score=0;combo=0;best=0;wrong=[];next()}
   function next(){
     clearInterval(timer);
     if(i>=order.length) return end();
@@ -808,24 +1046,29 @@ function renderQuick(el,items){
       el.querySelectorAll('.opt').forEach(x=>{x.onclick=null;if(x.dataset.v===esc(a))x.classList.add('ok')});
       const right=b&&b.dataset.v===esc(a);
       if(right){sOK();combo++;best=Math.max(best,combo);score+=10+Math.round(left)+(combo>=3?5:0)}
-      else{sBAD();if(b)b.classList.add('bad');combo=0;wrong.push(order[i])}
+      else{sBAD();if(b)b.classList.add('bad');combo=0;wrong.push({item:order[i],my:b?b.textContent:'（超時）'})}
       if(b&&isEN(a)&&type!=='e') say(a);
       i++;setTimeout(next,right?900:1600);
     }
   }
   function end(){
-    const acc=Math.round((order.length-wrong.length)/order.length*100);
+    const n=order.length,acc=Math.round((n-wrong.length)/n*100),retry=n!==items.length;
     el.innerHTML=`<div class="card" style="text-align:center">
       <div style="font-size:3rem">${acc>=90?'🏆':acc>=70?'👍':'💪'}</div>
       <h3>完成！正確率 ${acc}%</h3><p>總分 <b>${score}</b>　最高連對 <b>${best}</b></p>
-      ${wrong.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:12px 16px;margin:12px 0"><b>要再加強的：</b><br>${wrong.map(([q,a])=>`${esc(q)} → <b>${esc(a)}</b>`).join('<br>')}</div>`:''}
-      <div class="row" style="justify-content:center">${wrong.length?'<button class="btn alt" id="rw">只練錯的題目</button>':''}<button class="btn" id="ra">全部重來</button></div></div>`;
-    $('#ra',el).onclick=start;
-    const rw=$('#rw',el); if(rw) rw.onclick=()=>{const w=wrong;order=shuf(w);i=0;score=0;combo=0;best=0;wrong=[];next()};
+      ${wrong.length?`<div style="text-align:left;background:#fffaf0;border-radius:12px;padding:12px 16px;margin:12px 0"><b>要再加強的：</b><br>${wrong.map(w=>`${esc(w.item[0])} → <b>${esc(w.item[1])}</b>（你選：${esc(w.my)}）`).join('<br>')}</div>`:''}
+      <div class="row" style="justify-content:center">
+        ${code!=null?'<button class="btn alt" id="sub">📤 交卷給老師</button>':''}
+        ${wrong.length?'<button class="btn ghost" id="rw">只練錯的題目</button>':''}<button class="btn" id="ra">全部重來</button></div>
+      ${code!=null?'<p class="muted" style="margin-top:8px">交卷會把你的姓名、分數和錯的題目傳給老師。</p>':''}</div>`;
+    $('#ra',el).onclick=()=>start();
+    const rw=$('#rw',el); if(rw) rw.onclick=()=>start(wrong.map(w=>w.item));
+    const sb=$('#sub',el); if(sb) sb.onclick=()=>submitToTeacher({code,type:1,title:title+(retry?'（只練錯題）':''),total:n,correct:n-wrong.length,
+      wrong:wrong.map(w=>({q:`${w.item[0]}（${ASK[w.item[4]]}）`,my:w.my,a:w.item[1]}))},sb);
   }
   el.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:3rem">⚡</div><h3>快問快答</h3>
-  <p>每題 10 秒，越快答對分數越高，連對 3 題以上有加分！<br><span class="star">★</span> 表示 2 所以上學校考過。按 🔊 可以聽發音。</p><button class="btn alt" id="go">開始挑戰（${items.length} 題）</button></div>`;
-  $('#go',el).onclick=start;
+  <p>每題 10 秒，越快答對分數越高，連對 3 題以上有加分！<br><span class="star">★</span> 表示 2 所以上學校考過。按 🔊 可以聽發音。做完可以按「交卷給老師」。</p><button class="btn alt" id="go">開始挑戰（${items.length} 題）</button></div>`;
+  $('#go',el).onclick=()=>start();
 }
 
 /* ================= 過去式抓抓樂（以「字」為單位） ================= */
@@ -858,7 +1101,7 @@ function renderMix(app){
   const s=curSub.mix||'cloze';
   const subs=[['cloze','🧩 課文改寫克漏字'],['read','📖 閱讀測驗'],['trans','🃏 翻譯翻翻卡']];
   app.innerHTML=`<h2>🧩 克漏字＋閱讀＋翻譯</h2>
-  <p class="muted">三校都考課外閱讀，且文章都借用課本主題；福興、五權的翻譯題都是課文原句。以下文章皆為原創改寫。</p>
+  <p class="muted">四校都考課外閱讀，且文章常借用課本主題；福興、五權、新北中正的翻譯題都是課文原句。以下文章皆為原創改寫。</p>
   <div class="subtabs">${subs.map(([k,t])=>`<button class="sub ${k===s?'on':''}" data-s="${k}">${t}</button>`).join('')}</div><div id="panel"></div>`;
   app.querySelectorAll('.sub').forEach(b=>b.onclick=()=>{curSub.mix=b.dataset.s;render()});
   const p=$('#panel');
@@ -870,7 +1113,7 @@ function renderMix(app){
   }
   const set=s==='cloze'?CLOZE:READ;
   p.innerHTML=set.map((c,k)=>`<div class="card"><h3>${c.title}</h3><div class="passage en">${esc(c.text).replace(/\n/g,'<br>').replace(/__(\d)__/g,'<b class="blank">__$1__</b>')}</div><div id="cq${k}"></div></div>`).join('');
-  set.forEach((c,k)=>renderMCQ($('#cq'+k),c.qs.map(q=>({...q,src:''}))));
+  set.forEach((c,k)=>{const nm=c.title.split('｜')[1]||c.title;renderMCQ($('#cq'+k),c.qs.map(q=>({...q,src:'',q:/^__\d__$/.test(q.q)?`${nm} 第 ${q.q.replace(/_/g,'')} 格`:q.q})),7,`綜合 ${c.title.replace(/｜/g,' ')}`)});
 }
 
 /* ================= L1 動畫 ================= */
@@ -939,8 +1182,9 @@ function animG(p){
     <div class="ps en" id="ps" style="margin-top:14px"></div>
     <div class="row" id="pv" style="margin-top:12px;justify-content:center"></div>
     <div class="meaning" id="pm">👆 請按上面的按鈕</div></div>
-    <div class="card"><h3>🎯 三校必考速記</h3>
+    <div class="card"><h3>🎯 四校必考速記</h3>
     <p><span class="pill">did / didn't</span>後面一定接<b>原形</b>：didn't <s>went</s> → didn't go</p>
+    <p><span class="pill">代動詞 did</span>So when he <b>did</b>, everyone was surprised.（did＝came，會考常見）</p>
     <p><span class="pill">簡答省略</span>Kathy picked it up, but Tiffany <b>didn't</b>.／Who did? My brother <b>did</b>.</p>
     <p><span class="pill">was / were</span>I, he, she, it, 單數 → was；you, we, they, 複數 → were；there was / were 看<b>後面</b>名詞</p>
     <p><span class="pill">時間副詞</span>two days <b>ago</b>、<b>last</b> week（last 前不加 in）、<b>yesterday</b> afternoon、<b>then</b>＝那時</p>
@@ -959,7 +1203,150 @@ function animG(p){
   show(0);
 }
 
-drawTabs();render();
+meChip();drawTabs();render();
+if(!CLOUD.me)enroll(()=>{},true);
+
+/* ================= ✏️ 老師手寫 =================
+   畫在網頁上的筆跡記在「整頁座標」，會跟著畫面捲動；白板的筆跡另外存、不捲動。
+   書寫時：一指／觸控筆寫字、兩指捲動＋縮放（不鎖畫面）。✋ 捲動模式：筆跡照樣顯示，可以點題目。
+   縮放：把頁面內容包進 #penZoom 再用 transform:scale；筆跡存「內容座標」，縮放後仍黏在原來的字上。
+   用固定大小的畫布＋捲動時重畫（平板瀏覽器對超大畫布有尺寸限制）。 */
+(function(){
+  const css=`
+  #penBtn{position:fixed;left:14px;bottom:14px;z-index:60;border:none;background:#fff;color:#2b4c7e;border-radius:99px;padding:8px 16px;box-shadow:0 4px 18px rgba(30,45,70,.18);font-weight:700;font-size:1rem;font-family:inherit;cursor:pointer}
+  #penCv{position:fixed;inset:0;width:100vw;height:100vh;z-index:57;pointer-events:none;display:none}
+  #penHit{position:fixed;inset:0;z-index:58;display:none;touch-action:none;cursor:crosshair}
+  #penBoard{position:fixed;inset:0;z-index:56;background:#fff;display:none}
+  body.pen-on #penCv{display:block}
+  body.pen-on.pen-draw #penHit{display:block}
+  body.pen-board #penBoard{display:block}
+  #penBar{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;bottom:12px;z-index:61;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;
+    background:rgba(255,255,255,.97);border-radius:16px;padding:8px 10px;box-shadow:0 6px 24px rgba(30,45,70,.22);max-width:calc(100vw - 24px)}
+  body.pen-top #penBar{bottom:auto;top:12px}
+  body.pen-on #penBar{display:flex}
+  #penBar button{border:2px solid #e3e0d8;background:#fff;border-radius:10px;min-width:44px;height:44px;font-size:1rem;font-family:inherit;font-weight:700;cursor:pointer;color:#23303f;padding:0 10px}
+  #penBar button.on{border-color:#2b4c7e;background:#e8effa}
+  #penBar button.mode{background:#2b4c7e;color:#fff;border-color:#2b4c7e}
+  #penBar .dot{width:44px;padding:0}
+  #penBar .dot i{display:block;width:22px;height:22px;border-radius:50%;margin:auto}
+  #penBar .sep{width:1px;height:30px;background:#e3e0d8;margin:0 2px}
+  body.pen-on #penBtn{display:none}
+  #penZoom{transform-origin:0 0}
+  html.pen-lock,html.pen-lock body{touch-action:manipulation;touch-action:pan-x pan-y}
+  #penBar,#penBar *,#penBtn{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+  @media(max-width:640px){#penBar .t,#penBar .sep{display:none}#penBar{gap:4px;padding:6px}#penBar button{min-width:40px;height:40px;padding:0 6px}#penBar .dot{width:40px}}`;
+  const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  const COLORS=['#d9342b','#1f5fbf','#1d1d1d','#1f9a55'];
+  const SIZES=[[3,'細'],[6,'中'],[12,'粗']];
+  let color=COLORS[0],size=6,erase=false,page=[],board=[],cur=null,boardOn=false;
+  document.body.insertAdjacentHTML('beforeend',`<button id="penBtn" title="老師手寫">✏️ 手寫</button>
+    <div id="penBoard"></div><canvas id="penCv"></canvas><div id="penHit"></div>
+    <div id="penBar">
+      <button class="mode" data-a="mode">✋<span class="t"> 捲動</span></button>
+      <span class="sep"></span>
+      ${COLORS.map((c,i)=>`<button class="dot${i?'':' on'}" data-c="${c}" title="顏色"><i style="background:${c}"></i></button>`).join('')}
+      <span class="sep"></span>
+      ${SIZES.map(([s,n])=>`<button data-s="${s}" class="${s===6?'on':''}">${n}</button>`).join('')}
+      <span class="sep"></span>
+      <button data-a="erase" title="橡皮擦">🧽<span class="t"> 橡皮擦</span></button><button data-a="undo" title="復原">↩️<span class="t"> 復原</span></button><button data-a="clear" title="清除">🗑️<span class="t"> 清除</span></button>
+      <button data-a="zout" title="縮小">－</button><button data-a="zoom" title="回到 1 倍">🔍<span class="z">1.0×</span></button><button data-a="zin" title="放大">＋</button><button data-a="board" title="白板">⬜<span class="t"> 白板</span></button><button data-a="move" title="移位">⇅<span class="t"> 移位</span></button><button data-a="close" title="關閉">✖<span class="t"> 關閉</span></button>
+    </div>`);
+  const Z=document.createElement('div');Z.id='penZoom';
+  const flow=[...document.body.children].filter(e=>/^(HEADER|NAV|MAIN|FOOTER)$/.test(e.tagName));
+  if(flow.length){flow[0].before(Z);flow.forEach(e=>Z.appendChild(e))}
+  let zoom=1;
+  const B=document.body,cv=document.getElementById('penCv'),hit=document.getElementById('penHit'),bar=document.getElementById('penBar'),ctx=cv.getContext('2d');
+  const list=()=>boardOn?board:page;
+  /* 螢幕座標＝內容座標×z＋(x,y)。白板不捲動不縮放；網頁筆跡跟著捲動與縮放 */
+  const off=()=>{if(boardOn)return{z:1,x:0,y:0};const r=Z.getBoundingClientRect();return{z:zoom,x:r.left,y:r.top}};
+  function fit(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;ctx.setTransform(r,0,0,r,0,0);redraw()}
+  function seg(s,a,b,o){
+    ctx.globalCompositeOperation=s.erase?'destination-out':'source-over';
+    ctx.strokeStyle=s.color;ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineWidth=(s.erase?s.size*4:s.size*(0.55+(b.p||0.5)*0.9))*o.z;
+    ctx.beginPath();ctx.moveTo(a.x*o.z+o.x,a.y*o.z+o.y);ctx.lineTo(b.x*o.z+o.x,b.y*o.z+o.y);ctx.stroke();
+  }
+  function draw(s,o){const P=s.pts;if(P.length===1)seg(s,P[0],{...P[0],x:P[0].x+.01},o);for(let i=1;i<P.length;i++)seg(s,P[i-1],P[i],o)}
+  function redraw(){ctx.clearRect(0,0,innerWidth,innerHeight);const o=off();
+    list().forEach(s=>{const ys=s.pts.map(p=>p.y*o.z+o.y);if(Math.max(...ys)<-50||Math.min(...ys)>innerHeight+50)return;draw(s,o)});
+    ctx.globalCompositeOperation='source-over'}
+  let raf=0;addEventListener('scroll',()=>{if(!B.classList.contains('pen-on')||boardOn||raf)return;raf=requestAnimationFrame(()=>{raf=0;redraw()})},{passive:true});
+  addEventListener('resize',()=>{if(B.classList.contains('pen-on')){fit();pad()}});
+  const pt=e=>{const o=off();return{x:(e.clientX-o.x)/o.z,y:(e.clientY-o.y)/o.z,p:e.pressure&&e.pointerType==='pen'?e.pressure:0.5}};
+  /* 以螢幕上的 at 點為中心縮放，讓內容點 c 落在 at（c 省略＝at 底下的內容點） */
+  const zBtn=()=>bar.querySelector('[data-a="zoom"] .z');
+  function setZoom(nz,at,c){
+    nz=Math.min(3,Math.max(1,nz));const o=off();c=c||{x:(at.x-o.x)/o.z,y:(at.y-o.y)/o.z};
+    zoom=nz;Z.style.transform=nz===1?'':`scale(${nz})`;
+    const r=Z.getBoundingClientRect(),ox=r.left+scrollX,oy=r.top+scrollY;
+    window.scrollTo(ox+c.x*nz-at.x,oy+c.y*nz-at.y);
+    zBtn().textContent=nz.toFixed(1)+'×';bar.querySelector('[data-a="zoom"]').classList.toggle('on',nz>1.01);redraw();
+  }
+  /* 一指／觸控筆＝寫字；兩指＝捲動＋縮放（書寫中不鎖畫面） */
+  const ptrs=new Map();let pan=null,hold=false;
+  const mid=()=>{const v=[...ptrs.values()];return{x:(v[0].x+v[1].x)/2,y:(v[0].y+v[1].y)/2}};
+  const dist=()=>{const v=[...ptrs.values()];return Math.hypot(v[0].x-v[1].x,v[0].y-v[1].y)||1};
+  function startPan(){const m=mid(),o=off();pan={d0:dist(),z0:zoom,c:{x:(m.x-o.x)/o.z,y:(m.y-o.y)/o.z},m}}
+  hit.addEventListener('pointerdown',e=>{e.preventDefault();hit.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(ptrs.size>=2){if(cur){const L=list(),i=L.indexOf(cur);if(i>=0)L.splice(i,1);cur=null;redraw()}startPan();hold=true;return}
+    if(hold)return;
+    cur={color,size,erase,pts:[pt(e)]};list().push(cur);draw(cur,off());ctx.globalCompositeOperation='source-over'});
+  hit.addEventListener('pointermove',e=>{
+    if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pan&&ptrs.size>=2){e.preventDefault();const m=mid();
+      if(boardOn)return;
+      setZoom(pan.z0*dist()/pan.d0,m,pan.c);return}
+    if(!cur)return;e.preventDefault();const o=off();
+    (e.getCoalescedEvents?e.getCoalescedEvents():[e]).forEach(ev=>{const p=pt(ev),q=cur.pts[cur.pts.length-1];cur.pts.push(p);seg(cur,q,p,o)});ctx.globalCompositeOperation='source-over'});
+  const up=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pan=null;else startPan();if(ptrs.size===0)hold=false;cur=null};
+  hit.addEventListener('pointerup',up);hit.addEventListener('pointercancel',up);
+  /* 滑鼠滾輪／觸控板在書寫層上也能捲動 */
+  /* 觸控板捏合／Ctrl＋滾輪＝縮放 */
+  hit.addEventListener('wheel',e=>{e.preventDefault();
+    if(e.ctrlKey&&!boardOn)setZoom(zoom*Math.exp(-e.deltaY*0.01),{x:e.clientX,y:e.clientY});else window.scrollBy(e.deltaX,e.deltaY)},{passive:false});
+  const modeBtn=bar.querySelector('[data-a="mode"]');
+  function setDraw(on){B.classList.toggle('pen-draw',on);modeBtn.innerHTML=on?'✋<span class="t"> 捲動</span>':'✏️<span class="t"> 書寫</span>';modeBtn.title=on?'切換成捲動畫面（筆跡保留）':'切換回寫字'}
+  /* 依工具列實際高度在頁面上／下留白，最後一題不會被擋住 */
+  function pad(){const on=B.classList.contains('pen-on'),top=B.classList.contains('pen-top'),h=on?bar.offsetHeight+24+'px':'';
+    B.style.paddingBottom=on&&!top?h:'';B.style.paddingTop=on&&top?h:''}
+  const VP=document.querySelector('meta[name=viewport]'),VP0=VP?VP.content:'';
+  function lockVP(on){if(VP)VP.content=on?'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no':VP0}
+  function resetNative(){if(!VP||!window.visualViewport||visualViewport.scale<=1.01)return;lockVP(true);setTimeout(()=>{VP.content='width=device-width, initial-scale=1, maximum-scale=1';setTimeout(()=>lockVP(B.classList.contains('pen-on')),300)},50)}
+  let kb=0;
+  function open(){lockVP(true);clearInterval(kb);kb=setInterval(keepBar,250);document.documentElement.classList.add('pen-lock');B.classList.add('pen-on');setDraw(true);fit();pad()}
+  function close(){clearInterval(kb);lockVP(false);if(zoom!==1)setZoom(1,{x:innerWidth/2,y:innerHeight/2});document.documentElement.classList.remove('pen-lock');bar.style.transform='';B.classList.remove('pen-on','pen-draw','pen-board');B.style.paddingBottom=B.style.paddingTop='';boardOn=false;bar.querySelector('[data-a="board"]').classList.remove('on')}
+  document.getElementById('penBtn').onclick=open;
+  modeBtn.onclick=()=>setDraw(!B.classList.contains('pen-draw'));
+  bar.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{color=b.dataset.c;erase=false;setDraw(true);
+    bar.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x===b));bar.querySelector('[data-a="erase"]').classList.remove('on')});
+  bar.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{size=+b.dataset.s;setDraw(true);bar.querySelectorAll('[data-s]').forEach(x=>x.classList.toggle('on',x===b))});
+  bar.querySelector('[data-a="erase"]').onclick=function(){erase=!erase;setDraw(true);this.classList.toggle('on',erase)};
+  bar.querySelector('[data-a="undo"]').onclick=()=>{list().pop();redraw()};
+  bar.querySelector('[data-a="clear"]').onclick=()=>{list().length=0;redraw()};
+  bar.querySelector('[data-a="board"]').onclick=function(){boardOn=!boardOn;B.classList.toggle('pen-board',boardOn);this.classList.toggle('on',boardOn);if(boardOn)setDraw(true);redraw()};
+  /* ✋ 捲動模式：兩指捏合一樣交給自己的縮放（瀏覽器原生縮放已關閉，工具列不會被推出畫面） */
+  let tp=null;
+  const tDist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY)||1;
+  const tMid=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+  document.addEventListener('touchstart',e=>{if(!B.classList.contains('pen-on')||B.classList.contains('pen-draw')||boardOn||e.touches.length!==2)return;
+    const m=tMid(e.touches),o=off();tp={d0:tDist(e.touches),z0:zoom,c:{x:(m.x-o.x)/o.z,y:(m.y-o.y)/o.z}}},{passive:true});
+  document.addEventListener('touchmove',e=>{if(!tp||e.touches.length!==2)return;e.preventDefault();setZoom(tp.z0*tDist(e.touches)/tp.d0,tMid(e.touches),tp.c)},{passive:false});
+  document.addEventListener('touchend',e=>{if(e.touches.length<2)tp=null},{passive:true});
+  /* 保險：萬一瀏覽器還是放大了整頁，把工具列擺回看得到的地方並維持原本大小 */
+  function keepBar(){const v=window.visualViewport;if(!v)return;
+    if(v.scale<=1.01||!B.classList.contains('pen-on')){bar.style.transform='';bar.style.transformOrigin='';return}
+    const top=B.classList.contains('pen-top');
+    bar.style.transformOrigin=top?'center top':'center bottom';
+    const dx=v.offsetLeft+v.width/2-innerWidth/2,dy=top?v.offsetTop:v.offsetTop+v.height-innerHeight;
+    bar.style.transform=`translate(${dx}px,${dy}px) scale(${1/v.scale})`}
+  if(window.visualViewport){visualViewport.addEventListener('resize',keepBar);visualViewport.addEventListener('scroll',keepBar)}
+  const ctr=()=>({x:innerWidth/2,y:innerHeight/2});
+  bar.querySelector('[data-a="zoom"]').onclick=()=>{setZoom(1,ctr());resetNative();keepBar()};
+  bar.querySelector('[data-a="zin"]').onclick=()=>{if(!boardOn)setZoom(zoom*1.25,ctr())};
+  bar.querySelector('[data-a="zout"]').onclick=()=>{if(!boardOn)setZoom(zoom/1.25,ctr())};
+  bar.querySelector('[data-a="move"]').onclick=()=>{B.classList.toggle('pen-top');pad()};
+  bar.querySelector('[data-a="close"]').onclick=close;
+})();
 </script>
 </body>
 </html>
