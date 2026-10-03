@@ -73,7 +73,7 @@ h2{font-size:clamp(36px,6.4vw,72px);text-align:center;margin:12px 0 10px;line-he
 .term .st{color:#b9c9e8;animation:pop .4s both}.term .st.ok{color:#7dffb0}.term .st.done{color:var(--gold);font-weight:800;margin-top:12px}
 @keyframes pop{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
 .paper{border-radius:24px;background:#fffdf7;color:#17213f;padding:30px 30px 26px;box-shadow:0 24px 70px rgba(0,0,0,.6),0 0 60px rgba(255,210,122,.18);min-height:520px;position:relative}
-.paper:empty::after{content:"等待指令… Waiting for a prompt…";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8791ab;font-size:20px}
+.paper:empty::after{content:"等待指令…";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8791ab;font-size:20px}
 .ph{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:3px solid #17213f;padding-bottom:12px;margin-bottom:14px;animation:pop .5s both}
 .ph b{font-size:26px;line-height:1.3}.ph span{font-size:20px;background:#ffd27a;border-radius:99px;padding:3px 14px;font-weight:800;white-space:nowrap}
 .pq{margin:14px 0 20px;animation:pop .5s both}
@@ -125,45 +125,39 @@ footer b{color:var(--ink);font-size:26px}
 <header class="hero">
   <canvas id="galaxy" aria-label="作品星系 / Project galaxy"></canvas>
   <div class="hero-text">
-    <div class="kicker">The Second Brain · 2026</div>
     <h1>一個老師 × 一個 AI<br>＝ 一整個教學宇宙</h1>
-    <p>One teacher × one AI = an entire teaching universe</p>
   </div>
   <div class="legend" id="legend"></div>
   <div class="panel" id="panel">
     <button class="x" id="px" aria-label="close">×</button>
-    <div class="tag" id="pt"></div><h3 id="pn"></h3><div class="en" id="pe"></div><p id="pd"></p><a id="pl" target="_blank" rel="noopener">前往網站 · Visit →</a>
+    <div class="tag" id="pt"></div><h3 id="pn"></h3><p id="pd"></p><a id="pl" target="_blank" rel="noopener">前往網站 →</a>
   </div>
   <div class="ticker" id="ticker"></div>
-  <div class="hint">拖曳旋轉．點星球飛過去看作品 · Drag &amp; tap a planet <b>↓</b></div>
+  <div class="hint">拖曳旋轉．點星球飛過去看作品 <b>↓</b></div>
 </header>
 
 <section class="demo" id="demo">
   <div class="wrap">
-    <div class="eyebrow">One sentence → One exam</div>
     <h2>一句話，長出一份考卷</h2>
-    <p class="sub">老師只下一句指令，其餘交給 AI · One prompt in, a full interactive exam out</p>
+    <p class="sub">老師只下一句指令，其餘交給 AI</p>
     <div class="chips" id="demoChips"></div>
     <div class="demo-grid">
       <div class="term"><div class="term-bar"><i></i><i></i><i></i><span>Claude Code</span></div><div class="term-body" id="term"></div></div>
       <div class="paper" id="paper"></div>
     </div>
-    <div style="text-align:center;margin-top:34px"><button class="chip" id="replay">↻ 重播 · Replay</button></div>
+    <div style="text-align:center;margin-top:34px"><button class="chip" id="replay">↻ 重播</button></div>
   </div>
 </section>
 
 <section class="stats" id="stats">
   <div class="wrap">
-    <div class="eyebrow">By the numbers</div>
     <h2>115 天，長出這些東西</h2>
-    <p class="sub">115 days of building together</p>
     <div class="grid" id="statGrid"></div>
   </div>
 </section>
 
 <section id="works">
   <div class="wrap">
-    <div class="eyebrow">Work wall</div>
     <h2>作品牆</h2>
     <p class="sub">這段時間一起做出來的成果（有網址的可直接點進去）</p>
     <div class="chips" id="chips"></div>
@@ -172,9 +166,9 @@ footer b{color:var(--ink);font-size:26px}
 </section>
 
 <footer>
-  <b>第二顆腦 · The Second Brain</b><br><br>
+  <b>第二顆腦</b><br><br>
   全民補習班 × 彰化縣人師教育協會 × Claude<br>
-  僅供私下展示 · For private showing only
+  僅供私下展示
 </footer>
 
 <script>
@@ -241,11 +235,11 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 let seed=11;const sr=()=>(seed=(seed*16807)%2147483647)/2147483647;
 const nodes=[];
 CATS.forEach((c,i)=>{
-  const a=i/CATS.length*Math.PI*2, R=300;
+  const a=i/CATS.length*Math.PI*2, R=430;
   const cx=Math.cos(a)*R, cz=Math.sin(a)*R, cy=(sr()-.5)*150;
   c.hub={x:cx,y:cy,z:cz};
   W.filter(x=>x.cat===c.id).forEach(wk=>{
-    const th=sr()*Math.PI*2, ph=Math.acos(2*sr()-1), r=75+sr()*75;
+    const th=sr()*Math.PI*2, ph=Math.acos(2*sr()-1), r=115+sr()*95;
     wk.p={x:cx+r*Math.sin(ph)*Math.cos(th),y:cy+r*Math.cos(ph)*.8,z:cz+r*Math.sin(ph)*Math.sin(th)};
     wk.r=6+wk.s*6; wk.col=c.c; wk.ph=sr()*6.28; wk.ang=Math.atan2(wk.p.z,wk.p.x);
     nodes.push(wk);
@@ -254,7 +248,7 @@ CATS.forEach((c,i)=>{
 // galactic dust: 5 spiral arms around the sun, thin disc
 const dust=[];
 for(let i=0;i<1700;i++){
-  const arm=i%5, r=40+Math.pow(sr(),.7)*520, a=arm/5*6.283+r*.011+(sr()-.5)*.55;
+  const arm=i%5, r=40+Math.pow(sr(),.7)*700, a=arm/5*6.283+r*.011+(sr()-.5)*.55;
   const col=[ '#7fb8ff','#b79cff','#ff9ec8','#ffe3a0','#8ff0c4'][arm];
   dust.push({x:Math.cos(a)*r,y:(sr()-.5)*30*(1-r/700),z:Math.sin(a)*r,s:sr()*2+.6,c:col,tw:sr()*6});
 }
@@ -275,7 +269,7 @@ function proj(p,s){
   const cp=Math.cos(pitch),sp=Math.sin(pitch);
   const y2=Y*cp-z*sp, z2=Y*sp+z*cp;
   const f=820, k=f/(f+z2+380);
-  const sc=(Math.min(w*.95,h*1.02)/560)*(.92+.08*IP);
+  const sc=(Math.min(w*.95,h*1.02)/780)*(.92+.08*IP);
   return {x:w/2+x*k*sc,y:h*cyF+y2*k*sc,k:k*sc,z:z2};
 }
 function glow(x,y,r,col,a){
@@ -284,10 +278,21 @@ function glow(x,y,r,col,a){
   g.addColorStop(1,col+'00');
   ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,6.283);ctx.fill();
 }
-function label(txt,x,y,size,alpha,bold){
-  ctx.font=(bold?'800 ':'600 ')+size+'px -apple-system,"PingFang TC","Noto Sans TC",sans-serif';
-  ctx.lineWidth=5;ctx.strokeStyle='rgba(3,5,15,'+alpha*.9+')';ctx.strokeText(txt,x,y);
-  ctx.fillStyle='rgba(255,255,255,'+alpha+')';ctx.fillText(txt,x,y);
+let LQ=[];
+function label(txt,x,y,size,alpha,bold,prio){LQ.push({txt,x,y,size,alpha,bold,prio:prio==null?5:prio})}
+function flushLabels(){
+  LQ.sort((a,b)=>a.prio-b.prio);
+  const placed=[];ctx.textAlign='center';
+  for(const L of LQ){
+    ctx.font=(L.bold?'800 ':'600 ')+L.size+'px -apple-system,"PingFang TC","Noto Sans TC",sans-serif';
+    const tw=ctx.measureText(L.txt).width, x=Math.max(tw/2+8,Math.min(w-tw/2-8,L.x));
+    const r={x0:x-tw/2-8,x1:x+tw/2+8,y0:L.y-L.size-4,y1:L.y+L.size*.4};
+    if(L.prio>=1&&placed.some(q=>r.x0<q.x1&&r.x1>q.x0&&r.y0<q.y1&&r.y1>q.y0))continue;
+    placed.push(r);
+    ctx.lineWidth=5;ctx.strokeStyle='rgba(3,5,15,'+L.alpha*.9+')';ctx.strokeText(L.txt,x,L.y);
+    ctx.fillStyle='rgba(255,255,255,'+L.alpha+')';ctx.fillText(L.txt,x,L.y);
+  }
+  LQ=[];
 }
 const mobile=()=>w<900;
 function frame(now){
@@ -348,10 +353,10 @@ function frame(now){
   ctx.lineWidth=1;
   ctx.strokeStyle='rgba(160,200,255,.14)';
   ctx.beginPath();
-  for(let i=0;i<=96;i++){const a=i/96*6.283;const q=proj({x:Math.cos(a)*300,y:0,z:Math.sin(a)*300},IP);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)}
+  for(let i=0;i<=96;i++){const a=i/96*6.283;const q=proj({x:Math.cos(a)*430,y:0,z:Math.sin(a)*430},IP);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)}
   ctx.stroke();
   ctx.beginPath();
-  for(let i=0;i<=96;i++){const a=i/96*6.283;const q=proj({x:Math.cos(a)*520,y:0,z:Math.sin(a)*520},IP);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)}
+  for(let i=0;i<=96;i++){const a=i/96*6.283;const q=proj({x:Math.cos(a)*700,y:0,z:Math.sin(a)*700},IP);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)}
   ctx.stroke();
   // --- collect
   const items=[];
@@ -373,7 +378,7 @@ function frame(now){
   for(let i=0;i<3;i++){const u=((t*.3+i/3)%1);ctx.strokeStyle='rgba(255,220,150,'+(.5*(1-u))+')';ctx.lineWidth=2;ctx.beginPath();ctx.arc(sun.x,sun.y,(30+u*260)*sun.k,0,6.283);ctx.stroke()}
   ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sun.x,sun.y,17*sun.k,0,6.283);ctx.fill();
   ctx.textAlign='center';
-  label('第二顆腦',sun.x,sun.y+Math.max(46,52*sun.k),Math.max(22,24*sun.k),Math.min(1,IP*1.5),true);
+  label('第二顆腦',sun.x,sun.y+Math.max(46,52*sun.k),Math.max(22,24*sun.k),Math.min(1,IP*1.5),true,0);
   // --- far to near
   items.sort((a,b)=>b.p.z-a.p.z);
   hover=null;let best=1e9;
@@ -384,7 +389,7 @@ function frame(now){
       glow(p.x,p.y,64*p.k,it.c.c,.45);
       ctx.fillStyle=it.c.c;ctx.beginPath();ctx.arc(p.x,p.y,7*p.k+2,0,6.283);ctx.fill();
       ctx.strokeStyle=it.c.c+'aa';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(p.x,p.y,16*p.k+4,0,6.283);ctx.stroke();
-      label(it.c.zh,p.x,p.y-26*p.k-6,Math.max(hubF,hubF+3*(p.k-.9)),Math.min(1,(.55+p.k*.5)*IP),true);
+      label(it.c.zh,p.x,p.y-26*p.k-6,Math.max(hubF,hubF+3*(p.k-.9)),Math.min(1,(.55+p.k*.5)*IP),true,1+(p.z+500)/1000);
     }else{
       const n=it.n,r=n.r*p.k*1.25, bob=Math.sin(t*1.2+n.ph)*3*p.k;
       const y=p.y+bob; it.sx=p.x;it.sy=y;it.sr=Math.max(r,10);
@@ -403,9 +408,10 @@ function frame(now){
     const n=it.n,near=it.p.z<-60;
     if(hover===n||selected===n||(near&&n.s>=1.6&&!mobile())){
       const big=hover===n||selected===n;
-      label(n.zh,it.sx,it.sy+it.sr+plF+6,big?plF+2:plF,big?1:.88,big);
+      label(n.zh,it.sx,it.sy+it.sr+plF+6,big?plF+2:plF,big?1:.88,big,big?.1:3+(it.p.z+500)/1000);
     }
   }
+  flushLabels();
   cv.style.cursor=hover?'pointer':(drag?'grabbing':'grab');
   // hero ticker count-up kicks in with the intro
   if(!tick&&el>2400){tick=1;document.querySelectorAll('#ticker [data-n]').forEach(countUp)}
@@ -424,14 +430,14 @@ const panel=document.getElementById('panel');
 function select(n){
   selected=n;const c=catOf(n.cat);
   tgtYaw=-Math.PI/2-n.ang;
-  pt.textContent=c.zh+' · '+c.en;pt.style.color=c.c;pn.textContent=n.zh;pe.textContent=n.en;pd.textContent=n.d;
+  pt.textContent=c.zh;pt.style.color=c.c;pn.textContent=n.zh;pd.textContent=n.d;
   panel.style.setProperty('--pc',c.c+'55');
   if(n.u){pl.href=n.u;pl.style.display='inline-block'}else pl.style.display='none';
   panel.classList.add('on');document.querySelector('.hero').classList.add('sel');
 }
 function close(){selected=null;panel.classList.remove('on');document.querySelector('.hero').classList.remove('sel')}
 px.onclick=close;
-document.getElementById('legend').innerHTML=CATS.map(c=>`<span style="--c:${c.c}"><i></i>${c.zh}<em>${c.en}</em></span>`).join('');
+document.getElementById('legend').innerHTML=CATS.map(c=>`<span style="--c:${c.c}"><i></i>${c.zh}</span>`).join('');
 requestAnimationFrame(frame);
 
 
@@ -509,7 +515,7 @@ function countUp(el){
 }
 if(reduce)setTimeout(()=>document.querySelectorAll('#ticker [data-n]').forEach(countUp),0);
 const sg=document.getElementById('statGrid');
-sg.innerHTML=STATS.map((s,i)=>`<div class="stat" style="--glow:${s.g};transition-delay:${i*110}ms"><div class="num"><span data-n="${s.n}">0</span><small>${s.u}</small></div><div class="zh">${s.zh}</div><div class="en">${s.en}</div></div>`).join('');
+sg.innerHTML=STATS.map((s,i)=>`<div class="stat" style="--glow:${s.g};transition-delay:${i*110}ms"><div class="num"><span data-n="${s.n}">0</span><small>${s.u}</small></div><div class="zh">${s.zh}</div></div>`).join('');
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');const sp=e.target.querySelector('[data-n]');if(sp&&!sp.done){sp.done=1;countUp(sp)}io.unobserve(e.target)}
 }),{threshold:.25});
@@ -517,12 +523,12 @@ document.querySelectorAll('.stat').forEach(el=>io.observe(el));
 
 /* ================= Work wall ================= */
 const chips=document.getElementById('chips'),wall=document.getElementById('wall');
-chips.innerHTML=`<button class="chip on" data-c="all">全部 All · ${W.length}</button>`+CATS.map(c=>`<button class="chip" data-c="${c.id}">${c.zh} · ${W.filter(x=>x.cat===c.id).length}</button>`).join('');
+chips.innerHTML=`<button class="chip on" data-c="all">全部 · ${W.length}</button>`+CATS.map(c=>`<button class="chip" data-c="${c.id}">${c.zh} · ${W.filter(x=>x.cat===c.id).length}</button>`).join('');
 function render(f){
   const list=W.filter(x=>f==='all'||x.cat===f);
   wall.innerHTML=list.map(x=>{
     const c=catOf(x.cat);
-    return `<article class="work" style="--c:${c.c}"><div class="ban" style="background:linear-gradient(135deg,${c.c}dd,${c.c}33)">${c.emoji}</div><div class="body"><div class="cat" style="color:${c.c}">${c.zh} · ${c.en}</div><h3>${x.zh}</h3><div class="en">${x.en}</div><p>${x.d}</p>${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${x.u.replace(/^https?:\/\//,'').replace(/\/$/,'')} →</a>`:`<span class="nolink">本機／內部使用 · Internal</span>`}</div></article>`;
+    return `<article class="work" style="--c:${c.c}"><div class="ban" style="background:linear-gradient(135deg,${c.c}dd,${c.c}33)">${c.emoji}</div><div class="body"><div class="cat" style="color:${c.c}">${c.zh}</div><h3>${x.zh}</h3><p>${x.d}</p>${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${x.u.replace(/^https?:\/\//,'').replace(/\/$/,'')} →</a>`:`<span class="nolink">本機／內部使用 · Internal</span>`}</div></article>`;
   }).join('');
   wall.querySelectorAll('.work').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),reduce?0:i*45));
 }
