@@ -95,6 +95,19 @@ h2{font-size:clamp(36px,6.4vw,72px);text-align:center;margin:12px 0 10px;line-he
 .stat .zh{font-size:26px;font-weight:800;margin-top:10px;position:relative}
 .stat .en{font-size:20px;color:var(--muted);position:relative}
 .foot{text-align:center;color:var(--muted);font-size:20px;margin-top:34px}
+
+/* ---------- Core values ---------- */
+.values{background:linear-gradient(180deg,var(--bg),#0c1236 50%,var(--bg))}
+.values h2{background:linear-gradient(100deg,#fff 10%,#9fe0ff 50%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.values .grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+.val{padding:40px 30px 36px;border-radius:30px;background:var(--card);border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,.35);position:relative;overflow:hidden;opacity:0;transform:translateY(40px);transition:.9s cubic-bezier(.2,.8,.2,1)}
+.val.in{opacity:1;transform:none}
+.val::before{content:"";position:absolute;inset:-30% auto auto -10%;width:220px;height:220px;border-radius:50%;background:var(--glow);opacity:.2;filter:blur(40px)}
+.val .no{font-size:64px;font-weight:900;line-height:1;color:var(--glow);text-shadow:0 0 30px var(--glow);position:relative}
+.val h3{font-size:28px;line-height:1.4;margin:14px 0 12px;position:relative}
+.val p{font-size:21px;line-height:1.85;color:#d6e2f8;position:relative}
+.closing{text-align:center;font-size:clamp(24px,3.4vw,38px);font-weight:800;line-height:1.6;margin:64px auto 0;max-width:900px;color:var(--gold)}
+@media(prefers-reduced-motion:reduce){.val{opacity:1;transform:none;transition:none}}
 /* ---------- Work wall ---------- */
 .chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:44px}
 .chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:12px 22px;border-radius:99px;font-size:20px;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
@@ -153,6 +166,31 @@ footer b{color:var(--ink);font-size:26px}
   <div class="wrap">
     <h2>115 天，長出這些東西</h2>
     <div class="grid" id="statGrid"></div>
+  </div>
+</section>
+
+<section class="values" id="values">
+  <div class="wrap">
+    <h2>這不是 AI 做的，是我教 AI 怎麼做的</h2>
+    <p class="sub">115 天，我學到的三件事</p>
+    <div class="grid">
+      <div class="val" style="--glow:#5ec8ff;transition-delay:0ms">
+        <div class="no">一</div>
+        <h3>不要只問 AI 問題，要把流程教給它</h3>
+        <p>我把每一種作業寫成一個「技能」：出一份英檢考卷、做一個學校雙語網站、剪一支訪校影片。現在有 38 個。下次只要一句話，它就照同一套流程重跑一遍。</p>
+      </div>
+      <div class="val" style="--glow:#ffd27a;transition-delay:120ms">
+        <div class="no">二</div>
+        <h3>一個老師，也能有一整條產線</h3>
+        <p>題庫、音檔、互動網頁、影片，原本需要一個團隊分工的事，現在我一個人就能接得住。靠的不是我變快，而是流程可以重複使用。</p>
+      </div>
+      <div class="val" style="--glow:#ff7ab8;transition-delay:240ms">
+        <div class="no">三</div>
+        <h3>專業判斷還是我的</h3>
+        <p>題型怎麼設計、單元怎麼排序、答案對不對、學生看不看得懂，每一關都由我把關。AI 負責產能，我負責判斷。</p>
+      </div>
+    </div>
+    <p class="closing">工具誰都能用，但要先知道「好的教學長什麼樣子」。</p>
   </div>
 </section>
 
@@ -519,7 +557,7 @@ sg.innerHTML=STATS.map((s,i)=>`<div class="stat" style="--glow:${s.g};transition
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');const sp=e.target.querySelector('[data-n]');if(sp&&!sp.done){sp.done=1;countUp(sp)}io.unobserve(e.target)}
 }),{threshold:.25});
-document.querySelectorAll('.stat').forEach(el=>io.observe(el));
+document.querySelectorAll('.stat,.val').forEach(el=>io.observe(el));
 
 /* ================= Work wall ================= */
 const chips=document.getElementById('chips'),wall=document.getElementById('wall');
