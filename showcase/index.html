@@ -15,7 +15,7 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-size:20px;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Helvetica Neue",Arial,sans-serif;line-height:1.65;overflow-x:hidden}
 /* ---------- Hero ---------- */
-.hero{position:relative;height:100vh;min-height:680px;overflow:hidden;background:radial-gradient(ellipse at 50% 58%,#1b2a6b 0%,#0b1236 34%,var(--bg) 72%)}
+.hero{position:relative;height:100vh;height:100svh;min-height:680px;overflow:hidden;background:radial-gradient(ellipse at 50% 58%,#1b2a6b 0%,#0b1236 34%,var(--bg) 72%)}
 #galaxy{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
 .hero-text{position:absolute;top:5vh;left:0;right:0;text-align:center;pointer-events:none;padding:0 16px;animation:rise 1.6s 1.4s both cubic-bezier(.2,.8,.2,1)}
 @keyframes rise{from{opacity:0;transform:translateY(30px) scale(.96);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
@@ -27,6 +27,7 @@ body{background:var(--bg);color:var(--ink);font-size:20px;font-family:-apple-sys
 .ticker b{display:block;font-size:clamp(30px,min(4vw,6.5vh),58px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--c)}
 .ticker span{font-size:clamp(20px,1.6vw,19px);color:var(--muted)}
 .hint{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:20px;color:var(--muted);pointer-events:none;animation:rise 1.4s 2.8s both}
+.hero.sel .hint{opacity:0!important;animation:none}
 .hint b{display:inline-block;animation:bob 1.8s ease-in-out infinite;color:var(--gold)}
 @keyframes bob{50%{transform:translateY(7px)}}
 .legend{position:absolute;left:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;animation:rise 1.4s 2.2s both}
@@ -49,11 +50,6 @@ body{background:var(--bg);color:var(--ink);font-size:20px;font-family:-apple-sys
   .ticker{display:none}
   .hero-text{top:3vh}
 }
-/* ---------- Marquee ---------- */
-.marquee{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);background:linear-gradient(90deg,#0a1030,#14123a,#0a1030);padding:18px 0}
-.marquee div{display:inline-block;animation:slide 60s linear infinite;font-size:clamp(22px,3vw,34px);font-weight:800;color:#dfe9ff}
-.marquee span{margin:0 26px}.marquee i{font-style:normal;color:var(--gold)}
-@keyframes slide{to{transform:translateX(-50%)}}
 /* ---------- Sections ---------- */
 section{padding:clamp(80px,12vw,150px) 18px}
 .wrap{max-width:1200px;margin:0 auto}
@@ -121,7 +117,7 @@ h2{font-size:clamp(36px,6.4vw,72px);text-align:center;margin:12px 0 10px;line-he
 /* ---------- Footer ---------- */
 footer{padding:70px 16px 90px;text-align:center;color:var(--muted);font-size:20px;border-top:1px solid var(--line)}
 footer b{color:var(--ink);font-size:26px}
-@media(prefers-reduced-motion:reduce){.stat,.work{opacity:1;transform:none;transition:none}.hint b,.marquee div{animation:none}.hero-text,.ticker,.hint,.legend{animation:none}}
+@media(prefers-reduced-motion:reduce){.stat,.work{opacity:1;transform:none;transition:none}.hint b{animation:none}.hero-text,.ticker,.hint,.legend{animation:none}}
 </style>
 </head>
 <body>
@@ -141,8 +137,6 @@ footer b{color:var(--ink);font-size:26px}
   <div class="ticker" id="ticker"></div>
   <div class="hint">拖曳旋轉．點星球飛過去看作品 · Drag &amp; tap a planet <b>↓</b></div>
 </header>
-
-<div class="marquee"><div id="marq"></div></div>
 
 <section class="demo" id="demo">
   <div class="wrap">
@@ -233,16 +227,14 @@ const STATS=[
 const catOf=id=>CATS.find(c=>c.id===id);
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-/* ================= Hero ticker + marquee ================= */
+/* ================= Hero ticker ================= */
 document.getElementById('ticker').innerHTML=[
  [936,'互動網頁','#ffd27a'],[17639,'AI 音檔','#ff7ab8'],[38,'自訂技能','#b79cff'],[115,'天','#5ec8ff']
 ].map(([n,l,c])=>`<div style="--c:${c}"><b data-n="${n}">0</b><span>${l}</span></div>`).join('');
-const mq=W.map(x=>`<span>${x.zh}</span><i>✦</i>`).join('');
-document.getElementById('marq').innerHTML=mq+mq;
 
 /* ================= Galaxy ================= */
 const cv=document.getElementById('galaxy'),ctx=cv.getContext('2d');
-let w,h,dpr,yaw=0,pitch=-.32,vy=.0022,drag=false,lx=0,ly=0,hover=null,selected=null,tgtYaw=null;
+let cyF=.55,w,h,dpr,yaw=0,pitch=-.32,vy=.0022,drag=false,lx=0,ly=0,hover=null,selected=null,tgtYaw=null;
 let mx=null,my=null,moved=0;
 const t0=performance.now(), INTRO=reduce?0:3600;
 const rnd=(a,b)=>a+Math.random()*(b-a);
@@ -284,7 +276,7 @@ function proj(p,s){
   const y2=Y*cp-z*sp, z2=Y*sp+z*cp;
   const f=820, k=f/(f+z2+380);
   const sc=(Math.min(w*.95,h*1.02)/560)*(.92+.08*IP);
-  return {x:w/2+x*k*sc,y:h*.55+y2*k*sc,k:k*sc,z:z2};
+  return {x:w/2+x*k*sc,y:h*cyF+y2*k*sc,k:k*sc,z:z2};
 }
 function glow(x,y,r,col,a){
   const g=ctx.createRadialGradient(x,y,0,x,y,r);
@@ -309,7 +301,8 @@ function frame(now){
     }else{yaw+=vy;vy+=(.0022-vy)*.02}
   }
   ctx.clearRect(0,0,w,h);
-  const cxs=w/2, cys=h*.55;
+  cyF+=(((mobile()&&selected)?.3:.55)-cyF)*.08;
+  const cxs=w/2, cys=h*cyF;
   // --- nebula blobs
   glow(cxs+Math.cos(t*.1)*w*.18,cys-h*.12,Math.max(w,h)*.5,'#3a2bff',.16);
   glow(cxs-Math.sin(t*.12)*w*.2,cys+h*.08,Math.max(w,h)*.45,'#ff2d95',.10);
@@ -434,9 +427,9 @@ function select(n){
   pt.textContent=c.zh+' · '+c.en;pt.style.color=c.c;pn.textContent=n.zh;pe.textContent=n.en;pd.textContent=n.d;
   panel.style.setProperty('--pc',c.c+'55');
   if(n.u){pl.href=n.u;pl.style.display='inline-block'}else pl.style.display='none';
-  panel.classList.add('on');
+  panel.classList.add('on');document.querySelector('.hero').classList.add('sel');
 }
-function close(){selected=null;panel.classList.remove('on')}
+function close(){selected=null;panel.classList.remove('on');document.querySelector('.hero').classList.remove('sel')}
 px.onclick=close;
 document.getElementById('legend').innerHTML=CATS.map(c=>`<span style="--c:${c.c}"><i></i>${c.zh}<em>${c.en}</em></span>`).join('');
 requestAnimationFrame(frame);
