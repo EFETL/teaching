@@ -48,8 +48,19 @@ body{background:var(--bg);color:var(--ink);font-size:20px;font-family:-apple-sys
   .legend span{font-size:20px;padding:5px 11px}.legend em{display:none}
   .panel{top:auto;bottom:16px;right:50%;transform:translate(50%,30px)}.panel.on{transform:translate(50%,0)}
   .ticker{display:none}
-  .hero-text{top:3vh}
+  .hero-text{top:calc(3vh + 56px)}
 }
+
+/* ---------- Music button ---------- */
+#musicBtn{position:fixed;top:14px;right:14px;z-index:60;display:flex;align-items:center;gap:10px;padding:10px 20px;border-radius:99px;border:1px solid var(--line);background:rgba(10,16,40,.7);backdrop-filter:blur(10px);color:var(--ink);font-size:20px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);transition:.3s}
+#musicBtn:hover{border-color:var(--gold)}
+#musicBtn.on{border-color:var(--gold);box-shadow:0 0 28px rgba(255,210,122,.4)}
+#musicBtn .bars{display:inline-flex;gap:3px;align-items:flex-end;height:20px}
+#musicBtn .bars i{width:4px;height:6px;background:var(--gold);border-radius:2px}
+#musicBtn.on .bars i{animation:eq 1s ease-in-out infinite}
+#musicBtn.on .bars i:nth-child(2){animation-delay:.2s}#musicBtn.on .bars i:nth-child(3){animation-delay:.4s}#musicBtn.on .bars i:nth-child(4){animation-delay:.6s}
+@keyframes eq{50%{height:20px}}
+.hero-text{top:calc(5vh + 52px)}
 /* ---------- Sections ---------- */
 section{padding:clamp(80px,12vw,150px) 18px}
 .wrap{max-width:1200px;margin:0 auto}
@@ -135,6 +146,7 @@ footer b{color:var(--ink);font-size:26px}
 </head>
 <body>
 
+<button id="musicBtn" aria-pressed="false"><span class="bars"><i></i><i></i><i></i><i></i></span><span id="musicTxt">開啟宇宙音樂</span></button>
 <header class="hero">
   <canvas id="galaxy" aria-label="作品星系 / Project galaxy"></canvas>
   <div class="hero-text">
@@ -471,7 +483,7 @@ function select(n){
   pt.textContent=c.zh;pt.style.color=c.c;pn.textContent=n.zh;pd.textContent=n.d;
   panel.style.setProperty('--pc',c.c+'55');
   if(n.u){pl.href=n.u;pl.style.display='inline-block'}else pl.style.display='none';
-  panel.classList.add('on');document.querySelector('.hero').classList.add('sel');
+  panel.classList.add('on');document.querySelector('.hero').classList.add('sel');if(typeof Music!=="undefined")Music.chime([523.25,659.25,783.99,880,1046.5][Math.floor(Math.random()*5)]);
 }
 function close(){selected=null;panel.classList.remove('on');document.querySelector('.hero').classList.remove('sel')}
 px.onclick=close;
@@ -541,6 +553,57 @@ dc.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;d
 document.getElementById('replay').onclick=()=>runDemo(demoIdx);
 let demoStarted=false;
 new IntersectionObserver((es,ob)=>{if(es[0].isIntersecting&&!demoStarted){demoStarted=true;runDemo(0);ob.disconnect()}},{threshold:.25}).observe(document.querySelector('.term'));
+
+
+/* ================= Cosmic ambient music (Web Audio, generated live) ================= */
+const Music=(()=>{
+  let ac,master,bus,on=false,sparkT,chordT,idx=0;
+  const CH=[[110,164.81,220,261.63,329.63,493.88],[87.31,130.81,174.61,220,261.63,392],[130.81,196,261.63,329.63,392,493.88],[98,146.83,196,246.94,293.66,392]];
+  const SC=[440,523.25,587.33,659.25,783.99,880,1046.5,1318.5];
+  function impulse(){const len=Math.floor(ac.sampleRate*3.4),b=ac.createBuffer(2,len,ac.sampleRate);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.4)}return b}
+  function init(){
+    ac=new (window.AudioContext||window.webkitAudioContext)();
+    master=ac.createGain();master.gain.value=0;
+    const comp=ac.createDynamicsCompressor(),rev=ac.createConvolver();rev.buffer=impulse();
+    const wet=ac.createGain();wet.gain.value=.8;const dry=ac.createGain();dry.gain.value=.45;
+    bus=ac.createGain();bus.connect(dry);bus.connect(rev);rev.connect(wet);wet.connect(comp);dry.connect(comp);comp.connect(master);master.connect(ac.destination);
+    // deep sub drone
+    const sub=ac.createOscillator(),sg=ac.createGain();sub.type='sine';sub.frequency.value=55;sg.gain.value=.07;sub.connect(sg);sg.connect(bus);sub.start();
+  }
+  function chord(){
+    const f=CH[idx++%CH.length],t=ac.currentTime,dur=15;
+    const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;lp.Q.value=.6;
+    const lfo=ac.createOscillator(),lg=ac.createGain();lfo.frequency.value=.07+Math.random()*.05;lg.gain.value=380;lfo.connect(lg);lg.connect(lp.frequency);lfo.start(t);lfo.stop(t+dur+6);
+    const g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+5);g.gain.setValueAtTime(.05,t+dur-4);g.gain.linearRampToValueAtTime(0,t+dur+5);
+    lp.connect(g);g.connect(bus);
+    f.forEach(hz=>[-7,7].forEach(dt=>{const o=ac.createOscillator();o.type='triangle';o.frequency.value=hz;o.detune.value=dt;o.connect(lp);o.start(t);o.stop(t+dur+6)}));
+  }
+  function chime(hz,vel){
+    if(!ac)return;const t=ac.currentTime;
+    const g=ac.createGain(),pan=ac.createStereoPanner?ac.createStereoPanner():null;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vel,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+4.2);
+    [[1,1],[2.01,.25],[3.99,.08]].forEach(([m,a])=>{const o=ac.createOscillator(),og=ac.createGain();o.type='sine';o.frequency.value=hz*m;og.gain.value=a;o.connect(og);og.connect(g);o.start(t);o.stop(t+4.4)});
+    if(pan){pan.pan.value=Math.random()*1.6-.8;g.connect(pan);pan.connect(bus)}else g.connect(bus);
+  }
+  function spark(){if(!on)return;chime(SC[Math.floor(Math.random()*SC.length)],.035+Math.random()*.05);sparkT=setTimeout(spark,1800+Math.random()*3200)}
+  function loopChord(){if(!on)return;chord();chordT=setTimeout(loopChord,11000)}
+  async function start(){
+    if(!ac)init();await ac.resume();on=true;
+    master.gain.cancelScheduledValues(ac.currentTime);master.gain.setTargetAtTime(.9,ac.currentTime,1.4);
+    loopChord();setTimeout(spark,1500);
+  }
+  function stop(){
+    on=false;clearTimeout(sparkT);clearTimeout(chordT);
+    if(ac){master.gain.setTargetAtTime(0,ac.currentTime,.5);setTimeout(()=>{if(!on)ac.suspend()},2200)}
+  }
+  document.addEventListener('visibilitychange',()=>{if(!ac||!on)return;document.hidden?ac.suspend():ac.resume()});
+  return{toggle:async()=>{on?stop():await start();return on},chime:(hz)=>{if(on)chime(hz||SC[2],.07)},get on(){return on}};
+})();
+const mb=document.getElementById('musicBtn'),mt=document.getElementById('musicTxt');
+mb.addEventListener('click',async()=>{
+  try{const o=await Music.toggle();mb.classList.toggle('on',o);mb.setAttribute('aria-pressed',o);mt.textContent=o?'音樂播放中':'開啟宇宙音樂'}
+  catch(e){mt.textContent='此瀏覽器無法播放'}
+});
 
 /* ================= Count-up ================= */
 function countUp(el){
