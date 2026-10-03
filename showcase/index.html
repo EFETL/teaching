@@ -43,10 +43,10 @@ body{background:var(--bg);color:var(--ink);font-size:20px;font-family:-apple-sys
 .panel a{display:inline-block;margin-top:16px;padding:12px 22px;border-radius:99px;font-size:20px;color:#06101f;font-weight:800;text-decoration:none;background:var(--gold)}
 .panel .x{position:absolute;top:10px;right:16px;background:none;border:0;color:var(--muted);font-size:30px;cursor:pointer;line-height:1}
 @media(max-width:900px){
-  .legend{top:auto;bottom:150px;left:12px;right:12px;transform:none;flex-direction:row;flex-wrap:wrap;gap:6px;justify-content:center}
+  .legend{display:none}
   .legend span{font-size:20px;padding:5px 11px}.legend em{display:none}
   .panel{top:auto;bottom:16px;right:50%;transform:translate(50%,30px)}.panel.on{transform:translate(50%,0)}
-  .ticker{bottom:200px}
+  .ticker{display:none}
   .hero-text{top:3vh}
 }
 /* ---------- Marquee ---------- */
@@ -165,7 +165,6 @@ footer b{color:var(--ink);font-size:26px}
     <h2>115 天，長出這些東西</h2>
     <p class="sub">115 days of building together</p>
     <div class="grid" id="statGrid"></div>
-    <p class="foot">數據來源：本機專案資料夾盤點（2026-10-03），不含備份與舊版副本。<br>Counted from local project folders on 2026-10-03; backups and old copies excluded.</p>
   </div>
 </section>
 
@@ -192,7 +191,6 @@ const CATS=[
  {id:'hs',zh:'高中高職英文',en:'Senior High English',c:'#b79cff',emoji:'📘'},
  {id:'jr',zh:'國中各科',en:'Junior High',c:'#ff9d6e',emoji:'🧪'},
  {id:'school',zh:'學校與社區',en:'Schools & Community',c:'#6ee7a8',emoji:'🏫'},
- {id:'cram',zh:'安親班與行政',en:'After-school & Admin',c:'#ffd27a',emoji:'🗂️'},
  {id:'tool',zh:'工具與技能',en:'Tools & Skills',c:'#ff7ab8',emoji:'🛠️'}
 ];
 const W=[
@@ -219,11 +217,6 @@ const W=[
  {cat:'school',zh:'田尾鄉雙語介紹',en:'Tianwei Township',d:'社區雙語介紹網站。',u:'https://tianwei.efetl.com',s:1.1},
  {cat:'school',zh:'MCC 交流網',en:'MCC Exchange',d:'MyCultureConnect 交流專頁。',u:'https://mccexchange.efetl.com',s:.9},
  {cat:'school',zh:'人師協會活動與簽到',en:'Association Events',d:'第七屆會員簽到表、國外實習志工流程整理。',u:'',s:.9},
- {cat:'cram',zh:'班級網站',en:'Class Site',d:'全民補習班班級入口與工具箱，可安裝成 App。',u:'https://class.efetl.com',s:1.3},
- {cat:'cram',zh:'班級餐費登記系統',en:'Meal Fee Register',d:'餐費登記、對帳。',u:'',s:1},
- {cat:'cram',zh:'會議紀錄整理網站',en:'Meeting Notes Site',d:'週二開會內容整理成可搜尋網站。',u:'',s:1},
- {cat:'cram',zh:'Halloween 活動頁',en:'Halloween Activity',d:'節慶活動互動網頁，上線前檢查。',u:'',s:.9},
- {cat:'cram',zh:'低年級互動練習',en:'Early Grades Practice',d:'序數塗色、三年級自然第一單元互動網站。',u:'',s:1},
  {cat:'tool',zh:'38 個自訂技能',en:'38 Custom Skills',d:'把每一種作業流程寫成技能，下次一句話就能重跑。',u:'',s:1.7},
  {cat:'tool',zh:'每日一句播放列表',en:'Daily Sentence Playlist',d:'每日英文句子 + 發音，播放列表式學習。',u:'https://efetl.com/playlist.html',s:1.2},
  {cat:'tool',zh:'學校行事曆 → Google 日曆',en:'Calendar Import',d:'拍照行事曆自動判讀，匯入 Google 日曆。',u:'',s:1},
@@ -305,7 +298,7 @@ function label(txt,x,y,size,alpha,bold){
   ctx.lineWidth=5;ctx.strokeStyle='rgba(3,5,15,'+alpha*.9+')';ctx.strokeText(txt,x,y);
   ctx.fillStyle='rgba(255,255,255,'+alpha+')';ctx.fillText(txt,x,y);
 }
-const mobile=()=>w<700;
+const mobile=()=>w<900;
 function frame(now){
   const el=now-t0, t=el/1000;
   const warp=INTRO?Math.max(0,Math.min(1,el/1700)):0;          // 0..1 warp stars
@@ -416,7 +409,7 @@ function frame(now){
   for(const it of items){
     if(it.t!=='n')continue;
     const n=it.n,near=it.p.z<-60;
-    if(hover===n||selected===n||(near&&n.s>=1.2&&!mobile())||(near&&n.s>=1.5&&mobile())){
+    if(hover===n||selected===n||(near&&n.s>=1.6&&!mobile())){
       const big=hover===n||selected===n;
       label(n.zh,it.sx,it.sy+it.sr+plF+6,big?plF+2:plF,big?1:.88,big);
     }
