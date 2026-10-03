@@ -218,7 +218,7 @@ footer b{color:var(--ink);font-size:26px}
 <footer>
   <b>第二顆腦</b><br><br>
   全民補習班 × 彰化縣人師教育協會 × Claude<br>
-  僅供私下展示
+  音樂：Universal — Vibe Tracks（YouTube 音訊庫）<br>僅供私下展示
 </footer>
 
 <script>
@@ -555,49 +555,13 @@ let demoStarted=false;
 new IntersectionObserver((es,ob)=>{if(es[0].isIntersecting&&!demoStarted){demoStarted=true;runDemo(0);ob.disconnect()}},{threshold:.25}).observe(document.querySelector('.term'));
 
 
-/* ================= Cosmic ambient music (Web Audio, generated live) ================= */
+/* ================= Background music (universal.mp3, loop) ================= */
 const Music=(()=>{
-  let ac,master,bus,on=false,sparkT,chordT,idx=0;
-  const CH=[[110,164.81,220,261.63,329.63,493.88],[87.31,130.81,174.61,220,261.63,392],[130.81,196,261.63,329.63,392,493.88],[98,146.83,196,246.94,293.66,392]];
-  const SC=[440,523.25,587.33,659.25,783.99,880,1046.5,1318.5];
-  function impulse(){const len=Math.floor(ac.sampleRate*3.4),b=ac.createBuffer(2,len,ac.sampleRate);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.4)}return b}
-  function init(){
-    ac=new (window.AudioContext||window.webkitAudioContext)();
-    master=ac.createGain();master.gain.value=0;
-    const comp=ac.createDynamicsCompressor(),rev=ac.createConvolver();rev.buffer=impulse();
-    const wet=ac.createGain();wet.gain.value=.8;const dry=ac.createGain();dry.gain.value=.45;
-    bus=ac.createGain();bus.connect(dry);bus.connect(rev);rev.connect(wet);wet.connect(comp);dry.connect(comp);comp.connect(master);master.connect(ac.destination);
-    // deep sub drone
-    const sub=ac.createOscillator(),sg=ac.createGain();sub.type='sine';sub.frequency.value=55;sg.gain.value=.07;sub.connect(sg);sg.connect(bus);sub.start();
-  }
-  function chord(){
-    const f=CH[idx++%CH.length],t=ac.currentTime,dur=15;
-    const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;lp.Q.value=.6;
-    const lfo=ac.createOscillator(),lg=ac.createGain();lfo.frequency.value=.07+Math.random()*.05;lg.gain.value=380;lfo.connect(lg);lg.connect(lp.frequency);lfo.start(t);lfo.stop(t+dur+6);
-    const g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+5);g.gain.setValueAtTime(.05,t+dur-4);g.gain.linearRampToValueAtTime(0,t+dur+5);
-    lp.connect(g);g.connect(bus);
-    f.forEach(hz=>[-7,7].forEach(dt=>{const o=ac.createOscillator();o.type='triangle';o.frequency.value=hz;o.detune.value=dt;o.connect(lp);o.start(t);o.stop(t+dur+6)}));
-  }
-  function chime(hz,vel){
-    if(!ac)return;const t=ac.currentTime;
-    const g=ac.createGain(),pan=ac.createStereoPanner?ac.createStereoPanner():null;
-    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vel,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+4.2);
-    [[1,1],[2.01,.25],[3.99,.08]].forEach(([m,a])=>{const o=ac.createOscillator(),og=ac.createGain();o.type='sine';o.frequency.value=hz*m;og.gain.value=a;o.connect(og);og.connect(g);o.start(t);o.stop(t+4.4)});
-    if(pan){pan.pan.value=Math.random()*1.6-.8;g.connect(pan);pan.connect(bus)}else g.connect(bus);
-  }
-  function spark(){if(!on)return;chime(SC[Math.floor(Math.random()*SC.length)],.035+Math.random()*.05);sparkT=setTimeout(spark,1800+Math.random()*3200)}
-  function loopChord(){if(!on)return;chord();chordT=setTimeout(loopChord,11000)}
-  async function start(){
-    if(!ac)init();await ac.resume();on=true;
-    master.gain.cancelScheduledValues(ac.currentTime);master.gain.setTargetAtTime(.9,ac.currentTime,1.4);
-    loopChord();setTimeout(spark,1500);
-  }
-  function stop(){
-    on=false;clearTimeout(sparkT);clearTimeout(chordT);
-    if(ac){master.gain.setTargetAtTime(0,ac.currentTime,.5);setTimeout(()=>{if(!on)ac.suspend()},2200)}
-  }
-  document.addEventListener('visibilitychange',()=>{if(!ac||!on)return;document.hidden?ac.suspend():ac.resume()});
-  return{toggle:async()=>{on?stop():await start();return on},chime:(hz)=>{if(on)chime(hz||SC[2],.07)},get on(){return on}};
+  const a=new Audio('universal.mp3');a.loop=true;a.preload='none';a.volume=0;
+  let on=false,fade;
+  function ramp(to,ms,done){clearInterval(fade);const from=a.volume,t0=performance.now();fade=setInterval(()=>{const p=Math.min(1,(performance.now()-t0)/ms);a.volume=Math.max(0,Math.min(1,from+(to-from)*p));if(p>=1){clearInterval(fade);if(done)done()}},40)}
+  document.addEventListener('visibilitychange',()=>{if(!on)return;if(document.hidden)a.pause();else a.play().catch(()=>{})});
+  return{toggle:async()=>{if(on){on=false;ramp(0,900,()=>a.pause())}else{await a.play();on=true;ramp(.7,2000)}return on},chime(){},get on(){return on}};
 })();
 const mb=document.getElementById('musicBtn'),mt=document.getElementById('musicTxt');
 mb.addEventListener('click',async()=>{
