@@ -30,11 +30,6 @@ body{background:var(--bg);color:var(--ink);font-size:20px;font-family:-apple-sys
 .hero.sel .hint{opacity:0!important;animation:none}
 .hint b{display:inline-block;animation:bob 1.8s ease-in-out infinite;color:var(--gold)}
 @keyframes bob{50%{transform:translateY(7px)}}
-.legend{position:absolute;left:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;animation:rise 1.4s 2.2s both}
-.legend span{font-size:20px;font-weight:600;padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--line);display:flex;align-items:center;gap:10px;backdrop-filter:blur(8px)}
-.legend i{width:12px;height:12px;border-radius:50%;display:inline-block;box-shadow:0 0 12px var(--c);background:var(--c)}
-.legend em{font-style:normal;color:var(--muted);font-weight:400;font-size:20px;display:none}
-@media(min-width:1500px){.legend em{display:inline}}
 .panel{position:absolute;right:20px;top:50%;width:min(400px,calc(100% - 32px));padding:24px 26px;border-radius:24px;background:rgba(8,14,38,.82);border:1px solid var(--line);backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px var(--pc,transparent);transform:translateY(-44%);opacity:0;pointer-events:none;transition:.45s cubic-bezier(.2,.8,.2,1)}
 .panel.on{transform:translateY(-50%);opacity:1;pointer-events:auto}
 .panel .tag{font-size:20px;letter-spacing:.1em;font-weight:700}
@@ -44,8 +39,6 @@ body{background:var(--bg);color:var(--ink);font-size:20px;font-family:-apple-sys
 .panel a{display:inline-block;margin-top:16px;padding:12px 22px;border-radius:99px;font-size:20px;color:#06101f;font-weight:800;text-decoration:none;background:var(--gold)}
 .panel .x{position:absolute;top:10px;right:16px;background:none;border:0;color:var(--muted);font-size:30px;cursor:pointer;line-height:1}
 @media(max-width:900px){
-  .legend{display:none}
-  .legend span{font-size:20px;padding:5px 11px}.legend em{display:none}
   .panel{top:auto;bottom:16px;right:50%;transform:translate(50%,30px)}.panel.on{transform:translate(50%,0)}
   .ticker{display:none}
   .hero-text{top:calc(3vh + 56px)}
@@ -118,7 +111,6 @@ h2{font-size:clamp(36px,6.4vw,72px);text-align:center;margin:12px 0 10px;line-he
 .val h3{font-size:28px;line-height:1.4;margin:14px 0 12px;position:relative}
 .val p{font-size:21px;line-height:1.85;color:#d6e2f8;position:relative}
 .closing{text-align:center;font-size:clamp(24px,3.4vw,38px);font-weight:800;line-height:1.6;margin:64px auto 0;max-width:900px;color:var(--gold)}
-@media(prefers-reduced-motion:reduce){.val{opacity:1;transform:none;transition:none}}
 /* ---------- Work wall ---------- */
 .chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:44px}
 .chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:12px 22px;border-radius:99px;font-size:20px;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
@@ -141,7 +133,6 @@ h2{font-size:clamp(36px,6.4vw,72px);text-align:center;margin:12px 0 10px;line-he
 /* ---------- Footer ---------- */
 footer{padding:70px 16px 90px;text-align:center;color:var(--muted);font-size:20px;border-top:1px solid var(--line)}
 footer b{color:var(--ink);font-size:26px}
-@media(prefers-reduced-motion:reduce){.stat,.work{opacity:1;transform:none;transition:none}.hint b{animation:none}.hero-text,.ticker,.hint,.legend{animation:none}}
 </style>
 </head>
 <body>
@@ -152,7 +143,6 @@ footer b{color:var(--ink);font-size:26px}
   <div class="hero-text">
     <h1>一個老師 × 一個 AI<br>＝ 一整個教學宇宙</h1>
   </div>
-  <div class="legend" id="legend"></div>
   <div class="panel" id="panel">
     <button class="x" id="px" aria-label="close">×</button>
     <div class="tag" id="pt"></div><h3 id="pn"></h3><p id="pd"></p><a id="pl" target="_blank" rel="noopener">前往網站 →</a>
@@ -269,7 +259,7 @@ const STATS=[
  {n:6,u:'個',zh:'專屬子網域',en:'dedicated subdomains',g:'#ff9d6e'}
 ];
 const catOf=id=>CATS.find(c=>c.id===id);
-const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const reduce=false;
 
 /* ================= Hero ticker ================= */
 document.getElementById('ticker').innerHTML=[
@@ -487,7 +477,6 @@ function select(n){
 }
 function close(){selected=null;panel.classList.remove('on');document.querySelector('.hero').classList.remove('sel')}
 px.onclick=close;
-document.getElementById('legend').innerHTML=CATS.map(c=>`<span style="--c:${c.c}"><i></i>${c.zh}</span>`).join('');
 requestAnimationFrame(frame);
 
 
