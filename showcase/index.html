@@ -561,7 +561,7 @@ const Music=(()=>{
   let on=false,fade;
   function ramp(to,ms,done){clearInterval(fade);const from=a.volume,t0=performance.now();fade=setInterval(()=>{const p=Math.min(1,(performance.now()-t0)/ms);a.volume=Math.max(0,Math.min(1,from+(to-from)*p));if(p>=1){clearInterval(fade);if(done)done()}},40)}
   document.addEventListener('visibilitychange',()=>{if(!on)return;if(document.hidden)a.pause();else a.play().catch(()=>{})});
-  return{toggle:async()=>{if(on){on=false;ramp(0,900,()=>a.pause())}else{await a.play();on=true;ramp(.6,2000)}return on},chime(){},get on(){return on}};
+  return{toggle:async()=>{if(on){on=false;ramp(0,900,()=>a.pause())}else{await a.play();on=true;ramp(.5,2000)}return on},chime(){},get on(){return on}};
 })();
 const mb=document.getElementById('musicBtn'),mt=document.getElementById('musicTxt');
 mb.addEventListener('click',async()=>{
