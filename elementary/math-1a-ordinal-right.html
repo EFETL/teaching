@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一上數學・序數和數字塗色（從右邊數）</title>
+<style>
+  :root { --ink:#222; --pink:#e5527a; --pinkbg:#fff0f4; --blue:#3b8fe0; --bluebg:#eef6ff; --fill:#ffcf3f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#eee; color:var(--ink);
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif; }
+  .sheet { width:297mm; height:210mm; margin:12px auto; background:#fff; padding:7mm 8mm;
+    display:grid; grid-template-columns:1fr 1fr; gap:6mm; box-shadow:0 2px 8px rgba(0,0,0,.12); position:relative; }
+  .panel { border-radius:16px; padding:8px 10px 10px; display:flex; flex-direction:column; }
+  .panel.pink { background:var(--pinkbg); } .panel.blue { background:var(--bluebg); }
+  .head { text-align:center; margin-bottom:4px; }
+  .head h2 { margin:0; font-size:34px; font-weight:900; display:inline-flex; align-items:center; }
+  .head h2 .num { font-size:40px; margin-right:4px; }
+  .pink .hl .h { color:var(--pink); } .blue .hl .h { color:var(--blue); }
+  .head .tip { font-size:16px; margin-top:2px; }
+  .head .tip .h { font-size:16px; }
+  .start { display:table; margin:3px auto 0; background:#e5527a; color:#fff; border-radius:12px; padding:1px 10px 1px 6px; font-size:15px; vertical-align:middle; }
+  .blue .start { background:#3b8fe0; }
+  .start .z .h { font-size:15px; } .start .z .bw { font-size:7px; color:#fff; }
+  .head .tip .bw { font-size:7px; }
+  .name { position:absolute; top:2mm; right:10mm; font-size:12px; color:#555; }
+  .rows { display:flex; flex-direction:column; gap:5px; flex:1; }
+  .row { flex:1; background:#fff; border-radius:12px; border:1.5px solid #e3e3e3; display:flex; align-items:center; padding:0 8px; gap:6px; }
+  .no { width:26px; height:26px; border-radius:50%; color:#fff; font-weight:bold; font-size:15px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .pink .no { background:var(--pink); } .blue .no { background:var(--blue); }
+  .label { width:162px; flex:none; display:flex; align-items:center; }
+  .box { flex:none; border:2px solid var(--ink); border-radius:6px; font-size:20px; font-weight:bold; width:32px; height:34px; display:flex; align-items:center; justify-content:center; margin-right:4px; }
+  .digit { font-size:22px; font-weight:bold; margin:0 3px; }
+  .items { display:flex; gap:2px; flex:1; justify-content:flex-start; }
+  .pink .items { justify-content:flex-end; }
+  .it { width:26px; height:26px; flex:none; cursor:pointer; }
+  .it svg { width:100%; height:100%; }
+  .s { fill:#fff; stroke:var(--ink); stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+  .ln { fill:none; stroke:var(--ink); stroke-width:2; stroke-linecap:round; }
+  .dot { fill:var(--ink); }
+  .it.on .s { fill:var(--fill); }
+  /* 直式注音 */
+  .z { display:inline-flex; align-items:center; margin:0 1px; }
+  .z .h { font-size:20px; font-weight:bold; line-height:1; }
+  .z .bw { display:flex; flex-direction:column; align-items:center; font-size:8.5px; line-height:1.02; margin-left:1px; font-weight:normal; color:#333; }
+  .z .bw span { position:relative; }
+  .z .bw i { font-style:normal; position:absolute; left:100%; top:-2px; }
+  .head h2 .z .h { font-size:34px; font-weight:900; }
+  .head h2 .z .bw { font-size:11px; }
+  .bar { text-align:center; margin:10px; }
+  .bar button { font-size:16px; padding:8px 18px; margin:0 6px; border-radius:20px; border:1px solid #ccc; background:#fff; cursor:pointer; }
+  .key-title { position:absolute; top:1.5mm; left:10mm; font-size:13px; color:var(--pink); font-weight:bold; }
+  @media screen and (max-width:900px) {
+    .sheet { width:auto; height:auto; grid-template-columns:1fr; margin:0; }
+    .row { min-height:56px; flex-wrap:wrap; padding:6px 8px; }
+  }
+  @media print {
+    body { background:#fff; } .sheet { margin:0; box-shadow:none; page-break-after:always; }
+    .bar { display:none; }
+    @page { size:A4 landscape; margin:0; }
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <button onclick="location.href='./'">← 返回國小選單</button>
+  <a href="math-1a-ordinal-right.pdf" download><button>下載 PDF</button></a>
+  <button onclick="window.print()">列印（第 1 頁題目、第 2 頁答案）</button>
+  <button onclick="document.querySelectorAll('#q .it.on').forEach(e=>e.classList.remove('on'))">清除塗色</button>
+</div>
+<div id="q" class="sheet"></div>
+<div id="a" class="sheet"></div>
+<script>
+// ---- 圖形（viewBox 0 0 40 40）----
+const SH = {
+  fish:'<path class="s" d="M3 20 C10 9 25 8 31 20 C25 32 10 31 3 20Z"/><path class="s" d="M30 20 L38 12 L38 28Z"/><circle class="dot" cx="11" cy="18" r="1.8"/>',
+  apple:'<path class="s" d="M20 12 C14 7 4 9 4 20 C4 30 12 38 17 37 C19 37 19.5 36 20 36 C20.5 36 21 37 23 37 C28 38 36 30 36 20 C36 9 26 7 20 12Z"/><path class="ln" d="M20 12 C20 8 22 5 24 3"/><path class="s" d="M22 7 C25 3 30 4 31 6 C28 9 25 9 22 7Z"/>',
+  flower:'<circle class="s" cx="20" cy="9" r="6.5"/><circle class="s" cx="30.5" cy="17" r="6.5"/><circle class="s" cx="26.5" cy="29.5" r="6.5"/><circle class="s" cx="13.5" cy="29.5" r="6.5"/><circle class="s" cx="9.5" cy="17" r="6.5"/><circle class="s" cx="20" cy="20" r="5.5"/>',
+  bird:'<path class="s" d="M6 24 C6 15 13 11 19 13 C21 7 31 6 32 14 C33 20 31 24 28 27 C24 33 10 34 6 24Z"/><path class="s" d="M32 13 L38 15 L32 17Z"/><circle class="dot" cx="27" cy="12.5" r="1.6"/><path class="ln" d="M11 21 C14 26 20 26 22 22"/><path class="ln" d="M15 32 L14 37 M21 32 L21 37"/>',
+  star:'<polygon class="s" points="20,3 25,14.5 37,15.5 28,23.5 31,36 20,29.5 9,36 12,23.5 3,15.5 15,14.5"/>',
+  balloon:'<ellipse class="s" cx="20" cy="15" rx="11" ry="13"/><path class="s" d="M17.5 28 L22.5 28 L20 31Z"/><path class="ln" d="M20 31 C17 34 23 36 20 39" style="stroke-width:1.4"/>',
+  butterfly:'<ellipse class="s" cx="11" cy="13" rx="8" ry="8" transform="rotate(-20 11 13)"/><ellipse class="s" cx="29" cy="13" rx="8" ry="8" transform="rotate(20 29 13)"/><ellipse class="s" cx="13" cy="28" rx="6" ry="6.5"/><ellipse class="s" cx="27" cy="28" rx="6" ry="6.5"/><rect class="s" x="18" y="8" width="4" height="26" rx="2"/><path class="ln" d="M19 8 L15 3 M21 8 L25 3" style="stroke-width:1.4"/>',
+  strawberry:'<path class="s" d="M6 15 C6 10 12 9 20 10 C28 9 34 10 34 15 C34 25 26 37 20 37 C14 37 6 25 6 15Z"/><path class="s" d="M12 11 L16 5 L20 9 L24 5 L28 11 Z"/><circle class="dot" cx="14" cy="18" r="1"/><circle class="dot" cx="20" cy="17" r="1"/><circle class="dot" cx="26" cy="18" r="1"/><circle class="dot" cx="17" cy="25" r="1"/><circle class="dot" cx="23" cy="25" r="1"/><circle class="dot" cx="20" cy="31" r="1"/>',
+  heart:'<path class="s" d="M20 36 C6 26 3 19 3 13 C3 7 7 4 12 4 C16 4 19 7 20 10 C21 7 24 4 28 4 C33 4 37 7 37 13 C37 19 34 26 20 36Z"/>',
+  cup:'<path class="s" d="M5 9 L29 9 L27 34 C27 36 26 37 24 37 L10 37 C8 37 7 36 7 34Z"/><path class="ln" d="M28.5 14 C36 13 37 25 28 27"/>',
+  mushroom:'<path class="s" d="M3 20 C3 9 11 4 20 4 C29 4 37 9 37 20Z"/><path class="s" d="M14 20 L26 20 L27 35 C27 37 25 38 20 38 C15 38 13 37 13 35Z"/><circle class="s" cx="13" cy="12" r="3"/><circle class="s" cx="25" cy="10" r="2.5"/><circle class="s" cx="30" cy="16" r="2"/>',
+  cat:'<path class="s" d="M6 18 L5 4 L15 11 C18 10 22 10 25 11 L35 4 L34 18 C36 30 30 37 20 37 C10 37 4 30 6 18Z"/><circle class="dot" cx="14" cy="21" r="2"/><circle class="dot" cx="26" cy="21" r="2"/><path class="ln" d="M18 27 L20 29 L22 27" style="stroke-width:1.5"/><path class="ln" d="M3 25 L11 26 M3 30 L11 28 M37 25 L29 26 M37 30 L29 28" style="stroke-width:1.2"/>',
+  donut:'<circle class="s" cx="20" cy="20" r="17"/><circle cx="20" cy="20" r="6" fill="#fff" stroke="#222" stroke-width="2"/><path class="ln" d="M10 13 L12 11 M28 11 L30 13 M30 26 L28 29 M12 29 L10 27 M20 7 L21 9" style="stroke-width:1.5"/>',
+  car:'<path class="s" d="M3 28 L3 21 C3 19 5 18 7 18 L10 18 L14 10 C15 9 16 8 18 8 L27 8 C29 8 30 9 31 10 L34 18 C36 18 37 19 37 21 L37 28Z"/><path class="ln" d="M15 18 L18 11 L22 11 L22 18 Z M25 11 L28 11 L30 18 L25 18Z" style="stroke-width:1.5"/><circle class="s" cx="11" cy="29" r="4.5"/><circle class="s" cx="29" cy="29" r="4.5"/>',
+  umbrella:'<path class="s" d="M3 20 C3 10 11 4 20 4 C29 4 37 10 37 20 C34 17 30 17 28 20 C26 17 22 17 20 20 C18 17 14 17 12 20 C10 17 6 17 3 20Z"/><path class="ln" d="M20 20 L20 33 C20 37 14 37 14 33"/>',
+  leaf:'<path class="s" d="M5 35 C4 18 14 5 36 4 C36 25 24 36 5 35Z"/><path class="ln" d="M5 35 C14 25 22 17 30 10 M14 26 L13 18 M20 20 L27 21" style="stroke-width:1.5"/>'
+};
+// ---- 注音字典（量詞「個」讀輕聲） ----
+const ZY = {'第':'ㄉㄧˋ','條':'ㄊㄧㄠˊ','魚':'ㄩˊ','顆':'ㄎㄜ','蘋':'ㄆㄧㄥˊ','果':'ㄍㄨㄛˇ','朵':'ㄉㄨㄛˇ','花':'ㄏㄨㄚ',
+  '隻':'ㄓ','小':'ㄒㄧㄠˇ','鳥':'ㄋㄧㄠˇ','星':'ㄒㄧㄥ','個':'˙ㄍㄜ','氣':'ㄑㄧˋ','球':'ㄑㄧㄡˊ','蝴':'ㄏㄨˊ','蝶':'ㄉㄧㄝˊ',
+  '草':'ㄘㄠˇ','莓':'ㄇㄟˊ','愛':'ㄞˋ','心':'ㄒㄧㄣ','杯':'ㄅㄟ','子':'˙ㄗ','蘑':'ㄇㄛˊ','菇':'ㄍㄨ','貓':'ㄇㄠ','甜':'ㄊㄧㄢˊ',
+  '圈':'ㄑㄩㄢ','輛':'ㄌㄧㄤˋ','汽':'ㄑㄧˋ','車':'ㄔㄜ','把':'ㄅㄚˇ','雨':'ㄩˇ','傘':'ㄙㄢˇ','片':'ㄆㄧㄢˋ','葉':'ㄧㄝˋ',
+  '以':'ㄧˇ','內':'ㄋㄟˋ','的':'˙ㄉㄜ','序':'ㄒㄩˋ','字':'ㄗˋ','依':'ㄧ','照':'ㄓㄠˋ','題':'ㄊㄧˊ','目':'ㄇㄨˋ',
+  '正':'ㄓㄥˋ','確':'ㄑㄩㄝˋ','物':'ㄨˋ','品':'ㄆㄧㄣˇ','塗':'ㄊㄨˊ','上':'ㄕㄤˋ','顏':'ㄧㄢˊ','色':'ㄙㄜˋ',
+  '從':'ㄘㄨㄥˊ','左':'ㄗㄨㄛˇ','邊':'ㄅㄧㄢ','開':'ㄎㄞ','始':'ㄕˇ','只':'ㄓˇ','量':'ㄌㄧㄤˋ','出':'ㄔㄨ','一':'ㄧ',
+  '姓':'ㄒㄧㄥˋ','右':'ㄧㄡˋ','名':'ㄇㄧㄥˊ','答':'ㄉㄚˊ','案':'ㄢˋ'};
+const TONES = 'ˊˇˋ';
+function zy(ch, b){
+  b = b || ZY[ch];
+  if (!b) return ch;
+  let light = b[0]==='˙'; if (light) b = b.slice(1);
+  let tone = TONES.includes(b[b.length-1]) ? b[b.length-1] : ''; if (tone) b = b.slice(0,-1);
+  const syms = [...b].map((c,i,a)=> `<span>${c}${i===a.length-1&&tone?`<i>${tone}</i>`:''}</span>`).join('');
+  return `<span class="z"><span class="h">${ch}</span><span class="bw">${light?'<span>˙</span>':''}${syms}</span></span>`;
+}
+// 「數」：當動詞（數一數）讀 ㄕㄨˇ，當名詞（序數、數字、數量）讀 ㄕㄨˋ
+const zs = (str, over={}) => [...str].map((c,i)=> over[i] ? zy(c, over[i]) : (c==='數' ? zy(c,'ㄕㄨˋ') : (ZY[c]? zy(c) : c))).join('');
+
+// ---- 題目：[數字, 量詞+名稱, 圖形, 圖形總數] ----
+const ORD = [ [3,'條魚','fish',10], [5,'顆蘋果','apple',10], [2,'朵花','flower',10], [6,'隻小鳥','bird',10], [1,'顆星星','star',10],
+              [8,'個氣球','balloon',10], [4,'隻蝴蝶','butterfly',10], [9,'顆草莓','strawberry',10], [7,'個愛心','heart',10], [10,'個杯子','cup',10] ];
+const CNT = [ [3,'個蘑菇','mushroom',10], [7,'隻小貓','cat',10], [5,'個甜甜圈','donut',10], [2,'輛汽車','car',10], [8,'隻小鳥','bird',10],
+              [4,'朵花','flower',10], [6,'顆草莓','strawberry',10], [9,'把雨傘','umbrella',10], [1,'片葉子','leaf',10], [10,'條魚','fish',10] ];
+
+function panel(kind, answer){
+  const isOrd = kind==='ord';
+  const data = isOrd ? ORD : CNT;
+  const title = isOrd ? '序數' : '數字';
+  const tip1 = '依照題目，把正確的物品塗上顏色。';
+  const tip2 = isOrd ? '從右邊開始數，只塗一個。' : '從左邊開始數，塗出正確的數量。';
+  // tip2 的「數」第一個是動詞
+  const tip2html = [...tip2].map((c,i)=> c==='數' ? zy(c, i===5?'ㄕㄨˇ':'ㄕㄨˋ') : (ZY[c]?zy(c):c)).join('');
+  let rows = data.map(([n,word,shape,total],i)=>{
+    let items='';
+    for (let k=0;k<total;k++){
+      const on = answer && (isOrd ? k===total-n : k<n);
+      items += `<div class="it${on?' on':''}" onclick="this.classList.toggle('on')"><svg viewBox="0 0 40 40">${SH[shape]}</svg></div>`;
+    }
+    const label = isOrd
+      ? `${zy('第')}<span class="digit">${n}</span>${zs(word)}`
+      : `<span class="box">${n}</span>${zs(word)}`;
+    return `<div class="row"><div class="no">${i+1}</div><div class="label">${label}</div><div class="items">${items}</div></div>`;
+  }).join('');
+  return `<div class="panel ${isOrd?'pink':'blue'}">
+    <div class="head"><h2><span class="num">10</span>${zs('以內的')}<span class="hl">${zs(title)}</span></h2>
+      <div class="tip">${zs(tip1)}<br>${tip2html}<span class="start">${isOrd ? '← '+zs('從右邊開始') : zs('從左邊開始')+' →'}</span></div></div>
+    <div class="rows">${rows}</div></div>`;
+}
+document.getElementById('q').innerHTML =
+  `<div class="name">${zs('姓名')}：＿＿＿＿＿＿</div>` + panel('ord',false) + panel('cnt',false);
+document.getElementById('a').innerHTML =
+  `<div class="key-title">${zs('答案')}</div>` + panel('ord',true) + panel('cnt',true);
+</script>
+</body>
+</html>
