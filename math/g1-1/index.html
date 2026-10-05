@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國小一年級第一冊 數學</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif; color:#1a1a1a; background:#fdf1f5; line-height:1.7; padding:0 0 60px; }
+  header { background:linear-gradient(135deg,#e5527a,#f07fa0); color:#fff; padding:30px 20px 26px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+  header h1 { font-size:30px; margin-bottom:8px; }
+  header p { font-size:18px; opacity:.95; }
+  .back { display:inline-block; margin:16px auto 0; color:#c23d63; background:#fff; border:2px solid rgba(0,0,0,.08); border-radius:20px; padding:6px 16px; font-size:16px; text-decoration:none; }
+  .wrap { max-width:880px; margin:0 auto; padding:22px 16px; }
+  .unit { background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 1px 8px rgba(0,0,0,.08); }
+  .unit-head { background:#e5527a; color:#fff; font-size:20px; font-weight:bold; padding:12px 20px; }
+  .links { display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:18px 20px; }
+  .item { border:2px solid #f3d6df; border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:6px; }
+  .item .t { font-size:19px; font-weight:bold; color:#c23d63; }
+  .item .d { font-size:15px; color:#7a6870; }
+  .btns { display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+  .btns a { text-decoration:none; border-radius:18px; padding:6px 16px; font-size:15px; font-weight:bold; }
+  .btns .go { background:#e5527a; color:#fff; } .btns .pdf { border:2px solid #e5527a; color:#c23d63; }
+  footer { text-align:center; color:#a0879a; font-size:15px; margin-top:30px; }
+  @media (max-width:560px){ .links{ grid-template-columns:1fr; } header h1{ font-size:24px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🖍️ 國小一年級第一冊</h1>
+  <p>teaching.efetl.com / 數學 / 國小一年級第一冊</p>
+  <a class="back" href="../">← 回數學科</a>
+</header>
+<div class="wrap">
+  <div class="unit">
+    <div class="unit-head">10 以內的序數和數字　塗色練習</div>
+    <div class="links">
+      <div class="item">
+        <span class="t">① 從左邊數</span>
+        <span class="d">序數、數字各一張 A4，各 10 題，全文加注音；點圖形就能塗色，後兩頁附答案</span>
+        <div class="btns"><a class="go" href="ordinal-left.html">線上練習 →</a><a class="pdf" href="ordinal-left.pdf" download>下載 PDF</a></div>
+      </div>
+      <div class="item">
+        <span class="t">② 序數從右邊數</span>
+        <span class="d">序數從右邊數、數字從左邊數，每排 10 個圖案，各一張 A4；後兩頁附答案</span>
+        <div class="btns"><a class="go" href="ordinal-right.html">線上練習 →</a><a class="pdf" href="ordinal-right.pdf" download>下載 PDF</a></div>
+      </div>
+    </div>
+  </div>
+  <footer>數學科 互動學習 ‧ teaching.efetl.com</footer>
+</div>
+<style>
+#pw-gate{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#1a3a5c;display:flex;align-items:center;justify-content:center;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;}
+#pw-box{background:#fff;border-radius:16px;padding:40px 36px;max-width:360px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3);}
+#pw-box h2{font-size:22px;color:#1a3a5c;margin-bottom:8px;}
+#pw-box p{font-size:15px;color:#666;margin-bottom:20px;}
+#pw-box input{width:100%;font-size:18px;padding:10px 14px;border:2px solid #cdddef;border-radius:8px;outline:none;margin-bottom:12px;box-sizing:border-box;}
+#pw-box input:focus{border-color:#1a3a5c;}
+#pw-box button{width:100%;font-size:18px;font-weight:bold;padding:12px;background:#1a3a5c;color:#fff;border:none;border-radius:8px;cursor:pointer;}
+#pw-box button:hover{background:#2a5070;}
+#pw-err{color:#c0392b;font-size:15px;margin-top:10px;display:none;}
+</style>
+<div id="pw-gate"><div id="pw-box">
+  <h2>&#128274; 全民補習班</h2>
+  <p>teaching.efetl.com<br>請輸入密碼進入教學區</p>
+  <input type="password" id="pw-in" placeholder="密碼" onkeydown="if(event.key==='Enter')tryPw()">
+  <button onclick="tryPw()">進入</button>
+  <div id="pw-err">密碼錯誤，請再試一次</div>
+</div></div>
+<script>
+(function(){
+  if(localStorage.getItem('efetl_ok')==='1'){document.getElementById('pw-gate').style.display='none';return;}
+  async function sha256(t){const d=new TextEncoder().encode(t);const h=await crypto.subtle.digest('SHA-256',d);
+    return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+  window.tryPw=async function(){
+    const v=document.getElementById('pw-in').value;
+    const h=await sha256(v);
+    if(h==='bb6dbcaef9d5ed4d6a7f5df4effdeb3b24b34ae6b1dfb52e1315f511301fb26e'){localStorage.setItem('efetl_ok','1');document.getElementById('pw-gate').style.display='none';}
+    else{document.getElementById('pw-err').style.display='block';document.getElementById('pw-in').value='';}
+  };
+  document.getElementById('pw-in').focus();
+})();
+</script>
+</body>
+</html>

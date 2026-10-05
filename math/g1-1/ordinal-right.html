@@ -4,37 +4,37 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>一上數學・序數和數字塗色（從右邊數）</title>
+<title>國小一上數學・序數和數字塗色（序數從右邊數）</title>
 <style>
   :root { --ink:#222; --pink:#e5527a; --pinkbg:#fff0f4; --blue:#3b8fe0; --bluebg:#eef6ff; --fill:#ffcf3f; }
   * { box-sizing:border-box; }
   body { margin:0; background:#eee; color:var(--ink);
     font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif; }
-  .sheet { width:297mm; height:210mm; margin:12px auto; background:#fff; padding:7mm 8mm;
-    display:grid; grid-template-columns:1fr 1fr; gap:6mm; box-shadow:0 2px 8px rgba(0,0,0,.12); position:relative; }
-  .panel { border-radius:16px; padding:8px 10px 10px; display:flex; flex-direction:column; }
+  .sheet { width:210mm; height:297mm; margin:12px auto; background:#fff; padding:11mm 10mm 9mm;
+    display:flex; flex-direction:column; box-shadow:0 2px 8px rgba(0,0,0,.12); position:relative; }
+  .panel { flex:1; border-radius:18px; padding:12px 12px 12px; display:flex; flex-direction:column; }
   .panel.pink { background:var(--pinkbg); } .panel.blue { background:var(--bluebg); }
   .head { text-align:center; margin-bottom:4px; }
-  .head h2 { margin:0; font-size:34px; font-weight:900; display:inline-flex; align-items:center; }
-  .head h2 .num { font-size:40px; margin-right:4px; }
+  .head h2 { margin:0; font-size:40px; font-weight:900; display:inline-flex; align-items:center; }
+  .head h2 .num { font-size:46px; margin-right:4px; }
   .pink .hl .h { color:var(--pink); } .blue .hl .h { color:var(--blue); }
-  .head .tip { font-size:16px; margin-top:2px; }
-  .head .tip .h { font-size:16px; }
-  .start { display:table; margin:3px auto 0; background:#e5527a; color:#fff; border-radius:12px; padding:1px 10px 1px 6px; font-size:15px; vertical-align:middle; }
+  .head .tip { font-size:20px; margin-top:4px; }
+  .head .tip .h { font-size:20px; }
+  .start { display:table; margin:3px auto 0; background:#e5527a; color:#fff; border-radius:12px; padding:2px 12px 2px 8px; font-size:18px; vertical-align:middle; }
   .blue .start { background:#3b8fe0; }
-  .start .z .h { font-size:15px; } .start .z .bw { font-size:7px; color:#fff; }
-  .head .tip .bw { font-size:7px; }
-  .name { position:absolute; top:2mm; right:10mm; font-size:12px; color:#555; }
-  .rows { display:flex; flex-direction:column; gap:5px; flex:1; }
-  .row { flex:1; background:#fff; border-radius:12px; border:1.5px solid #e3e3e3; display:flex; align-items:center; padding:0 8px; gap:6px; }
-  .no { width:26px; height:26px; border-radius:50%; color:#fff; font-weight:bold; font-size:15px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .start .z .h { font-size:18px; } .start .z .bw { font-size:8px; color:#fff; }
+  .head .tip .bw { font-size:9px; }
+  .name { position:absolute; top:2.5mm; right:12mm; font-size:14px; color:#555; }
+  .rows { display:flex; flex-direction:column; gap:8px; flex:1; }
+  .row { flex:1; background:#fff; border-radius:12px; border:1.5px solid #e3e3e3; display:flex; align-items:center; padding:0 8px; gap:8px; }
+  .no { width:34px; height:34px; border-radius:50%; color:#fff; font-weight:bold; font-size:19px; display:flex; align-items:center; justify-content:center; flex:none; }
   .pink .no { background:var(--pink); } .blue .no { background:var(--blue); }
-  .label { width:162px; flex:none; display:flex; align-items:center; }
-  .box { flex:none; border:2px solid var(--ink); border-radius:6px; font-size:20px; font-weight:bold; width:32px; height:34px; display:flex; align-items:center; justify-content:center; margin-right:4px; }
-  .digit { font-size:22px; font-weight:bold; margin:0 3px; }
-  .items { display:flex; gap:2px; flex:1; justify-content:flex-start; }
+  .label { width:205px; flex:none; display:flex; align-items:center; }
+  .box { flex:none; border:2px solid var(--ink); border-radius:6px; font-size:26px; font-weight:bold; width:40px; height:44px; display:flex; align-items:center; justify-content:center; margin-right:4px; }
+  .digit { font-size:28px; font-weight:bold; margin:0 3px; }
+  .items { display:flex; gap:4px; flex:1; justify-content:flex-start; }
   .pink .items { justify-content:flex-end; }
-  .it { width:26px; height:26px; flex:none; cursor:pointer; }
+  .it { width:38px; height:38px; flex:none; cursor:pointer; }
   .it svg { width:100%; height:100%; }
   .s { fill:#fff; stroke:var(--ink); stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
   .ln { fill:none; stroke:var(--ink); stroke-width:2; stroke-linecap:round; }
@@ -42,35 +42,38 @@
   .it.on .s { fill:var(--fill); }
   /* 直式注音 */
   .z { display:inline-flex; align-items:center; margin:0 1px; }
-  .z .h { font-size:20px; font-weight:bold; line-height:1; }
-  .z .bw { display:flex; flex-direction:column; align-items:center; font-size:8.5px; line-height:1.02; margin-left:1px; font-weight:normal; color:#333; }
+  .z .h { font-size:26px; font-weight:bold; line-height:1; }
+  .z .bw { display:flex; flex-direction:column; align-items:center; font-size:11px; line-height:1.02; margin-left:1px; font-weight:normal; color:#333; }
   .z .bw span { position:relative; }
   .z .bw i { font-style:normal; position:absolute; left:100%; top:-2px; }
-  .head h2 .z .h { font-size:34px; font-weight:900; }
-  .head h2 .z .bw { font-size:11px; }
+  .head h2 .z .h { font-size:40px; font-weight:900; }
+  .head h2 .z .bw { font-size:13px; }
   .bar { text-align:center; margin:10px; }
   .bar button { font-size:16px; padding:8px 18px; margin:0 6px; border-radius:20px; border:1px solid #ccc; background:#fff; cursor:pointer; }
-  .key-title { position:absolute; top:1.5mm; left:10mm; font-size:13px; color:var(--pink); font-weight:bold; }
+  .key-title { position:absolute; top:2mm; left:12mm; font-size:16px; color:var(--pink); font-weight:bold; }
   @media screen and (max-width:900px) {
-    .sheet { width:auto; height:auto; grid-template-columns:1fr; margin:0; }
+    .sheet { width:auto; height:auto; margin:0 0 12px; padding:16px 8px; }
+    .label { width:auto; } .it { width:28px; height:28px; } .items { gap:2px; }
     .row { min-height:56px; flex-wrap:wrap; padding:6px 8px; }
   }
   @media print {
     body { background:#fff; } .sheet { margin:0; box-shadow:none; page-break-after:always; }
     .bar { display:none; }
-    @page { size:A4 landscape; margin:0; }
+    @page { size:A4 portrait; margin:0; }
   }
 </style>
 </head>
 <body>
 <div class="bar">
-  <button onclick="location.href='./'">← 返回國小選單</button>
-  <a href="math-1a-ordinal-right.pdf" download><button>下載 PDF</button></a>
-  <button onclick="window.print()">列印（第 1 頁題目、第 2 頁答案）</button>
-  <button onclick="document.querySelectorAll('#q .it.on').forEach(e=>e.classList.remove('on'))">清除塗色</button>
+  <button onclick="location.href='./'">← 回國小一年級第一冊</button>
+  <a href="ordinal-right.pdf" download><button>下載 PDF</button></a>
+  <button onclick="window.print()">列印（第 1、2 頁題目，第 3、4 頁答案）</button>
+  <button onclick="document.querySelectorAll('.qs .it.on').forEach(e=>e.classList.remove('on'))">清除塗色</button>
 </div>
-<div id="q" class="sheet"></div>
-<div id="a" class="sheet"></div>
+<div id="q1" class="sheet qs"></div>
+<div id="q2" class="sheet qs"></div>
+<div id="a1" class="sheet"></div>
+<div id="a2" class="sheet"></div>
 <script>
 // ---- 圖形（viewBox 0 0 40 40）----
 const SH = {
@@ -142,10 +145,43 @@ function panel(kind, answer){
       <div class="tip">${zs(tip1)}<br>${tip2html}<span class="start">${isOrd ? '← '+zs('從右邊開始') : zs('從左邊開始')+' →'}</span></div></div>
     <div class="rows">${rows}</div></div>`;
 }
-document.getElementById('q').innerHTML =
-  `<div class="name">${zs('姓名')}：＿＿＿＿＿＿</div>` + panel('ord',false) + panel('cnt',false);
-document.getElementById('a').innerHTML =
-  `<div class="key-title">${zs('答案')}</div>` + panel('ord',true) + panel('cnt',true);
+const NAME = `<div class="name">${zs('姓名')}：＿＿＿＿＿＿</div>`, KEY = `<div class="key-title">${zs('答案')}</div>`;
+document.getElementById('q1').innerHTML = NAME + panel('ord',false);
+document.getElementById('q2').innerHTML = NAME + panel('cnt',false);
+document.getElementById('a1').innerHTML = KEY + panel('ord',true);
+document.getElementById('a2').innerHTML = KEY + panel('cnt',true);
+</script>
+<style>
+#pw-gate{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#1a3a5c;display:flex;align-items:center;justify-content:center;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;}
+#pw-box{background:#fff;border-radius:16px;padding:40px 36px;max-width:360px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3);}
+#pw-box h2{font-size:22px;color:#1a3a5c;margin-bottom:8px;}
+#pw-box p{font-size:15px;color:#666;margin-bottom:20px;}
+#pw-box input{width:100%;font-size:18px;padding:10px 14px;border:2px solid #cdddef;border-radius:8px;outline:none;margin-bottom:12px;box-sizing:border-box;}
+#pw-box input:focus{border-color:#1a3a5c;}
+#pw-box button{width:100%;font-size:18px;font-weight:bold;padding:12px;background:#1a3a5c;color:#fff;border:none;border-radius:8px;cursor:pointer;}
+#pw-box button:hover{background:#2a5070;}
+#pw-err{color:#c0392b;font-size:15px;margin-top:10px;display:none;}
+</style>
+<div id="pw-gate"><div id="pw-box">
+  <h2>&#128274; 全民補習班</h2>
+  <p>teaching.efetl.com<br>請輸入密碼進入教學區</p>
+  <input type="password" id="pw-in" placeholder="密碼" onkeydown="if(event.key==='Enter')tryPw()">
+  <button onclick="tryPw()">進入</button>
+  <div id="pw-err">密碼錯誤，請再試一次</div>
+</div></div>
+<script>
+(function(){
+  if(localStorage.getItem('efetl_ok')==='1'){document.getElementById('pw-gate').style.display='none';return;}
+  async function sha256(t){const d=new TextEncoder().encode(t);const h=await crypto.subtle.digest('SHA-256',d);
+    return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+  window.tryPw=async function(){
+    const v=document.getElementById('pw-in').value;
+    const h=await sha256(v);
+    if(h==='bb6dbcaef9d5ed4d6a7f5df4effdeb3b24b34ae6b1dfb52e1315f511301fb26e'){localStorage.setItem('efetl_ok','1');document.getElementById('pw-gate').style.display='none';}
+    else{document.getElementById('pw-err').style.display='block';document.getElementById('pw-in').value='';}
+  };
+  document.getElementById('pw-in').focus();
+})();
 </script>
 </body>
 </html>
