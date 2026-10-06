@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let's Go 1 · Unit 1 句型動畫練習</title>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:#22303f;line-height:1.65;background:linear-gradient(180deg,#eef1ff,#f3f9ff 70%);min-height:100vh;}
+  .wrap{max-width:820px;margin:0 auto;padding:18px 16px 70px;}
+  .home{display:inline-block;margin-bottom:14px;color:#4a56c9;font-weight:800;text-decoration:none;
+    background:#fff;padding:7px 16px;border-radius:20px;box-shadow:0 3px 10px rgba(110,125,240,.28);font-size:.9rem;}
+
+  header.hero{background:linear-gradient(135deg,#5b6cf0,#7c8cf7 55%,#6fc3f5);color:#fff;
+    border-radius:22px;padding:28px 26px;margin-bottom:22px;box-shadow:0 10px 26px rgba(110,125,240,.4);}
+  header.hero h1{margin:0 0 8px;font-size:1.7rem;text-shadow:0 1px 3px rgba(40,50,140,.35);}
+  header.hero p{margin:0;font-size:.96rem;opacity:.97;}
+
+  .formula{background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:16px;
+    font-size:.86rem;color:#4a5766;border-left:5px solid #7c8cf7;box-shadow:0 3px 10px rgba(110,125,240,.1);}
+  .formula b{color:#4a56c9;}
+  .formula .ft{width:100%;border-collapse:collapse;margin:8px 0 10px;}
+  .formula .ft th,.formula .ft td{border:1px solid #e1e5ff;padding:7px 9px;text-align:left;}
+  .formula .ft th{background:#f3f4ff;color:#4a56c9;}
+  .formula ol{margin:6px 0 0;padding-left:1.4em;}
+  .formula ol li{margin-bottom:3px;}
+  .formula .tm{background:#fff7ec;border-radius:10px;padding:8px 12px;margin-top:6px;color:#8a5a25;}
+  .formula .tm b{color:#c9611a;}
+
+  .note{background:#eef2ff;border:1px solid #d3dbff;border-radius:14px;padding:12px 16px;margin-bottom:16px;
+    font-size:.86rem;color:#3f4a9a;}
+  .note b{color:#4a56c9;}
+
+  .q{background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:14px;
+    box-shadow:0 4px 14px rgba(110,125,240,.10);border:1px solid #eaedfb;}
+  .qtop{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+  .qnum{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#d9f5ee;color:#12806a;
+    font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .qnum.d{background:#e3e7ff;color:#4a56c9;}
+  .tagk{display:inline-block;font-size:.72rem;font-weight:800;color:#fff;border-radius:99px;
+    padding:2px 10px;background:linear-gradient(135deg,#6a7bf5,#8f6bf0);margin-left:auto;flex:0 0 auto;}
+
+  .lineLab{font-size:.7rem;font-weight:800;color:#8a94a2;background:#f0f3f8;border-radius:8px;
+    padding:1px 8px;margin:0 0 5px;display:inline-block;}
+
+  .q.demo{background:linear-gradient(180deg,#f6f7ff,#fff);border-color:#e3e7ff;}
+  .oldLine{font-size:1.05rem;padding:12px 15px;background:#fafaff;border:1.5px dashed #c5cdfa;
+    border-radius:12px;margin-bottom:10px;line-height:1.9;}
+  .buildLine{font-size:1.05rem;padding:12px 15px;background:#f7fbff;border:1.5px solid #d4e8fb;
+    border-radius:12px;line-height:1.9;min-height:1.9em;}
+
+  /* 色塊：o 橘＝時間、b 藍＝名詞、g 綠＝動詞、v 紫＝助動詞／疑問詞 */
+  .w,.slot{font-weight:800;border-radius:6px;padding:1px 6px;}
+  .w{transition:opacity .35s .1s;}
+  .w.used{opacity:.3;text-decoration:line-through;}
+  .slot{opacity:0;transition:opacity .25s;}
+  .slot.show{opacity:1;}
+  .o{background:#fff0e0;color:#c9611a;}
+  .b{background:#e8f4ff;color:#1a6fc9;}
+  .g{background:#eafaf2;color:#0f7a52;}
+  .v{background:#f0e5ff;color:#6b3fd4;}
+
+  /* 發音鈕 */
+  .spk{border:none;cursor:pointer;background:linear-gradient(135deg,#22c1c3,#43e97b);color:#fff;
+    width:34px;height:34px;border-radius:50%;line-height:1;padding:0;flex:0 0 auto;
+    box-shadow:0 2px 7px rgba(34,192,128,.35);vertical-align:middle;margin-left:8px;transition:.15s;}
+  .spk:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .spk.playing{animation:spkPulse .7s ease-in-out infinite;
+    box-shadow:0 0 0 4px rgba(67,233,123,.35),0 2px 7px rgba(34,192,128,.35);}
+  @keyframes spkPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.14);}}
+  .audiobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border-radius:14px;
+    padding:11px 16px;margin-bottom:16px;box-shadow:0 3px 10px rgba(34,193,195,.1);
+    border-left:5px solid #22c1c3;font-weight:800;color:#0e8f5e;}
+  .audiobar label{display:flex;align-items:center;gap:7px;cursor:pointer;}
+  .audiobar input{width:20px;height:20px;accent-color:#22c1c3;cursor:pointer;}
+  .audiobar .tip{color:#8a94a2;font-weight:600;}
+
+  .flyClone{position:fixed;font-weight:900;padding:1px 6px;border-radius:6px;white-space:nowrap;
+    z-index:999;pointer-events:none;will-change:left,top;}
+
+  #pathSvg{position:absolute;top:0;left:0;width:1px;height:1px;overflow:visible;pointer-events:none;z-index:997;}
+  .pathLine{fill:none;stroke-width:2.5;stroke-dasharray:7,6;opacity:0;transition:opacity .25s;}
+  .pathLine.show{opacity:.8;}
+  .pathLine.o{stroke:#c9611a;} .pathLine.b{stroke:#1a6fc9;} .pathLine.g{stroke:#0f7a52;} .pathLine.v{stroke:#6b3fd4;}
+
+  .stepbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;}
+  .hintk{font-size:.76rem;color:#8a94a2;font-weight:800;}
+  .sbtn{border:none;cursor:pointer;font-weight:800;font-size:.82rem;padding:9px 15px;border-radius:12px;
+    color:#fff;display:inline-flex;align-items:center;gap:7px;transition:.15s;box-shadow:0 3px 9px rgba(0,0,0,.14);}
+  .sbtn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+  .sbtn:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+  .sbtn .sn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;
+    background:rgba(255,255,255,.34);color:#fff;font-size:.7rem;font-weight:900;}
+  .sbtn.b1{background:linear-gradient(135deg,#ff8a1e,#ffb347);}
+  .sbtn.b2{background:linear-gradient(135deg,#1fb98a,#4fd8a8);}
+  .sbtn.b3{background:linear-gradient(135deg,#8a5cf5,#b48cff);}
+  .sbtn.on{box-shadow:0 0 0 3px rgba(255,255,255,.85),0 5px 14px rgba(0,0,0,.22);filter:brightness(1.08);transform:translateY(-1px);}
+  .replay{border:none;cursor:pointer;font-weight:800;font-size:.76rem;padding:8px 13px;border-radius:12px;
+    color:#4a56c9;background:#eef0ff;margin-left:auto;}
+
+  .reveal{display:none;margin-top:8px;padding:10px 13px;border-radius:12px;font-size:.9rem;border-left:4px solid;}
+  .reveal s{color:#d23b5e;} .reveal b{color:inherit;}
+  .reveal.r1{border-color:#ffa63e;background:#fff7ee;}
+  .reveal.r2{border-color:#2fbf8f;background:#effbf6;}
+  .reveal.r3{border-color:#a07bff;background:#f7f2ff;}
+  .q.demo.st1 .r1,.q.demo.st2 .r1,.q.demo.st3 .r1{display:block;}
+  .q.demo.st2 .r2,.q.demo.st3 .r2{display:block;}
+  .q.demo.st3 .r3{display:block;}
+
+  .demoexp{margin-top:10px;padding:11px 14px;border-radius:12px;background:#fff;border-left:4px solid #7c8cf7;font-size:.9rem;}
+  .demoexp .alt{color:#33414f;}
+  .demoexp .alt b{color:#4a56c9;}
+  .demoexp .zh{color:#4a5766;margin-top:5px;}
+
+  .morebtn{margin-top:10px;border:none;cursor:pointer;font-weight:800;font-size:.82rem;
+    padding:8px 14px;border-radius:12px;color:#4a56c9;background:#eef0ff;
+    box-shadow:0 2px 8px rgba(110,125,240,.22);}
+  .morelist{display:none;margin-top:10px;border-top:1px dashed #dbe3f5;padding-top:8px;}
+  .morelist.show{display:block;}
+  .mrow{padding:8px 0;border-bottom:1px dashed #eef2f7;}
+  .mrow:last-child{border-bottom:none;}
+  .mrow .mn{display:inline-block;width:22px;color:#a0a9b6;font-weight:800;font-size:.8rem;}
+  .mrow .ms{color:#22303f;font-size:.96rem;}
+  .mrow .mz{color:#8a94a2;font-size:.82rem;margin-left:22px;}
+
+  .cnq{color:#33414f;font-size:.98rem;}
+  .cnq .lab{display:inline-block;font-size:.7rem;font-weight:800;color:#8a94a2;
+    background:#f0f3f8;border-radius:8px;padding:1px 7px;margin-right:6px;vertical-align:2px;}
+  .qmark{flex:0 0 auto;border:none;cursor:pointer;width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,#7c8cf7,#b06bff);color:#fff;font-weight:900;font-size:1rem;
+    box-shadow:0 3px 9px rgba(140,110,240,.32);margin-left:auto;}
+  .qmark:hover{filter:brightness(1.07);transform:translateY(-1px);}
+  .exp .why{color:#33414f;margin-top:6px;}
+
+  .rewrite{font-size:1.02rem;line-height:2.2;color:#22303f;}
+  .rewrite input{font-family:inherit;font-size:.98rem;font-weight:700;color:#4a56c9;text-align:center;
+    border:none;border-bottom:2px solid #c9d4e6;background:#f6f7ff;border-radius:6px 6px 0 0;
+    padding:3px 6px;margin:0 2px;outline:none;transition:.15s;}
+  .rewrite input:focus{border-bottom-color:#7c8cf7;background:#eef0ff;}
+  .rewrite input.ok{border-bottom-color:#22b07a;background:#eafaf2;color:#0f7a52;}
+  .rewrite input.no{border-bottom-color:#ff5b7f;background:#fff0f3;color:#d23b5e;}
+  .hint{font-size:.72rem;color:#a0a9b6;}
+  .exp{display:none;margin-top:12px;padding:12px 14px;border-radius:12px;
+    background:#f3f4ff;border-left:4px solid #7c8cf7;font-size:.9rem;}
+  .exp.show{display:block;}
+  .exp .ans{font-weight:800;color:#4a56c9;}
+
+  .group-h{display:flex;align-items:center;gap:8px;margin:22px 2px 12px;font-weight:800;font-size:1rem;flex-wrap:wrap;}
+  .group-h .tag{color:#fff;border-radius:99px;padding:4px 12px;font-size:.82rem;}
+  .group-h.demo .tag{background:linear-gradient(135deg,#5ec6ff,#7d8bff);}
+  .group-h.prac .tag{background:linear-gradient(135deg,#22c1c3,#43e97b);}
+  .group-h .sub{color:#8a94a2;font-weight:600;font-size:.82rem;}
+
+  .bar{position:sticky;bottom:0;margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(6px);padding:12px 14px;border-radius:16px;
+    box-shadow:0 -3px 16px rgba(110,125,240,.14);}
+  .btn{border:none;cursor:pointer;font-weight:800;font-size:.95rem;padding:12px 22px;border-radius:14px;
+    background:linear-gradient(135deg,#6a7bf5,#8f6bf0);color:#fff;box-shadow:0 5px 14px rgba(110,125,240,.4);}
+  .btn.ghost{background:#fff;color:#4a56c9;box-shadow:0 3px 10px rgba(110,125,240,.25);}
+  .score{font-weight:800;color:#4a56c9;font-size:1rem;}
+
+  .wrong{background:#fff;border-radius:16px;padding:16px 20px;margin-top:26px;
+    box-shadow:0 4px 14px rgba(255,91,127,.12);border:1px solid #ffe0e7;border-left:5px solid #ff7aa8;}
+  .wrong h2{margin:0 0 8px;font-size:1.05rem;color:#c2568f;}
+  .wrong ol{margin:0;padding-left:1.4em;}
+  .wrong li{margin-bottom:6px;font-size:.92rem;color:#4a5766;}
+  .wrong s{color:#d23b5e;}
+  .wrong b{color:#0f7a52;}
+
+  footer{text-align:center;color:#9aa4b2;font-size:.8rem;margin-top:34px;}
+
+  /* ── 全站內文統一字級 ── */
+  .wrap *{font-size:20px;}
+  header.hero h1{font-size:30px;}
+  .lineLab,.tagk,.lab{font-size:14px;}
+  .qmark{font-size:19px;}
+  .qnum,.qnum.d{width:30px;height:30px;font-size:15px;}
+  .sbtn .sn{width:22px;height:22px;font-size:14px;}
+  .spk{font-size:16px;}
+  .hint{font-size:14px;}
+
+.wrap *{font-size:20px!important;}
+.wrap header.hero h1{font-size:32px!important;}
+.wrap .lineLab,.wrap .tagk,.wrap .lab,.wrap .hint,.wrap .qnum,.wrap .sbtn .sn,.wrap .mrow .mn{font-size:18px!important;}
+.wrap .oldLine,.wrap .oldLine *,.wrap .buildLine,.wrap .buildLine *,.wrap .rewrite,.wrap .rewrite input,.wrap .cnq{font-size:24px!important;}
+.wrap .oldLine .spk,.wrap .buildLine .spk{font-size:18px!important;}
+.flyClone{font-size:24px!important;}
+.wrap .tagk{white-space:normal;line-height:1.3;}
+.rewrite input{min-width:3.4em;}
+.pic{font-size:34px!important;line-height:1;flex:0 0 auto;}
+.qtop{flex-wrap:wrap;}
+.vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;}
+.vcard{background:#fff;border-radius:16px;padding:12px 8px;text-align:center;box-shadow:0 4px 14px rgba(110,125,240,.12);border:1px solid #eaedfb;}
+.vcard .em{font-size:46px!important;line-height:1.1;display:block;}
+.vcard b{display:block;color:#4a56c9;}
+.vcard span.zh{display:block;color:#8a94a2;}
+.vcard .spk{margin:6px auto 0;display:block;}
+.talk{background:#fff;border-radius:16px;padding:12px 16px;margin-bottom:16px;border-left:5px solid #ffb347;box-shadow:0 3px 10px rgba(255,179,71,.18);}
+.talk .tr{padding:6px 0;border-bottom:1px dashed #f1e3cc;}
+.talk .tr:last-child{border-bottom:none;}
+.talk .tz{color:#8a94a2;}
+.formula{overflow-x:auto;}
+.vimg{width:150px;height:150px;object-fit:contain;border-radius:16px;background:#fff;display:block;margin:0 auto 6px;}
+.placeChip{display:inline-block;margin-top:10px;padding:6px 16px;border-radius:99px;background:#fff7ec;color:#c9611a;font-weight:800;border:2px solid #ffd9a8;}
+.q.demo.mini{background:#fafbff;border:1px solid #e3e7ff;box-shadow:none;margin:12px 0;padding:12px 14px;}
+.morelist .q.demo .stepbtns{margin-top:8px;}
+.formula .ft td,.formula .ft th{vertical-align:top;}
+.wrong li{margin-bottom:10px;}
+.score{display:block;text-align:center;flex:1;}
+.reveal{line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="./">← 回 Let's Go 選單</a>
+  <header class="hero">
+    <h1>🍿 Let's Go 1 · Unit 1 At School</h1>
+    <p>看動畫學句型！按「1／2／3」，<b>字會自己飛</b>，一步一步變成新的句子。每個句型再看 5 句例句，最後 12 題自己填，會的話得星星 ⭐</p>
+  </header>
+
+  <div class="group-h demo"><span class="tag">🍬 先認識食物</span><span class="sub">點 🔊 聽聽看</span></div>
+  <div class="vocab"><div class="vcard"><img class="vimg" src="letsgo-u1-img/popcorn.jpg" alt="popcorn"><b>popcorn</b><span class="zh">爆米花</span><button class="spk" type="button" data-a="v1" data-t="popcorn" aria-label="聽發音">🔊</button></div><div class="vcard"><img class="vimg" src="letsgo-u1-img/candy.jpg" alt="candy"><b>candy</b><span class="zh">糖果</span><button class="spk" type="button" data-a="v2" data-t="candy" aria-label="聽發音">🔊</button></div><div class="vcard"><img class="vimg" src="letsgo-u1-img/peanuts.jpg" alt="peanuts"><b>peanuts</b><span class="zh">花生</span><button class="spk" type="button" data-a="v3" data-t="peanuts" aria-label="聽發音">🔊</button></div><div class="vcard"><img class="vimg" src="letsgo-u1-img/crackers.jpg" alt="crackers"><b>crackers</b><span class="zh">蘇打餅乾</span><button class="spk" type="button" data-a="v4" data-t="crackers" aria-label="聽發音">🔊</button></div><div class="vcard"><img class="vimg" src="letsgo-u1-img/potato-chips.jpg" alt="potato chips"><b>potato chips</b><span class="zh">洋芋片</span><button class="spk" type="button" data-a="v5" data-t="potato chips" aria-label="聽發音">🔊</button></div><div class="vcard"><img class="vimg" src="letsgo-u1-img/grapes.jpg" alt="grapes"><b>grapes</b><span class="zh">葡萄</span><button class="spk" type="button" data-a="v6" data-t="grapes" aria-label="聽發音">🔊</button></div></div>
+
+  <div class="group-h demo"><span class="tag">💬 課本小對話</span><span class="sub">朋友之間這樣說</span></div>
+  <div class="talk"><div class="tr">Can I have some?<button class="spk" type="button" data-a="f1" data-t="Can I have some?" aria-label="聽發音">🔊</button><div class="tz">我可以吃一些嗎？</div></div><div class="tr">Sure. Help yourself!<button class="spk" type="button" data-a="f2" data-t="Sure. Help yourself!" aria-label="聽發音">🔊</button><div class="tz">當然，請自便！</div></div><div class="tr">Do you want some grapes?<button class="spk" type="button" data-a="f3" data-t="Do you want some grapes?" aria-label="聽發音">🔊</button><div class="tz">你想要一些葡萄嗎？</div></div><div class="tr">Yes, please.<button class="spk" type="button" data-a="f4" data-t="Yes, please." aria-label="聽發音">🔊</button><div class="tz">是的，麻煩你。</div></div><div class="tr">No, thank you.<button class="spk" type="button" data-a="f5" data-t="No, thank you." aria-label="聽發音">🔊</button><div class="tz">不用了，謝謝。</div></div></div>
+
+  <div class="formula">
+    📐 <b>7 個句型一次看懂</b>
+    <table class="ft">
+      <tbody><tr><th>句型</th><th>回答</th><th>例句</th></tr>
+      <tr><td><b>some／any</b><br>一些／任何</td><td>有 → some<br>沒有 → any</td><td>I have <b>some</b> crackers.<br>I don't have <b>any</b> potato chips.</td></tr>
+      <tr><td><b>Where is ...?</b><br>…在哪裡？</td><td>He's／She's in ...</td><td>Where is Ted?<br>He's in the library.</td></tr>
+      <tr><td><b>Is ... walking?</b><br>…正在…嗎？</td><td>Yes, he is.<br>No, he <b>isn't</b>.</td><td>Is John walking?<br>No, he isn't.</td></tr>
+      <tr><td><b>Does ... talk?</b><br>他／她會…嗎？</td><td>Yes, she <b>does</b>.<br>No, he <b>doesn't</b>.</td><td>Does Lina talk on the phone?<br>Yes, she does.</td></tr>
+      <tr><td><b>Do you ...?</b><br>你會…嗎？</td><td>Yes, I <b>do</b>.<br>No, I <b>don't</b>.</td><td>Do you eat breakfast?<br>No, I don't.</td></tr>
+      <tr><td><b>Is there a ...?</b><br>有一個…嗎？</td><td>Yes, there <b>is</b>.<br>No, there <b>isn't</b>.</td><td>Is there a clock on the table?<br>Yes, there is.</td></tr>
+      <tr><td><b>Can ... swim?</b><br>…會…嗎？</td><td>Yes, they <b>can</b>.<br>No, they <b>can't</b>.</td><td>Can they swim?<br>No, they can't.</td></tr>
+    </tbody></table>
+    <b>三個口訣：</b>
+    <ol>
+      <li><b>問什麼，就用什麼回答</b>：問 Is 答 is／isn't；問 Does 答 does／doesn't；問 Do 答 do／don't；問 Can 答 can／can't。</li>
+      <li><b>he／she 回答時動作字要加 s</b>：She <b>talks</b> on the phone. 但 doesn't、don't、can't 後面的動作字<b>不加 s</b>。</li>
+      <li><b>有 → some，沒有 → any</b>。</li>
+    </ol>
+    <div class="tm">🎨 <b>顏色對照：</b><b>橘色＝誰</b>、<b>綠色＝做什麼</b>、<b>紫色＝小幫手字</b>（is／do／does／can／some／any／Yes／No）、<b>藍色＝東西或地方</b></div>
+  </div>
+
+  <div class="note">👆 按下面的「1／2／3」，字會真的飛到新位置，留下虛線路線；手機窄螢幕直接顯示結果。每句旁邊都有 🔊 可以聽。</div>
+
+  <div class="audiobar">
+    <span>🔊 發音</span>
+    <label><input type="checkbox" id="autoplay" checked>按步驟時自動念出來</label>
+  </div>
+
+  <div id="app"></div>
+
+  <div class="bar">
+    <button class="btn" id="submit">送出批改</button>
+    <button class="btn ghost" id="reset">重作</button>
+    <span class="score" id="score"></span>
+  </div>
+
+  <div class="wrong">
+    <h2>⚠️ 最容易錯的五點</h2>
+    <ol>
+      <li><b>Does 後面動作字不加 s</b>：<s>Does Lina talks</s> → Does Lina <b>talk</b>…?</li>
+      <li><b>doesn't 後面動作字也不加 s</b>：<s>He doesn't likes pasta.</s> → He doesn't <b>like</b> pasta.</li>
+      <li><b>沒有的句子要用 any</b>：<s>I don't have some candy.</s> → I don't have <b>any</b> candy.</li>
+      <li><b>Is 後面的動作字要加 -ing</b>：<s>Is John walk?</s> → Is John <b>walking</b>?</li>
+      <li><b>問 Where 不能回答 Yes／No</b>：<s>Where is Ted? — Yes, he is.</s> → He's in the library.</li>
+    </ol>
+  </div>
+
+  <footer>EFETL · Let's Go 系列 · 國小英語句型練習</footer>
+</div>
+
+<svg id="pathSvg" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c9611a"/></marker>
+    <marker id="arr-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a6fc9"/></marker>
+    <marker id="arr-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a52"/></marker>
+    <marker id="arr-v" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b3fd4"/></marker>
+  </defs>
+</svg>
+
+<script>
+
+const WIDE = window.matchMedia('(min-width:700px)').matches;
+const DEMO = [{"pic": "🍘", "tag": "I have some ...（我有一些…）→ 否定", "l1": "肯定：我有", "l2": "否定：我沒有", "pres": [{"t": "I", "r": "o"}, {"t": "have", "r": "g"}, {"t": "some", "r": "v", "x": 3}, {"t": "crackers.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "don't", "s": 1, "r": "v"}, {"t": "have", "s": 2, "r": "g", "f": 1}, {"t": "any", "s": 3, "r": "v", "f": 2}, {"t": "crackers.", "s": 3, "r": "b", "f": 3}], "b": ["加上 don't", "have 照抄", "some 換成 any"], "n1": "想說「沒有」，在 <b>I</b> 後面加上 <b>don't</b>（不）。", "n2": "動作字 <b>have</b>（有）不用變，照抄下來。", "n3": "<b>some</b>（一些）用在「有」的句子；說「沒有」的句子要換成 <b>any</b>（任何）。", "alt": "記得：有 → some，沒有 → any。", "zh": "我有一些蘇打餅乾。→ 我沒有任何蘇打餅乾。"}, {"pic": "🥔", "tag": "I don't have any ... → 肯定", "l1": "否定：我沒有", "l2": "肯定：我有", "pres": [{"t": "I", "r": "o"}, {"t": "don't", "r": "v", "x": 1}, {"t": "have", "r": "g"}, {"t": "any", "r": "v", "x": 3}, {"t": "potato chips.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "have", "s": 2, "r": "g", "f": 2}, {"t": "some", "s": 3, "r": "v", "f": 3}, {"t": "potato chips.", "s": 3, "r": "b", "f": 4}], "b": ["don't 拿掉", "have 照抄", "any 換成 some"], "n1": "想說「我有」，把 <b>don't</b> 拿掉。", "n2": "動作字 <b>have</b> 照抄下來。", "n3": "<b>any</b> 換回 <b>some</b>。句子變成「有」的句子。", "alt": "一來一回：some ⇄ any，don't 加上 ⇄ 拿掉。", "zh": "我沒有任何洋芋片。→ 我有一些洋芋片。"}, {"pic": "📚", "tag": "Where is ...?（…在哪裡？）男生", "l1": "問地點", "l2": "回答（他在…）", "pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Ted?", "r": "o"}], "past": [{"t": "He", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the library.", "s": 3, "r": "b"}], "b": ["Ted 換成 He", "is 縮短成 's", "說出地點"], "n1": "Where 是在問「哪裡」，回答時不用再說 Where。Ted 是男生，換成 <b>He</b>。", "n2": "<b>is</b> 縮短成 <b>'s</b>，黏在 He 後面：<b>He's</b>。", "n3": "最後說出地點：<b>in the library</b>（在圖書館）。", "alt": "回答 Where 的問題，不能說 Yes 或 No，要直接說在哪裡。", "zh": "泰德在哪裡？他在圖書館。", "place": ["library", "圖書館"]}, {"pic": "🏪", "tag": "Where is ...?（…在哪裡？）女生", "l1": "問地點", "l2": "回答（她在…）", "pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Tina?", "r": "o"}], "past": [{"t": "She", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the store.", "s": 3, "r": "b"}], "b": ["Tina 換成 She", "is 縮短成 's", "說出地點"], "n1": "Tina 是女生，換成 <b>She</b>（男生用 He，女生用 She）。", "n2": "<b>is</b> 縮短成 <b>'s</b>：<b>She's</b>。", "n3": "說出地點：<b>in the store</b>（在商店）。", "alt": "He's = He is，She's = She is。", "zh": "蒂娜在哪裡？她在商店。", "place": ["store", "商店"]}, {"pic": "🚶", "tag": "Is ... walking?（…正在走嗎？）", "l1": "問題", "l2": "回答（不是）", "pres": [{"t": "Is", "r": "v"}, {"t": "John", "r": "o"}, {"t": "walking?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "isn't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "isn't", "s": 3, "r": "v", "f": 0}, {"t": "walking.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Is → isn't、John → he", "再說完整句子"], "n1": "先回答 <b>No,</b>（不是）。", "n2": "<b>John</b> 換成 <b>he</b>，<b>Is</b> 變成 <b>isn't</b>（is not）：No, he isn't.", "n3": "再說一次完整句子：<b>He isn't walking.</b>（他沒有在走路）。", "alt": "問 Is，就用 is／isn't 回答。", "zh": "約翰正在走路嗎？不，他沒有。他沒有在走路。"}, {"pic": "☎️", "tag": "Does ... talk ...?（她會…嗎？）", "l1": "問題", "l2": "回答（是的）", "pres": [{"t": "Does", "r": "v"}, {"t": "Lina", "r": "o"}, {"t": "talk", "r": "g"}, {"t": "on the phone at noon?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "does.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "talks", "s": 3, "r": "g", "f": 2}, {"t": "on the phone at noon.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 Yes,", "Lina → she、Does → does", "再說完整句子"], "n1": "先回答 <b>Yes,</b>（是的）。", "n2": "<b>Lina</b> 換成 <b>she</b>，<b>Does</b> 變成 <b>does</b>：Yes, she does.", "n3": "再說完整句子：Does 不見了，動作字要加 <b>s</b>：talk → <b>talks</b>。", "alt": "問句裡 Does 後面用 talk；完整句子裡 she／he 後面用 talks。", "zh": "莉娜中午講電話嗎？是的。她中午講電話。"}, {"pic": "🍳", "tag": "Do you ...?（你會…嗎？）", "l1": "問題", "l2": "回答（我不會）", "pres": [{"t": "Do", "r": "v"}, {"t": "you", "r": "o"}, {"t": "eat", "r": "g"}, {"t": "breakfast in the morning?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "I", "s": 2, "r": "o", "f": 1}, {"t": "don't.", "s": 2, "r": "v", "f": 0}, {"t": "I", "s": 3, "r": "o", "f": 1}, {"t": "don't", "s": 3, "r": "v", "f": 0}, {"t": "eat", "s": 3, "r": "g", "f": 2}, {"t": "breakfast in the morning.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "you → I、Do → don't", "再說完整句子"], "n1": "先回答 <b>No,</b>（不）。", "n2": "人家問你 <b>you</b>，你要用 <b>I</b>（我）回答；<b>Do</b> 變成 <b>don't</b>（do not）。", "n3": "再說完整句子：<b>I don't eat breakfast in the morning.</b> don't 後面的動作字用原本的樣子 eat。", "alt": "問 Do，就用 do／don't 回答。", "zh": "你早上吃早餐嗎？不，我不吃。我早上不吃早餐。"}, {"pic": "🕐", "tag": "Is there a ...?（有一個…嗎？）", "l1": "問題", "l2": "回答（有）", "pres": [{"t": "Is", "r": "v"}, {"t": "there", "r": "o"}, {"t": "a clock on the table?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "there", "s": 2, "r": "o", "f": 1}, {"t": "is.", "s": 2, "r": "v", "f": 0}, {"t": "There", "s": 3, "r": "o", "f": 1}, {"t": "is", "s": 3, "r": "v", "f": 0}, {"t": "a clock on the table.", "s": 3, "r": "b", "f": 2}], "b": ["先回答 Yes,", "there is 對調位置", "再說完整句子"], "n1": "先回答 <b>Yes,</b>（有）。", "n2": "<b>Is there</b> 要對調成 <b>there is</b>：Yes, there is.", "n3": "再說完整句子：<b>There is</b> a clock on the table. 東西放後面。", "alt": "Is there ...?（問）⇄ There is ...（答），兩個字換位置。", "zh": "桌上有一個時鐘嗎？有。桌上有一個時鐘。"}, {"pic": "🍝", "tag": "Does ... like ...?（他喜歡…嗎？）", "l1": "問題", "l2": "回答（不喜歡）", "pres": [{"t": "Does", "r": "v"}, {"t": "Hank", "r": "o"}, {"t": "like", "r": "g"}, {"t": "pasta?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "doesn't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "doesn't", "s": 3, "r": "v", "f": 0}, {"t": "like", "s": 3, "r": "g", "f": 2}, {"t": "pasta.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "Hank → he、Does → doesn't", "再說完整句子"], "n1": "先回答 <b>No,</b>（不）。", "n2": "<b>Hank</b> 換成 <b>he</b>，<b>Does</b> 變成 <b>doesn't</b>（does not）。", "n3": "再說完整句子：<b>He doesn't like pasta.</b> doesn't 後面的 like <b>不加 s</b>。", "alt": "doesn't 後面的動作字不加 s：doesn't like ✔，doesn't likes ✘。", "zh": "漢克喜歡義大利麵嗎？不，他不喜歡。他不喜歡義大利麵。"}, {"pic": "🏊", "tag": "Can ... swim?（…會游泳嗎？）", "l1": "問題", "l2": "回答（不會）", "pres": [{"t": "Can", "r": "v"}, {"t": "they", "r": "o"}, {"t": "swim?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "they", "s": 2, "r": "o", "f": 1}, {"t": "can't.", "s": 2, "r": "v", "f": 0}, {"t": "They", "s": 3, "r": "o", "f": 1}, {"t": "can't", "s": 3, "r": "v", "f": 0}, {"t": "swim.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "they、Can → can't", "再說完整句子"], "n1": "先回答 <b>No,</b>（不會）。", "n2": "<b>they</b> 照抄，<b>Can</b> 變成 <b>can't</b>（cannot，不會）。", "n3": "再說完整句子：<b>They can't swim.</b>", "alt": "問 Can，就用 can／can't 回答。", "zh": "他們會游泳嗎？不會。他們不會游泳。"}];
+const MOREA = [[{"pres": [{"t": "I", "r": "o"}, {"t": "have", "r": "g"}, {"t": "some", "r": "v", "x": 3}, {"t": "candy.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "don't", "s": 1, "r": "v"}, {"t": "have", "s": 2, "r": "g", "f": 1}, {"t": "any", "s": 3, "r": "v", "f": 2}, {"t": "candy.", "s": 3, "r": "b", "f": 3}], "b": ["加上 don't", "have 照抄", "some 換成 any"], "l1": "肯定：我有", "l2": "否定：我沒有", "zh": "我有一些糖果。→ 我沒有任何糖果。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "have", "r": "g"}, {"t": "some", "r": "v", "x": 3}, {"t": "peanuts.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "don't", "s": 1, "r": "v"}, {"t": "have", "s": 2, "r": "g", "f": 1}, {"t": "any", "s": 3, "r": "v", "f": 2}, {"t": "peanuts.", "s": 3, "r": "b", "f": 3}], "b": ["加上 don't", "have 照抄", "some 換成 any"], "l1": "肯定：我有", "l2": "否定：我沒有", "zh": "我有一些花生。→ 我沒有任何花生。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "have", "r": "g"}, {"t": "some", "r": "v", "x": 3}, {"t": "grapes.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "don't", "s": 1, "r": "v"}, {"t": "have", "s": 2, "r": "g", "f": 1}, {"t": "any", "s": 3, "r": "v", "f": 2}, {"t": "grapes.", "s": 3, "r": "b", "f": 3}], "b": ["加上 don't", "have 照抄", "some 換成 any"], "l1": "肯定：我有", "l2": "否定：我沒有", "zh": "我有一些葡萄。→ 我沒有任何葡萄。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "have", "r": "g"}, {"t": "some", "r": "v", "x": 3}, {"t": "popcorn.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "don't", "s": 1, "r": "v"}, {"t": "have", "s": 2, "r": "g", "f": 1}, {"t": "any", "s": 3, "r": "v", "f": 2}, {"t": "popcorn.", "s": 3, "r": "b", "f": 3}], "b": ["加上 don't", "have 照抄", "some 換成 any"], "l1": "肯定：我有", "l2": "否定：我沒有", "zh": "我有一些爆米花。→ 我沒有任何爆米花。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "have", "r": "g"}, {"t": "some", "r": "v", "x": 3}, {"t": "potato chips.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "don't", "s": 1, "r": "v"}, {"t": "have", "s": 2, "r": "g", "f": 1}, {"t": "any", "s": 3, "r": "v", "f": 2}, {"t": "potato chips.", "s": 3, "r": "b", "f": 3}], "b": ["加上 don't", "have 照抄", "some 換成 any"], "l1": "肯定：我有", "l2": "否定：我沒有", "zh": "我有一些洋芋片。→ 我沒有任何洋芋片。"}], [{"pres": [{"t": "I", "r": "o"}, {"t": "don't", "r": "v", "x": 1}, {"t": "have", "r": "g"}, {"t": "any", "r": "v", "x": 3}, {"t": "candy.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "have", "s": 2, "r": "g", "f": 2}, {"t": "some", "s": 3, "r": "v", "f": 3}, {"t": "candy.", "s": 3, "r": "b", "f": 4}], "b": ["don't 拿掉", "have 照抄", "any 換成 some"], "l1": "否定：我沒有", "l2": "肯定：我有", "zh": "我沒有任何糖果。→ 我有一些糖果。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "don't", "r": "v", "x": 1}, {"t": "have", "r": "g"}, {"t": "any", "r": "v", "x": 3}, {"t": "peanuts.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "have", "s": 2, "r": "g", "f": 2}, {"t": "some", "s": 3, "r": "v", "f": 3}, {"t": "peanuts.", "s": 3, "r": "b", "f": 4}], "b": ["don't 拿掉", "have 照抄", "any 換成 some"], "l1": "否定：我沒有", "l2": "肯定：我有", "zh": "我沒有任何花生。→ 我有一些花生。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "don't", "r": "v", "x": 1}, {"t": "have", "r": "g"}, {"t": "any", "r": "v", "x": 3}, {"t": "crackers.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "have", "s": 2, "r": "g", "f": 2}, {"t": "some", "s": 3, "r": "v", "f": 3}, {"t": "crackers.", "s": 3, "r": "b", "f": 4}], "b": ["don't 拿掉", "have 照抄", "any 換成 some"], "l1": "否定：我沒有", "l2": "肯定：我有", "zh": "我沒有任何蘇打餅乾。→ 我有一些蘇打餅乾。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "don't", "r": "v", "x": 1}, {"t": "have", "r": "g"}, {"t": "any", "r": "v", "x": 3}, {"t": "grapes.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "have", "s": 2, "r": "g", "f": 2}, {"t": "some", "s": 3, "r": "v", "f": 3}, {"t": "grapes.", "s": 3, "r": "b", "f": 4}], "b": ["don't 拿掉", "have 照抄", "any 換成 some"], "l1": "否定：我沒有", "l2": "肯定：我有", "zh": "我沒有任何葡萄。→ 我有一些葡萄。"}, {"pres": [{"t": "I", "r": "o"}, {"t": "don't", "r": "v", "x": 1}, {"t": "have", "r": "g"}, {"t": "any", "r": "v", "x": 3}, {"t": "popcorn.", "r": "b"}], "past": [{"t": "I", "s": 1, "r": "o", "f": 0}, {"t": "have", "s": 2, "r": "g", "f": 2}, {"t": "some", "s": 3, "r": "v", "f": 3}, {"t": "popcorn.", "s": 3, "r": "b", "f": 4}], "b": ["don't 拿掉", "have 照抄", "any 換成 some"], "l1": "否定：我沒有", "l2": "肯定：我有", "zh": "我沒有任何爆米花。→ 我有一些爆米花。"}], [{"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Tom?", "r": "o"}], "past": [{"t": "He", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the classroom.", "s": 3, "r": "b"}], "b": ["名字換成 He", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（他在…）", "zh": "湯姆在哪裡？他在教室。", "place": ["classroom", "教室"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Ben?", "r": "o"}], "past": [{"t": "He", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the park.", "s": 3, "r": "b"}], "b": ["名字換成 He", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（他在…）", "zh": "班在哪裡？他在公園。", "place": ["park", "公園"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Dad?", "r": "o"}], "past": [{"t": "He", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the kitchen.", "s": 3, "r": "b"}], "b": ["名字換成 He", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（他在…）", "zh": "爸爸在哪裡？他在廚房。", "place": ["kitchen", "廚房"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Jack?", "r": "o"}], "past": [{"t": "He", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the gym.", "s": 3, "r": "b"}], "b": ["名字換成 He", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（他在…）", "zh": "傑克在哪裡？他在體育館。", "place": ["gym", "體育館"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Mr. Lin?", "r": "o"}], "past": [{"t": "He", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the office.", "s": 3, "r": "b"}], "b": ["名字換成 He", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（他在…）", "zh": "林老師在哪裡？他在辦公室。", "place": ["office", "辦公室"]}], [{"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Amy?", "r": "o"}], "past": [{"t": "She", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the classroom.", "s": 3, "r": "b"}], "b": ["名字換成 She", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（她在…）", "zh": "艾咪在哪裡？她在教室。", "place": ["classroom", "教室"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Mom?", "r": "o"}], "past": [{"t": "She", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the kitchen.", "s": 3, "r": "b"}], "b": ["名字換成 She", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（她在…）", "zh": "媽媽在哪裡？她在廚房。", "place": ["kitchen", "廚房"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Lucy?", "r": "o"}], "past": [{"t": "She", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the park.", "s": 3, "r": "b"}], "b": ["名字換成 She", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（她在…）", "zh": "露西在哪裡？她在公園。", "place": ["park", "公園"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Mary?", "r": "o"}], "past": [{"t": "She", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the library.", "s": 3, "r": "b"}], "b": ["名字換成 She", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（她在…）", "zh": "瑪麗在哪裡？她在圖書館。", "place": ["library", "圖書館"]}, {"pres": [{"t": "Where", "r": "v", "x": 1}, {"t": "is", "r": "v"}, {"t": "Ms. Chen?", "r": "o"}], "past": [{"t": "She", "s": 1, "r": "o", "f": 2}, {"t": "'s", "s": 2, "r": "v", "f": 1, "j": true}, {"t": "in the office.", "s": 3, "r": "b"}], "b": ["名字換成 She", "is 縮短成 's", "說出地點"], "l1": "問地點", "l2": "回答（她在…）", "zh": "陳老師在哪裡？她在辦公室。", "place": ["office", "辦公室"]}], [{"pres": [{"t": "Is", "r": "v"}, {"t": "Amy", "r": "o"}, {"t": "running?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "isn't.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "isn't", "s": 3, "r": "v", "f": 0}, {"t": "running.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Is → isn't、名字 → he／she", "再說完整句子"], "l1": "問題", "l2": "回答（不是）", "zh": "艾咪在跑步嗎？不，她沒有。她沒有在跑步。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "Tom", "r": "o"}, {"t": "eating?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "isn't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "isn't", "s": 3, "r": "v", "f": 0}, {"t": "eating.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Is → isn't、名字 → he／she", "再說完整句子"], "l1": "問題", "l2": "回答（不是）", "zh": "湯姆在吃東西嗎？不，他沒有。他沒有在吃東西。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "Mom", "r": "o"}, {"t": "cooking?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "isn't.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "isn't", "s": 3, "r": "v", "f": 0}, {"t": "cooking.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Is → isn't、名字 → he／she", "再說完整句子"], "l1": "問題", "l2": "回答（不是）", "zh": "媽媽在煮飯嗎？不，她沒有。她沒有在煮飯。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "Ben", "r": "o"}, {"t": "singing?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "isn't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "isn't", "s": 3, "r": "v", "f": 0}, {"t": "singing.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Is → isn't、名字 → he／she", "再說完整句子"], "l1": "問題", "l2": "回答（不是）", "zh": "班在唱歌嗎？不，他沒有。他沒有在唱歌。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "Lucy", "r": "o"}, {"t": "reading?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "isn't.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "isn't", "s": 3, "r": "v", "f": 0}, {"t": "reading.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Is → isn't、名字 → he／she", "再說完整句子"], "l1": "問題", "l2": "回答（不是）", "zh": "露西在看書嗎？不，她沒有。她沒有在看書。"}], [{"pres": [{"t": "Does", "r": "v"}, {"t": "Tom", "r": "o"}, {"t": "play", "r": "g"}, {"t": "ball at noon?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "does.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "plays", "s": 3, "r": "g", "f": 2}, {"t": "ball at noon.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 Yes,", "名字 → he／she、Does → does", "再說完整句子（動作字加 s）"], "l1": "問題", "l2": "回答（是的）", "zh": "湯姆中午打球嗎？是的。他中午打球。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Amy", "r": "o"}, {"t": "read", "r": "g"}, {"t": "books at night?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "does.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "reads", "s": 3, "r": "g", "f": 2}, {"t": "books at night.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 Yes,", "名字 → he／she、Does → does", "再說完整句子（動作字加 s）"], "l1": "問題", "l2": "回答（是的）", "zh": "艾咪晚上看書嗎？是的。她晚上看書。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Ben", "r": "o"}, {"t": "eat", "r": "g"}, {"t": "lunch at noon?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "does.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "eats", "s": 3, "r": "g", "f": 2}, {"t": "lunch at noon.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 Yes,", "名字 → he／she、Does → does", "再說完整句子（動作字加 s）"], "l1": "問題", "l2": "回答（是的）", "zh": "班中午吃午餐嗎？是的。他中午吃午餐。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Mom", "r": "o"}, {"t": "cook", "r": "g"}, {"t": "in the evening?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "does.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "cooks", "s": 3, "r": "g", "f": 2}, {"t": "in the evening.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 Yes,", "名字 → he／she、Does → does", "再說完整句子（動作字加 s）"], "l1": "問題", "l2": "回答（是的）", "zh": "媽媽傍晚煮飯嗎？是的。她傍晚煮飯。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Lucy", "r": "o"}, {"t": "sing", "r": "g"}, {"t": "in the morning?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "does.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "sings", "s": 3, "r": "g", "f": 2}, {"t": "in the morning.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 Yes,", "名字 → he／she、Does → does", "再說完整句子（動作字加 s）"], "l1": "問題", "l2": "回答（是的）", "zh": "露西早上唱歌嗎？是的。她早上唱歌。"}], [{"pres": [{"t": "Do", "r": "v"}, {"t": "you", "r": "o"}, {"t": "drink", "r": "g"}, {"t": "milk in the morning?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "I", "s": 2, "r": "o", "f": 1}, {"t": "don't.", "s": 2, "r": "v", "f": 0}, {"t": "I", "s": 3, "r": "o", "f": 1}, {"t": "don't", "s": 3, "r": "v", "f": 0}, {"t": "drink", "s": 3, "r": "g", "f": 2}, {"t": "milk in the morning.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "you → I、Do → don't", "再說完整句子"], "l1": "問題", "l2": "回答（我不會）", "zh": "你早上喝牛奶嗎？不，我不喝。我早上不喝牛奶。"}, {"pres": [{"t": "Do", "r": "v"}, {"t": "you", "r": "o"}, {"t": "play", "r": "g"}, {"t": "ball at night?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "I", "s": 2, "r": "o", "f": 1}, {"t": "don't.", "s": 2, "r": "v", "f": 0}, {"t": "I", "s": 3, "r": "o", "f": 1}, {"t": "don't", "s": 3, "r": "v", "f": 0}, {"t": "play", "s": 3, "r": "g", "f": 2}, {"t": "ball at night.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "you → I、Do → don't", "再說完整句子"], "l1": "問題", "l2": "回答（我不會）", "zh": "你晚上打球嗎？不，我不打。我晚上不打球。"}, {"pres": [{"t": "Do", "r": "v"}, {"t": "you", "r": "o"}, {"t": "watch", "r": "g"}, {"t": "TV in the morning?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "I", "s": 2, "r": "o", "f": 1}, {"t": "don't.", "s": 2, "r": "v", "f": 0}, {"t": "I", "s": 3, "r": "o", "f": 1}, {"t": "don't", "s": 3, "r": "v", "f": 0}, {"t": "watch", "s": 3, "r": "g", "f": 2}, {"t": "TV in the morning.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "you → I、Do → don't", "再說完整句子"], "l1": "問題", "l2": "回答（我不會）", "zh": "你早上看電視嗎？不，我不看。我早上不看電視。"}, {"pres": [{"t": "Do", "r": "v"}, {"t": "you", "r": "o"}, {"t": "eat", "r": "g"}, {"t": "popcorn at noon?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "I", "s": 2, "r": "o", "f": 1}, {"t": "don't.", "s": 2, "r": "v", "f": 0}, {"t": "I", "s": 3, "r": "o", "f": 1}, {"t": "don't", "s": 3, "r": "v", "f": 0}, {"t": "eat", "s": 3, "r": "g", "f": 2}, {"t": "popcorn at noon.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "you → I、Do → don't", "再說完整句子"], "l1": "問題", "l2": "回答（我不會）", "zh": "你中午吃爆米花嗎？不，我不吃。我中午不吃爆米花。"}, {"pres": [{"t": "Do", "r": "v"}, {"t": "you", "r": "o"}, {"t": "read", "r": "g"}, {"t": "books in the morning?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "I", "s": 2, "r": "o", "f": 1}, {"t": "don't.", "s": 2, "r": "v", "f": 0}, {"t": "I", "s": 3, "r": "o", "f": 1}, {"t": "don't", "s": 3, "r": "v", "f": 0}, {"t": "read", "s": 3, "r": "g", "f": 2}, {"t": "books in the morning.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "you → I、Do → don't", "再說完整句子"], "l1": "問題", "l2": "回答（我不會）", "zh": "你早上看書嗎？不，我不看。我早上不看書。"}], [{"pres": [{"t": "Is", "r": "v"}, {"t": "there", "r": "o"}, {"t": "a book on the desk?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "there", "s": 2, "r": "o", "f": 1}, {"t": "is.", "s": 2, "r": "v", "f": 0}, {"t": "There", "s": 3, "r": "o", "f": 1}, {"t": "is", "s": 3, "r": "v", "f": 0}, {"t": "a book on the desk.", "s": 3, "r": "b", "f": 2}], "b": ["先回答 Yes,", "there is 對調位置", "再說完整句子"], "l1": "問題", "l2": "回答（有）", "zh": "書桌上有一本書嗎？有。書桌上有一本書。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "there", "r": "o"}, {"t": "a cat on the chair?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "there", "s": 2, "r": "o", "f": 1}, {"t": "is.", "s": 2, "r": "v", "f": 0}, {"t": "There", "s": 3, "r": "o", "f": 1}, {"t": "is", "s": 3, "r": "v", "f": 0}, {"t": "a cat on the chair.", "s": 3, "r": "b", "f": 2}], "b": ["先回答 Yes,", "there is 對調位置", "再說完整句子"], "l1": "問題", "l2": "回答（有）", "zh": "椅子上有一隻貓嗎？有。椅子上有一隻貓。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "there", "r": "o"}, {"t": "a ball in the box?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "there", "s": 2, "r": "o", "f": 1}, {"t": "is.", "s": 2, "r": "v", "f": 0}, {"t": "There", "s": 3, "r": "o", "f": 1}, {"t": "is", "s": 3, "r": "v", "f": 0}, {"t": "a ball in the box.", "s": 3, "r": "b", "f": 2}], "b": ["先回答 Yes,", "there is 對調位置", "再說完整句子"], "l1": "問題", "l2": "回答（有）", "zh": "盒子裡有一顆球嗎？有。盒子裡有一顆球。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "there", "r": "o"}, {"t": "a bag on the bed?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "there", "s": 2, "r": "o", "f": 1}, {"t": "is.", "s": 2, "r": "v", "f": 0}, {"t": "There", "s": 3, "r": "o", "f": 1}, {"t": "is", "s": 3, "r": "v", "f": 0}, {"t": "a bag on the bed.", "s": 3, "r": "b", "f": 2}], "b": ["先回答 Yes,", "there is 對調位置", "再說完整句子"], "l1": "問題", "l2": "回答（有）", "zh": "床上有一個袋子嗎？有。床上有一個袋子。"}, {"pres": [{"t": "Is", "r": "v"}, {"t": "there", "r": "o"}, {"t": "a pen on the table?", "r": "b"}], "past": [{"t": "Yes,", "s": 1, "r": "v"}, {"t": "there", "s": 2, "r": "o", "f": 1}, {"t": "is.", "s": 2, "r": "v", "f": 0}, {"t": "There", "s": 3, "r": "o", "f": 1}, {"t": "is", "s": 3, "r": "v", "f": 0}, {"t": "a pen on the table.", "s": 3, "r": "b", "f": 2}], "b": ["先回答 Yes,", "there is 對調位置", "再說完整句子"], "l1": "問題", "l2": "回答（有）", "zh": "桌上有一支筆嗎？有。桌上有一支筆。"}], [{"pres": [{"t": "Does", "r": "v"}, {"t": "Amy", "r": "o"}, {"t": "like", "r": "g"}, {"t": "peanuts?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "doesn't.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "doesn't", "s": 3, "r": "v", "f": 0}, {"t": "like", "s": 3, "r": "g", "f": 2}, {"t": "peanuts.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "名字 → he／she、Does → doesn't", "再說完整句子"], "l1": "問題", "l2": "回答（不喜歡）", "zh": "艾咪喜歡花生嗎？不，她不喜歡。她不喜歡花生。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Tom", "r": "o"}, {"t": "like", "r": "g"}, {"t": "candy?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "doesn't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "doesn't", "s": 3, "r": "v", "f": 0}, {"t": "like", "s": 3, "r": "g", "f": 2}, {"t": "candy.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "名字 → he／she、Does → doesn't", "再說完整句子"], "l1": "問題", "l2": "回答（不喜歡）", "zh": "湯姆喜歡糖果嗎？不，他不喜歡。他不喜歡糖果。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Ben", "r": "o"}, {"t": "like", "r": "g"}, {"t": "grapes?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "doesn't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "doesn't", "s": 3, "r": "v", "f": 0}, {"t": "like", "s": 3, "r": "g", "f": 2}, {"t": "grapes.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "名字 → he／she、Does → doesn't", "再說完整句子"], "l1": "問題", "l2": "回答（不喜歡）", "zh": "班喜歡葡萄嗎？不，他不喜歡。他不喜歡葡萄。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Lucy", "r": "o"}, {"t": "like", "r": "g"}, {"t": "popcorn?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "doesn't.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "doesn't", "s": 3, "r": "v", "f": 0}, {"t": "like", "s": 3, "r": "g", "f": 2}, {"t": "popcorn.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "名字 → he／she、Does → doesn't", "再說完整句子"], "l1": "問題", "l2": "回答（不喜歡）", "zh": "露西喜歡爆米花嗎？不，她不喜歡。她不喜歡爆米花。"}, {"pres": [{"t": "Does", "r": "v"}, {"t": "Dad", "r": "o"}, {"t": "like", "r": "g"}, {"t": "crackers?", "r": "b"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "doesn't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "doesn't", "s": 3, "r": "v", "f": 0}, {"t": "like", "s": 3, "r": "g", "f": 2}, {"t": "crackers.", "s": 3, "r": "b", "f": 3}], "b": ["先回答 No,", "名字 → he／she、Does → doesn't", "再說完整句子"], "l1": "問題", "l2": "回答（不喜歡）", "zh": "爸爸喜歡蘇打餅乾嗎？不，他不喜歡。他不喜歡蘇打餅乾。"}], [{"pres": [{"t": "Can", "r": "v"}, {"t": "he", "r": "o"}, {"t": "swim?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "he", "s": 2, "r": "o", "f": 1}, {"t": "can't.", "s": 2, "r": "v", "f": 0}, {"t": "He", "s": 3, "r": "o", "f": 1}, {"t": "can't", "s": 3, "r": "v", "f": 0}, {"t": "swim.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Can → can't", "再說完整句子"], "l1": "問題", "l2": "回答（不會）", "zh": "他會游泳嗎？不會。他不會游泳。"}, {"pres": [{"t": "Can", "r": "v"}, {"t": "you", "r": "o"}, {"t": "run fast?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "I", "s": 2, "r": "o", "f": 1}, {"t": "can't.", "s": 2, "r": "v", "f": 0}, {"t": "I", "s": 3, "r": "o", "f": 1}, {"t": "can't", "s": 3, "r": "v", "f": 0}, {"t": "run fast.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Can → can't", "再說完整句子"], "l1": "問題", "l2": "回答（不會）", "zh": "你會跑很快嗎？不會。我不會跑很快。"}, {"pres": [{"t": "Can", "r": "v"}, {"t": "she", "r": "o"}, {"t": "sing?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "she", "s": 2, "r": "o", "f": 1}, {"t": "can't.", "s": 2, "r": "v", "f": 0}, {"t": "She", "s": 3, "r": "o", "f": 1}, {"t": "can't", "s": 3, "r": "v", "f": 0}, {"t": "sing.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Can → can't", "再說完整句子"], "l1": "問題", "l2": "回答（不會）", "zh": "她會唱歌嗎？不會。她不會唱歌。"}, {"pres": [{"t": "Can", "r": "v"}, {"t": "they", "r": "o"}, {"t": "dance?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "they", "s": 2, "r": "o", "f": 1}, {"t": "can't.", "s": 2, "r": "v", "f": 0}, {"t": "They", "s": 3, "r": "o", "f": 1}, {"t": "can't", "s": 3, "r": "v", "f": 0}, {"t": "dance.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Can → can't", "再說完整句子"], "l1": "問題", "l2": "回答（不會）", "zh": "他們會跳舞嗎？不會。他們不會跳舞。"}, {"pres": [{"t": "Can", "r": "v"}, {"t": "the cat", "r": "o"}, {"t": "swim?", "r": "g"}], "past": [{"t": "No,", "s": 1, "r": "v"}, {"t": "it", "s": 2, "r": "o", "f": 1}, {"t": "can't.", "s": 2, "r": "v", "f": 0}, {"t": "It", "s": 3, "r": "o", "f": 1}, {"t": "can't", "s": 3, "r": "v", "f": 0}, {"t": "swim.", "s": 3, "r": "g", "f": 2}], "b": ["先回答 No,", "Can → can't", "再說完整句子"], "l1": "問題", "l2": "回答（不會）", "zh": "那隻貓會游泳嗎？不會。牠不會游泳。"}]];
+const PRAC = [{"pic": "🥜", "zh": "我有一些花生。", "tpl": "I have [[some]] peanuts.", "hints": ["some / any"], "exp": "「有」的句子用 some（一些）。"}, {"pic": "🥔", "zh": "我沒有任何洋芋片。", "tpl": "I [[don't]] have [[any]] potato chips.", "hints": ["don't / doesn't", "some / any"], "exp": "「沒有」的句子：I 後面加 don't，some 換成 any。"}, {"pic": "🏪", "zh": "蒂娜在哪裡？她在商店。", "tpl": "Where [[is]] Tina? — [[She's|She is]] in the store.", "hints": ["is / are", "He's / She's"], "exp": "Tina 是女生，回答用 She's（She is）。"}, {"pic": "📚", "zh": "泰德在哪裡？他在圖書館。", "tpl": "Where is Ted? — [[He's|He is]] in the [[library]].", "hints": ["He's / She's", "地點：圖書館"], "exp": "Ted 是男生 → He's；圖書館是 library。"}, {"pic": "🚶", "zh": "約翰在走路嗎？不，他沒有。", "tpl": "Is John walking? — No, he [[isn't|is not]].", "hints": ["is / isn't"], "exp": "問 Is，就用 is／isn't 回答。"}, {"pic": "☎️", "zh": "莉娜中午講電話嗎？是的，她講。", "tpl": "[[Does]] Lina talk on the phone at noon? — Yes, she [[does]].", "hints": ["Do / Does", "do / does"], "exp": "Lina 是一個人（she），問句用 Does，回答用 does。"}, {"pic": "☎️", "zh": "莉娜中午講電話。", "tpl": "She [[talks]] on the phone at noon.", "hints": ["talk / talks"], "exp": "沒有 Does 了，she 後面的動作字要加 s：talks。"}, {"pic": "🍳", "zh": "你早上吃早餐嗎？不，我不吃。", "tpl": "[[Do]] you eat breakfast in the morning? — No, I [[don't|do not]].", "hints": ["Do / Does", "do / don't"], "exp": "問 you 用 Do；回答 I 不吃 → I don't。"}, {"pic": "🕐", "zh": "桌上有一個時鐘嗎？有。", "tpl": "Is [[there]] a clock on the table? — Yes, there [[is]].", "hints": ["there / it", "is / are"], "exp": "「有…嗎？」用 Is there ...?；回答 Yes, there is."}, {"pic": "🍝", "zh": "漢克不喜歡義大利麵。", "tpl": "Hank [[doesn't|does not]] like pasta.", "hints": ["don't / doesn't"], "exp": "Hank 是一個男生（he），不喜歡用 doesn't，like 不加 s。"}, {"pic": "🏊", "zh": "他們會游泳嗎？不會。", "tpl": "Can they swim? — No, they [[can't|cannot]].", "hints": ["can / can't"], "exp": "問 Can，就用 can／can't 回答。"}, {"pic": "🏊", "zh": "他們不會游泳。", "tpl": "They [[can't|cannot]] [[swim]].", "hints": ["can / can't", "動作字"], "exp": "can't 後面直接接動作字原形：They can't swim."}];
+function norm(s){
+  return (s||"").toLowerCase().trim().replace(/[’‘]/g,"'")
+    .replace(/[.,!?]/g,"").replace(/\s+/g," ").trim();
+}
+function accepts(ans, val){ return ans.split("|").map(norm).includes(norm(val)); }
+function firstAns(a){ return a.split("|")[0]; }
+function parsePrac(p){
+  const parts=[], answers=[]; let last=0, m; const re=/\[\[(.+?)\]\]/g;
+  while((m=re.exec(p.tpl))){ parts.push(p.tpl.slice(last,m.index)); answers.push(m[1]); last=re.lastIndex; }
+  parts.push(p.tpl.slice(last));
+  return {parts,answers};
+}
+function pracText(p){
+  const {parts,answers}=parsePrac(p);
+  return parts.map((t,i)=>t+(answers[i]?firstAns(answers[i]):'')).join('');
+}
+const ALL = DEMO.slice();
+DEMO.forEach((d,i)=>{d.id='d'+(i+1);});
+MOREA.forEach((lst,p)=>lst.forEach((m,k)=>{m.id='m'+(p+1)+'-'+(k+1);m.mini=true;m.gi=ALL.length;ALL.push(m);}));
+function jn(items,fn){ return items.map((s,k)=>(k===0||s.j?'':' ')+fn(s)).join(''); }
+function presText(d){ return jn(d.pres,s=>s.t); }
+function pastText(d){ return jn(d.past,s=>s.t); }
+function lastStep(d){ return Math.max.apply(null, d.past.map(s=>s.s||0)) || 3; }
+/* ── 發音：優先播 mp3（微軟 edge-tts Neural），失敗時退回瀏覽器內建朗讀 ── */
+const AUDIO_DIR = "letsgo-u1-audio/";
+let curAudio=null, curBtn=null;
+function stopSpk(){
+  if(curAudio){curAudio.pause();curAudio=null;}
+  if(curBtn){curBtn.classList.remove("playing");curBtn=null;}
+  if(window.speechSynthesis) speechSynthesis.cancel();
+}
+function fallbackSpeak(text){
+  if(!text||!window.speechSynthesis) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=.85;
+  u.onend=()=>{if(curBtn){curBtn.classList.remove("playing");curBtn=null;}};
+  speechSynthesis.speak(u);
+}
+function playId(id,btn,text){
+  const same = (curBtn && curBtn===btn);
+  stopSpk();
+  if(same) return;
+  curBtn = btn||null;
+  if(curBtn) curBtn.classList.add("playing");
+  if(!id){ fallbackSpeak(text); return; }
+  const a=new Audio(AUDIO_DIR+id+".mp3");
+  curAudio=a;
+  a.onended=()=>{if(curBtn){curBtn.classList.remove("playing");curBtn=null;}curAudio=null;};
+  a.onerror=()=>{curAudio=null;fallbackSpeak(text);};
+  a.play().catch(()=>{curAudio=null;fallbackSpeak(text);});
+}
+function spk(id,text){
+  return '<button class="spk" type="button" title="聽發音" aria-label="聽發音"'+
+    ' data-a="'+id+'" data-t="'+text.replace(/"/g,'&quot;')+'">🔊</button>';
+}
+
+
+const app = document.getElementById("app");
+let html = '';
+html += '<div class="group-h demo"><span class="tag">📖 看動畫學句型</span><span class="sub">10 個句型，一步一步按 1／2／3</span></div>';
+function demoCard(d,gi,num){
+  const id=d.id, mini=!!d.mini;
+  return '<div class="q demo st0'+(mini?' mini':'')+'" data-i="'+gi+'">'+
+    '<div class="qtop"><span class="qnum d">'+num+'</span>'+(d.pic?'<span class="pic">'+d.pic+'</span>':'')+(d.tag?'<span class="tagk">'+d.tag+'</span>':'')+'</div>'+
+    '<div class="lineLab">'+d.l1+'</div>'+
+    '<div class="oldLine">'+
+      jn(d.pres,s=> s.r ? '<span class="w '+s.r+'" data-p="'+d.pres.indexOf(s)+'"'+(s.x?' data-x="'+s.x+'"':'')+'>'+s.t+'</span>' : s.t)+
+      spk(id+'-1', presText(d))+
+    '</div>'+
+    '<div class="lineLab">'+d.l2+'</div>'+
+    '<div class="buildLine">'+
+      jn(d.past,s=> s.s
+        ? '<span class="slot '+s.r+'" data-s="'+s.s+'"'+(s.f!=null?' data-f="'+s.f+'"':'')+'>'+s.t+'</span>'
+        : s.t)+
+      spk(id+'-2', pastText(d))+
+    '</div>'+
+    (d.place?'<div class="placeChip">📍 地點：'+d.place[0]+' ＝ '+d.place[1]+'</div>':'')+
+    '<div class="stepbtns"><span class="hintk">一步一步點：</span>'+
+      '<button class="sbtn b1" type="button" data-s="1"><span class="sn">1</span>'+d.b[0]+'</button>'+
+      '<button class="sbtn b2" type="button" data-s="2" disabled><span class="sn">2</span>'+d.b[1]+'</button>'+
+      '<button class="sbtn b3" type="button" data-s="3" disabled><span class="sn">3</span>'+d.b[2]+'</button>'+
+      '<button class="replay" type="button">↺ 重播</button>'+
+    '</div>'+
+    (mini?'':
+      '<div class="reveal r1"><b>① </b>'+d.n1+'</div>'+
+      '<div class="reveal r2"><b>② </b>'+d.n2+'</div>'+
+      '<div class="reveal r3"><b>③ </b>'+d.n3+'</div>')+
+    '<div class="demoexp">'+(d.alt?'<div class="alt">💡 '+d.alt+'</div>':'')+'<div class="zh">💬 '+d.zh+'</div></div>'+
+    (mini?'':
+      '<button class="morebtn" type="button">➕ 再看 5 句同類型例句（也有動畫）</button>'+
+      '<div class="morelist">'+(MOREA[+id.slice(1)-1]||[]).map((m,k)=>demoCard(m,m.gi,(k+1))).join('')+'</div>')+
+  '</div>';
+}
+DEMO.forEach((d,i)=>{ html += demoCard(d,i,i+1); });
+
+html += '<div class="group-h prac"><span class="tag">✏️ 換你練習</span><span class="sub">看中文，把空格填起來 → 按「送出批改」；不會就點 ❓ 看答案</span></div>';
+PRAC.forEach((p,i)=>{
+  const {parts,answers}=parsePrac(p);
+  let sent='';
+  parts.forEach((t,k)=>{
+    sent+=t;
+    if(answers[k]!==undefined){
+      const w=Math.max.apply(null,answers[k].split('|').map(a=>a.length))+3;
+      sent+='<input data-b="'+k+'" size="'+w+'" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="?"> '+
+            '<span class="hint">('+p.hints[k]+')</span>';
+    }
+  });
+  html +=
+  '<div class="q practice" data-i="'+i+'">'+
+    '<div class="qtop"><span class="qnum">'+(i+1)+'</span><span class="pic">'+p.pic+'</span>'+
+      '<div class="cnq"><span class="lab">中文</span>'+p.zh+'</div>'+
+      '<button class="qmark" type="button" title="看答案與解析">？</button></div>'+
+    '<div class="rewrite">'+sent+'</div>'+
+    '<div class="exp"><div class="ans">✔ '+pracText(p)+spk('p'+(i+1), pracText(p))+'</div>'+
+      '<div class="why">📝 '+p.exp+'</div></div>'+
+  '</div>';
+});
+app.innerHTML = html;
+
+function own(card,sel){return Array.prototype.filter.call(card.querySelectorAll(sel),function(e){return e.closest('.q.demo')===card;});}
+/* ── 飛行動畫（電腦/平板寬螢幕）── */
+const pathSvg = document.getElementById('pathSvg');
+
+function drawPath(x1,y1,x2,y2,c,cardIdx){
+  const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('d','M'+x1+','+y1+' L'+x2+','+y2);
+  path.setAttribute('class','pathLine '+c);
+  path.setAttribute('marker-end','url(#arr-'+c+')');
+  path.dataset.card = cardIdx;
+  pathSvg.appendChild(path);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>path.classList.add('show')));
+}
+
+function flyText(sourceEl, destEl, c, cardIdx){
+  const a = sourceEl.getBoundingClientRect(), b = destEl.getBoundingClientRect();
+  drawPath(a.left+a.width/2+scrollX, a.top+a.height/2+scrollY, b.left+b.width/2+scrollX, b.top+b.height/2+scrollY, c, cardIdx);
+  const clone = document.createElement('span');
+  clone.className = 'flyClone w '+c;
+  clone.dataset.card = cardIdx;
+  clone.textContent = destEl.textContent;
+  clone.style.left = a.left+'px'; clone.style.top = a.top+'px';
+  document.body.appendChild(clone);
+  requestAnimationFrame(()=>{
+    clone.style.transition = 'left .65s cubic-bezier(.22,.85,.3,1), top .65s cubic-bezier(.22,.85,.3,1)';
+    clone.style.left = b.left+'px'; clone.style.top = b.top+'px';
+  });
+  const done = ()=>{ clone.remove(); destEl.classList.add('show'); };
+  clone.addEventListener('transitionend', done, {once:true});
+  setTimeout(done, 800);
+}
+
+function resetDemoCard(card){
+  card.classList.remove('st1','st2','st3');
+  card.classList.add('st0');
+  card.dataset.step = '0';
+  own(card,'.sbtn').forEach(b=>{ b.classList.remove('on'); b.disabled = (b.dataset.s !== '1'); });
+  own(card,'.slot').forEach(s=>s.classList.remove('show'));
+  own(card,'.w').forEach(s=>s.classList.remove('used'));
+}
+
+function autoSpeak(card, id, text, delay){
+  const cb = document.getElementById('autoplay');
+  if(!cb || !cb.checked) return;
+  setTimeout(()=>{ playId(id, card.querySelector('.spk[data-a="'+id+'"]'), text); }, delay);
+}
+
+app.addEventListener("click",(ev)=>{
+  const sp = ev.target.closest(".spk");
+  if(sp){ playId(sp.dataset.a, sp, sp.dataset.t); return; }
+  const mb = ev.target.closest(".morebtn");
+  if(mb){
+    const list = mb.parentElement.querySelector('.morelist');
+    const on = list.classList.toggle("show");
+    mb.textContent = on ? "➖ 收合這 5 句" : "➕ 再看 5 句同類型例句（也有動畫）";
+    return;
+  }
+  const qm = ev.target.closest(".qmark");
+  if(qm){
+    const card = qm.closest(".q.practice");
+    const on = card.querySelector(".exp").classList.toggle("show");
+    if(on){
+      const answers = parsePrac(PRAC[+card.dataset.i]).answers;
+      card.querySelectorAll("input").forEach((el,k)=>{ el.value = el.value || firstAns(answers[k]); });
+    }
+    return;
+  }
+  const rp = ev.target.closest('.replay');
+  if(rp){
+    const card = rp.closest('.q.demo');
+    pathSvg.querySelectorAll('.pathLine[data-card="'+card.dataset.i+'"]').forEach(p=>p.remove());
+    document.querySelectorAll('.flyClone[data-card="'+card.dataset.i+'"]').forEach(c=>c.remove());
+    stopSpk();
+    resetDemoCard(card);
+    return;
+  }
+  const b = ev.target.closest(".sbtn");
+  if(!b || b.disabled) return;
+  const card = b.closest(".q.demo");
+  const s = +b.dataset.s;
+  if(s !== +(card.dataset.step||0)+1) return;   // 強制照順序 1→2→3
+  card.dataset.step = s;
+  card.classList.remove("st0","st1","st2","st3");
+  card.classList.add("st"+s);
+  b.classList.add("on"); b.disabled = true;
+  const nextBtn = own(card,'.sbtn[data-s="'+(s+1)+'"]')[0];
+  if(nextBtn) nextBtn.disabled = false;
+
+  const idx = +card.dataset.i, d = ALL[idx];
+  own(card,'.slot[data-s="'+s+'"]').forEach(slot=>{
+    const f = slot.dataset.f;
+    const src = f!==undefined ? own(card,'.w[data-p="'+f+'"]')[0] : null;
+    if(src){
+      const c = slot.classList.contains('o')?'o':slot.classList.contains('b')?'b':slot.classList.contains('g')?'g':'v';
+      if(WIDE) flyText(src, slot, c, idx); else slot.classList.add('show');
+      src.classList.add('used');
+    } else slot.classList.add('show');
+  });
+  own(card,'.w[data-x="'+s+'"]').forEach(w=>w.classList.add('used'));
+  if(s===1 && !d.noA1) autoSpeak(card, d.id+'-1', presText(d), 0);
+  if(s===lastStep(d)) autoSpeak(card, d.id+'-2', pastText(d), WIDE ? 900 : 200);
+});
+
+/* 批改 */
+document.getElementById("submit").addEventListener("click",()=>{
+  let correct=0;
+  const cards = app.querySelectorAll(".q.practice");
+  cards.forEach(q=>{
+    const answers = parsePrac(PRAC[+q.dataset.i]).answers;
+    let ok=true;
+    q.querySelectorAll("input").forEach((el,k)=>{
+      if(accepts(answers[k], el.value)){ el.classList.add("ok"); el.classList.remove("no"); }
+      else { el.classList.add("no"); el.classList.remove("ok"); ok=false; }
+    });
+    q.querySelector(".exp").classList.add("show");
+    if(ok) correct++;
+  });
+  const st="⭐".repeat(correct)+"☆".repeat(cards.length-correct);document.getElementById("score").innerHTML="答對 "+correct+" / "+cards.length+" 題　"+st+"<br>"+(correct===cards.length?"🎉 太厲害了！全部答對！":correct>=cards.length*0.7?"👏 很棒！再看看紅色的題目":"💪 加油！點 ❓ 看答案再試一次");
+  window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+});
+
+document.getElementById("reset").addEventListener("click",()=>{
+  app.querySelectorAll(".q.practice input").forEach(i=>{i.value="";i.classList.remove("ok","no");});
+  app.querySelectorAll(".q.practice .exp").forEach(e=>e.classList.remove("show"));
+  document.getElementById("score").textContent="";
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+</script>
+</body>
+</html>
