@@ -161,14 +161,14 @@ function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 function mkMC(box,list,label){
  list.forEach((q,i)=>{
   const c=document.createElement('div');c.className='card';
-  c.innerHTML=`<div class="q"><span class="n">${label(i)}</span>${esc(q[0]).replace(/\n/g,'<br>')} <span class="note">（${q[3]}分）</span></div><div class="opts"></div><div class="exp"></div>`;
-  const o=c.querySelector('.opts'),e=c.querySelector('.exp');c.dataset.a=q[2];c.dataset.t=q[4];
+  c.innerHTML=`<div class="q"><span class="n">${label(i)}</span>${esc(q[0]).replace(/\n/g,'<br>')} <span class="note">（${q[3]}分）</span></div><div class="opts"></div><div class="row" style="margin-top:8px"><button class="btn alt xb">💡 看解析</button><span class="res fb"></span></div><div class="exp"></div>`;
+  const o=c.querySelector('.opts'),e=c.querySelector('.exp');c.dataset.a=q[2];c.dataset.t=q[4];const xb=c.querySelector('.xb'),fb=c.querySelector('.fb');e.innerHTML='<b>正確答案：('+L[q[2]]+')</b><br>'+esc(q[4]);xb.onclick=()=>{const on=e.classList.toggle('show');xb.textContent=on?'🔼 收起解析':'💡 看解析'};
   q[1].forEach((t,k)=>{
    const b=document.createElement('button');b.className='opt';b.textContent=`(${L[k]}) ${t}`;
    b.onclick=()=>{
     o.querySelectorAll('button').forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add('ok')});
     if(k===q[2])sc.mc+=q[3];else b.classList.add('bad');
-    e.innerHTML=`<b>${k===q[2]?'✔ 答對了':'✘ 答錯了'}｜正確答案：(${L[q[2]]})</b><br>${esc(q[4])}`;e.classList.add('show');upd();
+    fb.className='res fb '+(k===q[2]?'ok':'bad');fb.textContent=k===q[2]?'✔ 答對了':'✘ 答錯了，正確答案 ('+L[q[2]]+')';upd();
    };o.appendChild(b);
   });box.appendChild(c);
  });
@@ -211,7 +211,7 @@ function showAll(){
  document.querySelectorAll('.card[data-a]').forEach(c=>{
   const a=+c.dataset.a,e=c.querySelector('.exp');
   c.querySelectorAll('.opt').forEach((x,j)=>{x.disabled=true;if(j===a)x.classList.add('ok')});
-  if(!e.classList.contains('show')){e.innerHTML='<b>正確答案：('+L[a]+')</b><br>'+esc(c.dataset.t);e.classList.add('show')}
+  e.classList.add('show');const xb=c.querySelector('.xb');if(xb)xb.textContent='🔼 收起解析';
  });
  document.querySelectorAll('#zbox > div').forEach((d,i)=>{const r=d.querySelector('.res');if(!r.textContent){r.className='res bad';r.textContent='答案：'+Z[i][1]}});
  document.querySelectorAll('#nbox .show').forEach(b=>{if(!b.disabled)b.click()});
