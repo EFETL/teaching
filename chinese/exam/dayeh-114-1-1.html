@@ -17,7 +17,7 @@ header p{margin:0;opacity:.92}
 .score{position:sticky;top:0;z-index:10;background:rgba(246,244,239,.96);border-bottom:1px solid var(--line);padding:8px 0}
 .score .wrap{padding-bottom:0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .score b{color:var(--main);font-size:1.1rem}
-.score button{margin-left:auto}
+.score button:first-of-type{margin-left:auto}
 h2{margin:36px 0 6px;color:var(--main);font-size:1.25rem}
 .sub{color:var(--muted);margin:0 0 12px;font-size:.9rem}
 .card{background:var(--card);border-radius:14px;box-shadow:0 4px 18px rgba(30,45,70,.08);padding:16px 18px;margin:14px 0}
@@ -57,7 +57,8 @@ button{font:inherit;cursor:pointer}
 <span>國字注音：<b id="sZ">0</b> / 10</span>
 <span>注釋：<b id="sN">0</b> / 20</span>
 <span>總分：<b id="sAll">0</b> / 100</span>
-<button class="btn alt" onclick="location.reload()">重做一次</button>
+<button class="btn" onclick="showAll()">顯示全部答案</button>
+<button class="btn alt" style="margin-left:0" onclick="location.reload()">重做一次</button>
 </div></div>
 <div class="wrap">
 
@@ -161,7 +162,7 @@ function mkMC(box,list,label){
  list.forEach((q,i)=>{
   const c=document.createElement('div');c.className='card';
   c.innerHTML=`<div class="q"><span class="n">${label(i)}</span>${esc(q[0]).replace(/\n/g,'<br>')} <span class="note">（${q[3]}分）</span></div><div class="opts"></div><div class="exp"></div>`;
-  const o=c.querySelector('.opts'),e=c.querySelector('.exp');
+  const o=c.querySelector('.opts'),e=c.querySelector('.exp');c.dataset.a=q[2];c.dataset.t=q[4];
   q[1].forEach((t,k)=>{
    const b=document.createElement('button');b.className='opt';b.textContent=`(${L[k]}) ${t}`;
    b.onclick=()=>{
@@ -205,6 +206,16 @@ N.forEach((q,i)=>{
  };
  nbox.appendChild(c);
 });
+
+function showAll(){
+ document.querySelectorAll('.card[data-a]').forEach(c=>{
+  const a=+c.dataset.a,e=c.querySelector('.exp');
+  c.querySelectorAll('.opt').forEach((x,j)=>{x.disabled=true;if(j===a)x.classList.add('ok')});
+  if(!e.classList.contains('show')){e.innerHTML='<b>正確答案：('+L[a]+')</b><br>'+esc(c.dataset.t);e.classList.add('show')}
+ });
+ document.querySelectorAll('#zbox > div').forEach((d,i)=>{const r=d.querySelector('.res');if(!r.textContent){r.className='res bad';r.textContent='答案：'+Z[i][1]}});
+ document.querySelectorAll('#nbox .show').forEach(b=>{if(!b.disabled)b.click()});
+}
 </script>
 </body>
 </html>
