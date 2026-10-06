@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大業國中 114上 第一次段考 國文（互動版）</title>
+<style>
+:root{--main:#2b4c7e;--accent:#f2a541;--bg:#f6f4ef;--card:#fff;--ink:#23303f;--muted:#6b7686;--line:#e3e0d8;--ok:#2e9e6b;--ok-bg:#e3f5ec;--bad:#d9534f;--bad-bg:#fbe7e6;--hi:#fff4d6}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC",system-ui,sans-serif;line-height:1.75}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 80px}
+header{background:linear-gradient(135deg,#1f3a63,#3f6aa8 60%,#f2a541 140%);color:#fff;padding:32px 0 26px;margin-bottom:20px}
+header a{color:#fff;opacity:.85;text-decoration:none;display:block;margin-bottom:8px}
+header h1{margin:0 0 4px;font-size:1.6rem}
+header p{margin:0;opacity:.92}
+.score{position:sticky;top:0;z-index:10;background:rgba(246,244,239,.96);border-bottom:1px solid var(--line);padding:8px 0}
+.score .wrap{padding-bottom:0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.score b{color:var(--main);font-size:1.1rem}
+.score button{margin-left:auto}
+h2{margin:36px 0 6px;color:var(--main);font-size:1.25rem}
+.sub{color:var(--muted);margin:0 0 12px;font-size:.9rem}
+.card{background:var(--card);border-radius:14px;box-shadow:0 4px 18px rgba(30,45,70,.08);padding:16px 18px;margin:14px 0}
+.q{font-weight:500;margin-bottom:8px}
+.q .n{display:inline-block;min-width:2em;color:var(--main);font-weight:900}
+.passage{background:#faf8f2;border-left:4px solid var(--accent);padding:10px 14px;margin:10px 0;border-radius:6px;white-space:pre-wrap;font-size:.95rem}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font:inherit;cursor:pointer;color:var(--ink)}
+.opt:hover{border-color:var(--main)}
+.opt.ok{background:var(--ok-bg);border-color:var(--ok)}
+.opt.bad{background:var(--bad-bg);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.exp{display:none;margin-top:10px;background:var(--hi);border-radius:8px;padding:8px 12px;font-size:.95rem}
+.exp.show{display:block}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+input[type=text],textarea{font:inherit;border:2px solid var(--line);border-radius:8px;padding:6px 10px;width:100%}
+input.z{max-width:200px}
+button{font:inherit;cursor:pointer}
+.btn{border:none;background:var(--main);color:#fff;padding:6px 14px;border-radius:99px}
+.btn.alt{background:#fff;color:var(--main);border:2px solid var(--main)}
+.res{margin-top:6px;font-weight:700}
+.res.ok{color:var(--ok)}.res.bad{color:var(--bad)}
+.zgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.note{font-size:.85rem;color:var(--muted)}
+#final{display:none;text-align:center;font-size:1.3rem}
+@media print{.score,button,.exp{display:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap" style="padding-bottom:0">
+<a href="../">← 回國文科</a>
+<h1>大業國中 114學年度第1學期 第一次定期評量</h1>
+<p>七年級國文科 ・ 互動考卷（點選答案立即對錯＋解析）</p>
+</div></header>
+<div class="score"><div class="wrap">
+<span>選擇＋題組：<b id="sMC">0</b> / 70</span>
+<span>國字注音：<b id="sZ">0</b> / 10</span>
+<span>注釋：<b id="sN">0</b> / 20</span>
+<span>總分：<b id="sAll">0</b> / 100</span>
+<button class="btn alt" onclick="location.reload()">重做一次</button>
+</div></div>
+<div class="wrap">
+
+<h2>一、國字注音（10 題，每題 1 分）</h2>
+<p class="sub">1～5 題依注音寫國字；6～10 題依國字寫注音（含聲調，一聲不用標）。按「對答案」檢查。</p>
+<div class="card"><div class="zgrid" id="zbox"></div>
+<p class="note">※ 6～10 題學校答案卷未公布，標準答案為本頁依字典補充。</p></div>
+
+<h2>二、注釋（10 題，每題 2 分）</h2>
+<p class="sub">先寫下自己的解釋，再看參考答案，最後自評得分（全對 2 分、錯一字 1 分）。</p>
+<div id="nbox"></div>
+
+<h2>三、單一選擇題（23 題，1～14 題每題 3 分，15～23 題每題 2 分）</h2>
+<div id="mcbox"></div>
+
+<h2>四、題組（5 題，每題 2 分）</h2>
+<div class="card">
+<div class="q">【一～二題】閱讀下列新詩，回答問題。</div>
+<div class="passage">牆上的日曆瘦了
+桌上的筆記本卻胖了
+憂的是，黑板上的數字跌了
+喜的是，考卷上的紅字漲了
+
+當我費心遏阻時光竊取珍寶的同時
+緊張卻趁機悄悄進駐心房
+時不時爬呀爬的，它攀上了我的胸口
+肥嘟嘟的身軀擠得我喘不過氣
+爬呀爬的，它登上了我的肩頭
+沉甸甸的體重壓得我挺不起腰
+
+最後
+只留一地的落髮
+是它登頂的證明　　　——改寫自〈考前心情〉</div></div>
+<div id="g1"></div>
+<div class="card">
+<div class="q">【三～五題】閱讀下文，回答問題。</div>
+<div class="passage">　　古時候，人們居住環境的衛生較差，容易被「恙蟲」咬傷引發疾病，所以「恙」（讀音ㄧㄤˋ）就成了疾病、災禍的代名詞，也因此「別來無恙」（在上次分別到現在的這段時間，一切安好嗎？）成為古人慣用的問候語。
+
+　　《戰國策‧齊策四》寫道：「趙威后問使者：『歲亦無恙耶？民亦無恙耶？王亦無恙耶？』」可見「無恙」一語通行甚早。其故事記載趙威后有次接見齊王派來的使者，第一句話便問他說：「齊國今年的農作物收成好嗎？百姓們還好嗎？齊王也好嗎？」使者很不高興地回話說：「威后您先問收成與百姓，然後才問大王好不好，尊卑①是否顛倒了？」威后回說：「這就不對了，若沒有好的糧食收成，百姓怎麼會有好日子？若沒有百姓，又哪來的國君？」後來這個典故成了「安然無恙」這個成語的出處，意為「平安沒有疾病、禍患等事故」。
+
+　　「恙蟲病」是亞熱帶地區的流行性疾病，臺灣地區大約從四月開始，東部及南部的恙蟲開始活躍，那時衛福部疾管署會提醒民眾上山掃墓或是趁連假到戶外踏青，要小心「恙蟲病」，因為每年恙蟲病的病例數從四、五月，也就是清明假期左右開始上升，六、七月達到最高峰。
+
+　　引發恙蟲病的是，寄生在恙蟲身上一種類似細菌的立克次體，恙蟲大多孳生於野外草叢，伺機攀附叮咬經過草叢的人類或其他動物，使其感染立克次體。恙蟲病只會經由恙蟲叮咬傳染，不會人傳人，不須隔離。恙蟲叮咬處會出現小水泡，形成淺層潰瘍②，數天後變成黑色焦痂③。恙蟲叮咬的傷口不痛不癢，但是潛伏期大約一到兩週，發病後會出現持續性高燒、盜汗、頭痛、肌肉痠痛、淋巴結腫大等症狀，部分症狀和Ａ型流行感冒類似，故容易被誤診。感染者的症狀輕重不一，輕微者可自行痊癒，嚴重且未接受適當治療的病患可能會出現肺炎、腦炎等併發症，引起多重器官衰竭，致死率高達60％。
+
+【注釋】①尊卑：指社會階層、長幼次位的差異，例如古代君王與臣民之間有身分地位高低的分別。
+②潰瘍：身體表面組織（如皮膚或黏膜）的連續性受損，形成開放性的傷口或破洞。
+③痂：傷口痊癒時，由血小板、膠原蛋白和廢死細胞等凝結而成的硬塊。</div></div>
+<div id="g2"></div>
+
+<div class="card" id="final"></div>
+</div>
+
+<script>
+const L=['A','B','C','D'];
+// 一、國字注音：[題幹, 答案, 類型]
+const Z=[
+ ['「ㄇㄥˊ」朧','朦','w'],['「ㄍㄨㄚˇ」婦','寡','w'],['慫「ㄩㄥˇ」','恿','w'],['通「ㄑㄧˋ」犯','緝','w'],['「ㄊㄧㄢˇ」嘴','舔','w'],
+ ['黴「菌」','ㄐㄩㄣˋ','z'],['審「度」','ㄉㄨㄛˊ','z'],['教「誨」','ㄏㄨㄟˋ','z'],['「藤」蔓','ㄊㄥˊ','z'],['溫「馨」','ㄒㄧㄣ','z']];
+// 二、注釋
+const N=[['「擰」我的肉','用手指夾住用力扭轉'],['眼「翳」病','眼珠上所生遮蔽視線的薄膜'],['廣漠','廣大遼闊'],['「荷」槍實彈','扛著'],['彌補','補償'],
+ ['「肇」事','引起'],['擄人勒贖','綁架人質以勒索金錢'],['樹「梢」','樹枝的末端'],['「闔」眼','閉合'],['「撒」了滿天的珍珠','散布']];
+// 三、選擇題：[題幹, [A,B,C,D], 答案index, 分數, 解析]
+const MC=[
+['何組字音前後相同？',['英雄氣「概」／感「慨」萬千','四肢痙「攣」／「蠻」荒地帶','修「葺」宮殿／編「輯」刊物','「奄」奄一息／「醃」漬食物'],3,3,'(D)「奄」「醃」同音。(A)概ㄍㄞˋ／慨ㄎㄞˇ；(B)攣ㄌㄩㄢˊ／蠻ㄇㄢˊ；(C)葺ㄑㄧˋ／輯ㄐㄧˊ，均不同。'],
+['胡適〈母親的教誨〉的主旨為何？',['感念母親教導的苦心與關愛','回憶童年時母親的辛勞','刻畫母親無微不至的照顧','歌頌母親溫柔的形象'],0,3,'全文透過回憶母親的嚴格教誨，表達感念母親苦心與關愛。'],
+['〈夏夜〉一詩中，「只有綠色的小河還醒著，低聲地歌唱著溜過彎彎的小橋」以流水聲襯托夏夜的靜謐。下列何者「沒有」使用「以動襯靜」或「以聲襯靜」？',['空山不見人，但聞人語響','蟬噪林逾靜，鳥鳴山更幽','春眠不覺曉，處處聞啼鳥','明月松間照，清泉石上流'],2,3,'(C)「處處聞啼鳥」寫春日清晨的景象，並非藉聲音襯托寂靜；其餘三項均以聲音或動態襯托靜。'],
+['【引文】趨勢大師艾爾文‧托夫勒預言：「在這個事物飛速變化的時代，文盲的定義早已改變。……」\n（原卷此題引文在翻頁處僅列出前兩行，完整內容請參考原卷。）\n依據上文，下列說明何者「錯誤」？',['就算完成12年國民基本教育、讀到大學，也有可能成為21世紀的文盲','真正的文盲是那些停滯不前、無法更新知識與觀念而且無心重新出發的人','根據艾爾文‧托夫勒對學習的見解，預測21世紀將沒有文盲','在人生的每個階段，別對改變充滿抗拒，才能適應未來的變化與挑戰'],2,3,'(C)托夫勒是警告「不能持續學習的人」會成為新文盲，並非預測將沒有文盲。'],
+['「事前□兆／具體而□／旁□博引／紀念□章」，缺空處依序應填入下列何者？',['黴／徵／徵／徽','徵／微／徵／徽','徵／微／徽／徵','微／微／徽／徵'],1,3,'事前「徵」兆、具體而「微」、旁「徵」博引、紀念「徽」章。'],
+['下列「」中的字義，何者兩兩相同？',['傳「遞」訊息／逐年「遞」減','待人接「物」／「物」以稀為貴','國「道」塞車／航空跑「道」','「晦」澀難懂／天色「晦」暗'],2,3,'(C)「道」皆指道路。(A)遞：傳送／依次；(B)物：人／東西；(D)晦：隱晦／昏暗。'],
+['劉墉〈無心的錯誤〉：「『無心』往往就是一種錯誤」，下列何者「不是」作者想傳達的訊息？',['有人無知或無心而誤蹈法網，但不知情、不懂法，並不能作為免除法律責任的理由','沒有壞動機但實際上已觸法的錯誤行為，往往是欠缺社會常識及法治觀念所導致的','無心之過只要沒有造成財物上的損失，就不算是違法，若有財物損失，就需要賠錢','無心之過也是過錯，是過錯就要受到法律的懲罰，無心或是明知故犯，都一樣有罪'],2,3,'(C)作者強調無心之過仍可能違法，並非「沒財物損失就不違法」。'],
+['下列標點符號斷句的文意判斷，何者正確？',['老吳有一子，祕笈給予女、婿，外人不得爭奪。→「女兒和女婿共同繼承祕笈」','老吳有一子，祕笈給予女，婿外人不得爭奪。→「兒子和女兒繼承祕笈」','法國隊大敗德國隊，重返冠軍寶座。→「德國隊獲得冠軍」','法國隊大敗，德國隊重返冠軍寶座。→「法國隊獲得冠軍」'],0,3,'(A)正確。(B)祕笈給女兒、女婿，並非兒子；(C)法國隊獲勝；(D)德國隊獲得冠軍。'],
+['關於楊喚〈夏夜〉一詩，下列文意分析何者「錯誤」？',['小弟弟與小妹妹在老奶奶說故事的聲音中逐漸進入夢鄉，呈現了天倫之樂的溫馨','「窗外瓜架上的南瓜還醒著，伸長了藤蔓輕輕地往屋頂上爬」展現了夏夜的不安與喧囂','「撒了滿天的珍珠和一枚又大又亮的銀幣」營造富麗感，凸顯「星月交輝」的視覺效果','「當街燈亮起來向村莊道過晚安」正式宣告夜晚到來，具有承上啟下的作用'],1,3,'(B)南瓜「輕輕」往上爬，呈現的是夏夜的寧靜祥和，而非不安喧囂。'],
+['下列何者選項文句用字完全正確？',['他是本公司開拓海外市場的先軀，為後進者樹立了榜樣','這位演講者詼偕風趣的表現，博得了全場聽眾如雷的掌聲','網路資訊雖然豐富多元，但也帶來真假難辨的幣端','貪污犯受到了嚴厲的處罰，並被勒令退還部分贓款'],3,3,'(A)先「驅」；(B)詼「諧」；(C)弊端；(D)正確。'],
+['關於胡適名言：「有幾分證據說幾分話，有七分證據不能說八分話」的詮釋，下列何者最相近？',['盡信書，則不如無書','為學有如金字塔，要能廣大要能高','知之為知之，不知為不知，是知也','學問要在不疑處有疑'],2,3,'兩者都強調對知識、證據的誠實態度，有多少說多少。'],
+['琦君童年時存了很久的十塊大洋不翼而飛，哭著要母親賠。母親說：「你自己不小心丟的，我也不能賠你呀！」父親勸母親再給她十塊，母親卻不肯，說：「我不要讓她覺得那麼容易就可拿回她失去的東西。她既肯花那麼長時間耐心存錢，以後仍應該那麼做。」（改寫自琦君〈煙愁．倒賬〉）下列何者最適合說明琦君母親對孩子的教育態度？',['堅持原則，絕不溺愛','軟硬兼施，寬嚴並濟','嚴格苛刻，不容犯錯','一板一眼，不知變通'],0,3,'母親不因心疼而替孩子彌補損失，是堅持原則、不溺愛的教育態度。'],
+['下列選項「」中的注音寫成國字後，何組字形前後相同？',['天乾物「ㄗㄠˋ」／脾氣暴「ㄗㄠˋ」','隱「ㄇㄧˋ」之事／「ㄇㄧˋ」書工作','言行事「ㄐㄧ」／學習成「ㄐㄧ」','危言「ㄙㄨㄥˇ」聽／地勢高「ㄙㄨㄥˇ」'],3,3,'(D)皆為「聳」。(A)燥／躁；(B)祕／秘（隱祕、祕書）；(C)跡／績。'],
+['「滾著火輪子回家了」、「火紅的太陽」中的兩個「火」字的詞性依序是',['形容詞、名詞','副詞、名詞','副詞、形容詞','形容詞、副詞'],3,3,'依學校公布答案為 (D)。'],
+['破折號用來標明語意轉變、聲音延續，或在行文中補充說明，下列何者用來表示「語意轉變」？',['這是小陽生平所收到的第一個生日禮物──針織外套。','我實在不贊同這個主意──也罷，就依你們的想法吧。','嗚──嗚──嗚──，空襲警報的聲音又響起了。','失敗──對強者而言是逗號，對弱者來說則是句號。'],1,2,'(B)由「不贊同」轉為「也罷」，語意轉變。(A)(D)補充說明；(C)聲音延續。'],
+['「窗外流動著寶石藍的夜／屋子裡流進來牛乳一樣白的□□／水果店裡的鐘噹噹地敲了十二下／美麗的水果們就都一起□過來／請夜風指揮蟲兒們的樂隊來□□／這奇異的晚會就開了場。」（楊喚〈水果們的晚會〉）□處依序應填入',['夕陽／聚／合唱','彗星／衝／獨奏','月光／醒／伴奏','晨曦／趕／作戰'],2,2,'夜晚流進屋裡的是「月光」；午夜十二點水果們一起「醒」來；蟲兒樂隊來「伴奏」。'],
+['關於胡適〈母親的教誨〉的文章分析，下列敘述何者「錯誤」？',['善用對話與家鄉方言，使人物形象更加具體生動，躍然紙上','「你總要踏上你老子的腳步」意指母親希望胡適能夠克紹箕裘','採用第二人稱的口吻，回憶母親寬嚴並濟、恩威並施的教育方式','最後一段用感性的筆調書寫，透過排比句將自己的好品行歸功於母教'],2,2,'(C)本文以「我」回憶母親，是第一人稱，並非第二人稱。'],
+['依據劉墉〈無心的錯誤〉一文的內容，犯下無心之過的人最缺乏何種特質？',['三思而後行','三更燈火五更雞','三過家門而不入','三折肱而成良醫'],0,2,'無心之過源於行事未加思考，缺乏「三思而後行」的謹慎。'],
+['下列「」中的詞語，何者使用最恰當？',['弟弟竟然未經同意就拿走哥哥最愛的玩具，哥哥立刻「撒手人寰」向父母告狀','嫌疑犯向刑警交代犯罪過程時「避重就輕」，閃爍其詞，意圖為自己開脫罪名','科學家在好奇心的驅使下，以「匹夫之勇」的精神進行這個具有危險性的化學實驗','媽媽不眠不休地守護在小女兒的病榻前，深摯的「孺慕之情」，令人動容'],1,2,'(B)避重就輕：只講輕微的、避開重要的，用法正確。(A)撒手人寰指逝世；(C)匹夫之勇指有勇無謀，含貶意；(D)孺慕之情是子女對父母的依戀。'],
+['人們常使用諧音雙關創作吉祥賀詞。請問下列新年賀詞，何者「沒有」使用諧音雙關？',['羊年：名羊四海','龍年：飛龍在天','雞年：雞祥如意','蛇年：蛇來運轉'],1,2,'(B)「飛龍在天」是《易經》原句，沒有諧音；其餘為「名揚」「吉祥」「時來」的諧音。'],
+['「在這個紛紛擾擾的世界，有些人雖然正在面對內心的低谷□卻努力尋找平靜與力量□有些人即使曾經在微笑中隱藏傷痛□仍相信幸福終會到來□有些人曾在生命中迷失方向，卻一步步走向更清晰的人生道路。」空格處的標點符號，依序填入何者最恰當？',['；。；，','；，；。','，；。！','，；，；'],3,2,'前後並列的分句之間用分號，句中停頓用逗號：「，；，；」。'],
+['下列「」中的量詞，何者使用錯誤？',['兩「則」新聞','一「輪」新月','責罰一「頓」','三「輛」警車'],1,2,'新月應用「彎」（一彎新月）；「輪」用於滿月、太陽。'],
+['「譬喻」是用彼物比喻此物的修辭技巧。下列文句，何者也使用了譬喻修辭？',['你沒有老子，是多麼得意的事！好用來說嘴','風裡帶來些新翻泥土的氣息，混著青草味','女人心好似海底針，媽媽的心裡到底在想什麼呢','強颱豪雨造成溪流上游的堰塞湖發生大規模溢流而潰壩，導致下游的城區被洪水淹沒'],2,2,'(C)「好似」是喻詞，把女人心比喻成海底針。']
+];
+// 四、題組
+const G1=[
+['下列文句，何者「未」使用「擬人化」修辭？',['桌上的筆記本卻胖了','考卷上的紅字漲了','當我費心遏阻時光竊取珍寶','緊張卻趁機悄悄進駐心房'],1,2,'(B)「紅字漲」是分數增加的形容；其餘把筆記本、時光、緊張當成人來寫。'],
+['依據上文內容，下列文意判斷何者正確？',['從筆記本胖了可以知道作者複習敷衍了事','作者的成績並沒有進步，因此更加步步為營','本詩後半段描述作者好整以暇地準備考試','因為沉重的壓力，作者有落髮現象'],3,2,'末段「只留一地的落髮」是壓力沉重的證明。']];
+const G2=[
+['根據上文，下列選項何者敘述正確？',['因為罹恙蟲病的病患抵抗力較弱，容易併發Ａ型流行感冒','臺灣冬天是恙蟲病例數最高峰，外出野遊最好穿長袖衣褲','如果遭恙蟲咬傷感染立克次體，容易被誤診，故必須隔離','恙蟲病潛伏期可能長達14天左右，病情嚴重者應住院治療'],3,2,'(D)潛伏期約一到兩週。(A)只是症狀類似；(B)高峰為六、七月；(C)不會人傳人，不須隔離。'],
+['根據上文，作者運用了何種寫作手法？',['引用歷史典故來說明生活知識','透過描寫景物來抒發內心情感','引用外國新聞來報導醫學資訊','運用神話故事來闡揚抽象哲理'],0,2,'引用《戰國策》趙威后問「無恙」的典故，說明「恙」「恙蟲病」等知識。'],
+['上文提及《戰國策‧齊策四》，關於此處標點符號的使用，何者錯誤？',['標點符號《 》是專名號','《戰國策‧齊策四》的「‧」是間隔號','《戰國策‧齊策四》可以寫成 戰國策‧齊策四','《戰國策》是一本書，「齊策四」是此書的其中一篇內容'],0,2,'(A)《 》是書名號，不是專名號（專名號是底線）。']];
+
+let sc={mc:0,z:0,n:0};
+function upd(){sMC.textContent=sc.mc;sZ.textContent=sc.z;sN.textContent=sc.n;sAll.textContent=sc.mc+sc.z+sc.n}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function mkMC(box,list,label){
+ list.forEach((q,i)=>{
+  const c=document.createElement('div');c.className='card';
+  c.innerHTML=`<div class="q"><span class="n">${label(i)}</span>${esc(q[0]).replace(/\n/g,'<br>')} <span class="note">（${q[3]}分）</span></div><div class="opts"></div><div class="exp"></div>`;
+  const o=c.querySelector('.opts'),e=c.querySelector('.exp');
+  q[1].forEach((t,k)=>{
+   const b=document.createElement('button');b.className='opt';b.textContent=`(${L[k]}) ${t}`;
+   b.onclick=()=>{
+    o.querySelectorAll('button').forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add('ok')});
+    if(k===q[2])sc.mc+=q[3];else b.classList.add('bad');
+    e.innerHTML=`<b>${k===q[2]?'✔ 答對了':'✘ 答錯了'}｜正確答案：(${L[q[2]]})</b><br>${esc(q[4])}`;e.classList.add('show');upd();
+   };o.appendChild(b);
+  });box.appendChild(c);
+ });
+}
+mkMC(mcbox,MC,i=>(i+1)+'.');
+mkMC(g1,G1,i=>'題組'+(i+1)+'.');
+mkMC(g2,G2,i=>'題組'+(i+3)+'.');
+// 國字注音
+const norm=s=>s.replace(/\s/g,'').replace(/ˉ/g,'');
+Z.forEach((q,i)=>{
+ const d=document.createElement('div');
+ d.innerHTML=`<div>${i+1}. ${q[0]}：</div><div class="row"><input type="text" class="z" placeholder="${q[2]==='w'?'寫出國字':'寫出注音'}"><button class="btn">對答案</button></div><div class="res"></div>`;
+ const inp=d.querySelector('input'),b=d.querySelector('button'),r=d.querySelector('.res');
+ b.onclick=()=>{
+  if(b.disabled)return;b.disabled=inp.disabled=true;
+  const ok=norm(inp.value)===norm(q[1]);
+  r.className='res '+(ok?'ok':'bad');r.textContent=ok?'✔ 正確（+1）':'✘ 答案：'+q[1];
+  if(ok){sc.z++;upd()}
+ };
+ inp.addEventListener('keydown',e=>{if(e.key==='Enter')b.click()});
+ zbox.appendChild(d);
+});
+// 注釋
+N.forEach((q,i)=>{
+ const c=document.createElement('div');c.className='card';
+ c.innerHTML=`<div class="q"><span class="n">${i+1}.</span>${q[0]}</div><textarea rows="1" placeholder="寫下你的解釋"></textarea><div class="row" style="margin-top:8px"><button class="btn show">看參考答案</button></div><div class="exp"></div>`;
+ const e=c.querySelector('.exp'),b=c.querySelector('.show');
+ b.onclick=()=>{
+  b.disabled=true;
+  e.innerHTML=`<b>參考答案：</b>${q[1]}<div class="row" style="margin-top:8px">自評：<button class="btn alt" data-p="2">2分 全對</button><button class="btn alt" data-p="1">1分 錯一字</button><button class="btn alt" data-p="0">0分</button></div>`;
+  e.classList.add('show');
+  e.querySelectorAll('[data-p]').forEach(x=>x.onclick=()=>{
+   sc.n+=+x.dataset.p;e.querySelectorAll('[data-p]').forEach(y=>y.disabled=true);x.style.background='var(--accent)';upd();
+  });
+ };
+ nbox.appendChild(c);
+});
+</script>
+</body>
+</html>
