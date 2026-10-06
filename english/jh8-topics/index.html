@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>國二上第一次段考 考點分類練習</title>
+<style>
+:root{--main:#1d5c63;--main2:#2f8f83;--accent:#f2a541;--bg:#f6f4ef;--card:#fff;--ink:#23303f;--muted:#6b7686;--line:#e3e0d8;--ok:#2e9e6b;--okbg:#e3f5ec;--bad:#d9534f;--badbg:#fbe7e6;--hi:#fff4d6}
+*{box-sizing:border-box}
+html{font-size:18px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,-apple-system,sans-serif;line-height:1.7}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(135deg,#163f45,#2f8f83 60%,#f2a541 140%);color:#fff;padding:30px 0 22px}
+header h1{margin:0 0 4px;font-size:1.6rem}
+header p{margin:0;opacity:.92;font-size:1rem}
+header a{color:#fff;font-size:1rem}
+.bar{position:sticky;top:0;z-index:10;background:rgba(246,244,239,.97);border-bottom:1px solid var(--line);padding:8px 0}
+.bar .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bar b{font-size:1rem}
+.bar button{font:inherit;font-size:1rem;border:0;border-radius:99px;padding:4px 14px;background:var(--accent);color:#3a2a00;cursor:pointer}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 0 2px;-webkit-overflow-scrolling:touch}
+.chips a{flex:none;font-size:1rem;text-decoration:none;color:var(--main);background:#fff;border:2px solid var(--main2);border-radius:99px;padding:0 12px}
+.prog{height:6px;background:var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--main2);transition:width .2s}
+h2.sec{margin:36px 0 4px;color:var(--main);font-size:1.25rem;border-left:6px solid var(--accent);padding-left:10px;scroll-margin-top:110px}
+.sub{color:var(--muted);font-size:1rem;margin:0 0 10px}
+.tip{background:#eef6f5;border-radius:10px;padding:8px 14px;font-size:1rem;margin:8px 0}
+.passage{background:var(--hi);border-left:5px solid var(--accent);border-radius:10px;padding:12px 16px;margin:14px 0 6px;font-size:1rem}
+.passage h4{margin:0 0 6px}
+.passage p{margin:0 0 8px}
+.q{background:var(--card);border-radius:14px;box-shadow:0 4px 18px rgba(30,45,70,.08);padding:14px 16px;margin:12px 0}
+.q .t{font-weight:600;margin-bottom:8px}
+.src{display:inline-block;font-size:.8rem;background:#e9efe9;color:var(--main);border-radius:6px;padding:0 8px;margin-right:6px;font-weight:600;vertical-align:1px}
+.opt{display:block;width:100%;text-align:left;font:inherit;background:#fafaf7;border:2px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.opt.done{cursor:default}
+.exp{display:none;margin-top:8px;background:#eef6f5;border-radius:10px;padding:10px 14px;font-size:1rem}
+.exp.show{display:block}
+.exp b.h{color:var(--main)}
+.fill input,.fill textarea{font:inherit;width:100%;border:2px solid var(--line);border-radius:10px;padding:6px 10px;margin:6px 0}
+.rev,.play{font:inherit;font-size:1rem;border:2px solid var(--main);background:#fff;color:var(--main);border-radius:99px;padding:4px 14px;cursor:pointer;margin-right:6px}
+.play{background:var(--main);color:#fff}
+.ans{display:none;margin-top:8px;background:var(--okbg);border-radius:10px;padding:8px 14px;font-size:1rem}
+.ans.show{display:block}
+.script{display:none;margin-top:8px;color:var(--muted);font-size:1rem;white-space:pre-line}
+.script.show{display:block}
+#result{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;align-items:center;justify-content:center;padding:16px}
+#result.show{display:flex}
+#result .card{background:#fff;border-radius:18px;padding:24px;max-width:440px;width:100%;text-align:center}
+#result .score{font-size:3rem;font-weight:900;color:var(--main)}
+#result table{width:100%;font-size:1rem;margin:10px 0;border-collapse:collapse}
+#result td{padding:2px 6px;border-bottom:1px solid var(--line);text-align:left}
+#result td:last-child{text-align:right}
+.btn,.submit{font:inherit;border:0;border-radius:99px;cursor:pointer;background:var(--main);color:#fff;padding:6px 18px;font-size:1rem}
+.submit{display:block;margin:30px auto 60px;padding:12px 32px;font-size:1.1rem;background:var(--accent);color:#3a2a00;font-weight:700}
+@media print{.bar,.submit,.rev,.play{display:none}.exp,.ans{display:block}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a href="../">← 回英文科</a>
+<h1>國二上第一次段考　考點分類練習</h1>
+<p>南一版 Book 3 L1～R1 ‧ 把五權（台中）、復興（台南）、林園（高雄）三校段考題拆開，依考點重新編排，每題標示來源</p>
+</div></header>
+<div class="bar"><div class="wrap">
+<div class="row"><b id="cnt">已作答 0 / 0</b><b id="sc">答對 0</b><button id="showAll">📖 顯示全部解析</button></div>
+<div class="chips" id="chips"></div>
+</div></div>
+<div class="prog"><i id="pg"></i></div>
+<main class="wrap" id="app"></main>
+<div id="result"><div class="card">
+<div>選擇題答對題數</div><div class="score" id="rs">0</div><table id="rt"></table>
+<p><button class="btn" onclick="document.getElementById('result').classList.remove('show')">繼續檢討</button>
+<button class="btn" style="background:var(--muted)" onclick="location.reload()">重新作答</button></p>
+</div></div>
+
+<script>
+const WQ="五權",FX="復興",LY="林園";
+const m=(src,n,q,o,a,e)=>({t:'mc',src,n,q,o,a:"ABCD".indexOf(a),e});
+const r=(src,n,q,ans,e,ta)=>({t:'rv',src,n,q,ans,e,ta});
+const ls=(src,n,script,q,o,a,e)=>({t:'ls',src,n,script,q,o,a:"ABCD".indexOf(a),e});
+const P=h=>({t:'p',h});
+
+const CATS=[
+{id:'be',title:'① 過去式 be 動詞（was / were、there was / were）',sub:'看到 yesterday、last…、ago、then 等過去時間，be 動詞要用 was / were；主詞是 I / he / she / it / 單數 用 was，you / we / they / 複數 用 were。',items:[
+m(WQ,5,"Alice: Was your son a doctor ______? Peter: Yes, he was. He enjoyed being a doctor.",["now","tomorrow","ago","then"],"D","問句是過去式 Was，要搭配過去的時間副詞。<b>then＝那時候</b>。ago 前面要有時間長度（two years ago），不能單獨放句尾。"),
+m(WQ,2,"The weather ______ cloudy ten minutes ago, but it is sunny now.",["was","were","is","are"],"A","<b>ten minutes ago</b> 是過去時間；weather 不可數、視為單數，用 <b>was</b>。"),
+m(FX,1,"A: Who ______ with you in the park? B: My friends, Shoyo and Kenma, were.",["is","are","was","were"],"C","<b>疑問詞 Who 當主詞時視為單數</b>，過去式用 was。答句用 were 是因為回答的人是複數（Shoyo and Kenma）。"),
+m(FX,2,"______ your trip to Mexico last month interesting?",["How was","Were","How is","Was"],"D","主詞 your trip 是單數、last month 是過去，且已有形容詞 interesting，所以是 <b>Was</b> 開頭的 yes/no 問句。(A) How was 後面不能再接形容詞。"),
+m(WQ,16,"Alex: ______ you at Emma’s house this morning? Andy: Yes, I was with her this morning.",["Do","Did","Were","Was"],"C","答句 I was with her 是 be 動詞過去式，所以問句用 <b>Were you …</b>（you 搭配 were）。"),
+m(WQ,13,"There ______ ten books on the desk yesterday, but now there isn’t any.",["are","is","were","was"],"C","yesterday 是過去；ten books 是複數，所以用 <b>There were</b>。"),
+m(FX,12,"A: How many plates of chicken ______ there on the table? B: There ______ one.",["were ; were","was ; was","were ; was","was ; were"],"C","How many plates 是複數 → <b>were</b>；回答 one（一盤）是單數 → <b>was</b>。"),
+m(LY,8,"There ______ many things in the bedroom yesterday. But there ______ anything in the bedroom today.",["are; aren’t","were; isn’t","are; wasn’t","were; weren’t"],"B","yesterday → many things 用 <b>were</b>；today 是現在，anything 前面否定用 <b>isn’t</b>（there isn’t anything）。"),
+m(FX,10,"My English teacher gave us lots of homework. I ______ like her before. But now I ______.",["wasn’t ; am","didn’t ; do","don’t ; do","am not ; am"],"B","before 是過去 → <b>didn’t like</b>（一般動詞用 did 否定）；but now 是現在 → <b>do（like her）</b>。(A) wasn’t like 錯，like 是一般動詞，不能搭配 be 動詞。"),
+]},
+{id:'v',title:'② 一般動詞過去式（肯定／否定／問句／答句）',sub:'肯定句動詞變過去式；否定與疑問句用 did / didn’t + 原形動詞；簡答用 Yes, S did. / No, S didn’t.',items:[
+m(WQ,3,"The man didn’t ______ to work today because his parents ______ sick.",["went; was","go; were","go; was","went; were"],"B","<b>didn’t 後面接原形動詞 go</b>；because 子句主詞 parents 是複數，用 <b>were</b>。"),
+m(WQ,4,"My mom cooked dinner and then ______ songs in front of us.",["to sing","singing","sang","sing"],"C","and 連接兩個對等的動作：cooked … and then <b>sang</b>，時態一致用過去式。"),
+m(WQ,6,"Tiffany picked up the leaf, but Kathy ______.",["did","don’t","didn’t","doesn’t"],"C","前半句是過去式肯定，but 表轉折，後半句用<b>過去式否定 didn’t</b>（＝didn’t pick up the leaf）。"),
+m(WQ,7,"Cathy: Did Mark buy flowers for me this morning? Andy: Yes, he ______.",["were","was","didn’t","did"],"D","Did 開頭的問句，肯定回答用 <b>Yes, he did.</b>；Yes 後面不能接 didn’t。"),
+m(WQ,12,"Lisa and I ______ shopping last weekend, but Bob ______.",["went; did","goes; did","go; didn’t","went; didn’t"],"D","last weekend → <b>went</b>；but 轉折為否定 → <b>didn’t</b>（＝didn’t go shopping）。"),
+m(WQ,1,"Cindy: By the way, ______ you about my birthday? Bob: My daughter did.",["what did you tell","what do you tell","who did you tell","who told"],"D","Bob 答「My daughter did.」＝女兒告訴了他，所以問「誰告訴你」。<b>who 當主詞，直接接過去式 told</b>，不用 did。"),
+m(WQ,11,"Harry: Who prepared these birthday gifts? Sam: My mom ______. She ______ my favorite toys for me.",["did; buy","didn’t; bought","did; bought","didn’t; buy"],"C","第一格是代替 prepared 的肯定回答 <b>did</b>；第二格是過去式事實，用 <b>bought</b>。"),
+m(WQ,14,"The bad guy ______ too many people, so the police ______ him and took him to the police station.",["hit; caught","hit; catch","hitting; caught","hitting; catch"],"A","兩個動詞都在過去：hit 的過去式仍是 <b>hit</b>，catch 的過去式是 <b>caught</b>。"),
+m(WQ,15,"Did you go to the shopping mall ______ afternoon? I didn’t see you.",["yesterday","last","before","then"],"A","空格後是 afternoon，<b>yesterday afternoon（昨天下午）</b>。last 用在 last night / last week，不會說 last afternoon。"),
+m(WQ,17,"Nancy: What happened to you last night? Zoe: I ______ with my little brother.",["fighting","didn’t fight","fight","fought"],"D","last night 為過去，回答「發生什麼事」要用肯定的過去式 <b>fought</b>。"),
+m(FX,5,"Thank you for inviting me to the party last night. ______",["It is fun.","It had fun.","I was fun.","I had fun."],"D","<b>have fun＝玩得開心</b>，主詞是人 I，過去式 had。It is fun / I was fun 的主詞或時態都不對。"),
+m(FX,6,"A: Who ______ this morning? B: She talked to Olaf.",["talked to Elsa","talk to Elsa","did Elsa talk to","had a talk"],"C","答句 She talked to Olaf，所以問的是「Elsa 跟誰說話」：<b>Who did Elsa talk to?</b>（who 當受詞，用 did + 原形）。"),
+m(FX,7,"Out of anger, Woody ______ out and hit Buzz on his nose.",["cry","cried","cryed","cries"],"B","hit 是過去式，所以這句也用過去式。<b>cry → cried</b>（子音 + y，去 y 加 ied）。"),
+m(FX,8,"They ______ every evening last summer.",["was rain","have rain","was rainy","had rain"],"D","「下雨」可以說 <b>have rain</b>；last summer 是過去 → had rain。主詞 They 是複數，(A)(C) 的 was 也不對。"),
+m(LY,5,"Tommy: Didn’t you play baseball with your friends yesterday morning? Cindy: ______.",["Yes, I was late for the baseball class.","Yes, I did. It was really fun.","No, I didn’t. But I played baseball with them.","No, I don’t play baseball with my friends."],"B","問句 Didn’t you play …? 回答要用 did / didn’t。(C) 前後矛盾（沒打卻又打了）；(D) 時態用成現在式。(B) 語意與時態都合。"),
+m(FX,15,"______ Mr. Miya didn’t see the car coming ______ he was playing with his phone then.",["Because ; ,so","× ; ,so","× ; because","Because ; ,×"],"C","前面是結果、後面是原因，所以第一格不填（×），第二格用 <b>because</b>。（Because … , so 不能同時用。）"),
+]},
+{id:'conj',title:'③ 連接詞：because / because of / so / but',sub:'because ＋ 句子（原因）；because of ＋ 名詞；so（所以）引出結果；but 表轉折。because 與 so 不能同時出現。',items:[
+m(WQ,8,"Because David was hungry, ______ he ate two bowls of rice.",["X","when","but","so"],"A","有 Because 開頭的子句，<b>主要子句前不能再加 so</b>，所以空格不填（X）。"),
+m(WQ,9,"Judy: ______ did you go to cram school? Tim: I went there ______ I didn’t pass the English test.",["Why/,so","Why/ because","Where/, but","What/, so"],"B","問原因用 <b>Why</b>；回答原因用 <b>because</b>（因為我英文考試沒通過）。"),
+m(WQ,10,"Amy didn’t want to be late for school, ______ she got up early this morning.",["X","but","because","so"],"D","前句是原因，後句是結果（早起），用 <b>so（所以）</b>。"),
+m(FX,13,"Dear Juliet: My world is a better place ______ you, ______ please don’t leave me!",["because of ; so","because ; but","because of ; but","because ; and"],"A","because of ＋ 名詞/代名詞（you）；後面是「請別離開我」，是前面原因導出的結果，用 <b>so</b>。"),
+m(LY,7,"I don’t have money with me ______.",["because I bought a new pair of shoes.","because I played computer games tonight.","so I hit the animals on the farm.","so I finished my homework this afternoon."],"A","沒有帶錢的<b>原因</b>是買了新鞋。其他選項的前後句沒有因果關係。"),
+]},
+{id:'phr',title:'④ 單字、片語與情境應答',sub:'getting married / take action / become … 這幾課的核心字詞，以及對話情境題。',items:[
+m(WQ,18,"David: Bullying is really like a nightmare. Edward: Yes, we must stop it and ______ now.",["cry for us","pass away","do something","run away"],"C","前面說「我們必須阻止它」，所以接 <b>do something（採取行動）</b>。pass away 是過世、run away 是逃跑，語意不合。"),
+m(LY,1,"Natasha ______ in 2017.",["checked in","moved in","passed away","got married"],"D","in 2017 是過去時間點，<b>got married（結婚）</b>是可以發生在某一年的事件；checked in（登記入住）、moved in（搬進來）需要接地點，passed away 是過世，與 in 2017 搭配最自然的是結婚（官方答案 D）。"),
+m(LY,2,"We eat three ______ a day. They are breakfast, lunch, and dinner.",["candles","meals","candies","flowers"],"B","早餐、午餐、晚餐都是一餐 → <b>meals</b>。"),
+m(LY,3,"In 1952, Elizabeth’s father died, so she ______ Queen Elizabeth II of the UK.",["planted","finished","broke","became"],"D","父親過世所以她「成為」女王：<b>become → became</b>。"),
+m(LY,4,"People threw trash into the river. We ______ take actions to stop this.",["must","ever","well","later"],"A","<b>must ＋ 原形動詞</b>＝必須。take action＝採取行動。"),
+m(LY,6,"Sharon: I studied English for three hours last night! Jack: ______",["Right. I studied very hard.","Sure. I love English very much.","Wow. You are so hard-working.","Yes, I watched it last night."],"C","對方說自己念了三小時，自然的回應是稱讚：<b>You are so hard-working.</b>"),
+m(FX,16,"Which is correct?",["I wrote some words on the Threads just now.","I always finish do my homework on time.","Come here. I have special something for you.","We visited Taiwan two days before."],"A","(B) finish 後面要接 V-ing（finish doing）；(C) 形容詞放在 something 後面：something special；(D) 兩天前是 two days <b>ago</b>，before 不能這樣用。"),
+]},
+{id:'gram',title:'⑤ 其他文法：數量詞、助動詞、祈使句',sub:'形容詞/數量詞/情態助動詞的小地雷。',items:[
+m(FX,3,"Look at this picture. My daughter was a ______ baby at that time. She was so cute.",["one-month-old","one month old","two-months-old","two month old"],"A","<b>數字-單位-形容詞 以連字號連接時，單位用單數</b>：one-month-old baby。"),
+m(FX,4,"According to the news report, the war between Russia and Ukraine made ______ people homeless.",["five millions of","five million of","million of","millions of"],"D","<b>millions of ＝ 數百萬的</b>（不確定數量，million 要加 s + of）；確定數字用 five million people（後面不加 of）。"),
+m(FX,9,"A: My pet dog died this morning. B: I’m sorry. You ______ sad right now.",["were","must be","must","be"],"B","<b>must be ＋ 形容詞＝一定是</b>（表示推測）。寵物剛過世，所以一定很難過。"),
+m(FX,11,"Coco, just ______ our faces and ______ the special festival.",["paint ; celebrated","paint ; celebrate","painting ; celebrate","painted ; celebrate"],"B","<b>just ＋ 原形動詞</b>（祈使句），兩個動詞並列都用原形：paint … and celebrate。"),
+m(FX,14,"A: Do you want ______ cookies? B: Yes, and I also want ______ juice.",["a little ; a few","a few ; a little","a few ; a few","a little ; a little"],"B","cookies 是可數複數 → <b>a few</b>；juice 是不可數 → <b>a little</b>。"),
+]},
+{id:'cloze',title:'⑥ 克漏字',sub:'先看整篇的主題，再填空。',items:[
+P('<h4>Child marriage（五權）</h4><p>A ten-year-old girl from Niger, Geeta, got married <b>(19)</b> a thirty-year-old man. Geeta became a mother <b>(20)</b> eleven. She couldn’t go to school <b>(21)</b> her baby needed her.</p><p>Tanya, from Yemen, lived a miserable (悲慘的) life. Her husband <b>(22)</b> her very often. She was <b>(23)</b> and couldn’t sleep at night. The marriage was like a <b>(24)</b>. Child marriage is happening in many countries. Children like them need help. Let’s <b>(25)</b> now.</p>'),
+m(WQ,19,"(19) got married ____ a thirty-year-old man",["to","of","from","in"],"A","<b>get married to ＋ 人</b>＝和某人結婚。"),
+m(WQ,20,"(20) became a mother ____ eleven",["about","of","at","to"],"C","<b>at ＋ 年齡</b>：在幾歲時。"),
+m(WQ,21,"(21) She couldn’t go to school ____ her baby needed her.",["because","so","but","or"],"A","前面是結果（不能上學），後面是原因（寶寶需要她），用 <b>because</b>。"),
+m(WQ,22,"(22) Her husband ____ her very often.",["kissed","won","bought","hit"],"D","上下文是悲慘的生活，所以是丈夫常常<b>打（hit）</b>她。"),
+m(WQ,23,"(23) She was ____ and couldn’t sleep at night.",["dead","curious","scared","terrible"],"C","害怕到睡不著：<b>scared（害怕的）</b>。"),
+m(WQ,24,"(24) The marriage was like a ____.",["pair","arm","nobody","nightmare"],"D","婚姻像<b>惡夢（nightmare）</b>。"),
+m(WQ,25,"(25) Children like them need help. Let’s ____ now.",["look after","take action","check in","check out"],"B","需要幫助兒童，所以「讓我們現在<b>採取行動</b>」。"),
+P('<h4>The rise and fall of Nathan Lang（林園）</h4><p>Actor Nathan Lang, 78 years old, died in his sleep last night in his house. Nathan Lang started his acting life in the 1970s. He was <b>(10)</b> playing Justin Maud in Young Hours. The movie made the world <b>(11)</b> him. Women wanted a husband like him; men wanted a brother like him. Forever Justin, his fans called him.</p><p>After Young Hours, Nathan Lang played a role in many big movies: Fallen, After Tonight, and Killing Jules. The last one won him a best actor award. In the 1980s, Nathan Lang lost his shine on the big screen. During this time, his movies <b>(12)</b> entered the top 20 list. Nathan Lang’s last movie was Dreams. The movie won him two best actor awards, but <b>(13)</b></p><p>標題空格 (9)：The rise and fall on Nathan Lang in <b>(9)</b></p>'),
+m(LY,9,"(9) The rise and fall of Nathan Lang in ____",["school fair","show business","family members","marriage life"],"B","全文談演員的演藝生涯，標題是「在<b>演藝圈（show business）</b>的崛起與衰落」。"),
+m(LY,10,"(10) He was ____ playing Justin Maud.",["scared of","sweet of","busy with","famous for"],"D","<b>be famous for ＋ V-ing / 名詞</b>＝以…聞名。因為演 Justin 而出名。"),
+m(LY,11,"(11) The movie made the world ____ him.",["take actions","go crazy about","look after","dress up"],"B","接著說女人想要這樣的丈夫、男人想要這樣的兄弟，所以是全世界<b>瘋狂迷戀（go crazy about）</b>他。"),
+m(LY,12,"(12) his movies ____ entered the top 20 list.",["always","usually","often","never"],"D","前句說他在 1980 年代失去光彩（lost his shine），所以電影<b>從未（never）</b>進入前 20 名。"),
+m(LY,13,"(13) The movie won him two best actor awards, but ____",["it did not bring his fans back to the movie theater.","the actor had a lot of movies a few years ago.","it was another great win for an actor and his fans.","his fans couldn’t go to the movie because they had no money."],"A","but 表轉折：雖然得了兩座獎，但<b>卻沒有把影迷帶回戲院</b>，與前面失去光彩呼應。"),
+]},
+{id:'read',title:'⑦ 閱讀測驗',sub:'每篇文章後面是三校相關題目；先讀文章再作答。',items:[
+P('<h4>Animal Farm（復興）</h4><p>Animal Farm is a story by George Orwell, a great English writer. The animals in the story live on Mr. Jones’ farm and they all can talk. Mr. Jones treats them very badly. He takes their milk, and eggs, and he kills them for their meat. All the animals want to be free.</p><p>One day, Old Major, the smartest pig of them all, tells the other animals that they must work for themselves and should not work for the farmer. He tells them, “Four legs good, two legs bad.” The animals work together and get rid of Mr. Jones. Everyone is free and happy.</p><p>Now the pigs run the farm because they are smarter than the horses, chickens, and sheep. One pig, Napoleon, wants more and more power. He wants to run the farm just like Mr. Jones. Napoleon takes food from the farm for himself when no other animals have food to eat. They work tirelessly. However, Napoleon sleeps lazily and eats up all the food. He makes the animals build a windmill to make money for him. If any animals question Napoleon, then they will be eaten by Napoleon’s dogs. Napoleon even starts to work with people and makes a lot of money. He even starts to walk on two legs. He now says, Four legs good, two legs better. At the end of the story, the pigs are just like people. They treat the other animals as awfully as they can.</p>'),
+m(FX,"題組1","What makes Mr. Jones and Napoleon the same?",["They are both people.","They treat other animals badly.","They are rich.","They are both lazy."],"B","Mr. Jones treats them very badly；最後 Napoleon 也 treat the other animals as awfully as they can。兩者都<b>對動物很壞</b>。"),
+m(FX,"題組2","Why CAN’T the animals fight Napoleon?",["Napoleon will question them.","Napoleon is a friend of humans.","Napoleon’s dogs will eat them.","They do not have enough money."],"C","If any animals question Napoleon, then they will be eaten by Napoleon’s dogs. 動物怕被<b>狗吃掉</b>，所以不敢反抗。"),
+m(FX,"題組3","Which is true?",["The horses and chickens are smarter than the pigs.","Napoleon sleeps lazily and makes other animals work.","Napoleon makes every animal free and happy at the end.","Mr. Jones makes the animals build a windmill and work for him."],"B","Napoleon sleeps lazily … He makes the animals build a windmill。(A) 豬比較聰明；(C) 結尾不是自由快樂；(D) 蓋風車的是 Napoleon。"),
+P('<h4>School clubs in Japan（復興）</h4><p>Many students in Japan join clubs after school because junior high school only runs from 9:00 a.m. to 3:00 p.m. They have enough time to join school clubs after school. There are two kinds of clubs at school. One is about sports, and the other is about culture.</p><p>There are different kinds of practices in the sports clubs. Students can choose to play baseball, go swimming, go climbing, or learn judo. If they join a sports club, they have a chance to be a member of a school team. However, the members have to practice every day for the games. It is not easy. They need to think about it more carefully before joining sports clubs.</p><p>There are also many activities in cultural clubs. Students can go to the drama club, the chorus club, the art club, the tea tasting club, or the railway club. Members don’t have many opportunities to perform outside of their school, but they have more opportunities to perform in front of all the teachers and students at school. There is an important event every fall in Japan. It is called “Cultural Festival.” Students can show their skills to their family or people on this special day. It is a great time for everyone.</p>'),
+m(FX,"題組4","What does the reading mainly talk about?",["Students are very busy at school.","Not all clubs are popular with students.","There are different school clubs in Japan.","Students have a lot of time to play at school."],"C","全文介紹日本學校的<b>運動社團與文化社團</b>，主旨是各種社團。"),
+m(FX,"題組5","When do most high schools in Japan start and end their day?",["They start at 9:00 a.m. and end at 3:00 p.m.","They start at 9:00 a.m. and end at 4:00 p.m.","They start at 8:00 a.m. and end at 4:00 p.m.","They start at 8:30 a.m. and end at 3:30 p.m."],"A","文章第一句：junior high school only runs from <b>9:00 a.m. to 3:00 p.m.</b>（依官方答案選 A）。"),
+m(FX,"題組6","Which club is a cultural club?（A 棒球投手　B 柔道　C 游泳　D 兩人圍著桌子畫畫）",["(A) 棒球投手圖","(B) 柔道圖","(C) 游泳圖","(D) 兩人圍著桌子畫畫圖"],"D","棒球、柔道、游泳是運動社團；圍著桌子畫畫是 <b>art club（美術社）</b>，屬於文化社團。"),
+m(FX,"題組7","Which is true?",["School time is short in Japan.","Students are not happy in cultural clubs.","Only teachers can join the shows on Cultural Festival.","Before students join the sports clubs, they have to ask their teacher first."],"A","學校只上 9:00 到 3:00，時間短，所以學生有時間參加社團。其他選項文章都沒有說。"),
+P('<h4>Malala Yousafzai（復興、林園）</h4><p>There is a special woman from Pakistan, and her name is Malala Yousafzai. In her childhood, she loved school and always enjoyed her classes. At that same time in Pakistan, there was a group of people, the Taliban. They didn’t care about women’s education. “Women should be cooking at home and having babies. They shouldn’t go to school.” the Taliban said. They then stopped women from going to school ever again.</p><p>Malala didn’t like this, so she did something about it. She wrote about her life and women’s troubles in Pakistan. She told the world her story, and the world listened. The Taliban were very angry about what she did. In 2012, the Taliban took action; they shot her. A bullet went straight through her head. Luckily, she was sent to the UK by the Pakistan government and survived. Two years later, she won the Nobel Peace Prize. What an amazing woman!</p>'),
+m(FX,"題組8","What did the Taliban say about women?",["They should have an education.","They should write something about their life.","They should tell their troubles to the world.","They should cook for their family."],"D","“Women should be cooking at home and having babies.”＝女人應該在家<b>煮飯</b>、生小孩。"),
+m(FX,"題組9","What may be the title of this reading?",["The Taliban.","Women Should Be at Home.","A Special Woman in Pakistan.","Write Something and Get Famous."],"C","文章第一句 There is a special woman from Pakistan，全文講 Malala，所以標題是 <b>A Special Woman in Pakistan</b>。"),
+r(FX,"題組10","When did Malala win the Nobel Peace Prize?（寫出數字即可）","2014","2012 年被槍擊，<b>兩年後（Two years later）</b>得獎 → 2014。"),
+r(FX,"題組11","What did the Taliban do to Malala? Why?（英文或中文，各一分）","(1) They shot her.（他們開槍打她）　(2) They were angry about her. / Malala told the world her story.（因為他們對她生氣／她對世界說出自己的故事）","題目有兩個答案：做了什麼 ＋ 為什麼。注意 shoot 的過去式是 shot。",true),
+m(LY,14,"What do we know about Malala?",["The Taliban shot Malala’s family.","She didn’t care about women.","She liked her school life very much.","She joined the Taliban at school."],"C","She always loved her school and classes。被槍擊的是 Malala 本人，不是家人。"),
+m(LY,15,"“Women should be cooking at home and having babies. They shouldn’t go to school.” What does this mean?",["Women shouldn’t cook at home.","Women shouldn’t look after babies.","Women shouldn’t go to school.","Women shouldn’t join Taliban."],"C","題目引的最後一句 They shouldn’t go to school，意思就是 <b>Women shouldn’t go to school</b>。"),
+m(LY,16,"What may be the saying (名言) from Malala?",["There is no place like home.","When they go low, we go high.","It is not how much we have, but how much we enjoy our life.","One child, one teacher, one book, one pen can change the world."],"D","Malala 為女性受教育發聲，名言與<b>教育（teacher, book, pen）</b>有關：一個孩子、一位老師、一本書、一支筆就能改變世界。"),
+P('<h4>The Way Out 書評（林園）</h4><p><b>The Way Out</b> by Ming-da Wang　$450 → $199　Buy it now!</p><p><b>Sam Lee</b>: I couldn’t put the book down after I read it at my friend’s home. I borrowed it and read it over that night. I think it can help someone who is scared of facing family problems.</p><p><b>Candy Vigor</b>: The book saved my life. It opened a door that led me into a world of true love. I can look at the world around me with new eyes.</p><p><b>Rod Green</b>: The first part of the book really touched my heart and made me want to read on. However, I was getting bored when I came to the second part. In fact, I didn’t finish the book.</p><p><b>Vivian Lu</b>: The book helped me forget about my worries. With its easy words, people of all ages can enjoy it.</p>'),
+m(LY,17,"According to the words from readers, who doesn’t like the book?",["Sam Lee","Candy Vigor","Rod Green","Vivian Lu"],"C","Rod Green：I was getting bored … I didn’t finish the book，是唯一<b>覺得無聊、沒讀完</b>的人。"),
+m(LY,18,"Which is NOT right about the book in the reading?",["It tells a famous bookstore.","It is $199 now.","It is easy to understand.","The second part is boring."],"A","(B) $450 → $199；(C) Vivian 說 easy words；(D) Rod 說第二部分無聊。文章沒說這本書介紹書店，所以 <b>(A) 不對</b>。"),
+m(LY,19,"What can readers most likely learn from the book?",["How to be a famous writer.","How to buy a book in a bookstore.","A smart way to face work problems.","A new way of seeing the world."],"D","Candy：I can look at the world around me with new eyes。讀者最可能學到<b>用新的方式看世界</b>。"),
+P('<h4>Cinco de Mayo（林園）</h4><p>Cinco de Mayo means “May 5th” and is a celebration of Mexican culture. People celebrate it every year in Mexico and some parts of America.</p><p>The people of Mexico celebrate Cinco de Mayo with food, music, and dancing. Girls wear beautiful and colorful dresses. They also put flowers in their hair. Boys wear a sombrero, or Mexican hat.</p><p>In America, many schools teach children about Mexican culture. Children decorate Mexican flags and learn some Mexican songs and dances. They dance together, have fun, and learn about Mexico. Learning about other cultures is a fun experience for all.</p>'),
+m(LY,20,"What is the reading mainly about?",["The music and food culture in the U.S.A.","The flags, songs and dances in Mexico","The celebration of Cinco de Mayo in Mexico and parts of the USA.","The difference between Mexican and American culture."],"C","全文先講 Cinco de Mayo 是什麼，再講墨西哥和美國怎麼慶祝，主旨是 (C)。"),
+m(LY,21,"What is NOT true?",["Mexicans celebrate Cinco de Mayo with joy.","Mexicans celebrate Cinco de Mayo in autumn.","Many American children can learn Mexican culture at school.","Mexican boys celebrate Cinco de Mayo in a Mexican hat."],"B","Cinco de Mayo＝<b>5 月 5 日</b>，是春天不是秋天，所以 (B) 不對。"),
+P('<h4>Preface of Married to Food（林園）</h4><p>My mother was lousy at cooking. To her, cooking was more like an experiment. You put some of this and some of that in a pot, and you wait and see what will happen. “No experiments, no experiences.” is what she would say when her experiment did not turn out good, and I heard that a lot.</p><p>My father was a good cook, and he loved to cook, too. He often said that he got my mother to marry him with a table of delicious food, not with a beautiful ring. “A family needs only one good cook,” he said.</p><p>Now I am a cook myself. And I have my own restaurant. I learned how to cook from my father, of course. From him, I learned the art of cooking. But I did learn one thing from my mother. It’s her famous saying: “No experiments, no experiences.”</p>'),
+m(LY,22,"What does it mean when someone is lousy at something?",["They cannot do something.","They think something is good.","They gave cookies to their friends.","They don’t need something anymore."],"A","媽媽 was lousy at cooking，但爸爸才是好廚師，所以 lousy at ＝<b>做不好、不擅長</b>。"),
+m(LY,23,"What did Nick Foster learn from his mother?",["He learned the art of cooking at home.","He learned it’s bad to start a restaurant.","He learned it’s always good to give it a try.","He learned experience is good for a woman."],"C","媽媽的名言 No experiments, no experiences（不嘗試就沒有經驗），所以學到<b>多嘗試是好事</b>。"),
+m(LY,24,"What CAN’T we learn from the preface?",["Nick Foster started his own restaurant.","Nick Foster’s mother can cook delicious food.","Nick Foster learned how to cook from his father.","Nick Foster’s mother says “No experiments, no experiences.”"],"B","文章說媽媽 lousy at cooking，所以<b>不能</b>得知她會煮好吃的食物。"),
+P('<h4>Tracy’s Memory of Taitung（五權）</h4><p>Several years ago, Tracy’s parents were busy in Taichung. They were very busy, so she lived with her grandparents in Taitung.</p><p>Tracy loved Taitung so much. Her grandparents looked after her and prepared her favorite food: beef noodles. They were so delicious. Tracy’s grandpa always took her to go fishing and told her lots of interesting stories. Tracy loved these funny stories although (雖然) he often told the same ones.</p><p>Now, Tracy lives with her parents in Taichung, but she misses (想念) Taitung so much. The place is full of wonderful memories. She misses the beef noodles. She misses the old days. She misses the same old stories. She misses her grandparents. She misses them all.</p>'),
+m(WQ,26,"What do “ones” mean in the article?",["Stories.","Fishes.","Beef noodles.","Memories."],"A","文中 he often told the same <b>stories</b>；ones 指前面的 stories。"),
+m(WQ,27,"Which is true?",["Tracy lives in Taitung now.","Tracy lives in Taichung now.","Tracy didn’t eat any beef noodles.","Tracy didn’t miss her days in Taitung."],"B","Now, Tracy lives with her parents in <b>Taichung</b>。其他三項都與文章相反。"),
+P('<h4>Teenagers and AI Chatbots（五權）</h4><p>This year, more and more teenagers use AI chatbots (聊天機器人) every day. These smart tools can help students with many things. For example, when teens (青少年) have trouble with homework, they can ask an AI chatbot for help. The chatbot can make difficult ideas clear. This helps students know the answers better. Some students also use AI to practice writing and speaking English. By talking with AI, they can learn new words and make their English better.</p><p>AI chatbots can also be helpful when teens feel unhappy without friends. Talking to an AI can make them feel better, especially (尤其是) when they have no one to talk to at that time. It’s like having a helpful friend.</p><p>However (然而), there are also some problems. Some students may become lazy (懶惰的) and just copy (複製) the chatbot’s answers without thinking. This is not good for learning. Also, when teens spend (花費) too much time using AI, they have less (較少的) time to talk with people, like their family and friends.</p><p>In the end, AI chatbots can be very useful, but teenagers should learn to use them in a smart and healthy (健康的) way.</p>'),
+m(WQ,28,"How can AI chatbots help with English learning?",["They take English tests for students.","They help us to speak English well.","They teach us to cook.","They sing English songs for us."],"B","Some students also use AI to practice writing and speaking English … make their English better。"),
+m(WQ,29,"What is good about AI chatbots for teens?",["They help teens run faster.","They make teens rich.","They help teens sleep better.","They make teens feel less lonely."],"D","when they have no one to talk to … like having a helpful friend → 讓青少年<b>較不孤單</b>。"),
+m(WQ,30,"What is a problem when students copy chatbot answers?",["They become too smart.","They forget to eat.","They don’t learn well.","They have more friends."],"C","copy the chatbot’s answers without thinking. This is not good for learning。"),
+m(WQ,31,"What is the writer trying to say when we use AI?",["Use it smartly.","Never use it.","Use it only for games.","Ask AI to do all their work."],"A","結論：teenagers should learn to use them in a smart and healthy way。"),
+]},
+{id:'listen',title:'⑧ 聽力（按 ▶ 播放朗讀）',sub:'用瀏覽器的語音朗讀題目稿，可重複播放。答完再按「看稿」。基本問答只聽到一句話，請選最合適的回應。',items:[
+ls(FX,5,"How did you get such a good grade on the English test this morning?","(基本問答)",["No, I don’t have English class today.","I studied for three hours yesterday.","I don’t get good grades anymore."],"B","問「怎麼考這麼好」，回答 <b>I studied for three hours yesterday</b>（念了三小時）。"),
+ls(FX,6,"Did you like ghost stories when you were young?","(基本問答)",["Yes, and I still do.","Yes, so don’t tell me one.","I liked love stories many years ago."],"A","問你以前喜歡鬼故事嗎，A 答「喜歡，而且現在還喜歡」。B 語意矛盾；C 答非所問（love stories）。"),
+ls(FX,7,"Why don’t Mr. and Mrs. Lin have a baby?","(基本問答)",["Mr. Wang called his wife baby.","I don’t know.","Their first baby is two years old."],"B","Why 問原因，<b>I don’t know</b> 是合理回答。其他兩個選項與問題無關或相矛盾。"),
+ls(FX,8,"Was today’s English test easy for you?","(基本問答)",["Yes, math is always easy for me.","No, so I don’t study English often.","Yes, I did pretty well on it."],"C","Was … easy 的答案要用 Yes, it was / No, it wasn’t 類型；<b>I did pretty well on it</b> 表示考得不錯，語意合理。"),
+ls(FX,9,"W: Did you watch the basketball game last night?\nM: What basketball game?\nW: The NBA game. The Lakers and the Warriors played last night.\nM: Oh, no! I worked all night. I didn’t watch it. Who was the winner?\nW: The Lakers. It was really awesome.","Q: What do we know from the dialogue?",["The man worked last night.","The man watched basketball game with the woman.","The woman didn’t watch basketball game last night."],"A","男生說 I worked all night. I didn’t watch it。所以是<b>男生昨晚工作</b>。"),
+ls(FX,10,"W: How is the weather in Taipei?\nM: Warm and sunny.\nW: Is it always warm and sunny in Taipei?\nM: Not always, it rained last week. The sun didn’t come out all week.\nW: Wow, was it very cold?\nM: Not really, it was cool but not cold.","Q: How was the weather in Taipei last week?",["It was rainy.","It was cold.","It was sunny."],"A","男生說 it rained last week，且 not cold、sun didn’t come out → <b>rainy</b>。"),
+ls(FX,11,"W: Nick, I just bought a car last week.\nM: Wow, that’s great. Can I see your new car?\nW: Well, it’s not a new car. That’s Jimmy’s old car.\nM: Oh, I remember that car. It’s a big blue car.\nW: Right. It’s that one.","Q: What is true about the woman’s car?",["The car was not very big.","It was Jimmy’s old car.","Nick sold the car last week."],"B","女生說 That’s <b>Jimmy’s old car</b>。車子是 big blue car，所以 A 錯；是女生買的，不是 Nick 賣的。"),
+ls(FX,12,"G: Hey, Ian, how about going to Sun Moon Lake with us this Friday?\nB: Sorry. I went there last Saturday with Bob.\nG: How did you get there?\nB: We met at Taipei train station. Then we took the train from Taipei to Taichung. And then we took a bus to Sun Moon Lake.\nG: Is Sun Moon Lake near the bus station?\nB: Yes, it is.","Q: Why doesn’t Ian go to Sun Moon Lake this Friday?",["Because he got there by bus.","Because he met Bob at the train station.","Because he went there last Saturday."],"C","Ian 說 I went there last Saturday，所以這週五不用再去。"),
+ls(LY,15,"What did you do last night?","(基本問答)",["No, I didn’t.","We are reading.","I watched a movie."],"C","What did you do 問做了什麼事，用過去式回答 <b>I watched a movie</b>。(A) 是 yes/no 的答法；(B) 是現在進行式。"),
+ls(LY,16,"Was your mother a teacher ten years ago?","(基本問答)",["Yes, she was an actor.","No, she wasn’t twenty.","No, she was a nurse."],"C","問 Was … a teacher? 回答 No, she was a nurse（不是，她當時是護士）。A 是 Yes 但接了另一個職業，語意矛盾。"),
+ls(LY,17,"My husband bought some pink flowers yesterday just because I like pink flowers.","(基本問答)",["That’s so sweet.","When did you buy it?","Because he was busy."],"A","這是一句敘述，不是問句；老公只因為我喜歡就買花，合理回應是 <b>That’s so sweet（好貼心）</b>。"),
+ls(LY,18,"Father’s Day is next Wednesday.","(基本問答)",["My dad finally sold the house.","Really? Let’s buy a pair of shoes for dad.","Dad went to see a doctor last Wednesday."],"B","聽到父親節快到了，自然回應是一起買禮物：<b>Let’s buy a pair of shoes for dad.</b>"),
+ls(LY,19,"Why didn’t you eat lunch?","(基本問答)",["He didn’t see me.","I wasn’t hungry then.","I jogged this morning."],"B","Why 問原因，回答 <b>I wasn’t hungry then</b>（我那時不餓）。"),
+ls(LY,20,"Where did you plant the tree?","(基本問答)",["My parents did.","I can’t remember.","Just some flowers."],"B","Where 問地點。三個選項中只有 <b>I can’t remember</b> 與問題相合（A 回答了 who，C 回答了 what）。"),
+ls(LY,21,"Let’s take action and help this poor woman.","(基本問答)",["I was also poor then.","Sure. What can we do?","Why don’t you like her?"],"B","對方提議採取行動幫助人，答 <b>Sure. What can we do?</b> 最自然。"),
+ls(LY,22,"G: Wow, there is a beautiful garden behind your house.\nB: Thank you! Look at this. This is my favorite flower. I like its pink color.\nG: It’s beautiful, but I like this yellow one more. Can I visit your small garden again?\nB: Sure. And I can plant some more yellow flowers for you.\nG: Really? Thank you.","Q: What do we know from the dialogue?",["The girl likes the garden very much.","There are some blue flowers in the garden.","The girl can plant some flowers for the boy."],"A","女生說 Wow … beautiful 並想再來參觀，表示<b>很喜歡這座花園</b>。要種花的是男生；花的顏色是粉色和黃色。"),
+ls(LY,23,"M: Hi, Maggie. I didn’t see you at the party last night. Where did you go?\nW: Jenny and I visited our math teacher, Ms. Chen, last night.\nM: What did you do there?\nW: We asked about some math homework and then just talked about school. We had a lot of fun.\nM: Great. Well, we had a lot of fun at the party, too. Let’s invite Ms. Chen to the party next time.\nW: No problem.","Q: What did Maggie do last night?",["She visited her teacher.","She went to the party with Jenny.","She invited Ms. Chen to the party."],"A","Jenny and I visited our math teacher → <b>她去拜訪老師</b>。沒有去派對，邀請是下次的事。"),
+ls(LY,24,"B: Mary, is this your pencil?\nG: Yes! I just bought it yesterday. Where did you find it?\nB: I found it under my chair.\nG: Thank you so much, Peter!","Q: What do we know from the dialogue?",["The boy bought the pencil.","The boy used the girl’s pencil.","The boy found the girl’s pencil."],"C","男生說 I found it under my chair，是他<b>找到</b>女生的鉛筆。"),
+ls(LY,25,"W: Terry, how was your weekend? Did you go to the party?\nM: No, I didn’t.\nW: What happened?\nM: My mom and I were at my grandpa’s house on Sunday. He just passed away.\nW: Oh no. I am sorry.","Q: What do we know from the dialogue?",["Terry’s grandpa passed away.","Terry and his mom were at a party on Sunday.","The woman was at her grandpa’s house on Sunday."],"A","He just passed away＝爺爺剛過世。<b>pass away＝過世</b>。"),
+ls(LY,26,"M: What are you having, Jane?\nW: I am having beef noodles.\nM: Wow, that’s good. How are they?\nW: They are good. You can have some.\nM: No. Thank you. I just had a big bowl of chicken rice for lunch.","Q: What is true about the man?",["He is not hungry now.","He is having chicken rice now.","He just had beef noodles for lunch."],"A","男生剛吃完一大碗雞肉飯，所以現在<b>不餓</b>。吃雞肉飯是剛剛的事，不是現在進行。"),
+ls(LY,27,"B: This morning, my parents prepared some beautiful flowers and food. Then we visited Grandpa’s tomb. Many people go to visit their dead relatives on this day every year. Father told us that when he was a child, Grandpa worked hard with Grandma in the morning and looked after their five children after work. They weren’t rich, but they were happy.","Q: What special day may be today?",["Halloween.","Thanksgiving Day.","Tomb-Sweeping Day."],"C","visited Grandpa’s tomb（掃墓）、visit their dead relatives → <b>Tomb-Sweeping Day（清明節）</b>。"),
+ls(LY,28,"B: Mom, did you clean my bedroom today?\nW: Yes. You didn’t throw away your garbage. It was terrible in there.\nB: OK. By the way, did you see a yellow paper box on my desk? It’s my art homework.\nW: Your what? Oh, no! I threw it away!","Q: What is right about the dialogue?",["The boy’s room was dirty.","The boy didn’t do the homework.","The woman is collecting some paper boxes."],"A","媽媽說 It was terrible in there（裡面很糟），表示<b>房間很髒</b>。作業是被丟掉，不是沒做。"),
+ls(LY,29,"W: Nick, I just bought a car last week.\nM: Wow, that’s great. Can I see your new car?\nW: Well, it’s not a new car. That’s Jimmy’s old car.\nM: Oh, I remember that car. It’s a big blue car.\nW: Right. It’s that one.","Q: What is true about the woman’s car?",["It was Jimmy’s old car.","The car was not very big.","Nick sold the car last week."],"A","與復興第 11 題是同一段對話：That’s <b>Jimmy’s old car</b>。"),
+ls(LY,30,"M: Guess what? I met Ryan yesterday.\nW: Ryan? Didn’t he move to another country ten years ago? How is he doing?\nM: He’s doing great. He got married three years ago and has two children now.\nW: Wow! That’s amazing.","Q: What do we know about Ryan?",["He is the father of two kids.","He got married ten years ago.","He moved to another country three years ago."],"A","He got married three years ago and has two children now → <b>兩個孩子的爸爸</b>。結婚是三年前、搬到國外是十年前，B、C 的時間都對調了。"),
+]},
+];
+
+const W=[ // 非選擇題
+{id:'spell',title:'⑨ 文意字彙拼寫（看字首補完單字）',sub:'注意單複數與時態。按「看答案」核對。',items:[
+r(WQ,1,"My teacher and his wife have three c_ _ _ _ _n, two sons and one daughter.","children","child 的複數是不規則變化 → children。"),
+r(WQ,2,"What h_ _ _ _ _d to you this morning? Tell me more.","happened","happen（發生）的過去式 happened；第 17 題也有 What happened to you?"),
+r(WQ,3,"I don’t r_ _ _ _ _r her birthday. Is it in September?","remember","remember＝記得。"),
+r(WQ,4,"We like Kathy very much because she is s_ _ _t to us.","sweet","be sweet to ＋ 人＝對某人很貼心。"),
+r(WQ,5,"My little brother is s_ _ _ _d of snakes because he was hurt by them a year ago.","scared","be scared of ＝ 害怕…。"),
+r(WQ,6,"My p_ _ _ _ts are engineers. They work in the same company.","parents","parents＝父母（複數）。"),
+r(WQ,7,"I want the bottle. Could you b_y it for me?","buy","buy sth for sb＝買東西給某人。"),
+r(WQ,8,"I often c_ _ _ _e to help poor people. Helping others makes me happy.","choose","choose to V＝選擇去做。"),
+r(FX,1,"Look! Joy and Riley are j_ _ _ _ _ _ng over there! Let’s go say hi.（全對才給分）","jogging","jog 加 -ing：<b>短母音＋單一子音 → 重複子音字母</b>，jogging。"),
+r(FX,2,"We invited all our r_ _ _ _ _ _es to the wedding to celebrate together.","relatives","relative（親戚）複數 relatives。"),
+r(FX,3,"R_ _ _ _ _r to be kind to everyone, even when you’re having a bad day.","Remember","句首的祈使句，首字母大寫：<b>Remember</b> to V（記得要…）。"),
+r(FX,4,"The photos bring back all the me_ _ _ _ _es of every little thing we did.","memories","memory 的複數：<b>子音 + y → 去 y 加 ies</b>。"),
+r(FX,5,"While we are eating sweet ch_ _ _ _ _e, some kids in Africa are picking cacao beans.","chocolate","chocolate＝巧克力，不可數名詞。"),
+r(FX,6,"During the b_ _ _ _k between classes, kids go out to play on the playground.","break","the break between classes＝下課時間。"),
+r(FX,7,"The teacher ch_ _ _ _e Jasmine to be the class leader, and she was really a good one.","chose","choose 的過去式 chose。"),
+r(FX,8,"Boxer Lin Yu Ting of Taiwan won the gold medal and b_ _ _ _ _e a national hero this August.","became","become 的過去式 became。"),
+r(LY,1,"Her father sold her to a man because her family was p_ _ _r.","poor","poor＝貧窮的。"),
+r(LY,2,"I gave up the math t_ _ _t this morning because it was too difficult for me.","test","math test＝數學考試。"),
+r(LY,3,"The food in the restaurant was so t_ _ _ _ _e. I’m never going back there again!","terrible","terrible＝糟糕的。"),
+r(LY,4,"Cathy s_ _ _ _d many stories with her friends yesterday.","shared","share 的過去式 shared（e 結尾只加 d）。"),
+r(LY,5,"Millions of children under the age of eighteen get married w_ _ _ _ _t a choice.","without","<b>without a choice</b>＝沒有選擇權。"),
+r(LY,6,"Teacher Huang: What h_ _ _ _ _d in class? Students: Jason got hurt because he broke his cup.","happened","What happened？問發生什麼事。"),
+r(LY,7,"I always visit my grandfather with my p_ _ _ _ts on weekends.","parents","parents＝父母。"),
+r(LY,8,"I can r_ _ _ _ _r people’s faces, but not their names.","remember","can ＋ 原形動詞 remember。"),
+]},
+{id:'prep',title:'⑩ 介系詞填充（復興）',sub:'填入最適當的介系詞。',items:[
+r(FX,1,"My little brother is too young. He doesn’t know how to share toys ______ others.","with","<b>share sth with sb</b>＝與某人分享。"),
+r(FX,2,"The tour guide in the museum showed the paintings ______ a lively way.","in","<b>in a … way</b>＝以…的方式。"),
+r(FX,3,"My dad looks ______ me carefully though he has so much work to do.","after","<b>look after</b>＝照顧。"),
+r(FX,4,"Those elementary school students are curious ______ the lives of insects.","about","<b>be curious about</b>＝對…好奇。"),
+r(FX,5,"You can’t keep the fish on the dry ground! They can’t live ______ water!","without","沒有水魚不能活：<b>without（沒有）</b>。"),
+r(FX,6,"My dad met my mom and fell in love with her ______ the age of 31.","at","<b>at the age of ＋ 數字</b>＝在…歲時。"),
+]},
+{id:'past',title:'⑪ 不規則動詞過去式',sub:'自己寫出過去式再核對。',items:[
+r(WQ,9,"have →","had",""),r(WQ,10,"win →","won",""),r(WQ,11,"make →","made",""),r(WQ,12,"drink →","drank",""),r(WQ,13,"say →","said","say 的過去式 said，發音是 /sɛd/。"),
+r(LY,1,"am →","was","I am → I was。"),r(LY,2,"enjoy →","enjoyed","母音 + y → 直接加 ed。"),r(LY,3,"read →","read","<b>原形與過去式拼法相同</b>，過去式念 /rɛd/。"),r(LY,4,"plan →","planned","短母音＋單一子音，重複子音字母再加 ed。"),r(LY,5,"choose →","chose",""),r(LY,6,"meet →","met",""),
+]},
+{id:'write',title:'⑫ 句型改寫與翻譯',sub:'造原問句、合併句子、重組句子、中翻英。',items:[
+r(WQ,14,"They can go to the park this afternoon. They have free time.（用 Because … 合併句子）","Because they have free time, they can go to the park this afternoon.","Because ＋ 原因, 結果。because 句在前要加逗號，後面不能再用 so。",true),
+r(WQ,15,"Tim walked his dog last Sunday.（依畫線部分 last Sunday 造原問句）","What did Tim do last Sunday?","畫線部分是動作 walked his dog，所以問 <b>What did Tim do …</b>，did 後用原形。",true),
+r(LY,1,"Emma watched the movie two hours ago.（對 watched the movie 畫線，造原問句）","What did Emma do two hours ago?","問「做了什麼事」：What did S do …?",true),
+r(LY,2,"Sam didn’t go to school last Wednesday because he was sick.（對 because he was sick 畫線，造原問句）","Why didn’t Sam go to school last Wednesday?","問原因：Why ＋ 否定問句 didn’t Sam go …?",true),
+r(LY,3,"重組：basketball / , so / joined our team / loves / last year. / Ted / he","Ted loves basketball, so he joined our team last year.","主詞 Ted ＋ 現在式 loves ＋ , so ＋ 過去式 joined。",true),
+r(LY,4,"重組：at the party. / from different countries / People / and danced / dressed up in costumes","People from different countries dressed up in costumes and danced at the party.","People from different countries（主詞）＋ dressed up in costumes and danced（過去式並列）＋ at the party。",true),
+r(WQ,16,"她在 18 歲時當了媽媽並照顧自己的寶寶。","She became a mother at the age of 18 and looked after / took care of her baby.","become → became；at the age of 18；look after / take care of＝照顧。",true),
+r(WQ,17,"我祖父去年 12 月過世。那時我很難過。","My grandfather passed away / died last December. I was sad then / at that time.","pass away / die 的過去式 passed away / died；sad 前面 be 動詞用 was。",true),
+r(FX,"翻譯1","我看了一部關於死亡的電影，而且它讓我想起我的雙親。（過去式）","I watched (saw) a movie about death, and it reminded me of my parents.","remind sb of sb：讓某人想起。reminded 是過去式。",true),
+r(FX,"翻譯2","她嫁給了一個糟糕的男人，因為沒有人能夠幫她。（過去式）","She got married to (She married) a terrible man because nobody (no one) could help her.","get married to ＋ 人；could 是 can 的過去式。",true),
+r(FX,"翻譯3","我們以道具服打扮。（過去式）　We (1.)____ (2.)____ in (3.)____.","dressed up in costumes","dress up in costumes＝穿上道具服裝扮；過去式 dressed。"),
+r(FX,"翻譯4","童婚在很多貧困的國家正在發生。　(4.)____ (5.)____ is (6.)____ in many (7.)____ countries.","Child marriage is happening in many poor countries.","child marriage＝童婚；現在進行式 is happening；poor countries＝貧窮的國家。"),
+r(FX,"翻譯5","那個女士怕鬼，但是她依舊每年掃她丈夫的墳墓。　That lady is (8.)____ (9.)____ (10.)____, but she still (11.)____ the (12.)____ of her husband every year.","afraid/scared of ghosts；sweeps；tomb","be afraid / scared of ＋ 名詞；sweep the tomb＝掃墓（現在式，主詞 she 所以 sweeps）。"),
+]},
+];
+
+const app=document.getElementById('app'),chips=document.getElementById('chips');
+let answered=0,right=0,total=0;const mcEls=[];const catStat={};
+const L="ABCD";
+function upd(){
+  document.getElementById('cnt').textContent=`已作答 ${answered} / ${total}`;
+  document.getElementById('sc').textContent=`答對 ${right}`;
+  document.getElementById('pg').style.width=(total?answered/total*100:0)+'%';
+}
+function label(it){return `<span class="src">${it.src}</span>`+(it.n!==undefined?`${typeof it.n==='number'?it.n+'. ':it.n+'：'}`:'');}
+function mkMC(it,cat,withScript){
+  const d=document.createElement('div');d.className='q';
+  let top=`<div class="t">${label(it)}${it.q}</div>`;
+  if(withScript){
+    top=`<div class="t">${label(it)}${it.q}</div>`;
+  }
+  d.innerHTML=top;
+  if(withScript){
+    const bar=document.createElement('div');
+    const pb=document.createElement('button');pb.className='play';pb.textContent='▶ 播放';
+    pb.onclick=()=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(it.script.replace(/^[A-Za-z]+:\s*/mg,''));u.lang='en-US';u.rate=.85;speechSynthesis.speak(u);};
+    const sb=document.createElement('button');sb.className='rev';sb.textContent='看稿';
+    const sc=document.createElement('div');sc.className='script';sc.textContent=it.script;
+    sb.onclick=()=>sc.classList.toggle('show');
+    bar.append(pb,sb);d.append(bar,sc);
+  }
+  const ex=document.createElement('div');ex.className='exp';
+  ex.innerHTML=`<b class="h">💡 答案：(${L[it.a]}) ${it.o[it.a]}</b><br>${it.e}`;
+  it.o.forEach((t,i)=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=`(${L[i]}) ${t}`;
+    b.onclick=()=>{
+      if(d.dataset.done)return;d.dataset.done=1;
+      d.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
+      d.querySelectorAll('.opt')[it.a].classList.add('ok');
+      catStat[cat].done++;
+      if(i===it.a){right++;catStat[cat].right++;}else b.classList.add('bad');
+      ex.classList.add('show');answered++;upd();
+    };
+    d.appendChild(b);
+  });
+  d.appendChild(ex);
+  mcEls.push(()=>{ex.classList.add('show');d.querySelectorAll('.opt')[it.a].classList.add('ok');});
+  return d;
+}
+function mkRV(it){
+  const d=document.createElement('div');d.className='q fill';
+  const inp=it.ta?'<textarea rows="2" placeholder="寫下你的答案…"></textarea>':'<input placeholder="寫下你的答案…">';
+  d.innerHTML=`<div class="t">${label(it)}${it.q}</div>${inp}<button class="rev">看答案</button><div class="ans"><b>✔ ${it.ans}</b>${it.e?'<br>'+it.e:''}</div>`;
+  d.querySelector('.rev').onclick=()=>d.querySelector('.ans').classList.toggle('show');
+  return d;
+}
+function build(cats){
+  cats.forEach(c=>{
+    catStat[c.id]={title:c.title,done:0,right:0,n:0};
+    const a=document.createElement('a');a.href='#'+c.id;a.textContent=c.title.split(/[（(]/)[0];chips.appendChild(a);
+    const h=document.createElement('h2');h.className='sec';h.id=c.id;h.textContent=c.title;app.appendChild(h);
+    const p=document.createElement('p');p.className='sub';p.textContent=c.sub;app.appendChild(p);
+    c.items.forEach(it=>{
+      if(it.t==='p'){const d=document.createElement('div');d.className='passage';d.innerHTML=it.h;app.appendChild(d);}
+      else if(it.t==='mc'){catStat[c.id].n++;total++;app.appendChild(mkMC(it,c.id,false));}
+      else if(it.t==='ls'){catStat[c.id].n++;total++;app.appendChild(mkMC(it,c.id,true));}
+      else app.appendChild(mkRV(it));
+    });
+  });
+}
+build(CATS);build(W);
+document.getElementById('cnt').textContent=`已作答 0 / ${total}`;
+const sb=document.createElement('button');sb.className='submit';sb.textContent='📝 交卷 / 看各考點成績';
+sb.onclick=()=>{
+  document.getElementById('rs').textContent=`${right} / ${total}`;
+  document.getElementById('rt').innerHTML=Object.values(catStat).filter(s=>s.n).map(s=>`<tr><td>${s.title.split(/[（(]/)[0]}</td><td>${s.right} / ${s.n}</td></tr>`).join('');
+  document.getElementById('result').classList.add('show');
+};
+app.appendChild(sb);
+document.getElementById('showAll').onclick=()=>{
+  mcEls.forEach(f=>f());document.querySelectorAll('.ans').forEach(a=>a.classList.add('show'));
+};
+upd();
+</script>
+</body>
+</html>
