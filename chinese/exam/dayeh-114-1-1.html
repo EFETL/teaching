@@ -18,6 +18,12 @@ header p{margin:0;opacity:.92}
 .score .wrap{padding-bottom:0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .score b{color:var(--main);font-size:1.1rem}
 .score button:first-of-type{margin-left:auto}
+#key{display:none}#key.show{display:block}
+#key table{border-collapse:collapse;width:100%;margin:8px 0 16px;text-align:center}
+#key th,#key td{border:1px solid var(--line);padding:4px 6px}
+#key th{background:#eef2f8;color:var(--main)}
+#key td.t{text-align:left}
+@media print{#key{display:block!important}.card,h2.nk{display:none}}
 h2{margin:36px 0 6px;color:var(--main);font-size:1.25rem}
 .sub{color:var(--muted);margin:0 0 12px;font-size:.9rem}
 .card{background:var(--card);border-radius:14px;box-shadow:0 4px 18px rgba(30,45,70,.08);padding:16px 18px;margin:14px 0}
@@ -57,10 +63,12 @@ button{font:inherit;cursor:pointer}
 <span>國字注音：<b id="sZ">0</b> / 10</span>
 <span>注釋：<b id="sN">0</b> / 20</span>
 <span>總分：<b id="sAll">0</b> / 100</span>
-<button class="btn" onclick="showAll()">顯示全部答案</button>
+<button class="btn" onclick="toggleKey()">📋 答案總表</button>
+<button class="btn" style="margin-left:0" onclick="showAll()">顯示全部答案</button>
 <button class="btn alt" style="margin-left:0" onclick="location.reload()">重做一次</button>
 </div></div>
 <div class="wrap">
+<div id="key" class="card"></div>
 
 <h2>一、國字注音（10 題，每題 1 分）</h2>
 <p class="sub">1～5 題依注音寫國字；6～10 題依國字寫注音（含聲調，一聲不用標）。按「對答案」檢查。</p>
@@ -216,6 +224,22 @@ function showAll(){
  document.querySelectorAll('#zbox > div').forEach((d,i)=>{const r=d.querySelector('.res');if(!r.textContent){r.className='res bad';r.textContent='答案：'+Z[i][1]}});
  document.querySelectorAll('#nbox .show').forEach(b=>{if(!b.disabled)b.click()});
 }
+
+function grid(title,arr){let t='<tr><th>題號</th>'+arr.map((_,i)=>'<th>'+(i+1)+'</th>').join('')+'</tr><tr><th>答案</th>'+arr.map(x=>'<td>'+x+'</td>').join('')+'</tr>';return '<b>'+title+'</b><div style="overflow-x:auto"><table>'+t+'</table></div>'}
+function buildKey(){
+ const rows=(a,from)=>{const o=[];for(let i=0;i<a.length;i+=12)o.push(a.slice(i,i+12).map((x,j)=>[i+j+from,x]));return o};
+ let h='<h2 style="margin-top:0" class="nk">📋 答案總表（教師用）</h2>';
+ h+=grid('一、國字注音（每題1分）',Z.map(q=>q[1]));
+ h+='<b>二、注釋（每題2分，錯一字扣1分）</b><table>'+N.map((q,i)=>'<tr><th style="width:3em">'+(i+1)+'</th><td class="t">'+q[1]+'</td></tr>').join('')+'</table>';
+ const mc=MC.map(q=>L[q[2]]);
+ h+='<b>三、單一選擇題（1～14題每題3分；15～23題每題2分）</b>';
+ [[0,12],[12,23]].forEach(([a,b])=>{const idx=[];for(let i=a;i<b;i++)idx.push(i);h+='<div style="overflow-x:auto"><table><tr><th>題號</th>'+idx.map(i=>'<th>'+(i+1)+'</th>').join('')+'</tr><tr><th>答案</th>'+idx.map(i=>'<td>'+mc[i]+'</td>').join('')+'</tr></table></div>'});
+ h+=grid('四、題組（每題2分）',G1.concat(G2).map(q=>L[q[2]]));
+ h+='<div class="note">注音 6～10 題為補充答案；總分 100 分。</div>';
+ key.innerHTML=h;
+}
+function toggleKey(){const on=key.classList.toggle('show');if(on)key.scrollIntoView({behavior:'smooth',block:'start'})}
+buildKey();
 </script>
 </body>
 </html>
