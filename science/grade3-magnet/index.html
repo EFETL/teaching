@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>磁鐵好好玩｜三年級自然磁鐵單元</title>
+<style>
+:root{
+  --g:#6246c4; --g-d:#432e96; --g-l:#efeafc;
+  --earth:#d9822b; --earth-l:#fbefdf;
+  --water:#2f80ed; --sun:#f2b705; --food:#f2792b; --air:#8fa3b8; --red:#e5484d;
+  --bg:#f7f6fb; --card:#fff; --ink:#24302a; --muted:#5d6b63;
+  --r:22px; --sh:0 6px 20px rgba(50,30,110,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:30px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;font-size:30px;line-height:1.55;color:var(--ink);background:var(--bg);overflow-x:hidden}
+h1,h2,h3,h4,p,li,button,span,div,label,small,b,strong{font-size:30px}
+button{font-family:inherit;cursor:pointer;border:none;-webkit-tap-highlight-color:transparent;color:inherit}
+img{max-width:100%;display:block}
+
+.topbar{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;padding:10px 16px}
+.topbar .home{background:var(--g);color:#fff;border-radius:16px;padding:6px 18px;font-weight:700;white-space:nowrap}
+.topbar .now{flex:1;font-weight:700;color:var(--g-d);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .pen-btn{background:var(--earth-l);color:var(--earth);border-radius:16px;padding:6px 16px;font-weight:700;white-space:nowrap;margin-left:auto}
+
+.page{display:none;max-width:1200px;margin:0 auto;padding:24px 16px 120px}
+.page.show{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.hero img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.hero .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 28px 22px;background:linear-gradient(transparent,rgba(35,20,80,.8));color:#fff}
+.hero .cap b{display:block;font-weight:800}
+.intro{margin:40px 0 20px;color:var(--muted)}
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.lcard{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;text-align:left;display:flex;flex-direction:column;transition:transform .2s}
+.lcard:hover{transform:translateY(-4px)}
+.lcard .pic{aspect-ratio:4/3;background:var(--g-l) center/cover no-repeat}
+.lcard .t{padding:16px 20px 20px}
+.lcard .no{display:inline-block;background:var(--g);color:#fff;border-radius:999px;padding:0 16px;margin-bottom:6px}
+.lcard .nm{display:block;font-weight:800}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:36px 0 0}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:4px 18px;box-shadow:var(--sh)}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;flex:none}
+
+.lhead{display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.lhead .badge{background:var(--earth);color:#fff;border-radius:999px;padding:2px 20px;font-weight:700}
+.lhead h2{font-weight:800;color:var(--g-d)}
+.stepbar{position:sticky;top:64px;z-index:40;background:var(--bg);padding:10px 0 14px;display:flex;gap:12px;flex-wrap:wrap}
+.stepbar button{width:72px;height:72px;border-radius:50%;background:#fff;color:var(--g-d);font-weight:800;box-shadow:var(--sh);border:4px solid var(--g-l);transition:.2s}
+.stepbar button.seen{background:var(--g-l)}
+.stepbar button.on{background:var(--g);color:#fff;border-color:var(--g-d);transform:scale(1.08)}
+.step{display:none}
+.step.on{display:block;animation:fade .35s}
+.step > h3{font-weight:800;margin:6px 0 16px;display:flex;gap:12px;align-items:center}
+.step > h3 .n{background:var(--g);color:#fff;border-radius:50%;width:56px;height:56px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:24px;margin-bottom:24px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stepnav{display:flex;justify-content:space-between;gap:16px;margin-top:30px}
+.stepnav button{background:var(--g);color:#fff;border-radius:999px;padding:12px 30px;font-weight:700;box-shadow:var(--sh)}
+.stepnav button.prev{background:#fff;color:var(--g-d)}
+.stepnav button:disabled{opacity:.3}
+.tip{background:#fff8dc;border-left:10px solid var(--sun);border-radius:16px;padding:14px 20px;margin:18px 0}
+.tip::before{content:"🎨 老師提示：";font-weight:800}
+.key{font-weight:800;color:var(--g-d);background:linear-gradient(transparent 60%,#ddd3fb 60%)}
+.k-water{color:var(--water);font-weight:800}.k-sun{color:#c48f00;font-weight:800}.k-food{color:var(--food);font-weight:800}.k-air{color:#61778d;font-weight:800}.k-red{color:var(--red);font-weight:800}
+.big-btns{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0}
+.bb{background:#fff;border:4px solid var(--g-l);color:var(--g-d);border-radius:18px;padding:8px 20px;font-weight:700;box-shadow:var(--sh);transition:.2s}
+.bb.on{background:var(--g);color:#fff;border-color:var(--g-d)}
+.bb .num{display:inline-flex;width:44px;height:44px;border-radius:50%;background:var(--g-l);color:var(--g-d);align-items:center;justify-content:center;margin-right:8px}
+.bb.on .num{background:#fff}
+.reveal{opacity:0;transform:translateY(12px);transition:.4s;pointer-events:none}
+.reveal.show{opacity:1;transform:none;pointer-events:auto}
+.photo{border-radius:18px;overflow:hidden;background:#fff;position:relative}
+.photo img{width:100%}
+.caption{text-align:center;color:var(--muted);margin-top:8px}
+.pline{display:flex;gap:14px;align-items:center;margin:10px 0}
+.pline img{width:120px;height:120px;object-fit:cover;border-radius:14px;flex:none}
+
+/* 放大鏡 */
+.zoombox{position:relative;overflow:hidden;border-radius:18px;background:#fff;touch-action:manipulation}
+.zoombox .zin{position:absolute;inset:0;transform-origin:0 0;transition:transform .8s cubic-bezier(.3,.8,.3,1)}
+.zoombox .zin img{width:100%;height:100%;object-fit:cover}
+.hot{position:absolute;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;border:5px solid #fff;animation:pulse 1.8s infinite;z-index:3;transition:opacity .3s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(98,70,196,.55)}70%{box-shadow:0 0 0 22px rgba(98,70,196,0)}100%{box-shadow:0 0 0 0 rgba(98,70,196,0)}}
+.zoombox.zoomed .hot{opacity:0;pointer-events:none}
+.zoombox .ring{position:absolute;left:50%;top:50%;width:44%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.6);border-radius:50%;border:8px dashed var(--sun);opacity:0;transition:.5s;pointer-events:none;z-index:2}
+.zoombox.zoomed .ring{opacity:1;transform:translate(-50%,-50%) scale(1);animation:spin 12s linear infinite}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.zoombox .zlabel{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);border-radius:14px;padding:4px 18px;font-weight:800;color:var(--g-d);opacity:0;transition:.3s;z-index:4}
+.zoombox.zoomed .zlabel{opacity:1}
+.zoombox .back{position:absolute;right:14px;bottom:14px;background:var(--earth);color:#fff;border-radius:999px;padding:6px 20px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:4}
+.zoombox.zoomed .back{opacity:1;pointer-events:auto}
+.zinfo{min-height:120px}
+.zinfo .ph{color:var(--muted)}
+.zinfo h4{font-weight:800;color:var(--g-d);margin-bottom:6px}
+
+/* 圖鑑 */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.gcard{background:#fff;border-radius:20px;box-shadow:var(--sh);overflow:hidden;text-align:left;position:relative;transition:transform .2s;border:4px solid transparent}
+.gcard:hover{transform:translateY(-4px)}
+.gcard.seen{border-color:var(--g-l)}
+.gcard img{width:100%;aspect-ratio:1;object-fit:cover}
+.gcard .gno{position:absolute;left:10px;top:10px;width:54px;height:54px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;border:4px solid #fff}
+.gcard .gt{padding:10px 16px 14px}
+.gcard .gt b{display:block;color:var(--g-d)}
+.gcard .tag{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:999px;padding:0 14px;margin-top:4px;font-weight:700}
+.gsec{font-weight:800;color:var(--earth);margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.gsec::before{content:"";width:14px;height:40px;border-radius:8px;background:var(--earth)}
+
+/* 燈箱 */
+#lb{position:fixed;inset:0;z-index:150;background:rgba(20,12,45,.88);display:none;align-items:center;justify-content:center;padding:12px}
+#lb.on{display:flex;animation:fade .3s}
+#lb .box{background:#fff;border-radius:24px;max-width:1100px;width:100%;max-height:100%;overflow:auto;display:grid;grid-template-columns:1.2fr 1fr;gap:20px;padding:18px}
+#lb .zoombox{width:100%}
+#lb .txt h4{font-weight:800;color:var(--g-d);margin-bottom:8px}
+#lb .txt .tag{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:999px;padding:0 16px;margin-bottom:10px;font-weight:700}
+#lb .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+#lb .nav button{background:var(--g);color:#fff;border-radius:999px;padding:8px 22px;font-weight:700}
+#lb .nav button.x{background:var(--earth)}
+#lb .nums{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#lb .nums button{width:52px;height:52px;border-radius:50%;background:var(--g-l);color:var(--g-d);font-weight:800}
+#lb .nums button.on{background:var(--g);color:#fff}
+
+/* 翻牌 */
+.flip{perspective:900px;cursor:pointer}
+.flip .in{position:relative;transition:transform .6s;transform-style:preserve-3d;aspect-ratio:4/3.6}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.flip .f img{width:100%;height:100%;object-fit:cover}
+.flip .f b{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;padding:30px 16px 12px}
+.flip .b{background:var(--g-l);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;padding:20px;text-align:center}
+
+/* 分類 */
+.sort-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.sort-item{background:#fff;border-radius:18px;box-shadow:var(--sh);overflow:hidden;text-align:center;border:6px solid transparent;transition:.3s;cursor:pointer}
+.sort-item img{width:100%;aspect-ratio:1;object-fit:cover}
+.sort-item .ans{display:block;font-weight:800;opacity:0;transition:.3s}
+.sort-item.done .ans{opacity:1}
+.sort-item.done.animal{border-color:var(--food)}.sort-item.done.animal .ans{color:var(--food)}
+.sort-item.done.plant{border-color:var(--g)}.sort-item.done.plant .ans{color:var(--g)}
+.sort-item.done.non{border-color:var(--air)}.sort-item.done.non .ans{color:#61778d}
+
+/* 照片上的動畫 */
+.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.flowline{fill:none;stroke-linecap:round;stroke-dasharray:6 34;animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-40}}
+.grp{opacity:0;transition:opacity .6s}
+.lab{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:12px;padding:0 12px;font-weight:800;box-shadow:var(--sh);opacity:0;transition:.5s;white-space:nowrap;pointer-events:none;z-index:3}
+.lab.show{opacity:1}
+#flow.s1 .g-w1,#flow.s2 .g-w1,#flow.s2 .g-w2,#flow.s3 .g-w2,#flow.s3 .g-sun,#flow.s3 .g-air,#flow.s4 .g-sun,#flow.s4 .g-air,#flow.s4 .g-make,#flow.s5 .g-food,#flow.s5 .g-make,#flow.all .grp{opacity:1}
+.glow{animation:glow 1.3s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.15}to{opacity:.65}}
+.sunbeam{position:absolute;inset:0;background:radial-gradient(circle at 10% 0%,rgba(255,230,120,.85),rgba(255,230,120,.25) 40%,transparent 70%);opacity:0;transition:opacity .8s;pointer-events:none}
+.sunbeam.on{opacity:1;animation:beam 2.2s ease-in-out infinite alternate}
+@keyframes beam{from{filter:brightness(1)}to{filter:brightness(1.25)}}
+.lit img{transition:filter 1s}
+.lit.on img{filter:brightness(1.15) saturate(1.25)}
+.drop{position:absolute;width:30px;height:40px;background:radial-gradient(circle at 35% 35%,#fff,#6fb6ff 45%,#2f80ed);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform:translate(-50%,0);opacity:0}
+.drop.go{animation:drip 1.8s ease-in infinite}
+@keyframes drip{0%{opacity:0;transform:translate(-50%,-40px) scale(.5)}20%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,160px) scale(1)}}
+.pollen{position:absolute;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle,#fff59d,#f9a825);box-shadow:0 0 8px #ffd54f;pointer-events:none}
+.seq{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1;background:#000}
+.seq img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s, transform 4s ease-out;transform:scale(1.08)}
+.seq img.on{opacity:1;transform:scale(1)}
+.seq .slab{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);border-radius:14px;padding:4px 18px;font-weight:800;color:var(--g-d);z-index:2}
+.fade2{position:relative}
+.fade2 img.after{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 2.5s}
+.fade2.on img.after{opacity:1}
+
+/* 3D */
+.p3d-stage{position:relative;border-radius:18px;overflow:hidden;background:#eef6ff;min-height:300px;touch-action:none}
+.p3d-stage canvas{display:block;width:100%!important;height:auto!important}
+.p3d-stage.loading::after{content:"3D 模型載入中…";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.p3d-label{position:absolute;transform:translate(-50%,-260%);background:#fff;border:4px solid var(--g);color:var(--g-d);border-radius:14px;padding:0 14px;font-weight:800;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.p3d-info h4{font-weight:800;color:var(--g-d);margin-bottom:6px}
+
+/* 測驗 */
+.q .qbody{flex:1;min-width:0}
+.anabtn{margin-top:12px;background:var(--earth-l);color:var(--earth);border-radius:14px;padding:4px 18px;font-weight:700}
+.ana{display:none;margin-top:14px;background:#f4f9f5;border-left:10px solid var(--g);border-radius:14px;padding:14px 18px}
+.q.showana .ana{display:block}
+.ana p{margin:6px 0}
+.anak{display:inline-block;background:var(--g);color:#fff;border-radius:10px;padding:0 12px;margin-right:10px;font-weight:700}
+.opnotes{margin:8px 0 8px 1.2em}
+.opnotes li{margin:4px 0}
+.opnotes li.okk{color:var(--g-d)}
+.opnotes li.okk b::after{content:" ✔"}
+.opnotes li.picked{background:#fde7e7;border-radius:10px;padding:2px 8px;color:var(--red)}
+.teach{background:#fff8dc;border-radius:12px;padding:8px 12px}
+.q.teacher .opts button[data-k]{pointer-events:none}
+.back2{margin-top:8px}
+.q .opts button.tright{background:#dff5e7;border-color:var(--g);color:var(--g-d);font-weight:800}
+.tfbadge{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:10px;padding:0 10px;margin-right:8px}
+.qt-table{border-collapse:collapse;margin:8px 0 12px;max-width:100%}
+.qt-table th,.qt-table td{border:2px solid #ddd5f3;padding:4px 12px;text-align:center}
+.qt-table th{background:var(--g-l)}
+.q{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;margin-bottom:22px;display:flex;gap:20px;align-items:flex-start}
+.q img{width:200px;height:200px;object-fit:cover;border-radius:16px;flex:none}
+.q .qt{font-weight:800;margin-bottom:12px}
+.q .opts{display:flex;flex-wrap:wrap;gap:12px}
+.q .opts button{background:var(--bg);border:4px solid #dfe7e1;border-radius:16px;padding:6px 22px}
+.q .opts button.right{background:#dff5e7;border-color:var(--g);color:var(--g-d);font-weight:800}
+.q .opts button.wrong{background:#fde7e7;border-color:var(--red);color:var(--red);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.q .why{margin-top:10px;color:var(--g-d);display:none}
+.q.done .why{display:block}
+.score{position:sticky;bottom:16px;background:var(--g);color:#fff;border-radius:999px;padding:10px 26px;display:inline-block;font-weight:800;box-shadow:var(--sh)}
+
+#penLayer{position:fixed;inset:0;z-index:200;display:none;touch-action:none}
+#penLayer.on{display:block}
+#penCanvas{width:100%;height:100%;display:block;cursor:crosshair}
+#penBar{position:fixed;z-index:201;left:50%;bottom:16px;transform:translateX(-50%);background:#fff;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.25);display:none;gap:10px;padding:10px 16px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100% - 24px)}
+#penBar.on{display:flex}
+#penBar button{border-radius:999px;padding:4px 16px;font-weight:700;background:var(--bg);border:4px solid transparent}
+#penBar button.c{width:60px;height:60px;padding:0}
+#penBar button.sel{border-color:#333}
+
+footer{background:var(--g-d);color:#e8f5ec;padding:40px 16px;text-align:center}
+footer p{max-width:900px;margin:0 auto 8px}
+
+@media (max-width:900px){
+  .two,.three{grid-template-columns:1fr}
+  .four{grid-template-columns:repeat(2,1fr)}
+  #lb .box{grid-template-columns:1fr}
+  .topbar .now{display:none}
+}
+@media (max-width:520px){
+  .page{padding:16px 12px 120px}
+  .card{padding:16px}
+  .lesson-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;gap:12px}
+  .sort-grid{grid-template-columns:1fr 1fr}
+  .stepbar{gap:6px;top:56px}
+  .stepbar button{width:50px;height:50px;border-width:3px}
+  .hot{width:54px;height:54px;margin:-27px 0 0 -27px}
+  .gcard .gno{width:46px;height:46px}
+  .q{flex-direction:column}
+  .q img{width:100%;height:auto;aspect-ratio:1}
+}
+
+/* ===== 磁鐵單元 ===== */
+:root{--n:#e5484d;--s:#2f6fed;--force:#e5484d;--push:#2f6fed;--field:#8b5cf6}
+.k-n{color:var(--n);font-weight:800}.k-s{color:var(--s);font-weight:800}.k-field{color:var(--field);font-weight:800}
+.sort-item.done.yes{border-color:var(--n)}.sort-item.done.yes .ans{color:var(--n)}
+.sort-item.done.no{border-color:var(--air)}.sort-item.done.no .ans{color:#61778d}
+.sort-item .guess{display:flex;gap:6px;justify-content:center;padding:4px 0 8px}
+.sort-item .guess button{border-radius:12px;padding:0 8px;background:var(--bg);border:3px solid #dfe7e1;white-space:nowrap}
+.sort-item .ans{display:none}.sort-item.done .ans{display:block}
+.sort-item .guess button.pick{border-color:var(--g);background:var(--g-l)}
+.sort-item.done .guess{display:none}
+.steps7{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.steps7 .bb{padding:6px 14px}
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.chain span{background:var(--g-l);color:var(--g-d);border-radius:12px;padding:0 12px;font-weight:700}
+.chain i{font-style:normal;color:var(--muted)}
+/* 相吸相斥動畫 */
+.mstage{position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(#f5efe4,#e8dcc6);aspect-ratio:16/7;box-shadow:inset 0 -18px 30px rgba(120,90,40,.12)}
+.mag{position:absolute;top:50%;width:38%;transform:translateY(-50%);transition:left .9s cubic-bezier(.4,.1,.3,1)}
+.mag img{width:100%;display:block;filter:drop-shadow(0 8px 10px rgba(0,0,0,.25));transition:transform .4s}
+.mag.flip img{transform:scaleX(-1)}
+.mag .pl{position:absolute;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh)}
+.mag .pl.l{left:13%}.mag .pl.r{left:87%}
+.mag.shake{animation:mshake .35s 2}
+@keyframes mshake{25%{margin-left:-10px}75%{margin-left:10px}}
+.mstage .bang{position:absolute;left:50%;top:14%;transform:translate(-50%,0) scale(.5);background:#fff;border-radius:16px;padding:2px 18px;font-weight:900;opacity:0;transition:.3s;box-shadow:var(--sh);white-space:nowrap}
+.mstage .bang.on{opacity:1;transform:translate(-50%,0) scale(1)}
+.mstage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+/* 照片疊圖 */
+.pulse{animation:pls 1.4s ease-in-out infinite}
+@keyframes pls{0%,100%{opacity:.25}50%{opacity:.85}}
+.drop2{transition:transform 1.2s cubic-bezier(.5,0,.8,.4)}
+.drop2.fall{transform:translateY(22%)}
+.shakeit{animation:mshake .3s 3}
+.bookrow{display:flex;flex-wrap:wrap;gap:8px;min-height:60px;margin:10px 0}
+.bookrow b{background:var(--earth-l);color:var(--earth);border-radius:10px;padding:0 12px}
+.res-table{border-collapse:collapse;margin:12px 0;width:100%}
+.res-table th,.res-table td{border:2px solid #ddd5f3;padding:6px 10px;text-align:center}
+.res-table th{background:var(--g-l)}
+.bar{height:44px;border-radius:10px;background:linear-gradient(90deg,var(--g),#9b87f5);width:0;transition:width 1s;color:#fff;font-weight:800;display:flex;align-items:center;padding-left:12px;white-space:nowrap}
+.vocab{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.vocab span{background:#fff;border-radius:14px;box-shadow:var(--sh);padding:4px 16px}
+.vocab small{color:var(--muted);margin-left:8px}
+@media (max-width:520px){
+  .mag .pl{width:44px;height:44px}
+  .mstage{aspect-ratio:16/9}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="home" onclick="go('home')">🏠 首頁</button>
+  <span class="now" id="nowTitle">磁鐵好好玩</span>
+  <button class="pen-btn" onclick="togglePen()">🖍️ 畫筆</button>
+</div>
+
+<main class="page show" id="home">
+  <div class="hero">
+    <img src="images/hero.webp" fetchpriority="high" alt="小朋友在教室玩磁鐵和迴紋針">
+    <div class="cap"><b>🧲 磁鐵好好玩</b>三年級自然 ｜ 磁鐵單元（翰林・南一・康軒 三版整合）</div>
+  </div>
+  <p class="intro">每一課上方都有 ① ② ③ … 圓形按鈕，照順序點就能上課。照片上的<span class="key">數字</span>點下去會<b>放大</b>；有<b>動畫</b>的地方按按鈕就會動。</p>
+  <div class="lesson-grid" id="lessonGrid"></div>
+  <div class="legend">
+    <span class="chip"><i class="dot" style="background:var(--n)"></i>紅色＝N 極／吸引</span>
+    <span class="chip"><i class="dot" style="background:var(--s)"></i>藍色＝S 極／排斥</span>
+    <span class="chip"><i class="dot" style="background:var(--field)"></i>紫色＝磁力線</span>
+  </div>
+  <div class="vocab">
+    <span>磁鐵<small>magnet</small></span><span>磁力<small>magnetic force</small></span><span>磁極<small>magnetic pole</small></span><span>N 極<small>north pole</small></span><span>S 極<small>south pole</small></span>
+  </div>
+</main>
+
+<!-- ===== 第1課 ===== -->
+<section class="page lesson" id="m1" data-no="第1課" data-title="磁鐵可以吸什麼？" data-pic="images/students.webp">
+  <div class="step" data-label="生活中的磁鐵">
+    <div class="card"><p>磁鐵可以吸在<b>冰箱門、白板、黑板</b>上，卻<b>不能</b>吸在木頭櫃子和玻璃窗上。為什麼呢？先看看生活中的磁鐵，點照片放大：</p>
+      <div class="gallery" data-g="seen"></div>
+      <div class="tip">請學生說說看：「這些<b>被磁鐵吸住的東西</b>，有什麼一樣的地方？」</div></div>
+  </div>
+
+  <div class="step" data-label="科學探究的步驟">
+    <div class="card two">
+      <div class="zoombox" id="zChk" style="aspect-ratio:1400/1046" data-img="images/checkers.webp"></div>
+      <div><p>妍妍玩<span class="key">磁鐵跳棋</span>時發現：棋子吸得住<b>鐵製棋盤</b>，卻吸不住<b>紙製棋盤</b>。跟著她一步一步探究，依序點 1～7：</p>
+        <div class="big-btns" data-zoom="zChk"></div>
+        <div class="zinfo" id="zChk-info"></div></div>
+    </div>
+    <div class="card">
+      <div class="steps7">
+        <button class="bb" data-show="ip1"><span class="num">1</span>觀察現象</button>
+        <button class="bb" data-show="ip2"><span class="num">2</span>提出問題</button>
+        <button class="bb" data-show="ip3"><span class="num">3</span>蒐集資料</button>
+        <button class="bb" data-show="ip4"><span class="num">4</span>提出假設</button>
+        <button class="bb" data-show="ip5"><span class="num">5</span>設計實作</button>
+        <button class="bb" data-show="ip6"><span class="num">6</span>分析驗證</button>
+        <button class="bb" data-show="ip7"><span class="num">7</span>結論</button>
+      </div>
+      <p class="reveal" id="ip1">👀 <b>觀察現象</b>：磁鐵棋子吸得住鐵棋盤，吸不住紙棋盤。</p>
+      <p class="reveal" id="ip2">❓ <b>提出問題</b>：什麼<span class="key">材質</span>的物品可以被磁鐵吸引呢？</p>
+      <p class="reveal" id="ip3">📚 <b>蒐集資料</b>：磁鐵飛鏢吸在鏢靶上、磁鐵吸在冰箱門上——鏢靶和冰箱門都是<b>鐵製品</b>。</p>
+      <p class="reveal" id="ip4">💡 <b>提出假設</b>：<span class="key">鐵製的物品</span>可以被磁鐵吸引。</p>
+      <p class="reveal" id="ip5">🔬 <b>設計實作</b>：準備各種材質的物品，用磁鐵一個一個試試看。</p>
+      <p class="reveal" id="ip6">📊 <b>分析驗證</b>：把結果分成「會被吸」「不會被吸」兩堆。結果和假設<b>不一樣</b>時，要<span class="k-red">重新提出假設</span>。</p>
+      <p class="reveal" id="ip7">✅ <b>結論</b>：磁鐵可以吸引<span class="key">鐵製品</span>。</p>
+      <div class="tip">康軒版的步驟：察覺現象 → 提出問題 → 推測 → 實驗 → 結果 → 討論 → 結論。名稱不同，意思一樣。</div>
+    </div>
+  </div>
+
+  <div class="step" data-label="試試看：哪些會被吸？">
+    <div class="card">
+      <p>先讓學生<b>猜</b>（點「會／不會」），再點照片看答案：</p>
+      <div class="tip">用<span class="k-n">紅框＝會被磁鐵吸引</span>、<span class="k-air">灰框＝不會被吸引</span>。猜錯的請學生說說看「為什麼我以為會？」</div>
+      <div class="sort-grid" id="sortGrid"></div>
+      <p style="margin-top:20px" id="sortScore"></p>
+    </div>
+  </div>
+
+  <div class="step" data-label="金屬不一定會被吸">
+    <div class="card two">
+      <div class="zoombox" id="zRecycle" style="aspect-ratio:1400/1046" data-img="images/recycle.webp"></div>
+      <div><p>硬幣、鋁罐也是<b>金屬</b>，為什麼不會被吸？</p>
+        <div class="big-btns" data-zoom="zRecycle"></div>
+        <div class="zinfo" id="zRecycle-info"><p class="ph">👆 點數字放大。</p></div>
+        <p style="margin-top:12px">⚠️ 磁鐵吸的是<span class="key">鐵製品</span>，不是所有金屬！資源回收時，可以用磁鐵把<b>鐵罐</b>和<b>鋁罐</b>分開。</p></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="什麼是磁力？">
+    <div class="card two">
+      <div class="photo"><img loading="lazy" decoding="async" src="images/students.webp" alt="學生用磁鐵測試鐵罐"></div>
+      <div><p>磁鐵可以吸引鐵製品，這種<b>吸引的力量</b>就叫做<span class="key">磁力</span>。</p>
+        <div class="big-btns"><button class="bb" data-show="mf1"><span class="num">1</span>磁力看得見嗎？</button><button class="bb" data-show="mf2"><span class="num">2</span>磁鐵吸不住什麼？</button></div>
+        <p class="reveal" id="mf1">👁️ 磁力<b>看不見</b>，但可以從鐵製品被吸過來，知道磁力存在。</p>
+        <p class="reveal" id="mf2">🪵 木頭、塑膠、紙、玻璃、橡皮擦、鋁罐、硬幣都<b>不會</b>被磁鐵吸引。</p></div>
+    </div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">依各校段考常考的題型出題，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m1"></div><span class="score"></span>
+  </div>
+</section>
+
+<!-- ===== 第2課 ===== -->
+<section class="page lesson" id="m2" data-no="第2課" data-title="磁力可以穿過物品" data-pic="images/through.webp">
+  <div class="step" data-label="沒碰到也能吸">
+    <div class="card two">
+      <div class="photo" id="thrWrap"><img loading="lazy" decoding="async" src="images/through.webp" alt="磁鐵隔著墊板吸迴紋針">
+        <svg class="ov" viewBox="0 0 1400 1046"><g class="grp" id="thrArrow">
+          <path class="flowline" d="M560 600 L635 370" stroke="#e5484d" stroke-width="16" style="animation-direction:reverse"/>
+          <path class="flowline" d="M700 610 L665 370" stroke="#e5484d" stroke-width="16" style="animation-direction:reverse"/>
+          <path class="flowline" d="M820 600 L700 370" stroke="#e5484d" stroke-width="16" style="animation-direction:reverse"/></g>
+          <g class="grp" id="thrBoard"><rect x="0" y="360" width="1400" height="40" fill="#ffd23f" class="pulse"/></g></svg></div>
+      <div><p>磁鐵一定要<b>碰到</b>鐵製品才能吸住嗎？</p>
+        <div class="big-btns">
+          <button class="bb" onclick="thr(1,this)"><span class="num">1</span>中間隔著墊板</button>
+          <button class="bb" onclick="thr(2,this)"><span class="num">2</span>磁力穿過去</button>
+          <button class="bb" onclick="thr(3,this)"><span class="num">3</span>結論</button></div>
+        <div id="thrTxt"><p class="ph">👆 依序點按鈕。</p></div></div>
+    </div>
+    <div class="tip">用<span class="k-red">紅色</span>畫筆從迴紋針往磁鐵畫箭頭，表示「磁力把迴紋針往上吸」。</div>
+  </div>
+
+  <div class="step" data-label="隔太厚就吸不到">
+    <div class="card two">
+      <div class="fade2 photo" id="thick"><img loading="lazy" decoding="async" src="images/through.webp" alt="隔薄墊板"><img class="after" loading="lazy" decoding="async" src="images/thickbooks.webp" alt="隔一疊習作"></div>
+      <div><p>每次多放一本習作，迴紋針還會被吸起來嗎？（南一版實驗）</p>
+        <div class="big-btns">
+          <button class="bb" onclick="thick(1,this)"><span class="num">1</span>隔 1 張墊板</button>
+          <button class="bb" onclick="thick(2,this)"><span class="num">2</span>隔 1 本習作</button>
+          <button class="bb" onclick="thick(5,this)"><span class="num">3</span>隔 5 本習作</button></div>
+        <div id="thickTxt"><p class="ph">👆 依序點按鈕，看照片變化。</p></div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="紙為什麼吸得住？">
+    <div class="card two">
+      <div class="zoombox" id="zWhite" style="aspect-ratio:1400/1046" data-img="images/whiteboard.webp"></div>
+      <div><p>紙張<b>不會</b>被磁鐵吸引，為什麼可以被磁鐵固定在白板上呢？</p>
+        <div class="big-btns" data-zoom="zWhite"></div>
+        <div class="zinfo" id="zWhite-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="藏起來的磁鐵">
+    <div class="card two">
+      <div class="zoombox" id="zHidden" style="aspect-ratio:1400/1046" data-img="images/hidden.webp"></div>
+      <div><p>磁力隔著物品也有作用，所以很多產品把磁鐵<b>包在裡面</b>，又好用又美觀。</p>
+        <div class="big-btns" data-zoom="zHidden"></div>
+        <div class="zinfo" id="zHidden-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="飄浮的迴紋針">
+    <div class="card two">
+      <div class="zoombox" id="zFloat" style="aspect-ratio:1046/1400" data-img="images/floatclip.webp"></div>
+      <div><p>米歐變了什麼魔法，讓迴紋針<b>飄在空中</b>？（康軒・腦袋星球實驗室）</p>
+        <div class="big-btns" data-zoom="zFloat"></div>
+        <div class="zinfo" id="zFloat-info"><p class="ph">👆 點數字放大。</p></div>
+        <p style="margin-top:10px">🧪 做法：①紙盒頂端內側黏圓形磁鐵 ②迴紋針綁棉線，另一端固定 ③把紙盒翻正，迴紋針就飄起來了！</p></div>
+    </div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">依各校段考常考的題型出題，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m2"></div><span class="score"></span>
+  </div>
+</section>
+
+<!-- ===== 第3課 ===== -->
+<section class="page lesson" id="m3" data-no="第3課" data-title="磁鐵的磁極" data-pic="images/barclips.webp">
+  <div class="step" data-label="哪裡吸最多？">
+    <div class="card two">
+      <div class="photo" id="poleWrap"><img loading="lazy" decoding="async" src="images/barclips.webp" alt="長條形磁鐵兩端吸滿迴紋針">
+        <svg class="ov" viewBox="0 0 1400 1046">
+          <g class="grp" id="pEnd"><circle cx="170" cy="420" r="170" fill="none" stroke="#e5484d" stroke-width="16" stroke-dasharray="30 18" class="pulse"/><circle cx="1230" cy="420" r="170" fill="none" stroke="#2f6fed" stroke-width="16" stroke-dasharray="30 18" class="pulse"/></g>
+          <g class="grp" id="pMid"><circle cx="700" cy="250" r="110" fill="none" stroke="#8fa3b8" stroke-width="12" stroke-dasharray="20 14"/></g></svg>
+        <span class="lab" style="left:13%;top:73%;color:var(--n)" id="labN">很多！</span>
+        <span class="lab" style="left:87%;top:73%;color:var(--s)" id="labS">很多！</span>
+        <span class="lab" style="left:50%;top:46%;color:#61778d" id="labM">幾乎沒有</span></div>
+      <div><p>拿長條形磁鐵靠近迴紋針，再拿起來，<b>哪裡</b>吸的迴紋針最多？</p>
+        <div class="big-btns">
+          <button class="bb" onclick="pole(1,this)"><span class="num">1</span>看兩端</button>
+          <button class="bb" onclick="pole(2,this)"><span class="num">2</span>看中間</button>
+          <button class="bb" onclick="pole(3,this)"><span class="num">3</span>什麼是磁極？</button></div>
+        <div id="poleTxt"><p class="ph">👆 依序點按鈕。</p></div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="怎麼比較才公平？">
+    <div class="card two">
+      <div class="zoombox" id="zFil" style="aspect-ratio:1400/1046" data-img="images/filings.webp"></div>
+      <div><p>迴紋針常常<b>把整根磁鐵包住</b>，很難比較。怎麼辦？</p>
+        <div class="big-btns"><button class="bb" data-show="fair1"><span class="num">1</span>翰林的方法</button><button class="bb" data-show="fair2"><span class="num">2</span>南一的方法</button><button class="bb" data-show="fair3"><span class="num">3</span>用鐵粉看</button></div>
+        <p class="reveal" id="fair1">📄 把<b>透明片（或墊板）</b>和磁鐵一起平放在迴紋針上再拿起，比較每個位置吸住的<b>迴紋針數量</b>。</p>
+        <p class="reveal" id="fair2">📏 把迴紋針放在磁力測量圖上，把磁鐵<b>平行推過去</b>，看哪個位置<b>最快</b>吸到迴紋針。</p>
+        <p class="reveal" id="fair3">🧲 鐵粉撒在紙上，下面放磁鐵：鐵粉在<b>兩端最密</b>，排成一條條<span class="k-field">磁力線</span>。點照片上的數字看看！</p>
+        <div class="big-btns" data-zoom="zFil" style="margin-top:12px"></div>
+        <div class="zinfo" id="zFil-info"></div></div>
+    </div>
+    <div class="tip">吸住的<b>迴紋針愈多</b>，表示那裡的<b>磁力愈強</b>。</div>
+  </div>
+
+  <div class="step" data-label="馬蹄形磁鐵">
+    <div class="card two">
+      <div class="zoombox" id="zHorse" style="aspect-ratio:1" data-img="images/horseclips.webp"></div>
+      <div><p><span class="key">馬蹄形（U 形）磁鐵</span>的磁極在哪裡？</p>
+        <div class="big-btns" data-zoom="zHorse"></div>
+        <div class="zinfo" id="zHorse-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="圓形磁鐵">
+    <div class="card two">
+      <div class="zoombox" id="zRound" style="aspect-ratio:1" data-img="images/roundclips.webp"></div>
+      <div><p><span class="key">圓形磁鐵</span>的磁極在哪裡？</p>
+        <div class="big-btns" data-zoom="zRound"></div>
+        <div class="zinfo" id="zRound-info"><p class="ph">👆 點數字放大。</p></div>
+        <p style="margin-top:12px">🤔 想一想：為什麼長條形磁鐵常用<b>兩端</b>去吸東西，圓形磁鐵卻用<b>兩個面</b>？<br>→ 因為那裡是<span class="key">磁極</span>，磁力最強！</p></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="各種形狀的磁鐵">
+    <div class="card"><p>磁鐵有很多形狀，每一種都有 <span class="k-n">N 極</span>和 <span class="k-s">S 極</span>。點照片看磁極在哪裡：</p>
+      <div class="gallery" data-g="shapes"></div>
+      <div class="tip">⚠️ 磁力強弱<b>不能看外表大小</b>判斷，要<b>測量</b>才知道（南一・小學堂）。小小的釹鐵硼磁鐵比大磁鐵還強！</div></div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">依各校段考常考的題型出題，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m3"></div><span class="score"></span>
+  </div>
+</section>
+
+<!-- ===== 第4課 ===== -->
+<section class="page lesson" id="m4" data-no="第4課" data-title="同極相斥・異極相吸" data-pic="images/ringtower.webp">
+  <div class="step" data-label="兩根磁鐵靠近">
+    <div class="card">
+      <p>把兩根長條形磁鐵的磁極靠近，會發生什麼事？先讓學生<b>猜</b>，再點按鈕：</p>
+      <div class="big-btns" id="pairBtns">
+        <button class="bb" onclick="pair('N','S',this)"><span class="num">1</span><span class="k-n">N</span> 靠近 <span class="k-s">S</span></button>
+        <button class="bb" onclick="pair('N','N',this)"><span class="num">2</span><span class="k-n">N</span> 靠近 <span class="k-n">N</span></button>
+        <button class="bb" onclick="pair('S','S',this)"><span class="num">3</span><span class="k-s">S</span> 靠近 <span class="k-s">S</span></button>
+        <button class="bb" onclick="pair('S','N',this)"><span class="num">4</span><span class="k-s">S</span> 靠近 <span class="k-n">N</span></button>
+      </div>
+      <div class="mstage" id="mstage">
+        <div class="mag" id="magL" style="left:4%"><img src="images/barcut.webp" alt="磁鐵A"><span class="pl l"></span><span class="pl r"></span></div>
+        <div class="mag" id="magR" style="left:60%"><img src="images/barcut.webp" alt="磁鐵B"><span class="pl l"></span><span class="pl r"></span></div>
+        <svg viewBox="0 0 1600 700" id="pairSvg"></svg>
+        <span class="bang" id="bang"></span>
+      </div>
+      <div id="pairTxt" style="margin-top:14px"><p class="ph">👆 點 1～4。左邊磁鐵 A 不動，右邊磁鐵 B 慢慢靠近。</p></div>
+      <div class="tip"><span class="k-red">紅色箭頭＝互相吸引</span>、<span class="k-s">藍色箭頭＝互相排斥</span>。口訣：<b>同極相斥、異極相吸</b>。</div>
+    </div>
+  </div>
+
+  <div class="step" data-label="3D 磁鐵實驗室">
+    <div class="card">
+      <div class="two">
+        <div class="p3d-stage" id="m3dBox"></div>
+        <div><p>可以<b>用手指拖曳旋轉</b>、兩指縮放。</p>
+          <div class="big-btns">
+            <button class="bb" onclick="Magnet3D.mode('single')"><span class="num">1</span>一根磁鐵＋迴紋針</button>
+            <button class="bb" onclick="Magnet3D.field()"><span class="num">2</span>磁力線 開／關</button>
+            <button class="bb" onclick="Magnet3D.mode('attract')"><span class="num">3</span>異極相吸</button>
+            <button class="bb" onclick="Magnet3D.mode('repel')"><span class="num">4</span>同極相斥</button>
+            <button class="bb" onclick="Magnet3D.reset()">↺ 重設</button></div>
+          <div class="p3d-info" id="m3dBox-info"><p class="ph">3D 模型載入後，依序點 1～4。</p></div></div>
+      </div>
+      <div class="tip">磁力線用<span class="k-field">紫色</span>畫：從 <span class="k-n">N</span> 出來、回到 <span class="k-s">S</span>。相吸時線<b>連在一起</b>，相斥時線<b>互相推開</b>。</div>
+    </div>
+  </div>
+
+  <div class="step" data-label="環形磁鐵疊疊樂">
+    <div class="card two">
+      <div class="zoombox" id="zRing" style="aspect-ratio:1046/1400" data-img="images/ringtower.webp"></div>
+      <div><p>把環形磁鐵一個接一個<b>套進吸管（筆）</b>，為什麼有的會<b>飄起來</b>？（南一・翰林 磁力套圈圈）</p>
+        <div class="big-btns" data-zoom="zRing"></div>
+        <div class="zinfo" id="zRing-info"><p class="ph">👆 點數字放大。</p></div>
+        <p style="margin-top:12px">✅ 圓形、環形……<b>不同形狀的磁鐵</b>，也都有同極相斥、異極相吸的現象。</p></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="神秘磁鐵是哪一極？">
+    <div class="card two">
+      <div class="zoombox" id="zBlack" style="aspect-ratio:1400/787" data-img="images/blackmag.webp"></div>
+      <div><p>撿到一個<b>沒有標示</b>的黑色磁鐵，怎麼知道哪一端是 N 極？（南一 2-2）</p>
+        <div class="big-btns">
+          <button class="bb" data-show="bk1"><span class="num">1</span>用迴紋針可以嗎？</button>
+          <button class="bb" data-show="bk2"><span class="num">2</span>拿 N 極靠近</button>
+          <button class="bb" data-show="bk3"><span class="num">3</span>再拿 S 極靠近</button>
+          <button class="bb" data-show="bk4"><span class="num">4</span>另一端呢？</button></div>
+        <p class="reveal" id="bk1">❌ 不行！鐵製品靠近磁鐵的<b>哪一極都會被吸</b>，分不出 N、S。</p>
+        <p class="reveal" id="bk2">🔴 拿已知的 <span class="k-n">N 極</span>靠近貼標籤的一端 → <b>互相吸引</b>。異極相吸，所以標籤端是 <span class="k-s">S 極</span>。</p>
+        <p class="reveal" id="bk3">🔵 再拿 <span class="k-s">S 極</span>靠近標籤端 → <b>互相排斥</b>。同極相斥，確定標籤端是 <span class="k-s">S 極</span>！</p>
+        <p class="reveal" id="bk4">🧲 磁鐵<b>一定同時有 N 極和 S 極</b>，所以另一端就是 <span class="k-n">N 極</span>。</p>
+        <div class="tip">判斷磁極要看<b>「排斥」</b>最準：會排斥一定是同極；會吸引的有可能只是鐵。</div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="斷掉的磁鐵">
+    <div class="card two">
+      <div class="zoombox" id="zBroken" style="aspect-ratio:1400/787" data-img="images/broken.webp"></div>
+      <div><p>小南撿到一根<b>斷掉的磁鐵</b>，斷掉的地方還有磁力嗎？（南一・科學再探究）</p>
+        <div class="big-btns" data-zoom="zBroken"></div>
+        <div class="zinfo" id="zBroken-info"><p class="ph">👆 點數字放大。</p></div>
+        <p style="margin-top:12px">✅ 斷口可以吸住迴紋針＝<b>有磁力</b>。每一段都變成<b>一根新的磁鐵</b>，各有 N 極和 S 極。</p></div>
+    </div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">依各校段考常考的題型出題，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m4"></div><span class="score"></span>
+  </div>
+</section>
+
+<!-- ===== 第5課 ===== -->
+<section class="page lesson" id="m5" data-no="第5課" data-title="磁鐵加鐵片" data-pic="images/plates.webp">
+  <div class="step" data-label="門擋和櫃子門">
+    <div class="card"><p>門擋、櫃子門的磁鐵<b>兩旁都加了鐵片</b>。依序點照片看看：</p>
+      <div class="gallery" data-g="plate"></div>
+      <div class="tip">拉開門時覺得「吸得好緊」——是不是因為加了鐵片，吸力變強了？我們來做實驗！</div></div>
+  </div>
+
+  <div class="step" data-label="實驗：可以掛幾本書？">
+    <div class="card two">
+      <div style="position:relative;overflow:hidden;border-radius:18px"><div class="zoombox" id="zBag" style="aspect-ratio:1046/1400" data-img="images/boardbag.webp"></div></div>
+      <div><p>在黑板畫一條<b>水平線</b>，用磁鐵把塑膠袋吸在線上，每次放<b>一本一樣的書</b>，直到磁鐵<b>滑下來</b>為止。</p>
+        <div class="big-btns" data-zoom="zBag"></div>
+        <div class="zinfo" id="zBag-info"></div>
+        <div class="big-btns">
+          <button class="bb" onclick="book('no',this)">➕ <b>不加鐵片</b> 放一本</button>
+          <button class="bb" onclick="book('two',this)">➕ <b>兩面加鐵片</b> 放一本</button>
+          <button class="bb" onclick="bookReset()">↺ 重來</button></div>
+        <div class="bookrow" id="bookRow"></div>
+        <div id="bookTxt"><p class="ph">👆 先點「不加鐵片」一本一本放，再換「兩面加鐵片」。</p></div></div>
+    </div>
+  </div>
+
+  <div class="step" data-label="比較結果">
+    <div class="card">
+      <p>把兩種方式的結果畫成長條，比一比（示範數據）：</p>
+      <div class="big-btns"><button class="bb" onclick="bars(this)"><span class="num">1</span>畫出長條</button><button class="bb" data-show="plConc"><span class="num">2</span>結論</button></div>
+      <p>不加鐵片</p><div class="bar" id="bar0"></div>
+      <p style="margin-top:10px">兩面加鐵片</p><div class="bar" id="bar1"></div>
+      <p class="reveal" id="plConc" style="margin-top:16px">✅ 在磁鐵<b>兩旁各加一塊鐵片</b>，吸引的力量會<span class="key">變強</span>，可以掛更多東西。</p>
+    </div>
+  </div>
+
+  <div class="step" data-label="大挑戰：只加一面？">
+    <div class="card two">
+      <div class="zoombox" id="zPlates" style="aspect-ratio:1" data-img="images/plates.webp"></div>
+      <div><p>如果<b>只在一側</b>加鐵片，效果一樣嗎？（翰林・課餘大挑戰）</p>
+        <div class="big-btns" data-zoom="zPlates"></div>
+        <div class="zinfo" id="zPlates-info"></div>
+        <table class="res-table"><tr><th>加鐵片方式</th><th>能掛幾本書</th></tr>
+          <tr><td>不加鐵片</td><td>2 本</td></tr>
+          <tr><td>A：一側加鐵片</td><td class="reveal" id="one1">3 本</td></tr>
+          <tr><td>B：兩側加鐵片</td><td>5 本</td></tr></table>
+        <div class="big-btns"><button class="bb" data-show="one1"><span class="num">1</span>看 A 的結果</button><button class="bb" data-show="one2"><span class="num">2</span>結論</button></div>
+        <p class="reveal" id="one2">✅ 只加一側，承載的書<b>比較少</b>；兩側都加，吸力<b>最強</b>。所以門擋、櫃子門都是<b>兩側各加一片</b>。</p></div>
+    </div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">依各校段考常考的題型出題，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m5"></div><span class="score"></span>
+  </div>
+</section>
+
+<!-- ===== 第6課 ===== -->
+<section class="page lesson" id="m6" data-no="第6課" data-title="磁鐵的保存" data-pic="images/storage.webp">
+  <div class="step" data-label="正確收納">
+    <div class="card two">
+      <div class="zoombox" id="zStore" style="aspect-ratio:1400/1046" data-img="images/storage.webp"></div>
+      <div><p>磁鐵保存不當，<b>磁力會慢慢變弱</b>。看看這盒磁鐵怎麼收：</p>
+        <div class="big-btns" data-zoom="zStore"></div>
+        <div class="zinfo" id="zStore-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="保存四原則">
+    <div class="card"><p>點照片翻過來，看看要注意什麼：</p>
+      <div class="four" style="margin-top:16px">
+        <div class="flip" onclick="this.classList.toggle('on')"><div class="in"><div class="f"><img loading="lazy" decoding="async" src="images/thumb/storage.webp" alt=""><b>① 成對放</b></div><div class="b"><b>N 對 S 靠緊</b><p>兩個以上的磁鐵，不同極相吸、靠在一起放。</p></div></div></div>
+        <div class="flip" onclick="this.classList.toggle('on')"><div class="in"><div class="f"><img loading="lazy" decoding="async" src="images/thumb/plates.webp" alt=""><b>② 加鐵片</b></div><div class="b"><b>兩極吸鐵片</b><p>只有一個磁鐵時，讓兩極吸在鐵片上。</p></div></div></div>
+        <div class="flip" onclick="this.classList.toggle('on')"><div class="in"><div class="f"><img loading="lazy" decoding="async" src="images/thumb/broken.webp" alt=""><b>③ 不摔不敲</b></div><div class="b"><b>避免震動、敲擊、高溫</b><p>亂摔會讓磁力變弱，也可能斷掉。</p></div></div></div>
+        <div class="flip" onclick="this.classList.toggle('on')"><div class="in"><div class="f"><img loading="lazy" decoding="async" src="images/thumb/life3.webp" alt=""><b>④ 遠離卡片</b></div><div class="b"><b>遠離電子產品和卡片</b><p>提款卡、存摺的磁條會被破壞。也不要讓磁鐵長期互相排斥。</p></div></div></div>
+      </div>
+      <div class="tip">翰林：避免磁鐵<b>長期互相排斥</b>。南一：<b>N 極和 S 極要成對放</b>、遠離電子產品或卡片。</div></div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">依各校段考常考的題型出題，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m6"></div><span class="score"></span>
+  </div>
+</section>
+
+<!-- ===== 第7課 ===== -->
+<section class="page lesson" id="m7" data-no="第7課" data-title="磁鐵在生活中的應用" data-pic="images/life1.webp">
+  <div class="step" data-label="應用圖鑑">
+    <div class="card"><p>生活中哪些物品用了磁鐵？它們用了磁鐵的<b>哪一種特性</b>？點照片看：</p>
+      <div id="lifeBox"></div>
+      <div class="tip">每張照片點開後，請學生先說「它用了磁鐵的哪個特性」，老師再按「下一張」。</div></div>
+  </div>
+  <div class="step" data-label="打翻鐵粉怎麼辦？">
+    <div class="card two">
+      <div class="zoombox" id="zSand" style="aspect-ratio:1400/1046" data-img="images/ironsand.webp"></div>
+      <div><p>不小心打翻一盒<b>鐵粉</b>，混在地上的沙土裡，怎麼快速清理？（康軒・磁鐵的妙用）</p>
+        <div class="big-btns"><button class="bb" data-show="sd1"><span class="num">1</span>用掃把？</button><button class="bb" data-show="sd2"><span class="num">2</span>用磁鐵！</button><button class="bb" data-show="sd3"><span class="num">3</span>為什麼要套塑膠袋？</button></div>
+        <p class="reveal" id="sd1">🧹 掃把會把<b>沙土也一起掃起來</b>，鐵粉和沙土分不開。</p>
+        <p class="reveal" id="sd2">🧲 用磁鐵靠近，<b>只有鐵粉</b>會被吸起來，沙土留在地上——鐵粉和沙土就<b>分離</b>了！</p>
+        <p class="reveal" id="sd3">🛍️ 磁鐵先<b>包在塑膠袋裡</b>：隔著塑膠袋也吸得到（磁力可以穿過物品），把磁鐵抽出來，鐵粉就掉下來，<b>不會黏在磁鐵上</b>。</p>
+        <div class="big-btns" data-zoom="zSand" style="margin-top:10px"></div>
+        <div class="zinfo" id="zSand-info"></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="自己想一個妙用">
+    <div class="card">
+      <p>生活中還有哪些問題可以用磁鐵解決？點按鈕看看小朋友的點子：</p>
+      <div class="big-btns">
+        <button class="bb" data-show="id1"><span class="num">1</span>掉進水溝的鐵釘</button>
+        <button class="bb" data-show="id2"><span class="num">2</span>散了一地的迴紋針</button>
+        <button class="bb" data-show="id3"><span class="num">3</span>鐵罐鋁罐分類</button></div>
+      <p class="reveal" id="id1">🪝 用繩子綁一塊磁鐵垂下去，就能把<b>鐵釘</b>釣上來。</p>
+      <p class="reveal" id="id2">📎 拿磁鐵在地上掃一圈，迴紋針一下子就全部吸起來。</p>
+      <p class="reveal" id="id3">♻️ 用磁鐵靠近，<b>會被吸的是鐵罐</b>，不會被吸的是鋁罐。</p>
+      <div class="tip">鼓勵學生用「因為磁鐵可以___，所以___」的句型說出自己的點子。</div>
+    </div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">依各校段考常考的題型出題，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m7"></div><span class="score"></span>
+  </div>
+</section>
+
+<!-- ===== 科學閱讀 ===== -->
+<section class="page lesson" id="m8" data-no="科學閱讀" data-title="磁鐵哪裡來？" data-pic="images/lodestone.webp">
+  <div class="step" data-label="天然的磁鐵礦">
+    <div class="card two">
+      <div class="zoombox" id="zLode" style="aspect-ratio:1" data-img="images/lodestone.webp"></div>
+      <div><p>最早的磁鐵<b>不是人做出來的</b>，而是在大自然裡發現的！古代中國人和希臘人發現一種<b>黑色、堅硬</b>的石頭，能吸引小鐵塊——就是<span class="key">磁鐵礦</span>（也叫磁石、吸鐵石、鐵黑）。</p>
+        <div class="big-btns" data-zoom="zLode"></div>
+        <div class="zinfo" id="zLode-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="臺灣哪裡找得到？">
+    <div class="card"><p>點照片看看臺灣的磁鐵礦：</p><div class="gallery" data-g="taiwan"></div>
+      <p style="margin-top:16px">📍 大屯火山群、北部和西部海岸的<b>海沙</b>、花蓮和臺東的<b>河沙</b>、中央山脈，都找得到磁鐵礦。</p></div>
+  </div>
+  <div class="step" data-label="人造磁鐵">
+    <div class="card two">
+      <div class="zoombox" id="zNd" style="aspect-ratio:1" data-img="images/ndfeb.webp"></div>
+      <div><p>現在常見的磁鐵大多是<span class="key">人造磁鐵</span>，可以做成不同的形狀、大小和磁力強弱。</p>
+        <div class="big-btns" data-zoom="zNd"></div>
+        <div class="zinfo" id="zNd-info"><p class="ph">👆 點數字放大。</p></div></div>
+    </div>
+  </div>
+  <div class="step" data-label="看不見的磁鐵">
+    <div class="card"><p>有些東西雖然感覺不到「吸力」，裡面也有磁鐵或磁條（康軒・科學閱讀；南一・磁鐵小幫手）：</p>
+      <div class="gallery" data-g="hiddenmag"></div></div>
+  </div>
+  <div class="step" data-label="段考練習">
+    <p style="margin-bottom:14px">科學閱讀常考「從文章找答案」，點選答案馬上知道對錯：</p>
+    <div class="exq" data-ex="m8"></div><span class="score"></span>
+  </div>
+</section>
+
+<section class="page lesson" id="m9" data-no="複習" data-title="模擬段考" data-pic="images/shapes.webp">
+  <div class="step" data-label="模擬段考">
+    <p style="margin-bottom:14px">綜合各校段考題型，共 <b id="mockN"></b> 題。每題都有 <b>📖 解析</b>；答錯時會說明為什麼錯。</p>
+    <div class="big-btns"><button class="bb" onclick="teacherMode(this)">👩‍🏫 老師模式：關</button></div>
+    <div class="exq" data-ex="mock"></div>
+    <span class="score"></span>
+  </div>
+</section>
+
+<footer>
+  <p>🧲 磁鐵好好玩｜三年級自然 磁鐵單元 互動教學</p>
+  <p>整合三個版本課本：翰林「磁鐵好好玩」、南一「磁鐵」、康軒「生活中的力・磁力」</p>
+  <p>照片：Canva 製作｜適用手機・平板・電腦</p>
+  <p><a href="../" style="color:#fff">← 回自然科</a>　<a href="/" style="color:#fff">← 回主選單</a></p>
+</footer>
+
+<div id="lb"><div class="box">
+  <div><div class="zoombox" id="lbZoom" data-nohot="1"></div></div>
+  <div class="txt"><span class="tag" id="lbTag"></span><h4 id="lbName"></h4><p id="lbText"></p>
+    <div class="nav"><button onclick="lbMove(-1)">◀ 上一張</button><button onclick="lbMove(1)">下一張 ▶</button><button onclick="lbZoomToggle()">🔍 放大/全圖</button><button class="x" onclick="lbClose()">✖ 關閉</button></div>
+    <div class="nums" id="lbNums"></div></div>
+</div></div>
+
+<div id="penLayer"><canvas id="penCanvas"></canvas></div>
+<div id="penBar">
+  <button class="c sel" style="background:#e5484d" data-c="#e5484d" aria-label="紅色N極吸引"></button>
+  <button class="c" style="background:#2f6fed" data-c="#2f6fed" aria-label="藍色S極排斥"></button>
+  <button class="c" style="background:#8b5cf6" data-c="#8b5cf6" aria-label="紫色磁力線"></button>
+  <button class="c" style="background:#f2b705" data-c="#f2b705" aria-label="黃色"></button>
+  <button class="c" style="background:#2f8f5b" data-c="#2f8f5b" aria-label="綠色"></button>
+  <button onclick="penClear()">🧽 清除</button>
+  <button onclick="togglePen()">✖ 關閉</button>
+</div>
+
+<script src="magnet3d.js?v=5"></script>
+<script src="exam.js?v=3"></script>
+<script>
+/* ===== 放大鏡資料：[名稱, x%, y%, 倍數, 說明] ===== */
+const ZOOM={
+ zChk:[['鐵製棋盤',25,45,2.2,'棋子下面有磁鐵，棋盤是<b>鐵做的</b>，所以棋子吸得住，棋盤立起來也不會掉。'],
+  ['紙製棋盤',72,76,2.2,'紙做的棋盤<b>不會被磁鐵吸引</b>，棋子一碰就滑走。']],
+ zRecycle:[['鐵罐',60,35,2.2,'<b>鐵罐</b>被磁鐵吸起來了！'],
+  ['鋁罐',40,85,2,'飲料<b>鋁罐</b>也是金屬，但<span class="k-red">不會</span>被磁鐵吸引，留在回收桶裡。']],
+ zWhite:[['磁鐵',38,15,3,'白板的表面下有<b>鐵板</b>，所以磁鐵吸得住。'],
+  ['紙張',57,43,2,'紙不會被吸，但磁鐵<b>隔著紙</b>吸住白板，就把紙<span class="key">夾住</span>了！']],
+ zHidden:[['磁吸漱口杯架',24,32,2.4,'杯子裡藏著鐵片或磁鐵，<b>隔著塑膠</b>吸在架子上，倒掛著很快就乾。'],
+  ['窗簾磁吸綁帶',73,47,2.6,'綁帶兩端<b>包著磁鐵</b>，隔著布也能互相吸住，把窗簾固定。']],
+ zFloat:[['磁鐵',50,18,3,'紙盒頂端內側黏了一個<b>圓形磁鐵</b>。'],
+  ['迴紋針',50,39,3.2,'迴紋針被磁力往上吸，<b>沒有碰到磁鐵</b>卻飄在空中！'],
+  ['棉線',50,70,2.4,'棉線把迴紋針拉住，所以迴紋針不會直接被吸上去。']],
+ zFil:[['N 極',30,48,2.6,'鐵粉在磁鐵的<b>一端</b>聚得最密，表示這裡磁力最強。'],
+  ['S 極',68,48,2.6,'另一端的鐵粉也很密，這裡也是<span class="key">磁極</span>。'],
+  ['磁力線',50,15,1.8,'鐵粉排成一條條彎彎的線，從一端繞到另一端，叫做<span class="k-field">磁力線</span>。']],
+ zHorse:[['左邊磁極',37,76,2.4,'馬蹄形磁鐵的<b>兩個端點</b>吸住最多迴紋針，這裡是磁極。'],
+  ['右邊磁極',75,76,2.4,'另一個端點也吸滿迴紋針，也是磁極。'],
+  ['彎曲的地方',50,12,2.4,'彎曲的中間部分只吸住<b>很少</b>迴紋針，磁力比較弱。']],
+ zRound:[['圓形的面',50,45,1.7,'圓形磁鐵的<span class="key">兩個面</span>是磁極，所以迴紋針吸滿整個面。'],
+  ['邊緣',90,55,2.6,'圓形磁鐵的邊緣吸得比較少。']],
+ zRing:[['最上面的環形磁鐵',50,14,2.6,'最上面的磁鐵<b>飄在空中</b>，沒有碰到下面的磁鐵！'],
+  ['中間的空隙',50,36,2.6,'相鄰兩個磁鐵的<b>相同磁極</b>相對，<span class="k-s">互相排斥</span>，所以中間留下空隙。'],
+  ['最下面',50,68,2.6,'最下面的磁鐵被上面的磁鐵推著，壓在底座上。翻面放回去，就會吸在一起（異極相吸）。']],
+ zBlack:[['標籤端',40,85,2.6,'先在黑色磁鐵的一端<b>貼標籤</b>做記號。'],
+  ['已知磁極的磁鐵',60,45,1.8,'拿<b>已經知道 N、S</b> 的磁鐵去靠近標籤端，看是吸引還是排斥。']],
+ zBroken:[['斷口',52,48,3,'斷掉的地方吸住了迴紋針，表示<b>斷口也有磁力</b>。'],
+  ['左段',28,48,1.8,'左段：一端是 <span class="k-n">N</span>，斷口變成新的 <span class="k-s">S</span>。'],
+  ['右段',78,48,1.8,'右段：斷口變成新的 <span class="k-n">N</span>，另一端是 <span class="k-s">S</span>。每一段都是一根完整的磁鐵！']],
+ zBag:[['磁鐵',50,31,3,'黑色磁鐵把塑膠袋吸在黑板上。'],
+  ['水平線',22,30,2.4,'粉筆畫的<b>水平線</b>：磁鐵滑下、離開這條線，就算吸不住了。'],
+  ['塑膠袋和書',50,72,1.8,'每次放進<b>一本相同的書</b>，數一數能放幾本。']],
+ zPlates:[['左邊鐵片',9,62,3,'磁鐵的一側加上一片<b>鐵片</b>。'],
+  ['磁鐵',50,52,1.6,'中間黑色的是磁鐵。'],
+  ['右邊鐵片',89,45,3,'另一側也加一片鐵片——<b>兩側都加</b>，吸力最強。']],
+ zStore:[['成對放',50,48,1.5,'兩根磁鐵並排，<span class="k-n">N</span> 對 <span class="k-s">S</span>、<span class="k-s">S</span> 對 <span class="k-n">N</span>（異極相吸），磁力不容易變弱。'],
+  ['左邊鐵片',13,48,3,'兩端加上<b>鐵片</b>，讓磁鐵的兩極吸在鐵片上。'],
+  ['右邊鐵片',87,48,3,'另一端也有鐵片。']],
+ zSand:[['磁鐵包在塑膠袋裡',40,42,2.2,'黑色的鐵砂隔著塑膠袋吸在外面。把磁鐵抽出來，鐵砂就掉下來了。']],
+ zLode:[['磁鐵礦',45,70,1.8,'磁鐵礦是<b>天然的磁鐵</b>，黑色或灰黑色、很堅硬。'],
+  ['鐵釘和迴紋針',80,33,2.6,'磁鐵礦可以吸住<b>鐵釘、迴紋針</b>等鐵製品。']],
+ zNd:[['疊在一起的',40,30,2.2,'銀色的<span class="key">釹鐵硼磁鐵</span>，體積小、磁力很強，又叫<b>強力磁鐵</b>。'],
+  ['方形',63,55,2.6,'可以做成方形、圓形、環形等各種形狀。'],
+  ['環形',75,72,2.4,'常用在手機、喇叭、電動車裡。⚠️ 磁力很強，會夾傷手指，要小心！']]
+};
+
+/* ===== 圖鑑資料：[圖片, 名稱, 標籤, 說明, x%, y%, 倍數] ===== */
+const G={
+ seen:[['fridge','冰箱門','吸得住','磁鐵吸在冰箱門上，冰箱門是<b>鐵</b>做的。',45,30,1.6],
+  ['whiteboard','白板','吸得住','教室的白板可以用磁鐵貼海報，白板裡面有<b>鐵板</b>。',38,15,2.2],
+  ['checkers','磁鐵跳棋','鐵製棋盤','棋子下面有磁鐵，吸在<b>鐵製棋盤</b>上，玩起來更方便。',25,45,2],
+  ['dartboard','磁鐵飛鏢','鏢靶','飛鏢前端是磁鐵，鏢靶裡面有<b>鐵</b>，所以飛鏢吸得住。',62,22,2.4],
+  ['students','用磁鐵測試','做實驗','拿磁鐵靠近各種物品，看看哪些會被吸引。',45,62,2]],
+ shapes:[['shapes','長條形磁鐵','兩端','磁極在<b>兩端</b>。常塗<span class="k-n">紅色（N）</span>和<span class="k-s">藍色（S）</span>，但要以<b>標示的 N、S</b> 為準。',14,50,3],
+  ['shapes','馬蹄形（U 形）磁鐵','兩個端點','像馬蹄或英文字母 U，磁極在<b>兩個端點</b>。',32,48,3],
+  ['shapes','圓形磁鐵','兩個面','磁極在<b>上下兩個面</b>。',52,55,3.2],
+  ['shapes','環形磁鐵','兩個面','中間有洞，磁極也在<b>兩個面</b>，可以套在筆上玩疊疊樂。',73,55,3.2],
+  ['ndfeb','釹鐵硼磁鐵','小但很強','體積小、磁力很強的<b>強力磁鐵</b>。磁力強弱<b>不是看大小</b>！',50,50,1.4]],
+ plate:[['doorstop','門擋','磁鐵＋鐵片','牆邊的門擋裡有磁鐵，旁邊加了<b>鐵片</b>；門上也有一片鐵，門打開就被吸住。',33,48,2.4],
+  ['cabinet','櫃子門','磁鐵＋鐵片','櫃子的磁鐵門扣吸住門上的<b>鐵片</b>，門就不會自己打開。',25,52,2.6],
+  ['plates','磁鐵加鐵片','兩側各一片','把磁鐵夾在<b>兩片鐵片</b>中間，就是門擋、置物盒裡常見的樣子。',50,52,1.4]],
+ taiwan:[['mountain','陽明山的大磁石','菜公坑山','陽明山<b>菜公坑山頂</b>有一顆巨大的天然磁石，指南針放在旁邊會亂轉。',45,40,1.6],
+  ['ironsand','海邊的黑沙','鐵砂','臺灣北部、西部的<b>海沙</b>裡有黑色的磁鐵礦砂，用包著塑膠袋的磁鐵就能吸起來。',40,42,2],
+  ['lodestone','磁鐵礦','磁石・鐵黑','黑色或灰黑色的<b>天然磁鐵</b>，能吸引鐵製品。',45,65,1.6]],
+ hiddenmag:[['life3','提款卡、存摺','磁條','背面<b>黑色的磁條</b>裡儲存很多資料，靠近強磁鐵或被刮壞，資料就消失了！',30,80,2.4],
+  ['life3','防盜磁扣','強力磁鐵','衣服上的防盜扣用力拉也拉不開，店員用<b>強力磁鐵</b>把裡面的鐵環和鋼珠吸開，才能取下。',75,80,2.4],
+  ['life3','磁吸充電','磁吸','智慧手錶的充電線靠<b>磁鐵吸住</b>金屬，不會掉，又能直接充電。',75,25,2.4],
+  ['life3','磁吸手機架','磁吸','車上的磁吸手機架，手機背面貼鐵片就能吸住。',25,25,2.4]]
+};
+const LIFE=[['吸引鐵製品',[
+  ['life1','磁鐵釣魚組','吸引鐵製品','釣竿前端有磁鐵，吸起魚嘴上的<b>鐵製品</b>（鐵片或螺絲）。',25,25,2.2],
+  ['life1','磁性螺絲起子','吸引鐵製品','起子前端有磁鐵，可以吸住<b>鐵製的螺絲釘</b>，方便工作。',75,70,2.2],
+  ['life2','迴紋針收納盒','吸引鐵製品','上面有磁鐵，迴紋針吸在上面，方便收納、取用。',25,75,2.2],
+  ['checkers','磁鐵跳棋','吸引鐵製品','棋子下方有磁鐵，吸在<b>鐵製棋盤</b>上。',25,45,2],
+  ['dartboard','磁鐵飛鏢','吸引鐵製品','飛鏢吸在鏢靶上，比尖尖的飛鏢更安全。',62,22,2.4],
+  ['life2','磁鐵掛鉤','吸引鐵製品','掛鉤吸在<b>白板</b>上，幫忙掛袋子、固定物品。',75,25,2.2]]],
+ ['隔著物品也能吸',[
+  ['fridge','冰箱貼','隔著紙','磁鐵<b>隔著畫紙</b>吸住冰箱門，把畫固定。',42,40,2.4],
+  ['life2','磁鐵書籤','隔著紙','書籤兩片都有磁鐵，<b>隔著書頁</b>互相吸住，取用方便不散落。',25,25,2.2],
+  ['hidden','磁吸漱口杯架','藏起來的磁鐵','磁鐵包在裡面，隔著塑膠也能吸住。',24,32,2.4],
+  ['hidden','窗簾磁吸綁帶','藏起來的磁鐵','磁鐵包在布裡面，綁帶一碰就吸住。',73,47,2.6]]],
+ ['磁鐵＋鐵片 吸力更強',[
+  ['fridge','冰箱收納盒','磁鐵＋鐵片','收納盒背面的磁鐵加了鐵片，可以裝很多東西也不會掉。',38,86,2.4],
+  ['life1','磁吸鉛筆盒','磁鐵＋鐵片','鉛筆盒利用磁鐵吸住<b>蓋子上的鐵片</b>，蓋子關得緊緊的。',25,75,2.2],
+  ['life2','包包磁扣','磁鐵＋鐵片','皮包開口的磁扣吸住鐵片，把開口扣緊。',75,75,2.2],
+  ['fridge','冰箱磁性封條','磁性封條','冰箱門邊有<b>磁性封條</b>，把門封得緊緊的，冷氣不會跑出來。',80,50,2.6],
+  ['doorstop','門擋','磁鐵＋鐵片','把門固定在門擋上，風吹也不會亂關。',33,48,2.4]]],
+ ['異極相吸',[
+  ['life1','磁力小火車','異極相吸','車廂之間用磁鐵連接，<b>N 對 S</b> 才吸得住；接反了（同極）車廂會被推開！',75,20,2.2]]]
+];
+
+/* ===== 會不會被吸：[圖片, 名稱, yes/no, 說明] ===== */
+const SORT=[['objA1','鐵釘','yes','鐵做的'],['objB1','橡皮擦','no','橡膠'],['objA2','迴紋針','yes','鐵做的'],['objB5','硬幣','no','金屬但不是鐵'],
+ ['objA3','長尾夾','yes','鐵做的'],['objB2','鉛筆','no','木頭'],['objA6','鐵罐','yes','鐵做的'],['objB6','鋁罐','no','鋁，不是鐵'],
+ ['objA4','鐵尺','yes','鐵做的'],['objB8','塑膠尺','no','塑膠'],['objA5','釘書針','yes','鐵做的'],['objB4','便條紙','no','紙'],
+ ['objA9','剪刀','yes','刀刃是鐵'],['objB7','木塊','no','木頭'],['objA7','鐵盒','yes','鐵做的'],['objB3','膠水','no','塑膠'],
+ ['objA8','釘書機','yes','鐵的部分'],['objB9','膠帶','no','塑膠']];
+
+
+/* ===== 首頁卡片 / 課程架構 ===== */
+const lessons=[...document.querySelectorAll('.lesson')];
+const grid=document.getElementById('lessonGrid');
+lessons.forEach(sec=>{
+  const b=document.createElement('button');b.className='lcard';b.onclick=()=>go(sec.id);
+  b.innerHTML=`<div class="pic" style="background-image:url('${sec.dataset.pic.replace('images/','images/thumb/')}')"></div><div class="t"><span class="no">${sec.dataset.no}</span><span class="nm">${sec.dataset.title}</span></div>`;
+  grid.appendChild(b);
+  const head=document.createElement('div');head.className='lhead';
+  head.innerHTML=`<span class="badge">${sec.dataset.no}</span><h2>${sec.dataset.title}</h2>`;
+  const steps=[...sec.querySelectorAll(':scope > .step')];
+  const bar=document.createElement('nav');bar.className='stepbar';
+  steps.forEach((st,i)=>{
+    const h=document.createElement('h3');h.innerHTML=`<span class="n">${i+1}</span>${st.dataset.label}`;st.prepend(h);
+    const c=document.createElement('button');c.textContent=i+1;c.title=st.dataset.label;c.onclick=()=>setStep(sec,i);bar.appendChild(c);
+  });
+  const nav=document.createElement('div');nav.className='stepnav';
+  nav.innerHTML='<button class="prev">◀ 上一步</button><button class="next">下一步 ▶</button>';
+  nav.querySelector('.prev').onclick=()=>setStep(sec,sec._i-1);
+  nav.querySelector('.next').onclick=()=>{ if(sec._i<steps.length-1) setStep(sec,sec._i+1); else nextLesson(sec); };
+  sec.prepend(bar);sec.prepend(head);sec.appendChild(nav);
+  sec._steps=steps;sec._bar=bar;sec._nav=nav;sec._i=0;
+});
+function setStep(sec,i){
+  if(i<0||i>=sec._steps.length)return;
+  sec._i=i;
+  sec._steps.forEach((s,k)=>s.classList.toggle('on',k===i));
+  [...sec._bar.children].forEach((c,k)=>{c.classList.toggle('on',k===i);if(k===i)c.classList.add('seen')});
+  sec._nav.querySelector('.prev').disabled=i===0;
+  const last=i===sec._steps.length-1, idx=lessons.indexOf(sec);
+  sec._nav.querySelector('.next').textContent= last ? (idx<lessons.length-1?'下一課 ▶':'回首頁 🏠') : '下一步 ▶';
+  const top=sec.getBoundingClientRect().top+scrollY-70; if(scrollY>top) scrollTo({top,behavior:'smooth'});
+  sec._steps[i].querySelectorAll('.zoombox').forEach(z=>z._reset&&z._reset());
+  const p3=sec._steps[i].querySelector('#m3dBox'); if(p3&&window.Magnet3D) Magnet3D.init(p3);
+}
+function nextLesson(sec){const i=lessons.indexOf(sec);go(i<lessons.length-1?lessons[i+1].id:'home');}
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('show',p.id===id));
+  const sec=document.getElementById(id);
+  document.getElementById('nowTitle').textContent= id==='home'?'磁鐵好好玩':`${sec.dataset.no}｜${sec.dataset.title}`;
+  if(sec.classList.contains('lesson'))setStep(sec,sec._i||0);
+  if(location.hash!=='#'+id)history.pushState(null,'','#'+id);
+  scrollTo(0,0);
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-show]');if(!b)return;
+  b.classList.add('on');const t=document.getElementById(b.dataset.show);if(t)t.classList.add('show');
+});
+
+/* ===== 放大鏡 ===== */
+function makeZoom(box,img){
+  box.innerHTML=`<div class="zin"><img loading="lazy" decoding="async" src="${img}" alt=""></div><div class="ring"></div><span class="zlabel"></span><button class="back">↩ 全圖</button>`;
+  const zin=box.querySelector('.zin'),ring=box.querySelector('.ring');
+  box._zoom=(x,y,s,label)=>{
+    const W=box.clientWidth,H=box.clientHeight;
+    let tx=W/2-x/100*W*s, ty=H/2-y/100*H*s;
+    tx=Math.min(0,Math.max(W-W*s,tx)); ty=Math.min(0,Math.max(H-H*s,ty));
+    zin.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;
+    ring.style.left=(x/100*W*s+tx)+'px'; ring.style.top=(y/100*H*s+ty)+'px';
+    box.classList.add('zoomed'); box.querySelector('.zlabel').textContent=label||'';
+  };
+  box._reset=()=>{zin.style.transform='';box.classList.remove('zoomed');ring.style.left='50%';ring.style.top='50%';box._onreset&&box._onreset();};
+  box.querySelector('.back').onclick=()=>box._reset();
+}
+document.querySelectorAll('.zoombox[data-img]').forEach(box=>{
+  makeZoom(box,box.dataset.img);
+  const parts=ZOOM[box.id]; if(!parts)return;
+  const info=document.getElementById(box.id+'-info')||document.createElement('div'), wrap=document.querySelector(`[data-zoom="${box.id}"]`), btns=[];
+  const pick=i=>{const p=parts[i];box._zoom(p[1],p[2],p[3],`${i+1}. ${p[0]}`);btns.forEach((b,k)=>b.classList.toggle('on',k===i));info.innerHTML=`<h4>🔍 ${i+1}. ${p[0]}</h4><p>${p[4]}</p>`;};
+  parts.forEach((p,i)=>{
+    if(!box.dataset.nohot){const h=document.createElement('button');h.className='hot';h.textContent=i+1;h.style.left=p[1]+'%';h.style.top=p[2]+'%';h.onclick=()=>pick(i);box.appendChild(h);}
+    if(wrap){const b=document.createElement('button');b.className='bb';b.innerHTML=`<span class="num">${i+1}</span>${p[0]}`;b.onclick=()=>pick(i);wrap.appendChild(b);btns.push(b);}
+  });
+  if(wrap){const a=document.createElement('button');a.className='bb';a.textContent='🔍 全圖';a.onclick=()=>box._reset();wrap.appendChild(a);}
+  box._onreset=()=>btns.forEach(b=>b.classList.remove('on'));
+});
+addEventListener('resize',()=>document.querySelectorAll('.zoombox').forEach(z=>z._reset&&z._reset()));
+
+/* ===== 圖鑑 + 燈箱 ===== */
+let LB={list:[],i:0,zoomed:false};
+const lbBox=document.getElementById('lbZoom');
+function renderGallery(el,list){
+  el.classList.add('gallery');
+  list.forEach((it,i)=>{
+    const c=document.createElement('button');c.className='gcard';
+    c.innerHTML=`<span class="gno">${i+1}</span><img loading="lazy" decoding="async" src="images/thumb/${it[0]}.webp" alt="${it[1]}"><span class="gt"><b>${it[1]}</b><span class="tag">${it[2]}</span></span>`;
+    c.onclick=()=>{c.classList.add('seen');lbOpen(list,i,el);};
+    el.appendChild(c);
+  });
+}
+document.querySelectorAll('[data-g]').forEach(el=>renderGallery(el,G[el.dataset.g]));
+function groups(boxId,data){const box=document.getElementById(boxId);data.forEach(([t,list])=>{const h=document.createElement('div');h.className='gsec';h.textContent=t;box.appendChild(h);const g=document.createElement('div');box.appendChild(g);renderGallery(g,list);});}
+groups('lifeBox',LIFE);
+function lbOpen(list,i,el){LB.list=list;LB.el=el;document.getElementById('lb').classList.add('on');lbShow(i);}
+function lbShow(i){
+  LB.i=(i+LB.list.length)%LB.list.length;const it=LB.list[LB.i];
+  const im=new Image();im.src=`images/${it[0]}.webp`;
+  im.onload=()=>{lbBox.style.aspectRatio=`${im.naturalWidth}/${im.naturalHeight}`;makeZoom(lbBox,im.src);
+    setTimeout(()=>{lbBox._zoom(it[4],it[5],it[6],it[1]);LB.zoomed=true;},450);};
+  document.getElementById('lbTag').textContent=it[2];
+  document.getElementById('lbName').textContent=`${LB.i+1}. ${it[1]}`;
+  document.getElementById('lbText').innerHTML=it[3];
+  const nums=document.getElementById('lbNums');nums.innerHTML='';
+  LB.list.forEach((_,k)=>{const b=document.createElement('button');b.textContent=k+1;if(k===LB.i)b.classList.add('on');b.onclick=()=>lbShow(k);nums.appendChild(b);});
+  if(LB.el)LB.el.querySelectorAll('.gcard')[LB.i]?.classList.add('seen');
+}
+function lbMove(d){lbShow(LB.i+d);}
+function lbZoomToggle(){const it=LB.list[LB.i];if(LB.zoomed){lbBox._reset();LB.zoomed=false;}else{lbBox._zoom(it[4],it[5],it[6],it[1]);LB.zoomed=true;}}
+function lbClose(){document.getElementById('lb').classList.remove('on');}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')lbClose();});
+addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('on'))return;if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);if(e.key==='Escape')lbClose();});
+
+
+
+/* ===== 會不會被磁鐵吸引（先猜再看） ===== */
+let sortRight=0,sortDone=0;
+SORT.forEach(([img,n,c,why])=>{const d=document.createElement('div');d.className='sort-item '+c;
+  d.innerHTML=`<img loading="lazy" decoding="async" src="images/thumb/${img}.webp" alt="${n}"><b>${n}</b><span class="guess"><button data-g="yes">會</button><button data-g="no">不會</button></span><span class="ans">${c==='yes'?'🧲 會被吸':'✕ 不會'}・${why}</span>`;
+  d.querySelectorAll('.guess button').forEach(b=>b.onclick=e=>{e.stopPropagation();d.querySelectorAll('.guess button').forEach(x=>x.classList.toggle('pick',x===b));d._g=b.dataset.g;});
+  d.onclick=()=>{if(d.classList.contains('done'))return;d.classList.add('done');
+    if(d._g){sortDone++;if(d._g===c)sortRight++;sortScore.innerHTML=`🎯 猜對 <b>${sortRight}</b> / ${sortDone} 個`;}
+    if(document.querySelectorAll('#sortGrid .done').length===SORT.length)sortScore.innerHTML+=(sortScore.innerHTML?'<br>':'')+'✅ 會被吸的都是<span class="key">鐵製品</span>！硬幣、鋁罐是金屬，但不是鐵，所以不會被吸。';};
+  sortGrid.appendChild(d);});
+
+/* ===== 第2課：隔著物品 ===== */
+function thr(k,b){b.classList.add('on');
+  if(k===1){thrBoard.style.opacity=1;thrTxt.innerHTML='<p>🟨 磁鐵和迴紋針中間隔著一片<b>塑膠墊板</b>（黃色那層），磁鐵<b>沒有碰到</b>迴紋針。</p>';}
+  if(k===2){thrArrow.style.opacity=1;thrTxt.innerHTML='<p>🔴 迴紋針還是被吸上來了！<span class="k-red">磁力穿過墊板</span>，把迴紋針往上吸（紅色箭頭）。</p>';}
+  if(k===3)thrTxt.innerHTML='<p>✅ 磁鐵<b>不用碰到</b>、或<b>隔著物品</b>（紙、墊板、塑膠袋），都能吸引鐵製品。</p>';}
+function thick(n,b){document.querySelectorAll('#m2 [onclick^="thick"]').forEach(x=>x.classList.toggle('on',x===b));
+  const box=document.getElementById('thick');box.classList.toggle('on',n>=5);
+  thickTxt.innerHTML={1:'<p>📄 隔一張薄墊板：迴紋針<b>吸得起來</b>。</p>',2:'<p>📘 隔一本習作：還是<b>吸得起來</b>，但要靠近一點。</p>',
+    5:'<p>📚 隔五本習作：迴紋針<span class="k-red">留在桌上</span>，吸不起來了！</p><p>✅ 隔著的物品<b>太厚</b>，磁鐵就不能吸引鐵製品。</p>'}[n];}
+
+/* ===== 第3課：磁極 ===== */
+function pole(k,b){b.classList.add('on');
+  if(k===1){pEnd.style.opacity=1;labN.classList.add('show');labS.classList.add('show');poleTxt.innerHTML='<p>🧷 磁鐵的<b>兩端</b>吸住了一大串迴紋針！</p>';}
+  if(k===2){pMid.style.opacity=1;labM.classList.add('show');poleTxt.innerHTML='<p>🤏 磁鐵的<b>中間</b>幾乎吸不到迴紋針。</p>';}
+  if(k===3)poleTxt.innerHTML='<p>✅ 同一個磁鐵，不同位置的磁力強弱<b>不一樣</b>。磁力<b>最強</b>的地方叫做<span class="key">磁極</span>，分別是 <span class="k-n">N 極</span>和 <span class="k-s">S 極</span>。</p><p>長條形磁鐵的磁極在<b>兩端</b>。</p>';}
+
+/* ===== 第4課：兩根磁鐵 ===== */
+function setMag(el,flip){el.classList.toggle('flip',flip);const [l,r]=el.querySelectorAll('.pl');
+  l.textContent=flip?'S':'N';l.style.color=flip?'var(--s)':'var(--n)';r.textContent=flip?'N':'S';r.style.color=flip?'var(--n)':'var(--s)';}
+function pair(fl,fr,b){document.querySelectorAll('#pairBtns .bb').forEach(x=>x.classList.toggle('on',x===b));
+  const L=magL,R=magR,attract=fl!==fr;
+  setMag(L,fl==='N');setMag(R,fr==='S');
+  R.style.transition='none';R.style.left='60%';R.getBoundingClientRect();R.style.transition='';
+  bang.classList.remove('on');pairSvg.innerHTML='';
+  pairTxt.innerHTML=`<p>磁鐵 A 的 <span class="k-${fl.toLowerCase()}">${fl} 極</span>，對著磁鐵 B 的 <span class="k-${fr.toLowerCase()}">${fr} 極</span>……B 慢慢靠近……</p>`;
+  setTimeout(()=>{R.style.left=attract?'42%':'50%';},250);
+  setTimeout(()=>{
+    if(attract){bang.textContent='啪！吸住了';bang.style.color='var(--n)';bang.classList.add('on');
+      pairSvg.innerHTML='<path class="flowline" d="M200 540 L640 540" stroke="#e5484d" stroke-width="22"/><path class="flowline" d="M1150 540 L705 540" stroke="#e5484d" stroke-width="22"/>';
+      pairTxt.innerHTML=`<p>🔴 <b>${fl} 極</b>和 <b>${fr} 極</b>是<span class="k-red">不同磁極</span>，互相<b>吸引</b>，緊緊吸在一起！</p><p>✅ <span class="key">異極相吸</span></p>`;}
+    else{R.style.left='61%';R.classList.add('shake');setTimeout(()=>R.classList.remove('shake'),800);
+      bang.textContent='推開了！';bang.style.color='var(--s)';bang.classList.add('on');
+      pairSvg.innerHTML='<path class="flowline" d="M770 540 L250 540" stroke="#2f6fed" stroke-width="22"/><path class="flowline" d="M880 540 L1450 540" stroke="#2f6fed" stroke-width="22"/>';
+      pairTxt.innerHTML=`<p>🔵 <b>${fl} 極</b>和 <b>${fr} 極</b>是<span class="k-s">相同磁極</span>，互相<b>排斥</b>，B 被推開了！</p><p>✅ <span class="key">同極相斥</span></p>`;}
+  },1250);}
+setMag(magL,false);setMag(magR,false);
+
+/* ===== 第5課：加鐵片實驗 ===== */
+const CAP={no:2,two:5},BK={no:0,two:0,cur:null,fell:false};
+function bookReset(){BK.no=BK.two=0;BK.cur=null;BK.fell=false;bookRow.innerHTML='';const im=document.querySelector('#zBag .zin');im.classList.remove('fall');
+  bookTxt.innerHTML='<p class="ph">👆 先點「不加鐵片」一本一本放，再換「兩面加鐵片」。</p>';}
+function book(k,b){const im=document.querySelector('#zBag .zin');im.classList.add('drop2');
+  if(BK.cur!==k){BK.cur=k;BK[k]=0;BK.fell=false;bookRow.innerHTML='';im.classList.remove('fall');}
+  if(BK.fell)return;BK[k]++;
+  const nm=k==='no'?'不加鐵片':'兩面加鐵片';
+  bookRow.innerHTML+=`<b>📘 ${BK[k]}</b>`;
+  if(BK[k]>CAP[k]){BK.fell=true;im.classList.add('fall');document.getElementById('zBag').classList.add('shakeit');setTimeout(()=>document.getElementById('zBag').classList.remove('shakeit'),900);
+    bookTxt.innerHTML=`<p>💥 放到第 ${BK[k]} 本，磁鐵<span class="k-red">滑下來</span>了！</p><p>➡️ <b>${nm}</b>可以掛 <span class="key">${CAP[k]} 本</span>書。</p>`;}
+  else bookTxt.innerHTML=`<p>${nm}：已經放了 <b>${BK[k]}</b> 本，磁鐵還吸得住 👍</p>`;}
+function bars(b){b.classList.add('on');bar0.style.width='34%';bar0.textContent='2 本';bar1.style.width='85%';bar1.textContent='5 本';}
+
+/* ===== 生活應用分組圖鑑 ===== */
+
+function goStep(lid,label){go(lid);const sec=document.getElementById(lid);const i=sec._steps.findIndex(s=>s.dataset.label===label);setStep(sec,i<0?0:i);}
+function renderExam(box,list,ana){
+  const sc=box.parentNode.querySelector('.score');let right=0,done=0;
+  const upd=()=>sc.textContent=`答對 ${right} / ${done}　（共 ${list.length} 題）`;
+  list.forEach((it,i)=>{const opts=it[2]==='TF'?['○ 對','✕ 錯']:it[2];const d=document.createElement('div');d.className='q';d.dataset.ans=it[3];const A=ana&&ana[i];
+    const lab=k=>it[2]==='TF'?opts[k]:'('+(k+1)+') '+opts[k];
+    let panel=`<div class="ana"><p class="ans-line">✅ 正確答案：<b>${lab(it[3])}</b></p>`;
+    if(A){const sec=document.getElementById(A.go[0]);
+      panel+=`<p><span class="anak">考點</span>${A.k}</p><p>${A.ok}</p><ul class="opnotes">${opts.map((o,k)=>A.ops[k]&&A.ops[k]!=='—'?`<li data-k="${k}" class="${k===it[3]?'okk':''}"><b>${lab(k)}</b>：${A.ops[k].replace(/^✔ ?/,'')}</li>`:'').join('')}</ul><p class="teach">👩‍🏫 <b>教學提示：</b>${A.t}</p><button class="bb back2" onclick="goStep('${A.go[0]}','${A.go[1]}')">👉 回到「${sec.dataset.no}・${A.go[1]}」複習</button>`;}
+    else panel+=`<p>💡 ${it[4]}</p>`;
+    panel+='</div>';
+    d.innerHTML=`${it[0]?`<img loading="lazy" decoding="async" src="images/thumb/${it[0]}.webp" alt="">`:''}<div class="qbody"><div class="qt">${i+1}. ${it[2]==='TF'?'<span class="tfbadge">是非</span>':''}${it[1]}</div><div class="opts">${opts.map((o,k)=>`<button data-k="${k}">${lab(k)}</button>`).join('')}</div><div class="why">💡 ${it[4]}</div><button class="anabtn">📖 解析</button>${panel}</div>`;
+    const showWrong=k=>{d.querySelectorAll('.opnotes li').forEach(li=>li.classList.toggle('picked',+li.dataset.k===k));};
+    d.querySelector('.anabtn').onclick=()=>d.classList.toggle('showana');
+    d.querySelectorAll('.opts button').forEach(btn=>btn.onclick=()=>{if(d.classList.contains('done'))return;const k=+btn.dataset.k;
+      if(k===it[3]){btn.classList.add('right');d.classList.add('done');done++;if(!d._miss)right++;}
+      else{btn.classList.add('wrong');d._miss=true;if(A){showWrong(k);d.classList.add('showana');}}upd();});
+    box.appendChild(d);});upd();}
+function teacherMode(b){const on=b.classList.toggle('on');b.textContent=on?'👩‍🏫 老師模式：開（顯示全部答案與解析）':'👩‍🏫 老師模式：關';
+  document.querySelectorAll('#m9 .q').forEach(q=>{q.classList.toggle('showana',on);q.classList.toggle('teacher',on);q.querySelector(`.opts button[data-k="${q.dataset.ans}"]`).classList.toggle('tright',on);});}
+document.querySelectorAll('.exq').forEach(b=>{const k=b.dataset.ex;renderExam(b,k==='mock'?QUIZ.concat(MOCK):EX[k],k==='mock'?MOCK_A:null);});
+mockN.textContent=QUIZ.length+MOCK.length;
+
+/* ===== 畫筆 ===== */
+const cv=document.getElementById('penCanvas'),ctx=cv.getContext('2d');let penColor='#e5484d',drawing=false,last=null;
+function sizeCanvas(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;ctx.setTransform(r,0,0,r,0,0);ctx.lineCap='round';ctx.lineJoin='round';}
+function togglePen(){const on=!penLayer.classList.contains('on');penLayer.classList.toggle('on',on);penBar.classList.toggle('on',on);if(on&&!cv._s){sizeCanvas();cv._s=1;}}
+function penClear(){ctx.clearRect(0,0,cv.width,cv.height);}
+document.querySelectorAll('#penBar .c').forEach(b=>b.onclick=()=>{penColor=b.dataset.c;document.querySelectorAll('#penBar .c').forEach(x=>x.classList.toggle('sel',x===b));});
+cv.addEventListener('pointerdown',e=>{drawing=true;last=[e.clientX,e.clientY];cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{if(!drawing)return;ctx.strokeStyle=penColor;ctx.globalAlpha=.85;ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(...last);ctx.lineTo(e.clientX,e.clientY);ctx.stroke();last=[e.clientX,e.clientY];});
+['pointerup','pointercancel'].forEach(t=>cv.addEventListener(t,()=>drawing=false));
+addEventListener('resize',()=>{if(cv._s)sizeCanvas();});
+
+const start=location.hash.slice(1);go(document.getElementById(start)?start:'home');
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(document.getElementById(h))go(h);});
+</script>
+</body>
+</html>
