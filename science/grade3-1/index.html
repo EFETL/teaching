@@ -178,6 +178,21 @@ img{max-width:100%;display:block}
 .p3d-info h4{font-weight:800;color:var(--g-d);margin-bottom:6px}
 
 /* 測驗 */
+.q .qbody{flex:1;min-width:0}
+.anabtn{margin-top:12px;background:var(--earth-l);color:var(--earth);border-radius:14px;padding:4px 18px;font-weight:700}
+.ana{display:none;margin-top:14px;background:#f4f9f5;border-left:10px solid var(--g);border-radius:14px;padding:14px 18px}
+.q.showana .ana{display:block}
+.ana p{margin:6px 0}
+.anak{display:inline-block;background:var(--g);color:#fff;border-radius:10px;padding:0 12px;margin-right:10px;font-weight:700}
+.opnotes{margin:8px 0 8px 1.2em}
+.opnotes li{margin:4px 0}
+.opnotes li.okk{color:var(--g-d)}
+.opnotes li.okk b::after{content:" ✔"}
+.opnotes li.picked{background:#fde7e7;border-radius:10px;padding:2px 8px;color:var(--red)}
+.teach{background:#fff8dc;border-radius:12px;padding:8px 12px}
+.q.teacher .opts button[data-k]{pointer-events:none}
+.back2{margin-top:8px}
+.q .opts button.tright{background:#dff5e7;border-color:var(--g);color:var(--g-d);font-weight:800}
 .tfbadge{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:10px;padding:0 10px;margin-right:8px}
 .qt-table{border-collapse:collapse;margin:8px 0 12px;max-width:100%}
 .qt-table th,.qt-table td{border:2px solid #cfdcd3;padding:4px 12px;text-align:center}
@@ -829,7 +844,8 @@ footer p{max-width:900px;margin:0 auto 8px}
 <!-- ===== 第10課 ===== -->
 <section class="page lesson" id="l10" data-no="複習" data-title="模擬段考" data-pic="images/obs_look.webp">
   <div class="step" data-label="模擬段考">
-    <p style="margin-bottom:14px">綜合各校段考題型，共 <b id="mockN"></b> 題。</p>
+    <p style="margin-bottom:14px">綜合各校段考題型，共 <b id="mockN"></b> 題。每題都有 <b>📖 解析</b>；答錯時會說明為什麼錯。</p>
+    <div class="big-btns"><button class="bb" onclick="teacherMode(this)">👩‍🏫 老師模式：關</button></div>
     <div class="exq" data-ex="mock"></div>
     <span class="score"></span>
   </div>
@@ -862,6 +878,7 @@ footer p{max-width:900px;margin:0 auto 8px}
 
 <script src="plant3d.js"></script>
 <script src="exam.js"></script>
+<script src="exam_analysis.js"></script>
 <script>
 /* ===== 放大鏡資料：[名稱, x%, y%, 倍數, 說明] ===== */
 const ZOOM={
@@ -1190,15 +1207,27 @@ const QUIZ=[
  ['plantbox','水分在植物身體裡往哪裡走？',['從葉子往下到根','從根往上到葉子'],1,'藍色箭頭：根吸水，經過莖往上送。'],
  ['bodhi','菩提葉的尾尖有什麼功能？',['儲存水分','讓雨水滑落','吸引鳥'],1,'菩提生長在多雨的地方。'],
  ['goldenrain','臺灣欒樹的果實怎麼傳播種子？',['靠風','靠鳥','靠水'],0,'像氣球一樣又輕又薄，靠風傳播。']];
-function renderExam(box,list){
+function goStep(lid,label){go(lid);const sec=document.getElementById(lid);const i=sec._steps.findIndex(s=>s.dataset.label===label);setStep(sec,i<0?0:i);}
+function renderExam(box,list,ana){
   const sc=box.parentNode.querySelector('.score');let right=0,done=0;
   const upd=()=>sc.textContent=`答對 ${right} / ${done}　（共 ${list.length} 題）`;
-  list.forEach((it,i)=>{const opts=it[2]==='TF'?['○ 對','✕ 錯']:it[2];const d=document.createElement('div');d.className='q';
-    d.innerHTML=`${it[0]?`<img loading="lazy" decoding="async" src="images/thumb/${it[0]}.webp" alt="">`:''}<div><div class="qt">${i+1}. ${it[2]==='TF'?'<span class="tfbadge">是非</span>':''}${it[1]}</div><div class="opts">${opts.map((o,k)=>`<button data-k="${k}">${it[2]==='TF'?o:'('+(k+1)+') '+o}</button>`).join('')}</div><div class="why">💡 ${it[4]}</div></div>`;
-    d.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{if(d.classList.contains('done'))return;const k=+btn.dataset.k;
-      if(k===it[3]){btn.classList.add('right');d.classList.add('done');done++;if(!d._miss)right++;}else{btn.classList.add('wrong');d._miss=true;}upd();});
+  list.forEach((it,i)=>{const opts=it[2]==='TF'?['○ 對','✕ 錯']:it[2];const d=document.createElement('div');d.className='q';d.dataset.ans=it[3];const A=ana&&ana[i];
+    const lab=k=>it[2]==='TF'?opts[k]:'('+(k+1)+') '+opts[k];
+    let panel=`<div class="ana"><p class="ans-line">✅ 正確答案：<b>${lab(it[3])}</b></p>`;
+    if(A){const sec=document.getElementById(A.go[0]);
+      panel+=`<p><span class="anak">考點</span>${A.k}</p><p>${A.ok}</p><ul class="opnotes">${opts.map((o,k)=>A.ops[k]&&A.ops[k]!=='—'?`<li data-k="${k}" class="${k===it[3]?'okk':''}"><b>${lab(k)}</b>：${A.ops[k].replace(/^✔ ?/,'')}</li>`:'').join('')}</ul><p class="teach">👩‍🏫 <b>教學提示：</b>${A.t}</p><button class="bb back2" onclick="goStep('${A.go[0]}','${A.go[1]}')">👉 回到「${sec.dataset.no}・${A.go[1]}」複習</button>`;}
+    else panel+=`<p>💡 ${it[4]}</p>`;
+    panel+='</div>';
+    d.innerHTML=`${it[0]?`<img loading="lazy" decoding="async" src="images/thumb/${it[0]}.webp" alt="">`:''}<div class="qbody"><div class="qt">${i+1}. ${it[2]==='TF'?'<span class="tfbadge">是非</span>':''}${it[1]}</div><div class="opts">${opts.map((o,k)=>`<button data-k="${k}">${lab(k)}</button>`).join('')}</div><div class="why">💡 ${it[4]}</div><button class="anabtn">📖 解析</button>${panel}</div>`;
+    const showWrong=k=>{d.querySelectorAll('.opnotes li').forEach(li=>li.classList.toggle('picked',+li.dataset.k===k));};
+    d.querySelector('.anabtn').onclick=()=>d.classList.toggle('showana');
+    d.querySelectorAll('.opts button').forEach(btn=>btn.onclick=()=>{if(d.classList.contains('done'))return;const k=+btn.dataset.k;
+      if(k===it[3]){btn.classList.add('right');d.classList.add('done');done++;if(!d._miss)right++;}
+      else{btn.classList.add('wrong');d._miss=true;if(A){showWrong(k);d.classList.add('showana');}}upd();});
     box.appendChild(d);});upd();}
-document.querySelectorAll('.exq').forEach(b=>{const k=b.dataset.ex;renderExam(b,k==='mock'?QUIZ.concat(MOCK):EX[k]);});
+function teacherMode(b){const on=b.classList.toggle('on');b.textContent=on?'👩‍🏫 老師模式：開（顯示全部答案與解析）':'👩‍🏫 老師模式：關';
+  document.querySelectorAll('#l10 .q').forEach(q=>{q.classList.toggle('showana',on);q.classList.toggle('teacher',on);q.querySelector(`.opts button[data-k="${q.dataset.ans}"]`).classList.toggle('tright',on);});}
+document.querySelectorAll('.exq').forEach(b=>{const k=b.dataset.ex;renderExam(b,k==='mock'?QUIZ.concat(MOCK):EX[k],k==='mock'?MOCK_A:null);});
 mockN.textContent=QUIZ.length+MOCK.length;
 
 /* ===== 畫筆 ===== */
