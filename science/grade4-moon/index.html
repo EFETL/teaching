@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>月亮 3D 動畫教室</title>
+<style>
+:root{
+  --navy:#1b2550; --navy2:#2c3a78; --gold:#f2b84b; --ink:#1d2433; --muted:#5b6478;
+  --bg:#f3f5fa; --card:#ffffff; --line:#e2e6ef; --blue:#2f6fd6; --sea:#3b6fb6; --crater:#c8722e; --mount:#2f8a57;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:18px/1.6 "PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+header.top{background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff;padding:22px 0 18px}
+header.top h1{margin:0;font-size:30px;letter-spacing:1px}
+header.top p{margin:4px 0 0;opacity:.85;font-size:17px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.tabs button{font:inherit;font-size:18px;border:0;border-radius:999px;padding:10px 20px;background:#fff;color:var(--navy);cursor:pointer;box-shadow:0 1px 3px rgba(20,30,60,.12)}
+.tabs button.on{background:var(--gold);color:#3a2a00;font-weight:700}
+main.grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:20px;margin-top:16px;margin-bottom:28px}
+@media (max-width:920px){main.grid{grid-template-columns:minmax(0,1fr)}}
+main.grid>*{min-width:0}
+#stage{position:relative;height:min(70vh,640px);min-height:380px;border-radius:20px;overflow:hidden;background:#05081a;box-shadow:0 6px 20px rgba(20,30,60,.18)}
+#stage canvas{display:block;width:100%;height:100%}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lb{position:absolute;left:0;top:0;white-space:nowrap;font-size:16px;font-weight:700;color:#fff;padding:2px 10px;border-radius:999px;pointer-events:auto;cursor:pointer;transform-origin:0 50%;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.lb::before{content:"";position:absolute;left:-7px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:inherit;border:2px solid #fff}
+.lb.sea{background:rgba(59,111,182,.92)} .lb.crater{background:rgba(200,114,46,.92)} .lb.mount{background:rgba(47,138,87,.92)} .lb.land{background:rgba(190,40,60,.92)}
+.lb.sel{outline:3px solid var(--gold)}
+#hint{position:absolute;left:14px;bottom:12px;color:#fff;font-size:15px;background:rgba(0,0,0,.45);padding:4px 12px;border-radius:999px;pointer-events:none}
+#inset{position:absolute;right:12px;top:12px;width:230px;height:230px;background:rgba(10,16,40,.82);border-radius:16px;border:1px solid rgba(255,255,255,.2)}
+.strip{display:flex;gap:6px;overflow-x:auto;padding:12px 4px 6px;margin-top:4px}
+.strip button{flex:0 0 auto;border:2px solid transparent;background:#fff;border-radius:12px;padding:4px 4px 2px;cursor:pointer;font:inherit;font-size:14px;color:var(--muted);text-align:center;box-shadow:0 1px 3px rgba(20,30,60,.1)}
+.strip button.on{border-color:var(--gold);color:var(--ink);font-weight:700}
+.strip svg{display:block;width:40px;height:40px;margin:0 auto}
+aside.panel>div{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--card);border-radius:18px;padding:16px 18px;box-shadow:0 2px 10px rgba(20,30,60,.08)}
+.card h3{margin:0 0 8px;font-size:19px;color:var(--navy)}
+.card ul{margin:0;padding-left:1.2em}
+.card li{margin:4px 0}
+.big{text-align:center}
+.big .lunar{font-size:20px;color:var(--muted)}
+.big .pname{font-size:36px;font-weight:800;color:var(--navy);line-height:1.3}
+.big .rhyme{font-size:20px;color:#8a5a00;background:#fff6dc;border-radius:12px;padding:6px 10px;margin-top:8px}
+label.ctl{display:block;font-weight:700;color:var(--navy)}
+label.ctl input[type=range]{width:100%;margin-top:6px;accent-color:var(--gold);height:28px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btns button,.pill{font:inherit;font-size:17px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--ink)}
+.btns button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+button.primary{background:var(--gold)!important;border-color:var(--gold)!important;color:#3a2a00!important;font-weight:700}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:17px;cursor:pointer}
+.chk input{width:20px;height:20px;margin-top:4px;accent-color:var(--navy)}
+.read{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.read div{background:#f4f6fb;border-radius:14px;padding:8px 12px}
+.read span{display:block;font-size:15px;color:var(--muted)}
+.read b{font-size:26px;color:var(--navy)}
+#bFist{font-size:20px}
+.status{margin:0;font-weight:700;color:#8a5a00}
+.feat{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.feat button{font:inherit;font-size:16px;border:0;border-radius:999px;padding:5px 12px;color:#fff;cursor:pointer}
+.feat .sea{background:var(--sea)} .feat .crater{background:var(--crater)} .feat .mount{background:var(--mount)} .feat .land{background:#be283c}
+#cInfo{background:#fff6dc;border-radius:14px;padding:10px 14px;min-height:64px}
+details summary{cursor:pointer;font-weight:700;color:var(--navy)}
+.note{font-size:16px;color:var(--muted)}
+footer{color:var(--muted);font-size:16px;padding:0 0 30px}
+@media (max-width:600px){header.top h1{font-size:25px}.tabs{gap:6px}.tabs button{font-size:16px;padding:8px 12px}#stage{height:58vh}#inset{width:170px;height:170px}.big .pname{font-size:30px}}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>🌙 月亮 3D 動畫教室</h1>
+  <p>國小四上自然｜月亮的位置、月相變化與月球表面</p>
+</div></header>
+
+<nav class="wrap tabs">
+  <button data-tab="A" class="on">① 月相變化</button>
+  <button data-tab="B">② 一天中月亮的位置</button>
+  <button data-tab="C">③ 月球表面</button>
+</nav>
+
+<main class="wrap grid">
+  <section>
+    <div id="stage">
+      <div id="labels"></div>
+      <svg id="inset" viewBox="-115 -115 230 230" hidden>
+        <text x="0" y="-98" fill="#fff" font-size="13" text-anchor="middle">從北極上空往下看（延伸）</text>
+        <g stroke="#ffd36b" stroke-width="1.5" opacity=".7">
+          <line x1="-112" y1="-50" x2="-90" y2="-50"/><line x1="-112" y1="0" x2="-90" y2="0"/><line x1="-112" y1="50" x2="-90" y2="50"/>
+        </g>
+        <text x="-104" y="-62" fill="#ffd36b" font-size="12">太陽光→</text>
+        <circle r="72" fill="none" stroke="#8ea0d8" stroke-dasharray="4 4"/>
+        <circle r="17" fill="#3f86d8"/><path d="M0,-17 A17,17 0 0 1 0,17 Z" fill="#0b2448" opacity=".75"/>
+        <text y="34" fill="#cfe0ff" font-size="12" text-anchor="middle">地球</text>
+        <g id="insetMoon"><circle r="11" fill="#3a3f55"/><path d="M0,-11 A11,11 0 0 0 0,11 Z" fill="#fff3c4"/></g>
+        <text y="104" fill="#cfd6ee" font-size="12" text-anchor="middle">月亮繞地球轉，被照亮的一半始終朝太陽</text>
+      </svg>
+      <div id="hint"></div>
+    </div>
+    <div id="strip" class="strip"></div>
+  </section>
+
+  <aside class="panel">
+    <!-- ① 月相 -->
+    <div data-pane="A">
+      <div class="card big">
+        <div class="lunar" id="aLunar">農曆初八</div>
+        <div class="pname" id="aName">上弦月</div>
+        <div class="rhyme" id="aRhyme">「初七初八月半邊」</div>
+      </div>
+      <div class="card">
+        <label class="ctl">拖拉選農曆日期
+          <input type="range" id="aDay" min="1" max="30" step="1" value="8">
+        </label>
+        <div class="btns" style="margin-top:8px">
+          <button id="aPlay" class="primary">▶ 播放一個月</button>
+        </div>
+        <div class="btns" style="margin-top:10px" id="aJumps"></div>
+        <p class="note" id="aWhen" style="margin:10px 0 0"></p>
+      </div>
+      <label class="chk card"><input type="checkbox" id="aInset">延伸：從太空看，為什麼會有月相？（國中才會學）</label>
+      <div class="card">
+        <h3>課本重點</h3>
+        <ul>
+          <li>月亮看起來的形狀，稱為<b>月相</b>。</li>
+          <li>月相由缺到圓、再由圓到缺，大約 <b>29 或 30 天</b>，就是月相變化的規律。</li>
+          <li>農曆日期依月相訂定：大月 30 天、小月 29 天。可以用農曆日期推測當天的月相。</li>
+          <li>農曆初一叫<b>朔</b>（看不到月亮）；農曆十五、十六叫<b>望</b>（滿月）。</li>
+          <li>上半個月亮的部分在<b>右邊（西邊）</b>，下半個月亮的部分在<b>左邊（東邊）</b>（面向南方看）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ② 一天中的位置 -->
+    <div data-pane="B" hidden>
+      <div class="card">
+        <div class="read">
+          <div><span>時間</span><b id="bTime">18:30</b></div>
+          <div><span>方位</span><b id="bAz">東</b></div>
+          <div><span>高度角</span><b id="bAlt">10°</b></div>
+          <div><span>拳頭數（1 個約 10°）</span><b id="bFist">✊</b></div>
+        </div>
+        <p class="status" id="bStatus" style="margin-top:10px"></p>
+      </div>
+      <div class="card">
+        <label class="ctl">時間 <span id="bTimeLbl" class="note"></span>
+          <input type="range" id="bTimeR" min="6" max="30" step="0.083333" value="18.5">
+        </label>
+        <div class="btns" style="margin-top:6px"><button id="bPlay" class="primary">▶ 播放一個晚上</button></div>
+        <label class="ctl" style="margin-top:12px">農曆日期：<span id="bDayLbl"></span>
+          <input type="range" id="bDay" min="1" max="30" step="1" value="15">
+        </label>
+        <div class="btns" id="bJumps" style="margin-top:6px"></div>
+      </div>
+      <div class="card">
+        <h3>換個角度看</h3>
+        <div class="btns" id="bViews">
+          <button data-view="out" class="on">🔭 從外面看</button>
+          <button data-view="eye">🧍 站在地上看</button>
+        </div>
+        <label class="chk" style="margin-top:10px"><input type="checkbox" id="bFollow" checked>站在地上看時，頭跟著月亮轉</label>
+      </div>
+      <div class="card">
+        <h3>課本重點</h3>
+        <ul>
+          <li>描述月亮的位置要用<b>方位</b>（指北針）和<b>高度角</b>。</li>
+          <li>高度角：觀測者看月亮的<b>視線</b>與<b>地平線</b>間的夾角。地平線到天頂是 90°。</li>
+          <li>用拳頭疊加量高度角：<b>一個拳頭大約 10°</b>。</li>
+          <li>一天中，月亮的方位<b>由東向西</b>移動，高度角<b>由小到大，再由大到小</b>。</li>
+          <li>太陽、月亮等天體，都有<b>東升西落</b>的現象。</li>
+          <li>記錄時常用「南方在前、東方在左、西方在右」。</li>
+        </ul>
+        <p class="note" style="margin:8px 0 0">＊以九月（中秋前後）在臺灣觀測為例；太陽和月亮的大小有放大，方便觀察。</p>
+      </div>
+    </div>
+
+    <!-- ③ 月球表面 -->
+    <div data-pane="C" hidden>
+      <div class="card">
+        <h3>點一點，飛過去看</h3>
+        <div class="feat" id="cFeat"></div>
+        <div id="cInfo" style="margin-top:12px">月球表面有亮有暗：暗的地方叫「海」，還有坑洞（環形山）和山脈。點上面的按鈕或月球上的名稱看看！</div>
+        <label class="chk" style="margin-top:10px"><input type="checkbox" id="cLabels" checked>顯示地名</label>
+      </div>
+      <div class="card">
+        <h3>想一想</h3>
+        <p style="margin:0 0 6px">月亮表面看起來比較灰暗的地區，通常是什麼樣的地形呢？</p>
+        <details><summary>看答案</summary>
+          <p style="margin:6px 0 0">是「<b>海</b>」——比周圍低窪、較平坦的大片地區（裡面其實沒有水）。伽利略用望遠鏡觀察，發現月球表面的明暗其實是不同的地形。</p>
+        </details>
+      </div>
+      <div class="card">
+        <h3>月球小知識</h3>
+        <ul>
+          <li>月球是地球在太空中最近的鄰居。</li>
+          <li>月球幾乎沒有空氣，所以腳印可以留存很久。</li>
+          <li>1969 年，阿姆斯壯和艾德林第一次踏上月球。</li>
+          <li>滿月剛好最靠近地球時，看起來特別大、特別亮，叫「超級月亮」。</li>
+          <li>月球總是用同一面朝著地球，所以我們看到的「海」的樣子都一樣。</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer class="wrap">內容依據國小四上自然「月亮」單元（月亮的位置、月相的變化、月球表面）。月球表面為依真實位置繪製的示意圖。<br><a href="../">← 回自然科</a>　<a href="/">← 回主選單</a></footer>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const PI = Math.PI, D2R = PI / 180, SYN = 29.53;
+const $ = id => document.getElementById(id);
+
+/* ---------- 共用：農曆、月相文字 ---------- */
+const CN = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+function lunar(d) {
+  if (d <= 10) return '初' + CN[d];
+  if (d < 20) return '十' + CN[d - 10];
+  if (d === 20) return '二十';
+  if (d < 30) return '二十' + CN[d - 20];
+  return '三十';
+}
+function phaseName(d) {
+  if (d === 1) return '朔（看不到月亮）';
+  if (d <= 6) return '眉形新月';
+  if (d <= 8) return '上弦月';
+  if (d <= 14) return '盈凸月';
+  if (d <= 16) return '滿月（望）';
+  if (d <= 21) return '虧凸月';
+  if (d <= 23) return '下弦月';
+  if (d <= 28) return '眉形殘月';
+  return '幾乎看不見月亮';
+}
+function rhyme(d) {
+  if (d === 1) return '初一看不見';
+  if (d === 2) return '初二一根線';
+  if (d <= 4) return '初三初四鐮刀月';
+  if (d <= 6) return '一天更比一天胖';
+  if (d <= 8) return '初七初八月半邊';
+  if (d <= 14) return '一天更比一天胖';
+  if (d <= 16) return '直到十五月團圓';
+  if (d <= 18) return '十七十八月慢出';
+  if (d <= 21) return '一天更比一天瘦';
+  if (d <= 23) return '廿二半夜見半圓';
+  if (d <= 28) return '一天更比一天瘦';
+  return '廿九三十月難見';
+}
+function whenSeen(d) {
+  if (d === 1 || d >= 29) return '月亮和太陽差不多一起升落，所以看不到。';
+  if (d <= 6) return '傍晚在西方低空，天黑不久就落下。';
+  if (d <= 8) return '傍晚高掛在南方天空，大約半夜落下。';
+  if (d <= 14) return '下午就升起，傍晚在東南方天空，後半夜才落下。';
+  if (d <= 16) return '傍晚從東方升起，整個晚上都看得到，清晨在西方落下。';
+  if (d <= 21) return '晚上才升起（十七十八月慢出），早上還掛在西方天空。';
+  if (d <= 23) return '大約半夜才升起，清晨高掛在南方天空。';
+  return '天快亮時，才在東方低空出現。';
+}
+// 月相 SVG 形狀（E＝太陽與月亮的夾角）
+function phasePath(E, r) {
+  E = ((E % (2 * PI)) + 2 * PI) % (2 * PI);
+  const k = Math.cos(E), rx = Math.abs(k) * r;
+  return E < PI
+    ? `M0,${-r} A${r},${r} 0 0 1 0,${r} A${rx},${r} 0 0 ${k > 0 ? 0 : 1} 0,${-r}Z`
+    : `M0,${-r} A${r},${r} 0 0 0 0,${r} A${rx},${r} 0 0 ${k > 0 ? 1 : 0} 0,${-r}Z`;
+}
+const ageOf = d => d - 0.5;
+const elong = age => age / SYN * 2 * PI;
+
+/* ---------- 渲染器 ---------- */
+const stage = $('stage');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+stage.prepend(renderer.domElement);
+
+/* ---------- 月球貼圖（依真實位置程式繪製） ---------- */
+function rng(seed) {
+  return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+const MARIA = [
+  { lat: 15, lon: -57, r: 12, k: 26, sl: 18, sn: 20 }, // 風暴洋
+  { lat: 33, lon: -16, r: 11, k: 10 },                 // 雨海
+  { lat: 28, lon: 17, r: 8, k: 6 },                    // 晴海
+  { lat: 8, lon: 30, r: 9, k: 8 },                     // 寧靜海
+  { lat: 17, lon: 59, r: 6, k: 4 },                    // 危難海
+  { lat: -8, lon: 51, r: 7, k: 6 },                    // 豐饒海
+  { lat: -15, lon: 35, r: 4.5, k: 3 },                 // 神酒海
+  { lat: -21, lon: -17, r: 8, k: 6 },                  // 雲海
+  { lat: -24, lon: -39, r: 4.5, k: 3 },                // 濕海
+  { lat: 56, lon: 0, r: 4, k: 14, sl: 40, sn: 3 },     // 冷海
+  { lat: 13, lon: 4, r: 3.5, k: 2 },                   // 汽海
+  { lat: -1, lon: 86, r: 4, k: 3 },                    // 史密斯海
+  { lat: 27, lon: 148, r: 3, k: 2 },                   // 莫斯科海（背面）
+  { lat: -20, lon: -95, r: 3, k: 2 },                  // 東方海
+];
+function makeMoonTextures() {
+  const W = 2048, H = 1024, R = rng(11);
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const hc = document.createElement('canvas'); hc.width = W; hc.height = H;
+  const g = c.getContext('2d'), h = hc.getContext('2d');
+  g.fillStyle = '#b3b0a8'; g.fillRect(0, 0, W, H);
+  h.fillStyle = '#808080'; h.fillRect(0, 0, W, H);
+  const px = lon => (lon + 180) / 360 * W, py = lat => (90 - lat) / 180 * H;
+  const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+  function blob(ctx, lat, lon, r, col, a, hard = 0.55) {
+    const ry = r / 180 * H, sx = 1 / Math.max(0.15, Math.cos(lat * D2R));
+    ctx.save(); ctx.translate(px(lon), py(lat)); ctx.scale(sx, 1);
+    const gr = ctx.createRadialGradient(0, 0, 0, 0, 0, ry);
+    gr.addColorStop(0, rgba(col, a)); gr.addColorStop(hard, rgba(col, a)); gr.addColorStop(1, rgba(col, 0));
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(0, 0, ry, 0, 2 * PI); ctx.fill(); ctx.restore();
+  }
+  function crater(lat, lon, r, strong = 1) {
+    const ry = r / 180 * H, sx = 1 / Math.max(0.15, Math.cos(lat * D2R));
+    for (const [ctx, stops] of [
+      [g, [[0, `rgba(95,92,88,${0.35 * strong})`], [0.7, `rgba(120,117,112,${0.2 * strong})`], [0.86, `rgba(228,225,218,${0.45 * strong})`], [1, 'rgba(228,225,218,0)']]],
+      [h, [[0, `rgba(40,40,40,${0.9 * strong})`], [0.72, `rgba(90,90,90,${0.7 * strong})`], [0.88, `rgba(220,220,220,${0.8 * strong})`], [1, 'rgba(128,128,128,0)']]],
+    ]) {
+      ctx.save(); ctx.translate(px(lon), py(lat)); ctx.scale(sx, 1);
+      const gr = ctx.createRadialGradient(0, 0, 0, 0, 0, ry * 1.18);
+      stops.forEach(([o, col]) => gr.addColorStop(o, col));
+      ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(0, 0, ry * 1.18, 0, 2 * PI); ctx.fill(); ctx.restore();
+    }
+  }
+  const randLat = () => Math.asin(R() * 2 - 1) / D2R;
+  // 高地的斑駁
+  for (let i = 0; i < 3500; i++) {
+    const light = R() < 0.5;
+    blob(g, randLat(), R() * 360 - 180, 0.6 + R() * 4, light ? [215, 212, 204] : [120, 117, 110], 0.07, 0.2);
+  }
+  // 大量坑洞（之後被海蓋掉一部分）
+  for (let i = 0; i < 1800; i++) crater(randLat(), R() * 360 - 180, 0.2 + 2.6 * R() ** 4, 0.55);
+  // 海：暗、平坦
+  for (const m of MARIA) {
+    const sl = m.sl ?? m.r * 0.7, sn = m.sn ?? m.r * 0.7;
+    blob(g, m.lat, m.lon, m.r * 0.95, [86, 84, 80], 0.72, 0.5);
+    blob(h, m.lat, m.lon, m.r, [110, 110, 110], 0.85, 0.6);
+    for (let i = 0; i < m.k * 3; i++) {
+      const la = m.lat + (R() * 2 - 1) * sn * 1.1, lo = m.lon + (R() * 2 - 1) * sl * 1.1, rr = m.r * (0.2 + R() * 0.45);
+      blob(g, la, lo, rr, R() < 0.8 ? [80, 78, 74] : [112, 108, 100], 0.5 + R() * 0.25, 0.4);
+      blob(h, la, lo, rr, [110, 110, 110], 0.6, 0.4);
+    }
+  }
+  // 海上的小坑
+  for (let i = 0; i < 500; i++) crater(randLat(), R() * 360 - 180, 0.2 + 0.5 * R(), 0.45);
+  // 亞平寧山脈：雨海東南邊緣的一串亮點
+  for (let i = 0; i <= 30; i++) {
+    const f = i / 30, la = 26 - 13 * f + (R() - 0.5) * 2, lo = 2 - 13 * f + (R() - 0.5) * 2;
+    blob(g, la, lo, 0.4 + R() * 0.5, [222, 218, 210], 0.4, 0.2);
+    blob(h, la, lo, 0.7 + R() * 0.8, [235, 235, 235], 0.9, 0.3);
+  }
+  // 有名的坑洞與亮紋
+  function rays(lat, lon, n, len) {
+    g.lineCap = 'round';
+    for (let i = 0; i < n; i++) {
+      const a = R() * 2 * PI, L = len * (0.3 + R() * 0.7);
+      const steps = 12;
+      for (let s = 1; s <= steps; s++) {
+        const f0 = (s - 1) / steps, f1 = s / steps;
+        const p = f => [lat + L * f * Math.sin(a), lon + L * f * Math.cos(a) / Math.max(0.2, Math.cos((lat + L * f * Math.sin(a)) * D2R))];
+        const [a0, o0] = p(f0), [a1, o1] = p(f1);
+        g.strokeStyle = `rgba(238,235,226,${0.22 * (1 - f0)})`; g.lineWidth = 2 + R() * 3;
+        g.beginPath(); g.moveTo(px(o0), py(a0)); g.lineTo(px(o1), py(a1)); g.stroke();
+      }
+    }
+  }
+  rays(-43.3, -11.2, 46, 40); rays(9.6, -20.1, 28, 14); rays(8.1, -38, 18, 9); rays(23.7, -47.4, 10, 5);
+  crater(-43.3, -11.2, 1.4, 1.4); crater(9.6, -20.1, 1.6, 1.4); crater(8.1, -38, 0.6, 1.4);
+  blob(g, 51.6, -9.3, 1.5, [80, 78, 74], 0.9, 0.7); crater(51.6, -9.3, 1.6, 0.8);
+  blob(g, -43.3, -11.2, 1.0, [235, 232, 222], 0.5, 0.4);
+  const map = new THREE.CanvasTexture(c); map.colorSpace = THREE.SRGBColorSpace; map.anisotropy = 8;
+  const bump = new THREE.CanvasTexture(hc);
+  return { map, bump };
+}
+const MOONTEX = makeMoonTextures();
+const moonGeo = new THREE.SphereGeometry(1, 160, 80);
+function makeMoon(radius, bumpScale = 3) {
+  const mat = new THREE.MeshStandardMaterial({ map: MOONTEX.map, bumpMap: MOONTEX.bump, bumpScale, roughness: 1, metalness: 0 });
+  const mesh = new THREE.Mesh(moonGeo, mat);
+  mesh.scale.setScalar(radius);
+  mesh.rotation.y = -PI / 2;          // 讓月球正面（經度 0°）朝 +z
+  const grp = new THREE.Group(); grp.add(mesh); grp.userData.mesh = mesh;
+  return grp;
+}
+// 月面經緯度 → 網格本地座標（與 SphereGeometry 的 uv 對應）
+function selenoLocal(lat, lon) {
+  const u = (lon + 180) / 360, v = (90 - lat) / 180, phi = u * 2 * PI, th = v * PI;
+  return new THREE.Vector3(-Math.cos(phi) * Math.sin(th), Math.cos(th), Math.sin(phi) * Math.sin(th));
+}
+function starField(n, r, size = 0.15) {
+  const R = rng(5), pos = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) {
+    const z = R() * 2 - 1, a = R() * 2 * PI, s = Math.sqrt(1 - z * z);
+    pos.set([r * s * Math.cos(a), r * z, r * s * Math.sin(a)], i * 3);
+  }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  return new THREE.Points(geo, new THREE.PointsMaterial({ color: 0xffffff, size, sizeAttenuation: true, transparent: true, opacity: 0.85 }));
+}
+function textSprite(text, { size = 56, color = '#fff', stroke = 'rgba(0,0,0,.65)', scale = 1 } = {}) {
+  const c = document.createElement('canvas'), g = c.getContext('2d');
+  const font = `bold ${size}px "PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif`;
+  g.font = font;
+  const w = Math.ceil(g.measureText(text).width + size * 0.6), hh = Math.ceil(size * 1.45);
+  c.width = w; c.height = hh; g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.lineWidth = size * 0.2; g.strokeStyle = stroke; g.lineJoin = 'round';
+  g.strokeText(text, w / 2, hh / 2); g.fillStyle = color; g.fillText(text, w / 2, hh / 2);
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true }));
+  s.scale.set(scale * w / hh, scale, 1); s.renderOrder = 10;
+  return s;
+}
+function dynLine(color, max, opacity = 1, depthTest = true) {
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(max * 3), 3));
+  geo.setDrawRange(0, 0);
+  const l = new THREE.Line(geo, new THREE.LineBasicMaterial({ color, transparent: opacity < 1, opacity, depthTest }));
+  l.frustumCulled = false; l.renderOrder = 5;
+  return l;
+}
+function setLine(line, pts) {
+  const a = line.geometry.attributes.position;
+  pts.forEach((p, i) => a.setXYZ(i, p.x, p.y, p.z));
+  a.needsUpdate = true; line.geometry.setDrawRange(0, pts.length);
+}
+
+/* =========================================================
+   ① 月相變化
+   ========================================================= */
+const sA = new THREE.Scene(); sA.background = new THREE.Color('#04071a');
+const camA = new THREE.PerspectiveCamera(32, 1, 0.1, 200); camA.position.set(0, 0, 8.6);
+const moonA = makeMoon(1.6, 2.5); sA.add(moonA);
+const sunA = new THREE.DirectionalLight(0xfff6e8, 3.2); sA.add(sunA);
+sA.add(new THREE.AmbientLight(0x8fa0d0, 0.035));   // 地球反光，讓暗面隱約可見
+sA.add(starField(900, 60, 0.18));
+let aAge = ageOf(8), aPlaying = false, aLastDay = 0;
+
+const strip = $('strip');
+for (let d = 1; d <= 30; d++) {
+  const b = document.createElement('button');
+  b.innerHTML = `<svg viewBox="-20 -20 40 40"><circle r="17" fill="#2b3352"/><path d="${phasePath(elong(ageOf(d)), 17)}" fill="#fff1b8"/></svg>${lunar(d)}`;
+  b.onclick = () => { stopA(); aAge = ageOf(d); updateA(); };
+  strip.appendChild(b);
+}
+const aJ = $('aJumps');
+[1, 3, 8, 12, 15, 20, 22, 28].forEach(d => {
+  const b = document.createElement('button'); b.textContent = lunar(d);
+  b.onclick = () => { stopA(); aAge = ageOf(d); updateA(); };
+  aJ.appendChild(b);
+});
+$('aDay').oninput = e => { stopA(); aAge = ageOf(+e.target.value); updateA(); };
+$('aPlay').onclick = () => { aPlaying = !aPlaying; $('aPlay').textContent = aPlaying ? '⏸ 暫停' : '▶ 播放一個月'; };
+function stopA() { aPlaying = false; $('aPlay').textContent = '▶ 播放一個月'; }
+$('aInset').onchange = e => { $('inset').toggleAttribute('hidden', !e.target.checked); };
+
+function updateA() {
+  const E = elong(aAge);
+  // 面向南方看月亮：上半月太陽在右（西）邊照過來
+  sunA.position.set(Math.sin(E), 0, -Math.cos(E)).multiplyScalar(10);
+  const th = PI + E, mx = 72 * Math.cos(th), my = -72 * Math.sin(th);
+  $('insetMoon').setAttribute('transform', `translate(${mx.toFixed(1)},${my.toFixed(1)})`);
+  const d = Math.min(30, Math.max(1, Math.round(aAge + 0.5)));
+  if (d !== aLastDay) {
+    aLastDay = d;
+    $('aLunar').textContent = '農曆' + lunar(d);
+    $('aName').textContent = phaseName(d);
+    $('aRhyme').textContent = '「' + rhyme(d) + '」';
+    $('aWhen').textContent = '什麼時候看得到？' + whenSeen(d);
+    $('aDay').value = d;
+    [...strip.children].forEach((b, i) => b.classList.toggle('on', i + 1 === d));
+    const on = strip.children[d - 1];
+    if (!aPlaying || d % 5 === 0) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: aPlaying ? 'smooth' : 'auto' });
+  }
+}
+
+/* =========================================================
+   ② 一天中月亮的位置（天球）
+   ========================================================= */
+const LAT = 24 * D2R, EPS = 23.44 * D2R, LAMS = 180 * D2R; // 臺灣、九月下旬（中秋前後）
+const eqOf = lam => ({ ra: Math.atan2(Math.cos(EPS) * Math.sin(lam), Math.cos(lam)), dec: Math.asin(Math.sin(EPS) * Math.sin(lam)) });
+const SUN = eqOf(LAMS);
+// 世界座標：x＝西、y＝上、z＝北（面向南方時東在左、西在右）
+function horiz(H, dec) {
+  const cd = Math.cos(dec), sd = Math.sin(dec), sl = Math.sin(LAT), cl = Math.cos(LAT);
+  const east = -cd * Math.sin(H), north = sd * cl - cd * Math.cos(H) * sl, up = sd * sl + cd * Math.cos(H) * cl;
+  return new THREE.Vector3(-east, up, north);
+}
+function skyAt(t, day) {
+  const Hs = (t - 12) * 15 * D2R, M = eqOf(LAMS + elong(ageOf(day)));
+  return { sun: horiz(Hs, SUN.dec), moon: horiz(Hs - (M.ra - SUN.ra), M.dec), Hs };
+}
+const azOf = v => ((Math.atan2(-v.x, v.z) / D2R) + 360) % 360;
+const DIR8 = ['北', '東北', '東', '東南', '南', '西南', '西', '西北'];
+const azName = az => DIR8[Math.round(az / 45) % 8];
+const azVec = (az, r, y = 0) => new THREE.Vector3(-Math.sin(az * D2R) * r, y, Math.cos(az * D2R) * r);
+
+const sB = new THREE.Scene(); sB.background = new THREE.Color('#0a1230');
+const R = 10, EYE = new THREE.Vector3(0, 0.8, 0);
+const camB = new THREE.PerspectiveCamera(48, 1, 0.05, 300); camB.position.set(0, 9.5, 19);
+const ctlB = new OrbitControls(camB, renderer.domElement);
+ctlB.target.set(0, 2.5, 0); ctlB.enableDamping = true; ctlB.enablePan = false;
+ctlB.maxPolarAngle = PI * 0.495; ctlB.minDistance = 8; ctlB.maxDistance = 40; ctlB.enabled = false;
+const camEye = new THREE.PerspectiveCamera(70, 1, 0.05, 300); camEye.position.copy(EYE);
+
+const groundMat = new THREE.MeshBasicMaterial({ color: '#6e9f5e' });
+const ground = new THREE.Mesh(new THREE.CircleGeometry(60, 96), groundMat);
+ground.rotation.x = -PI / 2; sB.add(ground);
+const plaza = new THREE.Mesh(new THREE.CircleGeometry(R, 96), new THREE.MeshBasicMaterial({ color: '#86b374', transparent: true, opacity: 0.6 }));
+plaza.rotation.x = -PI / 2; plaza.position.y = 0.01; sB.add(plaza);
+const tint = [groundMat, plaza.material];
+const tintBase = tint.map(m => m.color.clone());
+
+// 半透明天球與高度角圓圈
+const dome = new THREE.Mesh(new THREE.SphereGeometry(R, 64, 32, 0, 2 * PI, 0, PI / 2),
+  new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.07, side: THREE.DoubleSide, depthWrite: false }));
+sB.add(dome);
+function ring(altDeg, color, opacity) {
+  const pts = [], a = altDeg * D2R;
+  for (let i = 0; i <= 128; i++) { const t = i / 128 * 2 * PI; pts.push(new THREE.Vector3(R * Math.cos(a) * Math.cos(t), R * Math.sin(a) + 0.02, R * Math.cos(a) * Math.sin(t))); }
+  const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color, transparent: true, opacity }));
+  sB.add(l); return l;
+}
+ring(0, 0xffffff, 0.9); ring(30, 0xffffff, 0.25); ring(60, 0xffffff, 0.25);
+// 南北、東西的天頂大圓
+for (const az of [0, 90]) {
+  const pts = [];
+  for (let i = 0; i <= 64; i++) { const a = i / 64 * PI; pts.push(azVec(az, R * Math.cos(a), R * Math.sin(a))); }
+  sB.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 })));
+}
+const zen = textSprite('天頂', { size: 44, scale: 0.6 }); zen.position.set(0, R + 0.5, 0); sB.add(zen);
+// 方位文字
+const compass = new THREE.Group(); sB.add(compass);
+DIR8.forEach((n, i) => {
+  const main = i % 2 === 0;
+  const s = textSprite(n, { size: 64, color: n === '南' ? '#ffd36b' : '#fff', scale: main ? 1.1 : 0.75 });
+  s.position.copy(azVec(i * 45, R + 1.1, 0.5)); compass.add(s);
+});
+// 地面景物（觀察時的參考景物）
+const scenery = new THREE.Group(); sB.add(scenery);
+{
+  const Rr = rng(3);
+  const treeTop = new THREE.MeshBasicMaterial({ color: '#2f6b3a' }), trunk = new THREE.MeshBasicMaterial({ color: '#6b4a2f' });
+  tint.push(treeTop, trunk); tintBase.push(treeTop.color.clone(), trunk.color.clone());
+  for (let i = 0; i < 22; i++) {
+    const az = Rr() * 360, rr = 12 + Rr() * 6, hgt = 1.2 + Rr() * 1.4;
+    const t = new THREE.Group();
+    const top = new THREE.Mesh(new THREE.ConeGeometry(0.55 * hgt / 1.6, hgt, 10), treeTop); top.position.y = hgt / 2 + 0.5;
+    const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.12, 0.6, 6), trunk); tr.position.y = 0.3;
+    t.add(top, tr); t.position.copy(azVec(az, rr)); scenery.add(t);
+  }
+  const wall = new THREE.MeshBasicMaterial({ color: '#d9c7a8' }), roof = new THREE.MeshBasicMaterial({ color: '#b5523b' });
+  tint.push(wall, roof); tintBase.push(wall.color.clone(), roof.color.clone());
+  const school = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(5, 1.8, 1.6), wall); body.position.y = 0.9;
+  const rf = new THREE.Mesh(new THREE.BoxGeometry(5.3, 0.25, 1.9), roof); rf.position.y = 1.9;
+  school.add(body, rf); school.position.copy(azVec(200, 15)); school.lookAt(0, 0, 0); scenery.add(school);
+}
+// 觀測者小人（面向南方）
+const person = new THREE.Group(); sB.add(person);
+{
+  const skin = new THREE.MeshBasicMaterial({ color: '#f1c7a0' }), shirt = new THREE.MeshBasicMaterial({ color: '#e0563b' });
+  const bodyM = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.2, 0.6, 12), shirt); bodyM.position.y = 0.3;
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.17, 16, 12), skin); head.position.y = 0.78;
+  person.add(bodyM, head);
+}
+// 星星（跟著天空一起東升西落）
+const STAR_N = 700, starInfo = [], starPos = new Float32Array(STAR_N * 3);
+{ const Rr = rng(9); for (let i = 0; i < STAR_N; i++) starInfo.push([Rr() * 2 * PI, Math.asin(Rr() * 1.6 - 0.6)]); }
+const starGeo = new THREE.BufferGeometry(); starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+const starsB = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.09, transparent: true, opacity: 0 }));
+starsB.frustumCulled = false; sB.add(starsB);
+// 太陽、月亮
+const sunB = new THREE.Mesh(new THREE.SphereGeometry(0.7, 32, 16), new THREE.MeshBasicMaterial({ color: '#ffd84a' }));
+const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64); gr.addColorStop(0, 'rgba(255,230,120,.9)'); gr.addColorStop(1, 'rgba(255,200,80,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false })); glow.scale.set(4, 4, 1); sunB.add(glow);
+sB.add(sunB);
+const moonB = makeMoon(0.8, 1); sB.add(moonB);
+let sunDirB = new THREE.Vector3(0, 1, 0);
+const sunLightB = new THREE.DirectionalLight(0xfff6e8, 3.2); sunLightB.target = moonB; sB.add(sunLightB);
+sB.add(new THREE.AmbientLight(0x8fa0d0, 0.08));
+// 高度角示意線
+const sightL = dynLine(0xffd36b, 2), horizL = dynLine(0x7fd1ff, 2), arcL = dynLine(0xffd36b, 64), merL = dynLine(0xffffff, 64, 0.5);
+sB.add(sightL, horizL, arcL, merL);
+let altSprite = null, altShown = null;
+// 站在地上看時的高度角刻度
+const ticks = new THREE.Group(); sB.add(ticks);
+for (let a = 10; a <= 80; a += 10) { const s = textSprite(a + '°', { size: 48, color: '#ffe9a8', scale: 0.55 }); s.userData.a = a; ticks.add(s); }
+// 一晚的路徑與整點
+let pathGroup = new THREE.Group(); sB.add(pathGroup);
+
+let bT = 18.5, bDay = 15, bPlaying = false, bView = 'out', yaw = 180, pitch = 20, moonAlt = 0, moonAz = 180;
+const lerpC = (a, b, f) => new THREE.Color(a).lerp(new THREE.Color(b), Math.min(1, Math.max(0, f)));
+function skyColor(sunAlt) {
+  if (sunAlt > 8) return new THREE.Color('#8cc6f2');
+  if (sunAlt > -2) return lerpC('#e9946a', '#8cc6f2', (sunAlt + 2) / 10);
+  if (sunAlt > -12) return lerpC('#0a1230', '#e9946a', (sunAlt + 12) / 10);
+  return new THREE.Color('#0a1230');
+}
+const fmtT = t => { const m = Math.round(t * 60) % (24 * 60); return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
+
+function buildPath() {
+  sB.remove(pathGroup);
+  pathGroup.traverse(o => { o.geometry?.dispose(); o.material?.map?.dispose(); o.material?.dispose(); });
+  pathGroup = new THREE.Group(); sB.add(pathGroup);
+  const seg = []; let prev = null;
+  for (let t = 6; t <= 30.001; t += 1 / 12) {
+    const m = skyAt(t, bDay).moon;
+    if (prev && prev.y > 0 && m.y > 0) seg.push(prev.clone().multiplyScalar(R * 0.995), m.clone().multiplyScalar(R * 0.995));
+    prev = m;
+  }
+  const pl = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(seg), new THREE.LineBasicMaterial({ color: 0xffd36b, transparent: true, opacity: 0.75 }));
+  pathGroup.add(pl);
+  const dotMat = new THREE.MeshBasicMaterial({ color: 0xffd36b });
+  for (let hh = 7; hh <= 29; hh++) {
+    const m = skyAt(hh, bDay).moon;
+    if (m.y < 0.03) continue;
+    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 8), dotMat); dot.position.copy(m).multiplyScalar(R * 0.995); pathGroup.add(dot);
+    const s = textSprite((hh % 24) + '時', { size: 44, color: '#ffe9a8', scale: 0.5 }); s.position.copy(m).multiplyScalar(R * 0.9).add(new THREE.Vector3(0, -0.35, 0)); pathGroup.add(s);
+  }
+}
+
+function updateB() {
+  const { sun, moon, Hs } = skyAt(bT, bDay);
+  sunB.position.copy(sun).multiplyScalar(R * 0.97);
+  moonB.position.copy(moon).multiplyScalar(R * 0.93); sunDirB.copy(sun);
+  const sunAlt = Math.asin(sun.y) / D2R;
+  moonAlt = Math.asin(moon.y) / D2R; moonAz = azOf(moon);
+  sB.background = skyColor(sunAlt);
+  const dayF = Math.min(1, Math.max(0, (sunAlt + 10) / 16));
+  tint.forEach((m, i) => m.color.copy(tintBase[i]).multiplyScalar(0.3 + 0.7 * dayF));
+  starsB.material.opacity = Math.min(0.9, Math.max(0, (-sunAlt - 5) / 8));
+  starsB.visible = bView === 'eye';
+  for (let i = 0; i < STAR_N; i++) {
+    const v = horiz(starInfo[i][0] + Hs, starInfo[i][1]);
+    if (v.y < 0) starPos.set([0, -50, 0], i * 3); else starPos.set([v.x * R * 0.985, v.y * R * 0.985, v.z * R * 0.985], i * 3);
+  }
+  starGeo.attributes.position.needsUpdate = true;
+  sunB.visible = sun.y > -0.06; moonB.visible = moon.y > -0.07;
+
+  const up = new THREE.Vector3(0, 1, 0), hd = new THREE.Vector3(moon.x, 0, moon.z).normalize();
+  const a = Math.max(0, moonAlt * D2R), above = moonAlt > 0;
+  const showAngle = above && bView === 'out';
+  [sightL, horizL, arcL].forEach(l => l.visible = showAngle);
+  merL.visible = above;
+  if (above) {
+    setLine(sightL, [EYE, EYE.clone().addScaledVector(moon, R * 0.88)]);
+    setLine(horizL, [EYE, EYE.clone().addScaledVector(hd, R)]);
+    const arc = [], mer = [];
+    for (let i = 0; i <= 40; i++) {
+      const b = a * i / 40;
+      arc.push(EYE.clone().addScaledVector(hd, 2.2 * Math.cos(b)).addScaledVector(up, 2.2 * Math.sin(b)));
+      mer.push(hd.clone().multiplyScalar(R * Math.cos(b) * 0.998).addScaledVector(up, R * Math.sin(b) * 0.998));
+    }
+    setLine(arcL, arc); setLine(merL, mer);
+  }
+  const altInt = Math.round(moonAlt);
+  if (altShown !== altInt) {
+    if (altSprite) { sB.remove(altSprite); altSprite.material.map.dispose(); altSprite.material.dispose(); }
+    altSprite = textSprite('高度角 ' + altInt + '°', { size: 56, color: '#ffd36b', scale: 0.7 }); sB.add(altSprite); altShown = altInt;
+  }
+  altSprite.visible = showAngle;
+  altSprite.position.copy(EYE).addScaledVector(hd, 3.4 * Math.cos(a / 2)).addScaledVector(up, 3.4 * Math.sin(a / 2) + 0.3);
+  // 刻度
+  ticks.visible = bView === 'eye';
+  const tAz = above ? hd : new THREE.Vector3(0, 0, -1);
+  ticks.children.forEach(s => { const b = s.userData.a * D2R; s.position.copy(tAz).multiplyScalar(R * 0.9 * Math.cos(b)).add(new THREE.Vector3(0, R * 0.9 * Math.sin(b), 0)).addScaledVector(new THREE.Vector3(-tAz.z, 0, tAz.x), 0.6); });
+
+  $('bTime').textContent = fmtT(bT);
+  $('bTimeLbl').textContent = (bT >= 24 ? '（隔天）' : '') + fmtT(bT);
+  $('bTimeR').value = bT;
+  if (above) {
+    const n = Math.round(moonAlt / 10);
+    $('bAz').textContent = azName(moonAz);
+    $('bAlt').textContent = altInt + '°';
+    $('bFist').textContent = n ? '✊'.repeat(n) + ` 約 ${n} 個` : '不到 1 個';
+    $('bStatus').textContent = sunAlt > 0 ? '☀️ 白天也看得到月亮喔！' : '🌙 月亮在天空中，量量看它的方位和高度角。';
+  } else {
+    $('bAz').textContent = '—'; $('bAlt').textContent = '—'; $('bFist').textContent = '—';
+    $('bStatus').textContent = '月亮在地平線下面，現在看不到。';
+  }
+}
+function setBDay(d) {
+  bDay = d; $('bDay').value = d;
+  $('bDayLbl').textContent = `${lunar(d)}（${phaseName(d)}）`;
+  buildPath(); updateB();
+}
+const bJ = $('bJumps');
+[3, 8, 15, 22].forEach(d => { const b = document.createElement('button'); b.textContent = lunar(d); b.onclick = () => setBDay(d); bJ.appendChild(b); });
+$('bDay').oninput = e => setBDay(+e.target.value);
+$('bTimeR').oninput = e => { stopB(); bT = +e.target.value; updateB(); };
+$('bPlay').onclick = () => {
+  if (bPlaying) return stopB();
+  if (bT >= 29.9) bT = 17.5;
+  bPlaying = true; $('bPlay').textContent = '⏸ 暫停';
+};
+function stopB() { bPlaying = false; $('bPlay').textContent = '▶ 播放一個晚上'; }
+document.querySelectorAll('#bViews button').forEach(b => b.onclick = () => {
+  bView = b.dataset.view;
+  document.querySelectorAll('#bViews button').forEach(x => x.classList.toggle('on', x === b));
+  person.visible = dome.visible = bView === 'out';
+  ctlB.enabled = active === 'B' && bView === 'out';
+  if (bView === 'eye') { yaw = moonAlt > 0 ? moonAz : 180; pitch = 20; }
+  setHint(); updateB();
+});
+// 站在地上看：拖曳轉頭
+let drag = null;
+renderer.domElement.addEventListener('pointerdown', e => { if (active === 'B' && bView === 'eye') { drag = { x: e.clientX, y: e.clientY }; $('bFollow').checked = false; } });
+addEventListener('pointermove', e => {
+  if (!drag) return;
+  yaw -= (e.clientX - drag.x) * 0.25; pitch = Math.min(80, Math.max(-5, pitch + (e.clientY - drag.y) * 0.2));
+  drag = { x: e.clientX, y: e.clientY };
+});
+addEventListener('pointerup', () => drag = null);
+// 從外面看時，讓月亮轉向鏡頭，但月相保持和「站在地上的人」看到的一樣
+function orientMoonB(viewer) {
+  moonB.lookAt(EYE); const qObs = moonB.quaternion.clone().invert();
+  moonB.lookAt(viewer); const q = moonB.quaternion.clone().multiply(qObs);
+  sunLightB.position.copy(moonB.position).addScaledVector(sunDirB.clone().applyQuaternion(q), 40);
+}
+function updateEyeCam() {
+  if ($('bFollow').checked && moonAlt > 0) {
+    let dy = ((moonAz - yaw + 540) % 360) - 180; yaw += dy * 0.08;
+    pitch += (Math.min(60, Math.max(10, moonAlt * 0.7)) - pitch) * 0.08;
+  }
+  const az = yaw * D2R, p = pitch * D2R;
+  camEye.lookAt(EYE.clone().add(new THREE.Vector3(-Math.sin(az) * Math.cos(p), Math.sin(p), Math.cos(az) * Math.cos(p))));
+}
+
+/* =========================================================
+   ③ 月球表面
+   ========================================================= */
+const sC = new THREE.Scene(); sC.background = new THREE.Color('#04071a');
+const camC = new THREE.PerspectiveCamera(35, 1, 0.1, 200); camC.position.set(0, 0, 7.4);
+sC.add(camC);
+const ctlC = new OrbitControls(camC, renderer.domElement);
+ctlC.enableDamping = true; ctlC.enablePan = false; ctlC.minDistance = 3.3; ctlC.maxDistance = 14; ctlC.enabled = false;
+const moonC = makeMoon(2, 4); sC.add(moonC);
+const lightC = new THREE.DirectionalLight(0xffffff, 2.4); lightC.position.set(-4, 2.5, 5); camC.add(lightC);
+sC.add(new THREE.AmbientLight(0xffffff, 0.45));
+sC.add(starField(900, 70, 0.2));
+const FEATURES = [
+  ['寧靜海', 'sea', 8.5, 31, '暗暗的大片平地。1969 年，太空人就是降落在寧靜海。'],
+  ['雨海', 'sea', 33, -16, '月球正面很大的「海」，旁邊有亞平寧山脈。'],
+  ['晴海', 'sea', 28, 17, '圓圓的「海」，在寧靜海的北邊。'],
+  ['危難海', 'sea', 17, 59, '靠近月球右邊邊緣、獨立的一塊「海」。'],
+  ['豐饒海', 'sea', -8, 51, '在寧靜海的東南邊。'],
+  ['神酒海', 'sea', -15, 35, '比較小的「海」。'],
+  ['風暴洋', 'sea', 18, -57, '月球上最大的暗色平地，大到被叫做「洋」。'],
+  ['哥白尼坑', 'crater', 9.6, -20.1, '很明顯的大坑洞（環形山），是隕石撞出來的，周圍有亮亮的紋路。'],
+  ['第谷坑（環形山）', 'crater', -43.3, -11.2, '隕石撞擊形成的環形山，四周放射出一條條亮紋，滿月時最明顯。'],
+  ['刻卜勒坑', 'crater', 8.1, -38, '在風暴洋裡的小坑洞，也有放射狀亮紋。'],
+  ['亞平寧山脈', 'mount', 19, -4, '在雨海旁邊的一長串山。月球上也有高山，最高峰約 5500 公尺。'],
+  ['1969 登月處', 'land', 0.7, 23.5, '阿姆斯壯和艾德林第一次踏上月球的地方（在寧靜海裡）。'],
+];
+const anchors = [], labelsEl = $('labels');
+let selected = null;
+FEATURES.forEach(([name, type, lat, lon, info]) => {
+  const o = new THREE.Object3D(); o.position.copy(selenoLocal(lat, lon).multiplyScalar(1.002));
+  moonC.userData.mesh.add(o);
+  const el = document.createElement('div'); el.className = 'lb ' + type; el.textContent = name; el.hidden = true;
+  labelsEl.appendChild(el);
+  const item = { name, type, info, o, el };
+  el.onclick = () => selectFeature(item);
+  anchors.push(item);
+  const b = document.createElement('button'); b.className = type; b.textContent = name; b.onclick = () => selectFeature(item);
+  $('cFeat').appendChild(b);
+});
+let fly = null;
+function selectFeature(item) {
+  selected = item;
+  anchors.forEach(a => a.el.classList.toggle('sel', a === item));
+  const kind = { sea: '「海」', crater: '坑洞', mount: '山脈', land: '登月地點' }[item.type];
+  $('cInfo').innerHTML = `<b>${item.name}</b>（${kind}）：${item.info}`;
+  const n = item.o.getWorldPosition(new THREE.Vector3()).normalize();
+  fly = { from: camC.position.clone(), to: n.multiplyScalar(Math.min(camC.position.length(), 6.2)), t: 0 };
+}
+function stepFly() {
+  if (!fly) return;
+  fly.t = Math.min(1, fly.t + 0.025);
+  const e = fly.t < 0.5 ? 2 * fly.t * fly.t : 1 - (-2 * fly.t + 2) ** 2 / 2;
+  const len = fly.from.length() + (fly.to.length() - fly.from.length()) * e;
+  camC.position.copy(fly.from.clone().normalize().lerp(fly.to.clone().normalize(), e).normalize().multiplyScalar(len));
+  camC.lookAt(0, 0, 0);
+  if (fly.t >= 1) fly = null;
+}
+const tmp = new THREE.Vector3();
+function updateLabels() {
+  const show = $('cLabels').checked, w = stage.clientWidth, h = stage.clientHeight;
+  for (const a of anchors) {
+    a.o.getWorldPosition(tmp);
+    const facing = tmp.clone().normalize().dot(camC.position.clone().sub(tmp).normalize());
+    const vis = show && facing > 0.25;
+    a.el.hidden = !vis;
+    if (!vis) continue;
+    const p = tmp.clone().project(camC);
+    a.el.style.transform = `translate(${((p.x + 1) / 2 * w + 8).toFixed(1)}px,${((1 - p.y) / 2 * h - 12).toFixed(1)}px)`;
+    a.el.style.opacity = Math.min(1, (facing - 0.25) * 4).toFixed(2);
+  }
+}
+
+/* ---------- 分頁、尺寸、主迴圈 ---------- */
+let active = 'A';
+const HINT = { A: '面向南方看月亮；拖拉右邊的日期或按播放', B: '拖曳可旋轉、滾輪或兩指可縮放', C: '拖曳轉動月球、滾輪或兩指縮放' };
+function setHint() { $('hint').textContent = active === 'B' && bView === 'eye' ? '拖曳畫面可以轉頭看四周' : HINT[active]; }
+document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
+  active = b.dataset.tab;
+  document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('[data-pane]').forEach(p => p.hidden = p.dataset.pane !== active);
+  strip.hidden = active !== 'A';
+  $('inset').toggleAttribute('hidden', !(active === 'A' && $('aInset').checked));
+  labelsEl.hidden = active !== 'C';
+  ctlB.enabled = active === 'B' && bView === 'out';
+  ctlC.enabled = active === 'C';
+  setHint(); resize();
+});
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false);
+  for (const c of [camA, camB, camEye, camC]) { c.aspect = w / h; c.updateProjectionMatrix(); }
+  // 窄螢幕時把月亮畫面拉遠一點
+  camA.position.z = w / h < 1 ? 8.6 / Math.max(0.55, w / h) : 8.6;
+}
+new ResizeObserver(resize).observe(stage);
+
+let last = performance.now();
+function loop(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (active === 'A') {
+    if (aPlaying) { aAge = (aAge + dt * 2.4) % SYN; updateA(); }
+    moonA.rotation.y = 0.05 * Math.sin(now / 1800);
+    renderer.render(sA, camA);
+  } else if (active === 'B') {
+    if (bPlaying) { bT += dt * 1.1; if (bT >= 30) { bT = 30; stopB(); } updateB(); }
+    if (bView === 'out') { ctlB.update(); orientMoonB(camB.position); renderer.render(sB, camB); }
+    else { updateEyeCam(); orientMoonB(EYE); renderer.render(sB, camEye); }
+  } else {
+    stepFly(); if (!fly) ctlC.update();
+    renderer.render(sC, camC); updateLabels();
+  }
+  requestAnimationFrame(loop);
+}
+resize(); updateA(); setBDay(15); setHint();
+labelsEl.hidden = true;
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
