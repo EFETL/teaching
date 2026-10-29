@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>月亮 3D 動畫教室</title>
 <style>
@@ -68,10 +68,58 @@ details summary{cursor:pointer;font-weight:700;color:var(--navy)}
 .note{font-size:16px;color:var(--muted)}
 footer{color:var(--muted);font-size:16px;padding:0 0 30px}
 @media (max-width:600px){header.top h1{font-size:25px}.tabs{gap:6px}.tabs button{font-size:16px;padding:8px 12px}#stage{height:58vh}#inset{width:170px;height:170px}.big .pname{font-size:30px}}
+
+/* ===== 手機／平板 ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-touch-callout:none}
+#stage,#stage *{-webkit-user-select:none;user-select:none}
+#stage canvas{outline:none}
+.overlay-msg{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:rgba(10,20,40,.8);color:#fff;font-size:18px;line-height:1.7}
+main.grid>section{position:sticky;top:10px;align-self:start;z-index:3}
+@media (pointer:coarse){
+  .tabs button{min-height:46px}
+  .btns button,.feat button,button.primary{min-height:44px;padding:8px 16px}
+  input[type=range]{height:44px}
+  .chk input{width:24px;height:24px;margin-top:2px}
+  .lb{padding:5px 14px}
+}
+@media (max-width:940px){
+  .wrap{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
+  header.top{padding:14px 0 10px}
+  header.top h1{font-size:24px}
+  header.top p{font-size:15px;margin-top:2px}
+  .tabs{margin-top:10px;gap:8px}
+  main.grid{margin-top:0;gap:14px}
+  main.grid>section{top:0;margin:0 -14px;padding:8px 14px 6px;background:var(--bg);box-shadow:0 6px 10px -8px rgba(0,0,0,.28)}
+  #stage{height:46vh;height:46dvh;min-height:240px;max-height:620px;border-radius:16px}
+  .strip svg{width:34px;height:34px}
+  footer{padding-bottom:max(30px,env(safe-area-inset-bottom))}
+}
+@media (max-width:600px){#stage{height:42vh;height:42dvh}}
+@media (max-width:600px){.strip button{font-size:13px;padding:3px 3px 1px}.strip svg{width:30px;height:30px}}
+@media (orientation:landscape) and (max-height:560px){
+  header.top{padding:8px 0 6px}
+  header.top h1{font-size:20px}
+  header.top p{display:none}
+  .tabs{margin-top:6px}
+  .tabs button{padding:6px 14px;min-height:38px;font-size:16px}
+  main.grid{grid-template-columns:minmax(0,1fr) minmax(300px,40%);margin-top:8px;gap:12px}
+  main.grid>section{top:8px;margin:0;padding:0;background:none;box-shadow:none}
+  #stage{height:calc(100vh - 110px);height:calc(100dvh - 110px);min-height:200px;max-height:none}
+  .strip{display:none}
+}
+.lb{will-change:transform,opacity}
 </style>
+<meta name="theme-color" content="#1b2550">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js">
+<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js"></script>
 <script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
 </script>
+<script>setTimeout(function(){if(!window.__booted){var e=document.getElementById('bootfail');if(e)e.hidden=false}},12000)</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -89,6 +137,8 @@ footer{color:var(--muted);font-size:16px;padding:0 0 30px}
   <section>
     <div id="stage">
       <div id="labels"></div>
+      <div id="loading" class="overlay-msg" style="background:#05081a">🌙 月球載入中…</div>
+      <div id="bootfail" class="overlay-msg" hidden>還在載入 3D 畫面…<br>如果一直是空白，請確認網路連線，<br>或把手機／平板的系統更新到 iOS／iPadOS 16 以上。</div>
       <svg id="inset" viewBox="-115 -115 230 230" hidden>
         <text x="0" y="-98" fill="#fff" font-size="13" text-anchor="middle">從北極上空往下看（延伸）</text>
         <g stroke="#ffd36b" stroke-width="1.5" opacity=".7">
@@ -275,10 +325,48 @@ const elong = age => age / SYN * 2 * PI;
 
 /* ---------- 渲染器 ---------- */
 const stage = $('stage');
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const LOW = new URLSearchParams(location.search).has('touch') || matchMedia('(pointer: coarse)').matches;   // 手機／平板走輕量路徑
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' }); }
+catch (err) { const b = $('bootfail'); b.hidden = false; b.textContent = '這個瀏覽器無法顯示 3D（WebGL）。請改用較新的 Safari 或 Chrome。'; throw err; }
+let pixelRatio = Math.min(window.devicePixelRatio || 1, LOW ? 1.5 : 2);
+renderer.setPixelRatio(pixelRatio);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 stage.prepend(renderer.domElement);
+// 畫面沒變就不重畫（省電、不發燙）；動到才標記 dirty
+let dirty = true;
+const mark = () => { dirty = true; };
+renderer.domElement.addEventListener('webglcontextlost', e => e.preventDefault());
+renderer.domElement.addEventListener('webglcontextrestored', mark);
+document.addEventListener('visibilitychange', mark);
+let frameNo = 0, onScreen = true;
+new IntersectionObserver(es => { onScreen = es[0].isIntersecting; if (onScreen) mark(); }, { threshold: 0 }).observe(stage);
+// 自動降低解析度：連續 60 格平均慢於約 28 fps 就降一級（最低 0.8），讓動作維持順暢
+const perf = { acc: 0, n: 0 };
+function perfTick(raw) {
+  if (raw > .25) { perf.acc = 0; perf.n = 0; return; }   // 切換分頁、被遮住後的大間隔不算
+  perf.acc += raw; perf.n++;
+  if (perf.n < 60) return;
+  const avg = perf.acc / perf.n; perf.acc = 0; perf.n = 0;
+  if (avg > .036 && pixelRatio > .8) { pixelRatio = Math.max(.8, pixelRatio - .25); renderer.setPixelRatio(pixelRatio); resize(); }
+}
+
+/* ---------- 偵錯面板（網址加 ?debug 才會顯示：fps、每格耗時、繪製次數） ---------- */
+const DEBUG = /[?&]debug/.test(location.search);
+const dbgState = { n: 0, w: 0, t0: performance.now(), el: null };
+if (DEBUG) {
+  const el = dbgState.el = document.createElement('div');
+  el.style.cssText = 'position:absolute;right:10px;bottom:10px;z-index:9;font:12px/1.35 monospace;color:#7CFC8A;background:rgba(0,0,0,.65);padding:4px 8px;border-radius:8px;pointer-events:none;white-space:pre';
+  stage.appendChild(el); window.__r = renderer;
+}
+function dbgFrame(work) {
+  if (!DEBUG) return;
+  const d = dbgState, now = performance.now(); d.n++; d.w += work;
+  if (now - d.t0 < 500) return;
+  const i = renderer.info.render;
+  d.el.textContent = `${(d.n * 1000 / (now - d.t0)).toFixed(0)} fps  work ${(d.w / d.n).toFixed(1)} ms\ncalls ${i.calls}  tris ${i.triangles}  dpr ${renderer.getPixelRatio().toFixed(2)}`;
+  window.__dbg = d.el.textContent; d.n = 0; d.w = 0; d.t0 = now;
+}
 
 /* ---------- 月球貼圖（依真實位置程式繪製） ---------- */
 function rng(seed) {
@@ -301,7 +389,7 @@ const MARIA = [
   { lat: -20, lon: -95, r: 3, k: 2 },                  // 東方海
 ];
 function makeMoonTextures() {
-  const W = 2048, H = 1024, R = rng(11);
+  const W = LOW ? 1536 : 2048, H = W / 2, R = rng(11), K = LOW ? .6 : 1;   // 手機：貼圖小一點、細節少一點
   const c = document.createElement('canvas'); c.width = W; c.height = H;
   const hc = document.createElement('canvas'); hc.width = W; hc.height = H;
   const g = c.getContext('2d'), h = hc.getContext('2d');
@@ -330,12 +418,12 @@ function makeMoonTextures() {
   }
   const randLat = () => Math.asin(R() * 2 - 1) / D2R;
   // 高地的斑駁
-  for (let i = 0; i < 3500; i++) {
+  for (let i = 0; i < Math.round(3500 * K); i++) {
     const light = R() < 0.5;
     blob(g, randLat(), R() * 360 - 180, 0.6 + R() * 4, light ? [215, 212, 204] : [120, 117, 110], 0.07, 0.2);
   }
   // 大量坑洞（之後被海蓋掉一部分）
-  for (let i = 0; i < 1800; i++) crater(randLat(), R() * 360 - 180, 0.2 + 2.6 * R() ** 4, 0.55);
+  for (let i = 0; i < Math.round(1800 * K); i++) crater(randLat(), R() * 360 - 180, 0.2 + 2.6 * R() ** 4, 0.55);
   // 海：暗、平坦
   for (const m of MARIA) {
     const sl = m.sl ?? m.r * 0.7, sn = m.sn ?? m.r * 0.7;
@@ -348,7 +436,7 @@ function makeMoonTextures() {
     }
   }
   // 海上的小坑
-  for (let i = 0; i < 500; i++) crater(randLat(), R() * 360 - 180, 0.2 + 0.5 * R(), 0.45);
+  for (let i = 0; i < Math.round(500 * K); i++) crater(randLat(), R() * 360 - 180, 0.2 + 0.5 * R(), 0.45);
   // 亞平寧山脈：雨海東南邊緣的一串亮點
   for (let i = 0; i <= 30; i++) {
     const f = i / 30, la = 26 - 13 * f + (R() - 0.5) * 2, lo = 2 - 13 * f + (R() - 0.5) * 2;
@@ -374,14 +462,19 @@ function makeMoonTextures() {
   crater(-43.3, -11.2, 1.4, 1.4); crater(9.6, -20.1, 1.6, 1.4); crater(8.1, -38, 0.6, 1.4);
   blob(g, 51.6, -9.3, 1.5, [80, 78, 74], 0.9, 0.7); crater(51.6, -9.3, 1.6, 0.8);
   blob(g, -43.3, -11.2, 1.0, [235, 232, 222], 0.5, 0.4);
-  const map = new THREE.CanvasTexture(c); map.colorSpace = THREE.SRGBColorSpace; map.anisotropy = 8;
+  const map = new THREE.CanvasTexture(c); map.colorSpace = THREE.SRGBColorSpace; map.anisotropy = LOW ? 4 : 8;
   const bump = new THREE.CanvasTexture(hc);
   return { map, bump };
 }
+const nextPaint = () => new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
+await nextPaint();   // 先讓「載入中」畫出來，再做比較花時間的月球貼圖
+const texT0 = performance.now();
 const MOONTEX = makeMoonTextures();
-const moonGeo = new THREE.SphereGeometry(1, 160, 80);
+window.__texMs = Math.round(performance.now() - texT0);
+const moonGeo = LOW ? new THREE.SphereGeometry(1, 96, 48) : new THREE.SphereGeometry(1, 160, 80);
 function makeMoon(radius, bumpScale = 3) {
-  const mat = new THREE.MeshStandardMaterial({ map: MOONTEX.map, bumpMap: MOONTEX.bump, bumpScale, roughness: 1, metalness: 0 });
+  const mat = LOW ? new THREE.MeshLambertMaterial({ map: MOONTEX.map, bumpMap: MOONTEX.bump, bumpScale })
+    : new THREE.MeshStandardMaterial({ map: MOONTEX.map, bumpMap: MOONTEX.bump, bumpScale, roughness: 1, metalness: 0 });
   const mesh = new THREE.Mesh(moonGeo, mat);
   mesh.scale.setScalar(radius);
   mesh.rotation.y = -PI / 2;          // 讓月球正面（經度 0°）朝 +z
@@ -459,6 +552,7 @@ function stopA() { aPlaying = false; $('aPlay').textContent = '▶ 播放一個�
 $('aInset').onchange = e => { $('inset').toggleAttribute('hidden', !e.target.checked); };
 
 function updateA() {
+  mark();
   const E = elong(aAge);
   // 面向南方看月亮：上半月太陽在右（西）邊照過來
   sunA.position.set(Math.sin(E), 0, -Math.cos(E)).multiplyScalar(10);
@@ -571,6 +665,7 @@ const person = new THREE.Group(); sB.add(person);
 // 星星（跟著天空一起東升西落）
 const STAR_N = 700, starInfo = [], starPos = new Float32Array(STAR_N * 3);
 { const Rr = rng(9); for (let i = 0; i < STAR_N; i++) starInfo.push([Rr() * 2 * PI, Math.asin(Rr() * 1.6 - 0.6)]); }
+const starTrig = starInfo.map(([ra, dec]) => [Math.sin(ra), Math.cos(ra), Math.cos(dec), Math.sin(dec)]);
 const starGeo = new THREE.BufferGeometry(); starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
 const starsB = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.09, transparent: true, opacity: 0 }));
 starsB.frustumCulled = false; sB.add(starsB);
@@ -586,7 +681,17 @@ sB.add(new THREE.AmbientLight(0x8fa0d0, 0.08));
 // 高度角示意線
 const sightL = dynLine(0xffd36b, 2), horizL = dynLine(0x7fd1ff, 2), arcL = dynLine(0xffd36b, 64), merL = dynLine(0xffffff, 64, 0.5);
 sB.add(sightL, horizL, arcL, merL);
-let altSprite = null, altShown = null;
+const altCv = document.createElement('canvas'); altCv.width = 320; altCv.height = 81;
+const altTex = new THREE.CanvasTexture(altCv); altTex.colorSpace = THREE.SRGBColorSpace;
+const altSprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: altTex, depthTest: false, transparent: true }));
+altSprite.scale.set(0.7 * 320 / 81, 0.7, 1); altSprite.renderOrder = 10; sB.add(altSprite);
+let altShown = null;
+function drawAlt(deg) {
+  const g = altCv.getContext('2d'), t = '高度角 ' + deg + '°'; g.clearRect(0, 0, 320, 81);
+  g.font = 'bold 56px "PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.lineWidth = 11; g.lineJoin = 'round'; g.strokeStyle = 'rgba(0,0,0,.65)'; g.strokeText(t, 160, 41); g.fillStyle = '#ffd36b'; g.fillText(t, 160, 41);
+  altTex.needsUpdate = true;
+}
 // 站在地上看時的高度角刻度
 const ticks = new THREE.Group(); sB.add(ticks);
 for (let a = 10; a <= 80; a += 10) { const s = textSprite(a + '°', { size: 48, color: '#ffe9a8', scale: 0.55 }); s.userData.a = a; ticks.add(s); }
@@ -603,9 +708,15 @@ function skyColor(sunAlt) {
 }
 const fmtT = t => { const m = Math.round(t * 60) % (24 * 60); return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
 
+const hourCache = new Map();
+function hourSprite(h) {   // 整點文字貼圖只做一次，換日期時重複使用
+  let tpl = hourCache.get(h);
+  if (!tpl) { tpl = textSprite(h + '時', { size: 44, color: '#ffe9a8', scale: 0.5 }); hourCache.set(h, tpl); }
+  const s = new THREE.Sprite(tpl.material); s.scale.copy(tpl.scale); s.renderOrder = 10; s.userData.cached = true; return s;
+}
 function buildPath() {
   sB.remove(pathGroup);
-  pathGroup.traverse(o => { o.geometry?.dispose(); o.material?.map?.dispose(); o.material?.dispose(); });
+  pathGroup.traverse(o => { if (!o.isSprite) o.geometry?.dispose(); if (!o.userData.cached) { o.material?.map?.dispose(); o.material?.dispose(); } });
   pathGroup = new THREE.Group(); sB.add(pathGroup);
   const seg = []; let prev = null;
   for (let t = 6; t <= 30.001; t += 1 / 12) {
@@ -620,11 +731,12 @@ function buildPath() {
     const m = skyAt(hh, bDay).moon;
     if (m.y < 0.03) continue;
     const dot = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 8), dotMat); dot.position.copy(m).multiplyScalar(R * 0.995); pathGroup.add(dot);
-    const s = textSprite((hh % 24) + '時', { size: 44, color: '#ffe9a8', scale: 0.5 }); s.position.copy(m).multiplyScalar(R * 0.9).add(new THREE.Vector3(0, -0.35, 0)); pathGroup.add(s);
+    const s = hourSprite(hh % 24); s.position.copy(m).multiplyScalar(R * 0.9).add(new THREE.Vector3(0, -0.35, 0)); pathGroup.add(s);
   }
 }
 
 function updateB() {
+  mark();
   const { sun, moon, Hs } = skyAt(bT, bDay);
   sunB.position.copy(sun).multiplyScalar(R * 0.97);
   moonB.position.copy(moon).multiplyScalar(R * 0.93); sunDirB.copy(sun);
@@ -634,12 +746,16 @@ function updateB() {
   const dayF = Math.min(1, Math.max(0, (sunAlt + 10) / 16));
   tint.forEach((m, i) => m.color.copy(tintBase[i]).multiplyScalar(0.3 + 0.7 * dayF));
   starsB.material.opacity = Math.min(0.9, Math.max(0, (-sunAlt - 5) / 8));
-  starsB.visible = bView === 'eye';
-  for (let i = 0; i < STAR_N; i++) {
-    const v = horiz(starInfo[i][0] + Hs, starInfo[i][1]);
-    if (v.y < 0) starPos.set([0, -50, 0], i * 3); else starPos.set([v.x * R * 0.985, v.y * R * 0.985, v.z * R * 0.985], i * 3);
+  starsB.visible = bView === 'eye' && starsB.material.opacity > 0.01;
+  if (starsB.visible) {   // 只在看得到星星時才算；不產生暫時物件
+    const sH = Math.sin(Hs), cH = Math.cos(Hs), r = R * 0.985, sl = Math.sin(LAT), cl = Math.cos(LAT);
+    for (let i = 0; i < STAR_N; i++) {
+      const t = starTrig[i], sinH = t[0] * cH + t[1] * sH, cosH = t[1] * cH - t[0] * sH, cd = t[2], sd = t[3];
+      const east = -cd * sinH, north = sd * cl - cd * cosH * sl, up = sd * sl + cd * cosH * cl, k = i * 3;
+      if (up < 0) { starPos[k] = 0; starPos[k + 1] = -50; starPos[k + 2] = 0; } else { starPos[k] = -east * r; starPos[k + 1] = up * r; starPos[k + 2] = north * r; }
+    }
+    starGeo.attributes.position.needsUpdate = true;
   }
-  starGeo.attributes.position.needsUpdate = true;
   sunB.visible = sun.y > -0.06; moonB.visible = moon.y > -0.07;
 
   const up = new THREE.Vector3(0, 1, 0), hd = new THREE.Vector3(moon.x, 0, moon.z).normalize();
@@ -659,10 +775,7 @@ function updateB() {
     setLine(arcL, arc); setLine(merL, mer);
   }
   const altInt = Math.round(moonAlt);
-  if (altShown !== altInt) {
-    if (altSprite) { sB.remove(altSprite); altSprite.material.map.dispose(); altSprite.material.dispose(); }
-    altSprite = textSprite('高度角 ' + altInt + '°', { size: 56, color: '#ffd36b', scale: 0.7 }); sB.add(altSprite); altShown = altInt;
-  }
+  if (altShown !== altInt) { drawAlt(altInt); altShown = altInt; }
   altSprite.visible = showAngle;
   altSprite.position.copy(EYE).addScaledVector(hd, 3.4 * Math.cos(a / 2)).addScaledVector(up, 3.4 * Math.sin(a / 2) + 0.3);
   // 刻度
@@ -713,7 +826,7 @@ renderer.domElement.addEventListener('pointerdown', e => { if (active === 'B' &&
 addEventListener('pointermove', e => {
   if (!drag) return;
   yaw -= (e.clientX - drag.x) * 0.25; pitch = Math.min(80, Math.max(-5, pitch + (e.clientY - drag.y) * 0.2));
-  drag = { x: e.clientX, y: e.clientY };
+  drag = { x: e.clientX, y: e.clientY }; mark();
 });
 addEventListener('pointerup', () => drag = null);
 // 從外面看時，讓月亮轉向鏡頭，但月相保持和「站在地上的人」看到的一樣
@@ -723,12 +836,14 @@ function orientMoonB(viewer) {
   sunLightB.position.copy(moonB.position).addScaledVector(sunDirB.clone().applyQuaternion(q), 40);
 }
 function updateEyeCam() {
+  const y0 = yaw, p0 = pitch;
   if ($('bFollow').checked && moonAlt > 0) {
     let dy = ((moonAz - yaw + 540) % 360) - 180; yaw += dy * 0.08;
     pitch += (Math.min(60, Math.max(10, moonAlt * 0.7)) - pitch) * 0.08;
   }
   const az = yaw * D2R, p = pitch * D2R;
   camEye.lookAt(EYE.clone().add(new THREE.Vector3(-Math.sin(az) * Math.cos(p), Math.sin(p), Math.cos(az) * Math.cos(p))));
+  return Math.abs(yaw - y0) + Math.abs(pitch - p0) > 1e-3;
 }
 
 /* =========================================================
@@ -781,6 +896,7 @@ function selectFeature(item) {
 }
 function stepFly() {
   if (!fly) return;
+  mark();
   fly.t = Math.min(1, fly.t + 0.025);
   const e = fly.t < 0.5 ? 2 * fly.t * fly.t : 1 - (-2 * fly.t + 2) ** 2 / 2;
   const len = fly.from.length() + (fly.to.length() - fly.from.length()) * e;
@@ -816,34 +932,60 @@ document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
   labelsEl.hidden = active !== 'C';
   ctlB.enabled = active === 'B' && bView === 'out';
   ctlC.enabled = active === 'C';
-  setHint(); resize();
+  renderer.domElement.style.touchAction = active === 'A' ? 'pan-y' : 'none';   // 月相頁：手指在畫面上也能捲動頁面
+  setHint(); mark(); resize();
 });
+let rW = 0, rH = 0, rP = 0;
+function fitFov(c, base, minAspect, cap) {   // 直式螢幕時加大視角，左右範圍才放得下
+  c.fov = c.aspect < minAspect ? Math.min(cap, 2 * Math.atan(Math.tan(base * PI / 360) * minAspect / c.aspect) * 180 / PI) : base;
+  c.updateProjectionMatrix();
+}
 function resize() {
   const w = stage.clientWidth, h = stage.clientHeight;
+  if (!w || !h || (w === rW && h === rH && pixelRatio === rP)) return;
+  rW = w; rH = h; rP = pixelRatio;
   renderer.setSize(w, h, false);
-  for (const c of [camA, camB, camEye, camC]) { c.aspect = w / h; c.updateProjectionMatrix(); }
+  for (const c of [camA, camB, camEye, camC]) c.aspect = w / h;
+  camA.updateProjectionMatrix();
+  fitFov(camB, 48, 1.5, 85); fitFov(camEye, 70, 1.5, 100); fitFov(camC, 35, 1.1, 60);
   // 窄螢幕時把月亮畫面拉遠一點
   camA.position.z = w / h < 1 ? 8.6 / Math.max(0.55, w / h) : 8.6;
+  mark();
 }
 new ResizeObserver(resize).observe(stage);
 
-let last = performance.now();
+let last = performance.now(), booted = false;
 function loop(now) {
-  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  requestAnimationFrame(loop);
+  const raw = (now - last) / 1000; last = now;
+  if (document.hidden || !onScreen) return;   // 看不到時不更新、不繪製（省電）
+  const dt = Math.min(0.05, raw);
+  perfTick(raw); frameNo++;
+  const w0 = performance.now();
+  let sc, cam;
   if (active === 'A') {
     if (aPlaying) { aAge = (aAge + dt * 2.4) % SYN; updateA(); }
-    moonA.rotation.y = 0.05 * Math.sin(now / 1800);
-    renderer.render(sA, camA);
+    sc = sA; cam = camA;
   } else if (active === 'B') {
     if (bPlaying) { bT += dt * 1.1; if (bT >= 30) { bT = 30; stopB(); } updateB(); }
-    if (bView === 'out') { ctlB.update(); orientMoonB(camB.position); renderer.render(sB, camB); }
-    else { updateEyeCam(); orientMoonB(EYE); renderer.render(sB, camEye); }
+    sc = sB;
+    if (bView === 'out') { ctlB.update(); cam = camB; } else { if (updateEyeCam()) mark(); cam = camEye; }
   } else {
     stepFly(); if (!fly) ctlC.update();
-    renderer.render(sC, camC); updateLabels();
+    sc = sC; cam = camC;
   }
-  requestAnimationFrame(loop);
+  if (dirty) {
+    dirty = false;
+    if (active === 'B') orientMoonB(bView === 'out' ? camB.position : EYE);
+    renderer.render(sc, cam);
+    if (active === 'C') updateLabels();
+    if (!booted) { booted = true; window.__booted = true; $('loading')?.remove(); $('bootfail').hidden = true; }
+  }
+  dbgFrame(performance.now() - w0);
 }
+ctlB.addEventListener('change', mark); ctlC.addEventListener('change', mark);
+$('cLabels').addEventListener('change', mark);
+renderer.domElement.style.touchAction = 'pan-y';
 resize(); updateA(); setBDay(15); setHint();
 labelsEl.hidden = true;
 requestAnimationFrame(loop);
