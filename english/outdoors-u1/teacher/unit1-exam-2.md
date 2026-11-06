@@ -8,15 +8,15 @@
 按「🔊 播放」聽句子（可重複聽），選出正確答案。
 
 1. 🔊（老師播放）What does he have?
-   (A) a helmet and a skateboard　(B) a bucket and a fishing rod　(C) a bat and a mitt　(D) a tennis ball and a racket
+   (A) a tennis ball and a racket　(B) a bat and a mitt　(C) a helmet and a skateboard　(D) a bucket and a fishing rod
 2. 🔊（老師播放）What is the speaker going to do?
    (A) go fishing　(B) play baseball　(C) play tennis　(D) go skateboarding
 3. 🔊（老師播放）What does B have?
-   (A) a tent and a flashlight　(B) a bat and a mitt　(C) a skateboard and a helmet　(D) a racket and a ball
+   (A) a skateboard and a helmet　(B) a bat and a mitt　(C) a tent and a flashlight　(D) a racket and a ball
 4. 🔊（老師播放）What do they have?
-   (A) buckets　(B) tennis rackets　(C) bats　(D) fishing rods
+   (A) bats　(B) fishing rods　(C) buckets　(D) tennis rackets
 5. 🔊（老師播放）What is B going to do?
-   (A) go skateboarding　(B) play tennis with A　(C) go fishing　(D) play video games
+   (A) go skateboarding　(B) go fishing　(C) play tennis with A　(D) play video games
 
 ## 二、是非題
 
@@ -35,46 +35,46 @@
 選出最適合的答案。
 
 11. A mitt is for ____.
-   (A) fishing　(B) tennis　(C) skateboarding　(D) baseball
+   (A) tennis　(B) fishing　(C) baseball　(D) skateboarding
 12. What's he going to do?  He's going to ____.
-   (A) play baseball　(B) playing baseball　(C) go baseball　(D) plays baseball
+   (A) play baseball　(B) go baseball　(C) playing baseball　(D) plays baseball
 13. You need a ____ to catch a fish.
-   (A) helmet　(B) racket　(C) bat　(D) fishing rod
+   (A) bat　(B) fishing rod　(C) racket　(D) helmet
 14. A helmet protects your ____.
-   (A) eye　(B) foot　(C) head　(D) hand
+   (A) eye　(B) hand　(C) head　(D) foot
 15. He ____ a tennis ball and a tennis racket.
-   (A) has　(B) are　(C) have　(D) is
+   (A) have　(B) is　(C) are　(D) has
 16. What is this?  這是什麼？
    ![](img/mitt-hr.png)
-   (A) a bat　(B) a mitt　(C) a bucket　(D) a helmet
+   (A) a bat　(B) a bucket　(C) a mitt　(D) a helmet
 17. What is this?  這是什麼？
    ![](img/fishingrod-hr.png)
-   (A) a skateboard　(B) a tennis racket　(C) a fishing rod　(D) a bat
+   (A) a skateboard　(B) a fishing rod　(C) a tennis racket　(D) a bat
 
 ## 四、文法測驗
 
 選出文法正確的答案。
 
 18. I ____ going to go fishing.
-   (A) am　(B) be　(C) is　(D) are
+   (A) is　(B) be　(C) am　(D) are
 19. What ____ you going to do?
-   (A) am　(B) does　(C) are　(D) is
+   (A) is　(B) am　(C) are　(D) does
 20. He ____ a bat and a mitt.
-   (A) have　(B) do　(C) are　(D) has
+   (A) do　(B) has　(C) are　(D) have
 21. ___ you going to play tennis with Gus?
-   (A) Is　(B) Does　(C) Are　(D) Am
+   (A) Am　(B) Is　(C) Does　(D) Are
 22. I'm going to go ____ after school.
-   (A) skateboarding　(B) skateboards　(C) to skateboard　(D) skateboard
+   (A) skateboarding　(B) skateboards　(C) skateboard　(D) to skateboard
 
 ## 五、配合題
 
 左邊的題目要配右邊哪一個？用下拉選單選出代號。
 
-- (A) 棒球手套
+- (A) 釣竿
 - (B) 安全帽
-- (C) 釣竿
-- (D) 球棒
-- (E) 水桶
+- (C) 球棒
+- (D) 水桶
+- (E) 棒球手套
 
 23. a mitt　（　）
 24. a bat　（　）
@@ -101,15 +101,15 @@
 
 依序點選單字，排成正確的句子。
 
-33. going / What / are / you / to / do?
+33. What / do? / to / are / you / going
    → ______________________________
-34. baseball. / going / play / to / He's
+34. play / to / going / baseball. / He's
    → ______________________________
-35. a / a / bat / has / He / and / mitt.
+35. has / bat / and / He / a / mitt. / a
    → ______________________________
-36. fishing. / I'm / going / go / to
+36. going / go / to / fishing. / I'm
    → ______________________________
-37. and / I / helmet. / skateboard / a / have / a
+37. and / a / I / have / skateboard / helmet. / a
    → ______________________________
 
 ---
@@ -124,15 +124,15 @@
 
 ## 答案
 
-**一、聽力測驗**　1. C　2. A　3. C　4. B　5. D
+**一、聽力測驗**　1. B　2. A　3. A　4. D　5. D
 
 **二、是非題**　6. F　7. T　8. T　9. F　10. F
 
-**三、選擇題**　11. D　12. A　13. D　14. C　15. A　16. B　17. C
+**三、選擇題**　11. C　12. A　13. B　14. C　15. D　16. C　17. B
 
-**四、文法測驗**　18. A　19. C　20. D　21. C　22. A
+**四、文法測驗**　18. C　19. C　20. B　21. D　22. A
 
-**五、配合題**　23. A　24. D　25. B　26. C　27. E
+**五、配合題**　23. E　24. C　25. B　26. A　27. D
 
 **六、句子改寫**　
 - 28. Are you going to play tennis today?
