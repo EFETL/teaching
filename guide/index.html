@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>新手安裝守則：Claude × GitHub × Obsidian</title>
+<style>
+:root{
+  --main:#1f5f8b; --main-soft:#e8f1f7; --accent:#b8864b; --accent-soft:#f7efe3;
+  --ink:#1d2a33; --muted:#5d6b75; --line:#e3e8ec; --bg:#f6f8fa; --card:#fff;
+  --ok:#2f7d4f; --warn:#b4531a; --warn-soft:#fdf0e6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;
+  line-height:1.8;font-size:17px}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.hero{background:linear-gradient(135deg,#1f5f8b,#2f7aa8);color:#fff;padding:64px 0 56px}
+.hero h1{margin:0 0 8px;font-size:2.1rem;line-height:1.3}
+.hero .en{opacity:.85;font-size:1.05rem;margin:0 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:999px;font-size:.92rem}
+
+.ostab{position:sticky;top:0;z-index:10;background:rgba(246,248,250,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.ostab .wrap{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.ostab span.lbl{color:var(--muted);font-size:.95rem}
+.ostab button{font:inherit;border:1.5px solid var(--main);background:#fff;color:var(--main);padding:6px 18px;border-radius:999px;cursor:pointer}
+.ostab button.on{background:var(--main);color:#fff}
+.ostab a{margin-left:auto;color:var(--muted);font-size:.9rem;text-decoration:none}
+
+section{margin:56px 0}
+h2{font-size:1.55rem;margin:0 0 6px;line-height:1.4}
+h2 .no{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--main);color:#fff;font-size:1.05rem;margin-right:10px;vertical-align:middle}
+.sub{color:var(--muted);margin:0 0 22px}
+.grid{display:grid;gap:18px}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.g3{grid-template-columns:1fr}.hero h1{font-size:1.6rem}}
+.card{background:var(--card);border-radius:16px;box-shadow:0 2px 10px rgba(20,40,60,.07);padding:22px 24px}
+.card h3{margin:0 0 6px;font-size:1.15rem}
+.card .tag{font-size:.82rem;color:var(--main);background:var(--main-soft);padding:2px 10px;border-radius:999px;display:inline-block;margin-bottom:8px}
+.card p{margin:6px 0 0;color:var(--muted)}
+
+.note{border-radius:14px;padding:14px 18px;margin:18px 0;background:var(--main-soft);border-left:5px solid var(--main)}
+.note.warn{background:var(--warn-soft);border-left-color:var(--warn)}
+.note.ok{background:#e9f6ee;border-left-color:var(--ok)}
+.note b.t{display:block;margin-bottom:2px}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,60,.07);font-size:.97rem}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--main-soft);color:var(--main)}
+tr:last-child td{border-bottom:none}
+.scroll{overflow-x:auto}
+
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.steps>li{counter-increment:s;position:relative;background:var(--card);border-radius:16px;box-shadow:0 2px 10px rgba(20,40,60,.07);padding:18px 22px 18px 68px;margin-bottom:14px}
+ol.steps>li::before{content:counter(s);position:absolute;left:20px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;text-align:center;line-height:32px;font-weight:700}
+ol.steps>li b.h{display:block;font-size:1.05rem;margin-bottom:2px}
+ol.steps p{margin:4px 0}
+.small{font-size:.93rem;color:var(--muted)}
+
+.code{position:relative;background:#14232e;color:#e8f1f7;border-radius:12px;padding:14px 74px 14px 16px;margin:10px 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;word-break:break-all;line-height:1.6}
+.code button{position:absolute;right:10px;top:10px;font:inherit;font-size:.8rem;border:none;background:#2f7aa8;color:#fff;padding:4px 12px;border-radius:8px;cursor:pointer}
+.code button.done{background:var(--ok)}
+kbd{background:#eef1f4;border:1px solid #cfd6dc;border-bottom-width:2px;border-radius:6px;padding:0 6px;font-size:.88em}
+a{color:var(--main)}
+
+.win,.mac{display:none}
+body[data-os="win"] .win{display:revert}
+body[data-os="mac"] .mac{display:revert}
+body[data-os="win"] span.win, body[data-os="mac"] span.mac{display:inline}
+
+details{background:var(--card);border-radius:14px;box-shadow:0 2px 10px rgba(20,40,60,.07);padding:4px 20px;margin-bottom:12px}
+summary{cursor:pointer;padding:12px 0;font-weight:600}
+details p{margin:0 0 14px;color:var(--muted)}
+
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.dd{grid-template-columns:1fr}}
+.dd .card.do{border-top:5px solid var(--ok)}
+.dd .card.dont{border-top:5px solid var(--warn)}
+.dd ul{margin:8px 0 0;padding-left:20px}
+.dd li{margin-bottom:6px}
+
+.check label{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.check label:last-child{border-bottom:none}
+.check input{width:22px;height:22px;margin-top:5px;accent-color:var(--ok);flex:none}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.progress{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:6px 0 14px}
+.progress i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+
+footer{padding:40px 0 70px;color:var(--muted);font-size:.9rem;text-align:center}
+@media print{.ostab{display:none}.win,.mac{display:revert!important}header.hero{background:#1f5f8b;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body data-os="win">
+
+<header class="hero">
+  <div class="wrap">
+    <h1>新手安裝守則：Claude × GitHub × Obsidian</h1>
+    <p class="en">A one-page beginner's setup guide — three tools, three independent accounts</p>
+    <div class="chips">
+      <span class="chip">⏱ 約 40 分鐘</span>
+      <span class="chip">💻 Windows / Mac 通用</span>
+      <span class="chip">🔰 零基礎可跟著做</span>
+    </div>
+  </div>
+</header>
+
+<div class="ostab">
+  <div class="wrap">
+    <span class="lbl">你的電腦是：</span>
+    <button id="b-win" onclick="setOS('win')">🪟 Windows</button>
+    <button id="b-mac" onclick="setOS('mac')">🍎 Mac</button>
+    <a href="../" style="margin-left:auto">← 回主選單</a>
+    <a href="#finish" style="margin-left:12px">跳到完成檢查 ↓</a>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- 0 -->
+<section id="what">
+  <h2>先看懂：三個軟體各做什麼</h2>
+  <p class="sub">What each tool does — 三個軟體、三個帳號，彼此獨立，登入一個不會自動登入另一個。</p>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Obsidian</span><h3>📓 你的筆記本</h3>
+      <p>筆記以一般檔案存在你電腦的資料夾裡。<b>不需要帳號</b>就能用。</p></div>
+    <div class="card"><span class="tag">GitHub</span><h3>☁️ 雲端備份與網站發布</h3>
+      <p>把資料夾備份到雲端、保留修改歷史，也能用來發布網站。<b>需要帳號</b>。</p></div>
+    <div class="card"><span class="tag">Claude</span><h3>🤖 AI 助手</h3>
+      <p>可以聊天，也能直接讀寫你的筆記資料夾、幫你整理與製作。<b>需要帳號</b>。</p></div>
+  </div>
+  <div class="note"><b class="t">安裝順序</b>Obsidian（最簡單）→ GitHub → Claude → 把三者串起來。照順序做，卡住時比較好找原因。</div>
+</section>
+
+<!-- 1 -->
+<section id="prep">
+  <h2>開始前先準備好</h2>
+  <p class="sub">Before you start</p>
+  <div class="grid g3">
+    <div class="card"><h3>📧 一個常用 Email</h3><p>要收驗證信，註冊 GitHub 與 Claude 都會用到。</p></div>
+    <div class="card"><h3>📱 一支手機</h3><p>之後開「二階段驗證」，登入時要用手機確認。</p></div>
+    <div class="card"><h3>🔑 密碼管理方式</h3><p>三個帳號<b>各用不同密碼</b>。用密碼管理員，或寫在紙本、放安全的地方。</p></div>
+  </div>
+  <p class="sub" style="margin-top:20px">還要有：穩定網路、約 2 GB 空間；<span class="win">Windows 安裝時若跳出「是否允許變更」，請按「是」。</span><span class="mac">Mac 安裝時若要求輸入電腦密碼，請輸入開機密碼。</span></p>
+  <div class="scroll">
+  <table>
+    <tr><th>軟體</th><th>要帳號嗎？</th><th>去哪裡註冊 / 下載</th></tr>
+    <tr><td><b>Obsidian</b></td><td>不用</td><td><a href="https://obsidian.md/download" target="_blank" rel="noopener">obsidian.md/download</a></td></tr>
+    <tr><td><b>GitHub</b></td><td>要（免費方案即可）</td><td><a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a></td></tr>
+    <tr><td><b>Claude</b></td><td>要</td><td><a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a></td></tr>
+  </table></div>
+</section>
+
+<!-- 2 Obsidian -->
+<section id="obsidian">
+  <h2><span class="no">1</span>安裝 Obsidian（筆記本）</h2>
+  <p class="sub">不用註冊帳號，先把筆記資料夾建立起來。</p>
+  <ol class="steps">
+    <li><b class="h">下載並安裝</b>
+      <p>打開 <a href="https://obsidian.md/download" target="_blank" rel="noopener">obsidian.md/download</a>。</p>
+      <p class="win">點 <b>Windows</b> 版下載 <code>.exe</code>，雙擊安裝，一路按「下一步」。</p>
+      <p class="mac">點 <b>macOS</b> 版下載 <code>.dmg</code>，打開後把 Obsidian 圖示<b>拖進「應用程式」</b>資料夾。</p></li>
+    <li><b class="h">建立筆記庫（Vault）</b>
+      <p>開啟 Obsidian，選 <b>Create new vault（建立新資料庫）</b>，畫面會問你兩件事：<b>名稱</b>與<b>位置</b>。這兩個是不同的東西：</p>
+      <ul>
+        <li><b>名稱（Vault name）</b>：筆記庫自己的名字，Obsidian 會用它建立一個資料夾，例如「我的筆記」。</li>
+        <li><b>位置（Location）</b>：這個資料夾要放在哪裡，也就是它的<b>上一層</b>資料夾。</li>
+      </ul>
+      <p>最後的完整路徑 ＝ <b>位置 ＋ 名稱</b>：</p>
+      <div class="scroll"><table>
+        <tr><th>位置</th><th>名稱</th><th>實際筆記資料夾</th></tr>
+        <tr class="win"><td><code>D:\</code></td><td><code>我的筆記</code></td><td><code>D:\我的筆記</code> ✅</td></tr>
+        <tr class="win"><td><code>D:\筆記</code></td><td><code>我的筆記</code></td><td><code>D:\筆記\我的筆記</code> ✅</td></tr>
+        <tr class="win"><td><code>D:\我的筆記</code></td><td><code>我的筆記</code></td><td><code>D:\我的筆記\我的筆記</code> ❌ 多一層同名資料夾</td></tr>
+        <tr class="mac"><td><code>文稿</code></td><td><code>我的筆記</code></td><td><code>文稿/我的筆記</code> ✅</td></tr>
+        <tr class="mac"><td><code>文稿/筆記</code></td><td><code>我的筆記</code></td><td><code>文稿/筆記/我的筆記</code> ✅</td></tr>
+        <tr class="mac"><td><code>文稿/我的筆記</code></td><td><code>我的筆記</code></td><td><code>文稿/我的筆記/我的筆記</code> ❌ 多一層同名資料夾</td></tr>
+      </table></div>
+      <div class="note"><b class="t">簡單記法</b>「位置」選一個<b>已經存在</b>的資料夾；「名稱」填你想要的筆記庫名字，<b>兩者不要取一樣</b>。建好後打開那個資料夾，裡面應該直接就是筆記和 <code>.obsidian</code>，不會再多一層。</div>
+      <p><b>位置怎麼選：</b></p>
+      <ul>
+        <li class="win"><b>Windows：</b>放在磁碟第一層，例如 <code>D:\</code>（沒有 D 槽就用 <code>C:\</code>）。<b>不要</b>放桌面或「文件」，這兩個常被 OneDrive 接管成同步資料夾。</li>
+        <li class="mac"><b>Mac：</b>選「文稿」。若你有開「iCloud 桌面與文稿」，改選你的使用者資料夾（家目錄），避免筆記被自動同步。</li>
+      </ul>
+      <p><b>名稱怎麼取：</b></p>
+      <ul>
+        <li>中英文都可以；想少踩雷就用短名字、<b>不要有空格</b>（路徑有空格時，用指令操作比較容易出錯）。</li>
+        <li class="win">不能包含這些字元：<code>\ / : * ? " &lt; &gt; |</code>；前後不要有空格，結尾不要是句點。</li>
+        <li>不要把一個筆記庫建在另一個筆記庫裡面。</li>
+      </ul>
+      <div class="note"><b class="t">已經有資料夾了？</b>如果是用現成的資料夾，不要選「建立新資料庫」，改選 <b>Open folder as vault（開啟資料夾作為資料庫）</b>，直接指到那個資料夾，就不會多出一層。</div>
+      <div class="note warn"><b class="t">新手先這樣做</b>先放在<b>本機</b>，不要一開始就設定多台電腦同步。等你會用了，再另外學同步（見下方常見問題）。</div></li>
+    <li><b class="h">寫第一則筆記</b>
+      <p>左上角按「新增筆記」，輸入一些文字。</p>
+      <p>到剛才建立的資料夾看看，應該會有一個 <code>.md</code> 檔，這就是你的筆記，之後 Claude 讀寫的就是它。</p></li>
+    <li><b class="h">略過所有「登入 / Sync」提示</b>
+      <p>Obsidian 的登入只用於付費的同步與發布服務，你現在用不到。</p></li>
+  </ol>
+  <div class="note ok"><b class="t">✅ 完成標準</b>資料夾裡看得到你寫的 <code>.md</code> 檔。</div>
+</section>
+
+<!-- 3 GitHub -->
+<section id="github">
+  <h2><span class="no">2</span>註冊 GitHub（雲端備份）</h2>
+  <p class="sub">建立獨立的 GitHub 帳號，並安裝 Git 與 GitHub Desktop。</p>
+  <ol class="steps">
+    <li><b class="h">註冊帳號</b>
+      <p>打開 <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a>，填入 Email、密碼、使用者名稱，完成驗證謎題。</p>
+      <p class="small">使用者名稱會出現在你的網址裡，取一個好記又適合公開的名字。</p></li>
+    <li><b class="h">收驗證信</b><p>到信箱輸入驗證碼。沒收到就看垃圾郵件匣。方案選 <b>Free（免費）</b>。</p></li>
+    <li><b class="h">開啟二階段驗證（2FA）</b>
+      <p>右上角頭像 → <b>Settings</b> → <b>Password and authentication</b> → <b>Two-factor authentication</b>，依指示用手機驗證 App 或通行金鑰設定。</p>
+      <div class="note warn"><b class="t">一定要做</b>設定完會給你「備用碼（recovery codes）」，請<b>下載並存在安全的地方</b>。手機弄丟時，它是你救回帳號的唯一方法。</div></li>
+    <li><b class="h">安裝 Git</b>
+      <p class="win">打開 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com/download/win</a> 下載安裝，<b>全部用預設選項、一路按 Next</b>。之後 Claude Code 在 Windows 上也需要它。</p>
+      <p class="mac">打開「終端機」（Terminal），輸入下面這行。若跳出「安裝命令列開發人員工具」，按「安裝」並等它跑完。</p>
+      <div class="code mac">git --version<button onclick="copyCode(this)">複製</button></div></li>
+    <li><b class="h">安裝 GitHub Desktop</b>
+      <p>到 <a href="https://desktop.github.com" target="_blank" rel="noopener">desktop.github.com</a> 下載安裝，開啟後按 <b>Sign in to GitHub.com</b>，瀏覽器會跳出授權，按允許即可。</p></li>
+  </ol>
+  <div class="note ok"><b class="t">✅ 完成標準</b>GitHub Desktop 左上角顯示你的使用者名稱，而且 GitHub 帳號已開啟 2FA。</div>
+</section>
+
+<!-- 4 Claude -->
+<section id="claude">
+  <h2><span class="no">3</span>註冊 Claude（AI 助手）</h2>
+  <p class="sub">建立 Claude 帳號，安裝桌面 App；想讓 Claude 直接讀寫資料夾，再加裝 Claude Code。</p>
+  <ol class="steps">
+    <li><b class="h">註冊帳號</b>
+      <p>打開 <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>，用 Google 帳號或 Email 註冊，並完成驗證。</p></li>
+    <li><b class="h">安裝桌面 App</b>
+      <p>到 <a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a> 下載
+      <span class="win">Windows</span><span class="mac">Mac</span> 版並安裝，開啟後登入。</p></li>
+    <li><b class="h">（需要時）安裝 Claude Code</b>
+      <p>Claude Code 能讓 Claude 在你選的資料夾裡讀檔、改檔、執行指令，通常需要付費方案。桌面 App 內也有 Code 分頁可直接使用；若要用終端機版，照下面做：</p>
+      <p class="win">1. 先確認已裝好上一節的 <b>Git for Windows</b>。<br>2. 按開始鈕，搜尋並打開 <b>PowerShell</b>，貼上：</p>
+      <div class="code win">irm https://claude.ai/install.ps1 | iex<button onclick="copyCode(this)">複製</button></div>
+      <p class="mac">打開「終端機」，貼上：</p>
+      <div class="code mac">curl -fsSL https://claude.ai/install.sh | bash<button onclick="copyCode(this)">複製</button></div>
+      <p>裝完後<b>關掉再重開</b>終端機，輸入下面指令，跟著畫面登入：</p>
+      <div class="code">claude<button onclick="copyCode(this)">複製</button></div>
+      <p class="small">安裝指令可能隨版本更新，若失敗請以 <a href="https://docs.claude.com" target="_blank" rel="noopener">官方文件</a> 為準。</p></li>
+  </ol>
+  <div class="note ok"><b class="t">✅ 完成標準</b>桌面 App 可以正常對話；若有裝 Claude Code，輸入 <code>claude</code> 能進入畫面。</div>
+</section>
+
+<!-- 5 串起來 -->
+<section id="connect">
+  <h2><span class="no">4</span>把三者串起來</h2>
+  <p class="sub">Connect everything — 讓 Claude 讀你的筆記，再選擇性備份到 GitHub。</p>
+  <ol class="steps">
+    <li><b class="h">讓 Claude 打開你的筆記資料夾</b>
+      <p>在 Claude 的 Code 分頁（或終端機 <code>cd</code> 進去後輸入 <code>claude</code>），選擇你在第 1 步建立的筆記庫資料夾。</p></li>
+    <li><b class="h">試一句話</b>
+      <p>對 Claude 說：「請列出這個資料夾裡有哪些筆記，並用一句話說明每一則在寫什麼。」</p>
+      <p class="small">Claude 要讀寫檔案時會請你允許。新手建議選「每次詢問」，看清楚再按。</p></li>
+    <li><b class="h">寫一份「使用說明」給 Claude</b>
+      <p>在筆記庫根目錄新增一個檔案，名稱必須是 <code>CLAUDE.md</code>，寫下你的規則。Claude 每次開啟都會先讀它。範例：</p>
+      <div class="code"># 我的規則<br>- 請用繁體中文回答<br>- 新筆記放在「收件匣」資料夾<br>- 修改或刪除檔案前，先告訴我要改什麼<button onclick="copyCode(this)">複製</button></div></li>
+    <li><b class="h">（選做）備份到 GitHub</b>
+      <p>打開 GitHub Desktop → <b>File → Add local repository</b>，選你的筆記庫資料夾（提示不是 repository 時，按「create a repository」）→ 填名稱 → 按 <b>Publish repository</b>。</p>
+      <div class="note warn"><b class="t">務必勾選「Keep this code private」</b>筆記裡可能有個人資料。預設若是公開，全世界都看得到。</div></li>
+  </ol>
+</section>
+
+<!-- 6 FAQ -->
+<section id="faq">
+  <h2>常見問題</h2>
+  <p class="sub">Troubleshooting</p>
+
+  <details><summary>收不到驗證信</summary><p>先看垃圾郵件匣，等 5 分鐘後再按「重新寄送」。確認 Email 沒有打錯字。</p></details>
+
+  <details class="win"><summary>Windows 跳出「Windows 已保護您的電腦」</summary><p>確認你是從官方網站下載的，點「其他資訊」→「仍要執行」。來源不明的檔案不要執行。</p></details>
+
+  <details class="mac"><summary>Mac 說「無法打開，因為來自未識別的開發者」</summary><p>從官網下載的正常不會出現。若出現：到「系統設定 → 隱私權與安全性」，往下找到被擋住的 App，按「仍要打開」。</p></details>
+
+  <details><summary>輸入 <code>claude</code> 說找不到指令</summary><p>先把終端機（或 PowerShell）完全關掉再重開。還是不行，就重跑一次安裝指令。</p></details>
+
+  <details class="win"><summary>Windows 的檔名有哪些字元不能用？</summary><p>檔名不能含這些字元：<code>\ / : * ? " &lt; &gt; |</code>。筆記標題如果有這些字，在 Windows 上建檔會失敗；Mac 的檔名比較寬鬆，所以跨電腦使用時要特別留意。</p></details>
+
+  <details class="mac"><summary>Mac 的筆記標題有「:」「?」，換到 Windows 會怎樣？</summary><p>Windows 不允許檔名含 <code>\ / : * ? " &lt; &gt; |</code>，這類檔案可能無法同步。若之後要兩台電腦共用，筆記標題一開始就避開這些字元。</p></details>
+
+  <details><summary>想在兩台電腦用同一個筆記庫（同步）怎麼辦？</summary>
+    <p>這是進階主題，建議先在一台電腦用熟再說。常見做法：<br>
+    • <b>iCloud / OneDrive</b>：免費，但 Windows 端要設成「永遠保留在此裝置」，且兩台不要同時編輯。<br>
+    • <b>Obsidian Sync</b>：官方付費同步，最穩。<br>
+    • <b>GitHub</b>：適合備份與版本紀錄，但不是即時同步。<br>
+    不要把 Git 倉庫放進 iCloud 或 OneDrive 的同步資料夾。</p></details>
+
+  <details><summary>Claude 說要執行某個指令或刪除檔案，我該按允許嗎？</summary><p>先看它說要做什麼。不確定就問它「這個指令會做什麼？」，看懂再允許。刪除與覆蓋這類動作，建議先把重要資料另外備份一份。</p></details>
+</section>
+
+<!-- 7 守則 -->
+<section id="rules">
+  <h2>安全守則</h2>
+  <p class="sub">Golden rules — 新手最容易出事的地方。</p>
+  <div class="dd">
+    <div class="card do"><h3>✅ 一定要做</h3>
+      <ul>
+        <li>GitHub 與 Claude 都開二階段驗證</li>
+        <li>備用碼存在離線、安全的地方</li>
+        <li>三個帳號用<b>不同</b>密碼</li>
+        <li>GitHub 存筆記一律選 <b>Private</b></li>
+        <li>只從官方網站下載軟體</li>
+        <li>重要資料先備份，再讓 AI 動手</li>
+      </ul></div>
+    <div class="card dont"><h3>🚫 千萬不要</h3>
+      <ul>
+        <li>把密碼、金鑰（API key）、Token 貼進聊天或筆記</li>
+        <li>把含個資的筆記推到公開的 GitHub</li>
+        <li>沒看清楚就按「允許」刪除或覆蓋</li>
+        <li>兩台電腦同時編輯同一個筆記庫</li>
+        <li>點來路不明的「安裝連結」</li>
+      </ul></div>
+  </div>
+</section>
+
+<!-- 8 完成 -->
+<section id="finish">
+  <h2>完成檢查清單</h2>
+  <p class="sub">Final checklist — 勾選會自動記在這台電腦的瀏覽器裡。</p>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="card check" id="checks">
+    <label><input type="checkbox"><span>Obsidian 已安裝，並建立了筆記庫</span></label>
+    <label><input type="checkbox"><span>在資料夾裡看得到自己寫的 .md 檔</span></label>
+    <label><input type="checkbox"><span>GitHub 帳號已註冊，並開啟二階段驗證</span></label>
+    <label><input type="checkbox"><span>GitHub 備用碼已存放在安全的地方</span></label>
+    <label><input type="checkbox"><span>Git 與 GitHub Desktop 已安裝並登入</span></label>
+    <label><input type="checkbox"><span>Claude 帳號已註冊，桌面 App 已登入</span></label>
+    <label><input type="checkbox"><span>（需要時）Claude Code 已安裝，輸入 claude 能進入</span></label>
+    <label><input type="checkbox"><span>Claude 能讀到筆記資料夾，並已寫好 CLAUDE.md</span></label>
+    <label><input type="checkbox"><span>（選做）筆記已用 Private 方式備份到 GitHub</span></label>
+    <label><input type="checkbox"><span>三個帳號的密碼各自不同，且已妥善保存</span></label>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">網站與下載連結、安裝指令可能隨版本更新，請以各官方網站為準。<br>內容整理日期：2026-11-11</div>
+</footer>
+
+<script>
+function setOS(os){
+  document.body.setAttribute('data-os',os);
+  document.getElementById('b-win').classList.toggle('on',os==='win');
+  document.getElementById('b-mac').classList.toggle('on',os==='mac');
+  try{localStorage.setItem('guide-os',os)}catch(e){}
+}
+(function(){
+  var os=null;
+  try{os=localStorage.getItem('guide-os')}catch(e){}
+  if(!os){ os=/Mac|iPhone|iPad/i.test(navigator.platform||navigator.userAgent)?'mac':'win'; }
+  setOS(os);
+})();
+function copyCode(btn){
+  var box=btn.parentNode, clone=box.cloneNode(true);
+  clone.querySelector('button').remove();
+  clone.querySelectorAll('br').forEach(function(b){b.replaceWith('\n')});
+  var txt=clone.textContent.trim();
+  var done=function(){btn.textContent='已複製';btn.classList.add('done');setTimeout(function(){btn.textContent='複製';btn.classList.remove('done')},1500)};
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done,done)}else{done()}
+}
+(function(){
+  var boxes=[].slice.call(document.querySelectorAll('#checks input'));
+  var saved={};try{saved=JSON.parse(localStorage.getItem('guide-checks')||'{}')}catch(e){}
+  function update(){
+    var n=boxes.filter(function(b){return b.checked}).length;
+    document.getElementById('bar').style.width=(n/boxes.length*100)+'%';
+    var s={};boxes.forEach(function(b,i){s[i]=b.checked});
+    try{localStorage.setItem('guide-checks',JSON.stringify(s))}catch(e){}
+  }
+  boxes.forEach(function(b,i){b.checked=!!saved[i];b.addEventListener('change',update)});
+  update();
+})();
+</script>
+</body>
+</html>
