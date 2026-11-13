@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<meta charset="UTF-8"><meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>統測英文模擬考卷 J</title>
+<style>
+  :root{
+    --blue:#2b8cff; --blue-dark:#1f6fe0;
+    --coral:#ff7a59; --amber:#ffb02e; --pink:#ff5d8f;
+    --bg:#f3f9ff; --card:#ffffff; --line:#e3edf9;
+    --green:#22b573; --green-bg:#e4f8ef;
+    --red:#ff5a5a; --red-bg:#ffecec;
+    --gray:#6b7785;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Helvetica Neue","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:linear-gradient(180deg,#f0f7ff,#fff7f2 70%);color:#22303f;line-height:1.6;
+    font-size:16px;-webkit-text-size-adjust:100%;}
+  .wrap{max-width:760px;margin:0 auto;padding:16px;}
+  header.top{background:linear-gradient(135deg,#5ec6ff,#7d8bff 55%,#b88bff);color:#fff;
+    border-radius:18px;padding:24px 22px;margin-bottom:16px;box-shadow:0 8px 22px rgba(93,141,255,.3);}
+  header.top h1{margin:0 0 6px;font-size:1.5rem;text-shadow:0 1px 2px rgba(0,0,0,.12);}
+  header.top p{margin:0;font-size:1rem;opacity:.95;}
+  .meta{margin-top:14px;font-size:1rem;background:rgba(255,255,255,.22);
+    padding:9px 13px;border-radius:10px;}
+  .sticky{position:sticky;top:0;z-index:20;padding:10px 0;
+    background:linear-gradient(180deg,#f0f7ff 70%,rgba(240,247,255,0));}
+  .bar{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:11px 16px;display:flex;align-items:center;gap:12px;font-size:1rem;
+    box-shadow:0 4px 12px rgba(43,140,255,.1);}
+  .bar .track{flex:1;height:9px;background:#e9f1fb;border-radius:6px;overflow:hidden;}
+  .bar .fill{height:100%;width:0;border-radius:6px;
+    background:linear-gradient(90deg,#3ad1c6,#2b8cff);transition:width .35s;}
+  .bar #count{font-weight:700;color:var(--blue-dark);}
+  .section-title{color:#fff;font-weight:800;border-radius:12px;
+    padding:10px 16px;margin:24px 0 6px;font-size:1.05rem;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);}
+  .section-title.s0{background:linear-gradient(135deg,#ff9a6c,#ff6f91);}
+  .section-title.s1{background:linear-gradient(135deg,#4dd0e1,#2b8cff);}
+  .section-title.s2{background:linear-gradient(135deg,#9b8bff,#b06bff);}
+  .section-title.s3{background:linear-gradient(135deg,#42d392,#22b573);}
+  .section-desc{font-size:1rem;color:var(--gray);margin:0 4px 10px;}
+  .passage{background:#fffdf4;border:1px solid #ffe9c9;border-left:5px solid var(--amber);
+    border-radius:12px;padding:15px 17px;margin:14px 0;font-size:1rem;
+    box-shadow:0 3px 10px rgba(255,176,46,.08);}
+  .passage h3{margin:0 0 8px;color:#e0820a;font-size:1rem;}
+  .passage .blk{display:inline-block;min-width:1.6em;text-align:center;font-weight:800;
+    color:#fff;background:var(--coral);border-radius:6px;padding:0 4px;margin:0 2px;font-size:1rem;}
+  .email-h{font-size:1rem;color:var(--gray);border-bottom:1px dashed #ffd9a8;
+    padding-bottom:6px;margin-bottom:8px;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:15px 17px;margin:12px 0;box-shadow:0 3px 10px rgba(43,140,255,.07);}
+  .q .stem{font-weight:600;margin-bottom:10px;}
+  .q .stem .num{display:inline-block;color:#fff;background:var(--blue);font-weight:700;
+    border-radius:8px;padding:1px 9px;margin-right:8px;font-size:1rem;}
+  .opt{display:flex;align-items:flex-start;gap:10px;border:2px solid var(--line);
+    border-radius:11px;padding:10px 13px;margin:8px 0;cursor:pointer;transition:.15s;
+    font-size:1rem;background:#fbfdff;}
+  .opt:hover{border-color:var(--blue);background:#eef6ff;}
+  .opt input{margin-top:3px;accent-color:var(--blue);}
+  .opt .lab{font-weight:800;color:var(--blue);min-width:18px;}
+  .opt.sel{border-color:var(--blue);background:#e7f2ff;}
+  .opt.correct{border-color:var(--green);background:var(--green-bg);}
+  .opt.wrong{border-color:var(--red);background:var(--red-bg);}
+  .opt.lock{cursor:default;}
+  .exp{display:none;margin-top:11px;border-top:2px dashed #ffe1c2;padding-top:11px;font-size:1rem;}
+  .exp.show{display:block;}
+  .exp .tag{display:inline-block;font-weight:800;color:#fff;background:var(--green);
+    border-radius:7px;padding:2px 10px;font-size:1rem;margin-bottom:7px;}
+  .exp .tag.miss{background:var(--red);}
+  .exp .tag.blank{background:var(--gray);}
+  .exp .body{color:#7a4a12;background:#fff7ea;border-radius:8px;padding:8px 11px;margin:5px 0;
+    white-space:pre-line;}
+  .written{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:15px 17px;margin:12px 0;box-shadow:0 3px 10px rgba(43,140,255,.07);}
+  .written h4{margin:0 0 8px;color:var(--blue-dark);font-size:1rem;}
+  .written .prompt{margin-bottom:10px;}
+  .written .blankline{display:inline-block;background:#fbfdff;border:1px dashed var(--line);
+    border-radius:8px;padding:6px 10px;margin-top:6px;}
+  .written button.reveal{background:#fff;color:var(--blue);border:2px solid var(--blue);
+    border-radius:10px;padding:8px 16px;font-weight:800;font-size:1rem;cursor:pointer;}
+  .written .ans{display:none;margin-top:11px;border-top:2px dashed #ffe1c2;padding-top:11px;font-size:1rem;}
+  .written .ans.show{display:block;}
+  .written .ans .tag{display:inline-block;font-weight:800;color:#fff;background:var(--blue);
+    border-radius:7px;padding:2px 10px;font-size:1rem;margin-bottom:7px;}
+  .written .ans .body{color:#7a4a12;background:#fff7ea;border-radius:8px;padding:8px 11px;margin:5px 0;}
+  .actions{position:sticky;bottom:0;padding:14px 0 6px;margin-top:18px;
+    background:linear-gradient(transparent,#fff7f2 35%);}
+  button.submit{width:100%;color:#fff;border:0;border-radius:14px;padding:16px;
+    font-size:1.08rem;font-weight:800;cursor:pointer;
+    background:linear-gradient(135deg,#ff8a5b,#ff5d8f);
+    box-shadow:0 6px 16px rgba(255,93,143,.35);}
+  button.submit:active{transform:translateY(1px);}
+  button.reset{width:100%;background:#fff;color:var(--blue);border:2px solid var(--blue);
+    border-radius:14px;padding:14px;font-size:1rem;font-weight:800;cursor:pointer;margin-top:10px;display:none;}
+  .result{display:none;background:var(--card);border:3px solid transparent;border-radius:16px;
+    padding:22px;margin:16px 0;text-align:center;
+    background-image:linear-gradient(#fff,#fff),linear-gradient(135deg,#3ad1c6,#2b8cff,#b06bff);
+    background-origin:border-box;background-clip:padding-box,border-box;
+    box-shadow:0 8px 22px rgba(43,140,255,.15);}
+  .result.show{display:block;}
+  .result .score{font-size:2.8rem;font-weight:900;
+    background:linear-gradient(135deg,#2b8cff,#b06bff);-webkit-background-clip:text;
+    background-clip:text;-webkit-text-fill-color:transparent;}
+  .result .sub{color:var(--gray);font-size:1rem;}
+  .result .bd{display:flex;justify-content:center;gap:18px;margin-top:12px;flex-wrap:wrap;font-size:1rem;}
+  .result .bd span{font-weight:800;}
+  .hint{text-align:center;font-size:1rem;color:var(--gray);margin-top:9px;min-height:1.2em;}
+  footer{text-align:center;color:var(--gray);font-size:1rem;margin:24px 0;}
+
+.xtra{margin-top:10px;border-top:1px dashed #cfdcec;padding-top:10px}
+.xtra .xh{display:inline-block;font-weight:800;font-size:16px;border-radius:8px;padding:2px 10px;margin:6px 0 4px}
+.xtra .xh.zh{background:#e8f3ff;color:#1f6fe0}
+.xtra .xh.sa{background:#f3ecff;color:#7a3fd6}
+.xtra .xb{font-size:17px;line-height:1.75}
+details.ptr{background:#fff;border:1px solid #e3edf9;border-radius:12px;margin:-4px 0 16px;box-shadow:0 3px 10px rgba(43,140,255,.08)}
+details.ptr summary{cursor:pointer;padding:12px 16px;font-weight:800;color:#1f6fe0;font-size:17px;list-style:none}
+details.ptr summary::-webkit-details-marker{display:none}
+details.ptr summary::before{content:'▶ ';font-size:16px}
+details.ptr[open] summary::before{content:'▼ '}
+.ps{padding:12px 16px;border-top:1px solid #eef3fa}
+.ps .en{font-size:17px;font-weight:600;color:#22303f}
+.ps .en b{color:#e0560a}
+.ps .zh{font-size:17px;color:#1f6fe0;margin-top:4px}
+.ps .sa{font-size:16px;color:#5b4a7a;background:#faf7ff;border-radius:8px;padding:6px 10px;margin-top:6px;line-height:1.7}
+.ps .no{display:inline-block;min-width:26px;text-align:center;background:#2b8cff;color:#fff;border-radius:6px;font-size:16px;font-weight:800;margin-right:6px}
+@media print{details.ptr{display:none}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:12px;left:12px;background:rgba(255,255,255,.92);color:#2b8cff;padding:7px 15px;border-radius:20px;text-decoration:none;font-size:1rem;font-weight:800;z-index:999;box-shadow:0 3px 10px rgba(0,0,0,.15);">&#8592; 回統測模擬卷</a>
+<div class="wrap">
+  <header class="top">
+    <h1>統測英文　<span style="opacity:.9">模擬考卷 J</span></h1>
+    <p>科技校院四年制與專科學校二年制統一入學測驗　共同科目：英文（模擬）</p>
+    <div class="meta">選擇題共 42 題，每題 2 分，共 84 分　|　每題選擇答案後立即顯示解析＋中文翻譯＋句型分析　|　送出後顯示總分與作答統計</div>
+  </header>
+
+  <div class="sticky">
+    <div class="bar">
+      <span>作答進度</span>
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <span id="count">0 / 42</span>
+    </div>
+  </div>
+
+  <form id="quiz"></form>
+
+  <div class="result" id="result">
+    <div class="score" id="scoreNum">0</div>
+    <div class="sub" id="scoreTxt">分</div>
+    <div class="bd">
+      <span style="color:var(--green)">答對 <b id="rOk">0</b></span>
+      <span style="color:var(--red)">答錯 <b id="rNo">0</b></span>
+      <span style="color:var(--gray)">未作答 <b id="rBlank">0</b></span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="submit" id="submitBtn">交卷並查看總分</button>
+    <div class="hint" id="hint">尚未作答任何題目</div>
+    <button type="button" class="reset" id="resetBtn">重新作答</button>
+  </div>
+
+  <div class="section-title s2" style="margin-top:30px;">二、非選擇題（共 16 分，點擊查看答案與解析）</div>
+  <div id="written"></div>
+
+  <footer>統測英文模擬考卷 J　&middot;　全民補習班 線上教學</footer>
+</div>
+
+<script>
+function xtra(q){
+  var h='';
+  if(q.zh) h+='<span class="xh zh">🈶 中文翻譯</span><div class="xb">'+q.zh+'</div>';
+  if(q.sa) h+='<span class="xh sa">🧩 句型分析</span><div class="xb">'+q.sa+'</div>';
+  return h?'<div class="xtra">'+h+'</div>':'';
+}
+function ptrHtml(key){
+  var L=(typeof PTR!=='undefined')&&PTR[key]; if(!L||!L.length) return '';
+  return '<details class="ptr"><summary>📖 全文逐句翻譯＋句型分析（建議作答後再打開）</summary>'+
+    L.map(function(s,i){return '<div class="ps"><div class="en"><span class="no">'+(i+1)+'</span>'+s.en+'</div><div class="zh">'+s.zh+'</div>'+(s.sa?'<div class="sa">🧩 '+s.sa+'</div>':'')+'</div>';}).join('')+'</details>';
+}
+
+const PARTS = [{"title": "Ⅰ　字彙題", "desc": "共 10 題。第 1–8 題為單字選填；第 9–10 題為劃線字詞同義詞選擇。"}, {"title": "Ⅱ　對話題", "desc": "共 10 題，請依對話內容選出一個最適合的答案。"}, {"title": "Ⅲ　綜合測驗", "desc": "共 8 題，兩篇短文各 4 個空格，請依文意選出最適合的答案。"}, {"title": "Ⅳ　閱讀測驗", "desc": "共 14 題，請依短文內容選出最適當的答案。"}];
+const PASSAGES = {"21": "<div class=\"passage\"><h3>第 21–24 題</h3>\nBefore mechanical refrigeration was invented, people <span class=\"blk\">21</span> ice cut from frozen lakes to preserve food during the warmer months. This ice was usually stored in insulated buildings called icehouses, where it could remain frozen <span class=\"blk\">22</span> several months. In the late 19th century, machines that could produce ice artificially began <span class=\"blk\">23</span> widely available, eventually making icehouses unnecessary. Today, refrigerators are considered an essential appliance, something <span class=\"blk\">24</span> most people now take for granted.</div>", "25": "<div class=\"passage\"><h3>第 25–28 題</h3>\nOnline reviews have become an important part of the shopping experience for many consumers. Before buying a product, people often spend time <span class=\"blk\">25</span> reviews written by other customers, hoping to learn about the quality and reliability of an item. A product <span class=\"blk\">26</span> receives many positive reviews is often seen as more trustworthy, even if some of those reviews cannot be verified. In recent years, some companies have been caught posting fake reviews, a practice, <span class=\"blk\">27</span> has damaged consumer trust and led several platforms to introduce stricter verification systems. Experts therefore advise shoppers not to <span class=\"blk\">28</span> too much importance to any single review, whether it is positive or negative.</div>", "29": "<div class=\"passage\"><h3>第 29–30 題</h3>\n<b>Notice</b><br><br>Starting next Monday, all employees must display a valid parking permit on their dashboard while parked in the company garage. Permits can be picked up at the security desk on the first floor. Vehicles without a visible permit may be ticketed or towed. Visitors should continue to use the visitor parking area on Level 1 and check in at the front desk.</div>", "31": "<div class=\"passage\"><h3>第 31–32 題</h3>\n<b>Text Messages</b><br><br>Jenny: Want to catch the new movie tonight? It starts at 8. Mark: I can't make it tonight, but I'm free tomorrow. Jenny: Tomorrow works too. Same time? Mark: Sounds good. I'll book the tickets.</div>", "33": "<div class=\"passage\"><h3>第 33–35 題</h3>\nIn many cities, electric scooters have become a popular option for short trips, offering a quick and affordable alternative to walking, driving, or taking public transportation. Riders can typically rent a scooter through a smartphone app, ride to their destination, and leave it at any designated parking area within the service zone. Supporters argue that electric scooters reduce traffic congestion and help lower carbon emissions by replacing short car trips. However, the rapid growth of scooter-sharing programs has also created challenges. Pedestrians have complained about scooters left blocking sidewalks, and hospitals have reported an increase in injuries related to scooter accidents, often caused by riders not wearing helmets or riding on sidewalks at high speed. In response, some cities have introduced regulations limiting scooter speeds in pedestrian areas, requiring companies to provide helmets, and designating specific parking zones to keep sidewalks clear. While electric scooters are unlikely to disappear from city streets anytime soon, finding a balance between convenience and safety remains an ongoing challenge for city planners.</div>", "36": "<div class=\"passage\"><h3>第 36–38 題</h3>\nThe shift toward remote work, accelerated by changes in workplace culture over the past several years, has led many companies to rethink how their offices are used. Some businesses have reduced their office space significantly, as employees now split their time between working from home and coming into the office only for meetings or collaborative projects. Other companies have redesigned their offices entirely, replacing rows of individual desks with shared workspaces, meeting rooms, and lounge areas meant to encourage interaction when employees do come in. Proponents of remote work point to benefits such as reduced commuting time, lower costs for both employees and employers, and greater flexibility for workers to manage their personal schedules. Critics, however, worry that remote work can make it harder for new employees to build relationships with colleagues and may leave some workers feeling isolated. Many companies have settled on a hybrid model, allowing employees to choose which days they work from home and which days they come into the office, in an attempt to balance flexibility with the benefits of in-person collaboration.</div>", "39": "<div class=\"passage\"><h3>第 39–42 題</h3>\nDaniel had always enjoyed fixing things — bicycles, small appliances, furniture — anything that seemed broken beyond repair. When his neighbor mentioned that she was planning to throw away a toaster simply because one of the wires had come loose, Daniel offered to fix it for her instead. Word spread quickly, and soon several neighbors were bringing him broken items to repair. Realizing that many people lacked both the skills and the tools to fix simple household items, Daniel decided to start a monthly \"repair café\" at the local community center, where volunteers with repair skills could help residents fix their broken belongings for free. At first, only a handful of people attended, but within a year, the repair café was attracting dozens of visitors each month, and several local schools began sending students to learn basic repair skills from the volunteers. Daniel hopes that by teaching people how to repair their own belongings, the repair café will not only reduce the amount of waste sent to landfills but also help people feel more confident about maintaining the things they own.</div>"};
+const PTR = {"21": [{"en": "Before mechanical refrigeration was invented, people <b>used<\/b> ice cut from frozen lakes to preserve food during the warmer months.", "zh": "在機械冷藏技術發明之前，人們利用從結冰湖面切下的冰塊，在較溫暖的月份保存食物。", "sa": "【S】people 【V】used 【O】ice 【M】cut from frozen lakes 【M】to preserve food<br>📌 Before 引導時間子句（被動 was invented）；use A to V"}, {"en": "This ice was usually stored in insulated buildings called icehouses, where it could remain frozen <b>for<\/b> several months.", "zh": "這些冰通常存放在稱為「冰窖」的隔熱建築裡，冰塊在那裡可以保持冰凍好幾個月。", "sa": "【S】This ice 【V】was usually stored 【M】in insulated buildings called icehouses<br>📌 , where 引導非限定子句；remain frozen「保持冰凍」；for + 一段時間"}, {"en": "In the late 19th century, machines that could produce ice artificially began <b>to become<\/b> widely available, eventually making icehouses unnecessary.", "zh": "十九世紀末，能人工製冰的機器開始普及，最終讓冰窖變得不再需要。", "sa": "【S】machines 【M】that could produce ice artificially 【V】began 【O】to become widely available<br>📌 begin to V；分詞構句 making + O + adj. 表結果"}, {"en": "Today, refrigerators are considered an essential appliance, something <b>that<\/b> most people now take for granted.", "zh": "如今，冰箱被視為不可或缺的家電，是大多數人現在都視為理所當然的東西。", "sa": "【S】refrigerators 【V】are considered 【C】an essential appliance<br>📌 something that… 為同位語；take… for granted「視為理所當然」"}], "25": [{"en": "Online reviews have become an important part of the shopping experience for many consumers.", "zh": "對許多消費者而言，網路評論已成為購物經驗中重要的一部分。", "sa": "【S】Online reviews 【V】have become 【C】an important part of the shopping experience<br>📌 現在完成式 have become「已經成為」"}, {"en": "Before buying a product, people often spend time <b>reading<\/b> reviews written by other customers, hoping to learn about the quality and reliability of an item.", "zh": "買東西之前，人們常會花時間閱讀其他顧客寫的評論，希望了解商品的品質與可靠度。", "sa": "【S】people 【V】spend 【O】time 【M】reading reviews<br>📌 spend + 時間 + V-ing；written by 過去分詞修飾；hoping… 分詞構句"}, {"en": "A product <b>that<\/b> receives many positive reviews is often seen as more trustworthy, even if some of those reviews cannot be verified.", "zh": "得到許多好評的產品常被認為比較可信，即使其中有些評論無法查證。", "sa": "【S】A product 【M】that receives many positive reviews 【V】is often seen as 【C】more trustworthy<br>📌 that 關代修飾物；be seen as；even if「即使」"}, {"en": "In recent years, some companies have been caught posting fake reviews, a practice, <b>which<\/b> has damaged consumer trust and led several platforms to introduce stricter verification systems.", "zh": "近年來，有些公司被抓到張貼假評論，這種做法損害了消費者的信任，也促使好幾個平台推出更嚴格的驗證機制。", "sa": "【S】some companies 【V】have been caught 【O】posting fake reviews<br>📌 be caught + V-ing；, which 引導非限定子句；lead + O + to V"}, {"en": "Experts therefore advise shoppers not to <b>attach<\/b> too much importance to any single review, whether it is positive or negative.", "zh": "因此專家建議購物者，不要太看重任何單一則評論，不論是好評或負評。", "sa": "【S】Experts 【V】advise 【O】shoppers 【C】not to attach too much importance…<br>📌 advise + O + not to V；attach importance to「重視」；whether A or B"}], "29": [{"en": "Notice", "zh": "公告", "sa": "標題，名詞"}, {"en": "Starting next Monday, all employees must display a valid parking permit on their dashboard while parked in the company garage.", "zh": "自下週一起，所有員工把車停在公司車庫時，都必須在儀表板上放置有效的停車證。", "sa": "【S】all employees 【V】must display 【O】a valid parking permit<br>📌 Starting + 時間「從…開始」；while (they are) parked 省略句"}, {"en": "Permits can be picked up at the security desk on the first floor.", "zh": "停車證可以到一樓的警衛櫃檯領取。", "sa": "【S】Permits 【V】can be picked up 【M】at the security desk on the first floor<br>📌 助動詞被動 can be + p.p.；pick up「領取」"}, {"en": "Vehicles without a visible permit may be ticketed or towed.", "zh": "沒有明顯放置停車證的車輛，可能會被開罰單或拖吊。", "sa": "【S】Vehicles 【M】without a visible permit 【V】may be ticketed or towed<br>📌 may be + p.p.（兩個過去分詞以 or 並列）"}, {"en": "Visitors should continue to use the visitor parking area on Level 1 and check in at the front desk.", "zh": "訪客請繼續使用一樓的訪客停車區，並到前台報到。", "sa": "【S】Visitors 【V】should continue to use… and check in<br>📌 continue to V；check in「報到、登記」"}], "31": [{"en": "Text Messages", "zh": "簡訊對話", "sa": "標題，名詞片語"}, {"en": "Jenny: Want to catch the new movie tonight? It starts at 8.", "zh": "Jenny：今晚想去看那部新電影嗎？八點開演。", "sa": "Want to…?＝Do you want to…?（口語省略）；catch a movie「去看電影」"}, {"en": "Mark: I can't make it tonight, but I'm free tomorrow.", "zh": "Mark：今晚我沒辦法去，不過明天有空。", "sa": "【S】I 【V】can't make it 【M】tonight, but 【S】I 【V】'm 【C】free<br>📌 make it「能到場」；but 連接對比"}, {"en": "Jenny: Tomorrow works too. Same time?", "zh": "Jenny：明天也可以。一樣的時間？", "sa": "【S】Tomorrow 【V】works<br>📌 時間 + work「方便、可行」；Same time? 省略句"}, {"en": "Mark: Sounds good. I'll book the tickets.", "zh": "Mark：好啊。我來訂票。", "sa": "【S】I 【V】'll book 【O】the tickets<br>📌 will 表當下決定；book「預訂」"}], "33": [{"en": "In many cities, electric scooters have become a popular option for short trips, offering a quick and affordable alternative to walking, driving, or taking public transportation.", "zh": "在許多城市，電動滑板車已成為短程移動的熱門選擇，提供了比步行、開車或搭大眾運輸更快速又便宜的替代方案。", "sa": "【S】electric scooters 【V】have become 【C】a popular option for short trips<br>📌 分詞構句 offering… 補充說明；an alternative to + N/V-ing「…的替代方案」"}, {"en": "Riders can typically rent a scooter through a smartphone app, ride to their destination, and leave it at any designated parking area within the service zone.", "zh": "騎乘者通常可以透過手機 App 租一台滑板車，騎到目的地後，把車停在服務範圍內任何一個指定停車區。", "sa": "【S】Riders 【V】can rent… ride… and leave…<br>📌 三個原形動詞並列，共用 can"}, {"en": "Supporters argue that electric scooters reduce traffic congestion and help lower carbon emissions by replacing short car trips.", "zh": "支持者認為，電動滑板車取代了短程開車，因此能減少交通壅塞，並有助於降低碳排放。", "sa": "【S】Supporters 【V】argue 【O】that 子句<br>📌 help + 原形（help lower）；by + V-ing「藉由…」"}, {"en": "However, the rapid growth of scooter-sharing programs has also created challenges.", "zh": "然而，共享滑板車計畫的快速成長也帶來了一些挑戰。", "sa": "【S】the rapid growth of scooter-sharing programs 【V】has created 【O】challenges<br>📌 主詞核心是 growth（單數），動詞用 has"}, {"en": "Pedestrians have complained about scooters left blocking sidewalks, and hospitals have reported an increase in injuries related to scooter accidents, often caused by riders not wearing helmets or riding on sidewalks at high speed.", "zh": "行人抱怨滑板車被亂停擋住人行道，醫院也通報與滑板車事故相關的傷害增加，而這些事故往往是因為騎乘者沒戴安全帽或在人行道上高速騎乘。", "sa": "【S】Pedestrians 【V】have complained about 【O】scooters left blocking sidewalks；【S】hospitals 【V】have reported 【O】an increase in injuries<br>📌 left 過去分詞修飾；caused by… 過去分詞片語補充原因"}, {"en": "In response, some cities have introduced regulations limiting scooter speeds in pedestrian areas, requiring companies to provide helmets, and designating specific parking zones to keep sidewalks clear.", "zh": "為此，有些城市推出規範：限制滑板車在行人區的速度、要求業者提供安全帽，並劃設專用停車區以保持人行道暢通。", "sa": "【S】some cities 【V】have introduced 【O】regulations 【M】limiting… requiring… designating…<br>📌 三個現在分詞片語並列修飾 regulations；keep + O + adj."}, {"en": "While electric scooters are unlikely to disappear from city streets anytime soon, finding a balance between convenience and safety remains an ongoing challenge for city planners.", "zh": "雖然電動滑板車短期內不太可能從城市街頭消失，但在便利與安全之間取得平衡，仍是都市規劃者持續面對的挑戰。", "sa": "【S】finding a balance between convenience and safety 【V】remains 【C】an ongoing challenge<br>📌 While 表讓步；動名詞片語當主詞；be unlikely to V"}], "36": [{"en": "The shift toward remote work, accelerated by changes in workplace culture over the past several years, has led many companies to rethink how their offices are used.", "zh": "過去幾年職場文化的改變，加速了轉向遠距工作的趨勢，也讓許多公司重新思考辦公室該如何使用。", "sa": "【S】The shift toward remote work 【V】has led 【O】many companies 【C】to rethink how their offices are used<br>📌 accelerated by… 過去分詞片語插入修飾主詞；lead + O + to V；how 引導名詞子句"}, {"en": "Some businesses have reduced their office space significantly, as employees now split their time between working from home and coming into the office only for meetings or collaborative projects.", "zh": "有些企業大幅縮減了辦公空間，因為員工現在把時間分配在居家工作，以及只為開會或合作專案才進辦公室。", "sa": "【S】Some businesses 【V】have reduced 【O】their office space<br>📌 as 表原因；split A between B and C"}, {"en": "Other companies have redesigned their offices entirely, replacing rows of individual desks with shared workspaces, meeting rooms, and lounge areas meant to encourage interaction when employees do come in.", "zh": "另一些公司則把辦公室徹底重新設計，以共用工作區、會議室和休息區取代一排排的個人辦公桌，目的是在員工真的進辦公室時促進彼此互動。", "sa": "【S】Other companies 【V】have redesigned 【O】their offices<br>📌 replace A with B；meant to V「目的是…」；do come in 中 do 加強語氣"}, {"en": "Proponents of remote work point to benefits such as reduced commuting time, lower costs for both employees and employers, and greater flexibility for workers to manage their personal schedules.", "zh": "遠距工作的支持者舉出許多好處，例如減少通勤時間、降低員工和雇主雙方的成本，以及讓員工更有彈性安排個人行程。", "sa": "【S】Proponents of remote work 【V】point to 【O】benefits such as…<br>📌 such as 列舉三個名詞片語；both A and B"}, {"en": "Critics, however, worry that remote work can make it harder for new employees to build relationships with colleagues and may leave some workers feeling isolated.", "zh": "然而，批評者擔心，遠距工作會讓新進員工更難和同事建立關係，也可能讓部分員工感到孤立。", "sa": "【S】Critics 【V】worry 【O】that 子句<br>📌 make it + adj. + for sb to V；leave + O + V-ing"}, {"en": "Many companies have settled on a hybrid model, allowing employees to choose which days they work from home and which days they come into the office, in an attempt to balance flexibility with the benefits of in-person collaboration.", "zh": "許多公司最後採用混合模式，讓員工自己選擇哪幾天在家工作、哪幾天進辦公室，試圖在彈性與面對面合作的好處之間取得平衡。", "sa": "【S】Many companies 【V】have settled on 【O】a hybrid model<br>📌 allow + O + to V；which days 引導名詞子句；in an attempt to V「試圖…」"}], "39": [{"en": "Daniel had always enjoyed fixing things — bicycles, small appliances, furniture — anything that seemed broken beyond repair.", "zh": "Daniel 一向喜歡修東西——腳踏車、小家電、家具——任何看起來壞到無法修理的東西都行。", "sa": "【S】Daniel 【V】had always enjoyed 【O】fixing things<br>📌 enjoy + V-ing；破折號內為列舉說明；beyond repair「無法修復」"}, {"en": "When his neighbor mentioned that she was planning to throw away a toaster simply because one of the wires had come loose, Daniel offered to fix it for her instead.", "zh": "當他的鄰居提到，她只因為一條電線鬆脫就打算把烤麵包機丟掉時，Daniel 主動提議幫她修理。", "sa": "【S】Daniel 【V】offered 【O】to fix it for her 【M】instead<br>📌 When 時間子句內含 that 名詞子句與 because 原因子句；had come loose 過去完成式；offer to V"}, {"en": "Word spread quickly, and soon several neighbors were bringing him broken items to repair.", "zh": "消息很快傳開，不久就有好幾位鄰居把壞掉的東西拿來請他修理。", "sa": "【S】Word 【V】spread；【S】several neighbors 【V】were bringing 【O】him 【O】broken items<br>📌 Word spread「消息傳開」（word 不加冠詞）；bring + 人 + 物"}, {"en": "Realizing that many people lacked both the skills and the tools to fix simple household items, Daniel decided to start a monthly \"repair café\" at the local community center, where volunteers with repair skills could help residents fix their broken belongings for free.", "zh": "Daniel 發現許多人既沒有技術也沒有工具來修理簡單的家用品，於是決定在當地社區中心開辦每月一次的「修理咖啡館」，讓有修理技術的志工免費幫居民修理壞掉的物品。", "sa": "【S】Daniel 【V】decided 【O】to start a monthly \"repair café\"<br>📌 Realizing… 分詞構句表原因；, where 引導非限定子句；help + O + 原形"}, {"en": "At first, only a handful of people attended, but within a year, the repair café was attracting dozens of visitors each month, and several local schools began sending students to learn basic repair skills from the volunteers.", "zh": "一開始只有少數幾個人參加，但不到一年，修理咖啡館每個月就吸引數十位訪客，還有好幾所當地學校開始派學生來向志工學習基本修理技巧。", "sa": "【S】only a handful of people 【V】attended, but 【S】the repair café 【V】was attracting 【O】dozens of visitors<br>📌 a handful of「少數」；begin + V-ing；send + O + to V"}, {"en": "Daniel hopes that by teaching people how to repair their own belongings, the repair café will not only reduce the amount of waste sent to landfills but also help people feel more confident about maintaining the things they own.", "zh": "Daniel 希望透過教大家修理自己的東西，修理咖啡館不但能減少送進掩埋場的垃圾量，也能讓人們對維護自己擁有的物品更有信心。", "sa": "【S】Daniel 【V】hopes 【O】that 子句<br>📌 by + V-ing；not only A but also B；sent to… 過去分詞修飾 waste"}]};
+const Q = [{"n": 1, "p": 0, "stem": "Students must _____ written permission from their parents before joining the school trip.", "o": ["obtain", "object", "observe", "obscure"], "a": 0, "exp": "✓ (A) obtain（獲得、取得）— 學生在參加校外旅行前必須先「取得」家長的書面同意。\n❌ (B) object = 反對，語意不符。\n❌ (C) observe = 觀察、遵守，語意不符。\n❌ (D) obscure = 使模糊，語意不符。", "zh": "學生參加校外教學前，必須先<b>取得<\/b>家長的書面同意。", "sa": "【S】Students 【V】must obtain 【O】written permission from their parents 【M】before joining the school trip<br>📌 句型：must + 原形「必須」；before + V-ing（介系詞後接動名詞）<br>例：You must wash your hands before eating."}, {"n": 2, "p": 0, "stem": "Please handle the package carefully; it contains _____ glass items.", "o": ["fragile", "flexible", "frequent", "friendly"], "a": 0, "exp": "✓ (A) fragile（易碎的）— 請小心搬運這個包裹，因為裡面裝有「易碎的」玻璃製品。\n❌ (B) flexible = 有彈性的，語意不符。\n❌ (C) frequent = 頻繁的，語意不符。\n❌ (D) friendly = 友善的，語意不符。", "zh": "請小心搬運這個包裹；裡面裝的是<b>易碎的<\/b>玻璃製品。", "sa": "【V】Please handle 【O】the package 【M】carefully；【S】it 【V】contains 【O】fragile glass items<br>📌 句型：祈使句（省略主詞 you）；分號連接兩個相關的獨立子句；形容詞 fragile 修飾名詞"}, {"n": 3, "p": 0, "stem": "Many people _____ old clothes to charity organizations every winter.", "o": ["donate", "decorate", "dominate", "dictate"], "a": 0, "exp": "✓ (A) donate（捐贈）— 許多人每年冬天都會將舊衣物「捐給」慈善機構。\n❌ (B) decorate = 裝飾，語意不符。\n❌ (C) dominate = 主導、支配，語意不符。\n❌ (D) dictate = 口述、命令，語意不符。", "zh": "每年冬天，許多人把舊衣服<b>捐<\/b>給慈善機構。", "sa": "【S】Many people 【V】donate 【O】old clothes 【M】to charity organizations 【M】every winter<br>📌 句型：donate A to B「把 A 捐給 B」；every winter 表習慣，用現在簡單式<br>例：He donates blood to the hospital every year."}, {"n": 4, "p": 0, "stem": "After running the marathon, she felt completely _____ .", "o": ["exhausted", "explained", "exchanged", "expanded"], "a": 0, "exp": "✓ (A) exhausted（精疲力盡的）— 跑完馬拉松後，她感到完全「精疲力盡」。\n❌ (B) explained = 被解釋，語意不符。\n❌ (C) exchanged = 被交換，語意不符。\n❌ (D) expanded = 被擴大，語意不符。", "zh": "跑完馬拉松之後，她覺得精疲力<b>盡<\/b>。", "sa": "【M】After running the marathon 【S】she 【V】felt 【C】completely exhausted<br>📌 句型：feel + adj.（連綴動詞＋形容詞補語）；exhausted「（人）精疲力盡的」，exhausting「（事）令人疲累的」"}, {"n": 5, "p": 0, "stem": "The new park has become a popular gathering place for people in the _____ .", "o": ["neighborhood", "knowledge", "nationality", "negotiation"], "a": 0, "exp": "✓ (A) neighborhood（鄰近地區、社區）— 這座新公園已成為「社區」居民聚會的熱門場所。\n❌ (B) knowledge = 知識，語意不符。\n❌ (C) nationality = 國籍，語意不符。\n❌ (D) negotiation = 談判，語意不符。", "zh": "這座新公園已經成為<b>附近社區<\/b>居民熱門的聚會場所。", "sa": "【S】The new park 【V】has become 【C】a popular gathering place 【M】for people in the neighborhood<br>📌 句型：現在完成式 has become 表「已經變成」；become + 名詞補語"}, {"n": 6, "p": 0, "stem": "He decided to _____ to his friend for arriving late.", "o": ["apologize", "appreciate", "approach", "apply"], "a": 0, "exp": "✓ (A) apologize（道歉）— 他決定為遲到向朋友「道歉」。\"apologize to somebody for something\" 為固定用法。\n❌ (B) appreciate = 感激，語意不符。\n❌ (C) approach = 接近、靠近，語意不符。\n❌ (D) apply = 申請、應用，語意不符。", "zh": "他決定為遲到的事向朋友<b>道歉<\/b>。", "sa": "【S】He 【V】decided 【O】to apologize to his friend for arriving late<br>📌 句型：decide to V；apologize to sb for + V-ing「為某事向某人道歉」<br>例：She apologized to me for being rude."}, {"n": 7, "p": 0, "stem": "Earthquakes can _____ without warning, so preparation is important.", "o": ["occur", "occupy", "operate", "oppose"], "a": 0, "exp": "✓ (A) occur（發生）— 地震可能毫無預警地「發生」，因此事前準備非常重要。\n❌ (B) occupy = 占據、占用，語意不符。\n❌ (C) operate = 操作、運作，語意不符。\n❌ (D) oppose = 反對，語意不符。", "zh": "地震可能毫無預警地<b>發生<\/b>，所以事先準備很重要。", "sa": "【S】Earthquakes 【V】can occur 【M】without warning, 【M】so 【S】preparation 【V】is 【C】important<br>📌 句型：occur 為不及物動詞「發生」（不用被動）；so 連接結果子句"}, {"n": 8, "p": 0, "stem": "Drivers should _____ using their phones while driving.", "o": ["avoid", "afford", "achieve", "admit"], "a": 0, "exp": "✓ (A) avoid（避免）— 駕駛應該「避免」在開車時使用手機。\"avoid + V-ing\" 為固定用法。\n❌ (B) afford = 負擔得起，語意不符。\n❌ (C) achieve = 達成，語意不符。\n❌ (D) admit = 承認，語意不符。", "zh": "駕駛人開車時應該<b>避免<\/b>使用手機。", "sa": "【S】Drivers 【V】should avoid 【O】using their phones 【M】while driving<br>📌 句型：avoid + V-ing「避免做…」；while + V-ing（省略主詞與 be 動詞）<br>例：Try to avoid eating too much sugar."}, {"n": 9, "p": 0, "stem": "She is known for being extremely <i>generous<\/i>, often donating to local charities.", "o": ["selfish", "kind", "careless", "shy"], "a": 1, "exp": "✓ (B) kind（仁慈的、慷慨的）— generous（慷慨的）與 kind 意義最接近，皆形容樂於助人、願意分享的特質。\n❌ (A) selfish = 自私的，語意相反。\n❌ (C) careless = 粗心的，語意不符。\n❌ (D) shy = 害羞的，語意不符。", "zh": "她以極為<b>慷慨大方<\/b>出名，經常捐款給當地的慈善機構。", "sa": "【S】She 【V】is known 【M】for being extremely generous 【M】, often donating to local charities<br>📌 句型：be known for + N/V-ing「以…聞名」；often donating… 為分詞構句補充說明<br>generous ≒ kind"}, {"n": 10, "p": 0, "stem": "He was <i>reluctant<\/i> to share his opinion in front of the large crowd.", "o": ["eager", "unwilling", "confident", "curious"], "a": 1, "exp": "✓ (B) unwilling（不願意的）— reluctant（不情願的）與 unwilling 意義最接近。\n❌ (A) eager = 渴望的，語意相反。\n❌ (C) confident = 有信心的，語意不符。\n❌ (D) curious = 好奇的，語意不符。", "zh": "他<b>不願意<\/b>在一大群人面前分享自己的意見。", "sa": "【S】He 【V】was 【C】reluctant 【M】to share his opinion in front of the large crowd<br>📌 句型：be reluctant to V ＝ be unwilling to V「不情願做…」；反義：be eager to V"}, {"n": 11, "p": 1, "stem": "Customer: Do you have a table for two available right now?<br>Host: _____<br>Customer: That's fine, we don't mind waiting.", "o": ["The kitchen is closed for tonight.", "There's about a 15-minute wait for a table.", "You can sit anywhere you like.", "We don't have any tables here."], "a": 1, "exp": "✓ (B) There's about a 15-minute wait for a table.— 接待員告知需要等候約15分鐘，顧客回應「沒關係，我們不介意等」，前後呼應。\n❌ (A) 說「今晚廚房已經關閉」，與顧客回應「我們不介意等」不連貫（廚房關閉表示無法用餐，等候也無意義）。\n❌ (C) 說「您可以隨意坐」，與顧客回應「我們不介意等」矛盾（若可隨意坐，就不需要等）。\n❌ (D) 說「我們這裡沒有任何桌位」，與顧客回應「我們不介意等」矛盾（完全沒有桌位就無從等候）。", "zh": "顧客：現在有兩人座的位子嗎？<br>帶位人員：<b>大約要等 15 分鐘才有位子。<\/b><br>顧客：沒關係，我們不介意等。", "sa": "正解句：There's about a 15-minute wait for a table.（There is + 名詞）<br>📌 句型：a 15-minute wait 中 15-minute 是複合形容詞，minute 不加 s；don't mind + V-ing「不介意…」<br>例：It's a two-hour drive from here."}, {"n": 12, "p": 1, "stem": "Coworker A: We're almost out of printer paper in the supply room.<br>Coworker B: _____<br>Coworker A: Thanks, I'll let everyone know.", "o": ["We don't use printers anymore.", "The printer is broken.", "I'll order more paper today.", "I already used the last of it."], "a": 2, "exp": "✓ (C) I'll order more paper today.— 同事B表示今天會訂購更多紙，同事A回應「謝謝，我會通知大家」，前後呼應。\n❌ (A) 說「我們已經不用印表機了」，與A的感謝回應不連貫。\n❌ (B) 說「印表機壞了」，未回應紙張不足的問題。\n❌ (D) 說「我已經用掉最後一張了」，與A回應「謝謝，我會通知大家」不連貫（B未提出解決方案）。", "zh": "同事 A：用品室的影印紙快用完了。<br>同事 B：<b>我今天會再訂一些紙。<\/b><br>同事 A：謝謝，我會通知大家。", "sa": "前句：【S】We 【V】're almost out of 【O】printer paper（be out of「用完」）<br>正解句：【S】I 【V】'll order 【O】more paper 【M】today<br>📌 句型：will 表當下決定要做的事；let + O + 原形（let everyone know）"}, {"n": 13, "p": 1, "stem": "Guest: I'd like to check out, but I think there's an extra charge on my bill.<br>Clerk: _____<br>Guest: Oh, I see. That makes sense now.", "o": ["We don't accept credit cards.", "That charge is for the late checkout fee.", "Checkout was yesterday.", "The hotel is fully booked."], "a": 1, "exp": "✓ (B) That charge is for the late checkout fee.— 櫃台人員解釋該費用是延遲退房費，房客回應「啊，我了解了，這樣就說得通了」，前後呼應。\n❌ (A) 說「我們不接受信用卡」，與房客詢問帳單上的額外費用不連貫。\n❌ (C) 說「退房是昨天的事」，與房客現在正要退房的情境矛盾。\n❌ (D) 說「飯店已經滿房」，與「帳單上的額外費用」話題不連貫。", "zh": "房客：我想退房，但我的帳單上好像多了一筆費用。<br>櫃檯人員：<b>那筆費用是延遲退房的手續費。<\/b><br>房客：喔，原來如此。這樣就說得通了。", "sa": "正解句：【S】That charge 【V】is 【C】for the late checkout fee<br>📌 句型：I'd like to V「我想要…」；check out「退房」（動詞片語），checkout（名詞）；That makes sense.「這說得通」"}, {"n": 14, "p": 1, "stem": "Friend A: Should we go hiking this weekend?<br>Friend B: _____<br>Friend A: Good point, let's check the forecast first.", "o": ["I love hiking in the mountains.", "We went hiking last weekend too.", "I heard it might rain on Saturday.", "I don't have hiking boots."], "a": 2, "exp": "✓ (C) I heard it might rain on Saturday.— 朋友B提到週六可能下雨，朋友A回應「有道理，我們先查一下天氣預報」，前後呼應。\n❌ (A) 說「我很喜歡在山裡健行」，與A回應「我們先查天氣預報」不連貫。\n❌ (B) 說「我們上週末也去健行了」，與A的回應不連貫。\n❌ (D) 說「我沒有登山靴」，未引出「查天氣預報」的回應。", "zh": "朋友 A：我們這個週末去爬山好嗎？<br>朋友 B：<b>我聽說週六可能會下雨。<\/b><br>朋友 A：說得好，我們先查一下天氣預報。", "sa": "正解句：【S】I 【V】heard 【O】(that) it might rain on Saturday<br>📌 句型：hear (that) + 子句「聽說…」；might 表推測；let's + 原形「我們來…」<br>例：I heard the store is closing early today."}, {"n": 15, "p": 1, "stem": "Customer: I have a prescription to fill.<br>Pharmacist: _____<br>Customer: Okay, I'll come back in half an hour.", "o": ["We don't fill prescriptions here.", "You need a doctor's note.", "The pharmacy is closing now.", "It'll be ready in about thirty minutes."], "a": 3, "exp": "✓ (D) It'll be ready in about thirty minutes.— 藥師告知約三十分鐘後可取藥，顧客回應「好，那我半小時後回來」，前後呼應。\n❌ (A) 說「我們這裡不配藥」，與顧客交付處方箋的情境矛盾。\n❌ (B) 說「您需要醫生的證明」，與「半小時後回來」的回應不連貫。\n❌ (C) 說「藥局現在要關門了」，與顧客回應「半小時後回來」矛盾。", "zh": "顧客：我有一張處方箋要領藥。<br>藥師：<b>大約三十分鐘後就會準備好。<\/b><br>顧客：好的，我半小時後再回來。", "sa": "正解句：【S】It 【V】'll be 【C】ready 【M】in about thirty minutes<br>📌 句型：in + 時間「再過…之後」；fill a prescription「依處方配藥」"}, {"n": 16, "p": 1, "stem": "Coworker A: Can we move tomorrow's meeting to Friday?<br>Coworker B: _____<br>Coworker A: Great, I'll send out a new invite.", "o": ["I'm busy on Friday.", "Friday works fine for me.", "The meeting was already canceled.", "Let's keep it on Monday instead."], "a": 1, "exp": "✓ (B) Friday works fine for me.— 同事B同意週五的時間，同事A回應「太好了，我會發新的邀請」，前後呼應。\n❌ (A) 說「我週五很忙」，與A回應「太好了，我會發新邀請」矛盾。\n❌ (C) 說「會議已經取消了」，與A接下來要發送新邀請的動作矛盾。\n❌ (D) 說「我們維持原訂在星期一」，與A回應「我會發新的邀請」（改成週五）矛盾。", "zh": "同事 A：明天的會議可以改到星期五嗎？<br>同事 B：<b>星期五我可以。<\/b><br>同事 A：太好了，我會發新的會議邀請。", "sa": "正解句：【S】Friday 【V】works 【M】fine 【M】for me<br>📌 句型：時間 + work for sb「（時間）對某人方便」；move A to B「把 A 改到 B」<br>例：Does 3 p.m. work for you?"}, {"n": 17, "p": 1, "stem": "Passenger: My suitcase didn't arrive on the carousel.<br>Staff: _____<br>Passenger: Thank you, I'll wait here.", "o": ["All luggage has already been delivered.", "You should have packed less.", "The airport is closed now.", "Let me check the system for your flight."], "a": 3, "exp": "✓ (D) Let me check the system for your flight.— 地勤人員表示要查詢系統，乘客回應「謝謝，我在這裡等」，前後呼應。\n❌ (A) 說「所有行李都已經送達了」，與乘客表示行李未到的陳述矛盾。\n❌ (B) 說「你應該少帶一些行李」，與乘客回應「謝謝，我在這裡等」不連貫。\n❌ (C) 說「機場現在已經關閉了」，與整段對話情境不連貫。", "zh": "乘客：我的行李箱沒有出現在行李轉盤上。<br>工作人員：<b>我幫您查一下系統裡您班機的資料。<\/b><br>乘客：謝謝，我在這裡等。", "sa": "正解句：Let me check the system for your flight.<br>📌 句型：Let me + 原形「讓我來…」（主動提供協助）；check A for B「在 A 裡查 B 的資料」"}, {"n": 18, "p": 1, "stem": "Classmate A: Have you finished your part of the project?<br>Classmate B: _____<br>Classmate A: No worries, just send it to me by tonight.", "o": ["I finished it last week.", "I'm almost done, just need a bit more time.", "I don't think we have a project.", "Someone else is doing my part."], "a": 1, "exp": "✓ (B) I'm almost done, just need a bit more time.— 同學B表示快完成了，需要再一點時間，同學A回應「沒關係，今晚前寄給我就好」，前後呼應。\n❌ (A) 說「我上週就完成了」，與A回應「沒關係，今晚前寄給我」矛盾（已完成的話應該已經寄出）。\n❌ (C) 說「我覺得我們沒有這個專案」，與A的回應不連貫。\n❌ (D) 說「別人在做我的部分」，與A回應「今晚前寄給我」（要求B本人提交）不連貫。", "zh": "同學 A：你負責的那部分報告做完了嗎？<br>同學 B：<b>快完成了，只是還需要多一點時間。<\/b><br>同學 A：別擔心，今晚以前寄給我就好。", "sa": "正解句：【S】I 【V】'm 【C】almost done, 【V】just need 【O】a bit more time<br>📌 句型：be done「做完了」；a bit more + 名詞「再多一點…」；by tonight「在今晚之前（期限）」"}, {"n": 19, "p": 1, "stem": "Customer: I'd like to return this sweater. It doesn't fit.<br>Clerk: _____<br>Customer: Sure, here it is.", "o": ["We don't sell sweaters.", "The store is closing.", "Do you have the receipt with you?", "You can keep it for free."], "a": 2, "exp": "✓ (C) Do you have the receipt with you?— 店員詢問是否有收據，顧客回應「有，在這裡」，前後呼應。\n❌ (A) 說「我們不賣毛衣」，與顧客要退貨毛衣的情境矛盾。\n❌ (B) 說「商店要關門了」，與顧客回應「有，在這裡」不連貫。\n❌ (D) 說「您可以免費保留它」，與顧客想要退貨的需求矛盾。", "zh": "顧客：我想退這件毛衣，尺寸不合。<br>店員：<b>您有帶收據嗎？<\/b><br>顧客：有，在這裡。", "sa": "正解句：Do you have the receipt with you?（have sth with you「隨身帶著某物」）<br>前句：It doesn't fit.（fit「尺寸合身」）<br>📌 句型：Here it is.「東西在這裡」（遞東西時的慣用語）"}, {"n": 20, "p": 1, "stem": "Neighbor A: I'm sorry about the noise last night. We had a small party.<br>Neighbor B: _____<br>Neighbor A: Thanks for understanding. We'll keep it quieter next time.", "o": ["You should move out.", "I called the police already.", "I never heard anything.", "No problem, it's not a big deal."], "a": 3, "exp": "✓ (D) No problem, it's not a big deal.— 鄰居B表示不要緊，鄰居A回應「謝謝你的理解，下次我們會小聲一點」，前後呼應。\n❌ (A) 說「你應該搬走」，與A回應「謝謝你的理解」語氣矛盾。\n❌ (B) 說「我已經報警了」，與A回應「謝謝你的理解」矛盾（報警表示不諒解）。\n❌ (C) 說「我什麼都沒聽到」，與A回應「謝謝你的理解」不連貫（若B什麼都沒聽到，就無需理解或被感謝）。", "zh": "鄰居 A：昨晚太吵了，真抱歉。我們辦了一個小派對。<br>鄰居 B：<b>沒關係，不是什麼大事。<\/b><br>鄰居 A：謝謝你的體諒，下次我們會小聲一點。", "sa": "正解句：No problem, it's not a big deal.「沒什麼大不了」<br>📌 句型：I'm sorry about + N；Thanks for + V-ing；keep it quieter（keep + O + 形容詞比較級）"}, {"n": 21, "p": 2, "stem": "(21)", "o": ["use", "used", "using", "to use"], "a": 1, "exp": "✓ (B) used（過去式動詞）— \"people used ice cut from frozen lakes to preserve food\" 描述「機械冷藏發明之前」的過去事實，主詞 people 搭配過去式動詞 used，作句子的主要動詞。\n❌ (A) use = 現在式原形，與全文描述過去時代的語意不符。\n❌ (C) using = 現在分詞，不能單獨作句子的主要動詞。\n❌ (D) to use = 不定詞，不能單獨作句子的主要動詞。", "zh": "<i>Before mechanical refrigeration was invented, people <b>used<\/b> ice cut from frozen lakes to preserve food during the warmer months.<\/i><br>在機械冷藏技術發明之前，人們<b>利用<\/b>從結冰湖面切下的冰塊，在較溫暖的月份保存食物。", "sa": "【M】Before mechanical refrigeration was invented 【S】people 【V】used 【O】ice 【M】cut from frozen lakes 【M】to preserve food<br>📌 句型：use A to V「用 A 來做…」；cut from… 為過去分詞片語修飾 ice；主要動詞用過去式"}, {"n": 22, "p": 2, "stem": "(22)", "o": ["for", "during", "since", "by"], "a": 0, "exp": "✓ (A) for（表時間長度）— \"remain frozen for several months\" 表示「維持冰凍長達數個月」，for + 一段時間，表示持續的時間長度。\n❌ (B) during = 後面通常接特定的一段時間（如 during the winter），不直接接表示「持續多久」的時間長度。\n❌ (C) since = 表示「自從某時間點以來」，後面須接時間點而非時間長度，且常與完成時搭配。\n❌ (D) by = 表示「在…之前、不晚於」，與「持續數個月」的語意不符。", "zh": "<i>This ice was usually stored in insulated buildings called icehouses, where it could remain frozen <b>for<\/b> several months.<\/i><br>這些冰通常存放在稱為「冰窖」的隔熱建築裡，冰塊在那裡可以保持冰凍<b>長達<\/b>好幾個月。", "sa": "【S】This ice 【V】was usually stored 【M】in insulated buildings called icehouses 【M】, where it could remain frozen for several months<br>📌 句型：for + 一段時間「持續…」；called… 為過去分詞修飾；, where 引導非限定關係副詞子句；remain + adj."}, {"n": 23, "p": 2, "stem": "(23)", "o": ["become", "becoming", "to become", "became"], "a": 2, "exp": "✓ (C) to become（不定詞）— \"began to become widely available\" 表示「開始變得普及」，begin 後接不定詞 to + 動詞原形。\n❌ (A) become = 動詞原形，begin 後不可直接接原形動詞。\n❌ (B) becoming = 動名詞，雖然 begin 後也可接動名詞，但本句已用過去式 began，搭配 to become 為更自然且文法正確的選項；becoming 在此處不如 to become 通順（此處設計為測試 begin + to V 的固定搭配）。\n❌ (D) became = 過去式，begin 後不可直接接另一個過去式動詞。", "zh": "<i>In the late 19th century, machines that could produce ice artificially began <b>to become<\/b> widely available, eventually making icehouses unnecessary.<\/i><br>十九世紀末，能夠人工製冰的機器開始<b>變得<\/b>普及，最終使冰窖不再需要。", "sa": "【S】machines 【M】that could produce ice artificially 【V】began 【O】to become widely available 【M】, eventually making icehouses unnecessary<br>📌 句型：begin to V；make + O + adj.；分詞構句 making… 表結果"}, {"n": 24, "p": 2, "stem": "(24)", "o": ["that", "what", "who", "whom"], "a": 0, "exp": "✓ (A) that（關係代名詞，指事物，作受詞）— \"something that most people now take for granted\" 表示「現在大多數人視為理所當然的東西」，that 代替先行詞 something（事物），在子句中作 take for granted 的受詞。\n❌ (B) what = what 本身已包含先行詞，不能再接在 something 之後重複指稱。\n❌ (C) who = 用於指人，something 為事物，不適用。\n❌ (D) whom = 用於指人且作受格，不適用於事物。", "zh": "<i>Today, refrigerators are considered an essential appliance, something <b>that<\/b> most people now take for granted.<\/i><br>如今，冰箱被認為是不可或缺的家電，是大多數人現在視為理所當然的東西。", "sa": "【S】refrigerators 【V】are considered 【C】an essential appliance 【M】, something that most people now take for granted（同位語）<br>📌 句型：be considered + N「被認為是…」；something 當先行詞時關代常用 that（在子句中當受詞）；take… for granted「視…為理所當然」"}, {"n": 25, "p": 2, "stem": "(25)", "o": ["read", "reading", "to read", "reads"], "a": 1, "exp": "✓ (B) reading（動名詞）— \"spend time reading reviews\" 為固定用法 \"spend + 時間 + V-ing\"，表示「花時間做某事」。\n❌ (A) read = 動詞原形，不可直接接在 spend time 之後。\n❌ (C) to read = 不定詞，spend time 後須接動名詞而非不定詞。\n❌ (D) reads = 第三人稱單數現在式，不可直接接在 time 之後。", "zh": "<i>Before buying a product, people often spend time <b>reading<\/b> reviews written by other customers, hoping to learn about the quality and reliability of an item.<\/i><br>買東西之前，人們常會花時間<b>閱讀<\/b>其他顧客寫的評論，希望了解商品的品質和可靠度。", "sa": "【M】Before buying a product 【S】people 【V】often spend 【O】time 【M】reading reviews written by other customers<br>📌 句型：spend + 時間 + V-ing；written by… 過去分詞修飾 reviews；hoping… 分詞構句表伴隨<br>例：She spent two hours doing her homework."}, {"n": 26, "p": 2, "stem": "(26)", "o": ["that", "who", "whom", "whose"], "a": 0, "exp": "✓ (A) that（關係代名詞，指事物，作主格）— \"A product that receives many positive reviews\" 中，that 代替先行詞 product（事物），在子句中作主詞，引導形容詞子句修飾 product。\n❌ (B) who = 用於指人，product 為事物，不適用。\n❌ (C) whom = 用於指人且作受格，不適用。\n❌ (D) whose = 所有格關係代名詞，此處子句缺的是主詞而非所有格修飾語，不符。", "zh": "<i>A product <b>that<\/b> receives many positive reviews is often seen as more trustworthy, even if some of those reviews cannot be verified.<\/i><br>得到許多好評的產品，常被認為比較值得信任，即使其中有些評論無法查證。", "sa": "【S】A product 【M】that receives many positive reviews 【V】is often seen as 【C】more trustworthy<br>📌 句型：that 關代主格修飾 product（指物，不用 who）；be seen as「被視為」；even if「即使」"}, {"n": 27, "p": 2, "stem": "(27)", "o": ["which", "that", "who", "it"], "a": 0, "exp": "✓ (A) which（關係代名詞，引導非限定關係子句）— \"a practice, which has damaged consumer trust...\" 中，逗號後的補述關係子句須使用 which，不可使用 that；which 代替先行詞 a practice，在子句中作主詞。\n❌ (B) that = 關係代名詞 that 不可用於逗號之後引導的非限定（補述）關係子句。\n❌ (C) who = 用於指人，practice 為事物，不適用。\n❌ (D) it = it 為人稱代名詞，不能引導從屬子句，會使句子缺少連接詞而結構錯誤。", "zh": "<i>In recent years, some companies have been caught posting fake reviews, a practice, <b>which<\/b> has damaged consumer trust and led several platforms to introduce stricter verification systems.<\/i><br>近年來，有些公司被抓到張貼假評論，這種做法損害了消費者的信任，<b>也<\/b>促使好幾個平台推出更嚴格的驗證機制。", "sa": "【S】some companies 【V】have been caught 【O】posting fake reviews 【M】, a practice, which has damaged… and led…<br>📌 句型：be caught + V-ing「被抓到在做…」；逗號後用 which 引導非限定子句（that 不能放在逗號後）；lead + O + to V「促使…」"}, {"n": 28, "p": 2, "stem": "(28)", "o": ["attach", "attaching", "attached", "to attach"], "a": 0, "exp": "✓ (A) attach（動詞原形）— \"advise shoppers not to attach too much importance to...\" 中，\"not to + 動詞原形\" 為否定不定詞的固定形式，\"attach importance to something\" 表示「對某事物賦予重視」。\n❌ (B) attaching = 動名詞，\"not to\" 後須接動詞原形而非動名詞。\n❌ (C) attached = 過去分詞，\"not to\" 後須接動詞原形。\n❌ (D) to attach = 重複的不定詞標記，\"not to\" 後不可再接 \"to attach\"（重複 to）。", "zh": "<i>Experts therefore advise shoppers not to <b>attach<\/b> too much importance to any single review, whether it is positive or negative.<\/i><br>因此專家建議購物者，不要對任何單一評論<b>過於看重<\/b>，不論是好評還是負評。", "sa": "【S】Experts 【V】advise 【O】shoppers 【C】not to attach too much importance to any single review<br>📌 句型：advise + O + (not) to V；attach importance to「重視…」；whether A or B「不論 A 或 B」"}, {"n": 29, "p": 3, "stem": "What must employees do starting next Monday?", "o": ["Park only on Level 1.", "Display a parking permit on their dashboard.", "Pay a monthly parking fee.", "Register their car with security weekly."], "a": 1, "exp": "公告提到：「all employees must display a valid parking permit on their dashboard while parked in the company garage」\n(B) Display a parking permit on their dashboard. ✓ 為正解。\n❌ (A) 公告未要求僅可停在Level 1（Level 1 是訪客停車區）。\n❌ (C) 公告未提到月費。\n❌ (D) 公告說許可證在保全櫃台領取，並非每週向保全登記車輛。", "zh": "題目：從下週一開始，員工必須做什麼？<br>(A) 只能停在一樓。<br>(B) 在儀表板上放置停車證。<br>(C) 每月繳交停車費。<br>(D) 每週向警衛登記車輛。", "sa": "依據句：【M】Starting next Monday 【S】all employees 【V】must display 【O】a valid parking permit 【M】on their dashboard 【M】while parked in the company garage<br>📌 句型：must + 原形；while (they are) parked 省略主詞與 be 動詞"}, {"n": 30, "p": 3, "stem": "Where can visitors park?", "o": ["In the company garage with employees.", "On Level 1 in the visitor parking area.", "Anywhere with a permit.", "At the security desk."], "a": 1, "exp": "公告提到：「Visitors should continue to use the visitor parking area on Level 1 and check in at the front desk.」\n(B) On Level 1 in the visitor parking area. ✓ 為正解。\n❌ (A) 公告說員工才需顯示停車證並停在公司車庫，訪客則使用Level 1訪客停車區。\n❌ (C) 公告明確指定訪客停車區為Level 1，並非任何有許可證的地方。\n❌ (D) 保全櫃台是員工領取許可證的地方，並非訪客停車地點。", "zh": "題目：訪客可以停在哪裡？<br>(A) 和員工一起停在公司車庫。<br>(B) 一樓的訪客停車區。<br>(C) 只要有停車證，哪裡都可以。<br>(D) 警衛櫃檯。", "sa": "依據句：【S】Visitors 【V】should continue to use 【O】the visitor parking area on Level 1 【V】and check in 【M】at the front desk<br>📌 句型：continue to V「繼續…」；check in「報到、登記」"}, {"n": 31, "p": 3, "stem": "What does Mark offer to do?", "o": ["Cancel the plan entirely.", "Book the tickets for tomorrow.", "Watch the movie alone.", "Ask Jenny to book the tickets."], "a": 1, "exp": "Mark 說：「Sounds good. I'll book the tickets.」\n(B) Book the tickets for tomorrow. ✓ 為正解。\n❌ (A) Mark 並未取消計畫，而是改到明天。\n❌ (C) 對話中Jenny和Mark皆會一同前往，並非Mark獨自觀看。\n❌ (D) Mark 主動表示「我會去買票」，並非要求Jenny買票。", "zh": "題目：Mark 主動表示要做什麼？<br>(A) 完全取消計畫。<br>(B) 訂明天的票。<br>(C) 自己一個人去看電影。<br>(D) 請 Jenny 訂票。", "sa": "依據句：Mark: Sounds good. 【S】I 【V】'll book 【O】the tickets.<br>📌 句型：will 表主動提議或當下決定；offer to V「主動提議做…」"}, {"n": 32, "p": 3, "stem": "When will Jenny and Mark go to the movie?", "o": ["Tonight at 8.", "Tomorrow at 8.", "Tomorrow morning.", "Tonight, but later than 8."], "a": 1, "exp": "Jenny 說：「Tomorrow works too. Same time?」Mark 回應：「Sounds good.」\n(B) Tomorrow at 8. ✓ 為正解（同樣的時間，即8點，但改到明天）。\n❌ (A) 今晚（tonight）8點是Jenny原本的提議，但Mark表示今晚無法前往。\n❌ (C) 對話中提到的是「同樣的時間」（即晚上8點），並非明天早上。\n❌ (D) Mark 表示今晚無法前往，並非延後到今晚較晚的時間。", "zh": "題目：Jenny 和 Mark 什麼時候去看電影？<br>(A) 今晚八點。<br>(B) 明天八點。<br>(C) 明天早上。<br>(D) 今晚，但比八點晚。", "sa": "依據句：Mark: I can't make it tonight, but I'm free tomorrow. → Jenny: Tomorrow works too. Same time?（＝8 點）<br>📌 句型：make it「趕得上、能到場」；Same time? 省略句，指同樣八點"}, {"n": 33, "p": 3, "stem": "How do riders typically use electric scooters, according to the passage?", "o": ["They must return scooters to a single station.", "They rent scooters through a smartphone app.", "They need a special license to ride them.", "They can only use scooters during business hours."], "a": 1, "exp": "文中提到：「Riders can typically rent a scooter through a smartphone app, ride to their destination, and leave it at any designated parking area within the service zone.」\n(B) They rent scooters through a smartphone app. ✓ 為正解。\n❌ (A) 文中說可以將電動滑板車留在服務區內任何指定停車區，並非必須歸還至單一站點。\n❌ (C) 文中未提到需要特殊駕照。\n❌ (D) 文中未提到僅限上班時間使用。", "zh": "題目：根據本文，騎乘者通常如何使用電動滑板車？<br>(A) 必須把車還到單一指定站點。<br>(B) 透過手機 App 租借滑板車。<br>(C) 需要特殊駕照才能騎。<br>(D) 只能在營業時間內使用。", "sa": "依據句：【S】Riders 【V】can typically rent 【O】a scooter 【M】through a smartphone app, 【V】ride… 【V】and leave it at any designated parking area<br>📌 句型：三個並列動詞 rent / ride / leave 共用助動詞 can；through「透過」"}, {"n": 34, "p": 3, "stem": "What problem has the growth of scooter-sharing caused, according to the passage?", "o": ["A shortage of parking spaces for cars.", "An increase in scooter-related injuries.", "A decrease in public transportation use.", "Higher costs for city governments."], "a": 1, "exp": "文中提到：「hospitals have reported an increase in injuries related to scooter accidents」\n(B) An increase in scooter-related injuries. ✓ 為正解。\n❌ (A) 文中未提到汽車停車位短缺。\n❌ (C) 文中提到支持者認為電動滑板車能取代部分汽車短程旅程，但這屬於支持者觀點，並非growth造成的「問題」。\n❌ (D) 文中未提到城市政府的成本增加。", "zh": "題目：根據本文，共享滑板車的成長帶來了什麼問題？<br>(A) 汽車停車位不足。<br>(B) 與滑板車相關的受傷事件增加。<br>(C) 大眾運輸使用量減少。<br>(D) 市政府的成本提高。", "sa": "依據句：【S】hospitals 【V】have reported 【O】an increase in injuries related to scooter accidents<br>📌 句型：an increase in + N「…的增加」；related to… 過去分詞片語修飾 injuries"}, {"n": 35, "p": 3, "stem": "What have some cities done in response to these challenges?", "o": ["Banned electric scooters completely.", "Required riders to pass a written test.", "Introduced regulations on speed, helmets, and parking.", "Reduced the number of sidewalks."], "a": 2, "exp": "文中提到：「some cities have introduced regulations limiting scooter speeds in pedestrian areas, requiring companies to provide helmets, and designating specific parking zones」\n(C) Introduced regulations on speed, helmets, and parking. ✓ 為正解。\n❌ (A) 文中說電動滑板車「不太可能在短期內從城市街道消失」，並非完全禁止。\n❌ (B) 文中未提到筆試。\n❌ (D) 文中提到的是設立指定停車區以保持人行道暢通，並非減少人行道數量。", "zh": "題目：面對這些挑戰，有些城市採取了什麼做法？<br>(A) 全面禁止電動滑板車。<br>(B) 要求騎乘者通過筆試。<br>(C) 針對速度、安全帽和停車訂定規範。<br>(D) 減少人行道的數量。", "sa": "依據句：【M】In response 【S】some cities 【V】have introduced 【O】regulations 【M】limiting scooter speeds…, requiring companies to provide helmets, and designating specific parking zones…<br>📌 句型：三個現在分詞片語並列修飾 regulations；require + O + to V"}, {"n": 36, "p": 3, "stem": "How have some companies changed their office space?", "o": ["They have expanded their offices significantly.", "They have redesigned offices with shared workspaces and lounge areas.", "They have closed all of their offices permanently.", "They have moved their offices to new cities."], "a": 1, "exp": "文中提到：「Other companies have redesigned their offices entirely, replacing rows of individual desks with shared workspaces, meeting rooms, and lounge areas」\n(B) They have redesigned offices with shared workspaces and lounge areas. ✓ 為正解。\n❌ (A) 文中說有些公司是「縮減」辦公空間，並非擴大。\n❌ (C) 文中未提到完全關閉所有辦公室。\n❌ (D) 文中未提到搬遷至新城市。", "zh": "題目：有些公司如何改變辦公空間？<br>(A) 大幅擴充辦公室。<br>(B) 重新設計辦公室，改成共用工作區和休息區。<br>(C) 永久關閉所有辦公室。<br>(D) 把辦公室搬到新的城市。", "sa": "依據句：【S】Other companies 【V】have redesigned 【O】their offices 【M】entirely, replacing rows of individual desks with shared workspaces, meeting rooms, and lounge areas<br>📌 句型：replace A with B「用 B 取代 A」；分詞構句 replacing… 說明方式"}, {"n": 37, "p": 3, "stem": "What benefit of remote work is mentioned in the passage?", "o": ["Reduced commuting time.", "Higher salaries for all employees.", "Guaranteed promotions.", "Unlimited vacation time."], "a": 0, "exp": "文中提到：「Proponents of remote work point to benefits such as reduced commuting time, lower costs for both employees and employers, and greater flexibility」\n(A) Reduced commuting time. ✓ 為正解。\n❌ (B) 文中未提到所有員工薪資提高。\n❌ (C) 文中未提到保證升遷。\n❌ (D) 文中未提到無限假期。", "zh": "題目：本文提到遠距工作的什麼好處？<br>(A) 減少通勤時間。<br>(B) 所有員工加薪。<br>(C) 保證升遷。<br>(D) 無限的休假天數。", "sa": "依據句：【S】Proponents of remote work 【V】point to 【O】benefits such as reduced commuting time, lower costs…, and greater flexibility…<br>📌 句型：point to「指出、舉出」；such as「例如」接名詞列舉"}, {"n": 38, "p": 3, "stem": "What concern do critics have about remote work?", "o": ["It costs companies too much money.", "It may make new employees feel isolated.", "It requires employees to travel more.", "It eliminates the need for meetings."], "a": 1, "exp": "文中提到：「Critics, however, worry that remote work can make it harder for new employees to build relationships with colleagues and may leave some workers feeling isolated.」\n(B) It may make new employees feel isolated. ✓ 為正解。\n❌ (A) 文中未提到遠距工作使公司成本過高（事實上文中說遠距工作能降低成本）。\n❌ (C) 文中未提到員工需要更多旅行。\n❌ (D) 文中未提到取消會議的需求；事實上文中提到員工有時仍需到公司開會。", "zh": "題目：批評者對遠距工作有什麼疑慮？<br>(A) 讓公司花太多錢。<br>(B) 可能讓新進員工感到孤立。<br>(C) 員工需要更常出差。<br>(D) 不再需要開會。", "sa": "依據句：【S】Critics 【V】worry 【O】that remote work can make it harder for new employees to build relationships… and may leave some workers feeling isolated<br>📌 句型：make it + adj. + for sb to V；leave + O + V-ing/adj.「使某人處於某狀態」"}, {"n": 39, "p": 3, "stem": "What inspired Daniel to start helping his neighbors with repairs?", "o": ["He wanted to start a business.", "His neighbor was going to throw away a toaster.", "He lost his job and needed income.", "A local school asked him for help."], "a": 1, "exp": "文中提到：「When his neighbor mentioned that she was planning to throw away a toaster simply because one of the wires had come loose, Daniel offered to fix it for her instead.」\n(B) His neighbor was going to throw away a toaster. ✓ 為正解。\n❌ (A) 文中未提到Daniel想開創事業；修理咖啡館一開始是免費的社區活動。\n❌ (C) 文中未提到Daniel失業或需要收入。\n❌ (D) 是修理咖啡館成立一年後，才有學校主動聯繫，並非一開始就有學校尋求協助。", "zh": "題目：是什麼促使 Daniel 開始幫鄰居修理東西？<br>(A) 他想創業。<br>(B) 他的鄰居打算把一台烤麵包機丟掉。<br>(C) 他失業了，需要收入。<br>(D) 當地一所學校請他幫忙。", "sa": "依據句：【M】When his neighbor mentioned that she was planning to throw away a toaster… 【S】Daniel 【V】offered 【O】to fix it for her instead<br>📌 句型：be planning to V「打算…」；offer to V「主動提議…」；inspire sb to V「激發某人做…」"}, {"n": 40, "p": 3, "stem": "What is a \"repair café,\" according to the passage?", "o": ["A coffee shop that sells used furniture.", "A monthly event where volunteers help people fix broken items for free.", "A store that sells repair tools.", "A class on how to bake desserts."], "a": 1, "exp": "文中提到：「Daniel decided to start a monthly \"repair café\" at the local community center, where volunteers with repair skills could help residents fix their broken belongings for free.」\n(B) A monthly event where volunteers help people fix broken items for free. ✓ 為正解。\n❌ (A) 文中並未說修理咖啡館是販售二手家具的咖啡店。\n❌ (C) 文中未提到販售修理工具的商店。\n❌ (D) 文中未提到烘焙課程。", "zh": "題目：根據本文，「修理咖啡館」是什麼？<br>(A) 一家販賣二手家具的咖啡店。<br>(B) 每月一次、由志工免費幫民眾修理壞掉物品的活動。<br>(C) 一家販賣修理工具的商店。<br>(D) 一堂教人烤甜點的課程。", "sa": "依據句：…a monthly \"repair café\" at the local community center, 【M】where volunteers with repair skills could help residents fix their broken belongings for free<br>📌 句型：, where 引導非限定子句說明地點；help + O + 原形；for free「免費」"}, {"n": 41, "p": 3, "stem": "What happened within a year of the repair café starting?", "o": ["It closed due to lack of interest.", "It began charging for repairs.", "It started attracting dozens of visitors and school students.", "Daniel stopped volunteering."], "a": 2, "exp": "文中提到：「within a year, the repair café was attracting dozens of visitors each month, and several local schools began sending students to learn basic repair skills」\n(C) It started attracting dozens of visitors and school students. ✓ 為正解。\n❌ (A) 文中說修理咖啡館的人氣是「增加」，並非因缺乏興趣而關閉。\n❌ (B) 文中強調修理咖啡館是「免費」幫助居民，並未提到開始收費。\n❌ (D) 文中未提到Daniel停止擔任志工；事實上他仍持續參與。", "zh": "題目：修理咖啡館開辦一年內發生了什麼事？<br>(A) 因為乏人問津而關閉。<br>(B) 開始收取修理費用。<br>(C) 開始吸引數十位訪客和學校學生。<br>(D) Daniel 不再擔任志工。", "sa": "依據句：【M】within a year 【S】the repair café 【V】was attracting 【O】dozens of visitors each month, and several local schools began sending students…<br>📌 句型：過去進行式表當時持續的狀態；At first…, but… 表前後對比；dozens of「數十個」"}, {"n": 42, "p": 3, "stem": "What does Daniel hope the repair café will achieve?", "o": ["Make him famous in his community.", "Reduce waste and help people feel confident maintaining their belongings.", "Replace all local repair shops.", "Encourage people to buy new products more often."], "a": 1, "exp": "文中提到：「Daniel hopes that by teaching people how to repair their own belongings, the repair café will not only reduce the amount of waste sent to landfills but also help people feel more confident about maintaining the things they own.」\n(B) Reduce waste and help people feel confident maintaining their belongings. ✓ 為正解。\n❌ (A) 文中未提到Daniel希望藉此在社區中成名。\n❌ (C) 文中未提到取代當地所有修理店。\n❌ (D) 文中目標是減少送往垃圾掩埋場的廢棄物，與「鼓勵人們更常購買新產品」的方向相反。", "zh": "題目：Daniel 希望修理咖啡館能達成什麼？<br>(A) 讓他在社區裡出名。<br>(B) 減少垃圾，並讓人們對維護自己的物品更有信心。<br>(C) 取代所有當地的修理店。<br>(D) 鼓勵人們更常買新產品。", "sa": "依據句：【S】Daniel 【V】hopes 【O】that… the repair café will not only reduce the amount of waste… but also help people feel more confident…<br>📌 句型：not only A but also B；help + O + 原形 feel；by + V-ing「藉由…」"}];
+const WRITTEN = [{"title": "Ⅰ. 填充（4 分）", "prompt": "我們應該努力減少日常生活中產生的垃圾量。<br><span class=\"blankline\">We should try to r<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<\/u>① the amount of w<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<\/u>② we produce in our daily lives.<\/span>", "ans": "① <b>reduce<\/b>　② <b>waste<\/b>", "exp": "① reduce（減少）— 依提示字首 r 及句意「我們應該努力減少日常生活中產生的垃圾量」。\n② waste（垃圾、廢棄物）— 依提示字首 w 及句意，與 reduce the amount of 搭配，表示「減少…的量」。", "zh": "題意：我們應該努力減少日常生活中產生的垃圾量。<br>① <b>reduce<\/b>＝減少　② <b>waste<\/b>＝垃圾、廢棄物", "sa": "參考句：We should try to <b>reduce<\/b> the amount of <b>waste<\/b> we produce in our daily lives.<br>【S】We 【V】should try to reduce 【O】the amount of waste 【M】(that) we produce in our daily lives<br>📌 句型：try to V「努力…」；the amount of + 不可數名詞「…的量」"}, {"title": "Ⅱ. 句子重組（6 分）", "prompt": "請將下列提示字詞重組成一句完整的句子，並於句尾加上適當標點符號：<br><i>every day / the museum / except Monday / is open / to the public<\/i>", "ans": "The museum is open to the public every day except Monday.", "exp": "句構：主詞 (The museum) + be動詞 (is) + 形容詞 (open) + to the public（對大眾開放）+ every day（時間副詞，每天）+ except Monday（除了星期一）。", "zh": "這間博物館除了星期一以外，每天都對外開放。", "sa": "【S】The museum 【V】is 【C】open 【M】to the public 【M】every day 【M】except Monday<br>📌 句型：be open to the public「對大眾開放」（open 是形容詞）；except + 名詞「除了…之外」<br>例：The store is open every day except Sunday."}, {"title": "Ⅲ. 中譯英（6 分）", "prompt": "請將以下中文句子譯成正確、通順、達意的英文：<br>政府鼓勵民眾使用大眾運輸工具，以減少空氣污染。", "ans": "The government encourages people to use public transportation in order to reduce air pollution.", "exp": "重點結構：encourage + 受詞 (people) + to V (to use)，表示「鼓勵某人做某事」；in order to + 動詞原形，表示「為了……」的目的。", "zh": "題意：政府鼓勵民眾搭乘大眾運輸工具，以減少空氣污染。", "sa": "【S】The government 【V】encourages 【O】people 【C】to use public transportation 【M】in order to reduce air pollution<br>📌 句型：encourage + O + to V「鼓勵某人做…」；in order to + 原形「為了…」<br>例：Teachers encourage students to read more books."}];
+const TOTAL = Q.length;
+
+/* ====== 產生選擇題畫面 ====== */
+const form = document.getElementById('quiz');
+let lastPart = -1;
+Q.forEach(q=>{
+  if(q.p!==lastPart){
+    const st=document.createElement('div'); st.className='section-title s'+q.p; st.textContent=PARTS[q.p].title;
+    const sd=document.createElement('div'); sd.className='section-desc'; sd.textContent=PARTS[q.p].desc;
+    form.appendChild(st); form.appendChild(sd); lastPart=q.p;
+  }
+  if(PASSAGES[q.n]){ const d=document.createElement('div'); d.innerHTML=PASSAGES[q.n]+ptrHtml(String(q.n)); while(d.firstChild) form.appendChild(d.firstChild); }
+  const card=document.createElement('div'); card.className='q'; card.id='q'+q.n;
+  const isBlank=/^\(\d+\)$/.test(q.stem);
+  const stemHtml = isBlank ? `第 ${q.n} 格` : q.stem;
+  card.innerHTML=`<div class="stem"><span class="num">${q.n}</span>${stemHtml}</div>`;
+  q.o.forEach((opt,i)=>{
+    const lab=document.createElement('label'); lab.className='opt'; lab.dataset.i=i;
+    lab.innerHTML=`<input type="radio" name="q${q.n}" value="${i}"><span class="lab">${'ABCD'[i]}</span><span>${opt}</span>`;
+    lab.querySelector('input').addEventListener('change',()=>{
+      pickAnswer(q,i);
+    });
+    card.appendChild(lab);
+  });
+  const exp=document.createElement('div'); exp.className='exp'; exp.id='exp'+q.n;
+  card.appendChild(exp);
+  form.appendChild(card);
+});
+
+const submitBtn=document.getElementById('submitBtn');
+const resetBtn=document.getElementById('resetBtn');
+const hint=document.getElementById('hint');
+let submitted=false;
+
+/* 選擇答案後立即鎖定並顯示該題解析 */
+function pickAnswer(q,pick){
+  const card=document.getElementById('q'+q.n);
+  card.querySelectorAll('.opt').forEach(o=>{
+    o.classList.add('lock');
+    o.querySelector('input').disabled=true;
+    const i=parseInt(o.dataset.i);
+    if(i===pick) o.classList.add('sel');
+    if(i===q.a) o.classList.add('correct');
+    if(i===pick && pick!==q.a) o.classList.add('wrong');
+  });
+  const correct = pick===q.a;
+  const exp=document.getElementById('exp'+q.n);
+  const tag = correct ? '答對' : '答錯';
+  exp.innerHTML=`<span class="tag ${correct?'':'miss'}">${tag}　正解：${'ABCD'[q.a]}</span>
+    <div class="body">${q.exp}</div>${xtra(q)}`;
+  exp.classList.add('show');
+  updateProgress();
+}
+
+function answeredCount(){ let c=0; Q.forEach(q=>{ if(form.querySelector(`input[name="q${q.n}"]:checked`)) c++; }); return c; }
+function updateProgress(){
+  const c=answeredCount();
+  document.getElementById('count').textContent=`${c} / ${TOTAL}`;
+  document.getElementById('fill').style.width=(c/TOTAL*100)+'%';
+  if(submitted) return;
+  hint.textContent = c===TOTAL ? `已完成全部 ${TOTAL} 題，可以交卷查看總分了` : (c===0 ? '尚未作答任何題目（每題選擇後立即顯示解析）' : `已作答 ${c} 題，未作答 ${TOTAL-c} 題（可隨時交卷）`);
+}
+
+submitBtn.addEventListener('click',()=>{
+  let ok=0, blank=0;
+  Q.forEach(q=>{
+    const sel=form.querySelector(`input[name="q${q.n}"]:checked`);
+    const pick = sel ? parseInt(sel.value) : null;
+    const card=document.getElementById('q'+q.n);
+    if(pick===null){
+      blank++;
+      card.querySelectorAll('.opt').forEach(o=>{
+        o.classList.add('lock');
+        o.querySelector('input').disabled=true;
+        const i=parseInt(o.dataset.i);
+        if(i===q.a) o.classList.add('correct');
+      });
+      const exp=document.getElementById('exp'+q.n);
+      exp.innerHTML=`<span class="tag blank">未作答　正解：${'ABCD'[q.a]}</span>
+        <div class="body">${q.exp}</div>${xtra(q)}`;
+      exp.classList.add('show');
+    } else if(pick===q.a){
+      ok++;
+    }
+  });
+  const res=document.getElementById('result');
+  const score = ok*2;
+  document.getElementById('scoreNum').textContent=score;
+  document.getElementById('scoreTxt').textContent=`分（選擇題 / 84 分，答對 ${ok} / ${TOTAL} 題）`;
+  document.getElementById('rOk').textContent=ok;
+  document.getElementById('rNo').textContent=TOTAL-ok-blank;
+  document.getElementById('rBlank').textContent=blank;
+  res.classList.add('show');
+  submitted=true;
+  submitBtn.style.display='none'; hint.style.display='none'; resetBtn.style.display='block';
+  res.scrollIntoView({behavior:'smooth'});
+});
+
+resetBtn.addEventListener('click',()=>{
+  form.reset();
+  Q.forEach(q=>{
+    const card=document.getElementById('q'+q.n);
+    card.querySelectorAll('.opt').forEach(o=>{o.classList.remove('sel','correct','wrong','lock');o.querySelector('input').disabled=false;});
+    document.getElementById('exp'+q.n).classList.remove('show');
+  });
+  document.getElementById('result').classList.remove('show');
+  submitted=false;
+  submitBtn.style.display='block'; hint.style.display='block'; resetBtn.style.display='none';
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ====== 非選擇題（點擊查看解析） ====== */
+const writtenDiv=document.getElementById('written');
+WRITTEN.forEach((w,idx)=>{
+  const card=document.createElement('div'); card.className='written';
+  card.innerHTML=`<h4>${w.title}</h4>
+    <div class="prompt">${w.prompt}</div>
+    <button type="button" class="reveal" id="wb${idx}">查看答案與解析</button>
+    <div class="ans" id="wa${idx}">
+      <span class="tag">參考答案</span>
+      <div class="body">${w.ans}</div>
+      <div class="body">${w.exp}</div>${xtra(w)}
+    </div>`;
+  writtenDiv.appendChild(card);
+  card.querySelector('#wb'+idx).addEventListener('click',()=>{
+    card.querySelector('#wa'+idx).classList.add('show');
+    card.querySelector('#wb'+idx).style.display='none';
+  });
+});
+
+updateProgress();
+</script>
+
+<!-- AK:answer-key -->
+<style id="ak-style">#ak-btn{position:fixed;left:14px;bottom:14px;z-index:9990;font:600 16px/1 "PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;background:#1f4e79;color:#fff;border:0;border-radius:999px;padding:11px 16px;box-shadow:0 4px 14px rgba(0,0,0,.22);cursor:pointer}#ak-btn:hover{background:#163a5c}#ak-box{display:none;position:fixed;inset:0;z-index:9995;background:rgba(15,25,40,.45);padding:16px;overflow:auto}#ak-box.show{display:block}#ak-box .ak-card{max-width:960px;margin:20px auto;background:#fff;color:#1d2733;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);font:16px/1.6 "PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;text-align:left}#ak-box .ak-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid #e3e8ef;position:sticky;top:0;background:#fff;border-radius:14px 14px 0 0}#ak-box .ak-head b{font-size:18px;color:#1f4e79}#ak-box .ak-head button{font:inherit;font-size:16px;margin-left:8px;border:1px solid #c9d3df;background:#f4f7fb;color:#1d2733;border-radius:8px;padding:6px 12px;cursor:pointer}#ak-box .ak-body{padding:6px 18px 18px}#ak-box h3{font-size:17px;margin:16px 0 6px;color:#1f4e79}#ak-box .ak-t{border-collapse:collapse;width:100%;margin:6px 0;table-layout:fixed}#ak-box .ak-t th,#ak-box .ak-t td{border:1px solid #cfd8e3;padding:5px 2px;text-align:center;font-size:16px;word-break:break-all}#ak-box .ak-t th{background:#eef3f9;color:#1f4e79;font-weight:600}#ak-box .ak-t th:first-child{width:3.6em}#ak-box .ak-t td{font-weight:700}#ak-box .ak-list{columns:2 300px;margin:6px 0;padding-left:0;list-style:none}#ak-box .ak-list li{break-inside:avoid;padding:3px 0;border-bottom:1px dashed #e3e8ef}@media print{#ak-btn{display:none!important}html:not(.ak-on) #ak-box{display:none!important}html.ak-on body>*:not(#ak-box){display:none!important}html.ak-on #ak-box{position:static;background:none;padding:0;display:block!important;overflow:visible}html.ak-on #ak-box .ak-card{box-shadow:none;margin:0;max-width:none}html.ak-on #ak-box .ak-head button{display:none}html.ak-on #ak-box .ak-head{position:static}}</style>
+<script id="ak-core">(function(){
+if(window.AK)return;
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function norm(secs){
+ if(!secs)return[];
+ if(!Array.isArray(secs[0]&&secs[0].items)&&Array.isArray(secs))secs=[{title:'',items:secs}];
+ return secs.map(function(s){return{title:s.title||'',items:(s.items||[]).map(function(x,i){return Array.isArray(x)?[x[0],x[1]]:[i+1,x]})}}).filter(function(s){return s.items.length});
+}
+function table(s){
+ var long=s.items.some(function(x){return String(x[1]).length>3});
+ var h=s.title?'<h3>'+esc(s.title)+'</h3>':'';
+ if(long){
+  return h+'<ol class="ak-list">'+s.items.map(function(x){return'<li><b>'+esc(x[0])+'.</b> '+esc(x[1])+'</li>'}).join('')+'</ol>';
+ }
+ var out=h;
+ for(var i=0;i<s.items.length;i+=10){
+  var r=s.items.slice(i,i+10);
+  out+='<table class="ak-t"><tr><th>題號</th>'+r.map(function(x){return'<th>'+esc(x[0])+'</th>'}).join('')+'</tr><tr><th>答案</th>'+r.map(function(x){return'<td>'+esc(x[1])+'</td>'}).join('')+'</tr></table>';
+ }
+ return out;
+}
+window.AK=function(fn){
+ function run(){
+  var secs;
+  try{secs=norm(typeof fn==='function'?fn():fn)}catch(e){console.warn('AK',e);return}
+  window.__AK_DATA=secs;
+  if(!secs.length)return;
+  var n=secs.reduce(function(a,s){return a+s.items.length},0);
+  var btn=document.createElement('button');btn.id='ak-btn';btn.type='button';btn.textContent='📋 答案總表';if(window.AK_BTN_STYLE)btn.style.cssText=window.AK_BTN_STYLE;
+  var box=document.createElement('div');box.id='ak-box';
+  box.innerHTML='<div class="ak-card" role="dialog" aria-label="答案總表"><div class="ak-head"><b>📋 答案總表（教師用，共 '+n+' 題）</b><span><button type="button" class="ak-p">🖨 列印答案</button><button type="button" class="ak-x" aria-label="關閉">✕</button></span></div><div class="ak-body">'+secs.map(table).join('')+'</div></div>';
+  document.body.appendChild(btn);document.body.appendChild(box);
+  function close(){box.classList.remove('show');document.documentElement.classList.remove('ak-on')}
+  btn.onclick=function(){box.classList.add('show');document.documentElement.classList.add('ak-on')};
+  box.querySelector('.ak-x').onclick=close;
+  box.onclick=function(e){if(e.target===box)close()};
+  box.querySelector('.ak-p').onclick=function(){window.print()};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+ }
+ if(document.readyState==='complete')setTimeout(run,0);else window.addEventListener('load',function(){setTimeout(run,0)});
+};
+})();</script>
+<script>AK(function(){
+// quiz.efetl.com mock-a～p 版型：PARTS[{title}] + Q[{n,p,o,a(0-3 索引)}] + WRITTEN[{title,ans}]（非選擇題列精簡參考答案）
+function txt(h){var d=document.createElement('div');d.innerHTML=String(h).replace(/<br\s*\/?>/gi,' ');var s=d.textContent.replace(/\s+/g,' ').trim();return s.length>60?s.slice(0,60)+'…':s}
+var secs=PARTS.map(function(p){return {title:p.title.replace(/\s+/g,' '),items:[]}});
+Q.forEach(function(q){secs[q.p].items.push([q.n,'ABCD'[q.a]])});
+if(typeof WRITTEN!=='undefined'&&WRITTEN.length)secs.push({title:'非選擇題（參考答案）',items:WRITTEN.map(function(w){
+  var t=String(w.title).replace(/<[^>]*>/g,'');var m=t.match(/^\s*([^.．\s]+)[.．]?\s*([^（(]*)/);
+  return [m?m[1]+' '+m[2].trim():t,txt(w.ans)]})});
+return secs;
+});</script>
+<!-- /AK -->
+<style>@media print{#penBtn,#penBar,#penCv,#penHit,#penBoard{display:none!important}}</style>
+<script>
+/* ================= ✏️ 老師手寫 =================
+   畫在網頁上的筆跡記在「整頁座標」，會跟著畫面捲動；白板的筆跡另外存、不捲動。
+   書寫時：一指／觸控筆寫字、兩指捲動＋縮放（不鎖畫面）。✋ 捲動模式：筆跡照樣顯示，可以點題目。
+   縮放：把頁面內容包進 #penZoom 再用 transform:scale；筆跡存「內容座標」，縮放後仍黏在原來的字上。
+   用固定大小的畫布＋捲動時重畫（平板瀏覽器對超大畫布有尺寸限制）。 */
+(function(){
+  const css=`
+  #penBtn{position:fixed;left:14px;bottom:14px;z-index:60;border:none;background:#fff;color:#2b4c7e;border-radius:99px;padding:8px 16px;box-shadow:0 4px 18px rgba(30,45,70,.18);font-weight:700;font-size:1rem;font-family:inherit;cursor:pointer}
+  #penCv{position:fixed;inset:0;width:100vw;height:100vh;z-index:57;pointer-events:none;display:none}
+  #penHit{position:fixed;inset:0;z-index:58;display:none;touch-action:none;cursor:crosshair}
+  #penBoard{position:fixed;inset:0;z-index:56;background:#fff;display:none}
+  body.pen-on #penCv{display:block}
+  body.pen-on.pen-draw #penHit{display:block}
+  body.pen-board #penBoard{display:block}
+  #penBar{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;bottom:12px;z-index:61;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;
+    background:rgba(255,255,255,.97);border-radius:16px;padding:8px 10px;box-shadow:0 6px 24px rgba(30,45,70,.22);max-width:calc(100vw - 24px)}
+  body.pen-top #penBar{bottom:auto;top:12px}
+  body.pen-on #penBar{display:flex}
+  #penBar button{border:2px solid #e3e0d8;background:#fff;border-radius:10px;min-width:44px;height:44px;font-size:1rem;font-family:inherit;font-weight:700;cursor:pointer;color:#23303f;padding:0 10px}
+  #penBar button.on{border-color:#2b4c7e;background:#e8effa}
+  #penBar button.mode{background:#2b4c7e;color:#fff;border-color:#2b4c7e}
+  #penBar .dot{width:44px;padding:0}
+  #penBar .dot i{display:block;width:22px;height:22px;border-radius:50%;margin:auto}
+  #penBar .sep{width:1px;height:30px;background:#e3e0d8;margin:0 2px}
+  body.pen-on #penBtn{display:none}
+  #penZoom{transform-origin:0 0}
+  #penBar.nozoom [data-a=zout],#penBar.nozoom [data-a=zoom],#penBar.nozoom [data-a=zin]{display:none}
+  html.pen-lock,html.pen-lock body{touch-action:manipulation;touch-action:pan-x pan-y}
+  #penBar,#penBar *,#penBtn{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+  @media(max-width:640px){#penBar .t,#penBar .sep{display:none}#penBar{gap:4px;padding:6px}#penBar button{min-width:40px;height:40px;padding:0 6px}#penBar .dot{width:40px}}`;
+  const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  const COLORS=['#d9342b','#1f5fbf','#1d1d1d','#1f9a55'];
+  const SIZES=[[3,'細'],[6,'中'],[12,'粗']];
+  let color=COLORS[0],size=6,erase=false,page=[],board=[],cur=null,boardOn=false;
+  document.body.insertAdjacentHTML('beforeend',`<button id="penBtn" title="老師手寫">✏️ 手寫</button>
+    <div id="penBoard"></div><canvas id="penCv"></canvas><div id="penHit"></div>
+    <div id="penBar">
+      <button class="mode" data-a="mode">✋<span class="t"> 捲動</span></button>
+      <span class="sep"></span>
+      ${COLORS.map((c,i)=>`<button class="dot${i?'':' on'}" data-c="${c}" title="顏色"><i style="background:${c}"></i></button>`).join('')}
+      <span class="sep"></span>
+      ${SIZES.map(([s,n])=>`<button data-s="${s}" class="${s===6?'on':''}">${n}</button>`).join('')}
+      <span class="sep"></span>
+      <button data-a="erase" title="橡皮擦">🧽<span class="t"> 橡皮擦</span></button><button data-a="undo" title="復原">↩️<span class="t"> 復原</span></button><button data-a="clear" title="清除">🗑️<span class="t"> 清除</span></button>
+      <button data-a="zout" title="縮小">－</button><button data-a="zoom" title="回到 1 倍">🔍<span class="z">1.0×</span></button><button data-a="zin" title="放大">＋</button><button data-a="board" title="白板">⬜<span class="t"> 白板</span></button><button data-a="move" title="移位">⇅<span class="t"> 移位</span></button><button data-a="close" title="關閉">✖<span class="t"> 關閉</span></button>
+    </div>`);
+  const Z=document.createElement('div');Z.id='penZoom';
+  /* 第一次打開手寫才把頁面內容包進 #penZoom（只有 header/nav/main/footer 就包這些，否則包所有一般排版的子元素）。
+     body 是 flex/grid 或 CSS 有「body>」選擇器時不包：不能縮放，但筆跡照樣跟著捲動。 */
+  const PEN_IDS=['penBtn','penBoard','penCv','penHit','penBar'];
+  const NOFLOW=/^(SCRIPT|STYLE|LINK|META|TEMPLATE|NOSCRIPT)$/;
+  function bodyChildCss(){const hit=rs=>[...rs].some(r=>(r.selectorText&&/(^|[\s,(])body\s*>/.test(r.selectorText))||(r.cssRules&&hit(r.cssRules)));
+    for(const ss of document.styleSheets){let rs;try{rs=ss.cssRules}catch(_){continue}if(rs&&hit(rs))return true}return false}
+  function wrap(){
+    if(Z.isConnected)return;
+    const kids=[...document.body.children].filter(e=>!PEN_IDS.includes(e.id)&&!NOFLOW.test(e.tagName)&&getComputedStyle(e).position!=='fixed');
+    let flow=kids.filter(e=>/^(HEADER|NAV|MAIN|FOOTER)$/.test(e.tagName));
+    if(flow.length<kids.length){if(/flex|grid/.test(getComputedStyle(document.body).display)||bodyChildCss())flow=[];else flow=kids}
+    if(flow.length){flow[0].before(Z);flow.forEach(e=>Z.appendChild(e))}
+    else bar.classList.add('nozoom');
+  }
+  let zoom=1;
+  const B=document.body,cv=document.getElementById('penCv'),hit=document.getElementById('penHit'),bar=document.getElementById('penBar'),ctx=cv.getContext('2d');
+  const list=()=>boardOn?board:page;
+  /* 螢幕座標＝內容座標×z＋(x,y)。白板不捲動不縮放；網頁筆跡跟著捲動與縮放 */
+  const off=()=>{if(boardOn)return{z:1,x:0,y:0};if(!Z.isConnected)return{z:1,x:-scrollX,y:-scrollY};const r=Z.getBoundingClientRect();return{z:zoom,x:r.left,y:r.top}};
+  function fit(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;ctx.setTransform(r,0,0,r,0,0);redraw()}
+  function seg(s,a,b,o){
+    ctx.globalCompositeOperation=s.erase?'destination-out':'source-over';
+    ctx.strokeStyle=s.color;ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineWidth=(s.erase?s.size*4:s.size*(0.55+(b.p||0.5)*0.9))*o.z;
+    ctx.beginPath();ctx.moveTo(a.x*o.z+o.x,a.y*o.z+o.y);ctx.lineTo(b.x*o.z+o.x,b.y*o.z+o.y);ctx.stroke();
+  }
+  function draw(s,o){const P=s.pts;if(P.length===1)seg(s,P[0],{...P[0],x:P[0].x+.01},o);for(let i=1;i<P.length;i++)seg(s,P[i-1],P[i],o)}
+  function redraw(){ctx.clearRect(0,0,innerWidth,innerHeight);const o=off();
+    list().forEach(s=>{const ys=s.pts.map(p=>p.y*o.z+o.y);if(Math.max(...ys)<-50||Math.min(...ys)>innerHeight+50)return;draw(s,o)});
+    ctx.globalCompositeOperation='source-over'}
+  let raf=0;addEventListener('scroll',()=>{if(!B.classList.contains('pen-on')||boardOn||raf)return;raf=requestAnimationFrame(()=>{raf=0;redraw()})},{passive:true});
+  addEventListener('resize',()=>{if(B.classList.contains('pen-on')){fit();pad()}});
+  const pt=e=>{const o=off();return{x:(e.clientX-o.x)/o.z,y:(e.clientY-o.y)/o.z,p:e.pressure&&e.pointerType==='pen'?e.pressure:0.5}};
+  /* 以螢幕上的 at 點為中心縮放，讓內容點 c 落在 at（c 省略＝at 底下的內容點） */
+  const zBtn=()=>bar.querySelector('[data-a="zoom"] .z');
+  function setZoom(nz,at,c){
+    if(!Z.isConnected)return;nz=Math.min(3,Math.max(1,nz));const o=off();c=c||{x:(at.x-o.x)/o.z,y:(at.y-o.y)/o.z};
+    zoom=nz;Z.style.transform=nz===1?'':`scale(${nz})`;
+    const r=Z.getBoundingClientRect(),ox=r.left+scrollX,oy=r.top+scrollY;
+    window.scrollTo(ox+c.x*nz-at.x,oy+c.y*nz-at.y);
+    zBtn().textContent=nz.toFixed(1)+'×';bar.querySelector('[data-a="zoom"]').classList.toggle('on',nz>1.01);redraw();
+  }
+  /* 一指／觸控筆＝寫字；兩指＝捲動＋縮放（書寫中不鎖畫面） */
+  const ptrs=new Map();let pan=null,hold=false;
+  const mid=()=>{const v=[...ptrs.values()];return{x:(v[0].x+v[1].x)/2,y:(v[0].y+v[1].y)/2}};
+  const dist=()=>{const v=[...ptrs.values()];return Math.hypot(v[0].x-v[1].x,v[0].y-v[1].y)||1};
+  function startPan(){const m=mid(),o=off();pan={d0:dist(),z0:zoom,c:{x:(m.x-o.x)/o.z,y:(m.y-o.y)/o.z},m}}
+  hit.addEventListener('pointerdown',e=>{e.preventDefault();hit.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(ptrs.size>=2){if(cur){const L=list(),i=L.indexOf(cur);if(i>=0)L.splice(i,1);cur=null;redraw()}startPan();hold=true;return}
+    if(hold)return;
+    cur={color,size,erase,pts:[pt(e)]};list().push(cur);draw(cur,off());ctx.globalCompositeOperation='source-over'});
+  hit.addEventListener('pointermove',e=>{
+    if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pan&&ptrs.size>=2){e.preventDefault();const m=mid();
+      if(boardOn)return;
+      setZoom(pan.z0*dist()/pan.d0,m,pan.c);return}
+    if(!cur)return;e.preventDefault();const o=off();
+    (e.getCoalescedEvents?e.getCoalescedEvents():[e]).forEach(ev=>{const p=pt(ev),q=cur.pts[cur.pts.length-1];cur.pts.push(p);seg(cur,q,p,o)});ctx.globalCompositeOperation='source-over'});
+  const up=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pan=null;else startPan();if(ptrs.size===0)hold=false;cur=null};
+  hit.addEventListener('pointerup',up);hit.addEventListener('pointercancel',up);
+  /* 滑鼠滾輪／觸控板在書寫層上也能捲動 */
+  /* 觸控板捏合／Ctrl＋滾輪＝縮放 */
+  hit.addEventListener('wheel',e=>{e.preventDefault();
+    if(e.ctrlKey&&!boardOn)setZoom(zoom*Math.exp(-e.deltaY*0.01),{x:e.clientX,y:e.clientY});else window.scrollBy(e.deltaX,e.deltaY)},{passive:false});
+  const modeBtn=bar.querySelector('[data-a="mode"]');
+  function setDraw(on){B.classList.toggle('pen-draw',on);modeBtn.innerHTML=on?'✋<span class="t"> 捲動</span>':'✏️<span class="t"> 書寫</span>';modeBtn.title=on?'切換成捲動畫面（筆跡保留）':'切換回寫字'}
+  /* 依工具列實際高度在頁面上／下留白，最後一題不會被擋住 */
+  function pad(){const on=B.classList.contains('pen-on'),top=B.classList.contains('pen-top'),h=on?bar.offsetHeight+24+'px':'';
+    B.style.paddingBottom=on&&!top?h:'';B.style.paddingTop=on&&top?h:''}
+  const VP=document.querySelector('meta[name=viewport]'),VP0=VP?VP.content:'';
+  function lockVP(on){if(VP)VP.content=on?'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no':VP0}
+  function resetNative(){if(!VP||!window.visualViewport||visualViewport.scale<=1.01)return;lockVP(true);setTimeout(()=>{VP.content='width=device-width, initial-scale=1, maximum-scale=1';setTimeout(()=>lockVP(B.classList.contains('pen-on')),300)},50)}
+  let kb=0;
+  function open(){wrap();lockVP(true);clearInterval(kb);kb=setInterval(keepBar,250);document.documentElement.classList.add('pen-lock');B.classList.add('pen-on');setDraw(true);fit();pad()}
+  function close(){clearInterval(kb);lockVP(false);if(zoom!==1)setZoom(1,{x:innerWidth/2,y:innerHeight/2});document.documentElement.classList.remove('pen-lock');bar.style.transform='';B.classList.remove('pen-on','pen-draw','pen-board');B.style.paddingBottom=B.style.paddingTop='';boardOn=false;bar.querySelector('[data-a="board"]').classList.remove('on')}
+  document.getElementById('penBtn').onclick=open;
+  modeBtn.onclick=()=>setDraw(!B.classList.contains('pen-draw'));
+  bar.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{color=b.dataset.c;erase=false;setDraw(true);
+    bar.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x===b));bar.querySelector('[data-a="erase"]').classList.remove('on')});
+  bar.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{size=+b.dataset.s;setDraw(true);bar.querySelectorAll('[data-s]').forEach(x=>x.classList.toggle('on',x===b))});
+  bar.querySelector('[data-a="erase"]').onclick=function(){erase=!erase;setDraw(true);this.classList.toggle('on',erase)};
+  bar.querySelector('[data-a="undo"]').onclick=()=>{list().pop();redraw()};
+  bar.querySelector('[data-a="clear"]').onclick=()=>{list().length=0;redraw()};
+  bar.querySelector('[data-a="board"]').onclick=function(){boardOn=!boardOn;B.classList.toggle('pen-board',boardOn);this.classList.toggle('on',boardOn);if(boardOn)setDraw(true);redraw()};
+  /* ✋ 捲動模式：兩指捏合一樣交給自己的縮放（瀏覽器原生縮放已關閉，工具列不會被推出畫面） */
+  let tp=null;
+  const tDist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY)||1;
+  const tMid=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+  document.addEventListener('touchstart',e=>{if(!B.classList.contains('pen-on')||B.classList.contains('pen-draw')||boardOn||e.touches.length!==2)return;
+    const m=tMid(e.touches),o=off();tp={d0:tDist(e.touches),z0:zoom,c:{x:(m.x-o.x)/o.z,y:(m.y-o.y)/o.z}}},{passive:true});
+  document.addEventListener('touchmove',e=>{if(!tp||e.touches.length!==2)return;e.preventDefault();setZoom(tp.z0*tDist(e.touches)/tp.d0,tMid(e.touches),tp.c)},{passive:false});
+  document.addEventListener('touchend',e=>{if(e.touches.length<2)tp=null},{passive:true});
+  /* 保險：萬一瀏覽器還是放大了整頁，把工具列擺回看得到的地方並維持原本大小 */
+  function keepBar(){const v=window.visualViewport;if(!v)return;
+    if(v.scale<=1.01||!B.classList.contains('pen-on')){bar.style.transform='';bar.style.transformOrigin='';return}
+    const top=B.classList.contains('pen-top');
+    bar.style.transformOrigin=top?'center top':'center bottom';
+    const dx=v.offsetLeft+v.width/2-innerWidth/2,dy=top?v.offsetTop:v.offsetTop+v.height-innerHeight;
+    bar.style.transform=`translate(${dx}px,${dy}px) scale(${1/v.scale})`}
+  if(window.visualViewport){visualViewport.addEventListener('resize',keepBar);visualViewport.addEventListener('scroll',keepBar)}
+  const ctr=()=>({x:innerWidth/2,y:innerHeight/2});
+  bar.querySelector('[data-a="zoom"]').onclick=()=>{setZoom(1,ctr());resetNative();keepBar()};
+  bar.querySelector('[data-a="zin"]').onclick=()=>{if(!boardOn)setZoom(zoom*1.25,ctr())};
+  bar.querySelector('[data-a="zout"]').onclick=()=>{if(!boardOn)setZoom(zoom/1.25,ctr())};
+  bar.querySelector('[data-a="move"]').onclick=()=>{B.classList.toggle('pen-top');pad()};
+  bar.querySelector('[data-a="close"]').onclick=close;
+})();
+
+</script>
+</body>
+</html>
