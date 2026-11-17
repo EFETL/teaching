@@ -138,6 +138,79 @@ button{font-family:inherit;color:inherit}
 @media (max-width:500px) and (orientation:portrait){#rot{display:block}}
 @media (min-width:1800px){#panel{width:1320px;padding:26px 40px}.q{font-size:52px}.say{font-size:42px}.opt{font-size:40px;padding:16px 34px}.btn{font-size:34px}.zhl{font-size:27px}
  #goal b{font-size:30px}#goal small{font-size:19px}.lab{font-size:26px}#zoom button{width:80px;height:80px;font-size:40px}#hud button,#hud .chip,#homeTab{font-size:24px}.card{width:200px}.card .ic{font-size:72px}.card b{font-size:28px}}
+
+/* ===== 獎品視窗、點數統計 ===== */
+#prize{position:fixed;inset:0;z-index:45;display:none;align-items:center;justify-content:center;background:#0004;pointer-events:auto}
+#prize.on{display:flex}
+#prize .pbox{background:linear-gradient(#fffdf2,#ffe9c7);border:6px solid #ffc93c;border-radius:36px;padding:24px 44px;text-align:center;box-shadow:0 16px 0 #0003;animation:pp .45s cubic-bezier(.2,1.6,.4,1)}
+#prize.bad .pbox{border-color:#7fb8ff;background:linear-gradient(#f5fbff,#dcefff)}
+@keyframes pp{from{transform:scale(.3) rotate(-12deg);opacity:0}}
+#prize img{height:200px;max-width:80vw;object-fit:contain;animation:wob 1.2s infinite}
+#prize .pt{font:800 64px var(--en);color:#e0661f}
+#prize .pz{font:700 34px var(--zh);color:#5d5646}
+#prize .pz b{color:#b23a5c}
+#prize .ok{font:800 52px var(--zh);color:#3e9e5b}
+#prize.bad .ok{color:#2b6cb0}
+#tally{position:fixed;inset:0;z-index:46;display:none;overflow-y:auto;background:radial-gradient(#fff8 0,#0000 60%),linear-gradient(#7cc6f0,#bfe6ff 55%,#9ad66b 55%);text-align:center;padding:24px 16px}
+#tally.on{display:block}
+#tally h2{font:800 56px var(--zh);margin:10px 0;color:#fff;text-shadow:0 4px 0 #f0708f}
+#tally .big{font:800 140px var(--en);color:#ffcf33;text-shadow:0 6px 0 #c47f00,0 10px 24px #0004;line-height:1}
+#tally .big small{font-size:56px;color:#fff;text-shadow:0 4px 0 #c47f00}
+#tally .grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:1200px;margin:16px auto}
+#tally .grid div{background:#fffc;border-radius:18px;padding:6px;width:120px}
+#tally .grid img{height:90px;max-width:100%;object-fit:contain}
+#tally .st{font:700 30px var(--zh);color:#2f3a2a;margin:8px}
+#tally .cr{font:500 30px var(--zh);color:#3a5a2a;margin-top:18px}
+body.pon #goal{display:none!important}
+#pts{background:#fff3a8!important;border-color:#f6b93b!important}
+#endBtn{background:#e7f8ec!important;border-color:#3e9e5b!important}
+/* ===== 字體：其他裝置最小 30px ===== */
+.lab,.lab small{font-size:30px}.lab{padding:8px 20px}
+#hud button,#hud .chip,#homeTab,#modeChip small{font-size:30px}
+#goal{max-width:62vw;top:84px}#goal b{font-size:36px}#goal small{font-size:30px}
+#help{font-size:30px}
+#zoom button{width:76px;height:76px;font-size:40px}
+#panel{width:min(1400px,96vw);max-height:66vh}
+.tag{font-size:30px}.q{font-size:48px}.say{font-size:40px}.zhl{font-size:30px}.fb{font-size:36px;min-height:44px}
+.opt{font-size:38px;padding:12px 26px}.btn{font-size:36px}.btn.sm{font-size:30px;padding:10px 22px}
+.fill{font-size:44px}.fill .slot{min-width:160px}
+.card{width:240px}.card b{font-size:34px}.card small{font-size:30px}.ltag{font-size:30px}.lzh{font-size:30px}.len button{font-size:36px}
+.namecard{font-size:80px}.wmap{font-size:42px}.wmap small{font-size:30px}.pair,.pair span{font-size:30px}
+.rule b{font-size:32px}.rule small{font-size:30px}.mtl{font-size:30px}.rgrid{grid-template-columns:repeat(4,1fr)}
+.stars{font-size:70px}
+#title .sub{font-size:36px}.modes button{width:min(440px,90vw)}.modes b{font-size:44px}.modes span{font-size:34px}.modes small,#title>small{font-size:30px!important}
+#load{font-size:36px}#load small{font-size:30px!important}
+#homeDrawer{width:min(820px,100vw)}
+.hdTop h2{font-size:40px}.hdTop h2 small,.hdTop button,.hdBig b,.hdBig small,.hdP,.hdEn,.hdBtn,.hdNote,.rcp h3,.rcp h3 small,.rcp .tg,.rcp li,.hdAllergy,.stamp{font-size:30px}
+.hdBig i{font-size:56px}.stamp{width:150px;height:150px}
+/* ===== 手機：最小 18px（直式、橫式都可用） ===== */
+@media (max-width:700px),(max-height:500px){
+ .lab,.lab small{font-size:18px}.lab{padding:5px 12px}
+ #hud{top:auto;bottom:8px;left:8px;gap:6px;flex-wrap:wrap;max-width:62vw}#hud button,#hud .chip,#modeChip small{font-size:18px;padding:5px 9px}
+ #homeTab{font-size:18px;padding:6px 10px;top:8px;right:8px}
+ #goal{padding:5px 12px;top:8px;max-width:58vw}#goal b{font-size:19px}#goal small{font-size:18px}
+ #help{display:none}
+ #zoom button{width:48px;height:48px;font-size:26px}
+ #panel{width:96vw;padding:10px 12px;border-radius:20px;bottom:6px;max-height:58vh}
+ .tag{font-size:18px}.q{font-size:24px}.say{font-size:21px}.zhl{font-size:18px}.fb{font-size:20px;min-height:26px}
+ .opt{font-size:20px;padding:7px 12px;min-width:100px}.btn{font-size:20px;padding:8px 18px}.btn.sm{font-size:18px;padding:6px 14px}
+ .fill{font-size:22px}.fill .slot{min-width:90px}
+ .card{width:118px}.card b{font-size:19px}.card small{font-size:18px}.ltag,.lzh{font-size:18px}.len button{font-size:20px}
+ .namecard{font-size:40px;min-width:200px;padding:4px 20px}.wmap{font-size:22px}.wmap small,.pair,.pair span{font-size:18px}
+ .rgrid{grid-template-columns:repeat(2,1fr)}.rule b{font-size:19px}.rule small,.mtl{font-size:18px}
+ .stars{font-size:44px}
+ #title .sub{font-size:20px}.modes button{width:min(320px,86vw);padding:10px}.modes b{font-size:26px}.modes span{font-size:20px}.modes small,#title>small{font-size:18px!important}
+ #load{font-size:22px}#load small{font-size:18px!important}
+ .hdTop h2{font-size:24px}.hdTop h2 small,.hdTop button,.hdBig b,.hdBig small,.hdP,.hdEn,.hdBtn,.hdNote,.rcp h3,.rcp h3 small,.rcp .tg,.rcp li,.hdAllergy,.stamp{font-size:18px}.hdBig i{font-size:36px}.stamp{width:100px;height:100px}
+ #prize .pbox{padding:14px 22px;border-radius:24px;max-width:92vw}#prize img{height:110px}#prize .pt{font-size:40px}#prize .pz{font-size:19px}#prize .ok{font-size:30px}
+ #tally h2{font-size:30px}#tally .big{font-size:80px}#tally .big small{font-size:30px}#tally .grid div{width:76px}#tally .grid img{height:56px}#tally .st,#tally .cr{font-size:18px}
+}
+@media (max-width:700px),(max-height:500px){#hud{top:8px;bottom:auto}#goal{top:58px}}
+@media (max-width:500px) and (orientation:portrait){#goal{top:100px;max-width:92vw}}
+@media (max-height:500px) and (orientation:landscape){#panel{left:auto;right:56px;transform:none;width:min(560px,54vw);max-height:84vh;bottom:6px}#panel.on{animation:none}#goal{max-width:40vw}}
+@media (max-width:500px) and (orientation:portrait){#panel{max-height:52vh}}
+/* 大螢幕／觸控電視 */
+@media (min-width:1800px){#panel{width:1500px}.q{font-size:56px}.say{font-size:46px}.opt{font-size:44px}.btn{font-size:40px}.card{width:270px}}
 </style>
 <script type="importmap">{"imports":{"three":"./lib/three.module.min.js"}}</script>
 </head>
@@ -145,14 +218,14 @@ button{font-family:inherit;color:inherit}
 <div id="load"><div>🐮 Loading Olimomo's Farm…</div><div class="bar"><i id="loadBar"></i></div><small style="font:600 16px var(--zh)">牧場準備中</small></div>
 <canvas id="c"></canvas>
 <div id="labels"></div>
-<div id="hud"><div class="chip" id="prog">⭐ 0 / 4</div><button id="modeChip">🎓<small>上課</small></button><button id="mute" aria-label="sound">🔊</button><button id="fs" aria-label="fullscreen">⛶</button></div>
+<div id="hud"><div class="chip" id="prog">🏠 0/5</div><button id="pts" type="button">⭐ <b id="ptsN">0</b></button><button id="endBtn" type="button">🏁 結束</button><button id="modeChip">🎓<small>上課</small></button><button id="mute" aria-label="sound">🔊</button><button id="fs" aria-label="fullscreen">⛶</button></div>
 <div id="goal"><b id="goalEn"></b><small id="goalZh"></small></div>
-<button id="homeTab" type="button">🏠 回家任務<small>Home missions</small></button>
+<button id="homeTab" type="button">🏠 回家任務</button>
 <aside id="homeDrawer"><div id="hdIn"></div></aside>
 <div id="zoom"><button id="zin" aria-label="zoom in">＋</button><button id="zout" aria-label="zoom out">－</button></div>
 <div id="help"></div>
-<div id="rot">📱 手機轉橫的，畫面更大</div>
-<div id="credit">Art: Google Gemini · Voice: Microsoft</div>
+<div id="prize"></div>
+<div id="tally"></div>
 <div id="panel"></div>
 <div id="fade"></div>
 <div id="title" style="display:none">
@@ -177,7 +250,7 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const TOUCH=matchMedia("(pointer:coarse)").matches||navigator.maxTouchPoints>0;
 const SMALL=Math.min(innerWidth,innerHeight)<600;
 const LOW=SMALL||(TOUCH&&(navigator.hardwareConcurrency||4)<=4);
-$("help").textContent=TOUCH?"👆 點地面走路　單指拖曳轉視角　兩指縮放":"🖱️ 點地面走路　拖曳轉視角　滾輪縮放　WASD／方向鍵";
+$("help").textContent=TOUCH?"👆 點地面走路　兩指轉動、縮放":"🖱️ 點地面走路　拖曳轉動";
 
 /* ===== 聲音：微軟語音 mp3（audio/<hash>.mp3），沒有就用瀏覽器朗讀 ===== */
 const hsh=t=>{let x=5381;for(const c of t.trim())x=((x<<5)+x+c.codePointAt(0))>>>0;return x.toString(36)};
@@ -193,7 +266,7 @@ let actx=null;
 function sfx(type){if(muted)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const c=actx,o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);g.gain.value=.07;
  if(type==="ok"){o.frequency.value=660;o.frequency.setValueAtTime(880,c.currentTime+.1);o.frequency.setValueAtTime(1175,c.currentTime+.2)}else if(type==="no"){o.type="triangle";o.frequency.value=240;o.frequency.setValueAtTime(180,c.currentTime+.12)}else o.frequency.value=520;
  g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.35);o.start();o.stop(c.currentTime+.36)}catch(_){}}
-$("mute").onclick=()=>{muted=!muted;$("mute").textContent=muted?"🔇":"🔊";if(muted)stopVoice()};
+$("mute").onclick=()=>{muted=!muted;$("mute").textContent=muted?"🔇":"🔊";if(muted){stopVoice();gull.pause()}else if(active===fly)gull.play().catch(()=>{})};
 $("fs").onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.();
 function confetti(n=26){const em=["⭐","🎉","🐮","🌼","🥛","💖","🌈"];for(let i=0;i<n;i++){const d=document.createElement("div");d.className="conf";d.textContent=em[i%em.length];d.style.left=Math.random()*100+"vw";d.style.animationDuration=(1.6+Math.random()*1.6)+"s";d.style.animationDelay=Math.random()*.4+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),3800)}}
 function toast(t){const d=document.createElement("div");d.textContent=t;Object.assign(d.style,{position:"fixed",top:"70px",left:"50%",transform:"translateX(-50%)",background:"#000b",color:"#fff",font:"600 16px var(--zh)",padding:"8px 16px",borderRadius:"12px",zIndex:50});document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
@@ -212,7 +285,7 @@ const camera=new THREE.PerspectiveCamera(50,1,.1,600);
 function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
 addEventListener("resize",resize);resize();
 /* ===== 圖（全部由 Gemini 畫，art/*.webp）===== */
-const ART=["olimomo","olimomo_walk","olimomo_yay","cow_holstein","cow_holstein_eat","cow_jersey","calf","calf_jersey","bull","hen","chick","butterfly","barn","classroom","cowshed","parlor","milking_robot","cold_tank","hay_round","hay_stack","feed_trough","water_trough","tree","tree_apple","flowers","fence","gate","balloon","milk_bottles","sun","grass_tile","dirt_tile","classroom_bg","taiwan_map"];
+const ART=["olimomo","olimomo_walk","olimomo_yay","cow_holstein","cow_holstein_eat","cow_jersey","calf","calf_jersey","bull","hen","chick","butterfly","barn","classroom","cowshed","parlor","milking_robot","cold_tank","hay_round","hay_stack","feed_trough","water_trough","tree","tree_apple","flowers","fence","gate","balloon","milk_bottles","sun","grass_tile","dirt_tile","classroom_bg","taiwan_map","seagull"];
 const TEX={};
 const BOARD={x:.5,y:.40,w:.29};   /* 教室背景圖裡黑板的位置（比例） */
 async function loadAll(){const L=new THREE.TextureLoader();let n=0;
@@ -276,7 +349,10 @@ function buildFly(){const S=fly.scene;S.background=skyTex("#5fb6ee","#a9dcf7","#
  const bal=new THREE.Group();const bs=stand("balloon",14,{shadow:false});bal.add(bs);const ol=stand("olimomo_yay",3.4,{shadow:false});ol.position.set(0,.6,0);ol.userData.spr.renderOrder=2;ol.userData.spr.material.depthTest=false;bal.add(ol);
  S.add(bal);fly.bal=bal;fly.oli=ol;
  const path=[fly.tp,mp(650,120),mp(560,170),mp(500,215),fly.lun].map(v=>new THREE.Vector3(v.x,16,v.z));
- fly.curve=new THREE.CatmullRomCurve3(path);bal.position.copy(path[0]);fly.tpLab=[fly.tp]}
+ fly.curve=new THREE.CatmullRomCurve3(path);bal.position.copy(path[0]);fly.tpLab=[fly.tp];
+ fly.tgt=new THREE.Vector3();fly.look=new THREE.Vector3();
+ /* 海鷗（Gemini 畫的）在海上繞圈飛 */
+ fly.gulls=[];[[-70,-10,26,.16,16],[70,10,30,-.13,20],[-40,40,22,.2,14],[60,-35,24,.18,18],[0,52,28,-.15,15],[-75,-40,34,.12,22],[80,40,20,.22,16]].forEach(([cx,cz,r,sp,y],i)=>{const g=stand("seagull",4.2,{shadow:false});g.userData.cx=cx;g.userData.cz=cz;g.userData.r=r;g.userData.sp=sp;g.userData.y=y;g.userData.ph=i*1.7;S.add(g);fly.gulls.push(g)})}
 
 /* ===== 場景 2：牧場 ===== */
 const farm={scene:new THREE.Scene()};const F=farm.scene;
@@ -354,34 +430,56 @@ function updLabels(){LABELS.forEach(L=>{if(L.scene!==active||!L.show){L.el.style
 
 /* ===== 控制 ===== */
 let active=null,camMode="fixed",locked=true,target=null,onArrive=null,tapHook=null,mapFocus=null;
-let yaw=Math.PI,pitch=.42,dist=15;const camT=new THREE.Vector3();
+let yaw=Math.PI,pitch=.42,dist=15;let fYaw=.25,fPitch=.72,fDist=135,ang0=0,yaw0=0,fYaw0=0,fDist0=0;const camT=new THREE.Vector3();
 const keys={};addEventListener("keydown",e=>{keys[e.key.toLowerCase()]=true});addEventListener("keyup",e=>{keys[e.key.toLowerCase()]=false});
 const ray=new THREE.Raycaster(),ndc=new THREE.Vector2(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),0),hitP=new THREE.Vector3();
 const cv=$("c");let drag=null;const ptrs=new Map();let pinch0=0,dist0=0;
 const pd=()=>{const [a,b]=[...ptrs.values()];return Math.hypot(a.x-b.x,a.y-b.y)};
-cv.addEventListener("pointerdown",e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptrs.size===2){pinch0=pd();dist0=dist;drag=null}else if(ptrs.size===1)drag={x:e.clientX,y:e.clientY,moved:0}});
-addEventListener("pointermove",e=>{if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(camMode!=="follow")return;
- if(ptrs.size===2&&pinch0){dist=Math.max(7,Math.min(36,dist0*pinch0/Math.max(20,pd())));return}
- if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.moved+=Math.abs(dx)+Math.abs(dy);yaw-=dx*.006;pitch=Math.max(.15,Math.min(1.2,pitch+dy*.004));drag.x=e.clientX;drag.y=e.clientY});
+const pang=()=>{const [a,b]=[...ptrs.values()];return Math.atan2(b.y-a.y,b.x-a.x)};
+cv.addEventListener("pointerdown",e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptrs.size===2){pinch0=pd();dist0=dist;fDist0=fDist;ang0=pang();yaw0=yaw;fYaw0=fYaw;drag=null}else if(ptrs.size===1)drag={x:e.clientX,y:e.clientY,moved:0}});
+addEventListener("pointermove",e=>{if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});const orb=active===fly;if(camMode!=="follow"&&!orb)return;
+ if(ptrs.size===2&&pinch0){const k=pinch0/Math.max(20,pd()),da=pang()-ang0;   /* 兩指：捏合縮放＋旋轉 */
+  if(orb){fDist=Math.max(35,Math.min(190,fDist0*k));fYaw=fYaw0-da}else{dist=Math.max(7,Math.min(36,dist0*k));yaw=yaw0-da}return}
+ if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.moved+=Math.abs(dx)+Math.abs(dy);
+ if(orb){fYaw-=dx*.006;fPitch=Math.max(.25,Math.min(1.35,fPitch+dy*.004))}else{yaw-=dx*.006;pitch=Math.max(.15,Math.min(1.2,pitch+dy*.004))}drag.x=e.clientX;drag.y=e.clientY});
 const pUp=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pinch0=0};
 addEventListener("pointercancel",e=>{pUp(e);drag=null});
 addEventListener("pointerup",e=>{pUp(e);if(drag&&drag.moved<(TOUCH?14:8)&&e.target===cv)tapScene(e);drag=null});
-cv.addEventListener("wheel",e=>{if(camMode==="follow"){dist=Math.max(7,Math.min(36,dist+e.deltaY*.02));e.preventDefault()}},{passive:false});
-$("zin").onclick=()=>dist=Math.max(7,dist-3);$("zout").onclick=()=>dist=Math.min(36,dist+3);
+cv.addEventListener("wheel",e=>{if(active===fly){fDist=Math.max(35,Math.min(190,fDist+e.deltaY*.08));e.preventDefault()}else if(camMode==="follow"){dist=Math.max(7,Math.min(36,dist+e.deltaY*.02));e.preventDefault()}},{passive:false});
+$("zin").onclick=()=>{if(active===fly)fDist=Math.max(35,fDist-15);else dist=Math.max(7,dist-3)};$("zout").onclick=()=>{if(active===fly)fDist=Math.min(190,fDist+15);else dist=Math.min(36,dist+3)};
 function tapScene(e){ndc.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(ndc,camera);if(tapHook&&tapHook(ray))return;if(active===farm&&!locked&&camMode==="follow"&&ray.ray.intersectPlane(plane,hitP))walkTo(hitP.x,hitP.z)}
 function walkTo(x,z,cb){target=new THREE.Vector3(Math.max(-50,Math.min(50,x)),0,Math.max(-78,Math.min(54,z)));onArrive=cb||null}
-function setScene(s){active=s;$("zoom").style.display=s===farm&&camMode==="follow"?"flex":"none"}
+function setScene(s){active=s;$("zoom").style.display=(s===farm&&camMode==="follow")||s===fly?"flex":"none";if(s===fly){if(!muted)gull.play().catch(()=>{})}else gull.pause()}
 async function fadeTo(fn){$("fade").classList.add("on");await wait(520);await fn();await wait(80);$("fade").classList.remove("on")}
 
 /* ===== 面板 ===== */
 const P=$("panel");
-function panel(html){P.innerHTML=html;P.classList.add("on");P.scrollTop=0}
-function closePanel(){P.classList.remove("on");P.innerHTML=""}
+function panel(html){P.innerHTML=html;P.classList.add("on");P.scrollTop=0;document.body.classList.add("pon")}
+function closePanel(){P.classList.remove("on");P.innerHTML="";document.body.classList.remove("pon")}
 const click=id=>new Promise(r=>{const b=$(id);if(b)b.onclick=()=>{sfx("tap");r()}});
 const spk=(en,zh,tag="")=>`<div class="spk"><div class="ava">${IMG("olimomo")}</div><div style="flex:1">${tag}<div class="say">${en}</div>${zh?`<div class="zhl">${zh}</div>`:""}</div></div>`;
 async function line(en,zh,{tag="",btn="Next ▶"}={}){panel(spk(en,zh,tag?`<span class="tag">${tag}</span>`:"")+`<div><button class="btn sm" id="ag">🔊 Again</button><button class="btn pink" id="nx">${btn}</button></div>`);say(en);$("ag").onclick=()=>say(en);await click("nx")}
 function goal(en,zh){$("goal").style.display=en?"block":"none";$("goalEn").textContent=en||"";$("goalZh").textContent=zh||""}
-const SCORE={first:0,total:0};
+const SCORE={first:0,total:0,points:0,prizes:[]};
+const PRIZES=[["p_gift","禮物盒"],["p_star","金星星"],["p_coins","金幣"],["p_trophy","乳牛獎盃"],["p_bag","寶物袋"],["w_milk","一杯牛奶"],["hay_round","大乾草捆"],["chick","小雞"],["calf","小牛"],["butterfly","蝴蝶"],["t_sweet","棒棒糖"],["w_icecream","冰淇淋"],["hen","母雞"],["flowers","小花"],["o_medal","牛博士獎章"],["tree_apple","蘋果樹"],["milk_bottles","牛奶瓶"],["w_juice","果汁"],["seagull","海鷗"],["cow_jersey","娟姍牛"]];
+let prizeT=null;
+function popup(html,bad,ms){const el=$("prize");el.className=bad?"on bad":"on";el.innerHTML=`<div class="pbox">${html}</div>`;clearTimeout(prizeT);prizeT=setTimeout(()=>el.className="",ms);el.onclick=()=>{clearTimeout(prizeT);el.className=""}}
+function reward(){SCORE.points+=10;const pz=PRIZES[SCORE.prizes.length%PRIZES.length];SCORE.prizes.push(pz);$("ptsN").textContent=SCORE.points;
+ popup(`<div class="ok">答對了！🎉</div>${IMG(pz[0])}<div class="pt">+10 點</div><div class="pz">你得到 <b>${pz[1]}</b>！　總共 <b>${SCORE.points}</b> 點</div>`,false,2200)}
+function tryAgain(){popup(`<div class="ok">再加油！💪</div>${IMG("olimomo")}<div class="pz">Try again! 換一個答案試試看</div>`,true,1500)}
+function showTally(){const el=$("tally");el.classList.add("on");locked=true;stopVoice();
+ const left=5-done.size;
+ el.innerHTML=`<h2>🏁 你的點數</h2><div class="big"><span id="tN">0</span><small> 點</small></div>
+  <div class="st">答對 ${SCORE.prizes.length} 題，拿到 ${SCORE.prizes.length} 個獎品　·　去過 ${done.size} / 5 個地方${left?`（還有 ${left} 個地方可以去）`:"　全部完成！"}</div>
+  <div class="grid">${SCORE.prizes.map(p=>`<div>${IMG(p[0])}</div>`).join("")||'<div style="width:auto;padding:10px 20px" class="st">還沒有獎品，去建築物答題就能拿到喔！</div>'}</div>
+  <div><button class="btn" id="tBack">🐮 繼續玩</button><button class="btn pink" id="tRe">↺ 重新開始</button></div>
+  <div class="cr">圖：Google Gemini　·　語音：Microsoft　·　海鷗聲：BigSoundBank（CC0）</div>`;
+ let n=0;const step=Math.max(1,Math.ceil(SCORE.points/40));const tick=setInterval(()=>{n=Math.min(SCORE.points,n+step);$("tN").textContent=n;sfx("tap");if(n>=SCORE.points){clearInterval(tick);if(SCORE.points){sfx("ok");confetti(50)}}},45);
+ if(SCORE.points===0)clearInterval(tick);
+ $("tBack").onclick=()=>{clearInterval(tick);el.classList.remove("on");if(!busy&&active===farm&&camMode!=="map")locked=false};
+ $("tRe").onclick=()=>location.reload()}
+$("endBtn").onclick=e=>{e.stopPropagation();sfx("tap");showTally()};
+$("pts").onclick=e=>{e.stopPropagation();sfx("tap");showTally()};
 const IMG=(n,c="")=>`<img class="aimg ${c}" src="art/${n}.webp" alt="">`;
 const QIMG={"How old is the farm?":"q_old_farm","How heavy is a baby calf?":"q_scale","What do baby calves drink?":"q_bottle","How many stomachs does a cow have?":"q_stomach","How much food does a cow eat every day?":"q_hay_pile","Which one is NOT cow food?":"w_candy","Do all cows have milk?":"bull","Can brown cows give milk?":"cow_jersey","Can we drink milk right from the cow?":"q_heat","When does a cow have her first baby?":"q_birthday","How much does a cow's food cost every day?":"q_money","How much water does a cow drink every day?":"q_water","What does a newborn calf drink first?":"q_colostrum","What do calves learn to eat when they grow?":"g_hay","Which cow gives more milk?":"cow_holstein","Whose milk is extra creamy?":"q_cream","How does the machine know each cow?":"q_chip","Where does the milk go after milking?":"cold_tank","Which grass has lots of protein?":"g_alfalfa","Which one gives cows lots of energy?":"g_silage"};
 const OIMG={"4 kg":"o_cat","40 kg":"o_child","Milk":"w_milk","Juice":"w_juice","Mom's first milk":"q_colostrum","Water":"w_water","Hay and grass":"g_hay","Rice":"w_rice","Holstein":"cow_holstein","Jersey":"cow_jersey","A chip":"q_chip","A cold tank":"cold_tank","Alfalfa":"g_alfalfa","Oat hay":"g_oat","Corn silage":"g_silage","Bermuda grass":"g_bermuda","Candy":"w_candy","50 kg":"q_hay_pile","Yes":"t_good","No":"t_bad","2 years old":"q_birthday","10 L":"w_water","100 L":"q_water","4":"q_stomach","NT$500":"q_money"};
@@ -395,8 +493,8 @@ async function quizStep(q,tag,bonus){let tried=false,right=false;
  say(q.q);$("ag").onclick=()=>say(q.q);
  q.opts.forEach(([icn,t],k)=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<span class="ic">${OIMG[t]?IMG(OIMG[t]):(OPTIC[icn]||icn)}</span>${t}${q.unit?`<small style="font-size:.55em;margin-left:4px">${q.unit}</small>`:""}`;
   b.onclick=()=>{if(right||b.disabled)return;
-   if(k===q.ans){right=true;b.classList.add("ok");sfx("ok");confetti();if(!tried)SCORE.first++;SCORE.total++;$("fb").textContent="⭐ "+q.title;$("fb").className="fb ok";$("zl").innerHTML=`<b style="font-family:var(--en);font-size:1.1em;color:var(--ink)">${q.say}</b><br>${q.zhA}`;say(q.say);$("ag").onclick=()=>say(q.say);document.querySelectorAll("#o .opt").forEach(x=>x.disabled=true);$("nx").style.display=""}
-   else{b.classList.add("no");b.disabled=true;sfx("no");tried=true;$("fb").textContent="Try again! 再想一想，換一個答案";$("fb").className="fb no";say("Try again!")}};$("o").appendChild(b)});
+   if(k===q.ans){right=true;b.classList.add("ok");sfx("ok");confetti();if(!tried)SCORE.first++;SCORE.total++;reward();$("fb").textContent="⭐ "+q.title;$("fb").className="fb ok";$("zl").innerHTML=`<b style="font-family:var(--en);font-size:1.1em;color:var(--ink)">${q.say}</b><br>${q.zhA}`;say(q.say);$("ag").onclick=()=>say(q.say);document.querySelectorAll("#o .opt").forEach(x=>x.disabled=true);$("nx").style.display=""}
+   else{b.classList.add("no");b.disabled=true;sfx("no");tried=true;$("fb").textContent="再加油！💪 Try again!";$("fb").className="fb no";tryAgain();say("Try again!")}};$("o").appendChild(b)});
  await click("nx")}
 async function practiceStep(p,tag){let pick=null,mixV=50;
  const sent=()=>{if(p.mix){const a=mixV>=50?"milk":"black tea",b=a==="milk"?"black tea":"milk";return `I like more ${a} and less ${b} because it tastes ${pick||"___"}.`}if(!p.chips)return p.frame;return p.frame.includes("___")&&p.frame!=="___"?p.frame.replace("___",pick||"___"):(pick||"___")};
@@ -430,10 +528,10 @@ async function milkteaStep(){const nob="cursor:default;border:0;box-shadow:none;
 
 /* ===== 站點 ===== */
 const done=new Set();
-const nextStation=()=>C.STATIONS.find(s=>!done.has(s.id));
-function updateGoal(){$("prog").textContent="⭐ "+done.size+" / 4";const n=nextStation();
- C.STATIONS.forEach(s=>{const d=done.has(s.id);s.lab.el.classList.toggle("done",d);s.lab.el.classList.toggle("next",s===n);s.lab.el.querySelector("i").textContent=d?" ✓":"";s.ring.material.color.set(d?0x3e9e5b:0xf0708f);s.disc.material.color.set(d?0x3e9e5b:0xf0708f)});
- if(n)goal("Go to "+n.label,"走到粉紅色圓圈：去「"+n.zhName+"」（點名牌會自動走過去）")}
+function updateGoal(){$("prog").textContent="🏠 "+done.size+"/5";
+ C.STATIONS.forEach(s=>{const d=done.has(s.id);s.lab.el.classList.toggle("done",d);s.lab.el.classList.toggle("next",!d);s.lab.el.querySelector("i").textContent=d?" ✓":"";s.ring.material.color.set(d?0x3e9e5b:0xf0708f);s.disc.material.color.set(d?0x3e9e5b:0xf0708f)});
+ const cd=done.has("class");farm.classLab.el.classList.toggle("done",cd);farm.classLab.el.classList.toggle("next",!cd);farm.classLab.el.querySelector("i").textContent=cd?" ✓":"";farm.cring.material.color.set(cd?0x3e9e5b:0xffc93c);
+ const left=5-done.size;goal(left?"Walk to any building!":"You visited everything! 🎉",left?`走到任何一棟建築就能上課、拿獎品（還有 ${left} 個）`:"按左下角「🏁 結束」看你的點數")}
 let busy=false;
 async function runStation(s){if(busy)return;busy=true;locked=true;target=null;
  const qs=C.QUIZ.filter(q=>q.station===s.id&&!q.bonus),bs=C.QUIZ.filter(q=>q.station===s.id&&q.bonus),pk=k=>C.PRACTICE.find(p=>p.key===k);
@@ -446,18 +544,19 @@ async function runStation(s){if(busy)return;busy=true;locked=true;target=null;
  if(s.id==="yard")await practiceStep(pk("p_spend"),"Cow Yard · Let's talk! 1 / 1");
  if(s.id==="milk"){await twordsStep();await practiceStep(pk("p_like_milk"),"Milking Cows · Let's talk! 1 / 4");await practiceStep(pk("p_tastes"),"Milking Cows · Let's talk! 2 / 4");await milkteaStep();await practiceStep(pk("p_tea_tastes"),"Milking Cows · Let's talk! 3 / 4");await practiceStep(pk("p_mix_milk"),"Milking Cows · Let's talk! 4 / 4")}
  done.add(s.id);confetti(40);sfx("ok");closePanel();updateGoal();busy=false;
- if(done.size===C.STATIONS.length){await finale();return}
+ if(done.size===5){await finale();return}
  /* 走出圓圈，避免馬上又觸發 */
  locked=false}
 
 /* ===== 流程 ===== */
 let flyT=-1;
-async function startFly(){setScene(fly);camMode="fixed";$("title").style.display="none";
+const gull=new Audio("sfx/seagulls.mp3");gull.loop=true;gull.volume=.5;
+async function startFly(){camMode="orbit";setScene(fly);$("title").style.display="none";
  const tLab=label(`Taipei<small>台北</small>`,new THREE.Vector3(fly.tpLab[0].x,12,fly.tpLab[0].z),fly);
  panel(`<div class="q">Where is my farm?</div><div class="say">Let's fly over Taiwan! 🎈</div><div class="zhl">按「Take off!」，跟 Olimomo 坐熱氣球飛越台灣！</div><button class="btn pink" id="nx">Take off! 🎈</button>`);
- await click("nx");closePanel();say(C.LINES.fly_go.en);goal("Wheee! Let's fly to my farm!","Olimomo 從台北出發，沿著西海岸往南飛……");flyT=0;
+ await click("nx");closePanel();fYaw=2.36;fPitch=.5;fDist=55;say(C.LINES.fly_go.en);goal("Wheee! Let's fly to my farm!","Olimomo 從台北出發，沿著西海岸往南飛……");flyT=0;
  while(flyT<1)await wait(100);
- tLab.show=false;fly.ring.visible=true;say(C.LINES.fly_here.en);goal("My farm is in Lunbei, Yunlin. Tap the light!",C.LINES.fly_here.zh+"（其他縣市之後開放）");
+ tLab.show=false;fly.ring.visible=true;fDist=70;fPitch=.75;say(C.LINES.fly_here.en);goal("My farm is in Lunbei, Yunlin. Tap the light!",C.LINES.fly_here.zh+"（其他縣市之後開放）");
  const lab=label(`✨ Lunbei, Yunlin<small>雲林崙背</small>`,fly.lun.clone().setY(8),fly,"big next");
  await new Promise(r=>{lab.el.onclick=()=>r();tapHook=rr=>{if(rr.intersectObject(fly.ring,false).length){r();return true}return false}});
  tapHook=null;lab.show=false;sfx("ok");goal("");
@@ -465,12 +564,14 @@ async function startFly(){setScene(fly);camMode="fixed";$("title").style.display
  await farmIntro()}
 async function farmIntro(){locked=true;walkTo(0,42);await wait(1700);
  await line(C.LINES.land.en,C.LINES.land.zh,{btn:"Let's go! ▶"});closePanel();
- goal("Go to the Classroom","先去簡報室：走到黃色圓圈（點名牌會自動走過去）");farm.classLab.show=true;locked=false;
- await new Promise(r=>farm.enterClass=r);farm.enterClass=null;locked=true;target=null;farm.classLab.show=false;goal("");
+ farm.classLab.show=true;C.STATIONS.forEach(s=>s.lab.show=true);updateGoal();locked=false}
+async function runClass(){if(busy)return;busy=true;locked=true;target=null;
  await fadeTo(()=>{camMode="fixed";setScene(room);camera.position.set(0,6,6.9);camera.lookAt(0,6,-6)});
  await classroom();
- await fadeTo(()=>{camMode="follow";setScene(farm);farm.oli.position.set(-14,0,39);farm.oli.rotation.y=0;camT.copy(farm.oli.position);yaw=.9;pitch=.42;dist=16});
- C.STATIONS.forEach(s=>s.lab.show=true);updateGoal();locked=false}
+ await fadeTo(()=>{camMode="follow";setScene(farm);farm.oli.position.set(-14,0,40);camT.copy(farm.oli.position);yaw=.9;pitch=.42;dist=16});
+ done.add("class");confetti(40);sfx("ok");updateGoal();busy=false;
+ if(done.size===5){await finale();return}
+ locked=false}
 async function classroom(){
  panel(spk(C.LINES.guess.en,C.LINES.guess.zh,`<span class="tag">Classroom · Guess!</span>`)+`<div class="namecard" id="nm">? ? ?</div><div><button class="btn sm" id="ag">🔊 Again</button><button class="btn pink" id="nx">✅ Yes! 揭曉名字</button></div><div class="zhl">等小朋友一起喊出名字，再按這個鈕</div>`);
  say(C.LINES.guess.en);$("ag").onclick=()=>say(C.LINES.guess.en);await click("nx");
@@ -489,13 +590,13 @@ async function classroom(){
  say(C.LINES.rules.en);$("ag").onclick=()=>say(C.LINES.rules.en);P.querySelectorAll(".rule").forEach(el=>el.onclick=()=>{say(C.LINES[el.dataset.k].en);el.classList.add("seen")});
  await click("nx");if(MODE==="explore")await learnStep("classroom");closePanel()}
 async function finale(){locked=true;goal("");const pct=SCORE.total?SCORE.first/SCORE.total:0,n=pct>=.8?3:pct>=.5?2:1;
- panel(`<div class="medal">${IMG("o_medal")}</div><div class="q">You are cow experts!</div><div class="stars">${"★".repeat(n)+"☆".repeat(3-n)}</div><div class="zhl">第一次就答對 ${SCORE.first} / ${SCORE.total} 題　${C.LINES.expert.zh}</div><button class="btn pink" id="nx">My Farm map ▶</button>`);
+ panel(`<div class="medal">${IMG("o_medal")}</div><div class="q">You are cow experts!</div><div class="stars">${"★".repeat(n)+"☆".repeat(3-n)}</div><div class="zhl">你拿到 ${SCORE.points} 點、${SCORE.prizes.length} 個獎品！${C.LINES.expert.zh}</div><button class="btn pink" id="nx">My Farm map ▶</button>`);
  confetti(60);say(C.LINES.expert.en);await click("nx");closePanel();
  camMode="map";$("zoom").style.display="none";C.STATIONS.forEach(s=>s.lab.show=false);
  const pins=C.PLACES.map(p=>{const [x,z]=PLACEPOS[p.id];return label(`${p.en}<small>${p.zh.split("：")[0]}</small>`,new THREE.Vector3(x,4,z),farm,"next",()=>{say(p.say);goal(p.en,p.zh);mapFocus=new THREE.Vector3(x,0,z)})});
  goal("My Farm","點地圖上的地點，認識牧場的每個區域。");
- panel(`<div class="q">My Farm</div><div class="zhl">點名牌聽 Olimomo 介紹每一區。</div>${MODE==="explore"?`<button class="btn" id="hm">🏠 Home missions</button>`:""}<button class="btn" id="fr">🐮 繼續逛牧場</button><button class="btn pink" id="rs">↺ Play again</button>`);
- if($("hm"))$("hm").onclick=()=>openHome();$("rs").onclick=()=>location.reload();
+ panel(`<div class="q">My Farm</div><div class="zhl">點名牌聽 Olimomo 介紹每一區。</div>${MODE==="explore"?`<button class="btn" id="hm">🏠 Home missions</button>`:""}<button class="btn" id="fr">🐮 繼續逛牧場</button><button class="btn" id="tl">🏁 看點數</button><button class="btn pink" id="rs">↺ Play again</button>`);
+ if($("hm"))$("hm").onclick=()=>openHome();$("tl").onclick=()=>showTally();$("rs").onclick=()=>location.reload();
  await click("fr");pins.forEach(p=>p.show=false);mapFocus=null;closePanel();camMode="follow";setScene(farm);goal("");C.STATIONS.forEach(s=>s.lab.show=true);locked=false}
 
 /* ===== 回家任務 ===== */
@@ -522,9 +623,11 @@ function frame(){requestAnimationFrame(frame);const dt=Math.min(clock.getDelta()
  if(active===fly){const b=fly.bal;
   if(flyT>=0&&flyT<1){flyT=Math.min(1,flyT+dt/9);const p=fly.curve.getPointAt(flyT);b.position.copy(p);const ah=fly.curve.getPointAt(Math.min(1,flyT+.02));b.rotation.y=Math.atan2(ah.x-p.x,ah.z-p.z)}
   b.position.y=16+Math.sin(t*2)*.5;if(flyT>=1)fly.ring.scale.setScalar(1+Math.sin(t*4)*.12);
-  /* 飛行時鏡頭在氣球的東北方、往西南看（看得到前面的台灣） */
-  const tg=flyT<0?tmp.set(0,4,-6):b.position,cp=flyT<0?new THREE.Vector3(26,92,96):new THREE.Vector3(tg.x+30,tg.y+22,tg.z-30);
-  camera.position.lerp(cp,Math.min(1,dt*(flyT<0?3:1.4)));camera.lookAt(flyT<0?tg:tmp.set(tg.x-8,tg.y-10,tg.z+16));
+  /* 鏡頭繞著目標轉（單指拖曳、兩指旋轉縮放都可以） */
+  const tg=flyT<0?fly.tgt.set(0,0,0):(flyT<1?fly.tgt.copy(b.position).setY(11):fly.tgt.copy(fly.lun));
+  const fd=fDist*(camera.aspect<1?1.75:1);const cp=tmp.set(tg.x+Math.sin(fYaw)*Math.cos(fPitch)*fd,tg.y+Math.sin(fPitch)*fd,tg.z+Math.cos(fYaw)*Math.cos(fPitch)*fd);
+  camera.position.lerp(cp,Math.min(1,dt*3));fly.look.lerp(tg,Math.min(1,dt*3));camera.lookAt(fly.look);
+  fly.gulls.forEach(g=>{const u=g.userData,a=t*u.sp+u.ph,x=u.cx+Math.cos(a)*u.r,z=u.cz+Math.sin(a)*u.r*.7;faceBy(g,x-g.position.x,z-g.position.z);g.position.set(x,u.y+Math.sin(t*1.3+u.ph)*1.5,z);u.spr.scale.y=u.h*(.72+.28*Math.abs(Math.sin(t*7+u.ph)))});
   fly.clouds.forEach(c=>{c.position.x+=dt*1.5;if(c.position.x>110)c.position.x=-110});bounce(fly.oli,t,false)}
  else if(active===farm){const o=farm.oli;let mx=0,mz=0,moving=false;
   if(!locked){if(keys.w||keys.arrowup)mz-=1;if(keys.s||keys.arrowdown)mz+=1;if(keys.a||keys.arrowleft)mx-=1;if(keys.d||keys.arrowright)mx+=1}
@@ -532,14 +635,14 @@ function frame(){requestAnimationFrame(frame);const dt=Math.min(clock.getDelta()
   if(mx||mz){target=null;const l=Math.hypot(mx,mz);mx/=l;mz/=l;const sy=Math.sin(yaw),cy=Math.cos(yaw);step(mx*cy+mz*sy,-mx*sy+mz*cy)}
   else if(target){const dx=target.x-o.position.x,dz=target.z-o.position.z,d=Math.hypot(dx,dz);if(d<.35){target=null;const cb=onArrive;onArrive=null;if(cb)cb()}else step(dx/d,dz/d)}
   animOli(o,t,moving);
-  if(!locked&&!busy){if(farm.enterClass){if(Math.hypot(o.position.x-CLASSDOOR.x,o.position.z-CLASSDOOR.z)<2.4)farm.enterClass()}
+  if(!locked&&!busy){if(!done.has("class")&&Math.hypot(o.position.x-CLASSDOOR.x,o.position.z-CLASSDOOR.z)<2.6)runClass();
    else for(const s of C.STATIONS){if(done.has(s.id))continue;const [x,z]=STPOS[s.id];if(Math.hypot(o.position.x-x,o.position.z-z)<2.6){runStation(s);break}}}
   cows.forEach(c=>{const u=c.userData;if(!u.wander||u.eat)return;u.ph+=dt;const cyc=(u.ph*.08)%1;
    if(cyc<.45){const a=u.ph*.18,tx=u.wander.cx+Math.cos(a)*u.wander.r,tz=u.wander.cz+Math.sin(a*1.3)*u.wander.r*.7,dx=tx-c.position.x,dz=tz-c.position.z,d=Math.hypot(dx,dz);if(d>.1){play(c,"Walk");const sp=Math.min(d,.9*dt);c.position.x+=dx/d*sp;c.position.z+=dz/d*sp;}else play(c,"Idle")}
    else play(c,cyc<.75?"Eating":"Idle")});
   cows.forEach(c=>{const u=c.userData,lp=u.lp||(u.lp=c.position.clone());faceBy(c,c.position.x-lp.x,c.position.z-lp.z);lp.copy(c.position);bounce(c,t,u.state==="Walk",.6)});
   critters.forEach(f=>f(t,dt));farm.clouds.forEach(c=>{c.position.x+=dt*1.2;if(c.position.x>200)c.position.x=-200});
-  C.STATIONS.forEach(s=>{const k=done.has(s.id)?1:1+Math.sin(t*3)*.12;s.ring.scale.set(k,k,k)});farm.cring.visible=!!farm.enterClass;farm.cring.scale.setScalar(1+Math.sin(t*3)*.12);
+  C.STATIONS.forEach(s=>{const k=done.has(s.id)?1:1+Math.sin(t*3)*.12;s.ring.scale.set(k,k,k)});farm.cring.scale.setScalar(done.has("class")?1:1+Math.sin(t*3)*.12);
   if(camMode==="map"){const c=mapFocus||tmp.set(0,0,14);camera.position.lerp(new THREE.Vector3(c.x,mapFocus?30:118,c.z+(mapFocus?26:34)),Math.min(1,dt*2));camera.lookAt(c)}
   else{camT.lerp(v3.set(o.position.x,1.8,o.position.z),Math.min(1,dt*6));camera.position.set(camT.x+Math.sin(yaw)*Math.cos(pitch)*dist,camT.y+Math.sin(pitch)*dist,camT.z+Math.cos(yaw)*Math.cos(pitch)*dist);camera.lookAt(camT)}
   sun.position.set(o.position.x+40,70,o.position.z+30);sun.target.position.copy(o.position)}
@@ -551,11 +654,11 @@ function frame(){requestAnimationFrame(frame);const dt=Math.min(clock.getDelta()
  try{await loadAll()}catch(e){$("load").innerHTML="😢 牧場載入失敗，請重新整理（"+e.message+"）";return}
  buildFly();buildFarm();buildRoom();
  C.STATIONS.forEach(s=>{const [x,z]=STPOS[s.id];s.lab=label(`${s.label}<small>${s.zhName}</small><i></i>`,new THREE.Vector3(x,4.6,z),farm,"",()=>{if(!locked)walkTo(x,z)});s.lab.show=false});
- farm.classLab=label(`Classroom<small>簡報室</small>`,new THREE.Vector3(CLASSDOOR.x,4.6,CLASSDOOR.z),farm,"next",()=>{if(!locked)walkTo(CLASSDOOR.x,CLASSDOOR.z)});farm.classLab.show=false;
+ farm.classLab=label(`Classroom<small>簡報室</small><i></i>`,new THREE.Vector3(CLASSDOOR.x,4.6,CLASSDOOR.z),farm,"next",()=>{if(!locked)walkTo(CLASSDOOR.x,CLASSDOOR.z)});farm.classLab.show=false;
  setScene(fly);camera.position.set(26,92,96);camera.lookAt(0,4,-6);frame();
  $("load").style.display="none";$("title").style.display="flex";
  document.querySelectorAll("#title [data-m]").forEach(b=>b.onclick=()=>{setMode(b.dataset.m);sfx("tap");startFly()});
- window.__oli={camera,farm,fly,room,C,done,runStation,STPOS,SCORE,walkTo,get locked(){return locked},set locked(v){locked=v},get active(){return active}};
+ window.__oli={showTally,reward,get fYaw(){return fYaw},camera,farm,fly,room,C,done,runStation,STPOS,SCORE,walkTo,get locked(){return locked},set locked(v){locked=v},get active(){return active}};
 })();
 </script>
 </body>
