@@ -90,6 +90,11 @@ button{font-family:inherit;color:inherit}
 .modes{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .modes button{width:min(320px,80vw);background:#fff;border:4px solid var(--line);border-radius:24px;padding:14px;cursor:pointer;box-shadow:0 6px 0 #0002;text-align:center}
 .modes b{display:block;font-size:30px}.modes span{display:block;font:800 20px var(--zh);color:#b23a5c}.modes small{display:block;font:500 15px var(--zh);color:#6b6455;margin-top:4px}
+.aimg{height:1.7em;width:auto;vertical-align:middle;filter:drop-shadow(0 3px 3px #0002)}
+.opt .aimg{height:64px}.card .aimg{height:84px}.bigic .aimg{height:clamp(84px,13vw,150px)}.rule .aimg{height:92px}.ava .aimg{height:72px}.medal .aimg{height:150px}.wmap .aimg{height:110px;border-radius:14px;display:block;margin:0 auto 4px}
+#title .cow img{height:clamp(110px,18vw,210px);vertical-align:bottom}
+@media (max-width:700px),(max-height:500px){.opt .aimg{height:40px}.card .aimg{height:52px}.bigic .aimg{height:64px}.rule .aimg{height:54px}.ava .aimg{height:46px}.medal .aimg{height:90px}.wmap .aimg{height:70px}#title .cow img{height:90px}}
+@media (min-width:1800px){.opt .aimg{height:96px}.card .aimg{height:120px}.rule .aimg{height:130px}}
 #load{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#bfe6ff;font:800 28px var(--en)}
 #load .bar{width:min(420px,80vw);height:18px;border-radius:999px;background:#fff;overflow:hidden;border:3px solid var(--line)}
 #load .bar i{display:block;height:100%;width:0;background:var(--pink);transition:width .2s}
@@ -147,11 +152,11 @@ button{font-family:inherit;color:inherit}
 <div id="zoom"><button id="zin" aria-label="zoom in">＋</button><button id="zout" aria-label="zoom out">－</button></div>
 <div id="help"></div>
 <div id="rot">📱 手機轉橫的，畫面更大</div>
-<div id="credit">3D models: Quaternius, Kenney, Polygonal Mind (CC0) · Voice: Microsoft</div>
+<div id="credit">Art: Google Gemini · Voice: Microsoft</div>
 <div id="panel"></div>
 <div id="fade"></div>
 <div id="title" style="display:none">
-  <div class="cow">🐮🎈</div>
+  <div class="cow"><img src="art/olimomo_yay.webp" alt="Olimomo"><img src="art/balloon.webp" alt=""></div>
   <h1>Olimomo's Farm</h1>
   <div class="sub">哞力全開英語營 · 乳此美好　3D 牧場</div>
   <div class="modes">
@@ -163,8 +168,6 @@ button{font-family:inherit;color:inherit}
 
 <script type="module">
 import * as THREE from "three";
-import {GLTFLoader} from "./lib/GLTFLoader.js";
-import * as SU from "./lib/SkeletonUtils.js";
 import * as C from "./content.js";
 const $=id=>document.getElementById(id);
 const rnd=(a,b)=>a+Math.random()*(b-a);
@@ -203,84 +206,77 @@ $("modeChip").onclick=()=>{setMode(MODE==="class"?"explore":"class");toast(MODE=
 /* ===== 3D 基本 ===== */
 const renderer=new THREE.WebGLRenderer({canvas:$("c"),antialias:!LOW,powerPreference:"high-performance"});
 renderer.setPixelRatio(Math.min(devicePixelRatio,LOW?1.25:2));
-renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
+
+renderer.toneMapping=THREE.NoToneMapping;
 const camera=new THREE.PerspectiveCamera(50,1,.1,600);
 function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
 addEventListener("resize",resize);resize();
+/* ===== 圖（全部由 Gemini 畫，art/*.webp）===== */
+const ART=["olimomo","olimomo_walk","olimomo_yay","cow_holstein","cow_holstein_eat","cow_jersey","calf","calf_jersey","bull","hen","chick","butterfly","barn","classroom","cowshed","parlor","milking_robot","cold_tank","hay_round","hay_stack","feed_trough","water_trough","tree","tree_apple","flowers","fence","gate","balloon","milk_bottles","sun","grass_tile","dirt_tile","classroom_bg","taiwan_map"];
+const TEX={};
+const BOARD={x:.5,y:.40,w:.29};   /* 教室背景圖裡黑板的位置（比例） */
+async function loadAll(){const L=new THREE.TextureLoader();let n=0;
+ await Promise.all(ART.map(async k=>{const t=await L.loadAsync("art/"+k+".webp");t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;TEX[k]=t;n++;$("loadBar").style.width=(n/ART.length*100)+"%"}));
+ /* 大門招牌：把字寫進 Gemini 畫的空白招牌 */
+ const im=TEX.gate.image,c=document.createElement("canvas");c.width=im.width;c.height=im.height;const g=c.getContext("2d");g.drawImage(im,0,0);
+ g.textAlign="center";g.textBaseline="middle";g.fillStyle="#5a3b1c";g.font=`800 ${Math.round(im.width*.075)}px "Baloo 2","Arial Rounded MT Bold",sans-serif`;g.fillText("Olimomo's Farm",im.width*.5,im.height*.225);
+ const gt=new THREE.CanvasTexture(c);gt.colorSpace=THREE.SRGBColorSpace;TEX.gate=gt;
+ /* 教室黑板寫上歡迎詞 */
+ const bi=TEX.classroom_bg.image,c2=document.createElement("canvas");c2.width=bi.width;c2.height=bi.height;const g2=c2.getContext("2d");g2.drawImage(bi,0,0);g2.textAlign="center";g2.textBaseline="middle";
+ const BX=bi.width*BOARD.x,BY=bi.height*BOARD.y,BW=bi.width*BOARD.w;g2.fillStyle="#ffffff";g2.font=`800 ${Math.round(BW*.085)}px "Baloo 2","Arial Rounded MT Bold",sans-serif`;g2.fillText("Welcome to",BX,BY-BW*.11);
+ g2.fillStyle="#ffe066";g2.font=`800 ${Math.round(BW*.12)}px "Baloo 2","Arial Rounded MT Bold",sans-serif`;g2.fillText("Olimomo's Farm!",BX,BY+BW*.01);
+ g2.fillStyle="#ffd3e0";g2.font=`700 ${Math.round(BW*.055)}px "PingFang TC","Noto Sans TC",sans-serif`;g2.fillText("哞力全開英語營 · 乳此美好",BX,BY+BW*.12);
+ const ct=new THREE.CanvasTexture(c2);ct.colorSpace=THREE.SRGBColorSpace;TEX.classroom_bg=ct}
 const mat=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.8},o));
 function mesh(geo,m,x=0,y=0,z=0,cast=true){const o=new THREE.Mesh(geo,m);o.position.set(x,y,z);o.castShadow=cast;o.receiveShadow=true;return o}
-function canvasTex(w,h,draw,rep){const c=document.createElement("canvas");c.width=w;c.height=h;draw(c.getContext("2d"),w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep,rep);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t}
+function canvasTex(w,h,draw,rep){const c=document.createElement("canvas");c.width=w;c.height=h;draw(c.getContext("2d"),w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep,rep);t.colorSpace=THREE.SRGBColorSpace;return t}
 function skyTex(top,mid,bot){return canvasTex(2,256,g=>{const gr=g.createLinearGradient(0,0,0,256);gr.addColorStop(0,top);gr.addColorStop(.6,mid);gr.addColorStop(1,bot);g.fillStyle=gr;g.fillRect(0,0,2,256)})}
-function lights(scene,size=70){scene.add(new THREE.HemisphereLight(0xdff1ff,0x6a9a45,1.3));const s=new THREE.DirectionalLight(0xfff0d8,2.4);s.position.set(40,70,30);s.castShadow=true;const m=LOW?1024:2048;s.shadow.mapSize.set(m,m);Object.assign(s.shadow.camera,{left:-size,right:size,top:size,bottom:-size,near:5,far:220});s.shadow.bias=-.0004;s.shadow.normalBias=.04;scene.add(s,s.target);return s}
+function lights(scene){scene.add(new THREE.HemisphereLight(0xffffff,0x9fd07a,2.2));const s=new THREE.DirectionalLight(0xfff3df,1.2);s.position.set(40,70,30);scene.add(s,s.target);return s}
+/* 地上的圓形影子 */
+const blobTex=canvasTex(128,128,g=>{const r=g.createRadialGradient(64,64,4,64,64,62);r.addColorStop(0,"rgba(40,60,20,.45)");r.addColorStop(1,"rgba(40,60,20,0)");g.fillStyle=r;g.fillRect(0,0,128,128)});
+blobTex.wrapS=blobTex.wrapT=THREE.ClampToEdgeWrapping;
+/* 立牌：Gemini 圖做成永遠面向鏡頭的 3D 立牌，腳底踩在地上 */
+function stand(name,h,{shadow=true,fog=true}={}){const t=TEX[name],a=t.image.width/t.image.height;
+ const m=new THREE.SpriteMaterial({map:t,alphaTest:.12,fog});const s=new THREE.Sprite(m);s.center.set(.5,.02);s.scale.set(h*a,h,1);
+ const g=new THREE.Group();g.add(s);
+ if(shadow){const b=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:blobTex,transparent:true,depthWrite:false}));b.rotation.x=-Math.PI/2;b.position.y=.04;b.scale.set(h*a*.8,h*.45,1);g.add(b)}
+ g.userData={spr:s,h,a,name,face:1,base:name};return g}
+function setArt(o,name){const u=o.userData,t=TEX[name];if(u.name===name)return;u.name=name;u.spr.material.map=t;u.a=t.image.width/t.image.height;u.spr.scale.x=u.h*u.a*u.face}
+const camRight=new THREE.Vector3();
+/* 依照螢幕方向決定朝左或朝右（圖都是朝右畫的） */
+function faceBy(o,dx,dz){camRight.setFromMatrixColumn(camera.matrixWorld,0);const d=dx*camRight.x+dz*camRight.z;if(Math.abs(d)<.02)return;const f=d>=0?1:-1;const u=o.userData;if(u.face!==f){u.face=f;u.spr.scale.x=u.h*u.a*f}}
+/* 走路／發呆的彈跳 */
+function bounce(o,t,moving,k=1){const s=o.userData.spr,ph=o.userData.ph||0;
+ if(moving){s.position.y=Math.abs(Math.sin(t*9*k+ph))*.18*o.userData.h*.12;s.material.rotation=Math.sin(t*9*k+ph)*.06}
+ else{s.position.y=0;s.material.rotation*=.85;const sq=1+Math.sin(t*2.2+ph)*.018;s.scale.y=o.userData.h*sq}}
 
-/* ===== 模型 ===== */
-const NAMES=["cow","bull","chick","chicken","barn","bigbarn","openbarn","hay","fence","trees","flowers","watertank","carton","cowchar"];
-const G={};
-async function loadAll(){const L=new GLTFLoader();let n=0;await Promise.all(NAMES.map(async k=>{G[k]=await L.loadAsync("models/"+k+".glb");n++;$("loadBar").style.width=(n/NAMES.length*100)+"%"}))}
-function fit(o,h){o.updateMatrixWorld(true);const b=new THREE.Box3().setFromObject(o,true),s=b.getSize(new THREE.Vector3());o.scale.multiplyScalar(h/s.y);o.updateMatrixWorld(true);const b2=new THREE.Box3().setFromObject(o,true),c=b2.getCenter(new THREE.Vector3());const w=new THREE.Group();w.add(o);o.position.sub(new THREE.Vector3(c.x,b2.min.y,c.z));return w}
-function shadowAll(o){o.traverse(m=>{if(m.isMesh){m.castShadow=true;m.receiveShadow=true}})}
-function inst(name,h){const o=SU.clone(G[name].scene);shadowAll(o);const w=fit(o,h);w.userData.inner=o;return w}
-/* 荷蘭牛黑白斑點（材質上的 3D 雜訊） */
-function spotify(m,geo,seed){geo.computeBoundingBox();const s=geo.boundingBox.getSize(new THREE.Vector3()),f=3.2/Math.max(s.x,s.y,s.z);
- m.onBeforeCompile=sh=>{sh.uniforms.uF={value:f};sh.uniforms.uS={value:seed};
-  sh.vertexShader=sh.vertexShader.replace("#include <common>","#include <common>\nvarying vec3 vOP;").replace("#include <begin_vertex>","#include <begin_vertex>\nvOP=position;");
-  sh.fragmentShader=sh.fragmentShader.replace("#include <common>",`#include <common>
-varying vec3 vOP;uniform float uF;uniform float uS;
-float hs(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
-float vn(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(mix(hs(i),hs(i+vec3(1,0,0)),f.x),mix(hs(i+vec3(0,1,0)),hs(i+vec3(1,1,0)),f.x),f.y),mix(mix(hs(i+vec3(0,0,1)),hs(i+vec3(1,0,1)),f.x),mix(hs(i+vec3(0,1,1)),hs(i+vec3(1,1,1)),f.x),f.y),f.z);}`)
-  .replace("#include <color_fragment>","#include <color_fragment>\nvec3 q=vOP*uF+uS;float sp=vn(q)*.7+vn(q*2.1)*.3;diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.05,.045,.04),smoothstep(.56,.6,sp));")};
- m.customProgramCacheKey=()=>"spots"}
-const COWCOL={holstein:{Main:0xf4f2ec,Main_Light:0x23201e,Muzzle:0xf3aab4,Horns:0xeee2c2},jersey:{Main:0xc98e55,Main_Light:0xf0dcc0,Muzzle:0x3a2a22},calf:{Main:0xf4f2ec,Main_Light:0x23201e,Muzzle:0xf3aab4}};
-const mixers=[];
-function makeCow(kind="holstein"){const src=G[kind==="bull"?"bull":"cow"],o=SU.clone(src.scene),cols=COWCOL[kind],seed=rnd(0,50);
- o.traverse(m=>{if(!m.isMesh)return;m.castShadow=m.receiveShadow=true;m.material=m.material.clone();const nm=m.material.name;if(cols&&cols[nm]!=null)m.material.color.setHex(cols[nm]);if((kind==="holstein"||kind==="calf")&&nm==="Main")spotify(m.material,m.geometry,seed)});
- const w=fit(o,kind==="calf"?1.05:1.65);const mx=new THREE.AnimationMixer(o);mixers.push(mx);
- const A={};src.animations.forEach(a=>{if(!a.name.includes("|"))A[a.name]=mx.clipAction(a)});
- w.userData={mx,A,cur:null,kind};play(w,"Idle");w.userData.ph=rnd(0,30);return w}
-function play(c,name,fade=.35){const u=c.userData,a=u.A[name];if(!a||u.cur===a)return;a.reset().setEffectiveTimeScale(name==="Walk"?1.3:1).fadeIn(fade).play();if(u.cur)u.cur.fadeOut(fade);u.cur=a}
-/* Olimomo：站著的卡通牛（程式做走路搖擺），加粉紅蝴蝶結 */
-function makeOli(h=2.1){const w=inst("cowchar",h);const body=new THREE.Group();const turn=new THREE.Group();while(w.children.length)turn.add(w.children[0]);turn.rotation.y=-Math.PI/2;body.add(turn);w.add(body);/* 模型原本面向 +X，轉成面向 +Z */
- const bow=new THREE.Group(),pm=mat(0xf0708f,{roughness:.45});[-1,1].forEach(s=>{const k=mesh(new THREE.ConeGeometry(.13*h/2,.26*h/2,14),pm,s*.13*h/2,0,0);k.rotation.z=s*Math.PI/2;bow.add(k)});bow.add(mesh(new THREE.SphereGeometry(.07*h/2,10,10),pm));bow.position.set(0,h*1.0,0);body.add(bow);
- w.userData.body=body;return w}
-function animOli(o,t,moving){const b=o.userData.body;if(moving){b.position.y=Math.abs(Math.sin(t*9))*.16;b.rotation.z=Math.sin(t*9)*.07}else{b.position.y=Math.sin(t*2.2)*.04;b.rotation.z*=.85}}
-
-/* ===== 共用小物 ===== */
-const hayTex=canvasTex(256,256,(g,w,h)=>{g.fillStyle="#e2c066";g.fillRect(0,0,w,h);for(let i=0;i<1400;i++){g.strokeStyle=`hsla(${rnd(40,52)},${rnd(55,75)}%,${rnd(45,75)}%,.6)`;g.beginPath();const x=rnd(0,w),y=rnd(0,h);g.moveTo(x,y);g.lineTo(x+rnd(-24,24),y+rnd(-4,4));g.stroke()}},1);
-function hayBale(x,y,z,ry=0){const b=mesh(new THREE.CylinderGeometry(.9,.9,1.3,22),mat(0xffffff,{map:hayTex}),x,y,z);b.rotation.z=Math.PI/2;b.rotation.y=ry;return b}
+const COWART={holstein:"cow_holstein",jersey:"cow_jersey",calf:"calf",calf_jersey:"calf_jersey",bull:"bull"};
+const COWH={holstein:2.6,jersey:2.5,calf:1.7,calf_jersey:1.6,bull:2.8};
+function makeCow(kind="holstein"){const o=stand(COWART[kind],COWH[kind]);o.userData.kind=kind;o.userData.ph=rnd(0,30);o.userData.state="Idle";return o}
+/* 狀態：Idle／Walk／Eating（荷蘭牛吃草換成低頭吃草的圖） */
+function play(c,name){const u=c.userData;if(u.state===name)return;u.state=name;if(u.kind==="holstein")setArt(c,name==="Eating"?"cow_holstein_eat":"cow_holstein")}
+function makeOli(h=2.6){const o=stand("olimomo",h);o.userData.body=o.userData.spr;o.userData.ph=0;return o}
+function animOli(o,t,moving){setArt(o,moving?"olimomo_walk":"olimomo");bounce(o,t,moving,1)}
+function cloud(){const g=new THREE.Group(),m=new THREE.MeshLambertMaterial({color:0xffffff});for(let i=0;i<5;i++)g.add(mesh(new THREE.SphereGeometry(rnd(2.2,3.6),14,10),m,i*2.6-5,rnd(-.6,.8),rnd(-1,1),false));g.scale.setScalar(rnd(.8,1.4));return g}
 function textTex(lines,w=1024,h=256,bg="#fff8ea",fg="#2f3a2a"){return canvasTex(w,h,g=>{g.fillStyle=bg;g.fillRect(0,0,w,h);g.textAlign="center";g.textBaseline="middle";lines.forEach(([t,size,y,col])=>{g.fillStyle=col||fg;g.font=`800 ${size}px "Baloo 2","Arial Rounded MT Bold","PingFang TC",sans-serif`;g.fillText(t,w/2,y)})})}
-function cloud(){const g=new THREE.Group(),m=mat(0xffffff,{roughness:1});for(let i=0;i<5;i++)g.add(mesh(new THREE.SphereGeometry(rnd(2.2,3.6),14,10),m,i*2.6-5,rnd(-.6,.8),rnd(-1,1),false));g.scale.setScalar(rnd(.8,1.4));return g}
-function balloonMesh(){const g=new THREE.Group();const t=canvasTex(512,256,(c,w,h)=>{const cols=["#f0708f","#fff3d6","#ffc93c","#fff3d6","#6ec6ff","#fff3d6","#a98bff","#fff3d6"];for(let i=0;i<8;i++){c.fillStyle=cols[i];c.fillRect(i*w/8,0,w/8,h)}});
- const env=mesh(new THREE.SphereGeometry(2.2,32,24),mat(0xffffff,{map:t,roughness:.45}),0,4.4,0);env.scale.set(1,1.15,1);g.add(env);
- const tip=mesh(new THREE.ConeGeometry(1.15,1.4,24),mat(0xf0708f,{roughness:.5}),0,1.85,0);tip.rotation.x=Math.PI;g.add(tip);
- [[-.6,-.6],[.6,-.6],[-.6,.6],[.6,.6]].forEach(([x,z])=>g.add(mesh(new THREE.CylinderGeometry(.03,.03,1.4,4),mat(0x8a5a3c),x*.9,.9,z*.9)));
- g.add(mesh(new THREE.CylinderGeometry(.75,.6,.8,16),mat(0xa0683e,{roughness:.9}),0,0,0));return g}
-function pip(p,poly){let ins=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const [xi,yi]=poly[i],[xj,yj]=poly[j];if(((yi>p[1])!=(yj>p[1]))&&(p[0]<(xj-xi)*(p[1]-yi)/(yj-yi)+xi))ins=!ins}return ins}
 
-/* ===== 場景 1：熱氣球飛越台灣 ===== */
+/* ===== 場景 1：熱氣球飛越台灣（地面是 Gemini 畫的台灣地圖）===== */
 const fly={scene:new THREE.Scene()};
-function buildFly(){const S=fly.scene;S.background=skyTex("#4aa3e6","#a9d9f5","#e6f6ff");S.fog=new THREE.Fog(0xbfe6ff,230,480);lights(S,90);
- const sea=mesh(new THREE.CircleGeometry(420,48),mat(0x4fb3e8,{roughness:.35,metalness:.1}),0,-.3,0,false);sea.rotation.x=-Math.PI/2;S.add(sea);
- const K=40,P=(lon,lat)=>({x:(lon-121)*K,z:-(lat-23.7)*K});
- const pts=[[121.54,25.30],[121.75,25.15],[121.93,25.02],[121.85,24.85],[121.83,24.6],[121.72,24.35],[121.62,24.0],[121.53,23.6],[121.43,23.2],[121.3,22.85],[121.05,22.6],[120.88,22.3],[120.85,21.9],[120.72,22.0],[120.62,22.35],[120.36,22.55],[120.2,22.85],[120.1,23.1],[120.12,23.5],[120.2,23.8],[120.35,24.1],[120.55,24.42],[120.75,24.7],[120.95,24.9],[121.1,25.05],[121.35,25.2]];
- const poly=pts.map(([a,b])=>{const p=P(a,b);return[p.x,p.z]});
- /* Shape 用 (x,-z)，再把 xy 平面轉成地面 */
- const sh=new THREE.Shape(poly.map(([x,z])=>new THREE.Vector2(x,-z)));
- const land=mesh(new THREE.ExtrudeGeometry(sh,{depth:1.4,bevelEnabled:true,bevelSize:1.2,bevelThickness:.6,bevelSegments:3}),mat(0x8fd16a,{roughness:.9,side:THREE.DoubleSide}),0,-.6,0);land.rotation.x=-Math.PI/2;S.add(land);
- const spine=[[121.55,24.75],[121.35,24.35],[121.15,23.95],[121.0,23.55],[120.92,23.2],[120.85,22.75],[120.8,22.35]];
- spine.forEach(([a,b],i)=>{const p=P(a,b);for(let k=0;k<3;k++){const r=rnd(5,8),hgt=rnd(5,9)*(i>0&&i<6?1.2:.8);const m=mesh(new THREE.SphereGeometry(r,16,12),mat(new THREE.Color().setHSL(rnd(.27,.33),.45,rnd(.32,.4)),{roughness:.95}),p.x+rnd(-3,3),1.6,p.z+rnd(-3,3));m.scale.y=hgt/r;S.add(m);
-  if(hgt>8.5){const cap=mesh(new THREE.SphereGeometry(r*.35,12,8),mat(0xffffff),m.position.x,1.6+hgt*.92,m.position.z);cap.scale.y=.5;S.add(cap)}}});
- for(let i=0;i<90;i++){const p=P(rnd(120.15,121.7),rnd(22.3,25.2));if(!pip([p.x,p.z],poly))continue;S.add(mesh(new THREE.ConeGeometry(.9,2.4,8),mat(0x3f9a4a),p.x,2.8,p.z))}
- const tp=P(121.56,25.03);S.add(mesh(new THREE.CylinderGeometry(.4,1,9,6),mat(0x7fc8b8,{metalness:.3,roughness:.4}),tp.x,6,tp.z));
- const lb=P(120.33,23.78);fly.lun=new THREE.Vector3(lb.x,1.6,lb.z);
- const barn=inst("barn",3);barn.position.set(lb.x+1.8,1.6,lb.z-1.5);S.add(barn);
- const cw=makeCow("holstein");cw.scale.multiplyScalar(1.3);cw.position.set(lb.x-1.6,1.6,lb.z+.8);S.add(cw);
- const ring=mesh(new THREE.TorusGeometry(4,.35,10,40),new THREE.MeshBasicMaterial({color:0xfff176}),lb.x,1.9,lb.z,false);ring.rotation.x=Math.PI/2;ring.visible=false;S.add(ring);fly.ring=ring;
- fly.clouds=[];for(let i=0;i<12;i++){const c=cloud();const a=rnd(0,6.28),r=rnd(55,95);c.position.set(Math.cos(a)*r,rnd(22,34),Math.sin(a)*r);S.add(c);fly.clouds.push(c)}
- const bal=balloonMesh();const ol=makeOli(1.4);ol.position.y=.1;bal.add(ol);bal.scale.setScalar(1.6);S.add(bal);fly.bal=bal;fly.oli=ol;
- const path=[[121.52,25.06],[121.25,24.95],[120.98,24.72],[120.72,24.42],[120.52,24.1],[120.36,23.86]].map(([a,b])=>{const p=P(a,b);return new THREE.Vector3(p.x,16,p.z)});
- fly.curve=new THREE.CatmullRomCurve3(path);bal.position.copy(path[0]);
- fly.tpLab=[P(121.52,25.04),P(120.33,23.78)]}
+const MAPW=170,MAPH=MAPW*572/1024;
+const mp=(px,py)=>new THREE.Vector3((px/1024-.5)*MAPW,0,(py/572-.5)*MAPH);
+function buildFly(){const S=fly.scene;S.background=skyTex("#5fb6ee","#a9dcf7","#dff3ff");S.fog=new THREE.Fog(0xcfeaf8,170,420);lights(S);
+ const sea=mesh(new THREE.PlaneGeometry(900,900),new THREE.MeshBasicMaterial({color:0x3aa6e6}),0,-.2,0,false);sea.rotation.x=-Math.PI/2;S.add(sea);
+ const map=mesh(new THREE.PlaneGeometry(MAPW,MAPH),new THREE.MeshBasicMaterial({map:TEX.taiwan_map}),0,0,0,false);map.rotation.x=-Math.PI/2;S.add(map);
+ fly.lun=mp(448,250);fly.tp=mp(706,74);
+ const barn=stand("barn",4.5,{shadow:false});barn.position.copy(fly.lun).add(new THREE.Vector3(2.2,0,-1.2));S.add(barn);
+ const cw=stand("cow_holstein",3,{shadow:false});cw.position.copy(fly.lun).add(new THREE.Vector3(-2.4,0,1));S.add(cw);
+ const ring=mesh(new THREE.TorusGeometry(5,.45,10,40),new THREE.MeshBasicMaterial({color:0xfff176}),fly.lun.x,.4,fly.lun.z,false);ring.rotation.x=Math.PI/2;ring.visible=false;S.add(ring);fly.ring=ring;
+ fly.clouds=[];for(let i=0;i<12;i++){const c=cloud();const a=rnd(0,6.28),r=rnd(60,110);c.position.set(Math.cos(a)*r,rnd(24,36),Math.sin(a)*r*.6);S.add(c);fly.clouds.push(c)}
+ const sun=stand("sun",30,{shadow:false,fog:false});sun.position.set(-70,60,-120);S.add(sun);
+ const bal=new THREE.Group();const bs=stand("balloon",14,{shadow:false});bal.add(bs);const ol=stand("olimomo_yay",3.4,{shadow:false});ol.position.set(0,.6,0);ol.userData.spr.renderOrder=2;ol.userData.spr.material.depthTest=false;bal.add(ol);
+ S.add(bal);fly.bal=bal;fly.oli=ol;
+ const path=[fly.tp,mp(650,120),mp(560,170),mp(500,215),fly.lun].map(v=>new THREE.Vector3(v.x,16,v.z));
+ fly.curve=new THREE.CatmullRomCurve3(path);bal.position.copy(path[0]);fly.tpLab=[fly.tp]}
 
 /* ===== 場景 2：牧場 ===== */
 const farm={scene:new THREE.Scene()};const F=farm.scene;
@@ -288,95 +284,67 @@ const STPOS={calf:[26,12],hay:[-26,12],yard:[-26,-30],milk:[26,-30]};
 const PLACEPOS={cows:[-26,-30],plant:[38,32],hay:[-26,12],milking:[26,-30],machine:[22,-35],calf:[26,12],classroom:[-14,30]};
 const CLASSDOOR=new THREE.Vector3(-14,0,36);
 let sun;const critters=[];const cows=[];
-function buildFarm(){F.background=skyTex("#4aa3e6","#a9d9f5","#e8f6ff");F.fog=new THREE.Fog(0xcfeaf8,80,230);sun=lights(F,70);
- const grassTex=canvasTex(512,512,(g,w,h)=>{g.fillStyle="#7cc94f";g.fillRect(0,0,w,h);for(let i=0;i<9000;i++){g.fillStyle=`hsla(${rnd(82,108)},${rnd(45,65)}%,${rnd(38,62)}%,.35)`;g.fillRect(rnd(0,w),rnd(0,h),rnd(1,3),rnd(3,9))}},40);
- const dirtTex=canvasTex(256,256,(g,w,h)=>{g.fillStyle="#d8b27a";g.fillRect(0,0,w,h);for(let i=0;i<2500;i++){g.fillStyle=`hsla(32,${rnd(30,50)}%,${rnd(50,75)}%,.45)`;g.fillRect(rnd(0,w),rnd(0,h),rnd(1,4),rnd(1,4))}});
- const ground=mesh(new THREE.PlaneGeometry(500,500),mat(0xffffff,{map:grassTex,roughness:1}),0,0,0,false);ground.rotation.x=-Math.PI/2;F.add(ground);
- const path=(x,z,w,d)=>{const t=dirtTex.clone();t.needsUpdate=true;t.repeat.set(w/8,d/8);const p=mesh(new THREE.PlaneGeometry(w,d),mat(0xffffff,{map:t,roughness:1}),x,.03,z,false);p.rotation.x=-Math.PI/2;F.add(p)};
+function buildFarm(){F.background=skyTex("#5fb6ee","#a9dcf7","#e8f6ff");F.fog=new THREE.Fog(0xd6eefa,90,240);sun=lights(F);
+ const gt=TEX.grass_tile.clone();gt.wrapS=gt.wrapT=THREE.RepeatWrapping;gt.repeat.set(60,60);gt.needsUpdate=true;
+ const ground=mesh(new THREE.PlaneGeometry(500,500),new THREE.MeshLambertMaterial({map:gt}),0,0,0,false);ground.rotation.x=-Math.PI/2;F.add(ground);
+ const path=(x,z,w,d)=>{const t=TEX.dirt_tile.clone();t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(w/6,d/6);t.needsUpdate=true;const p=mesh(new THREE.PlaneGeometry(w,d),new THREE.MeshLambertMaterial({map:t}),x,.03,z,false);p.rotation.x=-Math.PI/2;F.add(p)};
  path(0,0,6,100);path(0,12,58,5);path(0,-30,58,5);path(-26,-9,5,46);path(26,-9,5,46);path(-7,36,14,4);
+ const put=(name,h,x,z,o={})=>{const s=stand(name,h,o);s.position.set(x,0,z);if(o.flip){s.userData.face=-1;s.userData.spr.scale.x*=-1}F.add(s);return s};
  /* 樹 */
- const tg=G.trees.scene;tg.updateMatrixWorld(true);const groups={};tg.traverse(o=>{if(o.isMesh){const m=o.name.match(/NormalTree_(\d)/);if(m)(groups[m[1]]=groups[m[1]]||[]).push(o)}});
- const TREES=Object.values(groups).map(arr=>{const g=new THREE.Group();arr.forEach(o=>{const c=o.clone();o.matrixWorld.decompose(c.position,c.quaternion,c.scale);g.add(c)});shadowAll(g);return fit(g,1)});
- const tree=(x,z,h)=>{const t=TREES[Math.floor(rnd(0,TREES.length))].clone();t.scale.setScalar(h);t.position.set(x,0,z);t.rotation.y=rnd(0,6.28);F.add(t)};
- for(let i=0;i<(LOW?34:56);i++){const a=rnd(0,6.28),r=rnd(72,120);tree(Math.cos(a)*r,Math.sin(a)*r,rnd(8,13))}
- [[-26,54],[16,56],[-42,42],[44,44],[-45,-56],[46,-54],[0,-76],[-20,-72],[20,-70],[-46,0],[46,-6]].forEach(([x,z])=>tree(x,z,rnd(7,10)));
+ for(let i=0;i<(LOW?36:60);i++){const a=rnd(0,6.28),r=rnd(66,115);put(Math.random()<.35?"tree_apple":"tree",rnd(10,15),Math.cos(a)*r,Math.sin(a)*r)}
+ [[-26,54],[16,56],[-42,42],[44,44],[-45,-56],[46,-54],[0,-76],[-20,-72],[20,-70],[-46,0],[46,-6]].forEach(([x,z],i)=>put(i%3?"tree":"tree_apple",rnd(8,11),x,z));
  /* 花 */
- const fg=G.flowers.scene;fg.updateMatrixWorld(true);const fl=[];fg.traverse(o=>{if(o.isMesh){const geo=o.geometry.clone().applyMatrix4(o.matrixWorld);geo.computeBoundingBox();const b=geo.boundingBox,c=b.getCenter(new THREE.Vector3());geo.translate(-c.x,-b.min.y,-c.z);const s=.75/Math.max(.01,b.max.y-b.min.y);geo.scale(s,s,s);fl.push({geo,m:o.material})}});
- const per=Math.floor((LOW?400:900)/Math.max(1,fl.length)),d=new THREE.Object3D();
- const freeSpot=(x,z)=>!(Math.abs(x)<4.5||Math.abs(z-12)<4||Math.abs(z+30)<4||(Math.abs(Math.abs(x)-26)<4&&z>-34&&z<14)||(Math.abs(x-26)<10&&Math.abs(z-12)<8)||(Math.abs(x+26)<16&&Math.abs(z+30)<13)||(Math.abs(x-26)<11&&Math.abs(z+30)<7)||(Math.abs(x+14)<6&&Math.abs(z-31)<7)||(Math.abs(x+30)<9&&Math.abs(z-12)<8));
- fl.forEach(({geo,m})=>{const im=new THREE.InstancedMesh(geo,m,per);let n=0;while(n<per){const x=rnd(-52,52),z=rnd(-80,46);if(!freeSpot(x,z))continue;d.position.set(x,0,z);d.rotation.set(0,rnd(0,6.28),0);d.scale.setScalar(rnd(.7,1.3));d.updateMatrix();im.setMatrixAt(n++,d.matrix)}im.receiveShadow=true;F.add(im)});
- /* 柵欄 */
- const fgeo=(()=>{const o=G.fence.scene;o.updateMatrixWorld(true);let m;o.traverse(k=>{if(k.isMesh&&!m)m=k});const geo=m.geometry.clone().applyMatrix4(m.matrixWorld);geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new THREE.Vector3());geo.translate(-c.x,-geo.boundingBox.min.y,-c.z);return {geo,mat:m.material,len:geo.boundingBox.max.x-geo.boundingBox.min.x}})();
- const segs=[];const fence=(x1,z1,x2,z2,gap)=>{const L=Math.hypot(x2-x1,z2-z1),n=Math.max(1,Math.round(L/fgeo.len)),ang=Math.atan2(z2-z1,x2-x1);for(let i=0;i<n;i++){if(gap&&i===Math.floor(n/2))continue;segs.push({x:x1+(x2-x1)*(i+.5)/n,z:z1+(z2-z1)*(i+.5)/n,ry:-ang,sx:L/n/fgeo.len})}};
+ const freeSpot=(x,z)=>!(Math.abs(x)<4.5||Math.abs(z-12)<4||Math.abs(z+30)<4||(Math.abs(Math.abs(x)-26)<4&&z>-34&&z<14)||(Math.abs(x-26)<10&&Math.abs(z-12)<8)||(Math.abs(x+26)<16&&Math.abs(z+30)<13)||(Math.abs(x-26)<11&&Math.abs(z+30)<7)||(Math.abs(x+14)<7&&Math.abs(z-31)<8)||(Math.abs(x+30)<10&&Math.abs(z-12)<9));
+ let nf=0;while(nf<(LOW?70:150)){const x=rnd(-52,52),z=rnd(-80,46);if(!freeSpot(x,z))continue;put("flowers",rnd(.7,1.2),x,z,{shadow:false,flip:Math.random()<.5});nf++}
+ /* 柵欄：Gemini 的柵欄圖貼在直立的板子上，沿著圍欄排 */
+ const fenceMat=new THREE.MeshLambertMaterial({map:TEX.fence,transparent:true,alphaTest:.3,side:THREE.DoubleSide});const fa=TEX.fence.image.width/TEX.fence.image.height,FH=1.5,FL=FH*fa;
+ const fence=(x1,z1,x2,z2,gap)=>{const L=Math.hypot(x2-x1,z2-z1),n=Math.max(1,Math.round(L/FL)),ang=Math.atan2(z2-z1,x2-x1);for(let i=0;i<n;i++){if(gap&&i===Math.floor(n/2))continue;const p=new THREE.Mesh(new THREE.PlaneGeometry(L/n,FH),fenceMat);p.position.set(x1+(x2-x1)*(i+.5)/n,FH/2,z1+(z2-z1)*(i+.5)/n);p.rotation.y=-ang;F.add(p)}};
  const pen=(cx,cz,w,dd,gate)=>{const x0=cx-w/2,x1=cx+w/2,z0=cz-dd/2,z1=cz+dd/2;fence(x0,z0,x1,z0);fence(x0,z0,x0,z1);fence(x1,z0,x1,z1);fence(x0,z1,x1,z1,gate)};
  pen(26,12,18,14,true);pen(-26,-30,30,22,true);
- fence(-6,46,-54,46);fence(6,46,54,46);fence(-54,46,-54,-82);fence(54,46,54,-82);fence(-54,-82,54,-82);
- const fim=new THREE.InstancedMesh(fgeo.geo,fgeo.mat,segs.length);segs.forEach((s,i)=>{d.position.set(s.x,0,s.z);d.rotation.set(0,s.ry,0);d.scale.set(s.sx,1.3,1.3);d.updateMatrix();fim.setMatrixAt(i,d.matrix)});fim.castShadow=fim.receiveShadow=true;F.add(fim);
- /* 大門 */
- const wood=mat(0xa8744a,{roughness:.9});[-6,6].forEach(x=>F.add(mesh(new THREE.BoxGeometry(.8,6,.8),wood,x,3,46)));F.add(mesh(new THREE.BoxGeometry(13.6,.9,.6),wood,0,5.8,46));
- const st=textTex([["Olimomo's Farm",112,92],["哞力全開英語營 · 乳此美好",52,196,"#b23a5c"]],1024,256);F.add(mesh(new THREE.BoxGeometry(10,2,.3),[wood,wood,wood,wood,mat(0xffffff,{map:st}),mat(0xffffff,{map:st})],0,4.2,46));
- const bcols=[0xff6f91,0xffc93c,0x6ec6ff,0xa98bff,0x7bd88f,0xff9f43];[-6,6].forEach((gx,gi)=>{for(let i=0;i<3;i++){const b=new THREE.Group();const bal=mesh(new THREE.SphereGeometry(.7,20,16),mat(bcols[gi*3+i],{roughness:.25}),0,2.2,0);bal.scale.set(1,1.2,1);b.add(bal,mesh(new THREE.CylinderGeometry(.02,.02,2,4),mat(0xffffff),0,1,0,false));b.position.set(gx+(i-1)*.9,6,46+(i-1)*.3);F.add(b);const ph=rnd(0,6);critters.push(t=>{b.rotation.z=Math.sin(t*1.2+ph)*.12;b.rotation.x=Math.cos(t+ph)*.08})}});
- /* 簡報室 */
- const cls=inst("barn",7.5);cls.position.set(-14,0,30);F.add(cls);
- F.add(mesh(new THREE.PlaneGeometry(5,1.3),mat(0xffffff,{map:textTex([["Classroom 簡報室",110,128]],1024,256,"#fff3a8")}),-14,7.4,34.4,false));
- /* 背景大穀倉、種植區 */
- const bb=inst("bigbarn",11);bb.position.set(0,0,-66);F.add(bb);
- for(let r=0;r<5;r++){F.add(mesh(new THREE.BoxGeometry(14,.2,1.2),mat(0x9b6b43,{roughness:1}),38,.1,28+r*2.2,false));for(let i=0;i<9;i++){const p=mesh(new THREE.SphereGeometry(.55,10,8),mat(new THREE.Color().setHSL(.3,.55,rnd(.35,.45))),32+i*1.5,.45,28+r*2.2);p.scale.y=.8;F.add(p)}}
+ fence(-7,46,-54,46);fence(7,46,54,46);fence(-54,46,-54,-82);fence(54,46,54,-82);fence(-54,-82,54,-82);
+ /* 大門、簡報室、背景穀倉、種植區 */
+ put("gate",8.5,0,46,{shadow:false});
+ put("classroom",9,-14,29);
+ put("barn",12,0,-66);
+ [[32,28],[36,28],[40,28],[44,28],[32,32],[36,32],[40,32],[44,32],[32,36],[36,36],[40,36],[44,36]].forEach(([x,z])=>put("tree_apple",3.2,x,z));
  /* 小牛區 */
- const ob=inst("openbarn",5);ob.position.set(31,0,7.5);ob.rotation.y=Math.PI;F.add(ob);
- for(let i=0;i<3;i++){const c=makeCow("calf");c.position.set(21+i*3.3,0,rnd(10,15));c.rotation.y=rnd(0,6.28);c.userData.wander={cx:c.position.x,cz:c.position.z,r:1.6};cows.push(c);F.add(c)}
- const mom=makeCow("holstein");mom.position.set(31,0,15);mom.userData.wander={cx:31,cz:15,r:1.4};cows.push(mom);F.add(mom);
- F.add(mesh(new THREE.CylinderGeometry(.45,.35,.6,14),mat(0x4aa3d6,{roughness:.4}),20.5,.3,17.5));
+ put("cowshed",6.5,31,7);
+ [["calf",21.5,11],["calf_jersey",25,14.5],["calf",28.5,10.5]].forEach(([k,x,z])=>{const c=makeCow(k);c.position.set(x,0,z);c.userData.wander={cx:x,cz:z,r:1.6};cows.push(c);F.add(c)});
+ const mom=makeCow("holstein");mom.position.set(31,0,15.5);mom.userData.wander={cx:31,cz:15.5,r:1.2};cows.push(mom);F.add(mom);
+ put("milk_bottles",1.3,20.5,17.5);
  /* 牧草區 */
- const hb=inst("barn",8);hb.position.set(-37,0,14);hb.rotation.y=Math.PI/2;F.add(hb);
- [[-21.5,16.5],[-21.5,19],[-19.6,17.7],[-21.5,21.5]].forEach(([x,z],i)=>F.add(hayBale(x,.9,z,i*.4)));F.add(hayBale(-20.6,2.2,18.3,.2));
- for(let i=0;i<8;i++){const h=inst("hay",1.4);h.position.set(-31+rnd(-2,2),0,6+rnd(-1.5,2.5));h.rotation.y=rnd(0,6);F.add(h)}
- const trough=new THREE.Group();trough.add(mesh(new THREE.BoxGeometry(6.5,.8,1.3),mat(0x8d6e4a,{roughness:.9}),0,.4,0),mesh(new THREE.BoxGeometry(6.1,.25,1),mat(0xffffff,{map:hayTex}),0,.82,0,false));trough.position.set(-26,0,6.5);F.add(trough);farm.feedBox=trough;
- [["holstein",-28.3],["jersey",-23.7]].forEach(([k,x])=>{const c=makeCow(k);c.position.set(x,0,4.4);c.rotation.y=0;c.userData.eat=true;play(c,"Eating");cows.push(c);F.add(c)});
+ put("barn",10,-38,14);put("hay_round",2.4,-21,17);put("hay_round",2.4,-21,20.5,{flip:true});put("hay_stack",2.6,-31,7.5);put("hay_stack",2.4,-34,10,{flip:true});
+ const ft=put("feed_trough",1.5,-26,6.6);farm.feedBox=ft;
+ [["holstein",-28.4],["jersey",-23.6]].forEach(([k,x],i)=>{const c=makeCow(k);c.position.set(x,0,4.6);c.userData.eat=true;play(c,"Eating");if(i){c.userData.face=-1;c.userData.spr.scale.x*=-1}cows.push(c);F.add(c)});
  /* 牛區 */
- const shed=inst("openbarn",6);shed.position.set(-26,0,-37);F.add(shed);
- const wt=new THREE.Group();wt.add(mesh(new THREE.BoxGeometry(5,.8,1.2),mat(0x9fb3c2,{metalness:.5,roughness:.35}),0,.4,0),mesh(new THREE.BoxGeometry(4.7,.1,.9),mat(0x5ab6ee,{roughness:.1}),0,.78,0,false));wt.position.set(-15,0,-31);wt.rotation.y=Math.PI/2;F.add(wt);
- [["holstein",-33,-27],["holstein",-26,-31],["jersey",-20,-26],["holstein",-31,-34],["jersey",-21,-34],["bull",-36,-23]].forEach(([k,x,z])=>{const c=makeCow(k);c.position.set(x,0,z);c.rotation.y=rnd(0,6.28);c.userData.wander={cx:x,cz:z,r:2.4};cows.push(c);F.add(c)});
+ put("cowshed",7.5,-26,-38);put("water_trough",1.4,-15,-31);
+ [["holstein",-33,-27],["holstein",-26,-30],["jersey",-20,-26],["holstein",-31,-34],["jersey",-21,-34],["bull",-36,-23]].forEach(([k,x,z])=>{const c=makeCow(k);c.position.set(x,0,z);c.userData.wander={cx:x,cz:z,r:2.4};cows.push(c);F.add(c)});
  /* 擠乳區 */
- const parlor=new THREE.Group(),conc=mat(0xd9d6cf,{roughness:.9});
- parlor.add(mesh(new THREE.BoxGeometry(20,.25,12),conc,0,.12,0),mesh(new THREE.BoxGeometry(20.6,.4,12.6),mat(0x2f8f6f,{roughness:.6}),0,5.6,0));
- [[-9.7,-5.7],[9.7,-5.7],[-9.7,5.7],[9.7,5.7],[0,-5.7],[0,5.7]].forEach(([x,z])=>parlor.add(mesh(new THREE.CylinderGeometry(.22,.22,5.4,10),mat(0xf2f2ee),x,2.8,z)));
- parlor.add(mesh(new THREE.BoxGeometry(20,4.6,.3),mat(0xf6f1e4),0,2.4,-5.9),mesh(new THREE.PlaneGeometry(6,1.2),mat(0xffffff,{map:textTex([["Milking Cows 乳牛區",100,128]],1024,256,"#e6f6ff")}),0,4.1,-5.7,false));
- const rob=new THREE.Group();rob.add(mesh(new THREE.BoxGeometry(3,2.6,2),mat(0x2f6fb5,{roughness:.35,metalness:.3}),0,1.5,0),mesh(new THREE.BoxGeometry(2.6,.15,1.6),mat(0xcfd8de,{metalness:.7,roughness:.3}),0,2.9,0),mesh(new THREE.PlaneGeometry(1.8,.6),mat(0xffffff,{map:textTex([["Milking Robot",110,128]],1024,256,"#dff3ff")}),0,2.1,1.02,false));
- for(let i=0;i<4;i++)rob.add(mesh(new THREE.CylinderGeometry(.09,.09,.6,8),mat(0x333333),-.5+i*.34,.55,1.05));rob.position.set(-4,0,-2.5);parlor.add(rob);
- const tank=inst("watertank",3);tank.position.set(6,0,-3);tank.rotation.y=Math.PI/2;parlor.add(tank);
- parlor.add(mesh(new THREE.PlaneGeometry(1.8,.7),mat(0xffffff,{map:textTex([["Cold tank",110,128]],1024,256,"#e6f6ff")}),6,3.3,-1.6,false));
- for(let i=0;i<5;i++){const ct=inst("carton",.9);ct.position.set(-8+i*.7,.25,3.5);parlor.add(ct)}
- parlor.position.set(26,0,-31);F.add(parlor);
- [["holstein",21,-27.5],["jersey",24.5,-26.2],["holstein",29,-26.8]].forEach(([k,x,z])=>{const c=makeCow(k);c.position.set(x,0,z);c.rotation.y=Math.PI;cows.push(c);F.add(c)});
- [["holstein",38,-46],["jersey",43,-50],["holstein",46,-42]].forEach(([k,x,z])=>{const c=makeCow(k);c.position.set(x,0,z);c.rotation.y=rnd(0,6.28);c.userData.wander={cx:x,cz:z,r:3};cows.push(c);F.add(c)});
- /* 雞＋小雞 */
- const chicken=(k,x,z,h)=>{const o=SU.clone(G[k].scene);shadowAll(o);const w=fit(o,h);const mx=new THREE.AnimationMixer(o);mixers.push(mx);const an=G[k].animations,pk=n=>an.find(a=>a.name.endsWith(n))||an[0];const A={walk:mx.clipAction(pk(k==="chick"?"Run":"Walk")),idle:mx.clipAction(pk(k==="chick"?"Idle_Peck":"Idle"))};A.idle.play();w.position.set(x,0,z);F.add(w);
-  const ph=rnd(0,6.28);let walking=false;critters.push(t=>{const wk=((t*.2+ph)%2)<1;if(wk!==walking){walking=wk;(wk?A.idle:A.walk).fadeOut(.3);(wk?A.walk:A.idle).reset().fadeIn(.3).play()}if(wk){const a=t*.35+ph;w.position.x=x+Math.cos(a)*2;w.position.z=z+Math.sin(a)*2;w.rotation.y=-a}})};
- [[-10,22],[-7,24],[10,40],[-8,-12],[9,-50]].forEach(([x,z])=>chicken("chicken",x,z,.9));
- [[-9,23.5],[-8.4,22.8],[-10.6,24.2],[10.8,39],[11.4,40.6],[-7.2,-13]].forEach(([x,z])=>chicken("chick",x,z,.42));
- /* 雲、蝴蝶 */
+ put("parlor",9,26,-37);put("milking_robot",3.4,21.5,-31);put("cold_tank",3.2,31.5,-31.5);put("milk_bottles",1.4,28,-27.5);
+ [["holstein",23.5,-26.5],["jersey",29.5,-26]].forEach(([k,x,z])=>{const c=makeCow(k);c.position.set(x,0,z);c.userData.wander={cx:x,cz:z,r:.8};cows.push(c);F.add(c)});
+ [["holstein",38,-46],["jersey",43,-50],["holstein",46,-42]].forEach(([k,x,z])=>{const c=makeCow(k);c.position.set(x,0,z);c.userData.wander={cx:x,cz:z,r:3};cows.push(c);F.add(c)});
+ /* 母雞、小雞（跳跳走） */
+ const bird=(k,h,x,z)=>{const b=stand(k,h);b.position.set(x,0,z);b.userData.ph=rnd(0,6.28);F.add(b);const ph=b.userData.ph;
+  critters.push(t=>{const wk=((t*.2+ph)%2)<1;const a=t*.35+ph;if(wk){const nx=x+Math.cos(a)*2,nz=z+Math.sin(a)*2;faceBy(b,nx-b.position.x,nz-b.position.z);b.position.x=nx;b.position.z=nz;b.userData.spr.position.y=Math.abs(Math.sin(t*12+ph))*.18}else{b.userData.spr.position.y=0;b.userData.spr.material.rotation=Math.max(0,Math.sin(t*6+ph))*.25*-b.userData.face}})};
+ [[-10,22],[-7,24],[10,40],[-8,-12],[9,-50]].forEach(([x,z])=>bird("hen",1.3,x,z));
+ [[-9,23.5],[-8.4,22.8],[-10.6,24.2],[10.8,39],[11.4,40.6],[-7.2,-13]].forEach(([x,z])=>bird("chick",.7,x,z));
+ /* 雲、太陽、蝴蝶 */
  farm.clouds=[];for(let i=0;i<14;i++){const c=cloud();c.position.set(rnd(-170,170),rnd(42,62),rnd(-170,60));F.add(c);farm.clouds.push(c)}
- const bcol=[0xff6f91,0xffc93c,0x6ec6ff,0xa98bff,0xff9f43];for(let i=0;i<(LOW?8:16);i++){const b=new THREE.Group(),m=new THREE.MeshStandardMaterial({color:bcol[i%5],side:THREE.DoubleSide}),wg=new THREE.CircleGeometry(.32,12);const lp=new THREE.Group(),rp=new THREE.Group(),L=new THREE.Mesh(wg,m),R=new THREE.Mesh(wg,m);L.position.x=-.28;R.position.x=.28;lp.add(L);rp.add(R);b.add(lp,rp);const cx=rnd(-45,45),cz=rnd(-70,40),ph=rnd(0,6.28);F.add(b);
-  critters.push(t=>{const a=t*.4+ph;b.position.set(cx+Math.cos(a)*5,1.6+Math.sin(t*2+ph)*.5,cz+Math.sin(a*1.3)*4);b.rotation.y=-a;const f=Math.sin(t*14+ph)*1.1;lp.rotation.set(-Math.PI/2,0,f);rp.rotation.set(-Math.PI/2,0,-f)})}
+ const sn=stand("sun",36,{shadow:false,fog:false});sn.position.set(-90,70,-190);F.add(sn);critters.push(t=>{sn.userData.spr.material.rotation=Math.sin(t*.6)*.08});
+ for(let i=0;i<(LOW?8:16);i++){const b=stand("butterfly",.7,{shadow:false});F.add(b);const cx=rnd(-45,45),cz=rnd(-70,40),ph=rnd(0,6.28);
+  critters.push(t=>{const a=t*.4+ph;b.position.set(cx+Math.cos(a)*5,1.4+Math.sin(t*2+ph)*.5,cz+Math.sin(a*1.3)*4);b.userData.spr.scale.x=b.userData.h*b.userData.a*(.35+.65*Math.abs(Math.sin(t*12+ph)))})}
  /* 站點光圈 */
  C.STATIONS.forEach(s=>{const [x,z]=STPOS[s.id];const ring=mesh(new THREE.TorusGeometry(2.3,.2,8,40),new THREE.MeshBasicMaterial({color:0xf0708f}),x,.25,z,false);ring.rotation.x=Math.PI/2;F.add(ring);const disc=mesh(new THREE.CircleGeometry(2.3,32),new THREE.MeshBasicMaterial({color:0xf0708f,transparent:true,opacity:.25}),x,.06,z,false);disc.rotation.x=-Math.PI/2;F.add(disc);s.ring=ring;s.disc=disc});
  const cring=mesh(new THREE.TorusGeometry(2,.2,8,40),new THREE.MeshBasicMaterial({color:0xffc93c}),CLASSDOOR.x,.25,CLASSDOOR.z,false);cring.rotation.x=Math.PI/2;F.add(cring);farm.cring=cring;
- farm.oli=makeOli(2.8);farm.oli.position.set(0,0,54);farm.oli.rotation.y=Math.PI;F.add(farm.oli);const me=mesh(new THREE.RingGeometry(.9,1.25,32),new THREE.MeshBasicMaterial({color:0xf0708f,transparent:true,opacity:.75}),0,.07,0,false);me.rotation.x=-Math.PI/2;farm.oli.add(me)}
+ farm.oli=makeOli(3.2);farm.oli.position.set(0,0,54);F.add(farm.oli);
+ const me=mesh(new THREE.RingGeometry(1,1.35,32),new THREE.MeshBasicMaterial({color:0xf0708f,transparent:true,opacity:.75}),0,.07,0,false);me.rotation.x=-Math.PI/2;farm.oli.add(me)}
 
-/* ===== 場景 3：教室 ===== */
+/* ===== 場景 3：教室（Gemini 畫的教室當背景）===== */
 const room={scene:new THREE.Scene()};
-function buildRoom(){const S=room.scene;S.background=new THREE.Color(0xfff3dc);S.add(new THREE.HemisphereLight(0xffffff,0xd8b98a,1.6));const l=new THREE.DirectionalLight(0xfff0d8,1.6);l.position.set(4,9,8);l.castShadow=true;l.shadow.mapSize.set(1024,1024);Object.assign(l.shadow.camera,{left:-12,right:12,top:12,bottom:-12});S.add(l);
- const floorT=canvasTex(512,512,(g,w)=>{for(let i=0;i<8;i++){g.fillStyle=i%2?"#d7a96d":"#cf9f62";g.fillRect(0,i*64,w,64);g.fillStyle="#0001";g.fillRect(0,i*64,w,3)}},2);
- S.add(mesh(new THREE.BoxGeometry(22,.2,18),mat(0xffffff,{map:floorT}),0,-.1,0));
- const wall=mat(0xfff8ea,{roughness:1});S.add(mesh(new THREE.BoxGeometry(22,9,.3),wall,0,4.5,-9),mesh(new THREE.BoxGeometry(.3,9,18),wall,-11,4.5,0),mesh(new THREE.BoxGeometry(.3,9,18),wall,11,4.5,0),mesh(new THREE.BoxGeometry(22,1.2,.35),mat(0xf0708f),0,.6,-8.9,false));
- S.add(mesh(new THREE.BoxGeometry(10.4,4.4,.2),mat(0x8a5a3c),0,4.6,-8.75),mesh(new THREE.PlaneGeometry(10,4),mat(0xffffff,{map:textTex([["Welcome to",80,64,"#fff"],["Olimomo's Farm!",110,146,"#ffe066"],["哞力全開英語營 · 乳此美好",50,220,"#ffd3e0"]],1024,256,"#2f5d4a")}),0,4.6,-8.6,false));
- [-10.8,10.8].forEach(x=>[-4,3].forEach(z=>{const w=mesh(new THREE.PlaneGeometry(3.6,2.6),mat(0x9fe0ff,{emissive:0x5fb0d8,emissiveIntensity:.4}),x*.99,5,z,false);w.rotation.y=x<0?Math.PI/2:-Math.PI/2;S.add(w);S.add(mesh(new THREE.BoxGeometry(.1,2.9,3.9),mat(0xffffff),x,5,z,false))}));
- const poster=(t,x)=>S.add(mesh(new THREE.PlaneGeometry(2.2,2.2),mat(0xffffff,{map:textTex([[t,170,128]],256,256,"#fff3a8")}),x,5.6,-8.7,false));poster("🥛",7.4);
- const desk=mat(0xf6c26b,{roughness:.7}),chair=mat(0x7bc6ef,{roughness:.6});
- for(let r=0;r<3;r++)for(let c=0;c<4;c++){const x=-6+c*4,z=-1+r*3.4;S.add(mesh(new THREE.BoxGeometry(2.6,.15,1.3),desk,x,1.3,z));[[-1.1,-.5],[1.1,-.5],[-1.1,.5],[1.1,.5]].forEach(([a,b])=>S.add(mesh(new THREE.CylinderGeometry(.06,.06,1.3,6),mat(0x8a5a3c),x+a,.65,z+b)));S.add(mesh(new THREE.BoxGeometry(1.2,.12,1),chair,x,.8,z+1.2),mesh(new THREE.BoxGeometry(1.2,1.1,.12),chair,x,1.35,z+1.7));const ct=inst("carton",.5);ct.position.set(x+rnd(-.8,.8),1.38,z);S.add(ct)}
- S.add(mesh(new THREE.BoxGeometry(6,1.2,4),mat(0xffd36b,{roughness:.7}),-6.2,.6,-5.4));room.oli=makeOli(4.6);room.oli.position.set(-6.2,1.2,-5.2);room.oli.rotation.y=.3;S.add(room.oli);
- [-9.6,9.6].forEach(x=>{S.add(mesh(new THREE.CylinderGeometry(.5,.4,.8,12),mat(0xd96c4a),x,.4,-7.6),mesh(new THREE.SphereGeometry(.9,14,10),mat(0x4fae4a),x,1.5,-7.6))})}
+function buildRoom(){const S=room.scene;S.background=new THREE.Color(0xfff3dc);
+ const a=TEX.classroom_bg.image.width/TEX.classroom_bg.image.height,H=12;
+ const bg=new THREE.Mesh(new THREE.PlaneGeometry(H*a,H),new THREE.MeshBasicMaterial({map:TEX.classroom_bg}));bg.position.set(0,H/2,-6);S.add(bg);room.bgW=H*a;room.bg=bg;
+ room.oli=makeOli(4.4);room.oli.position.set(-4.1,3.7,-1);room.oli.userData.spr.material.fog=false;S.add(room.oli)}
 
 /* ===== 名牌 ===== */
 const LABELS=[];
@@ -410,16 +378,22 @@ const P=$("panel");
 function panel(html){P.innerHTML=html;P.classList.add("on");P.scrollTop=0}
 function closePanel(){P.classList.remove("on");P.innerHTML=""}
 const click=id=>new Promise(r=>{const b=$(id);if(b)b.onclick=()=>{sfx("tap");r()}});
-const spk=(en,zh,tag="")=>`<div class="spk"><div class="ava">🐮</div><div style="flex:1">${tag}<div class="say">${en}</div>${zh?`<div class="zhl">${zh}</div>`:""}</div></div>`;
+const spk=(en,zh,tag="")=>`<div class="spk"><div class="ava">${IMG("olimomo")}</div><div style="flex:1">${tag}<div class="say">${en}</div>${zh?`<div class="zhl">${zh}</div>`:""}</div></div>`;
 async function line(en,zh,{tag="",btn="Next ▶"}={}){panel(spk(en,zh,tag?`<span class="tag">${tag}</span>`:"")+`<div><button class="btn sm" id="ag">🔊 Again</button><button class="btn pink" id="nx">${btn}</button></div>`);say(en);$("ag").onclick=()=>say(en);await click("nx")}
 function goal(en,zh){$("goal").style.display=en?"block":"none";$("goalEn").textContent=en||"";$("goalZh").textContent=zh||""}
 const SCORE={first:0,total:0};
+const IMG=(n,c="")=>`<img class="aimg ${c}" src="art/${n}.webp" alt="">`;
+const QIMG={"How old is the farm?":"q_old_farm","How heavy is a baby calf?":"q_scale","What do baby calves drink?":"q_bottle","How many stomachs does a cow have?":"q_stomach","How much food does a cow eat every day?":"q_hay_pile","Which one is NOT cow food?":"w_candy","Do all cows have milk?":"bull","Can brown cows give milk?":"cow_jersey","Can we drink milk right from the cow?":"q_heat","When does a cow have her first baby?":"q_birthday","How much does a cow's food cost every day?":"q_money","How much water does a cow drink every day?":"q_water","What does a newborn calf drink first?":"q_colostrum","What do calves learn to eat when they grow?":"g_hay","Which cow gives more milk?":"cow_holstein","Whose milk is extra creamy?":"q_cream","How does the machine know each cow?":"q_chip","Where does the milk go after milking?":"cold_tank","Which grass has lots of protein?":"g_alfalfa","Which one gives cows lots of energy?":"g_silage"};
+const OIMG={"4 kg":"o_cat","40 kg":"o_child","Milk":"w_milk","Juice":"w_juice","Mom's first milk":"q_colostrum","Water":"w_water","Hay and grass":"g_hay","Rice":"w_rice","Holstein":"cow_holstein","Jersey":"cow_jersey","A chip":"q_chip","A cold tank":"cold_tank","Alfalfa":"g_alfalfa","Oat hay":"g_oat","Corn silage":"g_silage","Bermuda grass":"g_bermuda","Candy":"w_candy","50 kg":"q_hay_pile","Yes":"t_good","No":"t_bad","2 years old":"q_birthday","10 L":"w_water","100 L":"q_water","4":"q_stomach","NT$500":"q_money"};
+const WIMG={milk:"w_milk",water:"w_water",juice:"w_juice","soy milk":"w_soymilk","black tea":"w_blacktea","milk tea":"w_milktea",rice:"w_rice",noodles:"w_noodles",bread:"w_bread",fruit:"w_fruit",sweet:"t_sweet",yummy:"t_yummy",creamy:"t_creamy",good:"t_good",bitter:"t_bitter","Yes, I do.":"t_good","No, I don't.":"t_bad"};
+const LIMG={"Lunbei":"barn","6 cows":"cow_holstein","Eyes only":"r_eyes","No germs":"r_germ","Calm cows":"r_calmcow","Wash hands":"r_wash","First milk":"q_colostrum","Milk":"q_bottle","Hay":"g_hay","Big cow":"cow_holstein","Alfalfa":"g_alfalfa","Corn silage":"g_silage","Oat hay":"g_oat","Bermuda grass":"g_bermuda","Napier grass":"g_napier","Holstein":"cow_holstein","Jersey":"cow_jersey","100 liters":"q_water","50 bottles":"w_water","Grass":"g_hay","Cow":"cow_holstein_eat","Milking":"milking_robot","Cold":"cold_tank","Heat":"q_heat","Your cup":"o_cup"};
+const RIMG={r0:"r_eyes",r1:"r_walk",r2:"r_group",r3:"r_wash"};
 const QIC={"How old is the farm?":"🏡","How heavy is a baby calf?":"⚖️","What do baby calves drink?":"🍼","How many stomachs does a cow have?":"🫄","How much food does a cow eat every day?":"🥬","Which one is NOT cow food?":"🍬","Do all cows have milk?":"🐄","Can brown cows give milk?":"🟤","Can we drink milk right from the cow?":"🔥","When does a cow have her first baby?":"🎂","How much does a cow's food cost every day?":"💰","How much water does a cow drink every day?":"🚰","What does a newborn calf drink first?":"🤱","What do calves learn to eat when they grow?":"🌾","Which cow gives more milk?":"🥛","Whose milk is extra creamy?":"🍦","How does the machine know each cow?":"🤖","Where does the milk go after milking?":"🧊","Which grass has lots of protein?":"☘️","Which one gives cows lots of energy?":"⚡"};
 const OPTIC={holstein:"🐄",jersey:"🟤"};
 async function quizStep(q,tag,bonus){let tried=false,right=false;
- panel(`<span class="tag ${bonus?"bonus":""}">${tag}</span><div><span class="bigic">${QIC[q.q]||"⭐"}</span></div><div class="q">${q.q}</div><div class="opts" id="o"></div><div class="fb" id="fb"></div><div class="zhl" id="zl">${q.zhQ}</div><button class="btn sm" id="ag">🔊 Again</button><button class="btn pink" id="nx" style="display:none">Next ▶</button>`);
+ panel(`<span class="tag ${bonus?"bonus":""}">${tag}</span><div><span class="bigic">${QIMG[q.q]?IMG(QIMG[q.q]):(QIC[q.q]||"⭐")}</span></div><div class="q">${q.q}</div><div class="opts" id="o"></div><div class="fb" id="fb"></div><div class="zhl" id="zl">${q.zhQ}</div><button class="btn sm" id="ag">🔊 Again</button><button class="btn pink" id="nx" style="display:none">Next ▶</button>`);
  say(q.q);$("ag").onclick=()=>say(q.q);
- q.opts.forEach(([icn,t],k)=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<span class="ic">${OPTIC[icn]||icn}</span>${t}${q.unit?`<small style="font-size:.55em;margin-left:4px">${q.unit}</small>`:""}`;
+ q.opts.forEach(([icn,t],k)=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<span class="ic">${OIMG[t]?IMG(OIMG[t]):(OPTIC[icn]||icn)}</span>${t}${q.unit?`<small style="font-size:.55em;margin-left:4px">${q.unit}</small>`:""}`;
   b.onclick=()=>{if(right||b.disabled)return;
    if(k===q.ans){right=true;b.classList.add("ok");sfx("ok");confetti();if(!tried)SCORE.first++;SCORE.total++;$("fb").textContent="⭐ "+q.title;$("fb").className="fb ok";$("zl").innerHTML=`<b style="font-family:var(--en);font-size:1.1em;color:var(--ink)">${q.say}</b><br>${q.zhA}`;say(q.say);$("ag").onclick=()=>say(q.say);document.querySelectorAll("#o .opt").forEach(x=>x.disabled=true);$("nx").style.display=""}
    else{b.classList.add("no");b.disabled=true;sfx("no");tried=true;$("fb").textContent="Try again! 再想一想，換一個答案";$("fb").className="fb no";say("Try again!")}};$("o").appendChild(b)});
@@ -432,7 +406,7 @@ async function practiceStep(p,tag){let pick=null,mixV=50;
  say(p.ask);
  const cup=()=>{const k=mixV/100;$("cupI").style.background=`rgb(${Math.round(150+105*k)},${Math.round(85+160*k)},${Math.round(45+180*k)})`};
  if(p.mix){cup();$("mx").oninput=e=>{mixV=+e.target.value;cup();$("f").innerHTML=fillHTML()};$("mx").onchange=()=>say(mixV>=50?"More milk!":"More black tea!")}
- (p.chips||[]).forEach(w=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<span class="ic">${C.WICON[w]||"💬"}</span>${w}`;b.onclick=()=>{pick=w;P.querySelectorAll("#o .opt").forEach(x=>x.classList.toggle("pick",x===b));$("f").innerHTML=fillHTML();$("nx").style.display="";say(sent())};$("o").appendChild(b)});
+ (p.chips||[]).forEach(w=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<span class="ic">${WIMG[w]?IMG(WIMG[w]):(C.WICON[w]||"💬")}</span>${w}`;b.onclick=()=>{pick=w;P.querySelectorAll("#o .opt").forEach(x=>x.classList.toggle("pick",x===b));$("f").innerHTML=fillHTML();$("nx").style.display="";say(sent())};$("o").appendChild(b)});
  $("h").onclick=()=>say(pick||!p.chips?sent():p.ask);
  $("m").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition,fb=$("fb");
   if(p.chips&&!pick){fb.textContent="先選一張卡！";fb.className="fb no";return}
@@ -442,17 +416,17 @@ async function practiceStep(p,tag){let pick=null,mixV=50;
   r.onerror=()=>{fb.textContent="聽不到聲音，再試一次。";fb.className="fb no"};r.start()};
  await click("nx")}
 async function learnStep(k){const d=C.LEARN[k];
- panel(`<span class="tag bonus">📖 Learn more</span><div class="q">${d.title}</div><div class="len">${d.en.map(t=>`<button type="button" data-s="${t}">${t}</button>`).join("")}</div><div class="cards">${d.items.map(i=>`<div class="card" data-s="${i.say}"><span class="ic">${i.em}</span><b>${i.w}</b><small>${i.zh}</small>${i.tag?`<br><span class="ltag ${i.tag}">${C.LTAG[i.tag]}</span>`:""}</div>`).join("")}</div><div class="lzh"><b>給家長／老師</b>${d.zh}</div><button class="btn pink" id="nx">Next ▶</button>`);
+ panel(`<span class="tag bonus">📖 Learn more</span><div class="q">${d.title}</div><div class="len">${d.en.map(t=>`<button type="button" data-s="${t}">${t}</button>`).join("")}</div><div class="cards">${d.items.map(i=>`<div class="card" data-s="${i.say}"><span class="ic">${LIMG[i.w]?IMG(LIMG[i.w]):i.em}</span><b>${i.w}</b><small>${i.zh}</small>${i.tag?`<br><span class="ltag ${i.tag}">${C.LTAG[i.tag]}</span>`:""}</div>`).join("")}</div><div class="lzh"><b>給家長／老師</b>${d.zh}</div><button class="btn pink" id="nx">Next ▶</button>`);
  P.querySelectorAll("[data-s]").forEach(el=>el.onclick=()=>{say(el.dataset.s);el.classList.add("seen")});say(d.title);await click("nx")}
-function dropHay(){const fb=farm.feedBox;const h=mesh(new THREE.BoxGeometry(rnd(.5,.9),.3,.5),mat(0xffffff,{map:hayTex}),fb.position.x+rnd(-2.6,2.6),5,fb.position.z+rnd(-.3,.3));F.add(h);let v=0;const f=(t,dt)=>{v+=dt*14;h.position.y=Math.max(.98,h.position.y-v*dt);h.rotation.y+=dt*3;if(h.position.y<=.98)critters.splice(critters.indexOf(f),1)};critters.push(f)}
-async function grassStep(){panel(`<span class="tag">Hay & Grass · Grass cards</span><div class="q">What do cows eat?</div><div class="cards" id="gc">${C.GRASS.map((g,i)=>`<div class="card" data-i="${i}"><span class="ic">${g.em}</span><b>${g.w}</b><small>${g.zh}</small>${MODE==="explore"?`<br><span class="ltag ${g.tag}">${C.LTAG[g.tag]}</span>`:""}</div>`).join("")}</div><div class="zhl">點每張牧草卡聽 Olimomo 念，跟著說；牧草會掉進飼料盒給牛吃！</div><button class="btn pink" id="nx">Next ▶</button>`);
+function dropHay(){const fb=farm.feedBox;const h=stand("hay_stack",.9,{shadow:false});h.position.set(fb.position.x+rnd(-2,2),6,fb.position.z+.3);F.add(h);let v=0;const f=(t,dt)=>{v+=dt*14;h.position.y=Math.max(.7,h.position.y-v*dt);if(h.position.y<=.7)critters.splice(critters.indexOf(f),1)};critters.push(f)}
+async function grassStep(){panel(`<span class="tag">Hay & Grass · Grass cards</span><div class="q">What do cows eat?</div><div class="cards" id="gc">${C.GRASS.map((g,i)=>`<div class="card" data-i="${i}"><span class="ic">${IMG(g.key)}</span><b>${g.w}</b><small>${g.zh}</small>${MODE==="explore"?`<br><span class="ltag ${g.tag}">${C.LTAG[g.tag]}</span>`:""}</div>`).join("")}</div><div class="zhl">點每張牧草卡聽 Olimomo 念，跟著說；牧草會掉進飼料盒給牛吃！</div><button class="btn pink" id="nx">Next ▶</button>`);
  say(C.LINES.st_grass.en);P.querySelectorAll("#gc .card").forEach(el=>el.onclick=()=>{say(C.GRASS[+el.dataset.i].w);el.classList.add("seen");dropHay()});await click("nx")}
-async function twordsStep(){panel(`<span class="tag">Milking Cows · Taste words</span><div class="q">Taste words</div><div class="cards" id="tc">${C.TWORDS.map((t,i)=>`<div class="card" data-i="${i}"><span class="ic">${C.WICON[t.w]}</span><b>${t.w}</b><small>${t.zh}</small></div>`).join("")}</div><div class="zhl">${C.LINES.tw_intro.zh}後面會問「你喜歡牛奶嗎？喝起來像什麼味道？」</div><button class="btn pink" id="nx">Next ▶</button>`);
+async function twordsStep(){panel(`<span class="tag">Milking Cows · Taste words</span><div class="q">Taste words</div><div class="cards" id="tc">${C.TWORDS.map((t,i)=>`<div class="card" data-i="${i}"><span class="ic">${IMG("t_"+t.w)}</span><b>${t.w}</b><small>${t.zh}</small></div>`).join("")}</div><div class="zhl">${C.LINES.tw_intro.zh}後面會問「你喜歡牛奶嗎？喝起來像什麼味道？」</div><button class="btn pink" id="nx">Next ▶</button>`);
  say(C.LINES.tw_intro.en);P.querySelectorAll("#tc .card").forEach(el=>el.onclick=()=>{say(C.TWORDS[+el.dataset.i].say);el.classList.add("seen")});await click("nx")}
 async function milkteaStep(){const nob="cursor:default;border:0;box-shadow:none;background:none";
- panel(`<span class="tag">Milking Cows</span><div class="q">Milk + black tea = ?</div><div class="cards"><div class="card" id="mt1"><span class="ic">🥛</span><b>milk</b><small>牛奶</small></div><div class="card" style="${nob}"><span class="ic">➕</span></div><div class="card" id="mt2"><span class="ic">☕</span><b>black tea</b><small>紅茶</small></div><div class="card" style="${nob}"><span class="ic">🟰</span></div><div class="card" id="mt3"><span class="ic">❓</span><b>?</b><small>先問小朋友</small></div></div><div class="zhl">老師講到牛奶就點第 1 張、講到紅茶點第 2 張；第 3 張先問「混在一起會變成什麼？」，等小朋友回答再點開。</div><button class="btn pink" id="nx">Next ▶</button>`);
+ panel(`<span class="tag">Milking Cows</span><div class="q">Milk + black tea = ?</div><div class="cards"><div class="card" id="mt1"><span class="ic">${IMG("w_milk")}</span><b>milk</b><small>牛奶</small></div><div class="card" style="${nob}"><span class="ic">➕</span></div><div class="card" id="mt2"><span class="ic">${IMG("w_blacktea")}</span><b>black tea</b><small>紅茶</small></div><div class="card" style="${nob}"><span class="ic">🟰</span></div><div class="card" id="mt3"><span class="ic">❓</span><b>?</b><small>先問小朋友</small></div></div><div class="zhl">老師講到牛奶就點第 1 張、講到紅茶點第 2 張；第 3 張先問「混在一起會變成什麼？」，等小朋友回答再點開。</div><button class="btn pink" id="nx">Next ▶</button>`);
  $("mt1").onclick=()=>{say("milk");$("mt1").classList.add("seen")};$("mt2").onclick=()=>{say("black tea");$("mt2").classList.add("seen")};
- $("mt3").onclick=()=>{$("mt3").innerHTML=`<span class="ic">🧋</span><b>milk tea</b><small>鮮奶茶</small>`;$("mt3").classList.add("seen");confetti(16);say(C.LINES.milktea.en)};await click("nx")}
+ $("mt3").onclick=()=>{$("mt3").innerHTML=`<span class="ic">${IMG("w_milktea")}</span><b>milk tea</b><small>鮮奶茶</small>`;$("mt3").classList.add("seen");confetti(16);say(C.LINES.milktea.en)};await click("nx")}
 
 /* ===== 站點 ===== */
 const done=new Set();
@@ -493,7 +467,7 @@ async function farmIntro(){locked=true;walkTo(0,42);await wait(1700);
  await line(C.LINES.land.en,C.LINES.land.zh,{btn:"Let's go! ▶"});closePanel();
  goal("Go to the Classroom","先去簡報室：走到黃色圓圈（點名牌會自動走過去）");farm.classLab.show=true;locked=false;
  await new Promise(r=>farm.enterClass=r);farm.enterClass=null;locked=true;target=null;farm.classLab.show=false;goal("");
- await fadeTo(()=>{camMode="fixed";setScene(room);camera.position.set(2.5,4.6,9.5);camera.lookAt(-2.6,3.4,-7)});
+ await fadeTo(()=>{camMode="fixed";setScene(room);camera.position.set(0,6,6.9);camera.lookAt(0,6,-6)});
  await classroom();
  await fadeTo(()=>{camMode="follow";setScene(farm);farm.oli.position.set(-14,0,39);farm.oli.rotation.y=0;camT.copy(farm.oli.position);yaw=.9;pitch=.42;dist=16});
  C.STATIONS.forEach(s=>s.lab.show=true);updateGoal();locked=false}
@@ -505,17 +479,17 @@ async function classroom(){
  if(MODE==="explore")await learnStep("farm");
  await quizStep(C.QUIZ[0],"Classroom · Guess!");
  for(const w of C.WARM){let pick=null;
-  const ansHTML=()=>w.q==="where"?`<div class="wmap">📍 Lunbei, Yunlin<small>雲林縣崙背鄉</small></div><div class="fill">${w.ans}</div>`:w.q==="age"?`<div class="fill">I'm <span class="slot">${pick||"&nbsp;"}</span> years old.</div>`:`<div class="fill">My name is <span class="slot">&nbsp;</span>. <small style="font-size:.6em">or</small> I'm <span class="slot">&nbsp;</span>.</div>`;
+  const ansHTML=()=>w.q==="where"?`<div class="wmap">${IMG("taiwan_map")}📍 Lunbei, Yunlin<small>雲林縣崙背鄉</small></div><div class="fill">${w.ans}</div>`:w.q==="age"?`<div class="fill">I'm <span class="slot">${pick||"&nbsp;"}</span> years old.</div>`:`<div class="fill">My name is <span class="slot">&nbsp;</span>. <small style="font-size:.6em">or</small> I'm <span class="slot">&nbsp;</span>.</div>`;
   panel(`<span class="tag">Classroom · Warm up</span><div class="q">${w.title}</div><div id="wa" style="${w.q==="age"?"":"visibility:hidden"}">${ansHTML()}</div>${w.chips?`<div class="opts" id="o">${w.chips.map(n=>`<button class="opt" data-n="${n}">${n}</button>`).join("")}</div>`:""}<div><button class="btn sm" id="ag">🔊 Again</button><button class="btn sm" id="an">🔊 Answer</button><button class="btn pink" id="nx">Next ▶</button></div>${w.pair?`<div class="pair"><span>Ask your friend! 兩兩互相問答</span><b>A:</b> ${w.title}<br><b>B:</b> ${w.pair}</div>`:""}<div class="zhl">${C.LINES[w.q].zh}</div>`);
   say(w.title);$("ag").onclick=()=>say(w.title);
   $("an").onclick=()=>{$("wa").style.visibility="visible";say(w.q==="age"&&pick?`I'm ${pick} years old.`:C.LINES[w.q+"_a"].en)};
   if(w.chips)P.querySelectorAll("#o .opt").forEach(b=>b.onclick=()=>{pick=b.dataset.n;P.querySelectorAll("#o .opt").forEach(x=>x.classList.toggle("pick",x===b));$("wa").innerHTML=ansHTML();say(`I'm ${pick} years old.`)});
   await click("nx")}
- panel(`<span class="tag">Classroom</span><div class="q">Farm Rules</div><div class="rgrid">${C.RULES.map(r=>`<div class="rule" data-k="${r.key}"><span class="ic">${r.ic}</span><b>${r.en}</b><small>${r.zh}</small></div>`).join("")}</div><div><button class="btn sm" id="ag">🔊 Again</button><button class="btn pink" id="nx">Let's go outside! ▶</button></div><div class="zhl">${C.LINES.rules.zh}</div>`);
+ panel(`<span class="tag">Classroom</span><div class="q">Farm Rules</div><div class="rgrid">${C.RULES.map(r=>`<div class="rule" data-k="${r.key}"><span class="ic">${IMG(RIMG[r.key])}</span><b>${r.en}</b><small>${r.zh}</small></div>`).join("")}</div><div><button class="btn sm" id="ag">🔊 Again</button><button class="btn pink" id="nx">Let's go outside! ▶</button></div><div class="zhl">${C.LINES.rules.zh}</div>`);
  say(C.LINES.rules.en);$("ag").onclick=()=>say(C.LINES.rules.en);P.querySelectorAll(".rule").forEach(el=>el.onclick=()=>{say(C.LINES[el.dataset.k].en);el.classList.add("seen")});
  await click("nx");if(MODE==="explore")await learnStep("classroom");closePanel()}
 async function finale(){locked=true;goal("");const pct=SCORE.total?SCORE.first/SCORE.total:0,n=pct>=.8?3:pct>=.5?2:1;
- panel(`<div class="medal">🏅</div><div class="q">You are cow experts!</div><div class="stars">${"★".repeat(n)+"☆".repeat(3-n)}</div><div class="zhl">第一次就答對 ${SCORE.first} / ${SCORE.total} 題　${C.LINES.expert.zh}</div><button class="btn pink" id="nx">My Farm map ▶</button>`);
+ panel(`<div class="medal">${IMG("o_medal")}</div><div class="q">You are cow experts!</div><div class="stars">${"★".repeat(n)+"☆".repeat(3-n)}</div><div class="zhl">第一次就答對 ${SCORE.first} / ${SCORE.total} 題　${C.LINES.expert.zh}</div><button class="btn pink" id="nx">My Farm map ▶</button>`);
  confetti(60);say(C.LINES.expert.en);await click("nx");closePanel();
  camMode="map";$("zoom").style.display="none";C.STATIONS.forEach(s=>s.lab.show=false);
  const pins=C.PLACES.map(p=>{const [x,z]=PLACEPOS[p.id];return label(`${p.en}<small>${p.zh.split("：")[0]}</small>`,new THREE.Vector3(x,4,z),farm,"next",()=>{say(p.say);goal(p.en,p.zh);mapFocus=new THREE.Vector3(x,0,z)})});
@@ -544,31 +518,32 @@ hd.addEventListener("click",e=>{e.stopPropagation();if(e.target.closest("[data-x
 /* ===== 主迴圈 ===== */
 const clock=new THREE.Clock(),tmp=new THREE.Vector3();
 function frame(){requestAnimationFrame(frame);const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
- mixers.forEach(m=>m.update(dt));
+
  if(active===fly){const b=fly.bal;
   if(flyT>=0&&flyT<1){flyT=Math.min(1,flyT+dt/9);const p=fly.curve.getPointAt(flyT);b.position.copy(p);const ah=fly.curve.getPointAt(Math.min(1,flyT+.02));b.rotation.y=Math.atan2(ah.x-p.x,ah.z-p.z)}
-  b.position.y=16+Math.sin(t*2)*.4;if(flyT>=1)fly.ring.scale.setScalar(1+Math.sin(t*4)*.12);
+  b.position.y=16+Math.sin(t*2)*.5;if(flyT>=1)fly.ring.scale.setScalar(1+Math.sin(t*4)*.12);
   /* 飛行時鏡頭在氣球的東北方、往西南看（看得到前面的台灣） */
   const tg=flyT<0?tmp.set(0,4,-6):b.position,cp=flyT<0?new THREE.Vector3(26,92,96):new THREE.Vector3(tg.x+30,tg.y+22,tg.z-30);
   camera.position.lerp(cp,Math.min(1,dt*(flyT<0?3:1.4)));camera.lookAt(flyT<0?tg:tmp.set(tg.x-8,tg.y-10,tg.z+16));
-  fly.clouds.forEach(c=>{c.position.x+=dt*1.5;if(c.position.x>100)c.position.x=-100});animOli(fly.oli,t,false)}
+  fly.clouds.forEach(c=>{c.position.x+=dt*1.5;if(c.position.x>110)c.position.x=-110});bounce(fly.oli,t,false)}
  else if(active===farm){const o=farm.oli;let mx=0,mz=0,moving=false;
   if(!locked){if(keys.w||keys.arrowup)mz-=1;if(keys.s||keys.arrowdown)mz+=1;if(keys.a||keys.arrowleft)mx-=1;if(keys.d||keys.arrowright)mx+=1}
-  const step=(dx,dz)=>{const sp=8*dt;o.position.x=Math.max(-50,Math.min(50,o.position.x+dx*sp));o.position.z=Math.max(-78,Math.min(56,o.position.z+dz*sp));let da=Math.atan2(dx,dz)-o.rotation.y;da=Math.atan2(Math.sin(da),Math.cos(da));o.rotation.y+=da*Math.min(1,dt*10);moving=true};
+  const step=(dx,dz)=>{const sp=8*dt;o.position.x=Math.max(-50,Math.min(50,o.position.x+dx*sp));o.position.z=Math.max(-78,Math.min(56,o.position.z+dz*sp));faceBy(o,dx,dz);moving=true};
   if(mx||mz){target=null;const l=Math.hypot(mx,mz);mx/=l;mz/=l;const sy=Math.sin(yaw),cy=Math.cos(yaw);step(mx*cy+mz*sy,-mx*sy+mz*cy)}
   else if(target){const dx=target.x-o.position.x,dz=target.z-o.position.z,d=Math.hypot(dx,dz);if(d<.35){target=null;const cb=onArrive;onArrive=null;if(cb)cb()}else step(dx/d,dz/d)}
   animOli(o,t,moving);
   if(!locked&&!busy){if(farm.enterClass){if(Math.hypot(o.position.x-CLASSDOOR.x,o.position.z-CLASSDOOR.z)<2.4)farm.enterClass()}
    else for(const s of C.STATIONS){if(done.has(s.id))continue;const [x,z]=STPOS[s.id];if(Math.hypot(o.position.x-x,o.position.z-z)<2.6){runStation(s);break}}}
   cows.forEach(c=>{const u=c.userData;if(!u.wander||u.eat)return;u.ph+=dt;const cyc=(u.ph*.08)%1;
-   if(cyc<.45){const a=u.ph*.18,tx=u.wander.cx+Math.cos(a)*u.wander.r,tz=u.wander.cz+Math.sin(a*1.3)*u.wander.r*.7,dx=tx-c.position.x,dz=tz-c.position.z,d=Math.hypot(dx,dz);if(d>.1){play(c,"Walk");const sp=Math.min(d,.9*dt);c.position.x+=dx/d*sp;c.position.z+=dz/d*sp;let da=Math.atan2(dx,dz)-c.rotation.y;da=Math.atan2(Math.sin(da),Math.cos(da));c.rotation.y+=da*dt*2}else play(c,"Idle")}
+   if(cyc<.45){const a=u.ph*.18,tx=u.wander.cx+Math.cos(a)*u.wander.r,tz=u.wander.cz+Math.sin(a*1.3)*u.wander.r*.7,dx=tx-c.position.x,dz=tz-c.position.z,d=Math.hypot(dx,dz);if(d>.1){play(c,"Walk");const sp=Math.min(d,.9*dt);c.position.x+=dx/d*sp;c.position.z+=dz/d*sp;}else play(c,"Idle")}
    else play(c,cyc<.75?"Eating":"Idle")});
+  cows.forEach(c=>{const u=c.userData,lp=u.lp||(u.lp=c.position.clone());faceBy(c,c.position.x-lp.x,c.position.z-lp.z);lp.copy(c.position);bounce(c,t,u.state==="Walk",.6)});
   critters.forEach(f=>f(t,dt));farm.clouds.forEach(c=>{c.position.x+=dt*1.2;if(c.position.x>200)c.position.x=-200});
   C.STATIONS.forEach(s=>{const k=done.has(s.id)?1:1+Math.sin(t*3)*.12;s.ring.scale.set(k,k,k)});farm.cring.visible=!!farm.enterClass;farm.cring.scale.setScalar(1+Math.sin(t*3)*.12);
   if(camMode==="map"){const c=mapFocus||tmp.set(0,0,14);camera.position.lerp(new THREE.Vector3(c.x,mapFocus?30:118,c.z+(mapFocus?26:34)),Math.min(1,dt*2));camera.lookAt(c)}
   else{camT.lerp(v3.set(o.position.x,1.8,o.position.z),Math.min(1,dt*6));camera.position.set(camT.x+Math.sin(yaw)*Math.cos(pitch)*dist,camT.y+Math.sin(pitch)*dist,camT.z+Math.cos(yaw)*Math.cos(pitch)*dist);camera.lookAt(camT)}
   sun.position.set(o.position.x+40,70,o.position.z+30);sun.target.position.copy(o.position)}
- else if(active===room){animOli(room.oli,t,false);room.oli.rotation.y=.3+Math.sin(t*.8)*.12}
+ else if(active===room){const vh=2*12.9*Math.tan(Math.PI*25/180),k=Math.max(1,vh*camera.aspect/room.bgW);room.bg.scale.set(k,k,1);animOli(room.oli,t,false);room.oli.userData.spr.material.rotation=Math.sin(t*.8)*.04}
  updLabels();if(active)renderer.render(active.scene,camera)}
 
 /* ===== 開始 ===== */
