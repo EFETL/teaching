@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Olimomo's Farm 哞力全開英語營（精簡版）</title>
+<style>
+:root{--grass:#7DBB5A;--grass-deep:#4E8A3A;--cream:#FFF8EA;--sky:#CDE8F6;--pink:#F0708F;--pink-soft:#FCD9E2;--ink:#2F3A2A;--ok:#3E9E5B;--ok-soft:#DDF2E2;--no:#D9534F;--no-soft:#FBE1DF;--line:#E6DCC6;
+--en:"Baloo 2","Nunito","Arial Rounded MT Bold",system-ui,sans-serif;--zh:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--grass-deep);font-family:var(--en);color:var(--ink);overflow:hidden}
+#stage{width:1600px;height:900px;position:absolute;left:50%;top:50%;transform-origin:center;border-radius:28px;overflow:hidden;
+ background:linear-gradient(var(--sky) 0 56%,var(--grass) 56% 100%);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.hills{position:absolute;left:0;right:0;top:44%;height:20%;background:radial-gradient(ellipse at 20% 100%,#8fcb6b 0 40%,transparent 41%),radial-gradient(ellipse at 70% 100%,#6fae4d 0 45%,transparent 46%);opacity:.8}
+.cloud{position:absolute;font-size:90px;opacity:.9;animation:drift 40s linear infinite}
+@keyframes drift{from{transform:translateX(-200px)}to{transform:translateX(1800px)}}
+.screen{position:absolute;inset:0 0 96px 0;display:none;padding:50px 90px 20px;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px}
+.screen.on{display:flex;animation:pop .4s ease}
+@keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+h1{font-size:84px;margin:0;line-height:1.05;text-shadow:0 4px 0 #fff8}
+h2{font-size:60px;margin:0;line-height:1.1}
+.sub{font-family:var(--zh);font-size:30px}
+.mascot{font-size:190px;line-height:1;filter:drop-shadow(0 10px 0 #0002);animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-14px)}}
+.btn{font:800 36px var(--en);border:0;border-radius:999px;padding:16px 42px;background:#fff;color:var(--ink);box-shadow:0 6px 0 var(--line);cursor:pointer}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 var(--line)}
+.btn.pink{background:var(--pink);color:#fff;box-shadow:0 6px 0 #c74d6c}
+.btn.ghost{font-size:28px;padding:10px 26px}
+.card{background:var(--cream);border:4px solid var(--line);border-radius:28px;box-shadow:0 8px 0 #0001;padding:26px 40px}
+.say{font-size:44px;max-width:1200px;line-height:1.25}
+.pic{font-size:170px;line-height:1}
+.opts{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+.opt{min-width:280px;padding:22px 30px;font:800 42px var(--en);background:#fff;border:5px solid var(--line);border-radius:26px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 6px 0 var(--line)}
+.opt .ic{font-size:76px;line-height:1}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.no{background:var(--no-soft);border-color:var(--no);opacity:.55}
+.tag{font:800 26px var(--en);background:var(--pink-soft);color:#b23a5c;border-radius:999px;padding:6px 20px}
+.fb{font-size:42px;min-height:56px;font-weight:800}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.fill{font-size:60px;font-weight:800}
+.fill .slot{display:inline-block;min-width:240px;border-bottom:6px dashed var(--pink);color:var(--pink)}
+.chips{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.chip{font:800 38px var(--en);background:#fff;border:4px solid var(--line);border-radius:22px;padding:12px 26px;cursor:pointer;box-shadow:0 5px 0 var(--line)}
+.chip i{font-style:normal;margin-right:8px}
+.map{display:flex;gap:30px}
+.stn{width:300px;padding:24px 10px;border-radius:28px;background:var(--cream);border:4px solid var(--line);cursor:pointer;font-weight:800;font-size:34px;box-shadow:0 8px 0 var(--line)}
+.stn .ic{font-size:110px;display:block}.stn small{display:block;font:500 24px var(--zh)}
+.stn.done{background:var(--ok-soft);border-color:var(--ok)}
+.stn.lock{opacity:.5;cursor:not-allowed}
+.stars{font-size:70px}
+#bar{position:absolute;left:0;right:0;bottom:0;height:96px;background:var(--cream);border-top:4px solid var(--line);display:flex;align-items:center;gap:20px;padding:0 30px}
+#zh{flex:1;font:500 28px/1.3 var(--zh);color:#5d5646;max-height:84px;overflow:hidden}
+#tools{display:flex;gap:10px}
+#tools button{font:700 22px var(--zh);border:3px solid var(--line);background:#fff;border-radius:14px;padding:8px 14px;cursor:pointer}
+#prog{font:800 26px var(--en);color:var(--pink)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="hills"></div>
+  <div class="cloud" style="top:40px;animation-delay:-5s">☁️</div>
+  <div class="cloud" style="top:150px;animation-delay:-22s;font-size:70px">☁️</div>
+
+  <div class="screen on" id="s-start">
+    <div class="mascot">🐮</div>
+    <h1>Olimomo's Farm</h1>
+    <div class="sub">哞力全開英語營 · 乳此美好（精簡版）</div>
+    <button class="btn pink" id="go">Let's go! ▶</button>
+  </div>
+
+  <div class="screen" id="s-hello">
+    <div class="mascot" style="font-size:150px">🐮</div>
+    <div class="card say" id="helloSay"></div>
+    <div style="display:flex;gap:20px"><button class="btn ghost" data-say="hello">🔊 Again</button><button class="btn pink" id="toRules">Next ▶</button></div>
+  </div>
+
+  <div class="screen" id="s-rules">
+    <h2>Farm Rules</h2>
+    <div class="map" style="gap:24px">
+      <div class="stn" data-say="Eyes only, hands in pockets."><span class="ic">👀</span>Eyes only,<br>hands in pockets<small>只用眼睛看，手放口袋</small></div>
+      <div class="stn" data-say="Walk, don't run."><span class="ic">🚶</span>Walk,<br>don't run<small>用走的，不要跑</small></div>
+      <div class="stn" data-say="Stay with your group."><span class="ic">👫</span>Stay with<br>your group<small>跟好你的小組</small></div>
+      <div class="stn" data-say="Wash your hands."><span class="ic">🧼</span>Wash<br>your hands<small>記得洗手</small></div>
+    </div>
+    <button class="btn pink" id="toMap">Let's go outside! ▶</button>
+  </div>
+
+  <div class="screen" id="s-map">
+    <h2>Where do we go?</h2>
+    <div class="map" id="mapRow"></div>
+    <div class="sub" id="mapHint"></div>
+  </div>
+
+  <div class="screen" id="s-intro">
+    <div class="pic" id="inIc"></div>
+    <h2 id="inTitle"></h2>
+    <div class="card say" id="inSay"></div>
+    <div style="display:flex;gap:20px"><button class="btn ghost" id="inAgain">🔊 Again</button><button class="btn pink" id="inGo">Fun Facts ▶</button></div>
+  </div>
+
+  <div class="screen" id="s-quiz">
+    <span class="tag" id="qTag"></span>
+    <div class="pic" id="qIc"></div>
+    <h2 id="qQ" style="font-size:54px"></h2>
+    <div class="opts" id="qOpts"></div>
+    <div class="fb" id="qFb"></div>
+    <button class="btn pink" id="qNext" style="display:none">Next ▶</button>
+  </div>
+
+  <div class="screen" id="s-talk">
+    <span class="tag" id="tTag"></span>
+    <h2 id="tQ" style="font-size:52px"></h2>
+    <div class="fill" id="tFill"></div>
+    <div class="chips" id="tChips"></div>
+    <div style="display:flex;gap:20px;align-items:center">
+      <button class="btn ghost" id="tHear">🔊 Listen</button>
+      <button class="btn ghost" id="tMic">🎤 Try it!</button>
+      <button class="btn pink" id="tNext" style="display:none">Next ▶</button>
+    </div>
+    <div class="fb" id="tFb"></div>
+  </div>
+
+  <div class="screen" id="s-end">
+    <div class="mascot" style="font-size:150px">🏅</div>
+    <h1>You are cow experts!</h1>
+    <div class="stars" id="endStars"></div>
+    <div class="sub" id="endScore"></div>
+    <button class="btn pink" id="again2">↺ Play again</button>
+  </div>
+
+  <div id="bar">
+    <div id="zh"></div>
+    <div id="prog"></div>
+    <div id="tools"><button id="mute">🔊 聲音開</button><button id="fs">全螢幕</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== 內容：全部改這裡 ===== */
+const LINES = {
+  hello:{en:"Hello, my name is Olimomo. Welcome to my farm. And let's learn some fun facts about the cow.", zh:"大家好，我叫 Olimomo，歡迎來到我的牧場！我們一起來學一些關於牛的有趣小知識吧。"}
+};
+const STATIONS = [
+  {id:"calf", ic:"🐄", en:"Baby Calves", zh:"小牛區",
+   say:"These are baby calves. They are so cute! Let's answer some fun facts.", zhSay:"小牛區：先聽 Olimomo 介紹，再回答問題。",
+   quiz:[
+    {ic:"⚖️", q:"How heavy is a baby calf?", zhQ:"剛出生的小牛有多重？", opts:[["🐈","4 kg"],["🧒","40 kg"]], ans:1, good:"About 40 kg! A baby calf is about as heavy as a child.", zhA:"答案：大約 40 公斤！"},
+    {ic:"🍼", q:"What do baby calves drink?", zhQ:"小牛喝什麼長大？", opts:[["🥛","Milk"],["🧃","Juice"]], ans:0, good:"Milk! Baby calves drink milk every day.", zhA:"答案：牛奶！"},
+    {ic:"🤱", q:"What does a newborn calf drink first?", zhQ:"剛出生的小牛第一口喝什麼？", opts:[["🐄","Mom's first milk"],["💧","Water"]], ans:0, good:"Mom's first milk keeps baby calves healthy.", zhA:"答案：媽媽的第一口奶（初乳），有抗體，保護小牛不生病。"}],
+   talk:{q:"What do you drink every day?", frame:["I drink "," ."], chips:[["🥛","milk"],["💧","water"],["🧃","juice"],["🧋","milk tea"]], zh:"小牛喝牛奶，那你每天喝什麼？點一個字，再按 🎤 說說看。", need:["drink"]}},
+  {id:"hay", ic:"🌾", en:"Hay & Grass", zh:"牧草區",
+   say:"This is the hay barn. Cows eat hay and grass every day. Let's see what my cow friends like to eat!", zhSay:"牧草區：牛每天都要吃很多牧草。",
+   quiz:[
+    {ic:"🫄", q:"How many parts does a cow's stomach have?", zhQ:"牛的胃分成幾個部分？（1 個還是 4 個？）", opts:[["1️⃣","1"],["4️⃣","4"]], ans:1, good:"Four! They help her eat grass.", zhA:"答案：4 個！牛的胃分成 4 個部分，幫助牠消化牧草。"},
+    {ic:"🥬", q:"How much food does a cow eat every day?", zhQ:"一頭乳牛一天吃多少食物？", opts:[["🥕","5 kg"],["🌾","50 kg"]], ans:1, good:"About 50 kg of hay and grass!", zhA:"答案：大約 50 公斤！"},
+    {ic:"🍬", q:"Which one is NOT cow food?", zhQ:"哪一個「不是」牛的食物？", opts:[["🌾","Oat hay"],["🍬","Candy"],["☘️","Alfalfa"]], ans:1, good:"Candy! Cows eat hay and grass. No candy!", zhA:"答案：糖果！牛吃燕麥草、苜蓿、百慕達草、玉米青貯、狼尾草。"}],
+   talk:{q:"What do cows eat?", frame:["Cows eat "," ."], chips:[["🌾","hay"],["🌿","grass"],["🍬","candy"]], zh:"牛吃什麼？選對的字，一起說：Cows eat hay and grass.", need:["cows","eat"], ok:["hay","grass"]}},
+  {id:"yard", ic:"🏞️", en:"Cow Yard", zh:"牛區",
+   say:"This is the cow yard. Big cows live here. They eat a lot every day!", zhSay:"牛區：大牛住在這裡，每天吃很多。",
+   quiz:[
+    {ic:"🐮", q:"Which cow gives more milk?", zhQ:"哪一種牛產的奶比較多？（黑白花的荷蘭牛，還是褐色的娟姍牛？）", opts:[["⚫⚪","Holstein"],["🟤","Jersey"]], ans:0, good:"Holstein! Black and white cows give lots of milk.", zhA:"答案：荷蘭牛！黑白花的荷蘭牛產奶量高。"},
+    {ic:"🎂", q:"When does a cow have her first baby?", zhQ:"母牛大概幾歲生第一隻小牛？", opts:[["1️⃣","1 year old"],["2️⃣","2 years old"]], ans:1, good:"About 2 years old. Then she can give milk.", zhA:"答案：大約 2 歲！生了小牛之後才會有牛奶。"},
+    {ic:"🚰", q:"How much water does a cow drink every day?", zhQ:"一頭牛一天喝多少水？", opts:[["🪣","10 L"],["🛢️","100 L"]], ans:1, good:"About 100 liters! That's 50 big bottles of water!", zhA:"答案：大約 100 公升，等於 50 瓶 2 公升的大瓶水。"}],
+   talk:{q:"How much do you drink a day?", frame:["I drink about "," liters of water a day."], chips:[["💧","1"],["💧","2"],["💧","100"]], zh:"牛一天喝約 100 公升的水，那你呢？小朋友一天大約喝 1～2 公升。", need:["drink","liters"]}},
+  {id:"milk", ic:"🥛", en:"Milking Cows", zh:"乳牛區",
+   say:"These are mom cows. They give us milk. Let's answer some fun facts.", zhSay:"乳牛區：牛媽媽會產牛奶。",
+   quiz:[
+    {ic:"🐂", q:"Do all cows have milk?", zhQ:"是不是所有的牛都有牛奶？", opts:[["👍","Yes"],["✋","No"]], ans:1, good:"No! Only mom cows have milk, after they have a baby calf.", zhA:"答案：不是！要生過小牛的牛媽媽才有奶，公牛沒有奶。"},
+    {ic:"🟤", q:"Can brown cows give milk?", zhQ:"咖啡色的牛也會產牛奶嗎？", opts:[["👍","Yes"],["✋","No"]], ans:0, good:"Yes! Brown Jersey cows give milk too!", zhA:"答案：會！咖啡色的娟姍牛也是乳牛。"},
+    {ic:"🔥", q:"Can we drink milk right from the cow?", zhQ:"剛擠出來的牛奶可以直接喝嗎？", opts:[["👍","Yes"],["✋","No"]], ans:1, good:"No! We heat the milk to kill the germs. Then it is safe to drink!", zhA:"答案：不行！要先加熱殺菌，才能安全地喝。"}],
+   talk:{q:"Do you like to drink milk?", frame:["",""], chips:[["👍","Yes, I do."],["👎","No, I don't."]], full:true, zh:"你喜歡喝牛奶嗎？選一句，再說說看。", need:[]}}
+];
+
+/* ===== 程式 ===== */
+const $ = id=>document.getElementById(id);
+const stage = $("stage"), zh = $("zh");
+let muted=false, done=new Set(), score=0, total=0, cur=null, qi=0;
+
+function fit(){ const k=Math.min(innerWidth/1600, innerHeight/900); stage.style.transform=`translate(-50%,-50%) scale(${k})`; }
+addEventListener("resize",fit); fit();
+
+function show(id,zhText,prog){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id)); zh.textContent=zhText||""; $("prog").textContent=prog||""; }
+
+let voice=null;
+function pickVoice(){ const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang)); voice=v.find(x=>/Samantha|Google US|Female|Jenny|Aria/i.test(x.name))||v[0]||null; }
+if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function say(t){ if(muted||!("speechSynthesis" in window)) return; speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; if(voice)u.voice=voice; u.rate=.85; u.pitch=1.15; speechSynthesis.speak(u); }
+function beep(ok){ if(muted) return; try{ const c=new (window.AudioContext||window.webkitAudioContext)(), o=c.createOscillator(), g=c.createGain(); o.connect(g); g.connect(c.destination); o.frequency.value=ok?660:220; g.gain.value=.08; o.start(); o.frequency.setValueAtTime(ok?880:180,c.currentTime+.12); o.stop(c.currentTime+.28); }catch(_){} }
+
+$("mute").onclick=()=>{ muted=!muted; $("mute").textContent=muted?"🔇 聲音關":"🔊 聲音開"; if(muted) speechSynthesis.cancel(); };
+$("fs").onclick=()=>{ document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.(); };
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-say]"); if(!b) return; const k=b.dataset.say; say(LINES[k]?LINES[k].en:k); });
+
+/* 開場 → 規則 → 地圖 */
+$("go").onclick=()=>{ $("helloSay").textContent=LINES.hello.en; show("s-hello",LINES.hello.zh); say(LINES.hello.en); };
+$("toRules").onclick=()=>show("s-rules","農場規則：只用眼睛看、用走的、跟好小組、記得洗手。點每張卡可以聽。");
+$("toMap").onclick=()=>showMap();
+
+function showMap(){
+  const row=$("mapRow"); row.innerHTML="";
+  STATIONS.forEach(s=>{
+    const d=document.createElement("div"); d.className="stn"+(done.has(s.id)?" done":"");
+    d.innerHTML=`<span class="ic">${s.ic}</span>${s.en}<small>${s.zh}${done.has(s.id)?" ✓":""}</small>`;
+    d.onclick=()=>startStation(s); row.appendChild(d);
+  });
+  if(done.size===STATIONS.length){ finish(); return; }
+  $("mapHint").textContent="";
+  show("s-map","點一個地方，Olimomo 帶你走過去！（"+done.size+" / "+STATIONS.length+"）",done.size+" / "+STATIONS.length);
+}
+
+/* 參觀站 */
+function startStation(s){
+  cur=s; qi=0;
+  $("inIc").textContent=s.ic; $("inTitle").textContent=s.en; $("inSay").textContent=s.say;
+  show("s-intro",s.zhSay); say(s.say);
+}
+$("inAgain").onclick=()=>say(cur.say);
+$("inGo").onclick=()=>showQuiz();
+
+function showQuiz(){
+  const q=cur.quiz[qi], o=$("qOpts"); o.innerHTML=""; $("qFb").textContent=""; $("qFb").className="fb"; $("qNext").style.display="none";
+  $("qTag").textContent=`${cur.en} · Fun Fact ${qi+1} / ${cur.quiz.length}`;
+  $("qIc").textContent=q.ic; $("qQ").textContent=q.q;
+  q.opts.forEach(([ic,t],i)=>{
+    const b=document.createElement("button"); b.className="opt"; b.innerHTML=`<span class="ic">${ic}</span>${t}`;
+    b.onclick=()=>answer(b,i,q); o.appendChild(b);
+  });
+  show("s-quiz",q.zhQ,`${cur.en} ${qi+1}/${cur.quiz.length}`); say(q.q);
+}
+let tried=false;
+function answer(btn,i,q){
+  if(btn.classList.contains("ok")||btn.classList.contains("no")) return;
+  const fb=$("qFb");
+  if(i===q.ans){
+    btn.classList.add("ok"); beep(true); if(!tried) score++; total++; tried=false;
+    fb.textContent="⭐ "+q.good; fb.className="fb ok"; zh.textContent=q.zhA; say(q.good);
+    document.querySelectorAll("#qOpts .opt").forEach(x=>x.disabled=true);
+    $("qNext").style.display="";
+  }else{
+    btn.classList.add("no"); beep(false); tried=true;
+    fb.textContent="Try again! 再想一想"; fb.className="fb no";
+  }
+}
+$("qNext").onclick=()=>{ tried=false; qi++; qi<cur.quiz.length?showQuiz():showTalk(); };
+
+/* 說說看 */
+let pick=null;
+function sentence(){ const t=cur.talk; if(t.full) return pick||""; return t.frame[0]+(pick||"___")+t.frame[1]; }
+function showTalk(){
+  const t=cur.talk; pick=null; $("tFb").textContent=""; $("tNext").style.display="none";
+  $("tTag").textContent=cur.en+" · Let's talk!"; $("tQ").textContent=t.q; $("tFill").innerHTML=fillHTML();
+  const c=$("tChips"); c.innerHTML="";
+  t.chips.forEach(([ic,w])=>{ const b=document.createElement("button"); b.className="chip"; b.innerHTML=`<i>${ic}</i>${w}`;
+    b.onclick=()=>{ pick=w; $("tFill").innerHTML=fillHTML(); $("tNext").style.display=""; say(sentence()); }; c.appendChild(b); });
+  show("s-talk",t.zh,cur.en+" talk"); say(t.q);
+}
+function fillHTML(){ const t=cur.talk; if(t.full) return pick?pick:`<span class="slot">&nbsp;</span>`;
+  return `${t.frame[0]}<span class="slot">${pick||"&nbsp;"}</span>${t.frame[1]}`; }
+$("tHear").onclick=()=>say(pick?sentence():cur.talk.q);
+$("tMic").onclick=()=>{
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition, fb=$("tFb");
+  if(!pick){ fb.textContent="先選一個字！"; fb.className="fb no"; return; }
+  if(!SR){ fb.textContent="這個瀏覽器不能辨識聲音，大聲唸出來就很棒了！👏"; fb.className="fb ok"; return; }
+  const r=new SR(); r.lang="en-US"; fb.textContent="🎤 Listening…"; fb.className="fb";
+  r.onresult=e=>{ const said=e.results[0][0].transcript.toLowerCase(); const words=(cur.talk.full?pick:sentence()).toLowerCase().replace(/[^a-z' ]/g,"").split(" ").filter(w=>w.length>2);
+    const hit=words.filter(w=>said.includes(w)).length;
+    fb.textContent=hit>=Math.ceil(words.length/2)?"⭐ Great job! 說得很好！":"Try again! 再說一次（I heard: "+said+"）"; fb.className="fb "+(hit>=Math.ceil(words.length/2)?"ok":"no"); };
+  r.onerror=()=>{ fb.textContent="聽不到聲音，再試一次。"; fb.className="fb no"; };
+  r.start();
+};
+$("tNext").onclick=()=>{ done.add(cur.id); showMap(); };
+
+/* 結尾 */
+function finish(){
+  const pct=total?score/total:0, n=pct>=.8?3:pct>=.5?2:1;
+  $("endStars").textContent="★".repeat(n)+"☆".repeat(3-n);
+  $("endScore").textContent=`第一次就答對 ${score} / ${total} 題　COW EXPERT！`;
+  show("s-end","你們都是牛博士了！"); say("You are cow experts!");
+}
+$("again2").onclick=()=>{ done=new Set(); score=0; total=0; show("s-start",""); };
+</script>
+</body>
+</html>
