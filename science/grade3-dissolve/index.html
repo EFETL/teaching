@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>奇妙的溶解｜三年級自然第二次月考</title>
+<style>
+:root{
+  --g:#2f8f5b; --g-d:#1f6b43; --g-l:#e7f4ec;
+  --earth:#b97a33; --earth-l:#f8eedf;
+  --water:#2f80ed; --sun:#f2b705; --food:#f2792b; --air:#8fa3b8; --red:#e5484d;
+  --bg:#f6f8f3; --card:#fff; --ink:#24302a; --muted:#5d6b63;
+  --r:22px; --sh:0 6px 20px rgba(30,60,40,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:30px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;font-size:30px;line-height:1.55;color:var(--ink);background:var(--bg);overflow-x:hidden}
+h1,h2,h3,h4,p,li,button,span,div,label,small,b,strong{font-size:30px}
+button{font-family:inherit;cursor:pointer;border:none;-webkit-tap-highlight-color:transparent;color:inherit}
+img{max-width:100%;display:block}
+
+.topbar{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;padding:10px 16px}
+.topbar .home{background:var(--g);color:#fff;border-radius:16px;padding:6px 18px;font-weight:700;white-space:nowrap}
+.topbar .now{flex:1;font-weight:700;color:var(--g-d);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .pen-btn{background:var(--earth-l);color:var(--earth);border-radius:16px;padding:6px 16px;font-weight:700;white-space:nowrap;margin-left:auto}
+
+.page{display:none;max-width:1200px;margin:0 auto;padding:24px 16px 120px}
+.page.show{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.hero img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.hero .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 28px 22px;background:linear-gradient(transparent,rgba(15,50,30,.8));color:#fff}
+.hero .cap b{display:block;font-weight:800}
+.intro{margin:40px 0 20px;color:var(--muted)}
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.lcard{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;text-align:left;display:flex;flex-direction:column;transition:transform .2s}
+.lcard:hover{transform:translateY(-4px)}
+.lcard .pic{aspect-ratio:4/3;background:var(--g-l) center/cover no-repeat}
+.lcard .t{padding:16px 20px 20px}
+.lcard .no{display:inline-block;background:var(--g);color:#fff;border-radius:999px;padding:0 16px;margin-bottom:6px}
+.lcard .nm{display:block;font-weight:800}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:36px 0 0}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:4px 18px;box-shadow:var(--sh)}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;flex:none}
+
+.lhead{display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.lhead .badge{background:var(--earth);color:#fff;border-radius:999px;padding:2px 20px;font-weight:700}
+.lhead h2{font-weight:800;color:var(--g-d)}
+.stepbar{position:sticky;top:64px;z-index:40;background:var(--bg);padding:10px 0 14px;display:flex;gap:12px;flex-wrap:wrap}
+.stepbar button{width:72px;height:72px;border-radius:50%;background:#fff;color:var(--g-d);font-weight:800;box-shadow:var(--sh);border:4px solid var(--g-l);transition:.2s}
+.stepbar button.seen{background:var(--g-l)}
+.stepbar button.on{background:var(--g);color:#fff;border-color:var(--g-d);transform:scale(1.08)}
+.step{display:none}
+.step.on{display:block;animation:fade .35s}
+.step > h3{font-weight:800;margin:6px 0 16px;display:flex;gap:12px;align-items:center}
+.step > h3 .n{background:var(--g);color:#fff;border-radius:50%;width:56px;height:56px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:24px;margin-bottom:24px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stepnav{display:flex;justify-content:space-between;gap:16px;margin-top:30px}
+.stepnav button{background:var(--g);color:#fff;border-radius:999px;padding:12px 30px;font-weight:700;box-shadow:var(--sh)}
+.stepnav button.prev{background:#fff;color:var(--g-d)}
+.stepnav button:disabled{opacity:.3}
+.tip{background:#fff8dc;border-left:10px solid var(--sun);border-radius:16px;padding:14px 20px;margin:18px 0}
+.tip::before{content:"🎨 老師提示：";font-weight:800}
+.key{font-weight:800;color:var(--g-d);background:linear-gradient(transparent 60%,#cdeed9 60%)}
+.k-water{color:var(--water);font-weight:800}.k-sun{color:#c48f00;font-weight:800}.k-food{color:var(--food);font-weight:800}.k-air{color:#61778d;font-weight:800}.k-red{color:var(--red);font-weight:800}
+.big-btns{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0}
+.bb{background:#fff;border:4px solid var(--g-l);color:var(--g-d);border-radius:18px;padding:8px 20px;font-weight:700;box-shadow:var(--sh);transition:.2s}
+.bb.on{background:var(--g);color:#fff;border-color:var(--g-d)}
+.bb .num{display:inline-flex;width:44px;height:44px;border-radius:50%;background:var(--g-l);color:var(--g-d);align-items:center;justify-content:center;margin-right:8px}
+.bb.on .num{background:#fff}
+.reveal{opacity:0;transform:translateY(12px);transition:.4s;pointer-events:none}
+.reveal.show{opacity:1;transform:none;pointer-events:auto}
+.photo{border-radius:18px;overflow:hidden;background:#fff;position:relative}
+.photo img{width:100%}
+.caption{text-align:center;color:var(--muted);margin-top:8px}
+.pline{display:flex;gap:14px;align-items:center;margin:10px 0}
+.pline img{width:120px;height:120px;object-fit:cover;border-radius:14px;flex:none}
+
+/* 放大鏡 */
+.zoombox{position:relative;overflow:hidden;border-radius:18px;background:#fff;touch-action:manipulation}
+.zoombox .zin{position:absolute;inset:0;transform-origin:0 0;transition:transform .8s cubic-bezier(.3,.8,.3,1)}
+.zoombox .zin img{width:100%;height:100%;object-fit:cover}
+.hot{position:absolute;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;border:5px solid #fff;animation:pulse 1.8s infinite;z-index:3;transition:opacity .3s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,143,91,.55)}70%{box-shadow:0 0 0 22px rgba(47,143,91,0)}100%{box-shadow:0 0 0 0 rgba(47,143,91,0)}}
+.zoombox.zoomed .hot{opacity:0;pointer-events:none}
+.zoombox .ring{position:absolute;left:50%;top:50%;width:44%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.6);border-radius:50%;border:8px dashed var(--sun);opacity:0;transition:.5s;pointer-events:none;z-index:2}
+.zoombox.zoomed .ring{opacity:1;transform:translate(-50%,-50%) scale(1);animation:spin 12s linear infinite}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.zoombox .zlabel{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);border-radius:14px;padding:4px 18px;font-weight:800;color:var(--g-d);opacity:0;transition:.3s;z-index:4}
+.zoombox.zoomed .zlabel{opacity:1}
+.zoombox .back{position:absolute;right:14px;bottom:14px;background:var(--earth);color:#fff;border-radius:999px;padding:6px 20px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:4}
+.zoombox.zoomed .back{opacity:1;pointer-events:auto}
+.zinfo{min-height:120px}
+.zinfo .ph{color:var(--muted)}
+.zinfo h4{font-weight:800;color:var(--g-d);margin-bottom:6px}
+
+/* 圖鑑 */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.gcard{background:#fff;border-radius:20px;box-shadow:var(--sh);overflow:hidden;text-align:left;position:relative;transition:transform .2s;border:4px solid transparent}
+.gcard:hover{transform:translateY(-4px)}
+.gcard.seen{border-color:var(--g-l)}
+.gcard img{width:100%;aspect-ratio:1;object-fit:cover}
+.gcard .gno{position:absolute;left:10px;top:10px;width:54px;height:54px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;border:4px solid #fff}
+.gcard .gt{padding:10px 16px 14px}
+.gcard .gt b{display:block;color:var(--g-d)}
+.gcard .tag{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:999px;padding:0 14px;margin-top:4px;font-weight:700}
+.gsec{font-weight:800;color:var(--earth);margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.gsec::before{content:"";width:14px;height:40px;border-radius:8px;background:var(--earth)}
+
+/* 燈箱 */
+#lb{position:fixed;inset:0;z-index:150;background:rgba(10,25,15,.88);display:none;align-items:center;justify-content:center;padding:12px}
+#lb.on{display:flex;animation:fade .3s}
+#lb .box{background:#fff;border-radius:24px;max-width:1100px;width:100%;max-height:100%;overflow:auto;display:grid;grid-template-columns:1.2fr 1fr;gap:20px;padding:18px}
+#lb .zoombox{width:100%}
+#lb .txt h4{font-weight:800;color:var(--g-d);margin-bottom:8px}
+#lb .txt .tag{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:999px;padding:0 16px;margin-bottom:10px;font-weight:700}
+#lb .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+#lb .nav button{background:var(--g);color:#fff;border-radius:999px;padding:8px 22px;font-weight:700}
+#lb .nav button.x{background:var(--earth)}
+#lb .nums{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#lb .nums button{width:52px;height:52px;border-radius:50%;background:var(--g-l);color:var(--g-d);font-weight:800}
+#lb .nums button.on{background:var(--g);color:#fff}
+
+/* 翻牌 */
+.flip{perspective:900px;cursor:pointer}
+.flip .in{position:relative;transition:transform .6s;transform-style:preserve-3d;aspect-ratio:4/3.6}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.flip .f img{width:100%;height:100%;object-fit:cover}
+.flip .f b{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;padding:30px 16px 12px}
+.flip .b{background:var(--g-l);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;padding:20px;text-align:center}
+
+/* 分類 */
+.sort-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.sort-item{background:#fff;border-radius:18px;box-shadow:var(--sh);overflow:hidden;text-align:center;border:6px solid transparent;transition:.3s;cursor:pointer}
+.sort-item img{width:100%;aspect-ratio:1;object-fit:cover}
+.sort-item .ans{display:block;font-weight:800;opacity:0;transition:.3s}
+.sort-item.done .ans{opacity:1}
+.sort-item.done.animal{border-color:var(--food)}.sort-item.done.animal .ans{color:var(--food)}
+.sort-item.done.plant{border-color:var(--g)}.sort-item.done.plant .ans{color:var(--g)}
+.sort-item.done.non{border-color:var(--air)}.sort-item.done.non .ans{color:#61778d}
+
+/* 照片上的動畫 */
+.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.flowline{fill:none;stroke-linecap:round;stroke-dasharray:6 34;animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-40}}
+.grp{opacity:0;transition:opacity .6s}
+.lab{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:12px;padding:0 12px;font-weight:800;box-shadow:var(--sh);opacity:0;transition:.5s;white-space:nowrap;pointer-events:none;z-index:3}
+.lab.show{opacity:1}
+#flow.s1 .g-w1,#flow.s2 .g-w1,#flow.s2 .g-w2,#flow.s3 .g-w2,#flow.s3 .g-sun,#flow.s3 .g-air,#flow.s4 .g-sun,#flow.s4 .g-air,#flow.s4 .g-make,#flow.s5 .g-food,#flow.s5 .g-make,#flow.all .grp{opacity:1}
+.glow{animation:glow 1.3s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.15}to{opacity:.65}}
+.sunbeam{position:absolute;inset:0;background:radial-gradient(circle at 10% 0%,rgba(255,230,120,.85),rgba(255,230,120,.25) 40%,transparent 70%);opacity:0;transition:opacity .8s;pointer-events:none}
+.sunbeam.on{opacity:1;animation:beam 2.2s ease-in-out infinite alternate}
+@keyframes beam{from{filter:brightness(1)}to{filter:brightness(1.25)}}
+.lit img{transition:filter 1s}
+.lit.on img{filter:brightness(1.15) saturate(1.25)}
+.drop{position:absolute;width:30px;height:40px;background:radial-gradient(circle at 35% 35%,#fff,#6fb6ff 45%,#2f80ed);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform:translate(-50%,0);opacity:0}
+.drop.go{animation:drip 1.8s ease-in infinite}
+@keyframes drip{0%{opacity:0;transform:translate(-50%,-40px) scale(.5)}20%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,160px) scale(1)}}
+.pollen{position:absolute;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle,#fff59d,#f9a825);box-shadow:0 0 8px #ffd54f;pointer-events:none}
+.seq{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1;background:#000}
+.seq img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s, transform 4s ease-out;transform:scale(1.08)}
+.seq img.on{opacity:1;transform:scale(1)}
+.seq .slab{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);border-radius:14px;padding:4px 18px;font-weight:800;color:var(--g-d);z-index:2}
+.fade2{position:relative}
+.fade2 img.after{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 2.5s}
+.fade2.on img.after{opacity:1}
+
+/* 3D */
+.p3d-stage{position:relative;border-radius:18px;overflow:hidden;background:#eef6ff;min-height:300px;touch-action:none}
+.p3d-stage canvas{display:block;width:100%!important;height:auto!important}
+.p3d-stage.loading::after{content:"3D 模型載入中…";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.p3d-label{position:absolute;transform:translate(-50%,-260%);background:#fff;border:4px solid var(--g);color:var(--g-d);border-radius:14px;padding:0 14px;font-weight:800;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.p3d-info h4{font-weight:800;color:var(--g-d);margin-bottom:6px}
+
+/* 測驗 */
+.q .qbody{flex:1;min-width:0}
+.anabtn{margin-top:12px;background:var(--earth-l);color:var(--earth);border-radius:14px;padding:4px 18px;font-weight:700}
+.ana{display:none;margin-top:14px;background:#f4f9f5;border-left:10px solid var(--g);border-radius:14px;padding:14px 18px}
+.q.showana .ana{display:block}
+.ana p{margin:6px 0}
+.anak{display:inline-block;background:var(--g);color:#fff;border-radius:10px;padding:0 12px;margin-right:10px;font-weight:700}
+.opnotes{margin:8px 0 8px 1.2em}
+.opnotes li{margin:4px 0}
+.opnotes li.okk{color:var(--g-d)}
+.opnotes li.okk b::after{content:" ✔"}
+.opnotes li.picked{background:#fde7e7;border-radius:10px;padding:2px 8px;color:var(--red)}
+.teach{background:#fff8dc;border-radius:12px;padding:8px 12px}
+.q.teacher .opts button[data-k]{pointer-events:none}
+.back2{margin-top:8px}
+.q .opts button.tright{background:#dff5e7;border-color:var(--g);color:var(--g-d);font-weight:800}
+.tfbadge{display:inline-block;background:var(--earth-l);color:var(--earth);border-radius:10px;padding:0 10px;margin-right:8px}
+.qt-table{border-collapse:collapse;margin:8px 0 12px;max-width:100%}
+.qt-table th,.qt-table td{border:2px solid #cfdcd3;padding:4px 12px;text-align:center}
+.qt-table th{background:var(--g-l)}
+.q{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px;margin-bottom:22px;display:flex;gap:20px;align-items:flex-start}
+.q img{width:200px;height:200px;object-fit:cover;border-radius:16px;flex:none}
+.q .qt{font-weight:800;margin-bottom:12px}
+.q .opts{display:flex;flex-wrap:wrap;gap:12px}
+.q .opts button{background:var(--bg);border:4px solid #dfe7e1;border-radius:16px;padding:6px 22px}
+.q .opts button.right{background:#dff5e7;border-color:var(--g);color:var(--g-d);font-weight:800}
+.q .opts button.wrong{background:#fde7e7;border-color:var(--red);color:var(--red);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.q .why{margin-top:10px;color:var(--g-d);display:none}
+.q.done .why{display:block}
+.score{position:sticky;bottom:16px;background:var(--g);color:#fff;border-radius:999px;padding:10px 26px;display:inline-block;font-weight:800;box-shadow:var(--sh)}
+
+#penLayer{position:fixed;inset:0;z-index:200;display:none;touch-action:none}
+#penLayer.on{display:block}
+#penCanvas{width:100%;height:100%;display:block;cursor:crosshair}
+#penBar{position:fixed;z-index:201;left:50%;bottom:16px;transform:translateX(-50%);background:#fff;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.25);display:none;gap:10px;padding:10px 16px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100% - 24px)}
+#penBar.on{display:flex}
+#penBar button{border-radius:999px;padding:4px 16px;font-weight:700;background:var(--bg);border:4px solid transparent}
+#penBar button.c{width:60px;height:60px;padding:0}
+#penBar button.sel{border-color:#333}
+
+footer{background:var(--g-d);color:#e8f5ec;padding:40px 16px;text-align:center}
+footer p{max-width:900px;margin:0 auto 8px}
+
+@media (max-width:900px){
+  .two,.three{grid-template-columns:1fr}
+  .four{grid-template-columns:repeat(2,1fr)}
+  #lb .box{grid-template-columns:1fr}
+  .topbar .now{display:none}
+}
+@media (max-width:520px){
+  .page{padding:16px 12px 120px}
+  .card{padding:16px}
+  .lesson-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;gap:12px}
+  .sort-grid{grid-template-columns:1fr 1fr}
+  .stepbar{gap:6px;top:56px}
+  .stepbar button{width:50px;height:50px;border-width:3px}
+  .hot{width:54px;height:54px;margin:-27px 0 0 -27px}
+  .gcard .gno{width:46px;height:46px}
+  .q{flex-direction:column}
+  .q img{width:100%;height:auto;aspect-ratio:1}
+}
+
+:root{--g:#2a7fb8;--g-d:#1b5b88;--g-l:#e4f1fa;--earth:#d9822b;--earth-l:#fdf0e0;--bg:#f4f8fb}
+.tbox{background:#fff8dc;border-left:10px solid var(--sun);border-radius:16px;padding:14px 22px;margin:18px 0}
+.tbox ul{margin:8px 0 0 1.2em}.tbox li{margin:6px 0}
+.hero img{aspect-ratio:16/9}
+.photo img{border-radius:18px}
+.fade2 img{width:100%;border-radius:18px}
+.fade2{cursor:pointer}
+@media print{.topbar,.stepbar,.stepnav,#penBar,.tbox{display:none}.step{display:block!important}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="home" onclick="go('home')">🏠 首頁</button>
+  <span class="now" id="nowTitle">奇妙的溶解</span>
+  <button class="pen-btn" onclick="togglePen()">🖍️ 畫筆</button>
+</div>
+<main class="page show" id="home">
+  <div class="hero">
+    <img src="images/hero.webp" fetchpriority="high" alt="廚房裡的粉末與水">
+    <div class="cap"><b>🧂 奇妙的溶解</b>三年級自然 第二次月考範圍｜老師教學用</div>
+  </div>
+  <p class="intro">整合<b>翰林「奇妙的溶解」</b>與<b>康軒「廚房裡的科學」</b>。每課上方有 ① ② ③ … 圓形按鈕，照順序點就能上課；每一步都附<b>👩‍🏫 老師教學</b>提示（引導問句、準備、常見迷思）。</p>
+  <div class="lesson-grid" id="lessonGrid"></div>
+  <div class="legend">
+    <span class="chip"><i class="dot" style="background:var(--water)"></i>藍色＝水</span>
+    <span class="chip"><i class="dot" style="background:var(--red)"></i>紅色＝酸性</span>
+    <span class="chip"><i class="dot" style="background:#8e5bd1"></i>紫色＝中性</span>
+    <span class="chip"><i class="dot" style="background:#1aa88f"></i>藍綠＝鹼性</span>
+  </div>
+</main>
+<section class="page lesson" id="l1" data-no="第1課" data-title="認識廚房裡的粉末" data-pic="images/powders.webp">
+  <div class="step" data-label="廚房裡的材料"><div class="card"><p>廚房裡有好多白白的粉末和顆粒，標籤掉了怎麼辦？先<b>點照片上的數字</b>，認識六種材料。</p></div><div class="zoombox" id="zPow" style="aspect-ratio:1024/572" data-img="images/powders.webp"></div><div class="big-btns" data-zoom="zPow"></div><div class="card zinfo" id="zPow-info"><span class="ph">點下面的按鈕，照片會放大到那個部位。</span></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li><b>引導問句</b>：「它們看起來都白白的，要怎麼知道誰是誰？」先讓學生說，再帶出「用感官觀察」。</li><li><b>準備</b>：六個小碟（白砂糖、二砂、食鹽、細沙、小蘇打粉、檸檬酸），每組一份。</li><li><b>對照</b>：翰林用「特砂／二砂／食鹽／細沙」，康軒用「砂糖／食鹽／黑胡椒粒／小蘇打粉／檸檬酸」，兩版都要會。</li></ul></div></div>
+  <div class="step" data-label="用感官觀察"><div class="card"><p>觀察物質有三個方法，<b>點照片</b>翻過來看：</p><div class="three" style="margin-top:18px"><div class="flip" onclick="this.classList.toggle('on')"><div class="in"><div class="f"><img loading="lazy" decoding="async" src="images/sense_trio.webp" alt=""><b>① 眼睛看</b></div><div class="b"><b>看顏色、外觀</b><p>顏色、顆粒大小、形狀。例如二砂是<b>黃色</b>、細沙顆粒不透明。</p></div></div></div><div class="flip" onclick="this.classList.toggle('on')"><div class="in"><div class="f"><img loading="lazy" decoding="async" src="images/sense_trio.webp" alt=""><b>② 鼻子聞</b></div><div class="b"><b>聞氣味</b><p>用<b>手搧</b>的方式聞，不要把鼻子貼上去。</p></div></div></div><div class="flip" onclick="this.classList.toggle('on')"><div class="in"><div class="f"><img loading="lazy" decoding="async" src="images/sense_trio.webp" alt=""><b>③ 手摸</b></div><div class="b"><b>摸觸感</b><p>用手指搓一搓，感覺顆粒的粗細。</p></div></div></div></div></div><div class="card"><div class="tip">安全第一：<b>不可以用嘴巴嚐</b>；如果要聞或摸，要先確認物質是安全的。有危險的物質要避免嗅聞及觸摸。</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>三個感官各請一位學生示範，其他人說出觀察到的特徵。</li><li><b>常見迷思</b>：以為「味道不一樣」就可以嚐。強調：實驗室的東西都不可以入口。</li></ul></div></div>
+  <div class="step" data-label="放大鏡看顆粒"><div class="card"><p>顆粒太小看不清楚？用<b>放大鏡</b>幫忙！</p><div class="photo"><img loading="lazy" decoding="async" src="images/magnifier.webp" alt="手握放大鏡的握柄，調整放大鏡和物體的距離，直到看清楚。"></div><p class="caption">手握放大鏡的握柄，調整放大鏡和物體的距離，直到看清楚。</p><div class="tip">放大鏡<b>不可以用來看太陽</b>，會灼傷眼睛。</div></div><div class="card"><p>放大鏡下，六種顆粒的形狀和顏色更清楚：</p><div class="photo"><img loading="lazy" decoding="async" src="images/powders_macro.webp" alt="白砂糖、黃砂糖、粗鹽、細沙、小蘇打粉、檸檬酸（由左至右）"></div><p class="caption">白砂糖、黃砂糖、粗鹽、細沙、小蘇打粉、檸檬酸（由左至右）</p><p style="margin-top:14px">也可以<span class="key">拍照再放大</span>來觀察。</p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>讓學生輪流用放大鏡，說出一個「肉眼看不到、放大鏡才看到」的特徵。</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l1"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l2" data-no="第2課" data-title="實驗器材怎麼用" data-pic="images/lab_tools.webp">
+  <div class="step" data-label="認識器材"><div class="card"><p>溶解實驗要用到這些器材。<b>點按鈕</b>看看每一種的用途：</p></div><div class="zoombox" id="zLab" style="aspect-ratio:1024/572" data-img="images/lab_tools.webp"></div><div class="big-btns" data-zoom="zLab"></div><div class="card zinfo" id="zLab-info"><span class="ph">點下面的按鈕，照片會放大到那個部位。</span></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li><b>準備</b>：每組一套實物（量筒、燒杯、平匙、玻璃攪拌棒、滴管、放大鏡），邊講邊讓學生拿在手上。</li><li><b>提醒</b>：玻璃器材易碎，輕拿輕放；攪拌棒用前要洗乾淨。</li></ul></div></div>
+  <div class="step" data-label="量筒讀刻度"><div class="card"><p>用量筒量水，眼睛要<b>平視水面最低處</b>。</p><div class="photo"><img loading="lazy" decoding="async" src="images/cylinder_read.webp" alt="視線與水面最低處同高。"></div><p class="caption">視線與水面最低處同高。</p><div class="big-btns"><button class="bb" data-show="rd1"><span class="num">1</span>看高了（俯視）</button><button class="bb" data-show="rd2"><span class="num">2</span>看低了（仰視）</button><button class="bb" data-show="rd3"><span class="num">3</span>正確（平視）</button></div><div class="reveal card" id="rd1">眼睛在上面往下看，讀數會<b>偏大</b> ✕</div><div class="reveal card" id="rd2">眼睛在下面往上看，讀數會<b>偏小</b> ✕</div><div class="reveal card" id="rd3">眼睛<b>平視水面最低處</b>，讀數才準確 ✔</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>請學生蹲下、站起、再平視，親身感受三種讀法的差別。</li></ul></div></div>
+  <div class="step" data-label="刮成一平匙"><div class="card"><p>每次取同樣多的粉末，要<b>刮成平匙</b>：用玻璃棒刮平匙面上的顆粒，就是<b>一平匙</b>。</p><div class="photo"><img loading="lazy" decoding="async" src="images/level_spoon.webp" alt="玻璃棒刮平匙面。"></div><p class="caption">玻璃棒刮平匙面。</p><div class="tip">實驗要「公平」：每次都用<span class="key">同樣多</span>的水、<span class="key">同樣多</span>的粉末（一平匙）。</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>讓學生比較「滿滿一匙」和「刮平一匙」的差別，說明為什麼要刮平（控制變因）。</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l2"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l3" data-no="第3課" data-title="什麼是溶解？" data-pic="images/dissolve_after.webp">
+  <div class="step" data-label="糖不見了？"><div class="card"><p>煮綠豆湯時加了砂糖，喝的時候只看到綠豆，<b>糖真的消失了嗎？</b></p><div class="photo"><img loading="lazy" decoding="async" src="images/green_bean_soup.webp" alt="綠豆湯加砂糖"></div><p class="caption">綠豆湯加砂糖</p><div class="big-btns"><button class="bb" data-show="gb0"><span class="num">1</span>先猜猜看</button><button class="bb" data-show="gb1"><span class="num">2</span>嚐一嚐（想像）</button></div><div class="reveal card" id="gb0"><p>有人說「糖消失了」，有人說「糖還在湯裡」。你覺得呢？</p></div><div class="reveal card" id="gb1"><p>喝的時候可以<b>嚐到甜味</b>。所以糖還在湯裡，只是<b>看不見顆粒</b>。</p></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li><b>引導問句</b>：「怎麼證明糖還在？」→ 嚐到甜味。再問「如果是鹽呢？」帶到鹹味。</li><li><b>迷思</b>：溶解≠消失。物質還在水裡，只是變得看不見。</li></ul></div></div>
+  <div class="step" data-label="溶解的過程"><div class="card"><p>砂糖放進水裡，攪拌後顆粒會<b>慢慢變小、看不見</b>。</p><div class="two"><div><div class="fade2" id="dis" onclick="this.classList.toggle('on')"><img loading="lazy" src="images/dissolve_before.webp" alt=""><img class="after" loading="lazy" src="images/dissolve_after.webp" alt=""></div><p class="caption">👆 點照片：攪拌前 → 攪拌後</p></div><div><p><span class="key">溶解</span>：物質的顆粒在水中慢慢變小而看不見，與水<b>均勻混合</b>的現象。</p><p style="margin-top:12px">砂糖溶在水裡，成為<span class="key">水溶液</span>（糖水）。</p></div></div></div><div class="card"><p>🎨 畫筆提示：用<span class="k-sun">黃色</span>圈出杯底的糖粒，攪拌後再用<span class="k-water">藍色</span>畫出「均勻」的水。</p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>強調兩個關鍵：<b>顆粒變小到看不見</b>＋<b>與水均勻混合</b>，缺一不可。</li><li>康軒版重點圖：未溶解前看得到砂糖顆粒和水；溶解後只看到糖水。</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l3"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l4" data-no="第4課" data-title="哪些物質能溶在水裡？" data-pic="images/five_cups.webp">
+  <div class="step" data-label="三種物質比一比"><div class="card"><p>食鹽、砂糖、細沙放進水裡攪拌，會怎麼樣？</p><div class="zoombox" id="zThree" style="aspect-ratio:1024/572" data-img="images/three_cups.webp"></div><div class="big-btns" data-zoom="zThree"></div><div class="card zinfo" id="zThree-info"><span class="ph">點下面的按鈕，照片會放大到那個部位。</span></div><div class="tip">實驗要點：<b>40 毫升水</b>（翰林）或 <b>100 毫升水</b>（康軒）、各加<b>一平匙</b>、<b>充分攪拌</b>後靜置觀察。</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li><b>步驟</b>：量水→分別加一平匙→攪拌→靜置→觀察。先讓學生預測再看結果。</li><li><b>翰林版結論</b>：食鹽、砂糖可以<b>完全溶解</b>；細沙會<b>沉澱</b>在杯底，不能完全溶解。</li></ul></div></div>
+  <div class="step" data-label="廚房五種材料"><div class="card"><p>康軒版用的是廚房材料。由左至右：砂糖、食鹽、黑胡椒粒、小蘇打粉、檸檬酸。</p><div class="zoombox" id="zFive" style="aspect-ratio:1024/572" data-img="images/five_cups.webp"></div><div class="big-btns" data-zoom="zFive"></div><div class="card zinfo" id="zFive-info"><span class="ph">點下面的按鈕，照片會放大到那個部位。</span></div></div><div class="card"><p>黑胡椒粒特別：<b>有一部分溶解</b>（使水變成灰灰的顏色），<b>有一部分無法溶解</b>，沉在杯底。</p><div class="photo"><img loading="lazy" decoding="async" src="images/pepper_cup.webp" alt="黑胡椒粒：部分溶解、部分沉底"></div><p class="caption">黑胡椒粒：部分溶解、部分沉底</p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>黑胡椒粒是最常考的「部分溶解」例子，請學生說出兩個現象：水變色、杯底有顆粒。</li></ul></div></div>
+  <div class="step" data-label="整理：能不能溶解"><div class="card"><p>點一點，把結果整理起來：</p><div class="big-btns"><button class="bb" data-show="ok0"><span class="num">1</span>可以完全溶解</button><button class="bb" data-show="ok1"><span class="num">2</span>不能完全溶解</button><button class="bb" data-show="ok2"><span class="num">3</span>有什麼用？</button></div><div class="reveal card" id="ok0"><p>✅ <b>砂糖、食鹽、小蘇打粉、檸檬酸</b>：完全溶解，成為水溶液。</p></div><div class="reveal card" id="ok1"><p>❌ <b>細沙</b>：沉在杯底。<br>⚠️ <b>黑胡椒粒</b>：部分溶解、部分沉底。</p></div><div class="reveal card" id="ok2"><p>利用「能不能溶解」這個特性，可以<span class="key">區分部分物質</span>。例如食鹽和細沙看起來都是顆粒，丟進水裡就能分辨。</p></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>請學生自己設計：「只有水和杯子，怎麼分辨鹽和沙？」</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l4"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l5" data-no="第5課" data-title="溶解的量有限" data-pic="images/salt_spoons.webp">
+  <div class="step" data-label="一平匙一平匙加"><div class="card"><p>食鹽可以一直溶解下去嗎？一次加<b>一平匙</b>，攪拌到完全溶解，再加下一匙，記錄加了幾匙。</p><div class="photo"><img loading="lazy" decoding="async" src="images/salt_spoons.webp" alt="加到杯底出現溶不掉的食鹽顆粒，就停止。"></div><p class="caption">加到杯底出現溶不掉的食鹽顆粒，就停止。</p><div class="tip">康軒：50 毫升常溫水＋食鹽；翰林：10 毫升水＋砂糖。方法相同：<b>畫記平匙數</b>，加到溶不掉為止。</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>每組紀錄「第幾匙開始有溶不掉的顆粒」，各組數字會不同，趁機討論為什麼（攪拌力道、水量誤差）。</li></ul></div></div>
+  <div class="step" data-label="沉澱了！"><div class="card"><p>加到某一匙時，杯底出現<b>溶不掉的顆粒</b>，叫做<span class="key">沉澱</span>。</p><div class="photo"><img loading="lazy" decoding="async" src="images/sugar_saturated.webp" alt="砂糖在固定水量中，溶解的量是有限的。"></div><p class="caption">砂糖在固定水量中，溶解的量是有限的。</p><p style="margin-top:14px">結論：<b>大多數可溶於水的物質，在固定的水量中，溶解的量是有限的。</b></p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>「無法繼續溶解」的證據＝杯底有沉澱。</li></ul></div></div>
+  <div class="step" data-label="攪拌有用嗎？"><div class="card"><p>杯底有沉澱時，一直攪拌會怎麼樣？</p><div class="big-btns"><button class="bb" data-show="st0"><span class="num">1</span>攪拌可以…</button><button class="bb" data-show="st1"><span class="num">2</span>攪拌不能…</button></div><div class="reveal card" id="st0"><p>攪拌可以讓食鹽<b>均勻分散</b>到水中，<b>加快溶解的速度</b>。</p></div><div class="reveal card" id="st1"><p>攪拌<b>不能增加</b>溶解的量。杯底有沉澱時，再怎麼攪拌也不會多溶一點。</p></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li><b>考點</b>：「攪拌可以增加溶解的量」是錯的！攪拌只加快速度。</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l5"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l6" data-no="第6課" data-title="怎樣溶解更多？" data-pic="images/hot_cold_salt.webp">
+  <div class="step" data-label="提出假設"><div class="card"><p>泡紅茶時加糖，糖加多了會沉在杯底。用什麼方法可以讓沉澱的糖<b>繼續溶解</b>？</p><div class="big-btns"><button class="bb" data-show="hy0"><span class="num">1</span>我的假設</button><button class="bb" data-show="hy1"><span class="num">2</span>生活經驗</button></div><div class="reveal card" id="hy0"><p>我認為<b>增加水量</b>或<b>提高水溫</b>，可以讓砂糖繼續溶解。</p></div><div class="reveal card" id="hy1"><p>媽媽煮糖水時會<b>加熱</b>；發泡錠要依照建議的水量泡才能完全溶解。</p></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>這一課是「科學探究方法」：觀察現象→提出問題→提出假設→設計實驗→驗證→結論。帶學生用這個順序說一次。</li></ul></div></div>
+  <div class="step" data-label="增加水量／提高水溫"><div class="card"><div class="two"><div><p><b>方法 1：增加水量</b></p><p>在有沉澱的糖水中再加水，充分攪拌。</p></div><div><p><b>方法 2：提高水溫</b></p><div class="photo"><img loading="lazy" decoding="async" src="images/hot_water_bath.webp" alt="把有沉澱的杯子浸入熱水（隔水加熱）。"></div><p class="caption">把有沉澱的杯子浸入熱水（隔水加熱）。</p></div></div></div><div class="card"><p>結果：沉澱<b>變少或不見</b>。所以<span class="key">水量</span>和<span class="key">水溫</span>都會影響溶解的量。</p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>實驗要點：只改變<b>一個條件</b>（水量或水溫），其他都一樣，才公平。</li></ul></div></div>
+  <div class="step" data-label="冷水 vs 熱水"><div class="card"><p>食鹽在不同水溫，溶解的量一樣嗎？左邊常溫水、右邊熱水，加入一樣多的食鹽：</p><div class="zoombox" id="zHot" style="aspect-ratio:1024/572" data-img="images/hot_cold_salt.webp"></div><div class="big-btns" data-zoom="zHot"></div><div class="card zinfo" id="zHot-info"><span class="ph">點下面的按鈕，照片會放大到那個部位。</span></div><p style="margin-top:14px">熱水杯底的鹽顆粒<b>比較少</b> → 在熱水中<span class="key">溶解的量較多</span>。</p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>「溶不掉的顆粒量」越少，代表溶解的量越多——這個判讀方式很常出表格題。</li><li><b>注意</b>：溫度越高，大多數物質溶解的量越多（國小階段不談例外）。</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l6"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l7" data-no="第7課" data-title="溶解的應用與分離" data-pic="images/effervescent.webp">
+  <div class="step" data-label="生活中的溶解"><div class="card"><p>生活裡到處都有溶解！<b>點照片</b>看看：</p><div class="gallery" data-g="apps"></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>請學生再舉一個家裡的例子。重點：這些都是「把東西溶在水裡，讓它發揮作用」。</li></ul></div></div>
+  <div class="step" data-label="清潔也靠溶解"><div class="card"><p>洗衣粉、小蘇打粉、肥皂都溶在水裡，才能用來清潔：</p><div class="two"><div class="photo"><img loading="lazy" decoding="async" src="images/laundry_powder.webp" alt="洗衣粉溶在水裡洗衣服"></div><p class="caption">洗衣粉溶在水裡洗衣服</p><div class="photo"><img loading="lazy" decoding="async" src="images/soap_hand.webp" alt="肥皂溶在水裡洗手"></div><p class="caption">肥皂溶在水裡洗手</p></div></div></div>
+  <div class="step" data-label="沙和鹽怎麼分開？"><div class="card"><p>沙子和食鹽混在一起，一顆一顆挑很困難。利用<b>溶解的特性</b>就能分開！</p><div class="zoombox" id="zSep" style="aspect-ratio:1024/572" data-img="images/sand_salt_sep.webp"></div><div class="big-btns" data-zoom="zSep"></div><div class="card zinfo" id="zSep-info"><span class="ph">點下面的按鈕，照片會放大到那個部位。</span></div><p style="margin-top:14px">鹽<b>可以溶解</b>在水中，沙子<b>不能</b>。所以加水攪拌後，鹽溶成鹽水，沙子沉在杯底，再用濾紙過濾就分開了。</p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>請學生說出三個步驟：加水攪拌→過濾→沙子留在濾紙上、鹽水流下來。</li></ul></div></div>
+  <div class="step" data-label="科學閱讀：膠囊"><div class="card"><p>有些藥物做成<b>膠囊</b>，外殼<b>可溶於水</b>；外殼溶解後，才會釋出裡面的成分。洗衣膠囊也是同樣的概念。</p><div class="photo"><img loading="lazy" decoding="async" src="images/capsule.webp" alt="藥物膠囊（左）與洗衣膠囊（右）"></div><p class="caption">藥物膠囊（左）與洗衣膠囊（右）</p><div class="tip">想一想：把藥物和洗衣精做成膠囊狀，有什麼好處？（藥物：隔離苦味或難聞氣味，較容易吞服；洗衣膠囊：不用煩惱放多少洗衣精、可同時加柔軟精或芳香精。）</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>此內容翰林標示「由教師彈性進行教學」，不一定考，但是很好的延伸討論。</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l7"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l8" data-no="第8課" data-title="水溶液的酸鹼" data-pic="images/ph_cups.webp">
+  <div class="step" data-label="酸、中、鹼"><div class="card"><p>廚房的材料溶在水裡，成為水溶液。水溶液可以分成<b>酸性、中性、鹼性</b>。能用感官分辨嗎？</p><p>酸性水溶液通常聞起來有<b>酸酸的氣味</b>，容易分辨；但只用感官<b>無法準確判斷</b>酸鹼性。</p><div class="tip">黑胡椒粒不能完全溶解，所以<b>無法判別</b>酸鹼性。</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>帶出問題：「那要怎麼準確知道？」→ 下一步用紫色高麗菜汁。</li></ul></div></div>
+  <div class="step" data-label="紫色高麗菜汁"><div class="card"><p>吃紫色高麗菜沙拉時倒入醋，顏色會改變。把紫色高麗菜做成<b>菜汁</b>，就能當酸鹼指示劑。</p><div class="two"><div class="photo"><img loading="lazy" decoding="async" src="images/cabbage_juice.webp" alt="紫色高麗菜切絲，熱水浸泡、冷卻、過濾，就是紫色高麗菜汁。"></div><p class="caption">紫色高麗菜切絲，熱水浸泡、冷卻、過濾，就是紫色高麗菜汁。</p><div class="photo"><img loading="lazy" decoding="async" src="images/dropper_use.webp" alt="用滴管吸取菜汁，滴入各種水溶液。"></div><p class="caption">用滴管吸取菜汁，滴入各種水溶液。</p></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li><b>注意</b>：用熱水浸泡、等汁液冷卻再過濾；使用刀子要請老師在旁協助。</li><li><b>滴管用法</b>：先輕壓吸頭→放進菜汁→緩慢放開吸取→輕壓吸頭讓菜汁流出。</li></ul></div></div>
+  <div class="step" data-label="顏色變變變"><div class="card"><p>加入紫色高麗菜汁後的顏色。<b>點按鈕</b>看每一杯：</p><div class="zoombox" id="zPh" style="aspect-ratio:1024/572" data-img="images/ph_cups.webp"></div><div class="big-btns" data-zoom="zPh"></div><div class="card zinfo" id="zPh-info"><span class="ph">點下面的按鈕，照片會放大到那個部位。</span></div><div class="big-btns"><button class="bb" data-show="ph0"><span class="num">1</span>酸性</button><button class="bb" data-show="ph1"><span class="num">2</span>中性</button><button class="bb" data-show="ph2"><span class="num">3</span>鹼性</button></div><div class="reveal card" id="ph0"><p>🔴 紅色～粉紅色：<b>醋、檸檬酸水</b>。</p></div><div class="reveal card" id="ph1"><p>🟣 紫色（不變）：<b>食鹽水、砂糖水</b>。</p></div><div class="reveal card" id="ph2"><p>🟢 藍綠色：<b>小蘇打水</b>。</p></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>口訣：<b>酸紅、中紫、鹼藍綠</b>。請學生在畫筆上用紅、紫、綠色各畫一杯。</li></ul></div></div>
+  <div class="step" data-label="會變色的植物"><div class="card"><p>還有些植物汁液在酸鹼不同時也會變色：</p><div class="two"><div class="photo"><img loading="lazy" decoding="async" src="images/butterfly_pea.webp" alt="蝶豆花茶（藍色）加入檸檬汁後變成紫色"></div><p class="caption">蝶豆花茶（藍色）加入檸檬汁後變成紫色</p><div class="photo"><img loading="lazy" decoding="async" src="images/grape_redamaranth.webp" alt="紫色葡萄皮、紅鳳菜葉的汁液也會變色"></div><p class="caption">紫色葡萄皮、紅鳳菜葉的汁液也會變色</p></div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>蝶豆花＋檸檬汁（酸性）：藍→紫，是漸層飲料的原理。</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l8"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l9" data-no="第9課" data-title="科學閱讀：去汙與氣泡水" data-pic="images/soda_bubbles.webp">
+  <div class="step" data-label="只用水能去汙嗎？"><div class="card"><p>桌上沾到油漬，只用水擦還是油油的。可以沾點<b>肥皂</b>或噴<b>洗碗精</b>。</p><div class="photo"><img loading="lazy" decoding="async" src="images/cleaning.webp" alt="小蘇打粉、檸檬酸、洗碗精、肥皂，都是生活中的清潔幫手。"></div><p class="caption">小蘇打粉、檸檬酸、洗碗精、肥皂，都是生活中的清潔幫手。</p><p style="margin-top:14px">肥皂或洗碗精的成分遇到油汙，會和油汙<b>結合</b>，把油汙帶離物品表面，水就容易帶走了。</p></div><div class="card"><p>較環保的去汙：<b>小蘇打水</b>清潔衣服汗漬、<b>檸檬酸水</b>清潔水垢。</p></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>延伸問題：領口黃黃的汙漬，除了清潔劑和肥皂，還有什麼方法？（課本「想一想」）</li></ul></div></div>
+  <div class="step" data-label="氣泡水的祕密"><div class="card"><p>氣泡水裡為什麼有這麼多泡泡？因為<b>二氧化碳溶解在水裡</b>！</p><div class="photo"><img loading="lazy" decoding="async" src="images/soda_bubbles.webp" alt="打開瓶蓋，二氧化碳跑出來，變成氣泡。"></div><p class="caption">打開瓶蓋，二氧化碳跑出來，變成氣泡。</p><div class="tip">除了砂糖、食鹽，<b>氣體（二氧化碳）也可以溶解在水裡</b>。氣泡水喝起來刺刺的、涼涼的。</div></div><div class="tbox"><b>👩‍🏫 老師教學</b><ul><li>可以問：「汽水、可樂跟氣泡水的原理一樣嗎？」（一樣，都是二氧化碳溶在水裡。）</li></ul></div></div>
+  <div class="step" data-label="段考練習"><div class="exq" data-ex="l9"></div><span class="score"></span></div>
+</section>
+<section class="page lesson" id="l10" data-no="複習" data-title="模擬段考" data-pic="images/powders.webp">
+  <div class="step" data-label="模擬段考"><p style="margin-bottom:14px">綜合各校段考題型，共 <b id="mockN"></b> 題。每題都有 <b>📖 解析</b>；答錯時會說明為什麼錯。</p><div class="big-btns"><button class="bb" onclick="teacherMode(this)">👩‍🏫 老師模式：關</button></div><div class="exq" data-ex="mock"></div><span class="score"></span></div>
+</section>
+<footer>
+  <p>🧂 奇妙的溶解｜三年級自然 第二次月考範圍 互動教學</p>
+  <p>整合兩個版本課本：翰林（分辨物質的方法、物質在水中溶解了、溶解的應用）、康軒（廚房裡的科學）</p>
+  <p>照片：Gemini 製作｜適用手機・平板・電腦</p>
+  <p><a href="../" style="color:#fff">← 回自然科</a>　<a href="/" style="color:#fff">← 回主選單</a></p>
+</footer>
+<div id="lb"><div class="box">
+  <div><div class="zoombox" id="lbZoom" data-nohot="1"></div></div>
+  <div class="txt"><span class="tag" id="lbTag"></span><h4 id="lbName"></h4><p id="lbText"></p>
+    <div class="nav"><button onclick="lbMove(-1)">◀ 上一張</button><button onclick="lbMove(1)">下一張 ▶</button><button onclick="lbZoomToggle()">🔍 放大/全圖</button><button class="x" onclick="lbClose()">✖ 關閉</button></div>
+    <div class="nums" id="lbNums"></div></div>
+</div></div>
+<div id="penLayer"><canvas id="penCanvas"></canvas></div>
+<div id="penBar">
+  <button class="c sel" style="background:#2f80ed" data-c="#2f80ed" aria-label="藍色"></button>
+  <button class="c" style="background:#e5484d" data-c="#e5484d" aria-label="紅色"></button>
+  <button class="c" style="background:#8e5bd1" data-c="#8e5bd1" aria-label="紫色"></button>
+  <button class="c" style="background:#1aa88f" data-c="#1aa88f" aria-label="藍綠"></button>
+  <button class="c" style="background:#f2b705" data-c="#f2b705" aria-label="黃色"></button>
+  <button onclick="penClear()">🧽 清除</button>
+  <button onclick="togglePen()">✖ 關閉</button>
+</div>
+<script src="exam.js"></script>
+<script src="exam_analysis.js"></script>
+<script>
+const ZOOM={"zPow": [["白砂糖（特砂）", 24, 26, 2.6, "顆粒細小、<b>白色</b>，會閃閃發亮。"], ["二砂（黃砂糖）", 50, 26, 2.8, "顆粒比較大、<b>黃褐色</b>，也是砂糖。"], ["食鹽", 77, 26, 2.8, "<b>白色方塊狀</b>顆粒，比白砂糖粗。"], ["細沙", 23, 73, 2.8, "顆粒細小、<b>米黃色</b>，不透明，有點粗糙。"], ["小蘇打粉", 50, 73, 2.8, "<b>白色粉末</b>，非常細，摸起來滑滑的。"], ["檸檬酸", 77, 73, 2.8, "<b>透明～白色結晶</b>，像小冰塊。"]], "zLab": [["量筒", 16, 50, 2.4, "用來<b>量水的體積</b>（毫升）。讀數時眼睛平視水面最低處。"], ["燒杯", 29, 62, 2.6, "盛裝水和物質，<b>溶解實驗</b>的容器。"], ["平匙", 46, 50, 2.6, "舀取粉末，要<b>刮成一平匙</b>。"], ["玻璃攪拌棒", 56, 50, 2.4, "<b>攪拌</b>讓物質溶解得快；也可以用來刮平匙面。用前先洗乾淨。"], ["塑膠滴管", 66, 50, 2.4, "吸取少量液體，例如<b>紫色高麗菜汁</b>。"], ["放大鏡", 81, 45, 2.4, "觀察細小的顆粒。<b>不可以看太陽</b>。"]], "zThree": [["食鹽水", 20, 55, 2.4, "食鹽<b>完全溶解</b>，水是清澈透明的。"], ["砂糖水", 48, 55, 2.4, "砂糖<b>完全溶解</b>，水是清澈透明的。"], ["細沙", 77, 60, 2.4, "細沙<b>不能溶解</b>，攪拌後沉澱在杯底，水變混濁。"]], "zFive": [["砂糖", 13, 55, 2.6, "完全溶解，清澈。"], ["食鹽", 31, 55, 2.6, "完全溶解，清澈。"], ["黑胡椒粒", 50, 55, 2.6, "<b>部分溶解</b>，水變灰色；<b>部分沉底</b>或浮著。"], ["小蘇打粉", 69, 55, 2.6, "攪拌後溶解成<b>小蘇打水</b>（鹼性）。"], ["檸檬酸", 89, 55, 2.6, "溶解成<b>檸檬酸水</b>（酸性）。"]], "zHot": [["常溫水", 31, 70, 2.4, "杯底<b>鹽顆粒很多</b>→溶解的量<b>較少</b>。"], ["熱水", 69, 70, 2.4, "杯底<b>鹽顆粒很少</b>→溶解的量<b>較多</b>。"]], "zSep": [["① 混合物", 17, 55, 2.4, "細沙和食鹽混在一起，很難一顆一顆挑開。"], ["② 加水攪拌", 50, 55, 2.4, "食鹽<b>溶解</b>在水中，細沙<b>沉在杯底</b>。"], ["③ 過濾", 83, 50, 2.4, "濾紙擋住<b>沙子</b>，<b>鹽水</b>流到下面的燒杯。"]], "zPh": [["醋", 12, 55, 2.6, "<span class=\"k-red\">紅色</span>→ 酸性。"], ["檸檬酸水", 31, 55, 2.6, "<span class=\"k-red\">粉紅偏紅</span>→ 酸性。"], ["食鹽水", 50, 55, 2.6, "<b>紫色</b>（沒變）→ 中性。"], ["砂糖水", 68, 55, 2.6, "<b>紫色</b>（沒變）→ 中性。"], ["小蘇打水", 86, 55, 2.6, "<span class=\"key\">藍綠色</span>→ 鹼性。"]]};
+const G={"apps": [["tea_sugar", "紅茶加砂糖", "飲食", "紅茶有點苦，加砂糖後<b>溶解</b>，就變甜了。", 50, 55, 1.4], ["soup_salt", "煮湯加食鹽", "飲食", "食鹽<b>溶在湯裡</b>，湯才有鹹味。", 40, 50, 1.5], ["ginger_tea", "薑茶加黑糖", "飲食", "黑糖溶在熱薑茶裡。", 50, 55, 1.4], ["effervescent", "維他命 C 發泡錠", "飲食", "發泡錠要<b>依建議水量</b>泡，才會完全溶解。", 50, 50, 1.5], ["laundry_powder", "洗衣粉", "清潔", "洗衣粉溶在水裡才能洗衣服。", 55, 55, 1.4], ["soap_hand", "肥皂洗手", "清潔", "肥皂溶解在水中可以用來洗手。", 50, 50, 1.3], ["cleaning", "小蘇打粉與清潔劑", "清潔", "小蘇打粉溶在水中，可以<b>清潔餐具</b>；清潔劑溶在水中可以去除馬桶汙垢。", 40, 55, 1.6], ["capsule", "膠囊", "藥物／洗衣", "膠囊外殼<b>可溶於水</b>，外殼溶解後才釋出成分。", 50, 55, 1.6]]};
+/* ===== 首頁卡片 / 課程架構 ===== */
+const lessons=[...document.querySelectorAll('.lesson')];
+const grid=document.getElementById('lessonGrid');
+lessons.forEach(sec=>{
+  const b=document.createElement('button');b.className='lcard';b.onclick=()=>go(sec.id);
+  b.innerHTML=`<div class="pic" style="background-image:url('${sec.dataset.pic.replace('images/','images/thumb/')}')"></div><div class="t"><span class="no">${sec.dataset.no}</span><span class="nm">${sec.dataset.title}</span></div>`;
+  grid.appendChild(b);
+  const head=document.createElement('div');head.className='lhead';
+  head.innerHTML=`<span class="badge">${sec.dataset.no}</span><h2>${sec.dataset.title}</h2>`;
+  const steps=[...sec.querySelectorAll(':scope > .step')];
+  const bar=document.createElement('nav');bar.className='stepbar';
+  steps.forEach((st,i)=>{
+    const h=document.createElement('h3');h.innerHTML=`<span class="n">${i+1}</span>${st.dataset.label}`;st.prepend(h);
+    const c=document.createElement('button');c.textContent=i+1;c.title=st.dataset.label;c.onclick=()=>setStep(sec,i);bar.appendChild(c);
+  });
+  const nav=document.createElement('div');nav.className='stepnav';
+  nav.innerHTML='<button class="prev">◀ 上一步</button><button class="next">下一步 ▶</button>';
+  nav.querySelector('.prev').onclick=()=>setStep(sec,sec._i-1);
+  nav.querySelector('.next').onclick=()=>{ if(sec._i<steps.length-1) setStep(sec,sec._i+1); else nextLesson(sec); };
+  sec.prepend(bar);sec.prepend(head);sec.appendChild(nav);
+  sec._steps=steps;sec._bar=bar;sec._nav=nav;sec._i=0;
+});
+function setStep(sec,i){
+  if(i<0||i>=sec._steps.length)return;
+  sec._i=i;
+  sec._steps.forEach((s,k)=>s.classList.toggle('on',k===i));
+  [...sec._bar.children].forEach((c,k)=>{c.classList.toggle('on',k===i);if(k===i)c.classList.add('seen')});
+  sec._nav.querySelector('.prev').disabled=i===0;
+  const last=i===sec._steps.length-1, idx=lessons.indexOf(sec);
+  sec._nav.querySelector('.next').textContent= last ? (idx<lessons.length-1?'下一課 ▶':'回首頁 🏠') : '下一步 ▶';
+  const top=sec.getBoundingClientRect().top+scrollY-70; if(scrollY>top) scrollTo({top,behavior:'smooth'});
+  sec._steps[i].querySelectorAll('.zoombox').forEach(z=>z._reset&&z._reset());
+  const p3=sec._steps[i].querySelector('#p3dBox'); if(p3&&window.Plant3D) Plant3D.init(p3);
+}
+function nextLesson(sec){const i=lessons.indexOf(sec);go(i<lessons.length-1?lessons[i+1].id:'home');}
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('show',p.id===id));
+  const sec=document.getElementById(id);
+  document.getElementById('nowTitle').textContent= id==='home'?'奇妙的溶解':`${sec.dataset.no}｜${sec.dataset.title}`;
+  if(sec.classList.contains('lesson'))setStep(sec,sec._i||0);
+  if(location.hash!=='#'+id)history.pushState(null,'','#'+id);
+  scrollTo(0,0);
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-show]');if(!b)return;
+  b.classList.add('on');const t=document.getElementById(b.dataset.show);if(t)t.classList.add('show');
+});
+
+/* ===== 放大鏡 ===== */
+function makeZoom(box,img){
+  box.innerHTML=`<div class="zin"><img loading="lazy" decoding="async" src="${img}" alt=""></div><div class="ring"></div><span class="zlabel"></span><button class="back">↩ 全圖</button>`;
+  const zin=box.querySelector('.zin'),ring=box.querySelector('.ring');
+  box._zoom=(x,y,s,label)=>{
+    const W=box.clientWidth,H=box.clientHeight;
+    let tx=W/2-x/100*W*s, ty=H/2-y/100*H*s;
+    tx=Math.min(0,Math.max(W-W*s,tx)); ty=Math.min(0,Math.max(H-H*s,ty));
+    zin.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;
+    ring.style.left=(x/100*W*s+tx)+'px'; ring.style.top=(y/100*H*s+ty)+'px';
+    box.classList.add('zoomed'); box.querySelector('.zlabel').textContent=label||'';
+  };
+  box._reset=()=>{zin.style.transform='';box.classList.remove('zoomed');ring.style.left='50%';ring.style.top='50%';box._onreset&&box._onreset();};
+  box.querySelector('.back').onclick=()=>box._reset();
+}
+document.querySelectorAll('.zoombox[data-img]').forEach(box=>{
+  makeZoom(box,box.dataset.img);
+  const parts=ZOOM[box.id]; if(!parts)return;
+  const info=document.getElementById(box.id+'-info'), wrap=document.querySelector(`[data-zoom="${box.id}"]`), btns=[];
+  const pick=i=>{const p=parts[i];box._zoom(p[1],p[2],p[3],`${i+1}. ${p[0]}`);btns.forEach((b,k)=>b.classList.toggle('on',k===i));info.innerHTML=`<h4>🔍 ${i+1}. ${p[0]}</h4><p>${p[4]}</p>`;};
+  parts.forEach((p,i)=>{
+    if(!box.dataset.nohot){const h=document.createElement('button');h.className='hot';h.textContent=i+1;h.style.left=p[1]+'%';h.style.top=p[2]+'%';h.onclick=()=>pick(i);box.appendChild(h);}
+    if(wrap){const b=document.createElement('button');b.className='bb';b.innerHTML=`<span class="num">${i+1}</span>${p[0]}`;b.onclick=()=>pick(i);wrap.appendChild(b);btns.push(b);}
+  });
+  if(wrap){const a=document.createElement('button');a.className='bb';a.textContent='🔍 全圖';a.onclick=()=>box._reset();wrap.appendChild(a);}
+  box._onreset=()=>btns.forEach(b=>b.classList.remove('on'));
+});
+addEventListener('resize',()=>document.querySelectorAll('.zoombox').forEach(z=>z._reset&&z._reset()));
+
+/* ===== 圖鑑 + 燈箱 ===== */
+let LB={list:[],i:0,zoomed:false};
+const lbBox=document.getElementById('lbZoom');
+function renderGallery(el,list){
+  el.classList.add('gallery');
+  list.forEach((it,i)=>{
+    const c=document.createElement('button');c.className='gcard';
+    c.innerHTML=`<span class="gno">${i+1}</span><img loading="lazy" decoding="async" src="images/thumb/${it[0]}.webp" alt="${it[1]}"><span class="gt"><b>${it[1]}</b><span class="tag">${it[2]}</span></span>`;
+    c.onclick=()=>{c.classList.add('seen');lbOpen(list,i,el);};
+    el.appendChild(c);
+  });
+}
+document.querySelectorAll('[data-g]').forEach(el=>renderGallery(el,G[el.dataset.g]));
+function groups(boxId,data){const box=document.getElementById(boxId);data.forEach(([t,list])=>{const h=document.createElement('div');h.className='gsec';h.textContent=t;box.appendChild(h);const g=document.createElement('div');box.appendChild(g);renderGallery(g,list);});}
+function lbOpen(list,i,el){LB.list=list;LB.el=el;document.getElementById('lb').classList.add('on');lbShow(i);}
+function lbShow(i){
+  LB.i=(i+LB.list.length)%LB.list.length;const it=LB.list[LB.i];
+  const im=new Image();im.src=`images/${it[0]}.webp`;
+  im.onload=()=>{lbBox.style.aspectRatio=`${im.naturalWidth}/${im.naturalHeight}`;makeZoom(lbBox,im.src);
+    setTimeout(()=>{lbBox._zoom(it[4],it[5],it[6],it[1]);LB.zoomed=true;},450);};
+  document.getElementById('lbTag').textContent=it[2];
+  document.getElementById('lbName').textContent=`${LB.i+1}. ${it[1]}`;
+  document.getElementById('lbText').innerHTML=it[3];
+  const nums=document.getElementById('lbNums');nums.innerHTML='';
+  LB.list.forEach((_,k)=>{const b=document.createElement('button');b.textContent=k+1;if(k===LB.i)b.classList.add('on');b.onclick=()=>lbShow(k);nums.appendChild(b);});
+  if(LB.el)LB.el.querySelectorAll('.gcard')[LB.i]?.classList.add('seen');
+}
+function lbMove(d){lbShow(LB.i+d);}
+function lbZoomToggle(){const it=LB.list[LB.i];if(LB.zoomed){lbBox._reset();LB.zoomed=false;}else{lbBox._zoom(it[4],it[5],it[6],it[1]);LB.zoomed=true;}}
+function lbClose(){document.getElementById('lb').classList.remove('on');}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')lbClose();});
+addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('on'))return;if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);if(e.key==='Escape')lbClose();});
+
+
+function goStep(lid,label){go(lid);const sec=document.getElementById(lid);const i=sec._steps.findIndex(s=>s.dataset.label===label);setStep(sec,i<0?0:i);}
+function renderExam(box,list,ana){
+  const sc=box.parentNode.querySelector('.score');let right=0,done=0;
+  const upd=()=>sc.textContent=`答對 ${right} / ${done}　（共 ${list.length} 題）`;
+  list.forEach((it,i)=>{const opts=it[2]==='TF'?['○ 對','✕ 錯']:it[2];const d=document.createElement('div');d.className='q';d.dataset.ans=it[3];const A=ana&&ana[i];
+    const lab=k=>it[2]==='TF'?opts[k]:'('+(k+1)+') '+opts[k];
+    let panel=`<div class="ana"><p class="ans-line">✅ 正確答案：<b>${lab(it[3])}</b></p>`;
+    if(A){const sec=document.getElementById(A.go[0]);
+      panel+=`<p><span class="anak">考點</span>${A.k}</p><p>${A.ok}</p><ul class="opnotes">${opts.map((o,k)=>A.ops[k]&&A.ops[k]!=='—'?`<li data-k="${k}" class="${k===it[3]?'okk':''}"><b>${lab(k)}</b>：${A.ops[k].replace(/^✔ ?/,'')}</li>`:'').join('')}</ul><p class="teach">👩‍🏫 <b>教學提示：</b>${A.t}</p><button class="bb back2" onclick="goStep('${A.go[0]}','${A.go[1]}')">👉 回到「${sec.dataset.no}・${A.go[1]}」複習</button>`;}
+    else panel+=`<p>💡 ${it[4]}</p>`;
+    panel+='</div>';
+    d.innerHTML=`${it[0]?`<img loading="lazy" decoding="async" src="images/thumb/${it[0]}.webp" alt="">`:''}<div class="qbody"><div class="qt">${i+1}. ${it[2]==='TF'?'<span class="tfbadge">是非</span>':''}${it[1]}</div><div class="opts">${opts.map((o,k)=>`<button data-k="${k}">${lab(k)}</button>`).join('')}</div><div class="why">💡 ${it[4]}</div><button class="anabtn">📖 解析</button>${panel}</div>`;
+    const showWrong=k=>{d.querySelectorAll('.opnotes li').forEach(li=>li.classList.toggle('picked',+li.dataset.k===k));};
+    d.querySelector('.anabtn').onclick=()=>d.classList.toggle('showana');
+    d.querySelectorAll('.opts button').forEach(btn=>btn.onclick=()=>{if(d.classList.contains('done'))return;const k=+btn.dataset.k;
+      if(k===it[3]){btn.classList.add('right');d.classList.add('done');done++;if(!d._miss)right++;}
+      else{btn.classList.add('wrong');d._miss=true;if(A){showWrong(k);d.classList.add('showana');}}upd();});
+    box.appendChild(d);});upd();}
+function teacherMode(b){const on=b.classList.toggle('on');b.textContent=on?'👩‍🏫 老師模式：開（顯示全部答案與解析）':'👩‍🏫 老師模式：關';
+  document.querySelectorAll('#l10 .q').forEach(q=>{q.classList.toggle('showana',on);q.classList.toggle('teacher',on);q.querySelector(`.opts button[data-k="${q.dataset.ans}"]`).classList.toggle('tright',on);});}
+document.querySelectorAll('.exq').forEach(b=>{const k=b.dataset.ex;renderExam(b,k==='mock'?QUIZ.concat(MOCK):EX[k],k==='mock'?MOCK_A:null);});
+if(window.mockN)mockN.textContent=QUIZ.length+MOCK.length;
+
+/* ===== 畫筆 ===== */
+const cv=document.getElementById('penCanvas'),ctx=cv.getContext('2d');let penColor='#2f80ed',drawing=false,last=null;
+function sizeCanvas(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;ctx.setTransform(r,0,0,r,0,0);ctx.lineCap='round';ctx.lineJoin='round';}
+function togglePen(){const on=!penLayer.classList.contains('on');penLayer.classList.toggle('on',on);penBar.classList.toggle('on',on);if(on&&!cv._s){sizeCanvas();cv._s=1;}}
+function penClear(){ctx.clearRect(0,0,cv.width,cv.height);}
+document.querySelectorAll('#penBar .c').forEach(b=>b.onclick=()=>{penColor=b.dataset.c;document.querySelectorAll('#penBar .c').forEach(x=>x.classList.toggle('sel',x===b));});
+cv.addEventListener('pointerdown',e=>{drawing=true;last=[e.clientX,e.clientY];cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{if(!drawing)return;ctx.strokeStyle=penColor;ctx.globalAlpha=.85;ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(...last);ctx.lineTo(e.clientX,e.clientY);ctx.stroke();last=[e.clientX,e.clientY];});
+['pointerup','pointercancel'].forEach(t=>cv.addEventListener(t,()=>drawing=false));
+addEventListener('resize',()=>{if(cv._s)sizeCanvas();});
+
+
+const start=location.hash.slice(1);go(document.getElementById(start)?start:'home');
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(document.getElementById(h))go(h);});
+</script>
+</body>
+</html>
