@@ -380,5 +380,10 @@ body.plates .lb.lf,body.plates .lb.island,body.plates .lb.spot,body.plates .lb.p
   document.getElementById('pw-in').focus();
 })();
 </script>
+<script>/* hash-deeplink：網址加 #terrain / #ocean / #spots 可直接開該分頁；加 -junior 切到國中版（例：#ocean-junior） */
+(function(){var h=(location.hash||'').slice(1);if(!h)return;var m=h.split('-')[0],lv=h.indexOf('junior')>-1?'junior':(h.indexOf('elem')>-1?'elem':'');
+function go(){if(lv){var l=document.querySelector('[data-level="'+lv+'"]');if(l)l.click();}
+setTimeout(function(){var t=document.querySelector('.tabs [data-mode="'+m+'"]');if(t)t.click();},400);}
+if(document.readyState==='complete')setTimeout(go,900);else window.addEventListener('load',function(){setTimeout(go,900)});})();</script>
 </body>
 </html>
