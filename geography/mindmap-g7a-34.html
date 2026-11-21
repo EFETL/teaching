@@ -10,7 +10,7 @@ html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:#f6f3ec;color:#1a1a1a;line-height:1.85;font-size:18px}
 header{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;padding:26px 18px;text-align:center}
 header h1{font-size:27px}header p{margin-top:6px;font-size:18px;opacity:.95}
-nav.top{position:static;top:0;z-index:20;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:8px 12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+nav.top{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:8px 12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 nav.top a{padding:7px 16px;border-radius:22px;background:#f0ede4;color:#333;text-decoration:none;font-size:17px}
 nav.top a.home{background:var(--c1);color:#fff}
 nav.top a:hover{background:var(--c2);color:#fff}
@@ -101,18 +101,22 @@ body.brief .blk-ext,body.brief .flow,body.brief blockquote.note{display:none}
 body.brief article p:not(.callout):not(.tgp){}
 #fabBrief{position:fixed;right:14px;bottom:76px;z-index:30;border:0;border-radius:26px;padding:11px 16px;font-size:17px;font-weight:700;background:#e5383b;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.3);cursor:pointer}
 body.brief #fabBrief{background:#2e9f57}
-@media(max-width:700px){.tg{font-size:15px}nav.top{position:static}}
+@media(max-width:700px){.tg{font-size:15px}nav.top{position:sticky}}
+nav.top .mdb{margin-left:auto;display:flex;gap:6px}
+nav.top .mdb button{border:2px solid var(--c1);background:#fff;color:var(--c1);border-radius:18px;padding:3px 11px;font-size:14px;font-weight:700;cursor:pointer;line-height:1.5}
+nav.top .mdb button.on{background:var(--c1);color:#fff}
+.tools .lg{font-size:14px;gap:4px 6px}.tools .tg{font-size:13px;padding:0 9px}.tools .pub{font-size:13px}
 @media print{.tools{display:none}.blk-ext{display:none}}
 
 @media print{nav.top,.totop,.jump,.dl{display:none}body{background:#fff}article,.map{box-shadow:none}}
 </style></head>
 <body>
 <header><h1>🗺️ 國一上地理｜第3、4章 心智圖＋統整稿</h1><p>臺灣的地形、海岸與島嶼（康軒×南一×翰林）</p></header>
-<nav class="top"><a class="home" href="./">← 回地理科</a><a href="#chap1">第3章 臺灣的地形</a><a href="#chap2">第4章 臺灣的海岸與島嶼</a><a href="#intro">編撰說明</a><a href="#tail">跨章統整</a>
+<nav class="top"><a class="home" href="./">← 回地理科</a><a href="#chap1">第3章 臺灣的地形</a><a href="#chap2">第4章 臺灣的海岸與島嶼</a><a href="#intro">編撰說明</a><a href="#tail">跨章統整</a><span class="mdb"><button id="mAll" class="on">📖 完整</button><button id="mBrief">⚡ 快速複習</button></span>
 <div class="tools"><div class="lg"><b>顏色怎麼看：</b>
 <span class="tg tg-core">⭐ 三版共通</span><span class="tg tg-exam">🎯 段考重點</span><span class="tg tg-conf">⚠️ 易混淆</span><span class="tg tg-pub">📘 版本特色</span><span class="tg tg-ext">💡 延伸補充</span>
 <span class="pub kx">康軒</span><span class="pub ny">南一</span><span class="pub hl">翰林</span><span style="background:linear-gradient(transparent 38%,#fff2a8 38%);padding:0 4px;font-weight:700">黃底＝關鍵字</span></div>
-<div class="md"><b>閱讀模式：</b><button id="mAll" class="on">📖 完整</button><button id="mBrief">⚡ 快速複習（只看重點）</button></div></div></nav>
+</div></nav>
 <main>
 <section class="chap" id="intro"><article><h1 id="i-1">國中七年級上學期地理統整教學講義</h1>
 <p>第3章〈臺灣的地形〉｜第4章〈臺灣的海岸與島嶼〉</p>
@@ -1605,7 +1609,6 @@ body.brief #fabBrief{background:#2e9f57}
 <div class="dl"><a href="mindmap-g7a-34.pdf" target="_blank">📄 下載／列印心智圖 PDF</a></div>
 </main>
 <footer>全民英語補習班｜內容由三版課本整合，法規與時事補充查核至 2026-11-20</footer>
-<button id="fabBrief">⚡ 快速複習</button>
 <button class="totop" onclick="scrollTo(0,0)" aria-label="回到頂端">↑</button>
 <div id="lb"></div>
 <script src="/fontsize.js" defer></script><script src="/mobile.js" defer></script>
@@ -1615,8 +1618,7 @@ document.querySelectorAll('.map img,figure.mf img').forEach(function(i){i.onclic
 lb.onclick=function(){lb.style.display='none'};
 
 var mA=document.getElementById('mAll'),mB=document.getElementById('mBrief');
-function setM(b){document.body.classList.toggle('brief',b);mA.classList.toggle('on',!b);mB.classList.toggle('on',b);document.getElementById('fabBrief').textContent=b?'📖 看完整':'⚡ 快速複習';try{localStorage.setItem('efetl-brief',b?'1':'0')}catch(e){}}
-document.getElementById('fabBrief').onclick=function(){setM(!document.body.classList.contains('brief'))};
+function setM(b){document.body.classList.toggle('brief',b);mA.classList.toggle('on',!b);mB.classList.toggle('on',b);try{localStorage.setItem('efetl-brief',b?'1':'0')}catch(e){}}
 mA.onclick=function(){setM(false)};mB.onclick=function(){setM(true)};
 try{if(localStorage.getItem('efetl-brief')==='1')setM(true)}catch(e){}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.style.display='none'});
