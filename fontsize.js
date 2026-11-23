@@ -1,4 +1,4 @@
-/* fontsize.js — teaching.efetl.com 通用「字體大小」調整（100%～400%）
+/* fontsize.js — teaching.efetl.com 通用「字體大小」調整（100%～400%；平常縮成「Aa」小圓鈕，點開才顯示 A− 百分比 A＋，5 秒沒操作自動收起）
  * 用法：在頁面 </body> 前加  <script src="/fontsize.js" defer></script>
  * 做法：對 body 底下的「內容區塊」逐一套用 CSS zoom（等同瀏覽器放大，版面自動重排）；
  *       固定在畫面上的浮動元件（手寫工具列／畫布、回頂端鈕、本面板）不縮放，所以手寫筆的座標不會跑掉。
@@ -14,24 +14,29 @@
   box.id = 'efetl-fs'; box.setAttribute('data-nofs', '1');
   box.setAttribute('role', 'group'); box.setAttribute('aria-label', '字體大小');
   box.innerHTML =
+    '<button type="button" data-a="tg" class="tg" aria-label="字體大小" aria-expanded="false">Aa</button>' +
+    '<span class="pn">' +
     '<button type="button" data-a="dn" aria-label="縮小字體">A−</button>' +
-    '<input type="range" min="' + MIN + '" max="' + MAX + '" step="' + STEP + '" aria-label="字體大小百分比">' +
+    '<button type="button" data-a="rs" class="v" aria-label="還原 100%" title="點一下還原 100%"></button>' +
     '<button type="button" data-a="up" aria-label="放大字體">A＋</button>' +
-    '<span class="v"></span>' +
-    '<button type="button" data-a="rs" aria-label="還原">還原</button>';
+    '</span>';
   var st = document.createElement('style');
   st.textContent =
     '#efetl-fs{position:fixed;left:10px;bottom:62px;z-index:2147483000;display:flex;align-items:center;gap:6px;' +
-    'background:rgba(255,255,255,.96);border:1px solid #bbb;border-radius:26px;padding:6px 10px;box-shadow:0 2px 10px rgba(0,0,0,.25);' +
+    'background:rgba(255,255,255,.96);border:1px solid #bbb;border-radius:26px;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,.25);' +
     'font:16px/1 "Noto Sans TC","Microsoft JhengHei",sans-serif;color:#222}' +
     '#efetl-fs button{border:1px solid #999;background:#f4f4f4;border-radius:16px;min-width:38px;height:34px;padding:0 8px;font-size:16px;cursor:pointer;color:#222;font-family:inherit}' +
     '#efetl-fs button:hover{background:#ddd}' +
-    '#efetl-fs input{width:110px}' +
-    '#efetl-fs .v{min-width:46px;text-align:center;font-weight:700}' +
+    '#efetl-fs .tg{border:0;background:transparent;font-weight:700;min-width:44px;height:36px}' +
+    '#efetl-fs.on-fs .tg{color:#2563eb}' +
+    '#efetl-fs .pn{display:none;align-items:center;gap:6px}' +
+    '#efetl-fs.open .pn{display:flex}#efetl-fs.open .tg{display:none}' +
+    '#efetl-fs .v{min-width:58px;font-weight:700;background:#fff}' +
     '@media print{#efetl-fs{display:none!important}}';
   document.head.appendChild(st);
 
-  var sl = box.querySelector('input'), vv = box.querySelector('.v');
+  var vv = box.querySelector('.v'), tg = box.querySelector('.tg'), idle = 0;
+  function setOpen(o) { box.classList.toggle('open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); clearTimeout(idle); if (o) idle = setTimeout(function () { setOpen(false); }, 5000); }
 
   /* 取得要縮放的區塊：body 的子元素（排除固定定位的浮動元件）；手寫功能的 #penZoom 外殼則改取它的子元素 */
   function targets() {
@@ -56,15 +61,17 @@
   }
   function apply(n, save) {
     n = Math.max(MIN, Math.min(MAX, Math.round(n / STEP) * STEP));
-    cur = n; sl.value = n; vv.textContent = n + '%';
+    cur = n; vv.textContent = n + '%'; tg.textContent = n === 100 ? 'Aa' : n + '%'; box.classList.toggle('on-fs', n !== 100);
     if (save !== false) localStorage.setItem(KEY, String(n));
     paint();
   }
   box.addEventListener('click', function (e) {
     var a = e.target && e.target.getAttribute && e.target.getAttribute('data-a');
+    if (a === 'tg') { setOpen(true); return; }
+    if (a) setOpen(true);
     if (a === 'up') apply(cur + STEP); else if (a === 'dn') apply(cur - STEP); else if (a === 'rs') apply(100);
   });
-  sl.addEventListener('input', function () { apply(parseInt(sl.value, 10)); });
+  document.addEventListener('click', function (e) { if (!box.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown', function (e) {
     if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
       if (e.key === '+' || e.key === '=') { apply(cur + STEP); e.preventDefault(); }
