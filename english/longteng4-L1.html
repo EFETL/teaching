@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8"><meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1: The Bet ── 高中英文互動教學講義</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft JhengHei',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.75;font-size:17px}
+.page{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.header-nav{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.header-nav a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:16px;padding:7px 15px;border-radius:8px;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4);transition:all .15s}
+.header-nav a:hover{background:#fff;color:#1d4ed8;border-color:#fff}
+
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#38bdf8 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:26px}
+.header h1{font-size:22px;font-weight:800;letter-spacing:.5px}
+.header .sub{opacity:.95;margin-top:7px;font-size:17px}
+.header .time{margin-top:6px;font-size:16px;opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:16px;font-weight:700}
+
+.section{background:#fff;border-radius:12px;margin-bottom:26px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.sec-head{padding:17px 24px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:11px}
+.sec-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.sec-body{padding:6px 24px 26px}
+.sec-hint{font-size:16px;color:#64748b;margin-top:14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:9px 14px}
+
+.s-blue .sec-head{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.s-blue .sec-icon{background:#1d4ed8;color:#fff}
+.s-teal .sec-head{background:#f0fdfa;color:#0f766e;border-bottom:2px solid #99f6e4}
+.s-teal .sec-icon{background:#0f766e;color:#fff}
+.s-purple .sec-head{background:#f5f3ff;color:#6d28d9;border-bottom:2px solid #ddd6fe}
+.s-purple .sec-icon{background:#6d28d9;color:#fff}
+.s-green .sec-head{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.s-green .sec-icon{background:#166534;color:#fff}
+.s-orange .sec-head{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.s-orange .sec-icon{background:#9a3412;color:#fff}
+.s-rose .sec-head{background:#fff1f2;color:#be123c;border-bottom:2px solid #fecdd3}
+.s-rose .sec-icon{background:#be123c;color:#fff}
+
+/* 課文逐段 */
+.para{border:1px solid #e2e8f0;border-radius:10px;margin-top:16px;overflow:hidden}
+.para-speaker{font-weight:800;font-size:18px;padding:11px 16px;display:flex;align-items:center;gap:8px}
+.sp-robbie{background:#eff6ff;color:#1d4ed8;border-bottom:2px solid #bfdbfe}
+.sp-claire{background:#f0fdf4;color:#166534;border-bottom:2px solid #bbf7d0}
+.sp-nancy{background:#fff7ed;color:#9a3412;border-bottom:2px solid #fed7aa}
+.para-line{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.para-line:hover{background:#f8fafc}
+.para-line:last-child{border-bottom:none}
+.para-en{font-size:17px;color:#1e293b;display:flex;gap:9px;align-items:flex-start}
+.para-en .ic{color:#94a3b8;font-size:16px;margin-top:4px;flex-shrink:0;transition:transform .2s}
+.para-en .ic.open{transform:rotate(90deg)}
+.para-exp{display:none;margin-top:10px;padding-left:24px}
+.para-exp.open{display:block}
+.para-cn{color:#475569;font-size:16px;background:#f8fafc;border-left:3px solid #60a5fa;padding:7px 12px;border-radius:0 6px 6px 0}
+.para-note{font-size:16px;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.65}
+.para-note b{color:#b45309}
+.para-syntax{font-size:16px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 13px;margin-top:9px;line-height:2.1}
+.para-syntax .lbl{font-weight:700;color:#0f766e;display:block;margin-bottom:5px;font-size:16px}
+.para-syntax .num{color:#94a3b8;font-weight:700;margin-right:3px}
+.syn{padding:1px 6px;border-radius:4px;font-weight:700;display:inline-block}
+.syn-s{background:#dbeafe;color:#1d4ed8}
+.syn-v{background:#fee2e2;color:#dc2626}
+.syn-o{background:#dcfce7;color:#15803d}
+.syn-c{background:#f3e8ff;color:#9333ea}
+.syn-m{background:#f1f5f9;color:#64748b}
+.syn-t{font-size:16px;color:#64748b;margin:0 5px 0 1px}
+.syn-cl{font-size:16px;color:#64748b;font-style:italic;margin-left:3px}
+.syn-legend{font-size:16px;color:#475569;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:6px;padding:7px 11px;margin-top:12px;line-height:1.9}
+
+.story-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.story-card{flex:1;min-width:230px;border-radius:10px;padding:15px 17px;font-size:17px;line-height:1.7}
+.s1{background:#eff6ff;border:1.5px solid #bfdbfe}.s1 h4{color:#1d4ed8}
+.s2{background:#f0fdf4;border:1.5px solid #bbf7d0}.s2 h4{color:#166534}
+.s3{background:#fff7ed;border:1.5px solid #fed7aa}.s3 h4{color:#9a3412}
+.story-card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* 單字卡 */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.v-card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+.v-top{padding:12px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.v-top:hover{background:#f8fafc}
+.v-word{font-size:20px;font-weight:800;color:#1e40af}
+.v-pos{font-size:16px;color:#64748b;background:#e2e8f0;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
+.v-cn-mini{font-size:16px;color:#475569;margin-top:2px}
+.v-ic{color:#94a3b8;font-size:16px;flex-shrink:0;transition:transform .2s}
+.v-ic.open{transform:rotate(90deg)}
+.v-body{display:none;padding:0 15px 14px;border-top:1px solid #f1f5f9}
+.v-body.open{display:block}
+.v-fam{margin-top:10px;font-size:16px;color:#7c3aed}
+.v-fam span{background:#f5f3ff;border-radius:5px;padding:2px 7px;margin-right:5px;display:inline-block;margin-bottom:4px}
+.v-ex{margin-top:9px;font-size:16px;color:#334155;border-left:3px solid #60a5fa;padding-left:10px;line-height:1.65}
+.v-ex .cn{display:block;color:#64748b;font-size:16px;margin-top:2px}
+.v-gsat{margin-top:9px;font-size:16px;color:#b45309;background:#fef3c7;border-radius:5px;padding:4px 9px;display:inline-block;font-weight:600}
+
+.divlabel{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-weight:700;color:#475569;font-size:16px}
+.divlabel::before,.divlabel::after{content:'';flex:1;border-top:1px solid #e2e8f0}
+
+.ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:16px}
+.ptable th{background:#f1f5f9;padding:10px 13px;text-align:left;font-weight:700;color:#475569;border-bottom:2px solid #cbd5e1}
+.ptable td{padding:11px 13px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:nth-child(even) td{background:#f8fafc}
+.phr{font-weight:700;color:#1e40af}
+.pex{color:#475569;font-size:16px}
+.pex .cn{display:block;color:#94a3b8;font-size:16px;margin-top:2px}
+
+/* 俚語 */
+.slang-card{border:1px solid #fecdd3;border-radius:10px;background:#fff;margin-top:13px;overflow:hidden}
+.slang-top{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff5f6}
+.slang-top:hover{background:#ffe4e8}
+.slang-en{font-weight:800;color:#be123c;font-size:18px}
+.slang-cn-mini{font-size:16px;color:#9f1239;margin-top:2px}
+.slang-body{display:none;padding:13px 16px;border-top:1px solid #fecdd3}
+.slang-body.open{display:block}
+.slang-mean{font-size:16px;color:#334155;margin-bottom:7px}
+.slang-ex{font-size:16px;color:#475569;border-left:3px solid #fb7185;padding-left:10px;line-height:1.65}
+.slang-ex .cn{display:block;color:#9f1239;font-size:16px;margin-top:2px}
+
+/* 文法 */
+.g-panel{border:1px solid #ddd6fe;border-radius:10px;margin-top:15px;overflow:hidden}
+.g-head{background:#f5f3ff;padding:13px 17px;font-weight:700;color:#6d28d9;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:18px}
+.g-head:hover{background:#ede9fe}
+.g-arrow{font-size:16px;color:#a78bfa;transition:transform .2s;flex-shrink:0}
+.g-formula{background:#1e1b4b;color:#a5b4fc;padding:11px 17px;font-family:'Courier New',monospace;font-size:16px;white-space:pre-wrap}
+.g-body{padding:15px 17px;display:none}
+.g-body.open{display:block}
+.g-ex{background:#f0fdf4;border-left:4px solid #22c55e;padding:9px 13px;margin:9px 0;font-size:16px;border-radius:0 6px 6px 0;line-height:1.7}
+.g-ex-cn{font-size:16px;color:#64748b;margin-top:3px}
+.g-note{background:#fef9c3;border:1px solid #fde68a;border-radius:7px;padding:10px 13px;margin-top:11px;font-size:16px;color:#78350f;line-height:1.7}
+.g-note::before{content:"⚠️ 常見錯誤：";font-weight:700}
+.g-tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 13px;margin-top:9px;font-size:16px;color:#1e40af;line-height:1.7}
+.g-tip::before{content:"💡 學測重點：";font-weight:700}
+.gtab{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+.gtab th{background:#f1f5f9;padding:7px 11px;text-align:left;border-bottom:2px solid #ddd}
+.gtab td{padding:7px 11px;border-bottom:1px solid #e2e8f0}
+
+/* 練習題 */
+.q-block{border:1px solid #d1d5db;border-radius:11px;margin-top:15px;overflow:hidden}
+.q-top{display:flex;align-items:flex-start;gap:11px;padding:15px 17px}
+.q-num{border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:1px;color:#fff}
+.s-green .q-num{background:#166534}
+.s-orange .q-num{background:#9a3412}
+.q-main{flex:1}
+.q-en{font-size:17px;color:#1e293b;line-height:1.75}
+.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #2563eb;text-align:center;color:#2563eb;font-weight:700;margin:0 4px}
+.q-cn{font-size:16px;color:#64748b;margin-top:6px;font-style:italic;line-height:1.6}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.choice{padding:9px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:16px;background:#f8fafc;line-height:1.5;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.choice:hover{border-color:#94a3b8;background:#f1f5f9}
+.choice .mark{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid #cbd5e1;color:transparent}
+.choice.correct{border-color:#16a34a;background:#f0fdf4}
+.choice.correct .mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.choice.wrong{border-color:#dc2626;background:#fef2f2}
+.choice.wrong .mark{background:#dc2626;border-color:#dc2626;color:#fff}
+
+.q-ans{display:none;padding:15px 17px;border-top:1px solid #e2e8f0;background:#f8fafc}
+.q-ans.open{display:block}
+.ans-badge{display:inline-block;border-radius:7px;padding:4px 13px;font-weight:800;font-size:16px;margin-bottom:9px;color:#fff}
+.badge-green{background:#166534}
+.badge-orange{background:#9a3412}
+.ans-word{font-weight:700;font-size:17px;color:#166534;margin-bottom:5px}
+.ans-cn{font-size:16px;color:#374151;margin-bottom:7px;line-height:1.7}
+.ans-note{font-size:16px;color:#475569;line-height:1.75}
+.tnote{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 15px;margin-top:9px;font-size:16px;color:#7c2d12;line-height:1.75}
+.tnote::before{content:"📝 老師講解：";font-weight:800;display:block;margin-bottom:5px;font-size:17px}
+.show-btn{margin-top:11px;background:#475569;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.show-btn:hover{background:#334155}
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:none;background:#dbeafe;color:#1d4ed8;font-size:17px;cursor:pointer;margin-left:9px;vertical-align:middle;flex-shrink:0;transition:all .15s;padding:0}
+.speak-btn:hover{background:#1d4ed8;color:#fff}
+.speak-btn:active{transform:scale(.9)}
+.slang-en .speak-btn,.slang-top .speak-btn{background:#ffe4e8;color:#be123c}
+.slang-top .speak-btn:hover{background:#be123c;color:#fff}
+.word-row{display:flex;align-items:center}
+.hi{color:#dc2626;font-weight:700}
+.hib{color:#2563eb;font-weight:700}
+.hig{color:#166534;font-weight:700}
+
+/* 新增大題共用色系 */
+.s-indigo .sec-head{background:#eef2ff;color:#4338ca;border-bottom:2px solid #c7d2fe}
+.s-indigo .sec-icon{background:#4338ca;color:#fff}
+.s-amber .sec-head{background:#fffbeb;color:#b45309;border-bottom:2px solid #fde68a}
+.s-amber .sec-icon{background:#b45309;color:#fff}
+
+/* 文法手寫練習：填空 + 句子改寫 */
+.gw-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed #e2e8f0}
+.gw-item:last-child{border-bottom:none}
+.gw-num{width:30px;height:30px;border-radius:50%;background:#ede9fe;color:#6d28d9;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.gw-main{flex:1}
+.gw-en{font-size:17px;line-height:2}
+.gw-input{border:none;border-bottom:2px solid #94a3b8;background:#f8fafc;font-size:16px;font-weight:700;color:#1e293b;padding:3px 6px;width:150px;text-align:center;font-family:inherit}
+.gw-input:focus{outline:none;border-color:#6d28d9;background:#f5f3ff}
+.gw-hint{color:#6d28d9;font-weight:700;font-size:16px}
+.gw-cn{font-size:16px;color:#64748b;margin-top:4px;font-style:italic}
+.gw-given{font-size:17px;margin-bottom:6px}
+.gw-instr{font-size:16px;color:#be123c;font-weight:700;margin-bottom:8px}
+.gw-textarea{width:100%;border:1.5px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:16px;font-family:inherit;resize:vertical;margin-bottom:2px;display:block}
+.gw-textarea:focus{outline:none;border-color:#6d28d9}
+.gw-ans{display:none;margin-top:8px;font-size:16px;color:#059669;font-weight:700;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px}
+.gw-ans.open{display:block}
+
+/* 句子重組 */
+.ro-item{padding:16px 0;border-bottom:1px dashed #e2e8f0}
+.ro-item:last-child{border-bottom:none}
+.ro-top{display:flex;gap:12px;align-items:flex-start}
+.ro-num{width:30px;height:30px;border-radius:50%;background:#e0e7ff;color:#4338ca;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ro-main{flex:1}
+.ro-cn{font-size:16px;color:#64748b;font-style:italic;margin-bottom:10px}
+.ro-answer{min-height:44px;border:2px dashed #c7d2fe;border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;background:#f8fafc}
+.ro-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.ro-chip{padding:7px 13px;border-radius:7px;border:2px solid #c7d2fe;background:#fff;color:#3730a3;font-weight:700;font-size:16px;cursor:pointer;transition:all .15s}
+.ro-chip:hover{background:#eef2ff}
+.ro-chip.placed{border-style:solid;background:#e0e7ff}
+.ro-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ro-btn{border:none;border-radius:7px;padding:7px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#4338ca}
+.ro-btn.secondary{background:#64748b}
+.ro-result{margin-top:8px;font-size:16px;font-weight:700;min-height:20px}
+.ro-result.correct{color:#16a34a}
+.ro-result.wrong{color:#dc2626}
+.ro-result.reveal{color:#4338ca}
+
+/* 單字配對遊戲 */
+.match-status{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-weight:800;color:#92400e;font-size:17px}
+.match-btn{border:none;border-radius:8px;padding:8px 16px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;background:#b45309}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.match-col{display:flex;flex-direction:column;gap:9px}
+.match-chip{padding:11px 15px;border:2px solid #fde68a;border-radius:9px;cursor:pointer;font-weight:700;font-size:16px;background:#fffbeb;color:#78350f;transition:all .12s}
+.match-chip:hover{background:#fef3c7}
+.match-chip.selected{border-color:#b45309;background:#fef3c7;box-shadow:0 0 0 2px #fde68a}
+.match-chip.matched{border-color:#86efac;background:#f0fdf4;color:#16a34a;cursor:default;opacity:.65}
+.match-chip.wrong{border-color:#fca5a5;background:#fef2f2;color:#dc2626;animation:mshake .3s}
+@keyframes mshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.match-win{display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;color:#92400e;font-weight:800;text-align:center;font-size:18px}
+.match-win.show{display:block}
+@media(max-width:640px){.match-grid{grid-template-columns:1fr}}
+
+@media print{
+  body{background:#fff;font-size:16px}
+  .page{max-width:100%;padding:8px}
+  .header{background:#1e3a8a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px}
+  .section{box-shadow:none;page-break-inside:avoid}
+  /* 課文、字彙、俚語、文法的補充：列印時自動展開 */
+  .g-body,.v-body,.para-exp,.slang-body{display:block!important}
+  /* 學生練習 + 老師精講題：列印時「不」顯示解析（只印題目與選項） */
+  .q-ans{display:none!important}
+  .gw-ans{display:none!important}
+  .s-amber,.ro-actions{display:none!important}
+  .v-ic,.g-arrow,.q-arr,.para-en .ic,.v-ic,.show-btn,.sec-hint,.header-nav,.speak-btn{display:none!important}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .story-grid{flex-wrap:nowrap}
+  .story-card{min-width:0}
+  a{text-decoration:none}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .vocab-grid{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .story-grid{flex-direction:column}
+}
+
+/* ===== 列印分頁與頁碼（前端 paginator 產生 A4 分頁＋每頁頁碼） ===== */
+.print-root{display:none}
+.pg-badge{margin-left:auto;font-size:16px;font-weight:700;color:#fff;background:rgba(15,23,42,.22);border-radius:14px;padding:2px 12px;white-space:nowrap;flex-shrink:0}
+@media print{
+  /* 用 @page 邊界定義可列印範圍、sheet 寬度自適應（width:auto）→ 瀏覽器不會把整頁縮放進可列印區，
+     字級才會如實印出。若改回固定 210mm + margin:0，遇到列印對話框「預設邊界」會被縮到約 90%，
+     16px 就變 ~14px（低於房規最小字級）。 */
+  @page{size:A4;margin:12mm}
+  body.has-print-pages .page{display:none!important}
+  body.has-print-pages .print-root{display:block}
+  .print-root .sheet{width:auto;min-height:255mm;padding:0 0 12mm;box-sizing:border-box;position:relative;page-break-after:always;background:#fff}
+  .print-root .sheet-box{max-width:100%}
+  .print-root .sheet:last-child{page-break-after:auto}
+  .print-root .pa{break-inside:avoid;page-break-inside:avoid}
+  .print-root .sec-head{border-radius:8px}
+  .print-root .header{border-radius:8px}
+  .sheet-foot{position:absolute;left:0;right:0;bottom:2mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;color:#64748b;border-top:1px solid #cbd5e1;padding-top:5px}
+  .sheet-foot .ft-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-foot .ft-num{font-weight:700;color:#334155;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-nav">
+    <a href="./">📚 回英文選單</a>
+    <a href="../">🏠 回主選單</a>
+  </div>
+  <h1>L1: The Bet ── 賭注</h1>
+  <div class="sub">龍騰版高中英文 第四冊 第一課｜互動教學講義（高二適用）</div>
+  <div class="time">⏱️ 建議授課時數：2 小時（120 分鐘）｜依學測 107–115 年命題趨勢設計</div>
+  <div class="tags">
+    <span class="tag">📖 課文重點摘要 × 15</span>
+    <span class="tag">📝 核心字彙 × 15</span>
+    <span class="tag">➕ 補充字彙 × 12</span>
+    <span class="tag">🔗 片語 × 6</span>
+    <span class="tag">🗣️ 俚語 × 6</span>
+    <span class="tag">📐 句型 × 8</span>
+    <span class="tag">✏️ 學生練習 × 15</span>
+    <span class="tag">🎓 老師精講 × 15</span>
+    <span class="tag">✍️ 文法手寫練習 × 30</span>
+    <span class="tag">🔀 句子重組 × 10</span>
+    <span class="tag">🎮 單字配對遊戲</span>
+  </div>
+</div>
+
+<!-- 故事速覽（移至最上方） -->
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">💡</div>故事速覽（三幕）</div>
+  <div class="sec-body">
+    <div class="story-grid">
+      <div class="story-card s1">
+        <h4>🎲 第一幕｜打賭的起點</h4>
+        秋夜裡，老銀行家想起十五年前的一場宴會。賓客爭論<b>死刑</b>與<b>終身監禁</b>哪個較殘酷：銀行家認為痛快一死較仁慈，年輕<b>律師</b>卻認為活著總比死好。爭執升溫，銀行家拿出<b>兩百萬盧布</b>打賭律師撐不過五年，律師反而堅持加碼到<b>十五年</b>。
+      </div>
+      <div class="story-card s2">
+        <h4>📚 第二幕｜漫長的監禁</h4>
+        律師被關進銀行家<b>莊園裡的小屋</b>，只能透過<b>小窗</b>傳紙條索取酒、菸、樂器等物品。物質享受填不滿<b>孤寂</b>，他轉而埋首<b>讀書</b>；從第六年起日夜苦讀歷史、哲學，四年讀了數百冊，<b>精通多種語言</b>、學識深厚。
+      </div>
+      <div class="story-card s3">
+        <h4>💌 第三幕｜出人意料的結局</h4>
+        銀行家卻<b>瀕臨破產</b>，無法忍受把剩下的財產輸給律師，竟起了<b>殺意</b>。期滿前一晚他潛入小屋，發現律師留下一封<b>親筆信</b>：他看透財富的虛幻，決定<b>放棄賭金</b>。銀行家羞愧離去；律師在期滿前幾小時從窗戶離開、從此音訊全無，銀行家則把信<b>鎖進保險箱</b>以免流言。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 課文重點摘要 -->
+
+<div class="section s-blue">
+  <div class="sec-head"><div class="sec-icon">📖</div>課文重點摘要（精選精講）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 以下為課文重點的英文摘要（教師改寫）。點擊任何一句英文，即可展開「中文翻譯 + 句構分析（主詞／動詞／受詞／補語）+ 重點解析」。點右側 🔊 可聽整句朗讀。</div>
+    <div class="syn-legend">🔍 <b>句構顏色對照：</b>
+      <span class="syn syn-s">主詞 S</span>　<span class="syn syn-v">動詞 V</span>　<span class="syn syn-o">受詞 O</span>　<span class="syn syn-c">補語 C</span>　<span class="syn syn-m">修飾語</span>
+    </div>
+
+    <p style="margin-top:16px;color:#475569">本課改寫自契訶夫（Anton Chekhov）的短篇小說，探討自由、金錢與人生價值。以下摘要以教師自行撰寫的英文呈現（非課文原句），依「打賭的起點／漫長的監禁／出人意料的結局」三幕分段。</p>
+
+    <!-- 第一幕 -->
+    <div class="para">
+      <div class="para-speaker sp-robbie">🎲 第一幕｜打賭的起點（How the Bet Began）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The story opens with an aging banker who cannot sleep one autumn night because a memory from fifteen years ago keeps troubling him.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">故事從一位年邁的銀行家開始：某個秋夜他輾轉難眠，因為一段十五年前的回憶不斷困擾著他。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The story</span><span class="syn-t">S</span> <span class="syn syn-v">opens</span><span class="syn-t">V</span> <span class="syn syn-m">with an aging banker [who cannot sleep one autumn night]</span><span class="syn-t">副詞（含關係子句）</span><br>
+            <span class="num">②</span><span class="syn syn-m">because</span><span class="syn-t">連接詞</span> <span class="syn syn-s">a memory from fifteen years ago</span><span class="syn-t">S</span> <span class="syn syn-v">keeps troubling</span><span class="syn-t">V</span> <span class="syn syn-o">him</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>who</b> 引導形容詞子句修飾 banker；<b>keep + V-ing</b> = 持續…；<b>aging</b> = 年老的。課文用 <b>back and forth</b>（來回地）描寫他焦躁踱步（見片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>At a dinner party back then, the guests had argued about which punishment was crueler: putting a criminal to death or locking him up for the rest of his life.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">當年在一場晚宴上，賓客們曾爭論哪一種刑罰比較殘酷：把罪犯處死，還是把他關到終老。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">At a dinner party back then</span><span class="syn-t">副詞</span> <span class="syn syn-s">the guests</span><span class="syn-t">S</span> <span class="syn syn-v">had argued</span><span class="syn-t">V（過去完成式）</span> <span class="syn syn-o">about which punishment was crueler</span><span class="syn-t">介系詞＋名詞子句</span><br>
+            <span class="num">②</span><span class="syn syn-m">: putting a criminal to death or locking him up ...</span><span class="syn-t">同位語（兩個動名詞片語）</span></div>
+          <div class="para-note"><b>had argued</b> 過去完成式：回憶「更早」發生的事（見句型六）；<b>put sb. to death</b> = 處死；主題字 <b>debate</b>（辯論）、<b>the death penalty</b>（死刑）、<b>life imprisonment</b>（終身監禁）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The banker felt that a quick death was more merciful than endless years behind bars, but a young lawyer argued that even a life spent in a cell was better than no life at all.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">銀行家認為痛快一死比無止盡的牢獄歲月更仁慈，但一位年輕律師主張，即使在牢房裡度過一生，也比完全沒有生命好。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The banker</span><span class="syn-t">S</span> <span class="syn syn-v">felt</span><span class="syn-t">V</span> <span class="syn syn-o">that a quick death was more merciful than endless years behind bars</span><span class="syn-t">O（名詞子句）</span><br>
+            <span class="num">②</span><span class="syn syn-s">a young lawyer</span><span class="syn-t">S</span> <span class="syn syn-v">argued</span><span class="syn-t">V</span> <span class="syn syn-o">that even a life [spent in a cell] was better than no life at all</span><span class="syn-t">O（名詞子句，含過去分詞片語）</span></div>
+          <div class="para-note"><b>behind bars</b> = 坐牢；<b>more merciful than</b> 比較級；<b>spent in a cell</b> 過去分詞片語修飾 life；律師的立場可用 <b>would rather + V1 + than + V2</b>（寧願…也不…）表達（見句型二）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Tempers rose so high that the banker put two million rubles on the table, betting that the lawyer could not endure five years of solitary confinement.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">雙方火氣越來越大，銀行家甚至拿出兩百萬盧布，賭律師撐不過五年的單獨監禁。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">Tempers</span><span class="syn-t">S</span> <span class="syn syn-v">rose</span><span class="syn-t">V</span> <span class="syn syn-m">so high</span><span class="syn-t">副詞</span> <span class="syn syn-m">that ...</span><span class="syn-t">結果子句</span><br>
+            <span class="num">②</span><span class="syn syn-s">the banker</span><span class="syn-t">S</span> <span class="syn syn-v">put</span><span class="syn-t">V</span> <span class="syn syn-o">two million rubles</span><span class="syn-t">O</span> <span class="syn syn-m">on the table</span><span class="syn-t">副詞</span> <span class="syn syn-m">, betting that the lawyer could not endure ...</span><span class="syn-t">分詞構句（主動）</span></div>
+          <div class="para-note"><b>so + adj./adv. + that</b> = 如此…以致於；<b>bet (that) S + V</b> = 打賭…；<b>solitary confinement</b> = 單獨監禁（補充字 solitary）；<b>endure</b> = 忍受、撐過。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Instead of backing down, the lawyer boldly demanded fifteen years, and soon afterward he was shut inside a cabin that stood on the banker's estate to start his long confinement.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">律師非但沒有退縮，反而大膽要求把期限拉長到十五年；不久後，他便被關進銀行家莊園裡的一間小屋，展開漫長的監禁。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Instead of backing down</span><span class="syn-t">副詞（介系詞＋動名詞）</span> <span class="syn syn-s">the lawyer</span><span class="syn-t">S</span> <span class="syn syn-m">boldly</span><span class="syn-t">副詞</span> <span class="syn syn-v">demanded</span><span class="syn-t">V</span> <span class="syn syn-o">fifteen years</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">was shut</span><span class="syn-t">V（被動）</span> <span class="syn syn-m">inside a cabin [that stood on the banker's estate]</span><span class="syn-t">地方副詞（含關係子句）</span> <span class="syn syn-m">to start his long confinement</span><span class="syn-t">副詞（不定詞表目的）</span></div>
+          <div class="para-note"><b>back down</b> = 讓步、退縮；<b>instead of + V-ing</b>；<b>estate</b> 莊園 ≈ <b>property</b>（地產，核心字）；律師「堅持」加碼可用 <b>insist</b>（核心字）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第二幕 -->
+    <div class="para">
+      <div class="para-speaker sp-claire">📚 第二幕｜漫長的監禁（Fifteen Years Alone）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>The lawyer could see no one and speak to no one; notes slipped out through a tiny window were the only way he could order whatever he wanted.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">律師見不到任何人，也不能和任何人說話；從小窗遞出的紙條，是他索取任何想要之物的唯一方法。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">The lawyer</span><span class="syn-t">S</span> <span class="syn syn-v">could see</span><span class="syn-t">V</span> <span class="syn syn-o">no one</span><span class="syn-t">O</span> <span class="syn syn-v">and speak to</span><span class="syn-t">V</span> <span class="syn syn-o">no one</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-s">notes [slipped out through a tiny window]</span><span class="syn-t">S（含過去分詞片語）</span> <span class="syn syn-v">were</span><span class="syn-t">V</span> <span class="syn syn-c">the only way [he could order whatever he wanted]</span><span class="syn-t">C</span></div>
+          <div class="para-note"><b>no one</b> 表全部否定；<b>whatever</b> = anything that（任何…的東西）；分號（;）連接兩個語意緊密的獨立子句。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Even with every comfort supplied, he suffered from deep loneliness and slowly discovered that wine and music only left him feeling empty.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">即使各種舒適享受一應俱全，他仍深受孤寂之苦，並漸漸發現美酒和音樂只讓他感到空虛。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Even with every comfort supplied</span><span class="syn-t">副詞（with + O + p.p.）</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">suffered from</span><span class="syn-t">V</span> <span class="syn syn-o">deep loneliness</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-m">slowly</span><span class="syn-t">副詞</span> <span class="syn syn-v">discovered</span><span class="syn-t">V</span> <span class="syn syn-o">that wine and music only left him feeling empty</span><span class="syn-t">O（名詞子句）</span></div>
+          <div class="para-note"><b>with + N + p.p.</b> 表附帶狀況；<b>leave + O + V-ing / adj.</b> = 使…處於某狀態；<b>suffer from</b> = 受…之苦；時間一天天慢慢過去可用片語 <b>wear on</b> 表達（見片語）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Tired of these empty pleasures, he set them aside and turned to reading for comfort.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">厭倦了這些空洞的享樂，他把它們擱在一旁，轉向閱讀尋求慰藉。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Tired of these empty pleasures</span><span class="syn-t">分詞構句（省略 Being，表原因）</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">set</span><span class="syn-t">V</span> <span class="syn syn-o">them</span><span class="syn-t">O</span> <span class="syn syn-m">aside</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-v">and turned to</span><span class="syn-t">V（片語）</span> <span class="syn syn-o">reading</span><span class="syn-t">O（動名詞）</span> <span class="syn syn-m">for comfort</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>(Being) tired of ...</b> 省略 being 的分詞構句（見句型五）；<b>set aside</b> = 擱置；<b>turn to</b> = 轉向、求助於；書本成了他的 <b>companion</b>（同伴，核心字）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Starting in his sixth year, he studied with amazing discipline, and within four years he had read hundreds of books on history, philosophy, and many other fields.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">從第六年起，他以驚人的自律埋首研讀；四年之內，他已讀完數百本涵蓋歷史、哲學等眾多領域的書。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Starting in his sixth year</span><span class="syn-t">分詞構句</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">studied</span><span class="syn-t">V</span> <span class="syn syn-m">with amazing discipline</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-m">within four years</span><span class="syn-t">副詞</span> <span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">had read</span><span class="syn-t">V（過去完成式）</span> <span class="syn syn-o">hundreds of books [on history, philosophy, and many other fields]</span><span class="syn-t">O</span></div>
+          <div class="para-note"><b>within + 時間</b> = 在…之內；<b>had read</b> 表「到過去某時點為止已完成」；如飢似渴地讀書可用 <b>devour</b>（核心字）；日夜不停 = <b>around the clock</b>（片語）；一冊書 = a <b>volume</b>。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Thanks to this effort, he became fluent in a number of languages and grew truly wise, and this inner wealth came to mean more to him than any amount of money.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">多虧這份努力，他能流利使用多種語言、變得真正睿智，而這份內在的財富對他而言，逐漸比任何金錢都更有意義。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">became</span><span class="syn-t">V（連綴）</span> <span class="syn syn-c">fluent in a number of languages</span><span class="syn-t">C</span> <span class="syn syn-v">and grew</span><span class="syn-t">V（連綴）</span> <span class="syn syn-c">truly wise</span><span class="syn-t">C</span><br>
+            <span class="num">②</span><span class="syn syn-s">this inner wealth</span><span class="syn-t">S</span> <span class="syn syn-v">came to mean</span><span class="syn-t">V</span> <span class="syn syn-o">more</span><span class="syn-t">O</span> <span class="syn syn-m">to him than any amount of money</span><span class="syn-t">副詞（比較）</span></div>
+          <div class="para-note"><b>become / grow + adj.</b> 連綴動詞接補語；<b>come to + V</b> = 逐漸…；<b>a number of</b> + 複數名詞；他 <b>acquire</b>（習得）了 <b>profound</b>（深厚的）知識，兩者皆為核心字。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第三幕 -->
+    <div class="para">
+      <div class="para-speaker sp-nancy">💌 第三幕｜出人意料的結局（An Unexpected Ending）</div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Meanwhile, time had not been kind to the banker: his once great fortune had nearly disappeared, and paying the bet would ruin him completely.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">與此同時，歲月並未善待銀行家：他曾經龐大的財富幾乎消失殆盡，若付出賭金，他將徹底破產。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-s">time</span><span class="syn-t">S</span> <span class="syn syn-v">had not been</span><span class="syn-t">V（過去完成式）</span> <span class="syn syn-c">kind</span><span class="syn-t">C</span> <span class="syn syn-m">to the banker</span><span class="syn-t">副詞</span><br>
+            <span class="num">②</span><span class="syn syn-s">his once great fortune</span><span class="syn-t">S</span> <span class="syn syn-v">had nearly disappeared</span><span class="syn-t">V</span><br>
+            <span class="num">③</span><span class="syn syn-s">paying the bet</span><span class="syn-t">S（動名詞）</span> <span class="syn syn-v">would ruin</span><span class="syn-t">V</span> <span class="syn syn-o">him</span><span class="syn-t">O</span> <span class="syn syn-m">completely</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>once</b> = 曾經（副詞，修飾 great）；<b>go bankrupt</b> = 破產（補充字 bankrupt）；<b>wealth / wealthy</b>（財富／富有的）為補充字；冒號（:）後接說明。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Unable to accept that his remaining money would go to the lawyer, the banker decided to kill the man before the deadline arrived.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">無法接受自己剩下的錢將歸律師所有，銀行家決定在期限到來之前殺了他。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Unable to accept that his remaining money would go to the lawyer</span><span class="syn-t">分詞構句（省略 Being，表原因）</span><br>
+            <span class="num">②</span><span class="syn syn-s">the banker</span><span class="syn-t">S</span> <span class="syn syn-v">decided</span><span class="syn-t">V</span> <span class="syn syn-o">to kill the man</span><span class="syn-t">O（不定詞）</span> <span class="syn syn-m">before the deadline arrived</span><span class="syn-t">時間副詞子句</span></div>
+          <div class="para-note"><b>(Being) unable to V</b> 表原因；<b>decide to V</b>；殺人的念頭「閃過腦海」= <b>cross one's mind</b>；他「絕對無法」忍受 = <b>by no means</b>（皆見片語）；<b>murder</b> = 謀殺。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>On the last night of the bet, the banker slipped into the cabin, only to discover that the lawyer had fallen asleep next to a note intended for him.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">打賭的最後一晚，銀行家悄悄溜進小屋，卻發現律師已在一張留給他的紙條旁睡著了。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">On the last night of the bet</span><span class="syn-t">副詞</span> <span class="syn syn-s">the banker</span><span class="syn-t">S</span> <span class="syn syn-v">slipped into</span><span class="syn-t">V</span> <span class="syn syn-o">the cabin</span><span class="syn-t">O</span><br>
+            <span class="num">②</span><span class="syn syn-m">, only to discover that the lawyer had fallen asleep next to a note [intended for him]</span><span class="syn-t">不定詞表意外結果（含名詞子句）</span></div>
+          <div class="para-note"><b>only to V</b> = 結果卻…（出乎意料，見句型八）；<b>had fallen asleep</b> 過去完成式；<b>intended for</b> = 給…的；課文以倒裝描寫桌上的信（見句型七）。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>In the note, the lawyer explained that years of reading had shown him how empty money and fame were, so he would give up the prize of his own free will.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">律師在紙條中說明，多年的閱讀讓他看清金錢與名聲有多空虛，因此他將出於自願放棄這筆獎金。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">In the note</span><span class="syn-t">副詞</span> <span class="syn syn-s">the lawyer</span><span class="syn-t">S</span> <span class="syn syn-v">explained</span><span class="syn-t">V</span> <span class="syn syn-o">that years of reading had shown him how empty money and fame were</span><span class="syn-t">O（名詞子句：show + IO + DO）</span><br>
+            <span class="num">②</span><span class="syn syn-s">he</span><span class="syn-t">S</span> <span class="syn syn-v">would give up</span><span class="syn-t">V（片語）</span> <span class="syn syn-o">the prize</span><span class="syn-t">O</span> <span class="syn syn-m">of his own free will</span><span class="syn-t">副詞</span></div>
+          <div class="para-note"><b>how + adj. + S + V</b> 間接問句（語序不倒裝）；<b>give up</b> ≈ <b>abandon / surrender</b>（核心字）；<b>of one's own free will</b> = 出於自願；他對世俗財富的 <b>disgust</b>（厭惡）與看透一切 <b>vain</b>（虛幻）也是核心字。</div>
+        </div>
+      </div>
+
+      <div class="para-line" onclick="toggleLine(this)">
+        <div class="para-en"><span class="ic">▶</span><span>Filled with shame, the banker crept away; hours later the lawyer climbed out of the window and vanished, so the banker hid the note in his safe to avoid gossip.</span></div>
+        <div class="para-exp">
+          <div class="para-cn">滿懷羞愧，銀行家悄悄離開；幾小時後律師從窗戶爬出去、從此消失無蹤，於是銀行家把紙條藏進保險箱，以免引來閒話。</div>
+          <div class="para-syntax"><span class="lbl">🔍 句構分析</span>
+            <span class="num">①</span><span class="syn syn-m">Filled with shame</span><span class="syn-t">分詞構句（被動）</span> <span class="syn syn-s">the banker</span><span class="syn-t">S</span> <span class="syn syn-v">crept away</span><span class="syn-t">V</span><br>
+            <span class="num">②</span><span class="syn syn-m">hours later</span><span class="syn-t">副詞</span> <span class="syn syn-s">the lawyer</span><span class="syn-t">S</span> <span class="syn syn-v">climbed out of</span><span class="syn-t">V</span> <span class="syn syn-o">the window</span><span class="syn-t">O</span> <span class="syn syn-v">and vanished</span><span class="syn-t">V</span><br>
+            <span class="num">③</span><span class="syn syn-s">the banker</span><span class="syn-t">S</span> <span class="syn syn-v">hid</span><span class="syn-t">V</span> <span class="syn syn-o">the note</span><span class="syn-t">O</span> <span class="syn syn-m">in his safe</span><span class="syn-t">副詞</span> <span class="syn syn-m">to avoid gossip</span><span class="syn-t">副詞（不定詞表目的）</span></div>
+          <div class="para-note"><b>be filled with</b> = 充滿；羞愧內疚 = <b>guilt</b>（核心字）；<b>gossip</b> ≈ <b>rumor</b>（謠言，補充字）；<b>safe</b> 作名詞為「保險箱」，一字多義。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核心字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">📝</div>核心字彙（課文 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個單字卡，展開「字族 + 例句 + 學測連結」。點單字旁 🔊 可聽發音。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">debate</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">辯論；爭論</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>debatable (adj.) 有爭議的</span><span>debater (n.) 辯論者</span></div>
+        <div class="v-ex">Our class held a lively <b>debate</b> on whether phones belong in school.<span class="cn">我們班針對手機是否該出現在學校舉行了熱烈的辯論。</span></div>
+        <span class="v-gsat">📊 debate about / over + N；a heated debate 激烈爭論</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">penalty</span><span class="v-pos">n.</span><div class="v-cn-mini">懲罰；刑罰；罰款</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>the death penalty 死刑</span><span>penalize (v.) 處罰</span></div>
+        <div class="v-ex">Drivers who run red lights may face a heavy <b>penalty</b>.<span class="cn">闖紅燈的駕駛可能面臨重罰。</span></div>
+        <span class="v-gsat">📊 ≈ punishment；penalty kick 罰球</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">imprison</span><span class="v-pos">v.</span><div class="v-cn-mini">監禁；關押</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>imprisonment (n.) 監禁</span><span>prisoner (n.) 囚犯</span></div>
+        <div class="v-ex">The thief was <b>imprisoned</b> for three years after the trial.<span class="cn">審判後，那名小偷被判入獄三年。</span></div>
+        <span class="v-gsat">📊 life imprisonment 終身監禁</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">claim</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">聲稱；主張；（對…的）權利</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>claim that S + V 聲稱</span><span>a claim to 對…的權利</span></div>
+        <div class="v-ex">She <b>claims</b> that she saw a ghost in the empty house.<span class="cn">她聲稱在那間空屋裡看到了鬼。</span></div>
+        <span class="v-gsat">📊 baggage claim 行李提領處；一字多義</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">insist</span><span class="v-pos">v.</span><div class="v-cn-mini">堅持；堅決要求</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>insistence (n.) 堅持</span><span>insistent (adj.) 堅持的</span></div>
+        <div class="v-ex">My mom <b>insists</b> that I finish my homework before dinner.<span class="cn">我媽堅持要我晚餐前寫完作業。</span></div>
+        <span class="v-gsat">📊 insist on V-ing；insist that S (should) V</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">property</span><span class="v-pos">n.</span><div class="v-cn-mini">財產；地產；特性</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>private property 私有財產</span><span>properties 特性</span></div>
+        <div class="v-ex">The farm and the old barn are both his family's <b>property</b>.<span class="cn">農場和那座舊穀倉都是他家的財產。</span></div>
+        <span class="v-gsat">📊 intellectual property 智慧財產</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">companion</span><span class="v-pos">n.</span><div class="v-cn-mini">同伴；伴侶</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>company (n.) 陪伴</span><span>companionship (n.) 友誼</span></div>
+        <div class="v-ex">My dog has been my faithful <b>companion</b> for ten years.<span class="cn">我的狗十年來一直是我忠實的夥伴。</span></div>
+        <span class="v-gsat">📊 keep sb. company 陪伴某人</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">devour</span><span class="v-pos">v.</span><div class="v-cn-mini">狼吞虎嚥；如飢似渴地閱讀</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>devour a book 一口氣讀完</span><span>≈ gobble 大口吞</span></div>
+        <div class="v-ex">The hungry boy <b>devoured</b> three bowls of rice in minutes.<span class="cn">那個飢餓的男孩幾分鐘內就吞下三碗飯。</span></div>
+        <span class="v-gsat">📊 be devoured by curiosity 被好奇心吞噬</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">acquire</span><span class="v-pos">v.</span><div class="v-cn-mini">獲得；習得</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>acquisition (n.) 獲得</span><span>acquired (adj.) 後天習得的</span></div>
+        <div class="v-ex">It takes years to <b>acquire</b> a good command of a foreign language.<span class="cn">要精通一種外語需要好幾年。</span></div>
+        <span class="v-gsat">📊 acquire knowledge / skills 習得知識與技能</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">profound</span><span class="v-pos">adj.</span><div class="v-cn-mini">深刻的；深奧的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>profoundly (adv.) 深刻地</span><span>profundity (n.) 深奧</span></div>
+        <div class="v-ex">The trip had a <b>profound</b> effect on how I see the world.<span class="cn">那趟旅行深深影響了我看世界的方式。</span></div>
+        <span class="v-gsat">📊 ≈ deep；a profound influence 深遠的影響</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">disgust</span><span class="v-pos">n. / v.</span><div class="v-cn-mini">厭惡；使作嘔</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>disgusting (adj.) 令人作嘔的</span><span>disgusted (adj.) 感到厭惡的</span></div>
+        <div class="v-ex">He turned away in <b>disgust</b> when he smelled the rotten fish.<span class="cn">聞到腐魚的味道，他厭惡地轉過頭去。</span></div>
+        <span class="v-gsat">📊 in disgust 厭惡地；-ing / -ed 情緒形容詞常考</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">vain</span><span class="v-pos">adj.</span><div class="v-cn-mini">徒勞的；虛榮的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>in vain 徒勞無功</span><span>vanity (n.) 虛榮</span></div>
+        <div class="v-ex">All our efforts to fix the old car were in <b>vain</b>.<span class="cn">我們修理那台舊車的努力全都白費了。</span></div>
+        <span class="v-gsat">📊 in vain 學測高頻片語</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">abandon</span><span class="v-pos">v.</span><div class="v-cn-mini">放棄；拋棄</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>abandoned (adj.) 被遺棄的</span><span>abandonment (n.) 拋棄</span></div>
+        <div class="v-ex">Bad weather forced the climbers to <b>abandon</b> their plan.<span class="cn">惡劣天氣迫使登山者放棄計畫。</span></div>
+        <span class="v-gsat">📊 ≈ give up / desert</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">surrender</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">投降；放棄；交出</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>surrender to 向…投降</span><span>surrender sth. to sb. 把…交給某人</span></div>
+        <div class="v-ex">After a long fight, the soldiers finally <b>surrendered</b>.<span class="cn">經過長時間的戰鬥，士兵們終於投降了。</span></div>
+        <span class="v-gsat">📊 ≈ give in / yield</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">guilt</span><span class="v-pos">n.</span><div class="v-cn-mini">罪惡感；內疚；有罪</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>guilty (adj.) 有罪的；內疚的</span><span>feel guilty about 對…感到內疚</span></div>
+        <div class="v-ex">She felt a sense of <b>guilt</b> after lying to her best friend.<span class="cn">對最好的朋友說謊後，她感到一陣罪惡感。</span></div>
+        <span class="v-gsat">📊 反義 innocence 無罪</span></div></div>
+
+    </div>
+
+    <!-- 片語 -->
+    <div class="divlabel">🔗 課文片語</div>
+    <table class="ptable">
+      <tr><th style="width:24%">片語</th><th style="width:20%">中文</th><th>例句（含翻譯）</th></tr>
+      <tr><td><span class="phr">back and forth</span></td><td>來回地</td><td class="pex">The nervous student walked <b>back and forth</b> outside the exam room.<span class="cn">那個緊張的學生在考場外走來走去。</span></td></tr>
+      <tr><td><span class="phr">wear on</span></td><td>（時間）緩慢流逝</td><td class="pex">The meeting <b>wore on</b> for hours, and everyone grew sleepy.<span class="cn">會議拖了好幾個小時，大家都昏昏欲睡。</span></td></tr>
+      <tr><td><span class="phr">around the clock</span></td><td>日以繼夜；全天候</td><td class="pex">Nurses work <b>around the clock</b> to care for their patients.<span class="cn">護理師日夜輪班照顧病患。</span></td></tr>
+      <tr><td><span class="phr">by no means</span></td><td>絕不；一點也不</td><td class="pex">This test is <b>by no means</b> easy, so start studying now.<span class="cn">這次考試一點也不簡單，所以現在就開始讀書吧。</span></td></tr>
+      <tr><td><span class="phr">cross one's mind</span></td><td>（念頭）閃過腦海</td><td class="pex">It never <b>crossed my mind</b> that he might be joking.<span class="cn">我從沒想過他可能是在開玩笑。</span></td></tr>
+      <tr><td><span class="phr">make clear</span></td><td>表明；講清楚</td><td class="pex">The coach <b>made</b> it <b>clear</b> that lateness would not be accepted.<span class="cn">教練明白表示不接受遲到。</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 補充字彙 -->
+<div class="section s-teal">
+  <div class="sec-head"><div class="sec-icon">➕</div>學測補充字彙（107–115 命題關鍵字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊單字卡展開。這些字皆與課文主題（監禁、金錢、人生價值）相關，且為學測常見字。</div>
+    <div class="vocab-grid">
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">worship</span><span class="v-pos">v. / n.</span><div class="v-cn-mini">崇拜；敬奉</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>worshipper (n.) 崇拜者</span><span>place of worship 禮拜場所</span></div>
+        <div class="v-ex">Some people <b>worship</b> fame more than anything else.<span class="cn">有些人崇拜名氣勝過一切。</span></div>
+        <span class="v-gsat">📊 ≈ adore；worship money 拜金</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">rumor</span><span class="v-pos">n.</span><div class="v-cn-mini">謠言；傳聞</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>Rumor has it that 據傳</span><span>spread a rumor 散布謠言</span></div>
+        <div class="v-ex">A <b>rumor</b> spread that our school would close early.<span class="cn">有謠言傳出我們學校會提早關閉。</span></div>
+        <span class="v-gsat">📊 ≈ gossip；英式拼法 rumour</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">intention</span><span class="v-pos">n.</span><div class="v-cn-mini">意圖；打算</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>intend (v.) 打算</span><span>intentional (adj.) 故意的</span></div>
+        <div class="v-ex">I have no <b>intention</b> of quitting the team.<span class="cn">我完全沒有退隊的打算。</span></div>
+        <span class="v-gsat">📊 have no intention of V-ing；intend to V</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">wealth</span><span class="v-pos">n.</span><div class="v-cn-mini">財富；大量</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>wealthy (adj.) 富有的</span><span>a wealth of 大量的</span></div>
+        <div class="v-ex">Good health is worth more than great <b>wealth</b>.<span class="cn">健康比鉅額財富更有價值。</span></div>
+        <span class="v-gsat">📊 a wealth of information 豐富的資訊</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">solitary</span><span class="v-pos">adj.</span><div class="v-cn-mini">單獨的；孤獨的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>solitude (n.) 獨處</span><span>solitary confinement 單獨監禁</span></div>
+        <div class="v-ex">The old painter lives a <b>solitary</b> life in the mountains.<span class="cn">那位老畫家在山裡過著獨居生活。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">isolation</span><span class="v-pos">n.</span><div class="v-cn-mini">隔離；孤立</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>isolate (v.) 隔離</span><span>isolated (adj.) 孤立的</span></div>
+        <div class="v-ex">Long periods of <b>isolation</b> can harm a person's mental health.<span class="cn">長期與世隔絕可能傷害一個人的心理健康。</span></div>
+        <span class="v-gsat">📊 in isolation 孤立地；mental health 心理健康</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">execute</span><span class="v-pos">v.</span><div class="v-cn-mini">處決；執行</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>execution (n.) 處決；執行</span><span>executive (n.) 主管</span></div>
+        <div class="v-ex">In the past, criminals were often <b>executed</b> in public.<span class="cn">過去罪犯常被公開處決。</span></div>
+        <span class="v-gsat">📊 execute a plan 執行計畫，一字多義</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">voluntary</span><span class="v-pos">adj.</span><div class="v-cn-mini">自願的；義務的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>volunteer (n./v.) 志工；自願</span><span>voluntarily (adv.) 自願地</span></div>
+        <div class="v-ex">Joining the club is <b>voluntary</b>, not required.<span class="cn">加入社團是自願的，不是必須的。</span></div>
+        <span class="v-gsat">📊 反義 compulsory / mandatory</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">bankrupt</span><span class="v-pos">adj.</span><div class="v-cn-mini">破產的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>bankruptcy (n.) 破產</span><span>go bankrupt 破產</span></div>
+        <div class="v-ex">The shop went <b>bankrupt</b> after losing its biggest customer.<span class="cn">那家店失去最大客戶後就破產了。</span></div>
+        <span class="v-gsat">📊 go bankrupt 固定搭配，go 作連綴動詞</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">greed</span><span class="v-pos">n.</span><div class="v-cn-mini">貪婪</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>greedy (adj.) 貪婪的</span><span>greedily (adv.) 貪婪地</span></div>
+        <div class="v-ex"><b>Greed</b> often leads people to make foolish choices.<span class="cn">貪婪常使人做出愚蠢的選擇。</span></div></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">materialistic</span><span class="v-pos">adj.</span><div class="v-cn-mini">物質主義的；重物質的</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>materialism (n.) 物質主義</span><span>material (n./adj.) 材料；物質的</span></div>
+        <div class="v-ex">Some critics say modern society has become too <b>materialistic</b>.<span class="cn">有些評論家說現代社會變得太重物質了。</span></div>
+        <span class="v-gsat">📊 反義 spiritual 精神的</span></div></div>
+
+      <div class="v-card"><div class="v-top" onclick="toggleV(this)"><div><span class="v-word">temptation</span><span class="v-pos">n.</span><div class="v-cn-mini">誘惑</div></div><span class="v-ic">▶</span></div>
+        <div class="v-body"><div class="v-fam"><span>tempt (v.) 引誘</span><span>tempting (adj.) 誘人的</span></div>
+        <div class="v-ex">It is hard to resist the <b>temptation</b> of fried chicken.<span class="cn">炸雞的誘惑很難抗拒。</span></div>
+        <span class="v-gsat">📊 resist the temptation to V 抗拒做…的誘惑</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 俚語 -->
+<div class="section s-rose">
+  <div class="sec-head"><div class="sec-icon">🗣️</div>常用俚語補充（提升口語語感）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個俚語展開「意思 + 生活例句」。這些俚語與課文主題（打賭、自由、金錢、時間）相關，能讓口語更道地。</div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">bet your bottom dollar</span><div class="slang-cn-mini">敢拿最後一塊錢打賭（非常確定）</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">連最後一塊錢都敢押上，表示「百分之百確定」。</div>
+      <div class="slang-ex">You can <b>bet your bottom dollar</b> that Jack will be late again.<span class="cn">我敢打包票，傑克又會遲到。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">do time</span><div class="slang-cn-mini">坐牢；服刑</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">口語中指「在監獄裡服刑一段時間」。</div>
+      <div class="slang-ex">My neighbor's cousin <b>did time</b> for stealing cars.<span class="cn">我鄰居的表哥曾因偷車坐過牢。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">go stir-crazy</span><div class="slang-cn-mini">被關到快抓狂</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">長時間被困在同一個地方，悶到心煩意亂、快受不了。</div>
+      <div class="slang-ex">After a week stuck indoors, the kids <b>went stir-crazy</b>.<span class="cn">在家裡悶了一星期，孩子們快抓狂了。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">free as a bird</span><div class="slang-cn-mini">像鳥一樣自由自在</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">完全沒有束縛、無憂無慮。</div>
+      <div class="slang-ex">With the final exam over, I feel <b>free as a bird</b>.<span class="cn">期末考結束了，我覺得自由自在。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">money can't buy happiness</span><div class="slang-cn-mini">金錢買不到快樂</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">再多的錢也換不來真正的幸福。</div>
+      <div class="slang-ex">The rich singer learned the hard way that <b>money can't buy happiness</b>.<span class="cn">那位富有的歌手吃了苦頭才明白金錢買不到快樂。</span></div></div></div>
+
+    <div class="slang-card"><div class="slang-top" onclick="toggleSlang(this)"><div><span class="slang-en">time flies</span><div class="slang-cn-mini">光陰似箭；時間過得飛快</div></div><span class="v-ic">▶</span></div>
+      <div class="slang-body"><div class="slang-mean">常與 when you're having fun 連用：開心時時間過得特別快。</div>
+      <div class="slang-ex"><b>Time flies</b> when you're lost in a good book.<span class="cn">沉浸在好書裡時，時間過得飛快。</span></div></div></div>
+
+  </div>
+</div>
+
+<!-- 文法 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">📐</div>核心句型文法解析</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點擊每個句型標題，展開「公式 + 例句 + 常見錯誤 + 學測重點」。</div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型一｜(As) + adj. + as + S + V（讓步：雖然…）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">(As) + adj./adv. + as + S + V, S + V.（= Although + S + V, ...）</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">把形容詞或副詞移到句首，表示「雖然…，但…」；美式常在句首多加一個 as，英式多省略。</p>
+        <div class="g-ex"><b>As tired as she was</b>, she kept practicing the piano.<div class="g-ex-cn">雖然很累，她仍持續練琴。</div></div>
+        <div class="g-ex"><b>Rich as he is</b>, he never feels satisfied.<div class="g-ex-cn">他雖然富有，卻從不感到滿足。</div></div>
+        <div class="g-note">✗ As tired as she was, but she kept practicing.（句型本身已表讓步，不可再加 but）。</div>
+        <div class="g-tip">可與 Although / Though 子句互換；名詞置首時要去冠詞：Child as he was, ...。學測句子改寫常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型二｜would rather + V1 + than + V2（寧願…也不…）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + would rather + 原形V1 + than + 原形V2</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">would rather 表偏好，前後兩個動詞都用原形；縮寫為 I'd rather。</p>
+        <div class="g-ex">I <b>would rather walk</b> home <b>than wait</b> for the late bus.<div class="g-ex-cn">我寧願走路回家，也不要等那班誤點的公車。</div></div>
+        <div class="g-ex">She <b>would rather stay</b> poor <b>than tell</b> a lie.<div class="g-ex-cn">她寧可窮困，也不願說謊。</div></div>
+        <div class="g-note">✗ would rather to walk than waiting（would rather 與 than 後都須接原形動詞）。</div>
+        <div class="g-tip">= prefer V-ing to V-ing = prefer to V rather than V；would rather + S + 過去式 表「寧願別人…」。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型三｜too + adj. + (for sb.) + to V（太…而不能…）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + be + (far/much) too + adj. + (for sb.) + to V</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">too ... to 本身帶有否定意味；要加強語氣時在 too 前加 far 或 much。</p>
+        <div class="g-ex">This box is <b>too heavy</b> for me <b>to lift</b>.<div class="g-ex-cn">這個箱子太重，我搬不動。</div></div>
+        <div class="g-ex">Some childhood memories are <b>far too sweet to forget</b>.<div class="g-ex-cn">有些童年回憶甜美得讓人忘不了。</div></div>
+        <div class="g-note">✗ This box is too heavy for me to lift it.（不定詞的受詞就是句子主詞，句尾不可再加 it）。</div>
+        <div class="g-tip">可改寫為 so + adj. + that + S + can't + V；學測綜合測驗與改寫常考。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型四｜propose / suggest / insist that + S + (should) + 原形V</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + propose / suggest / insist / demand + that + S + (should) + 原形V</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">表「建議、要求、堅持」的動詞，that 子句用 (should) + 原形；should 常省略，但動詞仍維持原形。</p>
+        <div class="g-ex">The teacher <b>proposed that</b> each student <b>write</b> a short story.<div class="g-ex-cn">老師提議每位學生寫一篇短篇故事。</div></div>
+        <div class="g-ex">My father <b>insisted that</b> I <b>(should) apologize</b> to my sister.<div class="g-ex-cn">爸爸堅持要我向妹妹道歉。</div></div>
+        <div class="g-note">✗ The teacher proposed that each student writes a story.（省略 should 後仍須用原形 write）。</div>
+        <div class="g-tip">若 insist / suggest 表「堅稱、暗示某事實」，that 子句用一般時態：He insisted that he was innocent.</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型五｜分詞構句（V-ing 主動／p.p. 被動／Having p.p. 先發生）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">V-ing ..., S + V（主動）
+p.p. ..., S + V（被動）
+Having + p.p. ..., S + V（動作先發生）</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">分詞構句的意義上主詞必須與主要子句的主詞相同；Unable to ...、Tired of ... 則是省略 Being 的形容詞片語。</p>
+        <div class="g-ex"><b>Locked</b> in her room, the girl wrote long letters to her friends.<div class="g-ex-cn">被鎖在房間裡，女孩寫了好幾封長信給朋友。</div></div>
+        <div class="g-ex"><b>Having finished</b> one novel, he started another right away.<div class="g-ex-cn">讀完一本小說後，他立刻開始讀下一本。</div></div>
+        <div class="g-note">✗ Having finished the novel, a new one was started.（主詞不一致，形成懸垂分詞）。</div>
+        <div class="g-tip">先判斷主詞與分詞是主動或被動，再看動作先後；學測改寫與綜合測驗高頻。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型六｜過去完成式 had + p.p.（過去的過去）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">By the time / When / Before + S + 過去式, S + had + p.p.</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">兩件過去的事，較早發生的用 had + p.p.；故事倒敘、回憶往事時特別常見。</p>
+        <div class="g-ex">By the time we arrived, the movie <b>had</b> already <b>started</b>.<div class="g-ex-cn">我們到的時候，電影已經開演了。</div></div>
+        <div class="g-ex">She suddenly realized that she <b>had left</b> her keys at school.<div class="g-ex-cn">她突然發現自己把鑰匙忘在學校了。</div></div>
+        <div class="g-note">✗ By the time we arrived, the movie has started.（主要子句應用過去完成式 had started）。</div>
+        <div class="g-tip">by the time + 過去式 → 主要子句 had + p.p.；by the time + 現在式 → 主要子句 will have + p.p.。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型七｜分詞置首倒裝（Sitting in the corner was ...）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">V-ing / p.p. + 地方副詞 + be + S</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">為了強調畫面，把分詞片語放句首，be 動詞接著出現，真正的主詞放最後；be 動詞須與後方主詞一致。</p>
+        <div class="g-ex"><b>Sitting</b> in the corner <b>was</b> an old man with a gray beard.<div class="g-ex-cn">角落裡坐著一位留著灰鬍子的老人。</div></div>
+        <div class="g-ex"><b>Hidden</b> under the bed <b>were</b> two boxes of old photos.<div class="g-ex-cn">床底下藏著兩箱舊照片。</div></div>
+        <div class="g-note">✗ Hidden under the bed was two boxes of old photos.（主詞 two boxes 為複數，應用 were）。</div>
+        <div class="g-tip">還原語序：An old man was sitting in the corner.；故事描寫與學測閱讀常見。</div>
+      </div>
+    </div>
+
+    <div class="g-panel">
+      <div class="g-head" onclick="toggleG(this)"><span>句型八｜..., only to + V（結果卻…，出乎意料）</span><span class="g-arrow">▼</span></div>
+      <div class="g-formula">S + V ..., only to + 原形V</div>
+      <div class="g-body">
+        <p style="margin-bottom:8px;color:#374151">only to V 表示「令人失望或意外的結果」，與表目的的 to V 不同。</p>
+        <div class="g-ex">I hurried to the station, <b>only to find</b> that the train had left.<div class="g-ex-cn">我匆忙趕到車站，結果火車已經開走了。</div></div>
+        <div class="g-ex">He studied all night, <b>only to fall</b> asleep during the test.<div class="g-ex-cn">他熬夜讀書，結果考試時睡著了。</div></div>
+        <div class="g-note">✗ ..., only finding / only to found（only to 後須接原形動詞）。</div>
+        <div class="g-tip">only to find / discover / realize 最常見；前面通常有逗號。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 老師精講題 -->
+<div class="section s-orange">
+  <div class="sec-head"><div class="sec-icon">🎓</div>老師精講題（15 題・文法深度）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 點選項即時對錯，按「看完整解析」展開老師講解。適合課堂講授或回家複習。</div>
+  </div>
+</div>
+
+<!-- 學生自我測驗 -->
+<div class="section s-green">
+  <div class="sec-head"><div class="sec-icon">✏️</div>學生自我測驗（15 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 直接<b>點選選項</b>：答對顯示 ✓（綠），答錯顯示 ✗（紅）並標出正解。再按「看完整解析」展開說明。</div>
+  </div>
+</div>
+
+<!-- 文法填空練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">✍️</div>文法填空練習（20 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依中文提示，將括號中的字改為正確的文法形式，直接打在空格中；寫完按「看解答」對答案。也適合列印後手寫作答。</div>
+
+    <div class="gw-item"><div class="gw-num">1</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(lonely)</span> as he felt, the old sailor never complained.</div>
+      <div class="gw-cn">雖然覺得孤單，那位老水手從不抱怨。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Lonely</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">2</div><div class="gw-main">
+      <div class="gw-en">As <input class="gw-input" style="width:90px"> <span class="gw-hint">(busy)</span> as she was, Grandma still baked cookies for us every week.</div>
+      <div class="gw-cn">雖然很忙，奶奶還是每週幫我們烤餅乾。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：busy</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">3</div><div class="gw-main">
+      <div class="gw-en">I would rather <input class="gw-input" style="width:90px"> <span class="gw-hint">(read)</span> a novel than watch TV tonight.</div>
+      <div class="gw-cn">今晚我寧願讀小說也不要看電視。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：read</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">4</div><div class="gw-main">
+      <div class="gw-en">She would rather walk in the rain than <input class="gw-input" style="width:90px"> <span class="gw-hint">(take)</span> a crowded bus.</div>
+      <div class="gw-cn">她寧願在雨中走路，也不要搭擁擠的公車。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：take</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">5</div><div class="gw-main">
+      <div class="gw-en">The suitcase is too heavy for the child <input class="gw-input" style="width:110px"> <span class="gw-hint">(carry)</span>.</div>
+      <div class="gw-cn">這個行李箱太重，小孩提不動。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：to carry</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">6</div><div class="gw-main">
+      <div class="gw-en">The soup was far too hot <input class="gw-input" style="width:100px"> <span class="gw-hint">(eat)</span> right away.</div>
+      <div class="gw-cn">湯實在太燙了，無法馬上喝。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：to eat</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">7</div><div class="gw-main">
+      <div class="gw-en">The librarian proposed that every student <input class="gw-input" style="width:110px"> <span class="gw-hint">(bring)</span> one book to share.</div>
+      <div class="gw-cn">圖書館員提議每位學生帶一本書來分享。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：(should) bring</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">8</div><div class="gw-main">
+      <div class="gw-en">The doctor insisted that my uncle <input class="gw-input" style="width:110px"> <span class="gw-hint">(stop)</span> smoking at once.</div>
+      <div class="gw-cn">醫生堅持我叔叔立刻戒菸。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：(should) stop</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">9</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(lock)</span> in a tiny room, the man had nothing to do but think.</div>
+      <div class="gw-cn">被鎖在小房間裡，那人除了思考什麼也不能做。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Locked</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">10</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(hear)</span> the good news, the girl jumped for joy.</div>
+      <div class="gw-cn">聽到好消息，女孩高興得跳了起來。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Hearing</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">11</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:150px"> <span class="gw-hint">(finish)</span> his homework, Tim went to bed early.</div>
+      <div class="gw-cn">寫完作業後，提姆早早上床睡覺。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Having finished</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">12</div><div class="gw-main">
+      <div class="gw-en">By the time I got to the platform, the train <input class="gw-input" style="width:110px"> <span class="gw-hint">(leave)</span>.</div>
+      <div class="gw-cn">我趕到月台時，火車已經開走了。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：had left</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">13</div><div class="gw-main">
+      <div class="gw-en">Amy <input class="gw-input" style="width:150px"> <span class="gw-hint">(never, see)</span> the ocean before she moved to Hualien.</div>
+      <div class="gw-cn">艾咪搬到花蓮之前從沒看過海。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：had never seen</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">14</div><div class="gw-main">
+      <div class="gw-en"><input class="gw-input" style="width:110px"> <span class="gw-hint">(sit)</span> by the window was a cat with bright green eyes.</div>
+      <div class="gw-cn">窗邊坐著一隻有著亮綠色眼睛的貓。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：Sitting</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">15</div><div class="gw-main">
+      <div class="gw-en">He rushed to the bakery, only <input class="gw-input" style="width:100px"> <span class="gw-hint">(find)</span> it already closed.</div>
+      <div class="gw-cn">他衝到麵包店，結果發現店已經關了。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：to find</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">16</div><div class="gw-main">
+      <div class="gw-en">Travel can have a <input class="gw-input" style="width:110px"> <span class="gw-hint">(profoundly)</span> effect on young people.</div>
+      <div class="gw-cn">旅行能對年輕人產生深遠的影響。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：profound</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">17</div><div class="gw-main">
+      <div class="gw-en">Kevin felt <input class="gw-input" style="width:100px"> <span class="gw-hint">(guilt)</span> about breaking his sister's cup.</div>
+      <div class="gw-cn">凱文對打破姊姊的杯子感到內疚。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：guilty</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">18</div><div class="gw-main">
+      <div class="gw-en">The judge sentenced the robber to five years' <input class="gw-input" style="width:140px"> <span class="gw-hint">(imprison)</span>.</div>
+      <div class="gw-cn">法官判處那名搶匪五年徒刑。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：imprisonment</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">19</div><div class="gw-main">
+      <div class="gw-en">Since she started reading every day, she <input class="gw-input" style="width:140px"> <span class="gw-hint">(acquire)</span> a lot of knowledge.</div>
+      <div class="gw-cn">自從開始每天閱讀，她已獲得大量知識。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：has acquired</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">20</div><div class="gw-main">
+      <div class="gw-en">Joining the cleanup team is <input class="gw-input" style="width:120px"> <span class="gw-hint">(volunteer)</span>, so no one is forced to go.</div>
+      <div class="gw-cn">加入淨灘隊是自願的，所以沒有人被強迫參加。</div>
+      <button class="show-btn" onclick="showGW(this)">看解答</button><div class="gw-ans">✅ 正解：voluntary</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子改寫練習 -->
+<div class="section s-purple">
+  <div class="sec-head"><div class="sec-icon">🔄</div>句子改寫練習（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依指示將兩句合併或改寫成一個正確的英文句子，寫在下方欄位中；寫完按「看參考答案」對答案。</div>
+
+    <div class="gw-item"><div class="gw-num">21</div><div class="gw-main">
+      <div class="gw-given">Although the test was difficult, Amy passed it easily.</div>
+      <div class="gw-instr">請用「Adj. + as + S + V」的讓步句型改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Difficult as the test was, Amy passed it easily.（或 As difficult as the test was, ...）</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">22</div><div class="gw-main">
+      <div class="gw-given">I prefer walking to school to taking the bus.</div>
+      <div class="gw-instr">請用 would rather ... than ... 改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ I would rather walk to school than take the bus.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">23</div><div class="gw-main">
+      <div class="gw-given">The riddle was so hard that nobody could solve it.</div>
+      <div class="gw-instr">請用 too ... (for sb.) to ... 改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The riddle was too hard for anybody to solve.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">24</div><div class="gw-main">
+      <div class="gw-given">The coach said, "Everyone should get more sleep before the game."</div>
+      <div class="gw-instr">請用 The coach suggested that ... 改寫（注意動詞形式）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ The coach suggested that everyone (should) get more sleep before the game.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">25</div><div class="gw-main">
+      <div class="gw-given">Because he was tired of noisy parties, Leo stayed home with a book.</div>
+      <div class="gw-instr">請改為分詞構句（省略 Because he was）。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Tired of noisy parties, Leo stayed home with a book.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">26</div><div class="gw-main">
+      <div class="gw-given">After she had read the email, Mia began to cry.</div>
+      <div class="gw-instr">請用 Having + p.p. 開頭改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Having read the email, Mia began to cry.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">27</div><div class="gw-main">
+      <div class="gw-given">The concert started. + Later, we arrived at the hall.</div>
+      <div class="gw-instr">請用 By the time 開頭，並使用過去完成式合併。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ By the time we arrived at the hall, the concert had (already) started.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">28</div><div class="gw-main">
+      <div class="gw-given">A strange package was lying on the doorstep.</div>
+      <div class="gw-instr">請把分詞片語移到句首，改成倒裝句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Lying on the doorstep was a strange package.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">29</div><div class="gw-main">
+      <div class="gw-given">He opened the fridge. + He found that it was empty.</div>
+      <div class="gw-instr">請用 only to 合併成一句。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ He opened the fridge, only to find (that) it was empty.</div>
+    </div></div>
+
+    <div class="gw-item"><div class="gw-num">30</div><div class="gw-main">
+      <div class="gw-given">Learning a new language is not easy at all.</div>
+      <div class="gw-instr">請用片語 by no means 改寫。</div>
+      <textarea class="gw-textarea" rows="2"></textarea>
+      <button class="show-btn" onclick="showGW(this)">看參考答案</button><div class="gw-ans">✅ Learning a new language is by no means easy.</div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- 句子重組 -->
+<div class="section s-indigo">
+  <div class="sec-head"><div class="sec-icon">🔀</div>句子重組（10 題）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 依序點選下方詞組，把句子排回正確順序；點錯可再點一次移回。排好後按「檢查」看對錯，或按「看正解」直接顯示答案。</div>
+    <div id="roArea"></div>
+  </div>
+</div>
+
+<!-- 單字配對遊戲 -->
+<div class="section s-amber">
+  <div class="sec-head"><div class="sec-icon">🎮</div>單字配對遊戲（核心字彙 15 字）</div>
+  <div class="sec-body">
+    <div class="sec-hint">👆 先點左邊的英文單字，再點右邊對應的中文意思；配對正確會變綠色鎖定，配對錯誤會閃紅重來。全部配對完成即過關！</div>
+    <div class="match-status"><span id="matchScore">配對成功：0 / 15</span><span id="matchTime">⏱ 00:00</span><button class="match-btn" onclick="initMatchGame()">🔄 重新開始</button></div>
+    <div class="match-grid">
+      <div class="match-col" id="matchLeft"></div>
+      <div class="match-col" id="matchRight"></div>
+    </div>
+    <div class="match-win" id="matchWin"></div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#94a3b8;margin-top:24px;padding-bottom:16px">
+  龍騰高中英文 第四冊 第一課｜互動教學講義
+</div>
+
+</div>
+<script>
+function goBack(){
+  if(window.history.length>1){history.back();}
+  else{window.location.href='./';}   // 無上一頁時退回英文選單
+}
+function toggleLine(el){
+  var exp=el.querySelector('.para-exp'), ic=el.querySelector('.ic');
+  exp.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleV(el){
+  var body=el.parentElement.querySelector('.v-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+// === 發音功能（Web Speech API）===
+function speak(text,btn,ev){
+  if(ev){ev.stopPropagation();}
+  if(!('speechSynthesis' in window)){alert('此瀏覽器不支援語音發音，建議使用 Chrome / Safari / Edge。');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.textContent='🔉';setTimeout(function(){btn.textContent='🔊';},700);}
+}
+function makeSpeakBtn(text){
+  var b=document.createElement('button');
+  b.className='speak-btn'; b.textContent='🔊'; b.title='點我聽發音：'+text;
+  b.setAttribute('aria-label','發音 '+text);
+  b.onclick=function(ev){speak(text,b,ev);};
+  return b;
+}
+function toggleSlang(el){
+  var body=el.parentElement.querySelector('.slang-body'), ic=el.querySelector('.v-ic');
+  body.classList.toggle('open'); if(ic)ic.classList.toggle('open');
+}
+function toggleG(el){
+  var body=el.parentElement.querySelector('.g-body'), arrow=el.querySelector('.g-arrow');
+  body.classList.toggle('open'); if(arrow)arrow.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function pickChoice(choiceEl){
+  var block=choiceEl.closest('.q-block');
+  if(block.dataset.answered==='1')return;
+  block.dataset.answered='1';
+  var correct=choiceEl.dataset.correct==='1';
+  var choices=block.querySelectorAll('.choice');
+  choices.forEach(function(c){
+    var m=c.querySelector('.mark');
+    if(c.dataset.correct==='1'){c.classList.add('correct');m.textContent='✓';}
+    else if(c===choiceEl){c.classList.add('wrong');m.textContent='✗';}
+  });
+}
+function showAns(btn){
+  var ans=btn.nextElementSibling;
+  ans.classList.toggle('open');
+  btn.textContent=ans.classList.contains('open')?'收合解析':'看完整解析';
+}
+
+// ===== 題庫資料 =====
+var studentQ=[
+ {q:['The class had a heated ',' over whether homework should be banned.'],
+  cn:'全班針對是否該廢除作業展開激烈的辯論。',
+  opts:['penalty','claim','debate','property'],ans:2,
+  word:'debate (n.) 辯論；爭論',
+  exp:'a heated debate over... = 針對…的激烈辯論。(A) 懲罰、(B) 聲稱、(D) 財產皆不合語意。',
+  note:'debate about / over + N；debatable (adj.) 有爭議的。'},
+ {q:['In some countries, the death ',' is still used for very serious crimes.'],
+  cn:'在某些國家，死刑仍用於極嚴重的罪行。',
+  opts:['penalty','companion','surrender','guilt'],ans:0,
+  word:'penalty (n.) 刑罰；懲罰',
+  exp:'the death penalty = 死刑，為固定搭配。(B) 同伴、(C) 投降、(D) 罪惡感皆不合。',
+  note:'≈ punishment；penalize (v.) 處罰。'},
+ {q:['The man was ',' for ten years for robbing a bank.'],
+  cn:'那名男子因搶銀行被關了十年。',
+  opts:['devoured','acquired','abandoned','imprisoned'],ans:3,
+  word:'imprison (v.) 監禁',
+  exp:'for robbing a bank 說明犯罪，因此是「被監禁」。(A) 被吞食、(B) 被取得、(C) 被拋棄皆不合。',
+  note:'imprisonment (n.)；life imprisonment = 終身監禁。'},
+ {q:['He ',' that he had never seen the stolen bike before.'],
+  cn:'他聲稱自己以前從沒見過那輛被偷的腳踏車。',
+  opts:['devoured','claimed','abandoned','imprisoned'],ans:1,
+  word:'claim (v.) 聲稱',
+  exp:'claim that + S + V = 聲稱…，後接 that 子句。其餘動詞都不能接 that 子句表「說法」。',
+  note:'claim 也可作名詞「權利」：a claim to the money。'},
+ {q:['My parents ',' on driving me to school whenever it rains.'],
+  cn:'只要下雨，我爸媽就堅持開車送我上學。',
+  opts:['claim','insist','debate','acquire'],ans:1,
+  word:'insist (v.) 堅持',
+  exp:'insist on + V-ing = 堅持做…。(A) claim、(C) debate、(D) acquire 都不與 on + V-ing 搭配。',
+  note:'insist that S (should) V；insistence (n.)。'},
+ {q:['Please do not damage school ','; it belongs to everyone.'],
+  cn:'請不要破壞學校財產，那是屬於大家的。',
+  opts:['guilt','disgust','penalty','property'],ans:3,
+  word:'property (n.) 財產',
+  exp:'belongs to everyone 說明是「財產」。school property = 學校公物。',
+  note:'private property 私有財產；intellectual property 智慧財產。'},
+ {q:['During the long journey, her old dog was her only ','.'],
+  cn:'漫長的旅途中，她的老狗是她唯一的夥伴。',
+  opts:['companion','prisoner','property','penalty'],ans:0,
+  word:'companion (n.) 同伴',
+  exp:'旅途中陪伴她的是「同伴」。(B) 囚犯、(C) 財產、(D) 懲罰皆不合。',
+  note:'keep sb. company = 陪伴某人。'},
+ {q:['The bookworm ',' the whole novel in a single night.'],
+  cn:'那個書蟲一個晚上就啃完了整本小說。',
+  opts:['surrendered','imprisoned','devoured','claimed'],ans:2,
+  word:'devour (v.) 如飢似渴地閱讀；狼吞虎嚥',
+  exp:'devour a book = 一口氣貪婪地讀完一本書，與 bookworm 呼應。',
+  note:'devour 原意為「狼吞虎嚥」，引申為大量閱讀。'},
+ {q:['Students can ',' new skills by joining different clubs.'],
+  cn:'學生可以藉由參加不同社團習得新技能。',
+  opts:['abandon','surrender','imprison','acquire'],ans:3,
+  word:'acquire (v.) 獲得；習得',
+  exp:'acquire skills = 習得技能。(A) 放棄、(B) 交出、(C) 監禁 語意不合。',
+  note:'acquisition (n.)；language acquisition 語言習得。'},
+ {q:['Reading that biography had a ',' influence on my life.'],
+  cn:'讀那本傳記對我的人生有深遠的影響。',
+  opts:['vain','profound','guilty','solitary'],ans:1,
+  word:'profound (adj.) 深刻的；深遠的',
+  exp:'a profound influence = 深遠的影響。(A) 徒勞的、(C) 有罪的、(D) 孤獨的 不能修飾 influence。',
+  note:'≈ deep；profoundly (adv.)。'},
+ {q:['She stepped back in ',' when she saw the dirty kitchen.'],
+  cn:'看到骯髒的廚房，她厭惡地往後退。',
+  opts:['disgust','debate','claim','wealth'],ans:0,
+  word:'disgust (n.) 厭惡',
+  exp:'in disgust = 厭惡地；dirty kitchen 引起「厭惡」。',
+  note:'disgusting（令人作嘔的）／disgusted（感到厭惡的）。'},
+ {q:['He tried to fix the broken phone, but all his efforts were in ','.'],
+  cn:'他試著修理那支壞掉的手機，但一切努力都白費了。',
+  opts:['debate','guilt','vain','claim'],ans:2,
+  word:'in vain（徒勞無功）',
+  exp:'but 表轉折，努力「白費」，固定片語 in vain。',
+  note:'vanity (n.) 虛榮；vain 另有「自負的」之意。'},
+ {q:['Because of the storm, the sailors had to ',' the sinking ship.'],
+  cn:'因為暴風雨，水手們不得不棄船。',
+  opts:['acquire','abandon','devour','insist'],ans:1,
+  word:'abandon (v.) 放棄；拋棄',
+  exp:'abandon ship = 棄船。(A) 獲得、(C) 吞食、(D) 堅持 皆不合。',
+  note:'≈ give up / desert；abandoned (adj.) 被遺棄的。'},
+ {q:['Surrounded by the police, the robber finally ','.'],
+  cn:'被警察包圍後，搶匪終於投降了。',
+  opts:['claimed','devoured','debated','surrendered'],ans:3,
+  word:'surrender (v.) 投降',
+  exp:'被包圍後「投降」，surrender 可作不及物動詞。',
+  note:'surrender to + sb.；surrender sth. to sb. = 交出。'},
+ {q:['After breaking his promise, Ben was full of ','.'],
+  cn:'違背承諾之後，班充滿了罪惡感。',
+  opts:['guilt','property','penalty','companion'],ans:0,
+  word:'guilt (n.) 罪惡感',
+  exp:'違背承諾後內心充滿「罪惡感」。be full of + N。',
+  note:'guilty (adj.)；feel guilty about = 對…感到內疚。'}
+];
+
+var teacherQ=[
+ {q:['',' she was, she refused to give up her dream of studying abroad.'],
+  cn:'雖然她很窮，卻拒絕放棄出國念書的夢想。',
+  opts:['As poor','Poor as','Though poor as','As poor that'],ans:1,
+  word:'Adj. + as + S + V（讓步）',
+  tnote:'<b>形容詞置首的讓步句</b>：Poor as she was = Although she was poor。<br>(A) 少了第二個 as；(C) though 與 as 重複；(D) 不可用 that。'},
+ {q:['I would rather stay home ',' to a noisy party tonight.'],
+  cn:'今晚我寧願待在家，也不要去吵鬧的派對。',
+  opts:['than going','to go','than to go','than go'],ans:3,
+  word:'would rather + V1 + than + V2',
+  tnote:'<b>would rather A than B</b>：A、B 都用原形動詞，故選 than go。<br>(A) 動名詞錯；(B) 缺 than；(C) than 後不加 to。'},
+ {q:['The coffee was ',' to drink, so I waited a few minutes.'],
+  cn:'咖啡太燙了沒辦法喝，所以我等了幾分鐘。',
+  opts:['too hot','so hot','very hot','hot enough'],ans:0,
+  word:'too + adj. + to V（太…而不能…）',
+  tnote:'<b>too ... to</b> 帶否定意味，與後句「等了幾分鐘」相符。<br>(B) so hot 須接 that 子句；(C) very 沒有「無法」之意；(D) hot enough to drink 表「夠燙可以喝」，與語意矛盾。'},
+ {q:['The coach proposed that every player ',' an hour earlier for practice.'],
+  cn:'教練提議每位球員提早一小時來練習。',
+  opts:['arrives','arrived','arrive','arriving'],ans:2,
+  word:'propose that S + (should) + 原形V',
+  tnote:'<b>建議類動詞 + that 子句</b>：省略 should，仍用原形 arrive。<br>(A) 第三人稱單數形錯；(B) 過去式錯；(D) 分詞不能當述語動詞。'},
+ {q:['',' in a small room for years, the man had plenty of time to think.'],
+  cn:'被關在小房間裡好幾年，那人有很多時間思考。',
+  opts:['Locked','Locking','To lock','Having locked'],ans:0,
+  word:'p.p. 分詞構句（被動）',
+  tnote:'<b>被動分詞構句</b>：the man 是「被」關，用 Locked。<br>(B) 主動，後面又沒有受詞；(C) 不定詞表目的不合；(D) Having locked 為主動完成式，語態錯。'},
+ {q:['By the time the police arrived, the thief ',' through the back door.'],
+  cn:'警察抵達時，小偷早已從後門逃走了。',
+  opts:['escapes','has escaped','was escaping','had escaped'],ans:3,
+  word:'By the time + 過去式, S + had + p.p.',
+  tnote:'<b>過去完成式</b>：逃走發生在警察抵達「之前」，用 had escaped。<br>(A) 現在式、(B) 現在完成式時態不合；(C) 過去進行式表「正在逃」，與 by the time 語意不合。'},
+ {q:['',' on the desk was a note written in neat handwriting.'],
+  cn:'書桌上放著一張字跡工整的紙條。',
+  opts:['Lain','Lay','Lying','To lie'],ans:2,
+  word:'分詞置首倒裝：Lying ... + be + S',
+  tnote:'<b>倒裝句</b>：原句 A note was lying on the desk，把 Lying on the desk 移到句首。<br>(A) lain 為 lie 的 p.p.，不可單獨表主動進行；(B) Lay 為過去式，句中已有 was；(D) 不定詞不用於此倒裝。'},
+ {q:['She ran all the way to school, ',' that the class had been canceled.'],
+  cn:'她一路跑到學校，結果卻發現課被取消了。',
+  opts:['only finding','only to find','only found','only to finding'],ans:1,
+  word:'..., only to + V（結果卻…）',
+  tnote:'<b>only to + 原形</b>：表出乎意料的結果。<br>(A) 動名詞錯；(C) 過去式錯；(D) to 後須接原形。'},
+ {q:['',' his homework, Tom went out to play basketball.'],
+  cn:'寫完作業後，湯姆出門去打籃球。',
+  opts:['Finished','Have finished','Being finished','Having finished'],ans:3,
+  word:'Having + p.p.（動作先發生）',
+  tnote:'<b>完成式分詞構句</b>：先寫完作業、再出門，且 Tom 是主動完成，用 Having finished。<br>(A) 被動語態錯；(B) 缺 -ing；(C) 被動進行，語態錯。'},
+ {q:['At the trial, the lawyer insisted that his client ',' innocent of the crime.'],
+  cn:'審判時，律師堅稱他的當事人是無罪的。',
+  opts:['be','should be','was','being'],ans:2,
+  word:'insist that + 一般時態（堅稱事實）',
+  tnote:'<b>insist 的兩種意思</b>：表「堅持要求」用 (should) + 原形；表「堅稱某事實」則用一般時態。本題是陳述事實，故用 was。<br>(A)(B) 為要求語氣，不合；(D) 分詞不能當述語動詞。'},
+ {q:['Hard ',' the work was, the students finished it on time.'],
+  cn:'雖然工作很辛苦，學生們還是準時完成了。',
+  opts:['so','while','as','because'],ans:2,
+  word:'Adj. + as + S + V（讓步）',
+  tnote:'<b>讓步倒裝</b>：Hard as the work was = Although the work was hard。<br>(A) so 無讓步用法；(B) while 不能放在形容詞後；(D) because 表原因，語意相反。'},
+ {q:['It never ',' my mind that my best friend might move away.'],
+  cn:'我從沒想過最好的朋友可能會搬走。',
+  opts:['crossed','passed','came','went'],ans:0,
+  word:'cross one\'s mind（閃過腦海）',
+  tnote:'<b>固定片語 cross one\'s mind</b>：It never crossed my mind that... = 我從沒想過…。<br>(B)(C)(D) 都不與 my mind 直接搭配（come to mind 須加 to）。'},
+ {q:['Many people prefer living freely ',' living in luxury behind bars.'],
+  cn:'許多人寧願自由地生活，也不要在牢裡過奢華的日子。',
+  opts:['than','to','over than','rather'],ans:1,
+  word:'prefer A to B（喜歡 A 勝於 B）',
+  tnote:'<b>prefer V-ing to V-ing</b>：to 為介系詞，前後接動名詞。<br>(A) than 用於 would rather；(C) over than 不存在；(D) rather 須寫 rather than 且搭配 prefer to V。'},
+ {q:['',' had the banker read the letter than he felt deeply ashamed.'],
+  cn:'銀行家一讀完那封信，就深感羞愧。',
+  opts:['Hardly','No sooner','As soon as','Not until'],ans:1,
+  word:'No sooner + had + S + p.p. + than ...（一…就…）',
+  tnote:'<b>否定副詞置首倒裝</b>：No sooner 與 than 搭配，助動詞 had 移到主詞前。<br>(A) Hardly 須搭配 when；(C) As soon as 不倒裝也不接 than；(D) Not until 句意與結構皆不合。'},
+ {q:['The old man, ',' fortune had almost disappeared, could no longer afford the bet.'],
+  cn:'那位老人的財富幾乎消失殆盡，再也付不起那筆賭金。',
+  opts:['whose','who','which','that'],ans:0,
+  word:'whose（所有格關代，非限定）',
+  tnote:'<b>whose + 名詞</b>：whose fortune = the old man\'s fortune，表所屬。<br>(B) who 後不能直接接名詞；(C) which 指物、無所有格用法；(D) that 不可用於非限定子句。'}
+];
+
+function buildQuestions(data,container,prefix,badgeClass,numColor){
+  var html='';
+  data.forEach(function(item,i){
+    var num=prefix+(i+1);
+    var qhtml='';
+    for(var k=0;k<item.q.length;k++){
+      qhtml+=item.q[k];
+      if(k<item.q.length-1)qhtml+='<span class="blank">______</span>';
+    }
+    var letters=['A','B','C','D'];
+    var choices='';
+    for(var j=0;j<item.opts.length;j++){
+      choices+='<div class="choice" data-correct="'+(j===item.ans?'1':'0')+'" onclick="pickChoice(this)">'
+        +'<span class="mark"></span>('+letters[j]+') '+item.opts[j]+'</div>';
+    }
+    var noteHtml=item.note?'<div class="ans-note">💡 '+item.note+'</div>':'';
+    var tnoteHtml=item.tnote?'<div class="tnote">'+item.tnote+'</div>':'';
+    var expHtml=item.exp?'<div class="ans-cn">'+item.exp+'</div>':'';
+    qhtml='<div class="q-block"><div class="q-top">'
+      +'<div class="q-num">'+num+'</div>'
+      +'<div class="q-main"><div class="q-en">'+qhtml+'</div>'
+      +'<div class="q-cn">'+item.cn+'</div>'
+      +'<div class="q-choices">'+choices+'</div>'
+      +'<button class="show-btn" onclick="showAns(this)">看完整解析</button>'
+      +'<div class="q-ans"><span class="ans-badge '+badgeClass+'">✓ 答案：('+letters[item.ans]+')</span>'
+      +'<div class="ans-word">'+item.word+'</div>'+expHtml+noteHtml+tnoteHtml
+      +'</div></div></div></div>';
+    html+=qhtml;
+  });
+  container.insertAdjacentHTML('beforeend',html);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var sBody=document.querySelectorAll('.s-green .sec-body')[0];
+  var tBody=document.querySelectorAll('.s-orange .sec-body')[0];
+  buildQuestions(studentQ,sBody,'',' badge-green','#166534');
+  buildQuestions(teacherQ,tBody,'T','badge-orange','#9a3412');
+
+  // 核心字彙 + 補充字彙：每個單字加發音鈕（緊鄰詞性標籤後）
+  document.querySelectorAll('.v-word').forEach(function(w){
+    var text=w.textContent.trim();
+    var pos=w.parentElement.querySelector('.v-pos');
+    var anchor=pos||w;
+    anchor.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 常用俚語：每個俚語加發音鈕
+  document.querySelectorAll('.slang-en').forEach(function(s){
+    var text=s.textContent.trim().replace(/one's/g,'your');
+    s.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文片語動詞：每個片語加發音鈕（去掉 ... 與括號後再唸）
+  document.querySelectorAll('.phr').forEach(function(p){
+    var text=p.textContent.trim()
+      .replace(/\.\.\./g,' ')        // take...seriously → take seriously
+      .replace(/\([^)]*\)/g,'')      // dress up (in) → dress up
+      .replace(/\s+/g,' ').trim();
+    p.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+  // 課文逐句精講：每一句英文加上發音鈕（音檔朗讀）
+  document.querySelectorAll('.para-en').forEach(function(p){
+    var span=p.querySelector('span:not(.ic)');
+    if(!span)return;
+    var text=span.textContent.trim();
+    if(!text)return;
+    span.insertAdjacentElement('afterend',makeSpeakBtn(text));
+  });
+});
+// ===== 列印分頁與頁碼：把內容排成 A4 頁面、每頁加頁碼；網頁各大題顯示所在頁 =====
+function buildPrintPages(){
+  var page=document.querySelector('.page');
+  if(!page||document.querySelector('.print-root'))return;
+  var MM=96/25.4;
+  var CONTENT_W=Math.round((210-28)*MM);   // A4 內容寬（左右各 14mm）
+  var CONTENT_H=940;                        // 每頁可用內容高（px，保守值，避免溢出）
+  var title=((document.querySelector('.header h1')||{}).textContent||'互動教學講義').replace(/\s+/g,' ').trim();
+  function prep(node){
+    var c=node.cloneNode(true);
+    c.querySelectorAll('.para-exp,.v-body,.g-body,.slang-body').forEach(function(e){e.classList.add('open');});
+    c.querySelectorAll('.q-ans,.show-btn,.sec-hint,.speak-btn,.header-nav,.ic,.v-ic,.g-arrow,.pg-badge').forEach(function(e){e.remove();});
+    return c;
+  }
+  var sections=[].slice.call(page.children).filter(function(c){return c.classList&&c.classList.contains('section');});
+  var items=[], header=page.querySelector('.header');
+  if(header)items.push({t:'header',node:prep(header)});
+  sections.forEach(function(sec,si){
+    var color=([].slice.call(sec.classList).filter(function(c){return /^s-/.test(c);})[0])||'s-blue';
+    items.push({t:'start',si:si});
+    var head=sec.querySelector('.sec-head');
+    if(head)items.push({t:'atom',color:color,node:prep(head)});
+    var body=sec.querySelector('.sec-body');
+    if(body)[].slice.call(body.children).forEach(function(ch){
+      if(ch.classList.contains('sec-hint'))return;
+      if(ch.classList.contains('para')){
+        var sp=ch.querySelector('.para-speaker');
+        [].slice.call(ch.querySelectorAll('.para-line')).forEach(function(ln,i){
+          var w=document.createElement('div'); w.className='para';
+          if(i===0&&sp)w.appendChild(prep(sp));
+          w.appendChild(prep(ln));
+          items.push({t:'atom',color:color,node:w});
+        });
+      }else if(ch.classList.contains('vocab-grid')){
+        var cards=[].slice.call(ch.querySelectorAll('.v-card'));
+        for(var i=0;i<cards.length;i+=2){
+          var row=document.createElement('div'); row.className='vocab-grid';
+          row.appendChild(prep(cards[i]));
+          if(cards[i+1])row.appendChild(prep(cards[i+1]));
+          items.push({t:'atom',color:color,node:row});
+        }
+      }else if(!ch.classList.contains('q-block')&&ch.querySelector&&ch.querySelector('.q-block')){
+        // 題目可能包在容器（如 #q-wrap）內：把每個 q-block 當一個原子
+        [].slice.call(ch.querySelectorAll('.q-block')).forEach(function(qb){items.push({t:'atom',color:color,node:prep(qb)});});
+      }else{
+        items.push({t:'atom',color:color,node:prep(ch)});
+      }
+    });
+  });
+  var root=document.createElement('div'); root.className='print-root';
+  root.style.cssText='position:absolute;left:-10000px;top:0;width:'+CONTENT_W+'px;visibility:hidden;display:block';
+  document.body.appendChild(root);
+  var sheets=[],sheet=null,box=null,pageStart={};
+  function newSheet(){
+    sheet=document.createElement('div'); sheet.className='sheet';
+    box=document.createElement('div'); box.className='sheet-box'; box.style.width=CONTENT_W+'px';
+    sheet.appendChild(box);
+    var f=document.createElement('div'); f.className='sheet-foot';
+    f.innerHTML='<span class="ft-title"></span><span class="ft-num"></span>';
+    sheet.appendChild(f); root.appendChild(sheet); sheets.push(sheet);
+  }
+  items.forEach(function(it){
+    if(it.t==='header'){ if(!sheet)newSheet(); var w=document.createElement('div'); w.style.marginBottom='12px'; w.appendChild(it.node); box.appendChild(w); return; }
+    if(it.t==='start'){ if(it.si>0||!sheet)newSheet(); pageStart[it.si]=sheets.length; return; }
+    if(!sheet)newSheet();
+    var w=document.createElement('div'); w.className=it.color+' pa'; w.style.marginBottom='10px'; w.appendChild(it.node);
+    box.appendChild(w);
+    if(box.offsetHeight>CONTENT_H){ box.removeChild(w); newSheet(); box.appendChild(w); }
+  });
+  var total=sheets.length;
+  sheets.forEach(function(sh,i){
+    sh.querySelector('.ft-title').textContent=title;
+    sh.querySelector('.ft-num').textContent='第 '+(i+1)+' 頁 ／ 共 '+total+' 頁';
+  });
+  root.removeAttribute('style');
+  document.body.classList.add('has-print-pages');
+  sections.forEach(function(sec,si){
+    var head=sec.querySelector('.sec-head');
+    if(!head||!pageStart[si])return;
+    var a=pageStart[si], b=(si+1<sections.length&&pageStart[si+1])?pageStart[si+1]-1:total;
+    var badge=document.createElement('span'); badge.className='pg-badge';
+    badge.textContent=(a===b)?('第 '+a+' 頁'):('第 '+a+'–'+b+' 頁');
+    head.appendChild(badge);
+  });
+}
+
+// 產生可列印的 A4 分頁與頁碼（延後執行避免阻塞首次繪製；列印前保證已建立）
+var _paged=false;
+function _mkPages(){ if(_paged)return; _paged=true; try{buildPrintPages();}catch(e){} }
+setTimeout(_mkPages,150);
+window.addEventListener('beforeprint',_mkPages);
+</script>
+<script>
+/* 字彙區補充發音：例句、片語例句、同義字、反義字（重用既有 speak/makeSpeakBtn；列印自動隱藏 .speak-btn） */
+(function(){
+  function ready(fn){ if(document.readyState!=='loading')fn(); else document.addEventListener('DOMContentLoaded',fn); }
+  function mkBtn(text){
+    if(typeof makeSpeakBtn==='function') return makeSpeakBtn(text);
+    var b=document.createElement('button');
+    b.className='speak-btn'; b.textContent='\u{1F50A}'; b.title='點我聽發音：'+text;
+    b.setAttribute('aria-label','發音 '+text);
+    b.onclick=function(ev){ if(typeof speak==='function')speak(text,b,ev); };
+    return b;
+  }
+  function enFromMarker(raw){
+    if(!/≈|同義|反義|反向/.test(raw)) return '';
+    var en='';
+    var m=raw.match(/(?:≈|同義字?|同義詞|反義字?|反義詞|反向)\s*[:：]?\s*([A-Za-z][A-Za-z '\/\-]*)/);
+    if(m){ en=m[1]; }
+    else { var m2=raw.match(/^\s*([A-Za-z][A-Za-z '\/\-]*)/); en=m2?m2[1]:''; }
+    en=en.replace(/\s*\/\s*/g,', ').replace(/\s+/g,' ').trim().replace(/[,\s]+$/,'');
+    return (en && /[A-Za-z]/.test(en) && en.length<=60) ? en : '';
+  }
+  function enFam(raw){
+    var s=(raw||'').replace(/\([^)]*\)/g,' ').replace(/（[^）]*）/g,' ').replace(/[≈=📊👆]/g,' ').replace(/\s*\/\s*/g,' / ');
+    var runs=s.match(/[A-Za-z][A-Za-z'’\-]*(?:\s+[A-Za-z][A-Za-z'’\-]*)*/g);
+    if(!runs) return '';
+    var en=runs.join(', ').replace(/\s+/g,' ').trim();
+    return (en && en.length<=60) ? en : '';
+  }
+  function enSentence(el){
+    var c=el.cloneNode(true);
+    c.querySelectorAll('.cn,.g-ex-cn,.speak-btn').forEach(function(x){x.remove();});
+    return c.textContent
+      .replace(/（[^）]*）/g,' ')
+      .replace(/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function addSentenceBtn(ex){
+    if(ex.querySelector('.speak-btn'))return;
+    var t=enSentence(ex); if(!t)return;
+    var cn=ex.querySelector('.cn'); var b=mkBtn(t);
+    if(cn)ex.insertBefore(b,cn); else ex.appendChild(b);
+  }
+  ready(function(){
+    document.querySelectorAll('.v-ex').forEach(addSentenceBtn);    // 字彙例句
+    document.querySelectorAll('.pex').forEach(addSentenceBtn);     // 片語例句
+    document.querySelectorAll('.slang-ex').forEach(addSentenceBtn);// 俚語生活例句
+    document.querySelectorAll('.g-ex').forEach(addSentenceBtn);    // 句型文法例句
+    document.querySelectorAll('.v-fam span').forEach(function(el){  // 字族衍生字（紫色標籤）全部發音
+      if(el.querySelector&&el.querySelector('.speak-btn'))return;
+      var en=enFam(el.textContent||'');
+      if(!en)return;
+      el.appendChild(mkBtn(en));
+    });
+    document.querySelectorAll('.v-gsat').forEach(function(el){  // 學測連結內同義/反義字
+      if(el.querySelector&&el.querySelector('.speak-btn'))return;
+      var en=enFromMarker(el.textContent||'');
+      if(!en)return;
+      el.appendChild(mkBtn(en));
+    });
+  });
+})();
+</script>
+<script>
+/* 文法手寫練習：填空/改寫「看解答」按鈕（沿用既有 show-btn 樣式與列印隱藏規則） */
+function showGW(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.toggle('open');
+  if(!btn.dataset.label){btn.dataset.label=btn.textContent;}
+  btn.textContent=isOpen?'收合':btn.dataset.label;
+}
+
+/* 句子重組：10 題，點詞組依序排列成句 */
+var reorderData=[
+ {cn:'雖然很累，她還是讀完了整本書。',
+  correct:['Tired as she was,','she finished','the whole book.'],
+  pool:['the whole book.','Tired as she was,','she finished']},
+ {cn:'我寧願待在家，也不要出門淋雨。',
+  correct:['I would rather','stay at home','than go out','in the rain.'],
+  pool:['than go out','in the rain.','I would rather','stay at home']},
+ {cn:'這條河太危險，不能在裡面游泳。',
+  correct:['The river is','too dangerous','to swim in.'],
+  pool:['to swim in.','too dangerous','The river is']},
+ {cn:'老師建議我們多讀課外書。',
+  correct:['The teacher suggested','that we','read more books.'],
+  pool:['read more books.','The teacher suggested','that we']},
+ {cn:'被困在房間裡，他開始寫日記。',
+  correct:['Trapped in his room,','he began','to keep a diary.'],
+  pool:['he began','to keep a diary.','Trapped in his room,']},
+ {cn:'我到的時候，晚餐已經結束了。',
+  correct:['When I arrived,','dinner','had already ended.'],
+  pool:['had already ended.','When I arrived,','dinner']},
+ {cn:'門邊站著一位高大的陌生人。',
+  correct:['Standing by the door','was','a tall stranger.'],
+  pool:['a tall stranger.','was','Standing by the door']},
+ {cn:'他努力了好幾個月，結果最後還是失敗了。',
+  correct:['He worked hard for months,','only to','fail in the end.'],
+  pool:['fail in the end.','He worked hard for months,','only to']},
+ {cn:'那個念頭從未閃過我的腦海。',
+  correct:['That idea','never','crossed my mind.'],
+  pool:['crossed my mind.','That idea','never']},
+ {cn:'金錢絕對不是人生中最重要的東西。',
+  correct:['Money is','by no means','the most important thing','in life.'],
+  pool:['the most important thing','in life.','by no means','Money is']}
+];
+
+function roRender(){
+  var area=document.getElementById('roArea');
+  if(!area)return;
+  var html='';
+  reorderData.forEach(function(item,idx){
+    item.placed=[];
+    html+='<div class="ro-item"><div class="ro-top"><div class="ro-num">'+(idx+1)+'</div><div class="ro-main">'
+      +'<div class="ro-cn">'+item.cn+'</div>'
+      +'<div class="ro-answer" id="roAns'+idx+'"></div>'
+      +'<div class="ro-pool" id="roPool'+idx+'"></div>'
+      +'<div class="ro-actions">'
+      +'<button class="ro-btn secondary" onclick="roReset('+idx+')">↺ 重置</button>'
+      +'<button class="ro-btn" onclick="roCheck('+idx+')">✔ 檢查</button>'
+      +'<button class="ro-btn secondary" onclick="roReveal('+idx+')">👀 看正解</button>'
+      +'</div>'
+      +'<div class="ro-result" id="roResult'+idx+'"></div>'
+      +'</div></div></div>';
+  });
+  area.innerHTML=html;
+  reorderData.forEach(function(item,idx){roRenderPool(idx);roRenderAnswer(idx);});
+}
+function roRenderPool(idx){
+  var item=reorderData[idx];
+  var pool=document.getElementById('roPool'+idx);
+  pool.innerHTML='';
+  item.pool.forEach(function(chunk,ci){
+    if(item.placed.indexOf(ci)>=0)return;
+    var btn=document.createElement('button');
+    btn.className='ro-chip'; btn.textContent=chunk;
+    btn.onclick=function(){roPlace(idx,ci);};
+    pool.appendChild(btn);
+  });
+}
+function roRenderAnswer(idx){
+  var item=reorderData[idx];
+  var ans=document.getElementById('roAns'+idx);
+  ans.innerHTML='';
+  item.placed.forEach(function(ci){
+    var btn=document.createElement('button');
+    btn.className='ro-chip placed'; btn.textContent=item.pool[ci];
+    btn.onclick=function(){roUnplace(idx,ci);};
+    ans.appendChild(btn);
+  });
+}
+function roPlace(idx,ci){
+  var item=reorderData[idx];
+  if(item.placed.indexOf(ci)>=0)return;
+  item.placed.push(ci);
+  roRenderPool(idx); roRenderAnswer(idx);
+  document.getElementById('roResult'+idx).textContent='';
+  document.getElementById('roResult'+idx).className='ro-result';
+}
+function roUnplace(idx,ci){
+  var item=reorderData[idx];
+  var p=item.placed.indexOf(ci);
+  if(p<0)return;
+  item.placed.splice(p,1);
+  roRenderPool(idx); roRenderAnswer(idx);
+}
+function roReset(idx){
+  reorderData[idx].placed=[];
+  roRenderPool(idx); roRenderAnswer(idx);
+  var r=document.getElementById('roResult'+idx); r.textContent=''; r.className='ro-result';
+}
+function roCheck(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  var built=item.placed.map(function(ci){return item.pool[ci];}).join(' ');
+  var correct=item.correct.join(' ');
+  if(item.placed.length===item.correct.length && built===correct){
+    r.textContent='✅ 正確！'; r.className='ro-result correct';
+  }else{
+    r.textContent='❌ 順序不正確，再試試看。'; r.className='ro-result wrong';
+  }
+}
+function roReveal(idx){
+  var item=reorderData[idx];
+  var r=document.getElementById('roResult'+idx);
+  r.textContent='👀 正解：'+item.correct.join(' ');
+  r.className='ro-result reveal';
+}
+
+/* 單字配對遊戲：核心字彙 15 字 */
+var vocabWords=[
+ {en:'debate',cn:'辯論；爭論'},
+ {en:'penalty',cn:'懲罰；刑罰'},
+ {en:'imprison',cn:'監禁'},
+ {en:'claim',cn:'聲稱；主張'},
+ {en:'insist',cn:'堅持'},
+ {en:'property',cn:'財產；地產'},
+ {en:'companion',cn:'同伴'},
+ {en:'devour',cn:'狼吞虎嚥；貪讀'},
+ {en:'acquire',cn:'獲得；習得'},
+ {en:'profound',cn:'深刻的'},
+ {en:'disgust',cn:'厭惡'},
+ {en:'vain',cn:'徒勞的'},
+ {en:'abandon',cn:'放棄；拋棄'},
+ {en:'surrender',cn:'投降；交出'},
+ {en:'guilt',cn:'罪惡感'}
+];
+var matchState={matched:0,seconds:0,timer:null,selLeft:null,selRight:null};
+function shuffleArr(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function initMatchGame(){
+  var leftCol=document.getElementById('matchLeft'), rightCol=document.getElementById('matchRight');
+  if(!leftCol||!rightCol)return;
+  matchState.matched=0; matchState.seconds=0; matchState.selLeft=null; matchState.selRight=null;
+  document.getElementById('matchScore').textContent='配對成功：0 / '+vocabWords.length;
+  document.getElementById('matchTime').textContent='⏱ 00:00';
+  var win=document.getElementById('matchWin'); win.classList.remove('show'); win.textContent='';
+  if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+
+  var idxs=vocabWords.map(function(_,i){return i;});
+  var leftOrder=shuffleArr(idxs), rightOrder=shuffleArr(idxs);
+  leftCol.innerHTML=''; rightCol.innerHTML='';
+
+  leftOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].en; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'left');};
+    leftCol.appendChild(b);
+  });
+  rightOrder.forEach(function(i){
+    var b=document.createElement('button');
+    b.className='match-chip'; b.textContent=vocabWords[i].cn; b.setAttribute('data-id',i);
+    b.onclick=function(){matchClick(b,'right');};
+    rightCol.appendChild(b);
+  });
+
+  matchState.timer=setInterval(function(){
+    matchState.seconds++;
+    var m=Math.floor(matchState.seconds/60), s=matchState.seconds%60;
+    document.getElementById('matchTime').textContent='⏱ '+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+  },1000);
+}
+function matchClick(btn,side){
+  if(btn.classList.contains('matched'))return;
+  if(side==='left'){
+    if(matchState.selLeft)matchState.selLeft.classList.remove('selected');
+    matchState.selLeft=btn; btn.classList.add('selected');
+  }else{
+    if(matchState.selRight)matchState.selRight.classList.remove('selected');
+    matchState.selRight=btn; btn.classList.add('selected');
+  }
+  if(matchState.selLeft&&matchState.selRight){
+    var L=matchState.selLeft, R=matchState.selRight;
+    if(L.getAttribute('data-id')===R.getAttribute('data-id')){
+      L.classList.remove('selected'); R.classList.remove('selected');
+      L.classList.add('matched'); R.classList.add('matched');
+      matchState.matched++;
+      document.getElementById('matchScore').textContent='配對成功：'+matchState.matched+' / '+vocabWords.length;
+      matchState.selLeft=null; matchState.selRight=null;
+      if(matchState.matched===vocabWords.length){
+        if(matchState.timer){clearInterval(matchState.timer);matchState.timer=null;}
+        var win=document.getElementById('matchWin');
+        win.textContent='🎉 全部配對成功！用時 '+document.getElementById('matchTime').textContent.replace('⏱ ','');
+        win.classList.add('show');
+      }
+    }else{
+      L.classList.add('wrong'); R.classList.add('wrong');
+      setTimeout(function(){L.classList.remove('selected','wrong');R.classList.remove('selected','wrong');},500);
+      matchState.selLeft=null; matchState.selRight=null;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  roRender();
+  initMatchGame();
+});
+</script>
+<style>@media print{#penBtn,#penBar,#penCv,#penHit,#penBoard{display:none!important}}</style>
+<script>
+/* ================= ✏️ 老師手寫 =================
+   畫在網頁上的筆跡記在「整頁座標」，會跟著畫面捲動；白板的筆跡另外存、不捲動。
+   書寫時：一指／觸控筆寫字、兩指捲動＋縮放（不鎖畫面）。✋ 捲動模式：筆跡照樣顯示，可以點題目。
+   縮放：把頁面內容包進 #penZoom 再用 transform:scale；筆跡存「內容座標」，縮放後仍黏在原來的字上。
+   用固定大小的畫布＋捲動時重畫（平板瀏覽器對超大畫布有尺寸限制）。 */
+(function(){
+  const css=`
+  #penBtn{position:fixed;left:14px;bottom:14px;z-index:60;border:none;background:#fff;color:#2b4c7e;border-radius:99px;padding:8px 16px;box-shadow:0 4px 18px rgba(30,45,70,.18);font-weight:700;font-size:1rem;font-family:inherit;cursor:pointer}
+  #penCv{position:fixed;inset:0;width:100vw;height:100vh;z-index:57;pointer-events:none;display:none}
+  #penHit{position:fixed;inset:0;z-index:58;display:none;touch-action:none;cursor:crosshair}
+  #penBoard{position:fixed;inset:0;z-index:56;background:#fff;display:none}
+  body.pen-on #penCv{display:block}
+  body.pen-on.pen-draw #penHit{display:block}
+  body.pen-board #penBoard{display:block}
+  #penBar{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;bottom:12px;z-index:61;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;
+    background:rgba(255,255,255,.97);border-radius:16px;padding:8px 10px;box-shadow:0 6px 24px rgba(30,45,70,.22);max-width:calc(100vw - 24px)}
+  body.pen-top #penBar{bottom:auto;top:12px}
+  body.pen-on #penBar{display:flex}
+  #penBar button{border:2px solid #e3e0d8;background:#fff;border-radius:10px;min-width:44px;height:44px;font-size:1rem;font-family:inherit;font-weight:700;cursor:pointer;color:#23303f;padding:0 10px}
+  #penBar button.on{border-color:#2b4c7e;background:#e8effa}
+  #penBar button.mode{background:#2b4c7e;color:#fff;border-color:#2b4c7e}
+  #penBar .dot{width:44px;padding:0}
+  #penBar .dot i{display:block;width:22px;height:22px;border-radius:50%;margin:auto}
+  #penBar .sep{width:1px;height:30px;background:#e3e0d8;margin:0 2px}
+  body.pen-on #penBtn{display:none}
+  #penZoom{transform-origin:0 0}
+  #penBar.nozoom [data-a=zout],#penBar.nozoom [data-a=zoom],#penBar.nozoom [data-a=zin]{display:none}
+  html.pen-lock,html.pen-lock body{touch-action:manipulation;touch-action:pan-x pan-y}
+  #penBar,#penBar *,#penBtn{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+  @media(max-width:640px){#penBar .t,#penBar .sep{display:none}#penBar{gap:4px;padding:6px}#penBar button{min-width:40px;height:40px;padding:0 6px}#penBar .dot{width:40px}}`;
+  const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  const COLORS=['#d9342b','#1f5fbf','#1d1d1d','#1f9a55'];
+  const SIZES=[[3,'細'],[6,'中'],[12,'粗']];
+  let color=COLORS[0],size=6,erase=false,page=[],board=[],cur=null,boardOn=false;
+  document.body.insertAdjacentHTML('beforeend',`<button id="penBtn" title="老師手寫">✏️ 手寫</button>
+    <div id="penBoard"></div><canvas id="penCv"></canvas><div id="penHit"></div>
+    <div id="penBar">
+      <button class="mode" data-a="mode">✋<span class="t"> 捲動</span></button>
+      <span class="sep"></span>
+      ${COLORS.map((c,i)=>`<button class="dot${i?'':' on'}" data-c="${c}" title="顏色"><i style="background:${c}"></i></button>`).join('')}
+      <span class="sep"></span>
+      ${SIZES.map(([s,n])=>`<button data-s="${s}" class="${s===6?'on':''}">${n}</button>`).join('')}
+      <span class="sep"></span>
+      <button data-a="erase" title="橡皮擦">🧽<span class="t"> 橡皮擦</span></button><button data-a="undo" title="復原">↩️<span class="t"> 復原</span></button><button data-a="clear" title="清除">🗑️<span class="t"> 清除</span></button>
+      <button data-a="zout" title="縮小">－</button><button data-a="zoom" title="回到 1 倍">🔍<span class="z">1.0×</span></button><button data-a="zin" title="放大">＋</button><button data-a="board" title="白板">⬜<span class="t"> 白板</span></button><button data-a="move" title="移位">⇅<span class="t"> 移位</span></button><button data-a="close" title="關閉">✖<span class="t"> 關閉</span></button>
+    </div>`);
+  const Z=document.createElement('div');Z.id='penZoom';
+  /* 第一次打開手寫才把頁面內容包進 #penZoom（只有 header/nav/main/footer 就包這些，否則包所有一般排版的子元素）。
+     body 是 flex/grid 或 CSS 有「body>」選擇器時不包：不能縮放，但筆跡照樣跟著捲動。 */
+  const PEN_IDS=['penBtn','penBoard','penCv','penHit','penBar'];
+  const NOFLOW=/^(SCRIPT|STYLE|LINK|META|TEMPLATE|NOSCRIPT)$/;
+  function bodyChildCss(){const hit=rs=>[...rs].some(r=>(r.selectorText&&/(^|[\s,(])body\s*>/.test(r.selectorText))||(r.cssRules&&hit(r.cssRules)));
+    for(const ss of document.styleSheets){let rs;try{rs=ss.cssRules}catch(_){continue}if(rs&&hit(rs))return true}return false}
+  function wrap(){
+    if(Z.isConnected)return;
+    const kids=[...document.body.children].filter(e=>!PEN_IDS.includes(e.id)&&!NOFLOW.test(e.tagName)&&getComputedStyle(e).position!=='fixed');
+    let flow=kids.filter(e=>/^(HEADER|NAV|MAIN|FOOTER)$/.test(e.tagName));
+    if(flow.length<kids.length){if(/flex|grid/.test(getComputedStyle(document.body).display)||bodyChildCss())flow=[];else flow=kids}
+    if(flow.length){flow[0].before(Z);flow.forEach(e=>Z.appendChild(e))}
+    else bar.classList.add('nozoom');
+  }
+  let zoom=1;
+  const B=document.body,cv=document.getElementById('penCv'),hit=document.getElementById('penHit'),bar=document.getElementById('penBar'),ctx=cv.getContext('2d');
+  const list=()=>boardOn?board:page;
+  /* 螢幕座標＝內容座標×z＋(x,y)。白板不捲動不縮放；網頁筆跡跟著捲動與縮放 */
+  const off=()=>{if(boardOn)return{z:1,x:0,y:0};if(!Z.isConnected)return{z:1,x:-scrollX,y:-scrollY};const r=Z.getBoundingClientRect();return{z:zoom,x:r.left,y:r.top}};
+  function fit(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;ctx.setTransform(r,0,0,r,0,0);redraw()}
+  function seg(s,a,b,o){
+    ctx.globalCompositeOperation=s.erase?'destination-out':'source-over';
+    ctx.strokeStyle=s.color;ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineWidth=(s.erase?s.size*4:s.size*(0.55+(b.p||0.5)*0.9))*o.z;
+    ctx.beginPath();ctx.moveTo(a.x*o.z+o.x,a.y*o.z+o.y);ctx.lineTo(b.x*o.z+o.x,b.y*o.z+o.y);ctx.stroke();
+  }
+  function draw(s,o){const P=s.pts;if(P.length===1)seg(s,P[0],{...P[0],x:P[0].x+.01},o);for(let i=1;i<P.length;i++)seg(s,P[i-1],P[i],o)}
+  function redraw(){ctx.clearRect(0,0,innerWidth,innerHeight);const o=off();
+    list().forEach(s=>{const ys=s.pts.map(p=>p.y*o.z+o.y);if(Math.max(...ys)<-50||Math.min(...ys)>innerHeight+50)return;draw(s,o)});
+    ctx.globalCompositeOperation='source-over'}
+  let raf=0;addEventListener('scroll',()=>{if(!B.classList.contains('pen-on')||boardOn||raf)return;raf=requestAnimationFrame(()=>{raf=0;redraw()})},{passive:true});
+  addEventListener('resize',()=>{if(B.classList.contains('pen-on')){fit();pad()}});
+  const pt=e=>{const o=off();return{x:(e.clientX-o.x)/o.z,y:(e.clientY-o.y)/o.z,p:e.pressure&&e.pointerType==='pen'?e.pressure:0.5}};
+  /* 以螢幕上的 at 點為中心縮放，讓內容點 c 落在 at（c 省略＝at 底下的內容點） */
+  const zBtn=()=>bar.querySelector('[data-a="zoom"] .z');
+  function setZoom(nz,at,c){
+    if(!Z.isConnected)return;nz=Math.min(3,Math.max(1,nz));const o=off();c=c||{x:(at.x-o.x)/o.z,y:(at.y-o.y)/o.z};
+    zoom=nz;Z.style.transform=nz===1?'':`scale(${nz})`;
+    const r=Z.getBoundingClientRect(),ox=r.left+scrollX,oy=r.top+scrollY;
+    window.scrollTo(ox+c.x*nz-at.x,oy+c.y*nz-at.y);
+    zBtn().textContent=nz.toFixed(1)+'×';bar.querySelector('[data-a="zoom"]').classList.toggle('on',nz>1.01);redraw();
+  }
+  /* 一指／觸控筆＝寫字；兩指＝捲動＋縮放（書寫中不鎖畫面） */
+  const ptrs=new Map();let pan=null,hold=false;
+  const mid=()=>{const v=[...ptrs.values()];return{x:(v[0].x+v[1].x)/2,y:(v[0].y+v[1].y)/2}};
+  const dist=()=>{const v=[...ptrs.values()];return Math.hypot(v[0].x-v[1].x,v[0].y-v[1].y)||1};
+  function startPan(){const m=mid(),o=off();pan={d0:dist(),z0:zoom,c:{x:(m.x-o.x)/o.z,y:(m.y-o.y)/o.z},m}}
+  hit.addEventListener('pointerdown',e=>{e.preventDefault();hit.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(ptrs.size>=2){if(cur){const L=list(),i=L.indexOf(cur);if(i>=0)L.splice(i,1);cur=null;redraw()}startPan();hold=true;return}
+    if(hold)return;
+    cur={color,size,erase,pts:[pt(e)]};list().push(cur);draw(cur,off());ctx.globalCompositeOperation='source-over'});
+  hit.addEventListener('pointermove',e=>{
+    if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pan&&ptrs.size>=2){e.preventDefault();const m=mid();
+      if(boardOn)return;
+      setZoom(pan.z0*dist()/pan.d0,m,pan.c);return}
+    if(!cur)return;e.preventDefault();const o=off();
+    (e.getCoalescedEvents?e.getCoalescedEvents():[e]).forEach(ev=>{const p=pt(ev),q=cur.pts[cur.pts.length-1];cur.pts.push(p);seg(cur,q,p,o)});ctx.globalCompositeOperation='source-over'});
+  const up=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pan=null;else startPan();if(ptrs.size===0)hold=false;cur=null};
+  hit.addEventListener('pointerup',up);hit.addEventListener('pointercancel',up);
+  /* 滑鼠滾輪／觸控板在書寫層上也能捲動 */
+  /* 觸控板捏合／Ctrl＋滾輪＝縮放 */
+  hit.addEventListener('wheel',e=>{e.preventDefault();
+    if(e.ctrlKey&&!boardOn)setZoom(zoom*Math.exp(-e.deltaY*0.01),{x:e.clientX,y:e.clientY});else window.scrollBy(e.deltaX,e.deltaY)},{passive:false});
+  const modeBtn=bar.querySelector('[data-a="mode"]');
+  function setDraw(on){B.classList.toggle('pen-draw',on);modeBtn.innerHTML=on?'✋<span class="t"> 捲動</span>':'✏️<span class="t"> 書寫</span>';modeBtn.title=on?'切換成捲動畫面（筆跡保留）':'切換回寫字'}
+  /* 依工具列實際高度在頁面上／下留白，最後一題不會被擋住 */
+  function pad(){const on=B.classList.contains('pen-on'),top=B.classList.contains('pen-top'),h=on?bar.offsetHeight+24+'px':'';
+    B.style.paddingBottom=on&&!top?h:'';B.style.paddingTop=on&&top?h:''}
+  const VP=document.querySelector('meta[name=viewport]'),VP0=VP?VP.content:'';
+  function lockVP(on){if(VP)VP.content=on?'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no':VP0}
+  function resetNative(){if(!VP||!window.visualViewport||visualViewport.scale<=1.01)return;lockVP(true);setTimeout(()=>{VP.content='width=device-width, initial-scale=1, maximum-scale=1';setTimeout(()=>lockVP(B.classList.contains('pen-on')),300)},50)}
+  let kb=0;
+  function open(){wrap();lockVP(true);clearInterval(kb);kb=setInterval(keepBar,250);document.documentElement.classList.add('pen-lock');B.classList.add('pen-on');setDraw(true);fit();pad()}
+  function close(){clearInterval(kb);lockVP(false);if(zoom!==1)setZoom(1,{x:innerWidth/2,y:innerHeight/2});document.documentElement.classList.remove('pen-lock');bar.style.transform='';B.classList.remove('pen-on','pen-draw','pen-board');B.style.paddingBottom=B.style.paddingTop='';boardOn=false;bar.querySelector('[data-a="board"]').classList.remove('on')}
+  document.getElementById('penBtn').onclick=open;
+  modeBtn.onclick=()=>setDraw(!B.classList.contains('pen-draw'));
+  bar.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{color=b.dataset.c;erase=false;setDraw(true);
+    bar.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x===b));bar.querySelector('[data-a="erase"]').classList.remove('on')});
+  bar.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{size=+b.dataset.s;setDraw(true);bar.querySelectorAll('[data-s]').forEach(x=>x.classList.toggle('on',x===b))});
+  bar.querySelector('[data-a="erase"]').onclick=function(){erase=!erase;setDraw(true);this.classList.toggle('on',erase)};
+  bar.querySelector('[data-a="undo"]').onclick=()=>{list().pop();redraw()};
+  bar.querySelector('[data-a="clear"]').onclick=()=>{list().length=0;redraw()};
+  bar.querySelector('[data-a="board"]').onclick=function(){boardOn=!boardOn;B.classList.toggle('pen-board',boardOn);this.classList.toggle('on',boardOn);if(boardOn)setDraw(true);redraw()};
+  /* ✋ 捲動模式：兩指捏合一樣交給自己的縮放（瀏覽器原生縮放已關閉，工具列不會被推出畫面） */
+  let tp=null;
+  const tDist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY)||1;
+  const tMid=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+  document.addEventListener('touchstart',e=>{if(!B.classList.contains('pen-on')||B.classList.contains('pen-draw')||boardOn||e.touches.length!==2)return;
+    const m=tMid(e.touches),o=off();tp={d0:tDist(e.touches),z0:zoom,c:{x:(m.x-o.x)/o.z,y:(m.y-o.y)/o.z}}},{passive:true});
+  document.addEventListener('touchmove',e=>{if(!tp||e.touches.length!==2)return;e.preventDefault();setZoom(tp.z0*tDist(e.touches)/tp.d0,tMid(e.touches),tp.c)},{passive:false});
+  document.addEventListener('touchend',e=>{if(e.touches.length<2)tp=null},{passive:true});
+  /* 保險：萬一瀏覽器還是放大了整頁，把工具列擺回看得到的地方並維持原本大小 */
+  function keepBar(){const v=window.visualViewport;if(!v)return;
+    if(v.scale<=1.01||!B.classList.contains('pen-on')){bar.style.transform='';bar.style.transformOrigin='';return}
+    const top=B.classList.contains('pen-top');
+    bar.style.transformOrigin=top?'center top':'center bottom';
+    const dx=v.offsetLeft+v.width/2-innerWidth/2,dy=top?v.offsetTop:v.offsetTop+v.height-innerHeight;
+    bar.style.transform=`translate(${dx}px,${dy}px) scale(${1/v.scale})`}
+  if(window.visualViewport){visualViewport.addEventListener('resize',keepBar);visualViewport.addEventListener('scroll',keepBar)}
+  const ctr=()=>({x:innerWidth/2,y:innerHeight/2});
+  bar.querySelector('[data-a="zoom"]').onclick=()=>{setZoom(1,ctr());resetNative();keepBar()};
+  bar.querySelector('[data-a="zin"]').onclick=()=>{if(!boardOn)setZoom(zoom*1.25,ctr())};
+  bar.querySelector('[data-a="zout"]').onclick=()=>{if(!boardOn)setZoom(zoom/1.25,ctr())};
+  bar.querySelector('[data-a="move"]').onclick=()=>{B.classList.toggle('pen-top');pad()};
+  bar.querySelector('[data-a="close"]').onclick=close;
+})();
+
+</script>
+<script src="/fontsize.js" defer></script><script src="/mobile.js" defer></script>
+</body>
+</html>
