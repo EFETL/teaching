@@ -212,8 +212,11 @@ function lessonView(app,li,si){
   <div class="row noprint" style="margin-top:10px"><button class="btn ghost" id="openall" style="padding:6px 14px">👀 全部答案打開</button></div></div>
   <div class="nav noprint"><button class="btn ghost" ${si===0?"disabled":""} onclick="go('L${li}-${si-1}')">◀ 上一步</button>
   ${si<n-1?`<button class="btn" onclick="go('L${li}-${si+1}')">下一步 ▶</button>`:(li<LESSONS.length-1?`<button class="btn" onclick="go('L${li+1}')">下一個觀念：${LESSONS[li+1].title} ▶</button>`:`<button class="btn alt" onclick="go('R0')">去闖關 ▶</button>`)}</div></div>`;
-  $$(".step .rv",app).forEach(rv=>{rv.hidden=true;const b=document.createElement("button");b.className="rvb";b.textContent="👆 看答案";b.onclick=()=>{rv.hidden=false;rv.classList.add("on");b.remove()};rv.before(b)});
-  $("#openall",app).onclick=()=>$$(".rvb",app).forEach(b=>b.click());
+  const oa=$("#openall",app);
+  const syncOA=()=>{const left=$$(".rvb",app).length;if(!left){oa.disabled=true;oa.textContent="✅ 答案都打開了"}};
+  $$(".step .rv",app).forEach(rv=>{rv.hidden=true;const b=document.createElement("button");b.className="rvb";b.textContent="👆 看答案";b.onclick=()=>{rv.hidden=false;rv.classList.add("on");b.remove();syncOA()};rv.before(b)});
+  if(!$$(".rvb",app).length) oa.parentElement.remove();     // 這一步沒有要點開的答案：不顯示「全部答案打開」
+  else oa.onclick=()=>$$(".rvb",app).forEach(b=>b.click());
   $$(".step table.tb",app).forEach(t=>{const n=Math.max(...[...t.rows].map(r=>r.cells.length));if(n>=3&&innerWidth<620){t.style.minWidth=(n*190)+"px";t.insertAdjacentHTML("beforebegin",'<div class="zh">👉 表格可以左右滑動</div>')}});
 }
 document.addEventListener("keydown",e=>{
