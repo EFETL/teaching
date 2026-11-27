@@ -12,7 +12,10 @@ html{font-size:var(--fs);-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.7}
 button{font:inherit;cursor:pointer}
 .wrap{max-width:900px;margin:0 auto;padding:14px 14px 80px}
-header.top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+@media(min-width:1100px){.wrap{max-width:1200px;padding:20px 24px 80px}}   /* 電腦 */
+@media(min-width:768px) and (max-width:1099px){.wrap{max-width:none;padding:18px 22px 80px}}   /* 平板 */
+header.top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;font-size:16px}   /* 工具列固定大小：字放到 400% 也按得到 A− */
+header.top .home,header.top .tb-btn,header.top .fsval{font-size:16px}
 header.top .home{font-weight:800;color:var(--main);text-decoration:none;background:#fff;border-radius:999px;padding:6px 14px;box-shadow:0 2px 8px rgba(0,0,0,.08);border:0}
 header.top .sp{flex:1}
 .tb-btn{border:0;background:#fff;border-radius:999px;padding:6px 12px;box-shadow:0 2px 8px rgba(0,0,0,.08);font-weight:700;color:#334}
@@ -21,8 +24,13 @@ header.top .sp{flex:1}
 .hero h1{margin:0 0 6px;font-size:1.45rem;line-height:1.35}
 .hero p{margin:0;opacity:.95}
 h2.sec{font-size:1.15rem;margin:26px 0 10px}
-.grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:620px){.grid{grid-template-columns:1fr 1fr}}
+/* 卡片欄數跟著螢幕寬與字體大小自動變（字放大＝欄變少，不會擠爆） */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,16em),1fr));gap:14px}
+#qs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,28em),1fr));gap:0 16px;align-items:start}
+#qs>.qsec,#qs>.zh{grid-column:1/-1}
+.fsval{min-width:3.6em;text-align:center;font-weight:800;color:#334}
+img{max-width:100%}
+.stem,.big,.ask,button.o,.tk{overflow-wrap:anywhere}
 .card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);border:0;text-align:left;padding:0;color:inherit;display:block;width:100%}
 .card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#eee}
 .card .cap{padding:12px 16px 14px}
@@ -125,20 +133,41 @@ button.say.playing{background:#1c7ed6;animation:pulse .8s infinite}
 .an-ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.an-ctl .btn{padding:6px 14px}
 .an-no{font-weight:800;color:var(--mut);min-width:3.2em;text-align:center}
 @media print{.anim{display:none}}
-/* 藍鯨：學生帳號不能列印、看不到答案（老師、主任、工程師帳號都是 teacher 身分＝html.bw-tch） */
-html.bwsite:not(.bw-tch) .printbtn,html.bwsite:not(.bw-tch) .akbtn{display:none!important}
-@media print{html.bwsite:not(.bw-tch) body>*{display:none!important}html.bwsite:not(.bw-tch) body::after{content:"列印功能只開放給老師帳號";display:block;padding:40px;font-size:20px}}
+/* 藍鯨：除了學生帳號，其他帳號（老師、主任、工程師…）都有答案總表、解答卷、列印＝html.bw-staff；teaching 站全開 */
+html.bwsite:not(.bw-staff) .printbtn,html.bwsite:not(.bw-staff) .akbtn{display:none!important}
+@media print{html.bwsite:not(.bw-staff) body>*{display:none!important}html.bwsite:not(.bw-staff) body::after{content:"學生帳號不能列印";display:block;padding:40px;font-size:20px}}
 /* 投影（老師上課）模式 */
-html.proj{--fs:26px}
-html.proj .wrap{max-width:1180px}
+html.proj .wrap{max-width:1400px}
 html.proj .lesson-hd img{max-height:34vh}
 /* 答案總表、列印 */
 .akbtn{display:none}
 html.tch .akbtn{display:inline-block}
-#akbox table{font-size:.85rem}
+.rvtabs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+.rvtabs button{border:0;border-radius:999px;padding:6px 16px;font-weight:800;background:#e9eef5;color:#334}
+.rvtabs button.on{background:var(--main);color:#fff}
+.rvtbl{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.rvtbl th{background:#eef3f9;text-align:left;padding:8px 10px;font-size:.85rem;position:sticky;top:0;z-index:1}
+.rvtbl td{border-top:1px solid #edf0f4;padding:10px;vertical-align:top}
+.rvtbl .q{font-family:Georgia,"Times New Roman",serif}
+.rvtbl .q ol{margin:6px 0 0;padding-left:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,9.5em),1fr));gap:2px 14px}
+.rvtbl .q li.ok{color:#2b8a3e;font-weight:800}
+.rvtbl .a{font-family:Georgia,"Times New Roman",serif;font-weight:800;color:#c92a2a}
+.rvtbl .ex{color:#445;font-size:.9rem}
+.rvtbl .no{font-weight:900;color:var(--main);white-space:nowrap}
+.rvtbl .ty{white-space:nowrap;font-size:.85rem}
+.rvhide .rvtbl .ex{display:none}
+@media(max-width:899px){   /* 平板直式、手機：表格改成一題一張卡 */
+  .rvtbl,.rvtbl tbody,.rvtbl tr,.rvtbl td{display:block;width:100%}
+  .rvtbl thead{display:none}
+  .rvtbl tr{border-top:6px solid var(--bg);padding:6px 0}
+  .rvtbl td{border:0;padding:4px 12px}
+  .rvtbl td[data-h]::before{content:attr(data-h)"：";font-weight:800;color:var(--mut);font-family:-apple-system,"PingFang TC",sans-serif;font-size:.8rem}
+}
 .printonly{display:none}
 @media print{
-  :root{--fs:13px}
+  html{font-size:13px!important}
+  .rvtabs,.rvbar{display:none!important}
+  .rvtbl th{position:static}
   body{background:#fff}
   .noprint,header.top,.qhead,.endbox,.res,.rvb,.akbtn{display:none!important}
   .printonly{display:block!important}
@@ -168,15 +197,26 @@ const norm=s=>String(s).toLowerCase().replace(/[’‘`]/g,"'").replace(/[“”
 const LETTERS="ABCD";
 if(/(^|\.)bluewhale-learning\.com$/.test(location.hostname)||/[?&]bwtest\b/.test(location.search))document.documentElement.classList.add("bwsite");
 const onBW=()=>document.documentElement.classList.contains("bwsite");
-const isBwTeacher=()=>document.documentElement.classList.contains("bw-tch");
+const isBwTeacher=()=>document.documentElement.classList.contains("bw-staff");
+/* 藍鯨身分：先用這台裝置上次的身分（bw.js 存的 bw_role），再向伺服器確認；不是學生就加 html.bw-staff */
+function setStaff(on){const h=document.documentElement;h.classList.toggle("bw-staff",!!on);h.classList.toggle("tch",!!on)}
+if(onBW()){try{const r=localStorage.getItem("bw_role");setStaff(!!r&&r!=="student")}catch(e){}
+  const code=location.pathname.split("/")[1];
+  if(code&&!/[?&]bwtest\b/.test(location.search))fetch("/api/"+code+"/me",{credentials:"same-origin",cache:"no-store"}).then(r=>r.ok?r.json():null).then(m=>{setStaff(!!(m&&m.ok&&m.role&&m.role!=="student"));if(/^#ak$/.test(location.hash)&&!tch())go("")}).catch(()=>{})}
 /* 老師：藍鯨上只認老師帳號（主任、工程師也是 teacher 身分），網址加 ?teacher 沒用；teaching 站用 ?teacher */
-const tch=()=>onBW()?isBwTeacher():(/[?&]teacher\b/.test(location.search)||isBwTeacher());
+const tch=()=>onBW()?isBwTeacher():true;   /* teaching 站沒有學生帳號：一律顯示答案總表 */
 const canPrint=()=>!onBW()||isBwTeacher();
 
 /* 字體大小（存在這台裝置） */
-function setFs(px){px=Math.max(16,Math.min(34,px));document.documentElement.style.setProperty("--fs",px+"px");LS.set("fs",px)}
-const savedFs=LS.get("fs",0); if(savedFs) setFs(savedFs);
+/* 字體大小 100%～400%（存在這台裝置）；📽️ 投影再放大 1.35 倍、版面加寬 */
+const FS_STEPS=[100,110,125,150,175,200,250,300,350,400];
+let fsPct=LS.get("fsp",100);if(!FS_STEPS.includes(fsPct))fsPct=100;
 if(LS.get("proj",false)) document.documentElement.classList.add("proj");
+function applyFs(){const proj=document.documentElement.classList.contains("proj");
+  document.documentElement.style.setProperty("--fs",(19*fsPct/100*(proj?1.35:1)).toFixed(1)+"px");
+  document.querySelectorAll(".fsval").forEach(e=>e.textContent=fsPct+"%")}
+function stepFs(d){const i=FS_STEPS.indexOf(fsPct);fsPct=FS_STEPS[Math.max(0,Math.min(FS_STEPS.length-1,i+d))];LS.set("fsp",fsPct);applyFs()}
+applyFs();
 
 /* 📒 錯題本：答錯收進來、之後答對就拿掉（藍鯨 efetl 也會包住 WB.hit／miss，記到帳號的學習紀錄） */
 window.WB={
@@ -192,11 +232,11 @@ function go(h){location.hash=h}
 window.addEventListener("hashchange",render);
 function topbar(back){
   return `<header class="top noprint"><a class="home" href="/english/">📚 英文選單</a>${back?`<button class="home" onclick="go('')">← 回首頁</button>`:""}<span class="sp"></span>
-  <button class="tb-btn" onclick="setFs(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fs'))-2)" aria-label="字體縮小">A−</button>
-  <button class="tb-btn" onclick="setFs(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fs'))+2)" aria-label="字體放大">A＋</button>
+  <button class="tb-btn" onclick="stepFs(-1)" aria-label="字體縮小">A−</button><span class="fsval" title="字體大小">${fsPct}%</span>
+  <button class="tb-btn" onclick="stepFs(1)" aria-label="字體放大">A＋</button>
   <button class="tb-btn ${document.documentElement.classList.contains("proj")?"on":""}" onclick="toggleProj(this)">📽️ 投影</button></header>`;
 }
-function toggleProj(b){const on=document.documentElement.classList.toggle("proj");LS.set("proj",on);if(!on){document.documentElement.style.removeProperty("--fs");const f=LS.get("fs",0);if(f)setFs(f)}else document.documentElement.style.removeProperty("--fs");b.classList.toggle("on",on)}
+function toggleProj(b){const on=document.documentElement.classList.toggle("proj");LS.set("proj",on);applyFs();b.classList.toggle("on",on)}
 function render(){
   const h=location.hash.slice(1), app=$("#app"); window.scrollTo(0,0);
   if(tch()) document.documentElement.classList.add("tch");
@@ -390,9 +430,24 @@ function wrongView(app){
 
 /* ---------- 答案總表（老師） ---------- */
 function ansText(q){return q.t==="mc"?`(${LETTERS[q.a]}) ${q.o[q.a]}`:q.t==="ord"?q.tiles.join(" "):q.ans.join("／")}
+const TN={mc:"選擇",fill:"填空",rw:"改寫",ord:"重組"};
 function akView(app){
   if(!tch()){go("");return}
-  app.innerHTML=topbar(true)+`<h1 style="font-size:1.3rem">📋 答案總表</h1><p class="zh">選擇題的 (A)～(D) 是列印卷上的順序；線上作答時選項會重新洗牌。</p><div id="akbox" class="tblwrap">${ROUNDS.map((r,ri)=>`<h2 class="sec">第 ${ri+1} 回</h2><table class="tb"><tr><th>題</th><th>文法</th><th>答案</th></tr>${printOrder(r).map((q,i)=>`<tr><td>${i+1}</td><td>${G[q.g][0]}</td><td style="font-family:Georgia,serif">${esc(ansText(q))}</td></tr>`).join("")}</table>`).join("")}</div>`;
+  let cur=LS.get("akr",0);if(!(cur>=-1&&cur<5))cur=0;
+  const rowHtml=(q,no)=>{const f=byQ.get(q.q)||q;
+    const opts=q.t==="mc"?`<ol>${q.o.map((o,k)=>`<li class="${k===q.a?"ok":""}">(${LETTERS[k]}) ${esc(o)}</li>`).join("")}</ol>`:q.t==="ord"?`<div class="zh">【${q.tiles.map(esc).join(" / ")}】</div>`:"";
+    return `<tr><td class="no" data-h="題">${no}</td><td class="ty" data-h="題型">${TN[q.t]}<br>${tagHtml(q)}</td><td class="q" data-h="題目">${esc(q.q)}${opts}</td><td class="a" data-h="答案">${esc(ansText(q))} ${sayBtn(q)}</td><td class="ex" data-h="解析">${esc(q.ex)}</td></tr>`};
+  const table=ri=>`<h2 class="sec">第 ${ri+1} 回</h2><div class="tblwrap"><table class="rvtbl"><thead><tr><th>題</th><th>題型</th><th style="width:44%">題目與選項</th><th style="width:20%">答案</th><th>解析</th></tr></thead><tbody>${printOrder(ROUNDS[ri]).map((q,i)=>rowHtml(q,i+1)).join("")}</tbody></table></div>`;
+  const draw=()=>{LS.set("akr",cur);
+    app.innerHTML=topbar(true)+`<h1 style="font-size:1.3rem;margin:4px 0">📋 答案總表・檢討</h1>
+    <p class="zh">選擇題的 (A)～(D) 是列印卷上的順序（綠色＝正解）；學生線上作答時選項會洗牌。</p>
+    <div class="row rvbar noprint"><div class="rvtabs">${[0,1,2,3,4].map(i=>`<button data-r="${i}" class="${cur===i?"on":""}">第 ${i+1} 回</button>`).join("")}<button data-r="-1" class="${cur===-1?"on":""}">全部 100 題</button></div>
+    <span class="sp" style="flex:1"></span><label class="zh" style="white-space:nowrap"><input type="checkbox" id="rvex" ${LS.get("akex",true)?"checked":""}> 顯示解析</label>
+    <button class="btn ghost printbtn" style="padding:6px 14px" onclick="window.print()">🖨️ 列印這一頁</button></div>
+    <div id="akbox" class="${LS.get("akex",true)?"":"rvhide"}">${cur===-1?[0,1,2,3,4].map(table).join(""):table(cur)}</div>`;
+    $$(".rvtabs button",app).forEach(b=>b.onclick=()=>{cur=+b.dataset.r;draw()});
+    $("#rvex",app).onchange=e=>{LS.set("akex",e.target.checked);$("#akbox",app).classList.toggle("rvhide",!e.target.checked)}};
+  draw();
 }
 function printOrder(r){return ["mc","fill","rw","ord"].flatMap(t=>r.filter(q=>q.t===t))}
 
@@ -423,9 +478,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 player.addEventListener("ended",()=>{if(playingBtn)playingBtn.classList.remove("playing");playingBtn=null});
 player.addEventListener("error",()=>{if(playingBtn)playingBtn.classList.remove("playing");playingBtn=null});
 render();
-/* 藍鯨老師帳號登入後才會加上 html.bw-tch：晚一點再檢查一次，讓答案總表按鈕出現 */
-setTimeout(()=>{if(tch()&&!document.documentElement.classList.contains("tch")){document.documentElement.classList.add("tch")}},1500);
 </script>
-<script src="/fontsize.js" defer></script><script src="/mobile.js" defer></script>
+<script src="/mobile.js" defer></script>
 </body>
 </html>
